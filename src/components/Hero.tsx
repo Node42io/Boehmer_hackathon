@@ -11,7 +11,7 @@
  *   <Hero
  *     eyebrow="Clayton Analysis · 2026-04-14"
  *     headline="Eight applications, three beachheads"
- *     subhead="Marquardt's DN20 ultrasonic flow sensor scored against 8 NAICS adjacencies."
+ *     subhead="Böhmer Heuraufe & Paddockbox equestrian product analysis for NAICS 112920."
  *   />
  *
  *   // With rich children (stat tiles, answer box, etc.):

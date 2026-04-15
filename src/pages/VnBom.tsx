@@ -1,9 +1,59 @@
 /**
- * 05 VN + BOM (333111) — Manufacturing value network and bill of materials
+ * VnBom — Manufacturing Value Network + Bill of Materials (NAICS 333111)
+ *
+ * Three tabs:
+ *   1. "Manufacturing VN" — interactive VNDiagram for the 14-step fabrication VN
+ *   2. "Heuraufe BOM"    — interactive BOMTab for Heuraufe L4-L0 BOM
+ *   3. "Paddockbox BOM"  — interactive BOMTab for Paddockbox L4-L0 BOM
+ *
+ * Static L6 scaling table and summary are shown BELOW the interactive diagrams.
  */
+
+import { useState } from "react";
+import type { CSSProperties } from "react";
 import PageHeader from "@/components/PageHeader";
 import SectionAnchor from "@/components/SectionAnchor";
+import VNDiagram from "./analysis/tabs/valuenetwork/VNDiagram";
+import BOMTab from "./analysis/tabs/BOMTab";
 
+import vnManufacturing from "@/data/vnManufacturing.json";
+import bomHeuraufe from "@/data/bomHeuraufe.json";
+import bomPaddockbox from "@/data/bomPaddockbox.json";
+
+import type { ValueNetworkData, BOMData } from "@/types";
+
+/* ── Tab strip styles (inline — no external CSS needed) ─────────────────── */
+const TAB_STRIP_STYLE: CSSProperties = {
+  display: "flex",
+  gap: 0,
+  borderBottom: "1px solid var(--border-subtle)",
+  marginBottom: 28,
+};
+
+const TAB_BASE: CSSProperties = {
+  display: "inline-flex",
+  alignItems: "center",
+  padding: "10px 20px",
+  fontSize: 13,
+  fontWeight: 500,
+  color: "var(--text-gray)",
+  cursor: "pointer",
+  background: "none",
+  border: "none",
+  borderBottom: "2px solid transparent",
+  marginBottom: -1,
+  transition: "color 0.13s",
+  userSelect: "none",
+  fontFamily: "inherit",
+};
+
+const TAB_ACTIVE: CSSProperties = {
+  ...TAB_BASE,
+  color: "var(--text-white)",
+  borderBottom: "2px solid var(--accent-yellow)",
+};
+
+/* ── L6 scaling data ─────────────────────────────────────────────────────── */
 const l6Steps = [
   { n: 1, name: "Design & Engineering", job: "Translate product requirements into manufacturing-ready drawings, BOM, and WPS", pScale: "fixed", prScale: "fixed", tScale: "fixed" },
   { n: 2, name: "Material Procurement", job: "Source steel tube, sheet, and hardware at target cost, quality, and lead time", pScale: "fixed", prScale: "sub-linear", tScale: "fixed" },
@@ -32,32 +82,84 @@ const scaleBadge = (s: string) => {
   return <span className={`badge ${colors[s] || "badge--neutral"}`} style={{ fontSize: 10 }}>{s}</span>;
 };
 
+/* ── Tab IDs ─────────────────────────────────────────────────────────────── */
+type TabId = "vn" | "bom-heuraufe" | "bom-paddockbox";
+
+const TABS: { id: TabId; label: string }[] = [
+  { id: "vn", label: "Manufacturing VN" },
+  { id: "bom-heuraufe", label: "Heuraufe BOM" },
+  { id: "bom-paddockbox", label: "Paddockbox BOM" },
+];
+
+/* ── Main page ───────────────────────────────────────────────────────────── */
 export default function VnBom() {
+  const [activeTab, setActiveTab] = useState<TabId>("vn");
+
   return (
     <section className="container">
       <PageHeader
         kicker="Phase 0 / Sub-step 04 / Value Network + BOM"
         title="VN + BOM (NAICS 333111)"
-        description="14-step manufacturing value network with per-step scaling analysis. Full L4-to-L0 bill of materials for both products."
+        description="Interactive manufacturing value network and bill of materials for Böhmer's 14-step fabrication chain."
       />
-      <div className="md">
+
+      {/* ── Tab strip ── */}
+      <div style={TAB_STRIP_STYLE}>
+        {TABS.map((t) => (
+          <button
+            key={t.id}
+            type="button"
+            style={activeTab === t.id ? TAB_ACTIVE : TAB_BASE}
+            onClick={() => setActiveTab(t.id)}
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
+
+      {/* ── Tab content ── */}
+      {activeTab === "vn" && (
+        <div>
+          <div style={{ marginBottom: 24 }}>
+            <div className="section__eyebrow">Value Network · NAICS 333111</div>
+            <h2 className="section__title">Manufacturing Process Value Network</h2>
+            <p className="section__sub">
+              14-step fabrication chain — Böhmer Systemtechnik GmbH · Farm Machinery & Equipment Manufacturing
+            </p>
+          </div>
+          <VNDiagram data={vnManufacturing as ValueNetworkData} />
+        </div>
+      )}
+
+      {activeTab === "bom-heuraufe" && (
+        <BOMTab bomData={bomHeuraufe as BOMData} />
+      )}
+
+      {activeTab === "bom-paddockbox" && (
+        <BOMTab bomData={bomPaddockbox as BOMData} />
+      )}
+
+      {/* ── Static content below diagrams ── */}
+      <div className="md" style={{ marginTop: 48 }}>
+        <hr />
         <SectionAnchor id="vn-summary" title="Value Network Summary" />
         <table>
           <thead><tr><th>Metric</th><th>Value</th></tr></thead>
           <tbody>
             <tr><td><strong>Total L6 steps</strong></td><td>14</td></tr>
-            <tr><td><strong>In-house steps</strong></td><td>13 (Steps 1-8, 10-14)</td></tr>
+            <tr><td><strong>In-house steps</strong></td><td>13 (Steps 1–8, 10–14)</td></tr>
             <tr><td><strong>Outsourced steps</strong></td><td>1 (Step 9: Surface Treatment)</td></tr>
             <tr><td><strong>Primary labor bottleneck</strong></td><td>Step 7: Welding & Assembly (linear scaling, certified welder constraint)</td></tr>
             <tr><td><strong>Primary capital bottleneck</strong></td><td>Step 4: Laser Cutting (step-function, shared with contract business)</td></tr>
             <tr><td><strong>Critical quality gate</strong></td><td>Step 10: QC — first-article inspection per DIN EN 1090</td></tr>
-            <tr><td><strong>Est. labor / Heuraufe</strong></td><td style={{ fontFamily: "var(--font-mono)" }}>14-22 hrs</td></tr>
-            <tr><td><strong>Est. labor / Paddockbox (4-seg)</strong></td><td style={{ fontFamily: "var(--font-mono)" }}>24-38 hrs</td></tr>
+            <tr><td><strong>New capability required</strong></td><td>Step 13: Finished-goods storage (zero inventory today per C4 constraint)</td></tr>
+            <tr><td><strong>Est. labor / Heuraufe</strong></td><td style={{ fontFamily: "var(--font-mono)" }}>14–22 hrs</td></tr>
+            <tr><td><strong>Est. labor / Paddockbox (4-seg)</strong></td><td style={{ fontFamily: "var(--font-mono)" }}>24–38 hrs</td></tr>
           </tbody>
         </table>
 
         <hr />
-        <SectionAnchor id="vn-steps" title="L6 Manufacturing Process Steps" />
+        <SectionAnchor id="vn-steps" title="L6 Manufacturing Process Steps — Scaling Analysis" />
         <table>
           <thead><tr><th>#</th><th>Step</th><th>Core Functional Job</th><th>People</th><th>Process</th><th>Tech</th></tr></thead>
           <tbody>
@@ -78,31 +180,32 @@ export default function VnBom() {
         </p>
 
         <hr />
-        <SectionAnchor id="vn-bom-heuraufe" title="BOM — Heuraufe" />
+        <SectionAnchor id="vn-bom-heuraufe" title="BOM Summary — Heuraufe" />
         <table>
-          <thead><tr><th>L4 Subsystem</th><th>Key Components</th><th>Est. Weight</th></tr></thead>
+          <thead><tr><th>L4 Subsystem</th><th>Key Components</th><th>Est. Weight</th><th>BOM Cost %</th></tr></thead>
           <tbody>
-            <tr><td><strong>L4-H01: Base Frame Assembly</strong></td><td>Main frame rails (80x80x5 SHS), cross members, tractor fork pockets, skid runners</td><td>~81 kg</td></tr>
-            <tr><td><strong>L4-H02: Support Post Assembly</strong></td><td>4-6 vertical posts (80x80x5 SHS), base plates, cap plates</td><td>~70 kg</td></tr>
-            <tr><td><strong>L4-H03: Roof Assembly</strong></td><td>Ridge beam, eave beams, rafters, purlins (40x40x3), corrugated roofing sheet</td><td>~42 kg</td></tr>
-            <tr><td><strong>L4-H04: Hay Containment System</strong></td><td>Bar-grid frames (3-4 per unit), grid bars (16mm round), hay net option</td><td>~42 kg</td></tr>
-            <tr><td><strong>L4-H05: Surface Treatment</strong></td><td>Hot-dip galvanizing ISO 1461 + powder topcoat (outsourced service)</td><td>—</td></tr>
-            <tr><td><strong>L4-H06: Hardware & Fasteners</strong></td><td>Roof screws, bolts, labels, accessory fittings</td><td>~5 kg</td></tr>
+            <tr><td><strong>L4-H01: Base Frame Assembly</strong></td><td>Main frame rails (80×80×5 SHS), cross members, tractor fork pockets, skid runners</td><td>~81 kg</td><td>~32%</td></tr>
+            <tr><td><strong>L4-H02: Support Post Assembly</strong></td><td>4–6 vertical posts (80×80×5 SHS), base plates, cap plates</td><td>~70 kg</td><td>~28%</td></tr>
+            <tr><td><strong>L4-H03: Roof Assembly</strong></td><td>Ridge beam, eave beams, rafters, purlins (40×40×3), corrugated roofing sheet</td><td>~42 kg</td><td>~17%</td></tr>
+            <tr style={{ background: "rgba(253,255,152,0.04)" }}><td><strong>L4-H04: Hay Containment System</strong></td><td>Bar-grid frames (3–4 per unit), 16 mm round bar, hay net option — <strong>Böhmer anchor</strong></td><td>~42 kg</td><td>~16%</td></tr>
+            <tr><td><strong>L4-H05: Surface Treatment</strong></td><td>Hot-dip galvanizing ISO 1461 + powder topcoat (outsourced service)</td><td>—</td><td>~5%</td></tr>
+            <tr><td><strong>L4-H06: Hardware & Fasteners</strong></td><td>Roof screws, bolts, CE/GPSR labels, accessory fittings</td><td>~5 kg</td><td>~2%</td></tr>
           </tbody>
         </table>
-        <p style={{ fontSize: 12, color: "var(--text-gray)" }}>Estimated total unit weight: ~250 kg. Primary material: S355J2 structural steel tube.</p>
+        <p style={{ fontSize: 12, color: "var(--text-gray)" }}>Estimated total unit weight: ~255 kg. Primary material: S355J2 structural steel tube.</p>
 
         <hr />
-        <SectionAnchor id="vn-bom-paddockbox" title="BOM — Paddockbox (per segment)" />
+        <SectionAnchor id="vn-bom-paddockbox" title="BOM Summary — Paddockbox (per segment)" />
         <table>
-          <thead><tr><th>L4 Subsystem</th><th>Key Components</th><th>Est. Weight</th></tr></thead>
+          <thead><tr><th>L4 Subsystem</th><th>Key Components</th><th>Est. Weight / Segment</th><th>BOM Cost %</th></tr></thead>
           <tbody>
-            <tr><td><strong>L4-P01: Rail Frame</strong></td><td>2-3 horizontal rails (60x60x4 SHS), 3.0m per rail</td><td>~42 kg</td></tr>
-            <tr><td><strong>L4-P02: Post Assembly</strong></td><td>2-3 vertical posts (80x80x3 SHS) with fatigue-rated hinge joints</td><td>~25 kg</td></tr>
-            <tr><td><strong>L4-P03: Castor Assembly</strong></td><td>{"2-4 heavy-duty castors (>=800kg lateral), wheel brakes, socket plates"}</td><td>~12 kg</td></tr>
-            <tr><td><strong>L4-P04: Connectors</strong></td><td>Pinned/flanged end-plate connectors, panel lock pins</td><td>~4 kg</td></tr>
-            <tr><td><strong>L4-P05: Wall-Mount Option</strong></td><td>Wall-hinge anchor brackets (fixed-position variant)</td><td>~3 kg</td></tr>
-            <tr><td><strong>L4-P06: Surface Treatment</strong></td><td>Hot-dip galvanizing + powder topcoat; castor thread masking required</td><td>—</td></tr>
+            <tr><td><strong>L4-P01: Panel Segment Frame</strong></td><td>2 posts (80×80×3 SHS) + 3 rails (60×60×4 SHS, 3000 mm) + end connector plates</td><td>~59 kg</td><td>~45%</td></tr>
+            <tr><td><strong>L4-P02: Gate Segment Assembly</strong></td><td>SHS 60×60×4 gate frame + weld-on barrel hinges + slide bolt latch (1 per enclosure)</td><td>~23 kg</td><td>~18%</td></tr>
+            <tr style={{ background: "rgba(253,255,152,0.04)" }}><td><strong>L4-P03: Castor / Wheel Assembly</strong></td><td>2× heavy-duty swivel castor (≥400 kg, 200 mm dia., foot brake) — <strong>Böhmer anchor</strong></td><td>~9 kg</td><td>~14%</td></tr>
+            <tr style={{ background: "rgba(253,255,152,0.04)" }}><td><strong>L4-P04: Hinge Assembly (fold-flat)</strong></td><td>S355J2 barrel hinge + fatigue-rated WPS + drop-in locking pin — <strong>Böhmer anchor</strong></td><td>~2 kg</td><td>~12%</td></tr>
+            <tr><td><strong>L4-P05: Segment Connection Hardware</strong></td><td>Pinned / flanged connectors, R-clip quick-release pins (4 sets per enclosure)</td><td>~1 kg</td><td>~6%</td></tr>
+            <tr><td><strong>L4-P07: Surface Treatment</strong></td><td>Hot-dip galvanizing + powder topcoat; castor thread masking required</td><td>—</td><td>~3%</td></tr>
+            <tr><td><strong>L4-P08: Hardware & Labels</strong></td><td>Bolts, CE/GPSR marking plate, safety instruction plate, Böhmer branding</td><td>~1 kg</td><td>~1%</td></tr>
           </tbody>
         </table>
         <p style={{ fontSize: 12, color: "var(--text-gray)" }}>Estimated weight per segment: ~90 kg. 4-segment configuration: ~360 kg total.</p>

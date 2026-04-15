@@ -8,7 +8,7 @@
  *   <PageHeader
  *     kicker="Step 01 / Christensen Capability Abstraction"
  *     title="Product Decomposition"
- *     description="Functional abstraction of the Marquardt Ultrasonic Flow Sensor."
+ *     description="Product analysis for Böhmer Systemtechnik equestrian equipment."
  *   />
  */
 

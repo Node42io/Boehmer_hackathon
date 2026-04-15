@@ -1,0 +1,305 @@
+{
+  "slug": "paddockbox",
+  "marketName": "Paddockbox — Mobile Modular Horse Paddock Enclosure",
+  "naicsCode": "333111",
+  "confidence": "medium",
+  "dataPending": false,
+  "sensorNote": "Böhmer primary position: L4-P04 Hinge Assembly is the critical design differentiator — fatigue-rated fold-flat hinge joints (C1 constraint: 10,000-cycle test) plus L4-P03 Castor Assembly enabling repositioning without disassembly. BOM below is per standard 3m panel segment.",
+  "outputTypes": [
+    {
+      "id": "OT-1",
+      "name": "Standard Panel Segment (3m, 3-rail)",
+      "hydronic": false,
+      "sensorFit": "primary",
+      "notes": "Core production unit. 4 segments form standard rectangular enclosure. 1600 mm height, 3 horizontal rails."
+    },
+    {
+      "id": "OT-2",
+      "name": "Gate Segment",
+      "hydronic": false,
+      "sensorFit": "primary",
+      "notes": "1 per enclosure. Integrated swing gate leaf with latch. Allows human/equipment access."
+    },
+    {
+      "id": "OT-3",
+      "name": "Wall-Hinge Variant",
+      "hydronic": false,
+      "sensorFit": "secondary",
+      "notes": "Optional wall anchor bracket kit for stable-wall attachment — semi-permanent installation."
+    },
+    {
+      "id": "OT-4",
+      "name": "4-Segment Rectangular Enclosure (complete)",
+      "hydronic": false,
+      "sensorFit": "primary",
+      "notes": "4 standard segments + 1 gate segment + 4 corner connection sets. ~360 kg total [EST]."
+    }
+  ],
+  "marquardtAnchorIds": ["L4-P03", "L4-P04"],
+  "l4Subsystems": [
+    {
+      "id": "L4-P01",
+      "name": "Panel Segment Frame (Posts + Rails)",
+      "costSharePct": 45,
+      "keyDesignChoice": "Post and rail section size for lateral horse load resistance",
+      "isMarquardtAnchor": false,
+      "confidence": "medium",
+      "alternatives": [
+        { "name": "S355J2 SHS 80×80×3 mm posts + SHS 60×60×4 mm rails (welded)", "sharePct": 65, "trend": "stable", "isMarquardt": true },
+        { "name": "Aluminium RHS posts + rails (lighter, higher cost)", "sharePct": 20, "trend": "growing" },
+        { "name": "S355J2 CHS round tube (aesthetic premium)", "sharePct": 10, "trend": "stable" },
+        { "name": "S235JR SHS 60×60×4 mm posts (lower grade)", "sharePct": 5, "trend": "declining" }
+      ],
+      "modules": [
+        {
+          "id": "P01-L3-01",
+          "name": "Vertical Posts (×2 per segment)",
+          "isMarquardtAnchor": false,
+          "sensorNote": null,
+          "alternatives": [
+            { "name": "S355J2 SHS 80×80×3 mm, 1600 mm, with base plate + cap", "sharePct": 70, "trend": "stable" },
+            { "name": "S355J2 SHS 80×80×5 mm (heavier-duty, same profile)", "sharePct": 20, "trend": "stable" },
+            { "name": "Aluminium SHS 80×80×4 mm (lightweight premium)", "sharePct": 10, "trend": "growing" }
+          ]
+        },
+        {
+          "id": "P01-L3-02",
+          "name": "Horizontal Rails (×3 per segment)",
+          "isMarquardtAnchor": false,
+          "sensorNote": null,
+          "alternatives": [
+            { "name": "S355J2 SHS 60×60×4 mm, 3000 mm full length", "sharePct": 75, "trend": "stable" },
+            { "name": "S355J2 SHS 60×60×3 mm (wall-thickness reduction)", "sharePct": 20, "trend": "stable" },
+            { "name": "Aluminium SHS 60×60×4 mm", "sharePct": 5, "trend": "growing" }
+          ]
+        },
+        {
+          "id": "P01-L3-03",
+          "name": "End Connector Plates (×2 per segment)",
+          "isMarquardtAnchor": false,
+          "sensorNote": null,
+          "alternatives": [
+            { "name": "S355J2 flat plate 120×80×8 mm, welded, drilled for pin connection", "sharePct": 80, "trend": "stable" },
+            { "name": "Cast malleable iron corner connector (purchased)", "sharePct": 20, "trend": "declining" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "L4-P02",
+      "name": "Gate Segment Assembly",
+      "costSharePct": 18,
+      "keyDesignChoice": "Gate leaf geometry and latch design (horse-proof closure)",
+      "isMarquardtAnchor": false,
+      "confidence": "medium",
+      "alternatives": [
+        { "name": "Welded S355J2 SHS gate frame with slide bolt latch and weld-on hinges", "sharePct": 70, "trend": "stable", "isMarquardt": true },
+        { "name": "Purchased heavy-duty galvanized gate frame (Farmco / Kerbl type)", "sharePct": 20, "trend": "stable" },
+        { "name": "Aluminium gate leaf (lightweight, premium)", "sharePct": 10, "trend": "growing" }
+      ],
+      "modules": [
+        {
+          "id": "P02-L3-01",
+          "name": "Gate Frame (rails + stiles + infill bars)",
+          "isMarquardtAnchor": false,
+          "sensorNote": null,
+          "alternatives": [
+            { "name": "S355J2 SHS 60×60×4 mm frame + 16 mm round bar infill", "sharePct": 75, "trend": "stable" },
+            { "name": "S355J2 SHS frame + horizontal flat bar rungs (ranch style)", "sharePct": 25, "trend": "stable" }
+          ]
+        },
+        {
+          "id": "P02-L3-02",
+          "name": "Gate Hinge Set (weld-on barrel hinges)",
+          "isMarquardtAnchor": false,
+          "sensorNote": null,
+          "alternatives": [
+            { "name": "S355J2 tube barrel hinges (35 mm OD, welded to gate + post)", "sharePct": 65, "trend": "stable" },
+            { "name": "Purchased weld-on pin hinge (Voigt, Simonswerk)", "sharePct": 35, "trend": "stable" }
+          ]
+        },
+        {
+          "id": "P02-L3-03",
+          "name": "Gate Latch (horse-proof, ≥500 kg hold)",
+          "isMarquardtAnchor": false,
+          "sensorNote": "Horse-safe slide bolt latch — purchased commercial heavy-duty component. Critical: horses learn to open simple latches.",
+          "alternatives": [
+            { "name": "Purchased heavy-duty slide bolt latch (galvanized, horse-safe)", "sharePct": 60, "trend": "stable" },
+            { "name": "Hook-and-eye latch with secondary safety pin", "sharePct": 25, "trend": "declining" },
+            { "name": "Spring-loaded lever latch (commercial paddock hardware)", "sharePct": 15, "trend": "growing" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "L4-P03",
+      "name": "Castor / Wheel Assembly",
+      "costSharePct": 14,
+      "keyDesignChoice": "Castor load rating and terrain capability (outdoor mud/gravel)",
+      "isMarquardtAnchor": true,
+      "confidence": "medium",
+      "alternatives": [
+        { "name": "Heavy-duty swivel castor 200 mm PU wheel + foot brake (×2 per segment)", "sharePct": 50, "trend": "stable", "isMarquardt": true },
+        { "name": "Fixed-wheel with swivel at corners only (4 per enclosure)", "sharePct": 30, "trend": "stable" },
+        { "name": "No castors — static floor pins (non-mobile variant)", "sharePct": 20, "trend": "declining" }
+      ],
+      "modules": [
+        {
+          "id": "P03-L3-01",
+          "name": "Heavy-Duty Swivel Castor with Foot Brake (×2 per segment) — Böhmer Anchor",
+          "isMarquardtAnchor": true,
+          "sensorNote": "Böhmer anchor: ≥400 kg load per castor (≥800 kg lateral load per post), 200 mm wheel dia., outdoor-rated for mud/gravel. Repositioning without disassembly is the Paddockbox primary differentiator.",
+          "alternatives": [
+            { "name": "200 mm PU swivel castor with foot brake (≥400 kg), bolt-on top plate", "sharePct": 55, "trend": "growing", "isMarquardt": true },
+            { "name": "200 mm rubber swivel castor without brake (lower cost)", "sharePct": 30, "trend": "stable" },
+            { "name": "150 mm PU castor (lighter-duty, lower cost)", "sharePct": 15, "trend": "declining" }
+          ]
+        },
+        {
+          "id": "P03-L3-02",
+          "name": "Castor Mounting Bolts & Hardware",
+          "isMarquardtAnchor": false,
+          "sensorNote": null,
+          "alternatives": [
+            { "name": "M12×30 galvanized 8.8 bolt + Nyloc nut + flat washer set (4 per castor)", "sharePct": 85, "trend": "stable" },
+            { "name": "M12×30 stainless A2 bolt set (premium corrosion)", "sharePct": 15, "trend": "growing" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "L4-P04",
+      "name": "Hinge Assembly — Fold-Flat Posts",
+      "costSharePct": 12,
+      "keyDesignChoice": "Fatigue weld specification and pin retention design (C1: 10,000-cycle requirement)",
+      "isMarquardtAnchor": true,
+      "confidence": "medium",
+      "alternatives": [
+        { "name": "Custom S355J2 barrel hinge with fatigue-rated weld and drop-in locking pin", "sharePct": 40, "trend": "growing", "isMarquardt": true },
+        { "name": "Purchased agricultural pin hinge (Simonswerk HV series)", "sharePct": 35, "trend": "stable" },
+        { "name": "Fixed welded post — no fold-flat (static configuration only)", "sharePct": 25, "trend": "declining" }
+      ],
+      "modules": [
+        {
+          "id": "P04-L3-01",
+          "name": "Hinge Joint (fatigue-rated weld) — Critical Constraint C1",
+          "isMarquardtAnchor": true,
+          "sensorNote": "Böhmer anchor: fold-flat post enables storage and compact repositioning. Hinge weld is primary fatigue risk — WPS qualification and 10,000-cycle test mandatory per C1 constraint. Full-penetration weld or fillet weld ≥0.7× tube wall thickness required.",
+          "alternatives": [
+            { "name": "Custom S355J2 barrel hinge (40 mm OD, fatigue-rated WPS weld)", "sharePct": 50, "trend": "growing", "isMarquardt": true },
+            { "name": "Purchased heavy-duty pin hinge plate (weld-on)", "sharePct": 35, "trend": "stable" },
+            { "name": "Forged barrel hinge (higher cost, proven fatigue life)", "sharePct": 15, "trend": "stable" }
+          ]
+        },
+        {
+          "id": "P04-L3-02",
+          "name": "Post Locking Mechanism (upright position)",
+          "isMarquardtAnchor": false,
+          "sensorNote": "Drop-in locking pin through aligned holes when post is upright. Chain retainer prevents pin loss in field.",
+          "alternatives": [
+            { "name": "S355J2 drop-in locking pin 16 mm + receiver tube + retention chain", "sharePct": 70, "trend": "stable" },
+            { "name": "Spring-loaded pin (purchased — Norelem, Elesa+Ganter)", "sharePct": 30, "trend": "growing" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "L4-P05",
+      "name": "Segment Connection Hardware",
+      "costSharePct": 6,
+      "keyDesignChoice": "Pin vs. bolt connection — speed of reconfiguration",
+      "isMarquardtAnchor": false,
+      "confidence": "medium",
+      "alternatives": [
+        { "name": "S355J2 galvanized 20 mm dia. pin + R-clip (quick-release)", "sharePct": 55, "trend": "growing", "isMarquardt": true },
+        { "name": "M20 bolt + flanged nut (higher torque, no reconfiguration)", "sharePct": 30, "trend": "declining" },
+        { "name": "Snap pin / clevis pin (commercial equestrian hardware)", "sharePct": 15, "trend": "stable" }
+      ],
+      "modules": [
+        {
+          "id": "P05-L3-01",
+          "name": "Corner Connection Pin Set (per connection)",
+          "isMarquardtAnchor": false,
+          "sensorNote": "Quick-release pin design allows enclosure reconfiguration without tools — key operational benefit for Reitstall customers.",
+          "alternatives": [
+            { "name": "20 mm dia. pin + stainless R-clip + optional alignment sleeve", "sharePct": 65, "trend": "growing" },
+            { "name": "Clevis pin with linchpin (standard agricultural hardware)", "sharePct": 35, "trend": "stable" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "L4-P06",
+      "name": "Wall-Hinge Mounting Kit (Optional)",
+      "costSharePct": 1,
+      "keyDesignChoice": "Wall anchor design for masonry vs. steel structure",
+      "isMarquardtAnchor": false,
+      "confidence": "low",
+      "alternatives": [
+        { "name": "S355J2 welded bracket + chemical anchor bolts (masonry wall)", "sharePct": 60, "trend": "stable" },
+        { "name": "Clamping bracket for existing steel structure (no drilling)", "sharePct": 40, "trend": "growing" }
+      ],
+      "modules": [
+        {
+          "id": "P06-L3-01",
+          "name": "Wall Anchor Plate + Hinge Pin",
+          "isMarquardtAnchor": false,
+          "sensorNote": "Optional kit for semi-permanent wall-attached installation variant. Adds anchor point so enclosure can be used as a swing-open paddock addition.",
+          "alternatives": [
+            { "name": "Laser-cut S355J2 anchor plate + hinge pin + chemical fixings", "sharePct": 70, "trend": "stable" },
+            { "name": "Purchased weld-on hinge plate (standard agricultural bracket)", "sharePct": 30, "trend": "stable" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "L4-P07",
+      "name": "Surface Treatment (Outsourced Service)",
+      "costSharePct": 3,
+      "keyDesignChoice": "Hot-dip galvanizing — same specification as Heuraufe",
+      "isMarquardtAnchor": false,
+      "confidence": "high",
+      "alternatives": [
+        { "name": "Hot-dip galvanizing ISO 1461 + powder topcoat (outsourced)", "sharePct": 80, "trend": "stable", "isMarquardt": true },
+        { "name": "Hot-dip galvanizing only", "sharePct": 15, "trend": "stable" },
+        { "name": "Sherardizing / thermal spray zinc (alternative for complex geometry)", "sharePct": 5, "trend": "stable" }
+      ],
+      "modules": [
+        {
+          "id": "P07-L3-01",
+          "name": "Hot-Dip Galvanizing (ISO 1461) — Note: Castor Threads Must Be Masked",
+          "isMarquardtAnchor": false,
+          "sensorNote": "Castor socket plates must have threaded holes masked with plugs before galvanizing to prevent zinc build-up blocking castor bolt thread engagement.",
+          "alternatives": [
+            { "name": "Batch hot-dip galvanizing with thread masking protocol", "sharePct": 90, "trend": "stable" },
+            { "name": "Electrogalvanizing (sheet-only alternative, not applicable)", "sharePct": 10, "trend": "declining" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "L4-P08",
+      "name": "Hardware, Labels & Accessories",
+      "costSharePct": 1,
+      "keyDesignChoice": "CE marking plate and safety instruction panel content (GPSR compliance)",
+      "isMarquardtAnchor": false,
+      "confidence": "high",
+      "alternatives": [
+        { "name": "Galvanized 8.8 bolts + stainless A2 CE plate + Böhmer brand label", "sharePct": 70, "trend": "stable" },
+        { "name": "Stainless A4 bolts + laser-engraved stainless plates (premium)", "sharePct": 30, "trend": "growing" }
+      ],
+      "modules": [
+        {
+          "id": "P08-L3-01",
+          "name": "CE / GPSR Marking & Safety Plates",
+          "isMarquardtAnchor": false,
+          "sensorNote": "CE marking required per GPSR before DACH market launch. Safety instruction plate: max horse count, usage instructions, hinge operating procedure.",
+          "alternatives": [
+            { "name": "Engraved stainless CE plate + printed weather-resistant safety label", "sharePct": 60, "trend": "stable" },
+            { "name": "Laser-engraved aluminium combined plate (single piece)", "sharePct": 40, "trend": "growing" }
+          ]
+        }
+      ]
+    }
+  ]
+}

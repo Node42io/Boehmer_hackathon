@@ -1,0 +1,283 @@
+{
+  "slug": "heuraufe",
+  "marketName": "Heuraufe — Outdoor Multi-Horse Hay Feeder Station",
+  "naicsCode": "333111",
+  "confidence": "medium",
+  "dataPending": false,
+  "sensorNote": "Böhmer primary position: L4-H01 Base Frame Assembly provides tractor fork pockets and skid runners enabling repositioning. L4-H04 Hay Containment System defines the core functional differentiation — bar-grid spacing (60–80 mm) prevents head entrapment while allowing hay pull-through.",
+  "outputTypes": [
+    {
+      "id": "OT-1",
+      "name": "4–5 Horse Configuration",
+      "hydronic": false,
+      "sensorFit": "primary",
+      "notes": "Standard 3-side open access, ~2500×1700 mm footprint. Primary target configuration."
+    },
+    {
+      "id": "OT-2",
+      "name": "6–8 Horse Configuration",
+      "hydronic": false,
+      "sensorFit": "primary",
+      "notes": "Extended frame, 4-side or 3-side access. Requires longer base rails and more grid frames."
+    },
+    {
+      "id": "OT-3",
+      "name": "Bar-Grid Variant",
+      "hydronic": false,
+      "sensorFit": "primary",
+      "notes": "16 mm round bar containment grid — standard. Lower cost per unit, robust for large horses."
+    },
+    {
+      "id": "OT-4",
+      "name": "Hay-Net Variant",
+      "hydronic": false,
+      "sensorFit": "secondary",
+      "notes": "Net hook rail with knotted polypropylene nets — slower feed consumption, suitable for easy-keepers."
+    }
+  ],
+  "marquardtAnchorIds": ["L4-H01", "L4-H04"],
+  "l4Subsystems": [
+    {
+      "id": "L4-H01",
+      "name": "Base Frame Assembly",
+      "costSharePct": 32,
+      "keyDesignChoice": "Tractor fork pockets and skid runners for repositioning",
+      "isMarquardtAnchor": true,
+      "confidence": "medium",
+      "alternatives": [
+        { "name": "S355J2 SHS 80×80×5 welded frame with fork pockets", "sharePct": 60, "trend": "stable", "isMarquardt": true },
+        { "name": "S235JR welded frame (no fork pockets, fixed)", "sharePct": 30, "trend": "declining" },
+        { "name": "Hot-rolled UPN channel frame", "sharePct": 10, "trend": "stable" }
+      ],
+      "modules": [
+        {
+          "id": "H01-L3-01",
+          "name": "Main Frame Rails (long side, ×2)",
+          "isMarquardtAnchor": false,
+          "sensorNote": null,
+          "alternatives": [
+            { "name": "S355J2 SHS 80×80×5 mm, 2500 mm, with welded end plates", "sharePct": 75, "trend": "stable" },
+            { "name": "S235JR SHS 80×80×3 mm (lighter, lower cost)", "sharePct": 25, "trend": "declining" }
+          ]
+        },
+        {
+          "id": "H01-L3-02",
+          "name": "Cross Members (short side, ×2–3)",
+          "isMarquardtAnchor": false,
+          "sensorNote": null,
+          "alternatives": [
+            { "name": "S355J2 SHS 80×80×5 mm, 1700 mm", "sharePct": 80, "trend": "stable" },
+            { "name": "S235JR SHS 60×60×4 mm (lighter spec)", "sharePct": 20, "trend": "stable" }
+          ]
+        },
+        {
+          "id": "H01-L3-03",
+          "name": "Tractor Fork Pockets (×2) — Böhmer Differentiator",
+          "isMarquardtAnchor": true,
+          "sensorNote": "Böhmer anchor: enables tractor front-loader repositioning without disassembly — unique vs. fixed-base competitors",
+          "alternatives": [
+            { "name": "Fabricated S235JR channel pocket (150×60×6 mm)", "sharePct": 55, "trend": "growing", "isMarquardt": true },
+            { "name": "Purchased UPN 150 channel welded-in", "sharePct": 45, "trend": "stable" }
+          ]
+        },
+        {
+          "id": "H01-L3-04",
+          "name": "Skid Runners (×2)",
+          "isMarquardtAnchor": false,
+          "sensorNote": null,
+          "alternatives": [
+            { "name": "S235JR flat bar 80×10 mm, 2500 mm", "sharePct": 85, "trend": "stable" },
+            { "name": "RHS 60×40×3 mm skid (heavier-duty)", "sharePct": 15, "trend": "stable" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "L4-H02",
+      "name": "Support Post Assembly",
+      "costSharePct": 28,
+      "keyDesignChoice": "Post section size and base plate connection method",
+      "isMarquardtAnchor": false,
+      "confidence": "medium",
+      "alternatives": [
+        { "name": "S355J2 SHS 80×80×5 mm posts with welded base + cap plates", "sharePct": 70, "trend": "stable" },
+        { "name": "S235JR SHS 80×80×3 mm (lower cost, adequate for lighter loads)", "sharePct": 25, "trend": "stable" },
+        { "name": "Hot-dip galvanized CHS round tube (aesthetic preference)", "sharePct": 5, "trend": "growing" }
+      ],
+      "modules": [
+        {
+          "id": "H02-L3-01",
+          "name": "Vertical Posts (×4–6)",
+          "isMarquardtAnchor": false,
+          "sensorNote": null,
+          "alternatives": [
+            { "name": "S355J2 SHS 80×80×5 mm, 2000 mm [EST]", "sharePct": 70, "trend": "stable" },
+            { "name": "S235JR SHS 80×80×3 mm", "sharePct": 30, "trend": "stable" }
+          ]
+        },
+        {
+          "id": "H02-L3-02",
+          "name": "Post Base & Cap Plates",
+          "isMarquardtAnchor": false,
+          "sensorNote": null,
+          "alternatives": [
+            { "name": "S355J2 laser-cut base plate 150×150×10 mm + S235JR cap 100×100×6 mm", "sharePct": 80, "trend": "stable" },
+            { "name": "Forged end caps (higher cost, premium product tier)", "sharePct": 20, "trend": "growing" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "L4-H03",
+      "name": "Roof Assembly",
+      "costSharePct": 17,
+      "keyDesignChoice": "Roof profile geometry and cladding material",
+      "isMarquardtAnchor": false,
+      "confidence": "medium",
+      "alternatives": [
+        { "name": "Pitched corrugated steel sheet over S235JR SHS purlins", "sharePct": 65, "trend": "stable" },
+        { "name": "Flat roof with integrated gutter (simpler fabrication)", "sharePct": 20, "trend": "declining" },
+        { "name": "Polycarbonate sheet roof (light, translucent)", "sharePct": 15, "trend": "growing" }
+      ],
+      "modules": [
+        {
+          "id": "H03-L3-01",
+          "name": "Ridge Beam, Eave Beams & Rafters",
+          "isMarquardtAnchor": false,
+          "sensorNote": null,
+          "alternatives": [
+            { "name": "S235JR SHS 40×40×3 mm structural members", "sharePct": 85, "trend": "stable" },
+            { "name": "S235JR SHS 50×50×3 mm (heavier-duty)", "sharePct": 15, "trend": "stable" }
+          ]
+        },
+        {
+          "id": "H03-L3-02",
+          "name": "Purlins (×4–6)",
+          "isMarquardtAnchor": false,
+          "sensorNote": null,
+          "alternatives": [
+            { "name": "S235JR SHS 30×30×2 mm or 40×40×3 mm", "sharePct": 90, "trend": "stable" },
+            { "name": "Cold-formed channel section (cost saving on purlins)", "sharePct": 10, "trend": "stable" }
+          ]
+        },
+        {
+          "id": "H03-L3-03",
+          "name": "Corrugated Roofing Sheet (×1–2)",
+          "isMarquardtAnchor": false,
+          "sensorNote": null,
+          "alternatives": [
+            { "name": "Pre-galvanized corrugated steel DX51D+Z275, 0.5–0.7 mm", "sharePct": 70, "trend": "stable" },
+            { "name": "Coated corrugated aluminium (corrosion-free, premium)", "sharePct": 20, "trend": "growing" },
+            { "name": "Polycarbonate corrugated sheet", "sharePct": 10, "trend": "growing" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "L4-H04",
+      "name": "Hay Containment System",
+      "costSharePct": 16,
+      "keyDesignChoice": "Grid bar spacing and frame design — horse welfare critical",
+      "isMarquardtAnchor": true,
+      "confidence": "medium",
+      "alternatives": [
+        { "name": "Welded bar-grid frame (16 mm round bar, 60–80 mm spacing)", "sharePct": 55, "trend": "stable", "isMarquardt": true },
+        { "name": "Net hook rail with polypropylene hay net (45–60 mm mesh)", "sharePct": 35, "trend": "growing" },
+        { "name": "Horizontal bar rack (flat bar rungs, larger spacing)", "sharePct": 10, "trend": "declining" }
+      ],
+      "modules": [
+        {
+          "id": "H04-L3-01",
+          "name": "Bar-Grid Frame (per open side, ×3–4)",
+          "isMarquardtAnchor": true,
+          "sensorNote": "Böhmer anchor: bar spacing 60–80 mm clear prevents head entrapment while enabling hay pull-through — welfare-critical design parameter",
+          "alternatives": [
+            { "name": "S235JR SHS 40×40×3 mm frame + 16 mm round bar grid", "sharePct": 60, "trend": "stable", "isMarquardt": true },
+            { "name": "S235JR SHS frame + 20×20×2 SHS bars (heavier)", "sharePct": 25, "trend": "stable" },
+            { "name": "Laser-cut flat bar grid (simplified fabrication)", "sharePct": 15, "trend": "growing" }
+          ]
+        },
+        {
+          "id": "H04-L3-02",
+          "name": "Hay Net Integration Frame (optional)",
+          "isMarquardtAnchor": false,
+          "sensorNote": null,
+          "alternatives": [
+            { "name": "S235JR SHS rail with welded hook pins at 150 mm spacing", "sharePct": 70, "trend": "growing" },
+            { "name": "Purchased stainless hook strip (pre-drilled)", "sharePct": 30, "trend": "stable" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "L4-H05",
+      "name": "Surface Treatment (Outsourced Service)",
+      "costSharePct": 5,
+      "keyDesignChoice": "Hot-dip galvanizing vs. paint — ISO 12944 C3+ life requirement",
+      "isMarquardtAnchor": false,
+      "confidence": "high",
+      "alternatives": [
+        { "name": "Hot-dip galvanizing ISO 1461 (min 45 µm Zn) + powder topcoat", "sharePct": 80, "trend": "stable", "isMarquardt": true },
+        { "name": "Hot-dip galvanizing only (no powder coat)", "sharePct": 15, "trend": "stable" },
+        { "name": "Thermal spray zinc + 2-pack epoxy paint system", "sharePct": 5, "trend": "declining" }
+      ],
+      "modules": [
+        {
+          "id": "H05-L3-01",
+          "name": "Hot-Dip Galvanizing (ISO 1461)",
+          "isMarquardtAnchor": false,
+          "sensorNote": "Outsourced to external Verzinkerei. Min 45 µm zinc layer; ≥70 µm for heavy sections. ~EUR 1.80–2.50/kg [EST].",
+          "alternatives": [
+            { "name": "Batch hot-dip galvanizing (external Verzinkerei)", "sharePct": 90, "trend": "stable" },
+            { "name": "Continuous hot-dip line (not available at this scale)", "sharePct": 10, "trend": "stable" }
+          ]
+        },
+        {
+          "id": "H05-L3-02",
+          "name": "Powder Topcoat (Optional)",
+          "isMarquardtAnchor": false,
+          "sensorNote": "60–80 µm polyester powder coat for UV and urine acid resistance. RAL 7016 anthracite or RAL 6005 moss green. ~EUR 5–8/unit additional [EST].",
+          "alternatives": [
+            { "name": "Polyester powder coat (applied over galv. surface, RAL color)", "sharePct": 65, "trend": "growing" },
+            { "name": "No powder coat (galvanized finish only)", "sharePct": 35, "trend": "stable" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "L4-H06",
+      "name": "Hardware & Fasteners",
+      "costSharePct": 2,
+      "keyDesignChoice": "Bolt grade and corrosion protection specification",
+      "isMarquardtAnchor": false,
+      "confidence": "high",
+      "alternatives": [
+        { "name": "Galvanized 8.8 structural bolts + stainless roof screws", "sharePct": 70, "trend": "stable" },
+        { "name": "Stainless A4 bolts throughout (premium, zero corrosion)", "sharePct": 25, "trend": "growing" },
+        { "name": "Painted mild steel bolts (cost minimum, short-life)", "sharePct": 5, "trend": "declining" }
+      ],
+      "modules": [
+        {
+          "id": "H06-L3-01",
+          "name": "Structural Bolts (M12 8.8 galvanized)",
+          "isMarquardtAnchor": false,
+          "sensorNote": null,
+          "alternatives": [
+            { "name": "M12×40 hex bolt + nut + washer set, 8.8 galvanized", "sharePct": 75, "trend": "stable" },
+            { "name": "M12×40 stainless A2 bolt set", "sharePct": 25, "trend": "growing" }
+          ]
+        },
+        {
+          "id": "H06-L3-02",
+          "name": "Labels & Signage (CE / GPSR / Branding)",
+          "isMarquardtAnchor": false,
+          "sensorNote": "GPSR marking plate required before DACH market launch. Engraved stainless or printed weather-resistant adhesive.",
+          "alternatives": [
+            { "name": "Engraved stainless steel plate (CE + product + safety)", "sharePct": 55, "trend": "stable" },
+            { "name": "Printed UV-stable adhesive plates (lower cost)", "sharePct": 45, "trend": "growing" }
+          ]
+        }
+      ]
+    }
+  ]
+}

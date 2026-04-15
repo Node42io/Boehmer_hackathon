@@ -1,0 +1,276 @@
+{
+  "naicsCode": "112920",
+  "marketName": "Reitstall / Equine Production (DACH)",
+  "slug": "vn-reitstall",
+  "coreJobStatement": "Raise, house, feed, and condition horses in managed facilities so that animals remain healthy, tractable, and available for their designated use — breeding, sport, recreation, or instruction",
+  "outputTypes": [
+    "OT-A: Reitstall / Pension (primary)",
+    "OT-B: Gestüt / Breeding (secondary)",
+    "OT-C: Schulpferd / Reitschule (primary)",
+    "OT-D: Turnierstall (secondary)",
+    "OT-E: Freizeitpferd / Privat (tertiary)"
+  ],
+  "hierarchy": "End-Beneficiary Process VN (L7 through L4) — equine husbandry facility operations in DACH region",
+  "architectureDistance": 4,
+  "marketSize": "~EUR 3–8M hay rack sub-segment DACH [EST]; full L6c feeding integrator TAM ~EUR 50–100M DACH",
+  "l6Systems": [
+    {
+      "id": "L6.a",
+      "name": "Facility Infrastructure & Site Preparation",
+      "type": "Core",
+      "jobFamily": "Establish and maintain the physical environment required to house and operate a horse facility",
+      "scope": "Stable buildings, riding arenas, hard standing, drainage, ventilation — permanent infrastructure",
+      "l5Units": []
+    },
+    {
+      "id": "L6.b",
+      "name": "Animal Intake & Identity Management",
+      "type": "Core",
+      "jobFamily": "Register, assess, and onboard incoming animals; establish individual health and nutrition baseline",
+      "scope": "EU equine passports (Reg. 504/2008), RFID microchip, veterinary intake assessment, digital management software",
+      "l5Units": []
+    },
+    {
+      "id": "L6.c",
+      "name": "Daily Feeding & Nutrition Management",
+      "type": "Core",
+      "jobFamily": "Deliver correct type, quantity, and timing of feed to each animal while minimizing waste and contamination",
+      "scope": "Outdoor hay rack stations, grain dispensers, automatic waterers, feed storage — universal across all output types",
+      "l5Units": []
+    },
+    {
+      "id": "L6.d",
+      "name": "Housing & Paddock Space Management",
+      "type": "Core",
+      "jobFamily": "Configure, operate, and reconfigure stable boxes, paddocks, and outdoor exercise areas for daily equine welfare and workflow",
+      "scope": "Mobile panel systems, stable stalls, bedding management — universal across all output types",
+      "l5Units": []
+    },
+    {
+      "id": "L6.e",
+      "name": "Health & Veterinary Care",
+      "type": "Core",
+      "jobFamily": "Maintain animal health through preventive protocols, farriery, and veterinary treatment",
+      "scope": "Farriery equipment, veterinary stocks, health monitoring — all output types",
+      "l5Units": []
+    },
+    {
+      "id": "L6.f",
+      "name": "Manure & Waste Management",
+      "type": "Core",
+      "jobFamily": "Remove, store, and dispose of dung and soiled bedding daily to meet Tierschutz and biosecurity standards",
+      "scope": "Manure collection, storage bunker, spreader/disposal — all output types",
+      "l5Units": []
+    },
+    {
+      "id": "L6.g",
+      "name": "Training & Conditioning",
+      "type": "Core",
+      "jobFamily": "Develop and maintain fitness, responsiveness, and gait quality in horses for their designated purpose",
+      "scope": "Lunging, mechanical walkers, rider training aids — Reitstall, Reitschule, Turnierstall only",
+      "l5Units": []
+    },
+    {
+      "id": "L6.h",
+      "name": "Breeding & Reproduction",
+      "type": "Core",
+      "jobFamily": "Manage estrus cycles, breeding events, gestation, and foaling",
+      "scope": "Gestüt/Breeding operations only (OT-B)",
+      "l5Units": []
+    },
+    {
+      "id": "L6.QA",
+      "name": "Records, Compliance & Tierschutz",
+      "type": "Horizontal",
+      "jobFamily": "Maintain EU equine passport records, Tierschutzgesetz feeding logs, facility compliance documentation",
+      "scope": "Mandatory across all core steps — EU Reg. 504/2008, German Tierschutzgesetz, DIN 18910 stable requirements",
+      "l5Units": []
+    },
+    {
+      "id": "L6.MNT",
+      "name": "Facility Maintenance",
+      "type": "Horizontal",
+      "jobFamily": "Structural repairs, equipment servicing, surface maintenance — required for all L6 core steps to run safely",
+      "scope": "Annual inspection schedule, reactive maintenance, planned replacement of wearing equipment",
+      "l5Units": []
+    }
+  ],
+  "vnUnits": [
+    {
+      "level": "L5",
+      "id": "L5.a.1",
+      "name": "Stable Building / Barn Structure",
+      "functionalJob": "Permanent weatherproof enclosure for horse stalls. Alternatives: prefab steel hall (~45%), timber barn (~35%), masonry construction (~20%).",
+      "description": "Permanent capital investment. Long lifecycle (20–50 years). Procured once during facility development.",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.a.2",
+      "name": "Riding Arena Surface & Enclosure",
+      "functionalJob": "Exercise surface and perimeter for daily training. Sand/fibre (~55%), natural turf (~30%), synthetic Equisand (~15%).",
+      "description": "Major capital item. Arena surface requires periodic top-up and maintenance.",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.b.1",
+      "name": "Equine Identification System",
+      "functionalJob": "EU passport + RFID microchip mandatory per EU Reg. 504/2008. Digital management software (StableMate, eHorse) for records management.",
+      "description": "100% penetration — EU mandatory. Software adoption growing. Near-zero competitive differentiation.",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.c.1",
+      "name": "Multi-Horse Outdoor Hay Rack / Station — BÖHMER HEURAUFE PRIMARY POSITION",
+      "functionalJob": "Roofed, galvanized, multi-access outdoor hay feeding station; tractor-movable. Alternatives: roofed hay rack (~20% BÖHMER PRIMARY), round bale ring feeder (~35%), wall-mounted corner feeder (~25%), hay net station (~15%), RFID dispenser (~5%).",
+      "description": "Böhmer Heuraufe PRIMARY anchor position. Key differentiator: only roofed, multi-access, tractor-movable category. Universal across all 5 output types. BÖHMER PRIMARY",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.c.2",
+      "name": "Grain & Concentrate Dispensing",
+      "functionalJob": "Individual or shared feed trough/bucket for concentrate delivery. Manual trough/bucket (~55%), RFID automatic station (~30%), semi-auto dispenser (~15%).",
+      "description": "High-frequency daily operation. RFID dispensing growing due to individual feeding precision. Not in Böhmer scope.",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.c.3",
+      "name": "Automatic Waterers",
+      "functionalJob": "Continuous frost-protected water access. Individual heated ball-valve drinker (~50%), shared heated trough (~35%), frost-free tank (~15%).",
+      "description": "Critical welfare equipment. Individual drinkers growing due to water consumption monitoring capability.",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.c.4",
+      "name": "Feed Storage Infrastructure",
+      "functionalJob": "Hay barn or covered storage enclosure for bulk hay and concentrate. Hay barn (~50%), grain silo/bins (~35%), mobile container (~15%).",
+      "description": "Böhmer adjacency candidate (L5): hay barn steel frame sub-assembly within welded structural steel competence. MEDIUM adaptation effort.",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.d.1",
+      "name": "Mobile Modular Panel System — BÖHMER PADDOCKBOX PRIMARY POSITION",
+      "functionalJob": "Galvanized steel tube-frame panels on heavy-duty castors; repositionable without disassembly; wall-hinge variant available. Alternatives: mobile panel system (~15% BÖHMER PRIMARY), permanent post-and-rail (~45%), electric tape fencing (~25%), V-mesh wire (~10%), aluminium portable panels (~5%).",
+      "description": "Böhmer Paddockbox PRIMARY anchor position. Key differentiator: only castor-mounted, fold-flat, wall-attachable category. Universal across all 5 output types. BÖHMER PRIMARY",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.d.2",
+      "name": "Stable Stall Equipment (interior box stalls)",
+      "functionalJob": "Fixed or modular interior horse stalls. Traditional timber box (~50%), prefab steel modular stall (~35%), open-front/group housing (~15%).",
+      "description": "HIGH-VALUE ADJACENCY: prefab steel stall system has 60% competence overlap with Böhmer's welded steel capability. 8/10 strategic fit. EUR 150–250K investment, 12–18 months.",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.d.3",
+      "name": "Bedding Management Equipment",
+      "functionalJob": "Manual or mechanical muck-out equipment. Wheelbarrow + fork (~60%), mechanical stall cleaner (~25%), rubber mat system (~15%).",
+      "description": "Labor-intensive daily operation. No Böhmer overlap — no steel fabrication competence in rubber mats.",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.e.1",
+      "name": "Farriery Equipment",
+      "functionalJob": "Hoof care tools and equipment used by farrier. Farrier stand, hoof pick, trimming tools, forge/anvil (traveling kit).",
+      "description": "Specialist professional equipment. Farrier typically brings own tools. Facility supplies handling stock only.",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.e.2",
+      "name": "Veterinary Treatment Stocks / Restraint",
+      "functionalJob": "Physical restraint equipment for veterinary procedures. Examination stocks, restraint halter/twitch, treatment cabinet.",
+      "description": "Standard facility equipment. Not a competitive differentiator in most facilities.",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.f.1",
+      "name": "Manure Collection Equipment",
+      "functionalJob": "Daily dung removal from stalls and paddocks. Wheelbarrow or manure cart, loading ramp, spreader hitch.",
+      "description": "LOW-EFFORT ADJACENCY: manure bunker/container is a welded steel box within Böhmer fabrication capability. Low unit value (EUR 200–800). 6/10 strategic fit.",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.f.2",
+      "name": "Manure Storage / Mistlager",
+      "functionalJob": "Covered storage for dung accumulation between disposal events. Manure bunker, leachate drainage, cover/ventilation.",
+      "description": "LOW-EFFORT ADJACENCY: welded steel container with drainage fitting — direct analogy to Böhmer fabrication capability. Under Tierschutzgesetz requirements.",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.g.1",
+      "name": "Lunging & Groundwork Equipment",
+      "functionalJob": "Non-ridden exercise and training aids. Lunging cavesson, long reins, marker cones.",
+      "description": "Low-value consumable equipment. No fabrication component.",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.g.2",
+      "name": "Mechanical Walker / Hot Walker",
+      "functionalJob": "Motorized rotating arm structure for autonomous horse exercise. Motor mount, rope attachment, timer/speed control.",
+      "description": "HIGH adaptation effort — motor, bearing, safety-speed control integration required. Excluded from near-term Böhmer scope.",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.h.1",
+      "name": "Breeding Handling Equipment (Gestüt only)",
+      "functionalJob": "Breeding stocks, semen collection/evaluation kit, AI catheter set for assisted reproduction.",
+      "description": "Specialist equipment for OT-B Gestüt/Breeding only. No Böhmer overlap.",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.QA.1",
+      "name": "Equine Passport & Feeding Log Records",
+      "functionalJob": "Maintain individual animal records per EU Reg. 504/2008. Digital or paper feeding logs per Tierschutzgesetz. Mandatory across all core steps.",
+      "description": "Compliance requirement; increasingly digitized (eHorse, StableMate). No steel fabrication component.",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.MNT.1",
+      "name": "Structural Maintenance & Equipment Repair",
+      "functionalJob": "Annual inspection of stable structures, arena fencing, paddock panels. Replace worn or damaged equipment. Tighten or re-weld structural connections.",
+      "description": "Recurring revenue opportunity for Böhmer: spare parts supply (replacement rails, castors, hinge pins) and repair welding for existing Paddockbox/Heuraufe customers.",
+      "dependencies": []
+    }
+  ],
+  "böhmerPosition": "Böhmer products occupy two L5 PRIMARY positions with universal activation across all 5 output types: Heuraufe (L6c Feeding — multi-horse outdoor hay rack) and Paddockbox (L6d Housing — mobile modular panel system). Highest-value adjacency: prefab steel stall equipment (L5 under L6d), 8/10 strategic fit, 60% competence overlap.",
+  "strategicPosition": null,
+  "sources": [
+    {
+      "id": "VR-S01",
+      "label": "NAICS 112920 — Horses and Other Equine Production (naics.com)",
+      "url": "https://www.naics.com/naics-code-description/?code=112920"
+    },
+    {
+      "id": "VR-S02",
+      "label": "GMI Insights — Equestrian Equipment Market 2025",
+      "url": "https://www.gminsights.com/industry-analysis/equestrian-equipment-market"
+    },
+    {
+      "id": "VR-S03",
+      "label": "Cattlefence.de — Mobile paddock panel product catalogue",
+      "url": "https://www.cattlefence.de/en"
+    },
+    {
+      "id": "VR-S04",
+      "label": "Kerbl / Epplejeck — Hay feeder product landscape",
+      "url": "https://www.epplejeck.com/hay-rack-slow-feeder-kerbl_other_62287.html"
+    }
+  ]
+}

@@ -1,8 +1,20 @@
 /**
- * 07 End-Beneficiary VN — Reitstall / Equine Production (NAICS 112920)
+ * VnReitstall — End-Beneficiary Value Network (NAICS 112920)
+ *
+ * Shows the interactive VNDiagram for the Reitstall / Equine Production VN.
+ * Böhmer's two product positions (Heuraufe in L6c, Paddockbox in L6d) are
+ * highlighted with yellow accent — the VNDiagram's anchor highlighting
+ * detects "BÖHMER PRIMARY" markers in the unit descriptions.
+ *
+ * Static tables and adjacency analysis shown BELOW the interactive diagram.
  */
+
 import PageHeader from "@/components/PageHeader";
 import SectionAnchor from "@/components/SectionAnchor";
+import VNDiagram from "./analysis/tabs/valuenetwork/VNDiagram";
+
+import vnReitstall from "@/data/vnReitstall.json";
+import type { ValueNetworkData } from "@/types";
 
 const outputTypes = [
   { id: "OT-A", name: "Reitstall / Pension", relevance: "primary" },
@@ -10,34 +22,6 @@ const outputTypes = [
   { id: "OT-C", name: "Schulpferd / Reitschule", relevance: "primary" },
   { id: "OT-D", name: "Turnierstall", relevance: "secondary" },
   { id: "OT-E", name: "Freizeitpferd / Privathaltung", relevance: "tertiary" },
-];
-
-const l6Steps = [
-  { id: "L6a", name: "Facility Infrastructure & Site Preparation", serves: "All", bohmer: false },
-  { id: "L6b", name: "Animal Intake & Identity Management", serves: "A,B,C,D", bohmer: false },
-  { id: "L6c", name: "Daily Feeding & Nutrition Management", serves: "All", bohmer: true, product: "Heuraufe" },
-  { id: "L6d", name: "Housing & Paddock Space Management", serves: "All", bohmer: true, product: "Paddockbox" },
-  { id: "L6e", name: "Health & Veterinary Care", serves: "All", bohmer: false },
-  { id: "L6f", name: "Manure & Waste Management", serves: "All", bohmer: false },
-  { id: "L6g", name: "Training & Conditioning", serves: "A,C,D", bohmer: false },
-  { id: "L6h", name: "Breeding & Reproduction", serves: "B only", bohmer: false },
-  { id: "L6i", name: "Animal Sales, Transfer & Dispatch", serves: "B,D", bohmer: false },
-];
-
-const heuraufeAlts = [
-  { name: "Multi-horse outdoor hay rack/station (roofed, galvanized)", share: 20, bohmer: true },
-  { name: "Round bale ring feeder", share: 35, bohmer: false },
-  { name: "Wall-mounted hay rack / corner feeder (single-horse)", share: 25, bohmer: false },
-  { name: "Slow-feed hay net station", share: 15, bohmer: false },
-  { name: "Automated RFID hay dispenser", share: 5, bohmer: false },
-];
-
-const paddockboxAlts = [
-  { name: "Mobile modular panel system (wheeled steel frames)", share: 15, bohmer: true },
-  { name: "Permanent post-and-rail fence (timber or galv. steel)", share: 45, bohmer: false },
-  { name: "Electric tape / wire fencing", share: 25, bohmer: false },
-  { name: "High-tensile wire / V-mesh perimeter fencing", share: 10, bohmer: false },
-  { name: "Aluminium portable corral panels (pin-hinge, no castors)", share: 5, bohmer: false },
 ];
 
 const adjacencies = [
@@ -53,15 +37,31 @@ export default function VnReitstall() {
       <PageHeader
         kicker="Phase 0 / Sub-step 06 / End-Beneficiary VN"
         title="VN Reitstall (NAICS 112920)"
-        description="End-beneficiary value network for equine production facilities in the DACH region."
+        description="Interactive end-beneficiary value network for equine production facilities in the DACH region. Böhmer's product positions are highlighted."
       />
+
+      {/* ── Interactive VN Diagram ── */}
+      <div style={{ marginBottom: 40 }}>
+        <div className="section__eyebrow">Value Network · NAICS 112920</div>
+        <h2 className="section__title">Reitstall / Equine Production Value Network</h2>
+        <p className="section__sub">
+          Equine Husbandry &amp; Sport Ecosystem — DACH region · Böhmer primary positions highlighted
+        </p>
+        <div style={{ marginTop: 20 }}>
+          <VNDiagram data={vnReitstall as ValueNetworkData} />
+        </div>
+      </div>
+
+      {/* ── Static content below diagram ── */}
       <div className="md">
+        <hr />
         <SectionAnchor id="vr-overview" title="VN Overview" />
         <table>
           <tbody>
             <tr><td><strong>NAICS</strong></td><td><code>112920</code> — Horses and Other Equine Production</td></tr>
-            <tr><td><strong>L7 Ecosystem</strong></td><td>Equine Husbandry & Sport Ecosystem</td></tr>
+            <tr><td><strong>L7 Ecosystem</strong></td><td>Equine Husbandry &amp; Sport Ecosystem</td></tr>
             <tr><td><strong>CFJ</strong></td><td>Raise, house, feed, and condition horses in managed facilities so that animals remain healthy, tractable, and available for their designated use</td></tr>
+            <tr><td><strong>Geography</strong></td><td>DACH region (DE, AT, CH)</td></tr>
           </tbody>
         </table>
 
@@ -80,28 +80,24 @@ export default function VnReitstall() {
         </table>
 
         <hr />
-        <SectionAnchor id="vr-l6" title="L6 Core Process Steps" />
-        <table>
-          <thead><tr><th>ID</th><th>Process Step</th><th>Serves</th><th>Böhmer Product</th></tr></thead>
-          <tbody>
-            {l6Steps.map((s) => (
-              <tr key={s.id} style={s.bohmer ? { background: "rgba(253,255,152,0.04)" } : undefined}>
-                <td><strong>{s.id}</strong></td>
-                <td><strong>{s.name}</strong></td>
-                <td style={{ fontSize: 12 }}>{s.serves}</td>
-                <td>{s.bohmer ? <span className="badge badge--accent">{s.product}</span> : "—"}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <SectionAnchor id="vr-positions" title="Böhmer Product Positions" />
 
-        <hr />
-        <SectionAnchor id="vr-heuraufe" title="Heuraufe Position — L6c Feeding" />
+        <h3>Heuraufe — L6c Daily Feeding &amp; Nutrition Management</h3>
         <p>L5 Node: <strong>Multi-Horse Outdoor Hay Rack / Station</strong></p>
+        <p style={{ fontSize: 13, color: "var(--text-gray)", marginBottom: 12 }}>
+          Böhmer's Heuraufe is the only roofed, multi-access, tractor-movable product in this L5 slot.
+          Activates across all 5 output types.
+        </p>
         <table>
-          <thead><tr><th>Alternative</th><th>Share %</th><th>Böhmer</th></tr></thead>
+          <thead><tr><th>Alternative</th><th>Share % [EST]</th><th>Böhmer</th></tr></thead>
           <tbody>
-            {heuraufeAlts.map((a) => (
+            {[
+              { name: "Multi-horse outdoor hay rack/station (roofed, galvanized)", share: 20, bohmer: true },
+              { name: "Round bale ring feeder", share: 35, bohmer: false },
+              { name: "Wall-mounted hay rack / corner feeder (single-horse)", share: 25, bohmer: false },
+              { name: "Slow-feed hay net station", share: 15, bohmer: false },
+              { name: "Automated RFID hay dispenser", share: 5, bohmer: false },
+            ].map((a) => (
               <tr key={a.name} style={a.bohmer ? { background: "rgba(253,255,152,0.04)" } : undefined}>
                 <td>{a.bohmer ? <strong>{a.name}</strong> : a.name}</td>
                 <td style={{ fontFamily: "var(--font-mono)", textAlign: "center" }}>{a.share}%</td>
@@ -111,13 +107,22 @@ export default function VnReitstall() {
           </tbody>
         </table>
 
-        <hr />
-        <SectionAnchor id="vr-paddockbox" title="Paddockbox Position — L6d Housing" />
+        <h3 style={{ marginTop: 24 }}>Paddockbox — L6d Housing &amp; Paddock Space Management</h3>
         <p>L5 Node: <strong>Mobile Modular Panel System</strong></p>
+        <p style={{ fontSize: 13, color: "var(--text-gray)", marginBottom: 12 }}>
+          Böhmer's Paddockbox is the only castor-mounted, fold-flat, wall-attachable panel system.
+          Activates across all 5 output types.
+        </p>
         <table>
-          <thead><tr><th>Alternative</th><th>Share %</th><th>Böhmer</th></tr></thead>
+          <thead><tr><th>Alternative</th><th>Share % [EST]</th><th>Böhmer</th></tr></thead>
           <tbody>
-            {paddockboxAlts.map((a) => (
+            {[
+              { name: "Mobile modular panel system (wheeled steel frames)", share: 15, bohmer: true },
+              { name: "Permanent post-and-rail fence (timber or galv. steel)", share: 45, bohmer: false },
+              { name: "Electric tape / wire fencing", share: 25, bohmer: false },
+              { name: "High-tensile wire / V-mesh perimeter fencing", share: 10, bohmer: false },
+              { name: "Aluminium portable corral panels (pin-hinge, no castors)", share: 5, bohmer: false },
+            ].map((a) => (
               <tr key={a.name} style={a.bohmer ? { background: "rgba(253,255,152,0.04)" } : undefined}>
                 <td>{a.bohmer ? <strong>{a.name}</strong> : a.name}</td>
                 <td style={{ fontFamily: "var(--font-mono)", textAlign: "center" }}>{a.share}%</td>
@@ -143,7 +148,7 @@ export default function VnReitstall() {
           </tbody>
         </table>
         <p style={{ fontSize: 12, color: "var(--text-gray)", marginTop: 8 }}>
-          <strong>Highest-value adjacency:</strong> Prefab steel stall equipment (L5 under L6d) — 60% competence overlap, same buyer persona, 8/10 strategic fit.
+          <strong>Highest-value adjacency:</strong> Prefab steel stall equipment (L5 under L6d) — 60% competence overlap, same buyer persona, 8/10 strategic fit. EUR 150–250K investment, 12–18 months.
         </p>
         <p style={{ fontSize: 12, color: "var(--text-gray)" }}>
           <strong>Vertical move-ups</strong> to L6c or L6d integrator level both score LOW feasibility organically — require software/civil/construction competences Böhmer does not possess.

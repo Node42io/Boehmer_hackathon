@@ -1,0 +1,268 @@
+{
+  "naicsCode": "333111",
+  "marketName": "Farm Machinery and Equipment Manufacturing",
+  "slug": "vn-manufacturing",
+  "coreJobStatement": "Fabricate welded galvanized structural steel products for equestrian use (Heuraufe, Paddockbox) from raw steel through certified welding and outsourced surface treatment to finished product",
+  "outputTypes": [
+    "Heuraufe (outdoor hay rack)",
+    "Paddockbox (modular paddock enclosure)"
+  ],
+  "hierarchy": "Manufacturing Process VN (L6 steps) — 14-step in-house + outsourced fabrication chain for Böhmer equestrian products",
+  "architectureDistance": 1,
+  "marketSize": "Internal production process — NAICS 333111 Farm Machinery & Equipment Manufacturing",
+  "l6Systems": [
+    {
+      "id": "L6.1",
+      "name": "Design & Engineering",
+      "type": "Core",
+      "jobFamily": "Translate product requirements into manufacturing-ready drawings, BOM, and weld procedure specifications",
+      "scope": "CAD/DXF flat patterns, tube cutting lists, WPS per ISO 3834-2, CE technical file (Paddockbox)",
+      "l5Units": []
+    },
+    {
+      "id": "L6.2",
+      "name": "Material Procurement & Receiving",
+      "type": "Core",
+      "jobFamily": "Source and verify incoming steel tube, sheet, and hardware at target cost, quality grade, and lead time",
+      "scope": "S235JR / S355 SHS/RHS tube, flat sheet, corrugated roofing sheet, bolts, castors, hay nets",
+      "l5Units": []
+    },
+    {
+      "id": "L6.3",
+      "name": "Cutting & Forming",
+      "type": "Core",
+      "jobFamily": "Cut flat sheet and tube stock to required profiles and lengths; form bends and radii",
+      "scope": "Laser cutting (DXF nested), tube cutting (band saw), CNC press brake bending",
+      "l5Units": []
+    },
+    {
+      "id": "L6.4",
+      "name": "Welding & Assembly",
+      "type": "Core",
+      "jobFamily": "Join cut and bent components into certified structural assemblies per WPS",
+      "scope": "MIG/MAG welding (DIN EN ISO 3834-2), TIG for visible joints, welding jigs, tack + full weld sequence",
+      "l5Units": []
+    },
+    {
+      "id": "L6.5",
+      "name": "Grinding & Deburring",
+      "type": "Core",
+      "jobFamily": "Remove weld spatter, grind flush welds in horse-contact zones, deburr all edges",
+      "scope": "Angle grinders, flap discs, pneumatic die grinders — no sharp points in horse-contact areas",
+      "l5Units": []
+    },
+    {
+      "id": "L6.6",
+      "name": "Surface Treatment (Outsourced)",
+      "type": "Core",
+      "jobFamily": "Apply corrosion protection for ISO 12944 C3+ 15-year outdoor service life in equestrian environment",
+      "scope": "Hot-dip galvanizing ISO 1461 (45–70 µm zinc) + optional powder topcoat; outsourced to Verzinkerei",
+      "l5Units": []
+    },
+    {
+      "id": "L6.7",
+      "name": "Quality Control & Final Assembly",
+      "type": "Core",
+      "jobFamily": "Verify dimensional accuracy, weld quality, coating integrity; install non-welded hardware",
+      "scope": "DIN EN 1090 first-article inspection; coating thickness gauge; functional check (hinges, castors, brakes)",
+      "l5Units": []
+    },
+    {
+      "id": "L6.8",
+      "name": "Packaging, Storage & Delivery",
+      "type": "Horizontal",
+      "jobFamily": "Protect, store, and ship finished products to DACH customers",
+      "scope": "Stretch wrap, foam interleaving, pallet strapping; finished goods storage; external freight (LTL/FTL)",
+      "l5Units": []
+    }
+  ],
+  "vnUnits": [
+    {
+      "level": "L5",
+      "id": "L5.1.1",
+      "name": "Product CAD Modeling",
+      "functionalJob": "Create 3D CAD model (SolidWorks/Inventor) with DXF flat-pattern export for laser and tube cutting lists. Revision-controlled per DIN EN 1090.",
+      "description": "One-time per SKU; same effort regardless of batch size. Böhmer CAD engineer owns this step.",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.1.2",
+      "name": "Weld Procedure Specification (WPS)",
+      "functionalJob": "Document and qualify weld procedures per DIN EN ISO 3834-2. Paddockbox hinge joints require fatigue-rated WPS — primary constraint C1.",
+      "description": "Fixed cost per product. Critical for DIN EN 1090 certification and Paddockbox CE marking. BÖHMER PRIMARY",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.1.3",
+      "name": "CE Technical File (Paddockbox)",
+      "functionalJob": "Compile CE technical file per GPSR for Paddockbox — risk assessment, product declaration, test evidence. Outsourced to CE consultant.",
+      "description": "Fixed per product. Required before DACH market launch. Heuraufe requires only GPSR product marking.",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.2.1",
+      "name": "Steel Tube & Sheet Ordering",
+      "functionalJob": "Order S235JR/S355 SHS/RHS tube, flat sheet, corrugated roofing sheet from steel service center. Typical lead time 1–3 weeks domestic.",
+      "description": "Sub-linear scaling — bulk purchasing yields volume discounts. Böhmer currently JIT; OEM transition requires push-inventory model.",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.2.2",
+      "name": "Purchased Parts Procurement (Castors, Hardware)",
+      "functionalJob": "Source heavy-duty swivel castors (≥400 kg, 200 mm dia., foot brake), bolts, nuts, hay nets, gate latches, CE plates from specialist suppliers.",
+      "description": "Fixed at low volumes. Castor quality is critical — outdoor mud/gravel rating required. BÖHMER PRIMARY",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.2.3",
+      "name": "Incoming Inspection & Storage",
+      "functionalJob": "Unload steel bundles, verify heat/lot vs. EN 10204 3.1 mill certificate, dimensional spot-check, assign storage location.",
+      "description": "Linear scaling — receiving hours scale with delivery frequency. Existing overhead crane and racking infrastructure.",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.3.1",
+      "name": "Laser / Plasma Cutting (Flat Sheet)",
+      "functionalJob": "Cut flat sheet steel into 2D profiles (base plates, gussets, roof panels, connector plates) per DXF nesting layout. Material: 2–8 mm S235JR/S355.",
+      "description": "Step-function capacity: 1 operator per machine; 2nd machine only when utilization >85%. Sub-linear on material efficiency (nesting). BÖHMER PRIMARY",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.3.2",
+      "name": "Tube Cutting & Preparation",
+      "functionalJob": "Cut steel tube stock to specified lengths per cutting list. Tube sizes: 80×80×5, 60×60×4, 40×40×3 SHS/RHS. Band saw or tube laser.",
+      "description": "Linear scaling — each cut takes same time. Band saw capacity ~80–120 cuts/shift.",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.3.3",
+      "name": "Bending / Forming",
+      "functionalJob": "Form steel tube and sheet into required angles and radii per drawing. CNC press brake for sheet bending. Minimal bending required for Heuraufe; some tube bends for Paddockbox hinge brackets.",
+      "description": "Step-function capacity. Sub-linear for repeat batches (CNC program recall). One press brake handles both products.",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.4.1",
+      "name": "Fixture Sub-Assembly & Tack Welding",
+      "functionalJob": "Clamp components in welding jig, tack weld to hold dimensional position before full weld sequence. Jig is fixed investment per SKU.",
+      "description": "Fixed jig investment amortized over production volume. Jigs must be designed and built per product — new capability required.",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.4.2",
+      "name": "Full Weld Sequence (MIG/MAG)",
+      "functionalJob": "Execute full weld sequence per WPS using MIG/MAG (Ar/CO2 82/18, 1.0–1.2 mm wire). Heuraufe: ~6–10 hrs/unit [EST]. Paddockbox segment: ~3–5 hrs/segment [EST].",
+      "description": "Linear scaling — primary labor bottleneck. Certified welder constraint (DIN EN ISO 9606-1). BÖHMER PRIMARY",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.4.3",
+      "name": "Paddockbox Hinge Joint Welding (Fatigue-Rated)",
+      "functionalJob": "Weld Paddockbox fold-flat hinge joints to fatigue-rated WPS. Full-penetration or minimum-throat fillet welds. 10,000-cycle test mandatory per constraint C1.",
+      "description": "Critical quality gate for Paddockbox. Requires dedicated WPS qualification. Higher welder skill level required vs. standard structural welds. BÖHMER PRIMARY",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.5.1",
+      "name": "Weld Spatter Removal & Flush Grinding",
+      "functionalJob": "Grind all weld seams in horse-contact zones flush (no proud beads). Heuraufe bar-grid and all edges that horses can contact. ~2–3 hrs/unit [EST].",
+      "description": "Linear scaling — manual process, no batch efficiency. Critical for animal welfare compliance.",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.5.2",
+      "name": "Edge Deburring & Sharp-Point Elimination",
+      "functionalJob": "Deburr all laser-cut and saw-cut edges. Verify no sharp points with glove test. Paddockbox segment: ~1–2 hrs/segment [EST].",
+      "description": "Linear scaling. Angle grinders, flap discs, pneumatic die grinders. Existing equipment.",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.6.1",
+      "name": "Transport to External Galvanizer",
+      "functionalJob": "Arrange pickup with freight carrier. Transport welded assemblies to external hot-dip galvanizer (Verzinkerei in Laupheim/Ulm region). Mask Paddockbox castor socket threads before transport.",
+      "description": "Sub-linear — 1 truck trip serves 5–20 units. Outsourced step; Böhmer has no in-house galvanizing. BÖHMER PRIMARY",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.6.2",
+      "name": "Hot-Dip Galvanizing (External)",
+      "functionalJob": "Hot-dip galvanize per ISO 1461 at external Verzinkerei. Minimum 45 µm zinc layer (≥70 µm for heavy sections). Lead time: 1–2 weeks per batch [EST].",
+      "description": "Outsourced. Priced per kg with batch minimums — sub-linear with larger batches. No in-house capital required.",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.6.3",
+      "name": "Powder Topcoat (Optional, External)",
+      "functionalJob": "Apply polyester powder coat (RAL color, 60–80 µm) over galvanized surface for UV and urine acid resistance. Color TBD by Böhmer product marketing.",
+      "description": "Optional additional service at galvanizer or specialist powder coater. Adds 1–3 days lead time and ~EUR 8–15/unit.",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.7.1",
+      "name": "Dimensional & Weld Visual Inspection",
+      "functionalJob": "Check critical dimensions per drawing ±tolerance. Visual weld inspection per ISO 5817 level C minimum. First-article inspection 100% on first 5 units per DIN EN 1090.",
+      "description": "Sub-linear — FAI is fixed; ongoing QC shifts 100%→20% statistical sampling as process matures. BÖHMER PRIMARY",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.7.2",
+      "name": "Coating Thickness & Quality Verification",
+      "functionalJob": "Measure coating thickness (6+ points per unit) with Elcometer gauge. Verify no bare spots or adhesion failures.",
+      "description": "Sub-linear. Fixed tool investment (coating gauge already owned). Applied to returned assemblies from galvanizer.",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.7.3",
+      "name": "Final Assembly & Hardware Installation",
+      "functionalJob": "Install non-welded components: heavy-duty castors, hinge pins, latch hardware, hay nets/bar grids, CE marking plates, Böhmer branding labels. Heuraufe: ~1–2 hrs/unit [EST].",
+      "description": "Linear scaling — same per unit. Pre-kitted hardware sets reduce fitter time slightly. BÖHMER PRIMARY",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.8.1",
+      "name": "Packaging & Protection",
+      "functionalJob": "Wrap fork pockets with foam, strap to pallet, shrink-wrap hardware bags. Paddockbox: interleave segments with foam/cardboard, strap to pallet. Label with order and delivery address.",
+      "description": "Linear scaling. Consumables only (stretch wrap, foam, strapping). No capital equipment.",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.8.2",
+      "name": "Finished Goods Storage",
+      "functionalJob": "Store finished units in covered area until dispatch. New capability: Böhmer currently has zero finished-goods inventory (JIT contract model). OEM buffer stock required.",
+      "description": "Step-function: existing warehouse space sufficient for <50 units; dedicated area required beyond that. Critical operational gap for OEM launch.",
+      "dependencies": []
+    },
+    {
+      "level": "L5",
+      "id": "L5.8.3",
+      "name": "DACH Freight & Delivery",
+      "functionalJob": "Dispatch to customer (Reitstall, dealer, end user) within DACH region. Heuraufe: single unit per standard flatbed. Paddockbox: 4–6 segments per truck [EST].",
+      "description": "Sub-linear — per-unit transport cost decreases with shipment consolidation. External freight carrier; Böhmer has no owned transport fleet.",
+      "dependencies": []
+    }
+  ],
+  "böhmerPosition": "Böhmer Systemtechnik GmbH operates all in-house steps (L6.1–L6.5, L6.7–L6.8) and coordinates outsourced surface treatment (L6.6). Primary bottlenecks: welding labor (L5.4.2, linear), laser cutting capacity (L5.3.1, step-function), and finished-goods storage (L5.8.2, new capability required).",
+  "strategicPosition": null,
+  "sources": []
+}

@@ -167,3 +167,97 @@ export interface FunctionalPromiseData {
   technologyClass: string;
   products: FPProductEntry[];
 }
+
+// ─── Value Network ────────────────────────────────────────────────────────────
+
+export interface L6System {
+  id: string;
+  name: string;
+  type: string;
+  jobFamily: string;
+  /** Output types or scope string. */
+  scope?: string;
+  /** L5 child units pre-linked (reserved for future use; always [] currently). */
+  l5Units?: unknown[];
+}
+
+export interface VNUnit {
+  level: string;
+  id: string;
+  name: string;
+  functionalJob: string;
+  description: string;
+  dependencies: string[];
+}
+
+export interface ValueNetworkData {
+  naicsCode: string;
+  marketName: string;
+  slug: string;
+  coreJobStatement: string;
+  outputTypes: string[];
+  hierarchy: string;
+  architectureDistance: number;
+  marketSize: string;
+  l6Systems: L6System[];
+  vnUnits: VNUnit[];
+  /** Böhmer strategic position narrative. */
+  böhmerPosition?: string;
+  /** Alias for backward compat with Marquardt component. */
+  marquardtPosition?: string;
+  strategicPosition: Record<string, unknown> | null;
+  sources: Array<{ id: string; label: string; url?: string }>;
+}
+
+// ─── Bill of Materials ────────────────────────────────────────────────────────
+
+export type BOMConfidence = "high" | "medium" | "low";
+
+export interface BOMOutputType {
+  id: string;
+  name: string;
+  hydronic: boolean;
+  sensorFit: "primary" | "secondary" | "none";
+  notes: string;
+}
+
+export interface BOMAlternative {
+  name: string;
+  sharePct: number;
+  trend: "growing" | "stable" | "declining" | string;
+  /** True when this alternative is the Böhmer product or technology */
+  isMarquardt?: boolean;
+}
+
+export interface BOMModule {
+  id: string;
+  name: string;
+  isMarquardtAnchor: boolean;
+  /** Short note shown in anchor badge */
+  sensorNote?: string | null;
+  alternatives: BOMAlternative[];
+}
+
+export interface BOML4Subsystem {
+  id: string;
+  name: string;
+  costSharePct: number;
+  keyDesignChoice: string;
+  isMarquardtAnchor: boolean;
+  confidence: BOMConfidence;
+  alternatives: BOMAlternative[];
+  modules: BOMModule[];
+}
+
+export interface BOMData {
+  slug: string;
+  marketName: string;
+  naicsCode: string;
+  confidence: BOMConfidence;
+  /** True when no BOM data has been generated yet */
+  dataPending: boolean;
+  sensorNote: string;
+  outputTypes: BOMOutputType[];
+  marquardtAnchorIds: string[];
+  l4Subsystems: BOML4Subsystem[];
+}
