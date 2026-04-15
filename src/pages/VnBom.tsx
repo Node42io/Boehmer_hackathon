@@ -71,15 +71,23 @@ const l6Steps = [
   { n: 14, name: "Shipping & Delivery", job: "Deliver to customer within DACH region", pScale: "sub-linear", prScale: "sub-linear", tScale: "fixed" },
 ];
 
+const scaleLabel: Record<string, string> = {
+  "fixed": "low effort",
+  "sub-linear": "low effort",
+  "linear": "medium effort",
+  "step-function": "high effort",
+  "exponential": "high effort",
+};
+
 const scaleBadge = (s: string) => {
   const colors: Record<string, string> = {
     "fixed": "badge--strong",
-    "sub-linear": "badge--moderate",
-    "linear": "badge--neutral",
+    "sub-linear": "badge--strong",
+    "linear": "badge--moderate",
     "step-function": "badge--weak",
     "exponential": "badge--weak",
   };
-  return <span className={`badge ${colors[s] || "badge--neutral"}`} style={{ fontSize: 10 }}>{s}</span>;
+  return <span className={`badge ${colors[s] || "badge--neutral"}`} style={{ fontSize: 10 }}>{scaleLabel[s] || s}</span>;
 };
 
 /* ── Tab IDs ─────────────────────────────────────────────────────────────── */
@@ -99,7 +107,7 @@ export default function VnBom() {
     <section className="container">
       <PageHeader
         kicker="Phase 0 / Sub-step 04 / Value Network + BOM"
-        title="VN + BOM (NAICS 333111)"
+        title="Manufacturing VN & Product BOMs"
         description="Interactive manufacturing value network and bill of materials for Böhmer's 14-step fabrication chain."
       />
 
@@ -128,6 +136,12 @@ export default function VnBom() {
             </p>
           </div>
           <VNDiagram data={vnManufacturing as ValueNetworkData} />
+          <div className="card" style={{ padding: 12, marginTop: 16, display: "flex", alignItems: "flex-start", gap: 12 }}>
+            <span style={{ color: "var(--accent-yellow)", fontSize: 14, lineHeight: 1 }}>★</span>
+            <p style={{ margin: 0, fontSize: 12, color: "var(--text-gray-light)", lineHeight: 1.6 }}>
+              <strong style={{ color: "var(--accent-yellow)" }}>Böhmer welding competence advantage:</strong> Yellow "Primary" markers on L5 units indicate steps where Böhmer's DIN EN ISO 3834-2 certified MIG/MAG-TIG welding capability provides a direct structural or quality advantage over uncertified fabricators. Step 7 (Welding & Assembly) and steps requiring fatigue-rated weld joints (Paddockbox hinge assembly) are the primary competence positions.
+            </p>
+          </div>
         </div>
       )}
 
@@ -159,7 +173,7 @@ export default function VnBom() {
         </table>
 
         <hr />
-        <SectionAnchor id="vn-steps" title="L6 Manufacturing Process Steps — Scaling Analysis" />
+        <SectionAnchor id="vn-steps" title="Manufacturing Process Steps Analysis" />
         <table>
           <thead><tr><th>#</th><th>Step</th><th>Core Functional Job</th><th>People</th><th>Process</th><th>Tech</th></tr></thead>
           <tbody>

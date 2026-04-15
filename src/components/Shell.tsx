@@ -9,18 +9,14 @@
  *   --- Phase 0 · Company & Capability ---
  *   01  Company Profile
  *   02  Capability Assessment
- *   --- Phase 1 · Product Intelligence ---
- *   03  Functional Promise
- *   04  Product Decomposition
+ *   --- Phase 1 · Product & Market Analysis ---
+ *   03  Product & Market Analysis
  *   --- Phase 2 · VN & Production ---
- *   05  VN + BOM (333111)
- *   06  Production Value Chain
- *   07  Equine Production VN (112920)
- *   08  Capability-Market Fit
- *   09  Adjacent Capabilities
+ *   04  Manufacturing VN & Product BOMs
+ *   05  Equine Production VN (112920)
+ *   06  Adjacent Capabilities
  *   --- Phase 3 · Market & Jobs ---
- *   10  JTBD + Stakeholder Needs
- *   11  Competitive Landscape
+ *   07  JTBD + Stakeholder Needs
  */
 
 import { useState, useEffect } from "react";
@@ -52,27 +48,23 @@ const navGroups: NavGroup[] = [
     ],
   },
   {
-    label: "Phase 1 · Product Intelligence",
+    label: "Phase 1 · Product & Market Analysis",
     items: [
-      { to: "/functional-promise", label: "Functional Promise", kicker: "03" },
-      { to: "/product", label: "Product Decomposition", kicker: "04" },
+      { to: "/product-analysis", label: "Product & Market Analysis", kicker: "03" },
     ],
   },
   {
     label: "Phase 2 · VN & Production",
     items: [
-      { to: "/vn-bom", label: "VN + BOM (333111)", kicker: "05" },
-      { to: "/production", label: "Production Value Chain", kicker: "06" },
-      { to: "/vn-reitstall", label: "Equine Production VN (112920)", kicker: "07" },
-      { to: "/capability-fit", label: "Capability-Market Fit", kicker: "08" },
-      { to: "/adjacent", label: "Adjacent Capabilities", kicker: "09" },
+      { to: "/vn-bom", label: "Manufacturing VN & Product BOMs", kicker: "04" },
+      { to: "/vn-reitstall", label: "Equine Production VN (112920)", kicker: "05" },
+      { to: "/adjacent", label: "Adjacent Capabilities", kicker: "06" },
     ],
   },
   {
     label: "Phase 3 · Market & Jobs",
     items: [
-      { to: "/jtbd", label: "JTBD + Stakeholder Needs", kicker: "10" },
-      { to: "/competitive", label: "Competitive Landscape", kicker: "11" },
+      { to: "/jtbd", label: "JTBD + Stakeholder Needs", kicker: "07" },
     ],
   },
 ];

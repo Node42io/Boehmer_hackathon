@@ -18,7 +18,7 @@ export default function VnReitstall() {
     <section className="container">
       <PageHeader
         kicker="Phase 0 / Sub-step 06 / End-Beneficiary VN"
-        title="VN Reitstall (NAICS 112920)"
+        title="Equine Production VN (112920)"
         description="End-beneficiary value network for equine production facilities (DACH). Böhmer product positions highlighted. Includes full L7→L4 hierarchy, adjacency analysis, and strategic move-up assessment."
       />
 
@@ -63,36 +63,36 @@ export default function VnReitstall() {
           </tbody>
         </table>
 
-        <h3>Output Types (NAICS 112920 in DACH context)</h3>
+        <h3>Segments (NAICS 112920 in DACH context)</h3>
         <table>
-          <thead><tr><th>ID</th><th>Output Type</th><th>Description</th><th>Böhmer Relevance</th></tr></thead>
+          <thead><tr><th>ID</th><th>Segment</th><th>Description</th><th>Böhmer Relevance</th></tr></thead>
           <tbody>
             <tr>
-              <td><strong>OT-A</strong></td>
+              <td><strong>Seg-A</strong></td>
               <td>Reitstall / Pension</td>
               <td style={{ fontSize: 12 }}>Commercial horse boarding + riding school. Multi-horse. Daily feed + paddock operations.</td>
               <td><span className="badge badge--strong">Primary target</span></td>
             </tr>
             <tr>
-              <td><strong>OT-B</strong></td>
+              <td><strong>Seg-B</strong></td>
               <td>Gestüt / Breeding</td>
               <td style={{ fontSize: 12 }}>Stud farm, breeding operations. Larger land, permanent infrastructure preferred.</td>
               <td><span className="badge badge--moderate">Secondary</span></td>
             </tr>
             <tr>
-              <td><strong>OT-C</strong></td>
+              <td><strong>Seg-C</strong></td>
               <td>Schulpferd / Reitschule</td>
               <td style={{ fontSize: 12 }}>Riding school with school horses. Intensive daily operations, high labor pressure.</td>
               <td><span className="badge badge--strong">Primary target</span></td>
             </tr>
             <tr>
-              <td><strong>OT-D</strong></td>
+              <td><strong>Seg-D</strong></td>
               <td>Turnierstall</td>
               <td style={{ fontSize: 12 }}>Competition stable. Premium infrastructure, horse welfare emphasis.</td>
               <td><span className="badge badge--moderate">Secondary</span></td>
             </tr>
             <tr>
-              <td><strong>OT-E</strong></td>
+              <td><strong>Seg-E</strong></td>
               <td>Freizeitpferd / Privathaltung</td>
               <td style={{ fontSize: 12 }}>Private leisure horse, 1–4 horses. Small scale.</td>
               <td><span className="badge badge--neutral">Tertiary</span></td>
@@ -103,61 +103,70 @@ export default function VnReitstall() {
         <hr />
         <SectionAnchor id="vr-l6" title="L6 Core Process Steps" />
         <table>
-          <thead><tr><th>#</th><th>L6 Node</th><th>Job Family</th><th>Serves</th></tr></thead>
+          <thead><tr><th>#</th><th>L6 Node</th><th>Job Family</th><th>Serves</th><th>Böhmer L5</th></tr></thead>
           <tbody>
             <tr>
               <td><strong>L6a</strong></td>
               <td>Facility Infrastructure &amp; Site Preparation</td>
               <td style={{ fontSize: 12 }}>Establish and maintain the physical environment required to house and operate a horse facility</td>
-              <td style={{ fontSize: 12 }}>OT-A, OT-B, OT-C, OT-D, OT-E</td>
+              <td style={{ fontSize: 12 }}>Seg-A, Seg-B, Seg-C, Seg-D, Seg-E</td>
+              <td>—</td>
             </tr>
             <tr>
               <td><strong>L6b</strong></td>
               <td>Animal Intake &amp; Identity Management</td>
               <td style={{ fontSize: 12 }}>Register, assess, and onboard incoming animals; establish individual health and nutrition baseline</td>
-              <td style={{ fontSize: 12 }}>OT-A, OT-B, OT-C, OT-D</td>
+              <td style={{ fontSize: 12 }}>Seg-A, Seg-B, Seg-C, Seg-D</td>
+              <td>—</td>
             </tr>
             <tr style={{ background: "rgba(253,255,152,0.04)" }}>
               <td><strong>L6c</strong></td>
               <td><strong>Daily Feeding &amp; Nutrition Management</strong></td>
               <td style={{ fontSize: 12 }}>Deliver correct type, quantity, and timing of feed to each animal while minimizing waste and contamination</td>
-              <td style={{ fontSize: 12 }}>OT-A, OT-B, OT-C, OT-D, OT-E</td>
+              <td style={{ fontSize: 12 }}>Seg-A, Seg-B, Seg-C, Seg-D, Seg-E</td>
+              <td><span style={{ color: "var(--accent-yellow)", fontWeight: 700 }}>● Heuraufe</span></td>
             </tr>
             <tr style={{ background: "rgba(253,255,152,0.04)" }}>
               <td><strong>L6d</strong></td>
               <td><strong>Housing &amp; Paddock Space Management</strong></td>
               <td style={{ fontSize: 12 }}>Configure, operate, and reconfigure stable boxes, paddocks, and outdoor exercise areas for daily equine welfare and workflow</td>
-              <td style={{ fontSize: 12 }}>OT-A, OT-B, OT-C, OT-D, OT-E</td>
+              <td style={{ fontSize: 12 }}>Seg-A, Seg-B, Seg-C, Seg-D, Seg-E</td>
+              <td><span style={{ color: "var(--accent-yellow)", fontWeight: 700 }}>● Paddockbox</span></td>
             </tr>
             <tr>
               <td><strong>L6e</strong></td>
               <td>Health &amp; Veterinary Care</td>
               <td style={{ fontSize: 12 }}>Maintain animal health through preventive protocols, farriery, and veterinary treatment</td>
-              <td style={{ fontSize: 12 }}>OT-A, OT-B, OT-C, OT-D, OT-E</td>
+              <td style={{ fontSize: 12 }}>Seg-A, Seg-B, Seg-C, Seg-D, Seg-E</td>
+              <td>—</td>
             </tr>
             <tr>
               <td><strong>L6f</strong></td>
               <td>Manure &amp; Waste Management</td>
               <td style={{ fontSize: 12 }}>Remove, store, and dispose of dung and soiled bedding daily to meet Tierschutz and biosecurity standards</td>
-              <td style={{ fontSize: 12 }}>OT-A, OT-B, OT-C, OT-D, OT-E</td>
+              <td style={{ fontSize: 12 }}>Seg-A, Seg-B, Seg-C, Seg-D, Seg-E</td>
+              <td>—</td>
             </tr>
             <tr>
               <td><strong>L6g</strong></td>
               <td>Training &amp; Conditioning</td>
               <td style={{ fontSize: 12 }}>Develop and maintain fitness, responsiveness, and gait quality in horses for their designated purpose</td>
-              <td style={{ fontSize: 12 }}>OT-A, OT-C, OT-D</td>
+              <td style={{ fontSize: 12 }}>Seg-A, Seg-C, Seg-D</td>
+              <td>—</td>
             </tr>
             <tr>
               <td><strong>L6h</strong></td>
               <td>Breeding &amp; Reproduction</td>
               <td style={{ fontSize: 12 }}>Manage estrus cycles, breeding events, gestation, and foaling</td>
-              <td style={{ fontSize: 12 }}>OT-B</td>
+              <td style={{ fontSize: 12 }}>Seg-B</td>
+              <td>—</td>
             </tr>
             <tr>
               <td><strong>L6i</strong></td>
               <td>Animal Sales, Transfer &amp; Dispatch</td>
               <td style={{ fontSize: 12 }}>Document ownership transfer, prepare animals for transport, arrange logistics</td>
-              <td style={{ fontSize: 12 }}>OT-B, OT-D</td>
+              <td style={{ fontSize: 12 }}>Seg-B, Seg-D</td>
+              <td>—</td>
             </tr>
           </tbody>
         </table>
@@ -405,7 +414,7 @@ export default function VnReitstall() {
           </tbody>
         </table>
 
-        <h3>L6h — Breeding &amp; Reproduction (OT-B only)</h3>
+        <h3>L6h — Breeding &amp; Reproduction (Segment-B only)</h3>
         <table>
           <thead><tr><th>L5</th><th>L4 Components</th></tr></thead>
           <tbody>
@@ -424,16 +433,16 @@ export default function VnReitstall() {
         </table>
 
         <hr />
-        <SectionAnchor id="vr-activation" title="Output Type Activation Matrix" />
+        <SectionAnchor id="vr-activation" title="Segment Activation Matrix" />
         <table>
           <thead>
             <tr>
               <th>L6 Segment</th>
-              <th style={{ textAlign: "center" }}>OT-A Reitstall</th>
-              <th style={{ textAlign: "center" }}>OT-B Gestüt</th>
-              <th style={{ textAlign: "center" }}>OT-C Reitschule</th>
-              <th style={{ textAlign: "center" }}>OT-D Turnierstall</th>
-              <th style={{ textAlign: "center" }}>OT-E Privat</th>
+              <th style={{ textAlign: "center" }}>Seg-A Reitstall</th>
+              <th style={{ textAlign: "center" }}>Seg-B Gestüt</th>
+              <th style={{ textAlign: "center" }}>Seg-C Reitschule</th>
+              <th style={{ textAlign: "center" }}>Seg-D Turnierstall</th>
+              <th style={{ textAlign: "center" }}>Seg-E Privat</th>
             </tr>
           </thead>
           <tbody>
@@ -463,7 +472,7 @@ export default function VnReitstall() {
           </tbody>
         </table>
         <p style={{ fontSize: 12, color: "var(--text-gray)" }}>
-          L6c and L6d activate across all output types — universal infrastructure demand. L6g and L6h are specialty-only. Böhmer's products (Heuraufe in L6c, Paddockbox in L6d) have the broadest addressable reach across output types.
+          L6c and L6d activate across all segments — universal infrastructure demand. L6g and L6h are specialty-only. Böhmer's products (Heuraufe in L6c, Paddockbox in L6d) have the broadest addressable reach across segments.
         </p>
 
         <hr />

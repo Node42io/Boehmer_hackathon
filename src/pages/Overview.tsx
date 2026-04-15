@@ -113,22 +113,58 @@ export default function Overview() {
         </table>
 
         <hr />
+        <SectionAnchor id="ovw-scores" title="Capability-Market Fit — Weighted Composite Score" />
+        <p style={{ fontSize: 13, lineHeight: 1.7, marginBottom: 16 }}>
+          Both products were scored against NAICS 112920 (Equine Production, DACH) using a six-factor composite model combining ODI opportunity score, feature fit, constraint compatibility, job coverage, value network hierarchy position, and incumbent vulnerability. The scores below represent the weighted aggregate result.
+        </p>
+        <table>
+          <thead>
+            <tr><th>Dimension</th><th>Weight</th><th>Heuraufe</th><th>Heuraufe contrib.</th><th>Paddockbox</th><th>Paddockbox contrib.</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>ODI Opportunity</td><td style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>0.25</td><td style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>5.40</td><td style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>1.350</td><td style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>5.63</td><td style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>1.408</td></tr>
+            <tr><td>Feature Fit</td><td style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>0.15</td><td style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>8.00</td><td style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>1.200</td><td style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>7.50</td><td style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>1.125</td></tr>
+            <tr><td>Constraint Compatibility</td><td style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>0.15</td><td style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>7.00</td><td style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>1.050</td><td style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>6.00</td><td style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>0.900</td></tr>
+            <tr><td>Job Coverage</td><td style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>0.15</td><td style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>6.25</td><td style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>0.938</td><td style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>7.50</td><td style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>1.125</td></tr>
+            <tr><td>VN Hierarchy</td><td style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>0.10</td><td style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>9.00</td><td style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>0.900</td><td style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>9.00</td><td style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>0.900</td></tr>
+            <tr><td>Incumbent Vulnerability</td><td style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>0.20</td><td style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>6.35</td><td style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>1.270</td><td style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>5.65</td><td style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>1.130</td></tr>
+            <tr style={{ fontWeight: 700, background: "rgba(253,255,152,0.04)" }}>
+              <td><strong>COMPOSITE</strong></td>
+              <td style={{ textAlign: "center" }}>1.00</td>
+              <td colSpan={2} style={{ textAlign: "center", fontFamily: "var(--font-mono)", color: "var(--accent-yellow)", fontSize: 18 }}>6.71</td>
+              <td colSpan={2} style={{ textAlign: "center", fontFamily: "var(--font-mono)", color: "var(--accent-yellow)", fontSize: 18 }}>6.59</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div className="card" style={{ padding: "20px 24px", marginTop: 20, borderLeft: "3px solid var(--accent-yellow)" }}>
+          <div style={{ fontFamily: "var(--font-mono)", fontSize: 10, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--text-gray-dark)", marginBottom: 8 }}>
+            Executive Recommendation
+          </div>
+          <p style={{ fontSize: 13, lineHeight: 1.7, marginBottom: 12 }}>
+            Both scores sit in the <strong>5.0–7.5 "investigate" band</strong> — above the 5.0 threshold that would warrant deferring, but short of the 7.5 threshold that would indicate a clear "pursue" decision. Neither product has a knockout constraint (all eight capability constraints are mitigable), and both achieve direct-to-operator customer-facing positions in the value network — the strongest possible hierarchy placement.
+          </p>
+          <p style={{ fontSize: 13, lineHeight: 1.7, marginBottom: 12 }}>
+            The <strong>Heuraufe (6.71)</strong> leads slightly due to better constraint compatibility (all low effort, vs. two medium-effort constraints for the Paddockbox) and slightly higher feature fit. The market for hay racks is larger and better established — Böhmer enters an existing product category where buyer familiarity exists. However, the competitive landscape is also more crowded: Patura, Kerbl, and GROWI hold established BayWa/Raiffeisen distribution positions.
+          </p>
+          <p style={{ fontSize: 13, lineHeight: 1.7, marginBottom: 0 }}>
+            The <strong>Paddockbox (6.59)</strong> is the more strategically interesting product because it creates a new category (castor-mounted steel paddock with fold-flat posts) where Böhmer has no direct steel-tube competitor. The constraint gap (Machinery Directive CE compliance + hinge fatigue test) is addressable with Böhmer's existing DIN EN ISO 3834-2 welding certification. <strong>Recommended sequencing:</strong> Launch Heuraufe first to establish market presence and distribution relationships at lower compliance cost, then bring Paddockbox to market once CE file and prototype fatigue testing are complete.
+          </p>
+        </div>
+
+        <hr />
         <SectionAnchor id="ovw-howto" title="How to Read This Report" />
         <table>
           <thead><tr><th>Section</th><th>What it covers</th></tr></thead>
           <tbody>
             {[
               ["01 Company Profile", "Legal entity, divisions, key persons, certifications, strategic context"],
-              ["02 Capability Assessment", "8 capability constraints (C1-C8), per-product compatibility, gap register"],
-              ["03 Functional Promise", "Two-level FP for both products, UNSPSC classification, complements"],
-              ["04 Product Decomposition", "Features, specifications, constraints per product"],
-              ["05 VN + BOM (333111)", "14-step manufacturing value network with per-step scaling analysis and full L4-to-L0 BOM"],
-              ["06 Production Value Chain", "SCOR model: Source, Plan, Make, Deliver, Return — supplier matrix, costs, QC gates"],
-              ["07 Equine Production VN (112920)", "End-beneficiary VN with L6 process steps, Böhmer position, adjacency analysis"],
-              ["08 Capability-Market Fit", "6-factor composite scoring: ODI, feature fit, constraints, job coverage, VN hierarchy, incumbents"],
-              ["09 Adjacent Capabilities", "4 adjacent opportunities (A1-A4) screened against all 8 constraints"],
-              ["10 JTBD + Stakeholder Needs", "Burleson JTBD, Ulwick ODI, 5 stakeholder roles, 52 needs, P1-P5 pyramid"],
-              ["11 Competitive Landscape", "10+ named competitors per product, price segmentation, positioning maps, distribution channels"],
+              ["02 Capability Assessment", "8 capability constraints (C1-C8), per-product compatibility with effort ratings, gap register"],
+              ["03 Product & Market Analysis", "Functional promises, product decomposition (features, specs, constraints), market context, named competitors (ranked by revenue)"],
+              ["04 Manufacturing VN & Product BOMs", "14-step manufacturing value network with Böhmer welding competence markers, scaling analysis, full L4-to-L0 BOM"],
+              ["05 Equine Production VN (112920)", "End-beneficiary VN with L6 segments, Böhmer positions in L6c/L6d, adjacency analysis"],
+              ["06 Adjacent Capabilities", "4 adjacent opportunities (A1-A4) screened against all 8 constraints"],
+              ["07 JTBD + Stakeholder Needs", "Burleson JTBD, Ulwick ODI, 5 stakeholder roles, 52 needs, P1-P5 pyramid, top-10 underserved needs"],
             ].map(([ch, what]) => (
               <tr key={ch}><td><strong>{ch}</strong></td><td style={{ fontSize: 12 }}>{what}</td></tr>
             ))}
