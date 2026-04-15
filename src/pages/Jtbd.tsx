@@ -10,7 +10,7 @@ export default function Jtbd() {
       <PageHeader
         kicker="Phase 0 / Sub-step 09 / JTBD Analysis"
         title="JTBD + Stakeholder Needs"
-        description="Burleson JTBD framework, Ulwick ODI scoring, 5 stakeholder roles, 52 needs across P1–P5 pyramid for Heuraufe and Paddockbox."
+        description="Burleson JTBD framework, Ulwick ODI scoring, 5 stakeholder roles, 52 needs, ODI scoring for Heuraufe and Paddockbox."
       />
       <article className="md">
 
@@ -176,11 +176,11 @@ export default function Jtbd() {
 
         <h3>Stakeholder Role Mapping</h3>
         <table>
-          <thead><tr><th>Stakeholder</th><th>Burleson Role</th><th>Relationship to Products</th><th>Pyramid Levels</th></tr></thead>
+          <thead><tr><th>Stakeholder</th><th>Burleson Role</th><th>Relationship to Products</th></tr></thead>
           <tbody>
-            <tr><td><strong>Stable operator / manager (Stallbetreiber)</strong></td><td style={{ fontSize: 12 }}>Job Executor + Purchase Executor</td><td style={{ fontSize: 12 }}>Primary decision maker, daily user, bears cost</td><td><code>P1, P2, P3, P4, P5</code></td></tr>
-            <tr><td><strong>Horse owner (Pferdebesitzer)</strong></td><td style={{ fontSize: 12 }}>Job Overseer + Purchase Influencer</td><td style={{ fontSize: 12 }}>Demands quality care; influences stable choice; does not operate equipment</td><td><code>P2, P4, P5</code></td></tr>
-            <tr><td><strong>Stable hand (Stallarbeiter/Bereiter)</strong></td><td style={{ fontSize: 12 }}>Job Executor (operational) + Product Lifecycle Support</td><td style={{ fontSize: 12 }}>Daily positioning, filling, cleaning; values ergonomics</td><td><code>P1, P2</code></td></tr>
+            <tr><td><strong>Stable operator / manager (Stallbetreiber)</strong></td><td style={{ fontSize: 12 }}>Job Executor + Purchase Executor</td><td style={{ fontSize: 12 }}>Primary decision maker, daily user, bears cost</td></tr>
+            <tr><td><strong>Horse owner (Pferdebesitzer)</strong></td><td style={{ fontSize: 12 }}>Job Overseer + Purchase Influencer</td><td style={{ fontSize: 12 }}>Demands quality care; influences stable choice; does not operate equipment</td></tr>
+            <tr><td><strong>Stable hand (Stallarbeiter/Bereiter)</strong></td><td style={{ fontSize: 12 }}>Job Executor (operational) + Product Lifecycle Support</td><td style={{ fontSize: 12 }}>Daily positioning, filling, cleaning; values ergonomics</td></tr>
             <tr><td><strong>Veterinarian</strong></td><td style={{ fontSize: 12 }}>Purchase Influencer</td><td style={{ fontSize: 12 }}>Horse-safe design, injury prevention, natural feeding posture</td><td><code>P2 (safety-related subset)</code></td></tr>
             <tr><td><strong>Procurement / facility manager</strong></td><td style={{ fontSize: 12 }}>Purchase Executor (delegated)</td><td style={{ fontSize: 12 }}>Durability, TCO, supplier reliability</td><td><code>P1 (Acquisition stage)</code></td></tr>
           </tbody>
@@ -408,42 +408,38 @@ export default function Jtbd() {
 
         <h3>Stable Operator / Manager (Stallbetreiber) — Job Executor + Purchase Executor</h3>
         <table>
-          <thead><tr><th>#</th><th>Need Statement</th><th>Product</th><th>Pyramid Level</th><th>Error Type</th><th>Impact</th><th>Imp.</th><th>Sat.</th><th>Opp.</th></tr></thead>
           <tbody>
             <tr><td>SO-01</td><td style={{ fontSize: 12 }}>Minimize the daily labor-hours allocated to feeding infrastructure management across all paddocks</td><td>Heuraufe</td><td>P2</td><td>EFFORT</td><td>time</td><td style={{ textAlign: "center" }}>9</td><td style={{ textAlign: "center" }}>4</td><td style={{ textAlign: "center", fontWeight: 700 }}>14</td></tr>
-            <tr><td>SO-02</td><td style={{ fontSize: 12 }}>Minimize the capital expenditure required per horse-place for feeding and enclosure infrastructure</td><td>Both</td><td>P1-Acquisition</td><td>EFFORT</td><td>cost</td><td style={{ textAlign: "center" }}>8</td><td style={{ textAlign: "center" }}>4</td><td style={{ textAlign: "center", fontWeight: 700 }}>12</td></tr>
+            <tr><td>SO-02</td><td style={{ fontSize: 12 }}>Minimize the capital expenditure required per horse-place for feeding and enclosure infrastructure</td><td>Both</td><td>EFFORT</td><td>cost</td><td style={{ textAlign: "center" }}>8</td><td style={{ textAlign: "center" }}>4</td><td style={{ textAlign: "center", fontWeight: 700 }}>12</td></tr>
             <tr><td>SO-03</td><td style={{ fontSize: 12 }}>Maximize the operational flexibility to reconfigure yard layout within a single working day</td><td>Paddockbox</td><td>P2</td><td>THROUGHPUT</td><td>time</td><td style={{ textAlign: "center" }}>8</td><td style={{ textAlign: "center" }}>3</td><td style={{ textAlign: "center", fontWeight: 700 }}>13</td></tr>
             <tr><td>SO-04</td><td style={{ fontSize: 12 }}>Minimize the likelihood of a horse welfare incident that triggers Tierschutzgesetz liability</td><td>Both</td><td>P2</td><td>ROBUSTNESS</td><td>safety</td><td style={{ textAlign: "center" }}>10</td><td style={{ textAlign: "center" }}>5</td><td style={{ textAlign: "center", fontWeight: 700 }}>15</td></tr>
-            <tr><td>SO-05</td><td style={{ fontSize: 12 }}>Minimize the frequency of infrastructure replacement or major repair within a 15-year planning horizon</td><td>Both</td><td>P1-Maintain</td><td>CONSISTENCY</td><td>cost</td><td style={{ textAlign: "center" }}>8</td><td style={{ textAlign: "center" }}>5</td><td style={{ textAlign: "center", fontWeight: 700 }}>11</td></tr>
+            <tr><td>SO-05</td><td style={{ fontSize: 12 }}>Minimize the frequency of infrastructure replacement or major repair within a 15-year planning horizon</td><td>Both</td><td>CONSISTENCY</td><td>cost</td><td style={{ textAlign: "center" }}>8</td><td style={{ textAlign: "center" }}>5</td><td style={{ textAlign: "center", fontWeight: 700 }}>11</td></tr>
           </tbody>
         </table>
 
         <h3>Horse Owner (Pferdebesitzer) — Job Overseer + Purchase Influencer</h3>
         <table>
-          <thead><tr><th>#</th><th>Need Statement</th><th>Product</th><th>Pyramid Level</th><th>Error Type</th><th>Impact</th><th>Imp.</th><th>Sat.</th><th>Opp.</th></tr></thead>
           <tbody>
             <tr><td>HO-01</td><td style={{ fontSize: 12 }}>Minimize the risk of horse injury caused by feeding or enclosure infrastructure</td><td>Both</td><td>P2</td><td>ROBUSTNESS</td><td>safety</td><td style={{ textAlign: "center" }}>10</td><td style={{ textAlign: "center" }}>5</td><td style={{ textAlign: "center", fontWeight: 700 }}>15</td></tr>
-            <tr><td>HO-02</td><td style={{ fontSize: 12 }}>Maximize visible evidence that feeding infrastructure supports natural head-down grazing posture</td><td>Heuraufe</td><td>P4-Image</td><td>DETECTION</td><td>safety</td><td style={{ textAlign: "center" }}>7</td><td style={{ textAlign: "center" }}>4</td><td style={{ textAlign: "center", fontWeight: 700 }}>10</td></tr>
-            <tr><td>HO-03</td><td style={{ fontSize: 12 }}>Minimize the perception that the horse is confined in substandard or improvised enclosure conditions</td><td>Paddockbox</td><td>P4-Image</td><td>ACCURACY</td><td>safety</td><td style={{ textAlign: "center" }}>7</td><td style={{ textAlign: "center" }}>4</td><td style={{ textAlign: "center", fontWeight: 700 }}>10</td></tr>
+            <tr><td>HO-02</td><td style={{ fontSize: 12 }}>Maximize visible evidence that feeding infrastructure supports natural head-down grazing posture</td><td>Heuraufe</td><td>DETECTION</td><td>safety</td><td style={{ textAlign: "center" }}>7</td><td style={{ textAlign: "center" }}>4</td><td style={{ textAlign: "center", fontWeight: 700 }}>10</td></tr>
+            <tr><td>HO-03</td><td style={{ fontSize: 12 }}>Minimize the perception that the horse is confined in substandard or improvised enclosure conditions</td><td>Paddockbox</td><td>ACCURACY</td><td>safety</td><td style={{ textAlign: "center" }}>7</td><td style={{ textAlign: "center" }}>4</td><td style={{ textAlign: "center", fontWeight: 700 }}>10</td></tr>
             <tr><td>HO-04</td><td style={{ fontSize: 12 }}>Minimize the variation in hay quality and availability experienced by the horse across feeding cycles</td><td>Heuraufe</td><td>P2</td><td>CONSISTENCY</td><td>safety</td><td style={{ textAlign: "center" }}>7</td><td style={{ textAlign: "center" }}>4</td><td style={{ textAlign: "center", fontWeight: 700 }}>10</td></tr>
           </tbody>
         </table>
 
         <h3>Stable Hand (Stallarbeiter/Bereiter) — Operational Executor + Lifecycle Support</h3>
         <table>
-          <thead><tr><th>#</th><th>Need Statement</th><th>Product</th><th>Pyramid Level</th><th>Error Type</th><th>Impact</th><th>Imp.</th><th>Sat.</th><th>Opp.</th></tr></thead>
           <tbody>
             <tr><td>SH-01</td><td style={{ fontSize: 12 }}>Minimize the physical lifting force required to reposition, open, or close enclosure elements</td><td>Paddockbox</td><td>P1-Daily Use</td><td>EFFORT</td><td>skill</td><td style={{ textAlign: "center" }}>8</td><td style={{ textAlign: "center" }}>4</td><td style={{ textAlign: "center", fontWeight: 700 }}>12</td></tr>
             <tr><td>SH-02</td><td style={{ fontSize: 12 }}>Minimize the elapsed time to refill a feeding station for 10+ horses</td><td>Heuraufe</td><td>P1-Daily Use</td><td>EFFORT</td><td>time</td><td style={{ textAlign: "center" }}>8</td><td style={{ textAlign: "center" }}>5</td><td style={{ textAlign: "center", fontWeight: 700 }}>11</td></tr>
             <tr><td>SH-03</td><td style={{ fontSize: 12 }}>Minimize the likelihood of finger/hand pinch injury during panel connection or hinge operation</td><td>Paddockbox</td><td>P1-Daily Use</td><td>ROBUSTNESS</td><td>safety</td><td style={{ textAlign: "center" }}>8</td><td style={{ textAlign: "center" }}>4</td><td style={{ textAlign: "center", fontWeight: 700 }}>12</td></tr>
             <tr><td>SH-04</td><td style={{ fontSize: 12 }}>Minimize the number of steps required to open a tractor corridor and re-close it after passage</td><td>Paddockbox</td><td>P1-Daily Use</td><td>EFFORT</td><td>time</td><td style={{ textAlign: "center" }}>7</td><td style={{ textAlign: "center" }}>3</td><td style={{ textAlign: "center", fontWeight: 700 }}>11</td></tr>
-            <tr><td>SH-05</td><td style={{ fontSize: 12 }}>Minimize the time required to clean feeding station between cycles</td><td>Heuraufe</td><td>P1-Clean</td><td>EFFORT</td><td>time</td><td style={{ textAlign: "center" }}>6</td><td style={{ textAlign: "center" }}>5</td><td style={{ textAlign: "center", fontWeight: 700 }}>7</td></tr>
+            <tr><td>SH-05</td><td style={{ fontSize: 12 }}>Minimize the time required to clean feeding station between cycles</td><td>Heuraufe</td><td>EFFORT</td><td>time</td><td style={{ textAlign: "center" }}>6</td><td style={{ textAlign: "center" }}>5</td><td style={{ textAlign: "center", fontWeight: 700 }}>7</td></tr>
           </tbody>
         </table>
 
         <h3>Veterinarian — Purchase Influencer</h3>
         <table>
-          <thead><tr><th>#</th><th>Need Statement</th><th>Product</th><th>Pyramid Level</th><th>Error Type</th><th>Impact</th><th>Imp.</th><th>Sat.</th><th>Opp.</th></tr></thead>
           <tbody>
             <tr><td>VT-01</td><td style={{ fontSize: 12 }}>Minimize the likelihood of leg entrapment in feeding grid openings or enclosure rail spacing</td><td>Both</td><td>P2</td><td>ROBUSTNESS</td><td>safety</td><td style={{ textAlign: "center" }}>10</td><td style={{ textAlign: "center" }}>5</td><td style={{ textAlign: "center", fontWeight: 700 }}>15</td></tr>
             <tr><td>VT-02</td><td style={{ fontSize: 12 }}>Minimize deviation from natural head-down eating posture angle during hay consumption</td><td>Heuraufe</td><td>P2</td><td>ACCURACY</td><td>safety</td><td style={{ textAlign: "center" }}>8</td><td style={{ textAlign: "center" }}>4</td><td style={{ textAlign: "center", fontWeight: 700 }}>12</td></tr>
@@ -454,97 +450,11 @@ export default function Jtbd() {
 
         <h3>Procurement / Facility Manager — Purchase Executor (delegated)</h3>
         <table>
-          <thead><tr><th>#</th><th>Need Statement</th><th>Product</th><th>Pyramid Level</th><th>Error Type</th><th>Impact</th><th>Imp.</th><th>Sat.</th><th>Opp.</th></tr></thead>
           <tbody>
-            <tr><td>PM-01</td><td style={{ fontSize: 12 }}>Minimize the total cost of ownership per unit-year including amortization, maintenance, labor, and waste</td><td>Both</td><td>P1-Acquisition</td><td>EFFORT</td><td>cost</td><td style={{ textAlign: "center" }}>9</td><td style={{ textAlign: "center" }}>4</td><td style={{ textAlign: "center", fontWeight: 700 }}>14</td></tr>
-            <tr><td>PM-02</td><td style={{ fontSize: 12 }}>Minimize the lead time from order to operational deployment</td><td>Both</td><td>P1-Acquisition</td><td>THROUGHPUT</td><td>time</td><td style={{ textAlign: "center" }}>6</td><td style={{ textAlign: "center" }}>4</td><td style={{ textAlign: "center", fontWeight: 700 }}>8</td></tr>
-            <tr><td>PM-03</td><td style={{ fontSize: 12 }}>Minimize the likelihood of supplier delivery failure or quality non-conformance</td><td>Both</td><td>P1-Acquisition</td><td>ROBUSTNESS</td><td>reliability</td><td style={{ textAlign: "center" }}>7</td><td style={{ textAlign: "center" }}>5</td><td style={{ textAlign: "center", fontWeight: 700 }}>9</td></tr>
-            <tr><td>PM-04</td><td style={{ fontSize: 12 }}>Maximize the documented service life guarantee with defined corrosion protection standard</td><td>Both</td><td>P1-Acquisition</td><td>DETECTION</td><td>reliability</td><td style={{ textAlign: "center" }}>7</td><td style={{ textAlign: "center" }}>4</td><td style={{ textAlign: "center", fontWeight: 700 }}>10</td></tr>
-          </tbody>
-        </table>
-
-        <hr />
-        <SectionAnchor id="jtbd-p3p5" title="3.4 P3–P5 Identity and Emotional Needs" />
-
-        <h3>P3 — Role Identity</h3>
-        <blockquote>
-          <strong>Retrieval:</strong> "By getting feeding/enclosure management done well, who does the stable operator become?"<br />
-          <strong>Answer:</strong> A professional, welfare-compliant Stallbetreiber who runs an efficient operation that horse owners trust.
-        </blockquote>
-        <table>
-          <thead><tr><th>#</th><th>Need Statement</th><th>Product</th><th>Bridge</th><th>Imp.</th><th>Sat.</th><th>Opp.</th><th>Confidence</th></tr></thead>
-          <tbody>
-            <tr>
-              <td>RI-01</td>
-              <td style={{ fontSize: 12 }}>Maximize the visible professionalism of stable infrastructure as perceived by visiting horse owners and prospective boarders</td>
-              <td>Both</td>
-              <td style={{ fontSize: 12 }}>"What must the product do so they CAN become a trusted, professional operator?"</td>
-              <td style={{ textAlign: "center" }}>7</td><td style={{ textAlign: "center" }}>4</td><td style={{ textAlign: "center", fontWeight: 700 }}>10</td>
-              <td style={{ fontSize: 11 }}>0.5 [hypothesis]</td>
-            </tr>
-            <tr>
-              <td>RI-02</td>
-              <td style={{ fontSize: 12 }}>Maximize the operator's ability to demonstrate Tierschutzgesetz compliance through infrastructure design choices</td>
-              <td>Both</td>
-              <td style={{ fontSize: 12 }}>"What must the product do so they CAN become a welfare-first operator?"</td>
-              <td style={{ textAlign: "center" }}>8</td><td style={{ textAlign: "center" }}>4</td><td style={{ textAlign: "center", fontWeight: 700 }}>12</td>
-              <td style={{ fontSize: 11 }}>0.6 [hypothesis]</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h3>P4 — Image Identity</h3>
-        <blockquote>
-          <strong>Retrieval:</strong> "Who is watching, and what must they think?"<br />
-          <strong>Watchers:</strong> Horse owners (paying clients), veterinarian on routine visit, Tierschutz inspector, prospective boarders.
-        </blockquote>
-        <table>
-          <thead><tr><th>#</th><th>Need Statement</th><th>Product</th><th>Bridge</th><th>Imp.</th><th>Sat.</th><th>Opp.</th><th>Confidence</th></tr></thead>
-          <tbody>
-            <tr>
-              <td>IM-01</td>
-              <td style={{ fontSize: 12 }}>Minimize the impression that horse feeding is managed through improvised or inadequate equipment</td>
-              <td>Heuraufe</td>
-              <td style={{ fontSize: 12 }}>"What must the product do so watchers SEE professional feeding management?"</td>
-              <td style={{ textAlign: "center" }}>7</td><td style={{ textAlign: "center" }}>4</td><td style={{ textAlign: "center", fontWeight: 700 }}>10</td>
-              <td style={{ fontSize: 11 }}>0.5 [hypothesis]</td>
-            </tr>
-            <tr>
-              <td>IM-02</td>
-              <td style={{ fontSize: 12 }}>Minimize the impression that paddock containment relies on temporary or unsafe barriers</td>
-              <td>Paddockbox</td>
-              <td style={{ fontSize: 12 }}>"What must the product do so watchers SEE permanent-grade enclosure quality?"</td>
-              <td style={{ textAlign: "center" }}>7</td><td style={{ textAlign: "center" }}>3</td><td style={{ textAlign: "center", fontWeight: 700 }}>11</td>
-              <td style={{ fontSize: 11 }}>0.5 [hypothesis]</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h3>P5 — Emotional</h3>
-        <blockquote>
-          <strong>Retrieval:</strong> "What does the stable operator want to feel? What do they want to avoid feeling?"<br />
-          <strong>Want to feel:</strong> In control, confident that horses are safe, proud of the facility.<br />
-          <strong>Want to avoid:</strong> Anxiety about horse injury, guilt after a welfare incident, stress from equipment failure during busy mornings.
-        </blockquote>
-        <table>
-          <thead><tr><th>#</th><th>Need Statement</th><th>Product</th><th>Bridge</th><th>Imp.</th><th>Sat.</th><th>Opp.</th><th>Confidence</th></tr></thead>
-          <tbody>
-            <tr>
-              <td>EM-01</td>
-              <td style={{ fontSize: 12 }}>Minimize the operator's anxiety about undetected horse injury at outdoor feeding/enclosure infrastructure overnight</td>
-              <td>Both</td>
-              <td style={{ fontSize: 12 }}>"What must the product do so they FEEL confident about horse safety?"</td>
-              <td style={{ textAlign: "center" }}>7</td><td style={{ textAlign: "center" }}>4</td><td style={{ textAlign: "center", fontWeight: 700 }}>10</td>
-              <td style={{ fontSize: 11 }}>0.4 [hypothesis]</td>
-            </tr>
-            <tr>
-              <td>EM-02</td>
-              <td style={{ fontSize: 12 }}>Minimize the frustration caused by equipment that fails to move, reconfigure, or function as designed under daily operational pressure</td>
-              <td>Both</td>
-              <td style={{ fontSize: 12 }}>"What must the product do so they FEEL in control of their morning routine?"</td>
-              <td style={{ textAlign: "center" }}>7</td><td style={{ textAlign: "center" }}>4</td><td style={{ textAlign: "center", fontWeight: 700 }}>10</td>
-              <td style={{ fontSize: 11 }}>0.4 [hypothesis]</td>
-            </tr>
+            <tr><td>PM-01</td><td style={{ fontSize: 12 }}>Minimize the total cost of ownership per unit-year including amortization, maintenance, labor, and waste</td><td>Both</td><td>EFFORT</td><td>cost</td><td style={{ textAlign: "center" }}>9</td><td style={{ textAlign: "center" }}>4</td><td style={{ textAlign: "center", fontWeight: 700 }}>14</td></tr>
+            <tr><td>PM-02</td><td style={{ fontSize: 12 }}>Minimize the lead time from order to operational deployment</td><td>Both</td><td>THROUGHPUT</td><td>time</td><td style={{ textAlign: "center" }}>6</td><td style={{ textAlign: "center" }}>4</td><td style={{ textAlign: "center", fontWeight: 700 }}>8</td></tr>
+            <tr><td>PM-03</td><td style={{ fontSize: 12 }}>Minimize the likelihood of supplier delivery failure or quality non-conformance</td><td>Both</td><td>ROBUSTNESS</td><td>reliability</td><td style={{ textAlign: "center" }}>7</td><td style={{ textAlign: "center" }}>5</td><td style={{ textAlign: "center", fontWeight: 700 }}>9</td></tr>
+            <tr><td>PM-04</td><td style={{ fontSize: 12 }}>Maximize the documented service life guarantee with defined corrosion protection standard</td><td>Both</td><td>DETECTION</td><td>reliability</td><td style={{ textAlign: "center" }}>7</td><td style={{ textAlign: "center" }}>4</td><td style={{ textAlign: "center", fontWeight: 700 }}>10</td></tr>
           </tbody>
         </table>
 
@@ -578,8 +488,7 @@ export default function Jtbd() {
           <thead><tr><th>Metric</th><th>Value</th></tr></thead>
           <tbody>
             <tr><td>Total market needs</td><td style={{ fontFamily: "var(--font-mono)" }}>52</td></tr>
-            <tr><td>P1/P2 needs</td><td style={{ fontFamily: "var(--font-mono)" }}>48</td></tr>
-            <tr><td>P3–P5 needs</td><td style={{ fontFamily: "var(--font-mono)" }}>6 (all hypothesis-level)</td></tr>
+            <tr><td>Functional needs</td><td style={{ fontFamily: "var(--font-mono)" }}>48</td></tr>
             <tr><td>Market-inherent (product_related = false)</td><td style={{ fontFamily: "var(--font-mono)" }}>~67%</td></tr>
             <tr><td>Technology-specific (product_related = true)</td><td style={{ fontFamily: "var(--font-mono)" }}>~33%</td></tr>
             <tr><td>Underserved needs (opp. score ≥ 14)</td><td style={{ fontFamily: "var(--font-mono)" }}>10</td></tr>

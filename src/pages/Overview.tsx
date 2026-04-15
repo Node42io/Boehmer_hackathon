@@ -164,7 +164,7 @@ export default function Overview() {
               ["04 Manufacturing VN & Product BOMs", "14-step manufacturing value network with Böhmer welding competence markers, scaling analysis, full L4-to-L0 BOM"],
               ["05 Equine Production VN (112920)", "End-beneficiary VN with L6 segments, Böhmer positions in L6c/L6d, adjacency analysis"],
               ["06 Adjacent Capabilities", "4 adjacent opportunities (A1-A4) screened against all 8 constraints"],
-              ["07 JTBD + Stakeholder Needs", "Burleson JTBD, Ulwick ODI, 5 stakeholder roles, 52 needs, P1-P5 pyramid, top-10 underserved needs"],
+              ["07 JTBD + Stakeholder Needs", "Burleson JTBD, Ulwick ODI, 5 stakeholder roles, 52 needs, ODI needs analysis, top-10 underserved needs"],
             ].map(([ch, what]) => (
               <tr key={ch}><td><strong>{ch}</strong></td><td style={{ fontSize: 12 }}>{what}</td></tr>
             ))}
