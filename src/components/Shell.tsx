@@ -45,6 +45,7 @@ const navGroups: NavGroup[] = [
     items: [
       { to: "/company", label: "Company Profile", kicker: "01" },
       { to: "/capability", label: "Capability Assessment", kicker: "02" },
+      { to: "/capabilities", label: "Capability Register", kicker: "02b" },
     ],
   },
   {
@@ -65,6 +66,12 @@ const navGroups: NavGroup[] = [
     label: "Phase 3 · Market & Jobs",
     items: [
       { to: "/jtbd", label: "JTBD + Stakeholder Needs", kicker: "07" },
+    ],
+  },
+  {
+    label: "Phase 4 · Strategic Synthesis",
+    items: [
+      { to: "/synthesis", label: "Strategic Synthesis & Recommendation", kicker: "08" },
     ],
   },
 ];

@@ -474,86 +474,86 @@ export default function ProductMarketAnalysis() {
                 <td style={{ fontSize: 11 }}>Viereckraufe mit Sicherheitsfressgitter + Dach</td>
                 <td style={{ fontSize: 11 }}>Hot-dip galvanized steel</td>
                 <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>1,100–1,750</td>
-                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>~€150M [SRC]</td>
-                <td style={{ fontSize: 11 }}>~500</td>
+                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>~€250M [SRC]</td>
+                <td style={{ fontSize: 11 }}>~500 [SRC]</td>
                 <td style={{ fontSize: 11 }}>12 safety feeding places, height-adjustable skids, roof; broad range incl. Hobby line</td>
                 <td style={{ fontSize: 11 }}>BayWa, Raiffeisen, Amazon, Stallbedarf24</td>
                 <td style={{ fontSize: 11 }}><a href="https://www.kerbl.de" target="_blank" rel="noopener noreferrer">kerbl.de</a></td>
               </tr>
               <tr>
-                <td>2</td><td><strong>Patura</strong></td><td>DE</td>
+                <td>2</td><td><strong>GROWI</strong> (Grossewinkelmann)</td><td>DE</td>
+                <td style={{ fontSize: 11 }}>Heuraufe Kompakt mit Dach</td>
+                <td style={{ fontSize: 11 }}>Galvanized steel</td>
+                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>1,447–1,499</td>
+                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>n/a [private]</td>
+                <td style={{ fontSize: 11 }}>~180–200 [SRC]</td>
+                <td style={{ fontSize: 11 }}>8 feeding places, 150x150 cm, roof with edge protection bumpers; also fence systems</td>
+                <td style={{ fontSize: 11 }}>Stallbedarf24, Haas Pferdesport, direct</td>
+                <td style={{ fontSize: 11 }}><a href="https://www.growi.de" target="_blank" rel="noopener noreferrer">growi.de</a></td>
+              </tr>
+              <tr>
+                <td>3</td><td><strong>Kellfri</strong></td><td>SE</td>
+                <td style={{ fontSize: 11 }}>Heuraufe mit Dach und geschlossenen Palisaden</td>
+                <td style={{ fontSize: 11 }}>Hot-dip galvanized steel</td>
+                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>1,890 (excl. VAT)</td>
+                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>~€28M [SRC]</td>
+                <td style={{ fontSize: 11 }}>~46–55 [SRC]</td>
+                <td style={{ fontSize: 11 }}>Roof + closed palisade elements, Swedish import, budget-premium; broad agri range</td>
+                <td style={{ fontSize: 11 }}>farmtec-online.de, direct import</td>
+                <td style={{ fontSize: 11 }}><a href="https://www.kellfri.com" target="_blank" rel="noopener noreferrer">kellfri.com</a></td>
+              </tr>
+              <tr>
+                <td>4</td><td><strong>Patura</strong></td><td>DE</td>
                 <td style={{ fontSize: 11 }}>Profi-Viereckraufe / Compact-Raufe range</td>
                 <td style={{ fontSize: 11 }}>Galvanized steel, massive full-steel</td>
                 <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>1,257–3,109</td>
-                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>~€50M [EST]</td>
-                <td style={{ fontSize: 11 }}>~200</td>
+                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>~€14M [SRC]</td>
+                <td style={{ fontSize: 11 }}>~120 [SRC]</td>
                 <td style={{ fontSize: 11 }}>12–16 safety feeding places, BMEL-conform, height-adjustable roof, large bale compatible</td>
                 <td style={{ fontSize: 11 }}>BayWa, Raiffeisen, Stallbedarf24, direct</td>
                 <td style={{ fontSize: 11 }}><a href="https://www.patura.com" target="_blank" rel="noopener noreferrer">patura.com</a></td>
               </tr>
               <tr>
-                <td>3</td><td><strong>GROWI</strong> (Grossewinkelmann)</td><td>DE</td>
-                <td style={{ fontSize: 11 }}>Heuraufe Kompakt mit Dach</td>
-                <td style={{ fontSize: 11 }}>Galvanized steel</td>
-                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>1,447–1,499</td>
-                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>~€20M [EST]</td>
-                <td style={{ fontSize: 11 }}>~80</td>
-                <td style={{ fontSize: 11 }}>8 feeding places, 150x150 cm, roof with edge protection bumpers</td>
-                <td style={{ fontSize: 11 }}>Stallbedarf24, Haas Pferdesport, direct</td>
-                <td style={{ fontSize: 11 }}><a href="https://www.growi.de" target="_blank" rel="noopener noreferrer">growi.de</a></td>
-              </tr>
-              <tr>
-                <td>4</td><td><strong>Kellfri</strong></td><td>SE</td>
-                <td style={{ fontSize: 11 }}>Heuraufe mit Dach und geschlossenen Palisaden</td>
-                <td style={{ fontSize: 11 }}>Hot-dip galvanized steel</td>
-                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>1,890 (excl. VAT)</td>
-                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>~€30M [EST]</td>
-                <td style={{ fontSize: 11 }}>~150</td>
-                <td style={{ fontSize: 11 }}>Roof + closed palisade elements, Swedish import, budget-premium</td>
-                <td style={{ fontSize: 11 }}>farmtec-online.de, direct import</td>
-                <td style={{ fontSize: 11 }}><a href="https://www.kellfri.com" target="_blank" rel="noopener noreferrer">kellfri.com</a></td>
-              </tr>
-              <tr>
-                <td>5</td><td><strong>Siepmann</strong></td><td>DE</td>
-                <td style={{ fontSize: 11 }}>Heu-Raufe mit Dach + Netzbügel</td>
-                <td style={{ fontSize: 11 }}>Galvanized steel + polycarbonate roof</td>
-                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>1,069–1,159</td>
-                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>~€5M [EST]</td>
-                <td style={{ fontSize: 11 }}>~30</td>
-                <td style={{ fontSize: 11 }}>180 kg, front-loader accessible, no fixed floor (drainage), screw-together system</td>
-                <td style={{ fontSize: 11 }}>siepmann.net direct, equestrian trade</td>
-                <td style={{ fontSize: 11 }}><a href="https://www.siepmann.net" target="_blank" rel="noopener noreferrer">siepmann.net</a></td>
-              </tr>
-              <tr>
-                <td>6</td><td><strong>Rutjes Pferdeboxen</strong></td><td>NL</td>
+                <td>5</td><td><strong>Rutjes Pferdeboxen</strong></td><td>NL</td>
                 <td style={{ fontSize: 11 }}>Heuraufe mit Dach 200x200 cm</td>
                 <td style={{ fontSize: 11 }}>Hot-dip galvanized steel</td>
                 <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>1,750 (reduced from 1,885)</td>
-                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>~€8M [EST]</td>
-                <td style={{ fontSize: 11 }}>~40</td>
+                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>~€1M [SRC]</td>
+                <td style={{ fontSize: 11 }}>11 [SRC]</td>
                 <td style={{ fontSize: 11 }}>3-point hitch for tractor, adjustable roof/feet, 2 fillable sides</td>
                 <td style={{ fontSize: 11 }}>rutjespferdeboxen.de direct</td>
                 <td style={{ fontSize: 11 }}><a href="https://www.rutjespferdeboxen.de" target="_blank" rel="noopener noreferrer">rutjespferdeboxen.de</a></td>
               </tr>
               <tr>
-                <td>7</td><td><strong>Kneilmann</strong></td><td>DE</td>
+                <td>6</td><td><strong>Kneilmann</strong></td><td>DE</td>
                 <td style={{ fontSize: 11 }}>Rundraufe + Heuraufen series</td>
                 <td style={{ fontSize: 11 }}>Galvanized steel</td>
                 <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>3,242+</td>
-                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>~€5M [EST]</td>
-                <td style={{ fontSize: 11 }}>~25</td>
-                <td style={{ fontSize: 11 }}>Premium specialty products, direct manufacturer</td>
+                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>€1–5M [SRC]</td>
+                <td style={{ fontSize: 11 }}>50–99 [SRC]</td>
+                <td style={{ fontSize: 11 }}>Premium specialty products, direct manufacturer; also mobile paddocks on wheels</td>
                 <td style={{ fontSize: 11 }}>Stallbedarf24, direct</td>
                 <td style={{ fontSize: 11 }}><a href="https://www.kneilmann.de" target="_blank" rel="noopener noreferrer">kneilmann.de</a></td>
+              </tr>
+              <tr>
+                <td>7</td><td><strong>Siepmann</strong></td><td>DE</td>
+                <td style={{ fontSize: 11 }}>Heu-Raufe mit Dach + Netzbügel</td>
+                <td style={{ fontSize: 11 }}>Galvanized steel + polycarbonate roof</td>
+                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>1,069–1,159</td>
+                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>n/a [EST small]</td>
+                <td style={{ fontSize: 11 }}>~5–15 [EST]</td>
+                <td style={{ fontSize: 11 }}>180 kg, front-loader accessible, no fixed floor (drainage), screw-together system</td>
+                <td style={{ fontSize: 11 }}>siepmann.net direct, equestrian trade</td>
+                <td style={{ fontSize: 11 }}><a href="https://www.siepmann.net" target="_blank" rel="noopener noreferrer">siepmann.net</a></td>
               </tr>
               <tr>
                 <td>8</td><td><strong>Skandwood</strong></td><td>DE</td>
                 <td style={{ fontSize: 11 }}>Futterraufe aus Lärchenholz</td>
                 <td style={{ fontSize: 11 }}>Larch wood (Lärchenholz)</td>
                 <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>985–6,540</td>
-                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>~€3M [EST]</td>
-                <td style={{ fontSize: 11 }}>~15</td>
-                <td style={{ fontSize: 11 }}>Premium wood construction, large roof overhang, aesthetic design</td>
+                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>n/a [EST small]</td>
+                <td style={{ fontSize: 11 }}>~5–10 [EST]</td>
+                <td style={{ fontSize: 11 }}>Premium wood construction, large roof overhang, aesthetic design; Oeversee/Schleswig</td>
                 <td style={{ fontSize: 11 }}>aussenbox.de direct, equestrian shows</td>
                 <td style={{ fontSize: 11 }}><a href="https://www.aussenbox.de" target="_blank" rel="noopener noreferrer">aussenbox.de</a></td>
               </tr>
@@ -594,34 +594,34 @@ export default function ProductMarketAnalysis() {
             </thead>
             <tbody>
               <tr>
-                <td>1</td><td><strong>Patura</strong></td><td>DE</td>
-                <td style={{ fontSize: 11 }}>Sicherheits-Pferdepanel range (Einzelbox through 4er)</td>
-                <td style={{ fontSize: 11 }}>Galvanized round steel tube</td>
-                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>893–4,346</td>
-                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>~€50M [SRC]</td>
-                <td style={{ fontSize: 11 }}>~200</td>
-                <td style={{ fontSize: 11 }}>BMEL-conform tube spacing, 3–4 box configurations, professional stables</td>
-                <td style={{ fontSize: 11 }}>BayWa, Raiffeisen, Stallbedarf24</td>
-                <td style={{ fontSize: 11 }}><a href="https://www.patura.com" target="_blank" rel="noopener noreferrer">patura.com</a></td>
-              </tr>
-              <tr>
-                <td>2</td><td><strong>VOSS.farming</strong></td><td>DE</td>
+                <td>1</td><td><strong>VOSS.farming</strong></td><td>DE</td>
                 <td style={{ fontSize: 11 }}>Weidepanel Sets (6-tube)</td>
                 <td style={{ fontSize: 11 }}>Hot-dip galvanized steel tube (6-tube)</td>
                 <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>Panel sets from ~2,310</td>
-                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>~€30M [EST]</td>
-                <td style={{ fontSize: 11 }}>~120</td>
-                <td style={{ fontSize: 11 }}>Complete box sets (single/2er/3er), chain locks, point-pressure feet</td>
+                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>n/a [EST ~€10M]</td>
+                <td style={{ fontSize: 11 }}>~100+ [SRC]</td>
+                <td style={{ fontSize: 11 }}>Complete box sets (single/2er/3er), chain locks, point-pressure feet; also electric fencing brand</td>
                 <td style={{ fontSize: 11 }}>weidezaun.info, Amazon</td>
                 <td style={{ fontSize: 11 }}><a href="https://www.voss-farming.de" target="_blank" rel="noopener noreferrer">voss-farming.de</a></td>
+              </tr>
+              <tr>
+                <td>2</td><td><strong>Patura</strong></td><td>DE</td>
+                <td style={{ fontSize: 11 }}>Sicherheits-Pferdepanel range (Einzelbox through 4er)</td>
+                <td style={{ fontSize: 11 }}>Galvanized round steel tube</td>
+                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>893–4,346</td>
+                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>~€14M [SRC]</td>
+                <td style={{ fontSize: 11 }}>~120 [SRC]</td>
+                <td style={{ fontSize: 11 }}>BMEL-conform tube spacing, 3–4 box configurations, professional stables</td>
+                <td style={{ fontSize: 11 }}>BayWa, Raiffeisen, Stallbedarf24</td>
+                <td style={{ fontSize: 11 }}><a href="https://www.patura.com" target="_blank" rel="noopener noreferrer">patura.com</a></td>
               </tr>
               <tr>
                 <td>3</td><td><strong>Kneilmann</strong></td><td>DE</td>
                 <td style={{ fontSize: 11 }}>Mobiler Paddock auf Rädern (pentagon/hexagon)</td>
                 <td style={{ fontSize: 11 }}>Galvanized round tube (aluminum frame)</td>
                 <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>3,149 (single); panels 583 each</td>
-                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>~€5M [EST]</td>
-                <td style={{ fontSize: 11 }}>~25</td>
+                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>€1–5M [SRC]</td>
+                <td style={{ fontSize: 11 }}>50–99 [SRC]</td>
                 <td style={{ fontSize: 11 }}>Pentagon (9.55 m dia) / hexagon (11.46 m dia), puncture-proof wheels, ~6 m panels</td>
                 <td style={{ fontSize: 11 }}>Stallbedarf24, direct</td>
                 <td style={{ fontSize: 11 }}><a href="https://www.kneilmann.de" target="_blank" rel="noopener noreferrer">kneilmann.de</a></td>
@@ -631,33 +631,33 @@ export default function ProductMarketAnalysis() {
                 <td style={{ fontSize: 11 }}>Weidepanel ausziehbar Modell Pferd</td>
                 <td style={{ fontSize: 11 }}>Steel tube, galvanized</td>
                 <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>137–415 per panel</td>
-                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>~€5M [EST]</td>
-                <td style={{ fontSize: 11 }}>~25</td>
+                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>n/a [EST small]</td>
+                <td style={{ fontSize: 11 }}>~10–25 [EST]</td>
                 <td style={{ fontSize: 11 }}>Extendable 2.4–4.0 m, 1.70 m height, with/without gate</td>
                 <td style={{ fontSize: 11 }}>equifarm.de direct</td>
                 <td style={{ fontSize: 11 }}><a href="https://www.equifarm.de" target="_blank" rel="noopener noreferrer">equifarm.de</a></td>
               </tr>
               <tr>
-                <td>5</td><td><strong>Hallertauer Zaun- und Stalldepot</strong></td><td>DE</td>
-                <td style={{ fontSize: 11 }}>Mobile Pferdebox Var. 1</td>
-                <td style={{ fontSize: 11 }}>Hot-dip galvanized steel (50x30x1.5 mm flat-oval tube)</td>
-                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>462–707</td>
-                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>~€3M [EST]</td>
-                <td style={{ fontSize: 11 }}>~15</td>
-                <td style={{ fontSize: 11 }}>2.4x2.4 to 4.0x4.0 m sizes, chain connection</td>
-                <td style={{ fontSize: 11 }}>zaun-und-stalldepot.de direct</td>
-                <td style={{ fontSize: 11 }}><a href="https://www.zaun-und-stalldepot.de" target="_blank" rel="noopener noreferrer">zaun-und-stalldepot.de</a></td>
-              </tr>
-              <tr>
-                <td>6</td><td><strong>Rutjes Pferdeboxen</strong></td><td>NL</td>
+                <td>5</td><td><strong>Rutjes Pferdeboxen</strong></td><td>NL</td>
                 <td style={{ fontSize: 11 }}>Paddock panel systems</td>
                 <td style={{ fontSize: 11 }}>Hot-dip galvanized steel</td>
                 <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>varies</td>
-                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>~€8M [EST]</td>
-                <td style={{ fontSize: 11 }}>~40</td>
-                <td style={{ fontSize: 11 }}>Full stable system supplier incl. panels, direct manufacturer</td>
+                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>~€1M [SRC]</td>
+                <td style={{ fontSize: 11 }}>11 [SRC]</td>
+                <td style={{ fontSize: 11 }}>Full stable system supplier incl. panels, direct manufacturer; Enter, Netherlands</td>
                 <td style={{ fontSize: 11 }}>rutjespferdeboxen.de direct</td>
                 <td style={{ fontSize: 11 }}><a href="https://www.rutjespferdeboxen.de" target="_blank" rel="noopener noreferrer">rutjespferdeboxen.de</a></td>
+              </tr>
+              <tr>
+                <td>6</td><td><strong>Hallertauer Zaun- und Stalldepot</strong></td><td>DE</td>
+                <td style={{ fontSize: 11 }}>Mobile Pferdebox Var. 1</td>
+                <td style={{ fontSize: 11 }}>Hot-dip galvanized steel (50x30x1.5 mm flat-oval tube)</td>
+                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>462–707</td>
+                <td style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>~€1M [SRC]</td>
+                <td style={{ fontSize: 11 }}>~5–10 [SRC]</td>
+                <td style={{ fontSize: 11 }}>2.4x2.4 to 4.0x4.0 m sizes, chain connection; Siegenburg, Bavaria</td>
+                <td style={{ fontSize: 11 }}>zaun-und-stalldepot.de direct</td>
+                <td style={{ fontSize: 11 }}><a href="https://www.zaun-und-stalldepot.de" target="_blank" rel="noopener noreferrer">zaun-und-stalldepot.de</a></td>
               </tr>
             </tbody>
           </table>

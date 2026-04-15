@@ -1,0 +1,130 @@
+{
+  "capabilities": [
+    {
+      "id": "C1",
+      "name": "Certified structural welding (MIG/MAG, TIG, manual arc)",
+      "type": "core",
+      "fpLinkage": "Enables 'structurally sound welded steel assemblies with repeatable quality' — DIN EN ISO 3834-2 certification anchors the quality commitment; DIN EN 1090-1/2 EXC2/EXC3 enables structural and safety-critical applications",
+      "constraints": ["Certified welders required — labor bottleneck if headcount shrinks", "Machine-specific fixturing required for each new product geometry", "DIN EN 1090 EXC3 scope limits some joint designs without pre-qualification"]
+    },
+    {
+      "id": "C2",
+      "name": "Laser cutting & CNC nesting (flat sheet 2D profiles)",
+      "type": "core",
+      "fpLinkage": "Enables precision-cut components for frame assembly — laser-cut flat sheet profiles (up to 3000×1500 mm, 1–20 mm thickness) are the input to all tube-frame products",
+      "constraints": ["Bed size limit 3000×1500 mm — oversized panels must be segmented", "Shared machine time with contract work — scheduling conflicts under high contract load", "2D flat sheet only — no 3D or tube laser capability currently"]
+    },
+    {
+      "id": "C3",
+      "name": "CNC bending / forming (tube bending, press brake sheet forming)",
+      "type": "core",
+      "fpLinkage": "Enables curved and angled structural elements (roof trusses, tube frames) — CNC-bent rectangular hollow sections are the primary structural members in both Heuraufe and Paddockbox",
+      "constraints": ["Tooling changeover required for different bend radii — reduces flexibility for short runs", "Tube bending limited to standard RHS/SHS profiles available on market", "Complex 3D compound bends not achievable with current machine park"]
+    },
+    {
+      "id": "C4",
+      "name": "System integration — Baugruppen → Systemlösungen (complete assembly)",
+      "type": "core",
+      "fpLinkage": "This IS the core transformation — from selling individual welds (Lohnfertigung) to selling complete products. Enables the full BOM: raw material in, finished product out. Without this, Böhmer remains a sub-tier supplier",
+      "constraints": ["Requires production planning, QC processes, and inventory management — all new processes for OEM business", "Working capital required for buy-stock-produce-sell cycle (vs. current customer-material JIT model)", "Batch scheduling must balance OEM production windows with ongoing contract business"]
+    },
+    {
+      "id": "C5",
+      "name": "Equestrian domain expertise (shareholder family)",
+      "type": "core",
+      "fpLinkage": "Ensures product design addresses actual stable operator needs — horse safety, tractor mobility, outdoor durability, multi-horse feeding behavior (Futterneid). Domain expertise is the origin of both product ideas and the reason the functional promise is well-specified",
+      "constraints": ["Tacit knowledge — not yet formalized into product requirements or design specs", "Knowledge concentrated in Böhmer family; succession of this knowledge to team is unplanned", "No formal equestrian user research or testing protocol beyond family experience"]
+    },
+    {
+      "id": "C6",
+      "name": "Multi-material processing (S235/S355 steel, stainless steel, aluminum)",
+      "type": "supporting",
+      "fpLinkage": "Material selection flexibility for corrosion/weight optimization — S355 for structural strength, stainless for corrosion-critical joints, aluminum for weight-sensitive components",
+      "constraints": ["Not differentiating vs. competitors — all comparable fabricators can process these materials", "Stainless and aluminum require separate tooling and process controls to avoid cross-contamination with carbon steel"]
+    },
+    {
+      "id": "C7",
+      "name": "Quality management system (ISO 9001:2015)",
+      "type": "supporting",
+      "fpLinkage": "Enables repeatable product quality with documented process control — ISO 9001 certification provides the QMS framework that supports DIN EN ISO 3834-2 welding quality and DIN EN 1090 structural steel execution",
+      "constraints": ["Standard table-stakes capability — not differentiating vs. any certified fabricator", "Ongoing audit and documentation cost; extends to new product lines once they enter series production"]
+    },
+    {
+      "id": "C8",
+      "name": "Grinding, deburring & surface preparation (horse-safe edge finishing)",
+      "type": "supporting",
+      "fpLinkage": "Critical for animal-contact products — no sharp edges or weld spatter on horse contact surfaces. Directly supports the 'safe for 15-year outdoor animal use' requirement in the functional promise",
+      "constraints": ["Labor-intensive, linear scaling — cannot be automated at Böhmer's current scale", "Not differentiating vs. competitors; all equestrian equipment manufacturers must meet the same requirement"]
+    },
+    {
+      "id": "C9",
+      "name": "Design engineering / technical drawing (CAD, in-house product development)",
+      "type": "supporting",
+      "fpLinkage": "Enables in-house product development cycle — CAD drawings for product design and production fixtures. Required to produce technical files for CE certification and to iterate product geometry without external engineering cost",
+      "constraints": ["Limited to 2D / simple 3D — no parametric FEA or simulation capability in-house", "Engineering resources are shared with contract work; OEM design tasks compete for time"]
+    }
+  ],
+  "combinations": [
+    {
+      "ids": ["C1", "C2", "C3"],
+      "name": "Precision welded steel structures",
+      "targetApplications": "Structural products requiring a complete cut-bend-weld sequence: any frame, enclosure, or load-bearing assembly from flat sheet and tube stock"
+    },
+    {
+      "ids": ["C1", "C4", "C5"],
+      "name": "Domain-informed complete products",
+      "targetApplications": "Products designed with equestrian expertise and manufactured as complete systems — where the domain knowledge shapes the product spec and C4 delivers the finished unit"
+    },
+    {
+      "ids": ["C1", "C8"],
+      "name": "Horse-safe welded equipment",
+      "targetApplications": "Animal-contact products requiring both certified structural welds (C1) and post-weld edge finishing (C8) to eliminate laceration and entrapment risk"
+    },
+    {
+      "ids": ["C2", "C3", "C6"],
+      "name": "Multi-material fabricated components",
+      "targetApplications": "Products requiring mixed material processing — e.g., S355 main frame with stainless steel hardware inserts or aluminum trim components"
+    }
+  ],
+  "trackATargets": [
+    {
+      "capabilityIds": ["C1", "C2", "C3", "C4"],
+      "description": "Welded steel outdoor equipment for equestrian market",
+      "examples": "Heuraufe (hay rack), Paddockbox (mobile paddock enclosure) — both products are direct C1+C2+C3+C4 applications. No new capability required."
+    },
+    {
+      "capabilityIds": ["C1", "C2", "C3"],
+      "description": "Steel stable furniture and hardware",
+      "examples": "Boxentrennwände (stall partition panels), Anbindebalken (tether rails), Sattelschränke (tack storage cabinets) — all are cut-bend-weld tube/sheet products within existing envelope"
+    },
+    {
+      "capabilityIds": ["C1", "C8"],
+      "description": "Horse-safe metal fixtures and accessories",
+      "examples": "Tränken-Halterungen (water trough brackets), Futtertrog-Rahmen (feed trough frames), fence post sockets, ring anchors — small certified-weld + safe-edge items"
+    }
+  ],
+  "trackBTargets": [
+    {
+      "existingCapabilityIds": ["C1", "C2", "C3"],
+      "additionalCapabilityNeeded": "Surface coating partner (hot-dip galvanizing + powder coat)",
+      "adjacentUnits": "Outdoor-rated equestrian equipment at ISO 12944 C3+ — required for any product sold into DACH outdoor equestrian market. This gap blocks market launch for both Heuraufe and Paddockbox."
+    },
+    {
+      "existingCapabilityIds": ["C4", "C5"],
+      "additionalCapabilityNeeded": "Outbound sales / dealer distribution channel",
+      "adjacentUnits": "Direct-to-customer product sales to Reitställe, Gestüte, and Pferdepensionen — requires trade fair presence, Fachhandel partnerships, or online catalog. Currently zero channel exists."
+    },
+    {
+      "existingCapabilityIds": ["C1", "C4"],
+      "additionalCapabilityNeeded": "Architectural / structural engineering capability",
+      "adjacentUnits": "Custom equestrian facility construction — stable buildings, covered riding arenas (Reithallen), permanent paddock fencing systems. Requires engineering sign-off and construction management."
+    }
+  ],
+  "trackCTargets": [
+    {
+      "currentLevel": "L1–L2: Fabricated components / assemblies",
+      "oneLevelUp": "L3–L4: Complete installed solutions",
+      "coverageQuestion": "Can Böhmer supply a complete installed equestrian facility — not just equipment but turnkey stable fitout including panels, fixtures, and installation? Requires field installation capability, project management, and structural engineering sign-off."
+    }
+  ]
+}
