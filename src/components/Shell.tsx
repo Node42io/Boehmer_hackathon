@@ -15,7 +15,7 @@
  *   --- Phase 2 · VN & Production ---
  *   05  VN + BOM (333111)
  *   06  Production Value Chain
- *   07  VN Reitstall (112920)
+ *   07  Equine Production VN (112920)
  *   08  Capability-Market Fit
  *   09  Adjacent Capabilities
  *   --- Phase 3 · Market & Jobs ---
@@ -63,7 +63,7 @@ const navGroups: NavGroup[] = [
     items: [
       { to: "/vn-bom", label: "VN + BOM (333111)", kicker: "05" },
       { to: "/production", label: "Production Value Chain", kicker: "06" },
-      { to: "/vn-reitstall", label: "VN Reitstall (112920)", kicker: "07" },
+      { to: "/vn-reitstall", label: "Equine Production VN (112920)", kicker: "07" },
       { to: "/capability-fit", label: "Capability-Market Fit", kicker: "08" },
       { to: "/adjacent", label: "Adjacent Capabilities", kicker: "09" },
     ],

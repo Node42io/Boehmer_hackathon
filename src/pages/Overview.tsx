@@ -124,7 +124,7 @@ export default function Overview() {
               ["04 Product Decomposition", "Features, specifications, constraints per product"],
               ["05 VN + BOM (333111)", "14-step manufacturing value network with per-step scaling analysis and full L4-to-L0 BOM"],
               ["06 Production Value Chain", "SCOR model: Source, Plan, Make, Deliver, Return — supplier matrix, costs, QC gates"],
-              ["07 VN Reitstall (112920)", "End-beneficiary VN with L6 process steps, Böhmer position, adjacency analysis"],
+              ["07 Equine Production VN (112920)", "End-beneficiary VN with L6 process steps, Böhmer position, adjacency analysis"],
               ["08 Capability-Market Fit", "6-factor composite scoring: ODI, feature fit, constraints, job coverage, VN hierarchy, incumbents"],
               ["09 Adjacent Capabilities", "4 adjacent opportunities (A1-A4) screened against all 8 constraints"],
               ["10 JTBD + Stakeholder Needs", "Burleson JTBD, Ulwick ODI, 5 stakeholder roles, 52 needs, P1-P5 pyramid"],
