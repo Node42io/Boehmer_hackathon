@@ -1,0 +1,822 @@
+{
+  "id": "FIT_flowmeters_src_01_product_decomposition_",
+  "title": "Feature-Market Fit — Flowmeters, Home Industry (NAICS 334513)",
+  "type": "feature_market_fit",
+  "market_slug": "flowmeters_src_01_product_decomposition_",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Step 09 — Technology-Level Feature-Market Fit",
+      "content": "Seven technology-scope features from Step 01 scored against NAICS 334513 (home industry). Market needs referenced from `JTBD_flowmeters_src_01_product_decomposition_.md`. The home industry encompasses all flowmeter segments: continuous thermal management, batch process metering, CIP/SIP validation, safety-critical interlock, fiscal/billing metering, and water infrastructure monitoring. [SRC: JTBD §1.2]\n\n### 09a — Per-Market Kano + ODI Fit Scoring\n\n| Feature | Kano | Time | Cost | Safety | Reliab. | Skill | Stress | Pain | Conf. | Delight | Overall |\n|---|---|---|---|---|---|---|---|---|---|---|---|\n| **Transit-Time Flow Measurement** | must_be | 5 | 5 | 7 | 8 | 4 | 5 | 5 | 7 | 3 | **5.44** |\n| **Integrated Temperature Sensing** | attractive | 5 | 7 | 4 | 6 | 5 | 5 | 7 | 7 | 5 | **5.67** |\n| **Zero Pressure Drop Flow Path** | one_dimensional | 3 | 6 | 3 | 5 | 3 | 3 | 4 | 4 | 3 | **3.78** |\n| **No Moving Parts** | one_dimensional | 3 | 7 | 5 | 9 | 5 | 5 | 7 | 6 | 4 | **5.67** |\n| **Bidirectional Flow Detection** | one_dimensional | 4 | 5 | 6 | 5 | 3 | 4 | 3 | 5 | 3 | **4.22** |\n| **Digital Anomaly Detection** | attractive | 5 | 5 | 8 | 7 | 5 | 7 | 5 | 8 | 6 | **6.22** |\n| **Real-Time Compensation Algorithms** | must_be | 3 | 4 | 4 | 8 | 5 | 4 | 4 | 7 | 2 | **4.56** |\n\n### 09a — Rationales\n\n**Transit-Time Flow Measurement** — `must_be`. This IS the commodity FP (\"quantify the volumetric or mass flow rate of fluids traversing a closed conduit\"). Every alternative — electromagnetic, Coriolis, turbine, vortex, DP — provides flow measurement. Absence is disqualifying. Primary drivers: Reliability (8) — solid-state transit-time delivers consistent readings without mechanical degradation, addressing E1 (flow accuracy ±2%, Opp=13) and E24 (unplanned replacement from mechanical wear, Opp=12); Safety (7) — rapid flow measurement enables safety interlocks for pipe-empty and dry-run detection per E11 (Opp=14) and reverse-flow events per E5 (Opp=11). [SRC: 01_product_decomposition, JTBD E1/E5/E11/E24]\n\n**Integrated Temperature Sensing** — `attractive`. Most flowmeters across the commodity class (electromagnetic, Coriolis, turbine, vortex, DP) do NOT include integrated temperature measurement — separate probes are standard practice. Combined flow + temperature from a single inline device enables thermal energy calculation (Q = flow × ΔT × Cp) without additional sensors, wiring, or controller inputs. Primary drivers: Cost (7) — eliminates separate temperature probe and installation, directly addressing E6 (simultaneous flow + temp ±0.5°C, Opp=11); Pain (7) — removes coordination of two separate measurement devices at each measurement point; Confidence (7) — matched flow/temp from the same location improves energy calculation accuracy. Attractive because most buyers do not expect a flowmeter to include temperature and are genuinely delighted when it does. [SRC: 02_functional_promise differentiator #4, JTBD E6]\n\n**Zero Pressure Drop Flow Path** — `one_dimensional`. Less pressure drop is proportionally better for system hydraulic design across all segments. Ultrasonic and electromagnetic share this advantage; turbine, vortex, and DP meters create 50–500 mbar obstruction. Primary drivers: Cost (6) — reduces pump sizing burden and operating energy cost, addressing E7 (pressure drop <50 mbar, Opp=7); Reliability (5) — no flow obstruction means no sensor-as-clogging-point. Scores moderate because while valued, zero pressure drop does not transform the product category — instrumentation engineers expect at least one technology class to offer it. [SRC: 01_product_decomposition differentiator #2, JTBD E7]\n\n**No Moving Parts** — `one_dimensional`. Solid-state vs. mechanical is a well-understood trade-off in the instrumentation industry. Process engineers know that ultrasonic and electromagnetic sensors have no moving parts; turbine and vortex sensors do. The relationship is linear: fewer mechanical wear points = longer life = less maintenance. Not a surprise (would be `attractive` only in markets unfamiliar with the technology). Primary drivers: Reliability (9) — eliminates bearing wear, rotor fouling, and mechanical seal degradation, directly addressing E24 (unplanned replacement from mechanical wear, Opp=12) and E23 (annual maintenance cost, Opp=12); Pain (7) — removes bearing replacement schedules and periodic disassembly for inspection. [SRC: 01_product_decomposition differentiator #1, JTBD E23/E24]\n\n**Bidirectional Flow Detection** — `one_dimensional`. Inherent to transit-time ultrasonic — the sign of the transit-time difference inverts with flow reversal. Also achievable with electromagnetic meters. A known, valued capability in the instrumentation industry. More measurement capability is linearly better. Primary drivers: Safety (6) — detects backflow events that cause contamination or energy waste, addressing E5 (reverse-flow >0.5 l/min in <2s, Opp=11); Confidence (5) — provides flow direction information for system diagnostics. [SRC: 01_product_decomposition differentiator #5, JTBD E5]\n\n**Digital Anomaly Detection** — `attractive`. While premium industrial instruments (Endress+Hauser Heartbeat, Emerson Smart Meter Verification) offer self-diagnostics, the majority of commodity flowmeters provide only raw flow data. Embedded analytics detecting air bubbles, empty-pipe conditions, and glycol concentration changes from the sensor itself are genuinely surprising across most segments — particularly where turbine, vortex, or DP sensors are the norm. Primary drivers: Safety (8) — empty-pipe detection prevents pump damage and thermal runaway, directly addressing E11 (pipe-empty detection speed, Opp=14, the highest-opportunity need in this market); Confidence (8) — real-time diagnostic flags enable operators to distinguish genuine process deviations from sensor artifacts per E10 (Opp=10) and detect transducer fouling per E12 (Opp=11); Stress (7) — automated anomaly detection reduces operator cognitive load during multi-point monitoring. [SRC: 01_product_decomposition, JTBD E10/E11/E12]\n\n**Real-Time Compensation Algorithms** — `must_be`. Every professional-grade flowmeter includes temperature, pressure, and viscosity compensation. Uncompensated measurement would be unusable in any serious process application. Absence is disqualifying. Primary drivers: Reliability (8) — reduces temperature-induced measurement error from ~1.5% to ~0.2% via NTC compensation, directly addressing E4 (accuracy during >20°C transients, Opp=10) and contributing to E1 (overall accuracy ±2%, Opp=13); Confidence (7) — auto-compensated readings across the operating envelope maintain measurement trust per E9 (calibration drift, Opp=13). [SRC: 01_product_decomposition, JTBD E1/E4/E9]\n\n### 09b — Validation\n\n| # | Check | Result |\n|---|---|---|\n| 1 | Kano cross-market consistency | PASS — must_be for core measurement (commodity FP) and compensation (table-stakes); one_dimensional for well-known technology advantages (zero DP, no moving parts, bidirectional); attractive only for genuinely beyond-commodity capabilities (integrated temp, anomaly detection) |\n| 2 | Safety >= 7 but Confidence <= 3 | PASS — no violation. Max safety = 8 (Digital Anomaly Detection), corresponding confidence = 8 |\n| 3 | Skill >= 7 but Stress <= 3 | PASS — no violation. Max skill = 5 |\n| 4 | overall_fit arithmetic | PASS — all 7 values recomputed: (sum of 9 scores) / 9, rounded to 2 decimal places |\n| 5 | No feature scores 10 on all dimensions | PASS — max single score = 9 (No Moving Parts → Reliability) |\n| 6 | Feature names comply with 1.pdf rules | PASS — spec-visible noun phrases, 2–6 words, no brand names, no outcome claims |\n| 7 | Indifferent features score 1-3 on all dimensions | N/A — no indifferent features in this market |\n\n---"
+    },
+    {
+      "title": "Step 10 — Product-Related Needs (Burleson Product Jobs)",
+      "content": "Needs derived from the ultrasonic transit-time technology's 12 constraints. Each passes the litmus test: **would this need disappear if a different technology (electromagnetic, Coriolis, turbine) were chosen? YES.** The home industry spans all flowmeter segments, so all constraints manifest.\n\n| # | Statement | Source Constraint | Imp | Sat |\n|---|---|---|---|---|\n| 1 | Minimize the likelihood of measurement failure when target process fluids have acoustic impedance outside the piezoelectric transducer's coupling range, excluding non-aqueous media (oils, gases, solvents) from the sensor's addressable application space | Aqueous Media Requirement | 8 | 3 |\n| 2 | Minimize the likelihood of polymer housing and seal degradation when process circuits operate at sustained temperatures approaching the 90°C material service limit | Maximum Medium Temperature | 6 | 5 |\n| 3 | Minimize the measurement error caused by entrained air exceeding 2% by volume, which attenuates the ultrasonic signal beyond the transit-time algorithm's compensation capability | Air Bubble / Void Fraction Limit | 7 | 3 |\n| 4 | Minimize the residual transit-time measurement error during rapid temperature transients where speed-of-sound changes outpace the NTC compensation algorithm's response rate | Temperature-Dependent Accuracy | 6 | 5 |\n| 5 | Minimize the likelihood of wetted polymer housing and seal attack when process fluids or CIP chemicals exceed the material's chemical resistance limits | Wetted Material Chemical Compatibility | 5 | 5 |\n| 6 | Minimize the duration of measurement outage during system events (drain-down, filling, purging) that temporarily create partially filled pipe conditions where the ultrasonic pulse cannot traverse the air gap | Pipe Full Condition Required | 6 | 4 |\n| 7 | Minimize the flow measurement dead zone below the minimum detectable threshold (0.25–4.2 l/min depending on DN variant) where transit-time signal-to-noise ratio prevents valid measurement | Minimum Flow Rate Detection | 7 | 4 |\n| 8 | Minimize the risk of housing structural failure in applications where process pressure spikes or water hammer events temporarily exceed the 10 bar continuous rating | Maximum Operating Pressure | 5 | 6 |\n| 9 | Minimize the installation footprint penalty from the 5–10× DN straight-pipe requirement that restricts deployment in space-constrained process skids, compact equipment, and retrofit installations | Minimum Straight Pipe Run | 7 | 4 |\n| 10 | Minimize the frequency of sensor replacement in continuous high-throughput applications where the 3,000 m³ total throughput endurance is consumed within months rather than years of operation | Life Endurance Ceiling | 6 | 4 |\n| 11 | Minimize the exclusion of hazardous-area applications where the absence of ATEX/IECEx certification prevents sensor deployment in Zone 1/0 explosive atmosphere classifications | No Explosive Atmosphere Certification | 4 | 3 |\n| 12 | Minimize the risk of electronics failure or RAST 2.5 connector degradation in outdoor or extreme-ambient installations that exceed the sensor's indoor-rated operating envelope | Ambient Temperature Range | 4 | 5 |\n\n### 10b — Validation\n\n| # | Check | Result |\n|---|---|---|\n| 1 | Litmus test — would need disappear with different technology? | PASS — all 12 needs trace to ultrasonic transit-time specific constraints. Electromagnetic sensors: unaffected by air bubbles (#3), no acoustic coupling (#1), metallic housings survive >150°C (#2), no straight-run requirement for most designs (#9). Coriolis: measures mass flow regardless of medium acoustics (#1), tolerates bubbles (#3), stainless steel construction (#2/#5). |\n| 2 | Source constraint traceability | PASS — all 12 constraints from 03_constraints.md mapped; each constraint logically causes the stated failure mode |\n| 3 | Affected markets plausibility | PASS — home industry spans all flowmeter segments; all constraints manifest across the breadth of applications |\n| 4 | Completeness — every constraint generates >= 1 need | PASS — all 12 constraints covered (1 need per constraint) |\n| 5 | importance < 3 AND satisfaction > 7 | PASS — no such entries; minimum importance = 4, maximum satisfaction = 6 |\n| 6 | No market-level needs included | PASS — all needs trace to specific ultrasonic transit-time mechanisms; no generic accuracy, cost, or regulatory needs |\n\n---"
+    },
+    {
+      "title": "Step 11 — Vendor Feature-Market Fit (Marquardt vs Best Incumbent)",
+      "content": "Six vendor-scope features (Marquardt-specific) scored against NAICS 334513 (home industry). The home industry encompasses all flowmeter segments — incumbents include electromagnetic (Endress+Hauser, ABB, ~30% share), Coriolis (Emerson, E+H, ~25% share), and turbine/impeller (Grundfos, Digmesa, ~8% share). [SRC: JTBD §Incumbent Technology Anchors]\n\n| Feature | Kano | Vendor | Incumbent | Inc. Tech | Advantage |\n|---|---|---|---|---|---|\n| **Modular Pipe Diameter Variants** | one_dimensional | 6 | 9 | Electromagnetic Flow Measurement | inferior |\n| **Customizable Communication Interface** | one_dimensional | 6 | 9 | Electromagnetic Flow Measurement | inferior |\n| **Customizable Mechanical Interface** | one_dimensional | 6 | 8 | Electromagnetic Flow Measurement | inferior |\n| **Low-Energy Battery Mode** | attractive | 8 | 5 | Ultrasonic Transit-Time (Kamstrup) | superior |\n| **Pre-Calibrated Delivery** | one_dimensional | 8 | 7 | Coriolis Mass Flow Measurement | parity |\n| **KTW/WRAS Drinking Water Approval** | one_dimensional | 8 | 8 | Ultrasonic Transit-Time (Kamstrup) | parity |\n\n### Advantage Distribution\n\n| Advantage | Count | % |\n|---|---|---|\n| superior | 1 | 17% |\n| parity | 2 | 33% |\n| inferior | 3 | 50% |\n\n### 11a — Rationales\n\n**Modular Pipe Diameter Variants** — `one_dimensional`, `inferior`. Marquardt offers DN12/14/20/25 on a shared RAST 2.5 electronics platform — elegant for OEM standardization but covering only 4 small-bore sizes (DN12/14/25 still in development). Industrial electromagnetic flowmeters (Endress+Hauser Promag, ABB AquaMaster) span DN1 to DN2400 with full flanged, wafer, and threaded options per size. Even within small-bore (DN15–DN25), electromagnetic sensors offer additional sizes and higher-pressure variants. Gap of 3 reflects a fundamental range limitation. [SRC: 01_product_decomposition, JTBD §2.4 alternatives]\n\n**Customizable Communication Interface** — `one_dimensional`, `inferior`. Marquardt provides UART/LIN/frequency — optimized for OEM-embedded control architectures (boilers, heat pumps, appliances). Industrial process flowmeters (Endress+Hauser, ABB, Emerson) offer 4–20 mA analog, HART, Modbus RTU/TCP, PROFIBUS PA/DP, Foundation Fieldbus, and EtherNet/IP. In the broader instrumentation market, HART and fieldbus protocols are standard expectations for DCS/SCADA integration; UART and LIN are niche embedded protocols. Gap of 3 reflects the protocol ecosystem mismatch between OEM-embedded and industrial process domains. [SRC: 01_product_decomposition]\n\n**Customizable Mechanical Interface** — `one_dimensional`, `inferior`. Marquardt provides threaded + plug-in quick-connect — well-suited for OEM assembly lines. Industrial flowmeters offer ANSI/DIN flanged, wafer, sanitary tri-clamp, compression, and threaded connections. The flanged and tri-clamp options are essential for process plant pipework and hygienic applications respectively — both absent from Marquardt's offering. Gap of 2 reflects missing connection types for the broader market. [SRC: 01_product_decomposition]\n\n**Low-Energy Battery Mode** — `attractive`, `superior`. Marquardt's <5 μA standby current is among the lowest in any inline flowmeter. Dedicated battery-powered ultrasonic water meters (Kamstrup MULTICAL 21) achieve multi-year battery life but at higher instantaneous current (~100 μA measurement cycle). Electromagnetic meters require 5–20 W continuous power — battery operation is impractical. For the growing segment of remote water monitoring, IoT-connected building metering, and infrastructure leak detection, ultra-low-power operation is a genuine delighter. Attractive because most flowmeter applications have mains power; battery mode is unexpected. Gap of 3 reflects a measurable power consumption advantage. [SRC: 01_product_decomposition, JTBD §2.6 scenario S6]\n\n**Pre-Calibrated Delivery** — `one_dimensional`, `parity`. Marquardt delivers each sensor individually calibrated to the customer's specified medium (water, glycol mix %) with 100% automated final test — streamlining OEM integration. Major instrument manufacturers (Endress+Hauser, Emerson) offer ISO 17025 traceable wet calibration but typically as a premium service with additional lead time. Coriolis meters provide inherent mass flow calibration via reference density. Both approaches deliver factory-calibrated sensors; Marquardt's OEM-focused automation is well-executed but not fundamentally differentiated. Gap = 1, within parity band. [SRC: 01_product_decomposition, JTBD E22]\n\n**KTW/WRAS Drinking Water Approval** — `one_dimensional`, `parity`. Marquardt holds both KTW (German) and WRAS (UK) potable water contact approvals. Kamstrup and Danfoss ultrasonic meters hold equivalent certifications for the water metering segment. Stainless steel electromagnetic meters meet potable water requirements through inherent material compliance. Drinking water approval is standard in the water metering sub-segment. Gap = 0. [SRC: 01_product_decomposition]\n\n### 11b — Objectivity Review\n\n| # | Check | Result |\n|---|---|---|\n| 1 | Vendor bias (>70% superior) | PASS — 17% superior; Marquardt's OEM-focused vendor features genuinely do not compete with full industrial process instrumentation range |\n| 2 | Anti-vendor bias (>70% inferior) | PASS — 50% inferior; justified because Marquardt's vendor features target the OEM sub-segment while the home market spans all flowmeter segments including industrial process |\n| 3 | Straw-man incumbents | PASS — electromagnetic (30% share, dominant technology) and Coriolis (25% share, premium) are the genuine best incumbents, not weak alternatives |\n| 4 | Advantage classification arithmetic | PASS — inferior: all gaps > 1 (3, 3, 2); superior: gap > 1 (3); parity: all gaps ≤ 1 (1, 0) |\n| 5 | must_be features have both scores >= 5 | N/A — no must_be vendor features in this market |\n| 6 | Rationale specificity | PASS — each references specific protocols (UART/LIN vs HART/Modbus/PROFIBUS), DN ranges (DN12–25 vs DN1–2400), connection types (threaded/plug-in vs flanged/tri-clamp), and power specs (<5 μA vs 5–20 W) |\n\n---"
+    },
+    {
+      "title": "Key Findings",
+      "content": "| Insight | Detail |\n|---|---|\n| **Strongest technology fit** | Digital Anomaly Detection (overall 6.22) — empty-pipe/air/glycol diagnostics address the #1 opportunity need E11 (pipe-empty detection, Opp=14) plus E10 and E12 (Opp=10–11) |\n| **Highest overall tech features** | Integrated Temperature Sensing and No Moving Parts (both 5.67) — co-measurement and zero-wear are highly valued across all segments |\n| **Single vendor advantage** | Low-Energy Battery Mode (superior, 8 vs 5) — <5 μA standby enables battery-powered remote deployments no electromagnetic competitor can match |\n| **Vendor positioning gap** | 3 of 6 vendor features are inferior to industrial incumbents — Marquardt's OEM-embedded focus (UART/LIN, DN12–25, threaded/plug-in) does not compete with industrial process instrumentation (HART/Modbus, DN1–2400, flanged/tri-clamp) |\n| **Most critical product-related risk** | Aqueous Media Requirement (Imp=8, Sat=3) — the acoustic impedance constraint excludes oils, gases, and solvents, limiting the addressable share of the flowmeter market |\n| **Second critical risk** | Air Bubble Tolerance (Imp=7, Sat=3) and Straight Pipe Run (Imp=7, Sat=4) — air entrainment and installation space constraints affect the widest range of application segments |\n| **Home market positioning** | Distance=0 confirms deep technology-market fit for thermal management and water circuit segments; vendor features are purpose-built for OEM integration, not for the broader industrial process instrumentation market |\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"feature_market_fit\",\n  \"naics_code\": \"334513\",\n  \"naics_title\": \"Instruments and Related Products Manufacturing for Measuring, Displaying, Indicating, Recording, Transmitting, and Controlling Industrial Process Variables\",\n  \"market_name\": \"Flowmeters (Home Industry)\",\n  \"architecture_distance\": 0,\n  \"product_name\": \"Ultrasonic Flow Sensor\",\n  \"vendor_name\": \"Marquardt\",\n  \"technology_class\": \"Ultrasonic Transit-Time Flow Measurement\",\n  \"step_09_tech_feature_market_fit\": {\n    \"market_name\": \"Flowmeters (Home Industry)\",\n    \"naics_code\": \"334513\",\n    \"n_features_assessed\": 7,\n    \"entries\": [\n      {\n        \"feature_name\": \"Transit-Time Flow Measurement\",\n        \"market_name\": \"Flowmeters (Home Industry)\",\n        \"naics_code\": \"334513\",\n        \"kano_class\": \"must_be\",\n        \"fit_score_time\": 5,\n        \"fit_score_cost\": 5,\n        \"fit_score_safety\": 7,\n        \"fit_score_reliability\": 8,\n        \"fit_score_skill\": 4,\n        \"fit_score_stress\": 5,\n        \"fit_score_pain\": 5,\n        \"fit_score_confidence\": 7,\n        \"fit_score_delight\": 3,\n        \"overall_fit\": 5.44,\n        \"rationale\": \"Must_be — this IS the commodity FP (quantify volumetric flow rate). Every alternative provides flow measurement. Primary drivers: Reliability (8) — solid-state transit-time delivers consistent readings addressing E1 (accuracy ±2%, Opp=13) and E24 (unplanned replacement, Opp=12); Safety (7) — enables safety interlocks for pipe-empty per E11 (Opp=14) and reverse-flow per E5 (Opp=11).\"\n      },\n      {\n        \"feature_name\": \"Integrated Temperature Sensing\",\n        \"market_name\": \"Flowmeters (Home Industry)\",\n        \"naics_code\": \"334513\",\n        \"kano_class\": \"attractive\",\n        \"fit_score_time\": 5,\n        \"fit_score_cost\": 7,\n        \"fit_score_safety\": 4,\n        \"fit_score_reliability\": 6,\n        \"fit_score_skill\": 5,\n        \"fit_score_stress\": 5,\n        \"fit_score_pain\": 7,\n        \"fit_score_confidence\": 7,\n        \"fit_score_delight\": 5,\n        \"overall_fit\": 5.67,\n        \"rationale\": \"Attractive — most flowmeters (electromagnetic, Coriolis, turbine, vortex, DP) do NOT include integrated temperature. Combined flow+temp enables thermal energy calculation without additional sensors. Primary drivers: Cost (7) — eliminates separate temp probe per E6 (Opp=11); Pain (7) — removes dual-sensor coordination; Confidence (7) — matched flow/temp improves energy calculation accuracy.\"\n      },\n      {\n        \"feature_name\": \"Zero Pressure Drop Flow Path\",\n        \"market_name\": \"Flowmeters (Home Industry)\",\n        \"naics_code\": \"334513\",\n        \"kano_class\": \"one_dimensional\",\n        \"fit_score_time\": 3,\n        \"fit_score_cost\": 6,\n        \"fit_score_safety\": 3,\n        \"fit_score_reliability\": 5,\n        \"fit_score_skill\": 3,\n        \"fit_score_stress\": 3,\n        \"fit_score_pain\": 4,\n        \"fit_score_confidence\": 4,\n        \"fit_score_delight\": 3,\n        \"overall_fit\": 3.78,\n        \"rationale\": \"One_dimensional — less pressure drop is linearly better. Ultrasonic and electromagnetic share this advantage; turbine/vortex/DP do not. Primary drivers: Cost (6) — reduces pump sizing and operating energy per E7 (Opp=7); Reliability (5) — no flow obstruction eliminates clogging risk.\"\n      },\n      {\n        \"feature_name\": \"No Moving Parts\",\n        \"market_name\": \"Flowmeters (Home Industry)\",\n        \"naics_code\": \"334513\",\n        \"kano_class\": \"one_dimensional\",\n        \"fit_score_time\": 3,\n        \"fit_score_cost\": 7,\n        \"fit_score_safety\": 5,\n        \"fit_score_reliability\": 9,\n        \"fit_score_skill\": 5,\n        \"fit_score_stress\": 5,\n        \"fit_score_pain\": 7,\n        \"fit_score_confidence\": 6,\n        \"fit_score_delight\": 4,\n        \"overall_fit\": 5.67,\n        \"rationale\": \"One_dimensional — solid-state vs mechanical is a well-understood trade-off in the instrumentation industry. No moving parts = longer life = less maintenance, linearly. Not a surprise (attractive) because instrumentation engineers expect this from ultrasonic/electromagnetic. Primary drivers: Reliability (9) — eliminates bearing wear and rotor fouling per E24 (Opp=12); Pain (7) — removes bearing replacement schedule per E23 (Opp=12).\"\n      },\n      {\n        \"feature_name\": \"Bidirectional Flow Detection\",\n        \"market_name\": \"Flowmeters (Home Industry)\",\n        \"naics_code\": \"334513\",\n        \"kano_class\": \"one_dimensional\",\n        \"fit_score_time\": 4,\n        \"fit_score_cost\": 5,\n        \"fit_score_safety\": 6,\n        \"fit_score_reliability\": 5,\n        \"fit_score_skill\": 3,\n        \"fit_score_stress\": 4,\n        \"fit_score_pain\": 3,\n        \"fit_score_confidence\": 5,\n        \"fit_score_delight\": 3,\n        \"overall_fit\": 4.22,\n        \"rationale\": \"One_dimensional — inherent to transit-time; also achievable with electromagnetic. A known, valued capability. Primary drivers: Safety (6) — detects backflow causing contamination or energy waste per E5 (Opp=11); Confidence (5) — provides flow direction for system diagnostics.\"\n      },\n      {\n        \"feature_name\": \"Digital Anomaly Detection\",\n        \"market_name\": \"Flowmeters (Home Industry)\",\n        \"naics_code\": \"334513\",\n        \"kano_class\": \"attractive\",\n        \"fit_score_time\": 5,\n        \"fit_score_cost\": 5,\n        \"fit_score_safety\": 8,\n        \"fit_score_reliability\": 7,\n        \"fit_score_skill\": 5,\n        \"fit_score_stress\": 7,\n        \"fit_score_pain\": 5,\n        \"fit_score_confidence\": 8,\n        \"fit_score_delight\": 6,\n        \"overall_fit\": 6.22,\n        \"rationale\": \"Attractive — most commodity flowmeters provide raw flow data only. Embedded analytics (bubble detection, empty-pipe, glycol concentration) are genuinely surprising. Primary drivers: Safety (8) — empty-pipe detection prevents pump damage per E11 (Opp=14, highest-opportunity need); Confidence (8) — diagnostic flags distinguish process deviations from sensor artifacts per E10 (Opp=10) and detect transducer fouling per E12 (Opp=11); Stress (7) — automated anomaly detection reduces operator cognitive load.\"\n      },\n      {\n        \"feature_name\": \"Real-Time Compensation Algorithms\",\n        \"market_name\": \"Flowmeters (Home Industry)\",\n        \"naics_code\": \"334513\",\n        \"kano_class\": \"must_be\",\n        \"fit_score_time\": 3,\n        \"fit_score_cost\": 4,\n        \"fit_score_safety\": 4,\n        \"fit_score_reliability\": 8,\n        \"fit_score_skill\": 5,\n        \"fit_score_stress\": 4,\n        \"fit_score_pain\": 4,\n        \"fit_score_confidence\": 7,\n        \"fit_score_delight\": 2,\n        \"overall_fit\": 4.56,\n        \"rationale\": \"Must_be — every professional-grade flowmeter includes compensation algorithms. Absence is disqualifying. Primary drivers: Reliability (8) — reduces temperature-induced error from ~1.5% to ~0.2% via NTC per E4 (Opp=10) and contributes to E1 (accuracy ±2%, Opp=13); Confidence (7) — auto-compensated readings maintain measurement trust per E9 (calibration drift, Opp=13).\"\n      }\n    ]\n  },\n  \"step_10_product_related_needs\": {\n    \"n_needs\": 12,\n    \"n_constraints_covered\": 12,\n    \"entries\": [\n      {\n        \"statement\": \"Minimize the likelihood of measurement failure when target process fluids have acoustic impedance outside the piezoelectric transducer's coupling range, excluding non-aqueous media from the addressable application space\",\n        \"source_constraint\": \"Aqueous Media Requirement\",\n        \"affected_markets\": [\"Flowmeters (Home Industry)\"],\n        \"importance\": 8.0,\n        \"satisfaction_current\": 3.0\n      },\n      {\n        \"statement\": \"Minimize the likelihood of polymer housing and seal degradation when process circuits operate at sustained temperatures approaching the 90 degrees C material service limit\",\n        \"source_constraint\": \"Maximum Medium Temperature\",\n        \"affected_markets\": [\"Flowmeters (Home Industry)\"],\n        \"importance\": 6.0,\n        \"satisfaction_current\": 5.0\n      },\n      {\n        \"statement\": \"Minimize the measurement error caused by entrained air exceeding 2% by volume, which attenuates the ultrasonic signal beyond the transit-time algorithm's compensation capability\",\n        \"source_constraint\": \"Air Bubble / Void Fraction Limit\",\n        \"affected_markets\": [\"Flowmeters (Home Industry)\"],\n        \"importance\": 7.0,\n        \"satisfaction_current\": 3.0\n      },\n      {\n        \"statement\": \"Minimize the residual transit-time measurement error during rapid temperature transients where speed-of-sound changes outpace the NTC compensation algorithm's response rate\",\n        \"source_constraint\": \"Temperature-Dependent Accuracy\",\n        \"affected_markets\": [\"Flowmeters (Home Industry)\"],\n        \"importance\": 6.0,\n        \"satisfaction_current\": 5.0\n      },\n      {\n        \"statement\": \"Minimize the likelihood of wetted polymer housing and seal attack when process fluids or CIP chemicals exceed the material's chemical resistance limits\",\n        \"source_constraint\": \"Wetted Material Chemical Compatibility\",\n        \"affected_markets\": [\"Flowmeters (Home Industry)\"],\n        \"importance\": 5.0,\n        \"satisfaction_current\": 5.0\n      },\n      {\n        \"statement\": \"Minimize the duration of measurement outage during system events that temporarily create partially filled pipe conditions where the ultrasonic pulse cannot traverse the air gap\",\n        \"source_constraint\": \"Pipe Full Condition Required\",\n        \"affected_markets\": [\"Flowmeters (Home Industry)\"],\n        \"importance\": 6.0,\n        \"satisfaction_current\": 4.0\n      },\n      {\n        \"statement\": \"Minimize the flow measurement dead zone below the minimum detectable threshold (0.25-4.2 l/min depending on DN) where transit-time signal-to-noise ratio prevents valid measurement\",\n        \"source_constraint\": \"Minimum Flow Rate Detection\",\n        \"affected_markets\": [\"Flowmeters (Home Industry)\"],\n        \"importance\": 7.0,\n        \"satisfaction_current\": 4.0\n      },\n      {\n        \"statement\": \"Minimize the risk of housing structural failure in applications where process pressure spikes or water hammer events temporarily exceed the 10 bar continuous rating\",\n        \"source_constraint\": \"Maximum Operating Pressure\",\n        \"affected_markets\": [\"Flowmeters (Home Industry)\"],\n        \"importance\": 5.0,\n        \"satisfaction_current\": 6.0\n      },\n      {\n        \"statement\": \"Minimize the installation footprint penalty from the 5-10x DN straight-pipe requirement that restricts deployment in space-constrained process skids, compact equipment, and retrofit installations\",\n        \"source_constraint\": \"Minimum Straight Pipe Run\",\n        \"affected_markets\": [\"Flowmeters (Home Industry)\"],\n        \"importance\": 7.0,\n        \"satisfaction_current\": 4.0\n      },\n      {\n        \"statement\": \"Minimize the frequency of sensor replacement in continuous high-throughput applications where the 3,000 m3 total throughput endurance is consumed within months rather than years of operation\",\n        \"source_constraint\": \"Life Endurance Ceiling\",\n        \"affected_markets\": [\"Flowmeters (Home Industry)\"],\n        \"importance\": 6.0,\n        \"satisfaction_current\": 4.0\n      },\n      {\n        \"statement\": \"Minimize the exclusion of hazardous-area applications where the absence of ATEX/IECEx certification prevents sensor deployment in Zone 1/0 explosive atmosphere classifications\",\n        \"source_constraint\": \"No Explosive Atmosphere Certification\",\n        \"affected_markets\": [\"Flowmeters (Home Industry)\"],\n        \"importance\": 4.0,\n        \"satisfaction_current\": 3.0\n      },\n      {\n        \"statement\": \"Minimize the risk of electronics failure or RAST 2.5 connector degradation in outdoor or extreme-ambient installations that exceed the sensor's indoor-rated operating envelope\",\n        \"source_constraint\": \"Ambient Temperature Range\",\n        \"affected_markets\": [\"Flowmeters (Home Industry)\"],\n        \"importance\": 4.0,\n        \"satisfaction_current\": 5.0\n      }\n    ]\n  },\n  \"step_11_vendor_feature_market_fit\": {\n    \"vendor_name\": \"Marquardt\",\n    \"vendor_product\": \"US Flow Sensor (DN20 serial, DN12/DN14/DN25 development)\",\n    \"n_features_assessed\": 6,\n    \"n_markets_assessed\": 1,\n    \"entries\": [\n      {\n        \"feature_name\": \"Modular Pipe Diameter Variants\",\n        \"feature_description\": \"Serve multiple pipe sizes via interchangeable flow bodies sharing a common electronics platform and RAST 2.5 connector\",\n        \"market_name\": \"Flowmeters (Home Industry)\",\n        \"naics_code\": \"334513\",\n        \"vendor_score\": 6,\n        \"best_incumbent_score\": 9,\n        \"best_incumbent_technology\": \"Electromagnetic Flow Measurement\",\n        \"advantage\": \"inferior\",\n        \"kano_class\": \"one_dimensional\",\n        \"rationale\": \"Marquardt: DN12/14/20/25 on shared RAST 2.5 platform (DN12/14/25 in development). Electromagnetic incumbent (E+H Promag, ABB AquaMaster): DN1-DN2400 with flanged/wafer/threaded per size. Marquardt covers 4 small-bore sizes; incumbents cover 20+ sizes spanning 3 orders of magnitude. Gap reflects fundamental range limitation.\"\n      },\n      {\n        \"feature_name\": \"Customizable Communication Interface\",\n        \"feature_description\": \"Support UART, LIN, and frequency output protocols for OEM-embedded control architectures\",\n        \"market_name\": \"Flowmeters (Home Industry)\",\n        \"naics_code\": \"334513\",\n        \"vendor_score\": 6,\n        \"best_incumbent_score\": 9,\n        \"best_incumbent_technology\": \"Electromagnetic Flow Measurement\",\n        \"advantage\": \"inferior\",\n        \"kano_class\": \"one_dimensional\",\n        \"rationale\": \"Marquardt: UART/LIN/frequency (OEM-embedded). Electromagnetic incumbent (E+H, ABB, Emerson): 4-20mA, HART, Modbus RTU/TCP, PROFIBUS PA/DP, Foundation Fieldbus, EtherNet/IP. Industrial HART/fieldbus protocols are standard for DCS/SCADA integration; UART/LIN are niche embedded protocols. Gap reflects protocol ecosystem mismatch.\"\n      },\n      {\n        \"feature_name\": \"Customizable Mechanical Interface\",\n        \"feature_description\": \"Accept threaded or plug-in quick-connect pipe connections for OEM assembly integration\",\n        \"market_name\": \"Flowmeters (Home Industry)\",\n        \"naics_code\": \"334513\",\n        \"vendor_score\": 6,\n        \"best_incumbent_score\": 8,\n        \"best_incumbent_technology\": \"Electromagnetic Flow Measurement\",\n        \"advantage\": \"inferior\",\n        \"kano_class\": \"one_dimensional\",\n        \"rationale\": \"Marquardt: threaded + plug-in quick-connect. Electromagnetic incumbent: ANSI/DIN flanged, wafer, tri-clamp, threaded, compression. Flanged and tri-clamp connections essential for process plant pipework and hygienic applications are absent from Marquardt's offering. Gap reflects missing connection types.\"\n      },\n      {\n        \"feature_name\": \"Low-Energy Battery Mode\",\n        \"feature_description\": \"Operate at ultra-low standby current (<5 uA) enabling battery-powered remote deployment without mains power\",\n        \"market_name\": \"Flowmeters (Home Industry)\",\n        \"naics_code\": \"334513\",\n        \"vendor_score\": 8,\n        \"best_incumbent_score\": 5,\n        \"best_incumbent_technology\": \"Ultrasonic Transit-Time (Kamstrup)\",\n        \"advantage\": \"superior\",\n        \"kano_class\": \"attractive\",\n        \"rationale\": \"Marquardt: <5 uA standby (lowest in any inline flowmeter). Kamstrup MULTICAL 21: battery-operated but ~100 uA measurement cycle. Electromagnetic meters require 5-20W continuous — battery impractical. For remote water monitoring and IoT-connected metering, ultra-low power is a genuine differentiator. Attractive because most flowmeter applications have mains power.\"\n      },\n      {\n        \"feature_name\": \"Pre-Calibrated Delivery\",\n        \"feature_description\": \"Ship fully calibrated and tested to customer-specific medium and flow profile with 100% automated final test\",\n        \"market_name\": \"Flowmeters (Home Industry)\",\n        \"naics_code\": \"334513\",\n        \"vendor_score\": 8,\n        \"best_incumbent_score\": 7,\n        \"best_incumbent_technology\": \"Coriolis Mass Flow Measurement\",\n        \"advantage\": \"parity\",\n        \"kano_class\": \"one_dimensional\",\n        \"rationale\": \"Marquardt: customer-specific medium calibration (water, glycol mix %) with 100% automated test per E22 (OEM qualification time, Opp=12). Coriolis incumbent: inherent mass flow calibration via reference density. E+H/ABB offer ISO 17025 traceable wet calibration as premium service. Both deliver factory-calibrated sensors; gap within parity band.\"\n      },\n      {\n        \"feature_name\": \"KTW/WRAS Drinking Water Approval\",\n        \"feature_description\": \"Wetted parts approved for potable water contact under KTW (German) and WRAS (UK) drinking water standards\",\n        \"market_name\": \"Flowmeters (Home Industry)\",\n        \"naics_code\": \"334513\",\n        \"vendor_score\": 8,\n        \"best_incumbent_score\": 8,\n        \"best_incumbent_technology\": \"Ultrasonic Transit-Time (Kamstrup)\",\n        \"advantage\": \"parity\",\n        \"kano_class\": \"one_dimensional\",\n        \"rationale\": \"Marquardt: KTW + WRAS. Kamstrup/Danfoss: equivalent certifications for water metering. Stainless steel electromagnetic meters meet potable water via material compliance. Drinking water approval is standard in the water metering sub-segment. No meaningful gap.\"\n      }\n    ]\n  }\n}\n```\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [01_product_decomposition.md](01_product_decomposition.md) — technology-scope and vendor-scope features, UNSPSC classification, constraints\n- [02_functional_promise.md](02_functional_promise.md) — commodity FP, product FP, FP extension, differentiators\n- [03_constraints.md](03_constraints.md) — 12 constraints (3 absolute, 9 conditional)\n- [05_market_discovery.md](05_market_discovery.md) — market discovery and architecture distance scoring\n- [JTBD_flowmeters_src_01_product_decomposition_.md](JTBD_flowmeters_src_01_product_decomposition_.md) — home industry JTBD analysis, 26 error statements, 6 segments, incumbent technology anchors"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "Feature",
+        "Kano",
+        "Time",
+        "Cost",
+        "Safety",
+        "Reliab.",
+        "Skill",
+        "Stress",
+        "Pain",
+        "Conf.",
+        "Delight",
+        "Overall"
+      ],
+      "rows": [
+        {
+          "Feature": "**Transit-Time Flow Measurement**",
+          "Kano": "must_be",
+          "Time": "5",
+          "Cost": "5",
+          "Safety": "7",
+          "Reliab.": "8",
+          "Skill": "4",
+          "Stress": "5",
+          "Pain": "5",
+          "Conf.": "7",
+          "Delight": "3",
+          "Overall": "**5.44**"
+        },
+        {
+          "Feature": "**Integrated Temperature Sensing**",
+          "Kano": "attractive",
+          "Time": "5",
+          "Cost": "7",
+          "Safety": "4",
+          "Reliab.": "6",
+          "Skill": "5",
+          "Stress": "5",
+          "Pain": "7",
+          "Conf.": "7",
+          "Delight": "5",
+          "Overall": "**5.67**"
+        },
+        {
+          "Feature": "**Zero Pressure Drop Flow Path**",
+          "Kano": "one_dimensional",
+          "Time": "3",
+          "Cost": "6",
+          "Safety": "3",
+          "Reliab.": "5",
+          "Skill": "3",
+          "Stress": "3",
+          "Pain": "4",
+          "Conf.": "4",
+          "Delight": "3",
+          "Overall": "**3.78**"
+        },
+        {
+          "Feature": "**No Moving Parts**",
+          "Kano": "one_dimensional",
+          "Time": "3",
+          "Cost": "7",
+          "Safety": "5",
+          "Reliab.": "9",
+          "Skill": "5",
+          "Stress": "5",
+          "Pain": "7",
+          "Conf.": "6",
+          "Delight": "4",
+          "Overall": "**5.67**"
+        },
+        {
+          "Feature": "**Bidirectional Flow Detection**",
+          "Kano": "one_dimensional",
+          "Time": "4",
+          "Cost": "5",
+          "Safety": "6",
+          "Reliab.": "5",
+          "Skill": "3",
+          "Stress": "4",
+          "Pain": "3",
+          "Conf.": "5",
+          "Delight": "3",
+          "Overall": "**4.22**"
+        },
+        {
+          "Feature": "**Digital Anomaly Detection**",
+          "Kano": "attractive",
+          "Time": "5",
+          "Cost": "5",
+          "Safety": "8",
+          "Reliab.": "7",
+          "Skill": "5",
+          "Stress": "7",
+          "Pain": "5",
+          "Conf.": "8",
+          "Delight": "6",
+          "Overall": "**6.22**"
+        },
+        {
+          "Feature": "**Real-Time Compensation Algorithms**",
+          "Kano": "must_be",
+          "Time": "3",
+          "Cost": "4",
+          "Safety": "4",
+          "Reliab.": "8",
+          "Skill": "5",
+          "Stress": "4",
+          "Pain": "4",
+          "Conf.": "7",
+          "Delight": "2",
+          "Overall": "**4.56**"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Check": "Kano cross-market consistency",
+          "Result": "PASS — must_be for core measurement (commodity FP) and compensation (table-stakes); one_dimensional for well-known technology advantages (zero DP, no moving parts, bidirectional); attractive only for genuinely beyond-commodity capabilities (integrated temp, anomaly detection)"
+        },
+        {
+          "#": "2",
+          "Check": "Safety >= 7 but Confidence <= 3",
+          "Result": "PASS — no violation. Max safety = 8 (Digital Anomaly Detection), corresponding confidence = 8"
+        },
+        {
+          "#": "3",
+          "Check": "Skill >= 7 but Stress <= 3",
+          "Result": "PASS — no violation. Max skill = 5"
+        },
+        {
+          "#": "4",
+          "Check": "overall_fit arithmetic",
+          "Result": "PASS — all 7 values recomputed: (sum of 9 scores) / 9, rounded to 2 decimal places"
+        },
+        {
+          "#": "5",
+          "Check": "No feature scores 10 on all dimensions",
+          "Result": "PASS — max single score = 9 (No Moving Parts → Reliability)"
+        },
+        {
+          "#": "6",
+          "Check": "Feature names comply with 1.pdf rules",
+          "Result": "PASS — spec-visible noun phrases, 2–6 words, no brand names, no outcome claims"
+        },
+        {
+          "#": "7",
+          "Check": "Indifferent features score 1-3 on all dimensions",
+          "Result": "N/A — no indifferent features in this market"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement",
+        "Source Constraint",
+        "Imp",
+        "Sat"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Statement": "Minimize the likelihood of measurement failure when target process fluids have acoustic impedance outside the piezoelectric transducer's coupling range, excluding non-aqueous media (oils, gases, solvents) from the sensor's addressable application space",
+          "Source Constraint": "Aqueous Media Requirement",
+          "Imp": "8",
+          "Sat": "3"
+        },
+        {
+          "#": "2",
+          "Statement": "Minimize the likelihood of polymer housing and seal degradation when process circuits operate at sustained temperatures approaching the 90°C material service limit",
+          "Source Constraint": "Maximum Medium Temperature",
+          "Imp": "6",
+          "Sat": "5"
+        },
+        {
+          "#": "3",
+          "Statement": "Minimize the measurement error caused by entrained air exceeding 2% by volume, which attenuates the ultrasonic signal beyond the transit-time algorithm's compensation capability",
+          "Source Constraint": "Air Bubble / Void Fraction Limit",
+          "Imp": "7",
+          "Sat": "3"
+        },
+        {
+          "#": "4",
+          "Statement": "Minimize the residual transit-time measurement error during rapid temperature transients where speed-of-sound changes outpace the NTC compensation algorithm's response rate",
+          "Source Constraint": "Temperature-Dependent Accuracy",
+          "Imp": "6",
+          "Sat": "5"
+        },
+        {
+          "#": "5",
+          "Statement": "Minimize the likelihood of wetted polymer housing and seal attack when process fluids or CIP chemicals exceed the material's chemical resistance limits",
+          "Source Constraint": "Wetted Material Chemical Compatibility",
+          "Imp": "5",
+          "Sat": "5"
+        },
+        {
+          "#": "6",
+          "Statement": "Minimize the duration of measurement outage during system events (drain-down, filling, purging) that temporarily create partially filled pipe conditions where the ultrasonic pulse cannot traverse the air gap",
+          "Source Constraint": "Pipe Full Condition Required",
+          "Imp": "6",
+          "Sat": "4"
+        },
+        {
+          "#": "7",
+          "Statement": "Minimize the flow measurement dead zone below the minimum detectable threshold (0.25–4.2 l/min depending on DN variant) where transit-time signal-to-noise ratio prevents valid measurement",
+          "Source Constraint": "Minimum Flow Rate Detection",
+          "Imp": "7",
+          "Sat": "4"
+        },
+        {
+          "#": "8",
+          "Statement": "Minimize the risk of housing structural failure in applications where process pressure spikes or water hammer events temporarily exceed the 10 bar continuous rating",
+          "Source Constraint": "Maximum Operating Pressure",
+          "Imp": "5",
+          "Sat": "6"
+        },
+        {
+          "#": "9",
+          "Statement": "Minimize the installation footprint penalty from the 5–10× DN straight-pipe requirement that restricts deployment in space-constrained process skids, compact equipment, and retrofit installations",
+          "Source Constraint": "Minimum Straight Pipe Run",
+          "Imp": "7",
+          "Sat": "4"
+        },
+        {
+          "#": "10",
+          "Statement": "Minimize the frequency of sensor replacement in continuous high-throughput applications where the 3,000 m³ total throughput endurance is consumed within months rather than years of operation",
+          "Source Constraint": "Life Endurance Ceiling",
+          "Imp": "6",
+          "Sat": "4"
+        },
+        {
+          "#": "11",
+          "Statement": "Minimize the exclusion of hazardous-area applications where the absence of ATEX/IECEx certification prevents sensor deployment in Zone 1/0 explosive atmosphere classifications",
+          "Source Constraint": "No Explosive Atmosphere Certification",
+          "Imp": "4",
+          "Sat": "3"
+        },
+        {
+          "#": "12",
+          "Statement": "Minimize the risk of electronics failure or RAST 2.5 connector degradation in outdoor or extreme-ambient installations that exceed the sensor's indoor-rated operating envelope",
+          "Source Constraint": "Ambient Temperature Range",
+          "Imp": "4",
+          "Sat": "5"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Check": "Litmus test — would need disappear with different technology?",
+          "Result": "PASS — all 12 needs trace to ultrasonic transit-time specific constraints. Electromagnetic sensors: unaffected by air bubbles (#3), no acoustic coupling (#1), metallic housings survive >150°C (#2), no straight-run requirement for most designs (#9). Coriolis: measures mass flow regardless of medium acoustics (#1), tolerates bubbles (#3), stainless steel construction (#2/#5)."
+        },
+        {
+          "#": "2",
+          "Check": "Source constraint traceability",
+          "Result": "PASS — all 12 constraints from 03_constraints.md mapped; each constraint logically causes the stated failure mode"
+        },
+        {
+          "#": "3",
+          "Check": "Affected markets plausibility",
+          "Result": "PASS — home industry spans all flowmeter segments; all constraints manifest across the breadth of applications"
+        },
+        {
+          "#": "4",
+          "Check": "Completeness — every constraint generates >= 1 need",
+          "Result": "PASS — all 12 constraints covered (1 need per constraint)"
+        },
+        {
+          "#": "5",
+          "Check": "importance < 3 AND satisfaction > 7",
+          "Result": "PASS — no such entries; minimum importance = 4, maximum satisfaction = 6"
+        },
+        {
+          "#": "6",
+          "Check": "No market-level needs included",
+          "Result": "PASS — all needs trace to specific ultrasonic transit-time mechanisms; no generic accuracy, cost, or regulatory needs"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Feature",
+        "Kano",
+        "Vendor",
+        "Incumbent",
+        "Inc. Tech",
+        "Advantage"
+      ],
+      "rows": [
+        {
+          "Feature": "**Modular Pipe Diameter Variants**",
+          "Kano": "one_dimensional",
+          "Vendor": "6",
+          "Incumbent": "9",
+          "Inc. Tech": "Electromagnetic Flow Measurement",
+          "Advantage": "inferior"
+        },
+        {
+          "Feature": "**Customizable Communication Interface**",
+          "Kano": "one_dimensional",
+          "Vendor": "6",
+          "Incumbent": "9",
+          "Inc. Tech": "Electromagnetic Flow Measurement",
+          "Advantage": "inferior"
+        },
+        {
+          "Feature": "**Customizable Mechanical Interface**",
+          "Kano": "one_dimensional",
+          "Vendor": "6",
+          "Incumbent": "8",
+          "Inc. Tech": "Electromagnetic Flow Measurement",
+          "Advantage": "inferior"
+        },
+        {
+          "Feature": "**Low-Energy Battery Mode**",
+          "Kano": "attractive",
+          "Vendor": "8",
+          "Incumbent": "5",
+          "Inc. Tech": "Ultrasonic Transit-Time (Kamstrup)",
+          "Advantage": "superior"
+        },
+        {
+          "Feature": "**Pre-Calibrated Delivery**",
+          "Kano": "one_dimensional",
+          "Vendor": "8",
+          "Incumbent": "7",
+          "Inc. Tech": "Coriolis Mass Flow Measurement",
+          "Advantage": "parity"
+        },
+        {
+          "Feature": "**KTW/WRAS Drinking Water Approval**",
+          "Kano": "one_dimensional",
+          "Vendor": "8",
+          "Incumbent": "8",
+          "Inc. Tech": "Ultrasonic Transit-Time (Kamstrup)",
+          "Advantage": "parity"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Advantage",
+        "Count",
+        "%"
+      ],
+      "rows": [
+        {
+          "Advantage": "superior",
+          "Count": "1",
+          "%": "17%"
+        },
+        {
+          "Advantage": "parity",
+          "Count": "2",
+          "%": "33%"
+        },
+        {
+          "Advantage": "inferior",
+          "Count": "3",
+          "%": "50%"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Check": "Vendor bias (>70% superior)",
+          "Result": "PASS — 17% superior; Marquardt's OEM-focused vendor features genuinely do not compete with full industrial process instrumentation range"
+        },
+        {
+          "#": "2",
+          "Check": "Anti-vendor bias (>70% inferior)",
+          "Result": "PASS — 50% inferior; justified because Marquardt's vendor features target the OEM sub-segment while the home market spans all flowmeter segments including industrial process"
+        },
+        {
+          "#": "3",
+          "Check": "Straw-man incumbents",
+          "Result": "PASS — electromagnetic (30% share, dominant technology) and Coriolis (25% share, premium) are the genuine best incumbents, not weak alternatives"
+        },
+        {
+          "#": "4",
+          "Check": "Advantage classification arithmetic",
+          "Result": "PASS — inferior: all gaps > 1 (3, 3, 2); superior: gap > 1 (3); parity: all gaps ≤ 1 (1, 0)"
+        },
+        {
+          "#": "5",
+          "Check": "must_be features have both scores >= 5",
+          "Result": "N/A — no must_be vendor features in this market"
+        },
+        {
+          "#": "6",
+          "Check": "Rationale specificity",
+          "Result": "PASS — each references specific protocols (UART/LIN vs HART/Modbus/PROFIBUS), DN ranges (DN12–25 vs DN1–2400), connection types (threaded/plug-in vs flanged/tri-clamp), and power specs (<5 μA vs 5–20 W)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Insight",
+        "Detail"
+      ],
+      "rows": [
+        {
+          "Insight": "**Strongest technology fit**",
+          "Detail": "Digital Anomaly Detection (overall 6.22) — empty-pipe/air/glycol diagnostics address the #1 opportunity need E11 (pipe-empty detection, Opp=14) plus E10 and E12 (Opp=10–11)"
+        },
+        {
+          "Insight": "**Highest overall tech features**",
+          "Detail": "Integrated Temperature Sensing and No Moving Parts (both 5.67) — co-measurement and zero-wear are highly valued across all segments"
+        },
+        {
+          "Insight": "**Single vendor advantage**",
+          "Detail": "Low-Energy Battery Mode (superior, 8 vs 5) — <5 μA standby enables battery-powered remote deployments no electromagnetic competitor can match"
+        },
+        {
+          "Insight": "**Vendor positioning gap**",
+          "Detail": "3 of 6 vendor features are inferior to industrial incumbents — Marquardt's OEM-embedded focus (UART/LIN, DN12–25, threaded/plug-in) does not compete with industrial process instrumentation (HART/Modbus, DN1–2400, flanged/tri-clamp)"
+        },
+        {
+          "Insight": "**Most critical product-related risk**",
+          "Detail": "Aqueous Media Requirement (Imp=8, Sat=3) — the acoustic impedance constraint excludes oils, gases, and solvents, limiting the addressable share of the flowmeter market"
+        },
+        {
+          "Insight": "**Second critical risk**",
+          "Detail": "Air Bubble Tolerance (Imp=7, Sat=3) and Straight Pipe Run (Imp=7, Sat=4) — air entrainment and installation space constraints affect the widest range of application segments"
+        },
+        {
+          "Insight": "**Home market positioning**",
+          "Detail": "Distance=0 confirms deep technology-market fit for thermal management and water circuit segments; vendor features are purpose-built for OEM integration, not for the broader industrial process instrumentation market"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "feature_market_fit",
+      "naics_code": "334513",
+      "naics_title": "Instruments and Related Products Manufacturing for Measuring, Displaying, Indicating, Recording, Transmitting, and Controlling Industrial Process Variables",
+      "market_name": "Flowmeters (Home Industry)",
+      "architecture_distance": 0,
+      "product_name": "Ultrasonic Flow Sensor",
+      "vendor_name": "Marquardt",
+      "technology_class": "Ultrasonic Transit-Time Flow Measurement",
+      "step_09_tech_feature_market_fit": {
+        "market_name": "Flowmeters (Home Industry)",
+        "naics_code": "334513",
+        "n_features_assessed": 7,
+        "entries": [
+          {
+            "feature_name": "Transit-Time Flow Measurement",
+            "market_name": "Flowmeters (Home Industry)",
+            "naics_code": "334513",
+            "kano_class": "must_be",
+            "fit_score_time": 5,
+            "fit_score_cost": 5,
+            "fit_score_safety": 7,
+            "fit_score_reliability": 8,
+            "fit_score_skill": 4,
+            "fit_score_stress": 5,
+            "fit_score_pain": 5,
+            "fit_score_confidence": 7,
+            "fit_score_delight": 3,
+            "overall_fit": 5.44,
+            "rationale": "Must_be — this IS the commodity FP (quantify volumetric flow rate). Every alternative provides flow measurement. Primary drivers: Reliability (8) — solid-state transit-time delivers consistent readings addressing E1 (accuracy ±2%, Opp=13) and E24 (unplanned replacement, Opp=12); Safety (7) — enables safety interlocks for pipe-empty per E11 (Opp=14) and reverse-flow per E5 (Opp=11)."
+          },
+          {
+            "feature_name": "Integrated Temperature Sensing",
+            "market_name": "Flowmeters (Home Industry)",
+            "naics_code": "334513",
+            "kano_class": "attractive",
+            "fit_score_time": 5,
+            "fit_score_cost": 7,
+            "fit_score_safety": 4,
+            "fit_score_reliability": 6,
+            "fit_score_skill": 5,
+            "fit_score_stress": 5,
+            "fit_score_pain": 7,
+            "fit_score_confidence": 7,
+            "fit_score_delight": 5,
+            "overall_fit": 5.67,
+            "rationale": "Attractive — most flowmeters (electromagnetic, Coriolis, turbine, vortex, DP) do NOT include integrated temperature. Combined flow+temp enables thermal energy calculation without additional sensors. Primary drivers: Cost (7) — eliminates separate temp probe per E6 (Opp=11); Pain (7) — removes dual-sensor coordination; Confidence (7) — matched flow/temp improves energy calculation accuracy."
+          },
+          {
+            "feature_name": "Zero Pressure Drop Flow Path",
+            "market_name": "Flowmeters (Home Industry)",
+            "naics_code": "334513",
+            "kano_class": "one_dimensional",
+            "fit_score_time": 3,
+            "fit_score_cost": 6,
+            "fit_score_safety": 3,
+            "fit_score_reliability": 5,
+            "fit_score_skill": 3,
+            "fit_score_stress": 3,
+            "fit_score_pain": 4,
+            "fit_score_confidence": 4,
+            "fit_score_delight": 3,
+            "overall_fit": 3.78,
+            "rationale": "One_dimensional — less pressure drop is linearly better. Ultrasonic and electromagnetic share this advantage; turbine/vortex/DP do not. Primary drivers: Cost (6) — reduces pump sizing and operating energy per E7 (Opp=7); Reliability (5) — no flow obstruction eliminates clogging risk."
+          },
+          {
+            "feature_name": "No Moving Parts",
+            "market_name": "Flowmeters (Home Industry)",
+            "naics_code": "334513",
+            "kano_class": "one_dimensional",
+            "fit_score_time": 3,
+            "fit_score_cost": 7,
+            "fit_score_safety": 5,
+            "fit_score_reliability": 9,
+            "fit_score_skill": 5,
+            "fit_score_stress": 5,
+            "fit_score_pain": 7,
+            "fit_score_confidence": 6,
+            "fit_score_delight": 4,
+            "overall_fit": 5.67,
+            "rationale": "One_dimensional — solid-state vs mechanical is a well-understood trade-off in the instrumentation industry. No moving parts = longer life = less maintenance, linearly. Not a surprise (attractive) because instrumentation engineers expect this from ultrasonic/electromagnetic. Primary drivers: Reliability (9) — eliminates bearing wear and rotor fouling per E24 (Opp=12); Pain (7) — removes bearing replacement schedule per E23 (Opp=12)."
+          },
+          {
+            "feature_name": "Bidirectional Flow Detection",
+            "market_name": "Flowmeters (Home Industry)",
+            "naics_code": "334513",
+            "kano_class": "one_dimensional",
+            "fit_score_time": 4,
+            "fit_score_cost": 5,
+            "fit_score_safety": 6,
+            "fit_score_reliability": 5,
+            "fit_score_skill": 3,
+            "fit_score_stress": 4,
+            "fit_score_pain": 3,
+            "fit_score_confidence": 5,
+            "fit_score_delight": 3,
+            "overall_fit": 4.22,
+            "rationale": "One_dimensional — inherent to transit-time; also achievable with electromagnetic. A known, valued capability. Primary drivers: Safety (6) — detects backflow causing contamination or energy waste per E5 (Opp=11); Confidence (5) — provides flow direction for system diagnostics."
+          },
+          {
+            "feature_name": "Digital Anomaly Detection",
+            "market_name": "Flowmeters (Home Industry)",
+            "naics_code": "334513",
+            "kano_class": "attractive",
+            "fit_score_time": 5,
+            "fit_score_cost": 5,
+            "fit_score_safety": 8,
+            "fit_score_reliability": 7,
+            "fit_score_skill": 5,
+            "fit_score_stress": 7,
+            "fit_score_pain": 5,
+            "fit_score_confidence": 8,
+            "fit_score_delight": 6,
+            "overall_fit": 6.22,
+            "rationale": "Attractive — most commodity flowmeters provide raw flow data only. Embedded analytics (bubble detection, empty-pipe, glycol concentration) are genuinely surprising. Primary drivers: Safety (8) — empty-pipe detection prevents pump damage per E11 (Opp=14, highest-opportunity need); Confidence (8) — diagnostic flags distinguish process deviations from sensor artifacts per E10 (Opp=10) and detect transducer fouling per E12 (Opp=11); Stress (7) — automated anomaly detection reduces operator cognitive load."
+          },
+          {
+            "feature_name": "Real-Time Compensation Algorithms",
+            "market_name": "Flowmeters (Home Industry)",
+            "naics_code": "334513",
+            "kano_class": "must_be",
+            "fit_score_time": 3,
+            "fit_score_cost": 4,
+            "fit_score_safety": 4,
+            "fit_score_reliability": 8,
+            "fit_score_skill": 5,
+            "fit_score_stress": 4,
+            "fit_score_pain": 4,
+            "fit_score_confidence": 7,
+            "fit_score_delight": 2,
+            "overall_fit": 4.56,
+            "rationale": "Must_be — every professional-grade flowmeter includes compensation algorithms. Absence is disqualifying. Primary drivers: Reliability (8) — reduces temperature-induced error from ~1.5% to ~0.2% via NTC per E4 (Opp=10) and contributes to E1 (accuracy ±2%, Opp=13); Confidence (7) — auto-compensated readings maintain measurement trust per E9 (calibration drift, Opp=13)."
+          }
+        ]
+      },
+      "step_10_product_related_needs": {
+        "n_needs": 12,
+        "n_constraints_covered": 12,
+        "entries": [
+          {
+            "statement": "Minimize the likelihood of measurement failure when target process fluids have acoustic impedance outside the piezoelectric transducer's coupling range, excluding non-aqueous media from the addressable application space",
+            "source_constraint": "Aqueous Media Requirement",
+            "affected_markets": [
+              "Flowmeters (Home Industry)"
+            ],
+            "importance": 8.0,
+            "satisfaction_current": 3.0
+          },
+          {
+            "statement": "Minimize the likelihood of polymer housing and seal degradation when process circuits operate at sustained temperatures approaching the 90 degrees C material service limit",
+            "source_constraint": "Maximum Medium Temperature",
+            "affected_markets": [
+              "Flowmeters (Home Industry)"
+            ],
+            "importance": 6.0,
+            "satisfaction_current": 5.0
+          },
+          {
+            "statement": "Minimize the measurement error caused by entrained air exceeding 2% by volume, which attenuates the ultrasonic signal beyond the transit-time algorithm's compensation capability",
+            "source_constraint": "Air Bubble / Void Fraction Limit",
+            "affected_markets": [
+              "Flowmeters (Home Industry)"
+            ],
+            "importance": 7.0,
+            "satisfaction_current": 3.0
+          },
+          {
+            "statement": "Minimize the residual transit-time measurement error during rapid temperature transients where speed-of-sound changes outpace the NTC compensation algorithm's response rate",
+            "source_constraint": "Temperature-Dependent Accuracy",
+            "affected_markets": [
+              "Flowmeters (Home Industry)"
+            ],
+            "importance": 6.0,
+            "satisfaction_current": 5.0
+          },
+          {
+            "statement": "Minimize the likelihood of wetted polymer housing and seal attack when process fluids or CIP chemicals exceed the material's chemical resistance limits",
+            "source_constraint": "Wetted Material Chemical Compatibility",
+            "affected_markets": [
+              "Flowmeters (Home Industry)"
+            ],
+            "importance": 5.0,
+            "satisfaction_current": 5.0
+          },
+          {
+            "statement": "Minimize the duration of measurement outage during system events that temporarily create partially filled pipe conditions where the ultrasonic pulse cannot traverse the air gap",
+            "source_constraint": "Pipe Full Condition Required",
+            "affected_markets": [
+              "Flowmeters (Home Industry)"
+            ],
+            "importance": 6.0,
+            "satisfaction_current": 4.0
+          },
+          {
+            "statement": "Minimize the flow measurement dead zone below the minimum detectable threshold (0.25-4.2 l/min depending on DN) where transit-time signal-to-noise ratio prevents valid measurement",
+            "source_constraint": "Minimum Flow Rate Detection",
+            "affected_markets": [
+              "Flowmeters (Home Industry)"
+            ],
+            "importance": 7.0,
+            "satisfaction_current": 4.0
+          },
+          {
+            "statement": "Minimize the risk of housing structural failure in applications where process pressure spikes or water hammer events temporarily exceed the 10 bar continuous rating",
+            "source_constraint": "Maximum Operating Pressure",
+            "affected_markets": [
+              "Flowmeters (Home Industry)"
+            ],
+            "importance": 5.0,
+            "satisfaction_current": 6.0
+          },
+          {
+            "statement": "Minimize the installation footprint penalty from the 5-10x DN straight-pipe requirement that restricts deployment in space-constrained process skids, compact equipment, and retrofit installations",
+            "source_constraint": "Minimum Straight Pipe Run",
+            "affected_markets": [
+              "Flowmeters (Home Industry)"
+            ],
+            "importance": 7.0,
+            "satisfaction_current": 4.0
+          },
+          {
+            "statement": "Minimize the frequency of sensor replacement in continuous high-throughput applications where the 3,000 m3 total throughput endurance is consumed within months rather than years of operation",
+            "source_constraint": "Life Endurance Ceiling",
+            "affected_markets": [
+              "Flowmeters (Home Industry)"
+            ],
+            "importance": 6.0,
+            "satisfaction_current": 4.0
+          },
+          {
+            "statement": "Minimize the exclusion of hazardous-area applications where the absence of ATEX/IECEx certification prevents sensor deployment in Zone 1/0 explosive atmosphere classifications",
+            "source_constraint": "No Explosive Atmosphere Certification",
+            "affected_markets": [
+              "Flowmeters (Home Industry)"
+            ],
+            "importance": 4.0,
+            "satisfaction_current": 3.0
+          },
+          {
+            "statement": "Minimize the risk of electronics failure or RAST 2.5 connector degradation in outdoor or extreme-ambient installations that exceed the sensor's indoor-rated operating envelope",
+            "source_constraint": "Ambient Temperature Range",
+            "affected_markets": [
+              "Flowmeters (Home Industry)"
+            ],
+            "importance": 4.0,
+            "satisfaction_current": 5.0
+          }
+        ]
+      },
+      "step_11_vendor_feature_market_fit": {
+        "vendor_name": "Marquardt",
+        "vendor_product": "US Flow Sensor (DN20 serial, DN12/DN14/DN25 development)",
+        "n_features_assessed": 6,
+        "n_markets_assessed": 1,
+        "entries": [
+          {
+            "feature_name": "Modular Pipe Diameter Variants",
+            "feature_description": "Serve multiple pipe sizes via interchangeable flow bodies sharing a common electronics platform and RAST 2.5 connector",
+            "market_name": "Flowmeters (Home Industry)",
+            "naics_code": "334513",
+            "vendor_score": 6,
+            "best_incumbent_score": 9,
+            "best_incumbent_technology": "Electromagnetic Flow Measurement",
+            "advantage": "inferior",
+            "kano_class": "one_dimensional",
+            "rationale": "Marquardt: DN12/14/20/25 on shared RAST 2.5 platform (DN12/14/25 in development). Electromagnetic incumbent (E+H Promag, ABB AquaMaster): DN1-DN2400 with flanged/wafer/threaded per size. Marquardt covers 4 small-bore sizes; incumbents cover 20+ sizes spanning 3 orders of magnitude. Gap reflects fundamental range limitation."
+          },
+          {
+            "feature_name": "Customizable Communication Interface",
+            "feature_description": "Support UART, LIN, and frequency output protocols for OEM-embedded control architectures",
+            "market_name": "Flowmeters (Home Industry)",
+            "naics_code": "334513",
+            "vendor_score": 6,
+            "best_incumbent_score": 9,
+            "best_incumbent_technology": "Electromagnetic Flow Measurement",
+            "advantage": "inferior",
+            "kano_class": "one_dimensional",
+            "rationale": "Marquardt: UART/LIN/frequency (OEM-embedded). Electromagnetic incumbent (E+H, ABB, Emerson): 4-20mA, HART, Modbus RTU/TCP, PROFIBUS PA/DP, Foundation Fieldbus, EtherNet/IP. Industrial HART/fieldbus protocols are standard for DCS/SCADA integration; UART/LIN are niche embedded protocols. Gap reflects protocol ecosystem mismatch."
+          },
+          {
+            "feature_name": "Customizable Mechanical Interface",
+            "feature_description": "Accept threaded or plug-in quick-connect pipe connections for OEM assembly integration",
+            "market_name": "Flowmeters (Home Industry)",
+            "naics_code": "334513",
+            "vendor_score": 6,
+            "best_incumbent_score": 8,
+            "best_incumbent_technology": "Electromagnetic Flow Measurement",
+            "advantage": "inferior",
+            "kano_class": "one_dimensional",
+            "rationale": "Marquardt: threaded + plug-in quick-connect. Electromagnetic incumbent: ANSI/DIN flanged, wafer, tri-clamp, threaded, compression. Flanged and tri-clamp connections essential for process plant pipework and hygienic applications are absent from Marquardt's offering. Gap reflects missing connection types."
+          },
+          {
+            "feature_name": "Low-Energy Battery Mode",
+            "feature_description": "Operate at ultra-low standby current (<5 uA) enabling battery-powered remote deployment without mains power",
+            "market_name": "Flowmeters (Home Industry)",
+            "naics_code": "334513",
+            "vendor_score": 8,
+            "best_incumbent_score": 5,
+            "best_incumbent_technology": "Ultrasonic Transit-Time (Kamstrup)",
+            "advantage": "superior",
+            "kano_class": "attractive",
+            "rationale": "Marquardt: <5 uA standby (lowest in any inline flowmeter). Kamstrup MULTICAL 21: battery-operated but ~100 uA measurement cycle. Electromagnetic meters require 5-20W continuous — battery impractical. For remote water monitoring and IoT-connected metering, ultra-low power is a genuine differentiator. Attractive because most flowmeter applications have mains power."
+          },
+          {
+            "feature_name": "Pre-Calibrated Delivery",
+            "feature_description": "Ship fully calibrated and tested to customer-specific medium and flow profile with 100% automated final test",
+            "market_name": "Flowmeters (Home Industry)",
+            "naics_code": "334513",
+            "vendor_score": 8,
+            "best_incumbent_score": 7,
+            "best_incumbent_technology": "Coriolis Mass Flow Measurement",
+            "advantage": "parity",
+            "kano_class": "one_dimensional",
+            "rationale": "Marquardt: customer-specific medium calibration (water, glycol mix %) with 100% automated test per E22 (OEM qualification time, Opp=12). Coriolis incumbent: inherent mass flow calibration via reference density. E+H/ABB offer ISO 17025 traceable wet calibration as premium service. Both deliver factory-calibrated sensors; gap within parity band."
+          },
+          {
+            "feature_name": "KTW/WRAS Drinking Water Approval",
+            "feature_description": "Wetted parts approved for potable water contact under KTW (German) and WRAS (UK) drinking water standards",
+            "market_name": "Flowmeters (Home Industry)",
+            "naics_code": "334513",
+            "vendor_score": 8,
+            "best_incumbent_score": 8,
+            "best_incumbent_technology": "Ultrasonic Transit-Time (Kamstrup)",
+            "advantage": "parity",
+            "kano_class": "one_dimensional",
+            "rationale": "Marquardt: KTW + WRAS. Kamstrup/Danfoss: equivalent certifications for water metering. Stainless steel electromagnetic meters meet potable water via material compliance. Drinking water approval is standard in the water metering sub-segment. No meaningful gap."
+          }
+        ]
+      }
+    }
+  ],
+  "has_bom": true,
+  "naics_sector_type": "manufacturing"
+}

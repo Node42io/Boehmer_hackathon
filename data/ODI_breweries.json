@@ -1,0 +1,1878 @@
+{
+  "id": "ODI_breweries",
+  "title": "ODI Matrix — Breweries (NAICS 312120)",
+  "type": "odi_matrix",
+  "market_slug": "breweries",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Step 1 — Error Statement Collection",
+      "content": "24 needs from Step 06 (JTBD_breweries) + 7 product-related needs from Step 10 (FIT_breweries) = **31 total needs**.\n\nStep 10 entries injected with `job_step_number=0`, `job_step_name=\"product_constraint\"`, `impact_category=\"reliability\"`, `product_related=true` per merge rule.\n\nNo markets skipped — 31 needs found for Breweries.\n\n---"
+    },
+    {
+      "title": "Step 2 — Satisfaction Recalibration (Incumbent-Grounded)",
+      "content": "**Incumbent profiles used for recalibration:**\n\n| Incumbent | Share | Mechanism | Strengths | Weaknesses |\n|---|---|---|---|---|\n| Paddle-wheel / turbine | 50–60% | Rotational (impeller) | Lowest cost ($50–150), simple installation, no fluid config needed | Bearing wear 6–18 mo in glycol, ±2–5% drift, no diagnostics, particle jamming |\n| Electromagnetic (mag) | 15–25% | Faraday induction | ±0.5% accuracy, no moving parts, 100:1 turndown, 4-20 mA output | 3–5× cost ($800–2,000), 10–20 W power, larger footprint, requires conductive fluid |\n| Manual / do nothing | 15–30% | Visual / thermal probe | Zero cost | No flow visibility, no fault detection, late excursion discovery |\n\n[SRC: JTBD_breweries §2.4 Alternatives, FIT_breweries §11a]\n\n### Recalibration Table — Step 06 Needs\n\n| # | Statement (abbreviated) | Imp | Sat_orig | Sat_recal | Recalibration Rationale |\n|---|---|---|---|---|---|\n| 1 | Calibration drift <±0.5% / 12mo | 8 | 4 | **3** | PW drifts 2–5% over life (dominant 50–60%); mag stable but minority; manual = zero measurement |\n| 2 | Glycol concentration accuracy 25–40% | 8 | 3 | **3** | No incumbent compensates for glycol concentration changes |\n| 3 | Full operating range 0.5–50 L/min | 7 | 5 | **5** | Mag handles full range (100:1 turndown); PW limited but functional |\n| 4 | Air bubble false readings | 7 | 3 | **3** | PW jams/stalls with air; mag less affected but still errors |\n| 5 | Jacket blockage detection <0.5°C | 9 | 2 | **2** | No incumbent provides glycol jacket flow monitoring; manual inspection only |\n| 6 | Pump degradation detection >15% | 8 | 3 | **2** | No incumbent trends pump degradation; manual checks only |\n| 7 | Process vs noise >95% classification | 8 | 4 | **3** | PW has poor S/N (dominant); mag better but no classification logic |\n| 8 | Glycol leak <5% reservoir | 8 | 3 | **2** | No automated leak detection in incumbent brewery glycol setups |\n| 9 | Correct flow rate setpoint ±10% | 7 | 4 | **4** | Knowledge/engineering need; sensor-independent |\n| 10 | Calculate flow from single config | 6 | 5 | **5** | Knowledge need; sensor-independent |\n| 11 | Install without drain | 7 | 3 | **3** | All inline sensors require system drain for installation |\n| 12 | Config error >1% from fluid-type | 8 | 5 | **6** | PW needs no fluid config (zero error risk); mag minimal config |\n| 13 | Verify accuracy in 5 min pre-batch | 7 | 3 | **3** | PW has no self-diagnostics; mag basic only; mostly skipped in practice |\n| 14 | False-normal masking blocked jacket | 9 | 3 | **2** | No incumbent detects partial jacket blockage — completely unaddressed |\n| 15 | Isolate anomaly root cause in 5 min | 8 | 3 | **3** | No incumbent provides diagnostic data for root cause isolation |\n| 16 | Operator expertise for anomaly data | 7 | 3 | **3** | PW: no diagnostics; mag: complex outputs requiring training |\n| 17 | Service life >3yr no maintenance | 7 | 4 | **3** | PW bearing life 6–18 mo in glycol dominates; mag >10yr but minority |\n| 18 | Installed cost <$500/point | 8 | 4 | **5** | PW at $50–150 well under target; mag at $800–2,000 exceeds it |\n| 19 | No flow path contamination | 6 | 5 | **5** | PW: some debris risk; mag: clean. Mixed |\n| 20 | Pressure drop minimization | 6 | 5 | **5** | PW/mag: minimal drop; orifice: high. Mixed |\n| 21 | Batch-to-batch temp <±0.5°C | 9 | 4 | **3** | Without per-zone flow monitoring, glycol distribution is uncontrolled |\n| 22 | Multi-fermenter without starvation | 8 | 5 | **4** | No per-zone flow visibility → starvation undetected until temp drifts |\n| 23 | Quantitative performance data | 7 | 3 | **3** | PW: basic pulse only; mag: better data but too expensive to deploy at every point |\n| 24 | Discover excursion before completion | 9 | 3 | **2** | No flow-based early warning exists; relies on slow-response fermenter temp probe |\n\n### Recalibration Table — Step 10 Product-Related Needs\n\n| # | Statement (abbreviated) | Imp | Sat_orig | Sat_recal | Recalibration Rationale |\n|---|---|---|---|---|---|\n| PR-1 | Air >2% false readings (ultrasonic) | 7 | 4 | **4** | Mag handles air better; PW jams entirely — mixed |\n| PR-2 | Recovery after air entrainment | 6 | 3 | **3** | PW may take minutes to restart after air clears |\n| PR-3 | Short straight pipe accuracy | 6 | 4 | **5** | PW is profile-insensitive; mag tolerates shorter runs |\n| PR-4 | Measurement blackout partial drain | 5 | 3 | **3** | DP degrades gradually; PW and ultrasonic lose signal entirely |\n| PR-5 | Crash-cooling transient error | 6 | 5 | **6** | Mag and PW unaffected by fluid temperature changes to flow reading |\n| PR-6 | Low-flow S/N degradation | 5 | 5 | **5** | PW stalls at low flow (worse); mag excellent at low flow |\n| PR-7 | Acoustic coupling failure (glycol ratio) | 5 | 4 | **6** | Purely ultrasonic-specific; mag and PW have no acoustic coupling dependency |\n\n---"
+    },
+    {
+      "title": "Step 3 — Opportunity Scores (Deterministic)",
+      "content": "Formula: `opportunity_score = importance + max(importance - satisfaction, 0)`\nUnderserved: `importance > 7 AND satisfaction < 5`\nOverserved: `importance < 3 AND satisfaction > 7`\n\n### Step 06 Needs — Scored\n\n| # | Statement (abbreviated) | Imp | Sat | Opp | Under? | Over? | Impact | prod_rel |\n|---|---|---|---|---|---|---|---|---|\n| 1 | Calibration drift <±0.5% / 12mo | 8 | 3 | **13.00** | YES | no | reliability | false |\n| 2 | Glycol concentration accuracy 25–40% | 8 | 3 | **13.00** | YES | no | reliability | false |\n| 3 | Full operating range 0.5–50 L/min | 7 | 5 | **9.00** | no | no | reliability | true |\n| 4 | Air bubble false readings | 7 | 3 | **11.00** | no | no | reliability | true |\n| 5 | Jacket blockage detection <0.5°C | 9 | 2 | **16.00** | YES | no | reliability | false |\n| 6 | Pump degradation detection >15% | 8 | 2 | **14.00** | YES | no | reliability | false |\n| 7 | Process vs noise >95% classification | 8 | 3 | **13.00** | YES | no | reliability | false |\n| 8 | Glycol leak <5% reservoir | 8 | 2 | **14.00** | YES | no | safety | false |\n| 9 | Correct flow rate setpoint ±10% | 7 | 4 | **10.00** | no | no | cost | false |\n| 10 | Calculate flow from single config | 6 | 5 | **7.00** | no | no | skill | false |\n| 11 | Install without drain | 7 | 3 | **11.00** | no | no | time | true |\n| 12 | Config error >1% from fluid-type | 8 | 6 | **10.00** | no | no | reliability | true |\n| 13 | Verify accuracy in 5 min pre-batch | 7 | 3 | **11.00** | no | no | time | false |\n| 14 | False-normal masking blocked jacket | 9 | 2 | **16.00** | YES | no | reliability | false |\n| 15 | Isolate anomaly root cause in 5 min | 8 | 3 | **13.00** | YES | no | time | false |\n| 16 | Operator expertise for anomaly data | 7 | 3 | **11.00** | no | no | skill | false |\n| 17 | Service life >3yr no maintenance | 7 | 3 | **11.00** | no | no | cost | true |\n| 18 | Installed cost <$500/point | 8 | 5 | **11.00** | no | no | cost | true |\n| 19 | No flow path contamination | 6 | 5 | **7.00** | no | no | safety | true |\n| 20 | Pressure drop minimization | 6 | 5 | **7.00** | no | no | cost | true |\n| 21 | Batch-to-batch temp <±0.5°C | 9 | 3 | **15.00** | YES | no | cost | false |\n| 22 | Multi-fermenter without starvation | 8 | 4 | **12.00** | YES | no | reliability | false |\n| 23 | Quantitative performance data | 7 | 3 | **11.00** | no | no | skill | false |\n| 24 | Discover excursion before completion | 9 | 2 | **16.00** | YES | no | cost | false |\n\n### Step 10 Product-Related Needs — Scored\n\n| # | Statement (abbreviated) | Imp | Sat | Opp | Under? | Over? | Impact | prod_rel |\n|---|---|---|---|---|---|---|---|---|\n| PR-1 | Air >2% false readings (ultrasonic) | 7 | 4 | **10.00** | no | no | reliability | true |\n| PR-2 | Recovery after air entrainment | 6 | 3 | **9.00** | no | no | reliability | true |\n| PR-3 | Short straight pipe accuracy | 6 | 5 | **7.00** | no | no | reliability | true |\n| PR-4 | Measurement blackout partial drain | 5 | 3 | **7.00** | no | no | reliability | true |\n| PR-5 | Crash-cooling transient error | 6 | 6 | **6.00** | no | no | reliability | true |\n| PR-6 | Low-flow S/N degradation | 5 | 5 | **5.00** | no | no | reliability | true |\n| PR-7 | Acoustic coupling failure (glycol ratio) | 5 | 6 | **5.00** | no | no | reliability | true |\n\n---"
+    },
+    {
+      "title": "Step 4 — Market ODI Summary",
+      "content": "| Metric | Value |\n|---|---|\n| **Market** | Breweries (NAICS 312120) |\n| **Total Needs** | 31 |\n| **Underserved Count** | 11 |\n| **Overserved Count** | 0 |\n| **Avg Opportunity Score** | 10.68 |\n\n### Top 5 Opportunities\n\n| Rank | # | Error Statement | Imp | Sat | Opp | Zone |\n|---|---|---|---|---|---|---|\n| 1 | 5 | Minimize the time to detect a glycol jacket blockage or partial restriction before fermenter temperature deviates >0.5°C from setpoint | 9 | 2 | **16.00** | Highly Underserved |\n| 2 | 14 | Minimize the likelihood of accepting a false-normal flow reading that masks a partially blocked glycol jacket | 9 | 2 | **16.00** | Highly Underserved |\n| 3 | 24 | Minimize the likelihood of discovering a fermentation temperature excursion only after the 2–4 week fermentation cycle has completed, when correction is no longer possible | 9 | 2 | **16.00** | Highly Underserved |\n| 4 | 21 | Minimize batch-to-batch variation in fermentation temperature profile caused by uneven glycol distribution across cooling zones (target: <±0.5°C) | 9 | 3 | **15.00** | Underserved |\n| 5 | 6 | Minimize the number of undetected glycol pump degradation events that reduce per-zone cooling capacity by >15% | 8 | 2 | **14.00** | Underserved |\n\n**Runners-up at Opp=14:** #8 (glycol leak detection).\n\n### Opportunity Landscape\n\n| Zone | Score Range | Count | % of Total |\n|---|---|---|---|\n| Highly Underserved | > 15 | 3 | 9.7% |\n| Underserved | 12–15 | 8 | 25.8% |\n| Appropriately Served | 10–12 | 11 | 35.5% |\n| Overserved | < 10 | 9 | 29.0% |\n\n---"
+    },
+    {
+      "title": "Step 5 — Cross-Check vs Feature-Market Fit",
+      "content": "| Metric | Value | Source |\n|---|---|---|\n| ODI avg_opportunity_score | 10.68 | This analysis |\n| Feature-Fit avg (tech features) | 5.02 | FIT_breweries §09a (mean of 7 features) |\n\n**Cross-check thresholds:**\n\n| Condition | Triggered? | Note |\n|---|---|---|\n| ODI avg > 12 AND Feature-Fit avg < 4 | **NO** | Feature-Fit avg = 5.02 (above 4) |\n| ODI avg < 8 AND Feature-Fit avg > 7 | **NO** | ODI avg = 10.68 (above 8) |\n\n**No inconsistencies detected.** ODI shows significant unmet needs (11 underserved) while Feature-Fit shows moderate technology relevance (5.02 avg). Interpretation: the market has real pain that ultrasonic technology partially addresses — the top opportunities (#5, #14, #24) align with Digital Anomaly Detection (fit=7.00) and No Moving Parts (fit=7.00) which scored highest in Feature-Fit.\n\n---"
+    },
+    {
+      "title": "QA Checklist",
+      "content": "| # | Check | Result | Note |\n|---|---|---|---|\n| Q1 | Formula correct | **PASS** | Spot-checked 5 entries: #5 (9+max(9-2,0)=16), #12 (8+max(8-6,0)=10), #21 (9+max(9-3,0)=15), PR-5 (6+max(6-6,0)=6), PR-7 (5+max(5-6,0)=5). All match. |\n| Q2 | Underserved flags correct | **PASS** | 11 entries with imp>7 AND sat<5; verified #1(8,3)=YES, #3(7,5)=NO (7 not >7), #5(9,2)=YES, #12(8,6)=NO (6 not <5), #22(8,4)=YES |\n| Q3 | Overserved flags correct | **PASS** | 0 entries with imp<3 AND sat>7; no need has importance <3 |\n| Q4 | Need count preserved | **PASS** | 24 (Step 06) + 7 (Step 10) = 31 ≥ 24 (Step 06 count) |\n| Q5 | Top-5 ordering correct | **PASS** | 16 > 16 > 16 > 15 > 14 — descending by opp score; ties broken by need number |\n| Q6 | Cross-check ran | **PASS** | ODI vs Feature-Fit comparison completed; no inconsistencies |\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"odi_matrix\",\n  \"naics_code\": \"312120\",\n  \"naics_title\": \"Breweries\",\n  \"market_name\": \"Breweries\",\n  \"product_name\": \"Ultrasonic Flow Sensor\",\n  \"vendor_name\": \"Marquardt\",\n  \"entries\": [\n    {\n      \"error_statement\": \"Minimize the likelihood of undetected calibration drift exceeding ±0.5% of reading over a 12-month service period\",\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize variation in flow measurement accuracy caused by glycol concentration fluctuations between 25% and 40% propylene glycol\",\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Increase the ability to measure flow rate across the full operating range (0.5–50 L/min) without sensor reconfiguration\",\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of false flow readings caused by air bubble entrainment during glycol system refill or maintenance events\",\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the time to detect a glycol jacket blockage or partial restriction before fermenter temperature deviates >0.5°C from setpoint\",\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"importance\": 9,\n      \"satisfaction_current\": 2,\n      \"opportunity_score\": 16.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the number of undetected glycol pump degradation events that reduce per-zone cooling capacity by >15%\",\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"importance\": 8,\n      \"satisfaction_current\": 2,\n      \"opportunity_score\": 14.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Increase the ability to distinguish genuine process flow deviations from sensor measurement noise with >95% classification accuracy\",\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the time to detect a glycol leak in the distribution system before coolant volume loss exceeds 5% of reservoir capacity\",\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"importance\": 8,\n      \"satisfaction_current\": 2,\n      \"opportunity_score\": 14.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Increase the ability to determine the correct glycol flow rate setpoint within ±10% of actual cooling load for each fermenter size and beer style\",\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"importance\": 7,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 10.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Increase the ability to calculate required glycol flow rates for different beer styles and fermenter sizes from a single sensor configuration\",\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"importance\": 6,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 7.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the time required to install and commission a flow sensor on an existing glycol line without draining the system\",\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of systematic measurement error >1% caused by incorrect fluid-type configuration at commissioning\",\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"importance\": 8,\n      \"satisfaction_current\": 6,\n      \"opportunity_score\": 10.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Increase the ability to verify sensor accuracy within 5 minutes before starting a fermentation batch\",\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of accepting a false-normal flow reading that masks a partially blocked glycol jacket\",\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"importance\": 9,\n      \"satisfaction_current\": 2,\n      \"opportunity_score\": 16.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Increase the ability to isolate flow anomaly root cause (sensor vs glycol pump vs zone valve) within 5 minutes\",\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the operator expertise required to interpret flow anomaly data and determine the correct corrective action\",\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Increase the sensor service life achievable without scheduled maintenance interventions affecting measurement accuracy (target: >3 years)\",\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the total installed cost per glycol flow measurement point including sensor, wiring, and power supply (target: <$500)\",\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"importance\": 8,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 11.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of sensor-induced flow path contamination requiring line flushing after sensor installation or replacement\",\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"importance\": 6,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 7.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the permanent pressure drop across the measurement point that increases glycol pump energy consumption\",\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"importance\": 6,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 7.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize batch-to-batch variation in fermentation temperature profile caused by uneven glycol distribution across cooling zones (target: <±0.5°C)\",\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"importance\": 9,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 15.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Increase the ability to cool multiple fermenters simultaneously without flow starvation to any individual cooling zone\",\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"importance\": 8,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 12.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Increase the ability to present quantitative cooling system performance data to brewery ownership and quality assurance teams\",\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of discovering a fermentation temperature excursion only after the 2–4 week fermentation cycle has completed, when correction is no longer possible\",\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"importance\": 9,\n      \"satisfaction_current\": 2,\n      \"opportunity_score\": 16.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of false flow readings when air entrainment exceeds 2% volume during glycol system refill or valve-switching events\",\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"importance\": 7,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 10.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the time to recover valid flow measurement after transient air entrainment events dissipate from the glycol circuit\",\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"importance\": 6,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 9.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the measurement accuracy degradation from insufficient straight pipe run in space-constrained brewery glycol manifolds with elbows and T-junctions within 5–10 DN upstream\",\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"importance\": 6,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 7.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the duration of measurement blackout caused by partial pipe drainage during glycol circuit maintenance\",\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"importance\": 5,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 7.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the transient measurement error during crash-cooling sequences where glycol temperature changes exceed the compensation algorithm response rate at >2°C/min\",\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"importance\": 6,\n      \"satisfaction_current\": 6,\n      \"opportunity_score\": 6.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of signal-to-noise degradation below the transit-time detection threshold during low-demand glycol flow in small cooling zones\",\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"importance\": 5,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 5.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the risk of acoustic coupling failure when glycol-to-water ratio shifts outside the validated acoustic impedance range due to uncontrolled top-up or evaporation\",\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"importance\": 5,\n      \"satisfaction_current\": 6,\n      \"opportunity_score\": 5.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    }\n  ],\n  \"market_summaries\": [\n    {\n      \"market_name\": \"Breweries\",\n      \"naics_code\": \"312120\",\n      \"total_needs\": 31,\n      \"underserved_count\": 11,\n      \"overserved_count\": 0,\n      \"avg_opportunity_score\": 10.68,\n      \"top_opportunities\": [\n        \"Minimize the time to detect a glycol jacket blockage or partial restriction before fermenter temperature deviates >0.5°C from setpoint\",\n        \"Minimize the likelihood of accepting a false-normal flow reading that masks a partially blocked glycol jacket\",\n        \"Minimize the likelihood of discovering a fermentation temperature excursion only after the 2–4 week fermentation cycle has completed, when correction is no longer possible\",\n        \"Minimize batch-to-batch variation in fermentation temperature profile caused by uneven glycol distribution across cooling zones (target: <±0.5°C)\",\n        \"Minimize the number of undetected glycol pump degradation events that reduce per-zone cooling capacity by >15%\"\n      ]\n    }\n  ],\n  \"cross_check\": {\n    \"odi_avg\": 10.68,\n    \"feature_fit_avg\": 5.02,\n    \"inconsistencies\": [],\n    \"status\": \"no_inconsistencies\"\n  },\n  \"entities_produced\": {\n    \"nodes\": [\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the likelihood of undetected calibration drift exceeding ±0.5% of readi\", \"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the likelihood of undetected calibration drift exceeding ±0.5% of reading over a 12-month service period\", \"market_name\": \"Breweries\", \"importance\": 8, \"satisfaction_current\": 3, \"opportunity_score\": 13.00, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize variation in flow measurement accuracy caused by glycol concentration flu\", \"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize variation in flow measurement accuracy caused by glycol concentration fluctuations between 25% and 40% propylene glycol\", \"market_name\": \"Breweries\", \"importance\": 8, \"satisfaction_current\": 3, \"opportunity_score\": 13.00, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Increase the ability to measure flow rate across the full operating range (0.5–50\", \"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Increase the ability to measure flow rate across the full operating range (0.5–50 L/min) without sensor reconfiguration\", \"market_name\": \"Breweries\", \"importance\": 7, \"satisfaction_current\": 5, \"opportunity_score\": 9.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the likelihood of false flow readings caused by air bubble entrainment d\", \"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the likelihood of false flow readings caused by air bubble entrainment during glycol system refill or maintenance events\", \"market_name\": \"Breweries\", \"importance\": 7, \"satisfaction_current\": 3, \"opportunity_score\": 11.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the time to detect a glycol jacket blockage or partial restriction befor\", \"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the time to detect a glycol jacket blockage or partial restriction before fermenter temperature deviates >0.5°C from setpoint\", \"market_name\": \"Breweries\", \"importance\": 9, \"satisfaction_current\": 2, \"opportunity_score\": 16.00, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the number of undetected glycol pump degradation events that reduce per-\", \"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the number of undetected glycol pump degradation events that reduce per-zone cooling capacity by >15%\", \"market_name\": \"Breweries\", \"importance\": 8, \"satisfaction_current\": 2, \"opportunity_score\": 14.00, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Increase the ability to distinguish genuine process flow deviations from sensor m\", \"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Increase the ability to distinguish genuine process flow deviations from sensor measurement noise with >95% classification accuracy\", \"market_name\": \"Breweries\", \"importance\": 8, \"satisfaction_current\": 3, \"opportunity_score\": 13.00, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the time to detect a glycol leak in the distribution system before coola\", \"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the time to detect a glycol leak in the distribution system before coolant volume loss exceeds 5% of reservoir capacity\", \"market_name\": \"Breweries\", \"importance\": 8, \"satisfaction_current\": 2, \"opportunity_score\": 14.00, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Increase the ability to determine the correct glycol flow rate setpoint within ±1\", \"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Increase the ability to determine the correct glycol flow rate setpoint within ±10% of actual cooling load for each fermenter size and beer style\", \"market_name\": \"Breweries\", \"importance\": 7, \"satisfaction_current\": 4, \"opportunity_score\": 10.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Increase the ability to calculate required glycol flow rates for different beer st\", \"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Increase the ability to calculate required glycol flow rates for different beer styles and fermenter sizes from a single sensor configuration\", \"market_name\": \"Breweries\", \"importance\": 6, \"satisfaction_current\": 5, \"opportunity_score\": 7.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the time required to install and commission a flow sensor on an existing\", \"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the time required to install and commission a flow sensor on an existing glycol line without draining the system\", \"market_name\": \"Breweries\", \"importance\": 7, \"satisfaction_current\": 3, \"opportunity_score\": 11.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the likelihood of systematic measurement error >1% caused by incorrect f\", \"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the likelihood of systematic measurement error >1% caused by incorrect fluid-type configuration at commissioning\", \"market_name\": \"Breweries\", \"importance\": 8, \"satisfaction_current\": 6, \"opportunity_score\": 10.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Increase the ability to verify sensor accuracy within 5 minutes before starting a\", \"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Increase the ability to verify sensor accuracy within 5 minutes before starting a fermentation batch\", \"market_name\": \"Breweries\", \"importance\": 7, \"satisfaction_current\": 3, \"opportunity_score\": 11.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the likelihood of accepting a false-normal flow reading that masks a par\", \"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the likelihood of accepting a false-normal flow reading that masks a partially blocked glycol jacket\", \"market_name\": \"Breweries\", \"importance\": 9, \"satisfaction_current\": 2, \"opportunity_score\": 16.00, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Increase the ability to isolate flow anomaly root cause (sensor vs glycol pump vs\", \"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Increase the ability to isolate flow anomaly root cause (sensor vs glycol pump vs zone valve) within 5 minutes\", \"market_name\": \"Breweries\", \"importance\": 8, \"satisfaction_current\": 3, \"opportunity_score\": 13.00, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the operator expertise required to interpret flow anomaly data and determ\", \"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the operator expertise required to interpret flow anomaly data and determine the correct corrective action\", \"market_name\": \"Breweries\", \"importance\": 7, \"satisfaction_current\": 3, \"opportunity_score\": 11.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Increase the sensor service life achievable without scheduled maintenance interve\", \"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Increase the sensor service life achievable without scheduled maintenance interventions affecting measurement accuracy (target: >3 years)\", \"market_name\": \"Breweries\", \"importance\": 7, \"satisfaction_current\": 3, \"opportunity_score\": 11.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the total installed cost per glycol flow measurement point including sens\", \"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the total installed cost per glycol flow measurement point including sensor, wiring, and power supply (target: <$500)\", \"market_name\": \"Breweries\", \"importance\": 8, \"satisfaction_current\": 5, \"opportunity_score\": 11.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the likelihood of sensor-induced flow path contamination requiring line f\", \"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the likelihood of sensor-induced flow path contamination requiring line flushing after sensor installation or replacement\", \"market_name\": \"Breweries\", \"importance\": 6, \"satisfaction_current\": 5, \"opportunity_score\": 7.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the permanent pressure drop across the measurement point that increases \", \"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the permanent pressure drop across the measurement point that increases glycol pump energy consumption\", \"market_name\": \"Breweries\", \"importance\": 6, \"satisfaction_current\": 5, \"opportunity_score\": 7.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize batch-to-batch variation in fermentation temperature profile caused by u\", \"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize batch-to-batch variation in fermentation temperature profile caused by uneven glycol distribution across cooling zones (target: <±0.5°C)\", \"market_name\": \"Breweries\", \"importance\": 9, \"satisfaction_current\": 3, \"opportunity_score\": 15.00, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Increase the ability to cool multiple fermenters simultaneously without flow star\", \"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Increase the ability to cool multiple fermenters simultaneously without flow starvation to any individual cooling zone\", \"market_name\": \"Breweries\", \"importance\": 8, \"satisfaction_current\": 4, \"opportunity_score\": 12.00, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Increase the ability to present quantitative cooling system performance data to b\", \"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Increase the ability to present quantitative cooling system performance data to brewery ownership and quality assurance teams\", \"market_name\": \"Breweries\", \"importance\": 7, \"satisfaction_current\": 3, \"opportunity_score\": 11.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the likelihood of discovering a fermentation temperature excursion only \", \"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the likelihood of discovering a fermentation temperature excursion only after the 2–4 week fermentation cycle has completed, when correction is no longer possible\", \"market_name\": \"Breweries\", \"importance\": 9, \"satisfaction_current\": 2, \"opportunity_score\": 16.00, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the likelihood of false flow readings when air entrainment exceeds 2% vo\", \"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the likelihood of false flow readings when air entrainment exceeds 2% volume during glycol system refill or valve-switching events\", \"market_name\": \"Breweries\", \"importance\": 7, \"satisfaction_current\": 4, \"opportunity_score\": 10.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the time to recover valid flow measurement after transient air entrainme\", \"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the time to recover valid flow measurement after transient air entrainment events dissipate from the glycol circuit\", \"market_name\": \"Breweries\", \"importance\": 6, \"satisfaction_current\": 3, \"opportunity_score\": 9.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the measurement accuracy degradation from insufficient straight pipe run\", \"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the measurement accuracy degradation from insufficient straight pipe run in space-constrained brewery glycol manifolds with elbows and T-junctions within 5–10 DN upstream\", \"market_name\": \"Breweries\", \"importance\": 6, \"satisfaction_current\": 5, \"opportunity_score\": 7.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the duration of measurement blackout caused by partial pipe drainage dur\", \"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the duration of measurement blackout caused by partial pipe drainage during glycol circuit maintenance\", \"market_name\": \"Breweries\", \"importance\": 5, \"satisfaction_current\": 3, \"opportunity_score\": 7.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the transient measurement error during crash-cooling sequences where gly\", \"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the transient measurement error during crash-cooling sequences where glycol temperature changes exceed the compensation algorithm response rate at >2°C/min\", \"market_name\": \"Breweries\", \"importance\": 6, \"satisfaction_current\": 6, \"opportunity_score\": 6.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the likelihood of signal-to-noise degradation below the transit-time det\", \"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the likelihood of signal-to-noise degradation below the transit-time detection threshold during low-demand glycol flow in small cooling zones\", \"market_name\": \"Breweries\", \"importance\": 5, \"satisfaction_current\": 5, \"opportunity_score\": 5.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the risk of acoustic coupling failure when glycol-to-water ratio shifts \", \"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the risk of acoustic coupling failure when glycol-to-water ratio shifts outside the validated acoustic impedance range due to uncontrolled top-up or evaporation\", \"market_name\": \"Breweries\", \"importance\": 5, \"satisfaction_current\": 6, \"opportunity_score\": 5.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": true}}\n    ],\n    \"relationships\": [\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:312120\", \"target\": \"OpportunityScore:<each>\", \"count\": 31}\n    ],\n    \"market_odi_props\": {\n      \"naics_code\": \"312120\",\n      \"odi_total_needs\": 31,\n      \"odi_underserved_count\": 11,\n      \"odi_overserved_count\": 0,\n      \"odi_avg_opportunity_score\": 10.68,\n      \"odi_top_opportunities\": \"[\\\"Minimize the time to detect a glycol jacket blockage or partial restriction before fermenter temperature deviates >0.5°C from setpoint\\\",\\\"Minimize the likelihood of accepting a false-normal flow reading that masks a partially blocked glycol jacket\\\",\\\"Minimize the likelihood of discovering a fermentation temperature excursion only after the 2–4 week fermentation cycle has completed, when correction is no longer possible\\\",\\\"Minimize batch-to-batch variation in fermentation temperature profile caused by uneven glycol distribution across cooling zones (target: <±0.5°C)\\\",\\\"Minimize the number of undetected glycol pump degradation events that reduce per-zone cooling capacity by >15%\\\"]\"\n    }\n  }\n}\n```\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- JTBD_breweries.md (24 error statements, incumbent anchors, alternatives, ODI pre-scores)\n- FIT_breweries.md (7 product-related needs from Step 10, 7 tech feature-market fit scores from Step 09)\n- 01_product_decomposition.md (constraints generating product-related needs)\n- 02_functional_promise.md (commodity FP baseline)\n- 05_market_discovery.md (Breweries NAICS 312120 — market context, alternatives)"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "Incumbent",
+        "Share",
+        "Mechanism",
+        "Strengths",
+        "Weaknesses"
+      ],
+      "rows": [
+        {
+          "Incumbent": "Paddle-wheel / turbine",
+          "Share": "50–60%",
+          "Mechanism": "Rotational (impeller)",
+          "Strengths": "Lowest cost ($50–150), simple installation, no fluid config needed",
+          "Weaknesses": "Bearing wear 6–18 mo in glycol, ±2–5% drift, no diagnostics, particle jamming"
+        },
+        {
+          "Incumbent": "Electromagnetic (mag)",
+          "Share": "15–25%",
+          "Mechanism": "Faraday induction",
+          "Strengths": "±0.5% accuracy, no moving parts, 100:1 turndown, 4-20 mA output",
+          "Weaknesses": "3–5× cost ($800–2,000), 10–20 W power, larger footprint, requires conductive fluid"
+        },
+        {
+          "Incumbent": "Manual / do nothing",
+          "Share": "15–30%",
+          "Mechanism": "Visual / thermal probe",
+          "Strengths": "Zero cost",
+          "Weaknesses": "No flow visibility, no fault detection, late excursion discovery"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement (abbreviated)",
+        "Imp",
+        "Sat_orig",
+        "Sat_recal",
+        "Recalibration Rationale"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Statement (abbreviated)": "Calibration drift <±0.5% / 12mo",
+          "Imp": "8",
+          "Sat_orig": "4",
+          "Sat_recal": "**3**",
+          "Recalibration Rationale": "PW drifts 2–5% over life (dominant 50–60%); mag stable but minority; manual = zero measurement"
+        },
+        {
+          "#": "2",
+          "Statement (abbreviated)": "Glycol concentration accuracy 25–40%",
+          "Imp": "8",
+          "Sat_orig": "3",
+          "Sat_recal": "**3**",
+          "Recalibration Rationale": "No incumbent compensates for glycol concentration changes"
+        },
+        {
+          "#": "3",
+          "Statement (abbreviated)": "Full operating range 0.5–50 L/min",
+          "Imp": "7",
+          "Sat_orig": "5",
+          "Sat_recal": "**5**",
+          "Recalibration Rationale": "Mag handles full range (100:1 turndown); PW limited but functional"
+        },
+        {
+          "#": "4",
+          "Statement (abbreviated)": "Air bubble false readings",
+          "Imp": "7",
+          "Sat_orig": "3",
+          "Sat_recal": "**3**",
+          "Recalibration Rationale": "PW jams/stalls with air; mag less affected but still errors"
+        },
+        {
+          "#": "5",
+          "Statement (abbreviated)": "Jacket blockage detection <0.5°C",
+          "Imp": "9",
+          "Sat_orig": "2",
+          "Sat_recal": "**2**",
+          "Recalibration Rationale": "No incumbent provides glycol jacket flow monitoring; manual inspection only"
+        },
+        {
+          "#": "6",
+          "Statement (abbreviated)": "Pump degradation detection >15%",
+          "Imp": "8",
+          "Sat_orig": "3",
+          "Sat_recal": "**2**",
+          "Recalibration Rationale": "No incumbent trends pump degradation; manual checks only"
+        },
+        {
+          "#": "7",
+          "Statement (abbreviated)": "Process vs noise >95% classification",
+          "Imp": "8",
+          "Sat_orig": "4",
+          "Sat_recal": "**3**",
+          "Recalibration Rationale": "PW has poor S/N (dominant); mag better but no classification logic"
+        },
+        {
+          "#": "8",
+          "Statement (abbreviated)": "Glycol leak <5% reservoir",
+          "Imp": "8",
+          "Sat_orig": "3",
+          "Sat_recal": "**2**",
+          "Recalibration Rationale": "No automated leak detection in incumbent brewery glycol setups"
+        },
+        {
+          "#": "9",
+          "Statement (abbreviated)": "Correct flow rate setpoint ±10%",
+          "Imp": "7",
+          "Sat_orig": "4",
+          "Sat_recal": "**4**",
+          "Recalibration Rationale": "Knowledge/engineering need; sensor-independent"
+        },
+        {
+          "#": "10",
+          "Statement (abbreviated)": "Calculate flow from single config",
+          "Imp": "6",
+          "Sat_orig": "5",
+          "Sat_recal": "**5**",
+          "Recalibration Rationale": "Knowledge need; sensor-independent"
+        },
+        {
+          "#": "11",
+          "Statement (abbreviated)": "Install without drain",
+          "Imp": "7",
+          "Sat_orig": "3",
+          "Sat_recal": "**3**",
+          "Recalibration Rationale": "All inline sensors require system drain for installation"
+        },
+        {
+          "#": "12",
+          "Statement (abbreviated)": "Config error >1% from fluid-type",
+          "Imp": "8",
+          "Sat_orig": "5",
+          "Sat_recal": "**6**",
+          "Recalibration Rationale": "PW needs no fluid config (zero error risk); mag minimal config"
+        },
+        {
+          "#": "13",
+          "Statement (abbreviated)": "Verify accuracy in 5 min pre-batch",
+          "Imp": "7",
+          "Sat_orig": "3",
+          "Sat_recal": "**3**",
+          "Recalibration Rationale": "PW has no self-diagnostics; mag basic only; mostly skipped in practice"
+        },
+        {
+          "#": "14",
+          "Statement (abbreviated)": "False-normal masking blocked jacket",
+          "Imp": "9",
+          "Sat_orig": "3",
+          "Sat_recal": "**2**",
+          "Recalibration Rationale": "No incumbent detects partial jacket blockage — completely unaddressed"
+        },
+        {
+          "#": "15",
+          "Statement (abbreviated)": "Isolate anomaly root cause in 5 min",
+          "Imp": "8",
+          "Sat_orig": "3",
+          "Sat_recal": "**3**",
+          "Recalibration Rationale": "No incumbent provides diagnostic data for root cause isolation"
+        },
+        {
+          "#": "16",
+          "Statement (abbreviated)": "Operator expertise for anomaly data",
+          "Imp": "7",
+          "Sat_orig": "3",
+          "Sat_recal": "**3**",
+          "Recalibration Rationale": "PW: no diagnostics; mag: complex outputs requiring training"
+        },
+        {
+          "#": "17",
+          "Statement (abbreviated)": "Service life >3yr no maintenance",
+          "Imp": "7",
+          "Sat_orig": "4",
+          "Sat_recal": "**3**",
+          "Recalibration Rationale": "PW bearing life 6–18 mo in glycol dominates; mag >10yr but minority"
+        },
+        {
+          "#": "18",
+          "Statement (abbreviated)": "Installed cost <$500/point",
+          "Imp": "8",
+          "Sat_orig": "4",
+          "Sat_recal": "**5**",
+          "Recalibration Rationale": "PW at $50–150 well under target; mag at $800–2,000 exceeds it"
+        },
+        {
+          "#": "19",
+          "Statement (abbreviated)": "No flow path contamination",
+          "Imp": "6",
+          "Sat_orig": "5",
+          "Sat_recal": "**5**",
+          "Recalibration Rationale": "PW: some debris risk; mag: clean. Mixed"
+        },
+        {
+          "#": "20",
+          "Statement (abbreviated)": "Pressure drop minimization",
+          "Imp": "6",
+          "Sat_orig": "5",
+          "Sat_recal": "**5**",
+          "Recalibration Rationale": "PW/mag: minimal drop; orifice: high. Mixed"
+        },
+        {
+          "#": "21",
+          "Statement (abbreviated)": "Batch-to-batch temp <±0.5°C",
+          "Imp": "9",
+          "Sat_orig": "4",
+          "Sat_recal": "**3**",
+          "Recalibration Rationale": "Without per-zone flow monitoring, glycol distribution is uncontrolled"
+        },
+        {
+          "#": "22",
+          "Statement (abbreviated)": "Multi-fermenter without starvation",
+          "Imp": "8",
+          "Sat_orig": "5",
+          "Sat_recal": "**4**",
+          "Recalibration Rationale": "No per-zone flow visibility → starvation undetected until temp drifts"
+        },
+        {
+          "#": "23",
+          "Statement (abbreviated)": "Quantitative performance data",
+          "Imp": "7",
+          "Sat_orig": "3",
+          "Sat_recal": "**3**",
+          "Recalibration Rationale": "PW: basic pulse only; mag: better data but too expensive to deploy at every point"
+        },
+        {
+          "#": "24",
+          "Statement (abbreviated)": "Discover excursion before completion",
+          "Imp": "9",
+          "Sat_orig": "3",
+          "Sat_recal": "**2**",
+          "Recalibration Rationale": "No flow-based early warning exists; relies on slow-response fermenter temp probe"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement (abbreviated)",
+        "Imp",
+        "Sat_orig",
+        "Sat_recal",
+        "Recalibration Rationale"
+      ],
+      "rows": [
+        {
+          "#": "PR-1",
+          "Statement (abbreviated)": "Air >2% false readings (ultrasonic)",
+          "Imp": "7",
+          "Sat_orig": "4",
+          "Sat_recal": "**4**",
+          "Recalibration Rationale": "Mag handles air better; PW jams entirely — mixed"
+        },
+        {
+          "#": "PR-2",
+          "Statement (abbreviated)": "Recovery after air entrainment",
+          "Imp": "6",
+          "Sat_orig": "3",
+          "Sat_recal": "**3**",
+          "Recalibration Rationale": "PW may take minutes to restart after air clears"
+        },
+        {
+          "#": "PR-3",
+          "Statement (abbreviated)": "Short straight pipe accuracy",
+          "Imp": "6",
+          "Sat_orig": "4",
+          "Sat_recal": "**5**",
+          "Recalibration Rationale": "PW is profile-insensitive; mag tolerates shorter runs"
+        },
+        {
+          "#": "PR-4",
+          "Statement (abbreviated)": "Measurement blackout partial drain",
+          "Imp": "5",
+          "Sat_orig": "3",
+          "Sat_recal": "**3**",
+          "Recalibration Rationale": "DP degrades gradually; PW and ultrasonic lose signal entirely"
+        },
+        {
+          "#": "PR-5",
+          "Statement (abbreviated)": "Crash-cooling transient error",
+          "Imp": "6",
+          "Sat_orig": "5",
+          "Sat_recal": "**6**",
+          "Recalibration Rationale": "Mag and PW unaffected by fluid temperature changes to flow reading"
+        },
+        {
+          "#": "PR-6",
+          "Statement (abbreviated)": "Low-flow S/N degradation",
+          "Imp": "5",
+          "Sat_orig": "5",
+          "Sat_recal": "**5**",
+          "Recalibration Rationale": "PW stalls at low flow (worse); mag excellent at low flow"
+        },
+        {
+          "#": "PR-7",
+          "Statement (abbreviated)": "Acoustic coupling failure (glycol ratio)",
+          "Imp": "5",
+          "Sat_orig": "4",
+          "Sat_recal": "**6**",
+          "Recalibration Rationale": "Purely ultrasonic-specific; mag and PW have no acoustic coupling dependency"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement (abbreviated)",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Under?",
+        "Over?",
+        "Impact",
+        "prod_rel"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Statement (abbreviated)": "Calibration drift <±0.5% / 12mo",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "**13.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "false"
+        },
+        {
+          "#": "2",
+          "Statement (abbreviated)": "Glycol concentration accuracy 25–40%",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "**13.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "false"
+        },
+        {
+          "#": "3",
+          "Statement (abbreviated)": "Full operating range 0.5–50 L/min",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "**9.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "true"
+        },
+        {
+          "#": "4",
+          "Statement (abbreviated)": "Air bubble false readings",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "**11.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "true"
+        },
+        {
+          "#": "5",
+          "Statement (abbreviated)": "Jacket blockage detection <0.5°C",
+          "Imp": "9",
+          "Sat": "2",
+          "Opp": "**16.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "false"
+        },
+        {
+          "#": "6",
+          "Statement (abbreviated)": "Pump degradation detection >15%",
+          "Imp": "8",
+          "Sat": "2",
+          "Opp": "**14.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "false"
+        },
+        {
+          "#": "7",
+          "Statement (abbreviated)": "Process vs noise >95% classification",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "**13.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "false"
+        },
+        {
+          "#": "8",
+          "Statement (abbreviated)": "Glycol leak <5% reservoir",
+          "Imp": "8",
+          "Sat": "2",
+          "Opp": "**14.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "safety",
+          "prod_rel": "false"
+        },
+        {
+          "#": "9",
+          "Statement (abbreviated)": "Correct flow rate setpoint ±10%",
+          "Imp": "7",
+          "Sat": "4",
+          "Opp": "**10.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "cost",
+          "prod_rel": "false"
+        },
+        {
+          "#": "10",
+          "Statement (abbreviated)": "Calculate flow from single config",
+          "Imp": "6",
+          "Sat": "5",
+          "Opp": "**7.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "skill",
+          "prod_rel": "false"
+        },
+        {
+          "#": "11",
+          "Statement (abbreviated)": "Install without drain",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "**11.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "time",
+          "prod_rel": "true"
+        },
+        {
+          "#": "12",
+          "Statement (abbreviated)": "Config error >1% from fluid-type",
+          "Imp": "8",
+          "Sat": "6",
+          "Opp": "**10.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "true"
+        },
+        {
+          "#": "13",
+          "Statement (abbreviated)": "Verify accuracy in 5 min pre-batch",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "**11.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "time",
+          "prod_rel": "false"
+        },
+        {
+          "#": "14",
+          "Statement (abbreviated)": "False-normal masking blocked jacket",
+          "Imp": "9",
+          "Sat": "2",
+          "Opp": "**16.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "false"
+        },
+        {
+          "#": "15",
+          "Statement (abbreviated)": "Isolate anomaly root cause in 5 min",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "**13.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "time",
+          "prod_rel": "false"
+        },
+        {
+          "#": "16",
+          "Statement (abbreviated)": "Operator expertise for anomaly data",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "**11.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "skill",
+          "prod_rel": "false"
+        },
+        {
+          "#": "17",
+          "Statement (abbreviated)": "Service life >3yr no maintenance",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "**11.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "cost",
+          "prod_rel": "true"
+        },
+        {
+          "#": "18",
+          "Statement (abbreviated)": "Installed cost <$500/point",
+          "Imp": "8",
+          "Sat": "5",
+          "Opp": "**11.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "cost",
+          "prod_rel": "true"
+        },
+        {
+          "#": "19",
+          "Statement (abbreviated)": "No flow path contamination",
+          "Imp": "6",
+          "Sat": "5",
+          "Opp": "**7.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "safety",
+          "prod_rel": "true"
+        },
+        {
+          "#": "20",
+          "Statement (abbreviated)": "Pressure drop minimization",
+          "Imp": "6",
+          "Sat": "5",
+          "Opp": "**7.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "cost",
+          "prod_rel": "true"
+        },
+        {
+          "#": "21",
+          "Statement (abbreviated)": "Batch-to-batch temp <±0.5°C",
+          "Imp": "9",
+          "Sat": "3",
+          "Opp": "**15.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "cost",
+          "prod_rel": "false"
+        },
+        {
+          "#": "22",
+          "Statement (abbreviated)": "Multi-fermenter without starvation",
+          "Imp": "8",
+          "Sat": "4",
+          "Opp": "**12.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "false"
+        },
+        {
+          "#": "23",
+          "Statement (abbreviated)": "Quantitative performance data",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "**11.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "skill",
+          "prod_rel": "false"
+        },
+        {
+          "#": "24",
+          "Statement (abbreviated)": "Discover excursion before completion",
+          "Imp": "9",
+          "Sat": "2",
+          "Opp": "**16.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "cost",
+          "prod_rel": "false"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement (abbreviated)",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Under?",
+        "Over?",
+        "Impact",
+        "prod_rel"
+      ],
+      "rows": [
+        {
+          "#": "PR-1",
+          "Statement (abbreviated)": "Air >2% false readings (ultrasonic)",
+          "Imp": "7",
+          "Sat": "4",
+          "Opp": "**10.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "true"
+        },
+        {
+          "#": "PR-2",
+          "Statement (abbreviated)": "Recovery after air entrainment",
+          "Imp": "6",
+          "Sat": "3",
+          "Opp": "**9.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "true"
+        },
+        {
+          "#": "PR-3",
+          "Statement (abbreviated)": "Short straight pipe accuracy",
+          "Imp": "6",
+          "Sat": "5",
+          "Opp": "**7.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "true"
+        },
+        {
+          "#": "PR-4",
+          "Statement (abbreviated)": "Measurement blackout partial drain",
+          "Imp": "5",
+          "Sat": "3",
+          "Opp": "**7.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "true"
+        },
+        {
+          "#": "PR-5",
+          "Statement (abbreviated)": "Crash-cooling transient error",
+          "Imp": "6",
+          "Sat": "6",
+          "Opp": "**6.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "true"
+        },
+        {
+          "#": "PR-6",
+          "Statement (abbreviated)": "Low-flow S/N degradation",
+          "Imp": "5",
+          "Sat": "5",
+          "Opp": "**5.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "true"
+        },
+        {
+          "#": "PR-7",
+          "Statement (abbreviated)": "Acoustic coupling failure (glycol ratio)",
+          "Imp": "5",
+          "Sat": "6",
+          "Opp": "**5.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "true"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Metric",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Metric": "**Market**",
+          "Value": "Breweries (NAICS 312120)"
+        },
+        {
+          "Metric": "**Total Needs**",
+          "Value": "31"
+        },
+        {
+          "Metric": "**Underserved Count**",
+          "Value": "11"
+        },
+        {
+          "Metric": "**Overserved Count**",
+          "Value": "0"
+        },
+        {
+          "Metric": "**Avg Opportunity Score**",
+          "Value": "10.68"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Rank",
+        "#",
+        "Error Statement",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Zone"
+      ],
+      "rows": [
+        {
+          "Rank": "1",
+          "#": "5",
+          "Error Statement": "Minimize the time to detect a glycol jacket blockage or partial restriction before fermenter temperature deviates >0.5°C from setpoint",
+          "Imp": "9",
+          "Sat": "2",
+          "Opp": "**16.00**",
+          "Zone": "Highly Underserved"
+        },
+        {
+          "Rank": "2",
+          "#": "14",
+          "Error Statement": "Minimize the likelihood of accepting a false-normal flow reading that masks a partially blocked glycol jacket",
+          "Imp": "9",
+          "Sat": "2",
+          "Opp": "**16.00**",
+          "Zone": "Highly Underserved"
+        },
+        {
+          "Rank": "3",
+          "#": "24",
+          "Error Statement": "Minimize the likelihood of discovering a fermentation temperature excursion only after the 2–4 week fermentation cycle has completed, when correction is no longer possible",
+          "Imp": "9",
+          "Sat": "2",
+          "Opp": "**16.00**",
+          "Zone": "Highly Underserved"
+        },
+        {
+          "Rank": "4",
+          "#": "21",
+          "Error Statement": "Minimize batch-to-batch variation in fermentation temperature profile caused by uneven glycol distribution across cooling zones (target: <±0.5°C)",
+          "Imp": "9",
+          "Sat": "3",
+          "Opp": "**15.00**",
+          "Zone": "Underserved"
+        },
+        {
+          "Rank": "5",
+          "#": "6",
+          "Error Statement": "Minimize the number of undetected glycol pump degradation events that reduce per-zone cooling capacity by >15%",
+          "Imp": "8",
+          "Sat": "2",
+          "Opp": "**14.00**",
+          "Zone": "Underserved"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Zone",
+        "Score Range",
+        "Count",
+        "% of Total"
+      ],
+      "rows": [
+        {
+          "Zone": "Highly Underserved",
+          "Score Range": "> 15",
+          "Count": "3",
+          "% of Total": "9.7%"
+        },
+        {
+          "Zone": "Underserved",
+          "Score Range": "12–15",
+          "Count": "8",
+          "% of Total": "25.8%"
+        },
+        {
+          "Zone": "Appropriately Served",
+          "Score Range": "10–12",
+          "Count": "11",
+          "% of Total": "35.5%"
+        },
+        {
+          "Zone": "Overserved",
+          "Score Range": "< 10",
+          "Count": "9",
+          "% of Total": "29.0%"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Metric",
+        "Value",
+        "Source"
+      ],
+      "rows": [
+        {
+          "Metric": "ODI avg_opportunity_score",
+          "Value": "10.68",
+          "Source": "This analysis"
+        },
+        {
+          "Metric": "Feature-Fit avg (tech features)",
+          "Value": "5.02",
+          "Source": "FIT_breweries §09a (mean of 7 features)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Condition",
+        "Triggered?",
+        "Note"
+      ],
+      "rows": [
+        {
+          "Condition": "ODI avg > 12 AND Feature-Fit avg < 4",
+          "Triggered?": "**NO**",
+          "Note": "Feature-Fit avg = 5.02 (above 4)"
+        },
+        {
+          "Condition": "ODI avg < 8 AND Feature-Fit avg > 7",
+          "Triggered?": "**NO**",
+          "Note": "ODI avg = 10.68 (above 8)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result",
+        "Note"
+      ],
+      "rows": [
+        {
+          "#": "Q1",
+          "Check": "Formula correct",
+          "Result": "**PASS**",
+          "Note": "Spot-checked 5 entries: #5 (9+max(9-2,0)=16), #12 (8+max(8-6,0)=10), #21 (9+max(9-3,0)=15), PR-5 (6+max(6-6,0)=6), PR-7 (5+max(5-6,0)=5). All match."
+        },
+        {
+          "#": "Q2",
+          "Check": "Underserved flags correct",
+          "Result": "**PASS**",
+          "Note": "11 entries with imp>7 AND sat<5; verified #1(8,3)=YES, #3(7,5)=NO (7 not >7), #5(9,2)=YES, #12(8,6)=NO (6 not <5), #22(8,4)=YES"
+        },
+        {
+          "#": "Q3",
+          "Check": "Overserved flags correct",
+          "Result": "**PASS**",
+          "Note": "0 entries with imp<3 AND sat>7; no need has importance <3"
+        },
+        {
+          "#": "Q4",
+          "Check": "Need count preserved",
+          "Result": "**PASS**",
+          "Note": "24 (Step 06) + 7 (Step 10) = 31 ≥ 24 (Step 06 count)"
+        },
+        {
+          "#": "Q5",
+          "Check": "Top-5 ordering correct",
+          "Result": "**PASS**",
+          "Note": "16 > 16 > 16 > 15 > 14 — descending by opp score; ties broken by need number"
+        },
+        {
+          "#": "Q6",
+          "Check": "Cross-check ran",
+          "Result": "**PASS**",
+          "Note": "ODI vs Feature-Fit comparison completed; no inconsistencies"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "odi_matrix",
+      "naics_code": "312120",
+      "naics_title": "Breweries",
+      "market_name": "Breweries",
+      "product_name": "Ultrasonic Flow Sensor",
+      "vendor_name": "Marquardt",
+      "entries": [
+        {
+          "error_statement": "Minimize the likelihood of undetected calibration drift exceeding ±0.5% of reading over a 12-month service period",
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize variation in flow measurement accuracy caused by glycol concentration fluctuations between 25% and 40% propylene glycol",
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Increase the ability to measure flow rate across the full operating range (0.5–50 L/min) without sensor reconfiguration",
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the likelihood of false flow readings caused by air bubble entrainment during glycol system refill or maintenance events",
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the time to detect a glycol jacket blockage or partial restriction before fermenter temperature deviates >0.5°C from setpoint",
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "importance": 9,
+          "satisfaction_current": 2,
+          "opportunity_score": 16.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the number of undetected glycol pump degradation events that reduce per-zone cooling capacity by >15%",
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "importance": 8,
+          "satisfaction_current": 2,
+          "opportunity_score": 14.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Increase the ability to distinguish genuine process flow deviations from sensor measurement noise with >95% classification accuracy",
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the time to detect a glycol leak in the distribution system before coolant volume loss exceeds 5% of reservoir capacity",
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "importance": 8,
+          "satisfaction_current": 2,
+          "opportunity_score": 14.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Increase the ability to determine the correct glycol flow rate setpoint within ±10% of actual cooling load for each fermenter size and beer style",
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Increase the ability to calculate required glycol flow rates for different beer styles and fermenter sizes from a single sensor configuration",
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "importance": 6,
+          "satisfaction_current": 5,
+          "opportunity_score": 7.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the time required to install and commission a flow sensor on an existing glycol line without draining the system",
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the likelihood of systematic measurement error >1% caused by incorrect fluid-type configuration at commissioning",
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "importance": 8,
+          "satisfaction_current": 6,
+          "opportunity_score": 10.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Increase the ability to verify sensor accuracy within 5 minutes before starting a fermentation batch",
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the likelihood of accepting a false-normal flow reading that masks a partially blocked glycol jacket",
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "importance": 9,
+          "satisfaction_current": 2,
+          "opportunity_score": 16.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Increase the ability to isolate flow anomaly root cause (sensor vs glycol pump vs zone valve) within 5 minutes",
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the operator expertise required to interpret flow anomaly data and determine the correct corrective action",
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Increase the sensor service life achievable without scheduled maintenance interventions affecting measurement accuracy (target: >3 years)",
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the total installed cost per glycol flow measurement point including sensor, wiring, and power supply (target: <$500)",
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "importance": 8,
+          "satisfaction_current": 5,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the likelihood of sensor-induced flow path contamination requiring line flushing after sensor installation or replacement",
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "importance": 6,
+          "satisfaction_current": 5,
+          "opportunity_score": 7.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the permanent pressure drop across the measurement point that increases glycol pump energy consumption",
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "importance": 6,
+          "satisfaction_current": 5,
+          "opportunity_score": 7.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize batch-to-batch variation in fermentation temperature profile caused by uneven glycol distribution across cooling zones (target: <±0.5°C)",
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "importance": 9,
+          "satisfaction_current": 3,
+          "opportunity_score": 15.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Increase the ability to cool multiple fermenters simultaneously without flow starvation to any individual cooling zone",
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "importance": 8,
+          "satisfaction_current": 4,
+          "opportunity_score": 12.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Increase the ability to present quantitative cooling system performance data to brewery ownership and quality assurance teams",
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the likelihood of discovering a fermentation temperature excursion only after the 2–4 week fermentation cycle has completed, when correction is no longer possible",
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "importance": 9,
+          "satisfaction_current": 2,
+          "opportunity_score": 16.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the likelihood of false flow readings when air entrainment exceeds 2% volume during glycol system refill or valve-switching events",
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the time to recover valid flow measurement after transient air entrainment events dissipate from the glycol circuit",
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "importance": 6,
+          "satisfaction_current": 3,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the measurement accuracy degradation from insufficient straight pipe run in space-constrained brewery glycol manifolds with elbows and T-junctions within 5–10 DN upstream",
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "importance": 6,
+          "satisfaction_current": 5,
+          "opportunity_score": 7.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the duration of measurement blackout caused by partial pipe drainage during glycol circuit maintenance",
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "importance": 5,
+          "satisfaction_current": 3,
+          "opportunity_score": 7.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the transient measurement error during crash-cooling sequences where glycol temperature changes exceed the compensation algorithm response rate at >2°C/min",
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "importance": 6,
+          "satisfaction_current": 6,
+          "opportunity_score": 6.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the likelihood of signal-to-noise degradation below the transit-time detection threshold during low-demand glycol flow in small cooling zones",
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "importance": 5,
+          "satisfaction_current": 5,
+          "opportunity_score": 5.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the risk of acoustic coupling failure when glycol-to-water ratio shifts outside the validated acoustic impedance range due to uncontrolled top-up or evaporation",
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "importance": 5,
+          "satisfaction_current": 6,
+          "opportunity_score": 5.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        }
+      ],
+      "market_summaries": [
+        {
+          "market_name": "Breweries",
+          "naics_code": "312120",
+          "total_needs": 31,
+          "underserved_count": 11,
+          "overserved_count": 0,
+          "avg_opportunity_score": 10.68,
+          "top_opportunities": [
+            "Minimize the time to detect a glycol jacket blockage or partial restriction before fermenter temperature deviates >0.5°C from setpoint",
+            "Minimize the likelihood of accepting a false-normal flow reading that masks a partially blocked glycol jacket",
+            "Minimize the likelihood of discovering a fermentation temperature excursion only after the 2–4 week fermentation cycle has completed, when correction is no longer possible",
+            "Minimize batch-to-batch variation in fermentation temperature profile caused by uneven glycol distribution across cooling zones (target: <±0.5°C)",
+            "Minimize the number of undetected glycol pump degradation events that reduce per-zone cooling capacity by >15%"
+          ]
+        }
+      ],
+      "cross_check": {
+        "odi_avg": 10.68,
+        "feature_fit_avg": 5.02,
+        "inconsistencies": [],
+        "status": "no_inconsistencies"
+      },
+      "entities_produced": {
+        "nodes": [
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the likelihood of undetected calibration drift exceeding ±0.5% of readi",
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the likelihood of undetected calibration drift exceeding ±0.5% of reading over a 12-month service period",
+              "market_name": "Breweries",
+              "importance": 8,
+              "satisfaction_current": 3,
+              "opportunity_score": 13.0,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize variation in flow measurement accuracy caused by glycol concentration flu",
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize variation in flow measurement accuracy caused by glycol concentration fluctuations between 25% and 40% propylene glycol",
+              "market_name": "Breweries",
+              "importance": 8,
+              "satisfaction_current": 3,
+              "opportunity_score": 13.0,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Increase the ability to measure flow rate across the full operating range (0.5–50",
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Increase the ability to measure flow rate across the full operating range (0.5–50 L/min) without sensor reconfiguration",
+              "market_name": "Breweries",
+              "importance": 7,
+              "satisfaction_current": 5,
+              "opportunity_score": 9.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the likelihood of false flow readings caused by air bubble entrainment d",
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the likelihood of false flow readings caused by air bubble entrainment during glycol system refill or maintenance events",
+              "market_name": "Breweries",
+              "importance": 7,
+              "satisfaction_current": 3,
+              "opportunity_score": 11.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the time to detect a glycol jacket blockage or partial restriction befor",
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the time to detect a glycol jacket blockage or partial restriction before fermenter temperature deviates >0.5°C from setpoint",
+              "market_name": "Breweries",
+              "importance": 9,
+              "satisfaction_current": 2,
+              "opportunity_score": 16.0,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the number of undetected glycol pump degradation events that reduce per-",
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the number of undetected glycol pump degradation events that reduce per-zone cooling capacity by >15%",
+              "market_name": "Breweries",
+              "importance": 8,
+              "satisfaction_current": 2,
+              "opportunity_score": 14.0,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Increase the ability to distinguish genuine process flow deviations from sensor m",
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Increase the ability to distinguish genuine process flow deviations from sensor measurement noise with >95% classification accuracy",
+              "market_name": "Breweries",
+              "importance": 8,
+              "satisfaction_current": 3,
+              "opportunity_score": 13.0,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the time to detect a glycol leak in the distribution system before coola",
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the time to detect a glycol leak in the distribution system before coolant volume loss exceeds 5% of reservoir capacity",
+              "market_name": "Breweries",
+              "importance": 8,
+              "satisfaction_current": 2,
+              "opportunity_score": 14.0,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Increase the ability to determine the correct glycol flow rate setpoint within ±1",
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Increase the ability to determine the correct glycol flow rate setpoint within ±10% of actual cooling load for each fermenter size and beer style",
+              "market_name": "Breweries",
+              "importance": 7,
+              "satisfaction_current": 4,
+              "opportunity_score": 10.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Increase the ability to calculate required glycol flow rates for different beer st",
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Increase the ability to calculate required glycol flow rates for different beer styles and fermenter sizes from a single sensor configuration",
+              "market_name": "Breweries",
+              "importance": 6,
+              "satisfaction_current": 5,
+              "opportunity_score": 7.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the time required to install and commission a flow sensor on an existing",
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the time required to install and commission a flow sensor on an existing glycol line without draining the system",
+              "market_name": "Breweries",
+              "importance": 7,
+              "satisfaction_current": 3,
+              "opportunity_score": 11.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the likelihood of systematic measurement error >1% caused by incorrect f",
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the likelihood of systematic measurement error >1% caused by incorrect fluid-type configuration at commissioning",
+              "market_name": "Breweries",
+              "importance": 8,
+              "satisfaction_current": 6,
+              "opportunity_score": 10.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Increase the ability to verify sensor accuracy within 5 minutes before starting a",
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Increase the ability to verify sensor accuracy within 5 minutes before starting a fermentation batch",
+              "market_name": "Breweries",
+              "importance": 7,
+              "satisfaction_current": 3,
+              "opportunity_score": 11.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the likelihood of accepting a false-normal flow reading that masks a par",
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the likelihood of accepting a false-normal flow reading that masks a partially blocked glycol jacket",
+              "market_name": "Breweries",
+              "importance": 9,
+              "satisfaction_current": 2,
+              "opportunity_score": 16.0,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Increase the ability to isolate flow anomaly root cause (sensor vs glycol pump vs",
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Increase the ability to isolate flow anomaly root cause (sensor vs glycol pump vs zone valve) within 5 minutes",
+              "market_name": "Breweries",
+              "importance": 8,
+              "satisfaction_current": 3,
+              "opportunity_score": 13.0,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the operator expertise required to interpret flow anomaly data and determ",
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the operator expertise required to interpret flow anomaly data and determine the correct corrective action",
+              "market_name": "Breweries",
+              "importance": 7,
+              "satisfaction_current": 3,
+              "opportunity_score": 11.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Increase the sensor service life achievable without scheduled maintenance interve",
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Increase the sensor service life achievable without scheduled maintenance interventions affecting measurement accuracy (target: >3 years)",
+              "market_name": "Breweries",
+              "importance": 7,
+              "satisfaction_current": 3,
+              "opportunity_score": 11.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the total installed cost per glycol flow measurement point including sens",
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the total installed cost per glycol flow measurement point including sensor, wiring, and power supply (target: <$500)",
+              "market_name": "Breweries",
+              "importance": 8,
+              "satisfaction_current": 5,
+              "opportunity_score": 11.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the likelihood of sensor-induced flow path contamination requiring line f",
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the likelihood of sensor-induced flow path contamination requiring line flushing after sensor installation or replacement",
+              "market_name": "Breweries",
+              "importance": 6,
+              "satisfaction_current": 5,
+              "opportunity_score": 7.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the permanent pressure drop across the measurement point that increases ",
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the permanent pressure drop across the measurement point that increases glycol pump energy consumption",
+              "market_name": "Breweries",
+              "importance": 6,
+              "satisfaction_current": 5,
+              "opportunity_score": 7.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize batch-to-batch variation in fermentation temperature profile caused by u",
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize batch-to-batch variation in fermentation temperature profile caused by uneven glycol distribution across cooling zones (target: <±0.5°C)",
+              "market_name": "Breweries",
+              "importance": 9,
+              "satisfaction_current": 3,
+              "opportunity_score": 15.0,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Increase the ability to cool multiple fermenters simultaneously without flow star",
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Increase the ability to cool multiple fermenters simultaneously without flow starvation to any individual cooling zone",
+              "market_name": "Breweries",
+              "importance": 8,
+              "satisfaction_current": 4,
+              "opportunity_score": 12.0,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Increase the ability to present quantitative cooling system performance data to b",
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Increase the ability to present quantitative cooling system performance data to brewery ownership and quality assurance teams",
+              "market_name": "Breweries",
+              "importance": 7,
+              "satisfaction_current": 3,
+              "opportunity_score": 11.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the likelihood of discovering a fermentation temperature excursion only ",
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the likelihood of discovering a fermentation temperature excursion only after the 2–4 week fermentation cycle has completed, when correction is no longer possible",
+              "market_name": "Breweries",
+              "importance": 9,
+              "satisfaction_current": 2,
+              "opportunity_score": 16.0,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the likelihood of false flow readings when air entrainment exceeds 2% vo",
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the likelihood of false flow readings when air entrainment exceeds 2% volume during glycol system refill or valve-switching events",
+              "market_name": "Breweries",
+              "importance": 7,
+              "satisfaction_current": 4,
+              "opportunity_score": 10.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the time to recover valid flow measurement after transient air entrainme",
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the time to recover valid flow measurement after transient air entrainment events dissipate from the glycol circuit",
+              "market_name": "Breweries",
+              "importance": 6,
+              "satisfaction_current": 3,
+              "opportunity_score": 9.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the measurement accuracy degradation from insufficient straight pipe run",
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the measurement accuracy degradation from insufficient straight pipe run in space-constrained brewery glycol manifolds with elbows and T-junctions within 5–10 DN upstream",
+              "market_name": "Breweries",
+              "importance": 6,
+              "satisfaction_current": 5,
+              "opportunity_score": 7.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the duration of measurement blackout caused by partial pipe drainage dur",
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the duration of measurement blackout caused by partial pipe drainage during glycol circuit maintenance",
+              "market_name": "Breweries",
+              "importance": 5,
+              "satisfaction_current": 3,
+              "opportunity_score": 7.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the transient measurement error during crash-cooling sequences where gly",
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the transient measurement error during crash-cooling sequences where glycol temperature changes exceed the compensation algorithm response rate at >2°C/min",
+              "market_name": "Breweries",
+              "importance": 6,
+              "satisfaction_current": 6,
+              "opportunity_score": 6.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the likelihood of signal-to-noise degradation below the transit-time det",
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the likelihood of signal-to-noise degradation below the transit-time detection threshold during low-demand glycol flow in small cooling zones",
+              "market_name": "Breweries",
+              "importance": 5,
+              "satisfaction_current": 5,
+              "opportunity_score": 5.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the risk of acoustic coupling failure when glycol-to-water ratio shifts ",
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the risk of acoustic coupling failure when glycol-to-water ratio shifts outside the validated acoustic impedance range due to uncontrolled top-up or evaporation",
+              "market_name": "Breweries",
+              "importance": 5,
+              "satisfaction_current": 6,
+              "opportunity_score": 5.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": true
+            }
+          }
+        ],
+        "relationships": [
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:312120",
+            "target": "OpportunityScore:<each>",
+            "count": 31
+          }
+        ],
+        "market_odi_props": {
+          "naics_code": "312120",
+          "odi_total_needs": 31,
+          "odi_underserved_count": 11,
+          "odi_overserved_count": 0,
+          "odi_avg_opportunity_score": 10.68,
+          "odi_top_opportunities": "[\"Minimize the time to detect a glycol jacket blockage or partial restriction before fermenter temperature deviates >0.5°C from setpoint\",\"Minimize the likelihood of accepting a false-normal flow reading that masks a partially blocked glycol jacket\",\"Minimize the likelihood of discovering a fermentation temperature excursion only after the 2–4 week fermentation cycle has completed, when correction is no longer possible\",\"Minimize batch-to-batch variation in fermentation temperature profile caused by uneven glycol distribution across cooling zones (target: <±0.5°C)\",\"Minimize the number of undetected glycol pump degradation events that reduce per-zone cooling capacity by >15%\"]"
+        }
+      }
+    }
+  ],
+  "has_bom": true,
+  "naics_sector_type": "manufacturing"
+}

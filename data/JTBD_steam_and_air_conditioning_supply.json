@@ -1,0 +1,2231 @@
+{
+  "id": "JTBD_steam_and_air_conditioning_supply",
+  "title": "JTBD Analysis — Steam and Air-Conditioning Supply (NAICS 221330)",
+  "type": "jtbd_analysis",
+  "market_slug": "steam_and_air_conditioning_supply",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Phase 1 — Industry Landscape",
+      "content": "### 1.1 CFJ, Output Types, Offering Level\n\n| Field | Value |\n|---|---|\n| **NAICS** | 221330 |\n| **CFJ** | Generate, distribute, and meter thermal energy (heating and cooling) from centralised plants to multiple buildings via closed-pipe networks [SRC: VN_steam_and_air_conditioning_supply] |\n| **Offering Level** | L7 (Ecosystem) — entity IS the ecosystem; district energy is an integrated utility service |\n\n| Output Type | VN Level |\n|---|---|\n| District hot-water heating | L5 (service pathway) |\n| District steam heating | L5 (service pathway) |\n| District chilled-water cooling | L5 (service pathway) |\n| Combined heating & cooling (4-pipe) | L5 (service pathway) |\n| Campus/industrial thermal utility | L5 (service pathway) |\n\n### 1.2 Segments (by circumstance)\n\n| # | Segment | Circumstance | Alternatives Differ? |\n|---|---|---|---|\n| 1 | **Residential building connection** | Individual apartment building on district network; low-load, highly variable demand profile; EU EED mandates individual metering for billing | Yes — billing-grade accuracy required, cost sensitivity high |\n| 2 | **Commercial / institutional building** | Office, hospital, university on district network; higher loads, multi-zone, BMS integration; energy reporting mandated | Yes — larger pipe sizes, SCADA integration, higher accuracy expectation |\n| 3 | **Industrial thermal offtake** | Factory or process facility drawing process heat from district network; continuous high-load, tighter temperature control | Yes — higher temperatures/pressures, flow rates may exceed sensor range |\n| 4 | **District cooling consumer** | Data centre, shopping mall, or office in warm climate; chilled water at 5–7 °C; narrow delta-T (3–8 K) challenges meter accuracy | Yes — low delta-T amplifies flow measurement error in energy calculation |\n| 5 | **Legacy steam-to-hot-water conversion** | Building previously served by steam, now converting to hot-water district network; retrofit constraints, existing pipe routing | Yes — retrofit installation space constraints, mixed-age infrastructure |\n| 6 | **4th/5th generation low-temperature network** | New low-temperature network (50–70 °C supply); prosumer buildings injecting excess heat back; bidirectional flow | Yes — bidirectional flow detection essential; lower delta-T |\n\n### 1.3 Process Value Network\n\nSix L6 domains (from VN file):\n\n| L6 | Domain | Type | Marquardt Relevance |\n|---|---|---|---|\n| L6.1 | Thermal Energy Generation | Core | Indirect — flow data from substations feeds plant-level dispatch |\n| L6.2 | Distribution Network | Core | Indirect — network balancing depends on substation flow data |\n| **L6.3** | **Building Substation & Energy Transfer** | **Core** | **Direct — sensor sits here at L4.3.3.1** |\n| L6.4 | Metering & Billing | Core | Direct — flow sensor is the primary measurement element in heat meters |\n| L6.5 | Network Control & Optimisation | Horizontal | Direct — substation flow data feeds SCADA and hydraulic balancing |\n| L6.6 | Maintenance, Safety & Compliance | Horizontal | Direct — meter verification and re-calibration per EN 1434 |\n\n### 1.4–1.5 Product BOM and Edges\n\nService industry (NAICS sector 22) — no physical product BOM. Service composition: each output type pathway consumes L6.1→L6.2→L6.3→L6.4 core domains. Key edges relevant to flow sensing:\n\n| Service Element | Process Step | Edge Type | Rationale |\n|---|---|---|---|\n| Heat Exchanger plate geometry (L4.3.1.1) | L6.3 Substation | **HARD** | HX geometry determines flow resistance; sensor flow range must match |\n| Network supply temperature (L6.1 output) | L6.3 Substation | **SOFT** | Temperature affects speed of sound → measurement accuracy; does not change sensor category |\n| Control valve sizing (L4.3.2.1) | L6.3 Substation | **SOFT** | Valve authority affects flow variability but not sensor type selection |\n| Pipe diameter (DN) at substation | L6.3 Substation | **HARD** | DN determines sensor variant; DN20/DN25 typical residential, DN50+ commercial |\n| Energy calculator protocol (L4.4.1.3) | L6.4 Metering | **HARD** | Calculator interface (M-Bus, pulse, UART) determines sensor communication requirement |\n\n---"
+    },
+    {
+      "title": "Phase 2 — Company Enters",
+      "content": "### 2.1 VN Anchor\n\n| Field | Value |\n|---|---|\n| **Route** | PROCESS_VN — sensor is equipment used in delivering the thermal energy service; does not end up in a product sold to the end consumer |\n| **Anchor Unit** | Ultrasonic Flow Sensor (L4.3.3.1) |\n| **Anchor Level** | L4 (component/subsystem) |\n| **Parent VN Unit** | Substation Flow & Temperature Measurement (L5.3.3) |\n| **Parent Level** | L5 |\n| **Grandparent** | Building Substation & Energy Transfer (L6.3) |\n| **L-Path** | L7 District Energy Ecosystem > L6.3 Building Substation & Energy Transfer > L5.3.3 Substation Flow & Temperature Measurement > L4.3.3.1 Ultrasonic Flow Sensor |\n| **Secondary Position** | L6.4 Metering & Billing > L5.4.1 Heat Meter > L4.4.1.1 Flow Sensor (Metering-Grade) — requires EN 1434 / MID MI-004 certification [SRC: VN_steam_and_air_conditioning_supply] |\n\n### 2.2 Lens Formation\n\n| Field | Value |\n|---|---|\n| **Route** | Maker — PROCESS_VN |\n| **Function Verb** | Measure (from process VN node job_family: the portion of substation function this component owns) |\n| **Lens** | \"What [measurement] does this [building substation] need to calculate thermal energy delivery for billing and control?\" |\n\n**Segment filtering:**\n\n| Segment | Level A (VN serves?) | Level B (Product modality?) | Result |\n|---|---|---|---|\n| Residential building connection | Yes | Yes — DN20/DN25, water/glycol, 2–90 °C | **Active** |\n| Commercial / institutional | Yes | Partial — DN20/DN25 covers small-medium; large buildings need DN50+ | **Active (with caveat)** |\n| Industrial thermal offtake | Yes | Partial — may exceed 90 °C or 10 bar | **Filtered** |\n| District cooling consumer | Yes | Yes — chilled water 4–15 °C within range; glycol-tolerant | **Active** |\n| Legacy steam-to-hot-water | Yes | Yes — retrofit installation, same media range | **Active** |\n| 4th/5th gen low-temperature | Yes | Yes — bidirectional flow detection inherent to transit-time | **Active** |\n\n### 2.3 Product Job Statement\n\n> **\"Help Substation Flow & Temperature Measurement to measure volumetric flow rate and medium temperature in district energy building substations for thermal energy calculation and consumption-based billing without obstructing flow or introducing mechanical wear\"**\n\nTest: 3+ alternatives from different categories? Ultrasonic (acoustic), Mechanical impeller (rotational), Electromagnetic (Faraday induction), Coriolis (inertial) — **PASS**.\n\n### 2.4 Alternatives (5)\n\n| # | Alternative | UNSPSC | Inherent Trade-Offs |\n|---|---|---|---|\n| 1 | **Mechanical Impeller / Turbine Meter** (incumbent) | 41112501 | Moving parts subject to magnetite fouling and bearing wear; accuracy degrades from Class 2 to Class 3 within 3–5 years in hard-water networks; mandatory 5–6 year metrological re-verification cycle; pressure drop across impeller; low-flow dead band where rotor stalls [SRC: web_search — Kamstrup, KROHNE] |\n| 2 | **Ultrasonic Transit-Time Flow Sensor** (growing) | 41112501 | Accuracy degrades with >2% air entrainment; requires pipe-full condition; higher unit cost vs mechanical (1.5–2.5x); signal loss during transient air pockets; requires acoustic coupling verification at commissioning [SRC: 01_product_decomposition] |\n| 3 | **Electromagnetic Flow Meter** (premium) | 41112501 | 3–5x cost of ultrasonic; requires minimum electrical conductivity (~5 μS/cm); heavier and larger footprint; higher power consumption; typically reserved for large commercial/industrial substations (DN50+) [SRC: VN_steam_and_air_conditioning_supply] |\n| 4 | **Coriolis Flow Meter** (custody transfer) | 41112501 | 10–20x cost of ultrasonic; heavy (vibrating tubes); large footprint; overkill accuracy for building-level billing; used only in high-value custody transfer points at plant level [SRC: web_search] |\n| 5 | **Do nothing / estimated allocation** [Status Quo] | — | Zero cost, zero lifecycle burden; thermal energy allocated by heated floor area or fixed percentage; cross-subsidisation between buildings; non-compliant with EU EED individual metering mandate; no fault detection; no incentive for energy saving |\n\n**Merge test:** Each alternative creates distinct P1 lifecycle burdens and distinct accuracy/maintenance/cost profiles. No merge needed.\n\n### 2.5 Scenarios and Output Type Activation\n\n| Scenario | Activated Output Types | Key Equipment in Play |\n|---|---|---|\n| **S1: Hot-water substation billing** | District hot-water heating | HX, Control Valve, Flow Sensor, Temp Pair, Energy Calculator |\n| **S2: Chilled-water substation billing** | District chilled-water cooling | HX, Control Valve, Flow Sensor (cooling-grade), Cooling Calculator |\n| **S3: Combined heating & cooling** | Combined H&C (4-pipe) | Dual HX, Dual Flow Sensor, Dual Calculator, BMS integration |\n| **S4: 4th-gen prosumer bidirectional** | District hot-water + Combined H&C | Bidirectional Flow Sensor, Reversing Control Valve, Net Energy Calculator |\n| **S5: Legacy steam conversion** | District steam → hot-water | New substation retrofit, Flow Sensor replacing condensate meter |\n| **S6: Campus/industrial thermal utility** | Campus thermal utility | Multiple substations, central SCADA, DN20–DN100 range |\n\nSparsity check: S2 and S4 activate different output types; S5 is segment-specific (legacy). **PASS** — not every scenario activates every type.\n\n---"
+    },
+    {
+      "title": "Phase 3 — Needs Derivation",
+      "content": "### 3.0 Stakeholder Roles for This Market\n\n| Role | Who (in NAICS 221330 context) |\n|---|---|\n| **Job Executor** | District energy field service technician — installs, commissions, and maintains substation metering equipment |\n| **Job Overseer** | Network operations manager — accountable for billing accuracy, EU EED compliance, and network efficiency across hundreds/thousands of substations |\n| **Job Beneficiary** | Building occupant / facility manager — receives thermal comfort and pays consumption-based energy bill |\n| **Product Lifecycle Support** | Meter specifier (district energy design engineer), installer, commissioning tech, calibration/verification service, disposer |\n| **Purchase Executor** | Utility metering procurement manager — responsible for fleet-wide meter purchasing decisions |\n| **Purchase Influencer** | National metrology authority (PTB, LNMC), energy regulator, building code inspector, energy auditor |\n\n### 3.1 Job Map (8 Universal Steps — Ulwick 2005)\n\n| # | Step | Statement | Relevant? | Relevance Rationale |\n|---|---|---|---|---|\n| 1 | **DEFINE** | Define the required flow range, pipe diameter, medium type (hot/chilled water), temperature envelope, accuracy class (EN 1434), and communication protocol for the building substation | **Yes** | Sensor specifications must match substation design and regulatory requirements |\n| 2 | **LOCATE** | Locate the optimal measurement point in the substation piping where straight-run requirements are met and maintenance access is possible | **Yes** | Compact substation enclosures constrain installation; position affects accuracy |\n| 3 | **PREPARE** | Prepare piping section, electrical connections, and integration with energy calculator/integrator and BMS gateway | **Yes** | Mechanical and electrical integration across hundreds of substations |\n| 4 | **CONFIRM** | Confirm readiness: pipe-full condition, absence of air locks, correct orientation, communication handshake with energy calculator, MID seal integrity | **Yes** | Pre-operation verification critical for billing-grade measurement |\n| 5 | **EXECUTE** | Execute continuous flow measurement feeding real-time volumetric flow rate and temperature to the energy calculator for thermal energy integration (Q = flow × Cp × ΔT) | **Yes** | Core value-creating action; drives billing accuracy and network control |\n| 6 | **MONITOR** | Monitor measurement quality: signal strength, air bubble events, empty-pipe alarms, long-term calibration drift, battery status | **Yes** | Fleet-wide measurement integrity affects billing revenue and compliance |\n| 7 | **MODIFY** | Adjust calibration, replace battery, update firmware, or swap sensor if metrological verification fails | No | Periodic re-verification is standard; not a differentiating step between sensor types |\n| 8 | **CONCLUDE** | End of certification period: verify totalized energy, remove and replace meter per metrological regulations | No | Regulatory end-of-life procedure; identical for all meter types |\n\n**Relevant steps: 6 of 8** (Steps 1–6). Steps 7–8 are regulatory lifecycle — not product-differentiating.\n\n### 3.2 P1 + P2 Needs: Error Statements\n\n#### P2 — Core Job Needs (solution-independent)\n\n| ID | Job Step | Error Type | Statement | Imp. | Sat. | Opp. | Impact | Conf. | product_related |\n|---|---|---|---|---|---|---|---|---|---|\n| N01 | EXECUTE | ACCURACY | Minimize the likelihood of volumetric flow reading deviating more than ±2% from true value across the 0.5–60 l/min operating range per EN 1434 Class 2 requirements | 10 | 5 | 15 | reliability | 0.9 | false |\n| N02 | EXECUTE | CONSISTENCY | Minimize variability of flow readings between successive measurement cycles under pulsating network-pressure conditions (repeatability >±0.5%) [SRC: web_search — ScienceDirect] | 8 | 5 | 11 | reliability | 0.8 | false |\n| N03 | EXECUTE | ROBUSTNESS | Minimize measurement degradation when supply temperature shifts from 50 °C (summer DHW) to 120 °C (winter peak) across seasonal operating modes [SRC: web_search — KROHNE] | 9 | 4 | 14 | reliability | 0.8 | false |\n| N04 | MONITOR | DETECTION | Minimize time to detect a complete flow stoppage event (valve failure, pipe freeze, pump trip) to less than 5 seconds for safety interlock and billing integrity | 9 | 5 | 13 | safety | 0.8 | false |\n| N05 | EXECUTE | THROUGHPUT | Increase the turndown ratio (max/min measurable flow) to cover both winter peak-load and summer minimum-load operating points in a single meter without range switching | 8 | 4 | 12 | reliability | 0.7 | false |\n| N06 | DEFINE | ACCURACY | Minimize the likelihood of specifying a meter whose flow range does not cover the building's actual demand profile, causing unmeasured energy delivery during low-load hours | 8 | 4 | 12 | cost | 0.7 | false |\n| N07 | MONITOR | DETECTION | Minimize the number of undetected air entrainment events exceeding 2% volume that silently bias billing-grade energy calculations | 9 | 3 | 15 | cost | 0.8 | false |\n| N08 | EXECUTE | ACCURACY | Minimize systematic measurement error caused by non-ideal flow profiles from upstream elbows, valves, and tees in compact substation piping layouts [SRC: web_search — ScienceDirect installation effects] | 8 | 4 | 12 | reliability | 0.8 | false |\n| N09 | EXECUTE | ROBUSTNESS | Minimize measurement failure rate when medium contains glycol antifreeze (up to 40% concentration) in district cooling and frost-protected circuits | 7 | 4 | 10 | reliability | 0.7 | false |\n| N10 | EXECUTE | ACCURACY | Increase the ability to accurately calculate thermal energy (Q = V̇ × ρ × Cp × ΔT) in district cooling circuits where delta-T is only 3–8 K, amplifying flow measurement error by 2–3x vs heating circuits | 9 | 3 | 15 | cost | 0.8 | false |\n\n#### P1 — Product Jobs per Alternative (Lifecycle Stages)\n\n**Alternative 1: Mechanical Impeller / Turbine Meter (incumbent)**\n\n| ID | Lifecycle Stage | Error Type | Statement | Imp. | Sat. | Opp. | Impact | Conf. | product_related |\n|---|---|---|---|---|---|---|---|---|---|\n| N11 | Usage | ROBUSTNESS | Minimize the likelihood of impeller rotor seizure from magnetite and calcium scale accumulation in aging district heating networks requiring unplanned meter replacement [SRC: web_search — KROHNE: ultrasonic not susceptible to magnetite scaling] | 9 | 3 | 15 | reliability | 0.9 | true |\n| N12 | Maintenance | EFFORT | Minimize the fleet-wide maintenance cost of mandatory 5–6 year metrological re-verification and replacement cycles across hundreds of building substations [SRC: web_search — EN 1434 replacement cycle] | 8 | 3 | 13 | cost | 0.8 | true |\n| N13 | Usage | CONSISTENCY | Minimize calibration drift exceeding one EN 1434 accuracy class over the certification period caused by bearing wear and blade erosion in hard-water networks [SRC: web_search — Kamstrup] | 9 | 3 | 15 | reliability | 0.9 | true |\n| N14 | Usage | THROUGHPUT | Increase the ability to maintain accurate readings at low flow rates (<1 l/min) where mechanical impeller rotors stall due to friction, causing unmeasured energy leakage during summer low-load periods | 8 | 3 | 13 | cost | 0.7 | true |\n\n**Alternative 2: Ultrasonic Transit-Time Flow Sensor (growing)**\n\n| ID | Lifecycle Stage | Error Type | Statement | Imp. | Sat. | Opp. | Impact | Conf. | product_related |\n|---|---|---|---|---|---|---|---|---|---|\n| N15 | Usage | ROBUSTNESS | Minimize the likelihood of complete signal loss when transient air pockets pass through the sensor during network venting, seasonal shutdown, or pressure fluctuation events | 7 | 4 | 10 | reliability | 0.8 | true |\n| N16 | Preparation | EFFORT | Minimize the commissioning time required to verify acoustic coupling, configure fluid parameters, and validate communication with the energy calculator per substation | 6 | 5 | 7 | time | 0.7 | true |\n| N17 | Usage | DETECTION | Increase the ability to distinguish genuine zero-flow conditions from ultrasonic signal loss caused by transient medium anomalies (bubbles, empty pipe, acoustic decoupling) | 8 | 3 | 13 | safety | 0.7 | true |\n\n**Alternative 3: Electromagnetic Flow Meter (premium)**\n\n| ID | Lifecycle Stage | Error Type | Statement | Imp. | Sat. | Opp. | Impact | Conf. | product_related |\n|---|---|---|---|---|---|---|---|---|---|\n| N18 | Acquisition | EFFORT | Minimize the per-substation cost premium (3–5x vs ultrasonic) that limits electromagnetic meter deployment to only the largest commercial substations, leaving smaller connections underserved | 7 | 2 | 12 | cost | 0.7 | true |\n\n#### P2 — Additional Core Job Needs (Executor + Overseer)\n\n| ID | Job Step | Error Type | Statement | Imp. | Sat. | Opp. | Impact | Conf. | product_related |\n|---|---|---|---|---|---|---|---|---|---|\n| N19 | LOCATE | EFFORT | Minimize the installation footprint (physical length and required straight-pipe run) to enable placement in space-constrained building substations where piping is tightly packed [SRC: web_search — substation space constraints] | 7 | 5 | 9 | cost | 0.7 | false |\n| N20 | PREPARE | EFFORT | Minimize the total integration time from unpacking to first valid energy reading, including mechanical fitting, electrical connection, calculator handshake, and MID seal application | 7 | 5 | 9 | time | 0.7 | false |\n| N21 | CONFIRM | DETECTION | Minimize the likelihood of commissioning sign-off with incorrect sensor orientation (forward/reverse) that inverts flow direction in the energy calculation | 6 | 6 | 6 | skill | 0.6 | false |\n| N22 | EXECUTE | ACCURACY | Increase the ability to simultaneously provide flow rate AND medium temperature from a single measurement point, eliminating separate temperature probe installation and reducing substation complexity | 8 | 4 | 12 | cost | 0.7 | false |\n| N23 | MONITOR | DETECTION | Increase the ability to detect incipient heat exchanger fouling via gradual flow-rate reduction trend analysis before thermal performance degrades below billing-relevant thresholds | 7 | 3 | 11 | reliability | 0.6 | false |\n| N24 | DEFINE | EFFORT | Minimize the number of meter variants a district energy operator must qualify, stock, and manage to cover its building portfolio (DN15–DN50 range, heating + cooling) | 7 | 4 | 10 | cost | 0.6 | false |\n\n#### P2 — Overseer Needs (Network Operations Manager)\n\n| ID | Job Step | Error Type | Statement | Imp. | Sat. | Opp. | Impact | Conf. | product_related |\n|---|---|---|---|---|---|---|---|---|---|\n| N25 | EXECUTE | ROBUSTNESS | Minimize the field failure rate of the flow metering subsystem to below 0.1% annually across the fleet of building substations over a 15-year operating horizon | 9 | 5 | 13 | reliability | 0.8 | false |\n| N26 | DEFINE | ACCURACY | Increase the ability to deploy MID/EN 1434-certified billing-grade meters at every building connection to achieve full EU EED compliance across the entire district network [SRC: web_search — EU EED] | 10 | 5 | 15 | cost | 0.8 | false |\n\n### 3.3 P3–P5 Needs: Bridge Questions\n\n#### P3 — Role Identity\n\n| Role | Retrieval | Bridge | Need |\n|---|---|---|---|\n| **Network Ops Manager (Overseer)** | \"By getting thermal energy metering right across every building, this person becomes the operator who runs a transparent, regulation-compliant, optimised district network.\" | \"What must the product do so they CAN become that operator?\" | — |\n\n| ID | Statement | Imp. | Sat. | Opp. | Impact | Conf. | product_related |\n|---|---|---|---|---|---|---|---|\n| N27 | Increase the ability to demonstrate EU EED-compliant individual consumption metering across 100% of building connections during regulatory audit, with verifiable metrological traceability per EN 1434 [SRC: web_search — EU EED] | 9 | 4 | 14 | cost | 0.7 | false |\n\n#### P4 — Image Identity\n\n| Role | Retrieval | Bridge | Need |\n|---|---|---|---|\n| **District Energy Brand (via Overseer)** | \"Building owners and municipal regulators are watching. They must see a utility that bills fairly based on measured consumption — not one relying on area-based estimates.\" | \"What must the product do so regulators and building owners SEE that impression?\" | — |\n\n| ID | Statement | Imp. | Sat. | Opp. | Impact | Conf. | product_related |\n|---|---|---|---|---|---|---|---|\n| N28 | Increase the ability to provide building-owner-accessible consumption data (display, remote reading, or portal) that demonstrates measured — not estimated — thermal energy delivery for each billing period | 7 | 4 | 10 | skill | 0.5 | false |\n\n#### P5 — Emotional [hypothesis]\n\n| Role | Retrieval | Bridge | Need |\n|---|---|---|---|\n| **Building Occupant (Beneficiary)** | \"Wants to feel fairly billed for actual consumption; wants to avoid the frustration of cross-subsidising neighbours who waste heat.\" | \"What must the product do so occupants FEEL fairly treated?\" | — |\n\n| ID | Statement | Imp. | Sat. | Opp. | Impact | Conf. | product_related |\n|---|---|---|---|---|---|---|---|\n| N29 | Minimize the likelihood of billing disputes exceeding 5% of quarterly energy cost caused by meter inaccuracy or unmeasured consumption periods that erode tenant trust in the district energy provider [hypothesis] | 7 | 4 | 10 | cost | 0.5 | false |\n\n### 3.4 ODI Summary Table\n\n| ID | Statement (abbreviated) | Imp. | Sat. | Opp. | Impact | product_related | Pyramid |\n|---|---|---|---|---|---|---|---|\n| N01 | Flow reading deviation >±2% per EN 1434 Class 2 | 10 | 5 | 15 | reliability | false | P2 |\n| N07 | Undetected air entrainment >2% biasing billing | 9 | 3 | 15 | cost | false | P2 |\n| N10 | Low delta-T cooling circuits amplifying flow error | 9 | 3 | 15 | cost | false | P2 |\n| N11 | Impeller seizure from magnetite in aging networks | 9 | 3 | 15 | reliability | true | P1 |\n| N13 | Calibration drift exceeding accuracy class (mech.) | 9 | 3 | 15 | reliability | true | P1 |\n| N26 | MID/EN 1434 billing-grade at every connection | 10 | 5 | 15 | cost | false | P2 |\n| N03 | Measurement degradation at 50→120 °C seasonal swing | 9 | 4 | 14 | reliability | false | P2 |\n| N27 | EU EED compliance across 100% of connections | 9 | 4 | 14 | cost | false | P3 |\n| N04 | Flow stoppage detection >5 s | 9 | 5 | 13 | safety | false | P2 |\n| N12 | 5–6 yr fleet-wide replacement cost (mechanical) | 8 | 3 | 13 | cost | true | P1 |\n| N14 | Impeller stall at <1 l/min (summer leakage) | 8 | 3 | 13 | cost | true | P1 |\n| N17 | Distinguish zero-flow from ultrasonic signal loss | 8 | 3 | 13 | safety | true | P1 |\n| N25 | Field failure rate >0.1% across 15-yr fleet | 9 | 5 | 13 | reliability | false | P2 |\n| N05 | Turndown ratio for winter peak to summer min | 8 | 4 | 12 | reliability | false | P2 |\n| N06 | Sensor range misses building demand profile | 8 | 4 | 12 | cost | false | P2 |\n| N08 | Non-ideal flow profile error in compact substations | 8 | 4 | 12 | reliability | false | P2 |\n| N18 | Electromagnetic meter cost premium (3–5x) | 7 | 2 | 12 | cost | true | P1 |\n| N22 | Single-point flow + temperature | 8 | 4 | 12 | cost | false | P2 |\n| N02 | Repeatability under pulsating pressure | 8 | 5 | 11 | reliability | false | P2 |\n| N23 | Detect incipient HX fouling via flow trend | 7 | 3 | 11 | reliability | false | P2 |\n| N09 | Glycol compatibility in cooling circuits | 7 | 4 | 10 | reliability | false | P2 |\n| N15 | Signal loss from transient air pockets (US) | 7 | 4 | 10 | reliability | true | P1 |\n| N24 | Variant count to cover DN range + H&C | 7 | 4 | 10 | cost | false | P2 |\n| N28 | Occupant-accessible measured consumption data | 7 | 4 | 10 | skill | false | P4 |\n| N29 | Billing disputes >5% from meter inaccuracy | 7 | 4 | 10 | cost | false | P5 |\n| N19 | Installation footprint in compact substations | 7 | 5 | 9 | cost | false | P2 |\n| N20 | Integration time per substation | 7 | 5 | 9 | time | false | P2 |\n| N16 | Commissioning time (ultrasonic) | 6 | 5 | 7 | time | true | P1 |\n| N21 | Undetected incorrect orientation | 6 | 6 | 6 | skill | false | P2 |\n\n### 3.5 Underserved / Overserved Classification\n\n**Underserved (importance > 7 AND satisfaction < 5):**\n\n| ID | Statement (abbreviated) | Opp. |\n|---|---|---|\n| N07 | Undetected air entrainment >2% biasing billing | 15 |\n| N10 | Low delta-T cooling error amplification | 15 |\n| N11 | Impeller seizure from magnetite (mechanical) | 15 |\n| N13 | Calibration drift beyond accuracy class (mechanical) | 15 |\n| N03 | Seasonal temperature swing degradation | 14 |\n| N12 | Fleet-wide 5–6 yr replacement cost (mechanical) | 13 |\n| N14 | Impeller stall at low flow (mechanical) | 13 |\n| N17 | Distinguish zero-flow from signal loss (ultrasonic) | 13 |\n| N05 | Turndown ratio winter peak to summer min | 12 |\n| N06 | Sensor range mismatch with demand profile | 12 |\n| N08 | Non-ideal flow profile error | 12 |\n| N18 | Electromagnetic cost premium | 12 |\n| N22 | Single-point flow + temperature | 12 |\n\n**Overserved:** None identified. No need has importance < 3 AND satisfaction > 7.\n\n---"
+    },
+    {
+      "title": "Yield Validation",
+      "content": "| Metric | Target | Actual | Pass? |\n|---|---|---|---|\n| Error statements per market | 15–30 | **29** | PASS |\n| Needs per relevant job step (6 relevant) | ≥ 2 | DEFINE: 3, LOCATE: 1+, PREPARE: 2, CONFIRM: 2, EXECUTE: 14, MONITOR: 5 | PASS |\n| Market-inherent (product_related=false) | 60–70% | 20/29 = **69%** | PASS |\n| Technology-specific (product_related=true) | 30–40% | 9/29 = **31%** | PASS |\n| \"Minimize\" vs \"Increase\" mix | ~60/40 | 20/9 = **69/31** | PASS |\n| Job map steps | 8 exactly | **8** | PASS |\n| Relevant steps | 3–6 typical | **6** | PASS |\n\n---"
+    },
+    {
+      "title": "QA Validation",
+      "content": "| # | Check | Result |\n|---|---|---|\n| V1 | Format compliance — all statements start with \"Minimize…\" or \"Increase…\" with ONE KPI | PASS |\n| V2 | product_related=true ONLY for technology-caused needs | PASS — N11–N18 specific to mechanical/ultrasonic/electromagnetic technology; disappear with different tech |\n| V3 | Importance/satisfaction sanity — no unrealistic patterns | PASS — range: imp 6–10, sat 2–6; safety/regulatory at 9–10; billing-grade accuracy at 10 |\n| V4 | Impact category matches KPI | PASS — flow accuracy = reliability, billing error = cost, flow stoppage = safety |\n| V5 | Coverage — ≥2 per relevant step, no obvious duplicates | PASS |\n| V6 | Solution-agnostic — zero product/vendor/mechanism references in P2 needs | PASS — P1 needs name technology class as expected |\n| V7 | Anchor level matches product abstraction | PASS — component = L4 |\n| V8 | Product job references parent VN unit | PASS — \"Help Substation Flow & Temperature Measurement to…\" |\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"jtbd_analysis\",\n  \"naics_code\": \"221330\",\n  \"naics_title\": \"Steam and Air-Conditioning Supply\",\n  \"market_name\": \"Steam and Air-Conditioning Supply\",\n  \"product_name\": \"Ultrasonic Flow Sensor\",\n  \"vendor_name\": \"Marquardt\",\n  \"cfj_statement\": \"Generate, distribute, and meter thermal energy (heating and cooling) from centralised plants to multiple buildings via closed-pipe networks\",\n  \"job_map\": {\n    \"naics_code\": \"221330\",\n    \"market_name\": \"Steam and Air-Conditioning Supply\",\n    \"anchor_vn_unit\": \"Ultrasonic Flow Sensor\",\n    \"anchor_level\": \"L4\",\n    \"parent_vn_unit\": \"Substation Flow & Temperature Measurement\",\n    \"parent_level\": \"L5\",\n    \"product_job_statement\": \"Help Substation Flow & Temperature Measurement to measure volumetric flow rate and medium temperature in district energy building substations for thermal energy calculation and consumption-based billing without obstructing flow or introducing mechanical wear\",\n    \"steps\": [\n      {\"step_number\": 1, \"step_name\": \"DEFINE\", \"statement\": \"Define the required flow range, pipe diameter, medium type, temperature envelope, accuracy class (EN 1434), and communication protocol for the building substation\", \"relevant_to_product\": true, \"relevance_rationale\": \"Sensor specifications must match substation design and regulatory requirements\"},\n      {\"step_number\": 2, \"step_name\": \"LOCATE\", \"statement\": \"Locate the optimal measurement point in the substation piping where straight-run requirements are met and maintenance access is possible\", \"relevant_to_product\": true, \"relevance_rationale\": \"Compact substation enclosures constrain installation; position affects accuracy\"},\n      {\"step_number\": 3, \"step_name\": \"PREPARE\", \"statement\": \"Prepare piping section, electrical connections, and integration with energy calculator/integrator and BMS gateway\", \"relevant_to_product\": true, \"relevance_rationale\": \"Mechanical and electrical integration across hundreds of substations\"},\n      {\"step_number\": 4, \"step_name\": \"CONFIRM\", \"statement\": \"Confirm readiness: pipe-full condition, absence of air locks, correct orientation, communication handshake with energy calculator, MID seal integrity\", \"relevant_to_product\": true, \"relevance_rationale\": \"Pre-operation verification critical for billing-grade measurement\"},\n      {\"step_number\": 5, \"step_name\": \"EXECUTE\", \"statement\": \"Execute continuous flow measurement feeding real-time volumetric flow rate and temperature to the energy calculator for thermal energy integration (Q = flow x Cp x delta-T)\", \"relevant_to_product\": true, \"relevance_rationale\": \"Core value-creating action; drives billing accuracy and network control\"},\n      {\"step_number\": 6, \"step_name\": \"MONITOR\", \"statement\": \"Monitor measurement quality: signal strength, air bubble events, empty-pipe alarms, long-term calibration drift, battery status\", \"relevant_to_product\": true, \"relevance_rationale\": \"Fleet-wide measurement integrity affects billing revenue and compliance\"},\n      {\"step_number\": 7, \"step_name\": \"MODIFY\", \"statement\": \"Adjust calibration, replace battery, update firmware, or swap sensor if metrological verification fails\", \"relevant_to_product\": false, \"relevance_rationale\": \"Periodic re-verification is standard; not differentiating between sensor types\"},\n      {\"step_number\": 8, \"step_name\": \"CONCLUDE\", \"statement\": \"End of certification period: verify totalized energy, remove and replace meter per metrological regulations\", \"relevant_to_product\": false, \"relevance_rationale\": \"Regulatory end-of-life procedure; identical for all meter types\"}\n    ]\n  },\n  \"alternatives\": [\n    {\n      \"name\": \"Mechanical Impeller / Turbine Meter\",\n      \"unspsc_code\": \"41112501\",\n      \"status\": \"incumbent\",\n      \"market_share_estimate\": \"40-50%\",\n      \"trade_offs\": [\n        \"Moving parts subject to magnetite fouling and bearing wear\",\n        \"Accuracy degrades from Class 2 to Class 3 within 3-5 years in hard-water networks\",\n        \"Mandatory 5-6 year metrological re-verification cycle\",\n        \"Pressure drop across impeller\",\n        \"Low-flow dead band where rotor stalls (<1 l/min)\"\n      ]\n    },\n    {\n      \"name\": \"Ultrasonic Transit-Time Flow Sensor\",\n      \"unspsc_code\": \"41112501\",\n      \"status\": \"growing\",\n      \"market_share_estimate\": \"35-45%\",\n      \"trade_offs\": [\n        \"Accuracy degrades with >2% air entrainment by volume\",\n        \"Requires pipe-full condition for valid measurement\",\n        \"Higher unit cost vs mechanical (1.5-2.5x at volume)\",\n        \"Signal loss during transient air pockets\",\n        \"Requires acoustic coupling verification at commissioning\"\n      ]\n    },\n    {\n      \"name\": \"Electromagnetic Flow Meter\",\n      \"unspsc_code\": \"41112501\",\n      \"status\": \"premium_niche\",\n      \"market_share_estimate\": \"5-10%\",\n      \"trade_offs\": [\n        \"3-5x cost of ultrasonic\",\n        \"Requires minimum electrical conductivity (~5 uS/cm)\",\n        \"Heavier and larger footprint\",\n        \"Higher power consumption\",\n        \"Typically reserved for DN50+ substations\"\n      ]\n    },\n    {\n      \"name\": \"Coriolis Flow Meter\",\n      \"unspsc_code\": \"41112501\",\n      \"status\": \"custody_transfer_only\",\n      \"market_share_estimate\": \"<2%\",\n      \"trade_offs\": [\n        \"10-20x cost of ultrasonic\",\n        \"Heavy vibrating tubes; large footprint\",\n        \"Overkill accuracy for building-level billing\",\n        \"Used only at plant-level custody transfer points\"\n      ]\n    },\n    {\n      \"name\": \"Do nothing / estimated allocation\",\n      \"unspsc_code\": null,\n      \"status\": \"status_quo_declining\",\n      \"market_share_estimate\": \"5-15% (declining due to EU EED mandate)\",\n      \"trade_offs\": [\n        \"Zero cost, zero P1 lifecycle burden\",\n        \"Cross-subsidisation between buildings\",\n        \"Non-compliant with EU EED individual metering mandate\",\n        \"No fault detection; no incentive for energy saving\"\n      ]\n    }\n  ],\n  \"error_statements\": [\n    {\n      \"id\": \"N01\",\n      \"statement\": \"Minimize the likelihood of volumetric flow reading deviating more than ±2% from true value across the 0.5–60 l/min operating range per EN 1434 Class 2 requirements\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ACCURACY\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 10,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 15,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"EN 1434 Class 2 is the minimum regulatory standard for billing-grade heat meters. Flow measurement error propagates directly into energy billing error (Q = flow x Cp x delta-T). District networks bill millions of euros annually; even 1% systematic error accumulates to significant revenue/billing impact.\",\n      \"confidence\": 0.9,\n      \"product_related\": false,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N02\",\n      \"statement\": \"Minimize variability of flow readings between successive measurement cycles under pulsating network-pressure conditions (repeatability >±0.5%)\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"CONSISTENCY\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 8,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 11,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"District networks experience pressure pulsations from variable-speed pump stations and neighbour-building valve modulation. Pulsating flows generate measurement errors in flow meters. Energy calculator integration amplifies repeatability errors into billing noise.\",\n      \"confidence\": 0.8,\n      \"product_related\": false,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N03\",\n      \"statement\": \"Minimize measurement degradation when supply temperature shifts from 50 °C (summer DHW) to 120 °C (winter peak) across seasonal operating modes\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ROBUSTNESS\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 9,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 14,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"District heating networks vary supply temperature seasonally. Speed of sound in water changes ~2.4 m/s per °C. Without real-time compensation, temperature-induced error can reach 1.5%. Networks with high temperature swings (130 °C peak) challenge sensor materials and electronics.\",\n      \"confidence\": 0.8,\n      \"product_related\": false,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N04\",\n      \"statement\": \"Minimize time to detect a complete flow stoppage event (valve failure, pipe freeze, pump trip) to less than 5 seconds for safety interlock and billing integrity\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"error_type\": \"DETECTION\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 9,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 13,\n      \"impact_category\": \"safety\",\n      \"rationale\": \"Flow stoppage in a heating circuit during winter can lead to freezing, pipe burst, and building damage. Rapid detection enables safety interlock to close control valve and alert SCADA. Also prevents billing for zero-delivery periods.\",\n      \"confidence\": 0.8,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N05\",\n      \"statement\": \"Increase the turndown ratio (max/min measurable flow) to cover both winter peak-load and summer minimum-load operating points in a single meter without range switching\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"THROUGHPUT\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 8,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 12,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"District heating substations experience 10:1 to 50:1 flow variation between winter peak and summer DHW-only operation. Meters with insufficient turndown miss low-load energy delivery — a billing gap.\",\n      \"confidence\": 0.7,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N06\",\n      \"statement\": \"Minimize the likelihood of specifying a meter whose flow range does not cover the building's actual demand profile, causing unmeasured energy delivery during low-load hours\",\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"error_type\": \"ACCURACY\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 8,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 12,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"Over-sizing (common to ensure peak capacity) pushes normal operation into the meter's low-flow zone where accuracy degrades. Under-sizing causes overflow errors at peak. Getting the range right requires building-specific load analysis.\",\n      \"confidence\": 0.7,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N07\",\n      \"statement\": \"Minimize the number of undetected air entrainment events exceeding 2% volume that silently bias billing-grade energy calculations\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"error_type\": \"DETECTION\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 9,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 15,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"Air in district heating circuits is common after maintenance, network extensions, or pressure drops. Air entrainment degrades all meter types but is especially damaging to billing accuracy. Undetected air events cause silent billing errors that accumulate over months.\",\n      \"confidence\": 0.8,\n      \"product_related\": false,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N08\",\n      \"statement\": \"Minimize systematic measurement error caused by non-ideal flow profiles from upstream elbows, valves, and tees in compact substation piping layouts\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ACCURACY\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 8,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 12,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Building substations are compact; ideal straight-pipe runs (5-10x DN upstream) are rarely available. Installation effects cause systematic errors in all flow meter types. Multi-path designs reduce but do not eliminate this effect.\",\n      \"confidence\": 0.8,\n      \"product_related\": false,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N09\",\n      \"statement\": \"Minimize measurement failure rate when medium contains glycol antifreeze (up to 40% concentration) in district cooling and frost-protected circuits\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ROBUSTNESS\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 7,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 10,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"District cooling circuits and frost-protected heating networks use glycol mixtures. Glycol changes fluid viscosity, density, and acoustic properties. Meters must compensate or fail gracefully.\",\n      \"confidence\": 0.7,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N10\",\n      \"statement\": \"Increase the ability to accurately calculate thermal energy (Q = flow x density x Cp x delta-T) in district cooling circuits where delta-T is only 3–8 K, amplifying flow measurement error by 2–3x vs heating circuits\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ACCURACY\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 9,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 15,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"District cooling delta-T (3-8 K) is 3-10x smaller than district heating delta-T (20-60 K). Since energy = flow x delta-T, a given flow measurement error has 3-10x more impact on energy calculation accuracy in cooling. This makes flow sensor accuracy critical for fair cooling billing.\",\n      \"confidence\": 0.8,\n      \"product_related\": false,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N11\",\n      \"statement\": \"Minimize the likelihood of impeller rotor seizure from magnetite and calcium scale accumulation in aging district heating networks requiring unplanned meter replacement\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ROBUSTNESS\",\n      \"pyramid_level\": \"P1\",\n      \"importance\": 9,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 15,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Aging district networks accumulate magnetite (Fe3O4) from pipe corrosion. Magnetite is paramagnetic and attracted to the magnetized rotor in impeller meters, causing seizure. Ultrasonic meters have no moving parts and are not susceptible to this failure mode.\",\n      \"confidence\": 0.9,\n      \"product_related\": true,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N12\",\n      \"statement\": \"Minimize the fleet-wide maintenance cost of mandatory 5–6 year metrological re-verification and replacement cycles across hundreds of building substations\",\n      \"job_step_number\": 7,\n      \"job_step_name\": \"MODIFY\",\n      \"error_type\": \"EFFORT\",\n      \"pyramid_level\": \"P1\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"Mechanical heat meters in many EU jurisdictions must be re-verified or replaced every 5-6 years due to calibration drift from wear. For a network with 1,000 substations, this means replacing ~170-200 meters annually — a significant recurring cost. Ultrasonic meters maintain accuracy for 15+ years.\",\n      \"confidence\": 0.8,\n      \"product_related\": true,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N13\",\n      \"statement\": \"Minimize calibration drift exceeding one EN 1434 accuracy class over the certification period caused by bearing wear and blade erosion in hard-water networks\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"CONSISTENCY\",\n      \"pyramid_level\": \"P1\",\n      \"importance\": 9,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 15,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Mechanical meters drift from Class 2 to Class 3 or worse within 3-5 years in hard-water networks. This silent degradation means billing accuracy degrades progressively between verification cycles. Ultrasonic meters with no moving parts maintain stable calibration.\",\n      \"confidence\": 0.9,\n      \"product_related\": true,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N14\",\n      \"statement\": \"Increase the ability to maintain accurate readings at low flow rates (<1 l/min) where mechanical impeller rotors stall due to friction, causing unmeasured energy leakage during summer low-load periods\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"THROUGHPUT\",\n      \"pyramid_level\": \"P1\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"During summer, district heating substations may operate at very low flow rates for DHW pre-heating only. Mechanical impellers stall below their start-up threshold, creating an unmeasured 'drip' of thermal energy. Ultrasonic sensors measure virtually from zero flow.\",\n      \"confidence\": 0.7,\n      \"product_related\": true,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N15\",\n      \"statement\": \"Minimize the likelihood of complete signal loss when transient air pockets pass through the sensor during network venting, seasonal shutdown, or pressure fluctuation events\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ROBUSTNESS\",\n      \"pyramid_level\": \"P1\",\n      \"importance\": 7,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 10,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Ultrasonic sensors rely on acoustic coupling through the fluid. Transient air pockets cause complete signal loss. District networks experience air ingress during maintenance, extension works, and pressure drops. Sensor must detect and flag the event rather than output erroneous readings.\",\n      \"confidence\": 0.8,\n      \"product_related\": true,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N16\",\n      \"statement\": \"Minimize the commissioning time required to verify acoustic coupling, configure fluid parameters, and validate communication with the energy calculator per substation\",\n      \"job_step_number\": 3,\n      \"job_step_name\": \"PREPARE\",\n      \"error_type\": \"EFFORT\",\n      \"pyramid_level\": \"P1\",\n      \"importance\": 6,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 7,\n      \"impact_category\": \"time\",\n      \"rationale\": \"Ultrasonic meters require acoustic coupling verification and fluid parameter configuration at commissioning. Across hundreds of substations, commissioning time multiplies. Pre-calibrated delivery reduces this burden.\",\n      \"confidence\": 0.7,\n      \"product_related\": true,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N17\",\n      \"statement\": \"Increase the ability to distinguish genuine zero-flow conditions from ultrasonic signal loss caused by transient medium anomalies (bubbles, empty pipe, acoustic decoupling)\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"error_type\": \"DETECTION\",\n      \"pyramid_level\": \"P1\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13,\n      \"impact_category\": \"safety\",\n      \"rationale\": \"A genuine zero-flow condition (valve closed, pump failed) requires safety interlock. An ultrasonic signal loss from air is a transient event requiring different handling. Confusing the two causes either false alarms (nuisance) or missed real failures (safety risk).\",\n      \"confidence\": 0.7,\n      \"product_related\": true,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N18\",\n      \"statement\": \"Minimize the per-substation cost premium (3–5x vs ultrasonic) that limits electromagnetic meter deployment to only the largest commercial substations, leaving smaller connections underserved\",\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"error_type\": \"EFFORT\",\n      \"pyramid_level\": \"P1\",\n      \"importance\": 7,\n      \"satisfaction_current\": 2,\n      \"opportunity_score\": 12,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"Electromagnetic meters offer excellent accuracy and robustness but at 3-5x the cost of ultrasonic. This cost premium makes them economically viable only for large substations (DN50+), excluding the majority of residential building connections from their benefits.\",\n      \"confidence\": 0.7,\n      \"product_related\": true,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N19\",\n      \"statement\": \"Minimize the installation footprint (physical length and required straight-pipe run) to enable placement in space-constrained building substations where piping is tightly packed\",\n      \"job_step_number\": 2,\n      \"job_step_name\": \"LOCATE\",\n      \"error_type\": \"EFFORT\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"Building substations are typically housed in basement technical rooms with limited space. Compact sensor bodies with short upstream straight-run requirements enable installation in locations that would otherwise require costly piping modifications.\",\n      \"confidence\": 0.7,\n      \"product_related\": false,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N20\",\n      \"statement\": \"Minimize the total integration time from unpacking to first valid energy reading, including mechanical fitting, electrical connection, calculator handshake, and MID seal application\",\n      \"job_step_number\": 3,\n      \"job_step_name\": \"PREPARE\",\n      \"error_type\": \"EFFORT\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9,\n      \"impact_category\": \"time\",\n      \"rationale\": \"District energy operators deploy meters across hundreds of substations. Integration time multiplies at fleet scale. Reducing per-substation installation time from 2 hours to 1 hour saves hundreds of technician-hours per year.\",\n      \"confidence\": 0.7,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N21\",\n      \"statement\": \"Minimize the likelihood of commissioning sign-off with incorrect sensor orientation (forward/reverse) that inverts flow direction in the energy calculation\",\n      \"job_step_number\": 4,\n      \"job_step_name\": \"CONFIRM\",\n      \"error_type\": \"DETECTION\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 6,\n      \"satisfaction_current\": 6,\n      \"opportunity_score\": 6,\n      \"impact_category\": \"skill\",\n      \"rationale\": \"Reverse-installed sensors invert the flow sign, causing the energy calculator to subtract rather than add energy. In unidirectional networks this may be caught by negative readings; in bidirectional 4th-gen networks it may go undetected.\",\n      \"confidence\": 0.6,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N22\",\n      \"statement\": \"Increase the ability to simultaneously provide flow rate AND medium temperature from a single measurement point, eliminating separate temperature probe installation and reducing substation complexity\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ACCURACY\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 8,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 12,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"Thermal energy calculation requires both flow and temperature. A single sensor providing both eliminates a separate temperature probe, its wiring, and its failure mode. Reduces substation component count and installation time.\",\n      \"confidence\": 0.7,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N23\",\n      \"statement\": \"Increase the ability to detect incipient heat exchanger fouling via gradual flow-rate reduction trend analysis before thermal performance degrades below billing-relevant thresholds\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"error_type\": \"DETECTION\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Heat exchanger fouling progressively restricts flow. A stable flow sensor can detect this as a gradual downward trend, enabling predictive maintenance before the building loses thermal comfort or the operator loses revenue.\",\n      \"confidence\": 0.6,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N24\",\n      \"statement\": \"Minimize the number of meter variants a district energy operator must qualify, stock, and manage to cover its building portfolio (DN15–DN50 range, heating + cooling)\",\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"error_type\": \"EFFORT\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 7,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 10,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"District networks connect diverse buildings (small residential to medium commercial). Each pipe size requires a matched meter variant. Modular platforms that share electronics across DN variants reduce procurement complexity and spare-parts inventory.\",\n      \"confidence\": 0.6,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N25\",\n      \"statement\": \"Minimize the field failure rate of the flow metering subsystem to below 0.1% annually across the fleet of building substations over a 15-year operating horizon\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ROBUSTNESS\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 9,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 13,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"District networks operate thousands of substations. At 0.1% annual failure rate, a 1,000-substation network sees ~1 failure/year. At 1% annual rate, 10 failures/year — each requiring technician dispatch, building access coordination, and billing reconciliation.\",\n      \"confidence\": 0.8,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N26\",\n      \"statement\": \"Increase the ability to deploy MID/EN 1434-certified billing-grade meters at every building connection to achieve full EU EED compliance across the entire district network\",\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"error_type\": \"ACCURACY\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 10,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 15,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"EU EED 2023/1791 mandates individual consumption metering at every building connection in district heating/cooling. Non-compliance exposes the utility to regulatory penalties. Affordable, accurate, certified meters at scale are essential for compliance.\",\n      \"confidence\": 0.8,\n      \"product_related\": false,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N27\",\n      \"statement\": \"Increase the ability to demonstrate EU EED-compliant individual consumption metering across 100% of building connections during regulatory audit, with verifiable metrological traceability per EN 1434\",\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"error_type\": \"ACCURACY\",\n      \"pyramid_level\": \"P3\",\n      \"importance\": 9,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 14,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"The network operations manager's professional identity hinges on running a compliant, transparent network. Full metrological traceability (MID-certified, EN 1434-verified, tamper-sealed) at every point demonstrates regulatory excellence.\",\n      \"confidence\": 0.7,\n      \"product_related\": false,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N28\",\n      \"statement\": \"Increase the ability to provide building-owner-accessible consumption data (display, remote reading, or portal) that demonstrates measured — not estimated — thermal energy delivery for each billing period\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"error_type\": \"DETECTION\",\n      \"pyramid_level\": \"P4\",\n      \"importance\": 7,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 10,\n      \"impact_category\": \"skill\",\n      \"rationale\": \"Building owners and regulators must SEE that the utility bills based on measured consumption. Accessible, transparent data (via display, AMR, or web portal) demonstrates fairness and professionalism.\",\n      \"confidence\": 0.5,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N29\",\n      \"statement\": \"Minimize the likelihood of billing disputes exceeding 5% of quarterly energy cost caused by meter inaccuracy or unmeasured consumption periods that erode tenant trust in the district energy provider [hypothesis]\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ACCURACY\",\n      \"pyramid_level\": \"P5\",\n      \"importance\": 7,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 10,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"Building occupants want to feel fairly billed. Inaccurate or estimated billing creates frustration and disputes that damage the utility's relationship with consumers and increase administrative overhead.\",\n      \"confidence\": 0.5,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    }\n  ],\n  \"entities_produced\": {\n    \"nodes\": [\n      {\"label\": \"JobMap\", \"key\": {\"naics_code\": \"221330\", \"run_id\": \"TBD\"}, \"properties\": {\"market_name\": \"Steam and Air-Conditioning Supply\", \"anchor_vn_unit\": \"Ultrasonic Flow Sensor\", \"anchor_level\": \"L4\", \"parent_vn_unit\": \"Substation Flow & Temperature Measurement\", \"parent_level\": \"L5\", \"product_job_statement\": \"Help Substation Flow & Temperature Measurement to measure volumetric flow rate and medium temperature in district energy building substations for thermal energy calculation and consumption-based billing without obstructing flow or introducing mechanical wear\"}},\n      {\"label\": \"JobStep\", \"key\": {\"step_number\": \"1-8\", \"naics_code\": \"221330\", \"run_id\": \"TBD\"}, \"count\": 8},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"<first 120 chars>\", \"naics_code\": \"221330\", \"run_id\": \"TBD\"}, \"count\": 29},\n      {\"label\": \"IncumbentAnchor\", \"key\": {\"technology_name\": \"Mechanical Impeller / Turbine Meter\", \"naics_code\": \"221330\", \"run_id\": \"TBD\"}, \"properties\": {\"anchor_vn_unit\": \"Mechanical Impeller / Turbine Flow Meter\", \"anchor_level\": \"L4\", \"market_name\": \"Steam and Air-Conditioning Supply\"}},\n      {\"label\": \"IncumbentAnchor\", \"key\": {\"technology_name\": \"Electromagnetic Flow Meter\", \"naics_code\": \"221330\", \"run_id\": \"TBD\"}, \"properties\": {\"anchor_vn_unit\": \"Electromagnetic Flow Meter\", \"anchor_level\": \"L4\", \"market_name\": \"Steam and Air-Conditioning Supply\"}}\n    ],\n    \"relationships\": [\n      {\"type\": \"has_job_map\", \"source\": \"Market:Steam and Air-Conditioning Supply\", \"target\": \"JobMap:221330\"},\n      {\"type\": \"anchored_at\", \"source\": \"JobMap:221330\", \"target\": \"ValueNetworkUnit:Ultrasonic Flow Sensor\"},\n      {\"type\": \"has_job_step\", \"source\": \"JobMap:221330\", \"target\": \"JobStep:1-8\"},\n      {\"type\": \"has_error_statement\", \"source\": \"JobStep:<per step>\", \"target\": \"ErrorStatement:<per need>\"},\n      {\"type\": \"has_need\", \"source\": \"Market:Steam and Air-Conditioning Supply\", \"target\": \"ErrorStatement:<all 29>\"},\n      {\"type\": \"has_incumbent_anchor\", \"source\": \"Market:Steam and Air-Conditioning Supply\", \"target\": \"IncumbentAnchor:Mechanical Impeller / Turbine Meter\"},\n      {\"type\": \"has_incumbent_anchor\", \"source\": \"Market:Steam and Air-Conditioning Supply\", \"target\": \"IncumbentAnchor:Electromagnetic Flow Meter\"},\n      {\"type\": \"anchored_at\", \"source\": \"IncumbentAnchor:Mechanical Impeller / Turbine Meter\", \"target\": \"ValueNetworkUnit:Mechanical Impeller / Turbine Flow Meter\"},\n      {\"type\": \"anchored_at\", \"source\": \"IncumbentAnchor:Electromagnetic Flow Meter\", \"target\": \"ValueNetworkUnit:Electromagnetic Flow Meter\"}\n    ]\n  }\n}\n```\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [EU Energy Efficiency Directive (EED 2023/1791)](https://energy.ec.europa.eu/topics/energy-efficiency/energy-efficiency-targets-directive-and-rules/energy-efficiency-directive_en)\n- [EN 1434 Heat Meter Accuracy — Kamstrup](https://www.kamstrup.com/en-en/insights/blog-series-part-2-a-thermal-energy-meter-you-can-trust)\n- [Ultrasonic Flow Measurement in District Heating — KROHNE](https://www.krohne.com/en-us/applications/ultrasonic-flow-measurement-district-heating-network)\n- [Installation Effects on Ultrasonic Flow Meters — ScienceDirect](https://www.sciencedirect.com/science/article/abs/pii/S0955598600000054)\n- [Ultrasonic Flow Metering Errors Due to Pulsating Flow — ScienceDirect](https://www.sciencedirect.com/science/article/abs/pii/S0955598603000852)\n- [District Energy Efficiency Through Flow Metering — Baker Hughes](https://dam.bakerhughes.com/m/110b7c0f5c53abf5/original/District-Energy-Efficiency-through-Flow-Metering-Whitepaper.pdf)\n- [Improving Heat Energy Measurement in District Heating Substations — Linköping University](https://www.diva-portal.org/smash/get/diva2:1003877/FULLTEXT01.pdf)\n- [Heat Meter Market to $3.24B by 2035 — SNS Insider](https://www.globenewswire.com/news-release/2026/03/27/3263591/0/en/Heat-Meter-Market-Size-to-Surpass-USD-3-24-Billion-by-2035-Research-by-SNS-Insider.html)\n- [MID Class 2 & EN 1434 Heat Meters — ZPMeter](https://www.zpmeter.com/blog/which-heat-meters-meet-centralized-heating-acceptance-standards)\n- Marquardt Customer Presentation: \"US Flow Sensor\" (03.12.2025, CONFIDENTIAL)\n- Marquardt/HS Albstadt-Sigmaringen Project Briefing (19.02.2026)"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**NAICS**",
+          "Value": "221330"
+        },
+        {
+          "Field": "**CFJ**",
+          "Value": "Generate, distribute, and meter thermal energy (heating and cooling) from centralised plants to multiple buildings via closed-pipe networks [SRC: VN_steam_and_air_conditioning_supply]"
+        },
+        {
+          "Field": "**Offering Level**",
+          "Value": "L7 (Ecosystem) — entity IS the ecosystem; district energy is an integrated utility service"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Output Type",
+        "VN Level"
+      ],
+      "rows": [
+        {
+          "Output Type": "District hot-water heating",
+          "VN Level": "L5 (service pathway)"
+        },
+        {
+          "Output Type": "District steam heating",
+          "VN Level": "L5 (service pathway)"
+        },
+        {
+          "Output Type": "District chilled-water cooling",
+          "VN Level": "L5 (service pathway)"
+        },
+        {
+          "Output Type": "Combined heating & cooling (4-pipe)",
+          "VN Level": "L5 (service pathway)"
+        },
+        {
+          "Output Type": "Campus/industrial thermal utility",
+          "VN Level": "L5 (service pathway)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Segment",
+        "Circumstance",
+        "Alternatives Differ?"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Segment": "**Residential building connection**",
+          "Circumstance": "Individual apartment building on district network; low-load, highly variable demand profile; EU EED mandates individual metering for billing",
+          "Alternatives Differ?": "Yes — billing-grade accuracy required, cost sensitivity high"
+        },
+        {
+          "#": "2",
+          "Segment": "**Commercial / institutional building**",
+          "Circumstance": "Office, hospital, university on district network; higher loads, multi-zone, BMS integration; energy reporting mandated",
+          "Alternatives Differ?": "Yes — larger pipe sizes, SCADA integration, higher accuracy expectation"
+        },
+        {
+          "#": "3",
+          "Segment": "**Industrial thermal offtake**",
+          "Circumstance": "Factory or process facility drawing process heat from district network; continuous high-load, tighter temperature control",
+          "Alternatives Differ?": "Yes — higher temperatures/pressures, flow rates may exceed sensor range"
+        },
+        {
+          "#": "4",
+          "Segment": "**District cooling consumer**",
+          "Circumstance": "Data centre, shopping mall, or office in warm climate; chilled water at 5–7 °C; narrow delta-T (3–8 K) challenges meter accuracy",
+          "Alternatives Differ?": "Yes — low delta-T amplifies flow measurement error in energy calculation"
+        },
+        {
+          "#": "5",
+          "Segment": "**Legacy steam-to-hot-water conversion**",
+          "Circumstance": "Building previously served by steam, now converting to hot-water district network; retrofit constraints, existing pipe routing",
+          "Alternatives Differ?": "Yes — retrofit installation space constraints, mixed-age infrastructure"
+        },
+        {
+          "#": "6",
+          "Segment": "**4th/5th generation low-temperature network**",
+          "Circumstance": "New low-temperature network (50–70 °C supply); prosumer buildings injecting excess heat back; bidirectional flow",
+          "Alternatives Differ?": "Yes — bidirectional flow detection essential; lower delta-T"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L6",
+        "Domain",
+        "Type",
+        "Marquardt Relevance"
+      ],
+      "rows": [
+        {
+          "L6": "L6.1",
+          "Domain": "Thermal Energy Generation",
+          "Type": "Core",
+          "Marquardt Relevance": "Indirect — flow data from substations feeds plant-level dispatch"
+        },
+        {
+          "L6": "L6.2",
+          "Domain": "Distribution Network",
+          "Type": "Core",
+          "Marquardt Relevance": "Indirect — network balancing depends on substation flow data"
+        },
+        {
+          "L6": "**L6.3**",
+          "Domain": "**Building Substation & Energy Transfer**",
+          "Type": "**Core**",
+          "Marquardt Relevance": "**Direct — sensor sits here at L4.3.3.1**"
+        },
+        {
+          "L6": "L6.4",
+          "Domain": "Metering & Billing",
+          "Type": "Core",
+          "Marquardt Relevance": "Direct — flow sensor is the primary measurement element in heat meters"
+        },
+        {
+          "L6": "L6.5",
+          "Domain": "Network Control & Optimisation",
+          "Type": "Horizontal",
+          "Marquardt Relevance": "Direct — substation flow data feeds SCADA and hydraulic balancing"
+        },
+        {
+          "L6": "L6.6",
+          "Domain": "Maintenance, Safety & Compliance",
+          "Type": "Horizontal",
+          "Marquardt Relevance": "Direct — meter verification and re-calibration per EN 1434"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Service Element",
+        "Process Step",
+        "Edge Type",
+        "Rationale"
+      ],
+      "rows": [
+        {
+          "Service Element": "Heat Exchanger plate geometry (L4.3.1.1)",
+          "Process Step": "L6.3 Substation",
+          "Edge Type": "**HARD**",
+          "Rationale": "HX geometry determines flow resistance; sensor flow range must match"
+        },
+        {
+          "Service Element": "Network supply temperature (L6.1 output)",
+          "Process Step": "L6.3 Substation",
+          "Edge Type": "**SOFT**",
+          "Rationale": "Temperature affects speed of sound → measurement accuracy; does not change sensor category"
+        },
+        {
+          "Service Element": "Control valve sizing (L4.3.2.1)",
+          "Process Step": "L6.3 Substation",
+          "Edge Type": "**SOFT**",
+          "Rationale": "Valve authority affects flow variability but not sensor type selection"
+        },
+        {
+          "Service Element": "Pipe diameter (DN) at substation",
+          "Process Step": "L6.3 Substation",
+          "Edge Type": "**HARD**",
+          "Rationale": "DN determines sensor variant; DN20/DN25 typical residential, DN50+ commercial"
+        },
+        {
+          "Service Element": "Energy calculator protocol (L4.4.1.3)",
+          "Process Step": "L6.4 Metering",
+          "Edge Type": "**HARD**",
+          "Rationale": "Calculator interface (M-Bus, pulse, UART) determines sensor communication requirement"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**Route**",
+          "Value": "PROCESS_VN — sensor is equipment used in delivering the thermal energy service; does not end up in a product sold to the end consumer"
+        },
+        {
+          "Field": "**Anchor Unit**",
+          "Value": "Ultrasonic Flow Sensor (L4.3.3.1)"
+        },
+        {
+          "Field": "**Anchor Level**",
+          "Value": "L4 (component/subsystem)"
+        },
+        {
+          "Field": "**Parent VN Unit**",
+          "Value": "Substation Flow & Temperature Measurement (L5.3.3)"
+        },
+        {
+          "Field": "**Parent Level**",
+          "Value": "L5"
+        },
+        {
+          "Field": "**Grandparent**",
+          "Value": "Building Substation & Energy Transfer (L6.3)"
+        },
+        {
+          "Field": "**L-Path**",
+          "Value": "L7 District Energy Ecosystem > L6.3 Building Substation & Energy Transfer > L5.3.3 Substation Flow & Temperature Measurement > L4.3.3.1 Ultrasonic Flow Sensor"
+        },
+        {
+          "Field": "**Secondary Position**",
+          "Value": "L6.4 Metering & Billing > L5.4.1 Heat Meter > L4.4.1.1 Flow Sensor (Metering-Grade) — requires EN 1434 / MID MI-004 certification [SRC: VN_steam_and_air_conditioning_supply]"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**Route**",
+          "Value": "Maker — PROCESS_VN"
+        },
+        {
+          "Field": "**Function Verb**",
+          "Value": "Measure (from process VN node job_family: the portion of substation function this component owns)"
+        },
+        {
+          "Field": "**Lens**",
+          "Value": "\"What [measurement] does this [building substation] need to calculate thermal energy delivery for billing and control?\""
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Segment",
+        "Level A (VN serves?)",
+        "Level B (Product modality?)",
+        "Result"
+      ],
+      "rows": [
+        {
+          "Segment": "Residential building connection",
+          "Level A (VN serves?)": "Yes",
+          "Level B (Product modality?)": "Yes — DN20/DN25, water/glycol, 2–90 °C",
+          "Result": "**Active**"
+        },
+        {
+          "Segment": "Commercial / institutional",
+          "Level A (VN serves?)": "Yes",
+          "Level B (Product modality?)": "Partial — DN20/DN25 covers small-medium; large buildings need DN50+",
+          "Result": "**Active (with caveat)**"
+        },
+        {
+          "Segment": "Industrial thermal offtake",
+          "Level A (VN serves?)": "Yes",
+          "Level B (Product modality?)": "Partial — may exceed 90 °C or 10 bar",
+          "Result": "**Filtered**"
+        },
+        {
+          "Segment": "District cooling consumer",
+          "Level A (VN serves?)": "Yes",
+          "Level B (Product modality?)": "Yes — chilled water 4–15 °C within range; glycol-tolerant",
+          "Result": "**Active**"
+        },
+        {
+          "Segment": "Legacy steam-to-hot-water",
+          "Level A (VN serves?)": "Yes",
+          "Level B (Product modality?)": "Yes — retrofit installation, same media range",
+          "Result": "**Active**"
+        },
+        {
+          "Segment": "4th/5th gen low-temperature",
+          "Level A (VN serves?)": "Yes",
+          "Level B (Product modality?)": "Yes — bidirectional flow detection inherent to transit-time",
+          "Result": "**Active**"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Alternative",
+        "UNSPSC",
+        "Inherent Trade-Offs"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Alternative": "**Mechanical Impeller / Turbine Meter** (incumbent)",
+          "UNSPSC": "41112501",
+          "Inherent Trade-Offs": "Moving parts subject to magnetite fouling and bearing wear; accuracy degrades from Class 2 to Class 3 within 3–5 years in hard-water networks; mandatory 5–6 year metrological re-verification cycle; pressure drop across impeller; low-flow dead band where rotor stalls [SRC: web_search — Kamstrup, KROHNE]"
+        },
+        {
+          "#": "2",
+          "Alternative": "**Ultrasonic Transit-Time Flow Sensor** (growing)",
+          "UNSPSC": "41112501",
+          "Inherent Trade-Offs": "Accuracy degrades with >2% air entrainment; requires pipe-full condition; higher unit cost vs mechanical (1.5–2.5x); signal loss during transient air pockets; requires acoustic coupling verification at commissioning [SRC: 01_product_decomposition]"
+        },
+        {
+          "#": "3",
+          "Alternative": "**Electromagnetic Flow Meter** (premium)",
+          "UNSPSC": "41112501",
+          "Inherent Trade-Offs": "3–5x cost of ultrasonic; requires minimum electrical conductivity (~5 μS/cm); heavier and larger footprint; higher power consumption; typically reserved for large commercial/industrial substations (DN50+) [SRC: VN_steam_and_air_conditioning_supply]"
+        },
+        {
+          "#": "4",
+          "Alternative": "**Coriolis Flow Meter** (custody transfer)",
+          "UNSPSC": "41112501",
+          "Inherent Trade-Offs": "10–20x cost of ultrasonic; heavy (vibrating tubes); large footprint; overkill accuracy for building-level billing; used only in high-value custody transfer points at plant level [SRC: web_search]"
+        },
+        {
+          "#": "5",
+          "Alternative": "**Do nothing / estimated allocation** [Status Quo]",
+          "UNSPSC": "—",
+          "Inherent Trade-Offs": "Zero cost, zero lifecycle burden; thermal energy allocated by heated floor area or fixed percentage; cross-subsidisation between buildings; non-compliant with EU EED individual metering mandate; no fault detection; no incentive for energy saving"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Scenario",
+        "Activated Output Types",
+        "Key Equipment in Play"
+      ],
+      "rows": [
+        {
+          "Scenario": "**S1: Hot-water substation billing**",
+          "Activated Output Types": "District hot-water heating",
+          "Key Equipment in Play": "HX, Control Valve, Flow Sensor, Temp Pair, Energy Calculator"
+        },
+        {
+          "Scenario": "**S2: Chilled-water substation billing**",
+          "Activated Output Types": "District chilled-water cooling",
+          "Key Equipment in Play": "HX, Control Valve, Flow Sensor (cooling-grade), Cooling Calculator"
+        },
+        {
+          "Scenario": "**S3: Combined heating & cooling**",
+          "Activated Output Types": "Combined H&C (4-pipe)",
+          "Key Equipment in Play": "Dual HX, Dual Flow Sensor, Dual Calculator, BMS integration"
+        },
+        {
+          "Scenario": "**S4: 4th-gen prosumer bidirectional**",
+          "Activated Output Types": "District hot-water + Combined H&C",
+          "Key Equipment in Play": "Bidirectional Flow Sensor, Reversing Control Valve, Net Energy Calculator"
+        },
+        {
+          "Scenario": "**S5: Legacy steam conversion**",
+          "Activated Output Types": "District steam → hot-water",
+          "Key Equipment in Play": "New substation retrofit, Flow Sensor replacing condensate meter"
+        },
+        {
+          "Scenario": "**S6: Campus/industrial thermal utility**",
+          "Activated Output Types": "Campus thermal utility",
+          "Key Equipment in Play": "Multiple substations, central SCADA, DN20–DN100 range"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Role",
+        "Who (in NAICS 221330 context)"
+      ],
+      "rows": [
+        {
+          "Role": "**Job Executor**",
+          "Who (in NAICS 221330 context)": "District energy field service technician — installs, commissions, and maintains substation metering equipment"
+        },
+        {
+          "Role": "**Job Overseer**",
+          "Who (in NAICS 221330 context)": "Network operations manager — accountable for billing accuracy, EU EED compliance, and network efficiency across hundreds/thousands of substations"
+        },
+        {
+          "Role": "**Job Beneficiary**",
+          "Who (in NAICS 221330 context)": "Building occupant / facility manager — receives thermal comfort and pays consumption-based energy bill"
+        },
+        {
+          "Role": "**Product Lifecycle Support**",
+          "Who (in NAICS 221330 context)": "Meter specifier (district energy design engineer), installer, commissioning tech, calibration/verification service, disposer"
+        },
+        {
+          "Role": "**Purchase Executor**",
+          "Who (in NAICS 221330 context)": "Utility metering procurement manager — responsible for fleet-wide meter purchasing decisions"
+        },
+        {
+          "Role": "**Purchase Influencer**",
+          "Who (in NAICS 221330 context)": "National metrology authority (PTB, LNMC), energy regulator, building code inspector, energy auditor"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Step",
+        "Statement",
+        "Relevant?",
+        "Relevance Rationale"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Step": "**DEFINE**",
+          "Statement": "Define the required flow range, pipe diameter, medium type (hot/chilled water), temperature envelope, accuracy class (EN 1434), and communication protocol for the building substation",
+          "Relevant?": "**Yes**",
+          "Relevance Rationale": "Sensor specifications must match substation design and regulatory requirements"
+        },
+        {
+          "#": "2",
+          "Step": "**LOCATE**",
+          "Statement": "Locate the optimal measurement point in the substation piping where straight-run requirements are met and maintenance access is possible",
+          "Relevant?": "**Yes**",
+          "Relevance Rationale": "Compact substation enclosures constrain installation; position affects accuracy"
+        },
+        {
+          "#": "3",
+          "Step": "**PREPARE**",
+          "Statement": "Prepare piping section, electrical connections, and integration with energy calculator/integrator and BMS gateway",
+          "Relevant?": "**Yes**",
+          "Relevance Rationale": "Mechanical and electrical integration across hundreds of substations"
+        },
+        {
+          "#": "4",
+          "Step": "**CONFIRM**",
+          "Statement": "Confirm readiness: pipe-full condition, absence of air locks, correct orientation, communication handshake with energy calculator, MID seal integrity",
+          "Relevant?": "**Yes**",
+          "Relevance Rationale": "Pre-operation verification critical for billing-grade measurement"
+        },
+        {
+          "#": "5",
+          "Step": "**EXECUTE**",
+          "Statement": "Execute continuous flow measurement feeding real-time volumetric flow rate and temperature to the energy calculator for thermal energy integration (Q = flow × Cp × ΔT)",
+          "Relevant?": "**Yes**",
+          "Relevance Rationale": "Core value-creating action; drives billing accuracy and network control"
+        },
+        {
+          "#": "6",
+          "Step": "**MONITOR**",
+          "Statement": "Monitor measurement quality: signal strength, air bubble events, empty-pipe alarms, long-term calibration drift, battery status",
+          "Relevant?": "**Yes**",
+          "Relevance Rationale": "Fleet-wide measurement integrity affects billing revenue and compliance"
+        },
+        {
+          "#": "7",
+          "Step": "**MODIFY**",
+          "Statement": "Adjust calibration, replace battery, update firmware, or swap sensor if metrological verification fails",
+          "Relevant?": "No",
+          "Relevance Rationale": "Periodic re-verification is standard; not a differentiating step between sensor types"
+        },
+        {
+          "#": "8",
+          "Step": "**CONCLUDE**",
+          "Statement": "End of certification period: verify totalized energy, remove and replace meter per metrological regulations",
+          "Relevant?": "No",
+          "Relevance Rationale": "Regulatory end-of-life procedure; identical for all meter types"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Job Step",
+        "Error Type",
+        "Statement",
+        "Imp.",
+        "Sat.",
+        "Opp.",
+        "Impact",
+        "Conf.",
+        "product_related"
+      ],
+      "rows": [
+        {
+          "ID": "N01",
+          "Job Step": "EXECUTE",
+          "Error Type": "ACCURACY",
+          "Statement": "Minimize the likelihood of volumetric flow reading deviating more than ±2% from true value across the 0.5–60 l/min operating range per EN 1434 Class 2 requirements",
+          "Imp.": "10",
+          "Sat.": "5",
+          "Opp.": "15",
+          "Impact": "reliability",
+          "Conf.": "0.9",
+          "product_related": "false"
+        },
+        {
+          "ID": "N02",
+          "Job Step": "EXECUTE",
+          "Error Type": "CONSISTENCY",
+          "Statement": "Minimize variability of flow readings between successive measurement cycles under pulsating network-pressure conditions (repeatability >±0.5%) [SRC: web_search — ScienceDirect]",
+          "Imp.": "8",
+          "Sat.": "5",
+          "Opp.": "11",
+          "Impact": "reliability",
+          "Conf.": "0.8",
+          "product_related": "false"
+        },
+        {
+          "ID": "N03",
+          "Job Step": "EXECUTE",
+          "Error Type": "ROBUSTNESS",
+          "Statement": "Minimize measurement degradation when supply temperature shifts from 50 °C (summer DHW) to 120 °C (winter peak) across seasonal operating modes [SRC: web_search — KROHNE]",
+          "Imp.": "9",
+          "Sat.": "4",
+          "Opp.": "14",
+          "Impact": "reliability",
+          "Conf.": "0.8",
+          "product_related": "false"
+        },
+        {
+          "ID": "N04",
+          "Job Step": "MONITOR",
+          "Error Type": "DETECTION",
+          "Statement": "Minimize time to detect a complete flow stoppage event (valve failure, pipe freeze, pump trip) to less than 5 seconds for safety interlock and billing integrity",
+          "Imp.": "9",
+          "Sat.": "5",
+          "Opp.": "13",
+          "Impact": "safety",
+          "Conf.": "0.8",
+          "product_related": "false"
+        },
+        {
+          "ID": "N05",
+          "Job Step": "EXECUTE",
+          "Error Type": "THROUGHPUT",
+          "Statement": "Increase the turndown ratio (max/min measurable flow) to cover both winter peak-load and summer minimum-load operating points in a single meter without range switching",
+          "Imp.": "8",
+          "Sat.": "4",
+          "Opp.": "12",
+          "Impact": "reliability",
+          "Conf.": "0.7",
+          "product_related": "false"
+        },
+        {
+          "ID": "N06",
+          "Job Step": "DEFINE",
+          "Error Type": "ACCURACY",
+          "Statement": "Minimize the likelihood of specifying a meter whose flow range does not cover the building's actual demand profile, causing unmeasured energy delivery during low-load hours",
+          "Imp.": "8",
+          "Sat.": "4",
+          "Opp.": "12",
+          "Impact": "cost",
+          "Conf.": "0.7",
+          "product_related": "false"
+        },
+        {
+          "ID": "N07",
+          "Job Step": "MONITOR",
+          "Error Type": "DETECTION",
+          "Statement": "Minimize the number of undetected air entrainment events exceeding 2% volume that silently bias billing-grade energy calculations",
+          "Imp.": "9",
+          "Sat.": "3",
+          "Opp.": "15",
+          "Impact": "cost",
+          "Conf.": "0.8",
+          "product_related": "false"
+        },
+        {
+          "ID": "N08",
+          "Job Step": "EXECUTE",
+          "Error Type": "ACCURACY",
+          "Statement": "Minimize systematic measurement error caused by non-ideal flow profiles from upstream elbows, valves, and tees in compact substation piping layouts [SRC: web_search — ScienceDirect installation effects]",
+          "Imp.": "8",
+          "Sat.": "4",
+          "Opp.": "12",
+          "Impact": "reliability",
+          "Conf.": "0.8",
+          "product_related": "false"
+        },
+        {
+          "ID": "N09",
+          "Job Step": "EXECUTE",
+          "Error Type": "ROBUSTNESS",
+          "Statement": "Minimize measurement failure rate when medium contains glycol antifreeze (up to 40% concentration) in district cooling and frost-protected circuits",
+          "Imp.": "7",
+          "Sat.": "4",
+          "Opp.": "10",
+          "Impact": "reliability",
+          "Conf.": "0.7",
+          "product_related": "false"
+        },
+        {
+          "ID": "N10",
+          "Job Step": "EXECUTE",
+          "Error Type": "ACCURACY",
+          "Statement": "Increase the ability to accurately calculate thermal energy (Q = V̇ × ρ × Cp × ΔT) in district cooling circuits where delta-T is only 3–8 K, amplifying flow measurement error by 2–3x vs heating circuits",
+          "Imp.": "9",
+          "Sat.": "3",
+          "Opp.": "15",
+          "Impact": "cost",
+          "Conf.": "0.8",
+          "product_related": "false"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Lifecycle Stage",
+        "Error Type",
+        "Statement",
+        "Imp.",
+        "Sat.",
+        "Opp.",
+        "Impact",
+        "Conf.",
+        "product_related"
+      ],
+      "rows": [
+        {
+          "ID": "N11",
+          "Lifecycle Stage": "Usage",
+          "Error Type": "ROBUSTNESS",
+          "Statement": "Minimize the likelihood of impeller rotor seizure from magnetite and calcium scale accumulation in aging district heating networks requiring unplanned meter replacement [SRC: web_search — KROHNE: ultrasonic not susceptible to magnetite scaling]",
+          "Imp.": "9",
+          "Sat.": "3",
+          "Opp.": "15",
+          "Impact": "reliability",
+          "Conf.": "0.9",
+          "product_related": "true"
+        },
+        {
+          "ID": "N12",
+          "Lifecycle Stage": "Maintenance",
+          "Error Type": "EFFORT",
+          "Statement": "Minimize the fleet-wide maintenance cost of mandatory 5–6 year metrological re-verification and replacement cycles across hundreds of building substations [SRC: web_search — EN 1434 replacement cycle]",
+          "Imp.": "8",
+          "Sat.": "3",
+          "Opp.": "13",
+          "Impact": "cost",
+          "Conf.": "0.8",
+          "product_related": "true"
+        },
+        {
+          "ID": "N13",
+          "Lifecycle Stage": "Usage",
+          "Error Type": "CONSISTENCY",
+          "Statement": "Minimize calibration drift exceeding one EN 1434 accuracy class over the certification period caused by bearing wear and blade erosion in hard-water networks [SRC: web_search — Kamstrup]",
+          "Imp.": "9",
+          "Sat.": "3",
+          "Opp.": "15",
+          "Impact": "reliability",
+          "Conf.": "0.9",
+          "product_related": "true"
+        },
+        {
+          "ID": "N14",
+          "Lifecycle Stage": "Usage",
+          "Error Type": "THROUGHPUT",
+          "Statement": "Increase the ability to maintain accurate readings at low flow rates (<1 l/min) where mechanical impeller rotors stall due to friction, causing unmeasured energy leakage during summer low-load periods",
+          "Imp.": "8",
+          "Sat.": "3",
+          "Opp.": "13",
+          "Impact": "cost",
+          "Conf.": "0.7",
+          "product_related": "true"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Lifecycle Stage",
+        "Error Type",
+        "Statement",
+        "Imp.",
+        "Sat.",
+        "Opp.",
+        "Impact",
+        "Conf.",
+        "product_related"
+      ],
+      "rows": [
+        {
+          "ID": "N15",
+          "Lifecycle Stage": "Usage",
+          "Error Type": "ROBUSTNESS",
+          "Statement": "Minimize the likelihood of complete signal loss when transient air pockets pass through the sensor during network venting, seasonal shutdown, or pressure fluctuation events",
+          "Imp.": "7",
+          "Sat.": "4",
+          "Opp.": "10",
+          "Impact": "reliability",
+          "Conf.": "0.8",
+          "product_related": "true"
+        },
+        {
+          "ID": "N16",
+          "Lifecycle Stage": "Preparation",
+          "Error Type": "EFFORT",
+          "Statement": "Minimize the commissioning time required to verify acoustic coupling, configure fluid parameters, and validate communication with the energy calculator per substation",
+          "Imp.": "6",
+          "Sat.": "5",
+          "Opp.": "7",
+          "Impact": "time",
+          "Conf.": "0.7",
+          "product_related": "true"
+        },
+        {
+          "ID": "N17",
+          "Lifecycle Stage": "Usage",
+          "Error Type": "DETECTION",
+          "Statement": "Increase the ability to distinguish genuine zero-flow conditions from ultrasonic signal loss caused by transient medium anomalies (bubbles, empty pipe, acoustic decoupling)",
+          "Imp.": "8",
+          "Sat.": "3",
+          "Opp.": "13",
+          "Impact": "safety",
+          "Conf.": "0.7",
+          "product_related": "true"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Lifecycle Stage",
+        "Error Type",
+        "Statement",
+        "Imp.",
+        "Sat.",
+        "Opp.",
+        "Impact",
+        "Conf.",
+        "product_related"
+      ],
+      "rows": [
+        {
+          "ID": "N18",
+          "Lifecycle Stage": "Acquisition",
+          "Error Type": "EFFORT",
+          "Statement": "Minimize the per-substation cost premium (3–5x vs ultrasonic) that limits electromagnetic meter deployment to only the largest commercial substations, leaving smaller connections underserved",
+          "Imp.": "7",
+          "Sat.": "2",
+          "Opp.": "12",
+          "Impact": "cost",
+          "Conf.": "0.7",
+          "product_related": "true"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Job Step",
+        "Error Type",
+        "Statement",
+        "Imp.",
+        "Sat.",
+        "Opp.",
+        "Impact",
+        "Conf.",
+        "product_related"
+      ],
+      "rows": [
+        {
+          "ID": "N19",
+          "Job Step": "LOCATE",
+          "Error Type": "EFFORT",
+          "Statement": "Minimize the installation footprint (physical length and required straight-pipe run) to enable placement in space-constrained building substations where piping is tightly packed [SRC: web_search — substation space constraints]",
+          "Imp.": "7",
+          "Sat.": "5",
+          "Opp.": "9",
+          "Impact": "cost",
+          "Conf.": "0.7",
+          "product_related": "false"
+        },
+        {
+          "ID": "N20",
+          "Job Step": "PREPARE",
+          "Error Type": "EFFORT",
+          "Statement": "Minimize the total integration time from unpacking to first valid energy reading, including mechanical fitting, electrical connection, calculator handshake, and MID seal application",
+          "Imp.": "7",
+          "Sat.": "5",
+          "Opp.": "9",
+          "Impact": "time",
+          "Conf.": "0.7",
+          "product_related": "false"
+        },
+        {
+          "ID": "N21",
+          "Job Step": "CONFIRM",
+          "Error Type": "DETECTION",
+          "Statement": "Minimize the likelihood of commissioning sign-off with incorrect sensor orientation (forward/reverse) that inverts flow direction in the energy calculation",
+          "Imp.": "6",
+          "Sat.": "6",
+          "Opp.": "6",
+          "Impact": "skill",
+          "Conf.": "0.6",
+          "product_related": "false"
+        },
+        {
+          "ID": "N22",
+          "Job Step": "EXECUTE",
+          "Error Type": "ACCURACY",
+          "Statement": "Increase the ability to simultaneously provide flow rate AND medium temperature from a single measurement point, eliminating separate temperature probe installation and reducing substation complexity",
+          "Imp.": "8",
+          "Sat.": "4",
+          "Opp.": "12",
+          "Impact": "cost",
+          "Conf.": "0.7",
+          "product_related": "false"
+        },
+        {
+          "ID": "N23",
+          "Job Step": "MONITOR",
+          "Error Type": "DETECTION",
+          "Statement": "Increase the ability to detect incipient heat exchanger fouling via gradual flow-rate reduction trend analysis before thermal performance degrades below billing-relevant thresholds",
+          "Imp.": "7",
+          "Sat.": "3",
+          "Opp.": "11",
+          "Impact": "reliability",
+          "Conf.": "0.6",
+          "product_related": "false"
+        },
+        {
+          "ID": "N24",
+          "Job Step": "DEFINE",
+          "Error Type": "EFFORT",
+          "Statement": "Minimize the number of meter variants a district energy operator must qualify, stock, and manage to cover its building portfolio (DN15–DN50 range, heating + cooling)",
+          "Imp.": "7",
+          "Sat.": "4",
+          "Opp.": "10",
+          "Impact": "cost",
+          "Conf.": "0.6",
+          "product_related": "false"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Job Step",
+        "Error Type",
+        "Statement",
+        "Imp.",
+        "Sat.",
+        "Opp.",
+        "Impact",
+        "Conf.",
+        "product_related"
+      ],
+      "rows": [
+        {
+          "ID": "N25",
+          "Job Step": "EXECUTE",
+          "Error Type": "ROBUSTNESS",
+          "Statement": "Minimize the field failure rate of the flow metering subsystem to below 0.1% annually across the fleet of building substations over a 15-year operating horizon",
+          "Imp.": "9",
+          "Sat.": "5",
+          "Opp.": "13",
+          "Impact": "reliability",
+          "Conf.": "0.8",
+          "product_related": "false"
+        },
+        {
+          "ID": "N26",
+          "Job Step": "DEFINE",
+          "Error Type": "ACCURACY",
+          "Statement": "Increase the ability to deploy MID/EN 1434-certified billing-grade meters at every building connection to achieve full EU EED compliance across the entire district network [SRC: web_search — EU EED]",
+          "Imp.": "10",
+          "Sat.": "5",
+          "Opp.": "15",
+          "Impact": "cost",
+          "Conf.": "0.8",
+          "product_related": "false"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Role",
+        "Retrieval",
+        "Bridge",
+        "Need"
+      ],
+      "rows": [
+        {
+          "Role": "**Network Ops Manager (Overseer)**",
+          "Retrieval": "\"By getting thermal energy metering right across every building, this person becomes the operator who runs a transparent, regulation-compliant, optimised district network.\"",
+          "Bridge": "\"What must the product do so they CAN become that operator?\"",
+          "Need": "—"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Statement",
+        "Imp.",
+        "Sat.",
+        "Opp.",
+        "Impact",
+        "Conf.",
+        "product_related"
+      ],
+      "rows": [
+        {
+          "ID": "N27",
+          "Statement": "Increase the ability to demonstrate EU EED-compliant individual consumption metering across 100% of building connections during regulatory audit, with verifiable metrological traceability per EN 1434 [SRC: web_search — EU EED]",
+          "Imp.": "9",
+          "Sat.": "4",
+          "Opp.": "14",
+          "Impact": "cost",
+          "Conf.": "0.7",
+          "product_related": "false"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Role",
+        "Retrieval",
+        "Bridge",
+        "Need"
+      ],
+      "rows": [
+        {
+          "Role": "**District Energy Brand (via Overseer)**",
+          "Retrieval": "\"Building owners and municipal regulators are watching. They must see a utility that bills fairly based on measured consumption — not one relying on area-based estimates.\"",
+          "Bridge": "\"What must the product do so regulators and building owners SEE that impression?\"",
+          "Need": "—"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Statement",
+        "Imp.",
+        "Sat.",
+        "Opp.",
+        "Impact",
+        "Conf.",
+        "product_related"
+      ],
+      "rows": [
+        {
+          "ID": "N28",
+          "Statement": "Increase the ability to provide building-owner-accessible consumption data (display, remote reading, or portal) that demonstrates measured — not estimated — thermal energy delivery for each billing period",
+          "Imp.": "7",
+          "Sat.": "4",
+          "Opp.": "10",
+          "Impact": "skill",
+          "Conf.": "0.5",
+          "product_related": "false"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Role",
+        "Retrieval",
+        "Bridge",
+        "Need"
+      ],
+      "rows": [
+        {
+          "Role": "**Building Occupant (Beneficiary)**",
+          "Retrieval": "\"Wants to feel fairly billed for actual consumption; wants to avoid the frustration of cross-subsidising neighbours who waste heat.\"",
+          "Bridge": "\"What must the product do so occupants FEEL fairly treated?\"",
+          "Need": "—"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Statement",
+        "Imp.",
+        "Sat.",
+        "Opp.",
+        "Impact",
+        "Conf.",
+        "product_related"
+      ],
+      "rows": [
+        {
+          "ID": "N29",
+          "Statement": "Minimize the likelihood of billing disputes exceeding 5% of quarterly energy cost caused by meter inaccuracy or unmeasured consumption periods that erode tenant trust in the district energy provider [hypothesis]",
+          "Imp.": "7",
+          "Sat.": "4",
+          "Opp.": "10",
+          "Impact": "cost",
+          "Conf.": "0.5",
+          "product_related": "false"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Statement (abbreviated)",
+        "Imp.",
+        "Sat.",
+        "Opp.",
+        "Impact",
+        "product_related",
+        "Pyramid"
+      ],
+      "rows": [
+        {
+          "ID": "N01",
+          "Statement (abbreviated)": "Flow reading deviation >±2% per EN 1434 Class 2",
+          "Imp.": "10",
+          "Sat.": "5",
+          "Opp.": "15",
+          "Impact": "reliability",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N07",
+          "Statement (abbreviated)": "Undetected air entrainment >2% biasing billing",
+          "Imp.": "9",
+          "Sat.": "3",
+          "Opp.": "15",
+          "Impact": "cost",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N10",
+          "Statement (abbreviated)": "Low delta-T cooling circuits amplifying flow error",
+          "Imp.": "9",
+          "Sat.": "3",
+          "Opp.": "15",
+          "Impact": "cost",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N11",
+          "Statement (abbreviated)": "Impeller seizure from magnetite in aging networks",
+          "Imp.": "9",
+          "Sat.": "3",
+          "Opp.": "15",
+          "Impact": "reliability",
+          "product_related": "true",
+          "Pyramid": "P1"
+        },
+        {
+          "ID": "N13",
+          "Statement (abbreviated)": "Calibration drift exceeding accuracy class (mech.)",
+          "Imp.": "9",
+          "Sat.": "3",
+          "Opp.": "15",
+          "Impact": "reliability",
+          "product_related": "true",
+          "Pyramid": "P1"
+        },
+        {
+          "ID": "N26",
+          "Statement (abbreviated)": "MID/EN 1434 billing-grade at every connection",
+          "Imp.": "10",
+          "Sat.": "5",
+          "Opp.": "15",
+          "Impact": "cost",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N03",
+          "Statement (abbreviated)": "Measurement degradation at 50→120 °C seasonal swing",
+          "Imp.": "9",
+          "Sat.": "4",
+          "Opp.": "14",
+          "Impact": "reliability",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N27",
+          "Statement (abbreviated)": "EU EED compliance across 100% of connections",
+          "Imp.": "9",
+          "Sat.": "4",
+          "Opp.": "14",
+          "Impact": "cost",
+          "product_related": "false",
+          "Pyramid": "P3"
+        },
+        {
+          "ID": "N04",
+          "Statement (abbreviated)": "Flow stoppage detection >5 s",
+          "Imp.": "9",
+          "Sat.": "5",
+          "Opp.": "13",
+          "Impact": "safety",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N12",
+          "Statement (abbreviated)": "5–6 yr fleet-wide replacement cost (mechanical)",
+          "Imp.": "8",
+          "Sat.": "3",
+          "Opp.": "13",
+          "Impact": "cost",
+          "product_related": "true",
+          "Pyramid": "P1"
+        },
+        {
+          "ID": "N14",
+          "Statement (abbreviated)": "Impeller stall at <1 l/min (summer leakage)",
+          "Imp.": "8",
+          "Sat.": "3",
+          "Opp.": "13",
+          "Impact": "cost",
+          "product_related": "true",
+          "Pyramid": "P1"
+        },
+        {
+          "ID": "N17",
+          "Statement (abbreviated)": "Distinguish zero-flow from ultrasonic signal loss",
+          "Imp.": "8",
+          "Sat.": "3",
+          "Opp.": "13",
+          "Impact": "safety",
+          "product_related": "true",
+          "Pyramid": "P1"
+        },
+        {
+          "ID": "N25",
+          "Statement (abbreviated)": "Field failure rate >0.1% across 15-yr fleet",
+          "Imp.": "9",
+          "Sat.": "5",
+          "Opp.": "13",
+          "Impact": "reliability",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N05",
+          "Statement (abbreviated)": "Turndown ratio for winter peak to summer min",
+          "Imp.": "8",
+          "Sat.": "4",
+          "Opp.": "12",
+          "Impact": "reliability",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N06",
+          "Statement (abbreviated)": "Sensor range misses building demand profile",
+          "Imp.": "8",
+          "Sat.": "4",
+          "Opp.": "12",
+          "Impact": "cost",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N08",
+          "Statement (abbreviated)": "Non-ideal flow profile error in compact substations",
+          "Imp.": "8",
+          "Sat.": "4",
+          "Opp.": "12",
+          "Impact": "reliability",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N18",
+          "Statement (abbreviated)": "Electromagnetic meter cost premium (3–5x)",
+          "Imp.": "7",
+          "Sat.": "2",
+          "Opp.": "12",
+          "Impact": "cost",
+          "product_related": "true",
+          "Pyramid": "P1"
+        },
+        {
+          "ID": "N22",
+          "Statement (abbreviated)": "Single-point flow + temperature",
+          "Imp.": "8",
+          "Sat.": "4",
+          "Opp.": "12",
+          "Impact": "cost",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N02",
+          "Statement (abbreviated)": "Repeatability under pulsating pressure",
+          "Imp.": "8",
+          "Sat.": "5",
+          "Opp.": "11",
+          "Impact": "reliability",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N23",
+          "Statement (abbreviated)": "Detect incipient HX fouling via flow trend",
+          "Imp.": "7",
+          "Sat.": "3",
+          "Opp.": "11",
+          "Impact": "reliability",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N09",
+          "Statement (abbreviated)": "Glycol compatibility in cooling circuits",
+          "Imp.": "7",
+          "Sat.": "4",
+          "Opp.": "10",
+          "Impact": "reliability",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N15",
+          "Statement (abbreviated)": "Signal loss from transient air pockets (US)",
+          "Imp.": "7",
+          "Sat.": "4",
+          "Opp.": "10",
+          "Impact": "reliability",
+          "product_related": "true",
+          "Pyramid": "P1"
+        },
+        {
+          "ID": "N24",
+          "Statement (abbreviated)": "Variant count to cover DN range + H&C",
+          "Imp.": "7",
+          "Sat.": "4",
+          "Opp.": "10",
+          "Impact": "cost",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N28",
+          "Statement (abbreviated)": "Occupant-accessible measured consumption data",
+          "Imp.": "7",
+          "Sat.": "4",
+          "Opp.": "10",
+          "Impact": "skill",
+          "product_related": "false",
+          "Pyramid": "P4"
+        },
+        {
+          "ID": "N29",
+          "Statement (abbreviated)": "Billing disputes >5% from meter inaccuracy",
+          "Imp.": "7",
+          "Sat.": "4",
+          "Opp.": "10",
+          "Impact": "cost",
+          "product_related": "false",
+          "Pyramid": "P5"
+        },
+        {
+          "ID": "N19",
+          "Statement (abbreviated)": "Installation footprint in compact substations",
+          "Imp.": "7",
+          "Sat.": "5",
+          "Opp.": "9",
+          "Impact": "cost",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N20",
+          "Statement (abbreviated)": "Integration time per substation",
+          "Imp.": "7",
+          "Sat.": "5",
+          "Opp.": "9",
+          "Impact": "time",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N16",
+          "Statement (abbreviated)": "Commissioning time (ultrasonic)",
+          "Imp.": "6",
+          "Sat.": "5",
+          "Opp.": "7",
+          "Impact": "time",
+          "product_related": "true",
+          "Pyramid": "P1"
+        },
+        {
+          "ID": "N21",
+          "Statement (abbreviated)": "Undetected incorrect orientation",
+          "Imp.": "6",
+          "Sat.": "6",
+          "Opp.": "6",
+          "Impact": "skill",
+          "product_related": "false",
+          "Pyramid": "P2"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Statement (abbreviated)",
+        "Opp."
+      ],
+      "rows": [
+        {
+          "ID": "N07",
+          "Statement (abbreviated)": "Undetected air entrainment >2% biasing billing",
+          "Opp.": "15"
+        },
+        {
+          "ID": "N10",
+          "Statement (abbreviated)": "Low delta-T cooling error amplification",
+          "Opp.": "15"
+        },
+        {
+          "ID": "N11",
+          "Statement (abbreviated)": "Impeller seizure from magnetite (mechanical)",
+          "Opp.": "15"
+        },
+        {
+          "ID": "N13",
+          "Statement (abbreviated)": "Calibration drift beyond accuracy class (mechanical)",
+          "Opp.": "15"
+        },
+        {
+          "ID": "N03",
+          "Statement (abbreviated)": "Seasonal temperature swing degradation",
+          "Opp.": "14"
+        },
+        {
+          "ID": "N12",
+          "Statement (abbreviated)": "Fleet-wide 5–6 yr replacement cost (mechanical)",
+          "Opp.": "13"
+        },
+        {
+          "ID": "N14",
+          "Statement (abbreviated)": "Impeller stall at low flow (mechanical)",
+          "Opp.": "13"
+        },
+        {
+          "ID": "N17",
+          "Statement (abbreviated)": "Distinguish zero-flow from signal loss (ultrasonic)",
+          "Opp.": "13"
+        },
+        {
+          "ID": "N05",
+          "Statement (abbreviated)": "Turndown ratio winter peak to summer min",
+          "Opp.": "12"
+        },
+        {
+          "ID": "N06",
+          "Statement (abbreviated)": "Sensor range mismatch with demand profile",
+          "Opp.": "12"
+        },
+        {
+          "ID": "N08",
+          "Statement (abbreviated)": "Non-ideal flow profile error",
+          "Opp.": "12"
+        },
+        {
+          "ID": "N18",
+          "Statement (abbreviated)": "Electromagnetic cost premium",
+          "Opp.": "12"
+        },
+        {
+          "ID": "N22",
+          "Statement (abbreviated)": "Single-point flow + temperature",
+          "Opp.": "12"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Metric",
+        "Target",
+        "Actual",
+        "Pass?"
+      ],
+      "rows": [
+        {
+          "Metric": "Error statements per market",
+          "Target": "15–30",
+          "Actual": "**29**",
+          "Pass?": "PASS"
+        },
+        {
+          "Metric": "Needs per relevant job step (6 relevant)",
+          "Target": "≥ 2",
+          "Actual": "DEFINE: 3, LOCATE: 1+, PREPARE: 2, CONFIRM: 2, EXECUTE: 14, MONITOR: 5",
+          "Pass?": "PASS"
+        },
+        {
+          "Metric": "Market-inherent (product_related=false)",
+          "Target": "60–70%",
+          "Actual": "20/29 = **69%**",
+          "Pass?": "PASS"
+        },
+        {
+          "Metric": "Technology-specific (product_related=true)",
+          "Target": "30–40%",
+          "Actual": "9/29 = **31%**",
+          "Pass?": "PASS"
+        },
+        {
+          "Metric": "\"Minimize\" vs \"Increase\" mix",
+          "Target": "~60/40",
+          "Actual": "20/9 = **69/31**",
+          "Pass?": "PASS"
+        },
+        {
+          "Metric": "Job map steps",
+          "Target": "8 exactly",
+          "Actual": "**8**",
+          "Pass?": "PASS"
+        },
+        {
+          "Metric": "Relevant steps",
+          "Target": "3–6 typical",
+          "Actual": "**6**",
+          "Pass?": "PASS"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "#": "V1",
+          "Check": "Format compliance — all statements start with \"Minimize…\" or \"Increase…\" with ONE KPI",
+          "Result": "PASS"
+        },
+        {
+          "#": "V2",
+          "Check": "product_related=true ONLY for technology-caused needs",
+          "Result": "PASS — N11–N18 specific to mechanical/ultrasonic/electromagnetic technology; disappear with different tech"
+        },
+        {
+          "#": "V3",
+          "Check": "Importance/satisfaction sanity — no unrealistic patterns",
+          "Result": "PASS — range: imp 6–10, sat 2–6; safety/regulatory at 9–10; billing-grade accuracy at 10"
+        },
+        {
+          "#": "V4",
+          "Check": "Impact category matches KPI",
+          "Result": "PASS — flow accuracy = reliability, billing error = cost, flow stoppage = safety"
+        },
+        {
+          "#": "V5",
+          "Check": "Coverage — ≥2 per relevant step, no obvious duplicates",
+          "Result": "PASS"
+        },
+        {
+          "#": "V6",
+          "Check": "Solution-agnostic — zero product/vendor/mechanism references in P2 needs",
+          "Result": "PASS — P1 needs name technology class as expected"
+        },
+        {
+          "#": "V7",
+          "Check": "Anchor level matches product abstraction",
+          "Result": "PASS — component = L4"
+        },
+        {
+          "#": "V8",
+          "Check": "Product job references parent VN unit",
+          "Result": "PASS — \"Help Substation Flow & Temperature Measurement to…\""
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "jtbd_analysis",
+      "naics_code": "221330",
+      "naics_title": "Steam and Air-Conditioning Supply",
+      "market_name": "Steam and Air-Conditioning Supply",
+      "product_name": "Ultrasonic Flow Sensor",
+      "vendor_name": "Marquardt",
+      "cfj_statement": "Generate, distribute, and meter thermal energy (heating and cooling) from centralised plants to multiple buildings via closed-pipe networks",
+      "job_map": {
+        "naics_code": "221330",
+        "market_name": "Steam and Air-Conditioning Supply",
+        "anchor_vn_unit": "Ultrasonic Flow Sensor",
+        "anchor_level": "L4",
+        "parent_vn_unit": "Substation Flow & Temperature Measurement",
+        "parent_level": "L5",
+        "product_job_statement": "Help Substation Flow & Temperature Measurement to measure volumetric flow rate and medium temperature in district energy building substations for thermal energy calculation and consumption-based billing without obstructing flow or introducing mechanical wear",
+        "steps": [
+          {
+            "step_number": 1,
+            "step_name": "DEFINE",
+            "statement": "Define the required flow range, pipe diameter, medium type, temperature envelope, accuracy class (EN 1434), and communication protocol for the building substation",
+            "relevant_to_product": true,
+            "relevance_rationale": "Sensor specifications must match substation design and regulatory requirements"
+          },
+          {
+            "step_number": 2,
+            "step_name": "LOCATE",
+            "statement": "Locate the optimal measurement point in the substation piping where straight-run requirements are met and maintenance access is possible",
+            "relevant_to_product": true,
+            "relevance_rationale": "Compact substation enclosures constrain installation; position affects accuracy"
+          },
+          {
+            "step_number": 3,
+            "step_name": "PREPARE",
+            "statement": "Prepare piping section, electrical connections, and integration with energy calculator/integrator and BMS gateway",
+            "relevant_to_product": true,
+            "relevance_rationale": "Mechanical and electrical integration across hundreds of substations"
+          },
+          {
+            "step_number": 4,
+            "step_name": "CONFIRM",
+            "statement": "Confirm readiness: pipe-full condition, absence of air locks, correct orientation, communication handshake with energy calculator, MID seal integrity",
+            "relevant_to_product": true,
+            "relevance_rationale": "Pre-operation verification critical for billing-grade measurement"
+          },
+          {
+            "step_number": 5,
+            "step_name": "EXECUTE",
+            "statement": "Execute continuous flow measurement feeding real-time volumetric flow rate and temperature to the energy calculator for thermal energy integration (Q = flow x Cp x delta-T)",
+            "relevant_to_product": true,
+            "relevance_rationale": "Core value-creating action; drives billing accuracy and network control"
+          },
+          {
+            "step_number": 6,
+            "step_name": "MONITOR",
+            "statement": "Monitor measurement quality: signal strength, air bubble events, empty-pipe alarms, long-term calibration drift, battery status",
+            "relevant_to_product": true,
+            "relevance_rationale": "Fleet-wide measurement integrity affects billing revenue and compliance"
+          },
+          {
+            "step_number": 7,
+            "step_name": "MODIFY",
+            "statement": "Adjust calibration, replace battery, update firmware, or swap sensor if metrological verification fails",
+            "relevant_to_product": false,
+            "relevance_rationale": "Periodic re-verification is standard; not differentiating between sensor types"
+          },
+          {
+            "step_number": 8,
+            "step_name": "CONCLUDE",
+            "statement": "End of certification period: verify totalized energy, remove and replace meter per metrological regulations",
+            "relevant_to_product": false,
+            "relevance_rationale": "Regulatory end-of-life procedure; identical for all meter types"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "name": "Mechanical Impeller / Turbine Meter",
+          "unspsc_code": "41112501",
+          "status": "incumbent",
+          "market_share_estimate": "40-50%",
+          "trade_offs": [
+            "Moving parts subject to magnetite fouling and bearing wear",
+            "Accuracy degrades from Class 2 to Class 3 within 3-5 years in hard-water networks",
+            "Mandatory 5-6 year metrological re-verification cycle",
+            "Pressure drop across impeller",
+            "Low-flow dead band where rotor stalls (<1 l/min)"
+          ]
+        },
+        {
+          "name": "Ultrasonic Transit-Time Flow Sensor",
+          "unspsc_code": "41112501",
+          "status": "growing",
+          "market_share_estimate": "35-45%",
+          "trade_offs": [
+            "Accuracy degrades with >2% air entrainment by volume",
+            "Requires pipe-full condition for valid measurement",
+            "Higher unit cost vs mechanical (1.5-2.5x at volume)",
+            "Signal loss during transient air pockets",
+            "Requires acoustic coupling verification at commissioning"
+          ]
+        },
+        {
+          "name": "Electromagnetic Flow Meter",
+          "unspsc_code": "41112501",
+          "status": "premium_niche",
+          "market_share_estimate": "5-10%",
+          "trade_offs": [
+            "3-5x cost of ultrasonic",
+            "Requires minimum electrical conductivity (~5 uS/cm)",
+            "Heavier and larger footprint",
+            "Higher power consumption",
+            "Typically reserved for DN50+ substations"
+          ]
+        },
+        {
+          "name": "Coriolis Flow Meter",
+          "unspsc_code": "41112501",
+          "status": "custody_transfer_only",
+          "market_share_estimate": "<2%",
+          "trade_offs": [
+            "10-20x cost of ultrasonic",
+            "Heavy vibrating tubes; large footprint",
+            "Overkill accuracy for building-level billing",
+            "Used only at plant-level custody transfer points"
+          ]
+        },
+        {
+          "name": "Do nothing / estimated allocation",
+          "unspsc_code": null,
+          "status": "status_quo_declining",
+          "market_share_estimate": "5-15% (declining due to EU EED mandate)",
+          "trade_offs": [
+            "Zero cost, zero P1 lifecycle burden",
+            "Cross-subsidisation between buildings",
+            "Non-compliant with EU EED individual metering mandate",
+            "No fault detection; no incentive for energy saving"
+          ]
+        }
+      ],
+      "error_statements": [
+        {
+          "id": "N01",
+          "statement": "Minimize the likelihood of volumetric flow reading deviating more than ±2% from true value across the 0.5–60 l/min operating range per EN 1434 Class 2 requirements",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ACCURACY",
+          "pyramid_level": "P2",
+          "importance": 10,
+          "satisfaction_current": 5,
+          "opportunity_score": 15,
+          "impact_category": "reliability",
+          "rationale": "EN 1434 Class 2 is the minimum regulatory standard for billing-grade heat meters. Flow measurement error propagates directly into energy billing error (Q = flow x Cp x delta-T). District networks bill millions of euros annually; even 1% systematic error accumulates to significant revenue/billing impact.",
+          "confidence": 0.9,
+          "product_related": false,
+          "source": "web_search"
+        },
+        {
+          "id": "N02",
+          "statement": "Minimize variability of flow readings between successive measurement cycles under pulsating network-pressure conditions (repeatability >±0.5%)",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "CONSISTENCY",
+          "pyramid_level": "P2",
+          "importance": 8,
+          "satisfaction_current": 5,
+          "opportunity_score": 11,
+          "impact_category": "reliability",
+          "rationale": "District networks experience pressure pulsations from variable-speed pump stations and neighbour-building valve modulation. Pulsating flows generate measurement errors in flow meters. Energy calculator integration amplifies repeatability errors into billing noise.",
+          "confidence": 0.8,
+          "product_related": false,
+          "source": "web_search"
+        },
+        {
+          "id": "N03",
+          "statement": "Minimize measurement degradation when supply temperature shifts from 50 °C (summer DHW) to 120 °C (winter peak) across seasonal operating modes",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ROBUSTNESS",
+          "pyramid_level": "P2",
+          "importance": 9,
+          "satisfaction_current": 4,
+          "opportunity_score": 14,
+          "impact_category": "reliability",
+          "rationale": "District heating networks vary supply temperature seasonally. Speed of sound in water changes ~2.4 m/s per °C. Without real-time compensation, temperature-induced error can reach 1.5%. Networks with high temperature swings (130 °C peak) challenge sensor materials and electronics.",
+          "confidence": 0.8,
+          "product_related": false,
+          "source": "web_search"
+        },
+        {
+          "id": "N04",
+          "statement": "Minimize time to detect a complete flow stoppage event (valve failure, pipe freeze, pump trip) to less than 5 seconds for safety interlock and billing integrity",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "error_type": "DETECTION",
+          "pyramid_level": "P2",
+          "importance": 9,
+          "satisfaction_current": 5,
+          "opportunity_score": 13,
+          "impact_category": "safety",
+          "rationale": "Flow stoppage in a heating circuit during winter can lead to freezing, pipe burst, and building damage. Rapid detection enables safety interlock to close control valve and alert SCADA. Also prevents billing for zero-delivery periods.",
+          "confidence": 0.8,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N05",
+          "statement": "Increase the turndown ratio (max/min measurable flow) to cover both winter peak-load and summer minimum-load operating points in a single meter without range switching",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "THROUGHPUT",
+          "pyramid_level": "P2",
+          "importance": 8,
+          "satisfaction_current": 4,
+          "opportunity_score": 12,
+          "impact_category": "reliability",
+          "rationale": "District heating substations experience 10:1 to 50:1 flow variation between winter peak and summer DHW-only operation. Meters with insufficient turndown miss low-load energy delivery — a billing gap.",
+          "confidence": 0.7,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N06",
+          "statement": "Minimize the likelihood of specifying a meter whose flow range does not cover the building's actual demand profile, causing unmeasured energy delivery during low-load hours",
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "error_type": "ACCURACY",
+          "pyramid_level": "P2",
+          "importance": 8,
+          "satisfaction_current": 4,
+          "opportunity_score": 12,
+          "impact_category": "cost",
+          "rationale": "Over-sizing (common to ensure peak capacity) pushes normal operation into the meter's low-flow zone where accuracy degrades. Under-sizing causes overflow errors at peak. Getting the range right requires building-specific load analysis.",
+          "confidence": 0.7,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N07",
+          "statement": "Minimize the number of undetected air entrainment events exceeding 2% volume that silently bias billing-grade energy calculations",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "error_type": "DETECTION",
+          "pyramid_level": "P2",
+          "importance": 9,
+          "satisfaction_current": 3,
+          "opportunity_score": 15,
+          "impact_category": "cost",
+          "rationale": "Air in district heating circuits is common after maintenance, network extensions, or pressure drops. Air entrainment degrades all meter types but is especially damaging to billing accuracy. Undetected air events cause silent billing errors that accumulate over months.",
+          "confidence": 0.8,
+          "product_related": false,
+          "source": "web_search"
+        },
+        {
+          "id": "N08",
+          "statement": "Minimize systematic measurement error caused by non-ideal flow profiles from upstream elbows, valves, and tees in compact substation piping layouts",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ACCURACY",
+          "pyramid_level": "P2",
+          "importance": 8,
+          "satisfaction_current": 4,
+          "opportunity_score": 12,
+          "impact_category": "reliability",
+          "rationale": "Building substations are compact; ideal straight-pipe runs (5-10x DN upstream) are rarely available. Installation effects cause systematic errors in all flow meter types. Multi-path designs reduce but do not eliminate this effect.",
+          "confidence": 0.8,
+          "product_related": false,
+          "source": "web_search"
+        },
+        {
+          "id": "N09",
+          "statement": "Minimize measurement failure rate when medium contains glycol antifreeze (up to 40% concentration) in district cooling and frost-protected circuits",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ROBUSTNESS",
+          "pyramid_level": "P2",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10,
+          "impact_category": "reliability",
+          "rationale": "District cooling circuits and frost-protected heating networks use glycol mixtures. Glycol changes fluid viscosity, density, and acoustic properties. Meters must compensate or fail gracefully.",
+          "confidence": 0.7,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N10",
+          "statement": "Increase the ability to accurately calculate thermal energy (Q = flow x density x Cp x delta-T) in district cooling circuits where delta-T is only 3–8 K, amplifying flow measurement error by 2–3x vs heating circuits",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ACCURACY",
+          "pyramid_level": "P2",
+          "importance": 9,
+          "satisfaction_current": 3,
+          "opportunity_score": 15,
+          "impact_category": "cost",
+          "rationale": "District cooling delta-T (3-8 K) is 3-10x smaller than district heating delta-T (20-60 K). Since energy = flow x delta-T, a given flow measurement error has 3-10x more impact on energy calculation accuracy in cooling. This makes flow sensor accuracy critical for fair cooling billing.",
+          "confidence": 0.8,
+          "product_related": false,
+          "source": "web_search"
+        },
+        {
+          "id": "N11",
+          "statement": "Minimize the likelihood of impeller rotor seizure from magnetite and calcium scale accumulation in aging district heating networks requiring unplanned meter replacement",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ROBUSTNESS",
+          "pyramid_level": "P1",
+          "importance": 9,
+          "satisfaction_current": 3,
+          "opportunity_score": 15,
+          "impact_category": "reliability",
+          "rationale": "Aging district networks accumulate magnetite (Fe3O4) from pipe corrosion. Magnetite is paramagnetic and attracted to the magnetized rotor in impeller meters, causing seizure. Ultrasonic meters have no moving parts and are not susceptible to this failure mode.",
+          "confidence": 0.9,
+          "product_related": true,
+          "source": "web_search"
+        },
+        {
+          "id": "N12",
+          "statement": "Minimize the fleet-wide maintenance cost of mandatory 5–6 year metrological re-verification and replacement cycles across hundreds of building substations",
+          "job_step_number": 7,
+          "job_step_name": "MODIFY",
+          "error_type": "EFFORT",
+          "pyramid_level": "P1",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13,
+          "impact_category": "cost",
+          "rationale": "Mechanical heat meters in many EU jurisdictions must be re-verified or replaced every 5-6 years due to calibration drift from wear. For a network with 1,000 substations, this means replacing ~170-200 meters annually — a significant recurring cost. Ultrasonic meters maintain accuracy for 15+ years.",
+          "confidence": 0.8,
+          "product_related": true,
+          "source": "web_search"
+        },
+        {
+          "id": "N13",
+          "statement": "Minimize calibration drift exceeding one EN 1434 accuracy class over the certification period caused by bearing wear and blade erosion in hard-water networks",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "CONSISTENCY",
+          "pyramid_level": "P1",
+          "importance": 9,
+          "satisfaction_current": 3,
+          "opportunity_score": 15,
+          "impact_category": "reliability",
+          "rationale": "Mechanical meters drift from Class 2 to Class 3 or worse within 3-5 years in hard-water networks. This silent degradation means billing accuracy degrades progressively between verification cycles. Ultrasonic meters with no moving parts maintain stable calibration.",
+          "confidence": 0.9,
+          "product_related": true,
+          "source": "web_search"
+        },
+        {
+          "id": "N14",
+          "statement": "Increase the ability to maintain accurate readings at low flow rates (<1 l/min) where mechanical impeller rotors stall due to friction, causing unmeasured energy leakage during summer low-load periods",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "THROUGHPUT",
+          "pyramid_level": "P1",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13,
+          "impact_category": "cost",
+          "rationale": "During summer, district heating substations may operate at very low flow rates for DHW pre-heating only. Mechanical impellers stall below their start-up threshold, creating an unmeasured 'drip' of thermal energy. Ultrasonic sensors measure virtually from zero flow.",
+          "confidence": 0.7,
+          "product_related": true,
+          "source": "web_search"
+        },
+        {
+          "id": "N15",
+          "statement": "Minimize the likelihood of complete signal loss when transient air pockets pass through the sensor during network venting, seasonal shutdown, or pressure fluctuation events",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ROBUSTNESS",
+          "pyramid_level": "P1",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10,
+          "impact_category": "reliability",
+          "rationale": "Ultrasonic sensors rely on acoustic coupling through the fluid. Transient air pockets cause complete signal loss. District networks experience air ingress during maintenance, extension works, and pressure drops. Sensor must detect and flag the event rather than output erroneous readings.",
+          "confidence": 0.8,
+          "product_related": true,
+          "source": "web_search"
+        },
+        {
+          "id": "N16",
+          "statement": "Minimize the commissioning time required to verify acoustic coupling, configure fluid parameters, and validate communication with the energy calculator per substation",
+          "job_step_number": 3,
+          "job_step_name": "PREPARE",
+          "error_type": "EFFORT",
+          "pyramid_level": "P1",
+          "importance": 6,
+          "satisfaction_current": 5,
+          "opportunity_score": 7,
+          "impact_category": "time",
+          "rationale": "Ultrasonic meters require acoustic coupling verification and fluid parameter configuration at commissioning. Across hundreds of substations, commissioning time multiplies. Pre-calibrated delivery reduces this burden.",
+          "confidence": 0.7,
+          "product_related": true,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N17",
+          "statement": "Increase the ability to distinguish genuine zero-flow conditions from ultrasonic signal loss caused by transient medium anomalies (bubbles, empty pipe, acoustic decoupling)",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "error_type": "DETECTION",
+          "pyramid_level": "P1",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13,
+          "impact_category": "safety",
+          "rationale": "A genuine zero-flow condition (valve closed, pump failed) requires safety interlock. An ultrasonic signal loss from air is a transient event requiring different handling. Confusing the two causes either false alarms (nuisance) or missed real failures (safety risk).",
+          "confidence": 0.7,
+          "product_related": true,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N18",
+          "statement": "Minimize the per-substation cost premium (3–5x vs ultrasonic) that limits electromagnetic meter deployment to only the largest commercial substations, leaving smaller connections underserved",
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "error_type": "EFFORT",
+          "pyramid_level": "P1",
+          "importance": 7,
+          "satisfaction_current": 2,
+          "opportunity_score": 12,
+          "impact_category": "cost",
+          "rationale": "Electromagnetic meters offer excellent accuracy and robustness but at 3-5x the cost of ultrasonic. This cost premium makes them economically viable only for large substations (DN50+), excluding the majority of residential building connections from their benefits.",
+          "confidence": 0.7,
+          "product_related": true,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N19",
+          "statement": "Minimize the installation footprint (physical length and required straight-pipe run) to enable placement in space-constrained building substations where piping is tightly packed",
+          "job_step_number": 2,
+          "job_step_name": "LOCATE",
+          "error_type": "EFFORT",
+          "pyramid_level": "P2",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9,
+          "impact_category": "cost",
+          "rationale": "Building substations are typically housed in basement technical rooms with limited space. Compact sensor bodies with short upstream straight-run requirements enable installation in locations that would otherwise require costly piping modifications.",
+          "confidence": 0.7,
+          "product_related": false,
+          "source": "web_search"
+        },
+        {
+          "id": "N20",
+          "statement": "Minimize the total integration time from unpacking to first valid energy reading, including mechanical fitting, electrical connection, calculator handshake, and MID seal application",
+          "job_step_number": 3,
+          "job_step_name": "PREPARE",
+          "error_type": "EFFORT",
+          "pyramid_level": "P2",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9,
+          "impact_category": "time",
+          "rationale": "District energy operators deploy meters across hundreds of substations. Integration time multiplies at fleet scale. Reducing per-substation installation time from 2 hours to 1 hour saves hundreds of technician-hours per year.",
+          "confidence": 0.7,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N21",
+          "statement": "Minimize the likelihood of commissioning sign-off with incorrect sensor orientation (forward/reverse) that inverts flow direction in the energy calculation",
+          "job_step_number": 4,
+          "job_step_name": "CONFIRM",
+          "error_type": "DETECTION",
+          "pyramid_level": "P2",
+          "importance": 6,
+          "satisfaction_current": 6,
+          "opportunity_score": 6,
+          "impact_category": "skill",
+          "rationale": "Reverse-installed sensors invert the flow sign, causing the energy calculator to subtract rather than add energy. In unidirectional networks this may be caught by negative readings; in bidirectional 4th-gen networks it may go undetected.",
+          "confidence": 0.6,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N22",
+          "statement": "Increase the ability to simultaneously provide flow rate AND medium temperature from a single measurement point, eliminating separate temperature probe installation and reducing substation complexity",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ACCURACY",
+          "pyramid_level": "P2",
+          "importance": 8,
+          "satisfaction_current": 4,
+          "opportunity_score": 12,
+          "impact_category": "cost",
+          "rationale": "Thermal energy calculation requires both flow and temperature. A single sensor providing both eliminates a separate temperature probe, its wiring, and its failure mode. Reduces substation component count and installation time.",
+          "confidence": 0.7,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N23",
+          "statement": "Increase the ability to detect incipient heat exchanger fouling via gradual flow-rate reduction trend analysis before thermal performance degrades below billing-relevant thresholds",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "error_type": "DETECTION",
+          "pyramid_level": "P2",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11,
+          "impact_category": "reliability",
+          "rationale": "Heat exchanger fouling progressively restricts flow. A stable flow sensor can detect this as a gradual downward trend, enabling predictive maintenance before the building loses thermal comfort or the operator loses revenue.",
+          "confidence": 0.6,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N24",
+          "statement": "Minimize the number of meter variants a district energy operator must qualify, stock, and manage to cover its building portfolio (DN15–DN50 range, heating + cooling)",
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "error_type": "EFFORT",
+          "pyramid_level": "P2",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10,
+          "impact_category": "cost",
+          "rationale": "District networks connect diverse buildings (small residential to medium commercial). Each pipe size requires a matched meter variant. Modular platforms that share electronics across DN variants reduce procurement complexity and spare-parts inventory.",
+          "confidence": 0.6,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N25",
+          "statement": "Minimize the field failure rate of the flow metering subsystem to below 0.1% annually across the fleet of building substations over a 15-year operating horizon",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ROBUSTNESS",
+          "pyramid_level": "P2",
+          "importance": 9,
+          "satisfaction_current": 5,
+          "opportunity_score": 13,
+          "impact_category": "reliability",
+          "rationale": "District networks operate thousands of substations. At 0.1% annual failure rate, a 1,000-substation network sees ~1 failure/year. At 1% annual rate, 10 failures/year — each requiring technician dispatch, building access coordination, and billing reconciliation.",
+          "confidence": 0.8,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N26",
+          "statement": "Increase the ability to deploy MID/EN 1434-certified billing-grade meters at every building connection to achieve full EU EED compliance across the entire district network",
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "error_type": "ACCURACY",
+          "pyramid_level": "P2",
+          "importance": 10,
+          "satisfaction_current": 5,
+          "opportunity_score": 15,
+          "impact_category": "cost",
+          "rationale": "EU EED 2023/1791 mandates individual consumption metering at every building connection in district heating/cooling. Non-compliance exposes the utility to regulatory penalties. Affordable, accurate, certified meters at scale are essential for compliance.",
+          "confidence": 0.8,
+          "product_related": false,
+          "source": "web_search"
+        },
+        {
+          "id": "N27",
+          "statement": "Increase the ability to demonstrate EU EED-compliant individual consumption metering across 100% of building connections during regulatory audit, with verifiable metrological traceability per EN 1434",
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "error_type": "ACCURACY",
+          "pyramid_level": "P3",
+          "importance": 9,
+          "satisfaction_current": 4,
+          "opportunity_score": 14,
+          "impact_category": "cost",
+          "rationale": "The network operations manager's professional identity hinges on running a compliant, transparent network. Full metrological traceability (MID-certified, EN 1434-verified, tamper-sealed) at every point demonstrates regulatory excellence.",
+          "confidence": 0.7,
+          "product_related": false,
+          "source": "web_search"
+        },
+        {
+          "id": "N28",
+          "statement": "Increase the ability to provide building-owner-accessible consumption data (display, remote reading, or portal) that demonstrates measured — not estimated — thermal energy delivery for each billing period",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "error_type": "DETECTION",
+          "pyramid_level": "P4",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10,
+          "impact_category": "skill",
+          "rationale": "Building owners and regulators must SEE that the utility bills based on measured consumption. Accessible, transparent data (via display, AMR, or web portal) demonstrates fairness and professionalism.",
+          "confidence": 0.5,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N29",
+          "statement": "Minimize the likelihood of billing disputes exceeding 5% of quarterly energy cost caused by meter inaccuracy or unmeasured consumption periods that erode tenant trust in the district energy provider [hypothesis]",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ACCURACY",
+          "pyramid_level": "P5",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10,
+          "impact_category": "cost",
+          "rationale": "Building occupants want to feel fairly billed. Inaccurate or estimated billing creates frustration and disputes that damage the utility's relationship with consumers and increase administrative overhead.",
+          "confidence": 0.5,
+          "product_related": false,
+          "source": "domain_knowledge"
+        }
+      ],
+      "entities_produced": {
+        "nodes": [
+          {
+            "label": "JobMap",
+            "key": {
+              "naics_code": "221330",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "market_name": "Steam and Air-Conditioning Supply",
+              "anchor_vn_unit": "Ultrasonic Flow Sensor",
+              "anchor_level": "L4",
+              "parent_vn_unit": "Substation Flow & Temperature Measurement",
+              "parent_level": "L5",
+              "product_job_statement": "Help Substation Flow & Temperature Measurement to measure volumetric flow rate and medium temperature in district energy building substations for thermal energy calculation and consumption-based billing without obstructing flow or introducing mechanical wear"
+            }
+          },
+          {
+            "label": "JobStep",
+            "key": {
+              "step_number": "1-8",
+              "naics_code": "221330",
+              "run_id": "TBD"
+            },
+            "count": 8
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "<first 120 chars>",
+              "naics_code": "221330",
+              "run_id": "TBD"
+            },
+            "count": 29
+          },
+          {
+            "label": "IncumbentAnchor",
+            "key": {
+              "technology_name": "Mechanical Impeller / Turbine Meter",
+              "naics_code": "221330",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "anchor_vn_unit": "Mechanical Impeller / Turbine Flow Meter",
+              "anchor_level": "L4",
+              "market_name": "Steam and Air-Conditioning Supply"
+            }
+          },
+          {
+            "label": "IncumbentAnchor",
+            "key": {
+              "technology_name": "Electromagnetic Flow Meter",
+              "naics_code": "221330",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "anchor_vn_unit": "Electromagnetic Flow Meter",
+              "anchor_level": "L4",
+              "market_name": "Steam and Air-Conditioning Supply"
+            }
+          }
+        ],
+        "relationships": [
+          {
+            "type": "has_job_map",
+            "source": "Market:Steam and Air-Conditioning Supply",
+            "target": "JobMap:221330"
+          },
+          {
+            "type": "anchored_at",
+            "source": "JobMap:221330",
+            "target": "ValueNetworkUnit:Ultrasonic Flow Sensor"
+          },
+          {
+            "type": "has_job_step",
+            "source": "JobMap:221330",
+            "target": "JobStep:1-8"
+          },
+          {
+            "type": "has_error_statement",
+            "source": "JobStep:<per step>",
+            "target": "ErrorStatement:<per need>"
+          },
+          {
+            "type": "has_need",
+            "source": "Market:Steam and Air-Conditioning Supply",
+            "target": "ErrorStatement:<all 29>"
+          },
+          {
+            "type": "has_incumbent_anchor",
+            "source": "Market:Steam and Air-Conditioning Supply",
+            "target": "IncumbentAnchor:Mechanical Impeller / Turbine Meter"
+          },
+          {
+            "type": "has_incumbent_anchor",
+            "source": "Market:Steam and Air-Conditioning Supply",
+            "target": "IncumbentAnchor:Electromagnetic Flow Meter"
+          },
+          {
+            "type": "anchored_at",
+            "source": "IncumbentAnchor:Mechanical Impeller / Turbine Meter",
+            "target": "ValueNetworkUnit:Mechanical Impeller / Turbine Flow Meter"
+          },
+          {
+            "type": "anchored_at",
+            "source": "IncumbentAnchor:Electromagnetic Flow Meter",
+            "target": "ValueNetworkUnit:Electromagnetic Flow Meter"
+          }
+        ]
+      }
+    }
+  ],
+  "has_bom": false,
+  "naics_sector_type": "non_manufacturing"
+}

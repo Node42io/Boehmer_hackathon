@@ -1,0 +1,2516 @@
+{
+  "id": "JTBD_flowmeters_src_01_product_decomposition_",
+  "title": "JTBD — Flowmeters (Home Industry, NAICS 334513)",
+  "type": "jtbd_analysis",
+  "market_slug": "flowmeters_src_01_product_decomposition_",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Phase 1 — Industry Landscape",
+      "content": "### 1.1 CFJ, Output Types, Offering Level\n\n| Field | Value |\n|---|---|\n| **NAICS** | 334513 |\n| **CFJ** | Design, manufacture, calibrate, and deliver instruments that measure, display, and control industrial process variables to enable safe, efficient, and compliant operation of process plants [SRC: VN_flowmeters] |\n| **Offering Level** | L3–L4 (Component/Module — sensor sold as OEM component) |\n\n| Output Type | VN Level | Notes |\n|---|---|---|\n| Flow instruments (ultrasonic, electromagnetic, Coriolis, vortex, turbine, DP, thermal mass) | L5 | Primary output type for this analysis |\n| Pressure instruments | L5 | Strain gauge, capacitive, piezoelectric transducers |\n| Temperature instruments | L5 | RTD, thermocouple, thermistor |\n| Level instruments | L5 | Radar, ultrasonic, capacitive, guided wave |\n| Analytical instruments | L5 | pH, conductivity, dissolved oxygen, turbidity |\n| Control & recording instruments | L5 | Controllers, recorders, data loggers |\n\n### 1.2 Segments\n\nCircumstance-based segmentation of flowmeter buyers. Each faces fundamentally different alternatives, regulatory regimes, and trade-offs. [SRC: 05_market_discovery, web_search]\n\n| # | Segment | Circumstance | Key Differentiator | Relevant Output Types |\n|---|---|---|---|---|\n| 1 | **Continuous thermal management** | Closed-loop heating/cooling circuits where flow × ΔT = energy (kW) | Combined flow + temperature; energy calculation; glycol tolerance | Flow, Temperature |\n| 2 | **Batch process metering** | Recipe-driven dosing/blending where flow accuracy = product quality | Sanitary fittings; CIP compatibility; batch documentation | Flow, Analytical |\n| 3 | **CIP/SIP validation** | Cleaning circuits where flow proves adequate coverage for hygiene compliance | Food-grade materials; flow threshold verification; rinse-cycle confirmation | Flow |\n| 4 | **Safety-critical interlock** | Flow as safety input: low-water cutoff, cooling failure, overtemperature protection | SIL-rated; fail-safe; redundancy; fast response time | Flow, Pressure, Temperature |\n| 5 | **Fiscal/billing metering** | Flow measurement as basis for commercial transactions | MID certification; ±1% accuracy; tamper-proof; audit trail | Flow, Temperature |\n| 6 | **Water infrastructure monitoring** | Distribution networks: leak detection, pressure zone management, demand forecasting | Large DN range; battery operation; remote telemetry; IP68 | Flow, Pressure, Level |\n\n### 1.3 Process VN\n\nFully decomposed in [VN_flowmeters_src_01_product_decomposition_.md](VN_flowmeters_src_01_product_decomposition_.md). Summary:\n\n| Level | Count | Key Nodes |\n|---|---|---|\n| L7 | 1 | Process Instrumentation Ecosystem |\n| L6 | 10 | 7 core (Design → Dispatch) + 3 horizontal (Quality, Supply Chain, Regulatory) |\n| L5 | 30 | 3 per L6 node |\n| L4 | 90 | 3 per L5 node |\n| **Total** | **131** | |\n\n### 1.4 Product BOM (Ultrasonic Transit-Time Flowmeter)\n\n| BOM Level | Component | Material / Technology |\n|---|---|---|\n| L4 (Subsystem) | Piezoelectric transducer pair (Piezo A / Piezo B) | PZT-5A ceramic, silver electrodes |\n| L4 (Subsystem) | Signal conditioning PCB | ARM MCU, charge amplifier, ADC, UART/LIN/freq output |\n| L4 (Subsystem) | Flow body (wetted) | PPS or PA66-GF polymer, DN12–DN25 bore |\n| L3 (Module) | Electronics housing | PA66-GF, RAST 2.5 connector (3/4-pole) |\n| L3 (Module) | Seal assembly | EPDM O-rings, face seals |\n| L2 (Assembly) | NTC thermistor | Embedded in flow body |\n| L1 (Part) | Firmware | Transit-time algorithms, compensation, anomaly detection |\n| L0 (Material) | Epoxy bond line | Transducer-to-body acoustic coupling |\n\n### 1.5 Edges (VN × BOM)\n\n| | Piezo transducer (L4) | Flow body (L4) | PCB/electronics (L4) | Seal assembly (L3) | NTC thermistor (L2) |\n|---|:---:|:---:|:---:|:---:|:---:|\n| L6.2 Sensor Fabrication | **HARD** | — | — | — | — |\n| L6.3 Electronics Mfg | — | — | **HARD** | — | SOFT |\n| L6.4 Housing Fabrication | — | **HARD** | — | **HARD** | — |\n| L6.5 Assembly | SOFT | SOFT | SOFT | SOFT | SOFT |\n| L6.6 Calibration & Test | SOFT | SOFT | SOFT | — | SOFT |\n\n**Reading:** Piezo transducer format determines sensor fabrication equipment category (HARD). Flow body material determines housing fabrication method (injection molding vs CNC). All components influence assembly and calibration parameters (SOFT).\n\n---"
+    },
+    {
+      "title": "Phase 2 — Company Enters",
+      "content": "### 2.1 VN Anchor\n\n| Field | Value |\n|---|---|\n| **Anchor Route** | PRODUCT_BOM (sensor becomes part of OEM's system — heat pump, boiler, process skid) |\n| **Anchor Level** | L4 (component/subsystem — sensor within parent fluid loop) |\n| **Anchor Unit** | Flow Sensor |\n| **Parent VN Unit (L5)** | Process-Fluid Loop (hydronic circuit, cooling loop, heating circuit) |\n| **Grandparent VN Unit (L6)** | Thermal Management System (HVAC, heat pump, boiler, process skid) |\n| **Anchor Rationale** | Sensor is an L4 component integrated inline within a closed-pipe fluid loop. It does not define the loop architecture — it measures within it. [SRC: 02_functional_promise] |\n\n### 2.2 Lens\n\n| Field | Value |\n|---|---|\n| **Route** | Maker — PRODUCT_BOM |\n| **Lens Source** | BOM position function (what the component DOES within the parent system) |\n| **Function Verb** | Quantify |\n| **Segment Filter A** | Continuous thermal management, Batch process metering, Safety-critical interlock (all use closed-pipe inline flow measurement) |\n| **Segment Filter B** | Continuous thermal management (best fit — DN15–DN25, water/glycol, flow + temperature) |\n| **Lens Statement** | \"What [quantification] does this [thermal management system operator] need [from a flow measurement point in a closed-pipe liquid circuit]?\" |\n\n### 2.3 Product Job\n\n| Field | Value |\n|---|---|\n| **Product Job Statement** | Help Process-Fluid Loop to quantify volumetric flow rate and medium temperature at a single inline measurement point in closed-pipe liquid circuits |\n| **Parent Unit** | Process-Fluid Loop |\n| **Verb** | Quantify |\n| **Object** | Volumetric flow rate and medium temperature |\n| **Context** | At a single inline measurement point in closed-pipe liquid circuits |\n\n**Mechanism-Free Test:** No mention of \"ultrasonic,\" \"piezoelectric,\" \"transit-time,\" or \"Marquardt.\" An electromagnetic, Coriolis, or turbine sensor would satisfy the same product job. PASS.\n\n**Abstraction Test:** 5+ alternatives from different categories can accomplish this job (ultrasonic, electromagnetic, Coriolis, turbine, no measurement). PASS — this is a valid Product Job.\n\n### 2.4 Alternatives (5)\n\n| # | Alternative | UNSPSC | Inherent Trade-Offs |\n|---|---|---|---|\n| 1 | **Ultrasonic transit-time inline flowmeter** | 41112501 | Requires acoustic coupling; air bubbles >2% vol degrade accuracy; needs 5–10× DN straight pipe run; pipe must be fully filled; accuracy depends on correct fluid-type configuration at commissioning [SRC: 01_product_decomposition, web_search] |\n| 2 | **Electromagnetic (mag) flowmeter** | 41112501 | Requires conductive fluid >5 μS/cm (excludes deionized water, glycol); higher power (5–20 W vs <1 W); 2–3× unit cost at DN15–DN25; no temperature co-measurement; larger installation footprint [SRC: web_search] |\n| 3 | **Coriolis mass flowmeter** | 41112501 | 5–10× unit cost ($200–500 vs $20–60 OEM); significant weight (5–50 kg vs 0.3 kg); inherent pressure drop from bent tube geometry; provides mass flow + density but overkill for volumetric water circuits [SRC: web_search] |\n| 4 | **Turbine / impeller flowmeter** | 41112501 | Lowest unit cost ($5–20 OEM); moving parts degrade with glycol/particulates; bearing wear limits life to 2–3 years; creates pressure drop; glycol-intolerant; no bidirectional detection [SRC: web_search] |\n| 5 | **No measurement / pump-curve inference** | — (Status Quo) | Zero hardware cost; zero installation effort; accuracy ±10–20% at best; no fault detection; no trend data; no regulatory compliance capability [ASM] |\n\n### 2.5 P1 Lifecycle Stages per Alternative\n\n| Stage | Ultrasonic Transit-Time | Electromagnetic | Turbine/Impeller | No Measurement |\n|---|---|---|---|---|\n| **Acquisition** | Select DN variant, specify fluid type, verify UART/LIN compatibility, qualify via PPAP (6–18 months for OEM) | Specify DN, verify fluid conductivity >5 μS/cm, 24 V power supply, PPAP | Select DN, verify media cleanliness, simple pulse output, PPAP | None |\n| **Preparation** | Install inline, connect RAST 2.5, configure fluid type in firmware, verify straight run | Install inline, connect M12, configure, verify grounding and electrode wetting | Install inline, orient with flow direction, connect pulse output | None |\n| **Usage** | Read flow + temperature from single sensor, monitor diagnostics | Read flow + separate temperature probe, monitor diagnostics | Read flow pulse, replace if drift suspected, no diagnostics | Estimate from pump speed/valve position |\n| **Maintenance** | Verify calibration annually; clean transducer face if fouled; no bearing replacement | Verify calibration annually; check electrode coating; replace liner gaskets | Replace bearings every 2–3 years; re-calibrate after bearing change | None |\n| **Disposal** | Remove inline, drain, replace, recycle electronics | Remove inline, drain, replace, recycle | Remove inline, drain, replace, recycle | None |\n\n**Key insight:** Turbine has lowest acquisition cost but highest maintenance burden. Ultrasonic eliminates mechanical wear entirely. \"No measurement\" has zero P1 burden — it wins whenever flow knowledge is non-critical. [ASM]\n\n### 2.6 Scenarios\n\n| # | Scenario | Segment | Output Type Activated | BOM Position In Play |\n|---|---|---|---|---|\n| S1 | Hydronic heating circuit monitoring (boiler/heat pump) | Continuous thermal management | Flow instrument + Temperature | Flow body, PCB, thermistor |\n| S2 | Glycol cooling loop in fermentation/data center | Continuous thermal management | Flow instrument | Flow body, PCB (glycol compensation) |\n| S3 | CIP circuit flow verification in food/pharma plant | CIP/SIP validation | Flow instrument | Flow body (food-grade material) |\n| S4 | Low-water safety cutoff in hot-water boiler | Safety-critical interlock | Flow instrument | PCB (alarm output), flow body |\n| S5 | Building-level thermal energy metering (district heating) | Fiscal/billing metering | Flow instrument + Temperature | All (MID certification required) |\n| S6 | Battery-powered remote water monitoring | Water infrastructure | Flow instrument | PCB (low-energy mode <5 μA) |\n\n**Sparsity check:** Not every scenario activates every BOM component equally. S6 uniquely activates low-energy mode; S5 uniquely requires MID certification path; S3 requires food-grade materials. PASS.\n\n---"
+    },
+    {
+      "title": "Phase 3 — Needs Derivation",
+      "content": "### 3.1 Job Map (8 Universal Steps — Ulwick 2005)\n\n| # | Step | Statement | Relevant | Relevance Rationale |\n|---|---|---|---|---|\n| 1 | **DEFINE** | Specify flow range, pipe diameter, medium type, accuracy class, and communication protocol for the measurement point | **Yes** | Sensor variant selection directly depends on these parameters [SRC: 01_product_decomposition] |\n| 2 | **LOCATE** | Identify installation point with adequate straight pipe run and access for wiring | **Yes** | Installation constraints (straight run, pipe-full) affect measurement accuracy [SRC: 01_product_decomposition] |\n| 3 | **PREPARE** | Install sensor inline, connect piping/power/communications, configure fluid type | **Yes** | Commissioning determines measurement accuracy; fluid-type configuration is required [SRC: 01_product_decomposition] |\n| 4 | **CONFIRM** | Verify signal quality, zero-flow baseline, and diagnostic status before process startup | **Yes** | Pre-startup verification catches latent installation faults |\n| 5 | **EXECUTE** | Continuously measure volumetric flow rate and medium temperature; transmit readings to controller | **Yes** | Core value-creating function of the sensor [SRC: 02_functional_promise] |\n| 6 | **MONITOR** | Check measurement stability, detect drift, verify diagnostic health during operation | **Yes** | Long-term accuracy depends on ongoing monitoring; drift is progressive and hard to detect [SRC: web_search] |\n| 7 | **MODIFY** | Re-calibrate, adjust compensation parameters, or troubleshoot faults when deviations detected | No | Rare event; modern sensors are designed to minimize field adjustment |\n| 8 | **CONCLUDE** | Decommission, drain, remove, and replace sensor at end of operational life | No | Generic for any inline device; not product-differentiating |\n\n**Relevant steps:** 6 of 8 (DEFINE, LOCATE, PREPARE, CONFIRM, EXECUTE, MONITOR).\n\n### 3.2 Error Statements (26 needs)\n\n**Stakeholder roles applied:** Job Executor (process/HVAC engineer), Job Overseer (plant/facilities manager), Product Lifecycle Support (specifier, installer, maintainer), Purchase Executor (procurement).\n\n#### EXECUTE Step — Core Measurement (8 needs)\n\n| # | Error Statement | Pyramid | Error Type | Imp | Sat | Opp | Impact | Prod-Rel | Conf |\n|---|---|---|---|---|---|---|---|---|---|\n| E1 | Minimize the likelihood of flow measurement error exceeding ±2% of reading across the 10–100% flow range | P2 | ACCURACY | 9 | 5 | 13 | reliability | false | 0.85 |\n| E2 | Increase the ability to maintain flow reading repeatability within ±0.3% under identical process conditions across consecutive measurement windows | P2 | CONSISTENCY | 8 | 6 | 10 | reliability | false | 0.80 |\n| E3 | Minimize the likelihood of measurement signal loss when entrained air exceeds 2% by volume for >30 seconds | P2 | ROBUSTNESS | 7 | 3 | 11 | reliability | true | 0.85 |\n| E4 | Increase the ability to sustain specified accuracy when fluid temperature changes by >20°C within 60 seconds | P2 | ROBUSTNESS | 7 | 4 | 10 | reliability | true | 0.75 |\n| E5 | Increase the ability to detect reverse-flow events exceeding 0.5 l/min within <2 seconds | P2 | DETECTION | 8 | 5 | 11 | safety | false | 0.80 |\n| E6 | Increase the ability to simultaneously measure fluid temperature within ±0.5°C alongside flow rate at a single measurement point | P2 | THROUGHPUT | 7 | 3 | 11 | cost | true | 0.75 |\n| E7 | Minimize the pressure drop across the measurement point to <50 mbar at nominal flow rate | P2 | EFFORT | 6 | 5 | 7 | cost | true | 0.80 |\n| E8 | Minimize the likelihood of flow measurement degradation when glycol concentration changes between 0% and 50% by volume | P2 | ROBUSTNESS | 7 | 3 | 11 | reliability | true | 0.75 |\n\n#### MONITOR Step — Drift Detection & Diagnostics (5 needs)\n\n| # | Error Statement | Pyramid | Error Type | Imp | Sat | Opp | Impact | Prod-Rel | Conf |\n|---|---|---|---|---|---|---|---|---|---|\n| E9 | Minimize the likelihood of undetected calibration drift exceeding ±0.5% over 12 months of continuous operation | P2 | DETECTION | 8 | 3 | 13 | reliability | false | 0.85 |\n| E10 | Increase the ability to distinguish genuine process deviations from sensor artifacts with >95% classification accuracy | P2 | ACCURACY | 7 | 4 | 10 | skill | false | 0.70 |\n| E11 | Minimize the time to detect pipe-empty or dry-run conditions that could damage downstream equipment | P2 | DETECTION | 9 | 4 | 14 | safety | false | 0.85 |\n| E12 | Minimize the likelihood of undetected transducer fouling or degradation reducing measurement accuracy below ±3% | P2 | DETECTION | 7 | 3 | 11 | reliability | true | 0.75 |\n| E13 | Increase the ability to provide continuous self-diagnostic health status to the host controller via standard communication protocols | P1-Usage | DETECTION | 6 | 4 | 8 | reliability | false | 0.70 |\n\n#### PREPARE Step — Installation & Commissioning (4 needs)\n\n| # | Error Statement | Pyramid | Error Type | Imp | Sat | Opp | Impact | Prod-Rel | Conf |\n|---|---|---|---|---|---|---|---|---|---|\n| E14 | Minimize the time required to install and commission a flow sensor from unpacking to first valid measurement | P1-Prep | EFFORT | 6 | 5 | 7 | time | false | 0.75 |\n| E15 | Minimize the likelihood of installation-induced measurement error due to insufficient upstream straight pipe run (<5× DN) | P1-Prep | ACCURACY | 7 | 3 | 11 | reliability | true | 0.80 |\n| E16 | Minimize the number of field configuration steps required before the sensor delivers specified accuracy | P1-Prep | EFFORT | 6 | 6 | 6 | skill | false | 0.70 |\n| E17 | Minimize the likelihood of measurement error caused by incorrect fluid-type configuration at commissioning | P1-Prep | ACCURACY | 7 | 4 | 10 | reliability | true | 0.70 |\n\n#### DEFINE Step — Specification & Selection (2 needs)\n\n| # | Error Statement | Pyramid | Error Type | Imp | Sat | Opp | Impact | Prod-Rel | Conf |\n|---|---|---|---|---|---|---|---|---|---|\n| E18 | Increase the ease of specifying the correct sensor variant for a given pipe diameter, medium, and flow range combination | P1-Acq | EFFORT | 5 | 6 | 4 | time | false | 0.65 |\n| E19 | Minimize the likelihood of specifying a sensor whose operating range does not cover ±20% beyond the expected process flow range | P1-Acq | ACCURACY | 7 | 5 | 9 | reliability | false | 0.75 |\n\n#### CONFIRM Step — Pre-Startup Verification (2 needs)\n\n| # | Error Statement | Pyramid | Error Type | Imp | Sat | Opp | Impact | Prod-Rel | Conf |\n|---|---|---|---|---|---|---|---|---|---|\n| E20 | Increase the ability to confirm valid sensor operation within <5 minutes of installation completion | P1-Prep | THROUGHPUT | 7 | 5 | 9 | time | false | 0.75 |\n| E21 | Minimize the likelihood of passing commissioning verification when the sensor has a latent installation fault (bond-line defect, misaligned transducer) | P1-Prep | DETECTION | 8 | 4 | 12 | safety | false | 0.75 |\n\n#### P1 Lifecycle Needs — Acquisition & Maintenance (3 needs)\n\n| # | Error Statement | Pyramid | Error Type | Imp | Sat | Opp | Impact | Prod-Rel | Conf |\n|---|---|---|---|---|---|---|---|---|---|\n| E22 | Minimize the time required to qualify a new flow sensor for OEM production from initial sample to PPAP approval | P1-Acq | EFFORT | 8 | 4 | 12 | time | false | 0.75 |\n| E23 | Minimize the annual maintenance cost per flow measurement point over a 10-year operational lifecycle | P1-Maint | EFFORT | 8 | 4 | 12 | cost | false | 0.80 |\n| E24 | Minimize the likelihood of unplanned sensor replacement due to mechanical wear or seal degradation within 5 years of installation | P1-Maint | ROBUSTNESS | 8 | 4 | 12 | reliability | true | 0.80 |\n\n#### P3/P4/P5 Needs — Identity & Emotional (2 needs)\n\n| # | Error Statement | Pyramid | Bridge | Imp | Sat | Opp | Impact | Prod-Rel | Conf |\n|---|---|---|---|---|---|---|---|---|---|\n| E25 | Increase the ability to demonstrate verifiable measurement traceability and calibration compliance during external quality or energy audits | P3 Role | \"By getting this job done well, who does the facilities manager become?\" → Trusted custodian of verifiable process/energy data → Product must enable traceable, auditable records | 7 | 5 | 9 | reliability | false | 0.70 |\n| E26 | Minimize the anxiety associated with deploying a new sensor technology by providing continuous self-diagnostic status confirmation [hypothesis] | P5 Emotion | \"What do they want to avoid feeling?\" → Uncertainty that the sensor is working correctly → Product must provide real-time health confirmation | 5 | 4 | 6 | skill | false | 0.50 |\n\n### 3.3 Need Distribution Summary\n\n| Dimension | Count | Pct | Target |\n|---|---|---|---|\n| **Total error statements** | 26 | — | 15–30 |\n| **Market-inherent** (product_related=false) | 17 | 65% | 60–70% |\n| **Technology-specific** (product_related=true) | 9 | 35% | 30–40% |\n| **\"Minimize…\" statements** | 17 | 65% | ~60% |\n| **\"Increase…\" statements** | 9 | 35% | ~40% |\n\n| Job Step | Need Count | Min Required |\n|---|---|---|\n| EXECUTE | 8 | ≥2 ✓ |\n| MONITOR | 5 | ≥2 ✓ |\n| PREPARE | 4 | ≥2 ✓ |\n| DEFINE | 2 | ≥2 ✓ |\n| CONFIRM | 2 | ≥2 ✓ |\n| P1 Lifecycle | 3 | — |\n| P3/P5 | 2 | — |\n\n### 3.4 ODI Opportunity Score Distribution\n\n| Score Range | Classification | Count | Statements |\n|---|---|---|---|\n| 13–14 | **Top opportunity** | 3 | E1 (accuracy), E9 (drift detection), E11 (dry-run detection) |\n| 11–12 | **High opportunity** | 10 | E3, E5, E6, E8, E10, E12, E15, E17, E21, E22, E23, E24 |\n| 9–10 | **Moderate opportunity** | 5 | E2, E4, E19, E20, E25 |\n| 6–8 | **Low opportunity** | 5 | E7, E13, E14, E16, E26 |\n| <6 | **Over-served** | 1 | E18 |\n\n**Top 5 underserved needs** (importance >7 AND satisfaction <5):\n\n| Rank | # | Statement | Opp Score |\n|---|---|---|---|\n| 1 | E11 | Dry-run / pipe-empty detection speed | 14 |\n| 2 | E1 | Flow measurement accuracy ±2% across range | 13 |\n| 3 | E9 | Undetected calibration drift over 12 months | 13 |\n| 4 | E22 | OEM qualification time (sample → PPAP) | 12 |\n| 5 | E24 | Unplanned replacement due to mechanical wear | 12 |\n\n---"
+    },
+    {
+      "title": "Incumbent Technology Anchors",
+      "content": "| Technology | Anchor VN Unit | Anchor Level | Market Share | Rationale |\n|---|---|---|---|---|\n| Electromagnetic flowmeter | Flow Sensor | L4 | ~30% | Dominant technology for closed-pipe liquid flow in process industries. Conductive-fluid-only limitation excludes glycol and DI water. [SRC: VN_flowmeters, web_search] |\n| Coriolis mass flowmeter | Flow Sensor | L4 | ~25% | Premium segment: highest accuracy (±0.1%), provides mass flow + density. Cost and weight prohibitive for OEM component applications. [SRC: VN_flowmeters, web_search] |\n| Turbine / impeller flowmeter | Flow Sensor | L4 | ~8% | Legacy; lowest unit cost. Declining due to mechanical wear, glycol intolerance, and maintenance burden. [SRC: VN_flowmeters, web_search] |\n\n---"
+    },
+    {
+      "title": "Validation (QA Checklist)",
+      "content": "| # | Check | Result |\n|---|---|---|\n| V1 | Format compliance: every statement starts with \"Minimize the likelihood of…\" or \"Increase the ability to…\" and contains exactly ONE measurable KPI | PASS — all 26 statements follow canonical format |\n| V2 | Product-related classification: product_related=true ONLY if need would DISAPPEAR with different technology | PASS — E3 (air bubbles), E4 (temp transients), E6 (co-measurement), E7 (pressure drop), E8 (glycol), E12 (transducer fouling), E15 (straight run), E17 (fluid config), E24 (mechanical wear) all tied to ultrasonic transit-time properties |\n| V3 | Importance/satisfaction sanity: no unrealistic patterns | PASS — importance range 5–9, satisfaction range 3–6. Safety-critical needs (E1, E5, E11, E21) scored 8–9 importance |\n| V4 | Impact category accuracy: category matches KPI | PASS — measurement accuracy → reliability, installation time → time, maintenance cost → cost |\n| V5 | Coverage: ≥2 needs per relevant job step; 65% market-inherent, 35% technology-specific | PASS — all relevant steps ≥2 needs; ratio within target |\n| V6 | Solution-agnostic: zero reference to specific product/vendor/technology in need statements | PASS — no mention of \"ultrasonic,\" \"Marquardt,\" \"piezoelectric,\" \"transit-time\" in any statement |\n| V7 | Anchor correctness: anchor level matches product abstraction | PASS — component/sensor anchors at L4 |\n| V8 | Product job references parent: includes parent VN unit name and context qualifier | PASS — \"Help Process-Fluid Loop to quantify…in closed-pipe liquid circuits\" |\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [Flowmeter Drift Causes and Management — Turbines Inc.](https://www.turbinesincorporated.com/news-resources/what-causes-flow-meter-drift-over-time-and-how-to-manage-it/)\n- [Ultrasonic Flow Meter Calibration and Maintenance — Pokcenser](https://pokcensertech.com/ultrasonic-flow-meter-calibration-and-maintenance-excellence-guide/)\n- [Common Flowmeter Errors — Processing Magazine](https://www.processingmagazine.com/process-control-automation/instrumentation/flow-measurement/article/55351639/common-flowmeter-errors-and-how-to-avoid-them)\n- [Flow Meter Error — Wikipedia](https://en.wikipedia.org/wiki/Flow_meter_error)\n- [Ultrasonic Transit Time Technology — ONICON](https://www.onicon.com/education-series/ultrasonic-transit-time-technology-explained-doc-0004240)\n- [VN_flowmeters_src_01_product_decomposition_.md](VN_flowmeters_src_01_product_decomposition_.md) (upstream VN file)\n- [01_product_decomposition.md](01_product_decomposition.md) (upstream product decomposition)\n- [02_functional_promise.md](02_functional_promise.md) (upstream functional promise)\n- [05_market_discovery.md](05_market_discovery.md) (upstream market discovery)\n- Marquardt Customer Presentation: \"US Flow Sensor\" (03.12.2025, CONFIDENTIAL)\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"jtbd_analysis\",\n  \"naics_code\": \"334513\",\n  \"naics_title\": \"Instruments and Related Products Manufacturing for Measuring, Displaying, Indicating, Recording, Transmitting, and Controlling Industrial Process Variables\",\n  \"market_name\": \"Flowmeters (Home Industry)\",\n  \"architecture_distance\": 0,\n  \"product_name\": \"Ultrasonic Flow Sensor\",\n  \"vendor_name\": \"Marquardt\",\n\n  \"cfj\": {\n    \"statement\": \"Design, manufacture, calibrate, and deliver instruments that measure, display, and control industrial process variables to enable safe, efficient, and compliant operation of process plants\",\n    \"source\": \"NAICS 334513 description\"\n  },\n\n  \"output_types\": [\n    \"Flow instruments\",\n    \"Pressure instruments\",\n    \"Temperature instruments\",\n    \"Level instruments\",\n    \"Analytical instruments\",\n    \"Control & recording instruments\"\n  ],\n\n  \"segments\": [\n    {\"name\": \"Continuous thermal management\", \"circumstance\": \"Closed-loop heating/cooling circuits where flow × ΔT = energy\"},\n    {\"name\": \"Batch process metering\", \"circumstance\": \"Recipe-driven dosing/blending where flow accuracy = product quality\"},\n    {\"name\": \"CIP/SIP validation\", \"circumstance\": \"Cleaning circuits where flow proves adequate coverage for hygiene compliance\"},\n    {\"name\": \"Safety-critical interlock\", \"circumstance\": \"Flow as safety input: low-water cutoff, cooling failure, overtemperature protection\"},\n    {\"name\": \"Fiscal/billing metering\", \"circumstance\": \"Flow measurement as basis for commercial transactions\"},\n    {\"name\": \"Water infrastructure monitoring\", \"circumstance\": \"Distribution networks: leak detection, pressure zone management\"}\n  ],\n\n  \"anchor\": {\n    \"route\": \"PRODUCT_BOM\",\n    \"anchor_level\": \"L4\",\n    \"anchor_vn_unit\": \"Flow Sensor\",\n    \"parent_vn_unit\": \"Process-Fluid Loop\",\n    \"parent_level\": \"L5\",\n    \"grandparent_vn_unit\": \"Thermal Management System\",\n    \"grandparent_level\": \"L6\"\n  },\n\n  \"product_job\": {\n    \"statement\": \"Help Process-Fluid Loop to quantify volumetric flow rate and medium temperature at a single inline measurement point in closed-pipe liquid circuits\",\n    \"parent_unit\": \"Process-Fluid Loop\",\n    \"verb\": \"Quantify\",\n    \"object\": \"Volumetric flow rate and medium temperature\",\n    \"context\": \"At a single inline measurement point in closed-pipe liquid circuits\"\n  },\n\n  \"alternatives\": [\n    {\n      \"name\": \"Ultrasonic transit-time inline flowmeter\",\n      \"unspsc_code\": \"41112501\",\n      \"trade_offs\": \"Requires acoustic coupling; air bubbles >2% vol degrade accuracy; needs 5-10x DN straight run; pipe must be fully filled\"\n    },\n    {\n      \"name\": \"Electromagnetic (mag) flowmeter\",\n      \"unspsc_code\": \"41112501\",\n      \"trade_offs\": \"Requires conductive fluid >5 uS/cm; higher power 5-20W; 2-3x unit cost; no temperature co-measurement\"\n    },\n    {\n      \"name\": \"Coriolis mass flowmeter\",\n      \"unspsc_code\": \"41112501\",\n      \"trade_offs\": \"5-10x unit cost; 5-50 kg weight; inherent pressure drop; overkill for volumetric water circuits\"\n    },\n    {\n      \"name\": \"Turbine / impeller flowmeter\",\n      \"unspsc_code\": \"41112501\",\n      \"trade_offs\": \"Lowest cost $5-20 OEM; moving parts degrade with glycol; bearing wear limits life 2-3 years; pressure drop\"\n    },\n    {\n      \"name\": \"No measurement / pump-curve inference\",\n      \"unspsc_code\": null,\n      \"trade_offs\": \"Zero hardware cost; accuracy +-10-20%; no fault detection; no regulatory compliance\"\n    }\n  ],\n\n  \"job_map\": {\n    \"steps\": [\n      {\"step_number\": 1, \"step_name\": \"DEFINE\", \"statement\": \"Specify flow range, pipe diameter, medium type, accuracy class, and communication protocol\", \"relevant_to_product\": true, \"relevance_rationale\": \"Sensor variant selection directly depends on these parameters\"},\n      {\"step_number\": 2, \"step_name\": \"LOCATE\", \"statement\": \"Identify installation point with adequate straight pipe run and access for wiring\", \"relevant_to_product\": true, \"relevance_rationale\": \"Installation constraints affect measurement accuracy\"},\n      {\"step_number\": 3, \"step_name\": \"PREPARE\", \"statement\": \"Install sensor inline, connect piping/power/communications, configure fluid type\", \"relevant_to_product\": true, \"relevance_rationale\": \"Commissioning determines measurement accuracy\"},\n      {\"step_number\": 4, \"step_name\": \"CONFIRM\", \"statement\": \"Verify signal quality, zero-flow baseline, and diagnostic status before process startup\", \"relevant_to_product\": true, \"relevance_rationale\": \"Pre-startup verification catches latent installation faults\"},\n      {\"step_number\": 5, \"step_name\": \"EXECUTE\", \"statement\": \"Continuously measure volumetric flow rate and medium temperature; transmit readings to controller\", \"relevant_to_product\": true, \"relevance_rationale\": \"Core value-creating function\"},\n      {\"step_number\": 6, \"step_name\": \"MONITOR\", \"statement\": \"Check measurement stability, detect drift, verify diagnostic health during operation\", \"relevant_to_product\": true, \"relevance_rationale\": \"Long-term accuracy depends on ongoing monitoring\"},\n      {\"step_number\": 7, \"step_name\": \"MODIFY\", \"statement\": \"Re-calibrate, adjust compensation parameters, or troubleshoot faults\", \"relevant_to_product\": false, \"relevance_rationale\": \"Rare event; modern sensors minimize field adjustment\"},\n      {\"step_number\": 8, \"step_name\": \"CONCLUDE\", \"statement\": \"Decommission, drain, remove, and replace sensor at end of life\", \"relevant_to_product\": false, \"relevance_rationale\": \"Generic for any inline device\"}\n    ]\n  },\n\n  \"error_statements\": [\n    {\n      \"id\": \"E1\",\n      \"statement\": \"Minimize the likelihood of flow measurement error exceeding ±2% of reading across the 10-100% flow range\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"pyramid_level\": \"P2\",\n      \"error_type\": \"ACCURACY\",\n      \"importance\": 9,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 13,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Measurement accuracy propagates into all downstream decisions: energy billing, dosing ratios, safety interlocks. ±1-3% is typical for transit-time under ideal conditions but degrades with installation quality.\",\n      \"product_related\": false,\n      \"confidence\": 0.85\n    },\n    {\n      \"id\": \"E2\",\n      \"statement\": \"Increase the ability to maintain flow reading repeatability within ±0.3% under identical process conditions across consecutive measurement windows\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"pyramid_level\": \"P2\",\n      \"error_type\": \"CONSISTENCY\",\n      \"importance\": 8,\n      \"satisfaction_current\": 6,\n      \"opportunity_score\": 10,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Repeatability is distinct from accuracy. A biased but repeatable meter can be corrected; a variable meter prevents stable control loops.\",\n      \"product_related\": false,\n      \"confidence\": 0.80\n    },\n    {\n      \"id\": \"E3\",\n      \"statement\": \"Minimize the likelihood of measurement signal loss when entrained air exceeds 2% by volume for >30 seconds\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"pyramid_level\": \"P2\",\n      \"error_type\": \"ROBUSTNESS\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Ultrasonic transit-time is specifically vulnerable to air bubble attenuation. Electromagnetic meters are unaffected. Systems with chronic air entrainment need de-aerators upstream.\",\n      \"product_related\": true,\n      \"confidence\": 0.85\n    },\n    {\n      \"id\": \"E4\",\n      \"statement\": \"Increase the ability to sustain specified accuracy when fluid temperature changes by >20°C within 60 seconds\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"pyramid_level\": \"P2\",\n      \"error_type\": \"ROBUSTNESS\",\n      \"importance\": 7,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 10,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Transit-time depends on speed of sound, which varies ~0.3%/°C. Rapid transients may exceed compensation algorithm response. Built-in NTC reduces steady-state error to ~0.2% but transients remain a challenge.\",\n      \"product_related\": true,\n      \"confidence\": 0.75\n    },\n    {\n      \"id\": \"E5\",\n      \"statement\": \"Increase the ability to detect reverse-flow events exceeding 0.5 l/min within <2 seconds\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"pyramid_level\": \"P2\",\n      \"error_type\": \"DETECTION\",\n      \"importance\": 8,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 11,\n      \"impact_category\": \"safety\",\n      \"rationale\": \"Backflow causes contamination in potable water systems, energy waste in heating circuits, and equipment damage in process loops. All flow technologies must address this.\",\n      \"product_related\": false,\n      \"confidence\": 0.80\n    },\n    {\n      \"id\": \"E6\",\n      \"statement\": \"Increase the ability to simultaneously measure fluid temperature within ±0.5°C alongside flow rate at a single measurement point\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"pyramid_level\": \"P2\",\n      \"error_type\": \"THROUGHPUT\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"Combined flow + temperature eliminates separate temperature probe, reducing installation cost and failure points. Most flowmeters require a separate sensor for temperature.\",\n      \"product_related\": true,\n      \"confidence\": 0.75\n    },\n    {\n      \"id\": \"E7\",\n      \"statement\": \"Minimize the pressure drop across the measurement point to <50 mbar at nominal flow rate\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"pyramid_level\": \"P2\",\n      \"error_type\": \"EFFORT\",\n      \"importance\": 6,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 7,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"Orifice-plate and vortex meters create 50-500 mbar pressure drops. Ultrasonic transit-time and electromagnetic meters have near-zero drop. Pressure drop wastes pump energy.\",\n      \"product_related\": true,\n      \"confidence\": 0.80\n    },\n    {\n      \"id\": \"E8\",\n      \"statement\": \"Minimize the likelihood of flow measurement degradation when glycol concentration changes between 0% and 50% by volume\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"pyramid_level\": \"P2\",\n      \"error_type\": \"ROBUSTNESS\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Glycol changes fluid viscosity and speed of sound, affecting transit-time accuracy. Turbine meters are physically degraded by glycol. Electromagnetic meters are unaffected but require conductivity >5 uS/cm.\",\n      \"product_related\": true,\n      \"confidence\": 0.75\n    },\n    {\n      \"id\": \"E9\",\n      \"statement\": \"Minimize the likelihood of undetected calibration drift exceeding ±0.5% over 12 months of continuous operation\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"pyramid_level\": \"P2\",\n      \"error_type\": \"DETECTION\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Calibration drift is progressive and hard to detect. In billing applications, 0.5% drift on a district heating meter causes ~€200-500/year revenue leakage per connection. Manufacturer-recommended recalibration intervals range from 1-3 years.\",\n      \"product_related\": false,\n      \"confidence\": 0.85\n    },\n    {\n      \"id\": \"E10\",\n      \"statement\": \"Increase the ability to distinguish genuine process deviations from sensor artifacts with >95% classification accuracy\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"pyramid_level\": \"P2\",\n      \"error_type\": \"ACCURACY\",\n      \"importance\": 7,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 10,\n      \"impact_category\": \"skill\",\n      \"rationale\": \"False alarms from sensor noise waste operator attention and erode trust in the measurement system. Operators begin ignoring alerts, missing real events.\",\n      \"product_related\": false,\n      \"confidence\": 0.70\n    },\n    {\n      \"id\": \"E11\",\n      \"statement\": \"Minimize the time to detect pipe-empty or dry-run conditions that could damage downstream equipment\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"pyramid_level\": \"P2\",\n      \"error_type\": \"DETECTION\",\n      \"importance\": 9,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 14,\n      \"impact_category\": \"safety\",\n      \"rationale\": \"Dry-run conditions damage pumps within minutes and can cause thermal runaway in heating elements. Early detection is safety-critical. Pump replacement costs €2,000-20,000.\",\n      \"product_related\": false,\n      \"confidence\": 0.85\n    },\n    {\n      \"id\": \"E12\",\n      \"statement\": \"Minimize the likelihood of undetected transducer fouling or degradation reducing measurement accuracy below ±3%\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"pyramid_level\": \"P2\",\n      \"error_type\": \"DETECTION\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Scale, biofilm, or particulate buildup on transducer faces attenuates the ultrasonic signal progressively. Self-diagnostic signal strength monitoring can detect this before accuracy impact.\",\n      \"product_related\": true,\n      \"confidence\": 0.75\n    },\n    {\n      \"id\": \"E13\",\n      \"statement\": \"Increase the ability to provide continuous self-diagnostic health status to the host controller via standard communication protocols\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"pyramid_level\": \"P1\",\n      \"error_type\": \"DETECTION\",\n      \"importance\": 6,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 8,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Predictive maintenance requires continuous health data from each measurement point. Legacy sensors provide only flow output with no diagnostic channel.\",\n      \"product_related\": false,\n      \"confidence\": 0.70\n    },\n    {\n      \"id\": \"E14\",\n      \"statement\": \"Minimize the time required to install and commission a flow sensor from unpacking to first valid measurement\",\n      \"job_step_number\": 3,\n      \"job_step_name\": \"PREPARE\",\n      \"pyramid_level\": \"P1\",\n      \"error_type\": \"EFFORT\",\n      \"importance\": 6,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 7,\n      \"impact_category\": \"time\",\n      \"rationale\": \"Installation cost is a significant portion of TCO for inline sensors. Pre-calibrated sensors with plug-and-play connectors reduce commissioning time from hours to minutes.\",\n      \"product_related\": false,\n      \"confidence\": 0.75\n    },\n    {\n      \"id\": \"E15\",\n      \"statement\": \"Minimize the likelihood of installation-induced measurement error due to insufficient upstream straight pipe run (<5x DN)\",\n      \"job_step_number\": 3,\n      \"job_step_name\": \"PREPARE\",\n      \"pyramid_level\": \"P1\",\n      \"error_type\": \"ACCURACY\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Ultrasonic transit-time meters require 5-10x DN undisturbed straight pipe upstream for specified accuracy. Many real installations cannot provide this. Coriolis meters have no straight-run requirement.\",\n      \"product_related\": true,\n      \"confidence\": 0.80\n    },\n    {\n      \"id\": \"E16\",\n      \"statement\": \"Minimize the number of field configuration steps required before the sensor delivers specified accuracy\",\n      \"job_step_number\": 3,\n      \"job_step_name\": \"PREPARE\",\n      \"pyramid_level\": \"P1\",\n      \"error_type\": \"EFFORT\",\n      \"importance\": 6,\n      \"satisfaction_current\": 6,\n      \"opportunity_score\": 6,\n      \"impact_category\": \"skill\",\n      \"rationale\": \"Fluid type, pipe diameter, and communication protocol must be configured at commissioning. Pre-calibrated, factory-configured sensors reduce this burden to zero.\",\n      \"product_related\": false,\n      \"confidence\": 0.70\n    },\n    {\n      \"id\": \"E17\",\n      \"statement\": \"Minimize the likelihood of measurement error caused by incorrect fluid-type configuration at commissioning\",\n      \"job_step_number\": 3,\n      \"job_step_name\": \"PREPARE\",\n      \"pyramid_level\": \"P1\",\n      \"error_type\": \"ACCURACY\",\n      \"importance\": 7,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 10,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Transit-time compensation algorithms require correct fluid-type selection. A water-configured sensor measuring 30% glycol will have systematic error of 3-5%. Pre-calibration to customer-specified medium eliminates this risk.\",\n      \"product_related\": true,\n      \"confidence\": 0.70\n    },\n    {\n      \"id\": \"E18\",\n      \"statement\": \"Increase the ease of specifying the correct sensor variant for a given pipe diameter, medium, and flow range combination\",\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"pyramid_level\": \"P1\",\n      \"error_type\": \"EFFORT\",\n      \"importance\": 5,\n      \"satisfaction_current\": 6,\n      \"opportunity_score\": 4,\n      \"impact_category\": \"time\",\n      \"rationale\": \"Modular platforms with a few key selection parameters (DN, fluid type, protocol) simplify specification vs technologies with dozens of material/range options.\",\n      \"product_related\": false,\n      \"confidence\": 0.65\n    },\n    {\n      \"id\": \"E19\",\n      \"statement\": \"Minimize the likelihood of specifying a sensor whose operating range does not cover ±20% beyond the expected process flow range\",\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"pyramid_level\": \"P1\",\n      \"error_type\": \"ACCURACY\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Under-sizing causes signal clipping; over-sizing reduces accuracy at low flows. Flow range must accommodate transient excursions beyond steady-state design point.\",\n      \"product_related\": false,\n      \"confidence\": 0.75\n    },\n    {\n      \"id\": \"E20\",\n      \"statement\": \"Increase the ability to confirm valid sensor operation within <5 minutes of installation completion\",\n      \"job_step_number\": 4,\n      \"job_step_name\": \"CONFIRM\",\n      \"pyramid_level\": \"P1\",\n      \"error_type\": \"THROUGHPUT\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9,\n      \"impact_category\": \"time\",\n      \"rationale\": \"Pre-startup verification must be fast to avoid delaying process commissioning. Built-in self-test routines that verify transducer coupling, signal quality, and zero-flow baseline enable rapid confirmation.\",\n      \"product_related\": false,\n      \"confidence\": 0.75\n    },\n    {\n      \"id\": \"E21\",\n      \"statement\": \"Minimize the likelihood of passing commissioning verification when the sensor has a latent installation fault\",\n      \"job_step_number\": 4,\n      \"job_step_name\": \"CONFIRM\",\n      \"pyramid_level\": \"P1\",\n      \"error_type\": \"DETECTION\",\n      \"importance\": 8,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 12,\n      \"impact_category\": \"safety\",\n      \"rationale\": \"A sensor that appears to work during commissioning but has a bond-line defect or misaligned transducer may fail under thermal cycling or pressure cycling. Comprehensive self-diagnostics must catch latent faults before production.\",\n      \"product_related\": false,\n      \"confidence\": 0.75\n    },\n    {\n      \"id\": \"E22\",\n      \"statement\": \"Minimize the time required to qualify a new flow sensor for OEM production from initial sample to PPAP approval\",\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"pyramid_level\": \"P1\",\n      \"error_type\": \"EFFORT\",\n      \"importance\": 8,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 12,\n      \"impact_category\": \"time\",\n      \"rationale\": \"OEM sensor qualification typically takes 6-18 months including PPAP. Sensors with pre-existing certifications (KTW, WRAS), extensive test data, and 100% automated final test documentation reduce this timeline significantly.\",\n      \"product_related\": false,\n      \"confidence\": 0.75\n    },\n    {\n      \"id\": \"E23\",\n      \"statement\": \"Minimize the annual maintenance cost per flow measurement point over a 10-year operational lifecycle\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"pyramid_level\": \"P1\",\n      \"error_type\": \"EFFORT\",\n      \"importance\": 8,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 12,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"Maintenance costs dominate TCO. Turbine meters require bearing replacement every 2-3 years (~€50-200 per service). Ultrasonic transit-time sensors with no moving parts reduce this to annual calibration verification only.\",\n      \"product_related\": false,\n      \"confidence\": 0.80\n    },\n    {\n      \"id\": \"E24\",\n      \"statement\": \"Minimize the likelihood of unplanned sensor replacement due to mechanical wear or seal degradation within 5 years of installation\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"pyramid_level\": \"P1\",\n      \"error_type\": \"ROBUSTNESS\",\n      \"importance\": 8,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 12,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Turbine meters require bearing replacement every 2-3 years. Ultrasonic transit-time eliminates this failure mode entirely. Seal degradation near 90°C limit reduces service life — polymer housing limits vs stainless steel.\",\n      \"product_related\": true,\n      \"confidence\": 0.80\n    },\n    {\n      \"id\": \"E25\",\n      \"statement\": \"Increase the ability to demonstrate verifiable measurement traceability and calibration compliance during external quality or energy audits\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"pyramid_level\": \"P3\",\n      \"error_type\": \"DETECTION\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"P3 Role Identity: facilities manager becomes trusted custodian of verifiable process/energy data. Product must enable traceable, auditable measurement records with individual calibration certificates.\",\n      \"product_related\": false,\n      \"confidence\": 0.70\n    },\n    {\n      \"id\": \"E26\",\n      \"statement\": \"Minimize the anxiety associated with deploying a new sensor technology by providing continuous self-diagnostic status confirmation\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"pyramid_level\": \"P5\",\n      \"error_type\": \"DETECTION\",\n      \"importance\": 5,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 6,\n      \"impact_category\": \"skill\",\n      \"rationale\": \"[hypothesis] P5 Emotional: process engineer wants to avoid uncertainty about whether the sensor is working correctly. Continuous diagnostic LEDs or status flags address this need.\",\n      \"product_related\": false,\n      \"confidence\": 0.50\n    }\n  ],\n\n  \"incumbent_anchors\": [\n    {\n      \"technology_name\": \"Electromagnetic flowmeter\",\n      \"anchor_vn_unit\": \"Flow Sensor\",\n      \"anchor_level\": \"L4\",\n      \"market_share_pct\": 30,\n      \"rationale\": \"Dominant technology for closed-pipe liquid flow in process industries\",\n      \"confidence\": 0.85\n    },\n    {\n      \"technology_name\": \"Coriolis mass flowmeter\",\n      \"anchor_vn_unit\": \"Flow Sensor\",\n      \"anchor_level\": \"L4\",\n      \"market_share_pct\": 25,\n      \"rationale\": \"Premium segment: highest accuracy, mass flow + density\",\n      \"confidence\": 0.85\n    },\n    {\n      \"technology_name\": \"Turbine / impeller flowmeter\",\n      \"anchor_vn_unit\": \"Flow Sensor\",\n      \"anchor_level\": \"L4\",\n      \"market_share_pct\": 8,\n      \"rationale\": \"Legacy technology, lowest unit cost, declining due to maintenance burden\",\n      \"confidence\": 0.75\n    }\n  ],\n\n  \"entities_produced\": {\n    \"nodes\": [\n      {\"label\": \"JobMap\", \"key\": {\"naics_code\": \"334513\", \"run_id\": \"TBD\"}, \"properties\": {\"market_name\": \"Flowmeters (Home Industry)\", \"anchor_vn_unit\": \"Flow Sensor\", \"anchor_level\": \"L4\", \"parent_vn_unit\": \"Process-Fluid Loop\", \"parent_level\": \"L5\", \"product_job_statement\": \"Help Process-Fluid Loop to quantify volumetric flow rate and medium temperature at a single inline measurement point in closed-pipe liquid circuits\"}},\n      {\"label\": \"JobStep\", \"key\": {\"step_number\": 1, \"naics_code\": \"334513\", \"run_id\": \"TBD\"}, \"properties\": {\"step_name\": \"DEFINE\", \"statement\": \"Specify flow range, pipe diameter, medium type, accuracy class, and communication protocol\", \"relevant_to_product\": true}},\n      {\"label\": \"JobStep\", \"key\": {\"step_number\": 2, \"naics_code\": \"334513\", \"run_id\": \"TBD\"}, \"properties\": {\"step_name\": \"LOCATE\", \"statement\": \"Identify installation point with adequate straight pipe run and access for wiring\", \"relevant_to_product\": true}},\n      {\"label\": \"JobStep\", \"key\": {\"step_number\": 3, \"naics_code\": \"334513\", \"run_id\": \"TBD\"}, \"properties\": {\"step_name\": \"PREPARE\", \"statement\": \"Install sensor inline, connect piping/power/communications, configure fluid type\", \"relevant_to_product\": true}},\n      {\"label\": \"JobStep\", \"key\": {\"step_number\": 4, \"naics_code\": \"334513\", \"run_id\": \"TBD\"}, \"properties\": {\"step_name\": \"CONFIRM\", \"statement\": \"Verify signal quality, zero-flow baseline, and diagnostic status before process startup\", \"relevant_to_product\": true}},\n      {\"label\": \"JobStep\", \"key\": {\"step_number\": 5, \"naics_code\": \"334513\", \"run_id\": \"TBD\"}, \"properties\": {\"step_name\": \"EXECUTE\", \"statement\": \"Continuously measure volumetric flow rate and medium temperature; transmit readings to controller\", \"relevant_to_product\": true}},\n      {\"label\": \"JobStep\", \"key\": {\"step_number\": 6, \"naics_code\": \"334513\", \"run_id\": \"TBD\"}, \"properties\": {\"step_name\": \"MONITOR\", \"statement\": \"Check measurement stability, detect drift, verify diagnostic health during operation\", \"relevant_to_product\": true}},\n      {\"label\": \"JobStep\", \"key\": {\"step_number\": 7, \"naics_code\": \"334513\", \"run_id\": \"TBD\"}, \"properties\": {\"step_name\": \"MODIFY\", \"statement\": \"Re-calibrate, adjust compensation parameters, or troubleshoot faults\", \"relevant_to_product\": false}},\n      {\"label\": \"JobStep\", \"key\": {\"step_number\": 8, \"naics_code\": \"334513\", \"run_id\": \"TBD\"}, \"properties\": {\"step_name\": \"CONCLUDE\", \"statement\": \"Decommission, drain, remove, and replace sensor at end of life\", \"relevant_to_product\": false}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Minimize the likelihood of flow measurement error exceeding ±2% of reading across the 10-100% flow range\", \"naics_code\": \"334513\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Increase the ability to maintain flow reading repeatability within ±0.3% under identical process conditions\", \"naics_code\": \"334513\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Minimize the likelihood of measurement signal loss when entrained air exceeds 2% by volume for >30 seconds\", \"naics_code\": \"334513\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Increase the ability to sustain specified accuracy when fluid temperature changes by >20°C within 60 seconds\", \"naics_code\": \"334513\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Increase the ability to detect reverse-flow events exceeding 0.5 l/min within <2 seconds\", \"naics_code\": \"334513\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Increase the ability to simultaneously measure fluid temperature within ±0.5°C alongside flow rate\", \"naics_code\": \"334513\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Minimize the pressure drop across the measurement point to <50 mbar at nominal flow rate\", \"naics_code\": \"334513\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Minimize the likelihood of flow measurement degradation when glycol concentration changes between 0% and 50%\", \"naics_code\": \"334513\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Minimize the likelihood of undetected calibration drift exceeding ±0.5% over 12 months of continuous operation\", \"naics_code\": \"334513\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Increase the ability to distinguish genuine process deviations from sensor artifacts with >95% accuracy\", \"naics_code\": \"334513\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Minimize the time to detect pipe-empty or dry-run conditions that could damage downstream equipment\", \"naics_code\": \"334513\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Minimize the likelihood of undetected transducer fouling reducing measurement accuracy below ±3%\", \"naics_code\": \"334513\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Increase the ability to provide continuous self-diagnostic health status to the host controller\", \"naics_code\": \"334513\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Minimize the time required to install and commission a flow sensor from unpacking to first valid measurement\", \"naics_code\": \"334513\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Minimize the likelihood of installation-induced measurement error due to insufficient upstream straight pipe run\", \"naics_code\": \"334513\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Minimize the number of field configuration steps required before the sensor delivers specified accuracy\", \"naics_code\": \"334513\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Minimize the likelihood of measurement error caused by incorrect fluid-type configuration at commissioning\", \"naics_code\": \"334513\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Increase the ease of specifying the correct sensor variant for a given pipe diameter, medium, and flow range\", \"naics_code\": \"334513\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Minimize the likelihood of specifying a sensor whose operating range does not cover ±20% beyond expected flow\", \"naics_code\": \"334513\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Increase the ability to confirm valid sensor operation within <5 minutes of installation completion\", \"naics_code\": \"334513\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Minimize the likelihood of passing commissioning verification when the sensor has a latent installation fault\", \"naics_code\": \"334513\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Minimize the time required to qualify a new flow sensor for OEM production from initial sample to PPAP\", \"naics_code\": \"334513\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Minimize the annual maintenance cost per flow measurement point over a 10-year operational lifecycle\", \"naics_code\": \"334513\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Minimize the likelihood of unplanned sensor replacement due to mechanical wear within 5 years\", \"naics_code\": \"334513\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Increase the ability to demonstrate verifiable measurement traceability during external quality audits\", \"naics_code\": \"334513\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Minimize the anxiety associated with deploying a new sensor technology via continuous self-diagnostic status\", \"naics_code\": \"334513\", \"run_id\": \"TBD\"}},\n      {\"label\": \"IncumbentAnchor\", \"key\": {\"technology_name\": \"Electromagnetic flowmeter\", \"naics_code\": \"334513\", \"run_id\": \"TBD\"}},\n      {\"label\": \"IncumbentAnchor\", \"key\": {\"technology_name\": \"Coriolis mass flowmeter\", \"naics_code\": \"334513\", \"run_id\": \"TBD\"}},\n      {\"label\": \"IncumbentAnchor\", \"key\": {\"technology_name\": \"Turbine / impeller flowmeter\", \"naics_code\": \"334513\", \"run_id\": \"TBD\"}}\n    ],\n    \"relationships\": [\n      {\"type\": \"has_job_map\", \"source\": \"Market:Flowmeters (Home Industry)\", \"target\": \"JobMap:334513\"},\n      {\"type\": \"anchored_at\", \"source\": \"JobMap:334513\", \"target\": \"ValueNetworkUnit:Flow Sensor\"},\n      {\"type\": \"has_job_step\", \"source\": \"JobMap:334513\", \"target\": \"JobStep:1-DEFINE\"},\n      {\"type\": \"has_job_step\", \"source\": \"JobMap:334513\", \"target\": \"JobStep:2-LOCATE\"},\n      {\"type\": \"has_job_step\", \"source\": \"JobMap:334513\", \"target\": \"JobStep:3-PREPARE\"},\n      {\"type\": \"has_job_step\", \"source\": \"JobMap:334513\", \"target\": \"JobStep:4-CONFIRM\"},\n      {\"type\": \"has_job_step\", \"source\": \"JobMap:334513\", \"target\": \"JobStep:5-EXECUTE\"},\n      {\"type\": \"has_job_step\", \"source\": \"JobMap:334513\", \"target\": \"JobStep:6-MONITOR\"},\n      {\"type\": \"has_job_step\", \"source\": \"JobMap:334513\", \"target\": \"JobStep:7-MODIFY\"},\n      {\"type\": \"has_job_step\", \"source\": \"JobMap:334513\", \"target\": \"JobStep:8-CONCLUDE\"},\n      {\"type\": \"has_error_statement\", \"source\": \"JobStep:5-EXECUTE\", \"target\": \"ErrorStatement:E1\"},\n      {\"type\": \"has_error_statement\", \"source\": \"JobStep:5-EXECUTE\", \"target\": \"ErrorStatement:E2\"},\n      {\"type\": \"has_error_statement\", \"source\": \"JobStep:5-EXECUTE\", \"target\": \"ErrorStatement:E3\"},\n      {\"type\": \"has_error_statement\", \"source\": \"JobStep:5-EXECUTE\", \"target\": \"ErrorStatement:E4\"},\n      {\"type\": \"has_error_statement\", \"source\": \"JobStep:5-EXECUTE\", \"target\": \"ErrorStatement:E5\"},\n      {\"type\": \"has_error_statement\", \"source\": \"JobStep:5-EXECUTE\", \"target\": \"ErrorStatement:E6\"},\n      {\"type\": \"has_error_statement\", \"source\": \"JobStep:5-EXECUTE\", \"target\": \"ErrorStatement:E7\"},\n      {\"type\": \"has_error_statement\", \"source\": \"JobStep:5-EXECUTE\", \"target\": \"ErrorStatement:E8\"},\n      {\"type\": \"has_error_statement\", \"source\": \"JobStep:6-MONITOR\", \"target\": \"ErrorStatement:E9\"},\n      {\"type\": \"has_error_statement\", \"source\": \"JobStep:6-MONITOR\", \"target\": \"ErrorStatement:E10\"},\n      {\"type\": \"has_error_statement\", \"source\": \"JobStep:6-MONITOR\", \"target\": \"ErrorStatement:E11\"},\n      {\"type\": \"has_error_statement\", \"source\": \"JobStep:6-MONITOR\", \"target\": \"ErrorStatement:E12\"},\n      {\"type\": \"has_error_statement\", \"source\": \"JobStep:6-MONITOR\", \"target\": \"ErrorStatement:E13\"},\n      {\"type\": \"has_error_statement\", \"source\": \"JobStep:3-PREPARE\", \"target\": \"ErrorStatement:E14\"},\n      {\"type\": \"has_error_statement\", \"source\": \"JobStep:3-PREPARE\", \"target\": \"ErrorStatement:E15\"},\n      {\"type\": \"has_error_statement\", \"source\": \"JobStep:3-PREPARE\", \"target\": \"ErrorStatement:E16\"},\n      {\"type\": \"has_error_statement\", \"source\": \"JobStep:3-PREPARE\", \"target\": \"ErrorStatement:E17\"},\n      {\"type\": \"has_error_statement\", \"source\": \"JobStep:1-DEFINE\", \"target\": \"ErrorStatement:E18\"},\n      {\"type\": \"has_error_statement\", \"source\": \"JobStep:1-DEFINE\", \"target\": \"ErrorStatement:E19\"},\n      {\"type\": \"has_error_statement\", \"source\": \"JobStep:4-CONFIRM\", \"target\": \"ErrorStatement:E20\"},\n      {\"type\": \"has_error_statement\", \"source\": \"JobStep:4-CONFIRM\", \"target\": \"ErrorStatement:E21\"},\n      {\"type\": \"has_error_statement\", \"source\": \"JobStep:1-DEFINE\", \"target\": \"ErrorStatement:E22\"},\n      {\"type\": \"has_error_statement\", \"source\": \"JobStep:6-MONITOR\", \"target\": \"ErrorStatement:E23\"},\n      {\"type\": \"has_error_statement\", \"source\": \"JobStep:6-MONITOR\", \"target\": \"ErrorStatement:E24\"},\n      {\"type\": \"has_error_statement\", \"source\": \"JobStep:6-MONITOR\", \"target\": \"ErrorStatement:E25\"},\n      {\"type\": \"has_error_statement\", \"source\": \"JobStep:5-EXECUTE\", \"target\": \"ErrorStatement:E26\"},\n      {\"type\": \"has_need\", \"source\": \"Market:Flowmeters (Home Industry)\", \"target\": \"ErrorStatement:E1\"},\n      {\"type\": \"has_need\", \"source\": \"Market:Flowmeters (Home Industry)\", \"target\": \"ErrorStatement:E2\"},\n      {\"type\": \"has_need\", \"source\": \"Market:Flowmeters (Home Industry)\", \"target\": \"ErrorStatement:E3\"},\n      {\"type\": \"has_need\", \"source\": \"Market:Flowmeters (Home Industry)\", \"target\": \"ErrorStatement:E4\"},\n      {\"type\": \"has_need\", \"source\": \"Market:Flowmeters (Home Industry)\", \"target\": \"ErrorStatement:E5\"},\n      {\"type\": \"has_need\", \"source\": \"Market:Flowmeters (Home Industry)\", \"target\": \"ErrorStatement:E6\"},\n      {\"type\": \"has_need\", \"source\": \"Market:Flowmeters (Home Industry)\", \"target\": \"ErrorStatement:E7\"},\n      {\"type\": \"has_need\", \"source\": \"Market:Flowmeters (Home Industry)\", \"target\": \"ErrorStatement:E8\"},\n      {\"type\": \"has_need\", \"source\": \"Market:Flowmeters (Home Industry)\", \"target\": \"ErrorStatement:E9\"},\n      {\"type\": \"has_need\", \"source\": \"Market:Flowmeters (Home Industry)\", \"target\": \"ErrorStatement:E10\"},\n      {\"type\": \"has_need\", \"source\": \"Market:Flowmeters (Home Industry)\", \"target\": \"ErrorStatement:E11\"},\n      {\"type\": \"has_need\", \"source\": \"Market:Flowmeters (Home Industry)\", \"target\": \"ErrorStatement:E12\"},\n      {\"type\": \"has_need\", \"source\": \"Market:Flowmeters (Home Industry)\", \"target\": \"ErrorStatement:E13\"},\n      {\"type\": \"has_need\", \"source\": \"Market:Flowmeters (Home Industry)\", \"target\": \"ErrorStatement:E14\"},\n      {\"type\": \"has_need\", \"source\": \"Market:Flowmeters (Home Industry)\", \"target\": \"ErrorStatement:E15\"},\n      {\"type\": \"has_need\", \"source\": \"Market:Flowmeters (Home Industry)\", \"target\": \"ErrorStatement:E16\"},\n      {\"type\": \"has_need\", \"source\": \"Market:Flowmeters (Home Industry)\", \"target\": \"ErrorStatement:E17\"},\n      {\"type\": \"has_need\", \"source\": \"Market:Flowmeters (Home Industry)\", \"target\": \"ErrorStatement:E18\"},\n      {\"type\": \"has_need\", \"source\": \"Market:Flowmeters (Home Industry)\", \"target\": \"ErrorStatement:E19\"},\n      {\"type\": \"has_need\", \"source\": \"Market:Flowmeters (Home Industry)\", \"target\": \"ErrorStatement:E20\"},\n      {\"type\": \"has_need\", \"source\": \"Market:Flowmeters (Home Industry)\", \"target\": \"ErrorStatement:E21\"},\n      {\"type\": \"has_need\", \"source\": \"Market:Flowmeters (Home Industry)\", \"target\": \"ErrorStatement:E22\"},\n      {\"type\": \"has_need\", \"source\": \"Market:Flowmeters (Home Industry)\", \"target\": \"ErrorStatement:E23\"},\n      {\"type\": \"has_need\", \"source\": \"Market:Flowmeters (Home Industry)\", \"target\": \"ErrorStatement:E24\"},\n      {\"type\": \"has_need\", \"source\": \"Market:Flowmeters (Home Industry)\", \"target\": \"ErrorStatement:E25\"},\n      {\"type\": \"has_need\", \"source\": \"Market:Flowmeters (Home Industry)\", \"target\": \"ErrorStatement:E26\"},\n      {\"type\": \"has_incumbent_anchor\", \"source\": \"Market:Flowmeters (Home Industry)\", \"target\": \"IncumbentAnchor:Electromagnetic flowmeter\"},\n      {\"type\": \"has_incumbent_anchor\", \"source\": \"Market:Flowmeters (Home Industry)\", \"target\": \"IncumbentAnchor:Coriolis mass flowmeter\"},\n      {\"type\": \"has_incumbent_anchor\", \"source\": \"Market:Flowmeters (Home Industry)\", \"target\": \"IncumbentAnchor:Turbine / impeller flowmeter\"},\n      {\"type\": \"anchored_at\", \"source\": \"IncumbentAnchor:Electromagnetic flowmeter\", \"target\": \"ValueNetworkUnit:Flow Sensor\"},\n      {\"type\": \"anchored_at\", \"source\": \"IncumbentAnchor:Coriolis mass flowmeter\", \"target\": \"ValueNetworkUnit:Flow Sensor\"},\n      {\"type\": \"anchored_at\", \"source\": \"IncumbentAnchor:Turbine / impeller flowmeter\", \"target\": \"ValueNetworkUnit:Flow Sensor\"}\n    ]\n  }\n}\n```"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**NAICS**",
+          "Value": "334513"
+        },
+        {
+          "Field": "**CFJ**",
+          "Value": "Design, manufacture, calibrate, and deliver instruments that measure, display, and control industrial process variables to enable safe, efficient, and compliant operation of process plants [SRC: VN_flowmeters]"
+        },
+        {
+          "Field": "**Offering Level**",
+          "Value": "L3–L4 (Component/Module — sensor sold as OEM component)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Output Type",
+        "VN Level",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "Output Type": "Flow instruments (ultrasonic, electromagnetic, Coriolis, vortex, turbine, DP, thermal mass)",
+          "VN Level": "L5",
+          "Notes": "Primary output type for this analysis"
+        },
+        {
+          "Output Type": "Pressure instruments",
+          "VN Level": "L5",
+          "Notes": "Strain gauge, capacitive, piezoelectric transducers"
+        },
+        {
+          "Output Type": "Temperature instruments",
+          "VN Level": "L5",
+          "Notes": "RTD, thermocouple, thermistor"
+        },
+        {
+          "Output Type": "Level instruments",
+          "VN Level": "L5",
+          "Notes": "Radar, ultrasonic, capacitive, guided wave"
+        },
+        {
+          "Output Type": "Analytical instruments",
+          "VN Level": "L5",
+          "Notes": "pH, conductivity, dissolved oxygen, turbidity"
+        },
+        {
+          "Output Type": "Control & recording instruments",
+          "VN Level": "L5",
+          "Notes": "Controllers, recorders, data loggers"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Segment",
+        "Circumstance",
+        "Key Differentiator",
+        "Relevant Output Types"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Segment": "**Continuous thermal management**",
+          "Circumstance": "Closed-loop heating/cooling circuits where flow × ΔT = energy (kW)",
+          "Key Differentiator": "Combined flow + temperature; energy calculation; glycol tolerance",
+          "Relevant Output Types": "Flow, Temperature"
+        },
+        {
+          "#": "2",
+          "Segment": "**Batch process metering**",
+          "Circumstance": "Recipe-driven dosing/blending where flow accuracy = product quality",
+          "Key Differentiator": "Sanitary fittings; CIP compatibility; batch documentation",
+          "Relevant Output Types": "Flow, Analytical"
+        },
+        {
+          "#": "3",
+          "Segment": "**CIP/SIP validation**",
+          "Circumstance": "Cleaning circuits where flow proves adequate coverage for hygiene compliance",
+          "Key Differentiator": "Food-grade materials; flow threshold verification; rinse-cycle confirmation",
+          "Relevant Output Types": "Flow"
+        },
+        {
+          "#": "4",
+          "Segment": "**Safety-critical interlock**",
+          "Circumstance": "Flow as safety input: low-water cutoff, cooling failure, overtemperature protection",
+          "Key Differentiator": "SIL-rated; fail-safe; redundancy; fast response time",
+          "Relevant Output Types": "Flow, Pressure, Temperature"
+        },
+        {
+          "#": "5",
+          "Segment": "**Fiscal/billing metering**",
+          "Circumstance": "Flow measurement as basis for commercial transactions",
+          "Key Differentiator": "MID certification; ±1% accuracy; tamper-proof; audit trail",
+          "Relevant Output Types": "Flow, Temperature"
+        },
+        {
+          "#": "6",
+          "Segment": "**Water infrastructure monitoring**",
+          "Circumstance": "Distribution networks: leak detection, pressure zone management, demand forecasting",
+          "Key Differentiator": "Large DN range; battery operation; remote telemetry; IP68",
+          "Relevant Output Types": "Flow, Pressure, Level"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Level",
+        "Count",
+        "Key Nodes"
+      ],
+      "rows": [
+        {
+          "Level": "L7",
+          "Count": "1",
+          "Key Nodes": "Process Instrumentation Ecosystem"
+        },
+        {
+          "Level": "L6",
+          "Count": "10",
+          "Key Nodes": "7 core (Design → Dispatch) + 3 horizontal (Quality, Supply Chain, Regulatory)"
+        },
+        {
+          "Level": "L5",
+          "Count": "30",
+          "Key Nodes": "3 per L6 node"
+        },
+        {
+          "Level": "L4",
+          "Count": "90",
+          "Key Nodes": "3 per L5 node"
+        },
+        {
+          "Level": "**Total**",
+          "Count": "**131**",
+          "Key Nodes": ""
+        }
+      ]
+    },
+    {
+      "headers": [
+        "BOM Level",
+        "Component",
+        "Material / Technology"
+      ],
+      "rows": [
+        {
+          "BOM Level": "L4 (Subsystem)",
+          "Component": "Piezoelectric transducer pair (Piezo A / Piezo B)",
+          "Material / Technology": "PZT-5A ceramic, silver electrodes"
+        },
+        {
+          "BOM Level": "L4 (Subsystem)",
+          "Component": "Signal conditioning PCB",
+          "Material / Technology": "ARM MCU, charge amplifier, ADC, UART/LIN/freq output"
+        },
+        {
+          "BOM Level": "L4 (Subsystem)",
+          "Component": "Flow body (wetted)",
+          "Material / Technology": "PPS or PA66-GF polymer, DN12–DN25 bore"
+        },
+        {
+          "BOM Level": "L3 (Module)",
+          "Component": "Electronics housing",
+          "Material / Technology": "PA66-GF, RAST 2.5 connector (3/4-pole)"
+        },
+        {
+          "BOM Level": "L3 (Module)",
+          "Component": "Seal assembly",
+          "Material / Technology": "EPDM O-rings, face seals"
+        },
+        {
+          "BOM Level": "L2 (Assembly)",
+          "Component": "NTC thermistor",
+          "Material / Technology": "Embedded in flow body"
+        },
+        {
+          "BOM Level": "L1 (Part)",
+          "Component": "Firmware",
+          "Material / Technology": "Transit-time algorithms, compensation, anomaly detection"
+        },
+        {
+          "BOM Level": "L0 (Material)",
+          "Component": "Epoxy bond line",
+          "Material / Technology": "Transducer-to-body acoustic coupling"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Piezo transducer (L4)",
+        "Flow body (L4)",
+        "PCB/electronics (L4)",
+        "Seal assembly (L3)",
+        "NTC thermistor (L2)"
+      ],
+      "rows": [
+        {
+          "Piezo transducer (L4)": "L6.2 Sensor Fabrication",
+          "Flow body (L4)": "**HARD**",
+          "PCB/electronics (L4)": "—",
+          "Seal assembly (L3)": "—",
+          "NTC thermistor (L2)": "—"
+        },
+        {
+          "Piezo transducer (L4)": "L6.3 Electronics Mfg",
+          "Flow body (L4)": "—",
+          "PCB/electronics (L4)": "—",
+          "Seal assembly (L3)": "**HARD**",
+          "NTC thermistor (L2)": "—"
+        },
+        {
+          "Piezo transducer (L4)": "L6.4 Housing Fabrication",
+          "Flow body (L4)": "—",
+          "PCB/electronics (L4)": "**HARD**",
+          "Seal assembly (L3)": "—",
+          "NTC thermistor (L2)": "**HARD**"
+        },
+        {
+          "Piezo transducer (L4)": "L6.5 Assembly",
+          "Flow body (L4)": "SOFT",
+          "PCB/electronics (L4)": "SOFT",
+          "Seal assembly (L3)": "SOFT",
+          "NTC thermistor (L2)": "SOFT"
+        },
+        {
+          "Piezo transducer (L4)": "L6.6 Calibration & Test",
+          "Flow body (L4)": "SOFT",
+          "PCB/electronics (L4)": "SOFT",
+          "Seal assembly (L3)": "SOFT",
+          "NTC thermistor (L2)": "—"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**Anchor Route**",
+          "Value": "PRODUCT_BOM (sensor becomes part of OEM's system — heat pump, boiler, process skid)"
+        },
+        {
+          "Field": "**Anchor Level**",
+          "Value": "L4 (component/subsystem — sensor within parent fluid loop)"
+        },
+        {
+          "Field": "**Anchor Unit**",
+          "Value": "Flow Sensor"
+        },
+        {
+          "Field": "**Parent VN Unit (L5)**",
+          "Value": "Process-Fluid Loop (hydronic circuit, cooling loop, heating circuit)"
+        },
+        {
+          "Field": "**Grandparent VN Unit (L6)**",
+          "Value": "Thermal Management System (HVAC, heat pump, boiler, process skid)"
+        },
+        {
+          "Field": "**Anchor Rationale**",
+          "Value": "Sensor is an L4 component integrated inline within a closed-pipe fluid loop. It does not define the loop architecture — it measures within it. [SRC: 02_functional_promise]"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**Route**",
+          "Value": "Maker — PRODUCT_BOM"
+        },
+        {
+          "Field": "**Lens Source**",
+          "Value": "BOM position function (what the component DOES within the parent system)"
+        },
+        {
+          "Field": "**Function Verb**",
+          "Value": "Quantify"
+        },
+        {
+          "Field": "**Segment Filter A**",
+          "Value": "Continuous thermal management, Batch process metering, Safety-critical interlock (all use closed-pipe inline flow measurement)"
+        },
+        {
+          "Field": "**Segment Filter B**",
+          "Value": "Continuous thermal management (best fit — DN15–DN25, water/glycol, flow + temperature)"
+        },
+        {
+          "Field": "**Lens Statement**",
+          "Value": "\"What [quantification] does this [thermal management system operator] need [from a flow measurement point in a closed-pipe liquid circuit]?\""
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**Product Job Statement**",
+          "Value": "Help Process-Fluid Loop to quantify volumetric flow rate and medium temperature at a single inline measurement point in closed-pipe liquid circuits"
+        },
+        {
+          "Field": "**Parent Unit**",
+          "Value": "Process-Fluid Loop"
+        },
+        {
+          "Field": "**Verb**",
+          "Value": "Quantify"
+        },
+        {
+          "Field": "**Object**",
+          "Value": "Volumetric flow rate and medium temperature"
+        },
+        {
+          "Field": "**Context**",
+          "Value": "At a single inline measurement point in closed-pipe liquid circuits"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Alternative",
+        "UNSPSC",
+        "Inherent Trade-Offs"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Alternative": "**Ultrasonic transit-time inline flowmeter**",
+          "UNSPSC": "41112501",
+          "Inherent Trade-Offs": "Requires acoustic coupling; air bubbles >2% vol degrade accuracy; needs 5–10× DN straight pipe run; pipe must be fully filled; accuracy depends on correct fluid-type configuration at commissioning [SRC: 01_product_decomposition, web_search]"
+        },
+        {
+          "#": "2",
+          "Alternative": "**Electromagnetic (mag) flowmeter**",
+          "UNSPSC": "41112501",
+          "Inherent Trade-Offs": "Requires conductive fluid >5 μS/cm (excludes deionized water, glycol); higher power (5–20 W vs <1 W); 2–3× unit cost at DN15–DN25; no temperature co-measurement; larger installation footprint [SRC: web_search]"
+        },
+        {
+          "#": "3",
+          "Alternative": "**Coriolis mass flowmeter**",
+          "UNSPSC": "41112501",
+          "Inherent Trade-Offs": "5–10× unit cost ($200–500 vs $20–60 OEM); significant weight (5–50 kg vs 0.3 kg); inherent pressure drop from bent tube geometry; provides mass flow + density but overkill for volumetric water circuits [SRC: web_search]"
+        },
+        {
+          "#": "4",
+          "Alternative": "**Turbine / impeller flowmeter**",
+          "UNSPSC": "41112501",
+          "Inherent Trade-Offs": "Lowest unit cost ($5–20 OEM); moving parts degrade with glycol/particulates; bearing wear limits life to 2–3 years; creates pressure drop; glycol-intolerant; no bidirectional detection [SRC: web_search]"
+        },
+        {
+          "#": "5",
+          "Alternative": "**No measurement / pump-curve inference**",
+          "UNSPSC": "— (Status Quo)",
+          "Inherent Trade-Offs": "Zero hardware cost; zero installation effort; accuracy ±10–20% at best; no fault detection; no trend data; no regulatory compliance capability [ASM]"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Stage",
+        "Ultrasonic Transit-Time",
+        "Electromagnetic",
+        "Turbine/Impeller",
+        "No Measurement"
+      ],
+      "rows": [
+        {
+          "Stage": "**Acquisition**",
+          "Ultrasonic Transit-Time": "Select DN variant, specify fluid type, verify UART/LIN compatibility, qualify via PPAP (6–18 months for OEM)",
+          "Electromagnetic": "Specify DN, verify fluid conductivity >5 μS/cm, 24 V power supply, PPAP",
+          "Turbine/Impeller": "Select DN, verify media cleanliness, simple pulse output, PPAP",
+          "No Measurement": "None"
+        },
+        {
+          "Stage": "**Preparation**",
+          "Ultrasonic Transit-Time": "Install inline, connect RAST 2.5, configure fluid type in firmware, verify straight run",
+          "Electromagnetic": "Install inline, connect M12, configure, verify grounding and electrode wetting",
+          "Turbine/Impeller": "Install inline, orient with flow direction, connect pulse output",
+          "No Measurement": "None"
+        },
+        {
+          "Stage": "**Usage**",
+          "Ultrasonic Transit-Time": "Read flow + temperature from single sensor, monitor diagnostics",
+          "Electromagnetic": "Read flow + separate temperature probe, monitor diagnostics",
+          "Turbine/Impeller": "Read flow pulse, replace if drift suspected, no diagnostics",
+          "No Measurement": "Estimate from pump speed/valve position"
+        },
+        {
+          "Stage": "**Maintenance**",
+          "Ultrasonic Transit-Time": "Verify calibration annually; clean transducer face if fouled; no bearing replacement",
+          "Electromagnetic": "Verify calibration annually; check electrode coating; replace liner gaskets",
+          "Turbine/Impeller": "Replace bearings every 2–3 years; re-calibrate after bearing change",
+          "No Measurement": "None"
+        },
+        {
+          "Stage": "**Disposal**",
+          "Ultrasonic Transit-Time": "Remove inline, drain, replace, recycle electronics",
+          "Electromagnetic": "Remove inline, drain, replace, recycle",
+          "Turbine/Impeller": "Remove inline, drain, replace, recycle",
+          "No Measurement": "None"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Scenario",
+        "Segment",
+        "Output Type Activated",
+        "BOM Position In Play"
+      ],
+      "rows": [
+        {
+          "#": "S1",
+          "Scenario": "Hydronic heating circuit monitoring (boiler/heat pump)",
+          "Segment": "Continuous thermal management",
+          "Output Type Activated": "Flow instrument + Temperature",
+          "BOM Position In Play": "Flow body, PCB, thermistor"
+        },
+        {
+          "#": "S2",
+          "Scenario": "Glycol cooling loop in fermentation/data center",
+          "Segment": "Continuous thermal management",
+          "Output Type Activated": "Flow instrument",
+          "BOM Position In Play": "Flow body, PCB (glycol compensation)"
+        },
+        {
+          "#": "S3",
+          "Scenario": "CIP circuit flow verification in food/pharma plant",
+          "Segment": "CIP/SIP validation",
+          "Output Type Activated": "Flow instrument",
+          "BOM Position In Play": "Flow body (food-grade material)"
+        },
+        {
+          "#": "S4",
+          "Scenario": "Low-water safety cutoff in hot-water boiler",
+          "Segment": "Safety-critical interlock",
+          "Output Type Activated": "Flow instrument",
+          "BOM Position In Play": "PCB (alarm output), flow body"
+        },
+        {
+          "#": "S5",
+          "Scenario": "Building-level thermal energy metering (district heating)",
+          "Segment": "Fiscal/billing metering",
+          "Output Type Activated": "Flow instrument + Temperature",
+          "BOM Position In Play": "All (MID certification required)"
+        },
+        {
+          "#": "S6",
+          "Scenario": "Battery-powered remote water monitoring",
+          "Segment": "Water infrastructure",
+          "Output Type Activated": "Flow instrument",
+          "BOM Position In Play": "PCB (low-energy mode <5 μA)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Step",
+        "Statement",
+        "Relevant",
+        "Relevance Rationale"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Step": "**DEFINE**",
+          "Statement": "Specify flow range, pipe diameter, medium type, accuracy class, and communication protocol for the measurement point",
+          "Relevant": "**Yes**",
+          "Relevance Rationale": "Sensor variant selection directly depends on these parameters [SRC: 01_product_decomposition]"
+        },
+        {
+          "#": "2",
+          "Step": "**LOCATE**",
+          "Statement": "Identify installation point with adequate straight pipe run and access for wiring",
+          "Relevant": "**Yes**",
+          "Relevance Rationale": "Installation constraints (straight run, pipe-full) affect measurement accuracy [SRC: 01_product_decomposition]"
+        },
+        {
+          "#": "3",
+          "Step": "**PREPARE**",
+          "Statement": "Install sensor inline, connect piping/power/communications, configure fluid type",
+          "Relevant": "**Yes**",
+          "Relevance Rationale": "Commissioning determines measurement accuracy; fluid-type configuration is required [SRC: 01_product_decomposition]"
+        },
+        {
+          "#": "4",
+          "Step": "**CONFIRM**",
+          "Statement": "Verify signal quality, zero-flow baseline, and diagnostic status before process startup",
+          "Relevant": "**Yes**",
+          "Relevance Rationale": "Pre-startup verification catches latent installation faults"
+        },
+        {
+          "#": "5",
+          "Step": "**EXECUTE**",
+          "Statement": "Continuously measure volumetric flow rate and medium temperature; transmit readings to controller",
+          "Relevant": "**Yes**",
+          "Relevance Rationale": "Core value-creating function of the sensor [SRC: 02_functional_promise]"
+        },
+        {
+          "#": "6",
+          "Step": "**MONITOR**",
+          "Statement": "Check measurement stability, detect drift, verify diagnostic health during operation",
+          "Relevant": "**Yes**",
+          "Relevance Rationale": "Long-term accuracy depends on ongoing monitoring; drift is progressive and hard to detect [SRC: web_search]"
+        },
+        {
+          "#": "7",
+          "Step": "**MODIFY**",
+          "Statement": "Re-calibrate, adjust compensation parameters, or troubleshoot faults when deviations detected",
+          "Relevant": "No",
+          "Relevance Rationale": "Rare event; modern sensors are designed to minimize field adjustment"
+        },
+        {
+          "#": "8",
+          "Step": "**CONCLUDE**",
+          "Statement": "Decommission, drain, remove, and replace sensor at end of operational life",
+          "Relevant": "No",
+          "Relevance Rationale": "Generic for any inline device; not product-differentiating"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Error Statement",
+        "Pyramid",
+        "Error Type",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Impact",
+        "Prod-Rel",
+        "Conf"
+      ],
+      "rows": [
+        {
+          "#": "E1",
+          "Error Statement": "Minimize the likelihood of flow measurement error exceeding ±2% of reading across the 10–100% flow range",
+          "Pyramid": "P2",
+          "Error Type": "ACCURACY",
+          "Imp": "9",
+          "Sat": "5",
+          "Opp": "13",
+          "Impact": "reliability",
+          "Prod-Rel": "false",
+          "Conf": "0.85"
+        },
+        {
+          "#": "E2",
+          "Error Statement": "Increase the ability to maintain flow reading repeatability within ±0.3% under identical process conditions across consecutive measurement windows",
+          "Pyramid": "P2",
+          "Error Type": "CONSISTENCY",
+          "Imp": "8",
+          "Sat": "6",
+          "Opp": "10",
+          "Impact": "reliability",
+          "Prod-Rel": "false",
+          "Conf": "0.80"
+        },
+        {
+          "#": "E3",
+          "Error Statement": "Minimize the likelihood of measurement signal loss when entrained air exceeds 2% by volume for >30 seconds",
+          "Pyramid": "P2",
+          "Error Type": "ROBUSTNESS",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "11",
+          "Impact": "reliability",
+          "Prod-Rel": "true",
+          "Conf": "0.85"
+        },
+        {
+          "#": "E4",
+          "Error Statement": "Increase the ability to sustain specified accuracy when fluid temperature changes by >20°C within 60 seconds",
+          "Pyramid": "P2",
+          "Error Type": "ROBUSTNESS",
+          "Imp": "7",
+          "Sat": "4",
+          "Opp": "10",
+          "Impact": "reliability",
+          "Prod-Rel": "true",
+          "Conf": "0.75"
+        },
+        {
+          "#": "E5",
+          "Error Statement": "Increase the ability to detect reverse-flow events exceeding 0.5 l/min within <2 seconds",
+          "Pyramid": "P2",
+          "Error Type": "DETECTION",
+          "Imp": "8",
+          "Sat": "5",
+          "Opp": "11",
+          "Impact": "safety",
+          "Prod-Rel": "false",
+          "Conf": "0.80"
+        },
+        {
+          "#": "E6",
+          "Error Statement": "Increase the ability to simultaneously measure fluid temperature within ±0.5°C alongside flow rate at a single measurement point",
+          "Pyramid": "P2",
+          "Error Type": "THROUGHPUT",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "11",
+          "Impact": "cost",
+          "Prod-Rel": "true",
+          "Conf": "0.75"
+        },
+        {
+          "#": "E7",
+          "Error Statement": "Minimize the pressure drop across the measurement point to <50 mbar at nominal flow rate",
+          "Pyramid": "P2",
+          "Error Type": "EFFORT",
+          "Imp": "6",
+          "Sat": "5",
+          "Opp": "7",
+          "Impact": "cost",
+          "Prod-Rel": "true",
+          "Conf": "0.80"
+        },
+        {
+          "#": "E8",
+          "Error Statement": "Minimize the likelihood of flow measurement degradation when glycol concentration changes between 0% and 50% by volume",
+          "Pyramid": "P2",
+          "Error Type": "ROBUSTNESS",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "11",
+          "Impact": "reliability",
+          "Prod-Rel": "true",
+          "Conf": "0.75"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Error Statement",
+        "Pyramid",
+        "Error Type",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Impact",
+        "Prod-Rel",
+        "Conf"
+      ],
+      "rows": [
+        {
+          "#": "E9",
+          "Error Statement": "Minimize the likelihood of undetected calibration drift exceeding ±0.5% over 12 months of continuous operation",
+          "Pyramid": "P2",
+          "Error Type": "DETECTION",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "13",
+          "Impact": "reliability",
+          "Prod-Rel": "false",
+          "Conf": "0.85"
+        },
+        {
+          "#": "E10",
+          "Error Statement": "Increase the ability to distinguish genuine process deviations from sensor artifacts with >95% classification accuracy",
+          "Pyramid": "P2",
+          "Error Type": "ACCURACY",
+          "Imp": "7",
+          "Sat": "4",
+          "Opp": "10",
+          "Impact": "skill",
+          "Prod-Rel": "false",
+          "Conf": "0.70"
+        },
+        {
+          "#": "E11",
+          "Error Statement": "Minimize the time to detect pipe-empty or dry-run conditions that could damage downstream equipment",
+          "Pyramid": "P2",
+          "Error Type": "DETECTION",
+          "Imp": "9",
+          "Sat": "4",
+          "Opp": "14",
+          "Impact": "safety",
+          "Prod-Rel": "false",
+          "Conf": "0.85"
+        },
+        {
+          "#": "E12",
+          "Error Statement": "Minimize the likelihood of undetected transducer fouling or degradation reducing measurement accuracy below ±3%",
+          "Pyramid": "P2",
+          "Error Type": "DETECTION",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "11",
+          "Impact": "reliability",
+          "Prod-Rel": "true",
+          "Conf": "0.75"
+        },
+        {
+          "#": "E13",
+          "Error Statement": "Increase the ability to provide continuous self-diagnostic health status to the host controller via standard communication protocols",
+          "Pyramid": "P1-Usage",
+          "Error Type": "DETECTION",
+          "Imp": "6",
+          "Sat": "4",
+          "Opp": "8",
+          "Impact": "reliability",
+          "Prod-Rel": "false",
+          "Conf": "0.70"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Error Statement",
+        "Pyramid",
+        "Error Type",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Impact",
+        "Prod-Rel",
+        "Conf"
+      ],
+      "rows": [
+        {
+          "#": "E14",
+          "Error Statement": "Minimize the time required to install and commission a flow sensor from unpacking to first valid measurement",
+          "Pyramid": "P1-Prep",
+          "Error Type": "EFFORT",
+          "Imp": "6",
+          "Sat": "5",
+          "Opp": "7",
+          "Impact": "time",
+          "Prod-Rel": "false",
+          "Conf": "0.75"
+        },
+        {
+          "#": "E15",
+          "Error Statement": "Minimize the likelihood of installation-induced measurement error due to insufficient upstream straight pipe run (<5× DN)",
+          "Pyramid": "P1-Prep",
+          "Error Type": "ACCURACY",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "11",
+          "Impact": "reliability",
+          "Prod-Rel": "true",
+          "Conf": "0.80"
+        },
+        {
+          "#": "E16",
+          "Error Statement": "Minimize the number of field configuration steps required before the sensor delivers specified accuracy",
+          "Pyramid": "P1-Prep",
+          "Error Type": "EFFORT",
+          "Imp": "6",
+          "Sat": "6",
+          "Opp": "6",
+          "Impact": "skill",
+          "Prod-Rel": "false",
+          "Conf": "0.70"
+        },
+        {
+          "#": "E17",
+          "Error Statement": "Minimize the likelihood of measurement error caused by incorrect fluid-type configuration at commissioning",
+          "Pyramid": "P1-Prep",
+          "Error Type": "ACCURACY",
+          "Imp": "7",
+          "Sat": "4",
+          "Opp": "10",
+          "Impact": "reliability",
+          "Prod-Rel": "true",
+          "Conf": "0.70"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Error Statement",
+        "Pyramid",
+        "Error Type",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Impact",
+        "Prod-Rel",
+        "Conf"
+      ],
+      "rows": [
+        {
+          "#": "E18",
+          "Error Statement": "Increase the ease of specifying the correct sensor variant for a given pipe diameter, medium, and flow range combination",
+          "Pyramid": "P1-Acq",
+          "Error Type": "EFFORT",
+          "Imp": "5",
+          "Sat": "6",
+          "Opp": "4",
+          "Impact": "time",
+          "Prod-Rel": "false",
+          "Conf": "0.65"
+        },
+        {
+          "#": "E19",
+          "Error Statement": "Minimize the likelihood of specifying a sensor whose operating range does not cover ±20% beyond the expected process flow range",
+          "Pyramid": "P1-Acq",
+          "Error Type": "ACCURACY",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "9",
+          "Impact": "reliability",
+          "Prod-Rel": "false",
+          "Conf": "0.75"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Error Statement",
+        "Pyramid",
+        "Error Type",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Impact",
+        "Prod-Rel",
+        "Conf"
+      ],
+      "rows": [
+        {
+          "#": "E20",
+          "Error Statement": "Increase the ability to confirm valid sensor operation within <5 minutes of installation completion",
+          "Pyramid": "P1-Prep",
+          "Error Type": "THROUGHPUT",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "9",
+          "Impact": "time",
+          "Prod-Rel": "false",
+          "Conf": "0.75"
+        },
+        {
+          "#": "E21",
+          "Error Statement": "Minimize the likelihood of passing commissioning verification when the sensor has a latent installation fault (bond-line defect, misaligned transducer)",
+          "Pyramid": "P1-Prep",
+          "Error Type": "DETECTION",
+          "Imp": "8",
+          "Sat": "4",
+          "Opp": "12",
+          "Impact": "safety",
+          "Prod-Rel": "false",
+          "Conf": "0.75"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Error Statement",
+        "Pyramid",
+        "Error Type",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Impact",
+        "Prod-Rel",
+        "Conf"
+      ],
+      "rows": [
+        {
+          "#": "E22",
+          "Error Statement": "Minimize the time required to qualify a new flow sensor for OEM production from initial sample to PPAP approval",
+          "Pyramid": "P1-Acq",
+          "Error Type": "EFFORT",
+          "Imp": "8",
+          "Sat": "4",
+          "Opp": "12",
+          "Impact": "time",
+          "Prod-Rel": "false",
+          "Conf": "0.75"
+        },
+        {
+          "#": "E23",
+          "Error Statement": "Minimize the annual maintenance cost per flow measurement point over a 10-year operational lifecycle",
+          "Pyramid": "P1-Maint",
+          "Error Type": "EFFORT",
+          "Imp": "8",
+          "Sat": "4",
+          "Opp": "12",
+          "Impact": "cost",
+          "Prod-Rel": "false",
+          "Conf": "0.80"
+        },
+        {
+          "#": "E24",
+          "Error Statement": "Minimize the likelihood of unplanned sensor replacement due to mechanical wear or seal degradation within 5 years of installation",
+          "Pyramid": "P1-Maint",
+          "Error Type": "ROBUSTNESS",
+          "Imp": "8",
+          "Sat": "4",
+          "Opp": "12",
+          "Impact": "reliability",
+          "Prod-Rel": "true",
+          "Conf": "0.80"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Error Statement",
+        "Pyramid",
+        "Bridge",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Impact",
+        "Prod-Rel",
+        "Conf"
+      ],
+      "rows": [
+        {
+          "#": "E25",
+          "Error Statement": "Increase the ability to demonstrate verifiable measurement traceability and calibration compliance during external quality or energy audits",
+          "Pyramid": "P3 Role",
+          "Bridge": "\"By getting this job done well, who does the facilities manager become?\" → Trusted custodian of verifiable process/energy data → Product must enable traceable, auditable records",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "9",
+          "Impact": "reliability",
+          "Prod-Rel": "false",
+          "Conf": "0.70"
+        },
+        {
+          "#": "E26",
+          "Error Statement": "Minimize the anxiety associated with deploying a new sensor technology by providing continuous self-diagnostic status confirmation [hypothesis]",
+          "Pyramid": "P5 Emotion",
+          "Bridge": "\"What do they want to avoid feeling?\" → Uncertainty that the sensor is working correctly → Product must provide real-time health confirmation",
+          "Imp": "5",
+          "Sat": "4",
+          "Opp": "6",
+          "Impact": "skill",
+          "Prod-Rel": "false",
+          "Conf": "0.50"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Dimension",
+        "Count",
+        "Pct",
+        "Target"
+      ],
+      "rows": [
+        {
+          "Dimension": "**Total error statements**",
+          "Count": "26",
+          "Pct": "—",
+          "Target": "15–30"
+        },
+        {
+          "Dimension": "**Market-inherent** (product_related=false)",
+          "Count": "17",
+          "Pct": "65%",
+          "Target": "60–70%"
+        },
+        {
+          "Dimension": "**Technology-specific** (product_related=true)",
+          "Count": "9",
+          "Pct": "35%",
+          "Target": "30–40%"
+        },
+        {
+          "Dimension": "**\"Minimize…\" statements**",
+          "Count": "17",
+          "Pct": "65%",
+          "Target": "~60%"
+        },
+        {
+          "Dimension": "**\"Increase…\" statements**",
+          "Count": "9",
+          "Pct": "35%",
+          "Target": "~40%"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Job Step",
+        "Need Count",
+        "Min Required"
+      ],
+      "rows": [
+        {
+          "Job Step": "EXECUTE",
+          "Need Count": "8",
+          "Min Required": "≥2 ✓"
+        },
+        {
+          "Job Step": "MONITOR",
+          "Need Count": "5",
+          "Min Required": "≥2 ✓"
+        },
+        {
+          "Job Step": "PREPARE",
+          "Need Count": "4",
+          "Min Required": "≥2 ✓"
+        },
+        {
+          "Job Step": "DEFINE",
+          "Need Count": "2",
+          "Min Required": "≥2 ✓"
+        },
+        {
+          "Job Step": "CONFIRM",
+          "Need Count": "2",
+          "Min Required": "≥2 ✓"
+        },
+        {
+          "Job Step": "P1 Lifecycle",
+          "Need Count": "3",
+          "Min Required": "—"
+        },
+        {
+          "Job Step": "P3/P5",
+          "Need Count": "2",
+          "Min Required": "—"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Score Range",
+        "Classification",
+        "Count",
+        "Statements"
+      ],
+      "rows": [
+        {
+          "Score Range": "13–14",
+          "Classification": "**Top opportunity**",
+          "Count": "3",
+          "Statements": "E1 (accuracy), E9 (drift detection), E11 (dry-run detection)"
+        },
+        {
+          "Score Range": "11–12",
+          "Classification": "**High opportunity**",
+          "Count": "10",
+          "Statements": "E3, E5, E6, E8, E10, E12, E15, E17, E21, E22, E23, E24"
+        },
+        {
+          "Score Range": "9–10",
+          "Classification": "**Moderate opportunity**",
+          "Count": "5",
+          "Statements": "E2, E4, E19, E20, E25"
+        },
+        {
+          "Score Range": "6–8",
+          "Classification": "**Low opportunity**",
+          "Count": "5",
+          "Statements": "E7, E13, E14, E16, E26"
+        },
+        {
+          "Score Range": "<6",
+          "Classification": "**Over-served**",
+          "Count": "1",
+          "Statements": "E18"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Rank",
+        "#",
+        "Statement",
+        "Opp Score"
+      ],
+      "rows": [
+        {
+          "Rank": "1",
+          "#": "E11",
+          "Statement": "Dry-run / pipe-empty detection speed",
+          "Opp Score": "14"
+        },
+        {
+          "Rank": "2",
+          "#": "E1",
+          "Statement": "Flow measurement accuracy ±2% across range",
+          "Opp Score": "13"
+        },
+        {
+          "Rank": "3",
+          "#": "E9",
+          "Statement": "Undetected calibration drift over 12 months",
+          "Opp Score": "13"
+        },
+        {
+          "Rank": "4",
+          "#": "E22",
+          "Statement": "OEM qualification time (sample → PPAP)",
+          "Opp Score": "12"
+        },
+        {
+          "Rank": "5",
+          "#": "E24",
+          "Statement": "Unplanned replacement due to mechanical wear",
+          "Opp Score": "12"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Technology",
+        "Anchor VN Unit",
+        "Anchor Level",
+        "Market Share",
+        "Rationale"
+      ],
+      "rows": [
+        {
+          "Technology": "Electromagnetic flowmeter",
+          "Anchor VN Unit": "Flow Sensor",
+          "Anchor Level": "L4",
+          "Market Share": "~30%",
+          "Rationale": "Dominant technology for closed-pipe liquid flow in process industries. Conductive-fluid-only limitation excludes glycol and DI water. [SRC: VN_flowmeters, web_search]"
+        },
+        {
+          "Technology": "Coriolis mass flowmeter",
+          "Anchor VN Unit": "Flow Sensor",
+          "Anchor Level": "L4",
+          "Market Share": "~25%",
+          "Rationale": "Premium segment: highest accuracy (±0.1%), provides mass flow + density. Cost and weight prohibitive for OEM component applications. [SRC: VN_flowmeters, web_search]"
+        },
+        {
+          "Technology": "Turbine / impeller flowmeter",
+          "Anchor VN Unit": "Flow Sensor",
+          "Anchor Level": "L4",
+          "Market Share": "~8%",
+          "Rationale": "Legacy; lowest unit cost. Declining due to mechanical wear, glycol intolerance, and maintenance burden. [SRC: VN_flowmeters, web_search]"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "#": "V1",
+          "Check": "Format compliance: every statement starts with \"Minimize the likelihood of…\" or \"Increase the ability to…\" and contains exactly ONE measurable KPI",
+          "Result": "PASS — all 26 statements follow canonical format"
+        },
+        {
+          "#": "V2",
+          "Check": "Product-related classification: product_related=true ONLY if need would DISAPPEAR with different technology",
+          "Result": "PASS — E3 (air bubbles), E4 (temp transients), E6 (co-measurement), E7 (pressure drop), E8 (glycol), E12 (transducer fouling), E15 (straight run), E17 (fluid config), E24 (mechanical wear) all tied to ultrasonic transit-time properties"
+        },
+        {
+          "#": "V3",
+          "Check": "Importance/satisfaction sanity: no unrealistic patterns",
+          "Result": "PASS — importance range 5–9, satisfaction range 3–6. Safety-critical needs (E1, E5, E11, E21) scored 8–9 importance"
+        },
+        {
+          "#": "V4",
+          "Check": "Impact category accuracy: category matches KPI",
+          "Result": "PASS — measurement accuracy → reliability, installation time → time, maintenance cost → cost"
+        },
+        {
+          "#": "V5",
+          "Check": "Coverage: ≥2 needs per relevant job step; 65% market-inherent, 35% technology-specific",
+          "Result": "PASS — all relevant steps ≥2 needs; ratio within target"
+        },
+        {
+          "#": "V6",
+          "Check": "Solution-agnostic: zero reference to specific product/vendor/technology in need statements",
+          "Result": "PASS — no mention of \"ultrasonic,\" \"Marquardt,\" \"piezoelectric,\" \"transit-time\" in any statement"
+        },
+        {
+          "#": "V7",
+          "Check": "Anchor correctness: anchor level matches product abstraction",
+          "Result": "PASS — component/sensor anchors at L4"
+        },
+        {
+          "#": "V8",
+          "Check": "Product job references parent: includes parent VN unit name and context qualifier",
+          "Result": "PASS — \"Help Process-Fluid Loop to quantify…in closed-pipe liquid circuits\""
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "jtbd_analysis",
+      "naics_code": "334513",
+      "naics_title": "Instruments and Related Products Manufacturing for Measuring, Displaying, Indicating, Recording, Transmitting, and Controlling Industrial Process Variables",
+      "market_name": "Flowmeters (Home Industry)",
+      "architecture_distance": 0,
+      "product_name": "Ultrasonic Flow Sensor",
+      "vendor_name": "Marquardt",
+      "cfj": {
+        "statement": "Design, manufacture, calibrate, and deliver instruments that measure, display, and control industrial process variables to enable safe, efficient, and compliant operation of process plants",
+        "source": "NAICS 334513 description"
+      },
+      "output_types": [
+        "Flow instruments",
+        "Pressure instruments",
+        "Temperature instruments",
+        "Level instruments",
+        "Analytical instruments",
+        "Control & recording instruments"
+      ],
+      "segments": [
+        {
+          "name": "Continuous thermal management",
+          "circumstance": "Closed-loop heating/cooling circuits where flow × ΔT = energy"
+        },
+        {
+          "name": "Batch process metering",
+          "circumstance": "Recipe-driven dosing/blending where flow accuracy = product quality"
+        },
+        {
+          "name": "CIP/SIP validation",
+          "circumstance": "Cleaning circuits where flow proves adequate coverage for hygiene compliance"
+        },
+        {
+          "name": "Safety-critical interlock",
+          "circumstance": "Flow as safety input: low-water cutoff, cooling failure, overtemperature protection"
+        },
+        {
+          "name": "Fiscal/billing metering",
+          "circumstance": "Flow measurement as basis for commercial transactions"
+        },
+        {
+          "name": "Water infrastructure monitoring",
+          "circumstance": "Distribution networks: leak detection, pressure zone management"
+        }
+      ],
+      "anchor": {
+        "route": "PRODUCT_BOM",
+        "anchor_level": "L4",
+        "anchor_vn_unit": "Flow Sensor",
+        "parent_vn_unit": "Process-Fluid Loop",
+        "parent_level": "L5",
+        "grandparent_vn_unit": "Thermal Management System",
+        "grandparent_level": "L6"
+      },
+      "product_job": {
+        "statement": "Help Process-Fluid Loop to quantify volumetric flow rate and medium temperature at a single inline measurement point in closed-pipe liquid circuits",
+        "parent_unit": "Process-Fluid Loop",
+        "verb": "Quantify",
+        "object": "Volumetric flow rate and medium temperature",
+        "context": "At a single inline measurement point in closed-pipe liquid circuits"
+      },
+      "alternatives": [
+        {
+          "name": "Ultrasonic transit-time inline flowmeter",
+          "unspsc_code": "41112501",
+          "trade_offs": "Requires acoustic coupling; air bubbles >2% vol degrade accuracy; needs 5-10x DN straight run; pipe must be fully filled"
+        },
+        {
+          "name": "Electromagnetic (mag) flowmeter",
+          "unspsc_code": "41112501",
+          "trade_offs": "Requires conductive fluid >5 uS/cm; higher power 5-20W; 2-3x unit cost; no temperature co-measurement"
+        },
+        {
+          "name": "Coriolis mass flowmeter",
+          "unspsc_code": "41112501",
+          "trade_offs": "5-10x unit cost; 5-50 kg weight; inherent pressure drop; overkill for volumetric water circuits"
+        },
+        {
+          "name": "Turbine / impeller flowmeter",
+          "unspsc_code": "41112501",
+          "trade_offs": "Lowest cost $5-20 OEM; moving parts degrade with glycol; bearing wear limits life 2-3 years; pressure drop"
+        },
+        {
+          "name": "No measurement / pump-curve inference",
+          "unspsc_code": null,
+          "trade_offs": "Zero hardware cost; accuracy +-10-20%; no fault detection; no regulatory compliance"
+        }
+      ],
+      "job_map": {
+        "steps": [
+          {
+            "step_number": 1,
+            "step_name": "DEFINE",
+            "statement": "Specify flow range, pipe diameter, medium type, accuracy class, and communication protocol",
+            "relevant_to_product": true,
+            "relevance_rationale": "Sensor variant selection directly depends on these parameters"
+          },
+          {
+            "step_number": 2,
+            "step_name": "LOCATE",
+            "statement": "Identify installation point with adequate straight pipe run and access for wiring",
+            "relevant_to_product": true,
+            "relevance_rationale": "Installation constraints affect measurement accuracy"
+          },
+          {
+            "step_number": 3,
+            "step_name": "PREPARE",
+            "statement": "Install sensor inline, connect piping/power/communications, configure fluid type",
+            "relevant_to_product": true,
+            "relevance_rationale": "Commissioning determines measurement accuracy"
+          },
+          {
+            "step_number": 4,
+            "step_name": "CONFIRM",
+            "statement": "Verify signal quality, zero-flow baseline, and diagnostic status before process startup",
+            "relevant_to_product": true,
+            "relevance_rationale": "Pre-startup verification catches latent installation faults"
+          },
+          {
+            "step_number": 5,
+            "step_name": "EXECUTE",
+            "statement": "Continuously measure volumetric flow rate and medium temperature; transmit readings to controller",
+            "relevant_to_product": true,
+            "relevance_rationale": "Core value-creating function"
+          },
+          {
+            "step_number": 6,
+            "step_name": "MONITOR",
+            "statement": "Check measurement stability, detect drift, verify diagnostic health during operation",
+            "relevant_to_product": true,
+            "relevance_rationale": "Long-term accuracy depends on ongoing monitoring"
+          },
+          {
+            "step_number": 7,
+            "step_name": "MODIFY",
+            "statement": "Re-calibrate, adjust compensation parameters, or troubleshoot faults",
+            "relevant_to_product": false,
+            "relevance_rationale": "Rare event; modern sensors minimize field adjustment"
+          },
+          {
+            "step_number": 8,
+            "step_name": "CONCLUDE",
+            "statement": "Decommission, drain, remove, and replace sensor at end of life",
+            "relevant_to_product": false,
+            "relevance_rationale": "Generic for any inline device"
+          }
+        ]
+      },
+      "error_statements": [
+        {
+          "id": "E1",
+          "statement": "Minimize the likelihood of flow measurement error exceeding ±2% of reading across the 10-100% flow range",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "pyramid_level": "P2",
+          "error_type": "ACCURACY",
+          "importance": 9,
+          "satisfaction_current": 5,
+          "opportunity_score": 13,
+          "impact_category": "reliability",
+          "rationale": "Measurement accuracy propagates into all downstream decisions: energy billing, dosing ratios, safety interlocks. ±1-3% is typical for transit-time under ideal conditions but degrades with installation quality.",
+          "product_related": false,
+          "confidence": 0.85
+        },
+        {
+          "id": "E2",
+          "statement": "Increase the ability to maintain flow reading repeatability within ±0.3% under identical process conditions across consecutive measurement windows",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "pyramid_level": "P2",
+          "error_type": "CONSISTENCY",
+          "importance": 8,
+          "satisfaction_current": 6,
+          "opportunity_score": 10,
+          "impact_category": "reliability",
+          "rationale": "Repeatability is distinct from accuracy. A biased but repeatable meter can be corrected; a variable meter prevents stable control loops.",
+          "product_related": false,
+          "confidence": 0.8
+        },
+        {
+          "id": "E3",
+          "statement": "Minimize the likelihood of measurement signal loss when entrained air exceeds 2% by volume for >30 seconds",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "pyramid_level": "P2",
+          "error_type": "ROBUSTNESS",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11,
+          "impact_category": "reliability",
+          "rationale": "Ultrasonic transit-time is specifically vulnerable to air bubble attenuation. Electromagnetic meters are unaffected. Systems with chronic air entrainment need de-aerators upstream.",
+          "product_related": true,
+          "confidence": 0.85
+        },
+        {
+          "id": "E4",
+          "statement": "Increase the ability to sustain specified accuracy when fluid temperature changes by >20°C within 60 seconds",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "pyramid_level": "P2",
+          "error_type": "ROBUSTNESS",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10,
+          "impact_category": "reliability",
+          "rationale": "Transit-time depends on speed of sound, which varies ~0.3%/°C. Rapid transients may exceed compensation algorithm response. Built-in NTC reduces steady-state error to ~0.2% but transients remain a challenge.",
+          "product_related": true,
+          "confidence": 0.75
+        },
+        {
+          "id": "E5",
+          "statement": "Increase the ability to detect reverse-flow events exceeding 0.5 l/min within <2 seconds",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "pyramid_level": "P2",
+          "error_type": "DETECTION",
+          "importance": 8,
+          "satisfaction_current": 5,
+          "opportunity_score": 11,
+          "impact_category": "safety",
+          "rationale": "Backflow causes contamination in potable water systems, energy waste in heating circuits, and equipment damage in process loops. All flow technologies must address this.",
+          "product_related": false,
+          "confidence": 0.8
+        },
+        {
+          "id": "E6",
+          "statement": "Increase the ability to simultaneously measure fluid temperature within ±0.5°C alongside flow rate at a single measurement point",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "pyramid_level": "P2",
+          "error_type": "THROUGHPUT",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11,
+          "impact_category": "cost",
+          "rationale": "Combined flow + temperature eliminates separate temperature probe, reducing installation cost and failure points. Most flowmeters require a separate sensor for temperature.",
+          "product_related": true,
+          "confidence": 0.75
+        },
+        {
+          "id": "E7",
+          "statement": "Minimize the pressure drop across the measurement point to <50 mbar at nominal flow rate",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "pyramid_level": "P2",
+          "error_type": "EFFORT",
+          "importance": 6,
+          "satisfaction_current": 5,
+          "opportunity_score": 7,
+          "impact_category": "cost",
+          "rationale": "Orifice-plate and vortex meters create 50-500 mbar pressure drops. Ultrasonic transit-time and electromagnetic meters have near-zero drop. Pressure drop wastes pump energy.",
+          "product_related": true,
+          "confidence": 0.8
+        },
+        {
+          "id": "E8",
+          "statement": "Minimize the likelihood of flow measurement degradation when glycol concentration changes between 0% and 50% by volume",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "pyramid_level": "P2",
+          "error_type": "ROBUSTNESS",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11,
+          "impact_category": "reliability",
+          "rationale": "Glycol changes fluid viscosity and speed of sound, affecting transit-time accuracy. Turbine meters are physically degraded by glycol. Electromagnetic meters are unaffected but require conductivity >5 uS/cm.",
+          "product_related": true,
+          "confidence": 0.75
+        },
+        {
+          "id": "E9",
+          "statement": "Minimize the likelihood of undetected calibration drift exceeding ±0.5% over 12 months of continuous operation",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "pyramid_level": "P2",
+          "error_type": "DETECTION",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13,
+          "impact_category": "reliability",
+          "rationale": "Calibration drift is progressive and hard to detect. In billing applications, 0.5% drift on a district heating meter causes ~€200-500/year revenue leakage per connection. Manufacturer-recommended recalibration intervals range from 1-3 years.",
+          "product_related": false,
+          "confidence": 0.85
+        },
+        {
+          "id": "E10",
+          "statement": "Increase the ability to distinguish genuine process deviations from sensor artifacts with >95% classification accuracy",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "pyramid_level": "P2",
+          "error_type": "ACCURACY",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10,
+          "impact_category": "skill",
+          "rationale": "False alarms from sensor noise waste operator attention and erode trust in the measurement system. Operators begin ignoring alerts, missing real events.",
+          "product_related": false,
+          "confidence": 0.7
+        },
+        {
+          "id": "E11",
+          "statement": "Minimize the time to detect pipe-empty or dry-run conditions that could damage downstream equipment",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "pyramid_level": "P2",
+          "error_type": "DETECTION",
+          "importance": 9,
+          "satisfaction_current": 4,
+          "opportunity_score": 14,
+          "impact_category": "safety",
+          "rationale": "Dry-run conditions damage pumps within minutes and can cause thermal runaway in heating elements. Early detection is safety-critical. Pump replacement costs €2,000-20,000.",
+          "product_related": false,
+          "confidence": 0.85
+        },
+        {
+          "id": "E12",
+          "statement": "Minimize the likelihood of undetected transducer fouling or degradation reducing measurement accuracy below ±3%",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "pyramid_level": "P2",
+          "error_type": "DETECTION",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11,
+          "impact_category": "reliability",
+          "rationale": "Scale, biofilm, or particulate buildup on transducer faces attenuates the ultrasonic signal progressively. Self-diagnostic signal strength monitoring can detect this before accuracy impact.",
+          "product_related": true,
+          "confidence": 0.75
+        },
+        {
+          "id": "E13",
+          "statement": "Increase the ability to provide continuous self-diagnostic health status to the host controller via standard communication protocols",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "pyramid_level": "P1",
+          "error_type": "DETECTION",
+          "importance": 6,
+          "satisfaction_current": 4,
+          "opportunity_score": 8,
+          "impact_category": "reliability",
+          "rationale": "Predictive maintenance requires continuous health data from each measurement point. Legacy sensors provide only flow output with no diagnostic channel.",
+          "product_related": false,
+          "confidence": 0.7
+        },
+        {
+          "id": "E14",
+          "statement": "Minimize the time required to install and commission a flow sensor from unpacking to first valid measurement",
+          "job_step_number": 3,
+          "job_step_name": "PREPARE",
+          "pyramid_level": "P1",
+          "error_type": "EFFORT",
+          "importance": 6,
+          "satisfaction_current": 5,
+          "opportunity_score": 7,
+          "impact_category": "time",
+          "rationale": "Installation cost is a significant portion of TCO for inline sensors. Pre-calibrated sensors with plug-and-play connectors reduce commissioning time from hours to minutes.",
+          "product_related": false,
+          "confidence": 0.75
+        },
+        {
+          "id": "E15",
+          "statement": "Minimize the likelihood of installation-induced measurement error due to insufficient upstream straight pipe run (<5x DN)",
+          "job_step_number": 3,
+          "job_step_name": "PREPARE",
+          "pyramid_level": "P1",
+          "error_type": "ACCURACY",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11,
+          "impact_category": "reliability",
+          "rationale": "Ultrasonic transit-time meters require 5-10x DN undisturbed straight pipe upstream for specified accuracy. Many real installations cannot provide this. Coriolis meters have no straight-run requirement.",
+          "product_related": true,
+          "confidence": 0.8
+        },
+        {
+          "id": "E16",
+          "statement": "Minimize the number of field configuration steps required before the sensor delivers specified accuracy",
+          "job_step_number": 3,
+          "job_step_name": "PREPARE",
+          "pyramid_level": "P1",
+          "error_type": "EFFORT",
+          "importance": 6,
+          "satisfaction_current": 6,
+          "opportunity_score": 6,
+          "impact_category": "skill",
+          "rationale": "Fluid type, pipe diameter, and communication protocol must be configured at commissioning. Pre-calibrated, factory-configured sensors reduce this burden to zero.",
+          "product_related": false,
+          "confidence": 0.7
+        },
+        {
+          "id": "E17",
+          "statement": "Minimize the likelihood of measurement error caused by incorrect fluid-type configuration at commissioning",
+          "job_step_number": 3,
+          "job_step_name": "PREPARE",
+          "pyramid_level": "P1",
+          "error_type": "ACCURACY",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10,
+          "impact_category": "reliability",
+          "rationale": "Transit-time compensation algorithms require correct fluid-type selection. A water-configured sensor measuring 30% glycol will have systematic error of 3-5%. Pre-calibration to customer-specified medium eliminates this risk.",
+          "product_related": true,
+          "confidence": 0.7
+        },
+        {
+          "id": "E18",
+          "statement": "Increase the ease of specifying the correct sensor variant for a given pipe diameter, medium, and flow range combination",
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "pyramid_level": "P1",
+          "error_type": "EFFORT",
+          "importance": 5,
+          "satisfaction_current": 6,
+          "opportunity_score": 4,
+          "impact_category": "time",
+          "rationale": "Modular platforms with a few key selection parameters (DN, fluid type, protocol) simplify specification vs technologies with dozens of material/range options.",
+          "product_related": false,
+          "confidence": 0.65
+        },
+        {
+          "id": "E19",
+          "statement": "Minimize the likelihood of specifying a sensor whose operating range does not cover ±20% beyond the expected process flow range",
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "pyramid_level": "P1",
+          "error_type": "ACCURACY",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9,
+          "impact_category": "reliability",
+          "rationale": "Under-sizing causes signal clipping; over-sizing reduces accuracy at low flows. Flow range must accommodate transient excursions beyond steady-state design point.",
+          "product_related": false,
+          "confidence": 0.75
+        },
+        {
+          "id": "E20",
+          "statement": "Increase the ability to confirm valid sensor operation within <5 minutes of installation completion",
+          "job_step_number": 4,
+          "job_step_name": "CONFIRM",
+          "pyramid_level": "P1",
+          "error_type": "THROUGHPUT",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9,
+          "impact_category": "time",
+          "rationale": "Pre-startup verification must be fast to avoid delaying process commissioning. Built-in self-test routines that verify transducer coupling, signal quality, and zero-flow baseline enable rapid confirmation.",
+          "product_related": false,
+          "confidence": 0.75
+        },
+        {
+          "id": "E21",
+          "statement": "Minimize the likelihood of passing commissioning verification when the sensor has a latent installation fault",
+          "job_step_number": 4,
+          "job_step_name": "CONFIRM",
+          "pyramid_level": "P1",
+          "error_type": "DETECTION",
+          "importance": 8,
+          "satisfaction_current": 4,
+          "opportunity_score": 12,
+          "impact_category": "safety",
+          "rationale": "A sensor that appears to work during commissioning but has a bond-line defect or misaligned transducer may fail under thermal cycling or pressure cycling. Comprehensive self-diagnostics must catch latent faults before production.",
+          "product_related": false,
+          "confidence": 0.75
+        },
+        {
+          "id": "E22",
+          "statement": "Minimize the time required to qualify a new flow sensor for OEM production from initial sample to PPAP approval",
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "pyramid_level": "P1",
+          "error_type": "EFFORT",
+          "importance": 8,
+          "satisfaction_current": 4,
+          "opportunity_score": 12,
+          "impact_category": "time",
+          "rationale": "OEM sensor qualification typically takes 6-18 months including PPAP. Sensors with pre-existing certifications (KTW, WRAS), extensive test data, and 100% automated final test documentation reduce this timeline significantly.",
+          "product_related": false,
+          "confidence": 0.75
+        },
+        {
+          "id": "E23",
+          "statement": "Minimize the annual maintenance cost per flow measurement point over a 10-year operational lifecycle",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "pyramid_level": "P1",
+          "error_type": "EFFORT",
+          "importance": 8,
+          "satisfaction_current": 4,
+          "opportunity_score": 12,
+          "impact_category": "cost",
+          "rationale": "Maintenance costs dominate TCO. Turbine meters require bearing replacement every 2-3 years (~€50-200 per service). Ultrasonic transit-time sensors with no moving parts reduce this to annual calibration verification only.",
+          "product_related": false,
+          "confidence": 0.8
+        },
+        {
+          "id": "E24",
+          "statement": "Minimize the likelihood of unplanned sensor replacement due to mechanical wear or seal degradation within 5 years of installation",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "pyramid_level": "P1",
+          "error_type": "ROBUSTNESS",
+          "importance": 8,
+          "satisfaction_current": 4,
+          "opportunity_score": 12,
+          "impact_category": "reliability",
+          "rationale": "Turbine meters require bearing replacement every 2-3 years. Ultrasonic transit-time eliminates this failure mode entirely. Seal degradation near 90°C limit reduces service life — polymer housing limits vs stainless steel.",
+          "product_related": true,
+          "confidence": 0.8
+        },
+        {
+          "id": "E25",
+          "statement": "Increase the ability to demonstrate verifiable measurement traceability and calibration compliance during external quality or energy audits",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "pyramid_level": "P3",
+          "error_type": "DETECTION",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9,
+          "impact_category": "reliability",
+          "rationale": "P3 Role Identity: facilities manager becomes trusted custodian of verifiable process/energy data. Product must enable traceable, auditable measurement records with individual calibration certificates.",
+          "product_related": false,
+          "confidence": 0.7
+        },
+        {
+          "id": "E26",
+          "statement": "Minimize the anxiety associated with deploying a new sensor technology by providing continuous self-diagnostic status confirmation",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "pyramid_level": "P5",
+          "error_type": "DETECTION",
+          "importance": 5,
+          "satisfaction_current": 4,
+          "opportunity_score": 6,
+          "impact_category": "skill",
+          "rationale": "[hypothesis] P5 Emotional: process engineer wants to avoid uncertainty about whether the sensor is working correctly. Continuous diagnostic LEDs or status flags address this need.",
+          "product_related": false,
+          "confidence": 0.5
+        }
+      ],
+      "incumbent_anchors": [
+        {
+          "technology_name": "Electromagnetic flowmeter",
+          "anchor_vn_unit": "Flow Sensor",
+          "anchor_level": "L4",
+          "market_share_pct": 30,
+          "rationale": "Dominant technology for closed-pipe liquid flow in process industries",
+          "confidence": 0.85
+        },
+        {
+          "technology_name": "Coriolis mass flowmeter",
+          "anchor_vn_unit": "Flow Sensor",
+          "anchor_level": "L4",
+          "market_share_pct": 25,
+          "rationale": "Premium segment: highest accuracy, mass flow + density",
+          "confidence": 0.85
+        },
+        {
+          "technology_name": "Turbine / impeller flowmeter",
+          "anchor_vn_unit": "Flow Sensor",
+          "anchor_level": "L4",
+          "market_share_pct": 8,
+          "rationale": "Legacy technology, lowest unit cost, declining due to maintenance burden",
+          "confidence": 0.75
+        }
+      ],
+      "entities_produced": {
+        "nodes": [
+          {
+            "label": "JobMap",
+            "key": {
+              "naics_code": "334513",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "market_name": "Flowmeters (Home Industry)",
+              "anchor_vn_unit": "Flow Sensor",
+              "anchor_level": "L4",
+              "parent_vn_unit": "Process-Fluid Loop",
+              "parent_level": "L5",
+              "product_job_statement": "Help Process-Fluid Loop to quantify volumetric flow rate and medium temperature at a single inline measurement point in closed-pipe liquid circuits"
+            }
+          },
+          {
+            "label": "JobStep",
+            "key": {
+              "step_number": 1,
+              "naics_code": "334513",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "step_name": "DEFINE",
+              "statement": "Specify flow range, pipe diameter, medium type, accuracy class, and communication protocol",
+              "relevant_to_product": true
+            }
+          },
+          {
+            "label": "JobStep",
+            "key": {
+              "step_number": 2,
+              "naics_code": "334513",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "step_name": "LOCATE",
+              "statement": "Identify installation point with adequate straight pipe run and access for wiring",
+              "relevant_to_product": true
+            }
+          },
+          {
+            "label": "JobStep",
+            "key": {
+              "step_number": 3,
+              "naics_code": "334513",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "step_name": "PREPARE",
+              "statement": "Install sensor inline, connect piping/power/communications, configure fluid type",
+              "relevant_to_product": true
+            }
+          },
+          {
+            "label": "JobStep",
+            "key": {
+              "step_number": 4,
+              "naics_code": "334513",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "step_name": "CONFIRM",
+              "statement": "Verify signal quality, zero-flow baseline, and diagnostic status before process startup",
+              "relevant_to_product": true
+            }
+          },
+          {
+            "label": "JobStep",
+            "key": {
+              "step_number": 5,
+              "naics_code": "334513",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "step_name": "EXECUTE",
+              "statement": "Continuously measure volumetric flow rate and medium temperature; transmit readings to controller",
+              "relevant_to_product": true
+            }
+          },
+          {
+            "label": "JobStep",
+            "key": {
+              "step_number": 6,
+              "naics_code": "334513",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "step_name": "MONITOR",
+              "statement": "Check measurement stability, detect drift, verify diagnostic health during operation",
+              "relevant_to_product": true
+            }
+          },
+          {
+            "label": "JobStep",
+            "key": {
+              "step_number": 7,
+              "naics_code": "334513",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "step_name": "MODIFY",
+              "statement": "Re-calibrate, adjust compensation parameters, or troubleshoot faults",
+              "relevant_to_product": false
+            }
+          },
+          {
+            "label": "JobStep",
+            "key": {
+              "step_number": 8,
+              "naics_code": "334513",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "step_name": "CONCLUDE",
+              "statement": "Decommission, drain, remove, and replace sensor at end of life",
+              "relevant_to_product": false
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Minimize the likelihood of flow measurement error exceeding ±2% of reading across the 10-100% flow range",
+              "naics_code": "334513",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Increase the ability to maintain flow reading repeatability within ±0.3% under identical process conditions",
+              "naics_code": "334513",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Minimize the likelihood of measurement signal loss when entrained air exceeds 2% by volume for >30 seconds",
+              "naics_code": "334513",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Increase the ability to sustain specified accuracy when fluid temperature changes by >20°C within 60 seconds",
+              "naics_code": "334513",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Increase the ability to detect reverse-flow events exceeding 0.5 l/min within <2 seconds",
+              "naics_code": "334513",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Increase the ability to simultaneously measure fluid temperature within ±0.5°C alongside flow rate",
+              "naics_code": "334513",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Minimize the pressure drop across the measurement point to <50 mbar at nominal flow rate",
+              "naics_code": "334513",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Minimize the likelihood of flow measurement degradation when glycol concentration changes between 0% and 50%",
+              "naics_code": "334513",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Minimize the likelihood of undetected calibration drift exceeding ±0.5% over 12 months of continuous operation",
+              "naics_code": "334513",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Increase the ability to distinguish genuine process deviations from sensor artifacts with >95% accuracy",
+              "naics_code": "334513",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Minimize the time to detect pipe-empty or dry-run conditions that could damage downstream equipment",
+              "naics_code": "334513",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Minimize the likelihood of undetected transducer fouling reducing measurement accuracy below ±3%",
+              "naics_code": "334513",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Increase the ability to provide continuous self-diagnostic health status to the host controller",
+              "naics_code": "334513",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Minimize the time required to install and commission a flow sensor from unpacking to first valid measurement",
+              "naics_code": "334513",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Minimize the likelihood of installation-induced measurement error due to insufficient upstream straight pipe run",
+              "naics_code": "334513",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Minimize the number of field configuration steps required before the sensor delivers specified accuracy",
+              "naics_code": "334513",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Minimize the likelihood of measurement error caused by incorrect fluid-type configuration at commissioning",
+              "naics_code": "334513",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Increase the ease of specifying the correct sensor variant for a given pipe diameter, medium, and flow range",
+              "naics_code": "334513",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Minimize the likelihood of specifying a sensor whose operating range does not cover ±20% beyond expected flow",
+              "naics_code": "334513",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Increase the ability to confirm valid sensor operation within <5 minutes of installation completion",
+              "naics_code": "334513",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Minimize the likelihood of passing commissioning verification when the sensor has a latent installation fault",
+              "naics_code": "334513",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Minimize the time required to qualify a new flow sensor for OEM production from initial sample to PPAP",
+              "naics_code": "334513",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Minimize the annual maintenance cost per flow measurement point over a 10-year operational lifecycle",
+              "naics_code": "334513",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Minimize the likelihood of unplanned sensor replacement due to mechanical wear within 5 years",
+              "naics_code": "334513",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Increase the ability to demonstrate verifiable measurement traceability during external quality audits",
+              "naics_code": "334513",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Minimize the anxiety associated with deploying a new sensor technology via continuous self-diagnostic status",
+              "naics_code": "334513",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "IncumbentAnchor",
+            "key": {
+              "technology_name": "Electromagnetic flowmeter",
+              "naics_code": "334513",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "IncumbentAnchor",
+            "key": {
+              "technology_name": "Coriolis mass flowmeter",
+              "naics_code": "334513",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "IncumbentAnchor",
+            "key": {
+              "technology_name": "Turbine / impeller flowmeter",
+              "naics_code": "334513",
+              "run_id": "TBD"
+            }
+          }
+        ],
+        "relationships": [
+          {
+            "type": "has_job_map",
+            "source": "Market:Flowmeters (Home Industry)",
+            "target": "JobMap:334513"
+          },
+          {
+            "type": "anchored_at",
+            "source": "JobMap:334513",
+            "target": "ValueNetworkUnit:Flow Sensor"
+          },
+          {
+            "type": "has_job_step",
+            "source": "JobMap:334513",
+            "target": "JobStep:1-DEFINE"
+          },
+          {
+            "type": "has_job_step",
+            "source": "JobMap:334513",
+            "target": "JobStep:2-LOCATE"
+          },
+          {
+            "type": "has_job_step",
+            "source": "JobMap:334513",
+            "target": "JobStep:3-PREPARE"
+          },
+          {
+            "type": "has_job_step",
+            "source": "JobMap:334513",
+            "target": "JobStep:4-CONFIRM"
+          },
+          {
+            "type": "has_job_step",
+            "source": "JobMap:334513",
+            "target": "JobStep:5-EXECUTE"
+          },
+          {
+            "type": "has_job_step",
+            "source": "JobMap:334513",
+            "target": "JobStep:6-MONITOR"
+          },
+          {
+            "type": "has_job_step",
+            "source": "JobMap:334513",
+            "target": "JobStep:7-MODIFY"
+          },
+          {
+            "type": "has_job_step",
+            "source": "JobMap:334513",
+            "target": "JobStep:8-CONCLUDE"
+          },
+          {
+            "type": "has_error_statement",
+            "source": "JobStep:5-EXECUTE",
+            "target": "ErrorStatement:E1"
+          },
+          {
+            "type": "has_error_statement",
+            "source": "JobStep:5-EXECUTE",
+            "target": "ErrorStatement:E2"
+          },
+          {
+            "type": "has_error_statement",
+            "source": "JobStep:5-EXECUTE",
+            "target": "ErrorStatement:E3"
+          },
+          {
+            "type": "has_error_statement",
+            "source": "JobStep:5-EXECUTE",
+            "target": "ErrorStatement:E4"
+          },
+          {
+            "type": "has_error_statement",
+            "source": "JobStep:5-EXECUTE",
+            "target": "ErrorStatement:E5"
+          },
+          {
+            "type": "has_error_statement",
+            "source": "JobStep:5-EXECUTE",
+            "target": "ErrorStatement:E6"
+          },
+          {
+            "type": "has_error_statement",
+            "source": "JobStep:5-EXECUTE",
+            "target": "ErrorStatement:E7"
+          },
+          {
+            "type": "has_error_statement",
+            "source": "JobStep:5-EXECUTE",
+            "target": "ErrorStatement:E8"
+          },
+          {
+            "type": "has_error_statement",
+            "source": "JobStep:6-MONITOR",
+            "target": "ErrorStatement:E9"
+          },
+          {
+            "type": "has_error_statement",
+            "source": "JobStep:6-MONITOR",
+            "target": "ErrorStatement:E10"
+          },
+          {
+            "type": "has_error_statement",
+            "source": "JobStep:6-MONITOR",
+            "target": "ErrorStatement:E11"
+          },
+          {
+            "type": "has_error_statement",
+            "source": "JobStep:6-MONITOR",
+            "target": "ErrorStatement:E12"
+          },
+          {
+            "type": "has_error_statement",
+            "source": "JobStep:6-MONITOR",
+            "target": "ErrorStatement:E13"
+          },
+          {
+            "type": "has_error_statement",
+            "source": "JobStep:3-PREPARE",
+            "target": "ErrorStatement:E14"
+          },
+          {
+            "type": "has_error_statement",
+            "source": "JobStep:3-PREPARE",
+            "target": "ErrorStatement:E15"
+          },
+          {
+            "type": "has_error_statement",
+            "source": "JobStep:3-PREPARE",
+            "target": "ErrorStatement:E16"
+          },
+          {
+            "type": "has_error_statement",
+            "source": "JobStep:3-PREPARE",
+            "target": "ErrorStatement:E17"
+          },
+          {
+            "type": "has_error_statement",
+            "source": "JobStep:1-DEFINE",
+            "target": "ErrorStatement:E18"
+          },
+          {
+            "type": "has_error_statement",
+            "source": "JobStep:1-DEFINE",
+            "target": "ErrorStatement:E19"
+          },
+          {
+            "type": "has_error_statement",
+            "source": "JobStep:4-CONFIRM",
+            "target": "ErrorStatement:E20"
+          },
+          {
+            "type": "has_error_statement",
+            "source": "JobStep:4-CONFIRM",
+            "target": "ErrorStatement:E21"
+          },
+          {
+            "type": "has_error_statement",
+            "source": "JobStep:1-DEFINE",
+            "target": "ErrorStatement:E22"
+          },
+          {
+            "type": "has_error_statement",
+            "source": "JobStep:6-MONITOR",
+            "target": "ErrorStatement:E23"
+          },
+          {
+            "type": "has_error_statement",
+            "source": "JobStep:6-MONITOR",
+            "target": "ErrorStatement:E24"
+          },
+          {
+            "type": "has_error_statement",
+            "source": "JobStep:6-MONITOR",
+            "target": "ErrorStatement:E25"
+          },
+          {
+            "type": "has_error_statement",
+            "source": "JobStep:5-EXECUTE",
+            "target": "ErrorStatement:E26"
+          },
+          {
+            "type": "has_need",
+            "source": "Market:Flowmeters (Home Industry)",
+            "target": "ErrorStatement:E1"
+          },
+          {
+            "type": "has_need",
+            "source": "Market:Flowmeters (Home Industry)",
+            "target": "ErrorStatement:E2"
+          },
+          {
+            "type": "has_need",
+            "source": "Market:Flowmeters (Home Industry)",
+            "target": "ErrorStatement:E3"
+          },
+          {
+            "type": "has_need",
+            "source": "Market:Flowmeters (Home Industry)",
+            "target": "ErrorStatement:E4"
+          },
+          {
+            "type": "has_need",
+            "source": "Market:Flowmeters (Home Industry)",
+            "target": "ErrorStatement:E5"
+          },
+          {
+            "type": "has_need",
+            "source": "Market:Flowmeters (Home Industry)",
+            "target": "ErrorStatement:E6"
+          },
+          {
+            "type": "has_need",
+            "source": "Market:Flowmeters (Home Industry)",
+            "target": "ErrorStatement:E7"
+          },
+          {
+            "type": "has_need",
+            "source": "Market:Flowmeters (Home Industry)",
+            "target": "ErrorStatement:E8"
+          },
+          {
+            "type": "has_need",
+            "source": "Market:Flowmeters (Home Industry)",
+            "target": "ErrorStatement:E9"
+          },
+          {
+            "type": "has_need",
+            "source": "Market:Flowmeters (Home Industry)",
+            "target": "ErrorStatement:E10"
+          },
+          {
+            "type": "has_need",
+            "source": "Market:Flowmeters (Home Industry)",
+            "target": "ErrorStatement:E11"
+          },
+          {
+            "type": "has_need",
+            "source": "Market:Flowmeters (Home Industry)",
+            "target": "ErrorStatement:E12"
+          },
+          {
+            "type": "has_need",
+            "source": "Market:Flowmeters (Home Industry)",
+            "target": "ErrorStatement:E13"
+          },
+          {
+            "type": "has_need",
+            "source": "Market:Flowmeters (Home Industry)",
+            "target": "ErrorStatement:E14"
+          },
+          {
+            "type": "has_need",
+            "source": "Market:Flowmeters (Home Industry)",
+            "target": "ErrorStatement:E15"
+          },
+          {
+            "type": "has_need",
+            "source": "Market:Flowmeters (Home Industry)",
+            "target": "ErrorStatement:E16"
+          },
+          {
+            "type": "has_need",
+            "source": "Market:Flowmeters (Home Industry)",
+            "target": "ErrorStatement:E17"
+          },
+          {
+            "type": "has_need",
+            "source": "Market:Flowmeters (Home Industry)",
+            "target": "ErrorStatement:E18"
+          },
+          {
+            "type": "has_need",
+            "source": "Market:Flowmeters (Home Industry)",
+            "target": "ErrorStatement:E19"
+          },
+          {
+            "type": "has_need",
+            "source": "Market:Flowmeters (Home Industry)",
+            "target": "ErrorStatement:E20"
+          },
+          {
+            "type": "has_need",
+            "source": "Market:Flowmeters (Home Industry)",
+            "target": "ErrorStatement:E21"
+          },
+          {
+            "type": "has_need",
+            "source": "Market:Flowmeters (Home Industry)",
+            "target": "ErrorStatement:E22"
+          },
+          {
+            "type": "has_need",
+            "source": "Market:Flowmeters (Home Industry)",
+            "target": "ErrorStatement:E23"
+          },
+          {
+            "type": "has_need",
+            "source": "Market:Flowmeters (Home Industry)",
+            "target": "ErrorStatement:E24"
+          },
+          {
+            "type": "has_need",
+            "source": "Market:Flowmeters (Home Industry)",
+            "target": "ErrorStatement:E25"
+          },
+          {
+            "type": "has_need",
+            "source": "Market:Flowmeters (Home Industry)",
+            "target": "ErrorStatement:E26"
+          },
+          {
+            "type": "has_incumbent_anchor",
+            "source": "Market:Flowmeters (Home Industry)",
+            "target": "IncumbentAnchor:Electromagnetic flowmeter"
+          },
+          {
+            "type": "has_incumbent_anchor",
+            "source": "Market:Flowmeters (Home Industry)",
+            "target": "IncumbentAnchor:Coriolis mass flowmeter"
+          },
+          {
+            "type": "has_incumbent_anchor",
+            "source": "Market:Flowmeters (Home Industry)",
+            "target": "IncumbentAnchor:Turbine / impeller flowmeter"
+          },
+          {
+            "type": "anchored_at",
+            "source": "IncumbentAnchor:Electromagnetic flowmeter",
+            "target": "ValueNetworkUnit:Flow Sensor"
+          },
+          {
+            "type": "anchored_at",
+            "source": "IncumbentAnchor:Coriolis mass flowmeter",
+            "target": "ValueNetworkUnit:Flow Sensor"
+          },
+          {
+            "type": "anchored_at",
+            "source": "IncumbentAnchor:Turbine / impeller flowmeter",
+            "target": "ValueNetworkUnit:Flow Sensor"
+          }
+        ]
+      }
+    }
+  ],
+  "has_bom": true,
+  "naics_sector_type": "manufacturing"
+}

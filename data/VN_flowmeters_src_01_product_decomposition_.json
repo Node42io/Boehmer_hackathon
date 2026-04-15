@@ -1,0 +1,2153 @@
+{
+  "id": "VN_flowmeters_src_01_product_decomposition_",
+  "title": "VN — Value Network: Industrial Process Variable Instruments (NAICS 334513)",
+  "type": "value_network",
+  "market_slug": "flowmeters_src_01_product_decomposition_",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Header",
+      "content": "| Field | Value |\n|---|---|\n| **NAICS Code** | 334513 — Instruments and Related Products Manufacturing for Measuring, Displaying, Indicating, Recording, Transmitting, and Controlling Industrial Process Variables |\n| **CFJ** | Design, manufacture, calibrate, and deliver instruments that measure, display, and control industrial process variables to enable safe, efficient, and compliant operation of process plants |\n| **Output Types** | Flow instruments (ultrasonic, electromagnetic, Coriolis, vortex, turbine, differential-pressure, thermal mass); Pressure instruments; Temperature instruments; Level instruments; Analytical instruments (pH, conductivity, dissolved oxygen); Control & recording instruments |\n| **Hierarchy** | Process VN (L7 through L4) — what process steps and equipment compose the instrument manufacturing chain |\n| **Key OEMs** | Endress+Hauser (~15% intelligent flow meter share), Emerson (~17%), Siemens, ABB, Yokogawa, KROHNE, Honeywell, Badger Meter, Bürkert, ifm electronic, Marquardt GmbH (ultrasonic OEM segment) |\n| **Market Size** | ~$8.5–9.1B globally (flow meters, 2024–2025); ~$0.8–1.3B ultrasonic flowmeter segment; transit-time = 80–85% of ultrasonic [SRC: web_search] |\n| **Architecture Distance** | 0 (home industry — Marquardt is a manufacturer within this NAICS) [SRC: 01_product_decomposition] |\n\n---"
+    },
+    {
+      "title": "L7 — Ecosystem",
+      "content": "### L7: Process Instrumentation Ecosystem\n\nThe complete ecosystem of instrument manufacturers, sensor/transducer fabricators, electronic component suppliers, calibration service providers, system integrators, distributors, and end-user process industries coordinated around the design, production, and deployment of instruments that measure, display, and control industrial process variables. NAICS 334513 comprises ~788 active U.S. establishments (~34,102 employees). The global flow meter market alone reached ~$9.1B in 2024, with ultrasonic flowmeters growing at 5–7% CAGR. Electromagnetic flowmeters hold ~26–32% market share; Coriolis meters lead by revenue; ultrasonic meters are the fastest-growing segment. [SRC: web_search, Census Bureau, Fortune Business Insights, Mordor Intelligence]\n\n---"
+    },
+    {
+      "title": "L6 — System-of-Systems Decomposition",
+      "content": "Seven L6 core process steps follow the physical transformation sequence from raw materials to finished, calibrated instrument. Three L6 horizontal steps run in parallel across all core steps.\n\n| L6 ID | Name | Type | Job Family | Output Types Served |\n|---|---|---|---|---|\n| **L6.1** | Product Design & Engineering | Core | Define measurement principle, mechanical form, electronics architecture, and firmware for target process variable | All |\n| **L6.2** | Sensor & Transducer Fabrication | Core | Manufacture the primary sensing element that converts a physical variable into an electrical signal | All (technology-specific per output type) |\n| **L6.3** | Electronics Manufacturing | Core | Fabricate, populate, and test printed circuit boards with signal conditioning, digitisation, and communication firmware | All |\n| **L6.4** | Flow Body & Housing Fabrication | Core | Machine, cast, or mold the wetted and structural housings that contain sensor and electronics | All |\n| **L6.5** | Assembly & Integration | Core | Combine sensor, electronics, and housing into a finished instrument; seal, wire, and verify | All |\n| **L6.6** | Calibration & Testing | Core | Calibrate each instrument against a traceable reference and verify performance across environmental and endurance envelopes | All |\n| **L6.7** | Packaging & Dispatch | Core | Inspect, document, pack, and ship finished instruments to OEMs, distributors, or end-users | All |\n| **L6.8** | Quality Management & Metrology (H) | Horizontal | Maintain measurement traceability, ISO 9001 / ISO 17025 compliance, and process control across all core steps |\n| **L6.9** | Supply Chain & Procurement (H) | Horizontal | Source raw materials, electronic components, piezo ceramics, metals, polymers, and manage vendor qualification |\n| **L6.10** | Regulatory & Certification (H) | Horizontal | Obtain and maintain CE/UL, ATEX/IECEx, MID billing, food-contact, and drinking-water certifications |\n\n---"
+    },
+    {
+      "title": "L6.1 — Product Design & Engineering",
+      "content": "First step in the transformation chain. Defines the measurement principle, mechanical design, electronics architecture, and firmware algorithms. Output: engineering release package (3D models, PCB layouts, firmware binaries, BOM, test specifications).\n\n### L5 Systems under L6.1\n\n#### L5.1.1: Mechanical Design (CAD/CAE)\n\n3D solid modeling and finite-element analysis of flow bodies, housings, and sensor mounting structures. Determines pressure rating, flow path geometry, and material selection.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.1.1.1: 3D CAD Workstation | Parametric solid modeling (SolidWorks, Creo, NX) for flow body and housing geometry |\n| L4.1.1.2: FEA Simulation Software | Structural (pressure burst), thermal (operating range), and CFD (flow path) simulation |\n| L4.1.1.3: Rapid Prototyping Equipment | SLA/SLS 3D printer and CNC prototype mill for design verification before tooling |\n\n#### L5.1.2: Electronics Design (EDA)\n\nSchematic capture, PCB layout, and circuit simulation for signal conditioning, ADC, microcontroller, and communication interfaces (UART, LIN, 4–20 mA, HART).\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.1.2.1: PCB Layout Tool | Multi-layer PCB design (Altium, KiCad, Cadence) with impedance-controlled routing |\n| L4.1.2.2: Circuit Simulation Software | SPICE analog simulation and mixed-signal verification |\n| L4.1.2.3: FPGA / DSP Development Kit | Hardware-in-the-loop development platform for real-time signal processing algorithms |\n\n#### L5.1.3: Firmware & Signal Processing\n\nEmbedded firmware development for transit-time measurement, temperature compensation, anomaly detection, and communication protocol stacks.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.1.3.1: Embedded Development Environment | Cross-compiler, debugger, and JTAG interface for ARM/RISC-V microcontrollers |\n| L4.1.3.2: DSP Algorithm Library | Transit-time calculation, digital filtering, zero-crossing detection, correlation algorithms |\n| L4.1.3.3: Hardware-in-the-Loop Test Bench | Simulated sensor input for firmware verification before physical prototyping |\n\n---"
+    },
+    {
+      "title": "L6.2 — Sensor & Transducer Fabrication",
+      "content": "Manufacture of the primary sensing element — the component that converts a physical process variable (flow velocity, pressure, temperature) into an electrical signal. This is the most technology-differentiated L6 step: each output type uses fundamentally different transducer technology. [SRC: web_search]\n\n### L5 Systems under L6.2\n\n#### L5.2.1: Piezoelectric Transducer Manufacturing\n\nFabrication of piezoelectric ceramic elements (PZT) for ultrasonic flow sensors. Two matched transducers per sensor body. Critical parameters: resonant frequency matching (±0.5%), acoustic impedance, and aging stability. PI Ceramic and CeramTec are major piezo suppliers; some OEMs fabricate in-house. [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.2.1.1: Piezo Ceramic Press & Sintering Furnace | Powder press forming PZT discs; sintering at 1,200–1,300 °C for densification |\n| L4.2.1.2: Electrode Metallization | Sputtering or screen-printing silver/nickel electrodes on piezo disc faces |\n| L4.2.1.3: Polarisation & Aging Station | High-voltage DC polarisation aligning dipoles; accelerated aging stabilises piezoelectric coefficient |\n\n#### L5.2.2: Electromagnetic Coil Assembly\n\nWinding of excitation and pickup coils for electromagnetic (mag) flowmeters. Coil geometry and insulation quality determine field uniformity and signal-to-noise ratio.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.2.2.1: Coil Winding Machine | Automated bobbin winder for excitation and pickup coils; wire gauge 0.1–0.5 mm |\n| L4.2.2.2: Insulation & Potting Station | Epoxy or polyurethane potting for moisture and vibration protection |\n| L4.2.2.3: Impedance Test Equipment | LCR meter verifying coil inductance, resistance, and Q-factor against specification |\n\n#### L5.2.3: Coriolis Tube Fabrication\n\nPrecision bending and welding of thin-walled stainless steel tubes (316L) for Coriolis mass flowmeters. Tube geometry (U-tube, straight, dual) determines sensitivity and zero stability.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.2.3.1: Tube Bending Machine | CNC mandrel bender for precise tube radii; wall thinning <10% |\n| L4.2.3.2: Orbital Welding & Brazing Station | Autogenous TIG orbital welder for tube-to-manifold joints; helium leak-tested |\n| L4.2.3.3: Tube Vibration Test Rig | Modal analysis verifying resonant frequency and symmetry of matched tube pairs |\n\n---"
+    },
+    {
+      "title": "L6.3 — Electronics Manufacturing",
+      "content": "Fabrication and assembly of printed circuit boards carrying signal conditioning, ADC, microcontroller, communication interfaces, and power management. Standard SMT production with instrument-specific firmware flashing and configuration.\n\n### L5 Systems under L6.3\n\n#### L5.3.1: PCB Fabrication & Assembly\n\nSurface-mount technology (SMT) production line. Multi-layer PCBs (4–6 layers typical for flowmeter electronics) with mixed analog/digital layout.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.3.1.1: SMT Pick-and-Place Machine | High-speed component placement; 0201–BGA capability; feeder capacity 80–200 reels |\n| L4.3.1.2: Reflow Oven | Convection reflow with nitrogen atmosphere; lead-free SAC305 profile |\n| L4.3.1.3: Automated Optical Inspection (AOI) | Camera-based solder joint and component placement verification; defect rate <50 ppm |\n\n#### L5.3.2: Firmware Flashing & Configuration\n\nProgramming microcontroller flash memory with production firmware, calibration constants, and customer-specific configuration (pipe diameter, fluid type, communication protocol).\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.3.2.1: Programming Jig | Pogo-pin bed-of-nails fixture for JTAG/SWD firmware download |\n| L4.3.2.2: Firmware Loader Software | Production server managing firmware versions, serial numbers, and configuration profiles |\n| L4.3.2.3: In-Circuit Test (ICT) Fixture | Flying-probe or bed-of-nails electrical test verifying component values and connectivity |\n\n#### L5.3.3: Power Supply & Signal Conditioning\n\nAssembly of power management (DC-DC converters, LDOs) and analog front-end modules (charge amplifiers, instrumentation amplifiers, ADC drivers).\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.3.3.1: DC-DC Converter Module | Switching or linear regulator providing 3.3 V / 5 V from 6–30 V input supply |\n| L4.3.3.2: Analog Front-End Module | Charge amplifier (for piezoelectric) or instrumentation amplifier (for electromagnetic) |\n| L4.3.3.3: EMC Shielding & Filtering | Board-level shielding cans, ferrite beads, and common-mode chokes for EMI compliance |\n\n---"
+    },
+    {
+      "title": "L6.4 — Flow Body & Housing Fabrication",
+      "content": "Machining, casting, or molding of the wetted flow body (the part in contact with the measured fluid) and the structural/electronics housing. Material selection determines media compatibility, pressure rating, and certification eligibility.\n\n### L5 Systems under L6.4\n\n#### L5.4.1: Metal Flow Body Machining\n\nCNC machining of stainless steel (316L), brass, or Hastelloy flow bodies for industrial and sanitary applications. Process connections (flanged, threaded, tri-clamp) machined to standard dimensions.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.4.1.1: CNC Lathe | Turning flow body bore, process connections, and seal grooves; tolerance ±0.02 mm |\n| L4.4.1.2: CNC Milling Centre | Milling transducer pockets, cable entry ports, and mounting features |\n| L4.4.1.3: Surface Treatment | Electropolishing (Ra ≤ 0.8 μm for sanitary), anodising, or passivation |\n\n#### L5.4.2: Polymer Housing Injection Molding\n\nInjection molding of thermoplastic housings (PPS, PA66-GF, PBT) for cost-optimised OEM sensors. Marquardt uses polymer housing for DN12–DN25 variants. [SRC: 01_product_decomposition]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.4.2.1: Injection Molding Machine | 50–250 t clamping force; multi-cavity molds for high-volume production |\n| L4.4.2.2: Mold Tool | Hardened steel multi-cavity tool; hot-runner for polymer flow bodies; cycle time 30–90 s |\n| L4.4.2.3: Material Drying & Feeding | Dehumidifying dryer and gravimetric feeder for hygroscopic engineering polymers |\n\n#### L5.4.3: Seal & Gasket Manufacturing\n\nFabrication of elastomeric O-rings, gaskets, and face seals that maintain pressure integrity and media containment. Material selection (EPDM, FKM, FFKM, silicone) matches media compatibility and temperature range.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.4.3.1: O-Ring Compression Mold | Heated compression mold for custom-profile seals; flash trimmed post-cure |\n| L4.4.3.2: Gasket Cutting | Die-cut or waterjet-cut flat gaskets from sheet stock |\n| L4.4.3.3: Seal Curing Oven | Post-cure oven (200–230 °C for FKM) completing cross-linking for long-term stability |\n\n---"
+    },
+    {
+      "title": "L6.5 — Assembly & Integration",
+      "content": "Combining sensor, electronics, and housing sub-assemblies into a finished instrument. Critical operations: transducer bonding, acoustic coupling verification, electrical wiring, pressure sealing, and cosmetic/functional inspection.\n\n### L5 Systems under L6.5\n\n#### L5.5.1: Sensor-to-Body Integration\n\nBonding or pressing piezoelectric transducers into the flow body; verifying acoustic coupling and signal quality. For ultrasonic sensors, transducer-to-fluid acoustic path integrity determines measurement accuracy.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.5.1.1: Transducer Bonding Station | Epoxy or silicone adhesive application; UV or thermal cure; bond-line thickness controlled to ±0.1 mm |\n| L4.5.1.2: Acoustic Coupling Verification | Ultrasonic pulse-echo test confirming signal-to-noise ratio >40 dB per transducer |\n| L4.5.1.3: Pressure Seal Test | Hydrostatic or pneumatic leak test at 1.5× rated pressure (15 bar for 10-bar rating) |\n\n#### L5.5.2: Electronics-to-Housing Integration\n\nMounting the populated PCB into the electronics housing; connecting sensor leads, power, and communication wiring; potting or conformal coating for environmental protection.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.5.2.1: PCB Mounting & Wiring | Screw or snap-fit PCB mounting; solder or crimp connections to sensor leads and connector |\n| L4.5.2.2: Connector Assembly | RAST 2.5 (Marquardt), M12, cable gland, or terminal block — matched to customer specification |\n| L4.5.2.3: Potting & Encapsulation | Polyurethane or epoxy potting compound for IP65–IP68 environmental sealing |\n\n#### L5.5.3: Final Assembly & Marking\n\nMechanical fastening of flow body to electronics housing; product labelling with serial number, calibration data, and regulatory markings.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.5.3.1: Torque-Controlled Fastening | Electric or pneumatic screwdriver with torque monitoring; prevents seal over/under-compression |\n| L4.5.3.2: Laser Marking / Nameplate | Laser-engraved serial number, datamatrix code, CE/UL marks on housing |\n| L4.5.3.3: Visual Inspection Station | Operator or camera inspection for cosmetic defects, label correctness, and connector alignment |\n\n---"
+    },
+    {
+      "title": "L6.6 — Calibration & Testing",
+      "content": "Each instrument is individually calibrated against a traceable reference standard and tested across its environmental and endurance envelope. Calibration is the quality-defining step — it converts a manufactured assembly into a measurement instrument. Marquardt delivers 100% pre-calibrated sensors with automated final test. [SRC: 01_product_decomposition, web_search]\n\n### L5 Systems under L6.6\n\n#### L5.6.1: Wet Calibration Rig\n\nFlow calibration against a gravimetric or volumetric reference standard traceable to national metrology institutes (PTB, NIST). Typically 5–10 flow points across the operating range per sensor. [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.6.1.1: Reference Flow Standard | Gravimetric (weighing tank) or volumetric (piston prover) reference; accuracy ±0.1–0.2% |\n| L4.6.1.2: Flow Loop Piping & Pump | Closed-loop water circuit with variable-speed pump; DN15–DN100 test sections |\n| L4.6.1.3: Data Acquisition System | Multi-channel DAQ capturing reference and device-under-test signals; automated pass/fail reporting |\n\n#### L5.6.2: Environmental & Endurance Testing\n\nVerification of performance across temperature, pressure, humidity, and mechanical stress envelopes. Ensures sensor meets datasheet specifications under worst-case operating conditions.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.6.2.1: Temperature Chamber | Programmable chamber −40 to +120 °C; temperature cycling per IEC 60068-2 |\n| L4.6.2.2: Pressure Cycle Test Rig | Automated cycling 0→rated pressure at rated temperature; 90,000 cycles for Marquardt [SRC: 01_product_decomposition] |\n| L4.6.2.3: Vibration / Shock Table | Sinusoidal and random vibration per IEC 60068-2-6/2-27; shock per IEC 60068-2-64 |\n\n#### L5.6.3: Electrical Safety & EMC Testing\n\nHi-pot insulation testing, EMC pre-compliance, and functional verification under electromagnetic interference conditions.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.6.3.1: Hi-Pot / Insulation Tester | Applies 500–2,000 V DC between circuits and housing; verifies >10 MΩ insulation resistance |\n| L4.6.3.2: EMC Pre-Compliance Chamber | Shielded enclosure with antenna for radiated emissions and immunity pre-screening |\n| L4.6.3.3: Functional Test Fixture | Automated end-of-line test verifying flow measurement, temperature reading, communication, and alarm outputs |\n\n---"
+    },
+    {
+      "title": "L6.7 — Packaging & Dispatch",
+      "content": "Final inspection, documentation, protective packaging, and shipment to OEM customers, distributors, or direct end-users.\n\n### L5 Systems under L6.7\n\n#### L5.7.1: Final Inspection & Documentation\n\nGeneration of calibration certificates, test reports, and traceability records. Each instrument receives a unique serial number linked to its calibration data.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.7.1.1: Calibration Certificate Printer | Automated certificate generation with calibration data, reference standard ID, and uncertainty statement |\n| L4.7.1.2: Barcode / QR Labelling | Serialised label linking physical instrument to digital calibration record |\n| L4.7.1.3: Serialisation Database | MES/ERP-linked database storing complete manufacturing and calibration history per serial number |\n\n#### L5.7.2: Protective Packaging\n\nCustom packaging protecting instruments during transport. Anti-static packaging for electronics; foam inserts for fragile sensor elements.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.7.2.1: Custom Foam Insert / Tray | Die-cut PE foam or vacuum-formed tray matched to instrument geometry |\n| L4.7.2.2: Anti-Static Packaging | ESD-safe bags or wraps for instruments with exposed electronic connectors |\n| L4.7.2.3: Shipping Carton & Labelling | Corrugated carton with shipping label, handling instructions, and customs documentation |\n\n#### L5.7.3: Warehousing & Logistics\n\nFinished goods storage, order picking, and carrier management for global distribution.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.7.3.1: Finished Goods Storage | Climate-controlled warehouse with bin/shelf organisation by product variant |\n| L4.7.3.2: ERP / WMS Integration | Order-to-shipment workflow with pick-list generation and dispatch confirmation |\n| L4.7.3.3: Carrier Management | Freight forwarder and parcel carrier selection; customs documentation for export |\n\n---"
+    },
+    {
+      "title": "L6.8 — Quality Management & Metrology (H)",
+      "content": "Horizontal process across all core L6 domains. Ensures measurement traceability, product conformity, and continuous improvement. ISO 9001 (QMS) and ISO 17025 (calibration lab accreditation) are industry baseline certifications. [SRC: web_search]\n\n### L5 Systems under L6.8\n\n#### L5.8.1: Metrology Laboratory\n\nReference-grade measurement equipment traceable to national standards (PTB, NIST, NPL). Provides calibration references for production rigs and resolves measurement disputes.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.8.1.1: Primary Flow Standard | Gravimetric weigh-tank or bell-prover traceable to national metrology institute; uncertainty ≤0.05% |\n| L4.8.1.2: Dimensional Measurement (CMM) | Coordinate measuring machine for flow body bore, port alignment, and seal groove verification |\n| L4.8.1.3: Calibrated Reference Instruments | Reference-grade pressure, temperature, and electrical standards for cross-checking production instruments |\n\n#### L5.8.2: Quality Management System\n\nDocument control, non-conformance tracking, and corrective/preventive action (CAPA) processes. Drives yield improvement and supplier quality management.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.8.2.1: ISO 9001 Document Control | Controlled procedure library, work instructions, and change management system |\n| L4.8.2.2: Non-Conformance Tracking | NCR database with root-cause analysis, containment actions, and trend reporting |\n| L4.8.2.3: Audit & CAPA System | Internal/external audit schedule; corrective action tracking with effectiveness verification |\n\n#### L5.8.3: Incoming Inspection\n\nVerification of incoming raw materials and purchased components against specifications before release to production.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.8.3.1: Raw Material Analyser (XRF/OES) | X-ray fluorescence or optical emission spectrometry for metal alloy verification |\n| L4.8.3.2: Component Verification Station | Electrical parameter measurement of purchased ICs, passives, and connectors |\n| L4.8.3.3: Supplier Qualification Database | Approved vendor list with audit history, PPM performance, and second-source identification |\n\n---"
+    },
+    {
+      "title": "L6.9 — Supply Chain & Procurement (H)",
+      "content": "Horizontal process managing sourcing, inventory, and vendor relationships. Critical materials: piezoelectric ceramics (PZT-5A, PZT-5H), stainless steel alloys (316L, 304), engineering polymers (PPS, PA66-GF), and specialised electronic components (high-precision ADCs, low-noise amplifiers).\n\n### L5 Systems under L6.9\n\n#### L5.9.1: Raw Material Procurement\n\nSourcing of metals, polymers, ceramics, and electronic components. Piezoelectric ceramic supply chain is concentrated (PI Ceramic, CeramTec, TDK/Epcos dominate PZT supply). [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.9.1.1: Piezo Ceramic Sourcing | PZT-5A/5H disc procurement; incoming verification of resonant frequency and d33 coefficient |\n| L4.9.1.2: Metal & Polymer Stock | 316L stainless bar stock, brass rod, PA66-GF / PPS pellets, EPDM/FKM sheet |\n| L4.9.1.3: Electronic Component Supply | Microcontrollers, ADCs, precision resistors, connectors; managed via authorised distribution |\n\n#### L5.9.2: Vendor Management\n\nQualification, audit, and performance monitoring of critical suppliers. Dual-sourcing strategy for supply chain resilience.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.9.2.1: Approved Vendor List | Qualified supplier registry with capability assessment and audit schedule |\n| L4.9.2.2: Second-Source Strategy | Alternative suppliers validated for all single-source components |\n| L4.9.2.3: Supplier Audit Programme | On-site quality audits, process capability studies (Cpk), and corrective action follow-up |\n\n#### L5.9.3: Inventory Management\n\nStorage and replenishment of raw materials and work-in-progress. MRP-driven planning with kanban for high-volume production lines.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.9.3.1: Component Warehouse | ESD-safe, climate-controlled storage for electronic components and piezo ceramics |\n| L4.9.3.2: ERP / MRP System | Material requirements planning linked to customer orders and production schedule |\n| L4.9.3.3: Kanban / JIT Replenishment | Pull-based replenishment for high-runner components; safety stock for long-lead items |\n\n---"
+    },
+    {
+      "title": "L6.10 — Regulatory & Certification (H)",
+      "content": "Horizontal process covering product certifications, material compliance, and export controls. Certification determines market access — an uncertified instrument cannot be sold into regulated markets regardless of technical capability. [SRC: web_search]\n\n### L5 Systems under L6.10\n\n#### L5.10.1: Product Certification\n\nObtaining and maintaining mandatory and voluntary product marks that enable market access.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.10.1.1: CE / UL Marking | EU Declaration of Conformity (LVD, EMC directives) and UL/CSA listing for North America |\n| L4.10.1.2: ATEX / IECEx Certification | Explosive atmosphere certification for hazardous area installations (Zone 0/1/2) |\n| L4.10.1.3: MID Billing Approval | Measuring Instruments Directive (2014/32/EU) for instruments used in fiscal/billing applications |\n\n#### L5.10.2: Material & Safety Compliance\n\nEnsuring wetted materials meet regulatory requirements for specific end-use environments (food contact, drinking water, pharmaceutical).\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.10.2.1: REACH / RoHS Compliance | Substance restriction verification; SCIP database registration for EU market |\n| L4.10.2.2: Food Contact Material Testing | FDA 21 CFR 177, EC 1935/2004, and 3-A sanitary standards for food/beverage industry |\n| L4.10.2.3: Drinking Water Approval | KTW (DE), WRAS (UK), NSF 61 (US), ACS (FR) — material migration testing for potable water contact. **Marquardt holds KTW/WRAS.** [SRC: 01_product_decomposition] |\n\n#### L5.10.3: Export & Trade Compliance\n\nManaging export controls, customs documentation, and country-of-origin requirements for global distribution.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.10.3.1: Export Control Classification | EAR/ECCN classification for dual-use technology; sanctions screening |\n| L4.10.3.2: Customs Documentation | Commercial invoices, certificates of origin, and HS tariff code assignment |\n| L4.10.3.3: Country-of-Origin Marking | Product marking per FTC/EU origin rules; supporting documentation for preferential tariff treatment |\n\n---"
+    },
+    {
+      "title": "Output Type Activation Matrix",
+      "content": "| L6 Domain | Flow Instruments | Pressure | Temperature | Level | Analytical | Control/Recording |\n|---|:---:|:---:|:---:|:---:|:---:|:---:|\n| L6.1 Design & Engineering | Y | Y | Y | Y | Y | Y |\n| L6.2 Sensor Fabrication | Y (piezo, coil, tube) | Y (strain gauge, capacitive) | Y (RTD, TC) | Y (radar, ultrasonic) | Y (electrochemical, optical) | partial |\n| L6.3 Electronics Mfg | Y | Y | Y | Y | Y | Y |\n| L6.4 Housing Fabrication | Y (flow body + housing) | Y (process connection) | Y (thermowell) | Y (flange/bracket) | Y (sensor housing) | Y (enclosure) |\n| L6.5 Assembly | Y | Y | Y | Y | Y | Y |\n| L6.6 Calibration & Testing | Y (wet cal) | Y (dead-weight) | Y (dry bath) | Y (tank cal) | Y (buffer cal) | Y (signal cal) |\n| L6.7 Packaging & Dispatch | Y | Y | Y | Y | Y | Y |\n| L6.8 Quality (H) | Y | Y | Y | Y | Y | Y |\n| L6.9 Supply Chain (H) | Y | Y | Y | Y | Y | Y |\n| L6.10 Regulatory (H) | Y | Y | Y | Y | Y | Y |\n\nNotes: L6.2 is the most technology-differentiated step — each output type uses fundamentally different transducer physics. Flow instruments require the most complex L6.4 (wetted flow body with pressure rating) and L6.6 (wet calibration rigs are expensive and space-intensive). Control/recording instruments may skip L6.2 if they are pure input/output devices without primary sensing elements.\n\n---"
+    },
+    {
+      "title": "Marquardt Position in the Value Network",
+      "content": "```\nL7   Process Instrumentation Ecosystem\n |\n +-- Output Type: Flow Instruments (Ultrasonic Transit-Time Inline)\n |\n +-- L6.1  Product Design & Engineering\n |    +-- L5.1.1  Mechanical Design — polymer flow body, DN12–DN25 variants\n |    +-- L5.1.2  Electronics Design — single-PCB, RAST 2.5 connector\n |    +-- L5.1.3  Firmware & Signal Processing — transit-time algorithms, anomaly detection\n |\n +-- L6.2  Sensor & Transducer Fabrication\n |    +-- L5.2.1  Piezoelectric Transducer Mfg — matched Piezo A / Piezo B pairs\n |\n +-- L6.3  Electronics Manufacturing\n |    +-- L5.3.1  PCB Assembly — SMT line for sensor electronics\n |    +-- L5.3.2  Firmware Flashing — customer-specific configuration (pipe diameter, fluid type, protocol)\n |\n +-- L6.4  Flow Body & Housing Fabrication\n |    +-- L5.4.2  Polymer Housing Injection Molding — PPS/PA66-GF flow bodies\n |\n +-- L6.5  Assembly & Integration\n |    +-- L5.5.1  Sensor-to-Body Integration — piezo bonding, acoustic coupling verification\n |    +-- L5.5.2  Electronics-to-Housing Integration — RAST 2.5 connector assembly\n |\n +-- L6.6  Calibration & Testing  [KEY DIFFERENTIATOR]\n |    +-- L5.6.1  Wet Calibration Rig — 100% individual calibration to customer-specified medium\n |    +-- L5.6.2  Environmental Testing — 90,000 pressure cycles, −20 to +90 °C\n |    +-- L5.6.3  Electrical Safety & EMC — automated final test\n |\n +-- L6.7  Packaging & Dispatch\n      +-- L5.7.1  Pre-calibrated delivery with individual calibration certificate\n```\n\n**Marquardt's competitive niche within NAICS 334513:**\n\n| Dimension | Marquardt Position | Industry Mainstream |\n|---|---|---|\n| **Segment** | Ultrasonic transit-time inline flowmeters | Full-range process instrumentation |\n| **Target customer** | OEM integration (B2B component supply) | End-user / EPC / distributor |\n| **Pipe size range** | DN12–DN25 (small-bore OEM) | DN15–DN2000+ |\n| **Housing material** | Polymer (PPS, PA66-GF) — cost-optimised | Stainless steel 316L / Hastelloy |\n| **Price point** | $20–60 OEM volume | $200–5,000 industrial retail |\n| **Calibration model** | 100% wet-calibrated, pre-configured per customer medium | Factory-calibrated on water; field-configurable |\n| **Certifications held** | KTW, WRAS (drinking water) | ATEX, MID, 3-A, FDA (varies by vendor) |\n| **Key differentiator** | Integrated flow + temperature; zero pressure drop; no moving parts; glycol-tolerant; battery mode (<5 μA) | Multi-parameter, fieldbus connectivity, hazardous area, custody transfer |\n\n**Alternatives landscape at Marquardt's L5 position (Ultrasonic Transit-Time Inline Flowmeters):**\n\n| Alternative | Status | Share Estimate | Confidence |\n|---|---|---|---|\n| Electromagnetic flowmeters | Dominant (26–32% of total flow market) | 30% | HIGH [SRC: web_search] |\n| Coriolis mass flowmeters | Established, premium segment | 25% | HIGH [SRC: web_search] |\n| Ultrasonic transit-time (all) | Fastest-growing; 80–85% of ultrasonic segment | 15% | MEDIUM [SRC: web_search] |\n| Vortex flowmeters | Established for steam/gas | 10% | MEDIUM |\n| Turbine / impeller meters | Legacy, declining | 8% | MEDIUM |\n| Differential-pressure (orifice) | Legacy, declining | 7% | MEDIUM |\n| Thermal mass flowmeters | Niche (gas measurement) | 5% | LOW |\n\n**Cost of failure:** An inaccurately calibrated flowmeter propagates measurement error into every downstream process decision — thermal energy billing errors (kW = flow × ΔT × Cp), incorrect dosing ratios (e.g., water-to-syrup blending), failed CIP validation (insufficient flow → incomplete cleaning → contamination), and safety interlock malfunction (low-water boiler cutoff). In billing applications, a 2% flow error on a district heating meter can cause ~€500–2,000/year revenue leakage per building connection. [SRC: web_search, 05_market_discovery]\n\n---"
+    },
+    {
+      "title": "Structural Validation Summary",
+      "content": "| Check | Result |\n|---|---|\n| Exactly one L7 node | PASS — 1 L7 (Process Instrumentation Ecosystem) |\n| L6 count in range (3–8 core + horizontals) | PASS — 7 core + 3 horizontal = 10 L6 nodes |\n| L5 count per L6 in range (2–5) | PASS — L6.1: 3, L6.2: 3, L6.3: 3, L6.4: 3, L6.5: 3, L6.6: 3, L6.7: 3, L6.8: 3, L6.9: 3, L6.10: 3 |\n| L4 count per L5 >= 2 | PASS — all L5 nodes have 3 L4 children |\n| No orphan nodes | PASS — every node has a parent |\n| No level skipping | PASS — L7>L6>L5>L4 strictly followed |\n| Valid parent-child transitions | PASS |\n| No company names in L7/L6 names | PASS |\n| Three-question naming test (5 spot-checks) | PASS — \"Piezoelectric Transducer Manufacturing,\" \"Wet Calibration Rig,\" \"Injection Molding Machine,\" \"SMT Pick-and-Place Machine,\" \"Reflow Oven\" — all industry-standard terms |\n| Unit count in range (15–60, extended for mfg) | PASS — 1 + 10 + 30 + 90 = 131 total units |\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"value_network_construction\",\n  \"naics_code\": \"334513\",\n  \"naics_title\": \"Instruments and Related Products Manufacturing for Measuring, Displaying, Indicating, Recording, Transmitting, and Controlling Industrial Process Variables\",\n  \"cfj_statement\": \"Design, manufacture, calibrate, and deliver instruments that measure, display, and control industrial process variables to enable safe, efficient, and compliant operation of process plants\",\n  \"l7_solution\": \"Process Instrumentation Ecosystem\",\n  \"top_level\": \"L7\",\n  \"market_name\": \"Flowmeters (Home Industry)\",\n  \"architecture_distance\": 0,\n  \"already_uses_technology\": true,\n  \"output_types\": [\n    \"Flow instruments (ultrasonic, electromagnetic, Coriolis, vortex, turbine, DP, thermal mass)\",\n    \"Pressure instruments\",\n    \"Temperature instruments\",\n    \"Level instruments\",\n    \"Analytical instruments\",\n    \"Control & recording instruments\"\n  ],\n  \"value_network\": {\n    \"naics_code\": \"334513\",\n    \"naics_title\": \"Instruments and Related Products Manufacturing for Measuring, Displaying, Indicating, Recording, Transmitting, and Controlling Industrial Process Variables\",\n    \"cfj_statement\": \"Design, manufacture, calibrate, and deliver instruments that measure, display, and control industrial process variables to enable safe, efficient, and compliant operation of process plants\",\n    \"l7_solution\": \"Process Instrumentation Ecosystem\",\n    \"units\": [\n      {\"name\": \"Process Instrumentation Ecosystem\", \"level\": \"L7\", \"description\": \"Complete ecosystem of instrument manufacturers, sensor fabricators, component suppliers, calibration providers, system integrators, distributors, and end-user process industries coordinated around measurement and control of industrial process variables\", \"bom_standard\": \"Moore 1993\", \"parent_name\": \"ROOT\"},\n\n      {\"name\": \"Product Design & Engineering\", \"level\": \"L6\", \"description\": \"Define measurement principle, mechanical form, electronics architecture, and firmware for target process variable\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Process Instrumentation Ecosystem\"},\n      {\"name\": \"Sensor & Transducer Fabrication\", \"level\": \"L6\", \"description\": \"Manufacture the primary sensing element that converts a physical variable into an electrical signal\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Process Instrumentation Ecosystem\"},\n      {\"name\": \"Electronics Manufacturing\", \"level\": \"L6\", \"description\": \"Fabricate, populate, and test PCBs with signal conditioning, digitisation, and communication firmware\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Process Instrumentation Ecosystem\"},\n      {\"name\": \"Flow Body & Housing Fabrication\", \"level\": \"L6\", \"description\": \"Machine, cast, or mold wetted flow bodies and structural housings\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Process Instrumentation Ecosystem\"},\n      {\"name\": \"Assembly & Integration\", \"level\": \"L6\", \"description\": \"Combine sensor, electronics, and housing into finished instrument; seal, wire, and verify\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Process Instrumentation Ecosystem\"},\n      {\"name\": \"Calibration & Testing\", \"level\": \"L6\", \"description\": \"Calibrate each instrument against traceable reference and verify performance across environmental envelope\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Process Instrumentation Ecosystem\"},\n      {\"name\": \"Packaging & Dispatch\", \"level\": \"L6\", \"description\": \"Inspect, document, pack, and ship finished instruments to OEMs, distributors, or end-users\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Process Instrumentation Ecosystem\"},\n      {\"name\": \"Quality Management & Metrology\", \"level\": \"L6\", \"description\": \"Maintain measurement traceability, ISO 9001/17025 compliance, and process control across all core steps (horizontal)\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Process Instrumentation Ecosystem\"},\n      {\"name\": \"Supply Chain & Procurement\", \"level\": \"L6\", \"description\": \"Source raw materials, electronic components, piezo ceramics, metals, polymers, and manage vendor qualification (horizontal)\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Process Instrumentation Ecosystem\"},\n      {\"name\": \"Regulatory & Certification\", \"level\": \"L6\", \"description\": \"Obtain and maintain CE/UL, ATEX/IECEx, MID, food-contact, and drinking-water certifications (horizontal)\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Process Instrumentation Ecosystem\"},\n\n      {\"name\": \"Mechanical Design (CAD/CAE)\", \"level\": \"L5\", \"description\": \"3D solid modeling and FEA of flow bodies, housings, and sensor mounting structures\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Product Design & Engineering\"},\n      {\"name\": \"Electronics Design (EDA)\", \"level\": \"L5\", \"description\": \"Schematic capture, PCB layout, and circuit simulation for signal conditioning and communication\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Product Design & Engineering\"},\n      {\"name\": \"Firmware & Signal Processing\", \"level\": \"L5\", \"description\": \"Embedded firmware for transit-time measurement, compensation algorithms, and communication protocols\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Product Design & Engineering\"},\n\n      {\"name\": \"Piezoelectric Transducer Manufacturing\", \"level\": \"L5\", \"description\": \"Fabrication of PZT ceramic elements for ultrasonic flow sensors; matched transducer pairs\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Sensor & Transducer Fabrication\"},\n      {\"name\": \"Electromagnetic Coil Assembly\", \"level\": \"L5\", \"description\": \"Winding of excitation and pickup coils for electromagnetic flowmeters\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Sensor & Transducer Fabrication\"},\n      {\"name\": \"Coriolis Tube Fabrication\", \"level\": \"L5\", \"description\": \"Precision bending and welding of thin-walled stainless tubes for Coriolis mass flowmeters\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Sensor & Transducer Fabrication\"},\n\n      {\"name\": \"PCB Fabrication & Assembly\", \"level\": \"L5\", \"description\": \"SMT production line for multi-layer PCBs with mixed analog/digital layout\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Electronics Manufacturing\"},\n      {\"name\": \"Firmware Flashing & Configuration\", \"level\": \"L5\", \"description\": \"Programming microcontroller with production firmware, calibration constants, and customer configuration\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Electronics Manufacturing\"},\n      {\"name\": \"Power Supply & Signal Conditioning\", \"level\": \"L5\", \"description\": \"DC-DC converters, analog front-end modules, and EMC filtering\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Electronics Manufacturing\"},\n\n      {\"name\": \"Metal Flow Body Machining\", \"level\": \"L5\", \"description\": \"CNC machining of stainless steel, brass, or Hastelloy flow bodies for industrial applications\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Flow Body & Housing Fabrication\"},\n      {\"name\": \"Polymer Housing Injection Molding\", \"level\": \"L5\", \"description\": \"Injection molding of thermoplastic housings (PPS, PA66-GF) for cost-optimised OEM sensors\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Flow Body & Housing Fabrication\"},\n      {\"name\": \"Seal & Gasket Manufacturing\", \"level\": \"L5\", \"description\": \"Fabrication of elastomeric O-rings, gaskets, and face seals for pressure integrity\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Flow Body & Housing Fabrication\"},\n\n      {\"name\": \"Sensor-to-Body Integration\", \"level\": \"L5\", \"description\": \"Bonding transducers into flow body; acoustic coupling verification; pressure seal test\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Assembly & Integration\"},\n      {\"name\": \"Electronics-to-Housing Integration\", \"level\": \"L5\", \"description\": \"Mounting PCB, connecting sensor leads and connector, potting for environmental sealing\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Assembly & Integration\"},\n      {\"name\": \"Final Assembly & Marking\", \"level\": \"L5\", \"description\": \"Mechanical fastening, laser marking, visual inspection\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Assembly & Integration\"},\n\n      {\"name\": \"Wet Calibration Rig\", \"level\": \"L5\", \"description\": \"Flow calibration against gravimetric or volumetric reference standard; 5-10 flow points per sensor\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Calibration & Testing\"},\n      {\"name\": \"Environmental & Endurance Testing\", \"level\": \"L5\", \"description\": \"Temperature, pressure, humidity, and mechanical stress verification\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Calibration & Testing\"},\n      {\"name\": \"Electrical Safety & EMC Testing\", \"level\": \"L5\", \"description\": \"Hi-pot insulation, EMC pre-compliance, and automated functional test\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Calibration & Testing\"},\n\n      {\"name\": \"Final Inspection & Documentation\", \"level\": \"L5\", \"description\": \"Calibration certificates, test reports, and traceability records\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Packaging & Dispatch\"},\n      {\"name\": \"Protective Packaging\", \"level\": \"L5\", \"description\": \"Custom foam inserts, anti-static packaging, shipping cartons\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Packaging & Dispatch\"},\n      {\"name\": \"Warehousing & Logistics\", \"level\": \"L5\", \"description\": \"Finished goods storage, order picking, and carrier management\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Packaging & Dispatch\"},\n\n      {\"name\": \"Metrology Laboratory\", \"level\": \"L5\", \"description\": \"Reference-grade measurement equipment traceable to national standards (PTB, NIST)\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Quality Management & Metrology\"},\n      {\"name\": \"Quality Management System\", \"level\": \"L5\", \"description\": \"ISO 9001 document control, non-conformance tracking, CAPA processes\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Quality Management & Metrology\"},\n      {\"name\": \"Incoming Inspection\", \"level\": \"L5\", \"description\": \"Verification of raw materials and purchased components against specifications\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Quality Management & Metrology\"},\n\n      {\"name\": \"Raw Material Procurement\", \"level\": \"L5\", \"description\": \"Sourcing of piezo ceramics, metals, polymers, and electronic components\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Supply Chain & Procurement\"},\n      {\"name\": \"Vendor Management\", \"level\": \"L5\", \"description\": \"Supplier qualification, audit, and performance monitoring\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Supply Chain & Procurement\"},\n      {\"name\": \"Inventory Management\", \"level\": \"L5\", \"description\": \"MRP-driven storage and replenishment of materials and components\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Supply Chain & Procurement\"},\n\n      {\"name\": \"Product Certification\", \"level\": \"L5\", \"description\": \"CE/UL, ATEX/IECEx, and MID billing approval for market access\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Regulatory & Certification\"},\n      {\"name\": \"Material & Safety Compliance\", \"level\": \"L5\", \"description\": \"REACH/RoHS, food contact, and drinking water material approvals\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Regulatory & Certification\"},\n      {\"name\": \"Export & Trade Compliance\", \"level\": \"L5\", \"description\": \"Export control classification, customs documentation, and origin marking\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Regulatory & Certification\"},\n\n      {\"name\": \"3D CAD Workstation\", \"level\": \"L4\", \"description\": \"Parametric solid modeling (SolidWorks, Creo, NX) for flow body and housing geometry\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Mechanical Design (CAD/CAE)\"},\n      {\"name\": \"FEA Simulation Software\", \"level\": \"L4\", \"description\": \"Structural, thermal, and CFD simulation for pressure rating and flow path optimisation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Mechanical Design (CAD/CAE)\"},\n      {\"name\": \"Rapid Prototyping Equipment\", \"level\": \"L4\", \"description\": \"SLA/SLS 3D printer and CNC prototype mill for design verification\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Mechanical Design (CAD/CAE)\"},\n\n      {\"name\": \"PCB Layout Tool\", \"level\": \"L4\", \"description\": \"Multi-layer PCB design with impedance-controlled routing (Altium, KiCad, Cadence)\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Electronics Design (EDA)\"},\n      {\"name\": \"Circuit Simulation Software\", \"level\": \"L4\", \"description\": \"SPICE analog simulation and mixed-signal verification\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Electronics Design (EDA)\"},\n      {\"name\": \"FPGA / DSP Development Kit\", \"level\": \"L4\", \"description\": \"Hardware-in-the-loop development for real-time signal processing algorithms\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Electronics Design (EDA)\"},\n\n      {\"name\": \"Embedded Development Environment\", \"level\": \"L4\", \"description\": \"Cross-compiler, debugger, and JTAG interface for ARM/RISC-V microcontrollers\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Firmware & Signal Processing\"},\n      {\"name\": \"DSP Algorithm Library\", \"level\": \"L4\", \"description\": \"Transit-time calculation, digital filtering, zero-crossing detection, correlation algorithms\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Firmware & Signal Processing\"},\n      {\"name\": \"Hardware-in-the-Loop Test Bench\", \"level\": \"L4\", \"description\": \"Simulated sensor input for firmware verification before physical prototyping\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Firmware & Signal Processing\"},\n\n      {\"name\": \"Piezo Ceramic Press & Sintering Furnace\", \"level\": \"L4\", \"description\": \"Powder press forming PZT discs; sintering at 1,200-1,300 C for densification\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Piezoelectric Transducer Manufacturing\"},\n      {\"name\": \"Electrode Metallisation\", \"level\": \"L4\", \"description\": \"Sputtering or screen-printing silver/nickel electrodes on piezo disc faces\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Piezoelectric Transducer Manufacturing\"},\n      {\"name\": \"Polarisation & Aging Station\", \"level\": \"L4\", \"description\": \"High-voltage DC polarisation aligning dipoles; accelerated aging stabilises piezoelectric coefficient\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Piezoelectric Transducer Manufacturing\"},\n\n      {\"name\": \"Coil Winding Machine\", \"level\": \"L4\", \"description\": \"Automated bobbin winder for excitation and pickup coils; wire gauge 0.1-0.5 mm\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Electromagnetic Coil Assembly\"},\n      {\"name\": \"Insulation & Potting Station\", \"level\": \"L4\", \"description\": \"Epoxy or polyurethane potting for moisture and vibration protection\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Electromagnetic Coil Assembly\"},\n      {\"name\": \"Impedance Test Equipment\", \"level\": \"L4\", \"description\": \"LCR meter verifying coil inductance, resistance, and Q-factor\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Electromagnetic Coil Assembly\"},\n\n      {\"name\": \"Tube Bending Machine\", \"level\": \"L4\", \"description\": \"CNC mandrel bender for precise tube radii; wall thinning <10%\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Coriolis Tube Fabrication\"},\n      {\"name\": \"Orbital Welding & Brazing Station\", \"level\": \"L4\", \"description\": \"Autogenous TIG orbital welder for tube-to-manifold joints; helium leak-tested\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Coriolis Tube Fabrication\"},\n      {\"name\": \"Tube Vibration Test Rig\", \"level\": \"L4\", \"description\": \"Modal analysis verifying resonant frequency and symmetry of matched tube pairs\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Coriolis Tube Fabrication\"},\n\n      {\"name\": \"SMT Pick-and-Place Machine\", \"level\": \"L4\", \"description\": \"High-speed component placement; 0201-BGA capability; 80-200 reel feeders\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"PCB Fabrication & Assembly\"},\n      {\"name\": \"Reflow Oven\", \"level\": \"L4\", \"description\": \"Convection reflow with nitrogen atmosphere; lead-free SAC305 profile\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"PCB Fabrication & Assembly\"},\n      {\"name\": \"Automated Optical Inspection (AOI)\", \"level\": \"L4\", \"description\": \"Camera-based solder joint and component verification; defect rate <50 ppm\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"PCB Fabrication & Assembly\"},\n\n      {\"name\": \"Programming Jig\", \"level\": \"L4\", \"description\": \"Pogo-pin bed-of-nails fixture for JTAG/SWD firmware download\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Firmware Flashing & Configuration\"},\n      {\"name\": \"Firmware Loader Software\", \"level\": \"L4\", \"description\": \"Production server managing firmware versions, serial numbers, and configuration profiles\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Firmware Flashing & Configuration\"},\n      {\"name\": \"In-Circuit Test Fixture\", \"level\": \"L4\", \"description\": \"Flying-probe or bed-of-nails electrical test verifying component values and connectivity\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Firmware Flashing & Configuration\"},\n\n      {\"name\": \"DC-DC Converter Module\", \"level\": \"L4\", \"description\": \"Switching or linear regulator providing 3.3V/5V from 6-30V input\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Power Supply & Signal Conditioning\"},\n      {\"name\": \"Analog Front-End Module\", \"level\": \"L4\", \"description\": \"Charge amplifier (piezoelectric) or instrumentation amplifier (electromagnetic)\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Power Supply & Signal Conditioning\"},\n      {\"name\": \"EMC Shielding & Filtering\", \"level\": \"L4\", \"description\": \"Board-level shielding cans, ferrite beads, and common-mode chokes\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Power Supply & Signal Conditioning\"},\n\n      {\"name\": \"CNC Lathe\", \"level\": \"L4\", \"description\": \"Turning flow body bore, process connections, and seal grooves; tolerance +/-0.02 mm\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Metal Flow Body Machining\"},\n      {\"name\": \"CNC Milling Centre\", \"level\": \"L4\", \"description\": \"Milling transducer pockets, cable entry ports, and mounting features\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Metal Flow Body Machining\"},\n      {\"name\": \"Surface Treatment\", \"level\": \"L4\", \"description\": \"Electropolishing (Ra <= 0.8 um for sanitary), anodising, or passivation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Metal Flow Body Machining\"},\n\n      {\"name\": \"Injection Molding Machine\", \"level\": \"L4\", \"description\": \"50-250 t clamping force; multi-cavity molds for high-volume OEM production\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Polymer Housing Injection Molding\"},\n      {\"name\": \"Mold Tool\", \"level\": \"L4\", \"description\": \"Hardened steel multi-cavity tool; hot-runner for polymer flow bodies; cycle 30-90 s\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Polymer Housing Injection Molding\"},\n      {\"name\": \"Material Drying & Feeding\", \"level\": \"L4\", \"description\": \"Dehumidifying dryer and gravimetric feeder for hygroscopic engineering polymers\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Polymer Housing Injection Molding\"},\n\n      {\"name\": \"O-Ring Compression Mold\", \"level\": \"L4\", \"description\": \"Heated compression mold for custom-profile seals; flash trimmed post-cure\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Seal & Gasket Manufacturing\"},\n      {\"name\": \"Gasket Cutting\", \"level\": \"L4\", \"description\": \"Die-cut or waterjet-cut flat gaskets from sheet stock\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Seal & Gasket Manufacturing\"},\n      {\"name\": \"Seal Curing Oven\", \"level\": \"L4\", \"description\": \"Post-cure oven (200-230 C for FKM) completing cross-linking for long-term stability\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Seal & Gasket Manufacturing\"},\n\n      {\"name\": \"Transducer Bonding Station\", \"level\": \"L4\", \"description\": \"Epoxy or silicone adhesive application; UV or thermal cure; bond-line +/-0.1 mm\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Sensor-to-Body Integration\"},\n      {\"name\": \"Acoustic Coupling Verification\", \"level\": \"L4\", \"description\": \"Ultrasonic pulse-echo test confirming SNR >40 dB per transducer\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Sensor-to-Body Integration\"},\n      {\"name\": \"Pressure Seal Test\", \"level\": \"L4\", \"description\": \"Hydrostatic or pneumatic leak test at 1.5x rated pressure\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Sensor-to-Body Integration\"},\n\n      {\"name\": \"PCB Mounting & Wiring\", \"level\": \"L4\", \"description\": \"Screw or snap-fit PCB mounting; solder or crimp connections to sensor leads\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Electronics-to-Housing Integration\"},\n      {\"name\": \"Connector Assembly\", \"level\": \"L4\", \"description\": \"RAST 2.5, M12, cable gland, or terminal block matched to customer specification\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Electronics-to-Housing Integration\"},\n      {\"name\": \"Potting & Encapsulation\", \"level\": \"L4\", \"description\": \"Polyurethane or epoxy compound for IP65-IP68 environmental sealing\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Electronics-to-Housing Integration\"},\n\n      {\"name\": \"Torque-Controlled Fastening\", \"level\": \"L4\", \"description\": \"Electric or pneumatic screwdriver with torque monitoring; prevents seal over/under-compression\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Final Assembly & Marking\"},\n      {\"name\": \"Laser Marking / Nameplate\", \"level\": \"L4\", \"description\": \"Laser-engraved serial number, datamatrix code, CE/UL marks on housing\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Final Assembly & Marking\"},\n      {\"name\": \"Visual Inspection Station\", \"level\": \"L4\", \"description\": \"Operator or camera inspection for cosmetic defects, label correctness, connector alignment\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Final Assembly & Marking\"},\n\n      {\"name\": \"Reference Flow Standard\", \"level\": \"L4\", \"description\": \"Gravimetric (weighing tank) or volumetric (piston prover); accuracy +/-0.1-0.2%\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Wet Calibration Rig\"},\n      {\"name\": \"Flow Loop Piping & Pump\", \"level\": \"L4\", \"description\": \"Closed-loop water circuit with variable-speed pump; DN15-DN100 test sections\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Wet Calibration Rig\"},\n      {\"name\": \"Data Acquisition System\", \"level\": \"L4\", \"description\": \"Multi-channel DAQ capturing reference and DUT signals; automated pass/fail reporting\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Wet Calibration Rig\"},\n\n      {\"name\": \"Temperature Chamber\", \"level\": \"L4\", \"description\": \"Programmable chamber -40 to +120 C; cycling per IEC 60068-2\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Environmental & Endurance Testing\"},\n      {\"name\": \"Pressure Cycle Test Rig\", \"level\": \"L4\", \"description\": \"Automated cycling 0 to rated pressure; 90,000 cycles for Marquardt specification\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Environmental & Endurance Testing\"},\n      {\"name\": \"Vibration / Shock Table\", \"level\": \"L4\", \"description\": \"Sinusoidal and random vibration per IEC 60068-2-6/2-27\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Environmental & Endurance Testing\"},\n\n      {\"name\": \"Hi-Pot / Insulation Tester\", \"level\": \"L4\", \"description\": \"500-2,000 V DC between circuits and housing; verifies >10 MOhm insulation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Electrical Safety & EMC Testing\"},\n      {\"name\": \"EMC Pre-Compliance Chamber\", \"level\": \"L4\", \"description\": \"Shielded enclosure for radiated emissions and immunity pre-screening\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Electrical Safety & EMC Testing\"},\n      {\"name\": \"Functional Test Fixture\", \"level\": \"L4\", \"description\": \"Automated EOL test verifying flow measurement, temperature, communication, alarms\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Electrical Safety & EMC Testing\"},\n\n      {\"name\": \"Calibration Certificate Printer\", \"level\": \"L4\", \"description\": \"Automated certificate with calibration data, reference standard ID, uncertainty statement\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Final Inspection & Documentation\"},\n      {\"name\": \"Barcode / QR Labelling\", \"level\": \"L4\", \"description\": \"Serialised label linking physical instrument to digital calibration record\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Final Inspection & Documentation\"},\n      {\"name\": \"Serialisation Database\", \"level\": \"L4\", \"description\": \"MES/ERP-linked database storing manufacturing and calibration history per serial number\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Final Inspection & Documentation\"},\n\n      {\"name\": \"Custom Foam Insert / Tray\", \"level\": \"L4\", \"description\": \"Die-cut PE foam or vacuum-formed tray matched to instrument geometry\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Protective Packaging\"},\n      {\"name\": \"Anti-Static Packaging\", \"level\": \"L4\", \"description\": \"ESD-safe bags or wraps for instruments with exposed electronic connectors\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Protective Packaging\"},\n      {\"name\": \"Shipping Carton & Labelling\", \"level\": \"L4\", \"description\": \"Corrugated carton with shipping label, handling instructions, customs docs\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Protective Packaging\"},\n\n      {\"name\": \"Finished Goods Storage\", \"level\": \"L4\", \"description\": \"Climate-controlled warehouse with bin/shelf organisation by product variant\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Warehousing & Logistics\"},\n      {\"name\": \"ERP / WMS Integration\", \"level\": \"L4\", \"description\": \"Order-to-shipment workflow with pick-list generation and dispatch confirmation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Warehousing & Logistics\"},\n      {\"name\": \"Carrier Management\", \"level\": \"L4\", \"description\": \"Freight forwarder and parcel carrier selection; customs documentation for export\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Warehousing & Logistics\"},\n\n      {\"name\": \"Primary Flow Standard\", \"level\": \"L4\", \"description\": \"Gravimetric weigh-tank or bell-prover traceable to national institute; uncertainty <=0.05%\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Metrology Laboratory\"},\n      {\"name\": \"Coordinate Measuring Machine (CMM)\", \"level\": \"L4\", \"description\": \"Dimensional measurement for flow body bore, port alignment, and seal groove verification\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Metrology Laboratory\"},\n      {\"name\": \"Calibrated Reference Instruments\", \"level\": \"L4\", \"description\": \"Reference-grade pressure, temperature, and electrical standards for production cross-checking\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Metrology Laboratory\"},\n\n      {\"name\": \"ISO 9001 Document Control\", \"level\": \"L4\", \"description\": \"Controlled procedure library, work instructions, and change management system\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Quality Management System\"},\n      {\"name\": \"Non-Conformance Tracking\", \"level\": \"L4\", \"description\": \"NCR database with root-cause analysis, containment actions, and trend reporting\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Quality Management System\"},\n      {\"name\": \"Audit & CAPA System\", \"level\": \"L4\", \"description\": \"Internal/external audit schedule; corrective action tracking with effectiveness verification\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Quality Management System\"},\n\n      {\"name\": \"Raw Material Analyser (XRF/OES)\", \"level\": \"L4\", \"description\": \"X-ray fluorescence or optical emission spectrometry for metal alloy verification\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Incoming Inspection\"},\n      {\"name\": \"Component Verification Station\", \"level\": \"L4\", \"description\": \"Electrical parameter measurement of purchased ICs, passives, and connectors\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Incoming Inspection\"},\n      {\"name\": \"Supplier Qualification Database\", \"level\": \"L4\", \"description\": \"Approved vendor list with audit history, PPM performance, and second-source ID\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Incoming Inspection\"},\n\n      {\"name\": \"Piezo Ceramic Sourcing\", \"level\": \"L4\", \"description\": \"PZT-5A/5H disc procurement; resonant frequency and d33 coefficient verification\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Raw Material Procurement\"},\n      {\"name\": \"Metal & Polymer Stock\", \"level\": \"L4\", \"description\": \"316L stainless bar, brass rod, PA66-GF/PPS pellets, EPDM/FKM sheet\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Raw Material Procurement\"},\n      {\"name\": \"Electronic Component Supply\", \"level\": \"L4\", \"description\": \"MCUs, ADCs, precision resistors, connectors via authorised distribution\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Raw Material Procurement\"},\n\n      {\"name\": \"Approved Vendor List\", \"level\": \"L4\", \"description\": \"Qualified supplier registry with capability assessment and audit schedule\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Vendor Management\"},\n      {\"name\": \"Second-Source Strategy\", \"level\": \"L4\", \"description\": \"Alternative suppliers validated for all single-source components\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Vendor Management\"},\n      {\"name\": \"Supplier Audit Programme\", \"level\": \"L4\", \"description\": \"On-site quality audits, Cpk studies, and corrective action follow-up\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Vendor Management\"},\n\n      {\"name\": \"Component Warehouse\", \"level\": \"L4\", \"description\": \"ESD-safe, climate-controlled storage for electronic components and piezo ceramics\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Inventory Management\"},\n      {\"name\": \"ERP / MRP System\", \"level\": \"L4\", \"description\": \"Material requirements planning linked to customer orders and production schedule\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Inventory Management\"},\n      {\"name\": \"Kanban / JIT Replenishment\", \"level\": \"L4\", \"description\": \"Pull-based replenishment for high-runners; safety stock for long-lead items\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Inventory Management\"},\n\n      {\"name\": \"CE / UL Marking\", \"level\": \"L4\", \"description\": \"EU Declaration of Conformity (LVD, EMC) and UL/CSA listing for North America\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Product Certification\"},\n      {\"name\": \"ATEX / IECEx Certification\", \"level\": \"L4\", \"description\": \"Explosive atmosphere certification for hazardous area installations (Zone 0/1/2)\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Product Certification\"},\n      {\"name\": \"MID Billing Approval\", \"level\": \"L4\", \"description\": \"Measuring Instruments Directive (2014/32/EU) for fiscal/billing applications\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Product Certification\"},\n\n      {\"name\": \"REACH / RoHS Compliance\", \"level\": \"L4\", \"description\": \"Substance restriction verification; SCIP database registration for EU market\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Material & Safety Compliance\"},\n      {\"name\": \"Food Contact Material Testing\", \"level\": \"L4\", \"description\": \"FDA 21 CFR 177, EC 1935/2004, and 3-A sanitary standards\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Material & Safety Compliance\"},\n      {\"name\": \"Drinking Water Approval\", \"level\": \"L4\", \"description\": \"KTW (DE), WRAS (UK), NSF 61 (US), ACS (FR) material migration testing. MARQUARDT HOLDS KTW/WRAS.\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Material & Safety Compliance\"},\n\n      {\"name\": \"Export Control Classification\", \"level\": \"L4\", \"description\": \"EAR/ECCN classification for dual-use technology; sanctions screening\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Export & Trade Compliance\"},\n      {\"name\": \"Customs Documentation\", \"level\": \"L4\", \"description\": \"Commercial invoices, certificates of origin, HS tariff code assignment\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Export & Trade Compliance\"},\n      {\"name\": \"Country-of-Origin Marking\", \"level\": \"L4\", \"description\": \"Product marking per FTC/EU origin rules; preferential tariff documentation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Export & Trade Compliance\"}\n    ]\n  },\n  \"marquardt_position\": {\n    \"segment\": \"Ultrasonic Transit-Time Inline Flowmeters (OEM component supply)\",\n    \"l7\": \"Process Instrumentation Ecosystem\",\n    \"output_type\": \"Flow instruments (ultrasonic transit-time)\",\n    \"key_l6_steps\": [\n      \"Product Design & Engineering\",\n      \"Sensor & Transducer Fabrication\",\n      \"Electronics Manufacturing\",\n      \"Flow Body & Housing Fabrication\",\n      \"Assembly & Integration\",\n      \"Calibration & Testing\",\n      \"Packaging & Dispatch\"\n    ],\n    \"key_differentiators\": [\n      \"Polymer housing injection molding (cost advantage over stainless steel)\",\n      \"100% individual wet calibration to customer-specified medium\",\n      \"Integrated flow + temperature in single sensor body\",\n      \"Low-energy battery mode (<5 uA standby)\",\n      \"KTW/WRAS drinking water approval already held\"\n    ],\n    \"alternatives_at_segment\": [\n      {\"name\": \"Electromagnetic flowmeters\", \"status\": \"dominant\", \"share_estimate\": \"26-32%\", \"confidence\": \"HIGH\"},\n      {\"name\": \"Coriolis mass flowmeters\", \"status\": \"established, premium\", \"share_estimate\": \"~25%\", \"confidence\": \"HIGH\"},\n      {\"name\": \"Ultrasonic transit-time (all vendors)\", \"status\": \"fastest-growing\", \"share_estimate\": \"~15%\", \"confidence\": \"MEDIUM\"},\n      {\"name\": \"Vortex flowmeters\", \"status\": \"established\", \"share_estimate\": \"~10%\", \"confidence\": \"MEDIUM\"},\n      {\"name\": \"Turbine / impeller meters\", \"status\": \"legacy, declining\", \"share_estimate\": \"~8%\", \"confidence\": \"MEDIUM\"},\n      {\"name\": \"Differential-pressure (orifice)\", \"status\": \"legacy, declining\", \"share_estimate\": \"~7%\", \"confidence\": \"MEDIUM\"},\n      {\"name\": \"Thermal mass flowmeters\", \"status\": \"niche (gas)\", \"share_estimate\": \"~5%\", \"confidence\": \"LOW\"}\n    ]\n  },\n  \"entities_produced\": {\n    \"nodes\": [\n      {\"label\": \"ValueNetwork\", \"key\": {\"naics_code\": \"334513\", \"run_id\": \"TBD\"}, \"properties\": {\"naics_title\": \"Instruments and Related Products Mfg for Measuring, Displaying, and Controlling Industrial Process Variables\", \"cfj_statement\": \"Design, manufacture, calibrate, and deliver instruments that measure, display, and control industrial process variables\", \"l7_solution\": \"Process Instrumentation Ecosystem\", \"top_level\": \"L7\", \"unit_count\": 131, \"enriched\": true, \"confidence\": 0.7, \"source_type\": \"llm_corroborated\"}},\n      {\"label\": \"ValueNetworkUnit\", \"key\": {\"name\": \"<per unit>\", \"naics_code\": \"334513\", \"level\": \"<per unit>\", \"run_id\": \"TBD\"}, \"count\": 131, \"confidence\": 0.6, \"source_type\": \"llm_corroborated\"}\n    ],\n    \"relationships\": [\n      {\"type\": \"has_value_network\", \"source\": \"Market:334513\", \"target\": \"ValueNetwork:334513\", \"confidence\": 0.7, \"source_type\": \"llm_corroborated\"},\n      {\"type\": \"contains_unit\", \"source\": \"ValueNetwork:334513\", \"target\": \"ValueNetworkUnit:<each>\", \"count\": 131, \"confidence\": 0.7, \"source_type\": \"llm_corroborated\"},\n      {\"type\": \"has_child\", \"source\": \"ValueNetworkUnit:<parent>\", \"target\": \"ValueNetworkUnit:<child>\", \"count\": 130, \"confidence\": 0.7, \"source_type\": \"llm_corroborated\"}\n    ]\n  },\n  \"qa_checklist\": {\n    \"Q1_cfj_industry_level\": {\"pass\": true, \"note\": \"CFJ describes entire industry purpose with no reference to specific technology, product, or company\"},\n    \"Q2_no_orphan_nodes\": {\"pass\": true, \"note\": \"Every unit except L7 has valid parent_name referencing existing unit\"},\n    \"Q3_valid_level_transitions\": {\"pass\": true, \"note\": \"L7>L6>L5>L4 strictly followed, no skipping\"},\n    \"Q4_l4_children_per_l5\": {\"pass\": true, \"note\": \"All 30 L5 nodes have exactly 3 L4 children\"},\n    \"Q5_no_solution_specific_l7_l6\": {\"pass\": true, \"note\": \"L7 and all L6 names are industry-generic, no technology or company references\"},\n    \"Q6_naming_test\": {\"pass\": true, \"note\": \"Spot-checked: Piezoelectric Transducer Manufacturing, Wet Calibration Rig, Injection Molding Machine, SMT Pick-and-Place Machine, Reflow Oven — all industry-standard terms\"},\n    \"Q7_unit_count_in_range\": {\"pass\": true, \"note\": \"131 units total (within extended range for manufacturing NAICS)\"}\n  }\n}\n```\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [NAICS 334513 — US Census Bureau](https://data.census.gov/profile/334513)\n- [NAICS Code 334513 — IBISWorld](https://www.ibisworld.com/classifications/naics/334513/)\n- [Flow Meter Market Size — Fortune Business Insights](https://www.fortunebusinessinsights.com/industry-reports/flow-meter-market-101140)\n- [Flow Meters Market Size & Growth — Mordor Intelligence](https://www.mordorintelligence.com/industry-reports/flow-meters-market)\n- [Flow Meters Market Size & Share — Straits Research](https://straitsresearch.com/report/flow-meters-market)\n- [Ultrasonic Flowmeters Market — Future Market Insights](https://www.futuremarketinsights.com/reports/ultrasonic-flowmeters-market)\n- [Ultrasonic Flow Meter Market — MarketsandMarkets](https://www.marketsandmarkets.com/Market-Reports/ultrasonic-flow-meter-market-168677264.html)\n- [Top 10 Flowmeter Manufacturer Brands — GAIMC](https://www.gaimc.com/Newsinfo/top-10-flowmeter-manufacturer-brands-comparison)\n- [Flow Meter Market — Grand View Research](https://www.grandviewresearch.com/industry-analysis/flow-meters-market)\n- [Intelligent Flow Meter Market — Global Growth Insights](https://www.globalgrowthinsights.com/market-reports/intelligent-flow-meter-market-100221)\n- [Ultrasonic Flow Meter Calibration Process — Nagman](https://www.nagman-calibration.com/ultrasonic-flow-meter-calibration-process-explained/)\n- [Ultrasonic Flow Meters — ASGMT Technical Paper](https://asgmt.com/wp-content/uploads/2018/10/066.pdf)\n- [Value Added Piezo Assemblies — PI Ceramic](https://www.pi-usa.us/en/products/piezo-actuators-stacks-benders-tubes/piezo-value-added-assemblies)\n- [FRED: NAICS 334513 Industrial Output — Federal Reserve](https://fred.stlouisfed.org/series/IPUEN334513T300000000)\n- 01_product_decomposition.md — technology class, specifications, constraints, UNSPSC classification\n- 02_functional_promise.md — commodity FP, FP extensions, complements, BOM position\n- 05_market_discovery.md — 16 target markets, architecture distance scoring\n\n---\n\n*End of VN — describes the manufacturing value chain for NAICS 334513 (Industrial Process Variable Instruments). Marquardt operates within the ultrasonic transit-time inline flowmeter segment, executing the full L6.1→L6.7 manufacturing chain with polymer housing injection molding (L6.4) and 100% pre-calibrated delivery (L6.6) as key competitive differentiators. This VN provides the supply-side context for all downstream market VNs where the Marquardt sensor is positioned as an L4/L5 supplier into target industries.*"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**NAICS Code**",
+          "Value": "334513 — Instruments and Related Products Manufacturing for Measuring, Displaying, Indicating, Recording, Transmitting, and Controlling Industrial Process Variables"
+        },
+        {
+          "Field": "**CFJ**",
+          "Value": "Design, manufacture, calibrate, and deliver instruments that measure, display, and control industrial process variables to enable safe, efficient, and compliant operation of process plants"
+        },
+        {
+          "Field": "**Output Types**",
+          "Value": "Flow instruments (ultrasonic, electromagnetic, Coriolis, vortex, turbine, differential-pressure, thermal mass); Pressure instruments; Temperature instruments; Level instruments; Analytical instruments (pH, conductivity, dissolved oxygen); Control & recording instruments"
+        },
+        {
+          "Field": "**Hierarchy**",
+          "Value": "Process VN (L7 through L4) — what process steps and equipment compose the instrument manufacturing chain"
+        },
+        {
+          "Field": "**Key OEMs**",
+          "Value": "Endress+Hauser (~15% intelligent flow meter share), Emerson (~17%), Siemens, ABB, Yokogawa, KROHNE, Honeywell, Badger Meter, Bürkert, ifm electronic, Marquardt GmbH (ultrasonic OEM segment)"
+        },
+        {
+          "Field": "**Market Size**",
+          "Value": "~$8.5–9.1B globally (flow meters, 2024–2025); ~$0.8–1.3B ultrasonic flowmeter segment; transit-time = 80–85% of ultrasonic [SRC: web_search]"
+        },
+        {
+          "Field": "**Architecture Distance**",
+          "Value": "0 (home industry — Marquardt is a manufacturer within this NAICS) [SRC: 01_product_decomposition]"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L6 ID",
+        "Name",
+        "Type",
+        "Job Family",
+        "Output Types Served"
+      ],
+      "rows": [
+        {
+          "L6 ID": "**L6.1**",
+          "Name": "Product Design & Engineering",
+          "Type": "Core",
+          "Job Family": "Define measurement principle, mechanical form, electronics architecture, and firmware for target process variable",
+          "Output Types Served": "All"
+        },
+        {
+          "L6 ID": "**L6.2**",
+          "Name": "Sensor & Transducer Fabrication",
+          "Type": "Core",
+          "Job Family": "Manufacture the primary sensing element that converts a physical variable into an electrical signal",
+          "Output Types Served": "All (technology-specific per output type)"
+        },
+        {
+          "L6 ID": "**L6.3**",
+          "Name": "Electronics Manufacturing",
+          "Type": "Core",
+          "Job Family": "Fabricate, populate, and test printed circuit boards with signal conditioning, digitisation, and communication firmware",
+          "Output Types Served": "All"
+        },
+        {
+          "L6 ID": "**L6.4**",
+          "Name": "Flow Body & Housing Fabrication",
+          "Type": "Core",
+          "Job Family": "Machine, cast, or mold the wetted and structural housings that contain sensor and electronics",
+          "Output Types Served": "All"
+        },
+        {
+          "L6 ID": "**L6.5**",
+          "Name": "Assembly & Integration",
+          "Type": "Core",
+          "Job Family": "Combine sensor, electronics, and housing into a finished instrument; seal, wire, and verify",
+          "Output Types Served": "All"
+        },
+        {
+          "L6 ID": "**L6.6**",
+          "Name": "Calibration & Testing",
+          "Type": "Core",
+          "Job Family": "Calibrate each instrument against a traceable reference and verify performance across environmental and endurance envelopes",
+          "Output Types Served": "All"
+        },
+        {
+          "L6 ID": "**L6.7**",
+          "Name": "Packaging & Dispatch",
+          "Type": "Core",
+          "Job Family": "Inspect, document, pack, and ship finished instruments to OEMs, distributors, or end-users",
+          "Output Types Served": "All"
+        },
+        {
+          "L6 ID": "**L6.8**",
+          "Name": "Quality Management & Metrology (H)",
+          "Type": "Horizontal",
+          "Job Family": "Maintain measurement traceability, ISO 9001 / ISO 17025 compliance, and process control across all core steps",
+          "Output Types Served": ""
+        },
+        {
+          "L6 ID": "**L6.9**",
+          "Name": "Supply Chain & Procurement (H)",
+          "Type": "Horizontal",
+          "Job Family": "Source raw materials, electronic components, piezo ceramics, metals, polymers, and manage vendor qualification",
+          "Output Types Served": ""
+        },
+        {
+          "L6 ID": "**L6.10**",
+          "Name": "Regulatory & Certification (H)",
+          "Type": "Horizontal",
+          "Job Family": "Obtain and maintain CE/UL, ATEX/IECEx, MID billing, food-contact, and drinking-water certifications",
+          "Output Types Served": ""
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.1.1.1: 3D CAD Workstation",
+          "Description": "Parametric solid modeling (SolidWorks, Creo, NX) for flow body and housing geometry"
+        },
+        {
+          "L4 Subsystem": "L4.1.1.2: FEA Simulation Software",
+          "Description": "Structural (pressure burst), thermal (operating range), and CFD (flow path) simulation"
+        },
+        {
+          "L4 Subsystem": "L4.1.1.3: Rapid Prototyping Equipment",
+          "Description": "SLA/SLS 3D printer and CNC prototype mill for design verification before tooling"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.1.2.1: PCB Layout Tool",
+          "Description": "Multi-layer PCB design (Altium, KiCad, Cadence) with impedance-controlled routing"
+        },
+        {
+          "L4 Subsystem": "L4.1.2.2: Circuit Simulation Software",
+          "Description": "SPICE analog simulation and mixed-signal verification"
+        },
+        {
+          "L4 Subsystem": "L4.1.2.3: FPGA / DSP Development Kit",
+          "Description": "Hardware-in-the-loop development platform for real-time signal processing algorithms"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.1.3.1: Embedded Development Environment",
+          "Description": "Cross-compiler, debugger, and JTAG interface for ARM/RISC-V microcontrollers"
+        },
+        {
+          "L4 Subsystem": "L4.1.3.2: DSP Algorithm Library",
+          "Description": "Transit-time calculation, digital filtering, zero-crossing detection, correlation algorithms"
+        },
+        {
+          "L4 Subsystem": "L4.1.3.3: Hardware-in-the-Loop Test Bench",
+          "Description": "Simulated sensor input for firmware verification before physical prototyping"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.2.1.1: Piezo Ceramic Press & Sintering Furnace",
+          "Description": "Powder press forming PZT discs; sintering at 1,200–1,300 °C for densification"
+        },
+        {
+          "L4 Subsystem": "L4.2.1.2: Electrode Metallization",
+          "Description": "Sputtering or screen-printing silver/nickel electrodes on piezo disc faces"
+        },
+        {
+          "L4 Subsystem": "L4.2.1.3: Polarisation & Aging Station",
+          "Description": "High-voltage DC polarisation aligning dipoles; accelerated aging stabilises piezoelectric coefficient"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.2.2.1: Coil Winding Machine",
+          "Description": "Automated bobbin winder for excitation and pickup coils; wire gauge 0.1–0.5 mm"
+        },
+        {
+          "L4 Subsystem": "L4.2.2.2: Insulation & Potting Station",
+          "Description": "Epoxy or polyurethane potting for moisture and vibration protection"
+        },
+        {
+          "L4 Subsystem": "L4.2.2.3: Impedance Test Equipment",
+          "Description": "LCR meter verifying coil inductance, resistance, and Q-factor against specification"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.2.3.1: Tube Bending Machine",
+          "Description": "CNC mandrel bender for precise tube radii; wall thinning <10%"
+        },
+        {
+          "L4 Subsystem": "L4.2.3.2: Orbital Welding & Brazing Station",
+          "Description": "Autogenous TIG orbital welder for tube-to-manifold joints; helium leak-tested"
+        },
+        {
+          "L4 Subsystem": "L4.2.3.3: Tube Vibration Test Rig",
+          "Description": "Modal analysis verifying resonant frequency and symmetry of matched tube pairs"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.3.1.1: SMT Pick-and-Place Machine",
+          "Description": "High-speed component placement; 0201–BGA capability; feeder capacity 80–200 reels"
+        },
+        {
+          "L4 Subsystem": "L4.3.1.2: Reflow Oven",
+          "Description": "Convection reflow with nitrogen atmosphere; lead-free SAC305 profile"
+        },
+        {
+          "L4 Subsystem": "L4.3.1.3: Automated Optical Inspection (AOI)",
+          "Description": "Camera-based solder joint and component placement verification; defect rate <50 ppm"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.3.2.1: Programming Jig",
+          "Description": "Pogo-pin bed-of-nails fixture for JTAG/SWD firmware download"
+        },
+        {
+          "L4 Subsystem": "L4.3.2.2: Firmware Loader Software",
+          "Description": "Production server managing firmware versions, serial numbers, and configuration profiles"
+        },
+        {
+          "L4 Subsystem": "L4.3.2.3: In-Circuit Test (ICT) Fixture",
+          "Description": "Flying-probe or bed-of-nails electrical test verifying component values and connectivity"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.3.3.1: DC-DC Converter Module",
+          "Description": "Switching or linear regulator providing 3.3 V / 5 V from 6–30 V input supply"
+        },
+        {
+          "L4 Subsystem": "L4.3.3.2: Analog Front-End Module",
+          "Description": "Charge amplifier (for piezoelectric) or instrumentation amplifier (for electromagnetic)"
+        },
+        {
+          "L4 Subsystem": "L4.3.3.3: EMC Shielding & Filtering",
+          "Description": "Board-level shielding cans, ferrite beads, and common-mode chokes for EMI compliance"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.4.1.1: CNC Lathe",
+          "Description": "Turning flow body bore, process connections, and seal grooves; tolerance ±0.02 mm"
+        },
+        {
+          "L4 Subsystem": "L4.4.1.2: CNC Milling Centre",
+          "Description": "Milling transducer pockets, cable entry ports, and mounting features"
+        },
+        {
+          "L4 Subsystem": "L4.4.1.3: Surface Treatment",
+          "Description": "Electropolishing (Ra ≤ 0.8 μm for sanitary), anodising, or passivation"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.4.2.1: Injection Molding Machine",
+          "Description": "50–250 t clamping force; multi-cavity molds for high-volume production"
+        },
+        {
+          "L4 Subsystem": "L4.4.2.2: Mold Tool",
+          "Description": "Hardened steel multi-cavity tool; hot-runner for polymer flow bodies; cycle time 30–90 s"
+        },
+        {
+          "L4 Subsystem": "L4.4.2.3: Material Drying & Feeding",
+          "Description": "Dehumidifying dryer and gravimetric feeder for hygroscopic engineering polymers"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.4.3.1: O-Ring Compression Mold",
+          "Description": "Heated compression mold for custom-profile seals; flash trimmed post-cure"
+        },
+        {
+          "L4 Subsystem": "L4.4.3.2: Gasket Cutting",
+          "Description": "Die-cut or waterjet-cut flat gaskets from sheet stock"
+        },
+        {
+          "L4 Subsystem": "L4.4.3.3: Seal Curing Oven",
+          "Description": "Post-cure oven (200–230 °C for FKM) completing cross-linking for long-term stability"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.5.1.1: Transducer Bonding Station",
+          "Description": "Epoxy or silicone adhesive application; UV or thermal cure; bond-line thickness controlled to ±0.1 mm"
+        },
+        {
+          "L4 Subsystem": "L4.5.1.2: Acoustic Coupling Verification",
+          "Description": "Ultrasonic pulse-echo test confirming signal-to-noise ratio >40 dB per transducer"
+        },
+        {
+          "L4 Subsystem": "L4.5.1.3: Pressure Seal Test",
+          "Description": "Hydrostatic or pneumatic leak test at 1.5× rated pressure (15 bar for 10-bar rating)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.5.2.1: PCB Mounting & Wiring",
+          "Description": "Screw or snap-fit PCB mounting; solder or crimp connections to sensor leads and connector"
+        },
+        {
+          "L4 Subsystem": "L4.5.2.2: Connector Assembly",
+          "Description": "RAST 2.5 (Marquardt), M12, cable gland, or terminal block — matched to customer specification"
+        },
+        {
+          "L4 Subsystem": "L4.5.2.3: Potting & Encapsulation",
+          "Description": "Polyurethane or epoxy potting compound for IP65–IP68 environmental sealing"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.5.3.1: Torque-Controlled Fastening",
+          "Description": "Electric or pneumatic screwdriver with torque monitoring; prevents seal over/under-compression"
+        },
+        {
+          "L4 Subsystem": "L4.5.3.2: Laser Marking / Nameplate",
+          "Description": "Laser-engraved serial number, datamatrix code, CE/UL marks on housing"
+        },
+        {
+          "L4 Subsystem": "L4.5.3.3: Visual Inspection Station",
+          "Description": "Operator or camera inspection for cosmetic defects, label correctness, and connector alignment"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.6.1.1: Reference Flow Standard",
+          "Description": "Gravimetric (weighing tank) or volumetric (piston prover) reference; accuracy ±0.1–0.2%"
+        },
+        {
+          "L4 Subsystem": "L4.6.1.2: Flow Loop Piping & Pump",
+          "Description": "Closed-loop water circuit with variable-speed pump; DN15–DN100 test sections"
+        },
+        {
+          "L4 Subsystem": "L4.6.1.3: Data Acquisition System",
+          "Description": "Multi-channel DAQ capturing reference and device-under-test signals; automated pass/fail reporting"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.6.2.1: Temperature Chamber",
+          "Description": "Programmable chamber −40 to +120 °C; temperature cycling per IEC 60068-2"
+        },
+        {
+          "L4 Subsystem": "L4.6.2.2: Pressure Cycle Test Rig",
+          "Description": "Automated cycling 0→rated pressure at rated temperature; 90,000 cycles for Marquardt [SRC: 01_product_decomposition]"
+        },
+        {
+          "L4 Subsystem": "L4.6.2.3: Vibration / Shock Table",
+          "Description": "Sinusoidal and random vibration per IEC 60068-2-6/2-27; shock per IEC 60068-2-64"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.6.3.1: Hi-Pot / Insulation Tester",
+          "Description": "Applies 500–2,000 V DC between circuits and housing; verifies >10 MΩ insulation resistance"
+        },
+        {
+          "L4 Subsystem": "L4.6.3.2: EMC Pre-Compliance Chamber",
+          "Description": "Shielded enclosure with antenna for radiated emissions and immunity pre-screening"
+        },
+        {
+          "L4 Subsystem": "L4.6.3.3: Functional Test Fixture",
+          "Description": "Automated end-of-line test verifying flow measurement, temperature reading, communication, and alarm outputs"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.7.1.1: Calibration Certificate Printer",
+          "Description": "Automated certificate generation with calibration data, reference standard ID, and uncertainty statement"
+        },
+        {
+          "L4 Subsystem": "L4.7.1.2: Barcode / QR Labelling",
+          "Description": "Serialised label linking physical instrument to digital calibration record"
+        },
+        {
+          "L4 Subsystem": "L4.7.1.3: Serialisation Database",
+          "Description": "MES/ERP-linked database storing complete manufacturing and calibration history per serial number"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.7.2.1: Custom Foam Insert / Tray",
+          "Description": "Die-cut PE foam or vacuum-formed tray matched to instrument geometry"
+        },
+        {
+          "L4 Subsystem": "L4.7.2.2: Anti-Static Packaging",
+          "Description": "ESD-safe bags or wraps for instruments with exposed electronic connectors"
+        },
+        {
+          "L4 Subsystem": "L4.7.2.3: Shipping Carton & Labelling",
+          "Description": "Corrugated carton with shipping label, handling instructions, and customs documentation"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.7.3.1: Finished Goods Storage",
+          "Description": "Climate-controlled warehouse with bin/shelf organisation by product variant"
+        },
+        {
+          "L4 Subsystem": "L4.7.3.2: ERP / WMS Integration",
+          "Description": "Order-to-shipment workflow with pick-list generation and dispatch confirmation"
+        },
+        {
+          "L4 Subsystem": "L4.7.3.3: Carrier Management",
+          "Description": "Freight forwarder and parcel carrier selection; customs documentation for export"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.8.1.1: Primary Flow Standard",
+          "Description": "Gravimetric weigh-tank or bell-prover traceable to national metrology institute; uncertainty ≤0.05%"
+        },
+        {
+          "L4 Subsystem": "L4.8.1.2: Dimensional Measurement (CMM)",
+          "Description": "Coordinate measuring machine for flow body bore, port alignment, and seal groove verification"
+        },
+        {
+          "L4 Subsystem": "L4.8.1.3: Calibrated Reference Instruments",
+          "Description": "Reference-grade pressure, temperature, and electrical standards for cross-checking production instruments"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.8.2.1: ISO 9001 Document Control",
+          "Description": "Controlled procedure library, work instructions, and change management system"
+        },
+        {
+          "L4 Subsystem": "L4.8.2.2: Non-Conformance Tracking",
+          "Description": "NCR database with root-cause analysis, containment actions, and trend reporting"
+        },
+        {
+          "L4 Subsystem": "L4.8.2.3: Audit & CAPA System",
+          "Description": "Internal/external audit schedule; corrective action tracking with effectiveness verification"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.8.3.1: Raw Material Analyser (XRF/OES)",
+          "Description": "X-ray fluorescence or optical emission spectrometry for metal alloy verification"
+        },
+        {
+          "L4 Subsystem": "L4.8.3.2: Component Verification Station",
+          "Description": "Electrical parameter measurement of purchased ICs, passives, and connectors"
+        },
+        {
+          "L4 Subsystem": "L4.8.3.3: Supplier Qualification Database",
+          "Description": "Approved vendor list with audit history, PPM performance, and second-source identification"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.9.1.1: Piezo Ceramic Sourcing",
+          "Description": "PZT-5A/5H disc procurement; incoming verification of resonant frequency and d33 coefficient"
+        },
+        {
+          "L4 Subsystem": "L4.9.1.2: Metal & Polymer Stock",
+          "Description": "316L stainless bar stock, brass rod, PA66-GF / PPS pellets, EPDM/FKM sheet"
+        },
+        {
+          "L4 Subsystem": "L4.9.1.3: Electronic Component Supply",
+          "Description": "Microcontrollers, ADCs, precision resistors, connectors; managed via authorised distribution"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.9.2.1: Approved Vendor List",
+          "Description": "Qualified supplier registry with capability assessment and audit schedule"
+        },
+        {
+          "L4 Subsystem": "L4.9.2.2: Second-Source Strategy",
+          "Description": "Alternative suppliers validated for all single-source components"
+        },
+        {
+          "L4 Subsystem": "L4.9.2.3: Supplier Audit Programme",
+          "Description": "On-site quality audits, process capability studies (Cpk), and corrective action follow-up"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.9.3.1: Component Warehouse",
+          "Description": "ESD-safe, climate-controlled storage for electronic components and piezo ceramics"
+        },
+        {
+          "L4 Subsystem": "L4.9.3.2: ERP / MRP System",
+          "Description": "Material requirements planning linked to customer orders and production schedule"
+        },
+        {
+          "L4 Subsystem": "L4.9.3.3: Kanban / JIT Replenishment",
+          "Description": "Pull-based replenishment for high-runner components; safety stock for long-lead items"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.10.1.1: CE / UL Marking",
+          "Description": "EU Declaration of Conformity (LVD, EMC directives) and UL/CSA listing for North America"
+        },
+        {
+          "L4 Subsystem": "L4.10.1.2: ATEX / IECEx Certification",
+          "Description": "Explosive atmosphere certification for hazardous area installations (Zone 0/1/2)"
+        },
+        {
+          "L4 Subsystem": "L4.10.1.3: MID Billing Approval",
+          "Description": "Measuring Instruments Directive (2014/32/EU) for instruments used in fiscal/billing applications"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.10.2.1: REACH / RoHS Compliance",
+          "Description": "Substance restriction verification; SCIP database registration for EU market"
+        },
+        {
+          "L4 Subsystem": "L4.10.2.2: Food Contact Material Testing",
+          "Description": "FDA 21 CFR 177, EC 1935/2004, and 3-A sanitary standards for food/beverage industry"
+        },
+        {
+          "L4 Subsystem": "L4.10.2.3: Drinking Water Approval",
+          "Description": "KTW (DE), WRAS (UK), NSF 61 (US), ACS (FR) — material migration testing for potable water contact. **Marquardt holds KTW/WRAS.** [SRC: 01_product_decomposition]"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.10.3.1: Export Control Classification",
+          "Description": "EAR/ECCN classification for dual-use technology; sanctions screening"
+        },
+        {
+          "L4 Subsystem": "L4.10.3.2: Customs Documentation",
+          "Description": "Commercial invoices, certificates of origin, and HS tariff code assignment"
+        },
+        {
+          "L4 Subsystem": "L4.10.3.3: Country-of-Origin Marking",
+          "Description": "Product marking per FTC/EU origin rules; supporting documentation for preferential tariff treatment"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L6 Domain",
+        "Flow Instruments",
+        "Pressure",
+        "Temperature",
+        "Level",
+        "Analytical",
+        "Control/Recording"
+      ],
+      "rows": [
+        {
+          "L6 Domain": "L6.1 Design & Engineering",
+          "Flow Instruments": "Y",
+          "Pressure": "Y",
+          "Temperature": "Y",
+          "Level": "Y",
+          "Analytical": "Y",
+          "Control/Recording": "Y"
+        },
+        {
+          "L6 Domain": "L6.2 Sensor Fabrication",
+          "Flow Instruments": "Y (piezo, coil, tube)",
+          "Pressure": "Y (strain gauge, capacitive)",
+          "Temperature": "Y (RTD, TC)",
+          "Level": "Y (radar, ultrasonic)",
+          "Analytical": "Y (electrochemical, optical)",
+          "Control/Recording": "partial"
+        },
+        {
+          "L6 Domain": "L6.3 Electronics Mfg",
+          "Flow Instruments": "Y",
+          "Pressure": "Y",
+          "Temperature": "Y",
+          "Level": "Y",
+          "Analytical": "Y",
+          "Control/Recording": "Y"
+        },
+        {
+          "L6 Domain": "L6.4 Housing Fabrication",
+          "Flow Instruments": "Y (flow body + housing)",
+          "Pressure": "Y (process connection)",
+          "Temperature": "Y (thermowell)",
+          "Level": "Y (flange/bracket)",
+          "Analytical": "Y (sensor housing)",
+          "Control/Recording": "Y (enclosure)"
+        },
+        {
+          "L6 Domain": "L6.5 Assembly",
+          "Flow Instruments": "Y",
+          "Pressure": "Y",
+          "Temperature": "Y",
+          "Level": "Y",
+          "Analytical": "Y",
+          "Control/Recording": "Y"
+        },
+        {
+          "L6 Domain": "L6.6 Calibration & Testing",
+          "Flow Instruments": "Y (wet cal)",
+          "Pressure": "Y (dead-weight)",
+          "Temperature": "Y (dry bath)",
+          "Level": "Y (tank cal)",
+          "Analytical": "Y (buffer cal)",
+          "Control/Recording": "Y (signal cal)"
+        },
+        {
+          "L6 Domain": "L6.7 Packaging & Dispatch",
+          "Flow Instruments": "Y",
+          "Pressure": "Y",
+          "Temperature": "Y",
+          "Level": "Y",
+          "Analytical": "Y",
+          "Control/Recording": "Y"
+        },
+        {
+          "L6 Domain": "L6.8 Quality (H)",
+          "Flow Instruments": "Y",
+          "Pressure": "Y",
+          "Temperature": "Y",
+          "Level": "Y",
+          "Analytical": "Y",
+          "Control/Recording": "Y"
+        },
+        {
+          "L6 Domain": "L6.9 Supply Chain (H)",
+          "Flow Instruments": "Y",
+          "Pressure": "Y",
+          "Temperature": "Y",
+          "Level": "Y",
+          "Analytical": "Y",
+          "Control/Recording": "Y"
+        },
+        {
+          "L6 Domain": "L6.10 Regulatory (H)",
+          "Flow Instruments": "Y",
+          "Pressure": "Y",
+          "Temperature": "Y",
+          "Level": "Y",
+          "Analytical": "Y",
+          "Control/Recording": "Y"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Dimension",
+        "Marquardt Position",
+        "Industry Mainstream"
+      ],
+      "rows": [
+        {
+          "Dimension": "**Segment**",
+          "Marquardt Position": "Ultrasonic transit-time inline flowmeters",
+          "Industry Mainstream": "Full-range process instrumentation"
+        },
+        {
+          "Dimension": "**Target customer**",
+          "Marquardt Position": "OEM integration (B2B component supply)",
+          "Industry Mainstream": "End-user / EPC / distributor"
+        },
+        {
+          "Dimension": "**Pipe size range**",
+          "Marquardt Position": "DN12–DN25 (small-bore OEM)",
+          "Industry Mainstream": "DN15–DN2000+"
+        },
+        {
+          "Dimension": "**Housing material**",
+          "Marquardt Position": "Polymer (PPS, PA66-GF) — cost-optimised",
+          "Industry Mainstream": "Stainless steel 316L / Hastelloy"
+        },
+        {
+          "Dimension": "**Price point**",
+          "Marquardt Position": "$20–60 OEM volume",
+          "Industry Mainstream": "$200–5,000 industrial retail"
+        },
+        {
+          "Dimension": "**Calibration model**",
+          "Marquardt Position": "100% wet-calibrated, pre-configured per customer medium",
+          "Industry Mainstream": "Factory-calibrated on water; field-configurable"
+        },
+        {
+          "Dimension": "**Certifications held**",
+          "Marquardt Position": "KTW, WRAS (drinking water)",
+          "Industry Mainstream": "ATEX, MID, 3-A, FDA (varies by vendor)"
+        },
+        {
+          "Dimension": "**Key differentiator**",
+          "Marquardt Position": "Integrated flow + temperature; zero pressure drop; no moving parts; glycol-tolerant; battery mode (<5 μA)",
+          "Industry Mainstream": "Multi-parameter, fieldbus connectivity, hazardous area, custody transfer"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Status",
+        "Share Estimate",
+        "Confidence"
+      ],
+      "rows": [
+        {
+          "Alternative": "Electromagnetic flowmeters",
+          "Status": "Dominant (26–32% of total flow market)",
+          "Share Estimate": "30%",
+          "Confidence": "HIGH [SRC: web_search]"
+        },
+        {
+          "Alternative": "Coriolis mass flowmeters",
+          "Status": "Established, premium segment",
+          "Share Estimate": "25%",
+          "Confidence": "HIGH [SRC: web_search]"
+        },
+        {
+          "Alternative": "Ultrasonic transit-time (all)",
+          "Status": "Fastest-growing; 80–85% of ultrasonic segment",
+          "Share Estimate": "15%",
+          "Confidence": "MEDIUM [SRC: web_search]"
+        },
+        {
+          "Alternative": "Vortex flowmeters",
+          "Status": "Established for steam/gas",
+          "Share Estimate": "10%",
+          "Confidence": "MEDIUM"
+        },
+        {
+          "Alternative": "Turbine / impeller meters",
+          "Status": "Legacy, declining",
+          "Share Estimate": "8%",
+          "Confidence": "MEDIUM"
+        },
+        {
+          "Alternative": "Differential-pressure (orifice)",
+          "Status": "Legacy, declining",
+          "Share Estimate": "7%",
+          "Confidence": "MEDIUM"
+        },
+        {
+          "Alternative": "Thermal mass flowmeters",
+          "Status": "Niche (gas measurement)",
+          "Share Estimate": "5%",
+          "Confidence": "LOW"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "Check": "Exactly one L7 node",
+          "Result": "PASS — 1 L7 (Process Instrumentation Ecosystem)"
+        },
+        {
+          "Check": "L6 count in range (3–8 core + horizontals)",
+          "Result": "PASS — 7 core + 3 horizontal = 10 L6 nodes"
+        },
+        {
+          "Check": "L5 count per L6 in range (2–5)",
+          "Result": "PASS — L6.1: 3, L6.2: 3, L6.3: 3, L6.4: 3, L6.5: 3, L6.6: 3, L6.7: 3, L6.8: 3, L6.9: 3, L6.10: 3"
+        },
+        {
+          "Check": "L4 count per L5 >= 2",
+          "Result": "PASS — all L5 nodes have 3 L4 children"
+        },
+        {
+          "Check": "No orphan nodes",
+          "Result": "PASS — every node has a parent"
+        },
+        {
+          "Check": "No level skipping",
+          "Result": "PASS — L7>L6>L5>L4 strictly followed"
+        },
+        {
+          "Check": "Valid parent-child transitions",
+          "Result": "PASS"
+        },
+        {
+          "Check": "No company names in L7/L6 names",
+          "Result": "PASS"
+        },
+        {
+          "Check": "Three-question naming test (5 spot-checks)",
+          "Result": "PASS — \"Piezoelectric Transducer Manufacturing,\" \"Wet Calibration Rig,\" \"Injection Molding Machine,\" \"SMT Pick-and-Place Machine,\" \"Reflow Oven\" — all industry-standard terms"
+        },
+        {
+          "Check": "Unit count in range (15–60, extended for mfg)",
+          "Result": "PASS — 1 + 10 + 30 + 90 = 131 total units"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "value_network_construction",
+      "naics_code": "334513",
+      "naics_title": "Instruments and Related Products Manufacturing for Measuring, Displaying, Indicating, Recording, Transmitting, and Controlling Industrial Process Variables",
+      "cfj_statement": "Design, manufacture, calibrate, and deliver instruments that measure, display, and control industrial process variables to enable safe, efficient, and compliant operation of process plants",
+      "l7_solution": "Process Instrumentation Ecosystem",
+      "top_level": "L7",
+      "market_name": "Flowmeters (Home Industry)",
+      "architecture_distance": 0,
+      "already_uses_technology": true,
+      "output_types": [
+        "Flow instruments (ultrasonic, electromagnetic, Coriolis, vortex, turbine, DP, thermal mass)",
+        "Pressure instruments",
+        "Temperature instruments",
+        "Level instruments",
+        "Analytical instruments",
+        "Control & recording instruments"
+      ],
+      "value_network": {
+        "naics_code": "334513",
+        "naics_title": "Instruments and Related Products Manufacturing for Measuring, Displaying, Indicating, Recording, Transmitting, and Controlling Industrial Process Variables",
+        "cfj_statement": "Design, manufacture, calibrate, and deliver instruments that measure, display, and control industrial process variables to enable safe, efficient, and compliant operation of process plants",
+        "l7_solution": "Process Instrumentation Ecosystem",
+        "units": [
+          {
+            "name": "Process Instrumentation Ecosystem",
+            "level": "L7",
+            "description": "Complete ecosystem of instrument manufacturers, sensor fabricators, component suppliers, calibration providers, system integrators, distributors, and end-user process industries coordinated around measurement and control of industrial process variables",
+            "bom_standard": "Moore 1993",
+            "parent_name": "ROOT"
+          },
+          {
+            "name": "Product Design & Engineering",
+            "level": "L6",
+            "description": "Define measurement principle, mechanical form, electronics architecture, and firmware for target process variable",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Process Instrumentation Ecosystem"
+          },
+          {
+            "name": "Sensor & Transducer Fabrication",
+            "level": "L6",
+            "description": "Manufacture the primary sensing element that converts a physical variable into an electrical signal",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Process Instrumentation Ecosystem"
+          },
+          {
+            "name": "Electronics Manufacturing",
+            "level": "L6",
+            "description": "Fabricate, populate, and test PCBs with signal conditioning, digitisation, and communication firmware",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Process Instrumentation Ecosystem"
+          },
+          {
+            "name": "Flow Body & Housing Fabrication",
+            "level": "L6",
+            "description": "Machine, cast, or mold wetted flow bodies and structural housings",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Process Instrumentation Ecosystem"
+          },
+          {
+            "name": "Assembly & Integration",
+            "level": "L6",
+            "description": "Combine sensor, electronics, and housing into finished instrument; seal, wire, and verify",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Process Instrumentation Ecosystem"
+          },
+          {
+            "name": "Calibration & Testing",
+            "level": "L6",
+            "description": "Calibrate each instrument against traceable reference and verify performance across environmental envelope",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Process Instrumentation Ecosystem"
+          },
+          {
+            "name": "Packaging & Dispatch",
+            "level": "L6",
+            "description": "Inspect, document, pack, and ship finished instruments to OEMs, distributors, or end-users",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Process Instrumentation Ecosystem"
+          },
+          {
+            "name": "Quality Management & Metrology",
+            "level": "L6",
+            "description": "Maintain measurement traceability, ISO 9001/17025 compliance, and process control across all core steps (horizontal)",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Process Instrumentation Ecosystem"
+          },
+          {
+            "name": "Supply Chain & Procurement",
+            "level": "L6",
+            "description": "Source raw materials, electronic components, piezo ceramics, metals, polymers, and manage vendor qualification (horizontal)",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Process Instrumentation Ecosystem"
+          },
+          {
+            "name": "Regulatory & Certification",
+            "level": "L6",
+            "description": "Obtain and maintain CE/UL, ATEX/IECEx, MID, food-contact, and drinking-water certifications (horizontal)",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Process Instrumentation Ecosystem"
+          },
+          {
+            "name": "Mechanical Design (CAD/CAE)",
+            "level": "L5",
+            "description": "3D solid modeling and FEA of flow bodies, housings, and sensor mounting structures",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Product Design & Engineering"
+          },
+          {
+            "name": "Electronics Design (EDA)",
+            "level": "L5",
+            "description": "Schematic capture, PCB layout, and circuit simulation for signal conditioning and communication",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Product Design & Engineering"
+          },
+          {
+            "name": "Firmware & Signal Processing",
+            "level": "L5",
+            "description": "Embedded firmware for transit-time measurement, compensation algorithms, and communication protocols",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Product Design & Engineering"
+          },
+          {
+            "name": "Piezoelectric Transducer Manufacturing",
+            "level": "L5",
+            "description": "Fabrication of PZT ceramic elements for ultrasonic flow sensors; matched transducer pairs",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Sensor & Transducer Fabrication"
+          },
+          {
+            "name": "Electromagnetic Coil Assembly",
+            "level": "L5",
+            "description": "Winding of excitation and pickup coils for electromagnetic flowmeters",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Sensor & Transducer Fabrication"
+          },
+          {
+            "name": "Coriolis Tube Fabrication",
+            "level": "L5",
+            "description": "Precision bending and welding of thin-walled stainless tubes for Coriolis mass flowmeters",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Sensor & Transducer Fabrication"
+          },
+          {
+            "name": "PCB Fabrication & Assembly",
+            "level": "L5",
+            "description": "SMT production line for multi-layer PCBs with mixed analog/digital layout",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Electronics Manufacturing"
+          },
+          {
+            "name": "Firmware Flashing & Configuration",
+            "level": "L5",
+            "description": "Programming microcontroller with production firmware, calibration constants, and customer configuration",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Electronics Manufacturing"
+          },
+          {
+            "name": "Power Supply & Signal Conditioning",
+            "level": "L5",
+            "description": "DC-DC converters, analog front-end modules, and EMC filtering",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Electronics Manufacturing"
+          },
+          {
+            "name": "Metal Flow Body Machining",
+            "level": "L5",
+            "description": "CNC machining of stainless steel, brass, or Hastelloy flow bodies for industrial applications",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Flow Body & Housing Fabrication"
+          },
+          {
+            "name": "Polymer Housing Injection Molding",
+            "level": "L5",
+            "description": "Injection molding of thermoplastic housings (PPS, PA66-GF) for cost-optimised OEM sensors",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Flow Body & Housing Fabrication"
+          },
+          {
+            "name": "Seal & Gasket Manufacturing",
+            "level": "L5",
+            "description": "Fabrication of elastomeric O-rings, gaskets, and face seals for pressure integrity",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Flow Body & Housing Fabrication"
+          },
+          {
+            "name": "Sensor-to-Body Integration",
+            "level": "L5",
+            "description": "Bonding transducers into flow body; acoustic coupling verification; pressure seal test",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Assembly & Integration"
+          },
+          {
+            "name": "Electronics-to-Housing Integration",
+            "level": "L5",
+            "description": "Mounting PCB, connecting sensor leads and connector, potting for environmental sealing",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Assembly & Integration"
+          },
+          {
+            "name": "Final Assembly & Marking",
+            "level": "L5",
+            "description": "Mechanical fastening, laser marking, visual inspection",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Assembly & Integration"
+          },
+          {
+            "name": "Wet Calibration Rig",
+            "level": "L5",
+            "description": "Flow calibration against gravimetric or volumetric reference standard; 5-10 flow points per sensor",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Calibration & Testing"
+          },
+          {
+            "name": "Environmental & Endurance Testing",
+            "level": "L5",
+            "description": "Temperature, pressure, humidity, and mechanical stress verification",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Calibration & Testing"
+          },
+          {
+            "name": "Electrical Safety & EMC Testing",
+            "level": "L5",
+            "description": "Hi-pot insulation, EMC pre-compliance, and automated functional test",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Calibration & Testing"
+          },
+          {
+            "name": "Final Inspection & Documentation",
+            "level": "L5",
+            "description": "Calibration certificates, test reports, and traceability records",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Packaging & Dispatch"
+          },
+          {
+            "name": "Protective Packaging",
+            "level": "L5",
+            "description": "Custom foam inserts, anti-static packaging, shipping cartons",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Packaging & Dispatch"
+          },
+          {
+            "name": "Warehousing & Logistics",
+            "level": "L5",
+            "description": "Finished goods storage, order picking, and carrier management",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Packaging & Dispatch"
+          },
+          {
+            "name": "Metrology Laboratory",
+            "level": "L5",
+            "description": "Reference-grade measurement equipment traceable to national standards (PTB, NIST)",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Quality Management & Metrology"
+          },
+          {
+            "name": "Quality Management System",
+            "level": "L5",
+            "description": "ISO 9001 document control, non-conformance tracking, CAPA processes",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Quality Management & Metrology"
+          },
+          {
+            "name": "Incoming Inspection",
+            "level": "L5",
+            "description": "Verification of raw materials and purchased components against specifications",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Quality Management & Metrology"
+          },
+          {
+            "name": "Raw Material Procurement",
+            "level": "L5",
+            "description": "Sourcing of piezo ceramics, metals, polymers, and electronic components",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Supply Chain & Procurement"
+          },
+          {
+            "name": "Vendor Management",
+            "level": "L5",
+            "description": "Supplier qualification, audit, and performance monitoring",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Supply Chain & Procurement"
+          },
+          {
+            "name": "Inventory Management",
+            "level": "L5",
+            "description": "MRP-driven storage and replenishment of materials and components",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Supply Chain & Procurement"
+          },
+          {
+            "name": "Product Certification",
+            "level": "L5",
+            "description": "CE/UL, ATEX/IECEx, and MID billing approval for market access",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Regulatory & Certification"
+          },
+          {
+            "name": "Material & Safety Compliance",
+            "level": "L5",
+            "description": "REACH/RoHS, food contact, and drinking water material approvals",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Regulatory & Certification"
+          },
+          {
+            "name": "Export & Trade Compliance",
+            "level": "L5",
+            "description": "Export control classification, customs documentation, and origin marking",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Regulatory & Certification"
+          },
+          {
+            "name": "3D CAD Workstation",
+            "level": "L4",
+            "description": "Parametric solid modeling (SolidWorks, Creo, NX) for flow body and housing geometry",
+            "bom_standard": "INCOSE",
+            "parent_name": "Mechanical Design (CAD/CAE)"
+          },
+          {
+            "name": "FEA Simulation Software",
+            "level": "L4",
+            "description": "Structural, thermal, and CFD simulation for pressure rating and flow path optimisation",
+            "bom_standard": "INCOSE",
+            "parent_name": "Mechanical Design (CAD/CAE)"
+          },
+          {
+            "name": "Rapid Prototyping Equipment",
+            "level": "L4",
+            "description": "SLA/SLS 3D printer and CNC prototype mill for design verification",
+            "bom_standard": "INCOSE",
+            "parent_name": "Mechanical Design (CAD/CAE)"
+          },
+          {
+            "name": "PCB Layout Tool",
+            "level": "L4",
+            "description": "Multi-layer PCB design with impedance-controlled routing (Altium, KiCad, Cadence)",
+            "bom_standard": "INCOSE",
+            "parent_name": "Electronics Design (EDA)"
+          },
+          {
+            "name": "Circuit Simulation Software",
+            "level": "L4",
+            "description": "SPICE analog simulation and mixed-signal verification",
+            "bom_standard": "INCOSE",
+            "parent_name": "Electronics Design (EDA)"
+          },
+          {
+            "name": "FPGA / DSP Development Kit",
+            "level": "L4",
+            "description": "Hardware-in-the-loop development for real-time signal processing algorithms",
+            "bom_standard": "INCOSE",
+            "parent_name": "Electronics Design (EDA)"
+          },
+          {
+            "name": "Embedded Development Environment",
+            "level": "L4",
+            "description": "Cross-compiler, debugger, and JTAG interface for ARM/RISC-V microcontrollers",
+            "bom_standard": "INCOSE",
+            "parent_name": "Firmware & Signal Processing"
+          },
+          {
+            "name": "DSP Algorithm Library",
+            "level": "L4",
+            "description": "Transit-time calculation, digital filtering, zero-crossing detection, correlation algorithms",
+            "bom_standard": "INCOSE",
+            "parent_name": "Firmware & Signal Processing"
+          },
+          {
+            "name": "Hardware-in-the-Loop Test Bench",
+            "level": "L4",
+            "description": "Simulated sensor input for firmware verification before physical prototyping",
+            "bom_standard": "INCOSE",
+            "parent_name": "Firmware & Signal Processing"
+          },
+          {
+            "name": "Piezo Ceramic Press & Sintering Furnace",
+            "level": "L4",
+            "description": "Powder press forming PZT discs; sintering at 1,200-1,300 C for densification",
+            "bom_standard": "INCOSE",
+            "parent_name": "Piezoelectric Transducer Manufacturing"
+          },
+          {
+            "name": "Electrode Metallisation",
+            "level": "L4",
+            "description": "Sputtering or screen-printing silver/nickel electrodes on piezo disc faces",
+            "bom_standard": "INCOSE",
+            "parent_name": "Piezoelectric Transducer Manufacturing"
+          },
+          {
+            "name": "Polarisation & Aging Station",
+            "level": "L4",
+            "description": "High-voltage DC polarisation aligning dipoles; accelerated aging stabilises piezoelectric coefficient",
+            "bom_standard": "INCOSE",
+            "parent_name": "Piezoelectric Transducer Manufacturing"
+          },
+          {
+            "name": "Coil Winding Machine",
+            "level": "L4",
+            "description": "Automated bobbin winder for excitation and pickup coils; wire gauge 0.1-0.5 mm",
+            "bom_standard": "INCOSE",
+            "parent_name": "Electromagnetic Coil Assembly"
+          },
+          {
+            "name": "Insulation & Potting Station",
+            "level": "L4",
+            "description": "Epoxy or polyurethane potting for moisture and vibration protection",
+            "bom_standard": "INCOSE",
+            "parent_name": "Electromagnetic Coil Assembly"
+          },
+          {
+            "name": "Impedance Test Equipment",
+            "level": "L4",
+            "description": "LCR meter verifying coil inductance, resistance, and Q-factor",
+            "bom_standard": "INCOSE",
+            "parent_name": "Electromagnetic Coil Assembly"
+          },
+          {
+            "name": "Tube Bending Machine",
+            "level": "L4",
+            "description": "CNC mandrel bender for precise tube radii; wall thinning <10%",
+            "bom_standard": "INCOSE",
+            "parent_name": "Coriolis Tube Fabrication"
+          },
+          {
+            "name": "Orbital Welding & Brazing Station",
+            "level": "L4",
+            "description": "Autogenous TIG orbital welder for tube-to-manifold joints; helium leak-tested",
+            "bom_standard": "INCOSE",
+            "parent_name": "Coriolis Tube Fabrication"
+          },
+          {
+            "name": "Tube Vibration Test Rig",
+            "level": "L4",
+            "description": "Modal analysis verifying resonant frequency and symmetry of matched tube pairs",
+            "bom_standard": "INCOSE",
+            "parent_name": "Coriolis Tube Fabrication"
+          },
+          {
+            "name": "SMT Pick-and-Place Machine",
+            "level": "L4",
+            "description": "High-speed component placement; 0201-BGA capability; 80-200 reel feeders",
+            "bom_standard": "INCOSE",
+            "parent_name": "PCB Fabrication & Assembly"
+          },
+          {
+            "name": "Reflow Oven",
+            "level": "L4",
+            "description": "Convection reflow with nitrogen atmosphere; lead-free SAC305 profile",
+            "bom_standard": "INCOSE",
+            "parent_name": "PCB Fabrication & Assembly"
+          },
+          {
+            "name": "Automated Optical Inspection (AOI)",
+            "level": "L4",
+            "description": "Camera-based solder joint and component verification; defect rate <50 ppm",
+            "bom_standard": "INCOSE",
+            "parent_name": "PCB Fabrication & Assembly"
+          },
+          {
+            "name": "Programming Jig",
+            "level": "L4",
+            "description": "Pogo-pin bed-of-nails fixture for JTAG/SWD firmware download",
+            "bom_standard": "INCOSE",
+            "parent_name": "Firmware Flashing & Configuration"
+          },
+          {
+            "name": "Firmware Loader Software",
+            "level": "L4",
+            "description": "Production server managing firmware versions, serial numbers, and configuration profiles",
+            "bom_standard": "INCOSE",
+            "parent_name": "Firmware Flashing & Configuration"
+          },
+          {
+            "name": "In-Circuit Test Fixture",
+            "level": "L4",
+            "description": "Flying-probe or bed-of-nails electrical test verifying component values and connectivity",
+            "bom_standard": "INCOSE",
+            "parent_name": "Firmware Flashing & Configuration"
+          },
+          {
+            "name": "DC-DC Converter Module",
+            "level": "L4",
+            "description": "Switching or linear regulator providing 3.3V/5V from 6-30V input",
+            "bom_standard": "INCOSE",
+            "parent_name": "Power Supply & Signal Conditioning"
+          },
+          {
+            "name": "Analog Front-End Module",
+            "level": "L4",
+            "description": "Charge amplifier (piezoelectric) or instrumentation amplifier (electromagnetic)",
+            "bom_standard": "INCOSE",
+            "parent_name": "Power Supply & Signal Conditioning"
+          },
+          {
+            "name": "EMC Shielding & Filtering",
+            "level": "L4",
+            "description": "Board-level shielding cans, ferrite beads, and common-mode chokes",
+            "bom_standard": "INCOSE",
+            "parent_name": "Power Supply & Signal Conditioning"
+          },
+          {
+            "name": "CNC Lathe",
+            "level": "L4",
+            "description": "Turning flow body bore, process connections, and seal grooves; tolerance +/-0.02 mm",
+            "bom_standard": "INCOSE",
+            "parent_name": "Metal Flow Body Machining"
+          },
+          {
+            "name": "CNC Milling Centre",
+            "level": "L4",
+            "description": "Milling transducer pockets, cable entry ports, and mounting features",
+            "bom_standard": "INCOSE",
+            "parent_name": "Metal Flow Body Machining"
+          },
+          {
+            "name": "Surface Treatment",
+            "level": "L4",
+            "description": "Electropolishing (Ra <= 0.8 um for sanitary), anodising, or passivation",
+            "bom_standard": "INCOSE",
+            "parent_name": "Metal Flow Body Machining"
+          },
+          {
+            "name": "Injection Molding Machine",
+            "level": "L4",
+            "description": "50-250 t clamping force; multi-cavity molds for high-volume OEM production",
+            "bom_standard": "INCOSE",
+            "parent_name": "Polymer Housing Injection Molding"
+          },
+          {
+            "name": "Mold Tool",
+            "level": "L4",
+            "description": "Hardened steel multi-cavity tool; hot-runner for polymer flow bodies; cycle 30-90 s",
+            "bom_standard": "INCOSE",
+            "parent_name": "Polymer Housing Injection Molding"
+          },
+          {
+            "name": "Material Drying & Feeding",
+            "level": "L4",
+            "description": "Dehumidifying dryer and gravimetric feeder for hygroscopic engineering polymers",
+            "bom_standard": "INCOSE",
+            "parent_name": "Polymer Housing Injection Molding"
+          },
+          {
+            "name": "O-Ring Compression Mold",
+            "level": "L4",
+            "description": "Heated compression mold for custom-profile seals; flash trimmed post-cure",
+            "bom_standard": "INCOSE",
+            "parent_name": "Seal & Gasket Manufacturing"
+          },
+          {
+            "name": "Gasket Cutting",
+            "level": "L4",
+            "description": "Die-cut or waterjet-cut flat gaskets from sheet stock",
+            "bom_standard": "INCOSE",
+            "parent_name": "Seal & Gasket Manufacturing"
+          },
+          {
+            "name": "Seal Curing Oven",
+            "level": "L4",
+            "description": "Post-cure oven (200-230 C for FKM) completing cross-linking for long-term stability",
+            "bom_standard": "INCOSE",
+            "parent_name": "Seal & Gasket Manufacturing"
+          },
+          {
+            "name": "Transducer Bonding Station",
+            "level": "L4",
+            "description": "Epoxy or silicone adhesive application; UV or thermal cure; bond-line +/-0.1 mm",
+            "bom_standard": "INCOSE",
+            "parent_name": "Sensor-to-Body Integration"
+          },
+          {
+            "name": "Acoustic Coupling Verification",
+            "level": "L4",
+            "description": "Ultrasonic pulse-echo test confirming SNR >40 dB per transducer",
+            "bom_standard": "INCOSE",
+            "parent_name": "Sensor-to-Body Integration"
+          },
+          {
+            "name": "Pressure Seal Test",
+            "level": "L4",
+            "description": "Hydrostatic or pneumatic leak test at 1.5x rated pressure",
+            "bom_standard": "INCOSE",
+            "parent_name": "Sensor-to-Body Integration"
+          },
+          {
+            "name": "PCB Mounting & Wiring",
+            "level": "L4",
+            "description": "Screw or snap-fit PCB mounting; solder or crimp connections to sensor leads",
+            "bom_standard": "INCOSE",
+            "parent_name": "Electronics-to-Housing Integration"
+          },
+          {
+            "name": "Connector Assembly",
+            "level": "L4",
+            "description": "RAST 2.5, M12, cable gland, or terminal block matched to customer specification",
+            "bom_standard": "INCOSE",
+            "parent_name": "Electronics-to-Housing Integration"
+          },
+          {
+            "name": "Potting & Encapsulation",
+            "level": "L4",
+            "description": "Polyurethane or epoxy compound for IP65-IP68 environmental sealing",
+            "bom_standard": "INCOSE",
+            "parent_name": "Electronics-to-Housing Integration"
+          },
+          {
+            "name": "Torque-Controlled Fastening",
+            "level": "L4",
+            "description": "Electric or pneumatic screwdriver with torque monitoring; prevents seal over/under-compression",
+            "bom_standard": "INCOSE",
+            "parent_name": "Final Assembly & Marking"
+          },
+          {
+            "name": "Laser Marking / Nameplate",
+            "level": "L4",
+            "description": "Laser-engraved serial number, datamatrix code, CE/UL marks on housing",
+            "bom_standard": "INCOSE",
+            "parent_name": "Final Assembly & Marking"
+          },
+          {
+            "name": "Visual Inspection Station",
+            "level": "L4",
+            "description": "Operator or camera inspection for cosmetic defects, label correctness, connector alignment",
+            "bom_standard": "INCOSE",
+            "parent_name": "Final Assembly & Marking"
+          },
+          {
+            "name": "Reference Flow Standard",
+            "level": "L4",
+            "description": "Gravimetric (weighing tank) or volumetric (piston prover); accuracy +/-0.1-0.2%",
+            "bom_standard": "INCOSE",
+            "parent_name": "Wet Calibration Rig"
+          },
+          {
+            "name": "Flow Loop Piping & Pump",
+            "level": "L4",
+            "description": "Closed-loop water circuit with variable-speed pump; DN15-DN100 test sections",
+            "bom_standard": "INCOSE",
+            "parent_name": "Wet Calibration Rig"
+          },
+          {
+            "name": "Data Acquisition System",
+            "level": "L4",
+            "description": "Multi-channel DAQ capturing reference and DUT signals; automated pass/fail reporting",
+            "bom_standard": "INCOSE",
+            "parent_name": "Wet Calibration Rig"
+          },
+          {
+            "name": "Temperature Chamber",
+            "level": "L4",
+            "description": "Programmable chamber -40 to +120 C; cycling per IEC 60068-2",
+            "bom_standard": "INCOSE",
+            "parent_name": "Environmental & Endurance Testing"
+          },
+          {
+            "name": "Pressure Cycle Test Rig",
+            "level": "L4",
+            "description": "Automated cycling 0 to rated pressure; 90,000 cycles for Marquardt specification",
+            "bom_standard": "INCOSE",
+            "parent_name": "Environmental & Endurance Testing"
+          },
+          {
+            "name": "Vibration / Shock Table",
+            "level": "L4",
+            "description": "Sinusoidal and random vibration per IEC 60068-2-6/2-27",
+            "bom_standard": "INCOSE",
+            "parent_name": "Environmental & Endurance Testing"
+          },
+          {
+            "name": "Hi-Pot / Insulation Tester",
+            "level": "L4",
+            "description": "500-2,000 V DC between circuits and housing; verifies >10 MOhm insulation",
+            "bom_standard": "INCOSE",
+            "parent_name": "Electrical Safety & EMC Testing"
+          },
+          {
+            "name": "EMC Pre-Compliance Chamber",
+            "level": "L4",
+            "description": "Shielded enclosure for radiated emissions and immunity pre-screening",
+            "bom_standard": "INCOSE",
+            "parent_name": "Electrical Safety & EMC Testing"
+          },
+          {
+            "name": "Functional Test Fixture",
+            "level": "L4",
+            "description": "Automated EOL test verifying flow measurement, temperature, communication, alarms",
+            "bom_standard": "INCOSE",
+            "parent_name": "Electrical Safety & EMC Testing"
+          },
+          {
+            "name": "Calibration Certificate Printer",
+            "level": "L4",
+            "description": "Automated certificate with calibration data, reference standard ID, uncertainty statement",
+            "bom_standard": "INCOSE",
+            "parent_name": "Final Inspection & Documentation"
+          },
+          {
+            "name": "Barcode / QR Labelling",
+            "level": "L4",
+            "description": "Serialised label linking physical instrument to digital calibration record",
+            "bom_standard": "INCOSE",
+            "parent_name": "Final Inspection & Documentation"
+          },
+          {
+            "name": "Serialisation Database",
+            "level": "L4",
+            "description": "MES/ERP-linked database storing manufacturing and calibration history per serial number",
+            "bom_standard": "INCOSE",
+            "parent_name": "Final Inspection & Documentation"
+          },
+          {
+            "name": "Custom Foam Insert / Tray",
+            "level": "L4",
+            "description": "Die-cut PE foam or vacuum-formed tray matched to instrument geometry",
+            "bom_standard": "INCOSE",
+            "parent_name": "Protective Packaging"
+          },
+          {
+            "name": "Anti-Static Packaging",
+            "level": "L4",
+            "description": "ESD-safe bags or wraps for instruments with exposed electronic connectors",
+            "bom_standard": "INCOSE",
+            "parent_name": "Protective Packaging"
+          },
+          {
+            "name": "Shipping Carton & Labelling",
+            "level": "L4",
+            "description": "Corrugated carton with shipping label, handling instructions, customs docs",
+            "bom_standard": "INCOSE",
+            "parent_name": "Protective Packaging"
+          },
+          {
+            "name": "Finished Goods Storage",
+            "level": "L4",
+            "description": "Climate-controlled warehouse with bin/shelf organisation by product variant",
+            "bom_standard": "INCOSE",
+            "parent_name": "Warehousing & Logistics"
+          },
+          {
+            "name": "ERP / WMS Integration",
+            "level": "L4",
+            "description": "Order-to-shipment workflow with pick-list generation and dispatch confirmation",
+            "bom_standard": "INCOSE",
+            "parent_name": "Warehousing & Logistics"
+          },
+          {
+            "name": "Carrier Management",
+            "level": "L4",
+            "description": "Freight forwarder and parcel carrier selection; customs documentation for export",
+            "bom_standard": "INCOSE",
+            "parent_name": "Warehousing & Logistics"
+          },
+          {
+            "name": "Primary Flow Standard",
+            "level": "L4",
+            "description": "Gravimetric weigh-tank or bell-prover traceable to national institute; uncertainty <=0.05%",
+            "bom_standard": "INCOSE",
+            "parent_name": "Metrology Laboratory"
+          },
+          {
+            "name": "Coordinate Measuring Machine (CMM)",
+            "level": "L4",
+            "description": "Dimensional measurement for flow body bore, port alignment, and seal groove verification",
+            "bom_standard": "INCOSE",
+            "parent_name": "Metrology Laboratory"
+          },
+          {
+            "name": "Calibrated Reference Instruments",
+            "level": "L4",
+            "description": "Reference-grade pressure, temperature, and electrical standards for production cross-checking",
+            "bom_standard": "INCOSE",
+            "parent_name": "Metrology Laboratory"
+          },
+          {
+            "name": "ISO 9001 Document Control",
+            "level": "L4",
+            "description": "Controlled procedure library, work instructions, and change management system",
+            "bom_standard": "INCOSE",
+            "parent_name": "Quality Management System"
+          },
+          {
+            "name": "Non-Conformance Tracking",
+            "level": "L4",
+            "description": "NCR database with root-cause analysis, containment actions, and trend reporting",
+            "bom_standard": "INCOSE",
+            "parent_name": "Quality Management System"
+          },
+          {
+            "name": "Audit & CAPA System",
+            "level": "L4",
+            "description": "Internal/external audit schedule; corrective action tracking with effectiveness verification",
+            "bom_standard": "INCOSE",
+            "parent_name": "Quality Management System"
+          },
+          {
+            "name": "Raw Material Analyser (XRF/OES)",
+            "level": "L4",
+            "description": "X-ray fluorescence or optical emission spectrometry for metal alloy verification",
+            "bom_standard": "INCOSE",
+            "parent_name": "Incoming Inspection"
+          },
+          {
+            "name": "Component Verification Station",
+            "level": "L4",
+            "description": "Electrical parameter measurement of purchased ICs, passives, and connectors",
+            "bom_standard": "INCOSE",
+            "parent_name": "Incoming Inspection"
+          },
+          {
+            "name": "Supplier Qualification Database",
+            "level": "L4",
+            "description": "Approved vendor list with audit history, PPM performance, and second-source ID",
+            "bom_standard": "INCOSE",
+            "parent_name": "Incoming Inspection"
+          },
+          {
+            "name": "Piezo Ceramic Sourcing",
+            "level": "L4",
+            "description": "PZT-5A/5H disc procurement; resonant frequency and d33 coefficient verification",
+            "bom_standard": "INCOSE",
+            "parent_name": "Raw Material Procurement"
+          },
+          {
+            "name": "Metal & Polymer Stock",
+            "level": "L4",
+            "description": "316L stainless bar, brass rod, PA66-GF/PPS pellets, EPDM/FKM sheet",
+            "bom_standard": "INCOSE",
+            "parent_name": "Raw Material Procurement"
+          },
+          {
+            "name": "Electronic Component Supply",
+            "level": "L4",
+            "description": "MCUs, ADCs, precision resistors, connectors via authorised distribution",
+            "bom_standard": "INCOSE",
+            "parent_name": "Raw Material Procurement"
+          },
+          {
+            "name": "Approved Vendor List",
+            "level": "L4",
+            "description": "Qualified supplier registry with capability assessment and audit schedule",
+            "bom_standard": "INCOSE",
+            "parent_name": "Vendor Management"
+          },
+          {
+            "name": "Second-Source Strategy",
+            "level": "L4",
+            "description": "Alternative suppliers validated for all single-source components",
+            "bom_standard": "INCOSE",
+            "parent_name": "Vendor Management"
+          },
+          {
+            "name": "Supplier Audit Programme",
+            "level": "L4",
+            "description": "On-site quality audits, Cpk studies, and corrective action follow-up",
+            "bom_standard": "INCOSE",
+            "parent_name": "Vendor Management"
+          },
+          {
+            "name": "Component Warehouse",
+            "level": "L4",
+            "description": "ESD-safe, climate-controlled storage for electronic components and piezo ceramics",
+            "bom_standard": "INCOSE",
+            "parent_name": "Inventory Management"
+          },
+          {
+            "name": "ERP / MRP System",
+            "level": "L4",
+            "description": "Material requirements planning linked to customer orders and production schedule",
+            "bom_standard": "INCOSE",
+            "parent_name": "Inventory Management"
+          },
+          {
+            "name": "Kanban / JIT Replenishment",
+            "level": "L4",
+            "description": "Pull-based replenishment for high-runners; safety stock for long-lead items",
+            "bom_standard": "INCOSE",
+            "parent_name": "Inventory Management"
+          },
+          {
+            "name": "CE / UL Marking",
+            "level": "L4",
+            "description": "EU Declaration of Conformity (LVD, EMC) and UL/CSA listing for North America",
+            "bom_standard": "INCOSE",
+            "parent_name": "Product Certification"
+          },
+          {
+            "name": "ATEX / IECEx Certification",
+            "level": "L4",
+            "description": "Explosive atmosphere certification for hazardous area installations (Zone 0/1/2)",
+            "bom_standard": "INCOSE",
+            "parent_name": "Product Certification"
+          },
+          {
+            "name": "MID Billing Approval",
+            "level": "L4",
+            "description": "Measuring Instruments Directive (2014/32/EU) for fiscal/billing applications",
+            "bom_standard": "INCOSE",
+            "parent_name": "Product Certification"
+          },
+          {
+            "name": "REACH / RoHS Compliance",
+            "level": "L4",
+            "description": "Substance restriction verification; SCIP database registration for EU market",
+            "bom_standard": "INCOSE",
+            "parent_name": "Material & Safety Compliance"
+          },
+          {
+            "name": "Food Contact Material Testing",
+            "level": "L4",
+            "description": "FDA 21 CFR 177, EC 1935/2004, and 3-A sanitary standards",
+            "bom_standard": "INCOSE",
+            "parent_name": "Material & Safety Compliance"
+          },
+          {
+            "name": "Drinking Water Approval",
+            "level": "L4",
+            "description": "KTW (DE), WRAS (UK), NSF 61 (US), ACS (FR) material migration testing. MARQUARDT HOLDS KTW/WRAS.",
+            "bom_standard": "INCOSE",
+            "parent_name": "Material & Safety Compliance"
+          },
+          {
+            "name": "Export Control Classification",
+            "level": "L4",
+            "description": "EAR/ECCN classification for dual-use technology; sanctions screening",
+            "bom_standard": "INCOSE",
+            "parent_name": "Export & Trade Compliance"
+          },
+          {
+            "name": "Customs Documentation",
+            "level": "L4",
+            "description": "Commercial invoices, certificates of origin, HS tariff code assignment",
+            "bom_standard": "INCOSE",
+            "parent_name": "Export & Trade Compliance"
+          },
+          {
+            "name": "Country-of-Origin Marking",
+            "level": "L4",
+            "description": "Product marking per FTC/EU origin rules; preferential tariff documentation",
+            "bom_standard": "INCOSE",
+            "parent_name": "Export & Trade Compliance"
+          }
+        ]
+      },
+      "marquardt_position": {
+        "segment": "Ultrasonic Transit-Time Inline Flowmeters (OEM component supply)",
+        "l7": "Process Instrumentation Ecosystem",
+        "output_type": "Flow instruments (ultrasonic transit-time)",
+        "key_l6_steps": [
+          "Product Design & Engineering",
+          "Sensor & Transducer Fabrication",
+          "Electronics Manufacturing",
+          "Flow Body & Housing Fabrication",
+          "Assembly & Integration",
+          "Calibration & Testing",
+          "Packaging & Dispatch"
+        ],
+        "key_differentiators": [
+          "Polymer housing injection molding (cost advantage over stainless steel)",
+          "100% individual wet calibration to customer-specified medium",
+          "Integrated flow + temperature in single sensor body",
+          "Low-energy battery mode (<5 uA standby)",
+          "KTW/WRAS drinking water approval already held"
+        ],
+        "alternatives_at_segment": [
+          {
+            "name": "Electromagnetic flowmeters",
+            "status": "dominant",
+            "share_estimate": "26-32%",
+            "confidence": "HIGH"
+          },
+          {
+            "name": "Coriolis mass flowmeters",
+            "status": "established, premium",
+            "share_estimate": "~25%",
+            "confidence": "HIGH"
+          },
+          {
+            "name": "Ultrasonic transit-time (all vendors)",
+            "status": "fastest-growing",
+            "share_estimate": "~15%",
+            "confidence": "MEDIUM"
+          },
+          {
+            "name": "Vortex flowmeters",
+            "status": "established",
+            "share_estimate": "~10%",
+            "confidence": "MEDIUM"
+          },
+          {
+            "name": "Turbine / impeller meters",
+            "status": "legacy, declining",
+            "share_estimate": "~8%",
+            "confidence": "MEDIUM"
+          },
+          {
+            "name": "Differential-pressure (orifice)",
+            "status": "legacy, declining",
+            "share_estimate": "~7%",
+            "confidence": "MEDIUM"
+          },
+          {
+            "name": "Thermal mass flowmeters",
+            "status": "niche (gas)",
+            "share_estimate": "~5%",
+            "confidence": "LOW"
+          }
+        ]
+      },
+      "entities_produced": {
+        "nodes": [
+          {
+            "label": "ValueNetwork",
+            "key": {
+              "naics_code": "334513",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "naics_title": "Instruments and Related Products Mfg for Measuring, Displaying, and Controlling Industrial Process Variables",
+              "cfj_statement": "Design, manufacture, calibrate, and deliver instruments that measure, display, and control industrial process variables",
+              "l7_solution": "Process Instrumentation Ecosystem",
+              "top_level": "L7",
+              "unit_count": 131,
+              "enriched": true,
+              "confidence": 0.7,
+              "source_type": "llm_corroborated"
+            }
+          },
+          {
+            "label": "ValueNetworkUnit",
+            "key": {
+              "name": "<per unit>",
+              "naics_code": "334513",
+              "level": "<per unit>",
+              "run_id": "TBD"
+            },
+            "count": 131,
+            "confidence": 0.6,
+            "source_type": "llm_corroborated"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "has_value_network",
+            "source": "Market:334513",
+            "target": "ValueNetwork:334513",
+            "confidence": 0.7,
+            "source_type": "llm_corroborated"
+          },
+          {
+            "type": "contains_unit",
+            "source": "ValueNetwork:334513",
+            "target": "ValueNetworkUnit:<each>",
+            "count": 131,
+            "confidence": 0.7,
+            "source_type": "llm_corroborated"
+          },
+          {
+            "type": "has_child",
+            "source": "ValueNetworkUnit:<parent>",
+            "target": "ValueNetworkUnit:<child>",
+            "count": 130,
+            "confidence": 0.7,
+            "source_type": "llm_corroborated"
+          }
+        ]
+      },
+      "qa_checklist": {
+        "Q1_cfj_industry_level": {
+          "pass": true,
+          "note": "CFJ describes entire industry purpose with no reference to specific technology, product, or company"
+        },
+        "Q2_no_orphan_nodes": {
+          "pass": true,
+          "note": "Every unit except L7 has valid parent_name referencing existing unit"
+        },
+        "Q3_valid_level_transitions": {
+          "pass": true,
+          "note": "L7>L6>L5>L4 strictly followed, no skipping"
+        },
+        "Q4_l4_children_per_l5": {
+          "pass": true,
+          "note": "All 30 L5 nodes have exactly 3 L4 children"
+        },
+        "Q5_no_solution_specific_l7_l6": {
+          "pass": true,
+          "note": "L7 and all L6 names are industry-generic, no technology or company references"
+        },
+        "Q6_naming_test": {
+          "pass": true,
+          "note": "Spot-checked: Piezoelectric Transducer Manufacturing, Wet Calibration Rig, Injection Molding Machine, SMT Pick-and-Place Machine, Reflow Oven — all industry-standard terms"
+        },
+        "Q7_unit_count_in_range": {
+          "pass": true,
+          "note": "131 units total (within extended range for manufacturing NAICS)"
+        }
+      }
+    }
+  ],
+  "has_bom": true,
+  "naics_sector_type": "manufacturing"
+}

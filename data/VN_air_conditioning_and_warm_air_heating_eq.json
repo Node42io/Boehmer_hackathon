@@ -1,0 +1,2791 @@
+{
+  "id": "VN_air_conditioning_and_warm_air_heating_eq",
+  "title": "Value Network Construction — NAICS 333415",
+  "type": "value_network",
+  "market_slug": "air_conditioning_and_warm_air_heating_eq",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Core Functional Job (L7)",
+      "content": "**CFJ Statement:** Manufacture climate control and thermal management equipment that conditions, heats, cools, or refrigerates enclosed spaces and stored goods to specified temperature and humidity setpoints.\n\n*Industry-level — no reference to any specific technology, product, or company. Covers all output types: residential AC, heat pumps, warm air furnaces, commercial refrigeration, industrial chillers.*"
+    },
+    {
+      "title": "Output Types",
+      "content": "| ID | Output Type | Description |\n|---|---|---|\n| OT-1 | Residential Split/Packaged AC | Window units, split systems, mini-splits, packaged rooftop residential |\n| OT-2 | Heat Pump (air-source / water-source) | Reversible vapor-compression units for heating + cooling |\n| OT-3 | Warm Air Furnace | Gas-fired, oil-fired, or electric forced-air furnaces |\n| OT-4 | Commercial Rooftop Unit (RTU) | Packaged HVAC for commercial buildings |\n| OT-5 | Chiller (air-cooled / water-cooled) | Central cooling plant equipment for large commercial/industrial |\n| OT-6 | Commercial Refrigeration Equipment | Display cases, walk-in coolers/freezers, reach-in units |\n| OT-7 | Industrial Refrigeration Equipment | Ammonia systems, blast freezers, cold storage |\n\n---"
+    },
+    {
+      "title": "L7 — Ecosystem",
+      "content": "| Field | Value |\n|---|---|\n| **Name** | Climate Control & Refrigeration Equipment Manufacturing |\n| **Level** | L7 |\n| **BOM Standard** | Moore 1993 |\n| **Description** | The ecosystem of interacting organizations — OEMs, component suppliers, refrigerant producers, sheet metal fabricators, controls vendors, certification bodies, and distribution channels — that collectively manufacture and deliver HVAC and refrigeration equipment to end-use markets. |\n\n---"
+    },
+    {
+      "title": "L6 — Core Process Steps (Sequential)",
+      "content": "| L6 | Name | Job Family | Output Types |\n|---|---|---|---|\n| L6a | **Sheet Metal Fabrication** | Cut, form, punch, and bend sheet metal into enclosure and structural components | OT-1 through OT-7 (all) |\n| L6b | **Heat Exchanger Fabrication** | Manufacture coils, condensers, and evaporator assemblies by bending tubing and attaching fins | OT-1, OT-2, OT-4, OT-5, OT-6, OT-7 |\n| L6c | **Refrigerant Circuit Assembly** | Braze/weld tubing connections, mount compressor, expansion device, and reversing valve into integrated refrigerant circuit | OT-1, OT-2, OT-4, OT-5, OT-6, OT-7 |\n| L6d | **Combustion Assembly** | Assemble burner, heat exchanger, gas valve, ignition, and flue components into heating module | OT-3 (furnace only) |\n| L6e | **Electrical & Controls Integration** | Wire motors, contactors, sensors, control boards, and communication interfaces into the unit | OT-1 through OT-7 (all) |\n| L6f | **Hydronic Circuit Assembly** | Assemble water-side piping, circulation pumps, flow sensors, and hydraulic components for water-based heat exchange | OT-2 (water-source HP), OT-5 (water-cooled chiller) |\n| L6g | **System Evacuation & Refrigerant Charging** | Evacuate system to vacuum, leak-test, charge with specified refrigerant mass | OT-1, OT-2, OT-4, OT-5, OT-6, OT-7 |\n| L6h | **Final Assembly & Enclosure** | Mount all sub-assemblies into cabinet, attach panels, insulation, labels, and shipping hardware | OT-1 through OT-7 (all) |\n| L6i | **Performance Testing & Certification** | Run functional test, verify capacity/efficiency against AHRI/UL/CE standards, pass or reject | OT-1 through OT-7 (all) |"
+    },
+    {
+      "title": "L6 — Horizontal Process Steps",
+      "content": "| L6 | Name | Job Family | Scope |\n|---|---|---|---|\n| L6(H1) | **Quality Assurance** | Verify dimensional integrity, material compliance, and process adherence at each gate | All core steps |\n| L6(H2) | **Maintenance & Engineering** | Maintain production equipment uptime, tooling calibration, and process engineering | All core steps |\n| L6(H3) | **HSE & Environmental Compliance** | Manage refrigerant handling (EPA Section 608), brazing fume extraction, noise, and worker safety | All core steps |\n| L6(H4) | **Utilities & Facility Management** | Supply compressed air, nitrogen, electrical power, HVAC, and water to production floor | All core steps |\n| L6(H5) | **IT / Operations Technology** | Manage MES, ERP, CNC program distribution, test data acquisition, and traceability | All core steps |\n\n---"
+    },
+    {
+      "title": "Output Type Activation Matrix",
+      "content": "```\n                        OT-1  OT-2  OT-3  OT-4  OT-5  OT-6  OT-7\nL6a Sheet Metal Fab       x     x     x     x     x     x     x\nL6b Heat Exchanger Fab    x     x           x     x     x     x\nL6c Refrig Circuit Assy   x     x           x     x     x     x\nL6d Combustion Assembly                x\nL6e Electrical & Ctrl     x     x     x     x     x     x     x\nL6f Hydronic Circuit            x                 x\nL6g Evacuation & Charge   x     x           x     x     x     x\nL6h Final Assembly        x     x     x     x     x     x     x\nL6i Performance Test      x     x     x     x     x     x     x\n```\n\n**Key insight:** L6d (Combustion Assembly) is activated only by OT-3 (furnaces) — highly specialized. L6f (Hydronic Circuit) is activated only by water-source heat pumps and water-cooled chillers — where the Marquardt flow sensor plays. L6a, L6e, L6h, L6i are universal infrastructure steps.\n\n---"
+    },
+    {
+      "title": "L5 — Equipment Positions per L6 Node",
+      "content": "### L6a: Sheet Metal Fabrication\n\n| L5 | Equipment Category | Alternatives | Share | Confidence |\n|---|---|---|---|---|\n| **CNC Punch Press** | Automated sheet metal punching/forming | 1. Turret punch press | 55% | MEDIUM |\n| | | 2. Laser cutting center | 35% | |\n| | | 3. Plasma cutting system | 10% | |\n| **Press Brake** | Sheet metal bending/forming | 1. CNC hydraulic press brake | 65% | MEDIUM |\n| | | 2. CNC electric press brake | 30% | |\n| | | 3. Manual press brake | 5% | |\n| **Powder Coating Line** | Surface finishing and corrosion protection | 1. Electrostatic powder coat | 75% | MEDIUM |\n| | | 2. Wet paint spray | 15% | |\n| | | 3. E-coat (electrodeposition) | 10% | |\n\n### L6b: Heat Exchanger Fabrication\n\n| L5 | Equipment Category | Alternatives | Share | Confidence |\n|---|---|---|---|---|\n| **Tube Bender** | Bend copper/aluminum tubing into coil patterns | 1. CNC tube bender | 70% | MEDIUM |\n| | | 2. Manual tube bender | 15% | |\n| | | 3. Rotary draw bender | 15% | |\n| **Fin Press** | Stamp and form aluminum fins for coil assembly | 1. Progressive die fin press | 85% | MEDIUM |\n| | | 2. Separate stamp + form | 15% | |\n| **Coil Expansion Press** | Mechanically expand tubes into fin collars for thermal contact | 1. Hydraulic expansion press | 65% | LOW |\n| | | 2. Bullet expansion system | 35% | |\n| **Brazing Station** | Join tubing and headers via brazing | 1. Controlled-atmosphere furnace brazing | 45% | MEDIUM |\n| | | 2. Manual torch brazing (nitrogen purge) | 40% | |\n| | | 3. Induction brazing | 15% | |\n\n### L6c: Refrigerant Circuit Assembly\n\n| L5 | Equipment Category | Alternatives | Share | Confidence |\n|---|---|---|---|---|\n| **Compressor** | Compress refrigerant vapor | 1. Rotary compressor | 45% | HIGH |\n| | | 2. Scroll compressor | 35% | |\n| | | 3. Reciprocating compressor | 12% | |\n| | | 4. Screw compressor | 5% | |\n| | | 5. Centrifugal compressor | 3% | |\n| **Expansion Device** | Meter refrigerant flow and drop pressure | 1. Electronic expansion valve (EEV) | 50% | MEDIUM |\n| | | 2. Thermostatic expansion valve (TXV) | 40% | |\n| | | 3. Fixed orifice / capillary tube | 10% | |\n| **Reversing Valve** | Switch between heating and cooling modes | 1. 4-way reversing valve (solenoid) | 95% | HIGH |\n| | | 2. 3-way valve arrangement | 5% | |\n| **Refrigerant Piping** | Connect circuit components | 1. Copper tubing (brazed) | 85% | HIGH |\n| | | 2. Aluminum tubing | 15% | |\n\n*Compressor market shares: rotary dominates residential (57% of AC compressor market per [FMI 2025](https://www.futuremarketinsights.com/reports/air-conditioning-compressor-market)); scroll dominates commercial/HP (30% overall, fastest growth at 8.2% CAGR); reciprocating declining in new equipment.*\n\n### L6d: Combustion Assembly\n\n| L5 | Equipment Category | Alternatives | Share | Confidence |\n|---|---|---|---|---|\n| **Gas Burner** | Combust fuel to generate heat | 1. Inshot tubular burner | 60% | MEDIUM |\n| | | 2. Ribbon burner | 25% | |\n| | | 3. Premix burner | 15% | |\n| **Combustion Heat Exchanger** | Transfer combustion heat to airflow | 1. Tubular steel HX (80% AFUE) | 35% | MEDIUM |\n| | | 2. Secondary condensing HX (90%+ AFUE) | 55% | |\n| | | 3. Cast iron HX | 10% | |\n| **Gas Valve** | Regulate fuel flow to burner | 1. Modulating gas valve | 50% | LOW |\n| | | 2. Two-stage gas valve | 35% | |\n| | | 3. Single-stage gas valve | 15% | |\n| **Ignition Module** | Ignite fuel-air mixture | 1. Hot surface igniter (silicon nitride) | 75% | MEDIUM |\n| | | 2. Direct spark ignition | 20% | |\n| | | 3. Standing pilot (legacy) | 5% | |\n\n### L6e: Electrical & Controls Integration\n\n| L5 | Equipment Category | Alternatives | Share | Confidence |\n|---|---|---|---|---|\n| **Control Board** | Manage unit operation logic, sequencing, diagnostics | 1. Microcontroller-based PCB | 70% | MEDIUM |\n| | | 2. PLC-based controller | 20% | |\n| | | 3. Relay logic board (legacy) | 10% | |\n| **Variable Frequency Drive (VFD)** | Modulate compressor and fan motor speed | 1. Integrated inverter board | 60% | MEDIUM |\n| | | 2. External VFD module | 30% | |\n| | | 3. No VFD (fixed-speed, legacy) | 10% | |\n| **Fan / Blower Motor** | Drive airflow across coils or through ductwork | 1. ECM (electronically commutated motor) | 55% | MEDIUM |\n| | | 2. PSC (permanent split capacitor) motor | 35% | |\n| | | 3. Brushless DC motor | 10% | |\n| **Sensor Suite** | Measure temperature, pressure, flow, and refrigerant state | 1. NTC/RTD temperature sensors | 40% | LOW |\n| | | 2. Pressure transducers | 30% | |\n| | | 3. Flow sensors (ultrasonic, vortex, turbine) | 20% | |\n| | | 4. Refrigerant leak detectors | 10% | |\n\n### L6f: Hydronic Circuit Assembly\n\n| L5 | Equipment Category | Alternatives | Share | Confidence |\n|---|---|---|---|---|\n| **Circulation Pump** | Drive water/glycol through heat exchanger | 1. Wet-rotor pump (Grundfos, Wilo type) | 65% | MEDIUM |\n| | | 2. Dry-rotor pump | 25% | |\n| | | 3. Magnetically coupled pump | 10% | |\n| **Plate Heat Exchanger** | Transfer thermal energy between refrigerant and water circuits | 1. Brazed plate HX | 70% | MEDIUM |\n| | | 2. Shell-and-tube HX | 20% | |\n| | | 3. Gasketed plate HX | 10% | |\n| **Flow Sensor** | Measure water-side volumetric flow rate | 1. Ultrasonic transit-time sensor | 35% | LOW |\n| | | 2. Turbine/impeller sensor | 30% | |\n| | | 3. Vortex sensor | 15% | |\n| | | 4. Differential pressure sensor | 10% | |\n| | | 5. Paddle/float switch (binary only) | 10% | |\n| **Hydraulic Valve Assembly** | Control water routing, bypass, and safety | 1. Motorized 3-way diverter valve | 45% | LOW |\n| | | 2. Pressure relief valve | 30% | |\n| | | 3. Check valve / non-return valve | 25% | |\n\n*This is the VN position where the Marquardt Ultrasonic Flow Sensor operates. L6f is activated only by water-source heat pumps and water-cooled chillers — the sensor's current home market.*\n\n### L6g: System Evacuation & Refrigerant Charging\n\n| L5 | Equipment Category | Alternatives | Share | Confidence |\n|---|---|---|---|---|\n| **Vacuum Pump Station** | Evacuate system to remove moisture and non-condensables | 1. Two-stage rotary vane vacuum pump | 70% | MEDIUM |\n| | | 2. Scroll vacuum pump | 30% | |\n| **Leak Detection Station** | Verify system integrity before charging | 1. Helium mass spectrometer leak detector | 50% | MEDIUM |\n| | | 2. Electronic refrigerant leak detector | 35% | |\n| | | 3. Nitrogen pressure decay test | 15% | |\n| **Refrigerant Charging Station** | Dispense precise refrigerant mass into system | 1. Automated gravimetric charging | 75% | MEDIUM |\n| | | 2. Manual scale-based charging | 25% | |\n\n### L6h: Final Assembly & Enclosure\n\n| L5 | Equipment Category | Alternatives | Share | Confidence |\n|---|---|---|---|---|\n| **Cabinet Assembly Fixtures** | Position and fasten enclosure panels around sub-assemblies | 1. Semi-automated fixture with power tools | 60% | LOW |\n| | | 2. Manual assembly station | 30% | |\n| | | 3. Robotic fastening cell | 10% | |\n| **Insulation Application** | Apply thermal and acoustic insulation to cabinet | 1. Pre-cut foam insulation panels | 50% | LOW |\n| | | 2. Spray-applied foam insulation | 30% | |\n| | | 3. Fiberglass batt insulation | 20% | |\n\n### L6i: Performance Testing & Certification\n\n| L5 | Equipment Category | Alternatives | Share | Confidence |\n|---|---|---|---|---|\n| **Psychrometric Test Chamber** | Simulate operating conditions to verify capacity and efficiency | 1. Balanced ambient calorimeter room | 60% | MEDIUM |\n| | | 2. Air enthalpy tunnel test | 30% | |\n| | | 3. Outdoor test loop (commissioning only) | 10% | |\n| **Electrical Safety Test Station** | Hi-pot, ground continuity, insulation resistance | 1. Automated multi-point tester | 70% | MEDIUM |\n| | | 2. Manual hi-pot + megger | 30% | |\n| **Run-Test Station** | Functional verification of startup, operation, shutdown | 1. Automated end-of-line test bench | 65% | MEDIUM |\n| | | 2. Manual operator run-test | 35% | |\n\n### Horizontal L5 Equipment (selected)\n\n| L6(H) | L5 | Equipment Category |\n|---|---|---|\n| H1 Quality Assurance | **CMM / Dimensional Inspection** | Coordinate measuring machine for incoming and in-process inspection |\n| H1 Quality Assurance | **Statistical Process Control (SPC)** | Software-driven process monitoring at each fabrication cell |\n| H3 HSE | **Refrigerant Recovery Unit** | Capture and reclaim refrigerant per EPA Section 608 |\n| H3 HSE | **Brazing Fume Extraction** | Local exhaust ventilation at brazing stations |\n| H4 Utilities | **Compressed Air System** | Plant-wide compressed air supply for pneumatic tools and actuators |\n| H4 Utilities | **Nitrogen Supply** | Nitrogen for brazing purge and leak testing |\n\n---"
+    },
+    {
+      "title": "L4 — Subsystems (3+ per L5)",
+      "content": "### L6a Equipment\n\n| L5 Parent | L4 Subsystem | Description |\n|---|---|---|\n| CNC Punch Press | Drive Motor | Servo or hydraulic motor driving ram and turret indexing |\n| CNC Punch Press | Turret / Tool Holder | Multi-station tool magazine with auto-indexing |\n| CNC Punch Press | CNC Controller | Programmable controller receiving CAD/CAM punch programs |\n| CNC Punch Press | Sheet Feed System | Automated gripper and positioning table for sheet metal blanks |\n| Press Brake | Hydraulic Cylinder | Ram actuation for bending force generation |\n| Press Brake | Backgauge System | CNC-positioned fingers for bend location accuracy |\n| Press Brake | CNC Controller | Bend angle programming and stroke control |\n| Powder Coating Line | Spray Gun Array | Electrostatic guns for uniform powder application |\n| Powder Coating Line | Curing Oven | Infrared or convection oven for powder fusion |\n| Powder Coating Line | Conveyor System | Overhead chain conveyor through wash, spray, and cure stages |\n\n### L6b Equipment\n\n| L5 Parent | L4 Subsystem | Description |\n|---|---|---|\n| Tube Bender | Mandrel Assembly | Internal mandrel preventing tube collapse during bending |\n| Tube Bender | Bend Die Set | Interchangeable dies for different tube diameters and radii |\n| Tube Bender | Servo Drive | CNC-controlled rotation and feed axis |\n| Fin Press | Progressive Die Set | Multi-station die for punching, forming, and collaring fins |\n| Fin Press | Coil Feeder | Automatic aluminum strip feeding from coil stock |\n| Fin Press | Press Ram | High-speed reciprocating ram (200-400 strokes/min) |\n| Coil Expansion Press | Expansion Mandrel | Tapered rod that swages tube into fin collar for thermal bond |\n| Coil Expansion Press | Hydraulic Power Unit | Hydraulic pressure source driving mandrel through coil |\n| Coil Expansion Press | Fixture Plate | Positions coil assembly during expansion cycle |\n| Brazing Station | Torch / Heat Source | Oxy-fuel torch, induction coil, or furnace heating element |\n| Brazing Station | Nitrogen Purge System | Flow controller and tubing for anti-oxidation purge |\n| Brazing Station | Filler Metal Feeder | Pre-formed rings or wire feeder for braze alloy delivery |\n\n### L6c Equipment\n\n| L5 Parent | L4 Subsystem | Description |\n|---|---|---|\n| Compressor | Electric Motor | Hermetic or semi-hermetic motor driving compression element |\n| Compressor | Compression Element | Scroll, rotary, reciprocating piston, screw, or centrifugal impeller |\n| Compressor | Oil Management System | Lubrication circuit with oil separator and sump |\n| Compressor | Hermetic Shell | Welded steel housing enclosing motor + compression element |\n| Expansion Device | Valve Body | Precision-machined orifice or needle seat controlling refrigerant flow |\n| Expansion Device | Stepper Motor / Thermal Bulb | EEV: stepper motor driver. TXV: thermal sensing bulb. Capillary: none |\n| Expansion Device | Control Signal Interface | Wiring to control board (EEV) or self-contained thermal feedback (TXV) |\n| Reversing Valve | Solenoid Coil | Electromagnetic actuator switching pilot valve |\n| Reversing Valve | Slide / Piston | Internal slider redirecting refrigerant between heating and cooling paths |\n| Reversing Valve | Valve Body | Brass or steel housing with four ports |\n\n### L6d Equipment\n\n| L5 Parent | L4 Subsystem | Description |\n|---|---|---|\n| Gas Burner | Burner Orifice | Precision-drilled gas jet sized for BTU input rating |\n| Gas Burner | Venturi Tube | Air-gas mixing chamber for combustion air entrainment |\n| Gas Burner | Flame Sensor | Flame rectification rod or UV sensor for flame proving |\n| Combustion Heat Exchanger | Primary Heat Transfer Surface | Tubular or clamshell steel surface exposed to combustion gases |\n| Combustion Heat Exchanger | Secondary Condensing Section | Stainless steel condensate recovery surface (condensing furnaces only) |\n| Combustion Heat Exchanger | Drain Pan | Condensate collection and disposal from secondary exchanger |\n| Gas Valve | Solenoid Operator | Electromagnetic actuator for valve open/close |\n| Gas Valve | Pressure Regulator | Spring-loaded diaphragm maintaining constant outlet pressure |\n| Gas Valve | Safety Shutoff | Redundant valve train for fail-safe fuel cutoff |\n| Ignition Module | Igniter Element | Silicon nitride hot surface element or spark electrode |\n| Ignition Module | Control Circuit | Timing and retry logic for ignition sequence |\n| Ignition Module | Flame Proving Circuit | Microamp-level flame current detection for safety interlock |\n\n### L6e Equipment\n\n| L5 Parent | L4 Subsystem | Description |\n|---|---|---|\n| Control Board | Microcontroller | MCU running unit operational firmware and diagnostic routines |\n| Control Board | Relay / Contactor Driver | Power switching for compressor, fan, and heater loads |\n| Control Board | Communication Interface | UART, Modbus, BACnet, or proprietary bus for BMS integration |\n| Variable Frequency Drive | IGBT Power Module | Insulated-gate bipolar transistor bridge converting DC to variable-frequency AC |\n| Variable Frequency Drive | DC Bus Capacitor | Energy storage and ripple filtering between rectifier and inverter |\n| Variable Frequency Drive | Gate Driver Board | Signal conditioning between MCU PWM output and IGBT gate |\n| Fan / Blower Motor | Rotor / Stator Assembly | Electromagnetic components converting electrical to mechanical energy |\n| Fan / Blower Motor | Impeller / Fan Blade | Aerodynamic element moving air across heat exchanger |\n| Fan / Blower Motor | Motor Controller (ECM) | Integrated electronics for variable-speed commutation |\n| Sensor Suite | Temperature Probe | NTC thermistor or RTD element in protective sheath |\n| Sensor Suite | Pressure Transducer | Piezoresistive or ceramic capacitive pressure sensing element |\n| Sensor Suite | Flow Sensor | Ultrasonic, turbine, or vortex sensing element in pipe fitting |\n\n### L6f Equipment\n\n| L5 Parent | L4 Subsystem | Description |\n|---|---|---|\n| Circulation Pump | Wet-Rotor Motor | Canned motor assembly running in pumped medium |\n| Circulation Pump | Impeller | Centrifugal impeller creating water-side pressure differential |\n| Circulation Pump | Pump Housing | Cast iron or composite volute with threaded/flanged connections |\n| Plate Heat Exchanger | Plate Stack | Stamped stainless steel plates with herringbone corrugation pattern |\n| Plate Heat Exchanger | Braze / Gasket Seal | Copper brazing (BPHE) or elastomer gaskets (GPHE) sealing between plates |\n| Plate Heat Exchanger | Port Connections | Inlet/outlet fittings for refrigerant and water sides |\n| Flow Sensor | Transducer Assembly | Piezoelectric (ultrasonic), turbine wheel, or vortex shedder element |\n| Flow Sensor | Signal Conditioning Electronics | Firmware computing flow rate from raw transducer signal |\n| Flow Sensor | Flow Body / Housing | Wetted housing with inline pipe connections (DN12-DN25 typical) |\n| Hydraulic Valve Assembly | Actuator (motor / solenoid) | Electric motor or solenoid operating valve position |\n| Hydraulic Valve Assembly | Valve Seat / Disc | Sealing surface controlling water passage |\n| Hydraulic Valve Assembly | Valve Body | Brass or stainless steel housing with port connections |\n\n### L6g Equipment\n\n| L5 Parent | L4 Subsystem | Description |\n|---|---|---|\n| Vacuum Pump Station | Vacuum Pump | Two-stage rotary vane or scroll pump pulling system to <500 micron |\n| Vacuum Pump Station | Vacuum Gauge | Micron gauge verifying evacuation depth |\n| Vacuum Pump Station | Hose Manifold | Charging hoses and valves connecting pump to system service ports |\n| Leak Detection Station | Detector Probe | Helium sniffer or electronic refrigerant sensing wand |\n| Leak Detection Station | Pressurization System | Nitrogen regulator and charging manifold for pressure decay test |\n| Leak Detection Station | Data Recorder | Automated pass/fail logging tied to serial number |\n| Refrigerant Charging Station | Gravimetric Scale | Precision scale measuring refrigerant mass dispensed |\n| Refrigerant Charging Station | Charging Manifold | Automated valves and hoses connecting refrigerant cylinder to system |\n| Refrigerant Charging Station | Brazing Seal Station | Torch or induction unit sealing charging port after fill |\n\n### L6h Equipment\n\n| L5 Parent | L4 Subsystem | Description |\n|---|---|---|\n| Cabinet Assembly Fixtures | Positioning Jig | Fixture holding sub-assemblies in correct spatial relationship |\n| Cabinet Assembly Fixtures | Power Fastening Tools | Pneumatic or electric screwdrivers, riveters, and clinch tools |\n| Cabinet Assembly Fixtures | Label Applicator | Automated or manual nameplate and rating label placement |\n| Insulation Application | Cutting Station | Die-cut or CNC-cut insulation panels from stock material |\n| Insulation Application | Adhesive Applicator | Spray adhesive or mechanical fastener for insulation attachment |\n| Insulation Application | Foam Dispenser | Two-part polyurethane foam gun for spray-applied insulation |\n\n### L6i Equipment\n\n| L5 Parent | L4 Subsystem | Description |\n|---|---|---|\n| Psychrometric Test Chamber | Environmental Control System | Compressors, heaters, humidifiers maintaining test conditions |\n| Psychrometric Test Chamber | Data Acquisition System | Multi-channel temperature, pressure, airflow, and power logging |\n| Psychrometric Test Chamber | Calorimeter Instrumentation | Energy balance measurement for capacity determination |\n| Electrical Safety Test Station | Hi-Pot Tester | High-voltage dielectric withstand test instrument |\n| Electrical Safety Test Station | Ground Continuity Tester | Low-resistance measurement of safety ground path |\n| Electrical Safety Test Station | Insulation Resistance Meter | Megohm measurement of conductor-to-chassis isolation |\n| Run-Test Station | Power Supply / Load Bank | Simulated electrical and thermal load for functional test |\n| Run-Test Station | Vibration / Acoustic Monitor | Accelerometer and sound level meter for anomaly detection |\n| Run-Test Station | Test Automation Controller | Sequencer running startup, steady-state, and shutdown test scripts |\n\n---"
+    },
+    {
+      "title": "Structural Validation (04d)",
+      "content": "| Check | Result |\n|---|---|\n| All levels in {L7, L6, L6a, L6b, L6c, L5, L4} | PASS |\n| Every unit except L7 has parent referencing existing unit | PASS |\n| All parent-child transitions valid | PASS — L7->L6, L6->L5, L5->L4 |\n| Every L5 has >= 3 L4 children | PASS — all L5 nodes have 3+ L4 children |\n| No solution-specific L7 or L6 names | PASS — no technology references at L7/L6 |"
+    },
+    {
+      "title": "QA Checklist",
+      "content": "| # | Check | Result |\n|---|---|---|\n| Q1 | CFJ is industry-level, no technology/product/subsystem reference | PASS |\n| Q2 | No orphan nodes — every unit except L7 has valid parent | PASS |\n| Q3 | Valid level transitions — no level skipping | PASS |\n| Q4 | L4 children per L5 >= 2 | PASS — all >= 3 |\n| Q5 | No solution-specific L7 or L6 names | PASS |\n| Q6 | Three-question naming test (5 random spot-checks) | PASS — \"Compressor\", \"Tube Bender\", \"Flow Sensor\", \"Press Brake\", \"Brazing Station\" all pass |\n| Q7 | Unit count in range 15-60 | PASS — 38 L5 + L4 units (within 20-40 target) |\n\n---"
+    },
+    {
+      "title": "VN Statistics",
+      "content": "| Metric | Value |\n|---|---|\n| Total L6 core nodes | 9 |\n| Total L6 horizontal nodes | 5 |\n| Total L5 equipment positions | 29 |\n| Total L4 subsystems | 93 |\n| Total VN units (L7+L6+L5+L4) | 137 |\n| Output types | 7 |\n| Sensor anchor position | L6f > Flow Sensor (L5) > Transducer Assembly / Signal Conditioning / Flow Body (L4) |\n\n---"
+    },
+    {
+      "title": "Marquardt Sensor Position in VN",
+      "content": "The Marquardt Ultrasonic Flow Sensor occupies the **Flow Sensor (L5)** position within **L6f: Hydronic Circuit Assembly**. This L6 node is activated only by OT-2 (water-source heat pumps) and OT-5 (water-cooled chillers) — the sensor's current home market.\n\n| Field | Value |\n|---|---|\n| **VN Anchor Level** | L5 |\n| **VN Anchor Node** | Flow Sensor |\n| **Parent L6** | L6f — Hydronic Circuit Assembly |\n| **Sibling L5s** | Circulation Pump, Plate Heat Exchanger, Hydraulic Valve Assembly |\n| **L4 Children** | Transducer Assembly, Signal Conditioning Electronics, Flow Body / Housing |\n| **Alternative Technologies** | Ultrasonic transit-time (35%), Turbine/impeller (30%), Vortex (15%), Differential pressure (10%), Paddle/float switch (10%) |\n| **Cost of Flow Sensor Failure** | System cannot regulate thermal output -> compressor short-cycling, freeze protection loss, efficiency degradation, potential equipment damage |\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [How Air Conditioner is Made — MadeHow](https://www.madehow.com/Volume-3/Air-Conditioner.html)\n- [Pioneer Manufacturing Process — Pioneer HVAC](https://www.pdhvac.com/about/pioneer-manufacturing-process/)\n- [Air Conditioning Compressor Market 2025-2035 — Future Market Insights](https://www.futuremarketinsights.com/reports/air-conditioning-compressor-market)\n- [HVAC Compressor Market Size — Fortune Business Insights](https://www.fortunebusinessinsights.com/hvac-compressor-market-112625)\n- [Heat Exchanger Market 2025-2033 — Grand View Research](https://www.grandviewresearch.com/industry-analysis/heat-exchangers-market)\n- [Electronic Expansion Valves Market — GlobeNewsWire/FMI](https://www.globenewswire.com/news-release/2024/10/29/2971090/0/en/Global-Electronic-Expansion-Valves-Market-Growing-at-an-8-4-CAGR-to-Reach-USD-1-6-Billion-by-2032-Future-Market-Insights-Inc.html)\n- [Expansion Valves Market — Credence Research](https://www.credenceresearch.com/report/expansion-valves-market)\n- [NAICS 333415 — SIC Code](https://siccode.com/naics-code/333415/air-conditioning-warm-air-heating-equipment-commercial-industrial-refrigeration-equipment-manufacturing)\n- [NAICS 333415 — LegalClarity](https://legalclarity.org/naics-code-333415-hvac-and-refrigeration-manufacturing/)\n- [Brazing Components for Refrigeration — Lucas Milhaupt](https://blog.lucasmilhaupt.com/en-us/about/blog/brazing-components-refrigeration)\n- [Refrigeration Compressor Market Trends — Robotics & Automation](https://roboticsnautomation.wordpress.com/2025/11/27/refrigeration-and-air-conditioning-compressors-market-trends-highlight-shift-toward-scroll-compressors-for-hvac/)\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"value_network_construction\",\n  \"naics_code\": \"333415\",\n  \"naics_title\": \"Air-Conditioning and Warm Air Heating Equipment and Commercial and Industrial Refrigeration Equipment Manufacturing\",\n  \"cfj_statement\": \"Manufacture climate control and thermal management equipment that conditions, heats, cools, or refrigerates enclosed spaces and stored goods to specified temperature and humidity setpoints\",\n  \"l7_solution\": \"Climate Control & Refrigeration Equipment Manufacturing\",\n  \"top_level\": \"L7\",\n  \"confidence\": 0.7,\n  \"source_type\": \"web_search\",\n  \"output_types\": [\n    {\"id\": \"OT-1\", \"name\": \"Residential Split/Packaged AC\"},\n    {\"id\": \"OT-2\", \"name\": \"Heat Pump (air-source / water-source)\"},\n    {\"id\": \"OT-3\", \"name\": \"Warm Air Furnace\"},\n    {\"id\": \"OT-4\", \"name\": \"Commercial Rooftop Unit (RTU)\"},\n    {\"id\": \"OT-5\", \"name\": \"Chiller (air-cooled / water-cooled)\"},\n    {\"id\": \"OT-6\", \"name\": \"Commercial Refrigeration Equipment\"},\n    {\"id\": \"OT-7\", \"name\": \"Industrial Refrigeration Equipment\"}\n  ],\n  \"units\": [\n    {\"name\": \"Climate Control & Refrigeration Equipment Manufacturing\", \"level\": \"L7\", \"description\": \"Ecosystem of interacting organizations that collectively manufacture and deliver HVAC and refrigeration equipment\", \"bom_standard\": \"Moore 1993\", \"parent_name\": \"ROOT\"},\n    {\"name\": \"Sheet Metal Fabrication\", \"level\": \"L6\", \"description\": \"Cut, form, punch, and bend sheet metal into enclosure and structural components\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Climate Control & Refrigeration Equipment Manufacturing\"},\n    {\"name\": \"Heat Exchanger Fabrication\", \"level\": \"L6\", \"description\": \"Manufacture coils, condensers, and evaporator assemblies by bending tubing and attaching fins\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Climate Control & Refrigeration Equipment Manufacturing\"},\n    {\"name\": \"Refrigerant Circuit Assembly\", \"level\": \"L6\", \"description\": \"Braze/weld tubing connections, mount compressor, expansion device, and reversing valve into integrated refrigerant circuit\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Climate Control & Refrigeration Equipment Manufacturing\"},\n    {\"name\": \"Combustion Assembly\", \"level\": \"L6\", \"description\": \"Assemble burner, heat exchanger, gas valve, ignition, and flue components into heating module\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Climate Control & Refrigeration Equipment Manufacturing\"},\n    {\"name\": \"Electrical & Controls Integration\", \"level\": \"L6\", \"description\": \"Wire motors, contactors, sensors, control boards, and communication interfaces into the unit\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Climate Control & Refrigeration Equipment Manufacturing\"},\n    {\"name\": \"Hydronic Circuit Assembly\", \"level\": \"L6\", \"description\": \"Assemble water-side piping, circulation pumps, flow sensors, and hydraulic components for water-based heat exchange\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Climate Control & Refrigeration Equipment Manufacturing\"},\n    {\"name\": \"System Evacuation & Refrigerant Charging\", \"level\": \"L6\", \"description\": \"Evacuate system to vacuum, leak-test, charge with specified refrigerant mass\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Climate Control & Refrigeration Equipment Manufacturing\"},\n    {\"name\": \"Final Assembly & Enclosure\", \"level\": \"L6\", \"description\": \"Mount all sub-assemblies into cabinet, attach panels, insulation, labels, and shipping hardware\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Climate Control & Refrigeration Equipment Manufacturing\"},\n    {\"name\": \"Performance Testing & Certification\", \"level\": \"L6\", \"description\": \"Run functional test, verify capacity/efficiency against AHRI/UL/CE standards, pass or reject\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Climate Control & Refrigeration Equipment Manufacturing\"},\n    {\"name\": \"Quality Assurance\", \"level\": \"L6\", \"description\": \"Verify dimensional integrity, material compliance, and process adherence at each gate (horizontal)\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Climate Control & Refrigeration Equipment Manufacturing\"},\n    {\"name\": \"Maintenance & Engineering\", \"level\": \"L6\", \"description\": \"Maintain production equipment uptime, tooling calibration, and process engineering (horizontal)\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Climate Control & Refrigeration Equipment Manufacturing\"},\n    {\"name\": \"HSE & Environmental Compliance\", \"level\": \"L6\", \"description\": \"Manage refrigerant handling (EPA Section 608), brazing fume extraction, noise, and worker safety (horizontal)\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Climate Control & Refrigeration Equipment Manufacturing\"},\n    {\"name\": \"Utilities & Facility Management\", \"level\": \"L6\", \"description\": \"Supply compressed air, nitrogen, electrical power, HVAC, and water to production floor (horizontal)\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Climate Control & Refrigeration Equipment Manufacturing\"},\n    {\"name\": \"IT / Operations Technology\", \"level\": \"L6\", \"description\": \"Manage MES, ERP, CNC program distribution, test data acquisition, and traceability (horizontal)\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Climate Control & Refrigeration Equipment Manufacturing\"},\n    {\"name\": \"CNC Punch Press\", \"level\": \"L5\", \"description\": \"Automated sheet metal punching and forming machine\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Sheet Metal Fabrication\"},\n    {\"name\": \"Press Brake\", \"level\": \"L5\", \"description\": \"Sheet metal bending and forming machine\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Sheet Metal Fabrication\"},\n    {\"name\": \"Powder Coating Line\", \"level\": \"L5\", \"description\": \"Surface finishing and corrosion protection system\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Sheet Metal Fabrication\"},\n    {\"name\": \"Tube Bender\", \"level\": \"L5\", \"description\": \"Bend copper/aluminum tubing into coil patterns\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Heat Exchanger Fabrication\"},\n    {\"name\": \"Fin Press\", \"level\": \"L5\", \"description\": \"Stamp and form aluminum fins for coil assembly\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Heat Exchanger Fabrication\"},\n    {\"name\": \"Coil Expansion Press\", \"level\": \"L5\", \"description\": \"Mechanically expand tubes into fin collars for thermal contact\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Heat Exchanger Fabrication\"},\n    {\"name\": \"Brazing Station\", \"level\": \"L5\", \"description\": \"Join tubing and headers via brazing\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Heat Exchanger Fabrication\"},\n    {\"name\": \"Compressor\", \"level\": \"L5\", \"description\": \"Compress refrigerant vapor to raise pressure and temperature\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Refrigerant Circuit Assembly\"},\n    {\"name\": \"Expansion Device\", \"level\": \"L5\", \"description\": \"Meter refrigerant flow and reduce pressure before evaporator\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Refrigerant Circuit Assembly\"},\n    {\"name\": \"Reversing Valve\", \"level\": \"L5\", \"description\": \"Switch refrigerant flow between heating and cooling modes\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Refrigerant Circuit Assembly\"},\n    {\"name\": \"Refrigerant Piping\", \"level\": \"L5\", \"description\": \"Connect refrigerant circuit components with brazed tubing\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Refrigerant Circuit Assembly\"},\n    {\"name\": \"Gas Burner\", \"level\": \"L5\", \"description\": \"Combust fuel to generate heat for warm air furnace\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Combustion Assembly\"},\n    {\"name\": \"Combustion Heat Exchanger\", \"level\": \"L5\", \"description\": \"Transfer combustion heat to airflow stream\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Combustion Assembly\"},\n    {\"name\": \"Gas Valve\", \"level\": \"L5\", \"description\": \"Regulate fuel flow to burner assembly\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Combustion Assembly\"},\n    {\"name\": \"Ignition Module\", \"level\": \"L5\", \"description\": \"Ignite fuel-air mixture in combustion chamber\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Combustion Assembly\"},\n    {\"name\": \"Control Board\", \"level\": \"L5\", \"description\": \"Manage unit operation logic, sequencing, and diagnostics\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Electrical & Controls Integration\"},\n    {\"name\": \"Variable Frequency Drive\", \"level\": \"L5\", \"description\": \"Modulate compressor and fan motor speed for efficiency\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Electrical & Controls Integration\"},\n    {\"name\": \"Fan / Blower Motor\", \"level\": \"L5\", \"description\": \"Drive airflow across coils or through ductwork\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Electrical & Controls Integration\"},\n    {\"name\": \"Sensor Suite\", \"level\": \"L5\", \"description\": \"Measure temperature, pressure, flow, and refrigerant state\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Electrical & Controls Integration\"},\n    {\"name\": \"Circulation Pump\", \"level\": \"L5\", \"description\": \"Drive water/glycol through heat exchanger circuit\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Hydronic Circuit Assembly\"},\n    {\"name\": \"Plate Heat Exchanger\", \"level\": \"L5\", \"description\": \"Transfer thermal energy between refrigerant and water circuits\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Hydronic Circuit Assembly\"},\n    {\"name\": \"Flow Sensor\", \"level\": \"L5\", \"description\": \"Measure water-side volumetric flow rate for system control and protection\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Hydronic Circuit Assembly\"},\n    {\"name\": \"Hydraulic Valve Assembly\", \"level\": \"L5\", \"description\": \"Control water routing, bypass, and safety in hydronic circuit\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Hydronic Circuit Assembly\"},\n    {\"name\": \"Vacuum Pump Station\", \"level\": \"L5\", \"description\": \"Evacuate refrigerant system to remove moisture and non-condensables\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"System Evacuation & Refrigerant Charging\"},\n    {\"name\": \"Leak Detection Station\", \"level\": \"L5\", \"description\": \"Verify system integrity before refrigerant charging\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"System Evacuation & Refrigerant Charging\"},\n    {\"name\": \"Refrigerant Charging Station\", \"level\": \"L5\", \"description\": \"Dispense precise refrigerant mass into sealed system\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"System Evacuation & Refrigerant Charging\"},\n    {\"name\": \"Cabinet Assembly Fixtures\", \"level\": \"L5\", \"description\": \"Position and fasten enclosure panels around sub-assemblies\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Final Assembly & Enclosure\"},\n    {\"name\": \"Insulation Application\", \"level\": \"L5\", \"description\": \"Apply thermal and acoustic insulation to equipment cabinet\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Final Assembly & Enclosure\"},\n    {\"name\": \"Psychrometric Test Chamber\", \"level\": \"L5\", \"description\": \"Simulate operating conditions to verify capacity and efficiency\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Performance Testing & Certification\"},\n    {\"name\": \"Electrical Safety Test Station\", \"level\": \"L5\", \"description\": \"Hi-pot, ground continuity, and insulation resistance testing\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Performance Testing & Certification\"},\n    {\"name\": \"Run-Test Station\", \"level\": \"L5\", \"description\": \"Functional verification of startup, operation, and shutdown\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Performance Testing & Certification\"},\n    {\"name\": \"Drive Motor\", \"level\": \"L4\", \"description\": \"Servo or hydraulic motor driving ram and turret indexing\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"CNC Punch Press\"},\n    {\"name\": \"Turret / Tool Holder\", \"level\": \"L4\", \"description\": \"Multi-station tool magazine with auto-indexing\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"CNC Punch Press\"},\n    {\"name\": \"CNC Controller\", \"level\": \"L4\", \"description\": \"Programmable controller receiving CAD/CAM punch programs\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"CNC Punch Press\"},\n    {\"name\": \"Sheet Feed System\", \"level\": \"L4\", \"description\": \"Automated gripper and positioning table for sheet metal blanks\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"CNC Punch Press\"},\n    {\"name\": \"Hydraulic Cylinder\", \"level\": \"L4\", \"description\": \"Ram actuation for bending force generation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Press Brake\"},\n    {\"name\": \"Backgauge System\", \"level\": \"L4\", \"description\": \"CNC-positioned fingers for bend location accuracy\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Press Brake\"},\n    {\"name\": \"Press Brake CNC Controller\", \"level\": \"L4\", \"description\": \"Bend angle programming and stroke control\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Press Brake\"},\n    {\"name\": \"Spray Gun Array\", \"level\": \"L4\", \"description\": \"Electrostatic guns for uniform powder application\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Powder Coating Line\"},\n    {\"name\": \"Curing Oven\", \"level\": \"L4\", \"description\": \"Infrared or convection oven for powder fusion\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Powder Coating Line\"},\n    {\"name\": \"Conveyor System\", \"level\": \"L4\", \"description\": \"Overhead chain conveyor through wash, spray, and cure stages\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Powder Coating Line\"},\n    {\"name\": \"Mandrel Assembly\", \"level\": \"L4\", \"description\": \"Internal mandrel preventing tube collapse during bending\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Tube Bender\"},\n    {\"name\": \"Bend Die Set\", \"level\": \"L4\", \"description\": \"Interchangeable dies for different tube diameters and radii\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Tube Bender\"},\n    {\"name\": \"Servo Drive\", \"level\": \"L4\", \"description\": \"CNC-controlled rotation and feed axis\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Tube Bender\"},\n    {\"name\": \"Progressive Die Set\", \"level\": \"L4\", \"description\": \"Multi-station die for punching, forming, and collaring fins\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Fin Press\"},\n    {\"name\": \"Coil Feeder\", \"level\": \"L4\", \"description\": \"Automatic aluminum strip feeding from coil stock\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Fin Press\"},\n    {\"name\": \"Press Ram\", \"level\": \"L4\", \"description\": \"High-speed reciprocating ram (200-400 strokes/min)\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Fin Press\"},\n    {\"name\": \"Expansion Mandrel\", \"level\": \"L4\", \"description\": \"Tapered rod that swages tube into fin collar for thermal bond\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Coil Expansion Press\"},\n    {\"name\": \"Hydraulic Power Unit\", \"level\": \"L4\", \"description\": \"Hydraulic pressure source driving mandrel through coil\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Coil Expansion Press\"},\n    {\"name\": \"Fixture Plate\", \"level\": \"L4\", \"description\": \"Positions coil assembly during expansion cycle\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Coil Expansion Press\"},\n    {\"name\": \"Torch / Heat Source\", \"level\": \"L4\", \"description\": \"Oxy-fuel torch, induction coil, or furnace heating element\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Brazing Station\"},\n    {\"name\": \"Nitrogen Purge System\", \"level\": \"L4\", \"description\": \"Flow controller and tubing for anti-oxidation purge during brazing\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Brazing Station\"},\n    {\"name\": \"Filler Metal Feeder\", \"level\": \"L4\", \"description\": \"Pre-formed rings or wire feeder for braze alloy delivery\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Brazing Station\"},\n    {\"name\": \"Electric Motor\", \"level\": \"L4\", \"description\": \"Hermetic or semi-hermetic motor driving compression element\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Compressor\"},\n    {\"name\": \"Compression Element\", \"level\": \"L4\", \"description\": \"Scroll, rotary, reciprocating piston, screw, or centrifugal impeller\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Compressor\"},\n    {\"name\": \"Oil Management System\", \"level\": \"L4\", \"description\": \"Lubrication circuit with oil separator and sump\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Compressor\"},\n    {\"name\": \"Hermetic Shell\", \"level\": \"L4\", \"description\": \"Welded steel housing enclosing motor and compression element\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Compressor\"},\n    {\"name\": \"Valve Body\", \"level\": \"L4\", \"description\": \"Precision-machined orifice or needle seat controlling refrigerant flow\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Expansion Device\"},\n    {\"name\": \"Stepper Motor / Thermal Bulb\", \"level\": \"L4\", \"description\": \"EEV stepper motor driver or TXV thermal sensing bulb actuator\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Expansion Device\"},\n    {\"name\": \"Control Signal Interface\", \"level\": \"L4\", \"description\": \"Wiring to control board (EEV) or self-contained thermal feedback (TXV)\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Expansion Device\"},\n    {\"name\": \"Solenoid Coil\", \"level\": \"L4\", \"description\": \"Electromagnetic actuator switching pilot valve in reversing valve\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Reversing Valve\"},\n    {\"name\": \"Slide / Piston\", \"level\": \"L4\", \"description\": \"Internal slider redirecting refrigerant between heating and cooling paths\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Reversing Valve\"},\n    {\"name\": \"Reversing Valve Body\", \"level\": \"L4\", \"description\": \"Brass or steel housing with four ports for refrigerant routing\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Reversing Valve\"},\n    {\"name\": \"Burner Orifice\", \"level\": \"L4\", \"description\": \"Precision-drilled gas jet sized for BTU input rating\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Gas Burner\"},\n    {\"name\": \"Venturi Tube\", \"level\": \"L4\", \"description\": \"Air-gas mixing chamber for combustion air entrainment\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Gas Burner\"},\n    {\"name\": \"Flame Sensor\", \"level\": \"L4\", \"description\": \"Flame rectification rod or UV sensor for flame proving\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Gas Burner\"},\n    {\"name\": \"Primary Heat Transfer Surface\", \"level\": \"L4\", \"description\": \"Tubular or clamshell steel surface exposed to combustion gases\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Combustion Heat Exchanger\"},\n    {\"name\": \"Secondary Condensing Section\", \"level\": \"L4\", \"description\": \"Stainless steel condensate recovery surface (condensing furnaces)\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Combustion Heat Exchanger\"},\n    {\"name\": \"Drain Pan\", \"level\": \"L4\", \"description\": \"Condensate collection and disposal from secondary exchanger\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Combustion Heat Exchanger\"},\n    {\"name\": \"Solenoid Operator\", \"level\": \"L4\", \"description\": \"Electromagnetic actuator for gas valve open/close\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Gas Valve\"},\n    {\"name\": \"Pressure Regulator\", \"level\": \"L4\", \"description\": \"Spring-loaded diaphragm maintaining constant outlet gas pressure\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Gas Valve\"},\n    {\"name\": \"Safety Shutoff\", \"level\": \"L4\", \"description\": \"Redundant valve train for fail-safe fuel cutoff\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Gas Valve\"},\n    {\"name\": \"Igniter Element\", \"level\": \"L4\", \"description\": \"Silicon nitride hot surface element or spark electrode\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Ignition Module\"},\n    {\"name\": \"Ignition Control Circuit\", \"level\": \"L4\", \"description\": \"Timing and retry logic for ignition sequence\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Ignition Module\"},\n    {\"name\": \"Flame Proving Circuit\", \"level\": \"L4\", \"description\": \"Microamp-level flame current detection for safety interlock\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Ignition Module\"},\n    {\"name\": \"Microcontroller\", \"level\": \"L4\", \"description\": \"MCU running unit operational firmware and diagnostic routines\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Control Board\"},\n    {\"name\": \"Relay / Contactor Driver\", \"level\": \"L4\", \"description\": \"Power switching for compressor, fan, and heater loads\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Control Board\"},\n    {\"name\": \"Communication Interface\", \"level\": \"L4\", \"description\": \"UART, Modbus, BACnet, or proprietary bus for BMS integration\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Control Board\"},\n    {\"name\": \"IGBT Power Module\", \"level\": \"L4\", \"description\": \"IGBT bridge converting DC to variable-frequency AC for motor drive\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Variable Frequency Drive\"},\n    {\"name\": \"DC Bus Capacitor\", \"level\": \"L4\", \"description\": \"Energy storage and ripple filtering between rectifier and inverter\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Variable Frequency Drive\"},\n    {\"name\": \"Gate Driver Board\", \"level\": \"L4\", \"description\": \"Signal conditioning between MCU PWM output and IGBT gate\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Variable Frequency Drive\"},\n    {\"name\": \"Rotor / Stator Assembly\", \"level\": \"L4\", \"description\": \"Electromagnetic components converting electrical to mechanical energy\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Fan / Blower Motor\"},\n    {\"name\": \"Impeller / Fan Blade\", \"level\": \"L4\", \"description\": \"Aerodynamic element moving air across heat exchanger\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Fan / Blower Motor\"},\n    {\"name\": \"Motor Controller (ECM)\", \"level\": \"L4\", \"description\": \"Integrated electronics for variable-speed commutation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Fan / Blower Motor\"},\n    {\"name\": \"Temperature Probe\", \"level\": \"L4\", \"description\": \"NTC thermistor or RTD element in protective sheath\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Sensor Suite\"},\n    {\"name\": \"Pressure Transducer\", \"level\": \"L4\", \"description\": \"Piezoresistive or ceramic capacitive pressure sensing element\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Sensor Suite\"},\n    {\"name\": \"Flow Sensor Element\", \"level\": \"L4\", \"description\": \"Ultrasonic, turbine, or vortex sensing element in pipe fitting\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Sensor Suite\"},\n    {\"name\": \"Wet-Rotor Motor\", \"level\": \"L4\", \"description\": \"Canned motor assembly running in pumped medium\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Circulation Pump\"},\n    {\"name\": \"Pump Impeller\", \"level\": \"L4\", \"description\": \"Centrifugal impeller creating water-side pressure differential\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Circulation Pump\"},\n    {\"name\": \"Pump Housing\", \"level\": \"L4\", \"description\": \"Cast iron or composite volute with threaded/flanged connections\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Circulation Pump\"},\n    {\"name\": \"Plate Stack\", \"level\": \"L4\", \"description\": \"Stamped stainless steel plates with herringbone corrugation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Plate Heat Exchanger\"},\n    {\"name\": \"Braze / Gasket Seal\", \"level\": \"L4\", \"description\": \"Copper brazing (BPHE) or elastomer gaskets (GPHE) sealing plates\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Plate Heat Exchanger\"},\n    {\"name\": \"Port Connections\", \"level\": \"L4\", \"description\": \"Inlet/outlet fittings for refrigerant and water sides\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Plate Heat Exchanger\"},\n    {\"name\": \"Transducer Assembly\", \"level\": \"L4\", \"description\": \"Piezoelectric (ultrasonic), turbine wheel, or vortex shedder element\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Flow Sensor\"},\n    {\"name\": \"Signal Conditioning Electronics\", \"level\": \"L4\", \"description\": \"Firmware computing flow rate from raw transducer signal\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Flow Sensor\"},\n    {\"name\": \"Flow Body / Housing\", \"level\": \"L4\", \"description\": \"Wetted housing with inline pipe connections (DN12-DN25 typical)\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Flow Sensor\"},\n    {\"name\": \"Valve Actuator\", \"level\": \"L4\", \"description\": \"Electric motor or solenoid operating valve position\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Hydraulic Valve Assembly\"},\n    {\"name\": \"Valve Seat / Disc\", \"level\": \"L4\", \"description\": \"Sealing surface controlling water passage\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Hydraulic Valve Assembly\"},\n    {\"name\": \"Hydraulic Valve Body\", \"level\": \"L4\", \"description\": \"Brass or stainless steel housing with port connections\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Hydraulic Valve Assembly\"},\n    {\"name\": \"Vacuum Pump\", \"level\": \"L4\", \"description\": \"Two-stage rotary vane or scroll pump pulling system to <500 micron\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Vacuum Pump Station\"},\n    {\"name\": \"Vacuum Gauge\", \"level\": \"L4\", \"description\": \"Micron gauge verifying evacuation depth\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Vacuum Pump Station\"},\n    {\"name\": \"Hose Manifold\", \"level\": \"L4\", \"description\": \"Charging hoses and valves connecting pump to system service ports\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Vacuum Pump Station\"},\n    {\"name\": \"Detector Probe\", \"level\": \"L4\", \"description\": \"Helium sniffer or electronic refrigerant sensing wand\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Leak Detection Station\"},\n    {\"name\": \"Pressurization System\", \"level\": \"L4\", \"description\": \"Nitrogen regulator and charging manifold for pressure decay test\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Leak Detection Station\"},\n    {\"name\": \"Data Recorder\", \"level\": \"L4\", \"description\": \"Automated pass/fail logging tied to unit serial number\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Leak Detection Station\"},\n    {\"name\": \"Gravimetric Scale\", \"level\": \"L4\", \"description\": \"Precision scale measuring refrigerant mass dispensed\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Refrigerant Charging Station\"},\n    {\"name\": \"Charging Manifold\", \"level\": \"L4\", \"description\": \"Automated valves and hoses connecting refrigerant cylinder to system\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Refrigerant Charging Station\"},\n    {\"name\": \"Brazing Seal Station\", \"level\": \"L4\", \"description\": \"Torch or induction unit sealing charging port after fill\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Refrigerant Charging Station\"},\n    {\"name\": \"Positioning Jig\", \"level\": \"L4\", \"description\": \"Fixture holding sub-assemblies in correct spatial relationship\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Cabinet Assembly Fixtures\"},\n    {\"name\": \"Power Fastening Tools\", \"level\": \"L4\", \"description\": \"Pneumatic or electric screwdrivers, riveters, and clinch tools\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Cabinet Assembly Fixtures\"},\n    {\"name\": \"Label Applicator\", \"level\": \"L4\", \"description\": \"Automated or manual nameplate and rating label placement\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Cabinet Assembly Fixtures\"},\n    {\"name\": \"Cutting Station\", \"level\": \"L4\", \"description\": \"Die-cut or CNC-cut insulation panels from stock material\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Insulation Application\"},\n    {\"name\": \"Adhesive Applicator\", \"level\": \"L4\", \"description\": \"Spray adhesive or mechanical fastener for insulation attachment\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Insulation Application\"},\n    {\"name\": \"Foam Dispenser\", \"level\": \"L4\", \"description\": \"Two-part polyurethane foam gun for spray-applied insulation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Insulation Application\"},\n    {\"name\": \"Environmental Control System\", \"level\": \"L4\", \"description\": \"Compressors, heaters, humidifiers maintaining test chamber conditions\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Psychrometric Test Chamber\"},\n    {\"name\": \"Data Acquisition System\", \"level\": \"L4\", \"description\": \"Multi-channel temperature, pressure, airflow, and power logging\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Psychrometric Test Chamber\"},\n    {\"name\": \"Calorimeter Instrumentation\", \"level\": \"L4\", \"description\": \"Energy balance measurement for capacity determination\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Psychrometric Test Chamber\"},\n    {\"name\": \"Hi-Pot Tester\", \"level\": \"L4\", \"description\": \"High-voltage dielectric withstand test instrument\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Electrical Safety Test Station\"},\n    {\"name\": \"Ground Continuity Tester\", \"level\": \"L4\", \"description\": \"Low-resistance measurement of safety ground path\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Electrical Safety Test Station\"},\n    {\"name\": \"Insulation Resistance Meter\", \"level\": \"L4\", \"description\": \"Megohm measurement of conductor-to-chassis isolation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Electrical Safety Test Station\"},\n    {\"name\": \"Power Supply / Load Bank\", \"level\": \"L4\", \"description\": \"Simulated electrical and thermal load for functional test\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Run-Test Station\"},\n    {\"name\": \"Vibration / Acoustic Monitor\", \"level\": \"L4\", \"description\": \"Accelerometer and sound level meter for anomaly detection\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Run-Test Station\"},\n    {\"name\": \"Test Automation Controller\", \"level\": \"L4\", \"description\": \"Sequencer running startup, steady-state, and shutdown test scripts\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Run-Test Station\"}\n  ],\n  \"sensor_anchor\": {\n    \"anchor_level\": \"L5\",\n    \"anchor_node\": \"Flow Sensor\",\n    \"parent_l6\": \"Hydronic Circuit Assembly\",\n    \"activated_by\": [\"OT-2\", \"OT-5\"],\n    \"alternatives\": [\n      {\"name\": \"Ultrasonic transit-time sensor\", \"share_pct\": 35, \"trend\": \"growing\"},\n      {\"name\": \"Turbine/impeller sensor\", \"share_pct\": 30, \"trend\": \"stable\"},\n      {\"name\": \"Vortex sensor\", \"share_pct\": 15, \"trend\": \"stable\"},\n      {\"name\": \"Differential pressure sensor\", \"share_pct\": 10, \"trend\": \"declining\"},\n      {\"name\": \"Paddle/float switch (binary only)\", \"share_pct\": 10, \"trend\": \"declining\"}\n    ],\n    \"confidence\": 0.5,\n    \"source_type\": \"llm_corroborated\"\n  },\n  \"entities_produced\": {\n    \"nodes\": [\n      {\"label\": \"ValueNetwork\", \"key\": {\"naics_code\": \"333415\", \"run_id\": \"TBD\"}, \"properties\": {\"market_name\": \"Air-Conditioning and Warm Air Heating Equipment Mfg\", \"naics_title\": \"Air-Conditioning and Warm Air Heating Equipment and Commercial and Industrial Refrigeration Equipment Manufacturing\", \"cfj_statement\": \"Manufacture climate control and thermal management equipment that conditions, heats, cools, or refrigerates enclosed spaces and stored goods to specified temperature and humidity setpoints\", \"top_level\": \"L7\", \"unit_count\": 137, \"enriched\": true, \"confidence\": 0.7, \"source_type\": \"web_search\"}},\n      {\"label\": \"ValueNetworkUnit\", \"key\": {\"name\": \"[each unit name]\", \"naics_code\": \"333415\", \"run_id\": \"TBD\"}, \"count\": 137}\n    ],\n    \"relationships\": [\n      {\"type\": \"has_value_network\", \"source\": \"Market:333415\", \"target\": \"ValueNetwork:333415\"},\n      {\"type\": \"contains_unit\", \"source\": \"ValueNetwork:333415\", \"target\": \"ValueNetworkUnit:[each]\", \"count\": 137},\n      {\"type\": \"has_child\", \"source\": \"ValueNetworkUnit:[parent]\", \"target\": \"ValueNetworkUnit:[child]\", \"count\": 136}\n    ]\n  }\n}\n```"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "ID",
+        "Output Type",
+        "Description"
+      ],
+      "rows": [
+        {
+          "ID": "OT-1",
+          "Output Type": "Residential Split/Packaged AC",
+          "Description": "Window units, split systems, mini-splits, packaged rooftop residential"
+        },
+        {
+          "ID": "OT-2",
+          "Output Type": "Heat Pump (air-source / water-source)",
+          "Description": "Reversible vapor-compression units for heating + cooling"
+        },
+        {
+          "ID": "OT-3",
+          "Output Type": "Warm Air Furnace",
+          "Description": "Gas-fired, oil-fired, or electric forced-air furnaces"
+        },
+        {
+          "ID": "OT-4",
+          "Output Type": "Commercial Rooftop Unit (RTU)",
+          "Description": "Packaged HVAC for commercial buildings"
+        },
+        {
+          "ID": "OT-5",
+          "Output Type": "Chiller (air-cooled / water-cooled)",
+          "Description": "Central cooling plant equipment for large commercial/industrial"
+        },
+        {
+          "ID": "OT-6",
+          "Output Type": "Commercial Refrigeration Equipment",
+          "Description": "Display cases, walk-in coolers/freezers, reach-in units"
+        },
+        {
+          "ID": "OT-7",
+          "Output Type": "Industrial Refrigeration Equipment",
+          "Description": "Ammonia systems, blast freezers, cold storage"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**Name**",
+          "Value": "Climate Control & Refrigeration Equipment Manufacturing"
+        },
+        {
+          "Field": "**Level**",
+          "Value": "L7"
+        },
+        {
+          "Field": "**BOM Standard**",
+          "Value": "Moore 1993"
+        },
+        {
+          "Field": "**Description**",
+          "Value": "The ecosystem of interacting organizations — OEMs, component suppliers, refrigerant producers, sheet metal fabricators, controls vendors, certification bodies, and distribution channels — that collectively manufacture and deliver HVAC and refrigeration equipment to end-use markets."
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L6",
+        "Name",
+        "Job Family",
+        "Output Types"
+      ],
+      "rows": [
+        {
+          "L6": "L6a",
+          "Name": "**Sheet Metal Fabrication**",
+          "Job Family": "Cut, form, punch, and bend sheet metal into enclosure and structural components",
+          "Output Types": "OT-1 through OT-7 (all)"
+        },
+        {
+          "L6": "L6b",
+          "Name": "**Heat Exchanger Fabrication**",
+          "Job Family": "Manufacture coils, condensers, and evaporator assemblies by bending tubing and attaching fins",
+          "Output Types": "OT-1, OT-2, OT-4, OT-5, OT-6, OT-7"
+        },
+        {
+          "L6": "L6c",
+          "Name": "**Refrigerant Circuit Assembly**",
+          "Job Family": "Braze/weld tubing connections, mount compressor, expansion device, and reversing valve into integrated refrigerant circuit",
+          "Output Types": "OT-1, OT-2, OT-4, OT-5, OT-6, OT-7"
+        },
+        {
+          "L6": "L6d",
+          "Name": "**Combustion Assembly**",
+          "Job Family": "Assemble burner, heat exchanger, gas valve, ignition, and flue components into heating module",
+          "Output Types": "OT-3 (furnace only)"
+        },
+        {
+          "L6": "L6e",
+          "Name": "**Electrical & Controls Integration**",
+          "Job Family": "Wire motors, contactors, sensors, control boards, and communication interfaces into the unit",
+          "Output Types": "OT-1 through OT-7 (all)"
+        },
+        {
+          "L6": "L6f",
+          "Name": "**Hydronic Circuit Assembly**",
+          "Job Family": "Assemble water-side piping, circulation pumps, flow sensors, and hydraulic components for water-based heat exchange",
+          "Output Types": "OT-2 (water-source HP), OT-5 (water-cooled chiller)"
+        },
+        {
+          "L6": "L6g",
+          "Name": "**System Evacuation & Refrigerant Charging**",
+          "Job Family": "Evacuate system to vacuum, leak-test, charge with specified refrigerant mass",
+          "Output Types": "OT-1, OT-2, OT-4, OT-5, OT-6, OT-7"
+        },
+        {
+          "L6": "L6h",
+          "Name": "**Final Assembly & Enclosure**",
+          "Job Family": "Mount all sub-assemblies into cabinet, attach panels, insulation, labels, and shipping hardware",
+          "Output Types": "OT-1 through OT-7 (all)"
+        },
+        {
+          "L6": "L6i",
+          "Name": "**Performance Testing & Certification**",
+          "Job Family": "Run functional test, verify capacity/efficiency against AHRI/UL/CE standards, pass or reject",
+          "Output Types": "OT-1 through OT-7 (all)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L6",
+        "Name",
+        "Job Family",
+        "Scope"
+      ],
+      "rows": [
+        {
+          "L6": "L6(H1)",
+          "Name": "**Quality Assurance**",
+          "Job Family": "Verify dimensional integrity, material compliance, and process adherence at each gate",
+          "Scope": "All core steps"
+        },
+        {
+          "L6": "L6(H2)",
+          "Name": "**Maintenance & Engineering**",
+          "Job Family": "Maintain production equipment uptime, tooling calibration, and process engineering",
+          "Scope": "All core steps"
+        },
+        {
+          "L6": "L6(H3)",
+          "Name": "**HSE & Environmental Compliance**",
+          "Job Family": "Manage refrigerant handling (EPA Section 608), brazing fume extraction, noise, and worker safety",
+          "Scope": "All core steps"
+        },
+        {
+          "L6": "L6(H4)",
+          "Name": "**Utilities & Facility Management**",
+          "Job Family": "Supply compressed air, nitrogen, electrical power, HVAC, and water to production floor",
+          "Scope": "All core steps"
+        },
+        {
+          "L6": "L6(H5)",
+          "Name": "**IT / Operations Technology**",
+          "Job Family": "Manage MES, ERP, CNC program distribution, test data acquisition, and traceability",
+          "Scope": "All core steps"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L5",
+        "Equipment Category",
+        "Alternatives",
+        "Share",
+        "Confidence"
+      ],
+      "rows": [
+        {
+          "L5": "**CNC Punch Press**",
+          "Equipment Category": "Automated sheet metal punching/forming",
+          "Alternatives": "1. Turret punch press",
+          "Share": "55%",
+          "Confidence": "MEDIUM"
+        },
+        {
+          "L5": "2. Laser cutting center",
+          "Equipment Category": "35%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "3. Plasma cutting system",
+          "Equipment Category": "10%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "**Press Brake**",
+          "Equipment Category": "Sheet metal bending/forming",
+          "Alternatives": "1. CNC hydraulic press brake",
+          "Share": "65%",
+          "Confidence": "MEDIUM"
+        },
+        {
+          "L5": "2. CNC electric press brake",
+          "Equipment Category": "30%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "3. Manual press brake",
+          "Equipment Category": "5%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "**Powder Coating Line**",
+          "Equipment Category": "Surface finishing and corrosion protection",
+          "Alternatives": "1. Electrostatic powder coat",
+          "Share": "75%",
+          "Confidence": "MEDIUM"
+        },
+        {
+          "L5": "2. Wet paint spray",
+          "Equipment Category": "15%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "3. E-coat (electrodeposition)",
+          "Equipment Category": "10%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L5",
+        "Equipment Category",
+        "Alternatives",
+        "Share",
+        "Confidence"
+      ],
+      "rows": [
+        {
+          "L5": "**Tube Bender**",
+          "Equipment Category": "Bend copper/aluminum tubing into coil patterns",
+          "Alternatives": "1. CNC tube bender",
+          "Share": "70%",
+          "Confidence": "MEDIUM"
+        },
+        {
+          "L5": "2. Manual tube bender",
+          "Equipment Category": "15%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "3. Rotary draw bender",
+          "Equipment Category": "15%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "**Fin Press**",
+          "Equipment Category": "Stamp and form aluminum fins for coil assembly",
+          "Alternatives": "1. Progressive die fin press",
+          "Share": "85%",
+          "Confidence": "MEDIUM"
+        },
+        {
+          "L5": "2. Separate stamp + form",
+          "Equipment Category": "15%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "**Coil Expansion Press**",
+          "Equipment Category": "Mechanically expand tubes into fin collars for thermal contact",
+          "Alternatives": "1. Hydraulic expansion press",
+          "Share": "65%",
+          "Confidence": "LOW"
+        },
+        {
+          "L5": "2. Bullet expansion system",
+          "Equipment Category": "35%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "**Brazing Station**",
+          "Equipment Category": "Join tubing and headers via brazing",
+          "Alternatives": "1. Controlled-atmosphere furnace brazing",
+          "Share": "45%",
+          "Confidence": "MEDIUM"
+        },
+        {
+          "L5": "2. Manual torch brazing (nitrogen purge)",
+          "Equipment Category": "40%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "3. Induction brazing",
+          "Equipment Category": "15%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L5",
+        "Equipment Category",
+        "Alternatives",
+        "Share",
+        "Confidence"
+      ],
+      "rows": [
+        {
+          "L5": "**Compressor**",
+          "Equipment Category": "Compress refrigerant vapor",
+          "Alternatives": "1. Rotary compressor",
+          "Share": "45%",
+          "Confidence": "HIGH"
+        },
+        {
+          "L5": "2. Scroll compressor",
+          "Equipment Category": "35%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "3. Reciprocating compressor",
+          "Equipment Category": "12%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "4. Screw compressor",
+          "Equipment Category": "5%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "5. Centrifugal compressor",
+          "Equipment Category": "3%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "**Expansion Device**",
+          "Equipment Category": "Meter refrigerant flow and drop pressure",
+          "Alternatives": "1. Electronic expansion valve (EEV)",
+          "Share": "50%",
+          "Confidence": "MEDIUM"
+        },
+        {
+          "L5": "2. Thermostatic expansion valve (TXV)",
+          "Equipment Category": "40%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "3. Fixed orifice / capillary tube",
+          "Equipment Category": "10%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "**Reversing Valve**",
+          "Equipment Category": "Switch between heating and cooling modes",
+          "Alternatives": "1. 4-way reversing valve (solenoid)",
+          "Share": "95%",
+          "Confidence": "HIGH"
+        },
+        {
+          "L5": "2. 3-way valve arrangement",
+          "Equipment Category": "5%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "**Refrigerant Piping**",
+          "Equipment Category": "Connect circuit components",
+          "Alternatives": "1. Copper tubing (brazed)",
+          "Share": "85%",
+          "Confidence": "HIGH"
+        },
+        {
+          "L5": "2. Aluminum tubing",
+          "Equipment Category": "15%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L5",
+        "Equipment Category",
+        "Alternatives",
+        "Share",
+        "Confidence"
+      ],
+      "rows": [
+        {
+          "L5": "**Gas Burner**",
+          "Equipment Category": "Combust fuel to generate heat",
+          "Alternatives": "1. Inshot tubular burner",
+          "Share": "60%",
+          "Confidence": "MEDIUM"
+        },
+        {
+          "L5": "2. Ribbon burner",
+          "Equipment Category": "25%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "3. Premix burner",
+          "Equipment Category": "15%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "**Combustion Heat Exchanger**",
+          "Equipment Category": "Transfer combustion heat to airflow",
+          "Alternatives": "1. Tubular steel HX (80% AFUE)",
+          "Share": "35%",
+          "Confidence": "MEDIUM"
+        },
+        {
+          "L5": "2. Secondary condensing HX (90%+ AFUE)",
+          "Equipment Category": "55%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "3. Cast iron HX",
+          "Equipment Category": "10%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "**Gas Valve**",
+          "Equipment Category": "Regulate fuel flow to burner",
+          "Alternatives": "1. Modulating gas valve",
+          "Share": "50%",
+          "Confidence": "LOW"
+        },
+        {
+          "L5": "2. Two-stage gas valve",
+          "Equipment Category": "35%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "3. Single-stage gas valve",
+          "Equipment Category": "15%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "**Ignition Module**",
+          "Equipment Category": "Ignite fuel-air mixture",
+          "Alternatives": "1. Hot surface igniter (silicon nitride)",
+          "Share": "75%",
+          "Confidence": "MEDIUM"
+        },
+        {
+          "L5": "2. Direct spark ignition",
+          "Equipment Category": "20%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "3. Standing pilot (legacy)",
+          "Equipment Category": "5%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L5",
+        "Equipment Category",
+        "Alternatives",
+        "Share",
+        "Confidence"
+      ],
+      "rows": [
+        {
+          "L5": "**Control Board**",
+          "Equipment Category": "Manage unit operation logic, sequencing, diagnostics",
+          "Alternatives": "1. Microcontroller-based PCB",
+          "Share": "70%",
+          "Confidence": "MEDIUM"
+        },
+        {
+          "L5": "2. PLC-based controller",
+          "Equipment Category": "20%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "3. Relay logic board (legacy)",
+          "Equipment Category": "10%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "**Variable Frequency Drive (VFD)**",
+          "Equipment Category": "Modulate compressor and fan motor speed",
+          "Alternatives": "1. Integrated inverter board",
+          "Share": "60%",
+          "Confidence": "MEDIUM"
+        },
+        {
+          "L5": "2. External VFD module",
+          "Equipment Category": "30%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "3. No VFD (fixed-speed, legacy)",
+          "Equipment Category": "10%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "**Fan / Blower Motor**",
+          "Equipment Category": "Drive airflow across coils or through ductwork",
+          "Alternatives": "1. ECM (electronically commutated motor)",
+          "Share": "55%",
+          "Confidence": "MEDIUM"
+        },
+        {
+          "L5": "2. PSC (permanent split capacitor) motor",
+          "Equipment Category": "35%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "3. Brushless DC motor",
+          "Equipment Category": "10%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "**Sensor Suite**",
+          "Equipment Category": "Measure temperature, pressure, flow, and refrigerant state",
+          "Alternatives": "1. NTC/RTD temperature sensors",
+          "Share": "40%",
+          "Confidence": "LOW"
+        },
+        {
+          "L5": "2. Pressure transducers",
+          "Equipment Category": "30%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "3. Flow sensors (ultrasonic, vortex, turbine)",
+          "Equipment Category": "20%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "4. Refrigerant leak detectors",
+          "Equipment Category": "10%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L5",
+        "Equipment Category",
+        "Alternatives",
+        "Share",
+        "Confidence"
+      ],
+      "rows": [
+        {
+          "L5": "**Circulation Pump**",
+          "Equipment Category": "Drive water/glycol through heat exchanger",
+          "Alternatives": "1. Wet-rotor pump (Grundfos, Wilo type)",
+          "Share": "65%",
+          "Confidence": "MEDIUM"
+        },
+        {
+          "L5": "2. Dry-rotor pump",
+          "Equipment Category": "25%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "3. Magnetically coupled pump",
+          "Equipment Category": "10%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "**Plate Heat Exchanger**",
+          "Equipment Category": "Transfer thermal energy between refrigerant and water circuits",
+          "Alternatives": "1. Brazed plate HX",
+          "Share": "70%",
+          "Confidence": "MEDIUM"
+        },
+        {
+          "L5": "2. Shell-and-tube HX",
+          "Equipment Category": "20%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "3. Gasketed plate HX",
+          "Equipment Category": "10%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "**Flow Sensor**",
+          "Equipment Category": "Measure water-side volumetric flow rate",
+          "Alternatives": "1. Ultrasonic transit-time sensor",
+          "Share": "35%",
+          "Confidence": "LOW"
+        },
+        {
+          "L5": "2. Turbine/impeller sensor",
+          "Equipment Category": "30%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "3. Vortex sensor",
+          "Equipment Category": "15%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "4. Differential pressure sensor",
+          "Equipment Category": "10%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "5. Paddle/float switch (binary only)",
+          "Equipment Category": "10%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "**Hydraulic Valve Assembly**",
+          "Equipment Category": "Control water routing, bypass, and safety",
+          "Alternatives": "1. Motorized 3-way diverter valve",
+          "Share": "45%",
+          "Confidence": "LOW"
+        },
+        {
+          "L5": "2. Pressure relief valve",
+          "Equipment Category": "30%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "3. Check valve / non-return valve",
+          "Equipment Category": "25%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L5",
+        "Equipment Category",
+        "Alternatives",
+        "Share",
+        "Confidence"
+      ],
+      "rows": [
+        {
+          "L5": "**Vacuum Pump Station**",
+          "Equipment Category": "Evacuate system to remove moisture and non-condensables",
+          "Alternatives": "1. Two-stage rotary vane vacuum pump",
+          "Share": "70%",
+          "Confidence": "MEDIUM"
+        },
+        {
+          "L5": "2. Scroll vacuum pump",
+          "Equipment Category": "30%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "**Leak Detection Station**",
+          "Equipment Category": "Verify system integrity before charging",
+          "Alternatives": "1. Helium mass spectrometer leak detector",
+          "Share": "50%",
+          "Confidence": "MEDIUM"
+        },
+        {
+          "L5": "2. Electronic refrigerant leak detector",
+          "Equipment Category": "35%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "3. Nitrogen pressure decay test",
+          "Equipment Category": "15%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "**Refrigerant Charging Station**",
+          "Equipment Category": "Dispense precise refrigerant mass into system",
+          "Alternatives": "1. Automated gravimetric charging",
+          "Share": "75%",
+          "Confidence": "MEDIUM"
+        },
+        {
+          "L5": "2. Manual scale-based charging",
+          "Equipment Category": "25%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L5",
+        "Equipment Category",
+        "Alternatives",
+        "Share",
+        "Confidence"
+      ],
+      "rows": [
+        {
+          "L5": "**Cabinet Assembly Fixtures**",
+          "Equipment Category": "Position and fasten enclosure panels around sub-assemblies",
+          "Alternatives": "1. Semi-automated fixture with power tools",
+          "Share": "60%",
+          "Confidence": "LOW"
+        },
+        {
+          "L5": "2. Manual assembly station",
+          "Equipment Category": "30%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "3. Robotic fastening cell",
+          "Equipment Category": "10%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "**Insulation Application**",
+          "Equipment Category": "Apply thermal and acoustic insulation to cabinet",
+          "Alternatives": "1. Pre-cut foam insulation panels",
+          "Share": "50%",
+          "Confidence": "LOW"
+        },
+        {
+          "L5": "2. Spray-applied foam insulation",
+          "Equipment Category": "30%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "3. Fiberglass batt insulation",
+          "Equipment Category": "20%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L5",
+        "Equipment Category",
+        "Alternatives",
+        "Share",
+        "Confidence"
+      ],
+      "rows": [
+        {
+          "L5": "**Psychrometric Test Chamber**",
+          "Equipment Category": "Simulate operating conditions to verify capacity and efficiency",
+          "Alternatives": "1. Balanced ambient calorimeter room",
+          "Share": "60%",
+          "Confidence": "MEDIUM"
+        },
+        {
+          "L5": "2. Air enthalpy tunnel test",
+          "Equipment Category": "30%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "3. Outdoor test loop (commissioning only)",
+          "Equipment Category": "10%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "**Electrical Safety Test Station**",
+          "Equipment Category": "Hi-pot, ground continuity, insulation resistance",
+          "Alternatives": "1. Automated multi-point tester",
+          "Share": "70%",
+          "Confidence": "MEDIUM"
+        },
+        {
+          "L5": "2. Manual hi-pot + megger",
+          "Equipment Category": "30%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        },
+        {
+          "L5": "**Run-Test Station**",
+          "Equipment Category": "Functional verification of startup, operation, shutdown",
+          "Alternatives": "1. Automated end-of-line test bench",
+          "Share": "65%",
+          "Confidence": "MEDIUM"
+        },
+        {
+          "L5": "2. Manual operator run-test",
+          "Equipment Category": "35%",
+          "Alternatives": "",
+          "Share": "",
+          "Confidence": ""
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L6(H)",
+        "L5",
+        "Equipment Category"
+      ],
+      "rows": [
+        {
+          "L6(H)": "H1 Quality Assurance",
+          "L5": "**CMM / Dimensional Inspection**",
+          "Equipment Category": "Coordinate measuring machine for incoming and in-process inspection"
+        },
+        {
+          "L6(H)": "H1 Quality Assurance",
+          "L5": "**Statistical Process Control (SPC)**",
+          "Equipment Category": "Software-driven process monitoring at each fabrication cell"
+        },
+        {
+          "L6(H)": "H3 HSE",
+          "L5": "**Refrigerant Recovery Unit**",
+          "Equipment Category": "Capture and reclaim refrigerant per EPA Section 608"
+        },
+        {
+          "L6(H)": "H3 HSE",
+          "L5": "**Brazing Fume Extraction**",
+          "Equipment Category": "Local exhaust ventilation at brazing stations"
+        },
+        {
+          "L6(H)": "H4 Utilities",
+          "L5": "**Compressed Air System**",
+          "Equipment Category": "Plant-wide compressed air supply for pneumatic tools and actuators"
+        },
+        {
+          "L6(H)": "H4 Utilities",
+          "L5": "**Nitrogen Supply**",
+          "Equipment Category": "Nitrogen for brazing purge and leak testing"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L5 Parent",
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L5 Parent": "CNC Punch Press",
+          "L4 Subsystem": "Drive Motor",
+          "Description": "Servo or hydraulic motor driving ram and turret indexing"
+        },
+        {
+          "L5 Parent": "CNC Punch Press",
+          "L4 Subsystem": "Turret / Tool Holder",
+          "Description": "Multi-station tool magazine with auto-indexing"
+        },
+        {
+          "L5 Parent": "CNC Punch Press",
+          "L4 Subsystem": "CNC Controller",
+          "Description": "Programmable controller receiving CAD/CAM punch programs"
+        },
+        {
+          "L5 Parent": "CNC Punch Press",
+          "L4 Subsystem": "Sheet Feed System",
+          "Description": "Automated gripper and positioning table for sheet metal blanks"
+        },
+        {
+          "L5 Parent": "Press Brake",
+          "L4 Subsystem": "Hydraulic Cylinder",
+          "Description": "Ram actuation for bending force generation"
+        },
+        {
+          "L5 Parent": "Press Brake",
+          "L4 Subsystem": "Backgauge System",
+          "Description": "CNC-positioned fingers for bend location accuracy"
+        },
+        {
+          "L5 Parent": "Press Brake",
+          "L4 Subsystem": "CNC Controller",
+          "Description": "Bend angle programming and stroke control"
+        },
+        {
+          "L5 Parent": "Powder Coating Line",
+          "L4 Subsystem": "Spray Gun Array",
+          "Description": "Electrostatic guns for uniform powder application"
+        },
+        {
+          "L5 Parent": "Powder Coating Line",
+          "L4 Subsystem": "Curing Oven",
+          "Description": "Infrared or convection oven for powder fusion"
+        },
+        {
+          "L5 Parent": "Powder Coating Line",
+          "L4 Subsystem": "Conveyor System",
+          "Description": "Overhead chain conveyor through wash, spray, and cure stages"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L5 Parent",
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L5 Parent": "Tube Bender",
+          "L4 Subsystem": "Mandrel Assembly",
+          "Description": "Internal mandrel preventing tube collapse during bending"
+        },
+        {
+          "L5 Parent": "Tube Bender",
+          "L4 Subsystem": "Bend Die Set",
+          "Description": "Interchangeable dies for different tube diameters and radii"
+        },
+        {
+          "L5 Parent": "Tube Bender",
+          "L4 Subsystem": "Servo Drive",
+          "Description": "CNC-controlled rotation and feed axis"
+        },
+        {
+          "L5 Parent": "Fin Press",
+          "L4 Subsystem": "Progressive Die Set",
+          "Description": "Multi-station die for punching, forming, and collaring fins"
+        },
+        {
+          "L5 Parent": "Fin Press",
+          "L4 Subsystem": "Coil Feeder",
+          "Description": "Automatic aluminum strip feeding from coil stock"
+        },
+        {
+          "L5 Parent": "Fin Press",
+          "L4 Subsystem": "Press Ram",
+          "Description": "High-speed reciprocating ram (200-400 strokes/min)"
+        },
+        {
+          "L5 Parent": "Coil Expansion Press",
+          "L4 Subsystem": "Expansion Mandrel",
+          "Description": "Tapered rod that swages tube into fin collar for thermal bond"
+        },
+        {
+          "L5 Parent": "Coil Expansion Press",
+          "L4 Subsystem": "Hydraulic Power Unit",
+          "Description": "Hydraulic pressure source driving mandrel through coil"
+        },
+        {
+          "L5 Parent": "Coil Expansion Press",
+          "L4 Subsystem": "Fixture Plate",
+          "Description": "Positions coil assembly during expansion cycle"
+        },
+        {
+          "L5 Parent": "Brazing Station",
+          "L4 Subsystem": "Torch / Heat Source",
+          "Description": "Oxy-fuel torch, induction coil, or furnace heating element"
+        },
+        {
+          "L5 Parent": "Brazing Station",
+          "L4 Subsystem": "Nitrogen Purge System",
+          "Description": "Flow controller and tubing for anti-oxidation purge"
+        },
+        {
+          "L5 Parent": "Brazing Station",
+          "L4 Subsystem": "Filler Metal Feeder",
+          "Description": "Pre-formed rings or wire feeder for braze alloy delivery"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L5 Parent",
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L5 Parent": "Compressor",
+          "L4 Subsystem": "Electric Motor",
+          "Description": "Hermetic or semi-hermetic motor driving compression element"
+        },
+        {
+          "L5 Parent": "Compressor",
+          "L4 Subsystem": "Compression Element",
+          "Description": "Scroll, rotary, reciprocating piston, screw, or centrifugal impeller"
+        },
+        {
+          "L5 Parent": "Compressor",
+          "L4 Subsystem": "Oil Management System",
+          "Description": "Lubrication circuit with oil separator and sump"
+        },
+        {
+          "L5 Parent": "Compressor",
+          "L4 Subsystem": "Hermetic Shell",
+          "Description": "Welded steel housing enclosing motor + compression element"
+        },
+        {
+          "L5 Parent": "Expansion Device",
+          "L4 Subsystem": "Valve Body",
+          "Description": "Precision-machined orifice or needle seat controlling refrigerant flow"
+        },
+        {
+          "L5 Parent": "Expansion Device",
+          "L4 Subsystem": "Stepper Motor / Thermal Bulb",
+          "Description": "EEV: stepper motor driver. TXV: thermal sensing bulb. Capillary: none"
+        },
+        {
+          "L5 Parent": "Expansion Device",
+          "L4 Subsystem": "Control Signal Interface",
+          "Description": "Wiring to control board (EEV) or self-contained thermal feedback (TXV)"
+        },
+        {
+          "L5 Parent": "Reversing Valve",
+          "L4 Subsystem": "Solenoid Coil",
+          "Description": "Electromagnetic actuator switching pilot valve"
+        },
+        {
+          "L5 Parent": "Reversing Valve",
+          "L4 Subsystem": "Slide / Piston",
+          "Description": "Internal slider redirecting refrigerant between heating and cooling paths"
+        },
+        {
+          "L5 Parent": "Reversing Valve",
+          "L4 Subsystem": "Valve Body",
+          "Description": "Brass or steel housing with four ports"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L5 Parent",
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L5 Parent": "Gas Burner",
+          "L4 Subsystem": "Burner Orifice",
+          "Description": "Precision-drilled gas jet sized for BTU input rating"
+        },
+        {
+          "L5 Parent": "Gas Burner",
+          "L4 Subsystem": "Venturi Tube",
+          "Description": "Air-gas mixing chamber for combustion air entrainment"
+        },
+        {
+          "L5 Parent": "Gas Burner",
+          "L4 Subsystem": "Flame Sensor",
+          "Description": "Flame rectification rod or UV sensor for flame proving"
+        },
+        {
+          "L5 Parent": "Combustion Heat Exchanger",
+          "L4 Subsystem": "Primary Heat Transfer Surface",
+          "Description": "Tubular or clamshell steel surface exposed to combustion gases"
+        },
+        {
+          "L5 Parent": "Combustion Heat Exchanger",
+          "L4 Subsystem": "Secondary Condensing Section",
+          "Description": "Stainless steel condensate recovery surface (condensing furnaces only)"
+        },
+        {
+          "L5 Parent": "Combustion Heat Exchanger",
+          "L4 Subsystem": "Drain Pan",
+          "Description": "Condensate collection and disposal from secondary exchanger"
+        },
+        {
+          "L5 Parent": "Gas Valve",
+          "L4 Subsystem": "Solenoid Operator",
+          "Description": "Electromagnetic actuator for valve open/close"
+        },
+        {
+          "L5 Parent": "Gas Valve",
+          "L4 Subsystem": "Pressure Regulator",
+          "Description": "Spring-loaded diaphragm maintaining constant outlet pressure"
+        },
+        {
+          "L5 Parent": "Gas Valve",
+          "L4 Subsystem": "Safety Shutoff",
+          "Description": "Redundant valve train for fail-safe fuel cutoff"
+        },
+        {
+          "L5 Parent": "Ignition Module",
+          "L4 Subsystem": "Igniter Element",
+          "Description": "Silicon nitride hot surface element or spark electrode"
+        },
+        {
+          "L5 Parent": "Ignition Module",
+          "L4 Subsystem": "Control Circuit",
+          "Description": "Timing and retry logic for ignition sequence"
+        },
+        {
+          "L5 Parent": "Ignition Module",
+          "L4 Subsystem": "Flame Proving Circuit",
+          "Description": "Microamp-level flame current detection for safety interlock"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L5 Parent",
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L5 Parent": "Control Board",
+          "L4 Subsystem": "Microcontroller",
+          "Description": "MCU running unit operational firmware and diagnostic routines"
+        },
+        {
+          "L5 Parent": "Control Board",
+          "L4 Subsystem": "Relay / Contactor Driver",
+          "Description": "Power switching for compressor, fan, and heater loads"
+        },
+        {
+          "L5 Parent": "Control Board",
+          "L4 Subsystem": "Communication Interface",
+          "Description": "UART, Modbus, BACnet, or proprietary bus for BMS integration"
+        },
+        {
+          "L5 Parent": "Variable Frequency Drive",
+          "L4 Subsystem": "IGBT Power Module",
+          "Description": "Insulated-gate bipolar transistor bridge converting DC to variable-frequency AC"
+        },
+        {
+          "L5 Parent": "Variable Frequency Drive",
+          "L4 Subsystem": "DC Bus Capacitor",
+          "Description": "Energy storage and ripple filtering between rectifier and inverter"
+        },
+        {
+          "L5 Parent": "Variable Frequency Drive",
+          "L4 Subsystem": "Gate Driver Board",
+          "Description": "Signal conditioning between MCU PWM output and IGBT gate"
+        },
+        {
+          "L5 Parent": "Fan / Blower Motor",
+          "L4 Subsystem": "Rotor / Stator Assembly",
+          "Description": "Electromagnetic components converting electrical to mechanical energy"
+        },
+        {
+          "L5 Parent": "Fan / Blower Motor",
+          "L4 Subsystem": "Impeller / Fan Blade",
+          "Description": "Aerodynamic element moving air across heat exchanger"
+        },
+        {
+          "L5 Parent": "Fan / Blower Motor",
+          "L4 Subsystem": "Motor Controller (ECM)",
+          "Description": "Integrated electronics for variable-speed commutation"
+        },
+        {
+          "L5 Parent": "Sensor Suite",
+          "L4 Subsystem": "Temperature Probe",
+          "Description": "NTC thermistor or RTD element in protective sheath"
+        },
+        {
+          "L5 Parent": "Sensor Suite",
+          "L4 Subsystem": "Pressure Transducer",
+          "Description": "Piezoresistive or ceramic capacitive pressure sensing element"
+        },
+        {
+          "L5 Parent": "Sensor Suite",
+          "L4 Subsystem": "Flow Sensor",
+          "Description": "Ultrasonic, turbine, or vortex sensing element in pipe fitting"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L5 Parent",
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L5 Parent": "Circulation Pump",
+          "L4 Subsystem": "Wet-Rotor Motor",
+          "Description": "Canned motor assembly running in pumped medium"
+        },
+        {
+          "L5 Parent": "Circulation Pump",
+          "L4 Subsystem": "Impeller",
+          "Description": "Centrifugal impeller creating water-side pressure differential"
+        },
+        {
+          "L5 Parent": "Circulation Pump",
+          "L4 Subsystem": "Pump Housing",
+          "Description": "Cast iron or composite volute with threaded/flanged connections"
+        },
+        {
+          "L5 Parent": "Plate Heat Exchanger",
+          "L4 Subsystem": "Plate Stack",
+          "Description": "Stamped stainless steel plates with herringbone corrugation pattern"
+        },
+        {
+          "L5 Parent": "Plate Heat Exchanger",
+          "L4 Subsystem": "Braze / Gasket Seal",
+          "Description": "Copper brazing (BPHE) or elastomer gaskets (GPHE) sealing between plates"
+        },
+        {
+          "L5 Parent": "Plate Heat Exchanger",
+          "L4 Subsystem": "Port Connections",
+          "Description": "Inlet/outlet fittings for refrigerant and water sides"
+        },
+        {
+          "L5 Parent": "Flow Sensor",
+          "L4 Subsystem": "Transducer Assembly",
+          "Description": "Piezoelectric (ultrasonic), turbine wheel, or vortex shedder element"
+        },
+        {
+          "L5 Parent": "Flow Sensor",
+          "L4 Subsystem": "Signal Conditioning Electronics",
+          "Description": "Firmware computing flow rate from raw transducer signal"
+        },
+        {
+          "L5 Parent": "Flow Sensor",
+          "L4 Subsystem": "Flow Body / Housing",
+          "Description": "Wetted housing with inline pipe connections (DN12-DN25 typical)"
+        },
+        {
+          "L5 Parent": "Hydraulic Valve Assembly",
+          "L4 Subsystem": "Actuator (motor / solenoid)",
+          "Description": "Electric motor or solenoid operating valve position"
+        },
+        {
+          "L5 Parent": "Hydraulic Valve Assembly",
+          "L4 Subsystem": "Valve Seat / Disc",
+          "Description": "Sealing surface controlling water passage"
+        },
+        {
+          "L5 Parent": "Hydraulic Valve Assembly",
+          "L4 Subsystem": "Valve Body",
+          "Description": "Brass or stainless steel housing with port connections"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L5 Parent",
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L5 Parent": "Vacuum Pump Station",
+          "L4 Subsystem": "Vacuum Pump",
+          "Description": "Two-stage rotary vane or scroll pump pulling system to <500 micron"
+        },
+        {
+          "L5 Parent": "Vacuum Pump Station",
+          "L4 Subsystem": "Vacuum Gauge",
+          "Description": "Micron gauge verifying evacuation depth"
+        },
+        {
+          "L5 Parent": "Vacuum Pump Station",
+          "L4 Subsystem": "Hose Manifold",
+          "Description": "Charging hoses and valves connecting pump to system service ports"
+        },
+        {
+          "L5 Parent": "Leak Detection Station",
+          "L4 Subsystem": "Detector Probe",
+          "Description": "Helium sniffer or electronic refrigerant sensing wand"
+        },
+        {
+          "L5 Parent": "Leak Detection Station",
+          "L4 Subsystem": "Pressurization System",
+          "Description": "Nitrogen regulator and charging manifold for pressure decay test"
+        },
+        {
+          "L5 Parent": "Leak Detection Station",
+          "L4 Subsystem": "Data Recorder",
+          "Description": "Automated pass/fail logging tied to serial number"
+        },
+        {
+          "L5 Parent": "Refrigerant Charging Station",
+          "L4 Subsystem": "Gravimetric Scale",
+          "Description": "Precision scale measuring refrigerant mass dispensed"
+        },
+        {
+          "L5 Parent": "Refrigerant Charging Station",
+          "L4 Subsystem": "Charging Manifold",
+          "Description": "Automated valves and hoses connecting refrigerant cylinder to system"
+        },
+        {
+          "L5 Parent": "Refrigerant Charging Station",
+          "L4 Subsystem": "Brazing Seal Station",
+          "Description": "Torch or induction unit sealing charging port after fill"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L5 Parent",
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L5 Parent": "Cabinet Assembly Fixtures",
+          "L4 Subsystem": "Positioning Jig",
+          "Description": "Fixture holding sub-assemblies in correct spatial relationship"
+        },
+        {
+          "L5 Parent": "Cabinet Assembly Fixtures",
+          "L4 Subsystem": "Power Fastening Tools",
+          "Description": "Pneumatic or electric screwdrivers, riveters, and clinch tools"
+        },
+        {
+          "L5 Parent": "Cabinet Assembly Fixtures",
+          "L4 Subsystem": "Label Applicator",
+          "Description": "Automated or manual nameplate and rating label placement"
+        },
+        {
+          "L5 Parent": "Insulation Application",
+          "L4 Subsystem": "Cutting Station",
+          "Description": "Die-cut or CNC-cut insulation panels from stock material"
+        },
+        {
+          "L5 Parent": "Insulation Application",
+          "L4 Subsystem": "Adhesive Applicator",
+          "Description": "Spray adhesive or mechanical fastener for insulation attachment"
+        },
+        {
+          "L5 Parent": "Insulation Application",
+          "L4 Subsystem": "Foam Dispenser",
+          "Description": "Two-part polyurethane foam gun for spray-applied insulation"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L5 Parent",
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L5 Parent": "Psychrometric Test Chamber",
+          "L4 Subsystem": "Environmental Control System",
+          "Description": "Compressors, heaters, humidifiers maintaining test conditions"
+        },
+        {
+          "L5 Parent": "Psychrometric Test Chamber",
+          "L4 Subsystem": "Data Acquisition System",
+          "Description": "Multi-channel temperature, pressure, airflow, and power logging"
+        },
+        {
+          "L5 Parent": "Psychrometric Test Chamber",
+          "L4 Subsystem": "Calorimeter Instrumentation",
+          "Description": "Energy balance measurement for capacity determination"
+        },
+        {
+          "L5 Parent": "Electrical Safety Test Station",
+          "L4 Subsystem": "Hi-Pot Tester",
+          "Description": "High-voltage dielectric withstand test instrument"
+        },
+        {
+          "L5 Parent": "Electrical Safety Test Station",
+          "L4 Subsystem": "Ground Continuity Tester",
+          "Description": "Low-resistance measurement of safety ground path"
+        },
+        {
+          "L5 Parent": "Electrical Safety Test Station",
+          "L4 Subsystem": "Insulation Resistance Meter",
+          "Description": "Megohm measurement of conductor-to-chassis isolation"
+        },
+        {
+          "L5 Parent": "Run-Test Station",
+          "L4 Subsystem": "Power Supply / Load Bank",
+          "Description": "Simulated electrical and thermal load for functional test"
+        },
+        {
+          "L5 Parent": "Run-Test Station",
+          "L4 Subsystem": "Vibration / Acoustic Monitor",
+          "Description": "Accelerometer and sound level meter for anomaly detection"
+        },
+        {
+          "L5 Parent": "Run-Test Station",
+          "L4 Subsystem": "Test Automation Controller",
+          "Description": "Sequencer running startup, steady-state, and shutdown test scripts"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "Check": "All levels in {L7, L6, L6a, L6b, L6c, L5, L4}",
+          "Result": "PASS"
+        },
+        {
+          "Check": "Every unit except L7 has parent referencing existing unit",
+          "Result": "PASS"
+        },
+        {
+          "Check": "All parent-child transitions valid",
+          "Result": "PASS — L7->L6, L6->L5, L5->L4"
+        },
+        {
+          "Check": "Every L5 has >= 3 L4 children",
+          "Result": "PASS — all L5 nodes have 3+ L4 children"
+        },
+        {
+          "Check": "No solution-specific L7 or L6 names",
+          "Result": "PASS — no technology references at L7/L6"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "#": "Q1",
+          "Check": "CFJ is industry-level, no technology/product/subsystem reference",
+          "Result": "PASS"
+        },
+        {
+          "#": "Q2",
+          "Check": "No orphan nodes — every unit except L7 has valid parent",
+          "Result": "PASS"
+        },
+        {
+          "#": "Q3",
+          "Check": "Valid level transitions — no level skipping",
+          "Result": "PASS"
+        },
+        {
+          "#": "Q4",
+          "Check": "L4 children per L5 >= 2",
+          "Result": "PASS — all >= 3"
+        },
+        {
+          "#": "Q5",
+          "Check": "No solution-specific L7 or L6 names",
+          "Result": "PASS"
+        },
+        {
+          "#": "Q6",
+          "Check": "Three-question naming test (5 random spot-checks)",
+          "Result": "PASS — \"Compressor\", \"Tube Bender\", \"Flow Sensor\", \"Press Brake\", \"Brazing Station\" all pass"
+        },
+        {
+          "#": "Q7",
+          "Check": "Unit count in range 15-60",
+          "Result": "PASS — 38 L5 + L4 units (within 20-40 target)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Metric",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Metric": "Total L6 core nodes",
+          "Value": "9"
+        },
+        {
+          "Metric": "Total L6 horizontal nodes",
+          "Value": "5"
+        },
+        {
+          "Metric": "Total L5 equipment positions",
+          "Value": "29"
+        },
+        {
+          "Metric": "Total L4 subsystems",
+          "Value": "93"
+        },
+        {
+          "Metric": "Total VN units (L7+L6+L5+L4)",
+          "Value": "137"
+        },
+        {
+          "Metric": "Output types",
+          "Value": "7"
+        },
+        {
+          "Metric": "Sensor anchor position",
+          "Value": "L6f > Flow Sensor (L5) > Transducer Assembly / Signal Conditioning / Flow Body (L4)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**VN Anchor Level**",
+          "Value": "L5"
+        },
+        {
+          "Field": "**VN Anchor Node**",
+          "Value": "Flow Sensor"
+        },
+        {
+          "Field": "**Parent L6**",
+          "Value": "L6f — Hydronic Circuit Assembly"
+        },
+        {
+          "Field": "**Sibling L5s**",
+          "Value": "Circulation Pump, Plate Heat Exchanger, Hydraulic Valve Assembly"
+        },
+        {
+          "Field": "**L4 Children**",
+          "Value": "Transducer Assembly, Signal Conditioning Electronics, Flow Body / Housing"
+        },
+        {
+          "Field": "**Alternative Technologies**",
+          "Value": "Ultrasonic transit-time (35%), Turbine/impeller (30%), Vortex (15%), Differential pressure (10%), Paddle/float switch (10%)"
+        },
+        {
+          "Field": "**Cost of Flow Sensor Failure**",
+          "Value": "System cannot regulate thermal output -> compressor short-cycling, freeze protection loss, efficiency degradation, potential equipment damage"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "value_network_construction",
+      "naics_code": "333415",
+      "naics_title": "Air-Conditioning and Warm Air Heating Equipment and Commercial and Industrial Refrigeration Equipment Manufacturing",
+      "cfj_statement": "Manufacture climate control and thermal management equipment that conditions, heats, cools, or refrigerates enclosed spaces and stored goods to specified temperature and humidity setpoints",
+      "l7_solution": "Climate Control & Refrigeration Equipment Manufacturing",
+      "top_level": "L7",
+      "confidence": 0.7,
+      "source_type": "web_search",
+      "output_types": [
+        {
+          "id": "OT-1",
+          "name": "Residential Split/Packaged AC"
+        },
+        {
+          "id": "OT-2",
+          "name": "Heat Pump (air-source / water-source)"
+        },
+        {
+          "id": "OT-3",
+          "name": "Warm Air Furnace"
+        },
+        {
+          "id": "OT-4",
+          "name": "Commercial Rooftop Unit (RTU)"
+        },
+        {
+          "id": "OT-5",
+          "name": "Chiller (air-cooled / water-cooled)"
+        },
+        {
+          "id": "OT-6",
+          "name": "Commercial Refrigeration Equipment"
+        },
+        {
+          "id": "OT-7",
+          "name": "Industrial Refrigeration Equipment"
+        }
+      ],
+      "units": [
+        {
+          "name": "Climate Control & Refrigeration Equipment Manufacturing",
+          "level": "L7",
+          "description": "Ecosystem of interacting organizations that collectively manufacture and deliver HVAC and refrigeration equipment",
+          "bom_standard": "Moore 1993",
+          "parent_name": "ROOT"
+        },
+        {
+          "name": "Sheet Metal Fabrication",
+          "level": "L6",
+          "description": "Cut, form, punch, and bend sheet metal into enclosure and structural components",
+          "bom_standard": "Maier 1998",
+          "parent_name": "Climate Control & Refrigeration Equipment Manufacturing"
+        },
+        {
+          "name": "Heat Exchanger Fabrication",
+          "level": "L6",
+          "description": "Manufacture coils, condensers, and evaporator assemblies by bending tubing and attaching fins",
+          "bom_standard": "Maier 1998",
+          "parent_name": "Climate Control & Refrigeration Equipment Manufacturing"
+        },
+        {
+          "name": "Refrigerant Circuit Assembly",
+          "level": "L6",
+          "description": "Braze/weld tubing connections, mount compressor, expansion device, and reversing valve into integrated refrigerant circuit",
+          "bom_standard": "Maier 1998",
+          "parent_name": "Climate Control & Refrigeration Equipment Manufacturing"
+        },
+        {
+          "name": "Combustion Assembly",
+          "level": "L6",
+          "description": "Assemble burner, heat exchanger, gas valve, ignition, and flue components into heating module",
+          "bom_standard": "Maier 1998",
+          "parent_name": "Climate Control & Refrigeration Equipment Manufacturing"
+        },
+        {
+          "name": "Electrical & Controls Integration",
+          "level": "L6",
+          "description": "Wire motors, contactors, sensors, control boards, and communication interfaces into the unit",
+          "bom_standard": "Maier 1998",
+          "parent_name": "Climate Control & Refrigeration Equipment Manufacturing"
+        },
+        {
+          "name": "Hydronic Circuit Assembly",
+          "level": "L6",
+          "description": "Assemble water-side piping, circulation pumps, flow sensors, and hydraulic components for water-based heat exchange",
+          "bom_standard": "Maier 1998",
+          "parent_name": "Climate Control & Refrigeration Equipment Manufacturing"
+        },
+        {
+          "name": "System Evacuation & Refrigerant Charging",
+          "level": "L6",
+          "description": "Evacuate system to vacuum, leak-test, charge with specified refrigerant mass",
+          "bom_standard": "Maier 1998",
+          "parent_name": "Climate Control & Refrigeration Equipment Manufacturing"
+        },
+        {
+          "name": "Final Assembly & Enclosure",
+          "level": "L6",
+          "description": "Mount all sub-assemblies into cabinet, attach panels, insulation, labels, and shipping hardware",
+          "bom_standard": "Maier 1998",
+          "parent_name": "Climate Control & Refrigeration Equipment Manufacturing"
+        },
+        {
+          "name": "Performance Testing & Certification",
+          "level": "L6",
+          "description": "Run functional test, verify capacity/efficiency against AHRI/UL/CE standards, pass or reject",
+          "bom_standard": "Maier 1998",
+          "parent_name": "Climate Control & Refrigeration Equipment Manufacturing"
+        },
+        {
+          "name": "Quality Assurance",
+          "level": "L6",
+          "description": "Verify dimensional integrity, material compliance, and process adherence at each gate (horizontal)",
+          "bom_standard": "Maier 1998",
+          "parent_name": "Climate Control & Refrigeration Equipment Manufacturing"
+        },
+        {
+          "name": "Maintenance & Engineering",
+          "level": "L6",
+          "description": "Maintain production equipment uptime, tooling calibration, and process engineering (horizontal)",
+          "bom_standard": "Maier 1998",
+          "parent_name": "Climate Control & Refrigeration Equipment Manufacturing"
+        },
+        {
+          "name": "HSE & Environmental Compliance",
+          "level": "L6",
+          "description": "Manage refrigerant handling (EPA Section 608), brazing fume extraction, noise, and worker safety (horizontal)",
+          "bom_standard": "Maier 1998",
+          "parent_name": "Climate Control & Refrigeration Equipment Manufacturing"
+        },
+        {
+          "name": "Utilities & Facility Management",
+          "level": "L6",
+          "description": "Supply compressed air, nitrogen, electrical power, HVAC, and water to production floor (horizontal)",
+          "bom_standard": "Maier 1998",
+          "parent_name": "Climate Control & Refrigeration Equipment Manufacturing"
+        },
+        {
+          "name": "IT / Operations Technology",
+          "level": "L6",
+          "description": "Manage MES, ERP, CNC program distribution, test data acquisition, and traceability (horizontal)",
+          "bom_standard": "Maier 1998",
+          "parent_name": "Climate Control & Refrigeration Equipment Manufacturing"
+        },
+        {
+          "name": "CNC Punch Press",
+          "level": "L5",
+          "description": "Automated sheet metal punching and forming machine",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Sheet Metal Fabrication"
+        },
+        {
+          "name": "Press Brake",
+          "level": "L5",
+          "description": "Sheet metal bending and forming machine",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Sheet Metal Fabrication"
+        },
+        {
+          "name": "Powder Coating Line",
+          "level": "L5",
+          "description": "Surface finishing and corrosion protection system",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Sheet Metal Fabrication"
+        },
+        {
+          "name": "Tube Bender",
+          "level": "L5",
+          "description": "Bend copper/aluminum tubing into coil patterns",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Heat Exchanger Fabrication"
+        },
+        {
+          "name": "Fin Press",
+          "level": "L5",
+          "description": "Stamp and form aluminum fins for coil assembly",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Heat Exchanger Fabrication"
+        },
+        {
+          "name": "Coil Expansion Press",
+          "level": "L5",
+          "description": "Mechanically expand tubes into fin collars for thermal contact",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Heat Exchanger Fabrication"
+        },
+        {
+          "name": "Brazing Station",
+          "level": "L5",
+          "description": "Join tubing and headers via brazing",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Heat Exchanger Fabrication"
+        },
+        {
+          "name": "Compressor",
+          "level": "L5",
+          "description": "Compress refrigerant vapor to raise pressure and temperature",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Refrigerant Circuit Assembly"
+        },
+        {
+          "name": "Expansion Device",
+          "level": "L5",
+          "description": "Meter refrigerant flow and reduce pressure before evaporator",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Refrigerant Circuit Assembly"
+        },
+        {
+          "name": "Reversing Valve",
+          "level": "L5",
+          "description": "Switch refrigerant flow between heating and cooling modes",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Refrigerant Circuit Assembly"
+        },
+        {
+          "name": "Refrigerant Piping",
+          "level": "L5",
+          "description": "Connect refrigerant circuit components with brazed tubing",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Refrigerant Circuit Assembly"
+        },
+        {
+          "name": "Gas Burner",
+          "level": "L5",
+          "description": "Combust fuel to generate heat for warm air furnace",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Combustion Assembly"
+        },
+        {
+          "name": "Combustion Heat Exchanger",
+          "level": "L5",
+          "description": "Transfer combustion heat to airflow stream",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Combustion Assembly"
+        },
+        {
+          "name": "Gas Valve",
+          "level": "L5",
+          "description": "Regulate fuel flow to burner assembly",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Combustion Assembly"
+        },
+        {
+          "name": "Ignition Module",
+          "level": "L5",
+          "description": "Ignite fuel-air mixture in combustion chamber",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Combustion Assembly"
+        },
+        {
+          "name": "Control Board",
+          "level": "L5",
+          "description": "Manage unit operation logic, sequencing, and diagnostics",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Electrical & Controls Integration"
+        },
+        {
+          "name": "Variable Frequency Drive",
+          "level": "L5",
+          "description": "Modulate compressor and fan motor speed for efficiency",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Electrical & Controls Integration"
+        },
+        {
+          "name": "Fan / Blower Motor",
+          "level": "L5",
+          "description": "Drive airflow across coils or through ductwork",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Electrical & Controls Integration"
+        },
+        {
+          "name": "Sensor Suite",
+          "level": "L5",
+          "description": "Measure temperature, pressure, flow, and refrigerant state",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Electrical & Controls Integration"
+        },
+        {
+          "name": "Circulation Pump",
+          "level": "L5",
+          "description": "Drive water/glycol through heat exchanger circuit",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Hydronic Circuit Assembly"
+        },
+        {
+          "name": "Plate Heat Exchanger",
+          "level": "L5",
+          "description": "Transfer thermal energy between refrigerant and water circuits",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Hydronic Circuit Assembly"
+        },
+        {
+          "name": "Flow Sensor",
+          "level": "L5",
+          "description": "Measure water-side volumetric flow rate for system control and protection",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Hydronic Circuit Assembly"
+        },
+        {
+          "name": "Hydraulic Valve Assembly",
+          "level": "L5",
+          "description": "Control water routing, bypass, and safety in hydronic circuit",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Hydronic Circuit Assembly"
+        },
+        {
+          "name": "Vacuum Pump Station",
+          "level": "L5",
+          "description": "Evacuate refrigerant system to remove moisture and non-condensables",
+          "bom_standard": "ISO 15288",
+          "parent_name": "System Evacuation & Refrigerant Charging"
+        },
+        {
+          "name": "Leak Detection Station",
+          "level": "L5",
+          "description": "Verify system integrity before refrigerant charging",
+          "bom_standard": "ISO 15288",
+          "parent_name": "System Evacuation & Refrigerant Charging"
+        },
+        {
+          "name": "Refrigerant Charging Station",
+          "level": "L5",
+          "description": "Dispense precise refrigerant mass into sealed system",
+          "bom_standard": "ISO 15288",
+          "parent_name": "System Evacuation & Refrigerant Charging"
+        },
+        {
+          "name": "Cabinet Assembly Fixtures",
+          "level": "L5",
+          "description": "Position and fasten enclosure panels around sub-assemblies",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Final Assembly & Enclosure"
+        },
+        {
+          "name": "Insulation Application",
+          "level": "L5",
+          "description": "Apply thermal and acoustic insulation to equipment cabinet",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Final Assembly & Enclosure"
+        },
+        {
+          "name": "Psychrometric Test Chamber",
+          "level": "L5",
+          "description": "Simulate operating conditions to verify capacity and efficiency",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Performance Testing & Certification"
+        },
+        {
+          "name": "Electrical Safety Test Station",
+          "level": "L5",
+          "description": "Hi-pot, ground continuity, and insulation resistance testing",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Performance Testing & Certification"
+        },
+        {
+          "name": "Run-Test Station",
+          "level": "L5",
+          "description": "Functional verification of startup, operation, and shutdown",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Performance Testing & Certification"
+        },
+        {
+          "name": "Drive Motor",
+          "level": "L4",
+          "description": "Servo or hydraulic motor driving ram and turret indexing",
+          "bom_standard": "INCOSE",
+          "parent_name": "CNC Punch Press"
+        },
+        {
+          "name": "Turret / Tool Holder",
+          "level": "L4",
+          "description": "Multi-station tool magazine with auto-indexing",
+          "bom_standard": "INCOSE",
+          "parent_name": "CNC Punch Press"
+        },
+        {
+          "name": "CNC Controller",
+          "level": "L4",
+          "description": "Programmable controller receiving CAD/CAM punch programs",
+          "bom_standard": "INCOSE",
+          "parent_name": "CNC Punch Press"
+        },
+        {
+          "name": "Sheet Feed System",
+          "level": "L4",
+          "description": "Automated gripper and positioning table for sheet metal blanks",
+          "bom_standard": "INCOSE",
+          "parent_name": "CNC Punch Press"
+        },
+        {
+          "name": "Hydraulic Cylinder",
+          "level": "L4",
+          "description": "Ram actuation for bending force generation",
+          "bom_standard": "INCOSE",
+          "parent_name": "Press Brake"
+        },
+        {
+          "name": "Backgauge System",
+          "level": "L4",
+          "description": "CNC-positioned fingers for bend location accuracy",
+          "bom_standard": "INCOSE",
+          "parent_name": "Press Brake"
+        },
+        {
+          "name": "Press Brake CNC Controller",
+          "level": "L4",
+          "description": "Bend angle programming and stroke control",
+          "bom_standard": "INCOSE",
+          "parent_name": "Press Brake"
+        },
+        {
+          "name": "Spray Gun Array",
+          "level": "L4",
+          "description": "Electrostatic guns for uniform powder application",
+          "bom_standard": "INCOSE",
+          "parent_name": "Powder Coating Line"
+        },
+        {
+          "name": "Curing Oven",
+          "level": "L4",
+          "description": "Infrared or convection oven for powder fusion",
+          "bom_standard": "INCOSE",
+          "parent_name": "Powder Coating Line"
+        },
+        {
+          "name": "Conveyor System",
+          "level": "L4",
+          "description": "Overhead chain conveyor through wash, spray, and cure stages",
+          "bom_standard": "INCOSE",
+          "parent_name": "Powder Coating Line"
+        },
+        {
+          "name": "Mandrel Assembly",
+          "level": "L4",
+          "description": "Internal mandrel preventing tube collapse during bending",
+          "bom_standard": "INCOSE",
+          "parent_name": "Tube Bender"
+        },
+        {
+          "name": "Bend Die Set",
+          "level": "L4",
+          "description": "Interchangeable dies for different tube diameters and radii",
+          "bom_standard": "INCOSE",
+          "parent_name": "Tube Bender"
+        },
+        {
+          "name": "Servo Drive",
+          "level": "L4",
+          "description": "CNC-controlled rotation and feed axis",
+          "bom_standard": "INCOSE",
+          "parent_name": "Tube Bender"
+        },
+        {
+          "name": "Progressive Die Set",
+          "level": "L4",
+          "description": "Multi-station die for punching, forming, and collaring fins",
+          "bom_standard": "INCOSE",
+          "parent_name": "Fin Press"
+        },
+        {
+          "name": "Coil Feeder",
+          "level": "L4",
+          "description": "Automatic aluminum strip feeding from coil stock",
+          "bom_standard": "INCOSE",
+          "parent_name": "Fin Press"
+        },
+        {
+          "name": "Press Ram",
+          "level": "L4",
+          "description": "High-speed reciprocating ram (200-400 strokes/min)",
+          "bom_standard": "INCOSE",
+          "parent_name": "Fin Press"
+        },
+        {
+          "name": "Expansion Mandrel",
+          "level": "L4",
+          "description": "Tapered rod that swages tube into fin collar for thermal bond",
+          "bom_standard": "INCOSE",
+          "parent_name": "Coil Expansion Press"
+        },
+        {
+          "name": "Hydraulic Power Unit",
+          "level": "L4",
+          "description": "Hydraulic pressure source driving mandrel through coil",
+          "bom_standard": "INCOSE",
+          "parent_name": "Coil Expansion Press"
+        },
+        {
+          "name": "Fixture Plate",
+          "level": "L4",
+          "description": "Positions coil assembly during expansion cycle",
+          "bom_standard": "INCOSE",
+          "parent_name": "Coil Expansion Press"
+        },
+        {
+          "name": "Torch / Heat Source",
+          "level": "L4",
+          "description": "Oxy-fuel torch, induction coil, or furnace heating element",
+          "bom_standard": "INCOSE",
+          "parent_name": "Brazing Station"
+        },
+        {
+          "name": "Nitrogen Purge System",
+          "level": "L4",
+          "description": "Flow controller and tubing for anti-oxidation purge during brazing",
+          "bom_standard": "INCOSE",
+          "parent_name": "Brazing Station"
+        },
+        {
+          "name": "Filler Metal Feeder",
+          "level": "L4",
+          "description": "Pre-formed rings or wire feeder for braze alloy delivery",
+          "bom_standard": "INCOSE",
+          "parent_name": "Brazing Station"
+        },
+        {
+          "name": "Electric Motor",
+          "level": "L4",
+          "description": "Hermetic or semi-hermetic motor driving compression element",
+          "bom_standard": "INCOSE",
+          "parent_name": "Compressor"
+        },
+        {
+          "name": "Compression Element",
+          "level": "L4",
+          "description": "Scroll, rotary, reciprocating piston, screw, or centrifugal impeller",
+          "bom_standard": "INCOSE",
+          "parent_name": "Compressor"
+        },
+        {
+          "name": "Oil Management System",
+          "level": "L4",
+          "description": "Lubrication circuit with oil separator and sump",
+          "bom_standard": "INCOSE",
+          "parent_name": "Compressor"
+        },
+        {
+          "name": "Hermetic Shell",
+          "level": "L4",
+          "description": "Welded steel housing enclosing motor and compression element",
+          "bom_standard": "INCOSE",
+          "parent_name": "Compressor"
+        },
+        {
+          "name": "Valve Body",
+          "level": "L4",
+          "description": "Precision-machined orifice or needle seat controlling refrigerant flow",
+          "bom_standard": "INCOSE",
+          "parent_name": "Expansion Device"
+        },
+        {
+          "name": "Stepper Motor / Thermal Bulb",
+          "level": "L4",
+          "description": "EEV stepper motor driver or TXV thermal sensing bulb actuator",
+          "bom_standard": "INCOSE",
+          "parent_name": "Expansion Device"
+        },
+        {
+          "name": "Control Signal Interface",
+          "level": "L4",
+          "description": "Wiring to control board (EEV) or self-contained thermal feedback (TXV)",
+          "bom_standard": "INCOSE",
+          "parent_name": "Expansion Device"
+        },
+        {
+          "name": "Solenoid Coil",
+          "level": "L4",
+          "description": "Electromagnetic actuator switching pilot valve in reversing valve",
+          "bom_standard": "INCOSE",
+          "parent_name": "Reversing Valve"
+        },
+        {
+          "name": "Slide / Piston",
+          "level": "L4",
+          "description": "Internal slider redirecting refrigerant between heating and cooling paths",
+          "bom_standard": "INCOSE",
+          "parent_name": "Reversing Valve"
+        },
+        {
+          "name": "Reversing Valve Body",
+          "level": "L4",
+          "description": "Brass or steel housing with four ports for refrigerant routing",
+          "bom_standard": "INCOSE",
+          "parent_name": "Reversing Valve"
+        },
+        {
+          "name": "Burner Orifice",
+          "level": "L4",
+          "description": "Precision-drilled gas jet sized for BTU input rating",
+          "bom_standard": "INCOSE",
+          "parent_name": "Gas Burner"
+        },
+        {
+          "name": "Venturi Tube",
+          "level": "L4",
+          "description": "Air-gas mixing chamber for combustion air entrainment",
+          "bom_standard": "INCOSE",
+          "parent_name": "Gas Burner"
+        },
+        {
+          "name": "Flame Sensor",
+          "level": "L4",
+          "description": "Flame rectification rod or UV sensor for flame proving",
+          "bom_standard": "INCOSE",
+          "parent_name": "Gas Burner"
+        },
+        {
+          "name": "Primary Heat Transfer Surface",
+          "level": "L4",
+          "description": "Tubular or clamshell steel surface exposed to combustion gases",
+          "bom_standard": "INCOSE",
+          "parent_name": "Combustion Heat Exchanger"
+        },
+        {
+          "name": "Secondary Condensing Section",
+          "level": "L4",
+          "description": "Stainless steel condensate recovery surface (condensing furnaces)",
+          "bom_standard": "INCOSE",
+          "parent_name": "Combustion Heat Exchanger"
+        },
+        {
+          "name": "Drain Pan",
+          "level": "L4",
+          "description": "Condensate collection and disposal from secondary exchanger",
+          "bom_standard": "INCOSE",
+          "parent_name": "Combustion Heat Exchanger"
+        },
+        {
+          "name": "Solenoid Operator",
+          "level": "L4",
+          "description": "Electromagnetic actuator for gas valve open/close",
+          "bom_standard": "INCOSE",
+          "parent_name": "Gas Valve"
+        },
+        {
+          "name": "Pressure Regulator",
+          "level": "L4",
+          "description": "Spring-loaded diaphragm maintaining constant outlet gas pressure",
+          "bom_standard": "INCOSE",
+          "parent_name": "Gas Valve"
+        },
+        {
+          "name": "Safety Shutoff",
+          "level": "L4",
+          "description": "Redundant valve train for fail-safe fuel cutoff",
+          "bom_standard": "INCOSE",
+          "parent_name": "Gas Valve"
+        },
+        {
+          "name": "Igniter Element",
+          "level": "L4",
+          "description": "Silicon nitride hot surface element or spark electrode",
+          "bom_standard": "INCOSE",
+          "parent_name": "Ignition Module"
+        },
+        {
+          "name": "Ignition Control Circuit",
+          "level": "L4",
+          "description": "Timing and retry logic for ignition sequence",
+          "bom_standard": "INCOSE",
+          "parent_name": "Ignition Module"
+        },
+        {
+          "name": "Flame Proving Circuit",
+          "level": "L4",
+          "description": "Microamp-level flame current detection for safety interlock",
+          "bom_standard": "INCOSE",
+          "parent_name": "Ignition Module"
+        },
+        {
+          "name": "Microcontroller",
+          "level": "L4",
+          "description": "MCU running unit operational firmware and diagnostic routines",
+          "bom_standard": "INCOSE",
+          "parent_name": "Control Board"
+        },
+        {
+          "name": "Relay / Contactor Driver",
+          "level": "L4",
+          "description": "Power switching for compressor, fan, and heater loads",
+          "bom_standard": "INCOSE",
+          "parent_name": "Control Board"
+        },
+        {
+          "name": "Communication Interface",
+          "level": "L4",
+          "description": "UART, Modbus, BACnet, or proprietary bus for BMS integration",
+          "bom_standard": "INCOSE",
+          "parent_name": "Control Board"
+        },
+        {
+          "name": "IGBT Power Module",
+          "level": "L4",
+          "description": "IGBT bridge converting DC to variable-frequency AC for motor drive",
+          "bom_standard": "INCOSE",
+          "parent_name": "Variable Frequency Drive"
+        },
+        {
+          "name": "DC Bus Capacitor",
+          "level": "L4",
+          "description": "Energy storage and ripple filtering between rectifier and inverter",
+          "bom_standard": "INCOSE",
+          "parent_name": "Variable Frequency Drive"
+        },
+        {
+          "name": "Gate Driver Board",
+          "level": "L4",
+          "description": "Signal conditioning between MCU PWM output and IGBT gate",
+          "bom_standard": "INCOSE",
+          "parent_name": "Variable Frequency Drive"
+        },
+        {
+          "name": "Rotor / Stator Assembly",
+          "level": "L4",
+          "description": "Electromagnetic components converting electrical to mechanical energy",
+          "bom_standard": "INCOSE",
+          "parent_name": "Fan / Blower Motor"
+        },
+        {
+          "name": "Impeller / Fan Blade",
+          "level": "L4",
+          "description": "Aerodynamic element moving air across heat exchanger",
+          "bom_standard": "INCOSE",
+          "parent_name": "Fan / Blower Motor"
+        },
+        {
+          "name": "Motor Controller (ECM)",
+          "level": "L4",
+          "description": "Integrated electronics for variable-speed commutation",
+          "bom_standard": "INCOSE",
+          "parent_name": "Fan / Blower Motor"
+        },
+        {
+          "name": "Temperature Probe",
+          "level": "L4",
+          "description": "NTC thermistor or RTD element in protective sheath",
+          "bom_standard": "INCOSE",
+          "parent_name": "Sensor Suite"
+        },
+        {
+          "name": "Pressure Transducer",
+          "level": "L4",
+          "description": "Piezoresistive or ceramic capacitive pressure sensing element",
+          "bom_standard": "INCOSE",
+          "parent_name": "Sensor Suite"
+        },
+        {
+          "name": "Flow Sensor Element",
+          "level": "L4",
+          "description": "Ultrasonic, turbine, or vortex sensing element in pipe fitting",
+          "bom_standard": "INCOSE",
+          "parent_name": "Sensor Suite"
+        },
+        {
+          "name": "Wet-Rotor Motor",
+          "level": "L4",
+          "description": "Canned motor assembly running in pumped medium",
+          "bom_standard": "INCOSE",
+          "parent_name": "Circulation Pump"
+        },
+        {
+          "name": "Pump Impeller",
+          "level": "L4",
+          "description": "Centrifugal impeller creating water-side pressure differential",
+          "bom_standard": "INCOSE",
+          "parent_name": "Circulation Pump"
+        },
+        {
+          "name": "Pump Housing",
+          "level": "L4",
+          "description": "Cast iron or composite volute with threaded/flanged connections",
+          "bom_standard": "INCOSE",
+          "parent_name": "Circulation Pump"
+        },
+        {
+          "name": "Plate Stack",
+          "level": "L4",
+          "description": "Stamped stainless steel plates with herringbone corrugation",
+          "bom_standard": "INCOSE",
+          "parent_name": "Plate Heat Exchanger"
+        },
+        {
+          "name": "Braze / Gasket Seal",
+          "level": "L4",
+          "description": "Copper brazing (BPHE) or elastomer gaskets (GPHE) sealing plates",
+          "bom_standard": "INCOSE",
+          "parent_name": "Plate Heat Exchanger"
+        },
+        {
+          "name": "Port Connections",
+          "level": "L4",
+          "description": "Inlet/outlet fittings for refrigerant and water sides",
+          "bom_standard": "INCOSE",
+          "parent_name": "Plate Heat Exchanger"
+        },
+        {
+          "name": "Transducer Assembly",
+          "level": "L4",
+          "description": "Piezoelectric (ultrasonic), turbine wheel, or vortex shedder element",
+          "bom_standard": "INCOSE",
+          "parent_name": "Flow Sensor"
+        },
+        {
+          "name": "Signal Conditioning Electronics",
+          "level": "L4",
+          "description": "Firmware computing flow rate from raw transducer signal",
+          "bom_standard": "INCOSE",
+          "parent_name": "Flow Sensor"
+        },
+        {
+          "name": "Flow Body / Housing",
+          "level": "L4",
+          "description": "Wetted housing with inline pipe connections (DN12-DN25 typical)",
+          "bom_standard": "INCOSE",
+          "parent_name": "Flow Sensor"
+        },
+        {
+          "name": "Valve Actuator",
+          "level": "L4",
+          "description": "Electric motor or solenoid operating valve position",
+          "bom_standard": "INCOSE",
+          "parent_name": "Hydraulic Valve Assembly"
+        },
+        {
+          "name": "Valve Seat / Disc",
+          "level": "L4",
+          "description": "Sealing surface controlling water passage",
+          "bom_standard": "INCOSE",
+          "parent_name": "Hydraulic Valve Assembly"
+        },
+        {
+          "name": "Hydraulic Valve Body",
+          "level": "L4",
+          "description": "Brass or stainless steel housing with port connections",
+          "bom_standard": "INCOSE",
+          "parent_name": "Hydraulic Valve Assembly"
+        },
+        {
+          "name": "Vacuum Pump",
+          "level": "L4",
+          "description": "Two-stage rotary vane or scroll pump pulling system to <500 micron",
+          "bom_standard": "INCOSE",
+          "parent_name": "Vacuum Pump Station"
+        },
+        {
+          "name": "Vacuum Gauge",
+          "level": "L4",
+          "description": "Micron gauge verifying evacuation depth",
+          "bom_standard": "INCOSE",
+          "parent_name": "Vacuum Pump Station"
+        },
+        {
+          "name": "Hose Manifold",
+          "level": "L4",
+          "description": "Charging hoses and valves connecting pump to system service ports",
+          "bom_standard": "INCOSE",
+          "parent_name": "Vacuum Pump Station"
+        },
+        {
+          "name": "Detector Probe",
+          "level": "L4",
+          "description": "Helium sniffer or electronic refrigerant sensing wand",
+          "bom_standard": "INCOSE",
+          "parent_name": "Leak Detection Station"
+        },
+        {
+          "name": "Pressurization System",
+          "level": "L4",
+          "description": "Nitrogen regulator and charging manifold for pressure decay test",
+          "bom_standard": "INCOSE",
+          "parent_name": "Leak Detection Station"
+        },
+        {
+          "name": "Data Recorder",
+          "level": "L4",
+          "description": "Automated pass/fail logging tied to unit serial number",
+          "bom_standard": "INCOSE",
+          "parent_name": "Leak Detection Station"
+        },
+        {
+          "name": "Gravimetric Scale",
+          "level": "L4",
+          "description": "Precision scale measuring refrigerant mass dispensed",
+          "bom_standard": "INCOSE",
+          "parent_name": "Refrigerant Charging Station"
+        },
+        {
+          "name": "Charging Manifold",
+          "level": "L4",
+          "description": "Automated valves and hoses connecting refrigerant cylinder to system",
+          "bom_standard": "INCOSE",
+          "parent_name": "Refrigerant Charging Station"
+        },
+        {
+          "name": "Brazing Seal Station",
+          "level": "L4",
+          "description": "Torch or induction unit sealing charging port after fill",
+          "bom_standard": "INCOSE",
+          "parent_name": "Refrigerant Charging Station"
+        },
+        {
+          "name": "Positioning Jig",
+          "level": "L4",
+          "description": "Fixture holding sub-assemblies in correct spatial relationship",
+          "bom_standard": "INCOSE",
+          "parent_name": "Cabinet Assembly Fixtures"
+        },
+        {
+          "name": "Power Fastening Tools",
+          "level": "L4",
+          "description": "Pneumatic or electric screwdrivers, riveters, and clinch tools",
+          "bom_standard": "INCOSE",
+          "parent_name": "Cabinet Assembly Fixtures"
+        },
+        {
+          "name": "Label Applicator",
+          "level": "L4",
+          "description": "Automated or manual nameplate and rating label placement",
+          "bom_standard": "INCOSE",
+          "parent_name": "Cabinet Assembly Fixtures"
+        },
+        {
+          "name": "Cutting Station",
+          "level": "L4",
+          "description": "Die-cut or CNC-cut insulation panels from stock material",
+          "bom_standard": "INCOSE",
+          "parent_name": "Insulation Application"
+        },
+        {
+          "name": "Adhesive Applicator",
+          "level": "L4",
+          "description": "Spray adhesive or mechanical fastener for insulation attachment",
+          "bom_standard": "INCOSE",
+          "parent_name": "Insulation Application"
+        },
+        {
+          "name": "Foam Dispenser",
+          "level": "L4",
+          "description": "Two-part polyurethane foam gun for spray-applied insulation",
+          "bom_standard": "INCOSE",
+          "parent_name": "Insulation Application"
+        },
+        {
+          "name": "Environmental Control System",
+          "level": "L4",
+          "description": "Compressors, heaters, humidifiers maintaining test chamber conditions",
+          "bom_standard": "INCOSE",
+          "parent_name": "Psychrometric Test Chamber"
+        },
+        {
+          "name": "Data Acquisition System",
+          "level": "L4",
+          "description": "Multi-channel temperature, pressure, airflow, and power logging",
+          "bom_standard": "INCOSE",
+          "parent_name": "Psychrometric Test Chamber"
+        },
+        {
+          "name": "Calorimeter Instrumentation",
+          "level": "L4",
+          "description": "Energy balance measurement for capacity determination",
+          "bom_standard": "INCOSE",
+          "parent_name": "Psychrometric Test Chamber"
+        },
+        {
+          "name": "Hi-Pot Tester",
+          "level": "L4",
+          "description": "High-voltage dielectric withstand test instrument",
+          "bom_standard": "INCOSE",
+          "parent_name": "Electrical Safety Test Station"
+        },
+        {
+          "name": "Ground Continuity Tester",
+          "level": "L4",
+          "description": "Low-resistance measurement of safety ground path",
+          "bom_standard": "INCOSE",
+          "parent_name": "Electrical Safety Test Station"
+        },
+        {
+          "name": "Insulation Resistance Meter",
+          "level": "L4",
+          "description": "Megohm measurement of conductor-to-chassis isolation",
+          "bom_standard": "INCOSE",
+          "parent_name": "Electrical Safety Test Station"
+        },
+        {
+          "name": "Power Supply / Load Bank",
+          "level": "L4",
+          "description": "Simulated electrical and thermal load for functional test",
+          "bom_standard": "INCOSE",
+          "parent_name": "Run-Test Station"
+        },
+        {
+          "name": "Vibration / Acoustic Monitor",
+          "level": "L4",
+          "description": "Accelerometer and sound level meter for anomaly detection",
+          "bom_standard": "INCOSE",
+          "parent_name": "Run-Test Station"
+        },
+        {
+          "name": "Test Automation Controller",
+          "level": "L4",
+          "description": "Sequencer running startup, steady-state, and shutdown test scripts",
+          "bom_standard": "INCOSE",
+          "parent_name": "Run-Test Station"
+        }
+      ],
+      "sensor_anchor": {
+        "anchor_level": "L5",
+        "anchor_node": "Flow Sensor",
+        "parent_l6": "Hydronic Circuit Assembly",
+        "activated_by": [
+          "OT-2",
+          "OT-5"
+        ],
+        "alternatives": [
+          {
+            "name": "Ultrasonic transit-time sensor",
+            "share_pct": 35,
+            "trend": "growing"
+          },
+          {
+            "name": "Turbine/impeller sensor",
+            "share_pct": 30,
+            "trend": "stable"
+          },
+          {
+            "name": "Vortex sensor",
+            "share_pct": 15,
+            "trend": "stable"
+          },
+          {
+            "name": "Differential pressure sensor",
+            "share_pct": 10,
+            "trend": "declining"
+          },
+          {
+            "name": "Paddle/float switch (binary only)",
+            "share_pct": 10,
+            "trend": "declining"
+          }
+        ],
+        "confidence": 0.5,
+        "source_type": "llm_corroborated"
+      },
+      "entities_produced": {
+        "nodes": [
+          {
+            "label": "ValueNetwork",
+            "key": {
+              "naics_code": "333415",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "market_name": "Air-Conditioning and Warm Air Heating Equipment Mfg",
+              "naics_title": "Air-Conditioning and Warm Air Heating Equipment and Commercial and Industrial Refrigeration Equipment Manufacturing",
+              "cfj_statement": "Manufacture climate control and thermal management equipment that conditions, heats, cools, or refrigerates enclosed spaces and stored goods to specified temperature and humidity setpoints",
+              "top_level": "L7",
+              "unit_count": 137,
+              "enriched": true,
+              "confidence": 0.7,
+              "source_type": "web_search"
+            }
+          },
+          {
+            "label": "ValueNetworkUnit",
+            "key": {
+              "name": "[each unit name]",
+              "naics_code": "333415",
+              "run_id": "TBD"
+            },
+            "count": 137
+          }
+        ],
+        "relationships": [
+          {
+            "type": "has_value_network",
+            "source": "Market:333415",
+            "target": "ValueNetwork:333415"
+          },
+          {
+            "type": "contains_unit",
+            "source": "ValueNetwork:333415",
+            "target": "ValueNetworkUnit:[each]",
+            "count": 137
+          },
+          {
+            "type": "has_child",
+            "source": "ValueNetworkUnit:[parent]",
+            "target": "ValueNetworkUnit:[child]",
+            "count": 136
+          }
+        ]
+      }
+    }
+  ],
+  "has_bom": true,
+  "naics_sector_type": "manufacturing"
+}

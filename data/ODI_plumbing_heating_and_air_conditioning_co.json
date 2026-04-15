@@ -1,0 +1,1623 @@
+{
+  "id": "ODI_plumbing_heating_and_air_conditioning_co",
+  "title": "ODI Matrix — Plumbing, Heating & Air-Conditioning Contractors (NAICS 238220)",
+  "type": "odi_matrix",
+  "market_slug": "plumbing_heating_and_air_conditioning_co",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Step 1 — Error Statement Collection",
+      "content": "| Source | Count | Notes |\n|---|---|---|\n| Step 06 (JTBD market-level needs) | 25 | 15 market-inherent + 10 technology-specific |\n| Step 10 (product-related needs) | 8 | Injected as job_step_number=0, job_step_name=\"product_constraint\", impact_category=\"reliability\", product_related=true |\n| **Total** | **33** | |\n\n---"
+    },
+    {
+      "title": "Step 2 — Satisfaction Recalibration (Incumbent-Based)",
+      "content": "Incumbent technology profiles used for recalibration:\n\n| Incumbent | Share | Mechanism | Strengths | Weaknesses |\n|---|---|---|---|---|\n| Portable Ultrasonic Clamp-On (Belimo, Testo) | ~45% | External ultrasonic coupling | Portable, no pipe modification, ±1-2% accuracy with good coupling | Requires trained operator per reading, no continuous monitoring, $2K-5K, removed after commissioning |\n| Hydronic Manometer / dP Meter (TSI, IMI) | ~35% | Differential pressure via balancing valve | Inexpensive, simple, widely installed | Indirect measurement via Cv lookup table, accuracy ±5-10%, requires pre-installed valve |\n| Manual Pressure-Drop Estimation | ~10% | Pump curve extrapolation | Zero cost | Accuracy ±20-30%, no per-zone resolution, not accepted for regulatory compliance |\n\n**Recalibration adjustments (4 changes from Step 06 originals):**\n\n| Need # | Statement (abbreviated) | Sat_orig | Sat_recal | Rationale |\n|---|---|---|---|---|\n| 3 | Pipe modifications for installation | 4 | 5 | Clamp-on (45% share) requires zero pipe mods, raising weighted incumbent satisfaction |\n| 5 | Configure communication interface | 4 | 5 | Clamp-on and dP methods need no controller configuration; portable/manual reading is standard |\n| 6 | Flow measurement error >±3% | 5 | 4 | dP meters (35% share) achieve only ±5-10% accuracy via lookup tables, dragging weighted satisfaction below original estimate |\n| 19 | Undetected zone flow deviation | 3 | 2 | No incumbent provides ongoing zone-level monitoring; clamp-on removed after commissioning, dP is one-time |\n\n**Step 10 product-related need adjustments (2 changes):**\n\n| Need | Statement (abbreviated) | Sat_orig | Sat_recal | Rationale |\n|---|---|---|---|---|\n| P2 | Polymer housing degradation >80°C | 4 | 3 | Kamstrup uses metal housing with higher thermal tolerance; polymer housing is below-market for this constraint |\n| P5 | Signal loss during partial drainage | 3 | 2 | Complete signal failure vs dP meters that work partially drained; ultrasonic technology is worse than incumbents here |\n\n---"
+    },
+    {
+      "title": "Step 3 — Opportunity Scores (Deterministic)",
+      "content": "**Formula:** `opportunity_score = importance + max(importance - satisfaction, 0)`\n**Underserved:** `importance > 7 AND satisfaction < 5`\n**Overserved:** `importance < 3 AND satisfaction > 7`\n\n### Market-Level Needs (from Step 06 JTBD)\n\n| # | Statement (abbreviated) | Step | Imp | Sat | Opp | Under | Over | Prod-Rel |\n|---|---|---|---|---|---|---|---|---|\n| 1 | Accuracy spec insufficient for balancing tolerance | DEFINE | 8 | 5 | 11.00 | — | — | false |\n| 2 | Time to match sensor specs to system parameters | DEFINE | 6 | 5 | 7.00 | — | — | true |\n| 3 | Pipe modifications for inline installation | PREPARE | 7 | 5 | 9.00 | — | — | true |\n| 4 | Installation orientation causing flow errors | PREPARE | 8 | 6 | 10.00 | — | — | true |\n| 5 | Configure communication interface | PREPARE | 6 | 5 | 7.00 | — | — | true |\n| 6 | Flow measurement error >±3% at design rates | EXECUTE | 9 | 4 | **14.00** | **YES** | — | false |\n| 7 | Repeatability drift >1% of reading | EXECUTE | 8 | 5 | 11.00 | — | — | false |\n| 8 | Zones verified per hour during commissioning | EXECUTE | 7 | 3 | 11.00 | — | — | false |\n| 9 | Measurement degradation with glycol >30% | EXECUTE | 8 | 4 | **12.00** | **YES** | — | true |\n| 10 | Time to detect reverse flow / backflow | EXECUTE | 7 | 3 | 11.00 | — | — | false |\n| 11 | Detect post-commissioning flow degradation | MONITOR | 9 | 2 | **16.00** | **YES** | — | false |\n| 12 | Undetected air entrainment events | MONITOR | 7 | 3 | 11.00 | — | — | true |\n| 13 | Measurement failure during temperature transients | MONITOR | 7 | 5 | 9.00 | — | — | true |\n| 14 | Long-term calibration drift >±0.5%/yr | MONITOR | 8 | 4 | **12.00** | **YES** | — | true |\n| 15 | Measure-adjust-remeasure iterations per zone | MODIFY | 7 | 4 | 10.00 | — | — | false |\n| 16 | Real-time flow response latency <2s | MODIFY | 7 | 4 | 10.00 | — | — | true |\n| 17 | Generate documented commissioning report | CONCLUDE | 8 | 3 | **13.00** | **YES** | — | false |\n| 18 | Regulatory acceptance criteria (EPBD/ASHRAE) | CONCLUDE | 9 | 4 | **14.00** | **YES** | — | false |\n| 19 | Undetected zone flow deviation >±15% | P2_CORE | 9 | 2 | **16.00** | **YES** | — | false |\n| 20 | Energy waste from unmeasured flow imbalance | P2_CORE | 9 | 3 | **15.00** | **YES** | — | false |\n| 21 | TCO per measurement point over 10 years | P1_ACQ | 8 | 4 | **12.00** | **YES** | — | false |\n| 22 | Replace failed device without circuit drain | P1_MAINT | 6 | 4 | 8.00 | — | — | true |\n| 23 | Demonstrate data-backed commissioning competence | P3_ROLE | 8 | 3 | **13.00** | **YES** | — | false |\n| 24 | Present measurable energy performance evidence | P4_IMAGE | 7 | 3 | 11.00 | — | — | false |\n| 25 | Sign-off anxiety with estimation vs measurement | P5_EMOT | 6 | 4 | 8.00 | — | — | false |\n\n### Product-Related Needs (from Step 10, injected as product_constraint)\n\n| # | Statement (abbreviated) | Step | Imp | Sat | Opp | Under | Over | Prod-Rel |\n|---|---|---|---|---|---|---|---|---|\n| P1 | Measurement failure with non-aqueous additives | product_constraint | 5 | 6 | 5.00 | — | — | true |\n| P2 | Polymer housing degradation >80°C | product_constraint | 6 | 3 | 9.00 | — | — | true |\n| P3 | Low-flow detection below 4.2 l/min (DN20) | product_constraint | 7 | 4 | 10.00 | — | — | true |\n| P4 | Air entrainment error during fill/purge | product_constraint | 7 | 3 | 11.00 | — | — | true |\n| P5 | Signal loss during partial pipe drainage | product_constraint | 6 | 2 | 10.00 | — | — | true |\n| P6 | Accuracy degradation from insufficient straight pipe | product_constraint | 7 | 4 | 10.00 | — | — | true |\n| P7 | Temperature transient compensation error | product_constraint | 5 | 5 | 5.00 | — | — | true |\n| P8 | Acoustic coupling error with glycol shifts | product_constraint | 6 | 4 | 8.00 | — | — | true |\n\n---"
+    },
+    {
+      "title": "Step 4 — Market ODI Summary",
+      "content": "| Metric | Value |\n|---|---|\n| **Market** | Plumbing, Heating, and Air-Conditioning Contractors |\n| **NAICS** | 238220 |\n| **Total needs scored** | 33 |\n| **Underserved count** | 10 |\n| **Overserved count** | 0 |\n| **Avg opportunity score** | 10.58 |\n\n### Score Distribution\n\n| Zone | Range | Count | % |\n|---|---|---|---|\n| Highly Underserved | >15 | 2 | 6% |\n| Underserved | 12–15 | 8 | 24% |\n| Appropriately Served | 10–12 | 12 | 36% |\n| Overserved | <10 | 11 | 33% |\n\n### Top 5 Opportunities\n\n| Rank | # | Statement | Opp | Impact | Prod-Rel |\n|---|---|---|---|---|---|\n| 1 | 11 | Minimize the time to detect hydronic flow degradation below design rate after initial commissioning caused by fouling, pump wear, or valve drift | **16.00** | reliability | false |\n| 2 | 19 | Minimize the number of comfort zones with undetected flow-rate deviation exceeding ±15% of design causing occupant thermal discomfort complaints | **16.00** | reliability | false |\n| 3 | 20 | Minimize the percentage of annual heating/cooling energy wasted due to unmeasured flow imbalance across hydronic circuits | **15.00** | cost | false |\n| 4 | 6 | Minimize the likelihood of flow measurement error exceeding ±3% of reading at design flow rates (5–50 l/min) | **14.00** | reliability | false |\n| 5 | 18 | Minimize the likelihood of commissioning flow data not meeting regulatory acceptance criteria for EPBD/ASHRAE | **14.00** | safety | false |\n\n**Key insight:** All top-5 opportunities are market-inherent (product_related=false), meaning they exist regardless of which flow measurement technology is chosen. The top-3 (#11, #19, #20) are all **continuous monitoring and detection** needs that portable/temporary measurement methods fundamentally cannot address — this is the structural opportunity for a permanent inline sensor.\n\n---"
+    },
+    {
+      "title": "Step 5 — Cross-Check vs Feature-Market Fit (Step 09)",
+      "content": "| Metric | Value |\n|---|---|\n| ODI avg opportunity score | 10.58 |\n| Step 09 avg tech feature fit | 5.02 |\n| Cross-check threshold (high ODI / low fit) | ODI avg > 12 AND fit avg < 4 |\n| Cross-check threshold (low ODI / high fit) | ODI avg < 8 AND fit avg > 7 |\n| **Result** | **No inconsistencies detected** — ODI (10.58) and feature fit (5.02) are directionally consistent. Moderate opportunity with moderate technology fit. |\n\n---"
+    },
+    {
+      "title": "QA Checklist",
+      "content": "| # | Check | Result |\n|---|---|---|\n| Q1 | Formula correct — spot-check 5 entries | PASS — #11: 9+max(9-2,0)=16 ✓; #6: 9+max(9-4,0)=14 ✓; #P1: 5+max(5-6,0)=5 ✓; #25: 6+max(6-4,0)=8 ✓; #20: 9+max(9-3,0)=15 ✓ |\n| Q2 | Underserved flags correct | PASS — 10 entries with Imp>7 AND Sat<5 all flagged; no false positives (e.g. #8: Imp=7 NOT >7, correctly unflagged) |\n| Q3 | Overserved flags correct | PASS — 0 entries with Imp<3 AND Sat>7; minimum importance=5, no overserved needs in this market |\n| Q4 | Need count preserved | PASS — 25 (Step 06) + 8 (Step 10) = 33 total ≥ 25 from Step 06 |\n| Q5 | Top-5 ordering correct | PASS — 16.00, 16.00, 15.00, 14.00, 14.00 (descending) |\n| Q6 | Cross-check ran | PASS — ODI vs Feature-Fit comparison executed, no inconsistencies |\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"odi_matrix\",\n  \"naics_code\": \"238220\",\n  \"naics_title\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n  \"product_name\": \"Ultrasonic Flow Sensor\",\n  \"vendor_name\": \"Marquardt\",\n  \"technology_class\": \"Ultrasonic Transit-Time Flow Measurement\",\n  \"market_odi_summary\": {\n    \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n    \"naics_code\": \"238220\",\n    \"total_needs\": 33,\n    \"underserved_count\": 10,\n    \"overserved_count\": 0,\n    \"avg_opportunity_score\": 10.58,\n    \"top_opportunities\": [\n      \"Minimize the time to detect hydronic flow degradation below design rate after initial commissioning caused by fouling, pump wear, or valve drift\",\n      \"Minimize the number of comfort zones with undetected flow-rate deviation exceeding ±15% of design causing occupant thermal discomfort complaints\",\n      \"Minimize the percentage of annual heating/cooling energy wasted due to unmeasured flow imbalance across hydronic circuits\",\n      \"Minimize the likelihood of flow measurement error exceeding ±3% of reading at design flow rates (5-50 l/min)\",\n      \"Minimize the likelihood of commissioning flow data not meeting regulatory acceptance criteria for EPBD energy performance certification or ASHRAE 90.1 hydronic balancing verification\"\n    ]\n  },\n  \"entries\": [\n    {\n      \"error_statement\": \"Minimize the likelihood of selecting a flow measurement method whose accuracy specification is insufficient for the required balancing tolerance\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 5.0,\n      \"opportunity_score\": 11.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"impact_category\": \"reliability\"\n    },\n    {\n      \"error_statement\": \"Minimize the time required to match sensor specifications (DN size, flow range, medium compatibility, communication protocol) to the hydronic system design parameters\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 6.0,\n      \"satisfaction_current\": 5.0,\n      \"opportunity_score\": 7.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"impact_category\": \"time\"\n    },\n    {\n      \"error_statement\": \"Minimize the number of pipe modifications and fittings required to install the flow measurement device inline without disrupting existing circuit integrity\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 5.0,\n      \"opportunity_score\": 9.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 3,\n      \"job_step_name\": \"PREPARE\",\n      \"impact_category\": \"time\"\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of incorrect installation orientation causing flow reading errors exceeding ±5% of actual flow rate\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 6.0,\n      \"opportunity_score\": 10.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 3,\n      \"job_step_name\": \"PREPARE\",\n      \"impact_category\": \"reliability\"\n    },\n    {\n      \"error_statement\": \"Minimize the time required to configure the communication interface between the flow sensor and the system controller during commissioning setup\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 6.0,\n      \"satisfaction_current\": 5.0,\n      \"opportunity_score\": 7.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 3,\n      \"job_step_name\": \"PREPARE\",\n      \"impact_category\": \"time\"\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of flow measurement error exceeding ±3% of reading at design flow rates (5-50 l/min) under steady-state conditions\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 9.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 14.0,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"impact_category\": \"reliability\"\n    },\n    {\n      \"error_statement\": \"Minimize measurement variability between successive readings at the same flow rate (repeatability drift >1% of reading)\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 5.0,\n      \"opportunity_score\": 11.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"impact_category\": \"reliability\"\n    },\n    {\n      \"error_statement\": \"Increase the number of hydronic zones that can be verified per hour during commissioning without sacrificing measurement accuracy\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 3.0,\n      \"opportunity_score\": 11.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"impact_category\": \"time\"\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of measurement degradation when glycol concentration exceeds 30% by volume in antifreeze-protected circuits\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 12.0,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"impact_category\": \"reliability\"\n    },\n    {\n      \"error_statement\": \"Minimize the time to detect reverse flow (backflow) conditions indicating check-valve failure or pump malfunction during commissioning\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 3.0,\n      \"opportunity_score\": 11.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"impact_category\": \"safety\"\n    },\n    {\n      \"error_statement\": \"Minimize the time to detect hydronic flow degradation below design rate after initial commissioning caused by fouling, pump wear, or valve drift\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 9.0,\n      \"satisfaction_current\": 2.0,\n      \"opportunity_score\": 16.0,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"impact_category\": \"reliability\"\n    },\n    {\n      \"error_statement\": \"Minimize the number of undetected air entrainment events causing measurement disruption and system air-lock conditions\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 3.0,\n      \"opportunity_score\": 11.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"impact_category\": \"reliability\"\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of measurement system failure during temperature transients between heating and cooling mode changeover\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 5.0,\n      \"opportunity_score\": 9.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"impact_category\": \"reliability\"\n    },\n    {\n      \"error_statement\": \"Minimize long-term calibration drift exceeding ±0.5% per year without requiring field recalibration or sensor removal\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 12.0,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"impact_category\": \"reliability\"\n    },\n    {\n      \"error_statement\": \"Minimize the number of measurement-adjust-remeasure iterations needed to bring each zone within ±10% of design flow rate\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 10.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": 7,\n      \"job_step_name\": \"MODIFY\",\n      \"impact_category\": \"time\"\n    },\n    {\n      \"error_statement\": \"Increase the ability to observe real-time flow-rate response during balancing valve adjustment with response latency under 2 seconds\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 10.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 7,\n      \"job_step_name\": \"MODIFY\",\n      \"impact_category\": \"time\"\n    },\n    {\n      \"error_statement\": \"Minimize the time required to generate a documented commissioning report with per-zone measured flow-rate evidence for regulatory submission\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 3.0,\n      \"opportunity_score\": 13.0,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": 8,\n      \"job_step_name\": \"CONCLUDE\",\n      \"impact_category\": \"time\"\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of commissioning flow data not meeting regulatory acceptance criteria for EPBD energy performance certification or ASHRAE 90.1 hydronic balancing verification\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 9.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 14.0,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": 8,\n      \"job_step_name\": \"CONCLUDE\",\n      \"impact_category\": \"safety\"\n    },\n    {\n      \"error_statement\": \"Minimize the number of comfort zones with undetected flow-rate deviation exceeding ±15% of design causing occupant thermal discomfort complaints\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 9.0,\n      \"satisfaction_current\": 2.0,\n      \"opportunity_score\": 16.0,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": null,\n      \"job_step_name\": \"P2_CORE_JOB\",\n      \"impact_category\": \"reliability\"\n    },\n    {\n      \"error_statement\": \"Minimize the percentage of annual heating/cooling energy wasted due to unmeasured flow imbalance across hydronic circuits (industry baseline: 15-30% excess consumption)\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 9.0,\n      \"satisfaction_current\": 3.0,\n      \"opportunity_score\": 15.0,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": null,\n      \"job_step_name\": \"P2_CORE_JOB\",\n      \"impact_category\": \"cost\"\n    },\n    {\n      \"error_statement\": \"Minimize the total cost of ownership per measurement point over 10-year system life including acquisition, installation, calibration, and replacement\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 12.0,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": null,\n      \"job_step_name\": \"P1_ACQUISITION\",\n      \"impact_category\": \"cost\"\n    },\n    {\n      \"error_statement\": \"Minimize the time and cost to replace a failed flow measurement device without draining the hydronic circuit or disrupting other zones\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 6.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 8.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": null,\n      \"job_step_name\": \"P1_MAINTENANCE\",\n      \"impact_category\": \"time\"\n    },\n    {\n      \"error_statement\": \"Increase the ability to demonstrate verified, data-backed commissioning competence to building owners and code inspectors\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 3.0,\n      \"opportunity_score\": 13.0,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": null,\n      \"job_step_name\": \"P3_ROLE_IDENTITY\",\n      \"impact_category\": \"skill\"\n    },\n    {\n      \"error_statement\": \"Increase the ability to present measurable energy performance evidence that differentiates the contractor from competitors relying on estimation methods\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 3.0,\n      \"opportunity_score\": 11.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": null,\n      \"job_step_name\": \"P4_IMAGE_IDENTITY\",\n      \"impact_category\": \"cost\"\n    },\n    {\n      \"error_statement\": \"Minimize the anxiety of signing off on commissioning results when flow verification relies on estimation rather than direct measurement\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 6.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 8.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": null,\n      \"job_step_name\": \"P5_EMOTIONAL\",\n      \"impact_category\": \"reliability\"\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of measurement failure when the hydronic circuit medium contains non-aqueous additives (corrosion inhibitors, biocides) exceeding the ultrasonic transducer's acoustic impedance matching range\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 5.0,\n      \"satisfaction_current\": 6.0,\n      \"opportunity_score\": 5.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 0,\n      \"job_step_name\": \"product_constraint\",\n      \"impact_category\": \"reliability\"\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of polymer housing seal degradation when hydronic heating circuits operate continuously above 80 degrees C with occasional thermal spikes approaching the 90 degree C material service limit\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 6.0,\n      \"satisfaction_current\": 3.0,\n      \"opportunity_score\": 9.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 0,\n      \"job_step_name\": \"product_constraint\",\n      \"impact_category\": \"reliability\"\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of losing flow measurement capability at low-flow conditions below 4.2 l/min (DN20) during single-zone partial-load heating operation where only one circuit is active\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 10.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 0,\n      \"job_step_name\": \"product_constraint\",\n      \"impact_category\": \"reliability\"\n    },\n    {\n      \"error_statement\": \"Minimize the measurement error introduced by transient air entrainment exceeding 2% by volume during hydronic circuit fill, purge, or maintenance drain-and-refill operations that temporarily aerate the medium\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 3.0,\n      \"opportunity_score\": 11.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 0,\n      \"job_step_name\": \"product_constraint\",\n      \"impact_category\": \"reliability\"\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of complete signal loss during partial pipe drainage events required for circuit modification, sensor replacement, or zone isolation maintenance on hydronic systems\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 6.0,\n      \"satisfaction_current\": 2.0,\n      \"opportunity_score\": 10.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 0,\n      \"job_step_name\": \"product_constraint\",\n      \"impact_category\": \"reliability\"\n    },\n    {\n      \"error_statement\": \"Minimize the measurement accuracy degradation caused by insufficient upstream straight pipe run in retrofit installations where building constraints prevent the recommended 5-10x DN of undisturbed straight pipe upstream of the sensor\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 10.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 0,\n      \"job_step_name\": \"product_constraint\",\n      \"impact_category\": \"reliability\"\n    },\n    {\n      \"error_statement\": \"Minimize the residual measurement error during rapid temperature transients between heating and cooling mode changeover that temporarily exceed the NTC compensation algorithm's response time\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 5.0,\n      \"satisfaction_current\": 5.0,\n      \"opportunity_score\": 5.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 0,\n      \"job_step_name\": \"product_constraint\",\n      \"impact_category\": \"reliability\"\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of incorrect acoustic coupling between piezoelectric transducer and medium when glycol concentration changes shift the speed-of-sound calibration baseline beyond the pre-configured fluid-type setting\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"importance\": 6.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 8.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 0,\n      \"job_step_name\": \"product_constraint\",\n      \"impact_category\": \"reliability\"\n    }\n  ],\n  \"recalibration_adjustments\": [\n    {\"need_id\": 3, \"field\": \"satisfaction_current\", \"original\": 4, \"recalibrated\": 5, \"rationale\": \"Clamp-on (45% share) requires zero pipe modifications, raising weighted incumbent satisfaction\"},\n    {\"need_id\": 5, \"field\": \"satisfaction_current\", \"original\": 4, \"recalibrated\": 5, \"rationale\": \"Clamp-on and dP methods need no controller configuration; standalone/manual reading is standard\"},\n    {\"need_id\": 6, \"field\": \"satisfaction_current\", \"original\": 5, \"recalibrated\": 4, \"rationale\": \"dP meters (35% share) achieve only ±5-10% accuracy via Cv lookup tables, dragging weighted satisfaction below original\"},\n    {\"need_id\": 19, \"field\": \"satisfaction_current\", \"original\": 3, \"recalibrated\": 2, \"rationale\": \"No incumbent provides ongoing zone monitoring; clamp-on removed after commissioning, dP is one-time\"},\n    {\"need_id\": \"P2\", \"field\": \"satisfaction_current\", \"original\": 4, \"recalibrated\": 3, \"rationale\": \"Kamstrup uses metal housing with higher thermal tolerance; polymer housing is below-market\"},\n    {\"need_id\": \"P5\", \"field\": \"satisfaction_current\", \"original\": 3, \"recalibrated\": 2, \"rationale\": \"Complete signal failure during partial drainage is worse than dP meters that work partially drained\"}\n  ],\n  \"cross_check\": {\n    \"odi_avg\": 10.58,\n    \"feature_fit_avg\": 5.02,\n    \"inconsistencies\": [],\n    \"result\": \"No inconsistencies detected\"\n  },\n  \"entities_produced\": {\n    \"nodes\": [\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the likelihood of selecting a flow measurement method whose\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 11.0, \"is_underserved\": false},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the time required to match sensor specifications (DN size,\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 7.0, \"is_underserved\": false},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the number of pipe modifications and fittings required to\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 9.0, \"is_underserved\": false},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the likelihood of incorrect installation orientation causing\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 10.0, \"is_underserved\": false},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the time required to configure the communication interface\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 7.0, \"is_underserved\": false},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the likelihood of flow measurement error exceeding ±3% of\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 14.0, \"is_underserved\": true},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize measurement variability between successive readings at the\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 11.0, \"is_underserved\": false},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Increase the number of hydronic zones that can be verified per hour\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 11.0, \"is_underserved\": false},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the likelihood of measurement degradation when glycol\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 12.0, \"is_underserved\": true},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the time to detect reverse flow (backflow) conditions\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 11.0, \"is_underserved\": false},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the time to detect hydronic flow degradation below design\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 16.0, \"is_underserved\": true},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the number of undetected air entrainment events causing\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 11.0, \"is_underserved\": false},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the likelihood of measurement system failure during\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 9.0, \"is_underserved\": false},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize long-term calibration drift exceeding ±0.5% per year\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 12.0, \"is_underserved\": true},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the number of measurement-adjust-remeasure iterations\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 10.0, \"is_underserved\": false},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Increase the ability to observe real-time flow-rate response during\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 10.0, \"is_underserved\": false},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the time required to generate a documented commissioning\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 13.0, \"is_underserved\": true},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the likelihood of commissioning flow data not meeting\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 14.0, \"is_underserved\": true},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the number of comfort zones with undetected flow-rate\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 16.0, \"is_underserved\": true},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the percentage of annual heating/cooling energy wasted\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 15.0, \"is_underserved\": true},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the total cost of ownership per measurement point over\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 12.0, \"is_underserved\": true},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the time and cost to replace a failed flow measurement\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 8.0, \"is_underserved\": false},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Increase the ability to demonstrate verified, data-backed\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 13.0, \"is_underserved\": true},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Increase the ability to present measurable energy performance\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 11.0, \"is_underserved\": false},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the anxiety of signing off on commissioning results when\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 8.0, \"is_underserved\": false},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the likelihood of measurement failure when the hydronic\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 5.0, \"is_underserved\": false},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the likelihood of polymer housing seal degradation when\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 9.0, \"is_underserved\": false},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the likelihood of losing flow measurement capability at\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 10.0, \"is_underserved\": false},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the measurement error introduced by transient air\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 11.0, \"is_underserved\": false},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the likelihood of complete signal loss during partial pipe\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 10.0, \"is_underserved\": false},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the measurement accuracy degradation caused by\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 10.0, \"is_underserved\": false},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the residual measurement error during rapid temperature\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 5.0, \"is_underserved\": false},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the likelihood of incorrect acoustic coupling between\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"opportunity_score\": 8.0, \"is_underserved\": false}\n    ],\n    \"relationships\": [\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:238220\", \"target\": \"OpportunityScore:*all 33*\"}\n    ]\n  }\n}\n```\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [SRC: JTBD_plumbing_heating_and_air_conditioning_co] — 25 error statements, alternatives, job map, regulatory drivers\n- [SRC: FIT_plumbing_heating_and_air_conditioning_co] — Step 09 tech feature fit, Step 10 product-related needs, Step 11 vendor feature fit\n- [SRC: 01_product_decomposition] — Product features, constraints, specifications\n- [SRC: 02_functional_promise] — Product FP, commodity FP, complements\n- [SRC: 05_market_discovery] — NAICS 238220 candidate details, incumbent alternatives"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "Source",
+        "Count",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "Source": "Step 06 (JTBD market-level needs)",
+          "Count": "25",
+          "Notes": "15 market-inherent + 10 technology-specific"
+        },
+        {
+          "Source": "Step 10 (product-related needs)",
+          "Count": "8",
+          "Notes": "Injected as job_step_number=0, job_step_name=\"product_constraint\", impact_category=\"reliability\", product_related=true"
+        },
+        {
+          "Source": "**Total**",
+          "Count": "**33**",
+          "Notes": ""
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Incumbent",
+        "Share",
+        "Mechanism",
+        "Strengths",
+        "Weaknesses"
+      ],
+      "rows": [
+        {
+          "Incumbent": "Portable Ultrasonic Clamp-On (Belimo, Testo)",
+          "Share": "~45%",
+          "Mechanism": "External ultrasonic coupling",
+          "Strengths": "Portable, no pipe modification, ±1-2% accuracy with good coupling",
+          "Weaknesses": "Requires trained operator per reading, no continuous monitoring, $2K-5K, removed after commissioning"
+        },
+        {
+          "Incumbent": "Hydronic Manometer / dP Meter (TSI, IMI)",
+          "Share": "~35%",
+          "Mechanism": "Differential pressure via balancing valve",
+          "Strengths": "Inexpensive, simple, widely installed",
+          "Weaknesses": "Indirect measurement via Cv lookup table, accuracy ±5-10%, requires pre-installed valve"
+        },
+        {
+          "Incumbent": "Manual Pressure-Drop Estimation",
+          "Share": "~10%",
+          "Mechanism": "Pump curve extrapolation",
+          "Strengths": "Zero cost",
+          "Weaknesses": "Accuracy ±20-30%, no per-zone resolution, not accepted for regulatory compliance"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Need #",
+        "Statement (abbreviated)",
+        "Sat_orig",
+        "Sat_recal",
+        "Rationale"
+      ],
+      "rows": [
+        {
+          "Need #": "3",
+          "Statement (abbreviated)": "Pipe modifications for installation",
+          "Sat_orig": "4",
+          "Sat_recal": "5",
+          "Rationale": "Clamp-on (45% share) requires zero pipe mods, raising weighted incumbent satisfaction"
+        },
+        {
+          "Need #": "5",
+          "Statement (abbreviated)": "Configure communication interface",
+          "Sat_orig": "4",
+          "Sat_recal": "5",
+          "Rationale": "Clamp-on and dP methods need no controller configuration; portable/manual reading is standard"
+        },
+        {
+          "Need #": "6",
+          "Statement (abbreviated)": "Flow measurement error >±3%",
+          "Sat_orig": "5",
+          "Sat_recal": "4",
+          "Rationale": "dP meters (35% share) achieve only ±5-10% accuracy via lookup tables, dragging weighted satisfaction below original estimate"
+        },
+        {
+          "Need #": "19",
+          "Statement (abbreviated)": "Undetected zone flow deviation",
+          "Sat_orig": "3",
+          "Sat_recal": "2",
+          "Rationale": "No incumbent provides ongoing zone-level monitoring; clamp-on removed after commissioning, dP is one-time"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Need",
+        "Statement (abbreviated)",
+        "Sat_orig",
+        "Sat_recal",
+        "Rationale"
+      ],
+      "rows": [
+        {
+          "Need": "P2",
+          "Statement (abbreviated)": "Polymer housing degradation >80°C",
+          "Sat_orig": "4",
+          "Sat_recal": "3",
+          "Rationale": "Kamstrup uses metal housing with higher thermal tolerance; polymer housing is below-market for this constraint"
+        },
+        {
+          "Need": "P5",
+          "Statement (abbreviated)": "Signal loss during partial drainage",
+          "Sat_orig": "3",
+          "Sat_recal": "2",
+          "Rationale": "Complete signal failure vs dP meters that work partially drained; ultrasonic technology is worse than incumbents here"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement (abbreviated)",
+        "Step",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Under",
+        "Over",
+        "Prod-Rel"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Statement (abbreviated)": "Accuracy spec insufficient for balancing tolerance",
+          "Step": "DEFINE",
+          "Imp": "8",
+          "Sat": "5",
+          "Opp": "11.00",
+          "Under": "—",
+          "Over": "—",
+          "Prod-Rel": "false"
+        },
+        {
+          "#": "2",
+          "Statement (abbreviated)": "Time to match sensor specs to system parameters",
+          "Step": "DEFINE",
+          "Imp": "6",
+          "Sat": "5",
+          "Opp": "7.00",
+          "Under": "—",
+          "Over": "—",
+          "Prod-Rel": "true"
+        },
+        {
+          "#": "3",
+          "Statement (abbreviated)": "Pipe modifications for inline installation",
+          "Step": "PREPARE",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "9.00",
+          "Under": "—",
+          "Over": "—",
+          "Prod-Rel": "true"
+        },
+        {
+          "#": "4",
+          "Statement (abbreviated)": "Installation orientation causing flow errors",
+          "Step": "PREPARE",
+          "Imp": "8",
+          "Sat": "6",
+          "Opp": "10.00",
+          "Under": "—",
+          "Over": "—",
+          "Prod-Rel": "true"
+        },
+        {
+          "#": "5",
+          "Statement (abbreviated)": "Configure communication interface",
+          "Step": "PREPARE",
+          "Imp": "6",
+          "Sat": "5",
+          "Opp": "7.00",
+          "Under": "—",
+          "Over": "—",
+          "Prod-Rel": "true"
+        },
+        {
+          "#": "6",
+          "Statement (abbreviated)": "Flow measurement error >±3% at design rates",
+          "Step": "EXECUTE",
+          "Imp": "9",
+          "Sat": "4",
+          "Opp": "**14.00**",
+          "Under": "**YES**",
+          "Over": "—",
+          "Prod-Rel": "false"
+        },
+        {
+          "#": "7",
+          "Statement (abbreviated)": "Repeatability drift >1% of reading",
+          "Step": "EXECUTE",
+          "Imp": "8",
+          "Sat": "5",
+          "Opp": "11.00",
+          "Under": "—",
+          "Over": "—",
+          "Prod-Rel": "false"
+        },
+        {
+          "#": "8",
+          "Statement (abbreviated)": "Zones verified per hour during commissioning",
+          "Step": "EXECUTE",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "11.00",
+          "Under": "—",
+          "Over": "—",
+          "Prod-Rel": "false"
+        },
+        {
+          "#": "9",
+          "Statement (abbreviated)": "Measurement degradation with glycol >30%",
+          "Step": "EXECUTE",
+          "Imp": "8",
+          "Sat": "4",
+          "Opp": "**12.00**",
+          "Under": "**YES**",
+          "Over": "—",
+          "Prod-Rel": "true"
+        },
+        {
+          "#": "10",
+          "Statement (abbreviated)": "Time to detect reverse flow / backflow",
+          "Step": "EXECUTE",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "11.00",
+          "Under": "—",
+          "Over": "—",
+          "Prod-Rel": "false"
+        },
+        {
+          "#": "11",
+          "Statement (abbreviated)": "Detect post-commissioning flow degradation",
+          "Step": "MONITOR",
+          "Imp": "9",
+          "Sat": "2",
+          "Opp": "**16.00**",
+          "Under": "**YES**",
+          "Over": "—",
+          "Prod-Rel": "false"
+        },
+        {
+          "#": "12",
+          "Statement (abbreviated)": "Undetected air entrainment events",
+          "Step": "MONITOR",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "11.00",
+          "Under": "—",
+          "Over": "—",
+          "Prod-Rel": "true"
+        },
+        {
+          "#": "13",
+          "Statement (abbreviated)": "Measurement failure during temperature transients",
+          "Step": "MONITOR",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "9.00",
+          "Under": "—",
+          "Over": "—",
+          "Prod-Rel": "true"
+        },
+        {
+          "#": "14",
+          "Statement (abbreviated)": "Long-term calibration drift >±0.5%/yr",
+          "Step": "MONITOR",
+          "Imp": "8",
+          "Sat": "4",
+          "Opp": "**12.00**",
+          "Under": "**YES**",
+          "Over": "—",
+          "Prod-Rel": "true"
+        },
+        {
+          "#": "15",
+          "Statement (abbreviated)": "Measure-adjust-remeasure iterations per zone",
+          "Step": "MODIFY",
+          "Imp": "7",
+          "Sat": "4",
+          "Opp": "10.00",
+          "Under": "—",
+          "Over": "—",
+          "Prod-Rel": "false"
+        },
+        {
+          "#": "16",
+          "Statement (abbreviated)": "Real-time flow response latency <2s",
+          "Step": "MODIFY",
+          "Imp": "7",
+          "Sat": "4",
+          "Opp": "10.00",
+          "Under": "—",
+          "Over": "—",
+          "Prod-Rel": "true"
+        },
+        {
+          "#": "17",
+          "Statement (abbreviated)": "Generate documented commissioning report",
+          "Step": "CONCLUDE",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "**13.00**",
+          "Under": "**YES**",
+          "Over": "—",
+          "Prod-Rel": "false"
+        },
+        {
+          "#": "18",
+          "Statement (abbreviated)": "Regulatory acceptance criteria (EPBD/ASHRAE)",
+          "Step": "CONCLUDE",
+          "Imp": "9",
+          "Sat": "4",
+          "Opp": "**14.00**",
+          "Under": "**YES**",
+          "Over": "—",
+          "Prod-Rel": "false"
+        },
+        {
+          "#": "19",
+          "Statement (abbreviated)": "Undetected zone flow deviation >±15%",
+          "Step": "P2_CORE",
+          "Imp": "9",
+          "Sat": "2",
+          "Opp": "**16.00**",
+          "Under": "**YES**",
+          "Over": "—",
+          "Prod-Rel": "false"
+        },
+        {
+          "#": "20",
+          "Statement (abbreviated)": "Energy waste from unmeasured flow imbalance",
+          "Step": "P2_CORE",
+          "Imp": "9",
+          "Sat": "3",
+          "Opp": "**15.00**",
+          "Under": "**YES**",
+          "Over": "—",
+          "Prod-Rel": "false"
+        },
+        {
+          "#": "21",
+          "Statement (abbreviated)": "TCO per measurement point over 10 years",
+          "Step": "P1_ACQ",
+          "Imp": "8",
+          "Sat": "4",
+          "Opp": "**12.00**",
+          "Under": "**YES**",
+          "Over": "—",
+          "Prod-Rel": "false"
+        },
+        {
+          "#": "22",
+          "Statement (abbreviated)": "Replace failed device without circuit drain",
+          "Step": "P1_MAINT",
+          "Imp": "6",
+          "Sat": "4",
+          "Opp": "8.00",
+          "Under": "—",
+          "Over": "—",
+          "Prod-Rel": "true"
+        },
+        {
+          "#": "23",
+          "Statement (abbreviated)": "Demonstrate data-backed commissioning competence",
+          "Step": "P3_ROLE",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "**13.00**",
+          "Under": "**YES**",
+          "Over": "—",
+          "Prod-Rel": "false"
+        },
+        {
+          "#": "24",
+          "Statement (abbreviated)": "Present measurable energy performance evidence",
+          "Step": "P4_IMAGE",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "11.00",
+          "Under": "—",
+          "Over": "—",
+          "Prod-Rel": "false"
+        },
+        {
+          "#": "25",
+          "Statement (abbreviated)": "Sign-off anxiety with estimation vs measurement",
+          "Step": "P5_EMOT",
+          "Imp": "6",
+          "Sat": "4",
+          "Opp": "8.00",
+          "Under": "—",
+          "Over": "—",
+          "Prod-Rel": "false"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement (abbreviated)",
+        "Step",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Under",
+        "Over",
+        "Prod-Rel"
+      ],
+      "rows": [
+        {
+          "#": "P1",
+          "Statement (abbreviated)": "Measurement failure with non-aqueous additives",
+          "Step": "product_constraint",
+          "Imp": "5",
+          "Sat": "6",
+          "Opp": "5.00",
+          "Under": "—",
+          "Over": "—",
+          "Prod-Rel": "true"
+        },
+        {
+          "#": "P2",
+          "Statement (abbreviated)": "Polymer housing degradation >80°C",
+          "Step": "product_constraint",
+          "Imp": "6",
+          "Sat": "3",
+          "Opp": "9.00",
+          "Under": "—",
+          "Over": "—",
+          "Prod-Rel": "true"
+        },
+        {
+          "#": "P3",
+          "Statement (abbreviated)": "Low-flow detection below 4.2 l/min (DN20)",
+          "Step": "product_constraint",
+          "Imp": "7",
+          "Sat": "4",
+          "Opp": "10.00",
+          "Under": "—",
+          "Over": "—",
+          "Prod-Rel": "true"
+        },
+        {
+          "#": "P4",
+          "Statement (abbreviated)": "Air entrainment error during fill/purge",
+          "Step": "product_constraint",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "11.00",
+          "Under": "—",
+          "Over": "—",
+          "Prod-Rel": "true"
+        },
+        {
+          "#": "P5",
+          "Statement (abbreviated)": "Signal loss during partial pipe drainage",
+          "Step": "product_constraint",
+          "Imp": "6",
+          "Sat": "2",
+          "Opp": "10.00",
+          "Under": "—",
+          "Over": "—",
+          "Prod-Rel": "true"
+        },
+        {
+          "#": "P6",
+          "Statement (abbreviated)": "Accuracy degradation from insufficient straight pipe",
+          "Step": "product_constraint",
+          "Imp": "7",
+          "Sat": "4",
+          "Opp": "10.00",
+          "Under": "—",
+          "Over": "—",
+          "Prod-Rel": "true"
+        },
+        {
+          "#": "P7",
+          "Statement (abbreviated)": "Temperature transient compensation error",
+          "Step": "product_constraint",
+          "Imp": "5",
+          "Sat": "5",
+          "Opp": "5.00",
+          "Under": "—",
+          "Over": "—",
+          "Prod-Rel": "true"
+        },
+        {
+          "#": "P8",
+          "Statement (abbreviated)": "Acoustic coupling error with glycol shifts",
+          "Step": "product_constraint",
+          "Imp": "6",
+          "Sat": "4",
+          "Opp": "8.00",
+          "Under": "—",
+          "Over": "—",
+          "Prod-Rel": "true"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Metric",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Metric": "**Market**",
+          "Value": "Plumbing, Heating, and Air-Conditioning Contractors"
+        },
+        {
+          "Metric": "**NAICS**",
+          "Value": "238220"
+        },
+        {
+          "Metric": "**Total needs scored**",
+          "Value": "33"
+        },
+        {
+          "Metric": "**Underserved count**",
+          "Value": "10"
+        },
+        {
+          "Metric": "**Overserved count**",
+          "Value": "0"
+        },
+        {
+          "Metric": "**Avg opportunity score**",
+          "Value": "10.58"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Zone",
+        "Range",
+        "Count",
+        "%"
+      ],
+      "rows": [
+        {
+          "Zone": "Highly Underserved",
+          "Range": ">15",
+          "Count": "2",
+          "%": "6%"
+        },
+        {
+          "Zone": "Underserved",
+          "Range": "12–15",
+          "Count": "8",
+          "%": "24%"
+        },
+        {
+          "Zone": "Appropriately Served",
+          "Range": "10–12",
+          "Count": "12",
+          "%": "36%"
+        },
+        {
+          "Zone": "Overserved",
+          "Range": "<10",
+          "Count": "11",
+          "%": "33%"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Rank",
+        "#",
+        "Statement",
+        "Opp",
+        "Impact",
+        "Prod-Rel"
+      ],
+      "rows": [
+        {
+          "Rank": "1",
+          "#": "11",
+          "Statement": "Minimize the time to detect hydronic flow degradation below design rate after initial commissioning caused by fouling, pump wear, or valve drift",
+          "Opp": "**16.00**",
+          "Impact": "reliability",
+          "Prod-Rel": "false"
+        },
+        {
+          "Rank": "2",
+          "#": "19",
+          "Statement": "Minimize the number of comfort zones with undetected flow-rate deviation exceeding ±15% of design causing occupant thermal discomfort complaints",
+          "Opp": "**16.00**",
+          "Impact": "reliability",
+          "Prod-Rel": "false"
+        },
+        {
+          "Rank": "3",
+          "#": "20",
+          "Statement": "Minimize the percentage of annual heating/cooling energy wasted due to unmeasured flow imbalance across hydronic circuits",
+          "Opp": "**15.00**",
+          "Impact": "cost",
+          "Prod-Rel": "false"
+        },
+        {
+          "Rank": "4",
+          "#": "6",
+          "Statement": "Minimize the likelihood of flow measurement error exceeding ±3% of reading at design flow rates (5–50 l/min)",
+          "Opp": "**14.00**",
+          "Impact": "reliability",
+          "Prod-Rel": "false"
+        },
+        {
+          "Rank": "5",
+          "#": "18",
+          "Statement": "Minimize the likelihood of commissioning flow data not meeting regulatory acceptance criteria for EPBD/ASHRAE",
+          "Opp": "**14.00**",
+          "Impact": "safety",
+          "Prod-Rel": "false"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Metric",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Metric": "ODI avg opportunity score",
+          "Value": "10.58"
+        },
+        {
+          "Metric": "Step 09 avg tech feature fit",
+          "Value": "5.02"
+        },
+        {
+          "Metric": "Cross-check threshold (high ODI / low fit)",
+          "Value": "ODI avg > 12 AND fit avg < 4"
+        },
+        {
+          "Metric": "Cross-check threshold (low ODI / high fit)",
+          "Value": "ODI avg < 8 AND fit avg > 7"
+        },
+        {
+          "Metric": "**Result**",
+          "Value": "**No inconsistencies detected** — ODI (10.58) and feature fit (5.02) are directionally consistent. Moderate opportunity with moderate technology fit."
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "#": "Q1",
+          "Check": "Formula correct — spot-check 5 entries",
+          "Result": "PASS — #11: 9+max(9-2,0)=16 ✓; #6: 9+max(9-4,0)=14 ✓; #P1: 5+max(5-6,0)=5 ✓; #25: 6+max(6-4,0)=8 ✓; #20: 9+max(9-3,0)=15 ✓"
+        },
+        {
+          "#": "Q2",
+          "Check": "Underserved flags correct",
+          "Result": "PASS — 10 entries with Imp>7 AND Sat<5 all flagged; no false positives (e.g. #8: Imp=7 NOT >7, correctly unflagged)"
+        },
+        {
+          "#": "Q3",
+          "Check": "Overserved flags correct",
+          "Result": "PASS — 0 entries with Imp<3 AND Sat>7; minimum importance=5, no overserved needs in this market"
+        },
+        {
+          "#": "Q4",
+          "Check": "Need count preserved",
+          "Result": "PASS — 25 (Step 06) + 8 (Step 10) = 33 total ≥ 25 from Step 06"
+        },
+        {
+          "#": "Q5",
+          "Check": "Top-5 ordering correct",
+          "Result": "PASS — 16.00, 16.00, 15.00, 14.00, 14.00 (descending)"
+        },
+        {
+          "#": "Q6",
+          "Check": "Cross-check ran",
+          "Result": "PASS — ODI vs Feature-Fit comparison executed, no inconsistencies"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "odi_matrix",
+      "naics_code": "238220",
+      "naics_title": "Plumbing, Heating, and Air-Conditioning Contractors",
+      "product_name": "Ultrasonic Flow Sensor",
+      "vendor_name": "Marquardt",
+      "technology_class": "Ultrasonic Transit-Time Flow Measurement",
+      "market_odi_summary": {
+        "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+        "naics_code": "238220",
+        "total_needs": 33,
+        "underserved_count": 10,
+        "overserved_count": 0,
+        "avg_opportunity_score": 10.58,
+        "top_opportunities": [
+          "Minimize the time to detect hydronic flow degradation below design rate after initial commissioning caused by fouling, pump wear, or valve drift",
+          "Minimize the number of comfort zones with undetected flow-rate deviation exceeding ±15% of design causing occupant thermal discomfort complaints",
+          "Minimize the percentage of annual heating/cooling energy wasted due to unmeasured flow imbalance across hydronic circuits",
+          "Minimize the likelihood of flow measurement error exceeding ±3% of reading at design flow rates (5-50 l/min)",
+          "Minimize the likelihood of commissioning flow data not meeting regulatory acceptance criteria for EPBD energy performance certification or ASHRAE 90.1 hydronic balancing verification"
+        ]
+      },
+      "entries": [
+        {
+          "error_statement": "Minimize the likelihood of selecting a flow measurement method whose accuracy specification is insufficient for the required balancing tolerance",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 8.0,
+          "satisfaction_current": 5.0,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "impact_category": "reliability"
+        },
+        {
+          "error_statement": "Minimize the time required to match sensor specifications (DN size, flow range, medium compatibility, communication protocol) to the hydronic system design parameters",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 6.0,
+          "satisfaction_current": 5.0,
+          "opportunity_score": 7.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "impact_category": "time"
+        },
+        {
+          "error_statement": "Minimize the number of pipe modifications and fittings required to install the flow measurement device inline without disrupting existing circuit integrity",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 7.0,
+          "satisfaction_current": 5.0,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 3,
+          "job_step_name": "PREPARE",
+          "impact_category": "time"
+        },
+        {
+          "error_statement": "Minimize the likelihood of incorrect installation orientation causing flow reading errors exceeding ±5% of actual flow rate",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 8.0,
+          "satisfaction_current": 6.0,
+          "opportunity_score": 10.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 3,
+          "job_step_name": "PREPARE",
+          "impact_category": "reliability"
+        },
+        {
+          "error_statement": "Minimize the time required to configure the communication interface between the flow sensor and the system controller during commissioning setup",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 6.0,
+          "satisfaction_current": 5.0,
+          "opportunity_score": 7.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 3,
+          "job_step_name": "PREPARE",
+          "impact_category": "time"
+        },
+        {
+          "error_statement": "Minimize the likelihood of flow measurement error exceeding ±3% of reading at design flow rates (5-50 l/min) under steady-state conditions",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 9.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 14.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "impact_category": "reliability"
+        },
+        {
+          "error_statement": "Minimize measurement variability between successive readings at the same flow rate (repeatability drift >1% of reading)",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 8.0,
+          "satisfaction_current": 5.0,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "impact_category": "reliability"
+        },
+        {
+          "error_statement": "Increase the number of hydronic zones that can be verified per hour during commissioning without sacrificing measurement accuracy",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 7.0,
+          "satisfaction_current": 3.0,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "impact_category": "time"
+        },
+        {
+          "error_statement": "Minimize the likelihood of measurement degradation when glycol concentration exceeds 30% by volume in antifreeze-protected circuits",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 8.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 12.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "impact_category": "reliability"
+        },
+        {
+          "error_statement": "Minimize the time to detect reverse flow (backflow) conditions indicating check-valve failure or pump malfunction during commissioning",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 7.0,
+          "satisfaction_current": 3.0,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "impact_category": "safety"
+        },
+        {
+          "error_statement": "Minimize the time to detect hydronic flow degradation below design rate after initial commissioning caused by fouling, pump wear, or valve drift",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 9.0,
+          "satisfaction_current": 2.0,
+          "opportunity_score": 16.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "impact_category": "reliability"
+        },
+        {
+          "error_statement": "Minimize the number of undetected air entrainment events causing measurement disruption and system air-lock conditions",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 7.0,
+          "satisfaction_current": 3.0,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "impact_category": "reliability"
+        },
+        {
+          "error_statement": "Minimize the likelihood of measurement system failure during temperature transients between heating and cooling mode changeover",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 7.0,
+          "satisfaction_current": 5.0,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "impact_category": "reliability"
+        },
+        {
+          "error_statement": "Minimize long-term calibration drift exceeding ±0.5% per year without requiring field recalibration or sensor removal",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 8.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 12.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "impact_category": "reliability"
+        },
+        {
+          "error_statement": "Minimize the number of measurement-adjust-remeasure iterations needed to bring each zone within ±10% of design flow rate",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 7.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 10.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": 7,
+          "job_step_name": "MODIFY",
+          "impact_category": "time"
+        },
+        {
+          "error_statement": "Increase the ability to observe real-time flow-rate response during balancing valve adjustment with response latency under 2 seconds",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 7.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 10.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 7,
+          "job_step_name": "MODIFY",
+          "impact_category": "time"
+        },
+        {
+          "error_statement": "Minimize the time required to generate a documented commissioning report with per-zone measured flow-rate evidence for regulatory submission",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 8.0,
+          "satisfaction_current": 3.0,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": 8,
+          "job_step_name": "CONCLUDE",
+          "impact_category": "time"
+        },
+        {
+          "error_statement": "Minimize the likelihood of commissioning flow data not meeting regulatory acceptance criteria for EPBD energy performance certification or ASHRAE 90.1 hydronic balancing verification",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 9.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 14.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": 8,
+          "job_step_name": "CONCLUDE",
+          "impact_category": "safety"
+        },
+        {
+          "error_statement": "Minimize the number of comfort zones with undetected flow-rate deviation exceeding ±15% of design causing occupant thermal discomfort complaints",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 9.0,
+          "satisfaction_current": 2.0,
+          "opportunity_score": 16.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": null,
+          "job_step_name": "P2_CORE_JOB",
+          "impact_category": "reliability"
+        },
+        {
+          "error_statement": "Minimize the percentage of annual heating/cooling energy wasted due to unmeasured flow imbalance across hydronic circuits (industry baseline: 15-30% excess consumption)",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 9.0,
+          "satisfaction_current": 3.0,
+          "opportunity_score": 15.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": null,
+          "job_step_name": "P2_CORE_JOB",
+          "impact_category": "cost"
+        },
+        {
+          "error_statement": "Minimize the total cost of ownership per measurement point over 10-year system life including acquisition, installation, calibration, and replacement",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 8.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 12.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": null,
+          "job_step_name": "P1_ACQUISITION",
+          "impact_category": "cost"
+        },
+        {
+          "error_statement": "Minimize the time and cost to replace a failed flow measurement device without draining the hydronic circuit or disrupting other zones",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 6.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 8.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": null,
+          "job_step_name": "P1_MAINTENANCE",
+          "impact_category": "time"
+        },
+        {
+          "error_statement": "Increase the ability to demonstrate verified, data-backed commissioning competence to building owners and code inspectors",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 8.0,
+          "satisfaction_current": 3.0,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": null,
+          "job_step_name": "P3_ROLE_IDENTITY",
+          "impact_category": "skill"
+        },
+        {
+          "error_statement": "Increase the ability to present measurable energy performance evidence that differentiates the contractor from competitors relying on estimation methods",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 7.0,
+          "satisfaction_current": 3.0,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": null,
+          "job_step_name": "P4_IMAGE_IDENTITY",
+          "impact_category": "cost"
+        },
+        {
+          "error_statement": "Minimize the anxiety of signing off on commissioning results when flow verification relies on estimation rather than direct measurement",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 6.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 8.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": null,
+          "job_step_name": "P5_EMOTIONAL",
+          "impact_category": "reliability"
+        },
+        {
+          "error_statement": "Minimize the likelihood of measurement failure when the hydronic circuit medium contains non-aqueous additives (corrosion inhibitors, biocides) exceeding the ultrasonic transducer's acoustic impedance matching range",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 5.0,
+          "satisfaction_current": 6.0,
+          "opportunity_score": 5.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 0,
+          "job_step_name": "product_constraint",
+          "impact_category": "reliability"
+        },
+        {
+          "error_statement": "Minimize the likelihood of polymer housing seal degradation when hydronic heating circuits operate continuously above 80 degrees C with occasional thermal spikes approaching the 90 degree C material service limit",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 6.0,
+          "satisfaction_current": 3.0,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 0,
+          "job_step_name": "product_constraint",
+          "impact_category": "reliability"
+        },
+        {
+          "error_statement": "Minimize the likelihood of losing flow measurement capability at low-flow conditions below 4.2 l/min (DN20) during single-zone partial-load heating operation where only one circuit is active",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 7.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 10.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 0,
+          "job_step_name": "product_constraint",
+          "impact_category": "reliability"
+        },
+        {
+          "error_statement": "Minimize the measurement error introduced by transient air entrainment exceeding 2% by volume during hydronic circuit fill, purge, or maintenance drain-and-refill operations that temporarily aerate the medium",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 7.0,
+          "satisfaction_current": 3.0,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 0,
+          "job_step_name": "product_constraint",
+          "impact_category": "reliability"
+        },
+        {
+          "error_statement": "Minimize the likelihood of complete signal loss during partial pipe drainage events required for circuit modification, sensor replacement, or zone isolation maintenance on hydronic systems",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 6.0,
+          "satisfaction_current": 2.0,
+          "opportunity_score": 10.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 0,
+          "job_step_name": "product_constraint",
+          "impact_category": "reliability"
+        },
+        {
+          "error_statement": "Minimize the measurement accuracy degradation caused by insufficient upstream straight pipe run in retrofit installations where building constraints prevent the recommended 5-10x DN of undisturbed straight pipe upstream of the sensor",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 7.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 10.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 0,
+          "job_step_name": "product_constraint",
+          "impact_category": "reliability"
+        },
+        {
+          "error_statement": "Minimize the residual measurement error during rapid temperature transients between heating and cooling mode changeover that temporarily exceed the NTC compensation algorithm's response time",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 5.0,
+          "satisfaction_current": 5.0,
+          "opportunity_score": 5.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 0,
+          "job_step_name": "product_constraint",
+          "impact_category": "reliability"
+        },
+        {
+          "error_statement": "Minimize the likelihood of incorrect acoustic coupling between piezoelectric transducer and medium when glycol concentration changes shift the speed-of-sound calibration baseline beyond the pre-configured fluid-type setting",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "importance": 6.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 8.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 0,
+          "job_step_name": "product_constraint",
+          "impact_category": "reliability"
+        }
+      ],
+      "recalibration_adjustments": [
+        {
+          "need_id": 3,
+          "field": "satisfaction_current",
+          "original": 4,
+          "recalibrated": 5,
+          "rationale": "Clamp-on (45% share) requires zero pipe modifications, raising weighted incumbent satisfaction"
+        },
+        {
+          "need_id": 5,
+          "field": "satisfaction_current",
+          "original": 4,
+          "recalibrated": 5,
+          "rationale": "Clamp-on and dP methods need no controller configuration; standalone/manual reading is standard"
+        },
+        {
+          "need_id": 6,
+          "field": "satisfaction_current",
+          "original": 5,
+          "recalibrated": 4,
+          "rationale": "dP meters (35% share) achieve only ±5-10% accuracy via Cv lookup tables, dragging weighted satisfaction below original"
+        },
+        {
+          "need_id": 19,
+          "field": "satisfaction_current",
+          "original": 3,
+          "recalibrated": 2,
+          "rationale": "No incumbent provides ongoing zone monitoring; clamp-on removed after commissioning, dP is one-time"
+        },
+        {
+          "need_id": "P2",
+          "field": "satisfaction_current",
+          "original": 4,
+          "recalibrated": 3,
+          "rationale": "Kamstrup uses metal housing with higher thermal tolerance; polymer housing is below-market"
+        },
+        {
+          "need_id": "P5",
+          "field": "satisfaction_current",
+          "original": 3,
+          "recalibrated": 2,
+          "rationale": "Complete signal failure during partial drainage is worse than dP meters that work partially drained"
+        }
+      ],
+      "cross_check": {
+        "odi_avg": 10.58,
+        "feature_fit_avg": 5.02,
+        "inconsistencies": [],
+        "result": "No inconsistencies detected"
+      },
+      "entities_produced": {
+        "nodes": [
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the likelihood of selecting a flow measurement method whose",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 11.0,
+            "is_underserved": false
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the time required to match sensor specifications (DN size,",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 7.0,
+            "is_underserved": false
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the number of pipe modifications and fittings required to",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 9.0,
+            "is_underserved": false
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the likelihood of incorrect installation orientation causing",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 10.0,
+            "is_underserved": false
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the time required to configure the communication interface",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 7.0,
+            "is_underserved": false
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the likelihood of flow measurement error exceeding ±3% of",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 14.0,
+            "is_underserved": true
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize measurement variability between successive readings at the",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 11.0,
+            "is_underserved": false
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Increase the number of hydronic zones that can be verified per hour",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 11.0,
+            "is_underserved": false
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the likelihood of measurement degradation when glycol",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 12.0,
+            "is_underserved": true
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the time to detect reverse flow (backflow) conditions",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 11.0,
+            "is_underserved": false
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the time to detect hydronic flow degradation below design",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 16.0,
+            "is_underserved": true
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the number of undetected air entrainment events causing",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 11.0,
+            "is_underserved": false
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the likelihood of measurement system failure during",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 9.0,
+            "is_underserved": false
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize long-term calibration drift exceeding ±0.5% per year",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 12.0,
+            "is_underserved": true
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the number of measurement-adjust-remeasure iterations",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 10.0,
+            "is_underserved": false
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Increase the ability to observe real-time flow-rate response during",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 10.0,
+            "is_underserved": false
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the time required to generate a documented commissioning",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 13.0,
+            "is_underserved": true
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the likelihood of commissioning flow data not meeting",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 14.0,
+            "is_underserved": true
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the number of comfort zones with undetected flow-rate",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 16.0,
+            "is_underserved": true
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the percentage of annual heating/cooling energy wasted",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 15.0,
+            "is_underserved": true
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the total cost of ownership per measurement point over",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 12.0,
+            "is_underserved": true
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the time and cost to replace a failed flow measurement",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 8.0,
+            "is_underserved": false
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Increase the ability to demonstrate verified, data-backed",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 13.0,
+            "is_underserved": true
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Increase the ability to present measurable energy performance",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 11.0,
+            "is_underserved": false
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the anxiety of signing off on commissioning results when",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 8.0,
+            "is_underserved": false
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the likelihood of measurement failure when the hydronic",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 5.0,
+            "is_underserved": false
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the likelihood of polymer housing seal degradation when",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 9.0,
+            "is_underserved": false
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the likelihood of losing flow measurement capability at",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 10.0,
+            "is_underserved": false
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the measurement error introduced by transient air",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 11.0,
+            "is_underserved": false
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the likelihood of complete signal loss during partial pipe",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 10.0,
+            "is_underserved": false
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the measurement accuracy degradation caused by",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 10.0,
+            "is_underserved": false
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the residual measurement error during rapid temperature",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 5.0,
+            "is_underserved": false
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the likelihood of incorrect acoustic coupling between",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 8.0,
+            "is_underserved": false
+          }
+        ],
+        "relationships": [
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:238220",
+            "target": "OpportunityScore:*all 33*"
+          }
+        ]
+      }
+    }
+  ],
+  "has_bom": false,
+  "naics_sector_type": "non_manufacturing"
+}

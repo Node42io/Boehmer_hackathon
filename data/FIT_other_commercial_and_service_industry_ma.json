@@ -1,0 +1,777 @@
+{
+  "id": "FIT_other_commercial_and_service_industry_ma",
+  "title": "Feature-Market Fit — Other Commercial and Service Industry Machinery Manufacturing (NAICS 333318)",
+  "type": "feature_market_fit",
+  "market_slug": "other_commercial_and_service_industry_ma",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Step 09 — Technology-Level Feature-Market Fit",
+      "content": "7 technology-scope features assessed against NAICS 333318. Kano classification + 9-dimension ODI fit scoring grounded in the 33 error statements from JTBD_other_commercial_and_service_industry_ma.\n\n**Commodity FP baseline:** \"Quantify the volumetric or mass flow rate of fluids traversing a closed conduit\" — features delivering this are the must_be baseline.\n\n**Market segments:** High-volume vended laundry, on-premises institutional laundry, express tunnel car wash, in-bay/self-service car wash, commercial water purification, commercial ice & beverage dispensing. [SRC: JTBD_other_commercial_and_service_industry_ma §1.2]\n\n**Incumbent landscape:** Turbine/paddle-wheel 45–55% share, solenoid-valve timed fill 30–40%, electromagnetic 3–5%, ultrasonic <5%. [SRC: JTBD_other_commercial_and_service_industry_ma §2.4]\n\n### 09a — Kano + ODI Scores\n\n| Feature | Kano | Time | Cost | Safety | Reli | Skill | Stress | Pain | Conf | Delight | Fit |\n|---|---|---|---|---|---|---|---|---|---|---|---|\n| **Transit-Time Flow Measurement** | must_be | 4 | 6 | 5 | 7 | 3 | 4 | 3 | 7 | 2 | **4.56** |\n| **Integrated Temperature Sensing** | attractive | 3 | 5 | 4 | 5 | 4 | 3 | 4 | 5 | 4 | **4.11** |\n| **Zero Pressure Drop Flow Path** | one_dimensional | 2 | 5 | 2 | 4 | 2 | 2 | 2 | 3 | 2 | **2.67** |\n| **No Moving Parts** | attractive | 5 | 8 | 4 | 9 | 6 | 7 | 8 | 7 | 6 | **6.67** |\n| **Bidirectional Flow Detection** | attractive | 3 | 5 | 6 | 4 | 2 | 4 | 2 | 5 | 3 | **3.78** |\n| **Digital Anomaly Detection** | attractive | 5 | 6 | 8 | 6 | 5 | 7 | 5 | 7 | 5 | **6.00** |\n| **Real-Time Compensation Algorithms** | one_dimensional | 2 | 4 | 3 | 7 | 4 | 4 | 3 | 7 | 2 | **4.00** |\n\n### 09a — Rationales\n\n**Transit-Time Flow Measurement** (must_be, 4.56): Directly delivers the commodity FP — measuring water flow is the reason commercial equipment OEMs buy a flow sensor. Without it, no billing, no water-use reporting, no fault detection. Primary drivers: Reliability (7) — continuous quantitative measurement replaces timed-fill guesswork (±10–20% vs ±1–3%); Confidence (7) — provides measured data for pay-per-use billing and WaterSense certification. Grounded in N01 (±3% accuracy, Opp=14) and N08 (per-cycle billing, Opp=13). Must_be because every flowmeter technology provides this. [SRC: JTBD §3.2 N01/N08, 01_product_decomposition]\n\n**Integrated Temperature Sensing** (attractive, 4.11): Commercial washers cycle between 5°C cold fill and 85°C hot wash. Having flow + temperature in one sensor enables thermal energy tracking and temperature-compensated flow accuracy without a separate NTC probe. Primary drivers: Cost (5) — eliminates separate temperature sensor BOM line; Reliability (5) — enables real-time temperature compensation reducing error from ~1.5% to ~0.2%; Confidence (5) — temperature-compensated readings are more trustworthy across the 5–85°C operating envelope. Attractive because incumbents (turbine, timed fill) provide no temperature measurement. Not must_be because the market currently manages without it. Grounded in N09 (measurement failure at 5–85°C, Opp=9). [SRC: JTBD §3.2 N09, 01_product_decomposition]\n\n**Zero Pressure Drop Flow Path** (one_dimensional, 2.67): Commercial equipment has pump-constrained fluid circuits. Sensor flow restriction reduces available pump capacity for the washing/rinsing process. Less restriction = proportionally more capacity available (linear). Primary driver: Cost (5) — eliminates head-loss penalty across multiple measurement points in multi-machine installations. Low scores elsewhere because benefit is purely hydraulic. One_dimensional because more flow restriction is proportionally worse (linear relationship between pressure drop and pump energy). [SRC: 01_product_decomposition]\n\n**No Moving Parts** (attractive, 6.67): The #1 pain point in this market. Turbine/paddle-wheel sensors (45–55% incumbent share) clog from lint, detergent residue, and mineral scale within 12 months. A solid-state sensor with no maintenance schedule is genuinely delightful — most OEM engineers accept mechanical sensor replacement as normal. Primary drivers: Reliability (9) — directly eliminates the dominant failure mode in detergent-laden water (N10 rotor clogging, Opp=14); Cost (8) — eliminates $150–300 quarterly field service cleaning calls per machine (N11, Opp=11); Pain (8) — removes quarterly sensor disassembly that service technicians universally dislike. Attractive because the market currently accepts mechanical wear as an unavoidable trade-off. Not must_be — absence doesn't prevent basic function; turbine sensors work, they just fail faster. [SRC: JTBD §3.2 N10/N11/N12, 01_product_decomposition]\n\n**Bidirectional Flow Detection** (attractive, 3.78): Relevant in this market for detecting check-valve failures (causing backflow and water waste), monitoring water recycling system flow direction, and preventing potable water contamination in purification equipment. Primary driver: Safety (6) — detects backflow that could contaminate potable water supply in NSF-regulated purification equipment; Cost (5) — identifies water waste from failed check valves in multi-machine plumbing. Attractive because commercial machinery OEMs don't expect directional flow sensing — check valves are used instead. Not indifferent (unlike breweries) because 333318 has multi-machine plumbing with check valves that fail silently. Grounded in N06 (undetected water leaks, Opp=13). [SRC: JTBD §3.2 N06]\n\n**Digital Anomaly Detection** (attractive, 6.00): Detects air bubbles, empty pipes, and medium composition changes — capabilities that address the top safety pain points. Empty-pipe detection within 5 seconds prevents dry-run damage to pumps and heating elements in unmanned vended laundry and car wash equipment. Bubble detection flags recycled water aeration issues. Primary drivers: Safety (8) — prevents pump/heater destruction from dry-run (N04, Opp=14); Stress (7) — dramatically reduces anxiety about undetected failures in unmanned equipment; Confidence (7) — definitive diagnostic flags replace manual inspection rounds. Attractive because incumbents (turbine, timed fill) have zero diagnostic capability. N15b (undetected faults with timed fill, Opp=14) is entirely eliminated by any sensor with anomaly detection. [SRC: JTBD §3.2 N04/N15b, 01_product_decomposition]\n\n**Real-Time Compensation Algorithms** (one_dimensional, 4.00): Compensates for temperature variation (5–85°C), detergent concentration, and recycled water property changes. Better compensation = proportionally better accuracy across the operating envelope. Primary drivers: Reliability (7) — maintains accuracy across rapid thermal cycling in commercial washers (N09, Opp=9); Confidence (7) — users trust compensated readings across variable water quality (N22 recycled water, Opp=13). One_dimensional because 0.2% compensated error is proportionally better than 1.5% uncompensated — the benefit scales linearly with compensation quality. [SRC: JTBD §3.2 N09/N22, 01_product_decomposition]\n\n### 09b — Cross-Market Validation\n\n| # | Check | Result | Note |\n|---|---|---|---|\n| 1 | Kano consistency | **PASS** | Transit-Time = must_be (commodity FP baseline); 4 attractive features validated against 333318 status quo (turbine/timed-fill incumbents lack these capabilities) |\n| 2 | Safety-Confidence correlation | **PASS** | Digital Anomaly: safety=8, confidence=7 — consistent (safer systems earn trust) |\n| 3 | Skill-Stress correlation | **PASS** | No feature has skill ≥ 7 with stress ≤ 3 |\n| 4 | Indifferent score range | **N/A** | No features classified indifferent — all are relevant to this market |\n| 5 | No perfect-10 sweep | **PASS** | Highest single score is 9 (No Moving Parts: Reliability) |\n| 6 | Feature name compliance | **PASS** | All names are spec-visible noun phrases, 2–6 words, no brands, no superlatives |\n| 7 | Overall_fit arithmetic | **PASS** | All recomputed: (sum of 9 scores) / 9, rounded to 2 dp |\n\n**Cross-market note vs Breweries (312120):** Bidirectional Flow Detection = attractive here (3.78) vs indifferent in Breweries (1.89). Justified: 333318 has multi-machine plumbing with check valves that fail silently and potable water contamination risk in purification segments. Breweries have unidirectional glycol loops with no backflow consequence.\n\n---"
+    },
+    {
+      "title": "Step 10 — Product-Related Needs (Burleson Product Jobs)",
+      "content": "Needs that exist BECAUSE of choosing ultrasonic transit-time technology. Each traces to a specific product constraint from 01_product_decomposition. All pass the litmus test: \"Would this need disappear if a different technology were chosen?\" = YES.\n\n### 10a — Product-Related Needs\n\n| # | Statement | Source Constraint | Imp | Sat | Litmus Test |\n|---|---|---|---|---|---|\n| PR-1 | Minimize the likelihood of ultrasonic signal attenuation when detergent agitation or water recycling aeration generates air entrainment exceeding 2% by volume during commercial wash and rinse cycles | Air Bubble Tolerance | 8 | 4 | YES — electromagnetic flowmeters maintain measurement in aerated conductive fluids |\n| PR-2 | Minimize the time to restore valid flow measurement after transient foam or bubble events from detergent injection dissipate from the ultrasonic sensor measurement path | Air Bubble Tolerance | 7 | 3 | YES — Coriolis meters maintain continuous measurement through gas-liquid mixtures |\n| PR-3 | Minimize the duration of invalid measurement output during machine drain-to-fill transitions when the ultrasonic sensor encounters partial pipe fill that prevents acoustic signal propagation between transducers | Pipe Full Condition | 7 | 4 | YES — Coriolis sensors degrade gradually rather than total signal loss on partial fill |\n| PR-4 | Minimize the measurement error caused by disturbed flow profiles when the ultrasonic sensor is installed with less than 5×DN straight pipe run in compact commercial machine enclosures with elbows and T-junctions upstream | Minimum Straight Pipe Run | 7 | 4 | YES — Coriolis meters are orientation-independent; electromagnetic tolerate 3×DN upstream |\n| PR-5 | Minimize the measurement dead zone at trickle-fill and pre-rinse flow rates below 4.2 l/min (DN20) where ultrasonic transit-time difference falls below the signal-to-noise detection threshold | Minimum Flow Rate Detection | 7 | 4 | YES — electromagnetic meters maintain signal at turndown 100:1 vs ultrasonic ~10:1 |\n| PR-6 | Minimize the transient measurement error during rapid temperature cycling between cold fill (5°C) and hot wash (85°C) where ultrasonic speed-of-sound correction lags behind actual medium temperature change rate | Temperature-Dependent Accuracy | 7 | 5 | YES — electromagnetic flow measurement is independent of fluid temperature for velocity measurement |\n| PR-7 | Minimize the risk of polymer housing seal degradation when commercial hot wash cycles operate at 85°C within 5°C of the ultrasonic sensor's 90°C material limit for extended duty cycles | Maximum Medium Temperature | 6 | 5 | YES — stainless-steel-housed electromagnetic and Coriolis sensors withstand 150°C+ |\n| PR-8 | Minimize the likelihood of acoustic coupling degradation when surfactant concentrations in commercial wash water shift the medium's acoustic impedance outside the ultrasonic transducer's validated operating envelope | Media Limitation | 6 | 5 | YES — electromagnetic meters measure velocity via Faraday's law, unaffected by chemical additives |\n\n**Constraints not generating needs for 333318:**\n\n| Constraint | Why Not Applicable |\n|---|---|\n| Maximum Operating Pressure (10 bar) | Commercial equipment water circuits operate at 2–6 bar (municipal supply). High-pressure car wash spray circuits (50–150 bar) are excluded from sensor scope — different measurement point required [SRC: JTBD §1.5] |\n\n### 10b — Validation\n\n| # | Check | Result | Note |\n|---|---|---|---|\n| 1 | Litmus test | **PASS** | All 8 needs disappear with a different technology (electromagnetic or Coriolis) |\n| 2 | Source constraint traceability | **PASS** | Each constraint exists in 01_product_decomposition; causal mechanism is specific to ultrasonic transit-time operating principle |\n| 3 | Affected market plausibility | **PASS** | All constraints manifest in 333318: detergent water (air bubbles, surfactant), compact enclosures (straight run), rapid thermal cycling (5–85°C), drain transitions (pipe full) |\n| 4 | Completeness | **PASS** | 7 of 8 constraints generate needs; 1 excluded with rationale (pressure threshold never reached in sensor-applicable circuits) |\n| 5 | No market-level duplicates | **PASS** | None duplicate Step 06 P2 market needs from JTBD |\n| 6 | Importance/satisfaction sanity | **PASS** | Range 6–8 imp / 3–5 sat; air-bubble needs score highest (imp=8) due to frequent manifestation in detergent/reclaim water |\n\n---"
+    },
+    {
+      "title": "Step 11 — Vendor Feature-Market Fit (Marquardt)",
+      "content": "6 vendor-scope features compared against best incumbent per feature. Marquardt US Flow Sensor (DN20 serial) vs. best incumbent in 333318 applications.\n\n### 11a — Vendor vs. Incumbent Comparison\n\n| Feature | Kano | Vendor | Incumbent | Inc. Tech | Advantage | Rationale |\n|---|---|---|---|---|---|---|\n| **Modular Pipe Diameter Variants** | one_dimensional | 6 | 8 | Electromagnetic (E+H Promag) | **inferior** | Marquardt offers 4 variants (DN12/14/20/25) sharing RAST 2.5 electronics; electromagnetic vendors offer DN3–DN300+. DN20/DN25 cover >70% of commercial equipment circuits, but incumbent range is objectively broader. DN12 (ice machines) still in development. Addresses N21 (variant count, Opp=8). |\n| **Customizable Communication Interface** | must_be | 7 | 5 | Turbine / Paddle-Wheel | **superior** | Marquardt offers UART/LIN/frequency — matching commercial equipment OEM microcontrollers directly. LIN enables cross-platform OEM development (automotive + commercial). Incumbent turbine sensors provide only passive frequency/pulse output requiring OEM counting/conversion logic. Electromagnetic meters offer 4-20 mA/HART (industrial protocols uncommon in commercial equipment controllers). |\n| **Customizable Mechanical Interface** | one_dimensional | 7 | 5 | Turbine / Paddle-Wheel | **superior** | Marquardt's plug-in quick-connect reduces OEM assembly time from 2–3 min (wrench-and-seal threaded) to <30 s (snap-in). For OEMs producing 100+ machines/month, this translates to measurable production cost reduction. Incumbent turbine sensors offer threaded connections only. Addresses N17 (integration time, Opp=9). |\n| **Low-Energy Battery Mode** | indifferent | 8 | 2 | Electromagnetic | **superior** | <5 μA standby is well-implemented but commercial water-using machinery is mains-powered. Potential niche for remote standalone car wash water reclaim monitoring. No incumbent addresses this because the need rarely arises in this market. Superior implementation in an irrelevant context. |\n| **Pre-Calibrated Delivery** | attractive | 8 | 6 | Electromagnetic (E+H Promag) | **superior** | Marquardt factory-calibrates to customer's specific water/detergent composition and tests across operating flow profile with 100% automated final test. OEMs receive plug-and-produce sensors — no assembly-line calibration step. E+H ships with generic water calibration; field commissioning needed for non-standard media. Addresses N13 (commissioning time, Opp=7) and N17 (integration time, Opp=9). |\n| **KTW/WRAS Drinking Water Approval** | one_dimensional | 7 | 6 | Electromagnetic | **parity** | KTW/WRAS enables deployment in potable water circuits within commercial water purification and ice machine segments (segments 5–6). For laundry/car wash (segments 1–4), irrelevant. Electromagnetic meters from major brands carry NSF 61 (US) alongside European certifications. For European OEMs, Marquardt's coverage is fully adequate. \\|7-6\\| = 1 → parity. |\n\n### 11b — Objectivity Review\n\n| # | Check | Result | Note |\n|---|---|---|---|\n| 1 | Vendor bias | **PASS** | 4 superior, 1 parity, 1 inferior — 67% superior. Justified: comparison is against turbine incumbent (simple, cheap) for OEM integration features where Marquardt's sophistication provides genuine advantage |\n| 2 | Anti-vendor bias | **PASS** | 1 inferior on pipe size range is genuine (electromagnetic covers DN3–DN300+; Marquardt limited to DN12–DN25) |\n| 3 | Straw-man check | **PASS** | Best incumbent per feature: E+H Promag (market-leading electromagnetic) for size/calibration/cert; turbine/paddle-wheel (45–55% share incumbent) for communication/mechanical |\n| 4 | Advantage arithmetic | **PASS** | All gap calculations verified. Superior requires >1pt vendor-over-incumbent; parity requires |gap| ≤ 1 |\n| 5 | Kano-score consistency | **PASS** | Must_be (Comm Interface): both scores ≥ 5 ✓. Attractive (Pre-Calibrated): vendor > incumbent ✓. Indifferent scores reflect capability not market relevance ✓ |\n| 6 | Rationale specificity | **PASS** | Each rationale references concrete specs (DN sizes, protocol names, assembly times, calibration methods) |\n\n### Competitive Summary\n\n| Dimension | Marquardt Advantage | Marquardt Disadvantage |\n|---|---|---|\n| **Pre-Calibrated Delivery** | Eliminates OEM assembly-line calibration — reduces per-unit integration time | — |\n| **Communication Interface** | UART/LIN/frequency matches commercial OEM controllers directly | No 4-20 mA or Modbus for industrial-grade PLCs |\n| **Mechanical Interface** | Plug-in quick-connect cuts assembly time from minutes to seconds | — |\n| **Pipe Size Range** | — | DN12 still in development; no DN50+ for large commercial systems |\n| **Battery Mode** | Enables remote monitoring niche | Irrelevant for >95% of mains-powered commercial equipment |\n\n**Key finding:** Marquardt's strongest vendor advantages (Pre-Calibrated Delivery, Communication Interface, Mechanical Interface) directly address the OEM integration pain chain — N13 commissioning time, N17 assembly-line integration, N21 variant count. These advantages compound: a sensor that arrives factory-calibrated, with the right protocol, and snaps into place is fundamentally easier for commercial equipment OEMs to adopt than a turbine sensor requiring wrenching, wiring, and field adjustment. The weakness on pipe size range (inferior vs electromagnetic) is mitigated by the fact that DN20/DN25 covers the majority of commercial equipment circuits.\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"feature_market_fit\",\n  \"naics_code\": \"333318\",\n  \"naics_title\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n  \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n  \"product_name\": \"Ultrasonic Flow Sensor\",\n  \"vendor_name\": \"Marquardt\",\n  \"technology_class\": \"Ultrasonic Transit-Time Flow Measurement\",\n  \"step_09_tech_feature_market_fit\": {\n    \"n_features\": 7,\n    \"n_markets\": 1,\n    \"entries\": [\n      {\n        \"feature_name\": \"Transit-Time Flow Measurement\",\n        \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n        \"naics_code\": \"333318\",\n        \"kano_class\": \"must_be\",\n        \"fit_score_time\": 4,\n        \"fit_score_cost\": 6,\n        \"fit_score_safety\": 5,\n        \"fit_score_reliability\": 7,\n        \"fit_score_skill\": 3,\n        \"fit_score_stress\": 4,\n        \"fit_score_pain\": 3,\n        \"fit_score_confidence\": 7,\n        \"fit_score_delight\": 2,\n        \"overall_fit\": 4.56,\n        \"rationale\": \"Directly delivers the commodity FP — measuring water flow is the reason OEMs buy a flow sensor. Without it, no billing, no water-use reporting, no fault detection. Primary drivers: Reliability (7) — replaces timed-fill guesswork (±10-20% vs ±1-3%); Confidence (7) — measured data for pay-per-use billing and WaterSense certification. Grounded in N01 (Opp=14) and N08 (Opp=13). Must_be because every flowmeter provides this.\"\n      },\n      {\n        \"feature_name\": \"Integrated Temperature Sensing\",\n        \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n        \"naics_code\": \"333318\",\n        \"kano_class\": \"attractive\",\n        \"fit_score_time\": 3,\n        \"fit_score_cost\": 5,\n        \"fit_score_safety\": 4,\n        \"fit_score_reliability\": 5,\n        \"fit_score_skill\": 4,\n        \"fit_score_stress\": 3,\n        \"fit_score_pain\": 4,\n        \"fit_score_confidence\": 5,\n        \"fit_score_delight\": 4,\n        \"overall_fit\": 4.11,\n        \"rationale\": \"Commercial washers cycle 5-85 C. Integrated temperature enables thermal energy tracking and temperature-compensated flow accuracy without separate NTC probe. Primary drivers: Cost (5) — eliminates separate temp sensor BOM; Reliability (5) — enables compensation reducing error from ~1.5% to ~0.2%. Attractive because incumbents (turbine, timed fill) provide no temperature measurement. Grounded in N09 (Opp=9).\"\n      },\n      {\n        \"feature_name\": \"Zero Pressure Drop Flow Path\",\n        \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n        \"naics_code\": \"333318\",\n        \"kano_class\": \"one_dimensional\",\n        \"fit_score_time\": 2,\n        \"fit_score_cost\": 5,\n        \"fit_score_safety\": 2,\n        \"fit_score_reliability\": 4,\n        \"fit_score_skill\": 2,\n        \"fit_score_stress\": 2,\n        \"fit_score_pain\": 2,\n        \"fit_score_confidence\": 3,\n        \"fit_score_delight\": 2,\n        \"overall_fit\": 2.67,\n        \"rationale\": \"Sensor flow restriction reduces available pump capacity for washing/rinsing. Less restriction = proportionally more capacity available (linear). Primary driver: Cost (5) — eliminates head-loss penalty in multi-machine installations. One_dimensional because benefit scales linearly with restriction reduction.\"\n      },\n      {\n        \"feature_name\": \"No Moving Parts\",\n        \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n        \"naics_code\": \"333318\",\n        \"kano_class\": \"attractive\",\n        \"fit_score_time\": 5,\n        \"fit_score_cost\": 8,\n        \"fit_score_safety\": 4,\n        \"fit_score_reliability\": 9,\n        \"fit_score_skill\": 6,\n        \"fit_score_stress\": 7,\n        \"fit_score_pain\": 8,\n        \"fit_score_confidence\": 7,\n        \"fit_score_delight\": 6,\n        \"overall_fit\": 6.67,\n        \"rationale\": \"The #1 pain point. Turbine sensors (45-55% share) clog from lint, detergent residue, and mineral scale within 12 months. Solid-state measurement with no maintenance is genuinely delightful. Primary drivers: Reliability (9) — eliminates dominant failure mode (N10 rotor clogging, Opp=14); Cost (8) — eliminates $150-300 quarterly field service calls (N11, Opp=11); Pain (8) — removes quarterly sensor disassembly. Attractive because market accepts mechanical wear as normal.\"\n      },\n      {\n        \"feature_name\": \"Bidirectional Flow Detection\",\n        \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n        \"naics_code\": \"333318\",\n        \"kano_class\": \"attractive\",\n        \"fit_score_time\": 3,\n        \"fit_score_cost\": 5,\n        \"fit_score_safety\": 6,\n        \"fit_score_reliability\": 4,\n        \"fit_score_skill\": 2,\n        \"fit_score_stress\": 4,\n        \"fit_score_pain\": 2,\n        \"fit_score_confidence\": 5,\n        \"fit_score_delight\": 3,\n        \"overall_fit\": 3.78,\n        \"rationale\": \"Relevant for detecting check-valve failures (causing backflow and water waste), monitoring recycled water flow direction, and preventing potable water contamination in purification equipment. Primary drivers: Safety (6) — detects backflow risk in NSF-regulated purification; Cost (5) — identifies water waste from failed check valves. Attractive because OEMs don't expect directional sensing — check valves are used instead. Grounded in N06 (Opp=13).\"\n      },\n      {\n        \"feature_name\": \"Digital Anomaly Detection\",\n        \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n        \"naics_code\": \"333318\",\n        \"kano_class\": \"attractive\",\n        \"fit_score_time\": 5,\n        \"fit_score_cost\": 6,\n        \"fit_score_safety\": 8,\n        \"fit_score_reliability\": 6,\n        \"fit_score_skill\": 5,\n        \"fit_score_stress\": 7,\n        \"fit_score_pain\": 5,\n        \"fit_score_confidence\": 7,\n        \"fit_score_delight\": 5,\n        \"overall_fit\": 6.00,\n        \"rationale\": \"Detects bubbles, empty pipes, and medium composition changes. Empty-pipe detection within 5s prevents dry-run pump/heater damage in unmanned vended laundry and car wash. Primary drivers: Safety (8) — prevents pump destruction from dry-run (N04, Opp=14); Stress (7) — eliminates hidden-failure anxiety in unmanned equipment; Confidence (7) — definitive diagnostic flags replace manual inspection. Attractive because turbine and timed-fill incumbents have zero diagnostic capability. Grounded in N04 (Opp=14) and N15b (Opp=14).\"\n      },\n      {\n        \"feature_name\": \"Real-Time Compensation Algorithms\",\n        \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n        \"naics_code\": \"333318\",\n        \"kano_class\": \"one_dimensional\",\n        \"fit_score_time\": 2,\n        \"fit_score_cost\": 4,\n        \"fit_score_safety\": 3,\n        \"fit_score_reliability\": 7,\n        \"fit_score_skill\": 4,\n        \"fit_score_stress\": 4,\n        \"fit_score_pain\": 3,\n        \"fit_score_confidence\": 7,\n        \"fit_score_delight\": 2,\n        \"overall_fit\": 4.00,\n        \"rationale\": \"Compensates for temperature (5-85 C), detergent concentration, and recycled water property variation. Better compensation = proportionally better accuracy. Primary drivers: Reliability (7) — maintains accuracy across rapid thermal cycling (N09, Opp=9); Confidence (7) — users trust compensated readings across variable water quality (N22, Opp=13). One_dimensional because 0.2% compensated error is proportionally better than 1.5% uncompensated.\"\n      }\n    ]\n  },\n  \"step_10_product_related_needs\": {\n    \"n_needs\": 8,\n    \"technology_class\": \"Ultrasonic Transit-Time Flow Measurement\",\n    \"entries\": [\n      {\n        \"statement\": \"Minimize the likelihood of ultrasonic signal attenuation when detergent agitation or water recycling aeration generates air entrainment exceeding 2% by volume during commercial wash and rinse cycles\",\n        \"source_constraint\": \"Air Bubble Tolerance\",\n        \"affected_markets\": [\"Other Commercial and Service Industry Machinery Manufacturing\"],\n        \"importance\": 8,\n        \"satisfaction_current\": 4\n      },\n      {\n        \"statement\": \"Minimize the time to restore valid flow measurement after transient foam or bubble events from detergent injection dissipate from the ultrasonic sensor measurement path\",\n        \"source_constraint\": \"Air Bubble Tolerance\",\n        \"affected_markets\": [\"Other Commercial and Service Industry Machinery Manufacturing\"],\n        \"importance\": 7,\n        \"satisfaction_current\": 3\n      },\n      {\n        \"statement\": \"Minimize the duration of invalid measurement output during machine drain-to-fill transitions when the ultrasonic sensor encounters partial pipe fill that prevents acoustic signal propagation between transducers\",\n        \"source_constraint\": \"Pipe Full Condition\",\n        \"affected_markets\": [\"Other Commercial and Service Industry Machinery Manufacturing\"],\n        \"importance\": 7,\n        \"satisfaction_current\": 4\n      },\n      {\n        \"statement\": \"Minimize the measurement error caused by disturbed flow profiles when the ultrasonic sensor is installed with less than 5xDN straight pipe run in compact commercial machine enclosures with elbows and T-junctions upstream\",\n        \"source_constraint\": \"Minimum Straight Pipe Run\",\n        \"affected_markets\": [\"Other Commercial and Service Industry Machinery Manufacturing\"],\n        \"importance\": 7,\n        \"satisfaction_current\": 4\n      },\n      {\n        \"statement\": \"Minimize the measurement dead zone at trickle-fill and pre-rinse flow rates below 4.2 l/min (DN20) where ultrasonic transit-time difference falls below the signal-to-noise detection threshold\",\n        \"source_constraint\": \"Minimum Flow Rate Detection\",\n        \"affected_markets\": [\"Other Commercial and Service Industry Machinery Manufacturing\"],\n        \"importance\": 7,\n        \"satisfaction_current\": 4\n      },\n      {\n        \"statement\": \"Minimize the transient measurement error during rapid temperature cycling between cold fill (5 C) and hot wash (85 C) where ultrasonic speed-of-sound correction lags behind actual medium temperature change rate\",\n        \"source_constraint\": \"Temperature-Dependent Accuracy\",\n        \"affected_markets\": [\"Other Commercial and Service Industry Machinery Manufacturing\"],\n        \"importance\": 7,\n        \"satisfaction_current\": 5\n      },\n      {\n        \"statement\": \"Minimize the risk of polymer housing seal degradation when commercial hot wash cycles operate at 85 C within 5 C of the ultrasonic sensor's 90 C material limit for extended duty cycles\",\n        \"source_constraint\": \"Maximum Medium Temperature\",\n        \"affected_markets\": [\"Other Commercial and Service Industry Machinery Manufacturing\"],\n        \"importance\": 6,\n        \"satisfaction_current\": 5\n      },\n      {\n        \"statement\": \"Minimize the likelihood of acoustic coupling degradation when surfactant concentrations in commercial wash water shift the medium's acoustic impedance outside the ultrasonic transducer's validated operating envelope\",\n        \"source_constraint\": \"Media Limitation\",\n        \"affected_markets\": [\"Other Commercial and Service Industry Machinery Manufacturing\"],\n        \"importance\": 6,\n        \"satisfaction_current\": 5\n      }\n    ],\n    \"constraints_not_applicable\": [\n      {\n        \"constraint\": \"Maximum Operating Pressure\",\n        \"reason\": \"Commercial equipment water circuits operate at 2-6 bar. High-pressure car wash spray circuits (50-150 bar) are excluded from sensor scope — different measurement point required per JTBD BOM analysis\"\n      }\n    ]\n  },\n  \"step_11_vendor_feature_market_fit\": {\n    \"vendor_name\": \"Marquardt\",\n    \"vendor_product\": \"US Flow Sensor (DN20 serial)\",\n    \"n_comparisons\": 6,\n    \"entries\": [\n      {\n        \"feature_name\": \"Modular Pipe Diameter Variants\",\n        \"feature_description\": \"Serve multiple pipe sizes via interchangeable flow bodies sharing a common electronics platform\",\n        \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n        \"naics_code\": \"333318\",\n        \"vendor_score\": 6,\n        \"best_incumbent_score\": 8,\n        \"best_incumbent_technology\": \"Electromagnetic Flow Measurement\",\n        \"advantage\": \"inferior\",\n        \"kano_class\": \"one_dimensional\",\n        \"rationale\": \"Marquardt offers 4 variants (DN12/14/20/25) sharing RAST 2.5 electronics; electromagnetic vendors offer DN3-DN300+. DN20/DN25 cover >70% of commercial equipment circuits, but incumbent range is objectively broader. DN12 (ice machines) still in development. Addresses N21 (variant count, Opp=8).\"\n      },\n      {\n        \"feature_name\": \"Customizable Communication Interface\",\n        \"feature_description\": \"Support UART, LIN, and frequency output protocols selectable at order level\",\n        \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n        \"naics_code\": \"333318\",\n        \"vendor_score\": 7,\n        \"best_incumbent_score\": 5,\n        \"best_incumbent_technology\": \"Turbine / Paddle-Wheel Flow Sensor\",\n        \"advantage\": \"superior\",\n        \"kano_class\": \"must_be\",\n        \"rationale\": \"Marquardt UART/LIN/frequency matches commercial equipment OEM microcontrollers directly. LIN enables cross-platform development (automotive + commercial). Turbine sensors provide only passive frequency/pulse requiring OEM counting logic. Electromagnetic meters offer 4-20 mA/HART (industrial protocols uncommon in commercial equipment controllers).\"\n      },\n      {\n        \"feature_name\": \"Customizable Mechanical Interface\",\n        \"feature_description\": \"Accept threaded or plug-in pipe connections for flexible OEM installation\",\n        \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n        \"naics_code\": \"333318\",\n        \"vendor_score\": 7,\n        \"best_incumbent_score\": 5,\n        \"best_incumbent_technology\": \"Turbine / Paddle-Wheel Flow Sensor\",\n        \"advantage\": \"superior\",\n        \"kano_class\": \"one_dimensional\",\n        \"rationale\": \"Plug-in quick-connect reduces OEM assembly time from 2-3 min (wrench-and-seal) to <30 s (snap-in). For OEMs at 100+ machines/month, this is measurable production cost reduction. Turbine sensors offer threaded connections only requiring wrenching and sealant. Addresses N17 (integration time, Opp=9).\"\n      },\n      {\n        \"feature_name\": \"Low-Energy Battery Mode\",\n        \"feature_description\": \"Operate at ultra-low current consumption for battery-powered applications\",\n        \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n        \"naics_code\": \"333318\",\n        \"vendor_score\": 8,\n        \"best_incumbent_score\": 2,\n        \"best_incumbent_technology\": \"Electromagnetic Flow Measurement\",\n        \"advantage\": \"superior\",\n        \"kano_class\": \"indifferent\",\n        \"rationale\": \"<5 uA standby is well-implemented but commercial water-using machinery is mains-powered. Electromagnetic meters require 10-20 W continuous; no battery variant exists. Potential niche for remote car wash water reclaim monitoring. Superior implementation in a largely irrelevant market context.\"\n      },\n      {\n        \"feature_name\": \"Pre-Calibrated Delivery\",\n        \"feature_description\": \"Ship fully calibrated and tested to customer-specific medium and flow profile\",\n        \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n        \"naics_code\": \"333318\",\n        \"vendor_score\": 8,\n        \"best_incumbent_score\": 6,\n        \"best_incumbent_technology\": \"Electromagnetic Flow Measurement\",\n        \"advantage\": \"superior\",\n        \"kano_class\": \"attractive\",\n        \"rationale\": \"Marquardt factory-calibrates to customer's specific water/detergent composition with 100% automated final test. OEMs receive plug-and-produce sensors. E+H ships generic water calibration; field commissioning needed for non-standard media adds 5-15 min per unit. Addresses N13 (commissioning time, Opp=7) and N17 (integration time, Opp=9).\"\n      },\n      {\n        \"feature_name\": \"KTW/WRAS Drinking Water Approval\",\n        \"feature_description\": \"Wetted parts approved for potable water contact per KTW and WRAS standards\",\n        \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n        \"naics_code\": \"333318\",\n        \"vendor_score\": 7,\n        \"best_incumbent_score\": 6,\n        \"best_incumbent_technology\": \"Electromagnetic Flow Measurement\",\n        \"advantage\": \"parity\",\n        \"kano_class\": \"one_dimensional\",\n        \"rationale\": \"KTW/WRAS enables deployment in potable water circuits of purification and ice machine segments (5-6). For laundry/car wash (segments 1-4), irrelevant. Electromagnetic meters carry NSF 61 (US) + European certifications — slightly broader geographic coverage. For European OEMs, Marquardt's coverage is adequate. |7-6| = 1 -> parity.\"\n      }\n    ]\n  }\n}\n```"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "Feature",
+        "Kano",
+        "Time",
+        "Cost",
+        "Safety",
+        "Reli",
+        "Skill",
+        "Stress",
+        "Pain",
+        "Conf",
+        "Delight",
+        "Fit"
+      ],
+      "rows": [
+        {
+          "Feature": "**Transit-Time Flow Measurement**",
+          "Kano": "must_be",
+          "Time": "4",
+          "Cost": "6",
+          "Safety": "5",
+          "Reli": "7",
+          "Skill": "3",
+          "Stress": "4",
+          "Pain": "3",
+          "Conf": "7",
+          "Delight": "2",
+          "Fit": "**4.56**"
+        },
+        {
+          "Feature": "**Integrated Temperature Sensing**",
+          "Kano": "attractive",
+          "Time": "3",
+          "Cost": "5",
+          "Safety": "4",
+          "Reli": "5",
+          "Skill": "4",
+          "Stress": "3",
+          "Pain": "4",
+          "Conf": "5",
+          "Delight": "4",
+          "Fit": "**4.11**"
+        },
+        {
+          "Feature": "**Zero Pressure Drop Flow Path**",
+          "Kano": "one_dimensional",
+          "Time": "2",
+          "Cost": "5",
+          "Safety": "2",
+          "Reli": "4",
+          "Skill": "2",
+          "Stress": "2",
+          "Pain": "2",
+          "Conf": "3",
+          "Delight": "2",
+          "Fit": "**2.67**"
+        },
+        {
+          "Feature": "**No Moving Parts**",
+          "Kano": "attractive",
+          "Time": "5",
+          "Cost": "8",
+          "Safety": "4",
+          "Reli": "9",
+          "Skill": "6",
+          "Stress": "7",
+          "Pain": "8",
+          "Conf": "7",
+          "Delight": "6",
+          "Fit": "**6.67**"
+        },
+        {
+          "Feature": "**Bidirectional Flow Detection**",
+          "Kano": "attractive",
+          "Time": "3",
+          "Cost": "5",
+          "Safety": "6",
+          "Reli": "4",
+          "Skill": "2",
+          "Stress": "4",
+          "Pain": "2",
+          "Conf": "5",
+          "Delight": "3",
+          "Fit": "**3.78**"
+        },
+        {
+          "Feature": "**Digital Anomaly Detection**",
+          "Kano": "attractive",
+          "Time": "5",
+          "Cost": "6",
+          "Safety": "8",
+          "Reli": "6",
+          "Skill": "5",
+          "Stress": "7",
+          "Pain": "5",
+          "Conf": "7",
+          "Delight": "5",
+          "Fit": "**6.00**"
+        },
+        {
+          "Feature": "**Real-Time Compensation Algorithms**",
+          "Kano": "one_dimensional",
+          "Time": "2",
+          "Cost": "4",
+          "Safety": "3",
+          "Reli": "7",
+          "Skill": "4",
+          "Stress": "4",
+          "Pain": "3",
+          "Conf": "7",
+          "Delight": "2",
+          "Fit": "**4.00**"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result",
+        "Note"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Check": "Kano consistency",
+          "Result": "**PASS**",
+          "Note": "Transit-Time = must_be (commodity FP baseline); 4 attractive features validated against 333318 status quo (turbine/timed-fill incumbents lack these capabilities)"
+        },
+        {
+          "#": "2",
+          "Check": "Safety-Confidence correlation",
+          "Result": "**PASS**",
+          "Note": "Digital Anomaly: safety=8, confidence=7 — consistent (safer systems earn trust)"
+        },
+        {
+          "#": "3",
+          "Check": "Skill-Stress correlation",
+          "Result": "**PASS**",
+          "Note": "No feature has skill ≥ 7 with stress ≤ 3"
+        },
+        {
+          "#": "4",
+          "Check": "Indifferent score range",
+          "Result": "**N/A**",
+          "Note": "No features classified indifferent — all are relevant to this market"
+        },
+        {
+          "#": "5",
+          "Check": "No perfect-10 sweep",
+          "Result": "**PASS**",
+          "Note": "Highest single score is 9 (No Moving Parts: Reliability)"
+        },
+        {
+          "#": "6",
+          "Check": "Feature name compliance",
+          "Result": "**PASS**",
+          "Note": "All names are spec-visible noun phrases, 2–6 words, no brands, no superlatives"
+        },
+        {
+          "#": "7",
+          "Check": "Overall_fit arithmetic",
+          "Result": "**PASS**",
+          "Note": "All recomputed: (sum of 9 scores) / 9, rounded to 2 dp"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement",
+        "Source Constraint",
+        "Imp",
+        "Sat",
+        "Litmus Test"
+      ],
+      "rows": [
+        {
+          "#": "PR-1",
+          "Statement": "Minimize the likelihood of ultrasonic signal attenuation when detergent agitation or water recycling aeration generates air entrainment exceeding 2% by volume during commercial wash and rinse cycles",
+          "Source Constraint": "Air Bubble Tolerance",
+          "Imp": "8",
+          "Sat": "4",
+          "Litmus Test": "YES — electromagnetic flowmeters maintain measurement in aerated conductive fluids"
+        },
+        {
+          "#": "PR-2",
+          "Statement": "Minimize the time to restore valid flow measurement after transient foam or bubble events from detergent injection dissipate from the ultrasonic sensor measurement path",
+          "Source Constraint": "Air Bubble Tolerance",
+          "Imp": "7",
+          "Sat": "3",
+          "Litmus Test": "YES — Coriolis meters maintain continuous measurement through gas-liquid mixtures"
+        },
+        {
+          "#": "PR-3",
+          "Statement": "Minimize the duration of invalid measurement output during machine drain-to-fill transitions when the ultrasonic sensor encounters partial pipe fill that prevents acoustic signal propagation between transducers",
+          "Source Constraint": "Pipe Full Condition",
+          "Imp": "7",
+          "Sat": "4",
+          "Litmus Test": "YES — Coriolis sensors degrade gradually rather than total signal loss on partial fill"
+        },
+        {
+          "#": "PR-4",
+          "Statement": "Minimize the measurement error caused by disturbed flow profiles when the ultrasonic sensor is installed with less than 5×DN straight pipe run in compact commercial machine enclosures with elbows and T-junctions upstream",
+          "Source Constraint": "Minimum Straight Pipe Run",
+          "Imp": "7",
+          "Sat": "4",
+          "Litmus Test": "YES — Coriolis meters are orientation-independent; electromagnetic tolerate 3×DN upstream"
+        },
+        {
+          "#": "PR-5",
+          "Statement": "Minimize the measurement dead zone at trickle-fill and pre-rinse flow rates below 4.2 l/min (DN20) where ultrasonic transit-time difference falls below the signal-to-noise detection threshold",
+          "Source Constraint": "Minimum Flow Rate Detection",
+          "Imp": "7",
+          "Sat": "4",
+          "Litmus Test": "YES — electromagnetic meters maintain signal at turndown 100:1 vs ultrasonic ~10:1"
+        },
+        {
+          "#": "PR-6",
+          "Statement": "Minimize the transient measurement error during rapid temperature cycling between cold fill (5°C) and hot wash (85°C) where ultrasonic speed-of-sound correction lags behind actual medium temperature change rate",
+          "Source Constraint": "Temperature-Dependent Accuracy",
+          "Imp": "7",
+          "Sat": "5",
+          "Litmus Test": "YES — electromagnetic flow measurement is independent of fluid temperature for velocity measurement"
+        },
+        {
+          "#": "PR-7",
+          "Statement": "Minimize the risk of polymer housing seal degradation when commercial hot wash cycles operate at 85°C within 5°C of the ultrasonic sensor's 90°C material limit for extended duty cycles",
+          "Source Constraint": "Maximum Medium Temperature",
+          "Imp": "6",
+          "Sat": "5",
+          "Litmus Test": "YES — stainless-steel-housed electromagnetic and Coriolis sensors withstand 150°C+"
+        },
+        {
+          "#": "PR-8",
+          "Statement": "Minimize the likelihood of acoustic coupling degradation when surfactant concentrations in commercial wash water shift the medium's acoustic impedance outside the ultrasonic transducer's validated operating envelope",
+          "Source Constraint": "Media Limitation",
+          "Imp": "6",
+          "Sat": "5",
+          "Litmus Test": "YES — electromagnetic meters measure velocity via Faraday's law, unaffected by chemical additives"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Constraint",
+        "Why Not Applicable"
+      ],
+      "rows": [
+        {
+          "Constraint": "Maximum Operating Pressure (10 bar)",
+          "Why Not Applicable": "Commercial equipment water circuits operate at 2–6 bar (municipal supply). High-pressure car wash spray circuits (50–150 bar) are excluded from sensor scope — different measurement point required [SRC: JTBD §1.5]"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result",
+        "Note"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Check": "Litmus test",
+          "Result": "**PASS**",
+          "Note": "All 8 needs disappear with a different technology (electromagnetic or Coriolis)"
+        },
+        {
+          "#": "2",
+          "Check": "Source constraint traceability",
+          "Result": "**PASS**",
+          "Note": "Each constraint exists in 01_product_decomposition; causal mechanism is specific to ultrasonic transit-time operating principle"
+        },
+        {
+          "#": "3",
+          "Check": "Affected market plausibility",
+          "Result": "**PASS**",
+          "Note": "All constraints manifest in 333318: detergent water (air bubbles, surfactant), compact enclosures (straight run), rapid thermal cycling (5–85°C), drain transitions (pipe full)"
+        },
+        {
+          "#": "4",
+          "Check": "Completeness",
+          "Result": "**PASS**",
+          "Note": "7 of 8 constraints generate needs; 1 excluded with rationale (pressure threshold never reached in sensor-applicable circuits)"
+        },
+        {
+          "#": "5",
+          "Check": "No market-level duplicates",
+          "Result": "**PASS**",
+          "Note": "None duplicate Step 06 P2 market needs from JTBD"
+        },
+        {
+          "#": "6",
+          "Check": "Importance/satisfaction sanity",
+          "Result": "**PASS**",
+          "Note": "Range 6–8 imp / 3–5 sat; air-bubble needs score highest (imp=8) due to frequent manifestation in detergent/reclaim water"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Feature",
+        "Kano",
+        "Vendor",
+        "Incumbent",
+        "Inc. Tech",
+        "Advantage",
+        "Rationale"
+      ],
+      "rows": [
+        {
+          "Feature": "**Modular Pipe Diameter Variants**",
+          "Kano": "one_dimensional",
+          "Vendor": "6",
+          "Incumbent": "8",
+          "Inc. Tech": "Electromagnetic (E+H Promag)",
+          "Advantage": "**inferior**",
+          "Rationale": "Marquardt offers 4 variants (DN12/14/20/25) sharing RAST 2.5 electronics; electromagnetic vendors offer DN3–DN300+. DN20/DN25 cover >70% of commercial equipment circuits, but incumbent range is objectively broader. DN12 (ice machines) still in development. Addresses N21 (variant count, Opp=8)."
+        },
+        {
+          "Feature": "**Customizable Communication Interface**",
+          "Kano": "must_be",
+          "Vendor": "7",
+          "Incumbent": "5",
+          "Inc. Tech": "Turbine / Paddle-Wheel",
+          "Advantage": "**superior**",
+          "Rationale": "Marquardt offers UART/LIN/frequency — matching commercial equipment OEM microcontrollers directly. LIN enables cross-platform OEM development (automotive + commercial). Incumbent turbine sensors provide only passive frequency/pulse output requiring OEM counting/conversion logic. Electromagnetic meters offer 4-20 mA/HART (industrial protocols uncommon in commercial equipment controllers)."
+        },
+        {
+          "Feature": "**Customizable Mechanical Interface**",
+          "Kano": "one_dimensional",
+          "Vendor": "7",
+          "Incumbent": "5",
+          "Inc. Tech": "Turbine / Paddle-Wheel",
+          "Advantage": "**superior**",
+          "Rationale": "Marquardt's plug-in quick-connect reduces OEM assembly time from 2–3 min (wrench-and-seal threaded) to <30 s (snap-in). For OEMs producing 100+ machines/month, this translates to measurable production cost reduction. Incumbent turbine sensors offer threaded connections only. Addresses N17 (integration time, Opp=9)."
+        },
+        {
+          "Feature": "**Low-Energy Battery Mode**",
+          "Kano": "indifferent",
+          "Vendor": "8",
+          "Incumbent": "2",
+          "Inc. Tech": "Electromagnetic",
+          "Advantage": "**superior**",
+          "Rationale": "<5 μA standby is well-implemented but commercial water-using machinery is mains-powered. Potential niche for remote standalone car wash water reclaim monitoring. No incumbent addresses this because the need rarely arises in this market. Superior implementation in an irrelevant context."
+        },
+        {
+          "Feature": "**Pre-Calibrated Delivery**",
+          "Kano": "attractive",
+          "Vendor": "8",
+          "Incumbent": "6",
+          "Inc. Tech": "Electromagnetic (E+H Promag)",
+          "Advantage": "**superior**",
+          "Rationale": "Marquardt factory-calibrates to customer's specific water/detergent composition and tests across operating flow profile with 100% automated final test. OEMs receive plug-and-produce sensors — no assembly-line calibration step. E+H ships with generic water calibration; field commissioning needed for non-standard media. Addresses N13 (commissioning time, Opp=7) and N17 (integration time, Opp=9)."
+        },
+        {
+          "Feature": "**KTW/WRAS Drinking Water Approval**",
+          "Kano": "one_dimensional",
+          "Vendor": "7",
+          "Incumbent": "6",
+          "Inc. Tech": "Electromagnetic",
+          "Advantage": "**parity**",
+          "Rationale": "KTW/WRAS enables deployment in potable water circuits within commercial water purification and ice machine segments (segments 5–6). For laundry/car wash (segments 1–4), irrelevant. Electromagnetic meters from major brands carry NSF 61 (US) alongside European certifications. For European OEMs, Marquardt's coverage is fully adequate. \\"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result",
+        "Note"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Check": "Vendor bias",
+          "Result": "**PASS**",
+          "Note": "4 superior, 1 parity, 1 inferior — 67% superior. Justified: comparison is against turbine incumbent (simple, cheap) for OEM integration features where Marquardt's sophistication provides genuine advantage"
+        },
+        {
+          "#": "2",
+          "Check": "Anti-vendor bias",
+          "Result": "**PASS**",
+          "Note": "1 inferior on pipe size range is genuine (electromagnetic covers DN3–DN300+; Marquardt limited to DN12–DN25)"
+        },
+        {
+          "#": "3",
+          "Check": "Straw-man check",
+          "Result": "**PASS**",
+          "Note": "Best incumbent per feature: E+H Promag (market-leading electromagnetic) for size/calibration/cert; turbine/paddle-wheel (45–55% share incumbent) for communication/mechanical"
+        },
+        {
+          "#": "4",
+          "Check": "Advantage arithmetic",
+          "Result": "**PASS**",
+          "Note": "All gap calculations verified. Superior requires >1pt vendor-over-incumbent; parity requires"
+        },
+        {
+          "#": "5",
+          "Check": "Kano-score consistency",
+          "Result": "**PASS**",
+          "Note": "Must_be (Comm Interface): both scores ≥ 5 ✓. Attractive (Pre-Calibrated): vendor > incumbent ✓. Indifferent scores reflect capability not market relevance ✓"
+        },
+        {
+          "#": "6",
+          "Check": "Rationale specificity",
+          "Result": "**PASS**",
+          "Note": "Each rationale references concrete specs (DN sizes, protocol names, assembly times, calibration methods)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Dimension",
+        "Marquardt Advantage",
+        "Marquardt Disadvantage"
+      ],
+      "rows": [
+        {
+          "Dimension": "**Pre-Calibrated Delivery**",
+          "Marquardt Advantage": "Eliminates OEM assembly-line calibration — reduces per-unit integration time",
+          "Marquardt Disadvantage": "—"
+        },
+        {
+          "Dimension": "**Communication Interface**",
+          "Marquardt Advantage": "UART/LIN/frequency matches commercial OEM controllers directly",
+          "Marquardt Disadvantage": "No 4-20 mA or Modbus for industrial-grade PLCs"
+        },
+        {
+          "Dimension": "**Mechanical Interface**",
+          "Marquardt Advantage": "Plug-in quick-connect cuts assembly time from minutes to seconds",
+          "Marquardt Disadvantage": "—"
+        },
+        {
+          "Dimension": "**Pipe Size Range**",
+          "Marquardt Advantage": "—",
+          "Marquardt Disadvantage": "DN12 still in development; no DN50+ for large commercial systems"
+        },
+        {
+          "Dimension": "**Battery Mode**",
+          "Marquardt Advantage": "Enables remote monitoring niche",
+          "Marquardt Disadvantage": "Irrelevant for >95% of mains-powered commercial equipment"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "feature_market_fit",
+      "naics_code": "333318",
+      "naics_title": "Other Commercial and Service Industry Machinery Manufacturing",
+      "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+      "product_name": "Ultrasonic Flow Sensor",
+      "vendor_name": "Marquardt",
+      "technology_class": "Ultrasonic Transit-Time Flow Measurement",
+      "step_09_tech_feature_market_fit": {
+        "n_features": 7,
+        "n_markets": 1,
+        "entries": [
+          {
+            "feature_name": "Transit-Time Flow Measurement",
+            "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+            "naics_code": "333318",
+            "kano_class": "must_be",
+            "fit_score_time": 4,
+            "fit_score_cost": 6,
+            "fit_score_safety": 5,
+            "fit_score_reliability": 7,
+            "fit_score_skill": 3,
+            "fit_score_stress": 4,
+            "fit_score_pain": 3,
+            "fit_score_confidence": 7,
+            "fit_score_delight": 2,
+            "overall_fit": 4.56,
+            "rationale": "Directly delivers the commodity FP — measuring water flow is the reason OEMs buy a flow sensor. Without it, no billing, no water-use reporting, no fault detection. Primary drivers: Reliability (7) — replaces timed-fill guesswork (±10-20% vs ±1-3%); Confidence (7) — measured data for pay-per-use billing and WaterSense certification. Grounded in N01 (Opp=14) and N08 (Opp=13). Must_be because every flowmeter provides this."
+          },
+          {
+            "feature_name": "Integrated Temperature Sensing",
+            "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+            "naics_code": "333318",
+            "kano_class": "attractive",
+            "fit_score_time": 3,
+            "fit_score_cost": 5,
+            "fit_score_safety": 4,
+            "fit_score_reliability": 5,
+            "fit_score_skill": 4,
+            "fit_score_stress": 3,
+            "fit_score_pain": 4,
+            "fit_score_confidence": 5,
+            "fit_score_delight": 4,
+            "overall_fit": 4.11,
+            "rationale": "Commercial washers cycle 5-85 C. Integrated temperature enables thermal energy tracking and temperature-compensated flow accuracy without separate NTC probe. Primary drivers: Cost (5) — eliminates separate temp sensor BOM; Reliability (5) — enables compensation reducing error from ~1.5% to ~0.2%. Attractive because incumbents (turbine, timed fill) provide no temperature measurement. Grounded in N09 (Opp=9)."
+          },
+          {
+            "feature_name": "Zero Pressure Drop Flow Path",
+            "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+            "naics_code": "333318",
+            "kano_class": "one_dimensional",
+            "fit_score_time": 2,
+            "fit_score_cost": 5,
+            "fit_score_safety": 2,
+            "fit_score_reliability": 4,
+            "fit_score_skill": 2,
+            "fit_score_stress": 2,
+            "fit_score_pain": 2,
+            "fit_score_confidence": 3,
+            "fit_score_delight": 2,
+            "overall_fit": 2.67,
+            "rationale": "Sensor flow restriction reduces available pump capacity for washing/rinsing. Less restriction = proportionally more capacity available (linear). Primary driver: Cost (5) — eliminates head-loss penalty in multi-machine installations. One_dimensional because benefit scales linearly with restriction reduction."
+          },
+          {
+            "feature_name": "No Moving Parts",
+            "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+            "naics_code": "333318",
+            "kano_class": "attractive",
+            "fit_score_time": 5,
+            "fit_score_cost": 8,
+            "fit_score_safety": 4,
+            "fit_score_reliability": 9,
+            "fit_score_skill": 6,
+            "fit_score_stress": 7,
+            "fit_score_pain": 8,
+            "fit_score_confidence": 7,
+            "fit_score_delight": 6,
+            "overall_fit": 6.67,
+            "rationale": "The #1 pain point. Turbine sensors (45-55% share) clog from lint, detergent residue, and mineral scale within 12 months. Solid-state measurement with no maintenance is genuinely delightful. Primary drivers: Reliability (9) — eliminates dominant failure mode (N10 rotor clogging, Opp=14); Cost (8) — eliminates $150-300 quarterly field service calls (N11, Opp=11); Pain (8) — removes quarterly sensor disassembly. Attractive because market accepts mechanical wear as normal."
+          },
+          {
+            "feature_name": "Bidirectional Flow Detection",
+            "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+            "naics_code": "333318",
+            "kano_class": "attractive",
+            "fit_score_time": 3,
+            "fit_score_cost": 5,
+            "fit_score_safety": 6,
+            "fit_score_reliability": 4,
+            "fit_score_skill": 2,
+            "fit_score_stress": 4,
+            "fit_score_pain": 2,
+            "fit_score_confidence": 5,
+            "fit_score_delight": 3,
+            "overall_fit": 3.78,
+            "rationale": "Relevant for detecting check-valve failures (causing backflow and water waste), monitoring recycled water flow direction, and preventing potable water contamination in purification equipment. Primary drivers: Safety (6) — detects backflow risk in NSF-regulated purification; Cost (5) — identifies water waste from failed check valves. Attractive because OEMs don't expect directional sensing — check valves are used instead. Grounded in N06 (Opp=13)."
+          },
+          {
+            "feature_name": "Digital Anomaly Detection",
+            "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+            "naics_code": "333318",
+            "kano_class": "attractive",
+            "fit_score_time": 5,
+            "fit_score_cost": 6,
+            "fit_score_safety": 8,
+            "fit_score_reliability": 6,
+            "fit_score_skill": 5,
+            "fit_score_stress": 7,
+            "fit_score_pain": 5,
+            "fit_score_confidence": 7,
+            "fit_score_delight": 5,
+            "overall_fit": 6.0,
+            "rationale": "Detects bubbles, empty pipes, and medium composition changes. Empty-pipe detection within 5s prevents dry-run pump/heater damage in unmanned vended laundry and car wash. Primary drivers: Safety (8) — prevents pump destruction from dry-run (N04, Opp=14); Stress (7) — eliminates hidden-failure anxiety in unmanned equipment; Confidence (7) — definitive diagnostic flags replace manual inspection. Attractive because turbine and timed-fill incumbents have zero diagnostic capability. Grounded in N04 (Opp=14) and N15b (Opp=14)."
+          },
+          {
+            "feature_name": "Real-Time Compensation Algorithms",
+            "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+            "naics_code": "333318",
+            "kano_class": "one_dimensional",
+            "fit_score_time": 2,
+            "fit_score_cost": 4,
+            "fit_score_safety": 3,
+            "fit_score_reliability": 7,
+            "fit_score_skill": 4,
+            "fit_score_stress": 4,
+            "fit_score_pain": 3,
+            "fit_score_confidence": 7,
+            "fit_score_delight": 2,
+            "overall_fit": 4.0,
+            "rationale": "Compensates for temperature (5-85 C), detergent concentration, and recycled water property variation. Better compensation = proportionally better accuracy. Primary drivers: Reliability (7) — maintains accuracy across rapid thermal cycling (N09, Opp=9); Confidence (7) — users trust compensated readings across variable water quality (N22, Opp=13). One_dimensional because 0.2% compensated error is proportionally better than 1.5% uncompensated."
+          }
+        ]
+      },
+      "step_10_product_related_needs": {
+        "n_needs": 8,
+        "technology_class": "Ultrasonic Transit-Time Flow Measurement",
+        "entries": [
+          {
+            "statement": "Minimize the likelihood of ultrasonic signal attenuation when detergent agitation or water recycling aeration generates air entrainment exceeding 2% by volume during commercial wash and rinse cycles",
+            "source_constraint": "Air Bubble Tolerance",
+            "affected_markets": [
+              "Other Commercial and Service Industry Machinery Manufacturing"
+            ],
+            "importance": 8,
+            "satisfaction_current": 4
+          },
+          {
+            "statement": "Minimize the time to restore valid flow measurement after transient foam or bubble events from detergent injection dissipate from the ultrasonic sensor measurement path",
+            "source_constraint": "Air Bubble Tolerance",
+            "affected_markets": [
+              "Other Commercial and Service Industry Machinery Manufacturing"
+            ],
+            "importance": 7,
+            "satisfaction_current": 3
+          },
+          {
+            "statement": "Minimize the duration of invalid measurement output during machine drain-to-fill transitions when the ultrasonic sensor encounters partial pipe fill that prevents acoustic signal propagation between transducers",
+            "source_constraint": "Pipe Full Condition",
+            "affected_markets": [
+              "Other Commercial and Service Industry Machinery Manufacturing"
+            ],
+            "importance": 7,
+            "satisfaction_current": 4
+          },
+          {
+            "statement": "Minimize the measurement error caused by disturbed flow profiles when the ultrasonic sensor is installed with less than 5xDN straight pipe run in compact commercial machine enclosures with elbows and T-junctions upstream",
+            "source_constraint": "Minimum Straight Pipe Run",
+            "affected_markets": [
+              "Other Commercial and Service Industry Machinery Manufacturing"
+            ],
+            "importance": 7,
+            "satisfaction_current": 4
+          },
+          {
+            "statement": "Minimize the measurement dead zone at trickle-fill and pre-rinse flow rates below 4.2 l/min (DN20) where ultrasonic transit-time difference falls below the signal-to-noise detection threshold",
+            "source_constraint": "Minimum Flow Rate Detection",
+            "affected_markets": [
+              "Other Commercial and Service Industry Machinery Manufacturing"
+            ],
+            "importance": 7,
+            "satisfaction_current": 4
+          },
+          {
+            "statement": "Minimize the transient measurement error during rapid temperature cycling between cold fill (5 C) and hot wash (85 C) where ultrasonic speed-of-sound correction lags behind actual medium temperature change rate",
+            "source_constraint": "Temperature-Dependent Accuracy",
+            "affected_markets": [
+              "Other Commercial and Service Industry Machinery Manufacturing"
+            ],
+            "importance": 7,
+            "satisfaction_current": 5
+          },
+          {
+            "statement": "Minimize the risk of polymer housing seal degradation when commercial hot wash cycles operate at 85 C within 5 C of the ultrasonic sensor's 90 C material limit for extended duty cycles",
+            "source_constraint": "Maximum Medium Temperature",
+            "affected_markets": [
+              "Other Commercial and Service Industry Machinery Manufacturing"
+            ],
+            "importance": 6,
+            "satisfaction_current": 5
+          },
+          {
+            "statement": "Minimize the likelihood of acoustic coupling degradation when surfactant concentrations in commercial wash water shift the medium's acoustic impedance outside the ultrasonic transducer's validated operating envelope",
+            "source_constraint": "Media Limitation",
+            "affected_markets": [
+              "Other Commercial and Service Industry Machinery Manufacturing"
+            ],
+            "importance": 6,
+            "satisfaction_current": 5
+          }
+        ],
+        "constraints_not_applicable": [
+          {
+            "constraint": "Maximum Operating Pressure",
+            "reason": "Commercial equipment water circuits operate at 2-6 bar. High-pressure car wash spray circuits (50-150 bar) are excluded from sensor scope — different measurement point required per JTBD BOM analysis"
+          }
+        ]
+      },
+      "step_11_vendor_feature_market_fit": {
+        "vendor_name": "Marquardt",
+        "vendor_product": "US Flow Sensor (DN20 serial)",
+        "n_comparisons": 6,
+        "entries": [
+          {
+            "feature_name": "Modular Pipe Diameter Variants",
+            "feature_description": "Serve multiple pipe sizes via interchangeable flow bodies sharing a common electronics platform",
+            "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+            "naics_code": "333318",
+            "vendor_score": 6,
+            "best_incumbent_score": 8,
+            "best_incumbent_technology": "Electromagnetic Flow Measurement",
+            "advantage": "inferior",
+            "kano_class": "one_dimensional",
+            "rationale": "Marquardt offers 4 variants (DN12/14/20/25) sharing RAST 2.5 electronics; electromagnetic vendors offer DN3-DN300+. DN20/DN25 cover >70% of commercial equipment circuits, but incumbent range is objectively broader. DN12 (ice machines) still in development. Addresses N21 (variant count, Opp=8)."
+          },
+          {
+            "feature_name": "Customizable Communication Interface",
+            "feature_description": "Support UART, LIN, and frequency output protocols selectable at order level",
+            "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+            "naics_code": "333318",
+            "vendor_score": 7,
+            "best_incumbent_score": 5,
+            "best_incumbent_technology": "Turbine / Paddle-Wheel Flow Sensor",
+            "advantage": "superior",
+            "kano_class": "must_be",
+            "rationale": "Marquardt UART/LIN/frequency matches commercial equipment OEM microcontrollers directly. LIN enables cross-platform development (automotive + commercial). Turbine sensors provide only passive frequency/pulse requiring OEM counting logic. Electromagnetic meters offer 4-20 mA/HART (industrial protocols uncommon in commercial equipment controllers)."
+          },
+          {
+            "feature_name": "Customizable Mechanical Interface",
+            "feature_description": "Accept threaded or plug-in pipe connections for flexible OEM installation",
+            "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+            "naics_code": "333318",
+            "vendor_score": 7,
+            "best_incumbent_score": 5,
+            "best_incumbent_technology": "Turbine / Paddle-Wheel Flow Sensor",
+            "advantage": "superior",
+            "kano_class": "one_dimensional",
+            "rationale": "Plug-in quick-connect reduces OEM assembly time from 2-3 min (wrench-and-seal) to <30 s (snap-in). For OEMs at 100+ machines/month, this is measurable production cost reduction. Turbine sensors offer threaded connections only requiring wrenching and sealant. Addresses N17 (integration time, Opp=9)."
+          },
+          {
+            "feature_name": "Low-Energy Battery Mode",
+            "feature_description": "Operate at ultra-low current consumption for battery-powered applications",
+            "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+            "naics_code": "333318",
+            "vendor_score": 8,
+            "best_incumbent_score": 2,
+            "best_incumbent_technology": "Electromagnetic Flow Measurement",
+            "advantage": "superior",
+            "kano_class": "indifferent",
+            "rationale": "<5 uA standby is well-implemented but commercial water-using machinery is mains-powered. Electromagnetic meters require 10-20 W continuous; no battery variant exists. Potential niche for remote car wash water reclaim monitoring. Superior implementation in a largely irrelevant market context."
+          },
+          {
+            "feature_name": "Pre-Calibrated Delivery",
+            "feature_description": "Ship fully calibrated and tested to customer-specific medium and flow profile",
+            "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+            "naics_code": "333318",
+            "vendor_score": 8,
+            "best_incumbent_score": 6,
+            "best_incumbent_technology": "Electromagnetic Flow Measurement",
+            "advantage": "superior",
+            "kano_class": "attractive",
+            "rationale": "Marquardt factory-calibrates to customer's specific water/detergent composition with 100% automated final test. OEMs receive plug-and-produce sensors. E+H ships generic water calibration; field commissioning needed for non-standard media adds 5-15 min per unit. Addresses N13 (commissioning time, Opp=7) and N17 (integration time, Opp=9)."
+          },
+          {
+            "feature_name": "KTW/WRAS Drinking Water Approval",
+            "feature_description": "Wetted parts approved for potable water contact per KTW and WRAS standards",
+            "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+            "naics_code": "333318",
+            "vendor_score": 7,
+            "best_incumbent_score": 6,
+            "best_incumbent_technology": "Electromagnetic Flow Measurement",
+            "advantage": "parity",
+            "kano_class": "one_dimensional",
+            "rationale": "KTW/WRAS enables deployment in potable water circuits of purification and ice machine segments (5-6). For laundry/car wash (segments 1-4), irrelevant. Electromagnetic meters carry NSF 61 (US) + European certifications — slightly broader geographic coverage. For European OEMs, Marquardt's coverage is adequate. |7-6| = 1 -> parity."
+          }
+        ]
+      }
+    }
+  ],
+  "has_bom": true,
+  "naics_sector_type": "manufacturing"
+}

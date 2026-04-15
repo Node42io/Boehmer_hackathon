@@ -1,0 +1,346 @@
+{
+  "id": "COMPAT_plumbing_heating_and_air_conditioning_co",
+  "title": "COMPAT — Constraint-Market Compatibility: Plumbing, Heating & Air-Conditioning Contractors (NAICS 238220)",
+  "type": "constraint_compatibility",
+  "market_slug": "plumbing_heating_and_air_conditioning_co",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Step 07 — Product Constraints (from upstream)",
+      "content": "Constraints carried forward from 01_product_decomposition. No web search augmentation per instructions.\n\n| # | Constraint | Type | Severity | Threshold | is_absolute |\n|---|---|---|---|---|---|\n| C1 | Media Limitation | physical | hard | Water/water-like only | true |\n| C2 | Maximum Medium Temperature | physical | hard | 90 °C | true |\n| C3 | Maximum Operating Pressure | physical | hard | 10 bar | true |\n| C4 | Minimum Flow Rate Detection | operational | soft | 0.25–4.2 l/min (variant) | false |\n| C5 | Air Bubble Tolerance | physical | soft | ~2% vol | false |\n| C6 | Pipe Full Condition | operational | hard | Pipe must be full | true |\n| C7 | Minimum Straight Pipe Run | operational | soft | 5–10× DN | false |\n| C8 | Temperature-Dependent Accuracy | physical | soft | ~0.2% with NTC comp. | false |\n\n---"
+    },
+    {
+      "title": "Step 08 — Constraint-Market Assessment: NAICS 238220",
+      "content": "**Market context:** HVAC contractors install, commission, and maintain hydronic heating/cooling systems in residential and commercial buildings. Marquardt's sensor sits at L4.5.2.1 (Ultrasonic Inline Flow Sensor) under L5.5.2 Hydraulic Balancing & Flow Measurement within L6.5 Testing & Commissioning. [SRC: VN_plumbing_heating_and_air_conditioning_co]\n\nOperating environment: Closed-loop hydronic circuits, DN15–DN25 pipe, water or water-glycol media, 5–80 °C, 1–4 bar typical (max 6 bar), flow rates 5–30 l/min per zone. [SRC: 05_market_discovery, VN]\n\n### Verdict Matrix\n\n| # | Constraint | Verdict | Rationale |\n|---|---|---|---|\n| C1 | Media Limitation | **none** | Hydronic circuits use water or water-glycol mixtures — exact media match. No oils, gases, or non-polar liquids in HVAC hydronic systems. [SRC: 01, VN L5.5.2] |\n| C2 | Max Medium Temperature (90 °C) | **none** | Residential/commercial hydronic circuits operate at 40–80 °C. High-temperature boilers reach 82 °C max flow temp. Well within 90 °C limit. [SRC: 05_market_discovery Rank 2] |\n| C3 | Max Operating Pressure (10 bar) | **none** | Residential hydronic systems: 1–3 bar. Commercial: 2–6 bar. Safety relief valves set at 3 bar (residential) or 6 bar (commercial). Well within 10 bar. [SRC: VN L6.3–L6.5 context] |\n| C4 | Min Flow Rate Detection | **none** | Zone commissioning flows are 5–30 l/min for DN15–DN25 circuits. Minimum detectable (4.2 l/min DN20, 0.25 l/min DN14) is below typical operating range. [SRC: 01 specs, 05 Rank 2] |\n| C5 | Air Bubble Tolerance (~2% vol) | **none** | Standard commissioning sequence: fill → purge → pressure test → flow balance. Properly purged closed-loop hydronic systems have <0.5% air content by the time flow measurement occurs. Chronic air entrainment is a system defect, not a routine operating condition. [SRC: VN L5.5.1, L6.5] |\n| C6 | Pipe Full Condition | **none** | Closed-loop hydronic circuits are fully filled and pressurized as prerequisite to commissioning. Partially filled pipes are a fault state caught during pressure testing (L5.5.1) before flow balancing. [SRC: VN L5.5.1] |\n| C7 | Min Straight Pipe Run (5–10× DN) | **mitigable** | Tight mechanical rooms and retrofit installations may have elbows, tees, or valves close to sensor insertion point. Achieving 100–250 mm straight run (5–10× DN20) is constrained in some installations. |\n| C8 | Temp-Dependent Accuracy | **none** | HVAC systems operate in moderate range (5–80 °C) with gradual temperature changes. Built-in NTC compensation reduces error to ~0.2%. No extreme transients in standard hydronic operation. [SRC: 01 constraints] |\n\n### C7 Mitigation Detail\n\n| Field | Value |\n|---|---|\n| **Mitigation actions** | 1. Specify sensor placement during system design (L6.2) to ensure adequate straight run upstream. 2. Install compact flow straightener upstream of sensor (<$50, adds 2× DN equivalent). 3. Use DN14 variant where space is constrained (shorter 120 mm body, lower straight-run requirement in absolute terms). |\n| **Cost estimate** | low (<$10K) |\n| **Time estimate** | 0 — addressable at installation with no product modification |\n\n---"
+    },
+    {
+      "title": "Summary",
+      "content": "| Metric | Value |\n|---|---|\n| **Total assessments** | 8 |\n| **Knockouts** | 0 |\n| **Mitigable** | 1 (C7 — Minimum Straight Pipe Run) |\n| **None (irrelevant)** | 7 |\n| **Market status** | **SURVIVING** — no knockouts, proceeds to downstream scoring |\n\n**Conclusion:** NAICS 238220 presents zero physics or regulatory barriers to Marquardt's ultrasonic flow sensor. The only constraint with any relevance is installation-space-dependent straight pipe run (C7), mitigable at low cost via design-phase planning or a flow straightener. This aligns with the market's Tier 1 near-adjacent classification (architecture distance = 3) and confirms the sensor can enter this market with the current product, no redesign required. [SRC: 05_market_discovery Rank 2]\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"constraint_market_compatibility\",\n  \"product_name\": \"Ultrasonic Flow Sensor\",\n  \"vendor_name\": \"Marquardt\",\n  \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n  \"naics_code\": \"238220\",\n  \"architecture_distance\": 3,\n  \"constraints_assessed\": 8,\n  \"assessments\": [\n    {\n      \"constraint_name\": \"Media Limitation\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Hydronic circuits use water or water-glycol mixtures — exact media match for sensor capability.\"\n    },\n    {\n      \"constraint_name\": \"Maximum Medium Temperature\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Residential/commercial hydronic circuits operate at 40-80 degC. Well within 90 degC limit.\"\n    },\n    {\n      \"constraint_name\": \"Maximum Operating Pressure\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Residential 1-3 bar, commercial 2-6 bar. Safety relief valves cap at 6 bar. Well within 10 bar.\"\n    },\n    {\n      \"constraint_name\": \"Minimum Flow Rate Detection\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Zone commissioning flows 5-30 l/min. Minimum detectable 4.2 l/min (DN20) or 0.25 l/min (DN14) — below operating range.\"\n    },\n    {\n      \"constraint_name\": \"Air Bubble Tolerance\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Standard commissioning: fill, purge, pressure test, then flow balance. Properly purged closed loops have <0.5% air.\"\n    },\n    {\n      \"constraint_name\": \"Pipe Full Condition\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Closed-loop hydronic systems are fully filled and pressurized before commissioning. Partially filled pipes are a fault state caught during pressure testing.\"\n    },\n    {\n      \"constraint_name\": \"Minimum Straight Pipe Run\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"verdict\": \"mitigable\",\n      \"mitigation_actions\": [\n        \"Specify sensor placement during system design (L6.2) to ensure adequate straight run upstream\",\n        \"Install compact flow straightener upstream of sensor (<$50, adds 2x DN equivalent)\",\n        \"Use DN14 variant where space is constrained (shorter body, lower absolute straight-run requirement)\"\n      ],\n      \"mitigation_cost_estimate\": \"low\",\n      \"mitigation_time_estimate\": \"0 — addressable at installation\",\n      \"knockout_reason\": null,\n      \"rationale\": \"Tight mechanical rooms and retrofit installations may have elbows, tees, or valves close to sensor insertion point. Achievable with design-phase planning or flow straightener.\"\n    },\n    {\n      \"constraint_name\": \"Temperature-Dependent Accuracy\",\n      \"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n      \"naics_code\": \"238220\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"HVAC operates in moderate range (5-80 degC) with gradual changes. NTC compensation reduces error to ~0.2%.\"\n    }\n  ],\n  \"markets_eliminated\": [],\n  \"markets_surviving\": [\"238220\"],\n  \"market_status\": \"surviving\",\n  \"knockout_count\": 0,\n  \"mitigable_count\": 1,\n  \"none_count\": 7,\n  \"entities_produced\": {\n    \"nodes\": [],\n    \"relationships\": [\n      {\n        \"type\": \"incompatible_with\",\n        \"source\": \"Constraint:Minimum Straight Pipe Run\",\n        \"target\": \"Market:238220\",\n        \"properties\": {\n          \"compatibility\": \"mitigable\",\n          \"rationale\": \"Tight mechanical rooms and retrofit installations may constrain straight-run distance. Addressable via design-phase sensor placement or flow straightener.\",\n          \"mitigation_actions\": [\"Design-phase sensor placement\", \"Flow straightener (<$50)\", \"DN14 variant for tight spaces\"],\n          \"mitigation_cost_estimate\": \"low\",\n          \"mitigation_time_estimate\": \"0 — addressable at installation\",\n          \"knockout_reason\": null\n        }\n      }\n    ]\n  }\n}\n```"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "#",
+        "Constraint",
+        "Type",
+        "Severity",
+        "Threshold",
+        "is_absolute"
+      ],
+      "rows": [
+        {
+          "#": "C1",
+          "Constraint": "Media Limitation",
+          "Type": "physical",
+          "Severity": "hard",
+          "Threshold": "Water/water-like only",
+          "is_absolute": "true"
+        },
+        {
+          "#": "C2",
+          "Constraint": "Maximum Medium Temperature",
+          "Type": "physical",
+          "Severity": "hard",
+          "Threshold": "90 °C",
+          "is_absolute": "true"
+        },
+        {
+          "#": "C3",
+          "Constraint": "Maximum Operating Pressure",
+          "Type": "physical",
+          "Severity": "hard",
+          "Threshold": "10 bar",
+          "is_absolute": "true"
+        },
+        {
+          "#": "C4",
+          "Constraint": "Minimum Flow Rate Detection",
+          "Type": "operational",
+          "Severity": "soft",
+          "Threshold": "0.25–4.2 l/min (variant)",
+          "is_absolute": "false"
+        },
+        {
+          "#": "C5",
+          "Constraint": "Air Bubble Tolerance",
+          "Type": "physical",
+          "Severity": "soft",
+          "Threshold": "~2% vol",
+          "is_absolute": "false"
+        },
+        {
+          "#": "C6",
+          "Constraint": "Pipe Full Condition",
+          "Type": "operational",
+          "Severity": "hard",
+          "Threshold": "Pipe must be full",
+          "is_absolute": "true"
+        },
+        {
+          "#": "C7",
+          "Constraint": "Minimum Straight Pipe Run",
+          "Type": "operational",
+          "Severity": "soft",
+          "Threshold": "5–10× DN",
+          "is_absolute": "false"
+        },
+        {
+          "#": "C8",
+          "Constraint": "Temperature-Dependent Accuracy",
+          "Type": "physical",
+          "Severity": "soft",
+          "Threshold": "~0.2% with NTC comp.",
+          "is_absolute": "false"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Constraint",
+        "Verdict",
+        "Rationale"
+      ],
+      "rows": [
+        {
+          "#": "C1",
+          "Constraint": "Media Limitation",
+          "Verdict": "**none**",
+          "Rationale": "Hydronic circuits use water or water-glycol mixtures — exact media match. No oils, gases, or non-polar liquids in HVAC hydronic systems. [SRC: 01, VN L5.5.2]"
+        },
+        {
+          "#": "C2",
+          "Constraint": "Max Medium Temperature (90 °C)",
+          "Verdict": "**none**",
+          "Rationale": "Residential/commercial hydronic circuits operate at 40–80 °C. High-temperature boilers reach 82 °C max flow temp. Well within 90 °C limit. [SRC: 05_market_discovery Rank 2]"
+        },
+        {
+          "#": "C3",
+          "Constraint": "Max Operating Pressure (10 bar)",
+          "Verdict": "**none**",
+          "Rationale": "Residential hydronic systems: 1–3 bar. Commercial: 2–6 bar. Safety relief valves set at 3 bar (residential) or 6 bar (commercial). Well within 10 bar. [SRC: VN L6.3–L6.5 context]"
+        },
+        {
+          "#": "C4",
+          "Constraint": "Min Flow Rate Detection",
+          "Verdict": "**none**",
+          "Rationale": "Zone commissioning flows are 5–30 l/min for DN15–DN25 circuits. Minimum detectable (4.2 l/min DN20, 0.25 l/min DN14) is below typical operating range. [SRC: 01 specs, 05 Rank 2]"
+        },
+        {
+          "#": "C5",
+          "Constraint": "Air Bubble Tolerance (~2% vol)",
+          "Verdict": "**none**",
+          "Rationale": "Standard commissioning sequence: fill → purge → pressure test → flow balance. Properly purged closed-loop hydronic systems have <0.5% air content by the time flow measurement occurs. Chronic air entrainment is a system defect, not a routine operating condition. [SRC: VN L5.5.1, L6.5]"
+        },
+        {
+          "#": "C6",
+          "Constraint": "Pipe Full Condition",
+          "Verdict": "**none**",
+          "Rationale": "Closed-loop hydronic circuits are fully filled and pressurized as prerequisite to commissioning. Partially filled pipes are a fault state caught during pressure testing (L5.5.1) before flow balancing. [SRC: VN L5.5.1]"
+        },
+        {
+          "#": "C7",
+          "Constraint": "Min Straight Pipe Run (5–10× DN)",
+          "Verdict": "**mitigable**",
+          "Rationale": "Tight mechanical rooms and retrofit installations may have elbows, tees, or valves close to sensor insertion point. Achieving 100–250 mm straight run (5–10× DN20) is constrained in some installations."
+        },
+        {
+          "#": "C8",
+          "Constraint": "Temp-Dependent Accuracy",
+          "Verdict": "**none**",
+          "Rationale": "HVAC systems operate in moderate range (5–80 °C) with gradual temperature changes. Built-in NTC compensation reduces error to ~0.2%. No extreme transients in standard hydronic operation. [SRC: 01 constraints]"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**Mitigation actions**",
+          "Value": "1. Specify sensor placement during system design (L6.2) to ensure adequate straight run upstream. 2. Install compact flow straightener upstream of sensor (<$50, adds 2× DN equivalent). 3. Use DN14 variant where space is constrained (shorter 120 mm body, lower straight-run requirement in absolute terms)."
+        },
+        {
+          "Field": "**Cost estimate**",
+          "Value": "low (<$10K)"
+        },
+        {
+          "Field": "**Time estimate**",
+          "Value": "0 — addressable at installation with no product modification"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Metric",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Metric": "**Total assessments**",
+          "Value": "8"
+        },
+        {
+          "Metric": "**Knockouts**",
+          "Value": "0"
+        },
+        {
+          "Metric": "**Mitigable**",
+          "Value": "1 (C7 — Minimum Straight Pipe Run)"
+        },
+        {
+          "Metric": "**None (irrelevant)**",
+          "Value": "7"
+        },
+        {
+          "Metric": "**Market status**",
+          "Value": "**SURVIVING** — no knockouts, proceeds to downstream scoring"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "constraint_market_compatibility",
+      "product_name": "Ultrasonic Flow Sensor",
+      "vendor_name": "Marquardt",
+      "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+      "naics_code": "238220",
+      "architecture_distance": 3,
+      "constraints_assessed": 8,
+      "assessments": [
+        {
+          "constraint_name": "Media Limitation",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Hydronic circuits use water or water-glycol mixtures — exact media match for sensor capability."
+        },
+        {
+          "constraint_name": "Maximum Medium Temperature",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Residential/commercial hydronic circuits operate at 40-80 degC. Well within 90 degC limit."
+        },
+        {
+          "constraint_name": "Maximum Operating Pressure",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Residential 1-3 bar, commercial 2-6 bar. Safety relief valves cap at 6 bar. Well within 10 bar."
+        },
+        {
+          "constraint_name": "Minimum Flow Rate Detection",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Zone commissioning flows 5-30 l/min. Minimum detectable 4.2 l/min (DN20) or 0.25 l/min (DN14) — below operating range."
+        },
+        {
+          "constraint_name": "Air Bubble Tolerance",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Standard commissioning: fill, purge, pressure test, then flow balance. Properly purged closed loops have <0.5% air."
+        },
+        {
+          "constraint_name": "Pipe Full Condition",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Closed-loop hydronic systems are fully filled and pressurized before commissioning. Partially filled pipes are a fault state caught during pressure testing."
+        },
+        {
+          "constraint_name": "Minimum Straight Pipe Run",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "verdict": "mitigable",
+          "mitigation_actions": [
+            "Specify sensor placement during system design (L6.2) to ensure adequate straight run upstream",
+            "Install compact flow straightener upstream of sensor (<$50, adds 2x DN equivalent)",
+            "Use DN14 variant where space is constrained (shorter body, lower absolute straight-run requirement)"
+          ],
+          "mitigation_cost_estimate": "low",
+          "mitigation_time_estimate": "0 — addressable at installation",
+          "knockout_reason": null,
+          "rationale": "Tight mechanical rooms and retrofit installations may have elbows, tees, or valves close to sensor insertion point. Achievable with design-phase planning or flow straightener."
+        },
+        {
+          "constraint_name": "Temperature-Dependent Accuracy",
+          "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+          "naics_code": "238220",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "HVAC operates in moderate range (5-80 degC) with gradual changes. NTC compensation reduces error to ~0.2%."
+        }
+      ],
+      "markets_eliminated": [],
+      "markets_surviving": [
+        "238220"
+      ],
+      "market_status": "surviving",
+      "knockout_count": 0,
+      "mitigable_count": 1,
+      "none_count": 7,
+      "entities_produced": {
+        "nodes": [],
+        "relationships": [
+          {
+            "type": "incompatible_with",
+            "source": "Constraint:Minimum Straight Pipe Run",
+            "target": "Market:238220",
+            "properties": {
+              "compatibility": "mitigable",
+              "rationale": "Tight mechanical rooms and retrofit installations may constrain straight-run distance. Addressable via design-phase sensor placement or flow straightener.",
+              "mitigation_actions": [
+                "Design-phase sensor placement",
+                "Flow straightener (<$50)",
+                "DN14 variant for tight spaces"
+              ],
+              "mitigation_cost_estimate": "low",
+              "mitigation_time_estimate": "0 — addressable at installation",
+              "knockout_reason": null
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "has_bom": false,
+  "naics_sector_type": "non_manufacturing"
+}

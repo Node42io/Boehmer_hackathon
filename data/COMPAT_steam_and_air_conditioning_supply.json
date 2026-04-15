@@ -1,0 +1,432 @@
+{
+  "id": "COMPAT_steam_and_air_conditioning_supply",
+  "title": "COMPAT — Constraint-Market Compatibility: Steam and Air-Conditioning Supply (NAICS 221330)",
+  "type": "constraint_compatibility",
+  "market_slug": "steam_and_air_conditioning_supply",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Step 07 — Product Constraints (from upstream)",
+      "content": "Constraints carried forward from 01_product_decomposition. No web search augmentation per instructions.\n\n| # | Constraint | Type | Severity | Threshold | is_absolute |\n|---|---|---|---|---|---|\n| C1 | Media Limitation | physical | hard | Water/water-like only | true |\n| C2 | Maximum Medium Temperature | physical | hard | 90 °C | true |\n| C3 | Maximum Operating Pressure | physical | hard | 10 bar | true |\n| C4 | Minimum Flow Rate Detection | operational | soft | 0.25–4.2 l/min (variant) | false |\n| C5 | Air Bubble Tolerance | physical | soft | ~2% vol | false |\n| C6 | Pipe Full Condition | operational | hard | Pipe must be full | true |\n| C7 | Minimum Straight Pipe Run | operational | soft | 5–10x DN | false |\n| C8 | Temperature-Dependent Accuracy | physical | soft | ~0.2% with NTC comp. | false |\n\n---"
+    },
+    {
+      "title": "Step 08 — Constraint-Market Assessment: NAICS 221330",
+      "content": "**Market context:** District energy utilities generating, distributing, and metering thermal energy (heating and cooling) from centralised plants to multiple buildings via closed-pipe networks. Output types: district hot-water heating (3rd gen 80–120 °C supply, 4th gen 50–70 °C), district chilled-water cooling (5–7 °C supply), district steam heating, and combined heating & cooling. Marquardt's sensor sits at L4.3.3.1 (Ultrasonic Flow Sensor) under L5.3.3 Substation Flow & Temperature Measurement within L6.3 Building Substation & Energy Transfer. Secondary position at L6.4 Metering & Billing (requires EN 1434 / MID certification). [SRC: VN_steam_and_air_conditioning_supply, 05_market_discovery Rank 5]\n\nOperating environment at building substation: closed-loop water circuits, DN20–DN100 primary side (Marquardt DN20/DN25 matches residential substations), treated water medium, 2–6 bar typical substation pressure, flow rates 5–50+ l/min depending on building size. EU EED mandates individual consumption metering at every building connection. [SRC: VN L6.3, L6.4]\n\n### Verdict Matrix\n\n| # | Constraint | Verdict | Rationale |\n|---|---|---|---|\n| C1 | Media Limitation | **mitigable** | District hot-water and chilled-water networks circulate treated water — exact media match. However, district steam networks carry steam (vapour) on the primary side, which is incompatible. Mitigation: sensor is deployed on the secondary (water) side of steam substations or on condensate return, not on the steam primary. For hot-water and chilled-water output types (dominant and growing), this constraint is irrelevant. [SRC: VN L6.1, L6.3] |\n| C2 | Max Medium Temperature (90 °C) | **mitigable** | 4th generation low-temperature networks (50–70 °C supply) are fully within spec. Chilled-water networks (4–15 °C) are fully within spec. 3rd generation networks (80–120 °C supply) may exceed the 90 °C limit on the supply side — at 120 °C the gap is 1.3x, under 2x. Return-side temperatures are typically 40–60 °C (within spec). Mitigation: target 4th gen networks (growing segment), place sensor on return pipe, or serve chilled-water networks. [SRC: VN L5.1.2, L5.1.3, L5.1.4] |\n| C3 | Max Operating Pressure (10 bar) | **none** | District network trunk pressures reach 6–16 bar at central plant, but building substations operate at 2–6 bar after pressure reduction through the network. Differential pressure controllers (L4.3.2.2) and pressurisation units (L4.2.3.2) maintain substation pressures well within the 10 bar rating. Marquardt DN20/DN25 fits residential substations at the low end of the pressure range. [SRC: VN L6.2, L6.3] |\n| C4 | Min Flow Rate Detection | **none** | Residential substation flow rates at DN20/DN25 are typically 5–40 l/min — above the minimum detection threshold (4.2 l/min DN20, 0.25 l/min DN14). Substations modulate via control valve (L4.3.2.1) rather than running at near-zero flow. Low-demand periods reduce flow but not below detection limits. [SRC: 01 specs, VN L5.3.2] |\n| C5 | Air Bubble Tolerance (~2% vol) | **none** | District energy networks are closed, pressurised, and chemically treated systems. Water treatment & corrosion protection (L5.6.2) with chemical dosing, side-stream filtration, and oxygen scavengers maintains water quality. Pressurisation units prevent cavitation. Air content well below 2% in properly maintained networks. [SRC: VN L6.6, L5.6.2] |\n| C6 | Pipe Full Condition | **none** | All district energy circuits are closed-loop, fully filled, and continuously pressurised. Pressurisation units (L4.2.3.2) maintain static pressure system-wide. A partially filled pipe would indicate a major network failure (leak, burst), not a routine operating condition. [SRC: VN L5.2.3] |\n| C7 | Min Straight Pipe Run (5–10x DN) | **mitigable** | Building substations are compact installations in basements or utility rooms. The flow sensor sits between the plate heat exchanger (L5.3.1), control valve assembly (L5.3.2), and isolation valves. Space for 100–250 mm straight run (5–10x DN20) is constrained but manageable — substation manufacturers already accommodate inline energy meters. District energy substation standards (EN 1434) include meter installation provisions. [SRC: VN L6.3] |\n| C8 | Temp-Dependent Accuracy | **none** | District heating substations operate in a moderate, predictable temperature range (4–90 °C across heating and cooling). Temperature changes are gradual (seasonal/daily, not transient). NTC compensation to ~0.2% is adequate for both substation control and energy calculation. EN 1434 Class 2 accuracy is ±(2+0.02*qp/q) — sensor accuracy is competitive. [SRC: 01 constraints, VN L6.4] |\n\n### C1 Mitigation Detail\n\n| Field | Value |\n|---|---|\n| **Mitigation actions** | 1. For steam-based district systems, install sensor on the secondary (hot-water) side of the substation heat exchanger, not the steam primary side. 2. For condensate return metering in steam substations, sensor measures liquid condensate directly. 3. Focus go-to-market on hot-water and chilled-water district networks (dominant and growing segments) where media is a direct match. |\n| **Cost estimate** | low (<$10K) |\n| **Time estimate** | 0 — placement decision, no product modification required |\n\n### C2 Mitigation Detail\n\n| Field | Value |\n|---|---|\n| **Mitigation actions** | 1. Target 4th generation low-temperature networks (50–70 °C supply) — the fastest-growing segment, driven by heat pump integration and decarbonisation mandates. 2. Install sensor on the return pipe side of 3rd gen substations (return water typically 40–60 °C, well within 90 °C limit). 3. Serve all district chilled-water cooling substations directly (4–15 °C, no constraint). |\n| **Cost estimate** | low (<$10K) |\n| **Time estimate** | 0 — placement and market targeting decisions, no product modification |\n\n### C7 Mitigation Detail\n\n| Field | Value |\n|---|---|\n| **Mitigation actions** | 1. Specify sensor mounting position in substation piping design to ensure 5–10x DN straight run upstream — standard practice for EN 1434 compliant substation packages. 2. Use flow straightener vane upstream if space is critically constrained (<$5 per unit in volume). 3. Coordinate with substation OEMs (Danfoss, Kamstrup, Siemens packaging) for integrated placement. |\n| **Cost estimate** | low (<$10K) |\n| **Time estimate** | 0–2 months — addressable during substation package design |\n\n---"
+    },
+    {
+      "title": "Additional Market Note: EN 1434 / MID Certification",
+      "content": "The billing meter use case (L6.4) requires EN 1434 / MID MI-004 metering certification, which is not yet confirmed for the Marquardt sensor. Without this certification, the sensor can serve the substation **control loop** (L6.3, non-billing) but cannot be the billing-grade energy meter. Certification is a regulatory pathway, not a physics barrier — it is mitigable via the certification process (estimated 6–18 months, medium cost). This is noted as a market-entry barrier, not as a product constraint per Step 07. [SRC: VN_steam_and_air_conditioning_supply]\n\n---"
+    },
+    {
+      "title": "Summary",
+      "content": "| Metric | Value |\n|---|---|\n| **Total assessments** | 8 |\n| **Knockouts** | 0 |\n| **Mitigable** | 3 (C1 — Media/steam, C2 — Temperature/3rd gen, C7 — Straight pipe run) |\n| **None (irrelevant)** | 5 |\n| **Market status** | **SURVIVING** — no knockouts, proceeds to downstream scoring |\n\n**Conclusion:** NAICS 221330 presents zero physics knockouts for Marquardt's ultrasonic flow sensor. Three constraints are mitigable, all at low cost and zero product modification. The dominant mitigation pattern is **placement and market targeting**: install on the water side (not steam), target 4th gen / chilled-water networks or use return-side placement for 3rd gen, and specify straight-run distance in substation design. The sensor's combined flow + temperature capability is an unusually strong fit for this market's core job — thermal energy calculation (Q = flow x Cp x delta-T) at building connections — which is mandated by EU EED regulation. The DN20/DN25 pipe sizes match residential substations. The key non-constraint barrier is EN 1434 / MID metering certification for the billing meter position. Without it, the sensor serves the control loop; with it, it enters the $3.24B heat meter market. [SRC: 05_market_discovery Rank 5, VN_steam_and_air_conditioning_supply]\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"constraint_market_compatibility\",\n  \"product_name\": \"Ultrasonic Flow Sensor\",\n  \"vendor_name\": \"Marquardt\",\n  \"market_name\": \"Steam and Air-Conditioning Supply\",\n  \"naics_code\": \"221330\",\n  \"architecture_distance\": 3,\n  \"constraints_assessed\": 8,\n  \"assessments\": [\n    {\n      \"constraint_name\": \"Media Limitation\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"verdict\": \"mitigable\",\n      \"mitigation_actions\": [\n        \"Install sensor on secondary (hot-water) side of steam substation heat exchanger\",\n        \"Use for condensate return metering in steam substations\",\n        \"Focus go-to-market on hot-water and chilled-water networks (dominant segments)\"\n      ],\n      \"mitigation_cost_estimate\": \"low\",\n      \"mitigation_time_estimate\": \"0 — placement decision, no product modification\",\n      \"knockout_reason\": null,\n      \"rationale\": \"Hot-water and chilled-water networks circulate treated water (direct match). Steam networks carry vapour on primary side (incompatible), but sensor is deployed on secondary water side or condensate return.\"\n    },\n    {\n      \"constraint_name\": \"Maximum Medium Temperature\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"verdict\": \"mitigable\",\n      \"mitigation_actions\": [\n        \"Target 4th generation low-temperature networks (50-70 degC supply, fastest-growing segment)\",\n        \"Install on return pipe side of 3rd gen substations (40-60 degC return)\",\n        \"Serve all district chilled-water cooling substations directly (4-15 degC)\"\n      ],\n      \"mitigation_cost_estimate\": \"low\",\n      \"mitigation_time_estimate\": \"0 — placement and market targeting decisions\",\n      \"knockout_reason\": null,\n      \"rationale\": \"4th gen (50-70 degC) and chilled-water (4-15 degC) fully within 90 degC limit. 3rd gen supply (80-120 degC) may exceed limit, but return side (40-60 degC) is within spec. Gap at worst 1.3x (120/90).\"\n    },\n    {\n      \"constraint_name\": \"Maximum Operating Pressure\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Building substations operate at 2-6 bar after network pressure reduction. Differential pressure controllers maintain controlled conditions. Well within 10 bar limit.\"\n    },\n    {\n      \"constraint_name\": \"Minimum Flow Rate Detection\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Residential substation flow rates 5-40 l/min at DN20/DN25. Above minimum detection (4.2 l/min DN20). Substations modulate via control valve, not near-zero flow.\"\n    },\n    {\n      \"constraint_name\": \"Air Bubble Tolerance\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Closed, pressurised, chemically treated network. Water treatment with dosing and filtration maintains well below 2% air content.\"\n    },\n    {\n      \"constraint_name\": \"Pipe Full Condition\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Closed-loop, continuously pressurised network. Pressurisation units maintain static pressure. Partially filled pipe is a major failure event, not routine.\"\n    },\n    {\n      \"constraint_name\": \"Minimum Straight Pipe Run\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"verdict\": \"mitigable\",\n      \"mitigation_actions\": [\n        \"Specify sensor mounting position in substation piping design for 5-10x DN straight run\",\n        \"Use flow straightener vane upstream if space constrained (<$5/unit in volume)\",\n        \"Coordinate with substation OEMs for integrated placement in standard packages\"\n      ],\n      \"mitigation_cost_estimate\": \"low\",\n      \"mitigation_time_estimate\": \"0-2 months — during substation package design\",\n      \"knockout_reason\": null,\n      \"rationale\": \"Building substations are compact but already accommodate inline energy meters per EN 1434. Standard substation design consideration, not a novel barrier.\"\n    },\n    {\n      \"constraint_name\": \"Temperature-Dependent Accuracy\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"District substations operate at 4-90 degC across heating and cooling. Gradual seasonal/daily temperature changes. NTC compensation to ~0.2% adequate for energy calculation.\"\n    }\n  ],\n  \"markets_eliminated\": [],\n  \"markets_surviving\": [\"221330\"],\n  \"market_status\": \"surviving\",\n  \"knockout_count\": 0,\n  \"mitigable_count\": 3,\n  \"none_count\": 5,\n  \"entities_produced\": {\n    \"nodes\": [],\n    \"relationships\": [\n      {\n        \"type\": \"incompatible_with\",\n        \"source\": \"Constraint:Media Limitation\",\n        \"target\": \"Market:221330\",\n        \"properties\": {\n          \"compatibility\": \"mitigable\",\n          \"rationale\": \"Steam networks carry vapour on primary side (incompatible), but sensor deploys on secondary water side or condensate return. Hot-water and chilled-water networks are direct media match.\",\n          \"mitigation_actions\": [\"Secondary-side placement in steam substations\", \"Condensate return metering\", \"Focus on hot-water and chilled-water networks\"],\n          \"mitigation_cost_estimate\": \"low\",\n          \"mitigation_time_estimate\": \"0 — placement decision\",\n          \"knockout_reason\": null\n        }\n      },\n      {\n        \"type\": \"incompatible_with\",\n        \"source\": \"Constraint:Maximum Medium Temperature\",\n        \"target\": \"Market:221330\",\n        \"properties\": {\n          \"compatibility\": \"mitigable\",\n          \"rationale\": \"3rd gen supply (80-120 degC) may exceed 90 degC limit. 4th gen (50-70 degC) and chilled-water (4-15 degC) within spec. Return-side placement (40-60 degC) resolves 3rd gen.\",\n          \"mitigation_actions\": [\"Target 4th gen low-temperature networks\", \"Return-side sensor placement on 3rd gen\", \"Serve chilled-water substations directly\"],\n          \"mitigation_cost_estimate\": \"low\",\n          \"mitigation_time_estimate\": \"0 — placement and targeting decisions\",\n          \"knockout_reason\": null\n        }\n      },\n      {\n        \"type\": \"incompatible_with\",\n        \"source\": \"Constraint:Minimum Straight Pipe Run\",\n        \"target\": \"Market:221330\",\n        \"properties\": {\n          \"compatibility\": \"mitigable\",\n          \"rationale\": \"Compact building substations constrain straight-run distance but already accommodate inline energy meters per EN 1434. Standard design consideration.\",\n          \"mitigation_actions\": [\"Specify mounting position in substation design\", \"Flow straightener vane (<$5/unit)\", \"Coordinate with substation OEMs\"],\n          \"mitigation_cost_estimate\": \"low\",\n          \"mitigation_time_estimate\": \"0-2 months — during substation design\",\n          \"knockout_reason\": null\n        }\n      }\n    ]\n  }\n}\n```"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "#",
+        "Constraint",
+        "Type",
+        "Severity",
+        "Threshold",
+        "is_absolute"
+      ],
+      "rows": [
+        {
+          "#": "C1",
+          "Constraint": "Media Limitation",
+          "Type": "physical",
+          "Severity": "hard",
+          "Threshold": "Water/water-like only",
+          "is_absolute": "true"
+        },
+        {
+          "#": "C2",
+          "Constraint": "Maximum Medium Temperature",
+          "Type": "physical",
+          "Severity": "hard",
+          "Threshold": "90 °C",
+          "is_absolute": "true"
+        },
+        {
+          "#": "C3",
+          "Constraint": "Maximum Operating Pressure",
+          "Type": "physical",
+          "Severity": "hard",
+          "Threshold": "10 bar",
+          "is_absolute": "true"
+        },
+        {
+          "#": "C4",
+          "Constraint": "Minimum Flow Rate Detection",
+          "Type": "operational",
+          "Severity": "soft",
+          "Threshold": "0.25–4.2 l/min (variant)",
+          "is_absolute": "false"
+        },
+        {
+          "#": "C5",
+          "Constraint": "Air Bubble Tolerance",
+          "Type": "physical",
+          "Severity": "soft",
+          "Threshold": "~2% vol",
+          "is_absolute": "false"
+        },
+        {
+          "#": "C6",
+          "Constraint": "Pipe Full Condition",
+          "Type": "operational",
+          "Severity": "hard",
+          "Threshold": "Pipe must be full",
+          "is_absolute": "true"
+        },
+        {
+          "#": "C7",
+          "Constraint": "Minimum Straight Pipe Run",
+          "Type": "operational",
+          "Severity": "soft",
+          "Threshold": "5–10x DN",
+          "is_absolute": "false"
+        },
+        {
+          "#": "C8",
+          "Constraint": "Temperature-Dependent Accuracy",
+          "Type": "physical",
+          "Severity": "soft",
+          "Threshold": "~0.2% with NTC comp.",
+          "is_absolute": "false"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Constraint",
+        "Verdict",
+        "Rationale"
+      ],
+      "rows": [
+        {
+          "#": "C1",
+          "Constraint": "Media Limitation",
+          "Verdict": "**mitigable**",
+          "Rationale": "District hot-water and chilled-water networks circulate treated water — exact media match. However, district steam networks carry steam (vapour) on the primary side, which is incompatible. Mitigation: sensor is deployed on the secondary (water) side of steam substations or on condensate return, not on the steam primary. For hot-water and chilled-water output types (dominant and growing), this constraint is irrelevant. [SRC: VN L6.1, L6.3]"
+        },
+        {
+          "#": "C2",
+          "Constraint": "Max Medium Temperature (90 °C)",
+          "Verdict": "**mitigable**",
+          "Rationale": "4th generation low-temperature networks (50–70 °C supply) are fully within spec. Chilled-water networks (4–15 °C) are fully within spec. 3rd generation networks (80–120 °C supply) may exceed the 90 °C limit on the supply side — at 120 °C the gap is 1.3x, under 2x. Return-side temperatures are typically 40–60 °C (within spec). Mitigation: target 4th gen networks (growing segment), place sensor on return pipe, or serve chilled-water networks. [SRC: VN L5.1.2, L5.1.3, L5.1.4]"
+        },
+        {
+          "#": "C3",
+          "Constraint": "Max Operating Pressure (10 bar)",
+          "Verdict": "**none**",
+          "Rationale": "District network trunk pressures reach 6–16 bar at central plant, but building substations operate at 2–6 bar after pressure reduction through the network. Differential pressure controllers (L4.3.2.2) and pressurisation units (L4.2.3.2) maintain substation pressures well within the 10 bar rating. Marquardt DN20/DN25 fits residential substations at the low end of the pressure range. [SRC: VN L6.2, L6.3]"
+        },
+        {
+          "#": "C4",
+          "Constraint": "Min Flow Rate Detection",
+          "Verdict": "**none**",
+          "Rationale": "Residential substation flow rates at DN20/DN25 are typically 5–40 l/min — above the minimum detection threshold (4.2 l/min DN20, 0.25 l/min DN14). Substations modulate via control valve (L4.3.2.1) rather than running at near-zero flow. Low-demand periods reduce flow but not below detection limits. [SRC: 01 specs, VN L5.3.2]"
+        },
+        {
+          "#": "C5",
+          "Constraint": "Air Bubble Tolerance (~2% vol)",
+          "Verdict": "**none**",
+          "Rationale": "District energy networks are closed, pressurised, and chemically treated systems. Water treatment & corrosion protection (L5.6.2) with chemical dosing, side-stream filtration, and oxygen scavengers maintains water quality. Pressurisation units prevent cavitation. Air content well below 2% in properly maintained networks. [SRC: VN L6.6, L5.6.2]"
+        },
+        {
+          "#": "C6",
+          "Constraint": "Pipe Full Condition",
+          "Verdict": "**none**",
+          "Rationale": "All district energy circuits are closed-loop, fully filled, and continuously pressurised. Pressurisation units (L4.2.3.2) maintain static pressure system-wide. A partially filled pipe would indicate a major network failure (leak, burst), not a routine operating condition. [SRC: VN L5.2.3]"
+        },
+        {
+          "#": "C7",
+          "Constraint": "Min Straight Pipe Run (5–10x DN)",
+          "Verdict": "**mitigable**",
+          "Rationale": "Building substations are compact installations in basements or utility rooms. The flow sensor sits between the plate heat exchanger (L5.3.1), control valve assembly (L5.3.2), and isolation valves. Space for 100–250 mm straight run (5–10x DN20) is constrained but manageable — substation manufacturers already accommodate inline energy meters. District energy substation standards (EN 1434) include meter installation provisions. [SRC: VN L6.3]"
+        },
+        {
+          "#": "C8",
+          "Constraint": "Temp-Dependent Accuracy",
+          "Verdict": "**none**",
+          "Rationale": "District heating substations operate in a moderate, predictable temperature range (4–90 °C across heating and cooling). Temperature changes are gradual (seasonal/daily, not transient). NTC compensation to ~0.2% is adequate for both substation control and energy calculation. EN 1434 Class 2 accuracy is ±(2+0.02*qp/q) — sensor accuracy is competitive. [SRC: 01 constraints, VN L6.4]"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**Mitigation actions**",
+          "Value": "1. For steam-based district systems, install sensor on the secondary (hot-water) side of the substation heat exchanger, not the steam primary side. 2. For condensate return metering in steam substations, sensor measures liquid condensate directly. 3. Focus go-to-market on hot-water and chilled-water district networks (dominant and growing segments) where media is a direct match."
+        },
+        {
+          "Field": "**Cost estimate**",
+          "Value": "low (<$10K)"
+        },
+        {
+          "Field": "**Time estimate**",
+          "Value": "0 — placement decision, no product modification required"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**Mitigation actions**",
+          "Value": "1. Target 4th generation low-temperature networks (50–70 °C supply) — the fastest-growing segment, driven by heat pump integration and decarbonisation mandates. 2. Install sensor on the return pipe side of 3rd gen substations (return water typically 40–60 °C, well within 90 °C limit). 3. Serve all district chilled-water cooling substations directly (4–15 °C, no constraint)."
+        },
+        {
+          "Field": "**Cost estimate**",
+          "Value": "low (<$10K)"
+        },
+        {
+          "Field": "**Time estimate**",
+          "Value": "0 — placement and market targeting decisions, no product modification"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**Mitigation actions**",
+          "Value": "1. Specify sensor mounting position in substation piping design to ensure 5–10x DN straight run upstream — standard practice for EN 1434 compliant substation packages. 2. Use flow straightener vane upstream if space is critically constrained (<$5 per unit in volume). 3. Coordinate with substation OEMs (Danfoss, Kamstrup, Siemens packaging) for integrated placement."
+        },
+        {
+          "Field": "**Cost estimate**",
+          "Value": "low (<$10K)"
+        },
+        {
+          "Field": "**Time estimate**",
+          "Value": "0–2 months — addressable during substation package design"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Metric",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Metric": "**Total assessments**",
+          "Value": "8"
+        },
+        {
+          "Metric": "**Knockouts**",
+          "Value": "0"
+        },
+        {
+          "Metric": "**Mitigable**",
+          "Value": "3 (C1 — Media/steam, C2 — Temperature/3rd gen, C7 — Straight pipe run)"
+        },
+        {
+          "Metric": "**None (irrelevant)**",
+          "Value": "5"
+        },
+        {
+          "Metric": "**Market status**",
+          "Value": "**SURVIVING** — no knockouts, proceeds to downstream scoring"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "constraint_market_compatibility",
+      "product_name": "Ultrasonic Flow Sensor",
+      "vendor_name": "Marquardt",
+      "market_name": "Steam and Air-Conditioning Supply",
+      "naics_code": "221330",
+      "architecture_distance": 3,
+      "constraints_assessed": 8,
+      "assessments": [
+        {
+          "constraint_name": "Media Limitation",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "verdict": "mitigable",
+          "mitigation_actions": [
+            "Install sensor on secondary (hot-water) side of steam substation heat exchanger",
+            "Use for condensate return metering in steam substations",
+            "Focus go-to-market on hot-water and chilled-water networks (dominant segments)"
+          ],
+          "mitigation_cost_estimate": "low",
+          "mitigation_time_estimate": "0 — placement decision, no product modification",
+          "knockout_reason": null,
+          "rationale": "Hot-water and chilled-water networks circulate treated water (direct match). Steam networks carry vapour on primary side (incompatible), but sensor is deployed on secondary water side or condensate return."
+        },
+        {
+          "constraint_name": "Maximum Medium Temperature",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "verdict": "mitigable",
+          "mitigation_actions": [
+            "Target 4th generation low-temperature networks (50-70 degC supply, fastest-growing segment)",
+            "Install on return pipe side of 3rd gen substations (40-60 degC return)",
+            "Serve all district chilled-water cooling substations directly (4-15 degC)"
+          ],
+          "mitigation_cost_estimate": "low",
+          "mitigation_time_estimate": "0 — placement and market targeting decisions",
+          "knockout_reason": null,
+          "rationale": "4th gen (50-70 degC) and chilled-water (4-15 degC) fully within 90 degC limit. 3rd gen supply (80-120 degC) may exceed limit, but return side (40-60 degC) is within spec. Gap at worst 1.3x (120/90)."
+        },
+        {
+          "constraint_name": "Maximum Operating Pressure",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Building substations operate at 2-6 bar after network pressure reduction. Differential pressure controllers maintain controlled conditions. Well within 10 bar limit."
+        },
+        {
+          "constraint_name": "Minimum Flow Rate Detection",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Residential substation flow rates 5-40 l/min at DN20/DN25. Above minimum detection (4.2 l/min DN20). Substations modulate via control valve, not near-zero flow."
+        },
+        {
+          "constraint_name": "Air Bubble Tolerance",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Closed, pressurised, chemically treated network. Water treatment with dosing and filtration maintains well below 2% air content."
+        },
+        {
+          "constraint_name": "Pipe Full Condition",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Closed-loop, continuously pressurised network. Pressurisation units maintain static pressure. Partially filled pipe is a major failure event, not routine."
+        },
+        {
+          "constraint_name": "Minimum Straight Pipe Run",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "verdict": "mitigable",
+          "mitigation_actions": [
+            "Specify sensor mounting position in substation piping design for 5-10x DN straight run",
+            "Use flow straightener vane upstream if space constrained (<$5/unit in volume)",
+            "Coordinate with substation OEMs for integrated placement in standard packages"
+          ],
+          "mitigation_cost_estimate": "low",
+          "mitigation_time_estimate": "0-2 months — during substation package design",
+          "knockout_reason": null,
+          "rationale": "Building substations are compact but already accommodate inline energy meters per EN 1434. Standard substation design consideration, not a novel barrier."
+        },
+        {
+          "constraint_name": "Temperature-Dependent Accuracy",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "District substations operate at 4-90 degC across heating and cooling. Gradual seasonal/daily temperature changes. NTC compensation to ~0.2% adequate for energy calculation."
+        }
+      ],
+      "markets_eliminated": [],
+      "markets_surviving": [
+        "221330"
+      ],
+      "market_status": "surviving",
+      "knockout_count": 0,
+      "mitigable_count": 3,
+      "none_count": 5,
+      "entities_produced": {
+        "nodes": [],
+        "relationships": [
+          {
+            "type": "incompatible_with",
+            "source": "Constraint:Media Limitation",
+            "target": "Market:221330",
+            "properties": {
+              "compatibility": "mitigable",
+              "rationale": "Steam networks carry vapour on primary side (incompatible), but sensor deploys on secondary water side or condensate return. Hot-water and chilled-water networks are direct media match.",
+              "mitigation_actions": [
+                "Secondary-side placement in steam substations",
+                "Condensate return metering",
+                "Focus on hot-water and chilled-water networks"
+              ],
+              "mitigation_cost_estimate": "low",
+              "mitigation_time_estimate": "0 — placement decision",
+              "knockout_reason": null
+            }
+          },
+          {
+            "type": "incompatible_with",
+            "source": "Constraint:Maximum Medium Temperature",
+            "target": "Market:221330",
+            "properties": {
+              "compatibility": "mitigable",
+              "rationale": "3rd gen supply (80-120 degC) may exceed 90 degC limit. 4th gen (50-70 degC) and chilled-water (4-15 degC) within spec. Return-side placement (40-60 degC) resolves 3rd gen.",
+              "mitigation_actions": [
+                "Target 4th gen low-temperature networks",
+                "Return-side sensor placement on 3rd gen",
+                "Serve chilled-water substations directly"
+              ],
+              "mitigation_cost_estimate": "low",
+              "mitigation_time_estimate": "0 — placement and targeting decisions",
+              "knockout_reason": null
+            }
+          },
+          {
+            "type": "incompatible_with",
+            "source": "Constraint:Minimum Straight Pipe Run",
+            "target": "Market:221330",
+            "properties": {
+              "compatibility": "mitigable",
+              "rationale": "Compact building substations constrain straight-run distance but already accommodate inline energy meters per EN 1434. Standard design consideration.",
+              "mitigation_actions": [
+                "Specify mounting position in substation design",
+                "Flow straightener vane (<$5/unit)",
+                "Coordinate with substation OEMs"
+              ],
+              "mitigation_cost_estimate": "low",
+              "mitigation_time_estimate": "0-2 months — during substation design",
+              "knockout_reason": null
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "has_bom": false,
+  "naics_sector_type": "non_manufacturing"
+}

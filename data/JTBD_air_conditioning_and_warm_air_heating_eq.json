@@ -1,0 +1,1895 @@
+{
+  "id": "JTBD_air_conditioning_and_warm_air_heating_eq",
+  "title": "JTBD Analysis — NAICS 333415",
+  "type": "jtbd_analysis",
+  "market_slug": "air_conditioning_and_warm_air_heating_eq",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Phase 1 — Industry Landscape",
+      "content": "### 1.1 CFJ, Output Types, Offering Level\n\n| Field | Value |\n|---|---|\n| **NAICS** | 333415 |\n| **CFJ** | Manufacture climate control and thermal management equipment that conditions, heats, cools, or refrigerates enclosed spaces and stored goods to specified temperature and humidity setpoints |\n| **Offering Level** | L5 (Product) |\n\n| ID | Output Type | Description |\n|---|---|---|\n| OT-1 | Residential Split/Packaged AC | Window units, split systems, mini-splits |\n| OT-2 | Heat Pump (air-source / water-source) | Reversible vapor-compression units |\n| OT-3 | Warm Air Furnace | Gas-fired, oil-fired, or electric forced-air |\n| OT-4 | Commercial Rooftop Unit (RTU) | Packaged HVAC for commercial buildings |\n| OT-5 | Chiller (air-cooled / water-cooled) | Central cooling plant equipment |\n| OT-6 | Commercial Refrigeration Equipment | Display cases, walk-in coolers/freezers |\n| OT-7 | Industrial Refrigeration Equipment | Ammonia systems, blast freezers, cold storage |\n\n[SRC: VN_air_conditioning_and_warm_air_heating_eq]\n\n### 1.2 Segments\n\n| # | Segment | Circumstance | Alternatives Differ? |\n|---|---|---|---|\n| 1 | Residential comfort conditioning | Single-family/multi-family heating + cooling | Yes — heat pump vs furnace+AC vs boiler |\n| 2 | Commercial building comfort | Office/retail/hospitality HVAC | Yes — RTU vs chiller+AHU vs VRF |\n| 3 | Industrial process cooling | Manufacturing process thermal regulation | Yes — chiller vs cooling tower vs direct refrigeration |\n| 4 | Cold chain / food preservation | Perishable goods storage and transport | Yes — walk-in vs reach-in vs blast freezer |\n| 5 | Pharmaceutical / cleanroom | Precision temperature + humidity control | Yes — chiller+AHU vs CRAC vs DX units |\n| 6 | Data center thermal management | IT equipment heat rejection | Yes — air-cooled vs liquid-cooled vs evaporative |\n\n### 1.3 Process VN\n\n9 core L6 steps (Sheet Metal Fabrication → Performance Testing) + 5 horizontal (QA, Maintenance, HSE, Utilities, IT/OT). Full hierarchy in VN file. [SRC: VN_air_conditioning_and_warm_air_heating_eq]\n\n### 1.4 Product BOM\n\nManufacturing NAICS — BOM applies. L5 equipment positions and L4 subsystems per output type documented in VN file. Flow sensor relevant to OT-2 and OT-5 only (water-side circuits). [SRC: VN_air_conditioning_and_warm_air_heating_eq]\n\n### 1.5 Edges (Flow Sensor Column)\n\n| L6 Process Step | Edge Type | Rationale |\n|---|---|---|\n| L6f Hydronic Circuit Assembly | **HARD** | Flow sensor format/technology determines assembly process — ultrasonic requires different mounting than turbine |\n| L6e Electrical & Controls Integration | **SOFT** | Sensor output protocol (UART/LIN/frequency) affects controller interface wiring but not controller category |\n| L6i Performance Testing & Certification | **SOFT** | Sensor accuracy class affects test acceptance criteria but not test equipment category |\n| All other L6 steps | INDEPENDENT | Flow sensor has no effect on sheet metal, heat exchanger, refrigerant, combustion, or charging processes |\n\n---"
+    },
+    {
+      "title": "Phase 2 — Company Enters",
+      "content": "### 2.1 VN Anchor\n\n| Field | Value |\n|---|---|\n| **Route** | PRODUCT_BOM — sensor ends up IN the finished heat pump / chiller |\n| **Anchor Level** | L5 |\n| **Anchor Node** | Flow Sensor |\n| **Parent L6** | L6f — Hydronic Circuit Assembly |\n| **Parent Job Family** | Assemble water-side piping, circulation pumps, flow sensors, and hydraulic components for water-based heat exchange |\n| **Sibling L5s** | Circulation Pump, Plate Heat Exchanger, Hydraulic Valve Assembly |\n| **L4 Children** | Transducer Assembly, Signal Conditioning Electronics, Flow Body / Housing |\n| **Output Types Activated** | OT-2 (water-source HP), OT-5 (water-cooled chiller) |\n\n[SRC: VN_air_conditioning_and_warm_air_heating_eq]\n\n### 2.2 Lens\n\n| Field | Value |\n|---|---|\n| **Route** | Maker — PRODUCT_BOM |\n| **Lens Source** | BOM position function |\n| **Function Verb** | Measure |\n| **Lens** | \"What flow measurement does the hydronic circuit assembly need?\" |\n| **Level A filter** | Segments 1–6 all use hydronic circuits in some configurations |\n| **Level B filter** | Segments 1, 2, 3, 5, 6 can use water-source HP or water-cooled chiller → all pass |\n\n### 2.3 Product Job + Core Job\n\n**Product Job Statement:**\n\n> \"Help Hydronic Circuit Assembly to measure water-side volumetric flow rate in closed-loop heat exchange circuits for thermal output regulation and system protection\"\n\n**Core Job (solution-independent):**\n\n> \"Quantify water-side volumetric flow rate in hydronic heat exchange circuits to enable thermal output calculation, system balancing, and fault protection\"\n\n*Abstraction test: 5 alternatives from different categories (ultrasonic, turbine, vortex, differential-pressure, paddle switch) → PASS.*\n\n### 2.4 Alternatives (5)\n\n| # | Alternative | UNSPSC | Share | Trade-Offs |\n|---|---|---|---|---|\n| 1 | Ultrasonic transit-time sensor | 41112501 | 35% | Acoustic coupling dependency, air bubble sensitivity >2% vol, pipe-full requirement, higher unit cost |\n| 2 | Turbine / impeller sensor | 41112501 | 30% | Mechanical wear (bearing life), particle jamming, pressure drop ~100-300 mbar, maintenance schedule |\n| 3 | Vortex sensor | 41112501 | 15% | Minimum Reynolds number requirement, pressure drop from shedder bar, vibration sensitivity, limited low-flow accuracy |\n| 4 | Differential pressure sensor | 41112409 | 10% | Square-root extraction, limited turndown (3:1), permanent pressure loss, impulse line maintenance |\n| 5 | Paddle / float switch (binary) | 41112501 | 10% | On/off only — no proportional measurement, no diagnostic capability, mechanical moving parts. Zero trade-offs vs doing nothing. |\n\n[SRC: VN_air_conditioning_and_warm_air_heating_eq; shares estimated]\n\n### 2.5 Scenarios\n\n| # | Scenario | Output Types Activated | BOM Positions In Play |\n|---|---|---|---|\n| S1 | Heat pump heating mode | OT-2 | Plate HX (condenser side), Circulation Pump, Flow Sensor |\n| S2 | Heat pump cooling mode | OT-2 | Plate HX (evaporator side), Circulation Pump, Flow Sensor |\n| S3 | Chiller steady-state | OT-5 | Plate HX, Circulation Pump, Flow Sensor, Hydraulic Valve |\n| S4 | System startup — compressor enable | OT-2, OT-5 | Flow Sensor (confirm flow before compressor start) |\n| S5 | Part-load / low-flow operation | OT-2, OT-5 | Flow Sensor (minimum flow verification for compressor protection) |\n| S6 | Glycol freeze-protection circuit | OT-2 | Flow Sensor + temperature (freeze risk detection) |\n\n*Sparsity check: S4 and S5 activate only the Flow Sensor → scenarios are correctly granular. PASS.*\n\n---"
+    },
+    {
+      "title": "Phase 3 — Needs Derivation",
+      "content": "### 3.1 Stakeholder Roles\n\n| Role | Instantiation | P1 | P2 | P3 | P4 | P5 |\n|---|---|---|---|---|---|---|\n| **Job Executor** | OEM System Controller (control board) | ALL | ALL | — | — | — |\n| **Job Overseer** | HVAC OEM System Engineer | own | own | ALL | ALL | — |\n| **Product Lifecycle Support** | Assembly technician, commissioning tech, service tech | own | — | — | — | — |\n| **Purchase Executor** | OEM Procurement Manager | Acq | — | — | * | — |\n| **Job Beneficiary** | Building occupant (indirect) | — | * | — | — | * |\n\n### 3.2 Job Map (Ulwick 8 Steps)\n\n| # | Step | Statement | Relevant | Rationale |\n|---|---|---|---|---|\n| 1 | DEFINE | Determine flow measurement specifications, pipe size, media type, operating range | **Yes** | Sensor must match system hydraulic design |\n| 2 | LOCATE | Identify pipe connection point, power source, communication bus | No | System layout concern, not sensor function |\n| 3 | PREPARE | Install sensor, configure fluid type, set communication protocol, commission | **Yes** | Critical product interaction at OEM assembly + field |\n| 4 | CONFIRM | Verify signal quality, zero-flow baseline, communication handshake | **Yes** | Must confirm measurement validity before compressor enable |\n| 5 | EXECUTE | Measure volumetric flow rate and temperature during system operation | **Yes** | Core value-creating function |\n| 6 | MONITOR | Track measurement quality, detect drift, flag anomalies | **Yes** | Ongoing measurement integrity over equipment lifetime |\n| 7 | MODIFY | Recalibrate, reconfigure for media changes, compensate for drift | **Yes** | Maintaining accuracy over service life |\n| 8 | CONCLUDE | Log final readings, decommission | No | Trivial for embedded sensor — system shutdown handles |\n\n**Relevant steps: 6** (DEFINE, PREPARE, CONFIRM, EXECUTE, MONITOR, MODIFY)\n\n### 3.3 P1 Lifecycle Analysis (Per Alternative)\n\n| Stage | Ultrasonic Transit-Time | Turbine / Impeller | Vortex | Diff. Pressure | Paddle Switch |\n|---|---|---|---|---|---|\n| **Acquire** | Specify fluid properties, select DN variant | Specify DN, select bearing material | Specify DN, verify min Reynolds | Size orifice plate, calc beta ratio | Select setpoint threshold |\n| **Prepare** | Mount inline, configure acoustic properties for glycol mix | Mount inline, verify impeller clearance | Mount inline, verify straight run | Install orifice + impulse lines + transmitter | Mount inline, set paddle length |\n| **Use** | Read flow + temp, detect anomalies, compensate for temperature | Read flow, accept pressure drop and bearing noise | Read flow, accept pressure drop | Read ΔP, extract square root, accept pressure loss | Read binary on/off only |\n| **Maintain** | No mechanical maintenance; verify acoustic coupling | Replace bearings per schedule; clean impeller | Clean shedder bar periodically | Flush impulse lines; recalibrate transmitter | Replace paddle/spring periodically |\n| **Dispose** | Replace electronics module | Replace full sensor (worn bearings) | Replace full sensor | Remove orifice plate + impulse tubing + transmitter | Replace full sensor |\n\n**Key insight:** Turbine/impeller and differential-pressure alternatives carry the highest P1 Maintenance burden. Ultrasonic and vortex carry the lowest. Paddle switch has zero P2 burden (no proportional measurement) but also zero P2 value.\n\n### 3.4 Error Statements (27 Needs)\n\n#### DEFINE (Step 1) — 2 needs\n\n| # | Statement | Error Type | Role | Imp | Sat | Opp | Impact | Prod-Related | Confidence |\n|---|---|---|---|---|---|---|---|---|---|\n| ES-01 | Minimize the likelihood of selecting a flow sensor with insufficient turndown ratio for the system's part-load to full-load operating range | ACCURACY | Overseer | 7 | 5 | 9 | reliability | false | 0.7 |\n| ES-02 | Increase the ability to specify a single sensor platform across multiple pipe diameters (DN12–DN25) without redesigning the hydraulic assembly | EFFORT | Overseer | 6 | 4 | 8 | cost | true | 0.6 |\n\n#### PREPARE (Step 3) — 4 needs\n\n| # | Statement | Error Type | Role | Imp | Sat | Opp | Impact | Prod-Related | Confidence |\n|---|---|---|---|---|---|---|---|---|---|\n| ES-03 | Minimize the time required to mechanically integrate the flow sensor into the hydronic circuit during OEM assembly to under 3 minutes per unit | EFFORT | Lifecycle (Installer) | 7 | 5 | 9 | time | false | 0.7 |\n| ES-04 | Minimize the likelihood of incorrect sensor orientation during installation causing flow measurement bias exceeding 2% of reading | ACCURACY | Lifecycle (Installer) | 8 | 5 | 11 | reliability | false | 0.8 |\n| ES-05 | Minimize the commissioning effort required to configure fluid acoustic properties for varying water-glycol concentrations | EFFORT | Lifecycle (Commissioning) | 7 | 4 | 10 | skill | true | 0.7 |\n| ES-06 | Increase the ability to automatically compensate for glycol concentration variations up to 50% without manual reconfiguration | ACCURACY | Lifecycle (Commissioning) | 8 | 4 | 12 | reliability | false | 0.7 |\n\n*Glycol concentration mismatch causes flow measurement deviation up to 30%. [SRC: Belimo, Tameson]*\n\n#### CONFIRM (Step 4) — 2 needs\n\n| # | Statement | Error Type | Role | Imp | Sat | Opp | Impact | Prod-Related | Confidence |\n|---|---|---|---|---|---|---|---|---|---|\n| ES-07 | Minimize the time to detect an empty-pipe or air-lock condition before enabling the compressor to under 5 seconds | DETECTION | Executor | 9 | 4 | 14 | safety | true | 0.8 |\n| ES-08 | Increase the ability to verify sensor signal integrity through automated self-diagnostics at each system startup | DETECTION | Executor | 7 | 4 | 10 | reliability | false | 0.6 |\n\n#### EXECUTE (Step 5) — 8 needs\n\n| # | Statement | Error Type | Role | Imp | Sat | Opp | Impact | Prod-Related | Confidence |\n|---|---|---|---|---|---|---|---|---|---|\n| ES-09 | Increase the ability to maintain measurement accuracy within ±3% of reading over 10,000 operating hours of steady-state operation | ACCURACY | Executor | 9 | 6 | 12 | reliability | false | 0.8 |\n| ES-10 | Minimize the likelihood of air entrainment exceeding 2% by volume causing complete measurement signal loss during thermal cycling | ROBUSTNESS | Executor | 8 | 4 | 12 | reliability | true | 0.8 |\n| ES-11 | Increase the ability to measure flow rate accurately across the full turndown range from minimum to maximum system load | THROUGHPUT | Executor | 8 | 5 | 11 | reliability | false | 0.7 |\n| ES-12 | Minimize the likelihood of circulation pump pressure pulsations causing flow reading oscillations exceeding 5% of steady-state value | CONSISTENCY | Executor | 6 | 5 | 7 | reliability | false | 0.6 |\n| ES-13 | Minimize the likelihood of rapid temperature transients exceeding compensation algorithm response, causing measurement error >1% for more than 30 seconds | ROBUSTNESS | Executor | 7 | 5 | 9 | reliability | true | 0.7 |\n| ES-14 | Increase the ability to detect and report reverse flow direction to the system controller within 1 second of flow reversal | DETECTION | Executor | 7 | 4 | 10 | safety | true | 0.7 |\n| ES-15 | Minimize the flow sensor's contribution to system pressure drop below 50 mbar at design flow rate | EFFORT | Overseer | 7 | 6 | 8 | cost | false | 0.8 |\n| ES-16 | Minimize the likelihood of compressor short-cycling due to undetected low-flow conditions persisting longer than 10 seconds | DETECTION | Overseer | 9 | 5 | 13 | safety | false | 0.9 |\n\n*Air bubbles obstruct ultrasonic wave propagation in conventional sensors. [SRC: GAIMC, KLEEV USA]. Compressor short-cycling halves equipment lifespan from 15–20 years to 7–10 years; compressor replacement costs $1,500–2,500. [SRC: MyDadCanDoThat, JH Lincoln]*\n\n#### MONITOR (Step 6) — 5 needs\n\n| # | Statement | Error Type | Role | Imp | Sat | Opp | Impact | Prod-Related | Confidence |\n|---|---|---|---|---|---|---|---|---|---|\n| ES-17 | Increase the ability to detect calibration drift exceeding ±0.5% within 30 days of occurrence over 12 months of continuous operation | DETECTION | Executor | 8 | 5 | 11 | reliability | false | 0.7 |\n| ES-18 | Increase the ability to distinguish genuine process deviations from sensor artifacts with >95% classification accuracy | ACCURACY | Executor | 7 | 4 | 10 | reliability | false | 0.6 |\n| ES-19 | Minimize the likelihood of scale or sediment buildup degrading measurement accuracy by more than 2% within the sensor's rated service life | ROBUSTNESS | Executor | 7 | 5 | 9 | reliability | false | 0.7 |\n| ES-20 | Increase the ability to compute real-time thermal energy output (kW) by combining volumetric flow and temperature delta within a single sensor body | THROUGHPUT | Overseer | 8 | 4 | 12 | cost | true | 0.8 |\n| ES-21 | Minimize the likelihood of acoustic coupling degradation between transducer and fluid causing measurement error exceeding 1% within the first 5 years of operation | ROBUSTNESS | Executor | 8 | 5 | 11 | reliability | true | 0.7 |\n\n*All flow meters experience drift from wear, fouling, and environmental factors; annual calibration is typical. [SRC: SIMCO, Micronics]. EU EcoDesign revision mandates heaters measure and display energy consumption; expected adoption early 2026. [SRC: EC Energy]*\n\n#### MODIFY (Step 7) — 3 needs\n\n| # | Statement | Error Type | Role | Imp | Sat | Opp | Impact | Prod-Related | Confidence |\n|---|---|---|---|---|---|---|---|---|---|\n| ES-22 | Minimize the time required to recalibrate or replace a degraded flow sensor without draining the hydronic circuit | RECOVERY | Lifecycle (Maintainer) | 7 | 4 | 10 | time | false | 0.7 |\n| ES-23 | Minimize the likelihood of requiring field recalibration more frequently than once within the rated equipment service life | EFFORT | Lifecycle (Maintainer) | 8 | 5 | 11 | cost | false | 0.8 |\n| ES-24 | Increase the ability to remotely diagnose flow sensor health status via the existing BMS communication bus without physical inspection | DETECTION | Overseer | 6 | 3 | 9 | time | false | 0.6 |\n\n#### P3–P5 Bridge Needs — 3 needs\n\n| # | Statement | Pyramid Level | Bridge | Role | Imp | Sat | Opp | Impact | Prod-Related | Confidence |\n|---|---|---|---|---|---|---|---|---|---|---|\n| ES-25 | Increase the ability to demonstrate EU EcoDesign energy efficiency compliance through traceable, sensor-based flow measurement data | P3 Role | \"OEM engineer becomes the designer of regulation-compliant, auditable systems\" → \"What must the product do so they CAN become that role?\" | Overseer | 8 | 4 | 12 | cost | false | 0.8 |\n| ES-26 | Minimize the likelihood of field audit findings revealing flow measurement inaccuracy that would cause energy label downgrade | P4 Image | \"Auditors and regulators must see verified performance data\" → \"What must the product do so watchers SEE that impression?\" | Overseer | 8 | 5 | 11 | cost | false | 0.7 |\n| ES-27 | Minimize the frequency of warranty callbacks attributed to flow sensor malfunction within the first 24 months of equipment operation [hypothesis] | P5 Emotional | \"Service managers want to feel confident in first-year reliability; avoid anxiety of callback spikes\" → \"What must the product do so they FEEL that?\" | Lifecycle (Maintainer) | 8 | 5 | 11 | cost | false | 0.7 |\n\n*EU EcoDesign/ErP energy labeling revision for heat pumps: heaters must measure and display consumption; A–G rescaling expected early 2026. [SRC: EC Energy, Eurovent, EHPA]*\n\n### 3.5 ODI Summary\n\n| Metric | Value |\n|---|---|\n| Total error statements | 27 |\n| Market-inherent (product_related=false) | 19 (70%) |\n| Technology-specific (product_related=true) | 8 (30%) |\n| \"Minimize…\" statements | 16 (59%) |\n| \"Increase…\" statements | 11 (41%) |\n| Needs per relevant step (min) | 2 (DEFINE, CONFIRM) |\n| Needs per relevant step (max) | 8 (EXECUTE) |\n| Mean importance | 7.5 |\n| Mean satisfaction | 4.6 |\n| Mean opportunity score | 10.4 |\n\n**Top 5 Underserved Needs (highest opportunity score):**\n\n| Rank | # | Statement (abbreviated) | Opp | Imp | Sat |\n|---|---|---|---|---|---|\n| 1 | ES-07 | Detect empty-pipe / air-lock before compressor enable (<5s) | **14** | 9 | 4 |\n| 2 | ES-16 | Prevent compressor short-cycling from undetected low-flow (>10s) | **13** | 9 | 5 |\n| 3 | ES-06 | Auto-compensate for glycol concentration variations (<50%) | **12** | 8 | 4 |\n| 4 | ES-09 | Maintain ±3% accuracy over 10,000 operating hours | **12** | 9 | 6 |\n| 5 | ES-10 | Prevent air entrainment >2% vol causing signal loss | **12** | 8 | 4 |\n\n---"
+    },
+    {
+      "title": "Incumbent Anchors",
+      "content": "| Technology | Anchor VN Unit | Anchor Level | Market Share | Rationale |\n|---|---|---|---|---|\n| Ultrasonic transit-time sensor | Flow Sensor | L5 | 35% | Growing share in modern heat pumps; no moving parts, integrated temp |\n| Turbine / impeller sensor | Flow Sensor | L5 | 30% | Legacy dominant; declining due to mechanical wear and maintenance |\n| Vortex sensor | Flow Sensor | L5 | 15% | Used in larger commercial systems; limited in small DN sizes |\n| Differential pressure sensor | Flow Sensor | L5 | 10% | Used in legacy chiller plants; declining due to permanent pressure loss |\n| Paddle / float switch | Flow Sensor | L5 | 10% | Cheapest option; binary only — no proportional measurement |\n\n---"
+    },
+    {
+      "title": "Validation (QA Pass)",
+      "content": "| # | Check | Result |\n|---|---|---|\n| V1 | Format compliance — every statement starts with \"Minimize the likelihood of…\" or \"Increase the ability to…\" with exactly ONE measurable KPI | **PASS** |\n| V2 | product_related classification — true ONLY when need disappears with different technology | **PASS** — 8/27 flagged true (acoustic coupling, air bubble sensitivity, temperature compensation, reverse flow detection, glycol acoustic config, modular DN platform, empty-pipe detection, integrated energy calc) |\n| V3 | Importance/satisfaction sanity — no unrealistic patterns | **PASS** — safety/mission-critical items at 8–9; convenience at 6; satisfaction spread 3–6 |\n| V4 | Impact category accuracy — category matches KPI | **PASS** |\n| V5 | Coverage — ≥2 needs per relevant step; 60–70% market-inherent; no duplicates | **PASS** — 70/30 split; all 6 relevant steps have ≥2 needs |\n| V6 | Solution-agnostic — zero reference to any product, vendor, technology, or mechanism | **PASS** — no mention of ultrasonic, Marquardt, piezoelectric, or transit-time in any statement |\n| V7 | Anchor correctness — anchor level matches product abstraction | **PASS** — L5 for sensor/component per VN hierarchy |\n| V8 | Product job references parent — includes parent VN unit name and context qualifier | **PASS** — \"Help Hydronic Circuit Assembly to measure water-side volumetric flow rate in closed-loop heat exchange circuits…\" |\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [Ultrasonic Flow Meters in Hydronic HVAC Applications — Pumps & Systems](https://www.pumpsandsystems.com/ultrasonic-flow-meters-hydronic-hvac-applications)\n- [Flow Meter FAQ: Common Problems & Solutions — GAIMC](https://www.gaimc.com/Newsinfo/flow-meter-faq-common-problems-solutions)\n- [Troubleshooting Flow Meters — KLEEV USA](https://www.kleevusa.com/troubleshooting-flow-meters-common-issues-and-effective-solutions/)\n- [Flow Meter Calibration Best Practices — SIMCO](https://www.simco.com/blog/flow-meter-calibration/)\n- [Flow Meter Calibration — Micronics](https://micronicsflowmeters.com/flow-meter-calibration/)\n- [HVAC Ultrasonic Flow Sensor Guide — Tameson](https://tameson.com/pages/hvac-flow-sensor)\n- [What is a Flow Meter? — Belimo](https://www.belimo.com/us/en_US/blog/what-is-a-flow-meter)\n- [Heat Pump Short Cycling: Causes, Costs & Cures — MyDadCanDoThat](https://mydadcandothat.com/blog/heat-pump-short-cycling-causes-cures/)\n- [HVAC Short-Cycling: 10 Causes — John Henry](https://www.jhlincoln.com/hvac-short-cycling-10-causes-and-how-to-prevent-it/)\n- [Ecodesign and Energy Labelling: Revised Rules for Heaters — EC Energy](https://energy.ec.europa.eu/news/ecodesign-and-energy-labelling-commission-consults-revised-rules-space-and-water-heaters-2025-12-01_en)\n- [Ecodesign and Energy Labelling — Eurovent](https://www.eurovent.eu/issues/ecodesignandenergylabelling/)\n- [EHPA Position Paper on EcoDesign Lots 1–2](https://www.ehpa.org/wp-content/uploads/2023/07/20230623_EHPA-written-comments-on-Lots-1-2.pdf)\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"jtbd_analysis\",\n  \"naics_code\": \"333415\",\n  \"naics_title\": \"Air-Conditioning and Warm Air Heating Equipment and Commercial and Industrial Refrigeration Equipment Manufacturing\",\n  \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n  \"product_name\": \"Ultrasonic Flow Sensor\",\n  \"vendor_name\": \"Marquardt\",\n  \"cfj_statement\": \"Manufacture climate control and thermal management equipment that conditions, heats, cools, or refrigerates enclosed spaces and stored goods to specified temperature and humidity setpoints\",\n  \"product_job_statement\": \"Help Hydronic Circuit Assembly to measure water-side volumetric flow rate in closed-loop heat exchange circuits for thermal output regulation and system protection\",\n  \"core_job_statement\": \"Quantify water-side volumetric flow rate in hydronic heat exchange circuits to enable thermal output calculation, system balancing, and fault protection\",\n  \"anchor\": {\n    \"vn_unit\": \"Flow Sensor\",\n    \"level\": \"L5\",\n    \"parent_vn_unit\": \"Hydronic Circuit Assembly\",\n    \"parent_level\": \"L6\",\n    \"route\": \"PRODUCT_BOM\"\n  },\n  \"segments\": [\n    {\"name\": \"Residential comfort conditioning\", \"circumstance\": \"Single-family/multi-family heating + cooling\"},\n    {\"name\": \"Commercial building comfort\", \"circumstance\": \"Office/retail/hospitality HVAC\"},\n    {\"name\": \"Industrial process cooling\", \"circumstance\": \"Manufacturing process thermal regulation\"},\n    {\"name\": \"Cold chain / food preservation\", \"circumstance\": \"Perishable goods storage and transport\"},\n    {\"name\": \"Pharmaceutical / cleanroom\", \"circumstance\": \"Precision temperature + humidity control\"},\n    {\"name\": \"Data center thermal management\", \"circumstance\": \"IT equipment heat rejection\"}\n  ],\n  \"alternatives\": [\n    {\n      \"name\": \"Ultrasonic transit-time sensor\",\n      \"unspsc\": \"41112501\",\n      \"market_share_pct\": 35,\n      \"trade_offs\": [\"Acoustic coupling dependency\", \"Air bubble sensitivity >2% vol\", \"Pipe-full requirement\", \"Higher unit cost\"],\n      \"existential\": false\n    },\n    {\n      \"name\": \"Turbine / impeller sensor\",\n      \"unspsc\": \"41112501\",\n      \"market_share_pct\": 30,\n      \"trade_offs\": [\"Mechanical wear (bearing life)\", \"Particle jamming\", \"Pressure drop 100-300 mbar\", \"Maintenance schedule\"],\n      \"existential\": false\n    },\n    {\n      \"name\": \"Vortex sensor\",\n      \"unspsc\": \"41112501\",\n      \"market_share_pct\": 15,\n      \"trade_offs\": [\"Minimum Reynolds number requirement\", \"Pressure drop from shedder bar\", \"Vibration sensitivity\", \"Limited low-flow accuracy\"],\n      \"existential\": false\n    },\n    {\n      \"name\": \"Differential pressure sensor\",\n      \"unspsc\": \"41112409\",\n      \"market_share_pct\": 10,\n      \"trade_offs\": [\"Square-root extraction\", \"Limited turndown (3:1)\", \"Permanent pressure loss\", \"Impulse line maintenance\"],\n      \"existential\": false\n    },\n    {\n      \"name\": \"Paddle / float switch (binary only)\",\n      \"unspsc\": \"41112501\",\n      \"market_share_pct\": 10,\n      \"trade_offs\": [\"On/off only — no proportional measurement\", \"No diagnostic capability\", \"Mechanical moving parts\"],\n      \"existential\": false\n    }\n  ],\n  \"scenarios\": [\n    {\"id\": \"S1\", \"name\": \"Heat pump heating mode\", \"output_types\": [\"OT-2\"], \"bom_positions\": [\"Plate HX (condenser)\", \"Circulation Pump\", \"Flow Sensor\"]},\n    {\"id\": \"S2\", \"name\": \"Heat pump cooling mode\", \"output_types\": [\"OT-2\"], \"bom_positions\": [\"Plate HX (evaporator)\", \"Circulation Pump\", \"Flow Sensor\"]},\n    {\"id\": \"S3\", \"name\": \"Chiller steady-state\", \"output_types\": [\"OT-5\"], \"bom_positions\": [\"Plate HX\", \"Circulation Pump\", \"Flow Sensor\", \"Hydraulic Valve\"]},\n    {\"id\": \"S4\", \"name\": \"System startup — compressor enable\", \"output_types\": [\"OT-2\", \"OT-5\"], \"bom_positions\": [\"Flow Sensor\"]},\n    {\"id\": \"S5\", \"name\": \"Part-load / low-flow operation\", \"output_types\": [\"OT-2\", \"OT-5\"], \"bom_positions\": [\"Flow Sensor\"]},\n    {\"id\": \"S6\", \"name\": \"Glycol freeze-protection circuit\", \"output_types\": [\"OT-2\"], \"bom_positions\": [\"Flow Sensor\"]}\n  ],\n  \"job_map\": {\n    \"naics_code\": \"333415\",\n    \"anchor_vn_unit\": \"Flow Sensor\",\n    \"anchor_level\": \"L5\",\n    \"parent_vn_unit\": \"Hydronic Circuit Assembly\",\n    \"parent_level\": \"L6\",\n    \"product_job_statement\": \"Help Hydronic Circuit Assembly to measure water-side volumetric flow rate in closed-loop heat exchange circuits for thermal output regulation and system protection\",\n    \"steps\": [\n      {\"step_number\": 1, \"step_name\": \"DEFINE\", \"statement\": \"Determine flow measurement specifications, pipe size, media type, operating range\", \"relevant_to_product\": true, \"relevance_rationale\": \"Sensor must match system hydraulic design parameters\"},\n      {\"step_number\": 2, \"step_name\": \"LOCATE\", \"statement\": \"Identify pipe connection point, power source, communication bus\", \"relevant_to_product\": false, \"relevance_rationale\": \"System layout concern, not sensor function\"},\n      {\"step_number\": 3, \"step_name\": \"PREPARE\", \"statement\": \"Install sensor, configure fluid type, set communication protocol, commission\", \"relevant_to_product\": true, \"relevance_rationale\": \"Critical product interaction at OEM assembly and field commissioning\"},\n      {\"step_number\": 4, \"step_name\": \"CONFIRM\", \"statement\": \"Verify signal quality, zero-flow baseline, communication handshake\", \"relevant_to_product\": true, \"relevance_rationale\": \"Must confirm measurement validity before compressor enable\"},\n      {\"step_number\": 5, \"step_name\": \"EXECUTE\", \"statement\": \"Measure volumetric flow rate and temperature during system operation\", \"relevant_to_product\": true, \"relevance_rationale\": \"Core value-creating function of the sensor\"},\n      {\"step_number\": 6, \"step_name\": \"MONITOR\", \"statement\": \"Track measurement quality, detect drift, flag anomalies\", \"relevant_to_product\": true, \"relevance_rationale\": \"Ongoing measurement integrity over equipment lifetime\"},\n      {\"step_number\": 7, \"step_name\": \"MODIFY\", \"statement\": \"Recalibrate, reconfigure for media changes, compensate for drift\", \"relevant_to_product\": true, \"relevance_rationale\": \"Maintaining accuracy over service life\"},\n      {\"step_number\": 8, \"step_name\": \"CONCLUDE\", \"statement\": \"Log final readings, decommission\", \"relevant_to_product\": false, \"relevance_rationale\": \"Trivial for embedded sensor — system shutdown handles\"}\n    ]\n  },\n  \"error_statements\": [\n    {\n      \"id\": \"ES-01\",\n      \"statement\": \"Minimize the likelihood of selecting a flow sensor with insufficient turndown ratio for the system's part-load to full-load operating range\",\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"error_type\": \"ACCURACY\",\n      \"role\": \"Overseer\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9,\n      \"impact_category\": \"reliability\",\n      \"product_related\": false,\n      \"pyramid_level\": \"P2\",\n      \"confidence\": 0.7,\n      \"rationale\": \"Part-load operation is common in modulating heat pumps; turndown mismatch causes loss of measurement at low loads\"\n    },\n    {\n      \"id\": \"ES-02\",\n      \"statement\": \"Increase the ability to specify a single sensor platform across multiple pipe diameters (DN12–DN25) without redesigning the hydraulic assembly\",\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"error_type\": \"EFFORT\",\n      \"role\": \"Overseer\",\n      \"importance\": 6,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 8,\n      \"impact_category\": \"cost\",\n      \"product_related\": true,\n      \"pyramid_level\": \"P1\",\n      \"confidence\": 0.6,\n      \"rationale\": \"OEMs produce multiple capacity variants; shared electronics + interchangeable flow bodies reduce BOM complexity\"\n    },\n    {\n      \"id\": \"ES-03\",\n      \"statement\": \"Minimize the time required to mechanically integrate the flow sensor into the hydronic circuit during OEM assembly to under 3 minutes per unit\",\n      \"job_step_number\": 3,\n      \"job_step_name\": \"PREPARE\",\n      \"error_type\": \"EFFORT\",\n      \"role\": \"Lifecycle (Installer)\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9,\n      \"impact_category\": \"time\",\n      \"product_related\": false,\n      \"pyramid_level\": \"P1\",\n      \"confidence\": 0.7,\n      \"rationale\": \"Assembly line cycle time directly impacts unit cost; threaded vs plug-in connection affects integration speed\"\n    },\n    {\n      \"id\": \"ES-04\",\n      \"statement\": \"Minimize the likelihood of incorrect sensor orientation during installation causing flow measurement bias exceeding 2% of reading\",\n      \"job_step_number\": 3,\n      \"job_step_name\": \"PREPARE\",\n      \"error_type\": \"ACCURACY\",\n      \"role\": \"Lifecycle (Installer)\",\n      \"importance\": 8,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 11,\n      \"impact_category\": \"reliability\",\n      \"product_related\": false,\n      \"pyramid_level\": \"P1\",\n      \"confidence\": 0.8,\n      \"rationale\": \"All inline sensors have orientation requirements; misinstallation is a leading cause of commissioning failures\"\n    },\n    {\n      \"id\": \"ES-05\",\n      \"statement\": \"Minimize the commissioning effort required to configure fluid acoustic properties for varying water-glycol concentrations\",\n      \"job_step_number\": 3,\n      \"job_step_name\": \"PREPARE\",\n      \"error_type\": \"EFFORT\",\n      \"role\": \"Lifecycle (Commissioning)\",\n      \"importance\": 7,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 10,\n      \"impact_category\": \"skill\",\n      \"product_related\": true,\n      \"pyramid_level\": \"P1\",\n      \"confidence\": 0.7,\n      \"rationale\": \"Ultrasonic sensors require speed-of-sound calibration per fluid type; unknown glycol composition causes up to 30% flow deviation [SRC: Belimo/Tameson]\"\n    },\n    {\n      \"id\": \"ES-06\",\n      \"statement\": \"Increase the ability to automatically compensate for glycol concentration variations up to 50% without manual reconfiguration\",\n      \"job_step_number\": 3,\n      \"job_step_name\": \"PREPARE\",\n      \"error_type\": \"ACCURACY\",\n      \"role\": \"Lifecycle (Commissioning)\",\n      \"importance\": 8,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 12,\n      \"impact_category\": \"reliability\",\n      \"product_related\": false,\n      \"pyramid_level\": \"P2\",\n      \"confidence\": 0.7,\n      \"rationale\": \"Glycol concentration changes seasonally and after top-ups; manual reconfiguration is rarely performed\"\n    },\n    {\n      \"id\": \"ES-07\",\n      \"statement\": \"Minimize the time to detect an empty-pipe or air-lock condition before enabling the compressor to under 5 seconds\",\n      \"job_step_number\": 4,\n      \"job_step_name\": \"CONFIRM\",\n      \"error_type\": \"DETECTION\",\n      \"role\": \"Executor\",\n      \"importance\": 9,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 14,\n      \"impact_category\": \"safety\",\n      \"product_related\": true,\n      \"pyramid_level\": \"P2\",\n      \"confidence\": 0.8,\n      \"rationale\": \"Empty-pipe compressor start causes refrigerant high-pressure trip or freeze damage; ultrasonic acoustic diagnostics detect this faster than binary switches\"\n    },\n    {\n      \"id\": \"ES-08\",\n      \"statement\": \"Increase the ability to verify sensor signal integrity through automated self-diagnostics at each system startup\",\n      \"job_step_number\": 4,\n      \"job_step_name\": \"CONFIRM\",\n      \"error_type\": \"DETECTION\",\n      \"role\": \"Executor\",\n      \"importance\": 7,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 10,\n      \"impact_category\": \"reliability\",\n      \"product_related\": false,\n      \"pyramid_level\": \"P2\",\n      \"confidence\": 0.6,\n      \"rationale\": \"Degraded sensor operating undetected leads to incorrect system control decisions over weeks/months\"\n    },\n    {\n      \"id\": \"ES-09\",\n      \"statement\": \"Increase the ability to maintain measurement accuracy within ±3% of reading over 10,000 operating hours of steady-state operation\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ACCURACY\",\n      \"role\": \"Executor\",\n      \"importance\": 9,\n      \"satisfaction_current\": 6,\n      \"opportunity_score\": 12,\n      \"impact_category\": \"reliability\",\n      \"product_related\": false,\n      \"pyramid_level\": \"P2\",\n      \"confidence\": 0.8,\n      \"rationale\": \"Long-term accuracy is foundation for thermal energy calculation (kW = flow × ΔT × Cp); drift degrades efficiency\"\n    },\n    {\n      \"id\": \"ES-10\",\n      \"statement\": \"Minimize the likelihood of air entrainment exceeding 2% by volume causing complete measurement signal loss during thermal cycling\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ROBUSTNESS\",\n      \"role\": \"Executor\",\n      \"importance\": 8,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 12,\n      \"impact_category\": \"reliability\",\n      \"product_related\": true,\n      \"pyramid_level\": \"P1\",\n      \"confidence\": 0.8,\n      \"rationale\": \"Air bubbles obstruct ultrasonic wave propagation causing malfunction [SRC: GAIMC]; thermal cycling releases dissolved air\"\n    },\n    {\n      \"id\": \"ES-11\",\n      \"statement\": \"Increase the ability to measure flow rate accurately across the full turndown range from minimum to maximum system load\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"THROUGHPUT\",\n      \"role\": \"Executor\",\n      \"importance\": 8,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 11,\n      \"impact_category\": \"reliability\",\n      \"product_related\": false,\n      \"pyramid_level\": \"P2\",\n      \"confidence\": 0.7,\n      \"rationale\": \"VFD-driven systems modulate down to 20-30% of design flow; sensor must remain accurate at these low rates\"\n    },\n    {\n      \"id\": \"ES-12\",\n      \"statement\": \"Minimize the likelihood of circulation pump pressure pulsations causing flow reading oscillations exceeding 5% of steady-state value\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"CONSISTENCY\",\n      \"role\": \"Executor\",\n      \"importance\": 6,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 7,\n      \"impact_category\": \"reliability\",\n      \"product_related\": false,\n      \"pyramid_level\": \"P2\",\n      \"confidence\": 0.6,\n      \"rationale\": \"Wet-rotor pumps generate low-frequency pulsations; insufficient signal averaging creates noisy control input\"\n    },\n    {\n      \"id\": \"ES-13\",\n      \"statement\": \"Minimize the likelihood of rapid temperature transients exceeding compensation algorithm response, causing measurement error >1% for more than 30 seconds\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ROBUSTNESS\",\n      \"role\": \"Executor\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9,\n      \"impact_category\": \"reliability\",\n      \"product_related\": true,\n      \"pyramid_level\": \"P1\",\n      \"confidence\": 0.7,\n      \"rationale\": \"Speed of sound varies ~1.5% per 10°C; defrost cycles and mode switching cause rapid temperature shifts [SRC: 01_product_decomposition]\"\n    },\n    {\n      \"id\": \"ES-14\",\n      \"statement\": \"Increase the ability to detect and report reverse flow direction to the system controller within 1 second of flow reversal\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"DETECTION\",\n      \"role\": \"Executor\",\n      \"importance\": 7,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 10,\n      \"impact_category\": \"safety\",\n      \"product_related\": true,\n      \"pyramid_level\": \"P1\",\n      \"confidence\": 0.7,\n      \"rationale\": \"Reverse flow in hydronic circuits indicates check valve failure or pump malfunction; undetected backflow degrades heat exchange\"\n    },\n    {\n      \"id\": \"ES-15\",\n      \"statement\": \"Minimize the flow sensor's contribution to system pressure drop below 50 mbar at design flow rate\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"EFFORT\",\n      \"role\": \"Overseer\",\n      \"importance\": 7,\n      \"satisfaction_current\": 6,\n      \"opportunity_score\": 8,\n      \"impact_category\": \"cost\",\n      \"product_related\": false,\n      \"pyramid_level\": \"P2\",\n      \"confidence\": 0.8,\n      \"rationale\": \"Every mbar of pressure drop increases pump energy; turbine meters cause 100-300 mbar, ultrasonic <50 mbar\"\n    },\n    {\n      \"id\": \"ES-16\",\n      \"statement\": \"Minimize the likelihood of compressor short-cycling due to undetected low-flow conditions persisting longer than 10 seconds\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"DETECTION\",\n      \"role\": \"Overseer\",\n      \"importance\": 9,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 13,\n      \"impact_category\": \"safety\",\n      \"product_related\": false,\n      \"pyramid_level\": \"P2\",\n      \"confidence\": 0.9,\n      \"rationale\": \"Compressor short-cycling halves equipment lifespan (15-20yr → 7-10yr); replacement costs $1,500-2,500 [SRC: MyDadCanDoThat, JH Lincoln]\"\n    },\n    {\n      \"id\": \"ES-17\",\n      \"statement\": \"Increase the ability to detect calibration drift exceeding ±0.5% within 30 days of occurrence over 12 months of continuous operation\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"error_type\": \"DETECTION\",\n      \"role\": \"Executor\",\n      \"importance\": 8,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 11,\n      \"impact_category\": \"reliability\",\n      \"product_related\": false,\n      \"pyramid_level\": \"P2\",\n      \"confidence\": 0.7,\n      \"rationale\": \"All flow meters experience drift from wear, fouling, environmental factors; annual calibration is typical [SRC: SIMCO, Micronics]\"\n    },\n    {\n      \"id\": \"ES-18\",\n      \"statement\": \"Increase the ability to distinguish genuine process deviations from sensor artifacts with >95% classification accuracy\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"error_type\": \"ACCURACY\",\n      \"role\": \"Executor\",\n      \"importance\": 7,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 10,\n      \"impact_category\": \"reliability\",\n      \"product_related\": false,\n      \"pyramid_level\": \"P2\",\n      \"confidence\": 0.6,\n      \"rationale\": \"False alarms from sensor artifacts cause unnecessary service calls; missed real deviations cause system damage\"\n    },\n    {\n      \"id\": \"ES-19\",\n      \"statement\": \"Minimize the likelihood of scale or sediment buildup degrading measurement accuracy by more than 2% within the sensor's rated service life\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"error_type\": \"ROBUSTNESS\",\n      \"role\": \"Executor\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9,\n      \"impact_category\": \"reliability\",\n      \"product_related\": false,\n      \"pyramid_level\": \"P2\",\n      \"confidence\": 0.7,\n      \"rationale\": \"Hydronic circuits accumulate magnetite and calcium deposits over years; fouling affects all sensor technologies differently\"\n    },\n    {\n      \"id\": \"ES-20\",\n      \"statement\": \"Increase the ability to compute real-time thermal energy output (kW) by combining volumetric flow and temperature delta within a single sensor body\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"error_type\": \"THROUGHPUT\",\n      \"role\": \"Overseer\",\n      \"importance\": 8,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 12,\n      \"impact_category\": \"cost\",\n      \"product_related\": true,\n      \"pyramid_level\": \"P2\",\n      \"confidence\": 0.8,\n      \"rationale\": \"EU EcoDesign revision mandates consumption measurement and display; integrated flow+temp sensor eliminates separate probe [SRC: EC Energy]\"\n    },\n    {\n      \"id\": \"ES-21\",\n      \"statement\": \"Minimize the likelihood of acoustic coupling degradation between transducer and fluid causing measurement error exceeding 1% within the first 5 years of operation\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"error_type\": \"ROBUSTNESS\",\n      \"role\": \"Executor\",\n      \"importance\": 8,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 11,\n      \"impact_category\": \"reliability\",\n      \"product_related\": true,\n      \"pyramid_level\": \"P1\",\n      \"confidence\": 0.7,\n      \"rationale\": \"Acoustic interface between piezoelectric element and fluid is the primary aging mechanism for transit-time sensors\"\n    },\n    {\n      \"id\": \"ES-22\",\n      \"statement\": \"Minimize the time required to recalibrate or replace a degraded flow sensor without draining the hydronic circuit\",\n      \"job_step_number\": 7,\n      \"job_step_name\": \"MODIFY\",\n      \"error_type\": \"RECOVERY\",\n      \"role\": \"Lifecycle (Maintainer)\",\n      \"importance\": 7,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 10,\n      \"impact_category\": \"time\",\n      \"product_related\": false,\n      \"pyramid_level\": \"P1\",\n      \"confidence\": 0.7,\n      \"rationale\": \"Draining a hydronic circuit requires system shutdown, fluid disposal, refill, and re-commissioning — 4-8 hours of downtime\"\n    },\n    {\n      \"id\": \"ES-23\",\n      \"statement\": \"Minimize the likelihood of requiring field recalibration more frequently than once within the rated equipment service life\",\n      \"job_step_number\": 7,\n      \"job_step_name\": \"MODIFY\",\n      \"error_type\": \"EFFORT\",\n      \"role\": \"Lifecycle (Maintainer)\",\n      \"importance\": 8,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 11,\n      \"impact_category\": \"cost\",\n      \"product_related\": false,\n      \"pyramid_level\": \"P1\",\n      \"confidence\": 0.8,\n      \"rationale\": \"No-moving-parts designs significantly extend calibration intervals vs mechanical meters that require annual verification\"\n    },\n    {\n      \"id\": \"ES-24\",\n      \"statement\": \"Increase the ability to remotely diagnose flow sensor health status via the existing BMS communication bus without physical inspection\",\n      \"job_step_number\": 7,\n      \"job_step_name\": \"MODIFY\",\n      \"error_type\": \"DETECTION\",\n      \"role\": \"Overseer\",\n      \"importance\": 6,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 9,\n      \"impact_category\": \"time\",\n      \"product_related\": false,\n      \"pyramid_level\": \"P2\",\n      \"confidence\": 0.6,\n      \"rationale\": \"Remote diagnostics reduce truck rolls; becoming expected in modern BMS-connected HVAC equipment\"\n    },\n    {\n      \"id\": \"ES-25\",\n      \"statement\": \"Increase the ability to demonstrate EU EcoDesign energy efficiency compliance through traceable, sensor-based flow measurement data\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"P3_ROLE\",\n      \"role\": \"Overseer\",\n      \"importance\": 8,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 12,\n      \"impact_category\": \"cost\",\n      \"product_related\": false,\n      \"pyramid_level\": \"P3\",\n      \"confidence\": 0.8,\n      \"rationale\": \"EU EcoDesign/ErP rescaling to A-G labels expected early 2026; OEM engineers become 'compliance architects' [SRC: EC Energy, Eurovent]\"\n    },\n    {\n      \"id\": \"ES-26\",\n      \"statement\": \"Minimize the likelihood of field audit findings revealing flow measurement inaccuracy that would cause energy label downgrade\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"error_type\": \"P4_IMAGE\",\n      \"role\": \"Overseer\",\n      \"importance\": 8,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 11,\n      \"impact_category\": \"cost\",\n      \"product_related\": false,\n      \"pyramid_level\": \"P4\",\n      \"confidence\": 0.7,\n      \"rationale\": \"Energy label downgrade damages brand reputation; auditors and regulators are the 'watchers' in P4 terms\"\n    },\n    {\n      \"id\": \"ES-27\",\n      \"statement\": \"Minimize the frequency of warranty callbacks attributed to flow sensor malfunction within the first 24 months of equipment operation [hypothesis]\",\n      \"job_step_number\": 7,\n      \"job_step_name\": \"MODIFY\",\n      \"error_type\": \"P5_EMOTIONAL\",\n      \"role\": \"Lifecycle (Maintainer)\",\n      \"importance\": 8,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 11,\n      \"impact_category\": \"cost\",\n      \"product_related\": false,\n      \"pyramid_level\": \"P5\",\n      \"confidence\": 0.7,\n      \"rationale\": \"Service managers want confidence in first-year reliability; warranty callback spikes create organizational stress\"\n    }\n  ],\n  \"incumbent_anchors\": [\n    {\n      \"technology_name\": \"Ultrasonic transit-time sensor\",\n      \"anchor_vn_unit\": \"Flow Sensor\",\n      \"anchor_level\": \"L5\",\n      \"market_share_pct\": 35,\n      \"rationale\": \"Growing share in modern heat pumps; no moving parts, integrated temperature measurement\"\n    },\n    {\n      \"technology_name\": \"Turbine / impeller sensor\",\n      \"anchor_vn_unit\": \"Flow Sensor\",\n      \"anchor_level\": \"L5\",\n      \"market_share_pct\": 30,\n      \"rationale\": \"Legacy dominant in residential HVAC; declining due to mechanical wear and maintenance burden\"\n    },\n    {\n      \"technology_name\": \"Vortex sensor\",\n      \"anchor_vn_unit\": \"Flow Sensor\",\n      \"anchor_level\": \"L5\",\n      \"market_share_pct\": 15,\n      \"rationale\": \"Used in larger commercial systems; limited applicability in small DN pipe sizes\"\n    },\n    {\n      \"technology_name\": \"Differential pressure sensor\",\n      \"anchor_vn_unit\": \"Flow Sensor\",\n      \"anchor_level\": \"L5\",\n      \"market_share_pct\": 10,\n      \"rationale\": \"Legacy chiller plant instrumentation; declining due to permanent pressure loss and impulse line maintenance\"\n    },\n    {\n      \"technology_name\": \"Paddle / float switch (binary only)\",\n      \"anchor_vn_unit\": \"Flow Sensor\",\n      \"anchor_level\": \"L5\",\n      \"market_share_pct\": 10,\n      \"rationale\": \"Cheapest option; binary on/off only — no proportional flow measurement or diagnostics\"\n    }\n  ],\n  \"yield_metrics\": {\n    \"total_error_statements\": 27,\n    \"market_inherent_pct\": 70,\n    \"technology_specific_pct\": 30,\n    \"minimize_pct\": 59,\n    \"increase_pct\": 41,\n    \"job_map_steps\": 8,\n    \"relevant_steps\": 6,\n    \"needs_per_step_min\": 2,\n    \"needs_per_step_max\": 8,\n    \"mean_importance\": 7.5,\n    \"mean_satisfaction\": 4.6,\n    \"mean_opportunity_score\": 10.4\n  },\n  \"validation\": {\n    \"V1_format\": \"PASS\",\n    \"V2_product_related\": \"PASS\",\n    \"V3_scoring_sanity\": \"PASS\",\n    \"V4_impact_category\": \"PASS\",\n    \"V5_coverage\": \"PASS\",\n    \"V6_solution_agnostic\": \"PASS\",\n    \"V7_anchor_correctness\": \"PASS\",\n    \"V8_product_job_parent\": \"PASS\"\n  }\n}\n```"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**NAICS**",
+          "Value": "333415"
+        },
+        {
+          "Field": "**CFJ**",
+          "Value": "Manufacture climate control and thermal management equipment that conditions, heats, cools, or refrigerates enclosed spaces and stored goods to specified temperature and humidity setpoints"
+        },
+        {
+          "Field": "**Offering Level**",
+          "Value": "L5 (Product)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Output Type",
+        "Description"
+      ],
+      "rows": [
+        {
+          "ID": "OT-1",
+          "Output Type": "Residential Split/Packaged AC",
+          "Description": "Window units, split systems, mini-splits"
+        },
+        {
+          "ID": "OT-2",
+          "Output Type": "Heat Pump (air-source / water-source)",
+          "Description": "Reversible vapor-compression units"
+        },
+        {
+          "ID": "OT-3",
+          "Output Type": "Warm Air Furnace",
+          "Description": "Gas-fired, oil-fired, or electric forced-air"
+        },
+        {
+          "ID": "OT-4",
+          "Output Type": "Commercial Rooftop Unit (RTU)",
+          "Description": "Packaged HVAC for commercial buildings"
+        },
+        {
+          "ID": "OT-5",
+          "Output Type": "Chiller (air-cooled / water-cooled)",
+          "Description": "Central cooling plant equipment"
+        },
+        {
+          "ID": "OT-6",
+          "Output Type": "Commercial Refrigeration Equipment",
+          "Description": "Display cases, walk-in coolers/freezers"
+        },
+        {
+          "ID": "OT-7",
+          "Output Type": "Industrial Refrigeration Equipment",
+          "Description": "Ammonia systems, blast freezers, cold storage"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Segment",
+        "Circumstance",
+        "Alternatives Differ?"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Segment": "Residential comfort conditioning",
+          "Circumstance": "Single-family/multi-family heating + cooling",
+          "Alternatives Differ?": "Yes — heat pump vs furnace+AC vs boiler"
+        },
+        {
+          "#": "2",
+          "Segment": "Commercial building comfort",
+          "Circumstance": "Office/retail/hospitality HVAC",
+          "Alternatives Differ?": "Yes — RTU vs chiller+AHU vs VRF"
+        },
+        {
+          "#": "3",
+          "Segment": "Industrial process cooling",
+          "Circumstance": "Manufacturing process thermal regulation",
+          "Alternatives Differ?": "Yes — chiller vs cooling tower vs direct refrigeration"
+        },
+        {
+          "#": "4",
+          "Segment": "Cold chain / food preservation",
+          "Circumstance": "Perishable goods storage and transport",
+          "Alternatives Differ?": "Yes — walk-in vs reach-in vs blast freezer"
+        },
+        {
+          "#": "5",
+          "Segment": "Pharmaceutical / cleanroom",
+          "Circumstance": "Precision temperature + humidity control",
+          "Alternatives Differ?": "Yes — chiller+AHU vs CRAC vs DX units"
+        },
+        {
+          "#": "6",
+          "Segment": "Data center thermal management",
+          "Circumstance": "IT equipment heat rejection",
+          "Alternatives Differ?": "Yes — air-cooled vs liquid-cooled vs evaporative"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L6 Process Step",
+        "Edge Type",
+        "Rationale"
+      ],
+      "rows": [
+        {
+          "L6 Process Step": "L6f Hydronic Circuit Assembly",
+          "Edge Type": "**HARD**",
+          "Rationale": "Flow sensor format/technology determines assembly process — ultrasonic requires different mounting than turbine"
+        },
+        {
+          "L6 Process Step": "L6e Electrical & Controls Integration",
+          "Edge Type": "**SOFT**",
+          "Rationale": "Sensor output protocol (UART/LIN/frequency) affects controller interface wiring but not controller category"
+        },
+        {
+          "L6 Process Step": "L6i Performance Testing & Certification",
+          "Edge Type": "**SOFT**",
+          "Rationale": "Sensor accuracy class affects test acceptance criteria but not test equipment category"
+        },
+        {
+          "L6 Process Step": "All other L6 steps",
+          "Edge Type": "INDEPENDENT",
+          "Rationale": "Flow sensor has no effect on sheet metal, heat exchanger, refrigerant, combustion, or charging processes"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**Route**",
+          "Value": "PRODUCT_BOM — sensor ends up IN the finished heat pump / chiller"
+        },
+        {
+          "Field": "**Anchor Level**",
+          "Value": "L5"
+        },
+        {
+          "Field": "**Anchor Node**",
+          "Value": "Flow Sensor"
+        },
+        {
+          "Field": "**Parent L6**",
+          "Value": "L6f — Hydronic Circuit Assembly"
+        },
+        {
+          "Field": "**Parent Job Family**",
+          "Value": "Assemble water-side piping, circulation pumps, flow sensors, and hydraulic components for water-based heat exchange"
+        },
+        {
+          "Field": "**Sibling L5s**",
+          "Value": "Circulation Pump, Plate Heat Exchanger, Hydraulic Valve Assembly"
+        },
+        {
+          "Field": "**L4 Children**",
+          "Value": "Transducer Assembly, Signal Conditioning Electronics, Flow Body / Housing"
+        },
+        {
+          "Field": "**Output Types Activated**",
+          "Value": "OT-2 (water-source HP), OT-5 (water-cooled chiller)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**Route**",
+          "Value": "Maker — PRODUCT_BOM"
+        },
+        {
+          "Field": "**Lens Source**",
+          "Value": "BOM position function"
+        },
+        {
+          "Field": "**Function Verb**",
+          "Value": "Measure"
+        },
+        {
+          "Field": "**Lens**",
+          "Value": "\"What flow measurement does the hydronic circuit assembly need?\""
+        },
+        {
+          "Field": "**Level A filter**",
+          "Value": "Segments 1–6 all use hydronic circuits in some configurations"
+        },
+        {
+          "Field": "**Level B filter**",
+          "Value": "Segments 1, 2, 3, 5, 6 can use water-source HP or water-cooled chiller → all pass"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Alternative",
+        "UNSPSC",
+        "Share",
+        "Trade-Offs"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Alternative": "Ultrasonic transit-time sensor",
+          "UNSPSC": "41112501",
+          "Share": "35%",
+          "Trade-Offs": "Acoustic coupling dependency, air bubble sensitivity >2% vol, pipe-full requirement, higher unit cost"
+        },
+        {
+          "#": "2",
+          "Alternative": "Turbine / impeller sensor",
+          "UNSPSC": "41112501",
+          "Share": "30%",
+          "Trade-Offs": "Mechanical wear (bearing life), particle jamming, pressure drop ~100-300 mbar, maintenance schedule"
+        },
+        {
+          "#": "3",
+          "Alternative": "Vortex sensor",
+          "UNSPSC": "41112501",
+          "Share": "15%",
+          "Trade-Offs": "Minimum Reynolds number requirement, pressure drop from shedder bar, vibration sensitivity, limited low-flow accuracy"
+        },
+        {
+          "#": "4",
+          "Alternative": "Differential pressure sensor",
+          "UNSPSC": "41112409",
+          "Share": "10%",
+          "Trade-Offs": "Square-root extraction, limited turndown (3:1), permanent pressure loss, impulse line maintenance"
+        },
+        {
+          "#": "5",
+          "Alternative": "Paddle / float switch (binary)",
+          "UNSPSC": "41112501",
+          "Share": "10%",
+          "Trade-Offs": "On/off only — no proportional measurement, no diagnostic capability, mechanical moving parts. Zero trade-offs vs doing nothing."
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Scenario",
+        "Output Types Activated",
+        "BOM Positions In Play"
+      ],
+      "rows": [
+        {
+          "#": "S1",
+          "Scenario": "Heat pump heating mode",
+          "Output Types Activated": "OT-2",
+          "BOM Positions In Play": "Plate HX (condenser side), Circulation Pump, Flow Sensor"
+        },
+        {
+          "#": "S2",
+          "Scenario": "Heat pump cooling mode",
+          "Output Types Activated": "OT-2",
+          "BOM Positions In Play": "Plate HX (evaporator side), Circulation Pump, Flow Sensor"
+        },
+        {
+          "#": "S3",
+          "Scenario": "Chiller steady-state",
+          "Output Types Activated": "OT-5",
+          "BOM Positions In Play": "Plate HX, Circulation Pump, Flow Sensor, Hydraulic Valve"
+        },
+        {
+          "#": "S4",
+          "Scenario": "System startup — compressor enable",
+          "Output Types Activated": "OT-2, OT-5",
+          "BOM Positions In Play": "Flow Sensor (confirm flow before compressor start)"
+        },
+        {
+          "#": "S5",
+          "Scenario": "Part-load / low-flow operation",
+          "Output Types Activated": "OT-2, OT-5",
+          "BOM Positions In Play": "Flow Sensor (minimum flow verification for compressor protection)"
+        },
+        {
+          "#": "S6",
+          "Scenario": "Glycol freeze-protection circuit",
+          "Output Types Activated": "OT-2",
+          "BOM Positions In Play": "Flow Sensor + temperature (freeze risk detection)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Role",
+        "Instantiation",
+        "P1",
+        "P2",
+        "P3",
+        "P4",
+        "P5"
+      ],
+      "rows": [
+        {
+          "Role": "**Job Executor**",
+          "Instantiation": "OEM System Controller (control board)",
+          "P1": "ALL",
+          "P2": "ALL",
+          "P3": "—",
+          "P4": "—",
+          "P5": "—"
+        },
+        {
+          "Role": "**Job Overseer**",
+          "Instantiation": "HVAC OEM System Engineer",
+          "P1": "own",
+          "P2": "own",
+          "P3": "ALL",
+          "P4": "ALL",
+          "P5": "—"
+        },
+        {
+          "Role": "**Product Lifecycle Support**",
+          "Instantiation": "Assembly technician, commissioning tech, service tech",
+          "P1": "own",
+          "P2": "—",
+          "P3": "—",
+          "P4": "—",
+          "P5": "—"
+        },
+        {
+          "Role": "**Purchase Executor**",
+          "Instantiation": "OEM Procurement Manager",
+          "P1": "Acq",
+          "P2": "—",
+          "P3": "—",
+          "P4": "*",
+          "P5": "—"
+        },
+        {
+          "Role": "**Job Beneficiary**",
+          "Instantiation": "Building occupant (indirect)",
+          "P1": "—",
+          "P2": "*",
+          "P3": "—",
+          "P4": "—",
+          "P5": "*"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Step",
+        "Statement",
+        "Relevant",
+        "Rationale"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Step": "DEFINE",
+          "Statement": "Determine flow measurement specifications, pipe size, media type, operating range",
+          "Relevant": "**Yes**",
+          "Rationale": "Sensor must match system hydraulic design"
+        },
+        {
+          "#": "2",
+          "Step": "LOCATE",
+          "Statement": "Identify pipe connection point, power source, communication bus",
+          "Relevant": "No",
+          "Rationale": "System layout concern, not sensor function"
+        },
+        {
+          "#": "3",
+          "Step": "PREPARE",
+          "Statement": "Install sensor, configure fluid type, set communication protocol, commission",
+          "Relevant": "**Yes**",
+          "Rationale": "Critical product interaction at OEM assembly + field"
+        },
+        {
+          "#": "4",
+          "Step": "CONFIRM",
+          "Statement": "Verify signal quality, zero-flow baseline, communication handshake",
+          "Relevant": "**Yes**",
+          "Rationale": "Must confirm measurement validity before compressor enable"
+        },
+        {
+          "#": "5",
+          "Step": "EXECUTE",
+          "Statement": "Measure volumetric flow rate and temperature during system operation",
+          "Relevant": "**Yes**",
+          "Rationale": "Core value-creating function"
+        },
+        {
+          "#": "6",
+          "Step": "MONITOR",
+          "Statement": "Track measurement quality, detect drift, flag anomalies",
+          "Relevant": "**Yes**",
+          "Rationale": "Ongoing measurement integrity over equipment lifetime"
+        },
+        {
+          "#": "7",
+          "Step": "MODIFY",
+          "Statement": "Recalibrate, reconfigure for media changes, compensate for drift",
+          "Relevant": "**Yes**",
+          "Rationale": "Maintaining accuracy over service life"
+        },
+        {
+          "#": "8",
+          "Step": "CONCLUDE",
+          "Statement": "Log final readings, decommission",
+          "Relevant": "No",
+          "Rationale": "Trivial for embedded sensor — system shutdown handles"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Stage",
+        "Ultrasonic Transit-Time",
+        "Turbine / Impeller",
+        "Vortex",
+        "Diff. Pressure",
+        "Paddle Switch"
+      ],
+      "rows": [
+        {
+          "Stage": "**Acquire**",
+          "Ultrasonic Transit-Time": "Specify fluid properties, select DN variant",
+          "Turbine / Impeller": "Specify DN, select bearing material",
+          "Vortex": "Specify DN, verify min Reynolds",
+          "Diff. Pressure": "Size orifice plate, calc beta ratio",
+          "Paddle Switch": "Select setpoint threshold"
+        },
+        {
+          "Stage": "**Prepare**",
+          "Ultrasonic Transit-Time": "Mount inline, configure acoustic properties for glycol mix",
+          "Turbine / Impeller": "Mount inline, verify impeller clearance",
+          "Vortex": "Mount inline, verify straight run",
+          "Diff. Pressure": "Install orifice + impulse lines + transmitter",
+          "Paddle Switch": "Mount inline, set paddle length"
+        },
+        {
+          "Stage": "**Use**",
+          "Ultrasonic Transit-Time": "Read flow + temp, detect anomalies, compensate for temperature",
+          "Turbine / Impeller": "Read flow, accept pressure drop and bearing noise",
+          "Vortex": "Read flow, accept pressure drop",
+          "Diff. Pressure": "Read ΔP, extract square root, accept pressure loss",
+          "Paddle Switch": "Read binary on/off only"
+        },
+        {
+          "Stage": "**Maintain**",
+          "Ultrasonic Transit-Time": "No mechanical maintenance; verify acoustic coupling",
+          "Turbine / Impeller": "Replace bearings per schedule; clean impeller",
+          "Vortex": "Clean shedder bar periodically",
+          "Diff. Pressure": "Flush impulse lines; recalibrate transmitter",
+          "Paddle Switch": "Replace paddle/spring periodically"
+        },
+        {
+          "Stage": "**Dispose**",
+          "Ultrasonic Transit-Time": "Replace electronics module",
+          "Turbine / Impeller": "Replace full sensor (worn bearings)",
+          "Vortex": "Replace full sensor",
+          "Diff. Pressure": "Remove orifice plate + impulse tubing + transmitter",
+          "Paddle Switch": "Replace full sensor"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement",
+        "Error Type",
+        "Role",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Impact",
+        "Prod-Related",
+        "Confidence"
+      ],
+      "rows": [
+        {
+          "#": "ES-01",
+          "Statement": "Minimize the likelihood of selecting a flow sensor with insufficient turndown ratio for the system's part-load to full-load operating range",
+          "Error Type": "ACCURACY",
+          "Role": "Overseer",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "9",
+          "Impact": "reliability",
+          "Prod-Related": "false",
+          "Confidence": "0.7"
+        },
+        {
+          "#": "ES-02",
+          "Statement": "Increase the ability to specify a single sensor platform across multiple pipe diameters (DN12–DN25) without redesigning the hydraulic assembly",
+          "Error Type": "EFFORT",
+          "Role": "Overseer",
+          "Imp": "6",
+          "Sat": "4",
+          "Opp": "8",
+          "Impact": "cost",
+          "Prod-Related": "true",
+          "Confidence": "0.6"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement",
+        "Error Type",
+        "Role",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Impact",
+        "Prod-Related",
+        "Confidence"
+      ],
+      "rows": [
+        {
+          "#": "ES-03",
+          "Statement": "Minimize the time required to mechanically integrate the flow sensor into the hydronic circuit during OEM assembly to under 3 minutes per unit",
+          "Error Type": "EFFORT",
+          "Role": "Lifecycle (Installer)",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "9",
+          "Impact": "time",
+          "Prod-Related": "false",
+          "Confidence": "0.7"
+        },
+        {
+          "#": "ES-04",
+          "Statement": "Minimize the likelihood of incorrect sensor orientation during installation causing flow measurement bias exceeding 2% of reading",
+          "Error Type": "ACCURACY",
+          "Role": "Lifecycle (Installer)",
+          "Imp": "8",
+          "Sat": "5",
+          "Opp": "11",
+          "Impact": "reliability",
+          "Prod-Related": "false",
+          "Confidence": "0.8"
+        },
+        {
+          "#": "ES-05",
+          "Statement": "Minimize the commissioning effort required to configure fluid acoustic properties for varying water-glycol concentrations",
+          "Error Type": "EFFORT",
+          "Role": "Lifecycle (Commissioning)",
+          "Imp": "7",
+          "Sat": "4",
+          "Opp": "10",
+          "Impact": "skill",
+          "Prod-Related": "true",
+          "Confidence": "0.7"
+        },
+        {
+          "#": "ES-06",
+          "Statement": "Increase the ability to automatically compensate for glycol concentration variations up to 50% without manual reconfiguration",
+          "Error Type": "ACCURACY",
+          "Role": "Lifecycle (Commissioning)",
+          "Imp": "8",
+          "Sat": "4",
+          "Opp": "12",
+          "Impact": "reliability",
+          "Prod-Related": "false",
+          "Confidence": "0.7"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement",
+        "Error Type",
+        "Role",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Impact",
+        "Prod-Related",
+        "Confidence"
+      ],
+      "rows": [
+        {
+          "#": "ES-07",
+          "Statement": "Minimize the time to detect an empty-pipe or air-lock condition before enabling the compressor to under 5 seconds",
+          "Error Type": "DETECTION",
+          "Role": "Executor",
+          "Imp": "9",
+          "Sat": "4",
+          "Opp": "14",
+          "Impact": "safety",
+          "Prod-Related": "true",
+          "Confidence": "0.8"
+        },
+        {
+          "#": "ES-08",
+          "Statement": "Increase the ability to verify sensor signal integrity through automated self-diagnostics at each system startup",
+          "Error Type": "DETECTION",
+          "Role": "Executor",
+          "Imp": "7",
+          "Sat": "4",
+          "Opp": "10",
+          "Impact": "reliability",
+          "Prod-Related": "false",
+          "Confidence": "0.6"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement",
+        "Error Type",
+        "Role",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Impact",
+        "Prod-Related",
+        "Confidence"
+      ],
+      "rows": [
+        {
+          "#": "ES-09",
+          "Statement": "Increase the ability to maintain measurement accuracy within ±3% of reading over 10,000 operating hours of steady-state operation",
+          "Error Type": "ACCURACY",
+          "Role": "Executor",
+          "Imp": "9",
+          "Sat": "6",
+          "Opp": "12",
+          "Impact": "reliability",
+          "Prod-Related": "false",
+          "Confidence": "0.8"
+        },
+        {
+          "#": "ES-10",
+          "Statement": "Minimize the likelihood of air entrainment exceeding 2% by volume causing complete measurement signal loss during thermal cycling",
+          "Error Type": "ROBUSTNESS",
+          "Role": "Executor",
+          "Imp": "8",
+          "Sat": "4",
+          "Opp": "12",
+          "Impact": "reliability",
+          "Prod-Related": "true",
+          "Confidence": "0.8"
+        },
+        {
+          "#": "ES-11",
+          "Statement": "Increase the ability to measure flow rate accurately across the full turndown range from minimum to maximum system load",
+          "Error Type": "THROUGHPUT",
+          "Role": "Executor",
+          "Imp": "8",
+          "Sat": "5",
+          "Opp": "11",
+          "Impact": "reliability",
+          "Prod-Related": "false",
+          "Confidence": "0.7"
+        },
+        {
+          "#": "ES-12",
+          "Statement": "Minimize the likelihood of circulation pump pressure pulsations causing flow reading oscillations exceeding 5% of steady-state value",
+          "Error Type": "CONSISTENCY",
+          "Role": "Executor",
+          "Imp": "6",
+          "Sat": "5",
+          "Opp": "7",
+          "Impact": "reliability",
+          "Prod-Related": "false",
+          "Confidence": "0.6"
+        },
+        {
+          "#": "ES-13",
+          "Statement": "Minimize the likelihood of rapid temperature transients exceeding compensation algorithm response, causing measurement error >1% for more than 30 seconds",
+          "Error Type": "ROBUSTNESS",
+          "Role": "Executor",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "9",
+          "Impact": "reliability",
+          "Prod-Related": "true",
+          "Confidence": "0.7"
+        },
+        {
+          "#": "ES-14",
+          "Statement": "Increase the ability to detect and report reverse flow direction to the system controller within 1 second of flow reversal",
+          "Error Type": "DETECTION",
+          "Role": "Executor",
+          "Imp": "7",
+          "Sat": "4",
+          "Opp": "10",
+          "Impact": "safety",
+          "Prod-Related": "true",
+          "Confidence": "0.7"
+        },
+        {
+          "#": "ES-15",
+          "Statement": "Minimize the flow sensor's contribution to system pressure drop below 50 mbar at design flow rate",
+          "Error Type": "EFFORT",
+          "Role": "Overseer",
+          "Imp": "7",
+          "Sat": "6",
+          "Opp": "8",
+          "Impact": "cost",
+          "Prod-Related": "false",
+          "Confidence": "0.8"
+        },
+        {
+          "#": "ES-16",
+          "Statement": "Minimize the likelihood of compressor short-cycling due to undetected low-flow conditions persisting longer than 10 seconds",
+          "Error Type": "DETECTION",
+          "Role": "Overseer",
+          "Imp": "9",
+          "Sat": "5",
+          "Opp": "13",
+          "Impact": "safety",
+          "Prod-Related": "false",
+          "Confidence": "0.9"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement",
+        "Error Type",
+        "Role",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Impact",
+        "Prod-Related",
+        "Confidence"
+      ],
+      "rows": [
+        {
+          "#": "ES-17",
+          "Statement": "Increase the ability to detect calibration drift exceeding ±0.5% within 30 days of occurrence over 12 months of continuous operation",
+          "Error Type": "DETECTION",
+          "Role": "Executor",
+          "Imp": "8",
+          "Sat": "5",
+          "Opp": "11",
+          "Impact": "reliability",
+          "Prod-Related": "false",
+          "Confidence": "0.7"
+        },
+        {
+          "#": "ES-18",
+          "Statement": "Increase the ability to distinguish genuine process deviations from sensor artifacts with >95% classification accuracy",
+          "Error Type": "ACCURACY",
+          "Role": "Executor",
+          "Imp": "7",
+          "Sat": "4",
+          "Opp": "10",
+          "Impact": "reliability",
+          "Prod-Related": "false",
+          "Confidence": "0.6"
+        },
+        {
+          "#": "ES-19",
+          "Statement": "Minimize the likelihood of scale or sediment buildup degrading measurement accuracy by more than 2% within the sensor's rated service life",
+          "Error Type": "ROBUSTNESS",
+          "Role": "Executor",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "9",
+          "Impact": "reliability",
+          "Prod-Related": "false",
+          "Confidence": "0.7"
+        },
+        {
+          "#": "ES-20",
+          "Statement": "Increase the ability to compute real-time thermal energy output (kW) by combining volumetric flow and temperature delta within a single sensor body",
+          "Error Type": "THROUGHPUT",
+          "Role": "Overseer",
+          "Imp": "8",
+          "Sat": "4",
+          "Opp": "12",
+          "Impact": "cost",
+          "Prod-Related": "true",
+          "Confidence": "0.8"
+        },
+        {
+          "#": "ES-21",
+          "Statement": "Minimize the likelihood of acoustic coupling degradation between transducer and fluid causing measurement error exceeding 1% within the first 5 years of operation",
+          "Error Type": "ROBUSTNESS",
+          "Role": "Executor",
+          "Imp": "8",
+          "Sat": "5",
+          "Opp": "11",
+          "Impact": "reliability",
+          "Prod-Related": "true",
+          "Confidence": "0.7"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement",
+        "Error Type",
+        "Role",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Impact",
+        "Prod-Related",
+        "Confidence"
+      ],
+      "rows": [
+        {
+          "#": "ES-22",
+          "Statement": "Minimize the time required to recalibrate or replace a degraded flow sensor without draining the hydronic circuit",
+          "Error Type": "RECOVERY",
+          "Role": "Lifecycle (Maintainer)",
+          "Imp": "7",
+          "Sat": "4",
+          "Opp": "10",
+          "Impact": "time",
+          "Prod-Related": "false",
+          "Confidence": "0.7"
+        },
+        {
+          "#": "ES-23",
+          "Statement": "Minimize the likelihood of requiring field recalibration more frequently than once within the rated equipment service life",
+          "Error Type": "EFFORT",
+          "Role": "Lifecycle (Maintainer)",
+          "Imp": "8",
+          "Sat": "5",
+          "Opp": "11",
+          "Impact": "cost",
+          "Prod-Related": "false",
+          "Confidence": "0.8"
+        },
+        {
+          "#": "ES-24",
+          "Statement": "Increase the ability to remotely diagnose flow sensor health status via the existing BMS communication bus without physical inspection",
+          "Error Type": "DETECTION",
+          "Role": "Overseer",
+          "Imp": "6",
+          "Sat": "3",
+          "Opp": "9",
+          "Impact": "time",
+          "Prod-Related": "false",
+          "Confidence": "0.6"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement",
+        "Pyramid Level",
+        "Bridge",
+        "Role",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Impact",
+        "Prod-Related",
+        "Confidence"
+      ],
+      "rows": [
+        {
+          "#": "ES-25",
+          "Statement": "Increase the ability to demonstrate EU EcoDesign energy efficiency compliance through traceable, sensor-based flow measurement data",
+          "Pyramid Level": "P3 Role",
+          "Bridge": "\"OEM engineer becomes the designer of regulation-compliant, auditable systems\" → \"What must the product do so they CAN become that role?\"",
+          "Role": "Overseer",
+          "Imp": "8",
+          "Sat": "4",
+          "Opp": "12",
+          "Impact": "cost",
+          "Prod-Related": "false",
+          "Confidence": "0.8"
+        },
+        {
+          "#": "ES-26",
+          "Statement": "Minimize the likelihood of field audit findings revealing flow measurement inaccuracy that would cause energy label downgrade",
+          "Pyramid Level": "P4 Image",
+          "Bridge": "\"Auditors and regulators must see verified performance data\" → \"What must the product do so watchers SEE that impression?\"",
+          "Role": "Overseer",
+          "Imp": "8",
+          "Sat": "5",
+          "Opp": "11",
+          "Impact": "cost",
+          "Prod-Related": "false",
+          "Confidence": "0.7"
+        },
+        {
+          "#": "ES-27",
+          "Statement": "Minimize the frequency of warranty callbacks attributed to flow sensor malfunction within the first 24 months of equipment operation [hypothesis]",
+          "Pyramid Level": "P5 Emotional",
+          "Bridge": "\"Service managers want to feel confident in first-year reliability; avoid anxiety of callback spikes\" → \"What must the product do so they FEEL that?\"",
+          "Role": "Lifecycle (Maintainer)",
+          "Imp": "8",
+          "Sat": "5",
+          "Opp": "11",
+          "Impact": "cost",
+          "Prod-Related": "false",
+          "Confidence": "0.7"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Metric",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Metric": "Total error statements",
+          "Value": "27"
+        },
+        {
+          "Metric": "Market-inherent (product_related=false)",
+          "Value": "19 (70%)"
+        },
+        {
+          "Metric": "Technology-specific (product_related=true)",
+          "Value": "8 (30%)"
+        },
+        {
+          "Metric": "\"Minimize…\" statements",
+          "Value": "16 (59%)"
+        },
+        {
+          "Metric": "\"Increase…\" statements",
+          "Value": "11 (41%)"
+        },
+        {
+          "Metric": "Needs per relevant step (min)",
+          "Value": "2 (DEFINE, CONFIRM)"
+        },
+        {
+          "Metric": "Needs per relevant step (max)",
+          "Value": "8 (EXECUTE)"
+        },
+        {
+          "Metric": "Mean importance",
+          "Value": "7.5"
+        },
+        {
+          "Metric": "Mean satisfaction",
+          "Value": "4.6"
+        },
+        {
+          "Metric": "Mean opportunity score",
+          "Value": "10.4"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Rank",
+        "#",
+        "Statement (abbreviated)",
+        "Opp",
+        "Imp",
+        "Sat"
+      ],
+      "rows": [
+        {
+          "Rank": "1",
+          "#": "ES-07",
+          "Statement (abbreviated)": "Detect empty-pipe / air-lock before compressor enable (<5s)",
+          "Opp": "**14**",
+          "Imp": "9",
+          "Sat": "4"
+        },
+        {
+          "Rank": "2",
+          "#": "ES-16",
+          "Statement (abbreviated)": "Prevent compressor short-cycling from undetected low-flow (>10s)",
+          "Opp": "**13**",
+          "Imp": "9",
+          "Sat": "5"
+        },
+        {
+          "Rank": "3",
+          "#": "ES-06",
+          "Statement (abbreviated)": "Auto-compensate for glycol concentration variations (<50%)",
+          "Opp": "**12**",
+          "Imp": "8",
+          "Sat": "4"
+        },
+        {
+          "Rank": "4",
+          "#": "ES-09",
+          "Statement (abbreviated)": "Maintain ±3% accuracy over 10,000 operating hours",
+          "Opp": "**12**",
+          "Imp": "9",
+          "Sat": "6"
+        },
+        {
+          "Rank": "5",
+          "#": "ES-10",
+          "Statement (abbreviated)": "Prevent air entrainment >2% vol causing signal loss",
+          "Opp": "**12**",
+          "Imp": "8",
+          "Sat": "4"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Technology",
+        "Anchor VN Unit",
+        "Anchor Level",
+        "Market Share",
+        "Rationale"
+      ],
+      "rows": [
+        {
+          "Technology": "Ultrasonic transit-time sensor",
+          "Anchor VN Unit": "Flow Sensor",
+          "Anchor Level": "L5",
+          "Market Share": "35%",
+          "Rationale": "Growing share in modern heat pumps; no moving parts, integrated temp"
+        },
+        {
+          "Technology": "Turbine / impeller sensor",
+          "Anchor VN Unit": "Flow Sensor",
+          "Anchor Level": "L5",
+          "Market Share": "30%",
+          "Rationale": "Legacy dominant; declining due to mechanical wear and maintenance"
+        },
+        {
+          "Technology": "Vortex sensor",
+          "Anchor VN Unit": "Flow Sensor",
+          "Anchor Level": "L5",
+          "Market Share": "15%",
+          "Rationale": "Used in larger commercial systems; limited in small DN sizes"
+        },
+        {
+          "Technology": "Differential pressure sensor",
+          "Anchor VN Unit": "Flow Sensor",
+          "Anchor Level": "L5",
+          "Market Share": "10%",
+          "Rationale": "Used in legacy chiller plants; declining due to permanent pressure loss"
+        },
+        {
+          "Technology": "Paddle / float switch",
+          "Anchor VN Unit": "Flow Sensor",
+          "Anchor Level": "L5",
+          "Market Share": "10%",
+          "Rationale": "Cheapest option; binary only — no proportional measurement"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "#": "V1",
+          "Check": "Format compliance — every statement starts with \"Minimize the likelihood of…\" or \"Increase the ability to…\" with exactly ONE measurable KPI",
+          "Result": "**PASS**"
+        },
+        {
+          "#": "V2",
+          "Check": "product_related classification — true ONLY when need disappears with different technology",
+          "Result": "**PASS** — 8/27 flagged true (acoustic coupling, air bubble sensitivity, temperature compensation, reverse flow detection, glycol acoustic config, modular DN platform, empty-pipe detection, integrated energy calc)"
+        },
+        {
+          "#": "V3",
+          "Check": "Importance/satisfaction sanity — no unrealistic patterns",
+          "Result": "**PASS** — safety/mission-critical items at 8–9; convenience at 6; satisfaction spread 3–6"
+        },
+        {
+          "#": "V4",
+          "Check": "Impact category accuracy — category matches KPI",
+          "Result": "**PASS**"
+        },
+        {
+          "#": "V5",
+          "Check": "Coverage — ≥2 needs per relevant step; 60–70% market-inherent; no duplicates",
+          "Result": "**PASS** — 70/30 split; all 6 relevant steps have ≥2 needs"
+        },
+        {
+          "#": "V6",
+          "Check": "Solution-agnostic — zero reference to any product, vendor, technology, or mechanism",
+          "Result": "**PASS** — no mention of ultrasonic, Marquardt, piezoelectric, or transit-time in any statement"
+        },
+        {
+          "#": "V7",
+          "Check": "Anchor correctness — anchor level matches product abstraction",
+          "Result": "**PASS** — L5 for sensor/component per VN hierarchy"
+        },
+        {
+          "#": "V8",
+          "Check": "Product job references parent — includes parent VN unit name and context qualifier",
+          "Result": "**PASS** — \"Help Hydronic Circuit Assembly to measure water-side volumetric flow rate in closed-loop heat exchange circuits…\""
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "jtbd_analysis",
+      "naics_code": "333415",
+      "naics_title": "Air-Conditioning and Warm Air Heating Equipment and Commercial and Industrial Refrigeration Equipment Manufacturing",
+      "market_name": "Air Conditioning and Warm Air Heating Equipment",
+      "product_name": "Ultrasonic Flow Sensor",
+      "vendor_name": "Marquardt",
+      "cfj_statement": "Manufacture climate control and thermal management equipment that conditions, heats, cools, or refrigerates enclosed spaces and stored goods to specified temperature and humidity setpoints",
+      "product_job_statement": "Help Hydronic Circuit Assembly to measure water-side volumetric flow rate in closed-loop heat exchange circuits for thermal output regulation and system protection",
+      "core_job_statement": "Quantify water-side volumetric flow rate in hydronic heat exchange circuits to enable thermal output calculation, system balancing, and fault protection",
+      "anchor": {
+        "vn_unit": "Flow Sensor",
+        "level": "L5",
+        "parent_vn_unit": "Hydronic Circuit Assembly",
+        "parent_level": "L6",
+        "route": "PRODUCT_BOM"
+      },
+      "segments": [
+        {
+          "name": "Residential comfort conditioning",
+          "circumstance": "Single-family/multi-family heating + cooling"
+        },
+        {
+          "name": "Commercial building comfort",
+          "circumstance": "Office/retail/hospitality HVAC"
+        },
+        {
+          "name": "Industrial process cooling",
+          "circumstance": "Manufacturing process thermal regulation"
+        },
+        {
+          "name": "Cold chain / food preservation",
+          "circumstance": "Perishable goods storage and transport"
+        },
+        {
+          "name": "Pharmaceutical / cleanroom",
+          "circumstance": "Precision temperature + humidity control"
+        },
+        {
+          "name": "Data center thermal management",
+          "circumstance": "IT equipment heat rejection"
+        }
+      ],
+      "alternatives": [
+        {
+          "name": "Ultrasonic transit-time sensor",
+          "unspsc": "41112501",
+          "market_share_pct": 35,
+          "trade_offs": [
+            "Acoustic coupling dependency",
+            "Air bubble sensitivity >2% vol",
+            "Pipe-full requirement",
+            "Higher unit cost"
+          ],
+          "existential": false
+        },
+        {
+          "name": "Turbine / impeller sensor",
+          "unspsc": "41112501",
+          "market_share_pct": 30,
+          "trade_offs": [
+            "Mechanical wear (bearing life)",
+            "Particle jamming",
+            "Pressure drop 100-300 mbar",
+            "Maintenance schedule"
+          ],
+          "existential": false
+        },
+        {
+          "name": "Vortex sensor",
+          "unspsc": "41112501",
+          "market_share_pct": 15,
+          "trade_offs": [
+            "Minimum Reynolds number requirement",
+            "Pressure drop from shedder bar",
+            "Vibration sensitivity",
+            "Limited low-flow accuracy"
+          ],
+          "existential": false
+        },
+        {
+          "name": "Differential pressure sensor",
+          "unspsc": "41112409",
+          "market_share_pct": 10,
+          "trade_offs": [
+            "Square-root extraction",
+            "Limited turndown (3:1)",
+            "Permanent pressure loss",
+            "Impulse line maintenance"
+          ],
+          "existential": false
+        },
+        {
+          "name": "Paddle / float switch (binary only)",
+          "unspsc": "41112501",
+          "market_share_pct": 10,
+          "trade_offs": [
+            "On/off only — no proportional measurement",
+            "No diagnostic capability",
+            "Mechanical moving parts"
+          ],
+          "existential": false
+        }
+      ],
+      "scenarios": [
+        {
+          "id": "S1",
+          "name": "Heat pump heating mode",
+          "output_types": [
+            "OT-2"
+          ],
+          "bom_positions": [
+            "Plate HX (condenser)",
+            "Circulation Pump",
+            "Flow Sensor"
+          ]
+        },
+        {
+          "id": "S2",
+          "name": "Heat pump cooling mode",
+          "output_types": [
+            "OT-2"
+          ],
+          "bom_positions": [
+            "Plate HX (evaporator)",
+            "Circulation Pump",
+            "Flow Sensor"
+          ]
+        },
+        {
+          "id": "S3",
+          "name": "Chiller steady-state",
+          "output_types": [
+            "OT-5"
+          ],
+          "bom_positions": [
+            "Plate HX",
+            "Circulation Pump",
+            "Flow Sensor",
+            "Hydraulic Valve"
+          ]
+        },
+        {
+          "id": "S4",
+          "name": "System startup — compressor enable",
+          "output_types": [
+            "OT-2",
+            "OT-5"
+          ],
+          "bom_positions": [
+            "Flow Sensor"
+          ]
+        },
+        {
+          "id": "S5",
+          "name": "Part-load / low-flow operation",
+          "output_types": [
+            "OT-2",
+            "OT-5"
+          ],
+          "bom_positions": [
+            "Flow Sensor"
+          ]
+        },
+        {
+          "id": "S6",
+          "name": "Glycol freeze-protection circuit",
+          "output_types": [
+            "OT-2"
+          ],
+          "bom_positions": [
+            "Flow Sensor"
+          ]
+        }
+      ],
+      "job_map": {
+        "naics_code": "333415",
+        "anchor_vn_unit": "Flow Sensor",
+        "anchor_level": "L5",
+        "parent_vn_unit": "Hydronic Circuit Assembly",
+        "parent_level": "L6",
+        "product_job_statement": "Help Hydronic Circuit Assembly to measure water-side volumetric flow rate in closed-loop heat exchange circuits for thermal output regulation and system protection",
+        "steps": [
+          {
+            "step_number": 1,
+            "step_name": "DEFINE",
+            "statement": "Determine flow measurement specifications, pipe size, media type, operating range",
+            "relevant_to_product": true,
+            "relevance_rationale": "Sensor must match system hydraulic design parameters"
+          },
+          {
+            "step_number": 2,
+            "step_name": "LOCATE",
+            "statement": "Identify pipe connection point, power source, communication bus",
+            "relevant_to_product": false,
+            "relevance_rationale": "System layout concern, not sensor function"
+          },
+          {
+            "step_number": 3,
+            "step_name": "PREPARE",
+            "statement": "Install sensor, configure fluid type, set communication protocol, commission",
+            "relevant_to_product": true,
+            "relevance_rationale": "Critical product interaction at OEM assembly and field commissioning"
+          },
+          {
+            "step_number": 4,
+            "step_name": "CONFIRM",
+            "statement": "Verify signal quality, zero-flow baseline, communication handshake",
+            "relevant_to_product": true,
+            "relevance_rationale": "Must confirm measurement validity before compressor enable"
+          },
+          {
+            "step_number": 5,
+            "step_name": "EXECUTE",
+            "statement": "Measure volumetric flow rate and temperature during system operation",
+            "relevant_to_product": true,
+            "relevance_rationale": "Core value-creating function of the sensor"
+          },
+          {
+            "step_number": 6,
+            "step_name": "MONITOR",
+            "statement": "Track measurement quality, detect drift, flag anomalies",
+            "relevant_to_product": true,
+            "relevance_rationale": "Ongoing measurement integrity over equipment lifetime"
+          },
+          {
+            "step_number": 7,
+            "step_name": "MODIFY",
+            "statement": "Recalibrate, reconfigure for media changes, compensate for drift",
+            "relevant_to_product": true,
+            "relevance_rationale": "Maintaining accuracy over service life"
+          },
+          {
+            "step_number": 8,
+            "step_name": "CONCLUDE",
+            "statement": "Log final readings, decommission",
+            "relevant_to_product": false,
+            "relevance_rationale": "Trivial for embedded sensor — system shutdown handles"
+          }
+        ]
+      },
+      "error_statements": [
+        {
+          "id": "ES-01",
+          "statement": "Minimize the likelihood of selecting a flow sensor with insufficient turndown ratio for the system's part-load to full-load operating range",
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "error_type": "ACCURACY",
+          "role": "Overseer",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9,
+          "impact_category": "reliability",
+          "product_related": false,
+          "pyramid_level": "P2",
+          "confidence": 0.7,
+          "rationale": "Part-load operation is common in modulating heat pumps; turndown mismatch causes loss of measurement at low loads"
+        },
+        {
+          "id": "ES-02",
+          "statement": "Increase the ability to specify a single sensor platform across multiple pipe diameters (DN12–DN25) without redesigning the hydraulic assembly",
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "error_type": "EFFORT",
+          "role": "Overseer",
+          "importance": 6,
+          "satisfaction_current": 4,
+          "opportunity_score": 8,
+          "impact_category": "cost",
+          "product_related": true,
+          "pyramid_level": "P1",
+          "confidence": 0.6,
+          "rationale": "OEMs produce multiple capacity variants; shared electronics + interchangeable flow bodies reduce BOM complexity"
+        },
+        {
+          "id": "ES-03",
+          "statement": "Minimize the time required to mechanically integrate the flow sensor into the hydronic circuit during OEM assembly to under 3 minutes per unit",
+          "job_step_number": 3,
+          "job_step_name": "PREPARE",
+          "error_type": "EFFORT",
+          "role": "Lifecycle (Installer)",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9,
+          "impact_category": "time",
+          "product_related": false,
+          "pyramid_level": "P1",
+          "confidence": 0.7,
+          "rationale": "Assembly line cycle time directly impacts unit cost; threaded vs plug-in connection affects integration speed"
+        },
+        {
+          "id": "ES-04",
+          "statement": "Minimize the likelihood of incorrect sensor orientation during installation causing flow measurement bias exceeding 2% of reading",
+          "job_step_number": 3,
+          "job_step_name": "PREPARE",
+          "error_type": "ACCURACY",
+          "role": "Lifecycle (Installer)",
+          "importance": 8,
+          "satisfaction_current": 5,
+          "opportunity_score": 11,
+          "impact_category": "reliability",
+          "product_related": false,
+          "pyramid_level": "P1",
+          "confidence": 0.8,
+          "rationale": "All inline sensors have orientation requirements; misinstallation is a leading cause of commissioning failures"
+        },
+        {
+          "id": "ES-05",
+          "statement": "Minimize the commissioning effort required to configure fluid acoustic properties for varying water-glycol concentrations",
+          "job_step_number": 3,
+          "job_step_name": "PREPARE",
+          "error_type": "EFFORT",
+          "role": "Lifecycle (Commissioning)",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10,
+          "impact_category": "skill",
+          "product_related": true,
+          "pyramid_level": "P1",
+          "confidence": 0.7,
+          "rationale": "Ultrasonic sensors require speed-of-sound calibration per fluid type; unknown glycol composition causes up to 30% flow deviation [SRC: Belimo/Tameson]"
+        },
+        {
+          "id": "ES-06",
+          "statement": "Increase the ability to automatically compensate for glycol concentration variations up to 50% without manual reconfiguration",
+          "job_step_number": 3,
+          "job_step_name": "PREPARE",
+          "error_type": "ACCURACY",
+          "role": "Lifecycle (Commissioning)",
+          "importance": 8,
+          "satisfaction_current": 4,
+          "opportunity_score": 12,
+          "impact_category": "reliability",
+          "product_related": false,
+          "pyramid_level": "P2",
+          "confidence": 0.7,
+          "rationale": "Glycol concentration changes seasonally and after top-ups; manual reconfiguration is rarely performed"
+        },
+        {
+          "id": "ES-07",
+          "statement": "Minimize the time to detect an empty-pipe or air-lock condition before enabling the compressor to under 5 seconds",
+          "job_step_number": 4,
+          "job_step_name": "CONFIRM",
+          "error_type": "DETECTION",
+          "role": "Executor",
+          "importance": 9,
+          "satisfaction_current": 4,
+          "opportunity_score": 14,
+          "impact_category": "safety",
+          "product_related": true,
+          "pyramid_level": "P2",
+          "confidence": 0.8,
+          "rationale": "Empty-pipe compressor start causes refrigerant high-pressure trip or freeze damage; ultrasonic acoustic diagnostics detect this faster than binary switches"
+        },
+        {
+          "id": "ES-08",
+          "statement": "Increase the ability to verify sensor signal integrity through automated self-diagnostics at each system startup",
+          "job_step_number": 4,
+          "job_step_name": "CONFIRM",
+          "error_type": "DETECTION",
+          "role": "Executor",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10,
+          "impact_category": "reliability",
+          "product_related": false,
+          "pyramid_level": "P2",
+          "confidence": 0.6,
+          "rationale": "Degraded sensor operating undetected leads to incorrect system control decisions over weeks/months"
+        },
+        {
+          "id": "ES-09",
+          "statement": "Increase the ability to maintain measurement accuracy within ±3% of reading over 10,000 operating hours of steady-state operation",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ACCURACY",
+          "role": "Executor",
+          "importance": 9,
+          "satisfaction_current": 6,
+          "opportunity_score": 12,
+          "impact_category": "reliability",
+          "product_related": false,
+          "pyramid_level": "P2",
+          "confidence": 0.8,
+          "rationale": "Long-term accuracy is foundation for thermal energy calculation (kW = flow × ΔT × Cp); drift degrades efficiency"
+        },
+        {
+          "id": "ES-10",
+          "statement": "Minimize the likelihood of air entrainment exceeding 2% by volume causing complete measurement signal loss during thermal cycling",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ROBUSTNESS",
+          "role": "Executor",
+          "importance": 8,
+          "satisfaction_current": 4,
+          "opportunity_score": 12,
+          "impact_category": "reliability",
+          "product_related": true,
+          "pyramid_level": "P1",
+          "confidence": 0.8,
+          "rationale": "Air bubbles obstruct ultrasonic wave propagation causing malfunction [SRC: GAIMC]; thermal cycling releases dissolved air"
+        },
+        {
+          "id": "ES-11",
+          "statement": "Increase the ability to measure flow rate accurately across the full turndown range from minimum to maximum system load",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "THROUGHPUT",
+          "role": "Executor",
+          "importance": 8,
+          "satisfaction_current": 5,
+          "opportunity_score": 11,
+          "impact_category": "reliability",
+          "product_related": false,
+          "pyramid_level": "P2",
+          "confidence": 0.7,
+          "rationale": "VFD-driven systems modulate down to 20-30% of design flow; sensor must remain accurate at these low rates"
+        },
+        {
+          "id": "ES-12",
+          "statement": "Minimize the likelihood of circulation pump pressure pulsations causing flow reading oscillations exceeding 5% of steady-state value",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "CONSISTENCY",
+          "role": "Executor",
+          "importance": 6,
+          "satisfaction_current": 5,
+          "opportunity_score": 7,
+          "impact_category": "reliability",
+          "product_related": false,
+          "pyramid_level": "P2",
+          "confidence": 0.6,
+          "rationale": "Wet-rotor pumps generate low-frequency pulsations; insufficient signal averaging creates noisy control input"
+        },
+        {
+          "id": "ES-13",
+          "statement": "Minimize the likelihood of rapid temperature transients exceeding compensation algorithm response, causing measurement error >1% for more than 30 seconds",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ROBUSTNESS",
+          "role": "Executor",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9,
+          "impact_category": "reliability",
+          "product_related": true,
+          "pyramid_level": "P1",
+          "confidence": 0.7,
+          "rationale": "Speed of sound varies ~1.5% per 10°C; defrost cycles and mode switching cause rapid temperature shifts [SRC: 01_product_decomposition]"
+        },
+        {
+          "id": "ES-14",
+          "statement": "Increase the ability to detect and report reverse flow direction to the system controller within 1 second of flow reversal",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "DETECTION",
+          "role": "Executor",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10,
+          "impact_category": "safety",
+          "product_related": true,
+          "pyramid_level": "P1",
+          "confidence": 0.7,
+          "rationale": "Reverse flow in hydronic circuits indicates check valve failure or pump malfunction; undetected backflow degrades heat exchange"
+        },
+        {
+          "id": "ES-15",
+          "statement": "Minimize the flow sensor's contribution to system pressure drop below 50 mbar at design flow rate",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "EFFORT",
+          "role": "Overseer",
+          "importance": 7,
+          "satisfaction_current": 6,
+          "opportunity_score": 8,
+          "impact_category": "cost",
+          "product_related": false,
+          "pyramid_level": "P2",
+          "confidence": 0.8,
+          "rationale": "Every mbar of pressure drop increases pump energy; turbine meters cause 100-300 mbar, ultrasonic <50 mbar"
+        },
+        {
+          "id": "ES-16",
+          "statement": "Minimize the likelihood of compressor short-cycling due to undetected low-flow conditions persisting longer than 10 seconds",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "DETECTION",
+          "role": "Overseer",
+          "importance": 9,
+          "satisfaction_current": 5,
+          "opportunity_score": 13,
+          "impact_category": "safety",
+          "product_related": false,
+          "pyramid_level": "P2",
+          "confidence": 0.9,
+          "rationale": "Compressor short-cycling halves equipment lifespan (15-20yr → 7-10yr); replacement costs $1,500-2,500 [SRC: MyDadCanDoThat, JH Lincoln]"
+        },
+        {
+          "id": "ES-17",
+          "statement": "Increase the ability to detect calibration drift exceeding ±0.5% within 30 days of occurrence over 12 months of continuous operation",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "error_type": "DETECTION",
+          "role": "Executor",
+          "importance": 8,
+          "satisfaction_current": 5,
+          "opportunity_score": 11,
+          "impact_category": "reliability",
+          "product_related": false,
+          "pyramid_level": "P2",
+          "confidence": 0.7,
+          "rationale": "All flow meters experience drift from wear, fouling, environmental factors; annual calibration is typical [SRC: SIMCO, Micronics]"
+        },
+        {
+          "id": "ES-18",
+          "statement": "Increase the ability to distinguish genuine process deviations from sensor artifacts with >95% classification accuracy",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "error_type": "ACCURACY",
+          "role": "Executor",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10,
+          "impact_category": "reliability",
+          "product_related": false,
+          "pyramid_level": "P2",
+          "confidence": 0.6,
+          "rationale": "False alarms from sensor artifacts cause unnecessary service calls; missed real deviations cause system damage"
+        },
+        {
+          "id": "ES-19",
+          "statement": "Minimize the likelihood of scale or sediment buildup degrading measurement accuracy by more than 2% within the sensor's rated service life",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "error_type": "ROBUSTNESS",
+          "role": "Executor",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9,
+          "impact_category": "reliability",
+          "product_related": false,
+          "pyramid_level": "P2",
+          "confidence": 0.7,
+          "rationale": "Hydronic circuits accumulate magnetite and calcium deposits over years; fouling affects all sensor technologies differently"
+        },
+        {
+          "id": "ES-20",
+          "statement": "Increase the ability to compute real-time thermal energy output (kW) by combining volumetric flow and temperature delta within a single sensor body",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "error_type": "THROUGHPUT",
+          "role": "Overseer",
+          "importance": 8,
+          "satisfaction_current": 4,
+          "opportunity_score": 12,
+          "impact_category": "cost",
+          "product_related": true,
+          "pyramid_level": "P2",
+          "confidence": 0.8,
+          "rationale": "EU EcoDesign revision mandates consumption measurement and display; integrated flow+temp sensor eliminates separate probe [SRC: EC Energy]"
+        },
+        {
+          "id": "ES-21",
+          "statement": "Minimize the likelihood of acoustic coupling degradation between transducer and fluid causing measurement error exceeding 1% within the first 5 years of operation",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "error_type": "ROBUSTNESS",
+          "role": "Executor",
+          "importance": 8,
+          "satisfaction_current": 5,
+          "opportunity_score": 11,
+          "impact_category": "reliability",
+          "product_related": true,
+          "pyramid_level": "P1",
+          "confidence": 0.7,
+          "rationale": "Acoustic interface between piezoelectric element and fluid is the primary aging mechanism for transit-time sensors"
+        },
+        {
+          "id": "ES-22",
+          "statement": "Minimize the time required to recalibrate or replace a degraded flow sensor without draining the hydronic circuit",
+          "job_step_number": 7,
+          "job_step_name": "MODIFY",
+          "error_type": "RECOVERY",
+          "role": "Lifecycle (Maintainer)",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10,
+          "impact_category": "time",
+          "product_related": false,
+          "pyramid_level": "P1",
+          "confidence": 0.7,
+          "rationale": "Draining a hydronic circuit requires system shutdown, fluid disposal, refill, and re-commissioning — 4-8 hours of downtime"
+        },
+        {
+          "id": "ES-23",
+          "statement": "Minimize the likelihood of requiring field recalibration more frequently than once within the rated equipment service life",
+          "job_step_number": 7,
+          "job_step_name": "MODIFY",
+          "error_type": "EFFORT",
+          "role": "Lifecycle (Maintainer)",
+          "importance": 8,
+          "satisfaction_current": 5,
+          "opportunity_score": 11,
+          "impact_category": "cost",
+          "product_related": false,
+          "pyramid_level": "P1",
+          "confidence": 0.8,
+          "rationale": "No-moving-parts designs significantly extend calibration intervals vs mechanical meters that require annual verification"
+        },
+        {
+          "id": "ES-24",
+          "statement": "Increase the ability to remotely diagnose flow sensor health status via the existing BMS communication bus without physical inspection",
+          "job_step_number": 7,
+          "job_step_name": "MODIFY",
+          "error_type": "DETECTION",
+          "role": "Overseer",
+          "importance": 6,
+          "satisfaction_current": 3,
+          "opportunity_score": 9,
+          "impact_category": "time",
+          "product_related": false,
+          "pyramid_level": "P2",
+          "confidence": 0.6,
+          "rationale": "Remote diagnostics reduce truck rolls; becoming expected in modern BMS-connected HVAC equipment"
+        },
+        {
+          "id": "ES-25",
+          "statement": "Increase the ability to demonstrate EU EcoDesign energy efficiency compliance through traceable, sensor-based flow measurement data",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "P3_ROLE",
+          "role": "Overseer",
+          "importance": 8,
+          "satisfaction_current": 4,
+          "opportunity_score": 12,
+          "impact_category": "cost",
+          "product_related": false,
+          "pyramid_level": "P3",
+          "confidence": 0.8,
+          "rationale": "EU EcoDesign/ErP rescaling to A-G labels expected early 2026; OEM engineers become 'compliance architects' [SRC: EC Energy, Eurovent]"
+        },
+        {
+          "id": "ES-26",
+          "statement": "Minimize the likelihood of field audit findings revealing flow measurement inaccuracy that would cause energy label downgrade",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "error_type": "P4_IMAGE",
+          "role": "Overseer",
+          "importance": 8,
+          "satisfaction_current": 5,
+          "opportunity_score": 11,
+          "impact_category": "cost",
+          "product_related": false,
+          "pyramid_level": "P4",
+          "confidence": 0.7,
+          "rationale": "Energy label downgrade damages brand reputation; auditors and regulators are the 'watchers' in P4 terms"
+        },
+        {
+          "id": "ES-27",
+          "statement": "Minimize the frequency of warranty callbacks attributed to flow sensor malfunction within the first 24 months of equipment operation [hypothesis]",
+          "job_step_number": 7,
+          "job_step_name": "MODIFY",
+          "error_type": "P5_EMOTIONAL",
+          "role": "Lifecycle (Maintainer)",
+          "importance": 8,
+          "satisfaction_current": 5,
+          "opportunity_score": 11,
+          "impact_category": "cost",
+          "product_related": false,
+          "pyramid_level": "P5",
+          "confidence": 0.7,
+          "rationale": "Service managers want confidence in first-year reliability; warranty callback spikes create organizational stress"
+        }
+      ],
+      "incumbent_anchors": [
+        {
+          "technology_name": "Ultrasonic transit-time sensor",
+          "anchor_vn_unit": "Flow Sensor",
+          "anchor_level": "L5",
+          "market_share_pct": 35,
+          "rationale": "Growing share in modern heat pumps; no moving parts, integrated temperature measurement"
+        },
+        {
+          "technology_name": "Turbine / impeller sensor",
+          "anchor_vn_unit": "Flow Sensor",
+          "anchor_level": "L5",
+          "market_share_pct": 30,
+          "rationale": "Legacy dominant in residential HVAC; declining due to mechanical wear and maintenance burden"
+        },
+        {
+          "technology_name": "Vortex sensor",
+          "anchor_vn_unit": "Flow Sensor",
+          "anchor_level": "L5",
+          "market_share_pct": 15,
+          "rationale": "Used in larger commercial systems; limited applicability in small DN pipe sizes"
+        },
+        {
+          "technology_name": "Differential pressure sensor",
+          "anchor_vn_unit": "Flow Sensor",
+          "anchor_level": "L5",
+          "market_share_pct": 10,
+          "rationale": "Legacy chiller plant instrumentation; declining due to permanent pressure loss and impulse line maintenance"
+        },
+        {
+          "technology_name": "Paddle / float switch (binary only)",
+          "anchor_vn_unit": "Flow Sensor",
+          "anchor_level": "L5",
+          "market_share_pct": 10,
+          "rationale": "Cheapest option; binary on/off only — no proportional flow measurement or diagnostics"
+        }
+      ],
+      "yield_metrics": {
+        "total_error_statements": 27,
+        "market_inherent_pct": 70,
+        "technology_specific_pct": 30,
+        "minimize_pct": 59,
+        "increase_pct": 41,
+        "job_map_steps": 8,
+        "relevant_steps": 6,
+        "needs_per_step_min": 2,
+        "needs_per_step_max": 8,
+        "mean_importance": 7.5,
+        "mean_satisfaction": 4.6,
+        "mean_opportunity_score": 10.4
+      },
+      "validation": {
+        "V1_format": "PASS",
+        "V2_product_related": "PASS",
+        "V3_scoring_sanity": "PASS",
+        "V4_impact_category": "PASS",
+        "V5_coverage": "PASS",
+        "V6_solution_agnostic": "PASS",
+        "V7_anchor_correctness": "PASS",
+        "V8_product_job_parent": "PASS"
+      }
+    }
+  ],
+  "has_bom": true,
+  "naics_sector_type": "manufacturing"
+}

@@ -1,0 +1,520 @@
+{
+  "id": "02_functional_promise",
+  "title": "02 — Functional Promise",
+  "type": "functional_promise",
+  "market_slug": null,
+  "is_per_market": false,
+  "sections": [
+    {
+      "title": "Underlying Mechanism",
+      "content": "Piezoelectric transducers (Piezo A / Piezo B) in transit-time configuration alternately transmit and receive ultrasonic pulses through a fluid channel. The difference in transit time between upstream and downstream signal paths is proportional to fluid velocity. An embedded NTC thermistor provides simultaneous medium temperature. [SRC: 01_product_decomposition]"
+    },
+    {
+      "title": "Product Functional Promise",
+      "content": "| Field | Value |\n|---|---|\n| **Statement** | Measure volumetric flow rate and fluid temperature in closed-pipe liquid circuits without mechanical contact, pressure drop, or moving parts |\n| **Verb** | Measure |\n| **Object** | volumetric flow rate and fluid temperature |\n| **Context** | in closed-pipe liquid circuits |\n| **Scope** | product |\n\n**Differentiators vs alternatives:**\n\n| # | Differentiator | Vs What |\n|---|---|---|\n| 1 | No mechanical contact with the fluid stream | Turbine/impeller meters require rotating parts in the flow [SRC: 01_product_decomposition] |\n| 2 | Zero pressure drop across the measurement point | Orifice-plate, venturi, and vortex meters obstruct flow [SRC: 01_product_decomposition] |\n| 3 | No moving parts — eliminates mechanical wear and maintenance | Turbine meters require bearing replacement schedules [SRC: 01_product_decomposition] |\n| 4 | Simultaneous flow + temperature in a single sensor body | Conventional setups require separate flow meter + temperature probe [SRC: 01_product_decomposition] |\n| 5 | Bidirectional flow detection without additional hardware | Check valves or reverse-flow sensors needed with mechanical meters [SRC: 01_product_decomposition] |\n| 6 | Tolerant of glycol mixtures and particulate suspensions | Turbine sensors degraded by particles; Coriolis meters unaffected but cost 5-10x more [SRC: 01_product_decomposition, EST] |\n\n**Mechanism-Free Test:** The statement contains no technology-specific terms (no \"ultrasonic,\" \"piezoelectric,\" \"transit-time\"). The same statement would hold if the flow rate were measured by electromagnetic, Coriolis, or optical means — only the differentiators would change. PASS."
+    },
+    {
+      "title": "UNSPSC Classification",
+      "content": "| Field | Value |\n|---|---|\n| **UNSPSC Code** | 41112501 [SRC: 01_product_decomposition] |\n| **UNSPSC Title** | Flowmeters [SRC: 01_product_decomposition] |\n| **UNSPSC Path** | 41 Laboratory and Measuring > 11 Measuring Instruments > 25 Liquid and Gas Flow > 01 Flowmeters |\n| **Confidence** | 92% [SRC: 01_product_decomposition] |\n| **Custom Product Group** | None — UNSPSC match is strong |"
+    },
+    {
+      "title": "Commodity Functional Promise",
+      "content": "| Field | Value |\n|---|---|\n| **Commodity or Group** | Flowmeters (UNSPSC 41112501) |\n| **Functional Promise** | Quantify the volumetric or mass flow rate of fluids traversing a closed conduit |\n| **Scope** | commodity |\n| **Reasoning** | All flowmeter technologies (ultrasonic, Coriolis, electromagnetic, turbine, vortex, orifice-plate, thermal, differential-pressure) share this fundamental function. Differences are in mechanism, accuracy, media compatibility, and installation constraints — not in function. [SRC: 01_product_decomposition] |"
+    },
+    {
+      "title": "FP Extension (Broader-than-UNSPSC Capabilities)",
+      "content": "| Field | Value |\n|---|---|\n| **Primary Commodity FP** | Quantify the volumetric or mass flow rate of fluids traversing a closed conduit |\n| **FP Extension** | The underlying transit-time ultrasonic principle also enables: (1) liquid concentration measurement — glycol percentage detection via speed-of-sound shifts; (2) medium anomaly detection — air bubble presence, empty-pipe conditions; (3) fluid temperature monitoring — via integrated thermistor. These cross into UNSPSC classes 41115600 (Liquid analyzers) and 41112201 (Temperature sensors). [ASM: derived from feature set in 01_product_decomposition] |\n| **Extension Domains** | Liquid composition analysis, process anomaly detection, thermal monitoring |\n| **Market Discovery Use** | Phase A secondary search: \"What industries need real-time detection of liquid composition anomalies in closed-pipe systems?\" |\n\n**Justification for Extension:** The Marquardt sensor's feature set (Digital Anomaly Detection, Integrated Temperature Sensing) delivers capabilities beyond pure flow measurement. The glycol-concentration detection and bubble/empty-pipe diagnostics are not flowmeter functions — they are process analytics functions that happen to be co-located in the same sensor body. This broadens the addressable market beyond traditional flowmeter buyers. [ASM]"
+    },
+    {
+      "title": "VN / BOM Position",
+      "content": "| Field | Value |\n|---|---|\n| **BOM Level** | L5 — Component [ASM] |\n| **Position** | Sensor/transducer within a fluid-handling subsystem |\n| **Parent Subsystem (typical)** | Hydronic circuit, cooling loop, heating circuit, process-fluid loop |\n| **Grandparent System (typical)** | HVAC system, heat pump, boiler, industrial process skid, beverage dispenser |\n| **Promise Scope Impact** | Component-level FP is narrow: \"measure flow + temperature at one point.\" The subsystem-level promise would be broader: \"regulate thermal energy transfer.\" The FP as stated is correctly scoped to the component level. [ASM] |"
+    },
+    {
+      "title": "Required Complements",
+      "content": "| # | Complement | Criticality | Description |\n|---|---|---|---|\n| 1 | **Fluid conduit / piping** | Essential | Sensor must be installed inline in a pipe of matching diameter (DN12–DN25). Without piping, no measurement is possible. [SRC: 01_product_decomposition] |\n| 2 | **System controller** | Essential | Microcontroller, PLC, or building management system to read sensor output (UART / LIN / frequency) and act on data. Sensor produces raw signals, not decisions. [SRC: 01_product_decomposition] |\n| 3 | **DC power supply** | Essential | 5V or 6–30V DC depending on variant. Battery mode available at <5 uA for remote installations but requires battery infrastructure. [SRC: 01_product_decomposition] |\n| 4 | **Straight pipe run (upstream)** | Essential | 5–10x DN of undisturbed straight pipe upstream required for specified accuracy. Elbows, valves, or tees upstream degrade measurement. [SRC: 01_product_decomposition] |\n| 5 | **De-aerator (in air-prone circuits)** | Enhancing | Systems with chronic air entrainment >2% vol require upstream de-aeration for reliable measurement. Not needed in well-designed closed circuits. [SRC: 01_product_decomposition] |\n| 6 | **Commissioning / fluid-type configuration** | Enhancing | Fluid type must be configured at commissioning for accurate compensation algorithms. Pre-calibration by Marquardt reduces this burden. [SRC: 01_product_decomposition] |\n| 7 | **Data logging / visualization** | Optional | SCADA, HMI, or cloud dashboard to store and display measurement trends. Not required for basic control-loop operation. [ASM] |\n\n---"
+    },
+    {
+      "title": "How This Feeds Downstream",
+      "content": "| Phase | Uses | Search Query |\n|---|---|---|\n| **A: NAICS Discovery (primary)** | Commodity FP | \"What industries need to quantify the volumetric or mass flow rate of fluids traversing a closed conduit?\" |\n| **A: NAICS Discovery (secondary)** | FP Extension | \"What industries need real-time detection of liquid composition anomalies in closed-pipe systems?\" |\n| **B: Architecture Distance** | Product FP + specs | \"How close is this market's use case to measuring flow rate and temperature in closed-pipe liquid circuits without contact, pressure drop, or moving parts?\" |\n\n---"
+    },
+    {
+      "title": "QA Checklist",
+      "content": "| # | Check | Result |\n|---|---|---|\n| 1 | Product FP present with statement, verb, object, context, differentiators | PASS |\n| 2 | Product FP passes mechanism-free test | PASS — no technology-specific terms |\n| 3 | Commodity FP present and vendor-agnostic | PASS — no brand/product names |\n| 4 | UNSPSC commodity code or custom product group identified | PASS — 41112501 Flowmeters |\n| 5 | VN / BOM position mapped | PASS — L5 Component |\n| 6 | Required complements listed with criticality | PASS — 7 complements (4 Essential, 2 Enhancing, 1 Optional) |\n| 7 | Source tags on all factual claims | PASS — [SRC], [EST], [ASM] applied |\n| 8 | FP Extension assessed | PASS — present (capability broader than UNSPSC: liquid analysis + anomaly detection) |\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"product_name\": \"Ultrasonic Flow Sensor\",\n  \"vendor_name\": \"Marquardt\",\n  \"component\": \"functional_promise\",\n  \"mechanism\": {\n    \"description\": \"Piezoelectric transducers (Piezo A / Piezo B) in transit-time configuration alternately transmit and receive ultrasonic pulses through a fluid channel; the difference in transit time between upstream and downstream signal paths is proportional to fluid velocity; an embedded NTC thermistor provides simultaneous medium temperature\",\n    \"confidence\": 0.9,\n    \"source_type\": \"web_search\"\n  },\n  \"product_functional_promise\": {\n    \"name\": \"Marquardt US Flow Sensor Product FP\",\n    \"statement\": \"Measure volumetric flow rate and fluid temperature in closed-pipe liquid circuits without mechanical contact, pressure drop, or moving parts\",\n    \"verb\": \"Measure\",\n    \"object\": \"volumetric flow rate and fluid temperature\",\n    \"context\": \"in closed-pipe liquid circuits\",\n    \"differentiators\": [\n      \"No mechanical contact with the fluid stream\",\n      \"Zero pressure drop across the measurement point\",\n      \"No moving parts — eliminates mechanical wear and maintenance\",\n      \"Simultaneous flow + temperature in a single sensor body\",\n      \"Bidirectional flow detection without additional hardware\",\n      \"Tolerant of glycol mixtures and particulate suspensions\"\n    ],\n    \"scope\": \"product\",\n    \"confidence\": 0.7,\n    \"source_type\": \"llm_corroborated\"\n  },\n  \"commodity_functional_promise\": {\n    \"name\": \"Flowmeters Commodity FP\",\n    \"commodity_or_group\": \"Flowmeters\",\n    \"unspsc_code\": \"41112501\",\n    \"functional_promise\": \"Quantify the volumetric or mass flow rate of fluids traversing a closed conduit\",\n    \"fp_extension\": \"The underlying transit-time ultrasonic principle also enables: (1) liquid concentration measurement — glycol percentage detection via speed-of-sound shifts; (2) medium anomaly detection — air bubble presence, empty-pipe conditions; (3) fluid temperature monitoring — via integrated thermistor. These cross into UNSPSC classes 41115600 (Liquid analyzers) and 41112201 (Temperature sensors).\",\n    \"fp_extension_domains\": [\n      \"Liquid composition analysis\",\n      \"Process anomaly detection\",\n      \"Thermal monitoring\"\n    ],\n    \"reasoning\": \"All flowmeter technologies share the fundamental function of measuring fluid flow rate. Differences are in mechanism, accuracy, media compatibility, and installation constraints.\",\n    \"scope\": \"commodity\",\n    \"confidence\": 0.7,\n    \"source_type\": \"llm_corroborated\"\n  },\n  \"vn_bom_position\": {\n    \"bom_level\": \"L5\",\n    \"position\": \"Component\",\n    \"parent_subsystem\": \"Fluid-handling subsystem (hydronic circuit, cooling loop, heating circuit, process-fluid loop)\",\n    \"grandparent_system\": \"HVAC system, heat pump, boiler, industrial process skid, beverage dispenser\",\n    \"confidence\": 0.5,\n    \"source_type\": \"llm_single\"\n  },\n  \"complements\": [\n    {\n      \"name\": \"Fluid conduit / piping\",\n      \"criticality\": \"essential\",\n      \"description\": \"Inline pipe of matching diameter (DN12-DN25) for sensor installation\",\n      \"confidence\": 0.9,\n      \"source_type\": \"web_search\"\n    },\n    {\n      \"name\": \"System controller\",\n      \"criticality\": \"essential\",\n      \"description\": \"Microcontroller, PLC, or BMS to read sensor output (UART/LIN/frequency) and act on data\",\n      \"confidence\": 0.9,\n      \"source_type\": \"web_search\"\n    },\n    {\n      \"name\": \"DC power supply\",\n      \"criticality\": \"essential\",\n      \"description\": \"5V or 6-30V DC depending on variant; battery mode available at <5 uA\",\n      \"confidence\": 0.9,\n      \"source_type\": \"web_search\"\n    },\n    {\n      \"name\": \"Straight pipe run (upstream)\",\n      \"criticality\": \"essential\",\n      \"description\": \"5-10x DN of undisturbed straight pipe upstream for specified accuracy\",\n      \"confidence\": 0.8,\n      \"source_type\": \"web_search\"\n    },\n    {\n      \"name\": \"De-aerator\",\n      \"criticality\": \"enhancing\",\n      \"description\": \"Required in systems with chronic air entrainment >2% vol for reliable measurement\",\n      \"confidence\": 0.7,\n      \"source_type\": \"llm_corroborated\"\n    },\n    {\n      \"name\": \"Commissioning / fluid-type configuration\",\n      \"criticality\": \"enhancing\",\n      \"description\": \"Fluid type must be configured at commissioning for accurate compensation algorithms\",\n      \"confidence\": 0.8,\n      \"source_type\": \"web_search\"\n    },\n    {\n      \"name\": \"Data logging / visualization\",\n      \"criticality\": \"optional\",\n      \"description\": \"SCADA, HMI, or cloud dashboard for measurement trend storage and display\",\n      \"confidence\": 0.5,\n      \"source_type\": \"llm_single\"\n    }\n  ],\n  \"entities_produced\": {\n    \"nodes\": [\n      {\"label\": \"FunctionalPromise\", \"key\": {\"name\": \"Marquardt US Flow Sensor Product FP\", \"run_id\": \"TBD\"}, \"scope\": \"product\"},\n      {\"label\": \"FunctionalPromise\", \"key\": {\"name\": \"Flowmeters Commodity FP\", \"run_id\": \"TBD\"}, \"scope\": \"commodity\"}\n    ],\n    \"relationships\": [\n      {\"type\": \"has_functional_promise\", \"source\": \"NeutralProductGroup:Ultrasonic Flow Sensor\", \"target\": \"FunctionalPromise:Marquardt US Flow Sensor Product FP\"},\n      {\"type\": \"has_functional_promise\", \"source\": \"NeutralProductGroup:Ultrasonic Flow Sensor\", \"target\": \"FunctionalPromise:Flowmeters Commodity FP\"},\n      {\"type\": \"requires_complement\", \"source\": \"FunctionalPromise:Marquardt US Flow Sensor Product FP\", \"target\": \"Complement:Fluid conduit / piping\"},\n      {\"type\": \"requires_complement\", \"source\": \"FunctionalPromise:Marquardt US Flow Sensor Product FP\", \"target\": \"Complement:System controller\"},\n      {\"type\": \"requires_complement\", \"source\": \"FunctionalPromise:Marquardt US Flow Sensor Product FP\", \"target\": \"Complement:DC power supply\"},\n      {\"type\": \"requires_complement\", \"source\": \"FunctionalPromise:Marquardt US Flow Sensor Product FP\", \"target\": \"Complement:Straight pipe run (upstream)\"},\n      {\"type\": \"requires_complement\", \"source\": \"FunctionalPromise:Marquardt US Flow Sensor Product FP\", \"target\": \"Complement:De-aerator\"},\n      {\"type\": \"requires_complement\", \"source\": \"FunctionalPromise:Marquardt US Flow Sensor Product FP\", \"target\": \"Complement:Commissioning / fluid-type configuration\"},\n      {\"type\": \"requires_complement\", \"source\": \"FunctionalPromise:Marquardt US Flow Sensor Product FP\", \"target\": \"Complement:Data logging / visualization\"}\n    ]\n  }\n}\n```"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**Statement**",
+          "Value": "Measure volumetric flow rate and fluid temperature in closed-pipe liquid circuits without mechanical contact, pressure drop, or moving parts"
+        },
+        {
+          "Field": "**Verb**",
+          "Value": "Measure"
+        },
+        {
+          "Field": "**Object**",
+          "Value": "volumetric flow rate and fluid temperature"
+        },
+        {
+          "Field": "**Context**",
+          "Value": "in closed-pipe liquid circuits"
+        },
+        {
+          "Field": "**Scope**",
+          "Value": "product"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Differentiator",
+        "Vs What"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Differentiator": "No mechanical contact with the fluid stream",
+          "Vs What": "Turbine/impeller meters require rotating parts in the flow [SRC: 01_product_decomposition]"
+        },
+        {
+          "#": "2",
+          "Differentiator": "Zero pressure drop across the measurement point",
+          "Vs What": "Orifice-plate, venturi, and vortex meters obstruct flow [SRC: 01_product_decomposition]"
+        },
+        {
+          "#": "3",
+          "Differentiator": "No moving parts — eliminates mechanical wear and maintenance",
+          "Vs What": "Turbine meters require bearing replacement schedules [SRC: 01_product_decomposition]"
+        },
+        {
+          "#": "4",
+          "Differentiator": "Simultaneous flow + temperature in a single sensor body",
+          "Vs What": "Conventional setups require separate flow meter + temperature probe [SRC: 01_product_decomposition]"
+        },
+        {
+          "#": "5",
+          "Differentiator": "Bidirectional flow detection without additional hardware",
+          "Vs What": "Check valves or reverse-flow sensors needed with mechanical meters [SRC: 01_product_decomposition]"
+        },
+        {
+          "#": "6",
+          "Differentiator": "Tolerant of glycol mixtures and particulate suspensions",
+          "Vs What": "Turbine sensors degraded by particles; Coriolis meters unaffected but cost 5-10x more [SRC: 01_product_decomposition, EST]"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**UNSPSC Code**",
+          "Value": "41112501 [SRC: 01_product_decomposition]"
+        },
+        {
+          "Field": "**UNSPSC Title**",
+          "Value": "Flowmeters [SRC: 01_product_decomposition]"
+        },
+        {
+          "Field": "**UNSPSC Path**",
+          "Value": "41 Laboratory and Measuring > 11 Measuring Instruments > 25 Liquid and Gas Flow > 01 Flowmeters"
+        },
+        {
+          "Field": "**Confidence**",
+          "Value": "92% [SRC: 01_product_decomposition]"
+        },
+        {
+          "Field": "**Custom Product Group**",
+          "Value": "None — UNSPSC match is strong"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**Commodity or Group**",
+          "Value": "Flowmeters (UNSPSC 41112501)"
+        },
+        {
+          "Field": "**Functional Promise**",
+          "Value": "Quantify the volumetric or mass flow rate of fluids traversing a closed conduit"
+        },
+        {
+          "Field": "**Scope**",
+          "Value": "commodity"
+        },
+        {
+          "Field": "**Reasoning**",
+          "Value": "All flowmeter technologies (ultrasonic, Coriolis, electromagnetic, turbine, vortex, orifice-plate, thermal, differential-pressure) share this fundamental function. Differences are in mechanism, accuracy, media compatibility, and installation constraints — not in function. [SRC: 01_product_decomposition]"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**Primary Commodity FP**",
+          "Value": "Quantify the volumetric or mass flow rate of fluids traversing a closed conduit"
+        },
+        {
+          "Field": "**FP Extension**",
+          "Value": "The underlying transit-time ultrasonic principle also enables: (1) liquid concentration measurement — glycol percentage detection via speed-of-sound shifts; (2) medium anomaly detection — air bubble presence, empty-pipe conditions; (3) fluid temperature monitoring — via integrated thermistor. These cross into UNSPSC classes 41115600 (Liquid analyzers) and 41112201 (Temperature sensors). [ASM: derived from feature set in 01_product_decomposition]"
+        },
+        {
+          "Field": "**Extension Domains**",
+          "Value": "Liquid composition analysis, process anomaly detection, thermal monitoring"
+        },
+        {
+          "Field": "**Market Discovery Use**",
+          "Value": "Phase A secondary search: \"What industries need real-time detection of liquid composition anomalies in closed-pipe systems?\""
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**BOM Level**",
+          "Value": "L5 — Component [ASM]"
+        },
+        {
+          "Field": "**Position**",
+          "Value": "Sensor/transducer within a fluid-handling subsystem"
+        },
+        {
+          "Field": "**Parent Subsystem (typical)**",
+          "Value": "Hydronic circuit, cooling loop, heating circuit, process-fluid loop"
+        },
+        {
+          "Field": "**Grandparent System (typical)**",
+          "Value": "HVAC system, heat pump, boiler, industrial process skid, beverage dispenser"
+        },
+        {
+          "Field": "**Promise Scope Impact**",
+          "Value": "Component-level FP is narrow: \"measure flow + temperature at one point.\" The subsystem-level promise would be broader: \"regulate thermal energy transfer.\" The FP as stated is correctly scoped to the component level. [ASM]"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Complement",
+        "Criticality",
+        "Description"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Complement": "**Fluid conduit / piping**",
+          "Criticality": "Essential",
+          "Description": "Sensor must be installed inline in a pipe of matching diameter (DN12–DN25). Without piping, no measurement is possible. [SRC: 01_product_decomposition]"
+        },
+        {
+          "#": "2",
+          "Complement": "**System controller**",
+          "Criticality": "Essential",
+          "Description": "Microcontroller, PLC, or building management system to read sensor output (UART / LIN / frequency) and act on data. Sensor produces raw signals, not decisions. [SRC: 01_product_decomposition]"
+        },
+        {
+          "#": "3",
+          "Complement": "**DC power supply**",
+          "Criticality": "Essential",
+          "Description": "5V or 6–30V DC depending on variant. Battery mode available at <5 uA for remote installations but requires battery infrastructure. [SRC: 01_product_decomposition]"
+        },
+        {
+          "#": "4",
+          "Complement": "**Straight pipe run (upstream)**",
+          "Criticality": "Essential",
+          "Description": "5–10x DN of undisturbed straight pipe upstream required for specified accuracy. Elbows, valves, or tees upstream degrade measurement. [SRC: 01_product_decomposition]"
+        },
+        {
+          "#": "5",
+          "Complement": "**De-aerator (in air-prone circuits)**",
+          "Criticality": "Enhancing",
+          "Description": "Systems with chronic air entrainment >2% vol require upstream de-aeration for reliable measurement. Not needed in well-designed closed circuits. [SRC: 01_product_decomposition]"
+        },
+        {
+          "#": "6",
+          "Complement": "**Commissioning / fluid-type configuration**",
+          "Criticality": "Enhancing",
+          "Description": "Fluid type must be configured at commissioning for accurate compensation algorithms. Pre-calibration by Marquardt reduces this burden. [SRC: 01_product_decomposition]"
+        },
+        {
+          "#": "7",
+          "Complement": "**Data logging / visualization**",
+          "Criticality": "Optional",
+          "Description": "SCADA, HMI, or cloud dashboard to store and display measurement trends. Not required for basic control-loop operation. [ASM]"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Phase",
+        "Uses",
+        "Search Query"
+      ],
+      "rows": [
+        {
+          "Phase": "**A: NAICS Discovery (primary)**",
+          "Uses": "Commodity FP",
+          "Search Query": "\"What industries need to quantify the volumetric or mass flow rate of fluids traversing a closed conduit?\""
+        },
+        {
+          "Phase": "**A: NAICS Discovery (secondary)**",
+          "Uses": "FP Extension",
+          "Search Query": "\"What industries need real-time detection of liquid composition anomalies in closed-pipe systems?\""
+        },
+        {
+          "Phase": "**B: Architecture Distance**",
+          "Uses": "Product FP + specs",
+          "Search Query": "\"How close is this market's use case to measuring flow rate and temperature in closed-pipe liquid circuits without contact, pressure drop, or moving parts?\""
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Check": "Product FP present with statement, verb, object, context, differentiators",
+          "Result": "PASS"
+        },
+        {
+          "#": "2",
+          "Check": "Product FP passes mechanism-free test",
+          "Result": "PASS — no technology-specific terms"
+        },
+        {
+          "#": "3",
+          "Check": "Commodity FP present and vendor-agnostic",
+          "Result": "PASS — no brand/product names"
+        },
+        {
+          "#": "4",
+          "Check": "UNSPSC commodity code or custom product group identified",
+          "Result": "PASS — 41112501 Flowmeters"
+        },
+        {
+          "#": "5",
+          "Check": "VN / BOM position mapped",
+          "Result": "PASS — L5 Component"
+        },
+        {
+          "#": "6",
+          "Check": "Required complements listed with criticality",
+          "Result": "PASS — 7 complements (4 Essential, 2 Enhancing, 1 Optional)"
+        },
+        {
+          "#": "7",
+          "Check": "Source tags on all factual claims",
+          "Result": "PASS — [SRC], [EST], [ASM] applied"
+        },
+        {
+          "#": "8",
+          "Check": "FP Extension assessed",
+          "Result": "PASS — present (capability broader than UNSPSC: liquid analysis + anomaly detection)"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "product_name": "Ultrasonic Flow Sensor",
+      "vendor_name": "Marquardt",
+      "component": "functional_promise",
+      "mechanism": {
+        "description": "Piezoelectric transducers (Piezo A / Piezo B) in transit-time configuration alternately transmit and receive ultrasonic pulses through a fluid channel; the difference in transit time between upstream and downstream signal paths is proportional to fluid velocity; an embedded NTC thermistor provides simultaneous medium temperature",
+        "confidence": 0.9,
+        "source_type": "web_search"
+      },
+      "product_functional_promise": {
+        "name": "Marquardt US Flow Sensor Product FP",
+        "statement": "Measure volumetric flow rate and fluid temperature in closed-pipe liquid circuits without mechanical contact, pressure drop, or moving parts",
+        "verb": "Measure",
+        "object": "volumetric flow rate and fluid temperature",
+        "context": "in closed-pipe liquid circuits",
+        "differentiators": [
+          "No mechanical contact with the fluid stream",
+          "Zero pressure drop across the measurement point",
+          "No moving parts — eliminates mechanical wear and maintenance",
+          "Simultaneous flow + temperature in a single sensor body",
+          "Bidirectional flow detection without additional hardware",
+          "Tolerant of glycol mixtures and particulate suspensions"
+        ],
+        "scope": "product",
+        "confidence": 0.7,
+        "source_type": "llm_corroborated"
+      },
+      "commodity_functional_promise": {
+        "name": "Flowmeters Commodity FP",
+        "commodity_or_group": "Flowmeters",
+        "unspsc_code": "41112501",
+        "functional_promise": "Quantify the volumetric or mass flow rate of fluids traversing a closed conduit",
+        "fp_extension": "The underlying transit-time ultrasonic principle also enables: (1) liquid concentration measurement — glycol percentage detection via speed-of-sound shifts; (2) medium anomaly detection — air bubble presence, empty-pipe conditions; (3) fluid temperature monitoring — via integrated thermistor. These cross into UNSPSC classes 41115600 (Liquid analyzers) and 41112201 (Temperature sensors).",
+        "fp_extension_domains": [
+          "Liquid composition analysis",
+          "Process anomaly detection",
+          "Thermal monitoring"
+        ],
+        "reasoning": "All flowmeter technologies share the fundamental function of measuring fluid flow rate. Differences are in mechanism, accuracy, media compatibility, and installation constraints.",
+        "scope": "commodity",
+        "confidence": 0.7,
+        "source_type": "llm_corroborated"
+      },
+      "vn_bom_position": {
+        "bom_level": "L5",
+        "position": "Component",
+        "parent_subsystem": "Fluid-handling subsystem (hydronic circuit, cooling loop, heating circuit, process-fluid loop)",
+        "grandparent_system": "HVAC system, heat pump, boiler, industrial process skid, beverage dispenser",
+        "confidence": 0.5,
+        "source_type": "llm_single"
+      },
+      "complements": [
+        {
+          "name": "Fluid conduit / piping",
+          "criticality": "essential",
+          "description": "Inline pipe of matching diameter (DN12-DN25) for sensor installation",
+          "confidence": 0.9,
+          "source_type": "web_search"
+        },
+        {
+          "name": "System controller",
+          "criticality": "essential",
+          "description": "Microcontroller, PLC, or BMS to read sensor output (UART/LIN/frequency) and act on data",
+          "confidence": 0.9,
+          "source_type": "web_search"
+        },
+        {
+          "name": "DC power supply",
+          "criticality": "essential",
+          "description": "5V or 6-30V DC depending on variant; battery mode available at <5 uA",
+          "confidence": 0.9,
+          "source_type": "web_search"
+        },
+        {
+          "name": "Straight pipe run (upstream)",
+          "criticality": "essential",
+          "description": "5-10x DN of undisturbed straight pipe upstream for specified accuracy",
+          "confidence": 0.8,
+          "source_type": "web_search"
+        },
+        {
+          "name": "De-aerator",
+          "criticality": "enhancing",
+          "description": "Required in systems with chronic air entrainment >2% vol for reliable measurement",
+          "confidence": 0.7,
+          "source_type": "llm_corroborated"
+        },
+        {
+          "name": "Commissioning / fluid-type configuration",
+          "criticality": "enhancing",
+          "description": "Fluid type must be configured at commissioning for accurate compensation algorithms",
+          "confidence": 0.8,
+          "source_type": "web_search"
+        },
+        {
+          "name": "Data logging / visualization",
+          "criticality": "optional",
+          "description": "SCADA, HMI, or cloud dashboard for measurement trend storage and display",
+          "confidence": 0.5,
+          "source_type": "llm_single"
+        }
+      ],
+      "entities_produced": {
+        "nodes": [
+          {
+            "label": "FunctionalPromise",
+            "key": {
+              "name": "Marquardt US Flow Sensor Product FP",
+              "run_id": "TBD"
+            },
+            "scope": "product"
+          },
+          {
+            "label": "FunctionalPromise",
+            "key": {
+              "name": "Flowmeters Commodity FP",
+              "run_id": "TBD"
+            },
+            "scope": "commodity"
+          }
+        ],
+        "relationships": [
+          {
+            "type": "has_functional_promise",
+            "source": "NeutralProductGroup:Ultrasonic Flow Sensor",
+            "target": "FunctionalPromise:Marquardt US Flow Sensor Product FP"
+          },
+          {
+            "type": "has_functional_promise",
+            "source": "NeutralProductGroup:Ultrasonic Flow Sensor",
+            "target": "FunctionalPromise:Flowmeters Commodity FP"
+          },
+          {
+            "type": "requires_complement",
+            "source": "FunctionalPromise:Marquardt US Flow Sensor Product FP",
+            "target": "Complement:Fluid conduit / piping"
+          },
+          {
+            "type": "requires_complement",
+            "source": "FunctionalPromise:Marquardt US Flow Sensor Product FP",
+            "target": "Complement:System controller"
+          },
+          {
+            "type": "requires_complement",
+            "source": "FunctionalPromise:Marquardt US Flow Sensor Product FP",
+            "target": "Complement:DC power supply"
+          },
+          {
+            "type": "requires_complement",
+            "source": "FunctionalPromise:Marquardt US Flow Sensor Product FP",
+            "target": "Complement:Straight pipe run (upstream)"
+          },
+          {
+            "type": "requires_complement",
+            "source": "FunctionalPromise:Marquardt US Flow Sensor Product FP",
+            "target": "Complement:De-aerator"
+          },
+          {
+            "type": "requires_complement",
+            "source": "FunctionalPromise:Marquardt US Flow Sensor Product FP",
+            "target": "Complement:Commissioning / fluid-type configuration"
+          },
+          {
+            "type": "requires_complement",
+            "source": "FunctionalPromise:Marquardt US Flow Sensor Product FP",
+            "target": "Complement:Data logging / visualization"
+          }
+        ]
+      }
+    }
+  ],
+  "has_bom": false
+}

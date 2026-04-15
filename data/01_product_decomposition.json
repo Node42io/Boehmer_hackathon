@@ -1,0 +1,744 @@
+{
+  "id": "01_product_decomposition",
+  "title": "01 — Product Decomposition",
+  "type": "product_decomposition",
+  "market_slug": null,
+  "is_per_market": false,
+  "sections": [
+    {
+      "title": "Christensen Abstraction",
+      "content": "| Level | Description |\n|---|---|\n| **Mechanism** | Piezoelectric transducers emit ultrasonic pulses through a fluid channel; the transit-time difference between upstream and downstream paths is proportional to fluid velocity |\n| **Function** | Measure volumetric flow rate and temperature of liquids with no moving parts and no pressure drop |\n| **Outcome** | Enable system controllers to optimize thermal energy transfer, detect faults, and reduce resource waste |"
+    },
+    {
+      "title": "Technology Classification",
+      "content": "| Field | Value |\n|---|---|\n| **technology_class** | Ultrasonic Transit-Time Flow Measurement |\n| **underlying_mechanism** | Piezoelectric transducers (Piezo A / Piezo B) alternately transmit and receive ultrasonic pulses; the difference in transit time between upstream and downstream signal paths is proportional to fluid velocity; an embedded NTC thermistor provides simultaneous medium temperature |\n| **UNSPSC Code** | 41112501 |\n| **UNSPSC Title** | Flowmeters |\n| **UNSPSC Path** | 41 Laboratory and Measuring Equipment > 11 Measuring and Observing Instruments > 25 Liquid and Gas Flow Measuring > 01 Flowmeters |"
+    },
+    {
+      "title": "Functional Promise",
+      "content": "| Field | Value |\n|---|---|\n| **Statement** | Measure volumetric flow rate and temperature of liquids with no moving parts and no pressure drop |\n| **Verb** | Measure |\n| **Object** | volumetric flow rate and temperature of liquids |\n| **Context** | with no moving parts and no pressure drop |\n\n**Differentiators vs alternative flow measurement mechanisms:**\n\n| # | Differentiator |\n|---|---|\n| 1 | No moving parts — unlike impeller/turbine sensors that suffer mechanical wear and particle jamming |\n| 2 | Zero pressure drop — unlike orifice-plate, venturi, or vortex meters that obstruct flow |\n| 3 | Simultaneous flow + temperature in a single sensor body — eliminates separate temperature probe |\n| 4 | Tolerant of glycol mixtures and particulate suspensions — unlike turbine sensors degraded by particles |\n| 5 | Bidirectional flow detection — inherent to transit-time principle, detects backflow without additional hardware |"
+    },
+    {
+      "title": "Commodity-Level Functional Promise",
+      "content": "> **Quantify the volumetric or mass flow rate of fluids traversing a conduit.**\n\n*Reasoning: All flowmeter technologies (ultrasonic, Coriolis, electromagnetic, turbine, vortex, orifice-plate, thermal) share the same fundamental function — measuring how much fluid passes through. The differences are in mechanism, accuracy, media compatibility, and installation constraints, not in function.*"
+    },
+    {
+      "title": "Features",
+      "content": "### Technology-Scoped Features (scope = technology)\n\n| Feature | Description | Long Description | Category |\n|---|---|---|---|\n| **Transit-Time Flow Measurement** | Measure fluid velocity via ultrasonic pulse transit-time difference | Two piezoelectric transducers alternately transmit and receive ultrasonic pulses. The difference in transit time between upstream and downstream paths is proportional to fluid velocity. Requires acoustic coupling between transducer and fluid. Accuracy degrades with air bubble content >2% by volume. Typical accuracy ±1–3% of reading under ideal conditions. | performance |\n| **Integrated Temperature Sensing** | Measure medium temperature via embedded NTC thermistor | NTC element integrated into the wetted flow body provides continuous medium temperature reading alongside flow measurement. Eliminates need for separate temperature probe. Enables real-time temperature compensation of speed-of-sound calculations, reducing temperature-induced flow measurement error from ~1.5% to ~0.2%. | integration |\n| **Zero Pressure Drop Flow Path** | Pass fluid through an unobstructed bore with no flow restriction | Straight-through flow channel has no impeller, vortex-shedding body, or orifice plate. Fluid energy is not consumed by the measurement. Eliminates head-loss penalty in system hydraulic design. | performance |\n| **No Moving Parts** | Operate without any mechanical components in the flow path | Entirely solid-state measurement principle. No impeller bearings, no rotating shafts, no seal wear. Eliminates mechanical failure modes and the associated maintenance schedule. Service life limited by electronics and housing seals, not by mechanical wear. | reliability |\n| **Bidirectional Flow Detection** | Detect and measure both forward and reverse flow | Transit-time principle inherently distinguishes flow direction — the sign of the transit-time difference inverts with flow reversal. Enables backflow detection and alarm without additional check valves or sensors. | performance |\n| **Digital Anomaly Detection** | Detect bubbles, empty pipes, and glycol presence in the medium | Onboard signal processing identifies characteristic acoustic signatures of air bubbles, pipe-empty conditions, and glycol concentration changes. Provides diagnostic flags to the host controller for system health monitoring. | safety |\n| **Real-Time Compensation Algorithms** | Compensate flow readings for temperature, pressure, and viscosity variations | Firmware algorithms adjust transit-time calculations based on measured temperature and known fluid properties. Reduces systematic measurement error across the operating envelope. Requires fluid type to be configured at commissioning. | performance |\n\n### Vendor-Scoped Features (scope = vendor, Marquardt-specific)\n\n| Feature | Description | Long Description | Category |\n|---|---|---|---|\n| **Modular Pipe Diameter Variants** | Serve multiple pipe sizes via interchangeable flow bodies | DN12, DN14, DN20, DN25 flow body variants share the same electronics platform and RAST 2.5 connector. Customer selects flow body matching their pipe diameter. Reduces OEM integration cost by standardizing the electronic interface across the product family. DN20 is the serial production variant; DN12, DN14, DN25 are in concept/development. | usability |\n| **Customizable Communication Interface** | Support UART, LIN, and frequency output protocols | Electronics can be configured for UART digital bus, LIN automotive-grade bus, or frequency pulse output — matching the host controller's preferred protocol. Selectable at the order level. Enables integration into diverse control architectures without hardware changes. | integration |\n| **Customizable Mechanical Interface** | Accept threaded or plug-in pipe connections | Flow body inlet/outlet can be threaded (standard plumbing) or plug-in (quick-connect for OEM assembly lines). Reduces OEM installation time and allows adaptation to different piping standards. | usability |\n| **Low-Energy Battery Mode** | Operate at ultra-low current consumption (<5 μA) for battery-powered applications | Low-energy firmware variant reduces standby current to <5 μA, enabling battery-powered remote installations without mains power. Trades measurement frequency for power savings. | maintenance |\n| **Pre-Calibrated Delivery** | Ship fully calibrated and tested to customer-specific medium and flow profile | Each sensor is individually calibrated against the customer's specified medium (water, glycol mix, etc.) and tested across the operating flow profile before delivery. Includes 100% automated final test. Eliminates field calibration requirement. | reliability |\n| **KTW/WRAS Drinking Water Approval** | Wetted parts approved for potable water contact | Housing materials and seals meet KTW (German) and WRAS (UK) drinking water contact standards. Enables deployment in potable water circuits without additional material qualification. | safety |"
+    },
+    {
+      "title": "Specifications",
+      "content": "| Specification | Value | Unit | Test Condition |\n|---|---|---|---|\n| Flow Range (DN20) | 4.2–46.6 | l/min | Water at 20°C |\n| Flow Range (DN25) | 4.2–60 | l/min | Water at 20°C |\n| Flow Range (DN14) | 0.25–33.3 | l/min | Water at 20°C |\n| Pressure Range | 0–10 | bar | — |\n| Burst Pressure | 9 / 42 | bar | Variant-dependent |\n| Medium Temperature | +2 to 90 | °C | — |\n| Supply Voltage | 5 / 6–30 | V DC | Variant-dependent |\n| Max Current (standard) | 14 | mA | — |\n| Min Current (low-energy) | <5 | μA | Battery mode, standby |\n| Connector | RAST 2.5 | — | 3-pole or 4-pole |\n| Life Endurance | 3,000 | m³ | Total throughput |\n| Pressure Loss | <50 | mbar | At 10 l/min |\n| Water Hammer Resistance | >16 | bar | — |\n| Dimensions (DN20) | 155 × 81 × 64 | mm | L × B × H |\n| Dimensions (DN25) | 150 × 85 × 68.5 | mm | L × B × H |\n| Dimensions (DN14) | 120 × 75 × 58 | mm | L × B × H |\n| Pressure Cycle Endurance | 90,000 | cycles | At 40°C and 80°C |"
+    },
+    {
+      "title": "Constraints",
+      "content": "| Constraint | Type | Severity | Description | Threshold |\n|---|---|---|---|---|\n| **Media Limitation** | physical | hard | Only water and water-like media (incl. glycol mixtures, particulate suspensions). Cannot measure oils, gases, or non-polar liquids due to acoustic impedance mismatch between piezoelectric transducer and non-aqueous media. | — |\n| **Maximum Medium Temperature** | physical | hard | Polymer housing and seals degrade above 90°C. Extended operation near limit reduces service life. Excludes steam and high-temperature industrial processes. | 90°C |\n| **Maximum Operating Pressure** | physical | hard | Housing structural integrity rated to 10 bar continuous. Burst pressure 9 bar (low-pressure variant) or 42 bar (high-pressure variant). Exceeding rating risks seal failure and leakage. | 10 bar |\n| **Minimum Flow Rate Detection** | operational | soft | Signal-to-noise ratio degrades at very low flow rates. Transit-time difference becomes indistinguishable from noise. Lower bound varies by pipe diameter (~0.25 l/min for DN14, ~4.2 l/min for DN20/DN25). | Variant-dependent |\n| **Air Bubble Tolerance** | physical | soft | Air entrainment >2% by volume attenuates ultrasonic signal and introduces measurement error. Sensor detects bubbles as diagnostic event but accuracy degrades significantly. Systems with chronic air entrainment require de-aerators upstream. | ~2% vol |\n| **Pipe Full Condition** | operational | hard | Pipe must be fully filled with liquid for valid measurement. Partially filled pipes cause complete signal loss. Sensor detects empty-pipe condition as a fault state. | Pipe must be full |\n| **Minimum Straight Pipe Run** | operational | soft | Turbulent or asymmetric flow profiles (caused by elbows, valves, tees upstream) degrade accuracy. Manufacturer-recommended straight pipe run upstream of sensor required for specified accuracy. | Typically 5–10× DN |\n| **Temperature-Dependent Accuracy** | physical | soft | Speed of sound in the medium changes with temperature. Without compensation, temperature-induced measurement error can reach ~1.5%. Built-in NTC compensation reduces this to ~0.2%, but extreme temperature transients may temporarily exceed compensation response. | — |\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"product_name\": \"Ultrasonic Flow Sensor\",\n  \"vendor_name\": \"Marquardt\",\n  \"vendor_product_model\": \"US Flow Sensor (DN20 serial, DN12/DN14/DN25 development)\",\n  \"technology_class\": \"Ultrasonic Transit-Time Flow Measurement\",\n  \"underlying_mechanism\": \"Piezoelectric transducers (Piezo A / Piezo B) alternately transmit and receive ultrasonic pulses through a fluid channel; the difference in transit time between upstream and downstream signal paths is proportional to fluid velocity; an embedded NTC thermistor provides simultaneous medium temperature\",\n  \"functional_promise\": {\n    \"statement\": \"Measure volumetric flow rate and temperature of liquids with no moving parts and no pressure drop\",\n    \"verb\": \"Measure\",\n    \"object\": \"volumetric flow rate and temperature of liquids\",\n    \"context\": \"with no moving parts and no pressure drop\",\n    \"differentiators\": [\n      \"No moving parts (unlike impeller/turbine sensors)\",\n      \"Zero pressure drop (unlike orifice-plate, venturi, or vortex meters)\",\n      \"Simultaneous flow + temperature in single sensor body\",\n      \"Tolerant of glycol mixtures and particulate suspensions\",\n      \"Bidirectional flow detection inherent to transit-time principle\"\n    ]\n  },\n  \"commodity_functional_promise\": \"Quantify the volumetric or mass flow rate of fluids traversing a conduit\",\n  \"unspsc_code\": \"41112501\",\n  \"unspsc_title\": \"Flowmeters\",\n  \"custom_product_group\": null,\n  \"features\": [\n    {\n      \"name\": \"Transit-Time Flow Measurement\",\n      \"description\": \"Measure fluid velocity via ultrasonic pulse transit-time difference\",\n      \"long_description\": \"Two piezoelectric transducers alternately transmit and receive ultrasonic pulses. The difference in transit time between upstream and downstream paths is proportional to fluid velocity. Requires acoustic coupling between transducer and fluid. Accuracy degrades with air bubble content >2% by volume.\",\n      \"scope\": \"technology\",\n      \"category\": \"performance\"\n    },\n    {\n      \"name\": \"Integrated Temperature Sensing\",\n      \"description\": \"Measure medium temperature via embedded NTC thermistor\",\n      \"long_description\": \"NTC element integrated into the wetted flow body provides continuous medium temperature reading alongside flow measurement. Eliminates need for separate temperature probe. Enables real-time temperature compensation of speed-of-sound calculations.\",\n      \"scope\": \"technology\",\n      \"category\": \"integration\"\n    },\n    {\n      \"name\": \"Zero Pressure Drop Flow Path\",\n      \"description\": \"Pass fluid through an unobstructed bore with no flow restriction\",\n      \"long_description\": \"Straight-through flow channel has no impeller, vortex-shedding body, or orifice plate. Fluid energy is not consumed by the measurement. Eliminates head-loss penalty in system hydraulic design.\",\n      \"scope\": \"technology\",\n      \"category\": \"performance\"\n    },\n    {\n      \"name\": \"No Moving Parts\",\n      \"description\": \"Operate without any mechanical components in the flow path\",\n      \"long_description\": \"Entirely solid-state measurement principle. No impeller bearings, no rotating shafts, no seal wear. Eliminates mechanical failure modes and the associated maintenance schedule. Service life limited by electronics and housing seals, not by mechanical wear.\",\n      \"scope\": \"technology\",\n      \"category\": \"reliability\"\n    },\n    {\n      \"name\": \"Bidirectional Flow Detection\",\n      \"description\": \"Detect and measure both forward and reverse flow\",\n      \"long_description\": \"Transit-time principle inherently distinguishes flow direction. The sign of the transit-time difference inverts with flow reversal. Enables backflow detection and alarm without additional check valves or sensors.\",\n      \"scope\": \"technology\",\n      \"category\": \"performance\"\n    },\n    {\n      \"name\": \"Digital Anomaly Detection\",\n      \"description\": \"Detect bubbles, empty pipes, and glycol presence in the medium\",\n      \"long_description\": \"Onboard signal processing identifies characteristic acoustic signatures of air bubbles, pipe-empty conditions, and glycol concentration changes. Provides diagnostic flags to the host controller for system health monitoring.\",\n      \"scope\": \"technology\",\n      \"category\": \"safety\"\n    },\n    {\n      \"name\": \"Real-Time Compensation Algorithms\",\n      \"description\": \"Compensate flow readings for temperature, pressure, and viscosity variations\",\n      \"long_description\": \"Firmware algorithms adjust transit-time calculations based on measured temperature and known fluid properties. Reduces systematic measurement error across the operating envelope. Requires fluid type to be configured at commissioning.\",\n      \"scope\": \"technology\",\n      \"category\": \"performance\"\n    },\n    {\n      \"name\": \"Modular Pipe Diameter Variants\",\n      \"description\": \"Serve multiple pipe sizes via interchangeable flow bodies\",\n      \"long_description\": \"DN12, DN14, DN20, DN25 flow body variants share the same electronics platform and RAST 2.5 connector. Customer selects flow body matching their pipe diameter. DN20 is serial production; DN12, DN14, DN25 are concept/development.\",\n      \"scope\": \"vendor\",\n      \"category\": \"usability\"\n    },\n    {\n      \"name\": \"Customizable Communication Interface\",\n      \"description\": \"Support UART, LIN, and frequency output protocols\",\n      \"long_description\": \"Electronics can be configured for UART digital bus, LIN automotive-grade bus, or frequency pulse output. Selectable at the order level. Enables integration into diverse control architectures without hardware changes.\",\n      \"scope\": \"vendor\",\n      \"category\": \"integration\"\n    },\n    {\n      \"name\": \"Customizable Mechanical Interface\",\n      \"description\": \"Accept threaded or plug-in pipe connections\",\n      \"long_description\": \"Flow body inlet/outlet can be threaded (standard plumbing) or plug-in (quick-connect for OEM assembly lines). Reduces OEM installation time and allows adaptation to different piping standards.\",\n      \"scope\": \"vendor\",\n      \"category\": \"usability\"\n    },\n    {\n      \"name\": \"Low-Energy Battery Mode\",\n      \"description\": \"Operate at ultra-low current consumption for battery-powered applications\",\n      \"long_description\": \"Low-energy firmware variant reduces standby current to <5 uA, enabling battery-powered remote installations without mains power. Trades measurement frequency for power savings.\",\n      \"scope\": \"vendor\",\n      \"category\": \"maintenance\"\n    },\n    {\n      \"name\": \"Pre-Calibrated Delivery\",\n      \"description\": \"Ship fully calibrated and tested to customer-specific medium and flow profile\",\n      \"long_description\": \"Each sensor is individually calibrated against the customer's specified medium and tested across the operating flow profile before delivery. Includes 100% automated final test. Eliminates field calibration requirement.\",\n      \"scope\": \"vendor\",\n      \"category\": \"reliability\"\n    },\n    {\n      \"name\": \"KTW/WRAS Drinking Water Approval\",\n      \"description\": \"Wetted parts approved for potable water contact\",\n      \"long_description\": \"Housing materials and seals meet KTW (German) and WRAS (UK) drinking water contact standards. Enables deployment in potable water circuits without additional material qualification.\",\n      \"scope\": \"vendor\",\n      \"category\": \"safety\"\n    }\n  ],\n  \"specifications\": [\n    {\"name\": \"Flow Range (DN20)\", \"value\": \"4.2-46.6\", \"unit\": \"l/min\", \"test_condition\": \"Water at 20C\"},\n    {\"name\": \"Flow Range (DN25)\", \"value\": \"4.2-60\", \"unit\": \"l/min\", \"test_condition\": \"Water at 20C\"},\n    {\"name\": \"Flow Range (DN14)\", \"value\": \"0.25-33.3\", \"unit\": \"l/min\", \"test_condition\": \"Water at 20C\"},\n    {\"name\": \"Pressure Range\", \"value\": \"0-10\", \"unit\": \"bar\", \"test_condition\": null},\n    {\"name\": \"Burst Pressure\", \"value\": \"9 / 42\", \"unit\": \"bar\", \"test_condition\": \"Variant-dependent\"},\n    {\"name\": \"Medium Temperature\", \"value\": \"+2 to 90\", \"unit\": \"C\", \"test_condition\": null},\n    {\"name\": \"Supply Voltage\", \"value\": \"5 / 6-30\", \"unit\": \"V DC\", \"test_condition\": \"Variant-dependent\"},\n    {\"name\": \"Max Current\", \"value\": \"14\", \"unit\": \"mA\", \"test_condition\": null},\n    {\"name\": \"Min Current (low-energy)\", \"value\": \"<5\", \"unit\": \"uA\", \"test_condition\": \"Battery mode, standby\"},\n    {\"name\": \"Connector\", \"value\": \"RAST 2.5\", \"unit\": \"3/4-pole\", \"test_condition\": null},\n    {\"name\": \"Life Endurance\", \"value\": \"3000\", \"unit\": \"m3\", \"test_condition\": \"Total throughput\"},\n    {\"name\": \"Pressure Loss\", \"value\": \"<50\", \"unit\": \"mbar\", \"test_condition\": \"At 10 l/min\"},\n    {\"name\": \"Water Hammer Resistance\", \"value\": \">16\", \"unit\": \"bar\", \"test_condition\": null},\n    {\"name\": \"Dimensions (DN20)\", \"value\": \"155x81x64\", \"unit\": \"mm\", \"test_condition\": \"LxBxH\"},\n    {\"name\": \"Dimensions (DN25)\", \"value\": \"150x85x68.5\", \"unit\": \"mm\", \"test_condition\": \"LxBxH\"},\n    {\"name\": \"Dimensions (DN14)\", \"value\": \"120x75x58\", \"unit\": \"mm\", \"test_condition\": \"LxBxH\"},\n    {\"name\": \"Pressure Cycle Endurance\", \"value\": \"90000\", \"unit\": \"cycles\", \"test_condition\": \"At 40C and 80C\"}\n  ],\n  \"constraints\": [\n    {\n      \"name\": \"Media Limitation\",\n      \"constraint_type\": \"physical\",\n      \"description\": \"Only water and water-like media (incl. glycol, particulate suspensions). Cannot measure oils, gases, or non-polar liquids due to acoustic impedance mismatch.\",\n      \"severity\": \"hard\",\n      \"threshold_value\": null,\n      \"threshold_unit\": null\n    },\n    {\n      \"name\": \"Maximum Medium Temperature\",\n      \"constraint_type\": \"physical\",\n      \"description\": \"Polymer housing and seals degrade above 90C. Extended operation near limit reduces service life.\",\n      \"severity\": \"hard\",\n      \"threshold_value\": \"90\",\n      \"threshold_unit\": \"C\"\n    },\n    {\n      \"name\": \"Maximum Operating Pressure\",\n      \"constraint_type\": \"physical\",\n      \"description\": \"Housing structural integrity rated to 10 bar continuous. Burst pressure 9 or 42 bar depending on variant.\",\n      \"severity\": \"hard\",\n      \"threshold_value\": \"10\",\n      \"threshold_unit\": \"bar\"\n    },\n    {\n      \"name\": \"Minimum Flow Rate Detection\",\n      \"constraint_type\": \"operational\",\n      \"description\": \"Signal-to-noise ratio degrades at very low flow rates. Transit-time difference becomes indistinguishable from noise. Lower bound varies by pipe diameter.\",\n      \"severity\": \"soft\",\n      \"threshold_value\": \"0.25-4.2\",\n      \"threshold_unit\": \"l/min\"\n    },\n    {\n      \"name\": \"Air Bubble Tolerance\",\n      \"constraint_type\": \"physical\",\n      \"description\": \"Air entrainment >2% by volume attenuates ultrasonic signal and introduces measurement error. Systems with chronic air entrainment require de-aerators upstream.\",\n      \"severity\": \"soft\",\n      \"threshold_value\": \"2\",\n      \"threshold_unit\": \"% vol\"\n    },\n    {\n      \"name\": \"Pipe Full Condition\",\n      \"constraint_type\": \"operational\",\n      \"description\": \"Pipe must be fully filled with liquid for valid measurement. Partially filled pipes cause complete signal loss.\",\n      \"severity\": \"hard\",\n      \"threshold_value\": null,\n      \"threshold_unit\": null\n    },\n    {\n      \"name\": \"Minimum Straight Pipe Run\",\n      \"constraint_type\": \"operational\",\n      \"description\": \"Turbulent or asymmetric flow profiles from upstream disturbances degrade accuracy. Recommended straight pipe run required upstream.\",\n      \"severity\": \"soft\",\n      \"threshold_value\": \"5-10\",\n      \"threshold_unit\": \"x DN\"\n    },\n    {\n      \"name\": \"Temperature-Dependent Accuracy\",\n      \"constraint_type\": \"physical\",\n      \"description\": \"Speed of sound in the medium changes with temperature. Without compensation, error reaches ~1.5%. Built-in NTC compensation reduces to ~0.2%, but extreme transients may temporarily exceed compensation response.\",\n      \"severity\": \"soft\",\n      \"threshold_value\": null,\n      \"threshold_unit\": null\n    }\n  ],\n  \"unspsc_classification\": {\n    \"evaluations\": [\n      {\n        \"commodity_code\": \"41112501\",\n        \"commodity_name\": \"Flowmeters\",\n        \"confidence_pct\": 92,\n        \"reasoning\": \"Ultrasonic flow sensors are a type of flowmeter. UNSPSC 41112501 covers all flowmeter technologies including ultrasonic, electromagnetic, Coriolis, and turbine variants. This is the product's primary function — measuring flow rate.\"\n      },\n      {\n        \"commodity_code\": \"41111927\",\n        \"commodity_name\": \"Ultrasonic sensors\",\n        \"confidence_pct\": 52,\n        \"reasoning\": \"Matches the sensing technology (ultrasonic transduction) but describes the transducer type, not the product's primary function (flow measurement). A sub-component-level match.\"\n      },\n      {\n        \"commodity_code\": \"41112201\",\n        \"commodity_name\": \"Temperature sensors\",\n        \"confidence_pct\": 35,\n        \"reasoning\": \"The sensor includes integrated temperature measurement, but this is a secondary function. The primary product identity is a flowmeter.\"\n      }\n    ],\n    \"selected_code\": \"41112501\",\n    \"selected_title\": \"Flowmeters\",\n    \"selection_method\": \"highest_confidence_valid\",\n    \"suggested_product_group\": null\n  }\n}\n```\n\n---"
+    },
+    {
+      "title": "Validation Notes (01c)",
+      "content": "The decomposition was cross-referenced against web research on ultrasonic transit-time flow measurement technology. Key validation findings:\n\n- **Functional Promise** confirmed solution-agnostic: does not mention \"ultrasonic,\" \"Marquardt,\" or \"piezoelectric.\" Describes what the product does at the function level, not how.\n- **Feature scoping** validated: technology-scope features (transit-time measurement, zero pressure drop, no moving parts) apply to any ultrasonic transit-time flowmeter. Vendor-scope features (modular pipe variants, UART/LIN/frequency, KTW/WRAS approval) are Marquardt-specific.\n- **Air bubble constraint** added from web research — not in customer materials but a well-documented limitation of transit-time technology (>2% vol degrades accuracy).\n- **Minimum straight pipe run** added from web research — standard installation constraint for inline flowmeters.\n- **Temperature-dependent accuracy** quantified from research: ~1.5% error uncompensated, ~0.2% with NTC compensation.\n- **UNSPSC 41112501 \"Flowmeters\"** confirmed as correct commodity — classifies the product by its primary function, not by its sensing mechanism.\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [Ultrasonic Flow Meters — DwyerOmega](https://www.dwyeromega.com/en-us/resources/ultrasonic-flow-meters)\n- [Ultrasonic Transit Time Technology Explained — ONICON](https://www.onicon.com/education-series/ultrasonic-transit-time-technology-explained-doc-0004240)\n- [Types and Uses of Ultrasonic Flow Meters — IQS Directory](https://www.iqsdirectory.com/articles/flow-meter/ultrasonic-flow-meters.html)\n- [Temperature Effects on Ultrasonic Flow Meters — FlowTMeter](https://www.flowtmeter.com/blog/how-does-the-temperature-affect-the-performance-of-an-ultrasonic-flow-meter-469567.html)\n- [Ultrasonic Flowmeter Advantages and Disadvantages — GES Repair](https://gesrepair.com/ultrasonic-flow-meter-advantages-disadvantages/)\n- [Transit-Time Flow Meters in High Temperature Applications — Soaring Instrument](https://soaringinstrument.com/understanding-transit-time-ultrasonic-flow-meters-in-high-temperature-applications-what-should-you-know/)\n- Marquardt Customer Presentation: \"US Flow Sensor\" (03.12.2025, CONFIDENTIAL)\n- Marquardt/HS Albstadt-Sigmaringen Project Briefing (19.02.2026)"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "Level",
+        "Description"
+      ],
+      "rows": [
+        {
+          "Level": "**Mechanism**",
+          "Description": "Piezoelectric transducers emit ultrasonic pulses through a fluid channel; the transit-time difference between upstream and downstream paths is proportional to fluid velocity"
+        },
+        {
+          "Level": "**Function**",
+          "Description": "Measure volumetric flow rate and temperature of liquids with no moving parts and no pressure drop"
+        },
+        {
+          "Level": "**Outcome**",
+          "Description": "Enable system controllers to optimize thermal energy transfer, detect faults, and reduce resource waste"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**technology_class**",
+          "Value": "Ultrasonic Transit-Time Flow Measurement"
+        },
+        {
+          "Field": "**underlying_mechanism**",
+          "Value": "Piezoelectric transducers (Piezo A / Piezo B) alternately transmit and receive ultrasonic pulses; the difference in transit time between upstream and downstream signal paths is proportional to fluid velocity; an embedded NTC thermistor provides simultaneous medium temperature"
+        },
+        {
+          "Field": "**UNSPSC Code**",
+          "Value": "41112501"
+        },
+        {
+          "Field": "**UNSPSC Title**",
+          "Value": "Flowmeters"
+        },
+        {
+          "Field": "**UNSPSC Path**",
+          "Value": "41 Laboratory and Measuring Equipment > 11 Measuring and Observing Instruments > 25 Liquid and Gas Flow Measuring > 01 Flowmeters"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**Statement**",
+          "Value": "Measure volumetric flow rate and temperature of liquids with no moving parts and no pressure drop"
+        },
+        {
+          "Field": "**Verb**",
+          "Value": "Measure"
+        },
+        {
+          "Field": "**Object**",
+          "Value": "volumetric flow rate and temperature of liquids"
+        },
+        {
+          "Field": "**Context**",
+          "Value": "with no moving parts and no pressure drop"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Differentiator"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Differentiator": "No moving parts — unlike impeller/turbine sensors that suffer mechanical wear and particle jamming"
+        },
+        {
+          "#": "2",
+          "Differentiator": "Zero pressure drop — unlike orifice-plate, venturi, or vortex meters that obstruct flow"
+        },
+        {
+          "#": "3",
+          "Differentiator": "Simultaneous flow + temperature in a single sensor body — eliminates separate temperature probe"
+        },
+        {
+          "#": "4",
+          "Differentiator": "Tolerant of glycol mixtures and particulate suspensions — unlike turbine sensors degraded by particles"
+        },
+        {
+          "#": "5",
+          "Differentiator": "Bidirectional flow detection — inherent to transit-time principle, detects backflow without additional hardware"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Feature",
+        "Description",
+        "Long Description",
+        "Category"
+      ],
+      "rows": [
+        {
+          "Feature": "**Transit-Time Flow Measurement**",
+          "Description": "Measure fluid velocity via ultrasonic pulse transit-time difference",
+          "Long Description": "Two piezoelectric transducers alternately transmit and receive ultrasonic pulses. The difference in transit time between upstream and downstream paths is proportional to fluid velocity. Requires acoustic coupling between transducer and fluid. Accuracy degrades with air bubble content >2% by volume. Typical accuracy ±1–3% of reading under ideal conditions.",
+          "Category": "performance"
+        },
+        {
+          "Feature": "**Integrated Temperature Sensing**",
+          "Description": "Measure medium temperature via embedded NTC thermistor",
+          "Long Description": "NTC element integrated into the wetted flow body provides continuous medium temperature reading alongside flow measurement. Eliminates need for separate temperature probe. Enables real-time temperature compensation of speed-of-sound calculations, reducing temperature-induced flow measurement error from ~1.5% to ~0.2%.",
+          "Category": "integration"
+        },
+        {
+          "Feature": "**Zero Pressure Drop Flow Path**",
+          "Description": "Pass fluid through an unobstructed bore with no flow restriction",
+          "Long Description": "Straight-through flow channel has no impeller, vortex-shedding body, or orifice plate. Fluid energy is not consumed by the measurement. Eliminates head-loss penalty in system hydraulic design.",
+          "Category": "performance"
+        },
+        {
+          "Feature": "**No Moving Parts**",
+          "Description": "Operate without any mechanical components in the flow path",
+          "Long Description": "Entirely solid-state measurement principle. No impeller bearings, no rotating shafts, no seal wear. Eliminates mechanical failure modes and the associated maintenance schedule. Service life limited by electronics and housing seals, not by mechanical wear.",
+          "Category": "reliability"
+        },
+        {
+          "Feature": "**Bidirectional Flow Detection**",
+          "Description": "Detect and measure both forward and reverse flow",
+          "Long Description": "Transit-time principle inherently distinguishes flow direction — the sign of the transit-time difference inverts with flow reversal. Enables backflow detection and alarm without additional check valves or sensors.",
+          "Category": "performance"
+        },
+        {
+          "Feature": "**Digital Anomaly Detection**",
+          "Description": "Detect bubbles, empty pipes, and glycol presence in the medium",
+          "Long Description": "Onboard signal processing identifies characteristic acoustic signatures of air bubbles, pipe-empty conditions, and glycol concentration changes. Provides diagnostic flags to the host controller for system health monitoring.",
+          "Category": "safety"
+        },
+        {
+          "Feature": "**Real-Time Compensation Algorithms**",
+          "Description": "Compensate flow readings for temperature, pressure, and viscosity variations",
+          "Long Description": "Firmware algorithms adjust transit-time calculations based on measured temperature and known fluid properties. Reduces systematic measurement error across the operating envelope. Requires fluid type to be configured at commissioning.",
+          "Category": "performance"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Feature",
+        "Description",
+        "Long Description",
+        "Category"
+      ],
+      "rows": [
+        {
+          "Feature": "**Modular Pipe Diameter Variants**",
+          "Description": "Serve multiple pipe sizes via interchangeable flow bodies",
+          "Long Description": "DN12, DN14, DN20, DN25 flow body variants share the same electronics platform and RAST 2.5 connector. Customer selects flow body matching their pipe diameter. Reduces OEM integration cost by standardizing the electronic interface across the product family. DN20 is the serial production variant; DN12, DN14, DN25 are in concept/development.",
+          "Category": "usability"
+        },
+        {
+          "Feature": "**Customizable Communication Interface**",
+          "Description": "Support UART, LIN, and frequency output protocols",
+          "Long Description": "Electronics can be configured for UART digital bus, LIN automotive-grade bus, or frequency pulse output — matching the host controller's preferred protocol. Selectable at the order level. Enables integration into diverse control architectures without hardware changes.",
+          "Category": "integration"
+        },
+        {
+          "Feature": "**Customizable Mechanical Interface**",
+          "Description": "Accept threaded or plug-in pipe connections",
+          "Long Description": "Flow body inlet/outlet can be threaded (standard plumbing) or plug-in (quick-connect for OEM assembly lines). Reduces OEM installation time and allows adaptation to different piping standards.",
+          "Category": "usability"
+        },
+        {
+          "Feature": "**Low-Energy Battery Mode**",
+          "Description": "Operate at ultra-low current consumption (<5 μA) for battery-powered applications",
+          "Long Description": "Low-energy firmware variant reduces standby current to <5 μA, enabling battery-powered remote installations without mains power. Trades measurement frequency for power savings.",
+          "Category": "maintenance"
+        },
+        {
+          "Feature": "**Pre-Calibrated Delivery**",
+          "Description": "Ship fully calibrated and tested to customer-specific medium and flow profile",
+          "Long Description": "Each sensor is individually calibrated against the customer's specified medium (water, glycol mix, etc.) and tested across the operating flow profile before delivery. Includes 100% automated final test. Eliminates field calibration requirement.",
+          "Category": "reliability"
+        },
+        {
+          "Feature": "**KTW/WRAS Drinking Water Approval**",
+          "Description": "Wetted parts approved for potable water contact",
+          "Long Description": "Housing materials and seals meet KTW (German) and WRAS (UK) drinking water contact standards. Enables deployment in potable water circuits without additional material qualification.",
+          "Category": "safety"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Specification",
+        "Value",
+        "Unit",
+        "Test Condition"
+      ],
+      "rows": [
+        {
+          "Specification": "Flow Range (DN20)",
+          "Value": "4.2–46.6",
+          "Unit": "l/min",
+          "Test Condition": "Water at 20°C"
+        },
+        {
+          "Specification": "Flow Range (DN25)",
+          "Value": "4.2–60",
+          "Unit": "l/min",
+          "Test Condition": "Water at 20°C"
+        },
+        {
+          "Specification": "Flow Range (DN14)",
+          "Value": "0.25–33.3",
+          "Unit": "l/min",
+          "Test Condition": "Water at 20°C"
+        },
+        {
+          "Specification": "Pressure Range",
+          "Value": "0–10",
+          "Unit": "bar",
+          "Test Condition": "—"
+        },
+        {
+          "Specification": "Burst Pressure",
+          "Value": "9 / 42",
+          "Unit": "bar",
+          "Test Condition": "Variant-dependent"
+        },
+        {
+          "Specification": "Medium Temperature",
+          "Value": "+2 to 90",
+          "Unit": "°C",
+          "Test Condition": "—"
+        },
+        {
+          "Specification": "Supply Voltage",
+          "Value": "5 / 6–30",
+          "Unit": "V DC",
+          "Test Condition": "Variant-dependent"
+        },
+        {
+          "Specification": "Max Current (standard)",
+          "Value": "14",
+          "Unit": "mA",
+          "Test Condition": "—"
+        },
+        {
+          "Specification": "Min Current (low-energy)",
+          "Value": "<5",
+          "Unit": "μA",
+          "Test Condition": "Battery mode, standby"
+        },
+        {
+          "Specification": "Connector",
+          "Value": "RAST 2.5",
+          "Unit": "—",
+          "Test Condition": "3-pole or 4-pole"
+        },
+        {
+          "Specification": "Life Endurance",
+          "Value": "3,000",
+          "Unit": "m³",
+          "Test Condition": "Total throughput"
+        },
+        {
+          "Specification": "Pressure Loss",
+          "Value": "<50",
+          "Unit": "mbar",
+          "Test Condition": "At 10 l/min"
+        },
+        {
+          "Specification": "Water Hammer Resistance",
+          "Value": ">16",
+          "Unit": "bar",
+          "Test Condition": "—"
+        },
+        {
+          "Specification": "Dimensions (DN20)",
+          "Value": "155 × 81 × 64",
+          "Unit": "mm",
+          "Test Condition": "L × B × H"
+        },
+        {
+          "Specification": "Dimensions (DN25)",
+          "Value": "150 × 85 × 68.5",
+          "Unit": "mm",
+          "Test Condition": "L × B × H"
+        },
+        {
+          "Specification": "Dimensions (DN14)",
+          "Value": "120 × 75 × 58",
+          "Unit": "mm",
+          "Test Condition": "L × B × H"
+        },
+        {
+          "Specification": "Pressure Cycle Endurance",
+          "Value": "90,000",
+          "Unit": "cycles",
+          "Test Condition": "At 40°C and 80°C"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Constraint",
+        "Type",
+        "Severity",
+        "Description",
+        "Threshold"
+      ],
+      "rows": [
+        {
+          "Constraint": "**Media Limitation**",
+          "Type": "physical",
+          "Severity": "hard",
+          "Description": "Only water and water-like media (incl. glycol mixtures, particulate suspensions). Cannot measure oils, gases, or non-polar liquids due to acoustic impedance mismatch between piezoelectric transducer and non-aqueous media.",
+          "Threshold": "—"
+        },
+        {
+          "Constraint": "**Maximum Medium Temperature**",
+          "Type": "physical",
+          "Severity": "hard",
+          "Description": "Polymer housing and seals degrade above 90°C. Extended operation near limit reduces service life. Excludes steam and high-temperature industrial processes.",
+          "Threshold": "90°C"
+        },
+        {
+          "Constraint": "**Maximum Operating Pressure**",
+          "Type": "physical",
+          "Severity": "hard",
+          "Description": "Housing structural integrity rated to 10 bar continuous. Burst pressure 9 bar (low-pressure variant) or 42 bar (high-pressure variant). Exceeding rating risks seal failure and leakage.",
+          "Threshold": "10 bar"
+        },
+        {
+          "Constraint": "**Minimum Flow Rate Detection**",
+          "Type": "operational",
+          "Severity": "soft",
+          "Description": "Signal-to-noise ratio degrades at very low flow rates. Transit-time difference becomes indistinguishable from noise. Lower bound varies by pipe diameter (~0.25 l/min for DN14, ~4.2 l/min for DN20/DN25).",
+          "Threshold": "Variant-dependent"
+        },
+        {
+          "Constraint": "**Air Bubble Tolerance**",
+          "Type": "physical",
+          "Severity": "soft",
+          "Description": "Air entrainment >2% by volume attenuates ultrasonic signal and introduces measurement error. Sensor detects bubbles as diagnostic event but accuracy degrades significantly. Systems with chronic air entrainment require de-aerators upstream.",
+          "Threshold": "~2% vol"
+        },
+        {
+          "Constraint": "**Pipe Full Condition**",
+          "Type": "operational",
+          "Severity": "hard",
+          "Description": "Pipe must be fully filled with liquid for valid measurement. Partially filled pipes cause complete signal loss. Sensor detects empty-pipe condition as a fault state.",
+          "Threshold": "Pipe must be full"
+        },
+        {
+          "Constraint": "**Minimum Straight Pipe Run**",
+          "Type": "operational",
+          "Severity": "soft",
+          "Description": "Turbulent or asymmetric flow profiles (caused by elbows, valves, tees upstream) degrade accuracy. Manufacturer-recommended straight pipe run upstream of sensor required for specified accuracy.",
+          "Threshold": "Typically 5–10× DN"
+        },
+        {
+          "Constraint": "**Temperature-Dependent Accuracy**",
+          "Type": "physical",
+          "Severity": "soft",
+          "Description": "Speed of sound in the medium changes with temperature. Without compensation, temperature-induced measurement error can reach ~1.5%. Built-in NTC compensation reduces this to ~0.2%, but extreme temperature transients may temporarily exceed compensation response.",
+          "Threshold": "—"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "product_name": "Ultrasonic Flow Sensor",
+      "vendor_name": "Marquardt",
+      "vendor_product_model": "US Flow Sensor (DN20 serial, DN12/DN14/DN25 development)",
+      "technology_class": "Ultrasonic Transit-Time Flow Measurement",
+      "underlying_mechanism": "Piezoelectric transducers (Piezo A / Piezo B) alternately transmit and receive ultrasonic pulses through a fluid channel; the difference in transit time between upstream and downstream signal paths is proportional to fluid velocity; an embedded NTC thermistor provides simultaneous medium temperature",
+      "functional_promise": {
+        "statement": "Measure volumetric flow rate and temperature of liquids with no moving parts and no pressure drop",
+        "verb": "Measure",
+        "object": "volumetric flow rate and temperature of liquids",
+        "context": "with no moving parts and no pressure drop",
+        "differentiators": [
+          "No moving parts (unlike impeller/turbine sensors)",
+          "Zero pressure drop (unlike orifice-plate, venturi, or vortex meters)",
+          "Simultaneous flow + temperature in single sensor body",
+          "Tolerant of glycol mixtures and particulate suspensions",
+          "Bidirectional flow detection inherent to transit-time principle"
+        ]
+      },
+      "commodity_functional_promise": "Quantify the volumetric or mass flow rate of fluids traversing a conduit",
+      "unspsc_code": "41112501",
+      "unspsc_title": "Flowmeters",
+      "custom_product_group": null,
+      "features": [
+        {
+          "name": "Transit-Time Flow Measurement",
+          "description": "Measure fluid velocity via ultrasonic pulse transit-time difference",
+          "long_description": "Two piezoelectric transducers alternately transmit and receive ultrasonic pulses. The difference in transit time between upstream and downstream paths is proportional to fluid velocity. Requires acoustic coupling between transducer and fluid. Accuracy degrades with air bubble content >2% by volume.",
+          "scope": "technology",
+          "category": "performance"
+        },
+        {
+          "name": "Integrated Temperature Sensing",
+          "description": "Measure medium temperature via embedded NTC thermistor",
+          "long_description": "NTC element integrated into the wetted flow body provides continuous medium temperature reading alongside flow measurement. Eliminates need for separate temperature probe. Enables real-time temperature compensation of speed-of-sound calculations.",
+          "scope": "technology",
+          "category": "integration"
+        },
+        {
+          "name": "Zero Pressure Drop Flow Path",
+          "description": "Pass fluid through an unobstructed bore with no flow restriction",
+          "long_description": "Straight-through flow channel has no impeller, vortex-shedding body, or orifice plate. Fluid energy is not consumed by the measurement. Eliminates head-loss penalty in system hydraulic design.",
+          "scope": "technology",
+          "category": "performance"
+        },
+        {
+          "name": "No Moving Parts",
+          "description": "Operate without any mechanical components in the flow path",
+          "long_description": "Entirely solid-state measurement principle. No impeller bearings, no rotating shafts, no seal wear. Eliminates mechanical failure modes and the associated maintenance schedule. Service life limited by electronics and housing seals, not by mechanical wear.",
+          "scope": "technology",
+          "category": "reliability"
+        },
+        {
+          "name": "Bidirectional Flow Detection",
+          "description": "Detect and measure both forward and reverse flow",
+          "long_description": "Transit-time principle inherently distinguishes flow direction. The sign of the transit-time difference inverts with flow reversal. Enables backflow detection and alarm without additional check valves or sensors.",
+          "scope": "technology",
+          "category": "performance"
+        },
+        {
+          "name": "Digital Anomaly Detection",
+          "description": "Detect bubbles, empty pipes, and glycol presence in the medium",
+          "long_description": "Onboard signal processing identifies characteristic acoustic signatures of air bubbles, pipe-empty conditions, and glycol concentration changes. Provides diagnostic flags to the host controller for system health monitoring.",
+          "scope": "technology",
+          "category": "safety"
+        },
+        {
+          "name": "Real-Time Compensation Algorithms",
+          "description": "Compensate flow readings for temperature, pressure, and viscosity variations",
+          "long_description": "Firmware algorithms adjust transit-time calculations based on measured temperature and known fluid properties. Reduces systematic measurement error across the operating envelope. Requires fluid type to be configured at commissioning.",
+          "scope": "technology",
+          "category": "performance"
+        },
+        {
+          "name": "Modular Pipe Diameter Variants",
+          "description": "Serve multiple pipe sizes via interchangeable flow bodies",
+          "long_description": "DN12, DN14, DN20, DN25 flow body variants share the same electronics platform and RAST 2.5 connector. Customer selects flow body matching their pipe diameter. DN20 is serial production; DN12, DN14, DN25 are concept/development.",
+          "scope": "vendor",
+          "category": "usability"
+        },
+        {
+          "name": "Customizable Communication Interface",
+          "description": "Support UART, LIN, and frequency output protocols",
+          "long_description": "Electronics can be configured for UART digital bus, LIN automotive-grade bus, or frequency pulse output. Selectable at the order level. Enables integration into diverse control architectures without hardware changes.",
+          "scope": "vendor",
+          "category": "integration"
+        },
+        {
+          "name": "Customizable Mechanical Interface",
+          "description": "Accept threaded or plug-in pipe connections",
+          "long_description": "Flow body inlet/outlet can be threaded (standard plumbing) or plug-in (quick-connect for OEM assembly lines). Reduces OEM installation time and allows adaptation to different piping standards.",
+          "scope": "vendor",
+          "category": "usability"
+        },
+        {
+          "name": "Low-Energy Battery Mode",
+          "description": "Operate at ultra-low current consumption for battery-powered applications",
+          "long_description": "Low-energy firmware variant reduces standby current to <5 uA, enabling battery-powered remote installations without mains power. Trades measurement frequency for power savings.",
+          "scope": "vendor",
+          "category": "maintenance"
+        },
+        {
+          "name": "Pre-Calibrated Delivery",
+          "description": "Ship fully calibrated and tested to customer-specific medium and flow profile",
+          "long_description": "Each sensor is individually calibrated against the customer's specified medium and tested across the operating flow profile before delivery. Includes 100% automated final test. Eliminates field calibration requirement.",
+          "scope": "vendor",
+          "category": "reliability"
+        },
+        {
+          "name": "KTW/WRAS Drinking Water Approval",
+          "description": "Wetted parts approved for potable water contact",
+          "long_description": "Housing materials and seals meet KTW (German) and WRAS (UK) drinking water contact standards. Enables deployment in potable water circuits without additional material qualification.",
+          "scope": "vendor",
+          "category": "safety"
+        }
+      ],
+      "specifications": [
+        {
+          "name": "Flow Range (DN20)",
+          "value": "4.2-46.6",
+          "unit": "l/min",
+          "test_condition": "Water at 20C"
+        },
+        {
+          "name": "Flow Range (DN25)",
+          "value": "4.2-60",
+          "unit": "l/min",
+          "test_condition": "Water at 20C"
+        },
+        {
+          "name": "Flow Range (DN14)",
+          "value": "0.25-33.3",
+          "unit": "l/min",
+          "test_condition": "Water at 20C"
+        },
+        {
+          "name": "Pressure Range",
+          "value": "0-10",
+          "unit": "bar",
+          "test_condition": null
+        },
+        {
+          "name": "Burst Pressure",
+          "value": "9 / 42",
+          "unit": "bar",
+          "test_condition": "Variant-dependent"
+        },
+        {
+          "name": "Medium Temperature",
+          "value": "+2 to 90",
+          "unit": "C",
+          "test_condition": null
+        },
+        {
+          "name": "Supply Voltage",
+          "value": "5 / 6-30",
+          "unit": "V DC",
+          "test_condition": "Variant-dependent"
+        },
+        {
+          "name": "Max Current",
+          "value": "14",
+          "unit": "mA",
+          "test_condition": null
+        },
+        {
+          "name": "Min Current (low-energy)",
+          "value": "<5",
+          "unit": "uA",
+          "test_condition": "Battery mode, standby"
+        },
+        {
+          "name": "Connector",
+          "value": "RAST 2.5",
+          "unit": "3/4-pole",
+          "test_condition": null
+        },
+        {
+          "name": "Life Endurance",
+          "value": "3000",
+          "unit": "m3",
+          "test_condition": "Total throughput"
+        },
+        {
+          "name": "Pressure Loss",
+          "value": "<50",
+          "unit": "mbar",
+          "test_condition": "At 10 l/min"
+        },
+        {
+          "name": "Water Hammer Resistance",
+          "value": ">16",
+          "unit": "bar",
+          "test_condition": null
+        },
+        {
+          "name": "Dimensions (DN20)",
+          "value": "155x81x64",
+          "unit": "mm",
+          "test_condition": "LxBxH"
+        },
+        {
+          "name": "Dimensions (DN25)",
+          "value": "150x85x68.5",
+          "unit": "mm",
+          "test_condition": "LxBxH"
+        },
+        {
+          "name": "Dimensions (DN14)",
+          "value": "120x75x58",
+          "unit": "mm",
+          "test_condition": "LxBxH"
+        },
+        {
+          "name": "Pressure Cycle Endurance",
+          "value": "90000",
+          "unit": "cycles",
+          "test_condition": "At 40C and 80C"
+        }
+      ],
+      "constraints": [
+        {
+          "name": "Media Limitation",
+          "constraint_type": "physical",
+          "description": "Only water and water-like media (incl. glycol, particulate suspensions). Cannot measure oils, gases, or non-polar liquids due to acoustic impedance mismatch.",
+          "severity": "hard",
+          "threshold_value": null,
+          "threshold_unit": null
+        },
+        {
+          "name": "Maximum Medium Temperature",
+          "constraint_type": "physical",
+          "description": "Polymer housing and seals degrade above 90C. Extended operation near limit reduces service life.",
+          "severity": "hard",
+          "threshold_value": "90",
+          "threshold_unit": "C"
+        },
+        {
+          "name": "Maximum Operating Pressure",
+          "constraint_type": "physical",
+          "description": "Housing structural integrity rated to 10 bar continuous. Burst pressure 9 or 42 bar depending on variant.",
+          "severity": "hard",
+          "threshold_value": "10",
+          "threshold_unit": "bar"
+        },
+        {
+          "name": "Minimum Flow Rate Detection",
+          "constraint_type": "operational",
+          "description": "Signal-to-noise ratio degrades at very low flow rates. Transit-time difference becomes indistinguishable from noise. Lower bound varies by pipe diameter.",
+          "severity": "soft",
+          "threshold_value": "0.25-4.2",
+          "threshold_unit": "l/min"
+        },
+        {
+          "name": "Air Bubble Tolerance",
+          "constraint_type": "physical",
+          "description": "Air entrainment >2% by volume attenuates ultrasonic signal and introduces measurement error. Systems with chronic air entrainment require de-aerators upstream.",
+          "severity": "soft",
+          "threshold_value": "2",
+          "threshold_unit": "% vol"
+        },
+        {
+          "name": "Pipe Full Condition",
+          "constraint_type": "operational",
+          "description": "Pipe must be fully filled with liquid for valid measurement. Partially filled pipes cause complete signal loss.",
+          "severity": "hard",
+          "threshold_value": null,
+          "threshold_unit": null
+        },
+        {
+          "name": "Minimum Straight Pipe Run",
+          "constraint_type": "operational",
+          "description": "Turbulent or asymmetric flow profiles from upstream disturbances degrade accuracy. Recommended straight pipe run required upstream.",
+          "severity": "soft",
+          "threshold_value": "5-10",
+          "threshold_unit": "x DN"
+        },
+        {
+          "name": "Temperature-Dependent Accuracy",
+          "constraint_type": "physical",
+          "description": "Speed of sound in the medium changes with temperature. Without compensation, error reaches ~1.5%. Built-in NTC compensation reduces to ~0.2%, but extreme transients may temporarily exceed compensation response.",
+          "severity": "soft",
+          "threshold_value": null,
+          "threshold_unit": null
+        }
+      ],
+      "unspsc_classification": {
+        "evaluations": [
+          {
+            "commodity_code": "41112501",
+            "commodity_name": "Flowmeters",
+            "confidence_pct": 92,
+            "reasoning": "Ultrasonic flow sensors are a type of flowmeter. UNSPSC 41112501 covers all flowmeter technologies including ultrasonic, electromagnetic, Coriolis, and turbine variants. This is the product's primary function — measuring flow rate."
+          },
+          {
+            "commodity_code": "41111927",
+            "commodity_name": "Ultrasonic sensors",
+            "confidence_pct": 52,
+            "reasoning": "Matches the sensing technology (ultrasonic transduction) but describes the transducer type, not the product's primary function (flow measurement). A sub-component-level match."
+          },
+          {
+            "commodity_code": "41112201",
+            "commodity_name": "Temperature sensors",
+            "confidence_pct": 35,
+            "reasoning": "The sensor includes integrated temperature measurement, but this is a secondary function. The primary product identity is a flowmeter."
+          }
+        ],
+        "selected_code": "41112501",
+        "selected_title": "Flowmeters",
+        "selection_method": "highest_confidence_valid",
+        "suggested_product_group": null
+      }
+    }
+  ],
+  "has_bom": false
+}

@@ -1,0 +1,1435 @@
+{
+  "id": "ODI_steam_and_air_conditioning_supply",
+  "title": "ODI Matrix — Steam and Air-Conditioning Supply (NAICS 221330)",
+  "type": "odi_matrix",
+  "market_slug": "steam_and_air_conditioning_supply",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Step 1 — Error Statement Gathering",
+      "content": "| Source | Count | Type |\n|---|---|---|\n| JTBD Step 06 (P2 core market needs) | 20 | product_related = false |\n| JTBD Step 06 (P1 product lifecycle needs) | 9 | product_related = true |\n| FIT Step 10 (product-constraint needs) | 7 | product_related = true (injected as job_step=product_constraint) |\n| **Total** | **36** | — |\n\n---"
+    },
+    {
+      "title": "Step 2 — Satisfaction Recalibration",
+      "content": "Incumbent technology profiles used for recalibration:\n\n| Incumbent | Share | Mechanism | Top Strengths | Top Weaknesses |\n|---|---|---|---|---|\n| Mechanical Impeller / Turbine | 40–50% | Rotational (impeller) | Low unit cost, simple installation, proven MID certification | Magnetite fouling, bearing wear, calibration drift Class 2→3 in 3–5 yr, low-flow stall <1 l/min |\n| Ultrasonic (Kamstrup MULTICAL) | 35–45% | Transit-time (acoustic) | No moving parts, stable long-term accuracy, MID/EN 1434 certified, 16-yr battery, combined flow+temp | Air entrainment >2% degrades accuracy, pipe-full required, 1.5–2.5x cost vs mechanical |\n| Electromagnetic | 5–10% | Faraday induction | Unaffected by air/particles, high accuracy, wide turndown | 3–5x cost, requires conductivity >5 µS/cm, heavy/large, high power |\n\n[SRC: JTBD_steam alternatives, FIT_steam vendor comparison]\n\n### Recalibration Adjustments\n\n| ID | Original Sat | Recalibrated Sat | Rationale |\n|---|---|---|---|\n| N04 | 5 | 4 | Mechanical impellers (40–50% share) have inertia delay in stoppage detection; legacy installations often lack alarm integration. Market-weighted response time exceeds 5 s target. |\n| N09 | 4 | 5 | Kamstrup handles glycol adequately; most district networks use treated water. Glycol compatibility increasingly addressed by ultrasonic incumbents. |\n| N22 | 4 | 5 | Kamstrup provides combined flow+temp in single body. Growing ultrasonic share (35–45%) addresses this need. Market satisfaction improving. |\n| N25 | 5 | 4 | Mechanical impellers exhibit 2–5% annual failure rate in aging networks from magnetite. Fleet-wide <0.1% target not achieved when mechanical dominates the installed base. |\n| All others | — | Unchanged | Original Step 06 scores align with incumbent data from alternatives analysis. No contradictions found. |\n\n---"
+    },
+    {
+      "title": "Step 3 — ODI Entries (Deterministic Computation)",
+      "content": "**Formula:** `opportunity_score = importance + max(importance - satisfaction, 0)`\n**Underserved:** `importance > 7 AND satisfaction < 5`\n**Overserved:** `importance < 3 AND satisfaction > 7`\n\n### Highly Underserved (opp > 15)\n\n*None in this market.*\n\n### Underserved (opp 12–15)\n\n| ID | Statement | Step | Imp | Sat | Opp | Under | Over | Impact | Prod |\n|---|---|---|---|---|---|---|---|---|---|\n| N01 | Minimize flow reading deviation >±2% per EN 1434 Class 2 across 0.5–60 l/min range | EXECUTE | 10 | 5 | 15.00 | false | false | reliability | false |\n| N26 | Increase ability to deploy MID/EN 1434 billing-grade meters at every building connection for EU EED compliance | DEFINE | 10 | 5 | 15.00 | false | false | cost | false |\n| N07 | Minimize undetected air entrainment >2% vol biasing billing-grade energy calculations | MONITOR | 9 | 3 | 15.00 | true | false | cost | false |\n| N10 | Minimize low delta-T cooling circuit error amplification (3–8 K ΔT amplifies flow error 2–3x) | EXECUTE | 9 | 3 | 15.00 | true | false | cost | false |\n| N11 | Minimize impeller rotor seizure from magnetite/calcium scale in aging district heating networks | Usage | 9 | 3 | 15.00 | true | false | reliability | true |\n| N13 | Minimize calibration drift exceeding EN 1434 accuracy class from bearing wear/blade erosion | Usage | 9 | 3 | 15.00 | true | false | reliability | true |\n| N03 | Minimize measurement degradation during seasonal temp swing 50–120 °C | EXECUTE | 9 | 4 | 14.00 | true | false | reliability | false |\n| N04 | Minimize time to detect complete flow stoppage (valve failure, pipe freeze, pump trip) to <5 s | MONITOR | 9 | 4 | 14.00 | true | false | safety | false |\n| N25 | Minimize field failure rate to <0.1% annually across 15-year fleet operating horizon | EXECUTE | 9 | 4 | 14.00 | true | false | reliability | false |\n| N27 | Increase ability to demonstrate EU EED-compliant metering across 100% of connections with EN 1434 traceability | P3-ROLE | 9 | 4 | 14.00 | true | false | cost | false |\n| N12 | Minimize fleet-wide 5–6 yr metrological re-verification and replacement cost (mechanical) | Maint. | 8 | 3 | 13.00 | true | false | cost | true |\n| N14 | Increase ability to read accurately at <1 l/min where mechanical impellers stall | Usage | 8 | 3 | 13.00 | true | false | cost | true |\n| N17 | Increase ability to distinguish zero-flow from ultrasonic signal loss (bubbles, empty pipe) | Usage | 8 | 3 | 13.00 | true | false | safety | true |\n| PRN-01 | Minimize risk of polymer housing degradation at 90 °C winter peak-load conditions | product_constraint | 8 | 3 | 13.00 | true | false | reliability | true |\n| N05 | Increase turndown ratio to cover winter peak and summer minimum in single meter | EXECUTE | 8 | 4 | 12.00 | true | false | reliability | false |\n| N06 | Minimize likelihood of specifying a meter whose range misses building demand profile | DEFINE | 8 | 4 | 12.00 | true | false | cost | false |\n| N08 | Minimize systematic error from non-ideal flow profiles in compact substation piping | EXECUTE | 8 | 4 | 12.00 | true | false | reliability | false |\n| N18 | Minimize electromagnetic meter cost premium (3–5x) limiting deployment to large substations | Acq. | 7 | 2 | 12.00 | false | false | cost | true |\n\n### Appropriately Served (opp 10–12)\n\n| ID | Statement | Step | Imp | Sat | Opp | Under | Over | Impact | Prod |\n|---|---|---|---|---|---|---|---|---|---|\n| N02 | Minimize flow reading variability under pulsating network-pressure conditions | EXECUTE | 8 | 5 | 11.00 | false | false | reliability | false |\n| N22 | Increase ability to provide flow + temperature from single measurement point | EXECUTE | 8 | 5 | 11.00 | false | false | cost | false |\n| PRN-04 | Minimize cumulative billing error from sub-threshold air (1–2% vol) that silently biases readings | product_constraint | 7 | 3 | 11.00 | false | false | reliability | true |\n| N23 | Increase ability to detect incipient HX fouling via gradual flow-rate trend analysis | MONITOR | 7 | 3 | 11.00 | false | false | reliability | false |\n| N09 | Minimize measurement failure rate in glycol antifreeze circuits (up to 40% concentration) | EXECUTE | 7 | 5 | 9.00 (recal) | false | false | reliability | false |  <!-- recal sat 4→5 -->\n| N15 | Minimize signal loss from transient air pockets during venting/shutdown events (ultrasonic) | Usage | 7 | 4 | 10.00 | false | false | reliability | true |\n| N24 | Minimize meter variants needed to cover DN15–DN50 range for heating + cooling | DEFINE | 7 | 4 | 10.00 | false | false | cost | false |\n| N28 | Increase ability to provide occupant-accessible measured consumption data per billing period | P4-IMAGE | 7 | 4 | 10.00 | false | false | skill | false |\n| N29 | Minimize billing disputes >5% of quarterly cost from meter inaccuracy or unmeasured periods | P5-EMOT | 7 | 4 | 10.00 | false | false | cost | false |\n| PRN-03 | Minimize unmeasured energy below 4.2 l/min ultrasonic detection threshold (summer DHW standby) | product_constraint | 7 | 4 | 10.00 | false | false | reliability | true |\n\n### Overserved / Low Priority (opp < 10)\n\n| ID | Statement | Step | Imp | Sat | Opp | Under | Over | Impact | Prod |\n|---|---|---|---|---|---|---|---|---|---|\n| N19 | Minimize installation footprint in space-constrained building substations | LOCATE | 7 | 5 | 9.00 | false | false | cost | false |\n| N20 | Minimize total integration time per substation (unpack to first valid reading) | PREPARE | 7 | 5 | 9.00 | false | false | time | false |\n| PRN-02 | Minimize deployment exclusion at substations exceeding 10-bar operating pressure | product_constraint | 6 | 3 | 9.00 | false | false | reliability | true |\n| PRN-06 | Minimize single-chord path bias from insufficient straight-run (<5x DN) | product_constraint | 7 | 5 | 9.00 | false | false | reliability | true |\n| N16 | Minimize ultrasonic commissioning time (acoustic coupling, fluid config, calculator handshake) | Prep. | 6 | 5 | 7.00 | false | false | time | true |\n| PRN-07 | Minimize speed-of-sound error from rapid temp transients (>5 °C/min) outpacing NTC compensation | product_constraint | 6 | 5 | 7.00 | false | false | reliability | true |\n| N21 | Minimize commissioning sign-off with incorrect sensor orientation (forward/reverse) | CONFIRM | 6 | 6 | 6.00 | false | false | skill | false |\n| PRN-05 | Minimize measurement blackout during partial pipe fill (network maintenance drain) | product_constraint | 5 | 4 | 6.00 | false | false | reliability | true |\n\n---"
+    },
+    {
+      "title": "Step 4 — Market ODI Summary",
+      "content": "| Field | Value |\n|---|---|\n| **Market** | Steam and Air-Conditioning Supply |\n| **NAICS** | 221330 |\n| **Total Needs Scored** | 36 |\n| **Underserved Count** | 15 |\n| **Overserved Count** | 0 |\n| **Avg Opportunity Score** | 11.42 |\n\n### Top 5 Opportunities\n\n| Rank | ID | Opp | Statement |\n|---|---|---|---|\n| 1 | N01 | 15.00 | Minimize flow reading deviation >±2% per EN 1434 Class 2 across 0.5–60 l/min operating range |\n| 2 | N26 | 15.00 | Increase ability to deploy MID/EN 1434 billing-grade meters at every building connection |\n| 3 | N07 | 15.00 | Minimize undetected air entrainment >2% vol biasing billing-grade energy calculations |\n| 4 | N10 | 15.00 | Minimize low delta-T cooling circuit error amplification (flow error 2–3x in 3–8 K ΔT) |\n| 5 | N11 | 15.00 | Minimize impeller rotor seizure from magnetite/calcium scale in aging networks |\n\n*Tie-breaking: importance descending (N01=10, N26=10, N07=9, N10=9, N11=9), then ID ascending. N13 (15.00, imp=9) is 6th.*\n\n### Opportunity Zone Distribution\n\n| Zone | Score Range | Count | % |\n|---|---|---|---|\n| Highly Underserved | > 15 | 0 | 0% |\n| Underserved | 12–15 | 18 | 50% |\n| Appropriately Served | 10–12 | 10 | 28% |\n| Overserved | < 10 | 8 | 22% |\n\n---"
+    },
+    {
+      "title": "Step 5 — Cross-Check: ODI vs Feature-Market Fit",
+      "content": "| Metric | Value |\n|---|---|\n| ODI avg opportunity score | 11.42 |\n| Feature-Fit avg (Step 09) | 5.20 |\n| Threshold: ODI > 12 AND Fit < 4 | NOT triggered |\n| Threshold: ODI < 8 AND Fit > 7 | NOT triggered |\n| **Result** | **No inconsistencies** |\n\nThe ODI average (11.42) is just below the high-opportunity threshold (12), and feature-fit (5.20) is moderate. This aligns: the market has significant unmet needs (15 underserved), and the ultrasonic technology addresses them moderately well — strong on reliability/maintenance (No Moving Parts: 6.44, Digital Anomaly: 6.44) but limited on low-priority dimensions (Zero Pressure Drop: 2.89).\n\n---"
+    },
+    {
+      "title": "QA Checklist",
+      "content": "| # | Check | Pass Condition | Result |\n|---|---|---|---|\n| Q1 | Formula correct | Spot-check 5 entries: opp = imp + max(imp - sat, 0) | **PASS** — N01: 10+max(5,0)=15 ✓; N07: 9+max(6,0)=15 ✓; N21: 6+max(0,0)=6 ✓; PRN-05: 5+max(1,0)=6 ✓; N18: 7+max(5,0)=12 ✓ |\n| Q2 | Underserved flags correct | imp > 7 AND sat < 5 ↔ is_underserved | **PASS** — 15 entries flagged; verified N01 (imp=10, sat=5 → false, correct); N07 (imp=9, sat=3 → true, correct); N09 (imp=7, sat=5 → false, correct) |\n| Q3 | Overserved flags correct | imp < 3 AND sat > 7 ↔ is_overserved | **PASS** — 0 entries; no need has imp < 3 |\n| Q4 | Need count preserved | Total ≥ JTBD count (29) + Step 10 may add more | **PASS** — 29 + 7 = 36 |\n| Q5 | Top-5 ordering correct | Sorted by -opp, -imp, +id | **PASS** — all at 15.00; tie-broken by importance |\n| Q6 | Cross-check ran | ODI vs Feature-Fit thresholds checked | **PASS** — no inconsistencies flagged |\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"odi_matrix\",\n  \"naics_code\": \"221330\",\n  \"naics_title\": \"Steam and Air-Conditioning Supply\",\n  \"market_name\": \"Steam and Air-Conditioning Supply\",\n  \"product_name\": \"Ultrasonic Flow Sensor\",\n  \"vendor_name\": \"Marquardt\",\n  \"recalibration\": {\n    \"method\": \"incumbent_evidence\",\n    \"incumbents_used\": [\n      {\n        \"name\": \"Mechanical Impeller / Turbine Meter\",\n        \"market_share\": \"40-50%\",\n        \"mechanism\": \"rotational\",\n        \"strengths\": [\"low unit cost\", \"simple installation\", \"proven MID certification\"],\n        \"weaknesses\": [\"magnetite fouling\", \"bearing wear\", \"calibration drift Class 2 to 3 in 3-5 yr\", \"low-flow stall <1 l/min\"]\n      },\n      {\n        \"name\": \"Ultrasonic (Kamstrup MULTICAL)\",\n        \"market_share\": \"35-45%\",\n        \"mechanism\": \"transit-time acoustic\",\n        \"strengths\": [\"no moving parts\", \"stable long-term accuracy\", \"MID/EN 1434 certified\", \"16-yr battery\", \"combined flow+temp\"],\n        \"weaknesses\": [\"air entrainment >2% degrades accuracy\", \"pipe-full required\", \"1.5-2.5x cost vs mechanical\"]\n      },\n      {\n        \"name\": \"Electromagnetic Flow Meter\",\n        \"market_share\": \"5-10%\",\n        \"mechanism\": \"Faraday induction\",\n        \"strengths\": [\"unaffected by air/particles\", \"high accuracy\", \"wide turndown\"],\n        \"weaknesses\": [\"3-5x cost\", \"requires conductivity >5 uS/cm\", \"heavy/large\", \"high power\"]\n      }\n    ],\n    \"adjustments\": [\n      {\"id\": \"N04\", \"original_satisfaction\": 5, \"recalibrated_satisfaction\": 4, \"rationale\": \"Mechanical impellers have inertia delay in stoppage detection; legacy installations lack alarm integration\"},\n      {\"id\": \"N09\", \"original_satisfaction\": 4, \"recalibrated_satisfaction\": 5, \"rationale\": \"Kamstrup handles glycol adequately; glycol compatibility increasingly addressed by ultrasonic incumbents\"},\n      {\"id\": \"N22\", \"original_satisfaction\": 4, \"recalibrated_satisfaction\": 5, \"rationale\": \"Kamstrup provides combined flow+temp in single body; growing ultrasonic share addresses this need\"},\n      {\"id\": \"N25\", \"original_satisfaction\": 5, \"recalibrated_satisfaction\": 4, \"rationale\": \"Mechanical impellers exhibit 2-5% annual failure rate; fleet-wide <0.1% target not achieved\"}\n    ]\n  },\n  \"entries\": [\n    {\n      \"error_statement\": \"Minimize the likelihood of volumetric flow reading deviating more than ±2% from true value across the 0.5-60 l/min operating range per EN 1434 Class 2 requirements\",\n      \"id\": \"N01\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 10,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 15.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"impact_category\": \"reliability\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize variability of flow readings between successive measurement cycles under pulsating network-pressure conditions (repeatability >±0.5%)\",\n      \"id\": \"N02\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 8,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 11.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"impact_category\": \"reliability\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize measurement degradation when supply temperature shifts from 50 °C (summer DHW) to 120 °C (winter peak) across seasonal operating modes\",\n      \"id\": \"N03\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 9,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 14.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"impact_category\": \"reliability\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize time to detect a complete flow stoppage event (valve failure, pipe freeze, pump trip) to less than 5 seconds for safety interlock and billing integrity\",\n      \"id\": \"N04\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 9,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 14.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"impact_category\": \"safety\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Increase the turndown ratio (max/min measurable flow) to cover both winter peak-load and summer minimum-load operating points in a single meter without range switching\",\n      \"id\": \"N05\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 8,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 12.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"impact_category\": \"reliability\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of specifying a meter whose flow range does not cover the building's actual demand profile, causing unmeasured energy delivery during low-load hours\",\n      \"id\": \"N06\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 8,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 12.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"impact_category\": \"cost\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the number of undetected air entrainment events exceeding 2% volume that silently bias billing-grade energy calculations\",\n      \"id\": \"N07\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 9,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 15.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"impact_category\": \"cost\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize systematic measurement error caused by non-ideal flow profiles from upstream elbows, valves, and tees in compact substation piping layouts\",\n      \"id\": \"N08\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 8,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 12.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"impact_category\": \"reliability\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize measurement failure rate when medium contains glycol antifreeze (up to 40% concentration) in district cooling and frost-protected circuits\",\n      \"id\": \"N09\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"impact_category\": \"reliability\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Increase the ability to accurately calculate thermal energy (Q = V x rho x Cp x delta-T) in district cooling circuits where delta-T is only 3-8 K, amplifying flow measurement error by 2-3x vs heating circuits\",\n      \"id\": \"N10\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 9,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 15.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"impact_category\": \"cost\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of impeller rotor seizure from magnetite and calcium scale accumulation in aging district heating networks requiring unplanned meter replacement\",\n      \"id\": \"N11\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 9,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 15.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"job_step_number\": 5,\n      \"job_step_name\": \"Usage\",\n      \"impact_category\": \"reliability\",\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the fleet-wide maintenance cost of mandatory 5-6 year metrological re-verification and replacement cycles across hundreds of building substations\",\n      \"id\": \"N12\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"job_step_number\": 7,\n      \"job_step_name\": \"Maintenance\",\n      \"impact_category\": \"cost\",\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize calibration drift exceeding one EN 1434 accuracy class over the certification period caused by bearing wear and blade erosion in hard-water networks\",\n      \"id\": \"N13\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 9,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 15.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"job_step_number\": 5,\n      \"job_step_name\": \"Usage\",\n      \"impact_category\": \"reliability\",\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Increase the ability to maintain accurate readings at low flow rates (<1 l/min) where mechanical impeller rotors stall due to friction, causing unmeasured energy leakage during summer low-load periods\",\n      \"id\": \"N14\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"job_step_number\": 5,\n      \"job_step_name\": \"Usage\",\n      \"impact_category\": \"cost\",\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of complete signal loss when transient air pockets pass through the sensor during network venting, seasonal shutdown, or pressure fluctuation events\",\n      \"id\": \"N15\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 7,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 10.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"job_step_number\": 5,\n      \"job_step_name\": \"Usage\",\n      \"impact_category\": \"reliability\",\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the commissioning time required to verify acoustic coupling, configure fluid parameters, and validate communication with the energy calculator per substation\",\n      \"id\": \"N16\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 6,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 7.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"job_step_number\": 3,\n      \"job_step_name\": \"Preparation\",\n      \"impact_category\": \"time\",\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Increase the ability to distinguish genuine zero-flow conditions from ultrasonic signal loss caused by transient medium anomalies (bubbles, empty pipe, acoustic decoupling)\",\n      \"id\": \"N17\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"job_step_number\": 5,\n      \"job_step_name\": \"Usage\",\n      \"impact_category\": \"safety\",\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the per-substation cost premium (3-5x vs ultrasonic) that limits electromagnetic meter deployment to only the largest commercial substations, leaving smaller connections underserved\",\n      \"id\": \"N18\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 7,\n      \"satisfaction_current\": 2,\n      \"opportunity_score\": 12.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"job_step_number\": 1,\n      \"job_step_name\": \"Acquisition\",\n      \"impact_category\": \"cost\",\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the installation footprint (physical length and required straight-pipe run) to enable placement in space-constrained building substations where piping is tightly packed\",\n      \"id\": \"N19\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"job_step_number\": 2,\n      \"job_step_name\": \"LOCATE\",\n      \"impact_category\": \"cost\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the total integration time from unpacking to first valid energy reading, including mechanical fitting, electrical connection, calculator handshake, and MID seal application\",\n      \"id\": \"N20\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"job_step_number\": 3,\n      \"job_step_name\": \"PREPARE\",\n      \"impact_category\": \"time\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of commissioning sign-off with incorrect sensor orientation (forward/reverse) that inverts flow direction in the energy calculation\",\n      \"id\": \"N21\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 6,\n      \"satisfaction_current\": 6,\n      \"opportunity_score\": 6.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"job_step_number\": 4,\n      \"job_step_name\": \"CONFIRM\",\n      \"impact_category\": \"skill\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Increase the ability to simultaneously provide flow rate AND medium temperature from a single measurement point, eliminating separate temperature probe installation and reducing substation complexity\",\n      \"id\": \"N22\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 8,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 11.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"impact_category\": \"cost\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Increase the ability to detect incipient heat exchanger fouling via gradual flow-rate reduction trend analysis before thermal performance degrades below billing-relevant thresholds\",\n      \"id\": \"N23\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"impact_category\": \"reliability\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the number of meter variants a district energy operator must qualify, stock, and manage to cover its building portfolio (DN15-DN50 range, heating + cooling)\",\n      \"id\": \"N24\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 7,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 10.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"impact_category\": \"cost\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the field failure rate of the flow metering subsystem to below 0.1% annually across the fleet of building substations over a 15-year operating horizon\",\n      \"id\": \"N25\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 9,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 14.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"impact_category\": \"reliability\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Increase the ability to deploy MID/EN 1434-certified billing-grade meters at every building connection to achieve full EU EED compliance across the entire district network\",\n      \"id\": \"N26\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 10,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 15.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"impact_category\": \"cost\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Increase the ability to demonstrate EU EED-compliant individual consumption metering across 100% of building connections during regulatory audit, with verifiable metrological traceability per EN 1434\",\n      \"id\": \"N27\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 9,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 14.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"impact_category\": \"cost\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Increase the ability to provide building-owner-accessible consumption data (display, remote reading, or portal) that demonstrates measured — not estimated — thermal energy delivery for each billing period\",\n      \"id\": \"N28\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 7,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 10.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"impact_category\": \"skill\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of billing disputes exceeding 5% of quarterly energy cost caused by meter inaccuracy or unmeasured consumption periods that erode tenant trust in the district energy provider\",\n      \"id\": \"N29\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 7,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 10.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"impact_category\": \"cost\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the risk of polymer housing and seal degradation when district heating supply temperatures approach the 90°C material limit during winter peak-load conditions, reducing sensor service life below the 15-year fleet expectation\",\n      \"id\": \"PRN-01\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"job_step_number\": 0,\n      \"job_step_name\": \"product_constraint\",\n      \"impact_category\": \"reliability\",\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the deployment exclusion at building substations where network operating pressure exceeds the 10-bar polymer housing structural rating during peak demand or water-hammer events\",\n      \"id\": \"PRN-02\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 6,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 9.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"job_step_number\": 0,\n      \"job_step_name\": \"product_constraint\",\n      \"impact_category\": \"reliability\",\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the unmeasured energy delivery below the ultrasonic transit-time signal-to-noise detection threshold (4.2 l/min for DN20) during summer domestic hot water standby operation\",\n      \"id\": \"PRN-03\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 7,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 10.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"job_step_number\": 0,\n      \"job_step_name\": \"product_constraint\",\n      \"impact_category\": \"reliability\",\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the cumulative billing error from degraded ultrasonic transit-time accuracy during sub-threshold air entrainment events (1-2% by volume) that do not trigger signal-loss alarms but silently bias flow readings\",\n      \"id\": \"PRN-04\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"job_step_number\": 0,\n      \"job_step_name\": \"product_constraint\",\n      \"impact_category\": \"reliability\",\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the duration of measurement blackout when ultrasonic signal is lost due to partial pipe fill during network maintenance operations that temporarily drain the pipe section\",\n      \"id\": \"PRN-05\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 5,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 6.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"job_step_number\": 0,\n      \"job_step_name\": \"product_constraint\",\n      \"impact_category\": \"reliability\",\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the systematic measurement bias from single-chord acoustic path sampling in asymmetric flow profiles caused by insufficient upstream straight-pipe run (<5x DN) in compact building substations\",\n      \"id\": \"PRN-06\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"job_step_number\": 0,\n      \"job_step_name\": \"product_constraint\",\n      \"impact_category\": \"reliability\",\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize residual flow measurement error from speed-of-sound variation during rapid supply-temperature transients (>5°C/min) that outpace the NTC thermistor compensation response time\",\n      \"id\": \"PRN-07\",\n      \"market_name\": \"Steam and Air-Conditioning Supply\",\n      \"naics_code\": \"221330\",\n      \"importance\": 6,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 7.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"job_step_number\": 0,\n      \"job_step_name\": \"product_constraint\",\n      \"impact_category\": \"reliability\",\n      \"product_related\": true\n    }\n  ],\n  \"market_summary\": {\n    \"market_name\": \"Steam and Air-Conditioning Supply\",\n    \"naics_code\": \"221330\",\n    \"total_needs\": 36,\n    \"underserved_count\": 15,\n    \"overserved_count\": 0,\n    \"avg_opportunity_score\": 11.42,\n    \"top_opportunities\": [\n      \"Minimize the likelihood of volumetric flow reading deviating more than ±2% from true value across the 0.5-60 l/min operating range per EN 1434 Class 2 requirements\",\n      \"Increase the ability to deploy MID/EN 1434-certified billing-grade meters at every building connection to achieve full EU EED compliance across the entire district network\",\n      \"Minimize the number of undetected air entrainment events exceeding 2% volume that silently bias billing-grade energy calculations\",\n      \"Increase the ability to accurately calculate thermal energy in district cooling circuits where delta-T is only 3-8 K, amplifying flow measurement error by 2-3x vs heating circuits\",\n      \"Minimize the likelihood of impeller rotor seizure from magnetite and calcium scale accumulation in aging district heating networks requiring unplanned meter replacement\"\n    ]\n  },\n  \"cross_check\": {\n    \"odi_avg\": 11.42,\n    \"feature_fit_avg\": 5.20,\n    \"inconsistencies\": []\n  },\n  \"entities_produced\": {\n    \"nodes\": [\n      {\n        \"label\": \"OpportunityScore\",\n        \"count\": 36,\n        \"key\": {\"error_statement\": \"first 80 chars\", \"naics_code\": \"221330\", \"run_id\": \"TBD\"},\n        \"set_props\": [\"full_statement\", \"market_name\", \"importance\", \"satisfaction_current\", \"opportunity_score\", \"is_underserved\", \"is_overserved\", \"product_related\"]\n      }\n    ],\n    \"relationships\": [\n      {\n        \"type\": \"has_opportunity_score\",\n        \"source\": \"Market:221330\",\n        \"target\": \"OpportunityScore:N01..N29,PRN-01..PRN-07\",\n        \"count\": 36\n      }\n    ],\n    \"market_props_updated\": {\n      \"odi_total_needs\": 36,\n      \"odi_underserved_count\": 15,\n      \"odi_overserved_count\": 0,\n      \"odi_avg_opportunity_score\": 11.42\n    }\n  }\n}\n```\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- JTBD_steam_and_air_conditioning_supply.md — Error statements N01-N29, alternatives, incumbent profiles\n- FIT_steam_and_air_conditioning_supply.md — Product-related needs PRN-01 to PRN-07, technology feature-market fit scores, vendor comparison (Kamstrup MULTICAL)\n- 01_product_decomposition.md — Product constraints, specifications, features\n- 02_functional_promise.md — Commodity FP, FP extension\n- 05_market_discovery.md — NAICS 221330 candidate detail, architecture distance scoring"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "Source",
+        "Count",
+        "Type"
+      ],
+      "rows": [
+        {
+          "Source": "JTBD Step 06 (P2 core market needs)",
+          "Count": "20",
+          "Type": "product_related = false"
+        },
+        {
+          "Source": "JTBD Step 06 (P1 product lifecycle needs)",
+          "Count": "9",
+          "Type": "product_related = true"
+        },
+        {
+          "Source": "FIT Step 10 (product-constraint needs)",
+          "Count": "7",
+          "Type": "product_related = true (injected as job_step=product_constraint)"
+        },
+        {
+          "Source": "**Total**",
+          "Count": "**36**",
+          "Type": "—"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Incumbent",
+        "Share",
+        "Mechanism",
+        "Top Strengths",
+        "Top Weaknesses"
+      ],
+      "rows": [
+        {
+          "Incumbent": "Mechanical Impeller / Turbine",
+          "Share": "40–50%",
+          "Mechanism": "Rotational (impeller)",
+          "Top Strengths": "Low unit cost, simple installation, proven MID certification",
+          "Top Weaknesses": "Magnetite fouling, bearing wear, calibration drift Class 2→3 in 3–5 yr, low-flow stall <1 l/min"
+        },
+        {
+          "Incumbent": "Ultrasonic (Kamstrup MULTICAL)",
+          "Share": "35–45%",
+          "Mechanism": "Transit-time (acoustic)",
+          "Top Strengths": "No moving parts, stable long-term accuracy, MID/EN 1434 certified, 16-yr battery, combined flow+temp",
+          "Top Weaknesses": "Air entrainment >2% degrades accuracy, pipe-full required, 1.5–2.5x cost vs mechanical"
+        },
+        {
+          "Incumbent": "Electromagnetic",
+          "Share": "5–10%",
+          "Mechanism": "Faraday induction",
+          "Top Strengths": "Unaffected by air/particles, high accuracy, wide turndown",
+          "Top Weaknesses": "3–5x cost, requires conductivity >5 µS/cm, heavy/large, high power"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Original Sat",
+        "Recalibrated Sat",
+        "Rationale"
+      ],
+      "rows": [
+        {
+          "ID": "N04",
+          "Original Sat": "5",
+          "Recalibrated Sat": "4",
+          "Rationale": "Mechanical impellers (40–50% share) have inertia delay in stoppage detection; legacy installations often lack alarm integration. Market-weighted response time exceeds 5 s target."
+        },
+        {
+          "ID": "N09",
+          "Original Sat": "4",
+          "Recalibrated Sat": "5",
+          "Rationale": "Kamstrup handles glycol adequately; most district networks use treated water. Glycol compatibility increasingly addressed by ultrasonic incumbents."
+        },
+        {
+          "ID": "N22",
+          "Original Sat": "4",
+          "Recalibrated Sat": "5",
+          "Rationale": "Kamstrup provides combined flow+temp in single body. Growing ultrasonic share (35–45%) addresses this need. Market satisfaction improving."
+        },
+        {
+          "ID": "N25",
+          "Original Sat": "5",
+          "Recalibrated Sat": "4",
+          "Rationale": "Mechanical impellers exhibit 2–5% annual failure rate in aging networks from magnetite. Fleet-wide <0.1% target not achieved when mechanical dominates the installed base."
+        },
+        {
+          "ID": "All others",
+          "Original Sat": "—",
+          "Recalibrated Sat": "Unchanged",
+          "Rationale": "Original Step 06 scores align with incumbent data from alternatives analysis. No contradictions found."
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Statement",
+        "Step",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Under",
+        "Over",
+        "Impact",
+        "Prod"
+      ],
+      "rows": [
+        {
+          "ID": "N01",
+          "Statement": "Minimize flow reading deviation >±2% per EN 1434 Class 2 across 0.5–60 l/min range",
+          "Step": "EXECUTE",
+          "Imp": "10",
+          "Sat": "5",
+          "Opp": "15.00",
+          "Under": "false",
+          "Over": "false",
+          "Impact": "reliability",
+          "Prod": "false"
+        },
+        {
+          "ID": "N26",
+          "Statement": "Increase ability to deploy MID/EN 1434 billing-grade meters at every building connection for EU EED compliance",
+          "Step": "DEFINE",
+          "Imp": "10",
+          "Sat": "5",
+          "Opp": "15.00",
+          "Under": "false",
+          "Over": "false",
+          "Impact": "cost",
+          "Prod": "false"
+        },
+        {
+          "ID": "N07",
+          "Statement": "Minimize undetected air entrainment >2% vol biasing billing-grade energy calculations",
+          "Step": "MONITOR",
+          "Imp": "9",
+          "Sat": "3",
+          "Opp": "15.00",
+          "Under": "true",
+          "Over": "false",
+          "Impact": "cost",
+          "Prod": "false"
+        },
+        {
+          "ID": "N10",
+          "Statement": "Minimize low delta-T cooling circuit error amplification (3–8 K ΔT amplifies flow error 2–3x)",
+          "Step": "EXECUTE",
+          "Imp": "9",
+          "Sat": "3",
+          "Opp": "15.00",
+          "Under": "true",
+          "Over": "false",
+          "Impact": "cost",
+          "Prod": "false"
+        },
+        {
+          "ID": "N11",
+          "Statement": "Minimize impeller rotor seizure from magnetite/calcium scale in aging district heating networks",
+          "Step": "Usage",
+          "Imp": "9",
+          "Sat": "3",
+          "Opp": "15.00",
+          "Under": "true",
+          "Over": "false",
+          "Impact": "reliability",
+          "Prod": "true"
+        },
+        {
+          "ID": "N13",
+          "Statement": "Minimize calibration drift exceeding EN 1434 accuracy class from bearing wear/blade erosion",
+          "Step": "Usage",
+          "Imp": "9",
+          "Sat": "3",
+          "Opp": "15.00",
+          "Under": "true",
+          "Over": "false",
+          "Impact": "reliability",
+          "Prod": "true"
+        },
+        {
+          "ID": "N03",
+          "Statement": "Minimize measurement degradation during seasonal temp swing 50–120 °C",
+          "Step": "EXECUTE",
+          "Imp": "9",
+          "Sat": "4",
+          "Opp": "14.00",
+          "Under": "true",
+          "Over": "false",
+          "Impact": "reliability",
+          "Prod": "false"
+        },
+        {
+          "ID": "N04",
+          "Statement": "Minimize time to detect complete flow stoppage (valve failure, pipe freeze, pump trip) to <5 s",
+          "Step": "MONITOR",
+          "Imp": "9",
+          "Sat": "4",
+          "Opp": "14.00",
+          "Under": "true",
+          "Over": "false",
+          "Impact": "safety",
+          "Prod": "false"
+        },
+        {
+          "ID": "N25",
+          "Statement": "Minimize field failure rate to <0.1% annually across 15-year fleet operating horizon",
+          "Step": "EXECUTE",
+          "Imp": "9",
+          "Sat": "4",
+          "Opp": "14.00",
+          "Under": "true",
+          "Over": "false",
+          "Impact": "reliability",
+          "Prod": "false"
+        },
+        {
+          "ID": "N27",
+          "Statement": "Increase ability to demonstrate EU EED-compliant metering across 100% of connections with EN 1434 traceability",
+          "Step": "P3-ROLE",
+          "Imp": "9",
+          "Sat": "4",
+          "Opp": "14.00",
+          "Under": "true",
+          "Over": "false",
+          "Impact": "cost",
+          "Prod": "false"
+        },
+        {
+          "ID": "N12",
+          "Statement": "Minimize fleet-wide 5–6 yr metrological re-verification and replacement cost (mechanical)",
+          "Step": "Maint.",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "13.00",
+          "Under": "true",
+          "Over": "false",
+          "Impact": "cost",
+          "Prod": "true"
+        },
+        {
+          "ID": "N14",
+          "Statement": "Increase ability to read accurately at <1 l/min where mechanical impellers stall",
+          "Step": "Usage",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "13.00",
+          "Under": "true",
+          "Over": "false",
+          "Impact": "cost",
+          "Prod": "true"
+        },
+        {
+          "ID": "N17",
+          "Statement": "Increase ability to distinguish zero-flow from ultrasonic signal loss (bubbles, empty pipe)",
+          "Step": "Usage",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "13.00",
+          "Under": "true",
+          "Over": "false",
+          "Impact": "safety",
+          "Prod": "true"
+        },
+        {
+          "ID": "PRN-01",
+          "Statement": "Minimize risk of polymer housing degradation at 90 °C winter peak-load conditions",
+          "Step": "product_constraint",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "13.00",
+          "Under": "true",
+          "Over": "false",
+          "Impact": "reliability",
+          "Prod": "true"
+        },
+        {
+          "ID": "N05",
+          "Statement": "Increase turndown ratio to cover winter peak and summer minimum in single meter",
+          "Step": "EXECUTE",
+          "Imp": "8",
+          "Sat": "4",
+          "Opp": "12.00",
+          "Under": "true",
+          "Over": "false",
+          "Impact": "reliability",
+          "Prod": "false"
+        },
+        {
+          "ID": "N06",
+          "Statement": "Minimize likelihood of specifying a meter whose range misses building demand profile",
+          "Step": "DEFINE",
+          "Imp": "8",
+          "Sat": "4",
+          "Opp": "12.00",
+          "Under": "true",
+          "Over": "false",
+          "Impact": "cost",
+          "Prod": "false"
+        },
+        {
+          "ID": "N08",
+          "Statement": "Minimize systematic error from non-ideal flow profiles in compact substation piping",
+          "Step": "EXECUTE",
+          "Imp": "8",
+          "Sat": "4",
+          "Opp": "12.00",
+          "Under": "true",
+          "Over": "false",
+          "Impact": "reliability",
+          "Prod": "false"
+        },
+        {
+          "ID": "N18",
+          "Statement": "Minimize electromagnetic meter cost premium (3–5x) limiting deployment to large substations",
+          "Step": "Acq.",
+          "Imp": "7",
+          "Sat": "2",
+          "Opp": "12.00",
+          "Under": "false",
+          "Over": "false",
+          "Impact": "cost",
+          "Prod": "true"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Statement",
+        "Step",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Under",
+        "Over",
+        "Impact",
+        "Prod"
+      ],
+      "rows": [
+        {
+          "ID": "N02",
+          "Statement": "Minimize flow reading variability under pulsating network-pressure conditions",
+          "Step": "EXECUTE",
+          "Imp": "8",
+          "Sat": "5",
+          "Opp": "11.00",
+          "Under": "false",
+          "Over": "false",
+          "Impact": "reliability",
+          "Prod": "false"
+        },
+        {
+          "ID": "N22",
+          "Statement": "Increase ability to provide flow + temperature from single measurement point",
+          "Step": "EXECUTE",
+          "Imp": "8",
+          "Sat": "5",
+          "Opp": "11.00",
+          "Under": "false",
+          "Over": "false",
+          "Impact": "cost",
+          "Prod": "false"
+        },
+        {
+          "ID": "PRN-04",
+          "Statement": "Minimize cumulative billing error from sub-threshold air (1–2% vol) that silently biases readings",
+          "Step": "product_constraint",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "11.00",
+          "Under": "false",
+          "Over": "false",
+          "Impact": "reliability",
+          "Prod": "true"
+        },
+        {
+          "ID": "N23",
+          "Statement": "Increase ability to detect incipient HX fouling via gradual flow-rate trend analysis",
+          "Step": "MONITOR",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "11.00",
+          "Under": "false",
+          "Over": "false",
+          "Impact": "reliability",
+          "Prod": "false"
+        },
+        {
+          "ID": "N09",
+          "Statement": "Minimize measurement failure rate in glycol antifreeze circuits (up to 40% concentration)",
+          "Step": "EXECUTE",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "9.00 (recal)",
+          "Under": "false",
+          "Over": "false",
+          "Impact": "reliability",
+          "Prod": "false"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Statement",
+        "Step",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Under",
+        "Over",
+        "Impact",
+        "Prod"
+      ],
+      "rows": [
+        {
+          "ID": "N19",
+          "Statement": "Minimize installation footprint in space-constrained building substations",
+          "Step": "LOCATE",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "9.00",
+          "Under": "false",
+          "Over": "false",
+          "Impact": "cost",
+          "Prod": "false"
+        },
+        {
+          "ID": "N20",
+          "Statement": "Minimize total integration time per substation (unpack to first valid reading)",
+          "Step": "PREPARE",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "9.00",
+          "Under": "false",
+          "Over": "false",
+          "Impact": "time",
+          "Prod": "false"
+        },
+        {
+          "ID": "PRN-02",
+          "Statement": "Minimize deployment exclusion at substations exceeding 10-bar operating pressure",
+          "Step": "product_constraint",
+          "Imp": "6",
+          "Sat": "3",
+          "Opp": "9.00",
+          "Under": "false",
+          "Over": "false",
+          "Impact": "reliability",
+          "Prod": "true"
+        },
+        {
+          "ID": "PRN-06",
+          "Statement": "Minimize single-chord path bias from insufficient straight-run (<5x DN)",
+          "Step": "product_constraint",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "9.00",
+          "Under": "false",
+          "Over": "false",
+          "Impact": "reliability",
+          "Prod": "true"
+        },
+        {
+          "ID": "N16",
+          "Statement": "Minimize ultrasonic commissioning time (acoustic coupling, fluid config, calculator handshake)",
+          "Step": "Prep.",
+          "Imp": "6",
+          "Sat": "5",
+          "Opp": "7.00",
+          "Under": "false",
+          "Over": "false",
+          "Impact": "time",
+          "Prod": "true"
+        },
+        {
+          "ID": "PRN-07",
+          "Statement": "Minimize speed-of-sound error from rapid temp transients (>5 °C/min) outpacing NTC compensation",
+          "Step": "product_constraint",
+          "Imp": "6",
+          "Sat": "5",
+          "Opp": "7.00",
+          "Under": "false",
+          "Over": "false",
+          "Impact": "reliability",
+          "Prod": "true"
+        },
+        {
+          "ID": "N21",
+          "Statement": "Minimize commissioning sign-off with incorrect sensor orientation (forward/reverse)",
+          "Step": "CONFIRM",
+          "Imp": "6",
+          "Sat": "6",
+          "Opp": "6.00",
+          "Under": "false",
+          "Over": "false",
+          "Impact": "skill",
+          "Prod": "false"
+        },
+        {
+          "ID": "PRN-05",
+          "Statement": "Minimize measurement blackout during partial pipe fill (network maintenance drain)",
+          "Step": "product_constraint",
+          "Imp": "5",
+          "Sat": "4",
+          "Opp": "6.00",
+          "Under": "false",
+          "Over": "false",
+          "Impact": "reliability",
+          "Prod": "true"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**Market**",
+          "Value": "Steam and Air-Conditioning Supply"
+        },
+        {
+          "Field": "**NAICS**",
+          "Value": "221330"
+        },
+        {
+          "Field": "**Total Needs Scored**",
+          "Value": "36"
+        },
+        {
+          "Field": "**Underserved Count**",
+          "Value": "15"
+        },
+        {
+          "Field": "**Overserved Count**",
+          "Value": "0"
+        },
+        {
+          "Field": "**Avg Opportunity Score**",
+          "Value": "11.42"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Rank",
+        "ID",
+        "Opp",
+        "Statement"
+      ],
+      "rows": [
+        {
+          "Rank": "1",
+          "ID": "N01",
+          "Opp": "15.00",
+          "Statement": "Minimize flow reading deviation >±2% per EN 1434 Class 2 across 0.5–60 l/min operating range"
+        },
+        {
+          "Rank": "2",
+          "ID": "N26",
+          "Opp": "15.00",
+          "Statement": "Increase ability to deploy MID/EN 1434 billing-grade meters at every building connection"
+        },
+        {
+          "Rank": "3",
+          "ID": "N07",
+          "Opp": "15.00",
+          "Statement": "Minimize undetected air entrainment >2% vol biasing billing-grade energy calculations"
+        },
+        {
+          "Rank": "4",
+          "ID": "N10",
+          "Opp": "15.00",
+          "Statement": "Minimize low delta-T cooling circuit error amplification (flow error 2–3x in 3–8 K ΔT)"
+        },
+        {
+          "Rank": "5",
+          "ID": "N11",
+          "Opp": "15.00",
+          "Statement": "Minimize impeller rotor seizure from magnetite/calcium scale in aging networks"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Zone",
+        "Score Range",
+        "Count",
+        "%"
+      ],
+      "rows": [
+        {
+          "Zone": "Highly Underserved",
+          "Score Range": "> 15",
+          "Count": "0",
+          "%": "0%"
+        },
+        {
+          "Zone": "Underserved",
+          "Score Range": "12–15",
+          "Count": "18",
+          "%": "50%"
+        },
+        {
+          "Zone": "Appropriately Served",
+          "Score Range": "10–12",
+          "Count": "10",
+          "%": "28%"
+        },
+        {
+          "Zone": "Overserved",
+          "Score Range": "< 10",
+          "Count": "8",
+          "%": "22%"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Metric",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Metric": "ODI avg opportunity score",
+          "Value": "11.42"
+        },
+        {
+          "Metric": "Feature-Fit avg (Step 09)",
+          "Value": "5.20"
+        },
+        {
+          "Metric": "Threshold: ODI > 12 AND Fit < 4",
+          "Value": "NOT triggered"
+        },
+        {
+          "Metric": "Threshold: ODI < 8 AND Fit > 7",
+          "Value": "NOT triggered"
+        },
+        {
+          "Metric": "**Result**",
+          "Value": "**No inconsistencies**"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Pass Condition",
+        "Result"
+      ],
+      "rows": [
+        {
+          "#": "Q1",
+          "Check": "Formula correct",
+          "Pass Condition": "Spot-check 5 entries: opp = imp + max(imp - sat, 0)",
+          "Result": "**PASS** — N01: 10+max(5,0)=15 ✓; N07: 9+max(6,0)=15 ✓; N21: 6+max(0,0)=6 ✓; PRN-05: 5+max(1,0)=6 ✓; N18: 7+max(5,0)=12 ✓"
+        },
+        {
+          "#": "Q2",
+          "Check": "Underserved flags correct",
+          "Pass Condition": "imp > 7 AND sat < 5 ↔ is_underserved",
+          "Result": "**PASS** — 15 entries flagged; verified N01 (imp=10, sat=5 → false, correct); N07 (imp=9, sat=3 → true, correct); N09 (imp=7, sat=5 → false, correct)"
+        },
+        {
+          "#": "Q3",
+          "Check": "Overserved flags correct",
+          "Pass Condition": "imp < 3 AND sat > 7 ↔ is_overserved",
+          "Result": "**PASS** — 0 entries; no need has imp < 3"
+        },
+        {
+          "#": "Q4",
+          "Check": "Need count preserved",
+          "Pass Condition": "Total ≥ JTBD count (29) + Step 10 may add more",
+          "Result": "**PASS** — 29 + 7 = 36"
+        },
+        {
+          "#": "Q5",
+          "Check": "Top-5 ordering correct",
+          "Pass Condition": "Sorted by -opp, -imp, +id",
+          "Result": "**PASS** — all at 15.00; tie-broken by importance"
+        },
+        {
+          "#": "Q6",
+          "Check": "Cross-check ran",
+          "Pass Condition": "ODI vs Feature-Fit thresholds checked",
+          "Result": "**PASS** — no inconsistencies flagged"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "odi_matrix",
+      "naics_code": "221330",
+      "naics_title": "Steam and Air-Conditioning Supply",
+      "market_name": "Steam and Air-Conditioning Supply",
+      "product_name": "Ultrasonic Flow Sensor",
+      "vendor_name": "Marquardt",
+      "recalibration": {
+        "method": "incumbent_evidence",
+        "incumbents_used": [
+          {
+            "name": "Mechanical Impeller / Turbine Meter",
+            "market_share": "40-50%",
+            "mechanism": "rotational",
+            "strengths": [
+              "low unit cost",
+              "simple installation",
+              "proven MID certification"
+            ],
+            "weaknesses": [
+              "magnetite fouling",
+              "bearing wear",
+              "calibration drift Class 2 to 3 in 3-5 yr",
+              "low-flow stall <1 l/min"
+            ]
+          },
+          {
+            "name": "Ultrasonic (Kamstrup MULTICAL)",
+            "market_share": "35-45%",
+            "mechanism": "transit-time acoustic",
+            "strengths": [
+              "no moving parts",
+              "stable long-term accuracy",
+              "MID/EN 1434 certified",
+              "16-yr battery",
+              "combined flow+temp"
+            ],
+            "weaknesses": [
+              "air entrainment >2% degrades accuracy",
+              "pipe-full required",
+              "1.5-2.5x cost vs mechanical"
+            ]
+          },
+          {
+            "name": "Electromagnetic Flow Meter",
+            "market_share": "5-10%",
+            "mechanism": "Faraday induction",
+            "strengths": [
+              "unaffected by air/particles",
+              "high accuracy",
+              "wide turndown"
+            ],
+            "weaknesses": [
+              "3-5x cost",
+              "requires conductivity >5 uS/cm",
+              "heavy/large",
+              "high power"
+            ]
+          }
+        ],
+        "adjustments": [
+          {
+            "id": "N04",
+            "original_satisfaction": 5,
+            "recalibrated_satisfaction": 4,
+            "rationale": "Mechanical impellers have inertia delay in stoppage detection; legacy installations lack alarm integration"
+          },
+          {
+            "id": "N09",
+            "original_satisfaction": 4,
+            "recalibrated_satisfaction": 5,
+            "rationale": "Kamstrup handles glycol adequately; glycol compatibility increasingly addressed by ultrasonic incumbents"
+          },
+          {
+            "id": "N22",
+            "original_satisfaction": 4,
+            "recalibrated_satisfaction": 5,
+            "rationale": "Kamstrup provides combined flow+temp in single body; growing ultrasonic share addresses this need"
+          },
+          {
+            "id": "N25",
+            "original_satisfaction": 5,
+            "recalibrated_satisfaction": 4,
+            "rationale": "Mechanical impellers exhibit 2-5% annual failure rate; fleet-wide <0.1% target not achieved"
+          }
+        ]
+      },
+      "entries": [
+        {
+          "error_statement": "Minimize the likelihood of volumetric flow reading deviating more than ±2% from true value across the 0.5-60 l/min operating range per EN 1434 Class 2 requirements",
+          "id": "N01",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 10,
+          "satisfaction_current": 5,
+          "opportunity_score": 15.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "impact_category": "reliability",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize variability of flow readings between successive measurement cycles under pulsating network-pressure conditions (repeatability >±0.5%)",
+          "id": "N02",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 8,
+          "satisfaction_current": 5,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "impact_category": "reliability",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize measurement degradation when supply temperature shifts from 50 °C (summer DHW) to 120 °C (winter peak) across seasonal operating modes",
+          "id": "N03",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 9,
+          "satisfaction_current": 4,
+          "opportunity_score": 14.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "impact_category": "reliability",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize time to detect a complete flow stoppage event (valve failure, pipe freeze, pump trip) to less than 5 seconds for safety interlock and billing integrity",
+          "id": "N04",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 9,
+          "satisfaction_current": 4,
+          "opportunity_score": 14.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "impact_category": "safety",
+          "product_related": false
+        },
+        {
+          "error_statement": "Increase the turndown ratio (max/min measurable flow) to cover both winter peak-load and summer minimum-load operating points in a single meter without range switching",
+          "id": "N05",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 8,
+          "satisfaction_current": 4,
+          "opportunity_score": 12.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "impact_category": "reliability",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the likelihood of specifying a meter whose flow range does not cover the building's actual demand profile, causing unmeasured energy delivery during low-load hours",
+          "id": "N06",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 8,
+          "satisfaction_current": 4,
+          "opportunity_score": 12.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "impact_category": "cost",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the number of undetected air entrainment events exceeding 2% volume that silently bias billing-grade energy calculations",
+          "id": "N07",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 9,
+          "satisfaction_current": 3,
+          "opportunity_score": 15.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "impact_category": "cost",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize systematic measurement error caused by non-ideal flow profiles from upstream elbows, valves, and tees in compact substation piping layouts",
+          "id": "N08",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 8,
+          "satisfaction_current": 4,
+          "opportunity_score": 12.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "impact_category": "reliability",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize measurement failure rate when medium contains glycol antifreeze (up to 40% concentration) in district cooling and frost-protected circuits",
+          "id": "N09",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "impact_category": "reliability",
+          "product_related": false
+        },
+        {
+          "error_statement": "Increase the ability to accurately calculate thermal energy (Q = V x rho x Cp x delta-T) in district cooling circuits where delta-T is only 3-8 K, amplifying flow measurement error by 2-3x vs heating circuits",
+          "id": "N10",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 9,
+          "satisfaction_current": 3,
+          "opportunity_score": 15.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "impact_category": "cost",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the likelihood of impeller rotor seizure from magnetite and calcium scale accumulation in aging district heating networks requiring unplanned meter replacement",
+          "id": "N11",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 9,
+          "satisfaction_current": 3,
+          "opportunity_score": 15.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "job_step_number": 5,
+          "job_step_name": "Usage",
+          "impact_category": "reliability",
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the fleet-wide maintenance cost of mandatory 5-6 year metrological re-verification and replacement cycles across hundreds of building substations",
+          "id": "N12",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "job_step_number": 7,
+          "job_step_name": "Maintenance",
+          "impact_category": "cost",
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize calibration drift exceeding one EN 1434 accuracy class over the certification period caused by bearing wear and blade erosion in hard-water networks",
+          "id": "N13",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 9,
+          "satisfaction_current": 3,
+          "opportunity_score": 15.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "job_step_number": 5,
+          "job_step_name": "Usage",
+          "impact_category": "reliability",
+          "product_related": true
+        },
+        {
+          "error_statement": "Increase the ability to maintain accurate readings at low flow rates (<1 l/min) where mechanical impeller rotors stall due to friction, causing unmeasured energy leakage during summer low-load periods",
+          "id": "N14",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "job_step_number": 5,
+          "job_step_name": "Usage",
+          "impact_category": "cost",
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the likelihood of complete signal loss when transient air pockets pass through the sensor during network venting, seasonal shutdown, or pressure fluctuation events",
+          "id": "N15",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "job_step_number": 5,
+          "job_step_name": "Usage",
+          "impact_category": "reliability",
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the commissioning time required to verify acoustic coupling, configure fluid parameters, and validate communication with the energy calculator per substation",
+          "id": "N16",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 6,
+          "satisfaction_current": 5,
+          "opportunity_score": 7.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "job_step_number": 3,
+          "job_step_name": "Preparation",
+          "impact_category": "time",
+          "product_related": true
+        },
+        {
+          "error_statement": "Increase the ability to distinguish genuine zero-flow conditions from ultrasonic signal loss caused by transient medium anomalies (bubbles, empty pipe, acoustic decoupling)",
+          "id": "N17",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "job_step_number": 5,
+          "job_step_name": "Usage",
+          "impact_category": "safety",
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the per-substation cost premium (3-5x vs ultrasonic) that limits electromagnetic meter deployment to only the largest commercial substations, leaving smaller connections underserved",
+          "id": "N18",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 7,
+          "satisfaction_current": 2,
+          "opportunity_score": 12.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "job_step_number": 1,
+          "job_step_name": "Acquisition",
+          "impact_category": "cost",
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the installation footprint (physical length and required straight-pipe run) to enable placement in space-constrained building substations where piping is tightly packed",
+          "id": "N19",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "job_step_number": 2,
+          "job_step_name": "LOCATE",
+          "impact_category": "cost",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the total integration time from unpacking to first valid energy reading, including mechanical fitting, electrical connection, calculator handshake, and MID seal application",
+          "id": "N20",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "job_step_number": 3,
+          "job_step_name": "PREPARE",
+          "impact_category": "time",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the likelihood of commissioning sign-off with incorrect sensor orientation (forward/reverse) that inverts flow direction in the energy calculation",
+          "id": "N21",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 6,
+          "satisfaction_current": 6,
+          "opportunity_score": 6.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "job_step_number": 4,
+          "job_step_name": "CONFIRM",
+          "impact_category": "skill",
+          "product_related": false
+        },
+        {
+          "error_statement": "Increase the ability to simultaneously provide flow rate AND medium temperature from a single measurement point, eliminating separate temperature probe installation and reducing substation complexity",
+          "id": "N22",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 8,
+          "satisfaction_current": 5,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "impact_category": "cost",
+          "product_related": false
+        },
+        {
+          "error_statement": "Increase the ability to detect incipient heat exchanger fouling via gradual flow-rate reduction trend analysis before thermal performance degrades below billing-relevant thresholds",
+          "id": "N23",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "impact_category": "reliability",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the number of meter variants a district energy operator must qualify, stock, and manage to cover its building portfolio (DN15-DN50 range, heating + cooling)",
+          "id": "N24",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "impact_category": "cost",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the field failure rate of the flow metering subsystem to below 0.1% annually across the fleet of building substations over a 15-year operating horizon",
+          "id": "N25",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 9,
+          "satisfaction_current": 4,
+          "opportunity_score": 14.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "impact_category": "reliability",
+          "product_related": false
+        },
+        {
+          "error_statement": "Increase the ability to deploy MID/EN 1434-certified billing-grade meters at every building connection to achieve full EU EED compliance across the entire district network",
+          "id": "N26",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 10,
+          "satisfaction_current": 5,
+          "opportunity_score": 15.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "impact_category": "cost",
+          "product_related": false
+        },
+        {
+          "error_statement": "Increase the ability to demonstrate EU EED-compliant individual consumption metering across 100% of building connections during regulatory audit, with verifiable metrological traceability per EN 1434",
+          "id": "N27",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 9,
+          "satisfaction_current": 4,
+          "opportunity_score": 14.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "impact_category": "cost",
+          "product_related": false
+        },
+        {
+          "error_statement": "Increase the ability to provide building-owner-accessible consumption data (display, remote reading, or portal) that demonstrates measured — not estimated — thermal energy delivery for each billing period",
+          "id": "N28",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "impact_category": "skill",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the likelihood of billing disputes exceeding 5% of quarterly energy cost caused by meter inaccuracy or unmeasured consumption periods that erode tenant trust in the district energy provider",
+          "id": "N29",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "impact_category": "cost",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the risk of polymer housing and seal degradation when district heating supply temperatures approach the 90°C material limit during winter peak-load conditions, reducing sensor service life below the 15-year fleet expectation",
+          "id": "PRN-01",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "job_step_number": 0,
+          "job_step_name": "product_constraint",
+          "impact_category": "reliability",
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the deployment exclusion at building substations where network operating pressure exceeds the 10-bar polymer housing structural rating during peak demand or water-hammer events",
+          "id": "PRN-02",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 6,
+          "satisfaction_current": 3,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "job_step_number": 0,
+          "job_step_name": "product_constraint",
+          "impact_category": "reliability",
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the unmeasured energy delivery below the ultrasonic transit-time signal-to-noise detection threshold (4.2 l/min for DN20) during summer domestic hot water standby operation",
+          "id": "PRN-03",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "job_step_number": 0,
+          "job_step_name": "product_constraint",
+          "impact_category": "reliability",
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the cumulative billing error from degraded ultrasonic transit-time accuracy during sub-threshold air entrainment events (1-2% by volume) that do not trigger signal-loss alarms but silently bias flow readings",
+          "id": "PRN-04",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "job_step_number": 0,
+          "job_step_name": "product_constraint",
+          "impact_category": "reliability",
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the duration of measurement blackout when ultrasonic signal is lost due to partial pipe fill during network maintenance operations that temporarily drain the pipe section",
+          "id": "PRN-05",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 5,
+          "satisfaction_current": 4,
+          "opportunity_score": 6.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "job_step_number": 0,
+          "job_step_name": "product_constraint",
+          "impact_category": "reliability",
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the systematic measurement bias from single-chord acoustic path sampling in asymmetric flow profiles caused by insufficient upstream straight-pipe run (<5x DN) in compact building substations",
+          "id": "PRN-06",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "job_step_number": 0,
+          "job_step_name": "product_constraint",
+          "impact_category": "reliability",
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize residual flow measurement error from speed-of-sound variation during rapid supply-temperature transients (>5°C/min) that outpace the NTC thermistor compensation response time",
+          "id": "PRN-07",
+          "market_name": "Steam and Air-Conditioning Supply",
+          "naics_code": "221330",
+          "importance": 6,
+          "satisfaction_current": 5,
+          "opportunity_score": 7.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "job_step_number": 0,
+          "job_step_name": "product_constraint",
+          "impact_category": "reliability",
+          "product_related": true
+        }
+      ],
+      "market_summary": {
+        "market_name": "Steam and Air-Conditioning Supply",
+        "naics_code": "221330",
+        "total_needs": 36,
+        "underserved_count": 15,
+        "overserved_count": 0,
+        "avg_opportunity_score": 11.42,
+        "top_opportunities": [
+          "Minimize the likelihood of volumetric flow reading deviating more than ±2% from true value across the 0.5-60 l/min operating range per EN 1434 Class 2 requirements",
+          "Increase the ability to deploy MID/EN 1434-certified billing-grade meters at every building connection to achieve full EU EED compliance across the entire district network",
+          "Minimize the number of undetected air entrainment events exceeding 2% volume that silently bias billing-grade energy calculations",
+          "Increase the ability to accurately calculate thermal energy in district cooling circuits where delta-T is only 3-8 K, amplifying flow measurement error by 2-3x vs heating circuits",
+          "Minimize the likelihood of impeller rotor seizure from magnetite and calcium scale accumulation in aging district heating networks requiring unplanned meter replacement"
+        ]
+      },
+      "cross_check": {
+        "odi_avg": 11.42,
+        "feature_fit_avg": 5.2,
+        "inconsistencies": []
+      },
+      "entities_produced": {
+        "nodes": [
+          {
+            "label": "OpportunityScore",
+            "count": 36,
+            "key": {
+              "error_statement": "first 80 chars",
+              "naics_code": "221330",
+              "run_id": "TBD"
+            },
+            "set_props": [
+              "full_statement",
+              "market_name",
+              "importance",
+              "satisfaction_current",
+              "opportunity_score",
+              "is_underserved",
+              "is_overserved",
+              "product_related"
+            ]
+          }
+        ],
+        "relationships": [
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:221330",
+            "target": "OpportunityScore:N01..N29,PRN-01..PRN-07",
+            "count": 36
+          }
+        ],
+        "market_props_updated": {
+          "odi_total_needs": 36,
+          "odi_underserved_count": 15,
+          "odi_overserved_count": 0,
+          "odi_avg_opportunity_score": 11.42
+        }
+      }
+    }
+  ],
+  "has_bom": false,
+  "naics_sector_type": "non_manufacturing"
+}

@@ -1,0 +1,75 @@
+{
+  "company": {
+    "legalName": "Böhmer Systemtechnik GmbH",
+    "legalForm": "GmbH",
+    "headquarters": "Im Aisple 5, 88515 Langenenslingen, Germany",
+    "countryCode": "DE",
+    "region": "Baden-Württemberg",
+    "founded": 1947,
+    "foundedNote": "Locksmith workshop (Schlossereibetrieb); formal incorporation may be 1951",
+    "ownership": "Family-owned (Böhmer family, 3rd generation succession in progress)",
+    "employees": 130,
+    "employeesNote": "~130 incl. 17 trainees per web research; briefing states ~100",
+    "revenueEurM": "<10",
+    "revenueConfidence": "low estimate — private GmbH, single web source",
+    "naicsPrimary": "332312",
+    "naicsPrimaryTitle": "Fabricated Structural Metal Manufacturing",
+    "naicsSecondary": ["332710", "333111"],
+    "vatId": "DE248230480"
+  },
+  "divisions": [
+    {
+      "name": "Steel Fabrication (Systemtechnik)",
+      "focus": "core",
+      "status": "mature",
+      "description": "Contract manufacturing: laser cutting, bending, MIG/MAG-TIG welding, structural steel assemblies"
+    },
+    {
+      "name": "Equestrian Products",
+      "focus": "growth",
+      "status": "nascent",
+      "description": "Own-brand welded steel equestrian equipment: Heuraufe (hay rack) and Paddockbox (mobile paddock enclosure)"
+    }
+  ],
+  "keyPersons": [
+    { "name": "Josef Böhmer", "role": "Geschäftsführer (Managing Director)", "generation": 2 },
+    { "name": "Matthias Lukas Böhmer", "role": "Designated Successor", "generation": 3, "ageApprox": 29 }
+  ],
+  "certifications": [
+    { "name": "Quality Management", "standard": "DIN EN ISO 9001:2015" },
+    { "name": "Welding Quality", "standard": "DIN EN ISO 3834-2" },
+    { "name": "Structural Steel", "standard": "DIN EN 1090-1 / 1090-2" }
+  ],
+  "products": [
+    {
+      "name": "Heuraufe",
+      "nameEn": "Hay Rack",
+      "naicsManufacturing": "333111",
+      "naicsMarket": "112920",
+      "fp": "Store and deliver hay to multiple horses simultaneously in outdoor paddock environments — with all-side access, weather-protected storage, and elevated ground clearance",
+      "estimatedPrice": "1,500-2,500 EUR",
+      "serviceLife": "15 years",
+      "capabilityFitScore": 6.71,
+      "recommendation": "investigate"
+    },
+    {
+      "name": "Paddockbox",
+      "nameEn": "Mobile Paddock Enclosure",
+      "naicsManufacturing": "333111",
+      "naicsMarket": "112920",
+      "fp": "Partition and manage outdoor paddock or stable space around horses — with modular reconfigurability, castor-mounted repositionability, and fold-flat post clearance",
+      "estimatedPrice": "2,000-5,000 EUR",
+      "serviceLife": "15 years",
+      "capabilityFitScore": 6.59,
+      "recommendation": "investigate"
+    }
+  ],
+  "briefingQuestion": "Can Böhmer Systemtechnik — a contract welder with declining order books — successfully launch two own-brand equestrian products (Heuraufe and Paddockbox) into NAICS 112920, and what are the capability gaps, competitive dynamics, and market entry requirements?",
+  "briefingAnswer": "Both products survive all constraint screening with zero knockouts. Capability-market fit scores 6.71 (Heuraufe) and 6.59 (Paddockbox) — both INVESTIGATE tier. The strongest shared driver is direct customer-facing VN positioning (9.0/10 each). The primary gap preventing PURSUE is market access: no sales channel, no CE documentation, no galvanizer relationship. Critical path: commission hinge fatigue test and qualify external galvanizer in parallel (Month 1-2), then secure 3 pilot customers within 6 months.",
+  "stats": {
+    "products": 2,
+    "vnSteps": 14,
+    "marketNeeds": 52,
+    "targetMarketNaics": "112920"
+  }
+}

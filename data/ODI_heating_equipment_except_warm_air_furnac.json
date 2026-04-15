@@ -1,0 +1,1657 @@
+{
+  "id": "ODI_heating_equipment_except_warm_air_furnac",
+  "title": "ODI Matrix — Heating Equipment (except Warm Air Furnaces) Manufacturing (NAICS 333414)",
+  "type": "odi_matrix",
+  "market_slug": "heating_equipment_except_warm_air_furnac",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Inputs",
+      "content": "| Source | File | Count |\n|---|---|---|\n| **Step 06 — Market Needs (JTBD)** | `JTBD_heating_equipment_except_warm_air_furnac.md` | 33 error statements (N01–N28 incl. N12b, N14b, N14c, N15, N15b) |\n| **Step 10 — Product-Related Needs** | `FIT_heating_equipment_except_warm_air_furnac.md` | 8 product-constraint needs (PR1–PR8) |\n| **Step 03 — Incumbent Technologies** | `JTBD_heating_equipment_except_warm_air_furnac.md` (alternatives) | 5 alternatives: Turbine (55-65%), Ultrasonic (20-30%), Vortex (3-5%), DP Estimation (5-15%), Do nothing |\n| **Step 09 — Feature-Market Fit** | `FIT_heating_equipment_except_warm_air_furnac.md` | 7 tech features, avg overall_fit = 5.25 |\n\n---"
+    },
+    {
+      "title": "Step 1 — Error Statement Collection",
+      "content": "33 market-level needs from Step 06 (preserve all fields) + 8 product-constraint needs from Step 10 (injected with `job_step_number=0`, `job_step_name=\"product_constraint\"`, `impact_category=\"reliability\"`, `product_related=true`).\n\n**Total needs for scoring: 41**\n\n---"
+    },
+    {
+      "title": "Step 2 — Satisfaction Recalibration (Incumbent Evidence)",
+      "content": "Incumbent technology profiles used for recalibration:\n\n| Technology | Share | Strengths | Weaknesses |\n|---|---|---|---|\n| Impeller/Turbine | 55-65% | Low cost, simple, established supply chain | Magnetite fouling, bearing wear, calibration drift ±5%/yr, 3-5yr life, pressure drop |\n| Ultrasonic (transit-time) | 20-30% | No moving parts, no pressure drop, bidirectional | Air entrainment >2% degrades accuracy, pipe-full required, 2-3x cost, commissioning |\n| Vortex | 3-5% | Robust to dirty media | Pressure drop (bluff body), poor low-flow accuracy, vibration-sensitive |\n| DP Estimation | 5-15% | Zero hardware cost | ±15-20% accuracy, no direct measurement, no anomaly detection, pump curve drift |\n\n**Recalibration result:** Original satisfaction scores from Step 06 were derived with incumbent awareness. Cross-checking against incumbent profiles confirms scores are well-calibrated. Key validations:\n\n- N07 (air detection, sat=3): Confirmed — turbine sensors cannot detect air; they give wrong readings silently. Ultrasonic sensors detect signal loss but not air quantity.\n- N10 (magnetite seizure, sat=3): Confirmed — this IS the turbine's fundamental failure mode; no mitigation exists in the sensor itself.\n- N25 (documented efficiency, sat=3): Confirmed — turbine sensors provide pulse output only, no integrated temperature, no onboard energy calculation capability.\n- N01/N04/N24 (sat=5): Confirmed — turbine sensors deliver adequate baseline accuracy/detection/reliability when new, but degrade; ultrasonic maintains performance over life.\n\n**All 41 scores retained as recalibrated values.**\n\n---"
+    },
+    {
+      "title": "Step 3 — Opportunity Scores (Deterministic)",
+      "content": "**Formula:** `opportunity_score = importance + max(importance - satisfaction, 0)`\n**Underserved:** `importance > 7 AND satisfaction < 5`\n**Overserved:** `importance < 3 AND satisfaction > 7`\n\n### Step 06 Needs (33 from JTBD)\n\n| ID | Statement (abbreviated) | Step | Imp | Sat | Opp | Under | Over | product_related |\n|---|---|---|---|---|---|---|---|---|\n| N15b | Undetected faults invisible to DP estimation | MONITOR | 8 | 2 | **14.00** | true | false | true |\n| N01 | Flow reading deviation >±3% across range | EXECUTE | 9 | 5 | **13.00** | false | false | false |\n| N04 | Detect flow stoppage >2 s | MONITOR | 9 | 5 | **13.00** | false | false | false |\n| N07 | Undetected air entrainment >2% vol | MONITOR | 8 | 3 | **13.00** | true | false | false |\n| N10 | Turbine rotor seizure from magnetite <3 yr | EXECUTE | 8 | 3 | **13.00** | true | false | true |\n| N12 | Calibration drift >±5% from bearing wear | EXECUTE | 8 | 3 | **13.00** | true | false | true |\n| N14c | Distinguish zero-flow from signal loss | EXECUTE | 8 | 3 | **13.00** | true | false | true |\n| N24 | Field failure rate >0.1% in 15-yr life | EXECUTE | 9 | 5 | **13.00** | false | false | false |\n| N25 | Documented measured efficiency for EcoDesign | DEFINE | 8 | 3 | **13.00** | true | false | false |\n| N03 | Measurement degradation at ΔT >20°C | EXECUTE | 8 | 4 | **12.00** | true | false | false |\n| N06 | Sensor range misses min-modulation flow | DEFINE | 8 | 4 | **12.00** | true | false | false |\n| N09 | Failure with glycol >50% | EXECUTE | 8 | 4 | **12.00** | true | false | false |\n| N15 | DP estimate error >±15% at part-load | EXECUTE | 7 | 2 | **12.00** | false | false | true |\n| N19 | Single-point flow + temperature | EXECUTE | 8 | 4 | **12.00** | true | false | false |\n| N22 | Thermal energy calc noise at low modulation | EXECUTE | 8 | 4 | **12.00** | true | false | false |\n| N23 | Hydraulic imbalance >±10% at commissioning | CONFIRM | 8 | 4 | **12.00** | true | false | false |\n| N26 | A-rated label on first certification attempt | DEFINE | 8 | 4 | **12.00** | true | false | false |\n| N11 | Annual maintenance for cleaning/inspection | MAINTAIN | 7 | 3 | **11.00** | false | false | true |\n| N12b | Turbine low-flow dead band <3 l/min | EXECUTE | 7 | 3 | **11.00** | false | false | true |\n| N20 | Detect incipient pump degradation | MONITOR | 7 | 3 | **11.00** | false | false | false |\n| N27 | Installer-visible measured performance data | DEFINE | 7 | 3 | **11.00** | false | false | false |\n| N28 | Callback within 30 days from imbalance | CONFIRM | 7 | 3 | **11.00** | false | false | false |\n| N02 | Repeatability >±0.5% | EXECUTE | 8 | 6 | **10.00** | false | false | false |\n| N08 | Non-ideal flow profile error | EXECUTE | 7 | 4 | **10.00** | false | false | false |\n| N14 | Signal loss from transient air pockets | EXECUTE | 7 | 4 | **10.00** | false | false | true |\n| N16b | Mounting location turbulence >2% bias | LOCATE | 7 | 4 | **10.00** | false | false | false |\n| N05 | Turndown ratio for full-load to min-mod | EXECUTE | 7 | 5 | **9.00** | false | false | false |\n| N16 | Installation footprint and straight-run | LOCATE | 7 | 5 | **9.00** | false | false | false |\n| N17 | OEM integration time | PREPARE | 7 | 5 | **9.00** | false | false | false |\n| N14b | OEM qualification cost for acoustic validation | PREPARE | 6 | 4 | **8.00** | false | false | true |\n| N21 | Variant count to cover DN range | DEFINE | 6 | 4 | **8.00** | false | false | false |\n| N13 | Commissioning config time (ultrasonic) | PREPARE | 6 | 5 | **7.00** | false | false | true |\n| N18 | Undetected incorrect orientation | CONFIRM | 6 | 6 | **6.00** | false | false | false |\n\n### Step 10 Needs (8 product-constraint needs)\n\n| ID | Statement (abbreviated) | Source Constraint | Imp | Sat | Opp | Under | Over | product_related |\n|---|---|---|---|---|---|---|---|---|\n| PR3 | Low-modulation dead zones below 4.2 l/min DN20 | Min Flow Rate Detection | 8 | 4 | **12.00** | true | false | true |\n| PR6 | Straight-pipe 5-10× DN footprint penalty in compact enclosures | Min Straight Pipe Run | 8 | 4 | **12.00** | true | false | true |\n| PR4 | Micro-bubble entrainment >2% vol during filling/cold-start | Air Bubble Tolerance | 7 | 3 | **11.00** | false | false | true |\n| PR2 | Polymer housing seal degradation at 80-90°C | Max Medium Temperature | 7 | 5 | **9.00** | false | false | true |\n| PR7 | Cold-start temperature ramp outpaces NTC compensation | Temperature-Dependent Accuracy | 7 | 5 | **9.00** | false | false | true |\n| PR8 | Glycol concentration shifts acoustic coupling baseline | Media Limitation | 6 | 4 | **8.00** | false | false | true |\n| PR5 | Invalid measurement during drain-back solar-hybrid drain-down | Pipe Full Condition | 5 | 4 | **6.00** | false | false | true |\n| PR1 | Hydronic additives shift acoustic impedance beyond coupling range | Media Limitation | 5 | 6 | **5.00** | false | false | true |\n\n---"
+    },
+    {
+      "title": "Step 4 — Market ODI Summary",
+      "content": "| Metric | Value |\n|---|---|\n| **Market** | Heating Equipment (except Warm Air Furnaces) Manufacturing |\n| **NAICS** | 333414 |\n| **Total Needs Scored** | 41 |\n| **Underserved Count** | 15 |\n| **Overserved Count** | 0 |\n| **Avg Opportunity Score** | 10.66 |\n\n### Zone Distribution\n\n| Zone | Score Range | Count | % |\n|---|---|---|---|\n| Highly Underserved | > 15 | 0 | 0% |\n| Underserved | 12–15 | 18 | 44% |\n| Appropriately Served | 10–12 | 12 | 29% |\n| Overserved | < 10 | 11 | 27% |\n\n### Top 5 Opportunities\n\n| Rank | ID | Statement | Opp | Imp | Sat | Zone |\n|---|---|---|---|---|---|---|\n| 1 | N15b | Minimize undetected system faults (blocked filter, stuck valve) that DP estimation cannot sense | **14.00** | 8 | 2 | Underserved |\n| 2 | N01 | Minimize flow reading deviation >±3% across 5–50 l/min range | **13.00** | 9 | 5 | Underserved |\n| 3 | N04 | Minimize time to detect flow stoppage to <2 seconds | **13.00** | 9 | 5 | Underserved |\n| 4 | N24 | Minimize field failure rate to <0.1% in 15-yr appliance life | **13.00** | 9 | 5 | Underserved |\n| 5 | N07 | Minimize undetected air entrainment >2% vol degrading accuracy | **13.00** | 8 | 3 | Underserved |\n\n*Tiebreaker: importance descending, then satisfaction ascending.*\n\nAdditional entries at 13.0: N10 (magnetite seizure), N12 (calibration drift), N14c (zero-flow vs signal loss), N25 (documented efficiency). All represent significant unmet needs.\n\n---"
+    },
+    {
+      "title": "Step 5 — Cross-Check vs Feature-Market Fit (Step 09)",
+      "content": "| Metric | Value |\n|---|---|\n| ODI avg opportunity score | 10.66 |\n| Feature-Fit avg (tech features) | 5.25 |\n\n**Cross-check thresholds:**\n\n| Condition | Threshold | Actual | Result |\n|---|---|---|---|\n| High opportunity, low feature fit | ODI avg > 12 AND Fit avg < 4 | 10.66, 5.25 | **No flag** |\n| Low opportunity, high feature fit | ODI avg < 8 AND Fit avg > 7 | 10.66, 5.25 | **No flag** |\n\n**No inconsistencies detected.** ODI average (10.66) indicates a market with solid but not extreme unmet needs. Feature-Fit average (5.25) indicates moderate technology alignment. The combination is consistent: this market has real opportunities that the ultrasonic technology partially addresses, with strongest alignment on reliability and diagnostic needs.\n\n---"
+    },
+    {
+      "title": "Key Findings",
+      "content": "| Insight | Detail |\n|---|---|\n| **Dominant opportunity theme** | Reliability + detection failures — 7 of 9 needs scoring ≥13 relate to measurement reliability, fault detection, or degradation prevention |\n| **Incumbent vulnerability** | Turbine sensors (55-65% share) drive 4 of the top-9 needs: magnetite seizure (N10), calibration drift (N12), low-flow dead band (N12b), annual maintenance (N11) — all eliminated by ultrasonic technology |\n| **Regulatory pull** | EU EcoDesign documented efficiency (N25, Opp=13) and A-rated certification (N26, Opp=12) create regulatory demand for integrated flow+temperature measurement |\n| **Product-constraint risks** | 2 product-related needs score 12.0: low-modulation dead zones (PR3) and straight-pipe footprint (PR6) — both are design constraints Marquardt must address for OEM adoption |\n| **DP estimation gap** | N15b (Opp=14.0, highest score) reflects the massive detection gap when OEMs use pump-curve estimation instead of direct measurement — strongest argument for sensor adoption |\n| **No overserved needs** | Zero overserved needs indicates no incumbent over-delivers on any dimension — market is ripe for improvement across the board |\n\n---"
+    },
+    {
+      "title": "QA Checklist",
+      "content": "| # | Check | Pass Condition | Result |\n|---|---|---|---|\n| Q1 | Formula correct | Spot-check 5 entries match `opp = imp + max(imp - sat, 0)` | **PASS** — N15b: 8+max(6,0)=14; N01: 9+max(4,0)=13; N18: 6+max(0,0)=6; PR1: 5+max(-1,0)=5; N03: 8+max(4,0)=12 |\n| Q2 | Underserved flags correct | All imp>7 AND sat<5 flagged, no others | **PASS** — 15 entries flagged; verified N01(imp=9,sat=5)=false, N07(imp=8,sat=3)=true |\n| Q3 | Overserved flags correct | All imp<3 AND sat>7 flagged, no others | **PASS** — 0 entries; min importance=5 |\n| Q4 | Need count preserved | Total ≥ Step 06 count (33) | **PASS** — 41 (33 + 8 from Step 10) |\n| Q5 | Top-5 ordering correct | Sorted by descending opp score | **PASS** — 14.0, 13.0, 13.0, 13.0, 13.0 with importance tiebreaker |\n| Q6 | Cross-check ran | ODI-Feature-Fit inconsistencies logged | **PASS** — no inconsistencies; both thresholds checked |\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"odi_matrix\",\n  \"naics_code\": \"333414\",\n  \"naics_title\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n  \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n  \"product_name\": \"Ultrasonic Flow Sensor\",\n  \"vendor_name\": \"Marquardt\",\n  \"market_odi_summary\": {\n    \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n    \"naics_code\": \"333414\",\n    \"total_needs\": 41,\n    \"underserved_count\": 15,\n    \"overserved_count\": 0,\n    \"avg_opportunity_score\": 10.66,\n    \"top_opportunities\": [\n      \"Minimize the number of undetected system faults (blocked filter, stuck valve) that DP estimation cannot sense because it has no direct flow measurement\",\n      \"Minimize the likelihood of volumetric flow reading deviating more than ±3% from true value across the 5–50 l/min operating range\",\n      \"Minimize time to detect a complete flow stoppage event (circulator failure or valve closure) to less than 2 seconds\",\n      \"Minimize the field failure rate of the flow sensing subsystem to below 0.1% within the 15-year appliance design life\",\n      \"Minimize the number of undetected air entrainment events exceeding 2% volume that silently degrade measurement accuracy\"\n    ]\n  },\n  \"entries\": [\n    {\n      \"error_statement\": \"Minimize the number of undetected system faults (blocked filter, stuck valve) that DP estimation cannot sense because it has no direct flow measurement\",\n      \"id\": \"N15b\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 2.0,\n      \"opportunity_score\": 14.0,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"impact_category\": \"safety\",\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of volumetric flow reading deviating more than ±3% from true value across the 5–50 l/min operating range\",\n      \"id\": \"N01\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"importance\": 9.0,\n      \"satisfaction_current\": 5.0,\n      \"opportunity_score\": 13.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"impact_category\": \"reliability\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize time to detect a complete flow stoppage event (circulator failure or valve closure) to less than 2 seconds\",\n      \"id\": \"N04\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"importance\": 9.0,\n      \"satisfaction_current\": 5.0,\n      \"opportunity_score\": 13.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"impact_category\": \"safety\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the number of undetected air entrainment events exceeding 2% volume that silently degrade measurement accuracy\",\n      \"id\": \"N07\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 3.0,\n      \"opportunity_score\": 13.0,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"impact_category\": \"reliability\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of turbine rotor seizure from magnetite accumulation requiring unplanned sensor replacement within 3 years of installation\",\n      \"id\": \"N10\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 3.0,\n      \"opportunity_score\": 13.0,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"impact_category\": \"reliability\",\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize calibration drift exceeding ±5% over 12 months caused by bearing wear and blade erosion in hard-water circuits\",\n      \"id\": \"N12\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 3.0,\n      \"opportunity_score\": 13.0,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"impact_category\": \"reliability\",\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Increase the ability to distinguish genuine zero-flow conditions from ultrasonic signal loss caused by transient medium anomalies (bubbles, empty pipe)\",\n      \"id\": \"N14c\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 3.0,\n      \"opportunity_score\": 13.0,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"impact_category\": \"safety\",\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the field failure rate of the flow sensing subsystem to below 0.1% within the 15-year appliance design life\",\n      \"id\": \"N24\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"importance\": 9.0,\n      \"satisfaction_current\": 5.0,\n      \"opportunity_score\": 13.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"impact_category\": \"reliability\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Increase the ability to document measured seasonal efficiency per EU EcoDesign Lot 1/2 using onboard flow + temperature data rather than laboratory-only test results\",\n      \"id\": \"N25\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 3.0,\n      \"opportunity_score\": 13.0,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"impact_category\": \"cost\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize measurement degradation when medium temperature shifts by more than 20°C within a single heating cycle\",\n      \"id\": \"N03\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 12.0,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"impact_category\": \"reliability\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of specifying a sensor whose flow range does not cover the circuit's minimum-modulation flow rate, causing dead zones in low-load operation\",\n      \"id\": \"N06\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 12.0,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"impact_category\": \"cost\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize measurement failure rate when medium contains glycol concentrations up to 50% by volume\",\n      \"id\": \"N09\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 12.0,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"impact_category\": \"reliability\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of flow estimate error exceeding ±15% due to pump curve deviation from catalog values at part-load conditions\",\n      \"id\": \"N15\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 2.0,\n      \"opportunity_score\": 12.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"impact_category\": \"reliability\",\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Increase the ability to simultaneously provide flow rate AND medium temperature from a single measurement point, eliminating separate probe installation\",\n      \"id\": \"N19\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 12.0,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"impact_category\": \"cost\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the variation in thermal energy calculation (Q = flow × Cp × ΔT) caused by flow measurement noise at low modulation rates (<25% burner output)\",\n      \"id\": \"N22\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 12.0,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"impact_category\": \"reliability\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of commissioning sign-off with hydraulic imbalance exceeding ±10% of design flow rate per zone\",\n      \"id\": \"N23\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 4,\n      \"job_step_name\": \"CONFIRM\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 12.0,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"impact_category\": \"cost\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Increase the ability to achieve A-rated energy label classification on the first certification submission by providing measurement accuracy that matches laboratory reference within ±2%\",\n      \"id\": \"N26\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 12.0,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"impact_category\": \"cost\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of measurement dead zones during low-modulation boiler operation where flow rates drop below the minimum detectable threshold (4.2 l/min DN20) at 20-25% burner output\",\n      \"id\": \"PR3\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 0,\n      \"job_step_name\": \"product_constraint\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 12.0,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"impact_category\": \"reliability\",\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the installation footprint penalty from the 5-10× DN straight-pipe requirement that competes for space within compact boiler enclosures and wall-hung appliance housings\",\n      \"id\": \"PR6\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 0,\n      \"job_step_name\": \"product_constraint\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 12.0,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"impact_category\": \"reliability\",\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the annual maintenance effort required to inspect and clean mechanical flow sensor internals to prevent calibration drift from particulate fouling\",\n      \"id\": \"N11\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 7,\n      \"job_step_name\": \"MODIFY\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 3.0,\n      \"opportunity_score\": 11.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"impact_category\": \"cost\",\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Increase the ability to maintain accurate readings across the full flow range without mechanical-inertia dead band at low flow rates (<3 l/min) where turbine rotors stall\",\n      \"id\": \"N12b\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 3.0,\n      \"opportunity_score\": 11.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"impact_category\": \"reliability\",\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Increase the ability to detect incipient circulator pump degradation via flow-rate trend analysis before complete pump failure causes comfort loss\",\n      \"id\": \"N20\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 3.0,\n      \"opportunity_score\": 11.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"impact_category\": \"reliability\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Increase the ability to provide installer-visible flow data (display or diagnostic output) that demonstrates measured — not estimated — system performance during commissioning and service visits\",\n      \"id\": \"N27\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 3.0,\n      \"opportunity_score\": 11.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"impact_category\": \"skill\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of receiving a customer callback within 30 days of installation due to an undetected hydraulic imbalance that the sensor could have flagged during commissioning\",\n      \"id\": \"N28\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 4,\n      \"job_step_name\": \"CONFIRM\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 3.0,\n      \"opportunity_score\": 11.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"impact_category\": \"cost\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the measurement error caused by micro-bubble entrainment exceeding 2% by volume during system filling, de-aeration, and cold-start operations that temporarily aerate the hydronic medium\",\n      \"id\": \"PR4\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 0,\n      \"job_step_name\": \"product_constraint\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 3.0,\n      \"opportunity_score\": 11.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"impact_category\": \"reliability\",\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize variability of flow readings between successive measurement cycles under identical steady-state conditions (repeatability >±0.5%)\",\n      \"id\": \"N02\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 6.0,\n      \"opportunity_score\": 10.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"impact_category\": \"reliability\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize systematic measurement error caused by non-ideal flow profiles (swirl, asymmetry) from upstream pipe fittings\",\n      \"id\": \"N08\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 10.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"impact_category\": \"reliability\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of complete signal loss when transient air pockets pass through the sensor during system filling or de-aeration\",\n      \"id\": \"N14\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 10.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"impact_category\": \"reliability\",\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of mounting the sensor at a location where turbulence from upstream fittings causes >2% systematic reading bias\",\n      \"id\": \"N16b\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 2,\n      \"job_step_name\": \"LOCATE\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 10.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"impact_category\": \"reliability\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Increase the turndown ratio (max/min measurable flow) to cover both full-load and minimum-modulation operating points in a single device\",\n      \"id\": \"N05\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 5.0,\n      \"opportunity_score\": 9.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"impact_category\": \"reliability\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the installation footprint (physical length and required straight-pipe run) to enable placement in space-constrained boiler enclosures\",\n      \"id\": \"N16\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 2,\n      \"job_step_name\": \"LOCATE\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 5.0,\n      \"opportunity_score\": 9.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"impact_category\": \"cost\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the total OEM integration time from unpacking to first valid reading, including mechanical fitting, electrical connection, and protocol handshake\",\n      \"id\": \"N17\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 3,\n      \"job_step_name\": \"PREPARE\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 5.0,\n      \"opportunity_score\": 9.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"impact_category\": \"time\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of polymer housing seal degradation when boiler circuits operate at sustained supply temperatures of 80-90°C near the sensor's material service limit\",\n      \"id\": \"PR2\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 0,\n      \"job_step_name\": \"product_constraint\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 5.0,\n      \"opportunity_score\": 9.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"impact_category\": \"reliability\",\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the residual transit-time measurement error during rapid cold-start temperature ramps (15°C to 75°C in <10 minutes) where speed-of-sound changes temporarily outpace the NTC compensation algorithm's response\",\n      \"id\": \"PR7\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 0,\n      \"job_step_name\": \"product_constraint\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 5.0,\n      \"opportunity_score\": 9.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"impact_category\": \"reliability\",\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the OEM qualification cost for validating acoustic performance across the full DN range and glycol concentration matrix\",\n      \"id\": \"N14b\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 3,\n      \"job_step_name\": \"PREPARE\",\n      \"importance\": 6.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 8.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"impact_category\": \"cost\",\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the number of sensor variants an OEM must qualify and stock to cover its full boiler product range (DN15–DN25)\",\n      \"id\": \"N21\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"importance\": 6.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 8.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"impact_category\": \"cost\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of acoustic coupling degradation when glycol concentration changes between seasonal fill operations shift the speed-of-sound calibration baseline beyond the pre-configured fluid-type setting\",\n      \"id\": \"PR8\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 0,\n      \"job_step_name\": \"product_constraint\",\n      \"importance\": 6.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 8.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"impact_category\": \"reliability\",\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the commissioning time required to configure fluid-type parameters and verify acoustic coupling after installation\",\n      \"id\": \"N13\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 3,\n      \"job_step_name\": \"PREPARE\",\n      \"importance\": 6.0,\n      \"satisfaction_current\": 5.0,\n      \"opportunity_score\": 7.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"impact_category\": \"time\",\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of an installer failing to detect incorrect sensor orientation (forward/reverse) before system start-up\",\n      \"id\": \"N18\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 4,\n      \"job_step_name\": \"CONFIRM\",\n      \"importance\": 6.0,\n      \"satisfaction_current\": 6.0,\n      \"opportunity_score\": 6.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"impact_category\": \"skill\",\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the duration of invalid measurement during system drain-down events in solar-hybrid heating circuits with drain-back designs that periodically empty the sensor's measurement section\",\n      \"id\": \"PR5\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 0,\n      \"job_step_name\": \"product_constraint\",\n      \"importance\": 5.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 6.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"impact_category\": \"reliability\",\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of measurement failure when hydronic circuit additives (corrosion inhibitors, anti-scale agents, biocides) shift the medium's acoustic impedance beyond the piezoelectric transducer's coupling range\",\n      \"id\": \"PR1\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"job_step_number\": 0,\n      \"job_step_name\": \"product_constraint\",\n      \"importance\": 5.0,\n      \"satisfaction_current\": 6.0,\n      \"opportunity_score\": 5.0,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"impact_category\": \"reliability\",\n      \"product_related\": true\n    }\n  ],\n  \"recalibration_notes\": \"Satisfaction scores validated against incumbent profiles (Turbine 55-65%, Ultrasonic 20-30%, Vortex 3-5%, DP Estimation 5-15%). All original Step 06 and Step 10 scores confirmed. Key validations: N07 air detection (sat=3 confirmed — incumbents cannot detect), N10 magnetite (sat=3 confirmed — fundamental turbine weakness), N25 documented efficiency (sat=3 confirmed — turbine pulse-only output has no temp integration).\",\n  \"cross_check\": {\n    \"odi_avg\": 10.66,\n    \"feature_fit_avg\": 5.25,\n    \"inconsistencies\": [],\n    \"note\": \"No cross-check flags triggered. ODI avg (10.66) and Feature-Fit avg (5.25) are consistent: moderate unmet needs with moderate technology alignment.\"\n  },\n  \"entities_produced\": {\n    \"nodes\": [\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the number of undetected system faults (blocked filter, stuck valve) \", \"naics_code\": \"333414\", \"run_id\": \"TBD\"}, \"props\": {\"opportunity_score\": 14.0, \"is_underserved\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the likelihood of volumetric flow reading deviating more than ±3% fr\", \"naics_code\": \"333414\", \"run_id\": \"TBD\"}, \"props\": {\"opportunity_score\": 13.0, \"is_underserved\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize time to detect a complete flow stoppage event (circulator failure or \", \"naics_code\": \"333414\", \"run_id\": \"TBD\"}, \"props\": {\"opportunity_score\": 13.0, \"is_underserved\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the number of undetected air entrainment events exceeding 2% volume \", \"naics_code\": \"333414\", \"run_id\": \"TBD\"}, \"props\": {\"opportunity_score\": 13.0, \"is_underserved\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the likelihood of turbine rotor seizure from magnetite accumulation \", \"naics_code\": \"333414\", \"run_id\": \"TBD\"}, \"props\": {\"opportunity_score\": 13.0, \"is_underserved\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize calibration drift exceeding ±5% over 12 months caused by bearing wea\", \"naics_code\": \"333414\", \"run_id\": \"TBD\"}, \"props\": {\"opportunity_score\": 13.0, \"is_underserved\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Increase the ability to distinguish genuine zero-flow conditions from ultrason\", \"naics_code\": \"333414\", \"run_id\": \"TBD\"}, \"props\": {\"opportunity_score\": 13.0, \"is_underserved\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Minimize the field failure rate of the flow sensing subsystem to below 0.1% w\", \"naics_code\": \"333414\", \"run_id\": \"TBD\"}, \"props\": {\"opportunity_score\": 13.0, \"is_underserved\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix\": \"Increase the ability to document measured seasonal efficiency per EU EcoDesign\", \"naics_code\": \"333414\", \"run_id\": \"TBD\"}, \"props\": {\"opportunity_score\": 13.0, \"is_underserved\": true}}\n    ],\n    \"relationships\": [\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333414\", \"target\": \"OpportunityScore:N15b\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333414\", \"target\": \"OpportunityScore:N01\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333414\", \"target\": \"OpportunityScore:N04\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333414\", \"target\": \"OpportunityScore:N07\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333414\", \"target\": \"OpportunityScore:N10\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333414\", \"target\": \"OpportunityScore:N12\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333414\", \"target\": \"OpportunityScore:N14c\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333414\", \"target\": \"OpportunityScore:N24\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333414\", \"target\": \"OpportunityScore:N25\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333414\", \"target\": \"OpportunityScore:*all 41 entries*\"}\n    ],\n    \"market_odi_props\": {\n      \"naics_code\": \"333414\",\n      \"odi_total_needs\": 41,\n      \"odi_underserved_count\": 15,\n      \"odi_overserved_count\": 0,\n      \"odi_avg_opportunity_score\": 10.66\n    }\n  }\n}\n```\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [SRC: JTBD_heating_equipment_except_warm_air_furnac] — 33 error statements (N01-N28), 5 alternatives with market share and trade-offs\n- [SRC: FIT_heating_equipment_except_warm_air_furnac] — Step 10 product-related needs (8), Step 09 technology feature fit scores (7 features), Step 11 vendor feature fit (6 features)\n- [SRC: 01_product_decomposition] — Product constraints driving Step 10 needs\n- [SRC: 02_functional_promise] — Commodity FP and differentiators informing recalibration"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "Source",
+        "File",
+        "Count"
+      ],
+      "rows": [
+        {
+          "Source": "**Step 06 — Market Needs (JTBD)**",
+          "File": "`JTBD_heating_equipment_except_warm_air_furnac.md`",
+          "Count": "33 error statements (N01–N28 incl. N12b, N14b, N14c, N15, N15b)"
+        },
+        {
+          "Source": "**Step 10 — Product-Related Needs**",
+          "File": "`FIT_heating_equipment_except_warm_air_furnac.md`",
+          "Count": "8 product-constraint needs (PR1–PR8)"
+        },
+        {
+          "Source": "**Step 03 — Incumbent Technologies**",
+          "File": "`JTBD_heating_equipment_except_warm_air_furnac.md` (alternatives)",
+          "Count": "5 alternatives: Turbine (55-65%), Ultrasonic (20-30%), Vortex (3-5%), DP Estimation (5-15%), Do nothing"
+        },
+        {
+          "Source": "**Step 09 — Feature-Market Fit**",
+          "File": "`FIT_heating_equipment_except_warm_air_furnac.md`",
+          "Count": "7 tech features, avg overall_fit = 5.25"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Technology",
+        "Share",
+        "Strengths",
+        "Weaknesses"
+      ],
+      "rows": [
+        {
+          "Technology": "Impeller/Turbine",
+          "Share": "55-65%",
+          "Strengths": "Low cost, simple, established supply chain",
+          "Weaknesses": "Magnetite fouling, bearing wear, calibration drift ±5%/yr, 3-5yr life, pressure drop"
+        },
+        {
+          "Technology": "Ultrasonic (transit-time)",
+          "Share": "20-30%",
+          "Strengths": "No moving parts, no pressure drop, bidirectional",
+          "Weaknesses": "Air entrainment >2% degrades accuracy, pipe-full required, 2-3x cost, commissioning"
+        },
+        {
+          "Technology": "Vortex",
+          "Share": "3-5%",
+          "Strengths": "Robust to dirty media",
+          "Weaknesses": "Pressure drop (bluff body), poor low-flow accuracy, vibration-sensitive"
+        },
+        {
+          "Technology": "DP Estimation",
+          "Share": "5-15%",
+          "Strengths": "Zero hardware cost",
+          "Weaknesses": "±15-20% accuracy, no direct measurement, no anomaly detection, pump curve drift"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Statement (abbreviated)",
+        "Step",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Under",
+        "Over",
+        "product_related"
+      ],
+      "rows": [
+        {
+          "ID": "N15b",
+          "Statement (abbreviated)": "Undetected faults invisible to DP estimation",
+          "Step": "MONITOR",
+          "Imp": "8",
+          "Sat": "2",
+          "Opp": "**14.00**",
+          "Under": "true",
+          "Over": "false",
+          "product_related": "true"
+        },
+        {
+          "ID": "N01",
+          "Statement (abbreviated)": "Flow reading deviation >±3% across range",
+          "Step": "EXECUTE",
+          "Imp": "9",
+          "Sat": "5",
+          "Opp": "**13.00**",
+          "Under": "false",
+          "Over": "false",
+          "product_related": "false"
+        },
+        {
+          "ID": "N04",
+          "Statement (abbreviated)": "Detect flow stoppage >2 s",
+          "Step": "MONITOR",
+          "Imp": "9",
+          "Sat": "5",
+          "Opp": "**13.00**",
+          "Under": "false",
+          "Over": "false",
+          "product_related": "false"
+        },
+        {
+          "ID": "N07",
+          "Statement (abbreviated)": "Undetected air entrainment >2% vol",
+          "Step": "MONITOR",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "**13.00**",
+          "Under": "true",
+          "Over": "false",
+          "product_related": "false"
+        },
+        {
+          "ID": "N10",
+          "Statement (abbreviated)": "Turbine rotor seizure from magnetite <3 yr",
+          "Step": "EXECUTE",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "**13.00**",
+          "Under": "true",
+          "Over": "false",
+          "product_related": "true"
+        },
+        {
+          "ID": "N12",
+          "Statement (abbreviated)": "Calibration drift >±5% from bearing wear",
+          "Step": "EXECUTE",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "**13.00**",
+          "Under": "true",
+          "Over": "false",
+          "product_related": "true"
+        },
+        {
+          "ID": "N14c",
+          "Statement (abbreviated)": "Distinguish zero-flow from signal loss",
+          "Step": "EXECUTE",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "**13.00**",
+          "Under": "true",
+          "Over": "false",
+          "product_related": "true"
+        },
+        {
+          "ID": "N24",
+          "Statement (abbreviated)": "Field failure rate >0.1% in 15-yr life",
+          "Step": "EXECUTE",
+          "Imp": "9",
+          "Sat": "5",
+          "Opp": "**13.00**",
+          "Under": "false",
+          "Over": "false",
+          "product_related": "false"
+        },
+        {
+          "ID": "N25",
+          "Statement (abbreviated)": "Documented measured efficiency for EcoDesign",
+          "Step": "DEFINE",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "**13.00**",
+          "Under": "true",
+          "Over": "false",
+          "product_related": "false"
+        },
+        {
+          "ID": "N03",
+          "Statement (abbreviated)": "Measurement degradation at ΔT >20°C",
+          "Step": "EXECUTE",
+          "Imp": "8",
+          "Sat": "4",
+          "Opp": "**12.00**",
+          "Under": "true",
+          "Over": "false",
+          "product_related": "false"
+        },
+        {
+          "ID": "N06",
+          "Statement (abbreviated)": "Sensor range misses min-modulation flow",
+          "Step": "DEFINE",
+          "Imp": "8",
+          "Sat": "4",
+          "Opp": "**12.00**",
+          "Under": "true",
+          "Over": "false",
+          "product_related": "false"
+        },
+        {
+          "ID": "N09",
+          "Statement (abbreviated)": "Failure with glycol >50%",
+          "Step": "EXECUTE",
+          "Imp": "8",
+          "Sat": "4",
+          "Opp": "**12.00**",
+          "Under": "true",
+          "Over": "false",
+          "product_related": "false"
+        },
+        {
+          "ID": "N15",
+          "Statement (abbreviated)": "DP estimate error >±15% at part-load",
+          "Step": "EXECUTE",
+          "Imp": "7",
+          "Sat": "2",
+          "Opp": "**12.00**",
+          "Under": "false",
+          "Over": "false",
+          "product_related": "true"
+        },
+        {
+          "ID": "N19",
+          "Statement (abbreviated)": "Single-point flow + temperature",
+          "Step": "EXECUTE",
+          "Imp": "8",
+          "Sat": "4",
+          "Opp": "**12.00**",
+          "Under": "true",
+          "Over": "false",
+          "product_related": "false"
+        },
+        {
+          "ID": "N22",
+          "Statement (abbreviated)": "Thermal energy calc noise at low modulation",
+          "Step": "EXECUTE",
+          "Imp": "8",
+          "Sat": "4",
+          "Opp": "**12.00**",
+          "Under": "true",
+          "Over": "false",
+          "product_related": "false"
+        },
+        {
+          "ID": "N23",
+          "Statement (abbreviated)": "Hydraulic imbalance >±10% at commissioning",
+          "Step": "CONFIRM",
+          "Imp": "8",
+          "Sat": "4",
+          "Opp": "**12.00**",
+          "Under": "true",
+          "Over": "false",
+          "product_related": "false"
+        },
+        {
+          "ID": "N26",
+          "Statement (abbreviated)": "A-rated label on first certification attempt",
+          "Step": "DEFINE",
+          "Imp": "8",
+          "Sat": "4",
+          "Opp": "**12.00**",
+          "Under": "true",
+          "Over": "false",
+          "product_related": "false"
+        },
+        {
+          "ID": "N11",
+          "Statement (abbreviated)": "Annual maintenance for cleaning/inspection",
+          "Step": "MAINTAIN",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "**11.00**",
+          "Under": "false",
+          "Over": "false",
+          "product_related": "true"
+        },
+        {
+          "ID": "N12b",
+          "Statement (abbreviated)": "Turbine low-flow dead band <3 l/min",
+          "Step": "EXECUTE",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "**11.00**",
+          "Under": "false",
+          "Over": "false",
+          "product_related": "true"
+        },
+        {
+          "ID": "N20",
+          "Statement (abbreviated)": "Detect incipient pump degradation",
+          "Step": "MONITOR",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "**11.00**",
+          "Under": "false",
+          "Over": "false",
+          "product_related": "false"
+        },
+        {
+          "ID": "N27",
+          "Statement (abbreviated)": "Installer-visible measured performance data",
+          "Step": "DEFINE",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "**11.00**",
+          "Under": "false",
+          "Over": "false",
+          "product_related": "false"
+        },
+        {
+          "ID": "N28",
+          "Statement (abbreviated)": "Callback within 30 days from imbalance",
+          "Step": "CONFIRM",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "**11.00**",
+          "Under": "false",
+          "Over": "false",
+          "product_related": "false"
+        },
+        {
+          "ID": "N02",
+          "Statement (abbreviated)": "Repeatability >±0.5%",
+          "Step": "EXECUTE",
+          "Imp": "8",
+          "Sat": "6",
+          "Opp": "**10.00**",
+          "Under": "false",
+          "Over": "false",
+          "product_related": "false"
+        },
+        {
+          "ID": "N08",
+          "Statement (abbreviated)": "Non-ideal flow profile error",
+          "Step": "EXECUTE",
+          "Imp": "7",
+          "Sat": "4",
+          "Opp": "**10.00**",
+          "Under": "false",
+          "Over": "false",
+          "product_related": "false"
+        },
+        {
+          "ID": "N14",
+          "Statement (abbreviated)": "Signal loss from transient air pockets",
+          "Step": "EXECUTE",
+          "Imp": "7",
+          "Sat": "4",
+          "Opp": "**10.00**",
+          "Under": "false",
+          "Over": "false",
+          "product_related": "true"
+        },
+        {
+          "ID": "N16b",
+          "Statement (abbreviated)": "Mounting location turbulence >2% bias",
+          "Step": "LOCATE",
+          "Imp": "7",
+          "Sat": "4",
+          "Opp": "**10.00**",
+          "Under": "false",
+          "Over": "false",
+          "product_related": "false"
+        },
+        {
+          "ID": "N05",
+          "Statement (abbreviated)": "Turndown ratio for full-load to min-mod",
+          "Step": "EXECUTE",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "**9.00**",
+          "Under": "false",
+          "Over": "false",
+          "product_related": "false"
+        },
+        {
+          "ID": "N16",
+          "Statement (abbreviated)": "Installation footprint and straight-run",
+          "Step": "LOCATE",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "**9.00**",
+          "Under": "false",
+          "Over": "false",
+          "product_related": "false"
+        },
+        {
+          "ID": "N17",
+          "Statement (abbreviated)": "OEM integration time",
+          "Step": "PREPARE",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "**9.00**",
+          "Under": "false",
+          "Over": "false",
+          "product_related": "false"
+        },
+        {
+          "ID": "N14b",
+          "Statement (abbreviated)": "OEM qualification cost for acoustic validation",
+          "Step": "PREPARE",
+          "Imp": "6",
+          "Sat": "4",
+          "Opp": "**8.00**",
+          "Under": "false",
+          "Over": "false",
+          "product_related": "true"
+        },
+        {
+          "ID": "N21",
+          "Statement (abbreviated)": "Variant count to cover DN range",
+          "Step": "DEFINE",
+          "Imp": "6",
+          "Sat": "4",
+          "Opp": "**8.00**",
+          "Under": "false",
+          "Over": "false",
+          "product_related": "false"
+        },
+        {
+          "ID": "N13",
+          "Statement (abbreviated)": "Commissioning config time (ultrasonic)",
+          "Step": "PREPARE",
+          "Imp": "6",
+          "Sat": "5",
+          "Opp": "**7.00**",
+          "Under": "false",
+          "Over": "false",
+          "product_related": "true"
+        },
+        {
+          "ID": "N18",
+          "Statement (abbreviated)": "Undetected incorrect orientation",
+          "Step": "CONFIRM",
+          "Imp": "6",
+          "Sat": "6",
+          "Opp": "**6.00**",
+          "Under": "false",
+          "Over": "false",
+          "product_related": "false"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Statement (abbreviated)",
+        "Source Constraint",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Under",
+        "Over",
+        "product_related"
+      ],
+      "rows": [
+        {
+          "ID": "PR3",
+          "Statement (abbreviated)": "Low-modulation dead zones below 4.2 l/min DN20",
+          "Source Constraint": "Min Flow Rate Detection",
+          "Imp": "8",
+          "Sat": "4",
+          "Opp": "**12.00**",
+          "Under": "true",
+          "Over": "false",
+          "product_related": "true"
+        },
+        {
+          "ID": "PR6",
+          "Statement (abbreviated)": "Straight-pipe 5-10× DN footprint penalty in compact enclosures",
+          "Source Constraint": "Min Straight Pipe Run",
+          "Imp": "8",
+          "Sat": "4",
+          "Opp": "**12.00**",
+          "Under": "true",
+          "Over": "false",
+          "product_related": "true"
+        },
+        {
+          "ID": "PR4",
+          "Statement (abbreviated)": "Micro-bubble entrainment >2% vol during filling/cold-start",
+          "Source Constraint": "Air Bubble Tolerance",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "**11.00**",
+          "Under": "false",
+          "Over": "false",
+          "product_related": "true"
+        },
+        {
+          "ID": "PR2",
+          "Statement (abbreviated)": "Polymer housing seal degradation at 80-90°C",
+          "Source Constraint": "Max Medium Temperature",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "**9.00**",
+          "Under": "false",
+          "Over": "false",
+          "product_related": "true"
+        },
+        {
+          "ID": "PR7",
+          "Statement (abbreviated)": "Cold-start temperature ramp outpaces NTC compensation",
+          "Source Constraint": "Temperature-Dependent Accuracy",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "**9.00**",
+          "Under": "false",
+          "Over": "false",
+          "product_related": "true"
+        },
+        {
+          "ID": "PR8",
+          "Statement (abbreviated)": "Glycol concentration shifts acoustic coupling baseline",
+          "Source Constraint": "Media Limitation",
+          "Imp": "6",
+          "Sat": "4",
+          "Opp": "**8.00**",
+          "Under": "false",
+          "Over": "false",
+          "product_related": "true"
+        },
+        {
+          "ID": "PR5",
+          "Statement (abbreviated)": "Invalid measurement during drain-back solar-hybrid drain-down",
+          "Source Constraint": "Pipe Full Condition",
+          "Imp": "5",
+          "Sat": "4",
+          "Opp": "**6.00**",
+          "Under": "false",
+          "Over": "false",
+          "product_related": "true"
+        },
+        {
+          "ID": "PR1",
+          "Statement (abbreviated)": "Hydronic additives shift acoustic impedance beyond coupling range",
+          "Source Constraint": "Media Limitation",
+          "Imp": "5",
+          "Sat": "6",
+          "Opp": "**5.00**",
+          "Under": "false",
+          "Over": "false",
+          "product_related": "true"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Metric",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Metric": "**Market**",
+          "Value": "Heating Equipment (except Warm Air Furnaces) Manufacturing"
+        },
+        {
+          "Metric": "**NAICS**",
+          "Value": "333414"
+        },
+        {
+          "Metric": "**Total Needs Scored**",
+          "Value": "41"
+        },
+        {
+          "Metric": "**Underserved Count**",
+          "Value": "15"
+        },
+        {
+          "Metric": "**Overserved Count**",
+          "Value": "0"
+        },
+        {
+          "Metric": "**Avg Opportunity Score**",
+          "Value": "10.66"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Zone",
+        "Score Range",
+        "Count",
+        "%"
+      ],
+      "rows": [
+        {
+          "Zone": "Highly Underserved",
+          "Score Range": "> 15",
+          "Count": "0",
+          "%": "0%"
+        },
+        {
+          "Zone": "Underserved",
+          "Score Range": "12–15",
+          "Count": "18",
+          "%": "44%"
+        },
+        {
+          "Zone": "Appropriately Served",
+          "Score Range": "10–12",
+          "Count": "12",
+          "%": "29%"
+        },
+        {
+          "Zone": "Overserved",
+          "Score Range": "< 10",
+          "Count": "11",
+          "%": "27%"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Rank",
+        "ID",
+        "Statement",
+        "Opp",
+        "Imp",
+        "Sat",
+        "Zone"
+      ],
+      "rows": [
+        {
+          "Rank": "1",
+          "ID": "N15b",
+          "Statement": "Minimize undetected system faults (blocked filter, stuck valve) that DP estimation cannot sense",
+          "Opp": "**14.00**",
+          "Imp": "8",
+          "Sat": "2",
+          "Zone": "Underserved"
+        },
+        {
+          "Rank": "2",
+          "ID": "N01",
+          "Statement": "Minimize flow reading deviation >±3% across 5–50 l/min range",
+          "Opp": "**13.00**",
+          "Imp": "9",
+          "Sat": "5",
+          "Zone": "Underserved"
+        },
+        {
+          "Rank": "3",
+          "ID": "N04",
+          "Statement": "Minimize time to detect flow stoppage to <2 seconds",
+          "Opp": "**13.00**",
+          "Imp": "9",
+          "Sat": "5",
+          "Zone": "Underserved"
+        },
+        {
+          "Rank": "4",
+          "ID": "N24",
+          "Statement": "Minimize field failure rate to <0.1% in 15-yr appliance life",
+          "Opp": "**13.00**",
+          "Imp": "9",
+          "Sat": "5",
+          "Zone": "Underserved"
+        },
+        {
+          "Rank": "5",
+          "ID": "N07",
+          "Statement": "Minimize undetected air entrainment >2% vol degrading accuracy",
+          "Opp": "**13.00**",
+          "Imp": "8",
+          "Sat": "3",
+          "Zone": "Underserved"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Metric",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Metric": "ODI avg opportunity score",
+          "Value": "10.66"
+        },
+        {
+          "Metric": "Feature-Fit avg (tech features)",
+          "Value": "5.25"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Condition",
+        "Threshold",
+        "Actual",
+        "Result"
+      ],
+      "rows": [
+        {
+          "Condition": "High opportunity, low feature fit",
+          "Threshold": "ODI avg > 12 AND Fit avg < 4",
+          "Actual": "10.66, 5.25",
+          "Result": "**No flag**"
+        },
+        {
+          "Condition": "Low opportunity, high feature fit",
+          "Threshold": "ODI avg < 8 AND Fit avg > 7",
+          "Actual": "10.66, 5.25",
+          "Result": "**No flag**"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Insight",
+        "Detail"
+      ],
+      "rows": [
+        {
+          "Insight": "**Dominant opportunity theme**",
+          "Detail": "Reliability + detection failures — 7 of 9 needs scoring ≥13 relate to measurement reliability, fault detection, or degradation prevention"
+        },
+        {
+          "Insight": "**Incumbent vulnerability**",
+          "Detail": "Turbine sensors (55-65% share) drive 4 of the top-9 needs: magnetite seizure (N10), calibration drift (N12), low-flow dead band (N12b), annual maintenance (N11) — all eliminated by ultrasonic technology"
+        },
+        {
+          "Insight": "**Regulatory pull**",
+          "Detail": "EU EcoDesign documented efficiency (N25, Opp=13) and A-rated certification (N26, Opp=12) create regulatory demand for integrated flow+temperature measurement"
+        },
+        {
+          "Insight": "**Product-constraint risks**",
+          "Detail": "2 product-related needs score 12.0: low-modulation dead zones (PR3) and straight-pipe footprint (PR6) — both are design constraints Marquardt must address for OEM adoption"
+        },
+        {
+          "Insight": "**DP estimation gap**",
+          "Detail": "N15b (Opp=14.0, highest score) reflects the massive detection gap when OEMs use pump-curve estimation instead of direct measurement — strongest argument for sensor adoption"
+        },
+        {
+          "Insight": "**No overserved needs**",
+          "Detail": "Zero overserved needs indicates no incumbent over-delivers on any dimension — market is ripe for improvement across the board"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Pass Condition",
+        "Result"
+      ],
+      "rows": [
+        {
+          "#": "Q1",
+          "Check": "Formula correct",
+          "Pass Condition": "Spot-check 5 entries match `opp = imp + max(imp - sat, 0)`",
+          "Result": "**PASS** — N15b: 8+max(6,0)=14; N01: 9+max(4,0)=13; N18: 6+max(0,0)=6; PR1: 5+max(-1,0)=5; N03: 8+max(4,0)=12"
+        },
+        {
+          "#": "Q2",
+          "Check": "Underserved flags correct",
+          "Pass Condition": "All imp>7 AND sat<5 flagged, no others",
+          "Result": "**PASS** — 15 entries flagged; verified N01(imp=9,sat=5)=false, N07(imp=8,sat=3)=true"
+        },
+        {
+          "#": "Q3",
+          "Check": "Overserved flags correct",
+          "Pass Condition": "All imp<3 AND sat>7 flagged, no others",
+          "Result": "**PASS** — 0 entries; min importance=5"
+        },
+        {
+          "#": "Q4",
+          "Check": "Need count preserved",
+          "Pass Condition": "Total ≥ Step 06 count (33)",
+          "Result": "**PASS** — 41 (33 + 8 from Step 10)"
+        },
+        {
+          "#": "Q5",
+          "Check": "Top-5 ordering correct",
+          "Pass Condition": "Sorted by descending opp score",
+          "Result": "**PASS** — 14.0, 13.0, 13.0, 13.0, 13.0 with importance tiebreaker"
+        },
+        {
+          "#": "Q6",
+          "Check": "Cross-check ran",
+          "Pass Condition": "ODI-Feature-Fit inconsistencies logged",
+          "Result": "**PASS** — no inconsistencies; both thresholds checked"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "odi_matrix",
+      "naics_code": "333414",
+      "naics_title": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+      "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+      "product_name": "Ultrasonic Flow Sensor",
+      "vendor_name": "Marquardt",
+      "market_odi_summary": {
+        "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+        "naics_code": "333414",
+        "total_needs": 41,
+        "underserved_count": 15,
+        "overserved_count": 0,
+        "avg_opportunity_score": 10.66,
+        "top_opportunities": [
+          "Minimize the number of undetected system faults (blocked filter, stuck valve) that DP estimation cannot sense because it has no direct flow measurement",
+          "Minimize the likelihood of volumetric flow reading deviating more than ±3% from true value across the 5–50 l/min operating range",
+          "Minimize time to detect a complete flow stoppage event (circulator failure or valve closure) to less than 2 seconds",
+          "Minimize the field failure rate of the flow sensing subsystem to below 0.1% within the 15-year appliance design life",
+          "Minimize the number of undetected air entrainment events exceeding 2% volume that silently degrade measurement accuracy"
+        ]
+      },
+      "entries": [
+        {
+          "error_statement": "Minimize the number of undetected system faults (blocked filter, stuck valve) that DP estimation cannot sense because it has no direct flow measurement",
+          "id": "N15b",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "importance": 8.0,
+          "satisfaction_current": 2.0,
+          "opportunity_score": 14.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "impact_category": "safety",
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the likelihood of volumetric flow reading deviating more than ±3% from true value across the 5–50 l/min operating range",
+          "id": "N01",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "importance": 9.0,
+          "satisfaction_current": 5.0,
+          "opportunity_score": 13.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize time to detect a complete flow stoppage event (circulator failure or valve closure) to less than 2 seconds",
+          "id": "N04",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "importance": 9.0,
+          "satisfaction_current": 5.0,
+          "opportunity_score": 13.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "safety",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the number of undetected air entrainment events exceeding 2% volume that silently degrade measurement accuracy",
+          "id": "N07",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "importance": 8.0,
+          "satisfaction_current": 3.0,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the likelihood of turbine rotor seizure from magnetite accumulation requiring unplanned sensor replacement within 3 years of installation",
+          "id": "N10",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "importance": 8.0,
+          "satisfaction_current": 3.0,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize calibration drift exceeding ±5% over 12 months caused by bearing wear and blade erosion in hard-water circuits",
+          "id": "N12",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "importance": 8.0,
+          "satisfaction_current": 3.0,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": true
+        },
+        {
+          "error_statement": "Increase the ability to distinguish genuine zero-flow conditions from ultrasonic signal loss caused by transient medium anomalies (bubbles, empty pipe)",
+          "id": "N14c",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "importance": 8.0,
+          "satisfaction_current": 3.0,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "impact_category": "safety",
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the field failure rate of the flow sensing subsystem to below 0.1% within the 15-year appliance design life",
+          "id": "N24",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "importance": 9.0,
+          "satisfaction_current": 5.0,
+          "opportunity_score": 13.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": false
+        },
+        {
+          "error_statement": "Increase the ability to document measured seasonal efficiency per EU EcoDesign Lot 1/2 using onboard flow + temperature data rather than laboratory-only test results",
+          "id": "N25",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "importance": 8.0,
+          "satisfaction_current": 3.0,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "impact_category": "cost",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize measurement degradation when medium temperature shifts by more than 20°C within a single heating cycle",
+          "id": "N03",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "importance": 8.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 12.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the likelihood of specifying a sensor whose flow range does not cover the circuit's minimum-modulation flow rate, causing dead zones in low-load operation",
+          "id": "N06",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "importance": 8.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 12.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "impact_category": "cost",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize measurement failure rate when medium contains glycol concentrations up to 50% by volume",
+          "id": "N09",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "importance": 8.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 12.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the likelihood of flow estimate error exceeding ±15% due to pump curve deviation from catalog values at part-load conditions",
+          "id": "N15",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "importance": 7.0,
+          "satisfaction_current": 2.0,
+          "opportunity_score": 12.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": true
+        },
+        {
+          "error_statement": "Increase the ability to simultaneously provide flow rate AND medium temperature from a single measurement point, eliminating separate probe installation",
+          "id": "N19",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "importance": 8.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 12.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "impact_category": "cost",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the variation in thermal energy calculation (Q = flow × Cp × ΔT) caused by flow measurement noise at low modulation rates (<25% burner output)",
+          "id": "N22",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "importance": 8.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 12.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the likelihood of commissioning sign-off with hydraulic imbalance exceeding ±10% of design flow rate per zone",
+          "id": "N23",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 4,
+          "job_step_name": "CONFIRM",
+          "importance": 8.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 12.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "impact_category": "cost",
+          "product_related": false
+        },
+        {
+          "error_statement": "Increase the ability to achieve A-rated energy label classification on the first certification submission by providing measurement accuracy that matches laboratory reference within ±2%",
+          "id": "N26",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "importance": 8.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 12.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "impact_category": "cost",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the likelihood of measurement dead zones during low-modulation boiler operation where flow rates drop below the minimum detectable threshold (4.2 l/min DN20) at 20-25% burner output",
+          "id": "PR3",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 0,
+          "job_step_name": "product_constraint",
+          "importance": 8.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 12.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the installation footprint penalty from the 5-10× DN straight-pipe requirement that competes for space within compact boiler enclosures and wall-hung appliance housings",
+          "id": "PR6",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 0,
+          "job_step_name": "product_constraint",
+          "importance": 8.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 12.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the annual maintenance effort required to inspect and clean mechanical flow sensor internals to prevent calibration drift from particulate fouling",
+          "id": "N11",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 7,
+          "job_step_name": "MODIFY",
+          "importance": 7.0,
+          "satisfaction_current": 3.0,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "cost",
+          "product_related": true
+        },
+        {
+          "error_statement": "Increase the ability to maintain accurate readings across the full flow range without mechanical-inertia dead band at low flow rates (<3 l/min) where turbine rotors stall",
+          "id": "N12b",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "importance": 7.0,
+          "satisfaction_current": 3.0,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": true
+        },
+        {
+          "error_statement": "Increase the ability to detect incipient circulator pump degradation via flow-rate trend analysis before complete pump failure causes comfort loss",
+          "id": "N20",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "importance": 7.0,
+          "satisfaction_current": 3.0,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": false
+        },
+        {
+          "error_statement": "Increase the ability to provide installer-visible flow data (display or diagnostic output) that demonstrates measured — not estimated — system performance during commissioning and service visits",
+          "id": "N27",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "importance": 7.0,
+          "satisfaction_current": 3.0,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "skill",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the likelihood of receiving a customer callback within 30 days of installation due to an undetected hydraulic imbalance that the sensor could have flagged during commissioning",
+          "id": "N28",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 4,
+          "job_step_name": "CONFIRM",
+          "importance": 7.0,
+          "satisfaction_current": 3.0,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "cost",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the measurement error caused by micro-bubble entrainment exceeding 2% by volume during system filling, de-aeration, and cold-start operations that temporarily aerate the hydronic medium",
+          "id": "PR4",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 0,
+          "job_step_name": "product_constraint",
+          "importance": 7.0,
+          "satisfaction_current": 3.0,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize variability of flow readings between successive measurement cycles under identical steady-state conditions (repeatability >±0.5%)",
+          "id": "N02",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "importance": 8.0,
+          "satisfaction_current": 6.0,
+          "opportunity_score": 10.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize systematic measurement error caused by non-ideal flow profiles (swirl, asymmetry) from upstream pipe fittings",
+          "id": "N08",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "importance": 7.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 10.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the likelihood of complete signal loss when transient air pockets pass through the sensor during system filling or de-aeration",
+          "id": "N14",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "importance": 7.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 10.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the likelihood of mounting the sensor at a location where turbulence from upstream fittings causes >2% systematic reading bias",
+          "id": "N16b",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 2,
+          "job_step_name": "LOCATE",
+          "importance": 7.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 10.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": false
+        },
+        {
+          "error_statement": "Increase the turndown ratio (max/min measurable flow) to cover both full-load and minimum-modulation operating points in a single device",
+          "id": "N05",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "importance": 7.0,
+          "satisfaction_current": 5.0,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the installation footprint (physical length and required straight-pipe run) to enable placement in space-constrained boiler enclosures",
+          "id": "N16",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 2,
+          "job_step_name": "LOCATE",
+          "importance": 7.0,
+          "satisfaction_current": 5.0,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "cost",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the total OEM integration time from unpacking to first valid reading, including mechanical fitting, electrical connection, and protocol handshake",
+          "id": "N17",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 3,
+          "job_step_name": "PREPARE",
+          "importance": 7.0,
+          "satisfaction_current": 5.0,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "time",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the likelihood of polymer housing seal degradation when boiler circuits operate at sustained supply temperatures of 80-90°C near the sensor's material service limit",
+          "id": "PR2",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 0,
+          "job_step_name": "product_constraint",
+          "importance": 7.0,
+          "satisfaction_current": 5.0,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the residual transit-time measurement error during rapid cold-start temperature ramps (15°C to 75°C in <10 minutes) where speed-of-sound changes temporarily outpace the NTC compensation algorithm's response",
+          "id": "PR7",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 0,
+          "job_step_name": "product_constraint",
+          "importance": 7.0,
+          "satisfaction_current": 5.0,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the OEM qualification cost for validating acoustic performance across the full DN range and glycol concentration matrix",
+          "id": "N14b",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 3,
+          "job_step_name": "PREPARE",
+          "importance": 6.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 8.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "cost",
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the number of sensor variants an OEM must qualify and stock to cover its full boiler product range (DN15–DN25)",
+          "id": "N21",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "importance": 6.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 8.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "cost",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the likelihood of acoustic coupling degradation when glycol concentration changes between seasonal fill operations shift the speed-of-sound calibration baseline beyond the pre-configured fluid-type setting",
+          "id": "PR8",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 0,
+          "job_step_name": "product_constraint",
+          "importance": 6.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 8.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the commissioning time required to configure fluid-type parameters and verify acoustic coupling after installation",
+          "id": "N13",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 3,
+          "job_step_name": "PREPARE",
+          "importance": 6.0,
+          "satisfaction_current": 5.0,
+          "opportunity_score": 7.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "time",
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the likelihood of an installer failing to detect incorrect sensor orientation (forward/reverse) before system start-up",
+          "id": "N18",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 4,
+          "job_step_name": "CONFIRM",
+          "importance": 6.0,
+          "satisfaction_current": 6.0,
+          "opportunity_score": 6.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "skill",
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the duration of invalid measurement during system drain-down events in solar-hybrid heating circuits with drain-back designs that periodically empty the sensor's measurement section",
+          "id": "PR5",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 0,
+          "job_step_name": "product_constraint",
+          "importance": 5.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 6.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the likelihood of measurement failure when hydronic circuit additives (corrosion inhibitors, anti-scale agents, biocides) shift the medium's acoustic impedance beyond the piezoelectric transducer's coupling range",
+          "id": "PR1",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "job_step_number": 0,
+          "job_step_name": "product_constraint",
+          "importance": 5.0,
+          "satisfaction_current": 6.0,
+          "opportunity_score": 5.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": true
+        }
+      ],
+      "recalibration_notes": "Satisfaction scores validated against incumbent profiles (Turbine 55-65%, Ultrasonic 20-30%, Vortex 3-5%, DP Estimation 5-15%). All original Step 06 and Step 10 scores confirmed. Key validations: N07 air detection (sat=3 confirmed — incumbents cannot detect), N10 magnetite (sat=3 confirmed — fundamental turbine weakness), N25 documented efficiency (sat=3 confirmed — turbine pulse-only output has no temp integration).",
+      "cross_check": {
+        "odi_avg": 10.66,
+        "feature_fit_avg": 5.25,
+        "inconsistencies": [],
+        "note": "No cross-check flags triggered. ODI avg (10.66) and Feature-Fit avg (5.25) are consistent: moderate unmet needs with moderate technology alignment."
+      },
+      "entities_produced": {
+        "nodes": [
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the number of undetected system faults (blocked filter, stuck valve) ",
+              "naics_code": "333414",
+              "run_id": "TBD"
+            },
+            "props": {
+              "opportunity_score": 14.0,
+              "is_underserved": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the likelihood of volumetric flow reading deviating more than ±3% fr",
+              "naics_code": "333414",
+              "run_id": "TBD"
+            },
+            "props": {
+              "opportunity_score": 13.0,
+              "is_underserved": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize time to detect a complete flow stoppage event (circulator failure or ",
+              "naics_code": "333414",
+              "run_id": "TBD"
+            },
+            "props": {
+              "opportunity_score": 13.0,
+              "is_underserved": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the number of undetected air entrainment events exceeding 2% volume ",
+              "naics_code": "333414",
+              "run_id": "TBD"
+            },
+            "props": {
+              "opportunity_score": 13.0,
+              "is_underserved": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the likelihood of turbine rotor seizure from magnetite accumulation ",
+              "naics_code": "333414",
+              "run_id": "TBD"
+            },
+            "props": {
+              "opportunity_score": 13.0,
+              "is_underserved": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize calibration drift exceeding ±5% over 12 months caused by bearing wea",
+              "naics_code": "333414",
+              "run_id": "TBD"
+            },
+            "props": {
+              "opportunity_score": 13.0,
+              "is_underserved": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Increase the ability to distinguish genuine zero-flow conditions from ultrason",
+              "naics_code": "333414",
+              "run_id": "TBD"
+            },
+            "props": {
+              "opportunity_score": 13.0,
+              "is_underserved": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Minimize the field failure rate of the flow sensing subsystem to below 0.1% w",
+              "naics_code": "333414",
+              "run_id": "TBD"
+            },
+            "props": {
+              "opportunity_score": 13.0,
+              "is_underserved": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix": "Increase the ability to document measured seasonal efficiency per EU EcoDesign",
+              "naics_code": "333414",
+              "run_id": "TBD"
+            },
+            "props": {
+              "opportunity_score": 13.0,
+              "is_underserved": true
+            }
+          }
+        ],
+        "relationships": [
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333414",
+            "target": "OpportunityScore:N15b"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333414",
+            "target": "OpportunityScore:N01"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333414",
+            "target": "OpportunityScore:N04"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333414",
+            "target": "OpportunityScore:N07"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333414",
+            "target": "OpportunityScore:N10"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333414",
+            "target": "OpportunityScore:N12"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333414",
+            "target": "OpportunityScore:N14c"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333414",
+            "target": "OpportunityScore:N24"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333414",
+            "target": "OpportunityScore:N25"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333414",
+            "target": "OpportunityScore:*all 41 entries*"
+          }
+        ],
+        "market_odi_props": {
+          "naics_code": "333414",
+          "odi_total_needs": 41,
+          "odi_underserved_count": 15,
+          "odi_overserved_count": 0,
+          "odi_avg_opportunity_score": 10.66
+        }
+      }
+    }
+  ],
+  "has_bom": true,
+  "naics_sector_type": "manufacturing"
+}

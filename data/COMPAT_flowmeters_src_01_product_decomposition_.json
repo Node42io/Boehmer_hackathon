@@ -1,0 +1,404 @@
+{
+  "id": "COMPAT_flowmeters_src_01_product_decomposition_",
+  "title": "COMPAT — Constraint-Market Compatibility: Industrial Process Variable Instruments (NAICS 334513)",
+  "type": "constraint_compatibility",
+  "market_slug": "flowmeters_src_01_product_decomposition_",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Step 07 — Product Constraints (from upstream)",
+      "content": "Constraints carried forward from 03_constraints.md. No web search augmentation per instructions.\n\n| # | Constraint | Type | is_absolute | Threshold | Unit |\n|---|---|---|---|---|---|\n| C1 | Aqueous Media Requirement | physical | **true** | — | — |\n| C2 | Maximum Medium Temperature | physical | false | 90 | °C |\n| C3 | Air Bubble / Void Fraction Limit | physical | **true** | 2 | % vol |\n| C4 | Temperature-Dependent Accuracy | physical | false | 1.5 (uncompensated) | % error |\n| C5 | Wetted Material Chemical Compatibility | chemical | false | — | — |\n| C6 | Pipe Full Condition Required | operational | **true** | 100 | % fill |\n| C7 | Minimum Flow Rate Detection | operational | false | 0.25–4.2 | l/min |\n| C8 | Maximum Operating Pressure | operational | false | 10 | bar |\n| C9 | Minimum Straight Pipe Run | operational | false | 5–10 | × DN |\n| C10 | Life Endurance Ceiling | economic | false | 3,000 | m³ total |\n| C11 | No Explosive Atmosphere Certification | regulatory | false | Zone 1/0 | ATEX zone |\n| C12 | Ambient Temperature Range | environmental | false | −20 to +60 (est.) | °C ambient |\n\n---"
+    },
+    {
+      "title": "Step 08 — Constraint-Market Assessment: NAICS 334513",
+      "content": "**Market context:** NAICS 334513 is Marquardt's home industry — the manufacturing of instruments that measure, display, and control industrial process variables. This VN encompasses all flow instrument technologies (ultrasonic, electromagnetic, Coriolis, vortex, turbine, differential-pressure, thermal mass), plus pressure, temperature, level, analytical, and control instruments. Marquardt occupies the ultrasonic transit-time inline flowmeter niche within this NAICS, targeting OEM integration at DN12–DN25 with polymer housing and $20–60 price points. [SRC: VN_flowmeters_src_01_product_decomposition_]\n\nOperating environment: Indoor factory/production environments. Calibration rigs use water at 5–50 °C and 0–10 bar. Test benches circulate water or water-glycol through DN15–DN100 closed-loop piping at controlled flow rates. Assembly and integration stations operate at ambient indoor conditions (18–28 °C, 30–70% RH). [SRC: VN L6.5, L6.6]\n\n### Verdict Matrix\n\n| # | Constraint | Verdict | Rationale |\n|---|---|---|---|\n| C1 | Aqueous Media Requirement | **none** | Marquardt's product segment within 334513 uses water and water-glycol as calibration and test media. Wet calibration rigs (L5.6.1) circulate clean water through closed-loop test circuits. The home-market product targets water-based applications by design. [SRC: VN L6.6, 01] |\n| C2 | Max Medium Temperature (90 °C) | **none** | Calibration and test circuits operate at 5–50 °C. Environmental testing (L5.6.2) cycles to 90 °C maximum — matching the sensor's rated limit exactly. No routine process within this market's instrument manufacturing chain exceeds 90 °C for the sensor's wetted path. [SRC: VN L6.6, 01 specs] |\n| C3 | Air Bubble / Void Fraction Limit | **none** | Calibration rigs (L5.6.1) use de-aerated, temperature-stabilized water to ensure reference-grade measurement accuracy. Air content is actively minimized to <0.1% to avoid calibration error. Production test loops are closed-loop, pressurized systems. [SRC: VN L5.6.1] |\n| C4 | Temperature-Dependent Accuracy | **none** | Calibration is performed at controlled, stable temperatures with known fluid properties. NTC compensation reduces temperature-induced error to ~0.2%. No extreme thermal transients in instrument manufacturing test environments. [SRC: 01 constraints, VN L6.6] |\n| C5 | Wetted Material Chemical Compatibility | **none** | Calibration and test media are clean water or water-glycol — no aggressive chemicals contact the sensor during manufacturing or end-use calibration. Polymer housing and KTW/WRAS-approved seals are fully compatible. [SRC: 01 features, VN L5.6.1] |\n| C6 | Pipe Full Condition Required | **none** | All calibration rigs and test loops are closed-pipe, fully filled, and pressurized systems. Fill/drain procedures ensure complete pipe-full condition before any measurement. Partially filled pipes would invalidate calibration references. [SRC: VN L5.6.1] |\n| C7 | Minimum Flow Rate Detection | **none** | Calibration rigs cover the sensor's specified range (0.25–60 l/min depending on DN variant) with variable-speed pumps. The calibration process explicitly characterizes the sensor across its operating range including low-flow points. [SRC: VN L4.6.1.2, 01 specs] |\n| C8 | Max Operating Pressure (10 bar) | **none** | Calibration loops typically operate at 1–6 bar. Pressure cycle endurance testing (L5.6.2) goes to rated pressure (10 bar) and burst test at 1.5× — the test infrastructure is designed to match the product's rated envelope. [SRC: VN L4.6.2.2, 01 specs] |\n| C9 | Min Straight Pipe Run (5–10× DN) | **none** | Calibration rigs (L5.6.1) are purpose-built with adequate straight-run sections upstream and downstream of the device-under-test position. Straight pipe run is a standard rig design consideration, not a constraint in this market. [SRC: VN L4.6.1.2] |\n| C10 | Life Endurance Ceiling (3,000 m³) | **none** | In this market, the sensor is the manufactured product, not a consumed component. Life endurance is a specification the manufacturer validates (L5.6.2), not a constraint that limits market participation. Each individual sensor goes through a calibration run consuming a few liters, not thousands of cubic meters. [SRC: VN L6.6, 01 specs] |\n| C11 | No ATEX Certification | **none** | Instrument manufacturing facilities (L6.1–L6.7) are not classified as explosive atmospheres. No Zone 0/1/2 classification applies to standard instrument production floors, calibration labs, or assembly areas. [SRC: VN L6.10] |\n| C12 | Ambient Temperature Range | **none** | All manufacturing, calibration, and testing occurs in indoor, climate-controlled environments (18–28 °C ambient). RAST 2.5 connector and polymer housing are designed for exactly this type of protected installation environment. [SRC: VN L6.5, 01 specs] |\n\n---"
+    },
+    {
+      "title": "Summary",
+      "content": "| Metric | Value |\n|---|---|\n| **Total assessments** | 12 |\n| **Knockouts** | 0 |\n| **Mitigable** | 0 |\n| **None (irrelevant)** | 12 |\n| **Market status** | **SURVIVING** — no knockouts, proceeds to downstream scoring |\n\n**Conclusion:** NAICS 334513 is Marquardt's home industry with architecture distance = 0. All 12 constraints are irrelevant — the product was designed for and within this market. Calibration rigs use water at controlled conditions, manufacturing occurs indoors, no explosive atmospheres apply, and life endurance is a specification to validate rather than a consumption limit. Zero constraints require mitigation. This is the baseline against which all other markets are compared. [SRC: VN_flowmeters_src_01_product_decomposition_, 03_constraints, 01_product_decomposition]\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"constraint_market_compatibility\",\n  \"product_name\": \"Ultrasonic Flow Sensor\",\n  \"vendor_name\": \"Marquardt\",\n  \"market_name\": \"Industrial Process Variable Instruments Manufacturing\",\n  \"naics_code\": \"334513\",\n  \"architecture_distance\": 0,\n  \"constraints_assessed\": 12,\n  \"assessments\": [\n    {\n      \"constraint_name\": \"Aqueous Media Requirement\",\n      \"market_name\": \"Industrial Process Variable Instruments Manufacturing\",\n      \"naics_code\": \"334513\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Home market uses water and water-glycol as calibration and test media. Product targets water-based applications by design.\"\n    },\n    {\n      \"constraint_name\": \"Maximum Medium Temperature\",\n      \"market_name\": \"Industrial Process Variable Instruments Manufacturing\",\n      \"naics_code\": \"334513\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Calibration circuits 5-50 degC. Environmental testing cycles to 90 degC max — matching rated limit. No routine process exceeds 90 degC.\"\n    },\n    {\n      \"constraint_name\": \"Air Bubble / Void Fraction Limit\",\n      \"market_name\": \"Industrial Process Variable Instruments Manufacturing\",\n      \"naics_code\": \"334513\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Calibration rigs use de-aerated water at <0.1% air content. Closed-loop pressurized systems.\"\n    },\n    {\n      \"constraint_name\": \"Temperature-Dependent Accuracy\",\n      \"market_name\": \"Industrial Process Variable Instruments Manufacturing\",\n      \"naics_code\": \"334513\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Calibration at controlled, stable temperatures. NTC compensation to ~0.2%. No extreme transients in manufacturing test environments.\"\n    },\n    {\n      \"constraint_name\": \"Wetted Material Chemical Compatibility\",\n      \"market_name\": \"Industrial Process Variable Instruments Manufacturing\",\n      \"naics_code\": \"334513\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Clean water or water-glycol test media. Polymer housing and KTW/WRAS seals fully compatible.\"\n    },\n    {\n      \"constraint_name\": \"Pipe Full Condition Required\",\n      \"market_name\": \"Industrial Process Variable Instruments Manufacturing\",\n      \"naics_code\": \"334513\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Calibration rigs and test loops are closed-pipe, fully filled, pressurized systems. Standard requirement for valid calibration.\"\n    },\n    {\n      \"constraint_name\": \"Minimum Flow Rate Detection\",\n      \"market_name\": \"Industrial Process Variable Instruments Manufacturing\",\n      \"naics_code\": \"334513\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Calibration rigs cover the full specified flow range with variable-speed pumps. Low-flow characterization is part of the process.\"\n    },\n    {\n      \"constraint_name\": \"Maximum Operating Pressure\",\n      \"market_name\": \"Industrial Process Variable Instruments Manufacturing\",\n      \"naics_code\": \"334513\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Calibration loops at 1-6 bar. Pressure endurance testing at rated 10 bar. Test infrastructure matches product envelope.\"\n    },\n    {\n      \"constraint_name\": \"Minimum Straight Pipe Run\",\n      \"market_name\": \"Industrial Process Variable Instruments Manufacturing\",\n      \"naics_code\": \"334513\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Calibration rigs are purpose-built with adequate straight-run sections. Standard rig design consideration, not a market constraint.\"\n    },\n    {\n      \"constraint_name\": \"Life Endurance Ceiling\",\n      \"market_name\": \"Industrial Process Variable Instruments Manufacturing\",\n      \"naics_code\": \"334513\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Sensor is the manufactured product, not a consumed component. Life endurance is validated as a specification, not consumed during production.\"\n    },\n    {\n      \"constraint_name\": \"No Explosive Atmosphere Certification\",\n      \"market_name\": \"Industrial Process Variable Instruments Manufacturing\",\n      \"naics_code\": \"334513\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Instrument manufacturing facilities are not classified as explosive atmospheres. No ATEX Zone 0/1/2 applies to production floors or calibration labs.\"\n    },\n    {\n      \"constraint_name\": \"Ambient Temperature Range\",\n      \"market_name\": \"Industrial Process Variable Instruments Manufacturing\",\n      \"naics_code\": \"334513\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Indoor, climate-controlled manufacturing and testing at 18-28 degC ambient. RAST 2.5 connector designed for this environment.\"\n    }\n  ],\n  \"markets_eliminated\": [],\n  \"markets_surviving\": [\"334513\"],\n  \"market_status\": \"surviving\",\n  \"knockout_count\": 0,\n  \"mitigable_count\": 0,\n  \"none_count\": 12,\n  \"entities_produced\": {\n    \"nodes\": [],\n    \"relationships\": []\n  }\n}\n```"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "#",
+        "Constraint",
+        "Type",
+        "is_absolute",
+        "Threshold",
+        "Unit"
+      ],
+      "rows": [
+        {
+          "#": "C1",
+          "Constraint": "Aqueous Media Requirement",
+          "Type": "physical",
+          "is_absolute": "**true**",
+          "Threshold": "—",
+          "Unit": "—"
+        },
+        {
+          "#": "C2",
+          "Constraint": "Maximum Medium Temperature",
+          "Type": "physical",
+          "is_absolute": "false",
+          "Threshold": "90",
+          "Unit": "°C"
+        },
+        {
+          "#": "C3",
+          "Constraint": "Air Bubble / Void Fraction Limit",
+          "Type": "physical",
+          "is_absolute": "**true**",
+          "Threshold": "2",
+          "Unit": "% vol"
+        },
+        {
+          "#": "C4",
+          "Constraint": "Temperature-Dependent Accuracy",
+          "Type": "physical",
+          "is_absolute": "false",
+          "Threshold": "1.5 (uncompensated)",
+          "Unit": "% error"
+        },
+        {
+          "#": "C5",
+          "Constraint": "Wetted Material Chemical Compatibility",
+          "Type": "chemical",
+          "is_absolute": "false",
+          "Threshold": "—",
+          "Unit": "—"
+        },
+        {
+          "#": "C6",
+          "Constraint": "Pipe Full Condition Required",
+          "Type": "operational",
+          "is_absolute": "**true**",
+          "Threshold": "100",
+          "Unit": "% fill"
+        },
+        {
+          "#": "C7",
+          "Constraint": "Minimum Flow Rate Detection",
+          "Type": "operational",
+          "is_absolute": "false",
+          "Threshold": "0.25–4.2",
+          "Unit": "l/min"
+        },
+        {
+          "#": "C8",
+          "Constraint": "Maximum Operating Pressure",
+          "Type": "operational",
+          "is_absolute": "false",
+          "Threshold": "10",
+          "Unit": "bar"
+        },
+        {
+          "#": "C9",
+          "Constraint": "Minimum Straight Pipe Run",
+          "Type": "operational",
+          "is_absolute": "false",
+          "Threshold": "5–10",
+          "Unit": "× DN"
+        },
+        {
+          "#": "C10",
+          "Constraint": "Life Endurance Ceiling",
+          "Type": "economic",
+          "is_absolute": "false",
+          "Threshold": "3,000",
+          "Unit": "m³ total"
+        },
+        {
+          "#": "C11",
+          "Constraint": "No Explosive Atmosphere Certification",
+          "Type": "regulatory",
+          "is_absolute": "false",
+          "Threshold": "Zone 1/0",
+          "Unit": "ATEX zone"
+        },
+        {
+          "#": "C12",
+          "Constraint": "Ambient Temperature Range",
+          "Type": "environmental",
+          "is_absolute": "false",
+          "Threshold": "−20 to +60 (est.)",
+          "Unit": "°C ambient"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Constraint",
+        "Verdict",
+        "Rationale"
+      ],
+      "rows": [
+        {
+          "#": "C1",
+          "Constraint": "Aqueous Media Requirement",
+          "Verdict": "**none**",
+          "Rationale": "Marquardt's product segment within 334513 uses water and water-glycol as calibration and test media. Wet calibration rigs (L5.6.1) circulate clean water through closed-loop test circuits. The home-market product targets water-based applications by design. [SRC: VN L6.6, 01]"
+        },
+        {
+          "#": "C2",
+          "Constraint": "Max Medium Temperature (90 °C)",
+          "Verdict": "**none**",
+          "Rationale": "Calibration and test circuits operate at 5–50 °C. Environmental testing (L5.6.2) cycles to 90 °C maximum — matching the sensor's rated limit exactly. No routine process within this market's instrument manufacturing chain exceeds 90 °C for the sensor's wetted path. [SRC: VN L6.6, 01 specs]"
+        },
+        {
+          "#": "C3",
+          "Constraint": "Air Bubble / Void Fraction Limit",
+          "Verdict": "**none**",
+          "Rationale": "Calibration rigs (L5.6.1) use de-aerated, temperature-stabilized water to ensure reference-grade measurement accuracy. Air content is actively minimized to <0.1% to avoid calibration error. Production test loops are closed-loop, pressurized systems. [SRC: VN L5.6.1]"
+        },
+        {
+          "#": "C4",
+          "Constraint": "Temperature-Dependent Accuracy",
+          "Verdict": "**none**",
+          "Rationale": "Calibration is performed at controlled, stable temperatures with known fluid properties. NTC compensation reduces temperature-induced error to ~0.2%. No extreme thermal transients in instrument manufacturing test environments. [SRC: 01 constraints, VN L6.6]"
+        },
+        {
+          "#": "C5",
+          "Constraint": "Wetted Material Chemical Compatibility",
+          "Verdict": "**none**",
+          "Rationale": "Calibration and test media are clean water or water-glycol — no aggressive chemicals contact the sensor during manufacturing or end-use calibration. Polymer housing and KTW/WRAS-approved seals are fully compatible. [SRC: 01 features, VN L5.6.1]"
+        },
+        {
+          "#": "C6",
+          "Constraint": "Pipe Full Condition Required",
+          "Verdict": "**none**",
+          "Rationale": "All calibration rigs and test loops are closed-pipe, fully filled, and pressurized systems. Fill/drain procedures ensure complete pipe-full condition before any measurement. Partially filled pipes would invalidate calibration references. [SRC: VN L5.6.1]"
+        },
+        {
+          "#": "C7",
+          "Constraint": "Minimum Flow Rate Detection",
+          "Verdict": "**none**",
+          "Rationale": "Calibration rigs cover the sensor's specified range (0.25–60 l/min depending on DN variant) with variable-speed pumps. The calibration process explicitly characterizes the sensor across its operating range including low-flow points. [SRC: VN L4.6.1.2, 01 specs]"
+        },
+        {
+          "#": "C8",
+          "Constraint": "Max Operating Pressure (10 bar)",
+          "Verdict": "**none**",
+          "Rationale": "Calibration loops typically operate at 1–6 bar. Pressure cycle endurance testing (L5.6.2) goes to rated pressure (10 bar) and burst test at 1.5× — the test infrastructure is designed to match the product's rated envelope. [SRC: VN L4.6.2.2, 01 specs]"
+        },
+        {
+          "#": "C9",
+          "Constraint": "Min Straight Pipe Run (5–10× DN)",
+          "Verdict": "**none**",
+          "Rationale": "Calibration rigs (L5.6.1) are purpose-built with adequate straight-run sections upstream and downstream of the device-under-test position. Straight pipe run is a standard rig design consideration, not a constraint in this market. [SRC: VN L4.6.1.2]"
+        },
+        {
+          "#": "C10",
+          "Constraint": "Life Endurance Ceiling (3,000 m³)",
+          "Verdict": "**none**",
+          "Rationale": "In this market, the sensor is the manufactured product, not a consumed component. Life endurance is a specification the manufacturer validates (L5.6.2), not a constraint that limits market participation. Each individual sensor goes through a calibration run consuming a few liters, not thousands of cubic meters. [SRC: VN L6.6, 01 specs]"
+        },
+        {
+          "#": "C11",
+          "Constraint": "No ATEX Certification",
+          "Verdict": "**none**",
+          "Rationale": "Instrument manufacturing facilities (L6.1–L6.7) are not classified as explosive atmospheres. No Zone 0/1/2 classification applies to standard instrument production floors, calibration labs, or assembly areas. [SRC: VN L6.10]"
+        },
+        {
+          "#": "C12",
+          "Constraint": "Ambient Temperature Range",
+          "Verdict": "**none**",
+          "Rationale": "All manufacturing, calibration, and testing occurs in indoor, climate-controlled environments (18–28 °C ambient). RAST 2.5 connector and polymer housing are designed for exactly this type of protected installation environment. [SRC: VN L6.5, 01 specs]"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Metric",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Metric": "**Total assessments**",
+          "Value": "12"
+        },
+        {
+          "Metric": "**Knockouts**",
+          "Value": "0"
+        },
+        {
+          "Metric": "**Mitigable**",
+          "Value": "0"
+        },
+        {
+          "Metric": "**None (irrelevant)**",
+          "Value": "12"
+        },
+        {
+          "Metric": "**Market status**",
+          "Value": "**SURVIVING** — no knockouts, proceeds to downstream scoring"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "constraint_market_compatibility",
+      "product_name": "Ultrasonic Flow Sensor",
+      "vendor_name": "Marquardt",
+      "market_name": "Industrial Process Variable Instruments Manufacturing",
+      "naics_code": "334513",
+      "architecture_distance": 0,
+      "constraints_assessed": 12,
+      "assessments": [
+        {
+          "constraint_name": "Aqueous Media Requirement",
+          "market_name": "Industrial Process Variable Instruments Manufacturing",
+          "naics_code": "334513",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Home market uses water and water-glycol as calibration and test media. Product targets water-based applications by design."
+        },
+        {
+          "constraint_name": "Maximum Medium Temperature",
+          "market_name": "Industrial Process Variable Instruments Manufacturing",
+          "naics_code": "334513",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Calibration circuits 5-50 degC. Environmental testing cycles to 90 degC max — matching rated limit. No routine process exceeds 90 degC."
+        },
+        {
+          "constraint_name": "Air Bubble / Void Fraction Limit",
+          "market_name": "Industrial Process Variable Instruments Manufacturing",
+          "naics_code": "334513",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Calibration rigs use de-aerated water at <0.1% air content. Closed-loop pressurized systems."
+        },
+        {
+          "constraint_name": "Temperature-Dependent Accuracy",
+          "market_name": "Industrial Process Variable Instruments Manufacturing",
+          "naics_code": "334513",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Calibration at controlled, stable temperatures. NTC compensation to ~0.2%. No extreme transients in manufacturing test environments."
+        },
+        {
+          "constraint_name": "Wetted Material Chemical Compatibility",
+          "market_name": "Industrial Process Variable Instruments Manufacturing",
+          "naics_code": "334513",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Clean water or water-glycol test media. Polymer housing and KTW/WRAS seals fully compatible."
+        },
+        {
+          "constraint_name": "Pipe Full Condition Required",
+          "market_name": "Industrial Process Variable Instruments Manufacturing",
+          "naics_code": "334513",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Calibration rigs and test loops are closed-pipe, fully filled, pressurized systems. Standard requirement for valid calibration."
+        },
+        {
+          "constraint_name": "Minimum Flow Rate Detection",
+          "market_name": "Industrial Process Variable Instruments Manufacturing",
+          "naics_code": "334513",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Calibration rigs cover the full specified flow range with variable-speed pumps. Low-flow characterization is part of the process."
+        },
+        {
+          "constraint_name": "Maximum Operating Pressure",
+          "market_name": "Industrial Process Variable Instruments Manufacturing",
+          "naics_code": "334513",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Calibration loops at 1-6 bar. Pressure endurance testing at rated 10 bar. Test infrastructure matches product envelope."
+        },
+        {
+          "constraint_name": "Minimum Straight Pipe Run",
+          "market_name": "Industrial Process Variable Instruments Manufacturing",
+          "naics_code": "334513",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Calibration rigs are purpose-built with adequate straight-run sections. Standard rig design consideration, not a market constraint."
+        },
+        {
+          "constraint_name": "Life Endurance Ceiling",
+          "market_name": "Industrial Process Variable Instruments Manufacturing",
+          "naics_code": "334513",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Sensor is the manufactured product, not a consumed component. Life endurance is validated as a specification, not consumed during production."
+        },
+        {
+          "constraint_name": "No Explosive Atmosphere Certification",
+          "market_name": "Industrial Process Variable Instruments Manufacturing",
+          "naics_code": "334513",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Instrument manufacturing facilities are not classified as explosive atmospheres. No ATEX Zone 0/1/2 applies to production floors or calibration labs."
+        },
+        {
+          "constraint_name": "Ambient Temperature Range",
+          "market_name": "Industrial Process Variable Instruments Manufacturing",
+          "naics_code": "334513",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Indoor, climate-controlled manufacturing and testing at 18-28 degC ambient. RAST 2.5 connector designed for this environment."
+        }
+      ],
+      "markets_eliminated": [],
+      "markets_surviving": [
+        "334513"
+      ],
+      "market_status": "surviving",
+      "knockout_count": 0,
+      "mitigable_count": 0,
+      "none_count": 12,
+      "entities_produced": {
+        "nodes": [],
+        "relationships": []
+      }
+    }
+  ],
+  "has_bom": true,
+  "naics_sector_type": "manufacturing"
+}

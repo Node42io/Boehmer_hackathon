@@ -1,0 +1,1536 @@
+{
+  "id": "ODI_data_processing_hosting",
+  "title": "ODI Matrix — Data Processing, Hosting, and Related Services (NAICS 518210)",
+  "type": "odi_matrix",
+  "market_slug": "data_processing_hosting",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Step 1 — Error Statement Collection",
+      "content": "26 needs from Step 06 (JTBD_data_processing_hosting) + 8 product-related needs from Step 10 (FIT §10a) = **34 total needs**.\n\nStep 10 entries injected with `job_step_number=0`, `job_step_name=\"product_constraint\"`, `impact_category=\"reliability\"`, `product_related=true` per merge rule.\n\nMarket context: CDU secondary-loop flow sensing for GPU / HPC liquid-cooled IT (OT-3 primary, OT-2 partial). Safety-of-IT-load dominates upstream opportunity stack. No needs skipped.\n\n---"
+    },
+    {
+      "title": "Step 2 — Satisfaction Recalibration (Incumbent-Grounded)",
+      "content": "**Incumbent profiles used for recalibration** (from JTBD §2.4, FIT §11):\n\n| Incumbent | Share | Mechanism | Strengths | Weaknesses |\n|---|---|---|---|---|\n| **Electromagnetic (E+H Promag H et al.)** | 35% | Faraday induction | ±0.5% accuracy, no moving parts, DN2–DN150, HART/Modbus/PROFIBUS/EtherNet-IP, 100:1 turndown, bidirectional, empty-pipe detection via conductivity | 5–10× cost, larger footprint, higher power, flanged not plug-in, requires conductive fluid |\n| Ultrasonic transit-time | 30% | Acoustic A/B | (subject — excluded) | (subject — excluded) |\n| Turbine / impeller | 15% | Rotational | Low cost, simple pulse | Bearing wear, pressure drop, no diagnostics, ferrous particle jamming |\n| Vortex | 10% | Bluff-body shedding | No moving parts, simple | Min-Reynolds floor, vibration sensitive, poor at low flow |\n| Thermal-dispersion / paddle switch | 10% | Binary threshold | Cheap redundant cutout | On/off only, no kW duty, no telemetry |\n\n*Leading incumbent in CDU deployments is electromagnetic (E+H Promag H). Recalibration weights mag heavily with a floor set by turbine/vortex coverage in lower-tier CDU builds.*\n\n### Recalibration Table — Step 06 Needs\n\n| # | Statement (abbreviated) | Imp | Sat_orig | Sat_recal | Rationale |\n|---|---|---|---|---|---|\n| ES-01 | Turndown covers idle→peak pump | 8 | 5 | **6** | Mag 100:1 turndown covers variable-speed; turbine 30:1 adequate |\n| ES-02 | Single platform DN15–DN25 | 7 | 4 | **7** | Mag DN2–DN150 with common transmitter; Promag H full coverage |\n| ES-03 | Commissioning for water/PG25/EG25 | 7 | 4 | **5** | Mag needs no fluid config; ultrasonic/vortex do. Mixed |\n| ES-04 | Install orientation <2% bias | 8 | 5 | **6** | Mag orientation-insensitive; ultrasonic/vortex biased |\n| ES-05 | Modbus/BACnet/MQTT BMS | 7 | 5 | **7** | Mag ships HART/Modbus/PROFIBUS/EtherNet-IP native |\n| ES-06 | Empty-pipe detect <5s | 9 | 3 | **4** | Mag has conductivity-based empty-pipe; turbine/vortex cannot |\n| ES-07 | Self-diag at start cycle | 7 | 4 | **5** | Mag via HART; turbine none |\n| ES-08 | Gate GPU on OCP 1.5 L/min/kW | 9 | 4 | **4** | Flow reading available; OCP-specific interlock logic not provided |\n| ES-09 | ±2% over 40,000 h | 9 | 5 | **6** | Mag drift-stable; turbine drifts 2–5%; mixed |\n| ES-10 | Air >2% vol after glycol top-up | 8 | 4 | **5** | Mag insensitive to air; turbine jams; ultrasonic loses signal |\n| ES-11 | Step-change loss-of-flow <2s | 10 | 4 | **5** | Mag response 0.1–1s adequate; turbine slower |\n| ES-12 | Single-body flow×ΔT kW, sub-second | 8 | 4 | **3** | Integrated temp is rare across incumbents; Promag H optional |\n| ES-13 | ΔP <50 mbar @ 30 L/min | 7 | 6 | **7** | Mag zero-drop; turbine/vortex moderate drop |\n| ES-14 | Pulsation oscillation <5% | 6 | 5 | **5** | Mag has damping; ultrasonic/turbine susceptible |\n| ES-15 | Reverse-flow detect <1s | 7 | 4 | **6** | Mag bidirectional; turbine/paddle cannot resolve direction |\n| ES-16 | Undetected degradation >10% | 9 | 5 | **5** | Mag stable but no degradation trending; turbine drifts silently |\n| ES-17 | Drift ±0.5% / 30d over 24mo | 8 | 4 | **5** | Mag stable but no continuous drift alarm logic |\n| ES-18 | 1-sec telemetry to DCIM | 8 | 5 | **6** | Mag with Modbus/EtherNet-IP streams at 1 Hz |\n| ES-19 | Biofilm/scale <2% / 5yr | 7 | 5 | **6** | Mag electrodes tolerate fouling; turbine blades accumulate |\n| ES-20 | Incipient leak signatures | 9 | 4 | **3** | No incumbent provides sub-threshold leak pattern recognition |\n| ES-21 | Acoustic-coupling drift <1% / 5yr | 7 | 5 | **5** | Ultrasonic-specific; mag unaffected but minority share |\n| ES-22 | Replace without draining | 8 | 3 | **3** | Mag flanged/bulky; turbine/vortex inline — all require drain |\n| ES-23 | Recal <1 per 5-yr cycle | 7 | 4 | **6** | Mag rarely needs field recal; turbine wears and drifts |\n| ES-24 | Remote firmware push via BMS | 6 | 3 | **3** | Mag HART limited OTA; no incumbent offers full remote update |\n| ES-25 | ASHRAE TC 9.9 traceable telemetry | 8 | 4 | **5** | Mag with ISO 17025 traceability available; turbine rare |\n| ES-26 | Hyperscaler escalations <24mo | 8 | 4 | **5** | Mag reliability good but cost-driven underdeployment |\n\n### Recalibration Table — Step 10 Product-Related Needs\n\n| # | Statement (abbreviated) | Imp | Sat_orig | Sat_recal | Rationale |\n|---|---|---|---|---|---|\n| PRN-01 | Glycol inhibitor acoustic drift | 7 | 4 | **6** | Mag insensitive to sound speed; ultrasonic-only failure mode |\n| PRN-02 | 90 °C housing limit (ASHRAE W4/W5) | 5 | 5 | **7** | Metal-housed mag/Coriolis rated 130 °C+ |\n| PRN-03 | DN20 4.2 L/min SNR floor vs OCP | 8 | 4 | **6** | Mag resolves sub-0.1 m/s; ultrasonic hits SNR floor |\n| PRN-04 | Sub-threshold air bias 1–2% vol | 8 | 3 | **5** | Mag insensitive; turbine jams; mixed incumbent coverage |\n| PRN-05 | Empty-pipe blackout during drain-and-fill | 7 | 4 | **5** | Mag conductivity empty-pipe flag; mechanical impeller still rotates in partial fill |\n| PRN-06 | Single-chord path bias in compact manifold | 7 | 5 | **6** | Multi-path ultrasonic/mag are profile-insensitive |\n| PRN-07 | Speed-of-sound transient >5 °C/min | 7 | 5 | **6** | Mag temp-independent by principle |\n| PRN-08 | 10 bar polymer housing limit | 5 | 4 | **6** | Metal-bodied mag/Coriolis rated 16–40 bar |\n\n---"
+    },
+    {
+      "title": "Step 3 — Opportunity Scores (Deterministic)",
+      "content": "Formula: `opportunity_score = importance + max(importance - satisfaction, 0)`\nUnderserved: `importance > 7 AND satisfaction < 5`\nOverserved: `importance < 3 AND satisfaction > 7`\n\n### Step 06 Needs — Scored\n\n| # | Statement (abbreviated) | Imp | Sat | Opp | Under? | Over? | Impact | prod_rel |\n|---|---|---|---|---|---|---|---|---|\n| ES-01 | Turndown covers idle→peak pump | 8 | 6 | **10.00** | no | no | reliability | false |\n| ES-02 | Single platform DN15–DN25 | 7 | 7 | **7.00** | no | no | cost | true |\n| ES-03 | Commissioning water/PG25/EG25 | 7 | 5 | **9.00** | no | no | skill | true |\n| ES-04 | Install orientation <2% bias | 8 | 6 | **10.00** | no | no | reliability | false |\n| ES-05 | Modbus/BACnet/MQTT BMS | 7 | 7 | **7.00** | no | no | time | false |\n| ES-06 | Empty-pipe detect <5s | 9 | 4 | **14.00** | YES | no | safety | true |\n| ES-07 | Self-diag at start cycle | 7 | 5 | **9.00** | no | no | reliability | false |\n| ES-08 | Gate GPU on OCP 1.5 L/min/kW | 9 | 4 | **14.00** | YES | no | safety | false |\n| ES-09 | ±2% over 40,000 h | 9 | 6 | **12.00** | no | no | reliability | false |\n| ES-10 | Air >2% vol after glycol top-up | 8 | 5 | **11.00** | no | no | reliability | true |\n| ES-11 | Step-change loss-of-flow <2s | 10 | 5 | **15.00** | no | no | safety | false |\n| ES-12 | Single-body flow×ΔT kW | 8 | 3 | **13.00** | YES | no | cost | true |\n| ES-13 | ΔP <50 mbar @ 30 L/min | 7 | 7 | **7.00** | no | no | cost | false |\n| ES-14 | Pulsation oscillation <5% | 6 | 5 | **7.00** | no | no | reliability | false |\n| ES-15 | Reverse-flow detect <1s | 7 | 6 | **8.00** | no | no | safety | true |\n| ES-16 | Undetected degradation >10% | 9 | 5 | **13.00** | no | no | safety | false |\n| ES-17 | Drift ±0.5% / 30d over 24mo | 8 | 5 | **11.00** | no | no | reliability | false |\n| ES-18 | 1-sec telemetry to DCIM | 8 | 6 | **10.00** | no | no | cost | false |\n| ES-19 | Biofilm/scale <2% / 5yr | 7 | 6 | **8.00** | no | no | reliability | false |\n| ES-20 | Incipient leak signatures | 9 | 3 | **15.00** | YES | no | safety | true |\n| ES-21 | Acoustic-coupling drift <1% / 5yr | 7 | 5 | **9.00** | no | no | reliability | true |\n| ES-22 | Replace without draining | 8 | 3 | **13.00** | YES | no | time | false |\n| ES-23 | Recal <1 per 5-yr cycle | 7 | 6 | **8.00** | no | no | cost | false |\n| ES-24 | Remote firmware push via BMS | 6 | 3 | **9.00** | no | no | time | false |\n| ES-25 | ASHRAE TC 9.9 traceable telemetry | 8 | 5 | **11.00** | no | no | cost | false |\n| ES-26 | Hyperscaler escalations <24mo | 8 | 5 | **11.00** | no | no | cost | false |\n\n### Step 10 Product-Related Needs — Scored\n\n| # | Statement (abbreviated) | Imp | Sat | Opp | Under? | Over? | Impact | prod_rel |\n|---|---|---|---|---|---|---|---|---|\n| PRN-01 | Glycol inhibitor acoustic drift | 7 | 6 | **8.00** | no | no | reliability | true |\n| PRN-02 | 90 °C housing limit | 5 | 7 | **5.00** | no | no | reliability | true |\n| PRN-03 | DN20 4.2 L/min SNR floor | 8 | 6 | **10.00** | no | no | reliability | true |\n| PRN-04 | Sub-threshold air bias | 8 | 5 | **11.00** | no | no | reliability | true |\n| PRN-05 | Empty-pipe drain-and-fill blackout | 7 | 5 | **9.00** | no | no | reliability | true |\n| PRN-06 | Single-chord path bias | 7 | 6 | **8.00** | no | no | reliability | true |\n| PRN-07 | Speed-of-sound transient | 7 | 6 | **8.00** | no | no | reliability | true |\n| PRN-08 | 10 bar polymer housing limit | 5 | 6 | **5.00** | no | no | reliability | true |\n\n---"
+    },
+    {
+      "title": "Step 4 — Market ODI Summary",
+      "content": "| Metric | Value |\n|---|---|\n| **Market** | Data Processing, Hosting, and Related Services (NAICS 518210) |\n| **Total Needs** | 34 |\n| **Underserved Count** | 5 |\n| **Overserved Count** | 0 |\n| **Avg Opportunity Score** | 9.85 |\n\n### Top 5 Opportunities\n\n| Rank | # | Error Statement | Imp | Sat | Opp | Zone |\n|---|---|---|---|---|---|---|\n| 1 | ES-11 | Minimize the time to detect a step-change loss-of-flow event (leak, valve closure, pump trip) to under 2 seconds | 10 | 5 | **15.00** | Underserved |\n| 2 | ES-20 | Increase the ability to detect incipient leak signatures (sub-threshold flow decay) before visible coolant loss | 9 | 3 | **15.00** | Underserved |\n| 3 | ES-06 | Minimize the time to detect empty-pipe or air-lock in the secondary loop before IT power-on to under 5 seconds | 9 | 4 | **14.00** | Underserved |\n| 4 | ES-08 | Minimize the likelihood of enabling GPU load with secondary-loop flow below the OCP 1.5 L/min/kW safety threshold | 9 | 4 | **14.00** | Underserved |\n| 5 | ES-16 | Minimize the likelihood of GPU throttling events triggered by undetected flow degradation exceeding 10% from setpoint | 9 | 5 | **13.00** | Underserved |\n\n**Runners-up at Opp=13:** ES-09 (40,000 h accuracy), ES-12 (single-body kW), ES-22 (replace without drain).\n\n### Opportunity Landscape\n\n| Zone | Score Range | Count | % of Total |\n|---|---|---|---|\n| Highly Underserved | > 15 | 0 | 0.0% |\n| Underserved | 12–15 | 8 | 23.5% |\n| Appropriately Served | 10–12 | 9 | 26.5% |\n| Overserved | < 10 | 17 | 50.0% |\n\n**Pattern:** Top opportunities are all **safety-of-IT-load detection** needs (loss-of-flow, empty-pipe, OCP gating, incipient leaks, degradation). This market rewards **digital anomaly detection** over raw metrological precision — uptime and thermal-runaway prevention dominate over ±0.5% accuracy.\n\n---"
+    },
+    {
+      "title": "Step 5 — Cross-Check vs Feature-Market Fit",
+      "content": "| Metric | Value | Source |\n|---|---|---|\n| ODI avg_opportunity_score | 9.85 | This analysis |\n| Feature-Fit avg (tech features) | 5.73 | FIT_data_processing_hosting §09a (mean of 7 overall_fit values: 6.00, 6.56, 3.56, 6.78, 5.00, 7.56, 4.67) |\n\n**Cross-check thresholds:**\n\n| Condition | Triggered? | Note |\n|---|---|---|\n| ODI avg > 12 AND Feature-Fit avg < 4 | **NO** | Feature-Fit avg = 5.73 |\n| ODI avg < 8 AND Feature-Fit avg > 7 | **NO** | ODI avg = 9.85 |\n\n**No inconsistencies detected.** The top-5 opportunities (ES-11, ES-20, ES-06, ES-08, ES-16) align with the highest-scoring feature in Step 09 — **Digital Anomaly Detection (fit=7.56)** — which directly serves empty-pipe, incipient-leak, and loss-of-flow detection. **No Moving Parts (fit=6.78)** supports ES-09/ES-16. Biggest mismatch is ES-22 (replace without draining, opp=13) — FIT §11 flags Marquardt's plug-in mechanical interface as a vendor advantage but serial production is DN20-only. Communication-protocol gap (FIT §11a must_be=3) does not appear in ODI top-5 because Mag incumbents already satisfy ES-05 at sat=7.\n\n---"
+    },
+    {
+      "title": "QA Checklist",
+      "content": "| # | Check | Result | Note |\n|---|---|---|---|\n| Q1 | Formula correct | **PASS** | Spot-check: ES-11 (10+max(10-5,0)=15), ES-20 (9+max(9-3,0)=15), ES-13 (7+max(7-7,0)=7), PRN-02 (5+max(5-7,0)=5), ES-22 (8+max(8-3,0)=13). All match. |\n| Q2 | Underserved flags correct | **PASS** | 5 entries with imp>7 AND sat<5: ES-06(9,4), ES-08(9,4), ES-12(8,3), ES-20(9,3), ES-22(8,3). ES-11(10,5)=NO (5 not <5). |\n| Q3 | Overserved flags correct | **PASS** | 0 entries with imp<3 AND sat>7. Minimum importance across all 34 entries is 5. |\n| Q4 | Need count preserved | **PASS** | 26 (Step 06) + 8 (Step 10) = 34 ≥ 26 |\n| Q5 | Top-5 ordering correct | **PASS** | 15 ≥ 15 ≥ 14 ≥ 14 ≥ 13 — descending by opp; ties broken by importance then need# |\n| Q6 | Cross-check ran | **PASS** | ODI vs Feature-Fit comparison completed; no inconsistencies |\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"odi_matrix\",\n  \"naics_code\": \"518210\",\n  \"naics_title\": \"Data Processing, Hosting, and Related Services\",\n  \"market_name\": \"Data Processing, Hosting, and Related Services\",\n  \"product_name\": \"Ultrasonic Flow Sensor\",\n  \"vendor_name\": \"Marquardt\",\n  \"entries\": [\n    {\"error_statement\": \"Minimize the likelihood of selecting a flow sensor whose turndown ratio cannot cover variable-speed pump operation from idle to peak GPU load\", \"importance\": 8, \"satisfaction_current\": 6, \"opportunity_score\": 10.00, \"is_underserved\": false, \"is_overserved\": false, \"impact_category\": \"reliability\", \"product_related\": false, \"job_step_number\": 1, \"job_step_name\": \"DEFINE\"},\n    {\"error_statement\": \"Increase the ability to specify one sensor platform across DN15-DN25 CDU variants without redesigning the secondary manifold\", \"importance\": 7, \"satisfaction_current\": 7, \"opportunity_score\": 7.00, \"is_underserved\": false, \"is_overserved\": false, \"impact_category\": \"cost\", \"product_related\": true, \"job_step_number\": 1, \"job_step_name\": \"DEFINE\"},\n    {\"error_statement\": \"Minimize the commissioning time required to configure fluid acoustic properties for facility-specific water / PG25 / EG25 blends\", \"importance\": 7, \"satisfaction_current\": 5, \"opportunity_score\": 9.00, \"is_underserved\": false, \"is_overserved\": false, \"impact_category\": \"skill\", \"product_related\": true, \"job_step_number\": 3, \"job_step_name\": \"PREPARE\"},\n    {\"error_statement\": \"Minimize the likelihood of incorrect installation orientation causing flow measurement bias exceeding 2% of reading\", \"importance\": 8, \"satisfaction_current\": 6, \"opportunity_score\": 10.00, \"is_underserved\": false, \"is_overserved\": false, \"impact_category\": \"reliability\", \"product_related\": false, \"job_step_number\": 3, \"job_step_name\": \"PREPARE\"},\n    {\"error_statement\": \"Increase the ability to integrate the sensor into existing CDU BMS stacks (Modbus / BACnet / MQTT) without custom gateway development\", \"importance\": 7, \"satisfaction_current\": 7, \"opportunity_score\": 7.00, \"is_underserved\": false, \"is_overserved\": false, \"impact_category\": \"time\", \"product_related\": false, \"job_step_number\": 3, \"job_step_name\": \"PREPARE\"},\n    {\"error_statement\": \"Minimize the time to detect empty-pipe or air-lock in the secondary loop before IT power-on to under 5 seconds\", \"importance\": 9, \"satisfaction_current\": 4, \"opportunity_score\": 14.00, \"is_underserved\": true, \"is_overserved\": false, \"impact_category\": \"safety\", \"product_related\": true, \"job_step_number\": 4, \"job_step_name\": \"CONFIRM\"},\n    {\"error_statement\": \"Increase the ability to verify sensor signal integrity through automated self-diagnostics at each CDU start cycle\", \"importance\": 7, \"satisfaction_current\": 5, \"opportunity_score\": 9.00, \"is_underserved\": false, \"is_overserved\": false, \"impact_category\": \"reliability\", \"product_related\": false, \"job_step_number\": 4, \"job_step_name\": \"CONFIRM\"},\n    {\"error_statement\": \"Minimize the likelihood of enabling GPU load with secondary-loop flow below the OCP 1.5 L/min/kW safety threshold\", \"importance\": 9, \"satisfaction_current\": 4, \"opportunity_score\": 14.00, \"is_underserved\": true, \"is_overserved\": false, \"impact_category\": \"safety\", \"product_related\": false, \"job_step_number\": 4, \"job_step_name\": \"CONFIRM\"},\n    {\"error_statement\": \"Increase the ability to maintain flow accuracy within +/-2% of reading over 40,000 hours of continuous 24x7 operation\", \"importance\": 9, \"satisfaction_current\": 6, \"opportunity_score\": 12.00, \"is_underserved\": false, \"is_overserved\": false, \"impact_category\": \"reliability\", \"product_related\": false, \"job_step_number\": 5, \"job_step_name\": \"EXECUTE\"},\n    {\"error_statement\": \"Minimize the likelihood of air entrainment >2% vol after glycol top-up causing signal loss during a GPU workload ramp\", \"importance\": 8, \"satisfaction_current\": 5, \"opportunity_score\": 11.00, \"is_underserved\": false, \"is_overserved\": false, \"impact_category\": \"reliability\", \"product_related\": true, \"job_step_number\": 5, \"job_step_name\": \"EXECUTE\"},\n    {\"error_statement\": \"Minimize the time to detect a step-change loss-of-flow event (leak, valve closure, pump trip) to under 2 seconds\", \"importance\": 10, \"satisfaction_current\": 5, \"opportunity_score\": 15.00, \"is_underserved\": false, \"is_overserved\": false, \"impact_category\": \"safety\", \"product_related\": false, \"job_step_number\": 5, \"job_step_name\": \"EXECUTE\"},\n    {\"error_statement\": \"Increase the ability to compute secondary-loop thermal duty (kW) from flow x delta-T within a single sensor body, sub-second\", \"importance\": 8, \"satisfaction_current\": 3, \"opportunity_score\": 13.00, \"is_underserved\": true, \"is_overserved\": false, \"impact_category\": \"cost\", \"product_related\": true, \"job_step_number\": 5, \"job_step_name\": \"EXECUTE\"},\n    {\"error_statement\": \"Minimize the flow sensor's contribution to CDU secondary-loop pressure drop below 50 mbar at 30 L/min design flow\", \"importance\": 7, \"satisfaction_current\": 7, \"opportunity_score\": 7.00, \"is_underserved\": false, \"is_overserved\": false, \"impact_category\": \"cost\", \"product_related\": false, \"job_step_number\": 5, \"job_step_name\": \"EXECUTE\"},\n    {\"error_statement\": \"Minimize the likelihood of pump-pulsation-induced flow reading oscillation exceeding 5% of steady-state value\", \"importance\": 6, \"satisfaction_current\": 5, \"opportunity_score\": 7.00, \"is_underserved\": false, \"is_overserved\": false, \"impact_category\": \"reliability\", \"product_related\": false, \"job_step_number\": 5, \"job_step_name\": \"EXECUTE\"},\n    {\"error_statement\": \"Increase the ability to detect reverse-flow direction (bypass-valve misoperation) within 1 second of onset\", \"importance\": 7, \"satisfaction_current\": 6, \"opportunity_score\": 8.00, \"is_underserved\": false, \"is_overserved\": false, \"impact_category\": \"safety\", \"product_related\": true, \"job_step_number\": 5, \"job_step_name\": \"EXECUTE\"},\n    {\"error_statement\": \"Minimize the likelihood of GPU throttling events triggered by undetected flow degradation exceeding 10% from setpoint\", \"importance\": 9, \"satisfaction_current\": 5, \"opportunity_score\": 13.00, \"is_underserved\": false, \"is_overserved\": false, \"impact_category\": \"safety\", \"product_related\": false, \"job_step_number\": 5, \"job_step_name\": \"EXECUTE\"},\n    {\"error_statement\": \"Increase the ability to detect calibration drift exceeding +/-0.5% within 30 days of occurrence over 24 months continuous operation\", \"importance\": 8, \"satisfaction_current\": 5, \"opportunity_score\": 11.00, \"is_underserved\": false, \"is_overserved\": false, \"impact_category\": \"reliability\", \"product_related\": false, \"job_step_number\": 6, \"job_step_name\": \"MONITOR\"},\n    {\"error_statement\": \"Increase the ability to stream 1-second-granularity flow + temperature telemetry into DCIM for real-time PUE/WUE reporting\", \"importance\": 8, \"satisfaction_current\": 6, \"opportunity_score\": 10.00, \"is_underserved\": false, \"is_overserved\": false, \"impact_category\": \"cost\", \"product_related\": false, \"job_step_number\": 6, \"job_step_name\": \"MONITOR\"},\n    {\"error_statement\": \"Minimize the likelihood of biofilm / scale / particulate buildup degrading accuracy by more than 2% within 5-year service life\", \"importance\": 7, \"satisfaction_current\": 6, \"opportunity_score\": 8.00, \"is_underserved\": false, \"is_overserved\": false, \"impact_category\": \"reliability\", \"product_related\": false, \"job_step_number\": 6, \"job_step_name\": \"MONITOR\"},\n    {\"error_statement\": \"Increase the ability to detect incipient leak signatures (sub-threshold flow decay) before visible coolant loss\", \"importance\": 9, \"satisfaction_current\": 3, \"opportunity_score\": 15.00, \"is_underserved\": true, \"is_overserved\": false, \"impact_category\": \"safety\", \"product_related\": true, \"job_step_number\": 6, \"job_step_name\": \"MONITOR\"},\n    {\"error_statement\": \"Minimize the likelihood of acoustic-coupling degradation causing error >1% within the first 5 years of operation\", \"importance\": 7, \"satisfaction_current\": 5, \"opportunity_score\": 9.00, \"is_underserved\": false, \"is_overserved\": false, \"impact_category\": \"reliability\", \"product_related\": true, \"job_step_number\": 6, \"job_step_name\": \"MONITOR\"},\n    {\"error_statement\": \"Minimize the time required to replace a degraded flow sensor without draining the secondary loop or taking the CDU offline\", \"importance\": 8, \"satisfaction_current\": 3, \"opportunity_score\": 13.00, \"is_underserved\": true, \"is_overserved\": false, \"impact_category\": \"time\", \"product_related\": false, \"job_step_number\": 7, \"job_step_name\": \"MODIFY\"},\n    {\"error_statement\": \"Minimize the frequency of mandated field recalibration to no more than once per 5-year CDU service cycle\", \"importance\": 7, \"satisfaction_current\": 6, \"opportunity_score\": 8.00, \"is_underserved\": false, \"is_overserved\": false, \"impact_category\": \"cost\", \"product_related\": false, \"job_step_number\": 7, \"job_step_name\": \"MODIFY\"},\n    {\"error_statement\": \"Increase the ability to push firmware / compensation-table updates to the sensor remotely via the CDU BMS bus\", \"importance\": 6, \"satisfaction_current\": 3, \"opportunity_score\": 9.00, \"is_underserved\": false, \"is_overserved\": false, \"impact_category\": \"time\", \"product_related\": false, \"job_step_number\": 7, \"job_step_name\": \"MODIFY\"},\n    {\"error_statement\": \"Increase the ability to evidence ASHRAE TC 9.9 H-class liquid-cooling envelope compliance through traceable per-rack flow telemetry\", \"importance\": 8, \"satisfaction_current\": 5, \"opportunity_score\": 11.00, \"is_underserved\": false, \"is_overserved\": false, \"impact_category\": \"cost\", \"product_related\": false, \"job_step_number\": 6, \"job_step_name\": \"MONITOR\"},\n    {\"error_statement\": \"Minimize the frequency of hyperscaler customer escalations attributed to flow-sensor malfunction within first 24 months after CDU deployment\", \"importance\": 8, \"satisfaction_current\": 5, \"opportunity_score\": 11.00, \"is_underserved\": false, \"is_overserved\": false, \"impact_category\": \"cost\", \"product_related\": false, \"job_step_number\": 6, \"job_step_name\": \"MONITOR\"},\n    {\"error_statement\": \"Minimize the likelihood of measurement drift from acoustic-impedance mismatch when facility-specific glycol inhibitor packages alter the coolant's speed of sound beyond the commissioned compensation profile\", \"importance\": 7, \"satisfaction_current\": 6, \"opportunity_score\": 8.00, \"is_underserved\": false, \"is_overserved\": false, \"impact_category\": \"reliability\", \"product_related\": true, \"job_step_number\": 0, \"job_step_name\": \"product_constraint\"},\n    {\"error_statement\": \"Minimize the residual headroom concern when future ASHRAE W4/W5 warm-water liquid cooling drives CDU secondary-loop supply to the 90 C polymer housing limit\", \"importance\": 5, \"satisfaction_current\": 7, \"opportunity_score\": 5.00, \"is_underserved\": false, \"is_overserved\": false, \"impact_category\": \"reliability\", \"product_related\": true, \"job_step_number\": 0, \"job_step_name\": \"product_constraint\"},\n    {\"error_statement\": \"Minimize the unmeasured-flow window at the DN20 4.2 L/min SNR threshold during CDU idle / low-load states, below which the OCP 1.5 L/min/kW interlock cannot discriminate low flow from no flow\", \"importance\": 8, \"satisfaction_current\": 6, \"opportunity_score\": 10.00, \"is_underserved\": false, \"is_overserved\": false, \"impact_category\": \"reliability\", \"product_related\": true, \"job_step_number\": 0, \"job_step_name\": \"product_constraint\"},\n    {\"error_statement\": \"Minimize the probability of sub-threshold air entrainment (1-2% vol) following glycol top-up or venting biasing flow telemetry fed to the OCP safety interlock, without triggering the >2% loss-of-signal alarm\", \"importance\": 8, \"satisfaction_current\": 5, \"opportunity_score\": 11.00, \"is_underserved\": false, \"is_overserved\": false, \"impact_category\": \"reliability\", \"product_related\": true, \"job_step_number\": 0, \"job_step_name\": \"product_constraint\"},\n    {\"error_statement\": \"Minimize the time the CDU controller spends in empty-pipe fault state during secondary-loop drain-and-fill maintenance cycles, during which the sensor provides no measurement and the prove-flow gate cannot be satisfied\", \"importance\": 7, \"satisfaction_current\": 5, \"opportunity_score\": 9.00, \"is_underserved\": false, \"is_overserved\": false, \"impact_category\": \"reliability\", \"product_related\": true, \"job_step_number\": 0, \"job_step_name\": \"product_constraint\"},\n    {\"error_statement\": \"Minimize the installation-induced flow-profile bias from insufficient upstream straight-pipe run (<5x DN) inside space-constrained rack CDU manifolds where single-chord acoustic path sampling cannot correct for swirl\", \"importance\": 7, \"satisfaction_current\": 6, \"opportunity_score\": 8.00, \"is_underserved\": false, \"is_overserved\": false, \"impact_category\": \"reliability\", \"product_related\": true, \"job_step_number\": 0, \"job_step_name\": \"product_constraint\"},\n    {\"error_statement\": \"Minimize the transient kW duty miscalculation when a GPU workload spike drives secondary-supply temperature transients >5 C/min that outpace the NTC thermistor's compensation response, during which flow x delta-T telemetry deviates from true thermal load\", \"importance\": 7, \"satisfaction_current\": 6, \"opportunity_score\": 8.00, \"is_underserved\": false, \"is_overserved\": false, \"impact_category\": \"reliability\", \"product_related\": true, \"job_step_number\": 0, \"job_step_name\": \"product_constraint\"},\n    {\"error_statement\": \"Minimize the deployment gap at hyperscaler facility-loop pressures exceeding 10 bar where the polymer housing rating forecloses direct-facility-loop installation and forces placement downstream of the brazed-plate HX\", \"importance\": 5, \"satisfaction_current\": 6, \"opportunity_score\": 5.00, \"is_underserved\": false, \"is_overserved\": false, \"impact_category\": \"reliability\", \"product_related\": true, \"job_step_number\": 0, \"job_step_name\": \"product_constraint\"}\n  ],\n  \"market_summary\": {\n    \"market_name\": \"Data Processing, Hosting, and Related Services\",\n    \"naics_code\": \"518210\",\n    \"total_needs\": 34,\n    \"underserved_count\": 5,\n    \"overserved_count\": 0,\n    \"avg_opportunity_score\": 9.85,\n    \"top_opportunities\": [\n      \"Minimize the time to detect a step-change loss-of-flow event (leak, valve closure, pump trip) to under 2 seconds\",\n      \"Increase the ability to detect incipient leak signatures (sub-threshold flow decay) before visible coolant loss\",\n      \"Minimize the time to detect empty-pipe or air-lock in the secondary loop before IT power-on to under 5 seconds\",\n      \"Minimize the likelihood of enabling GPU load with secondary-loop flow below the OCP 1.5 L/min/kW safety threshold\",\n      \"Minimize the likelihood of GPU throttling events triggered by undetected flow degradation exceeding 10% from setpoint\"\n    ]\n  },\n  \"cross_check\": {\n    \"odi_avg_opportunity_score\": 9.85,\n    \"feature_fit_avg\": 5.73,\n    \"high_opp_low_fit_triggered\": false,\n    \"low_opp_high_fit_triggered\": false,\n    \"inconsistencies\": []\n  },\n  \"entities_produced\": {\n    \"nodes\": [\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix80\": \"Minimize the time to detect a step-change loss-of-flow event (leak, valve closure\", \"naics_code\": \"518210\", \"run_id\": \"TBD\"}, \"opportunity_score\": 15.00, \"is_underserved\": false},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix80\": \"Increase the ability to detect incipient leak signatures (sub-threshold flow dec\", \"naics_code\": \"518210\", \"run_id\": \"TBD\"}, \"opportunity_score\": 15.00, \"is_underserved\": true},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix80\": \"Minimize the time to detect empty-pipe or air-lock in the secondary loop before\", \"naics_code\": \"518210\", \"run_id\": \"TBD\"}, \"opportunity_score\": 14.00, \"is_underserved\": true},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix80\": \"Minimize the likelihood of enabling GPU load with secondary-loop flow below the\", \"naics_code\": \"518210\", \"run_id\": \"TBD\"}, \"opportunity_score\": 14.00, \"is_underserved\": true},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement_prefix80\": \"Minimize the likelihood of GPU throttling events triggered by undetected flow d\", \"naics_code\": \"518210\", \"run_id\": \"TBD\"}, \"opportunity_score\": 13.00, \"is_underserved\": false}\n    ],\n    \"relationships\": [\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:Data Processing, Hosting, and Related Services (518210)\", \"target\": \"OpportunityScore:ES-11\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:Data Processing, Hosting, and Related Services (518210)\", \"target\": \"OpportunityScore:ES-20\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:Data Processing, Hosting, and Related Services (518210)\", \"target\": \"OpportunityScore:ES-06\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:Data Processing, Hosting, and Related Services (518210)\", \"target\": \"OpportunityScore:ES-08\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:Data Processing, Hosting, and Related Services (518210)\", \"target\": \"OpportunityScore:ES-16\"}\n    ],\n    \"property_updates\": [\n      {\"node\": \"Market:Data Processing, Hosting, and Related Services (518210)\", \"property\": \"odi_total_needs\", \"value\": 34},\n      {\"node\": \"Market:Data Processing, Hosting, and Related Services (518210)\", \"property\": \"odi_underserved_count\", \"value\": 5},\n      {\"node\": \"Market:Data Processing, Hosting, and Related Services (518210)\", \"property\": \"odi_overserved_count\", \"value\": 0},\n      {\"node\": \"Market:Data Processing, Hosting, and Related Services (518210)\", \"property\": \"odi_avg_opportunity_score\", \"value\": 9.85}\n    ]\n  }\n}\n```"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "Incumbent",
+        "Share",
+        "Mechanism",
+        "Strengths",
+        "Weaknesses"
+      ],
+      "rows": [
+        {
+          "Incumbent": "**Electromagnetic (E+H Promag H et al.)**",
+          "Share": "35%",
+          "Mechanism": "Faraday induction",
+          "Strengths": "±0.5% accuracy, no moving parts, DN2–DN150, HART/Modbus/PROFIBUS/EtherNet-IP, 100:1 turndown, bidirectional, empty-pipe detection via conductivity",
+          "Weaknesses": "5–10× cost, larger footprint, higher power, flanged not plug-in, requires conductive fluid"
+        },
+        {
+          "Incumbent": "Ultrasonic transit-time",
+          "Share": "30%",
+          "Mechanism": "Acoustic A/B",
+          "Strengths": "(subject — excluded)",
+          "Weaknesses": "(subject — excluded)"
+        },
+        {
+          "Incumbent": "Turbine / impeller",
+          "Share": "15%",
+          "Mechanism": "Rotational",
+          "Strengths": "Low cost, simple pulse",
+          "Weaknesses": "Bearing wear, pressure drop, no diagnostics, ferrous particle jamming"
+        },
+        {
+          "Incumbent": "Vortex",
+          "Share": "10%",
+          "Mechanism": "Bluff-body shedding",
+          "Strengths": "No moving parts, simple",
+          "Weaknesses": "Min-Reynolds floor, vibration sensitive, poor at low flow"
+        },
+        {
+          "Incumbent": "Thermal-dispersion / paddle switch",
+          "Share": "10%",
+          "Mechanism": "Binary threshold",
+          "Strengths": "Cheap redundant cutout",
+          "Weaknesses": "On/off only, no kW duty, no telemetry"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement (abbreviated)",
+        "Imp",
+        "Sat_orig",
+        "Sat_recal",
+        "Rationale"
+      ],
+      "rows": [
+        {
+          "#": "ES-01",
+          "Statement (abbreviated)": "Turndown covers idle→peak pump",
+          "Imp": "8",
+          "Sat_orig": "5",
+          "Sat_recal": "**6**",
+          "Rationale": "Mag 100:1 turndown covers variable-speed; turbine 30:1 adequate"
+        },
+        {
+          "#": "ES-02",
+          "Statement (abbreviated)": "Single platform DN15–DN25",
+          "Imp": "7",
+          "Sat_orig": "4",
+          "Sat_recal": "**7**",
+          "Rationale": "Mag DN2–DN150 with common transmitter; Promag H full coverage"
+        },
+        {
+          "#": "ES-03",
+          "Statement (abbreviated)": "Commissioning for water/PG25/EG25",
+          "Imp": "7",
+          "Sat_orig": "4",
+          "Sat_recal": "**5**",
+          "Rationale": "Mag needs no fluid config; ultrasonic/vortex do. Mixed"
+        },
+        {
+          "#": "ES-04",
+          "Statement (abbreviated)": "Install orientation <2% bias",
+          "Imp": "8",
+          "Sat_orig": "5",
+          "Sat_recal": "**6**",
+          "Rationale": "Mag orientation-insensitive; ultrasonic/vortex biased"
+        },
+        {
+          "#": "ES-05",
+          "Statement (abbreviated)": "Modbus/BACnet/MQTT BMS",
+          "Imp": "7",
+          "Sat_orig": "5",
+          "Sat_recal": "**7**",
+          "Rationale": "Mag ships HART/Modbus/PROFIBUS/EtherNet-IP native"
+        },
+        {
+          "#": "ES-06",
+          "Statement (abbreviated)": "Empty-pipe detect <5s",
+          "Imp": "9",
+          "Sat_orig": "3",
+          "Sat_recal": "**4**",
+          "Rationale": "Mag has conductivity-based empty-pipe; turbine/vortex cannot"
+        },
+        {
+          "#": "ES-07",
+          "Statement (abbreviated)": "Self-diag at start cycle",
+          "Imp": "7",
+          "Sat_orig": "4",
+          "Sat_recal": "**5**",
+          "Rationale": "Mag via HART; turbine none"
+        },
+        {
+          "#": "ES-08",
+          "Statement (abbreviated)": "Gate GPU on OCP 1.5 L/min/kW",
+          "Imp": "9",
+          "Sat_orig": "4",
+          "Sat_recal": "**4**",
+          "Rationale": "Flow reading available; OCP-specific interlock logic not provided"
+        },
+        {
+          "#": "ES-09",
+          "Statement (abbreviated)": "±2% over 40,000 h",
+          "Imp": "9",
+          "Sat_orig": "5",
+          "Sat_recal": "**6**",
+          "Rationale": "Mag drift-stable; turbine drifts 2–5%; mixed"
+        },
+        {
+          "#": "ES-10",
+          "Statement (abbreviated)": "Air >2% vol after glycol top-up",
+          "Imp": "8",
+          "Sat_orig": "4",
+          "Sat_recal": "**5**",
+          "Rationale": "Mag insensitive to air; turbine jams; ultrasonic loses signal"
+        },
+        {
+          "#": "ES-11",
+          "Statement (abbreviated)": "Step-change loss-of-flow <2s",
+          "Imp": "10",
+          "Sat_orig": "4",
+          "Sat_recal": "**5**",
+          "Rationale": "Mag response 0.1–1s adequate; turbine slower"
+        },
+        {
+          "#": "ES-12",
+          "Statement (abbreviated)": "Single-body flow×ΔT kW, sub-second",
+          "Imp": "8",
+          "Sat_orig": "4",
+          "Sat_recal": "**3**",
+          "Rationale": "Integrated temp is rare across incumbents; Promag H optional"
+        },
+        {
+          "#": "ES-13",
+          "Statement (abbreviated)": "ΔP <50 mbar @ 30 L/min",
+          "Imp": "7",
+          "Sat_orig": "6",
+          "Sat_recal": "**7**",
+          "Rationale": "Mag zero-drop; turbine/vortex moderate drop"
+        },
+        {
+          "#": "ES-14",
+          "Statement (abbreviated)": "Pulsation oscillation <5%",
+          "Imp": "6",
+          "Sat_orig": "5",
+          "Sat_recal": "**5**",
+          "Rationale": "Mag has damping; ultrasonic/turbine susceptible"
+        },
+        {
+          "#": "ES-15",
+          "Statement (abbreviated)": "Reverse-flow detect <1s",
+          "Imp": "7",
+          "Sat_orig": "4",
+          "Sat_recal": "**6**",
+          "Rationale": "Mag bidirectional; turbine/paddle cannot resolve direction"
+        },
+        {
+          "#": "ES-16",
+          "Statement (abbreviated)": "Undetected degradation >10%",
+          "Imp": "9",
+          "Sat_orig": "5",
+          "Sat_recal": "**5**",
+          "Rationale": "Mag stable but no degradation trending; turbine drifts silently"
+        },
+        {
+          "#": "ES-17",
+          "Statement (abbreviated)": "Drift ±0.5% / 30d over 24mo",
+          "Imp": "8",
+          "Sat_orig": "4",
+          "Sat_recal": "**5**",
+          "Rationale": "Mag stable but no continuous drift alarm logic"
+        },
+        {
+          "#": "ES-18",
+          "Statement (abbreviated)": "1-sec telemetry to DCIM",
+          "Imp": "8",
+          "Sat_orig": "5",
+          "Sat_recal": "**6**",
+          "Rationale": "Mag with Modbus/EtherNet-IP streams at 1 Hz"
+        },
+        {
+          "#": "ES-19",
+          "Statement (abbreviated)": "Biofilm/scale <2% / 5yr",
+          "Imp": "7",
+          "Sat_orig": "5",
+          "Sat_recal": "**6**",
+          "Rationale": "Mag electrodes tolerate fouling; turbine blades accumulate"
+        },
+        {
+          "#": "ES-20",
+          "Statement (abbreviated)": "Incipient leak signatures",
+          "Imp": "9",
+          "Sat_orig": "4",
+          "Sat_recal": "**3**",
+          "Rationale": "No incumbent provides sub-threshold leak pattern recognition"
+        },
+        {
+          "#": "ES-21",
+          "Statement (abbreviated)": "Acoustic-coupling drift <1% / 5yr",
+          "Imp": "7",
+          "Sat_orig": "5",
+          "Sat_recal": "**5**",
+          "Rationale": "Ultrasonic-specific; mag unaffected but minority share"
+        },
+        {
+          "#": "ES-22",
+          "Statement (abbreviated)": "Replace without draining",
+          "Imp": "8",
+          "Sat_orig": "3",
+          "Sat_recal": "**3**",
+          "Rationale": "Mag flanged/bulky; turbine/vortex inline — all require drain"
+        },
+        {
+          "#": "ES-23",
+          "Statement (abbreviated)": "Recal <1 per 5-yr cycle",
+          "Imp": "7",
+          "Sat_orig": "4",
+          "Sat_recal": "**6**",
+          "Rationale": "Mag rarely needs field recal; turbine wears and drifts"
+        },
+        {
+          "#": "ES-24",
+          "Statement (abbreviated)": "Remote firmware push via BMS",
+          "Imp": "6",
+          "Sat_orig": "3",
+          "Sat_recal": "**3**",
+          "Rationale": "Mag HART limited OTA; no incumbent offers full remote update"
+        },
+        {
+          "#": "ES-25",
+          "Statement (abbreviated)": "ASHRAE TC 9.9 traceable telemetry",
+          "Imp": "8",
+          "Sat_orig": "4",
+          "Sat_recal": "**5**",
+          "Rationale": "Mag with ISO 17025 traceability available; turbine rare"
+        },
+        {
+          "#": "ES-26",
+          "Statement (abbreviated)": "Hyperscaler escalations <24mo",
+          "Imp": "8",
+          "Sat_orig": "4",
+          "Sat_recal": "**5**",
+          "Rationale": "Mag reliability good but cost-driven underdeployment"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement (abbreviated)",
+        "Imp",
+        "Sat_orig",
+        "Sat_recal",
+        "Rationale"
+      ],
+      "rows": [
+        {
+          "#": "PRN-01",
+          "Statement (abbreviated)": "Glycol inhibitor acoustic drift",
+          "Imp": "7",
+          "Sat_orig": "4",
+          "Sat_recal": "**6**",
+          "Rationale": "Mag insensitive to sound speed; ultrasonic-only failure mode"
+        },
+        {
+          "#": "PRN-02",
+          "Statement (abbreviated)": "90 °C housing limit (ASHRAE W4/W5)",
+          "Imp": "5",
+          "Sat_orig": "5",
+          "Sat_recal": "**7**",
+          "Rationale": "Metal-housed mag/Coriolis rated 130 °C+"
+        },
+        {
+          "#": "PRN-03",
+          "Statement (abbreviated)": "DN20 4.2 L/min SNR floor vs OCP",
+          "Imp": "8",
+          "Sat_orig": "4",
+          "Sat_recal": "**6**",
+          "Rationale": "Mag resolves sub-0.1 m/s; ultrasonic hits SNR floor"
+        },
+        {
+          "#": "PRN-04",
+          "Statement (abbreviated)": "Sub-threshold air bias 1–2% vol",
+          "Imp": "8",
+          "Sat_orig": "3",
+          "Sat_recal": "**5**",
+          "Rationale": "Mag insensitive; turbine jams; mixed incumbent coverage"
+        },
+        {
+          "#": "PRN-05",
+          "Statement (abbreviated)": "Empty-pipe blackout during drain-and-fill",
+          "Imp": "7",
+          "Sat_orig": "4",
+          "Sat_recal": "**5**",
+          "Rationale": "Mag conductivity empty-pipe flag; mechanical impeller still rotates in partial fill"
+        },
+        {
+          "#": "PRN-06",
+          "Statement (abbreviated)": "Single-chord path bias in compact manifold",
+          "Imp": "7",
+          "Sat_orig": "5",
+          "Sat_recal": "**6**",
+          "Rationale": "Multi-path ultrasonic/mag are profile-insensitive"
+        },
+        {
+          "#": "PRN-07",
+          "Statement (abbreviated)": "Speed-of-sound transient >5 °C/min",
+          "Imp": "7",
+          "Sat_orig": "5",
+          "Sat_recal": "**6**",
+          "Rationale": "Mag temp-independent by principle"
+        },
+        {
+          "#": "PRN-08",
+          "Statement (abbreviated)": "10 bar polymer housing limit",
+          "Imp": "5",
+          "Sat_orig": "4",
+          "Sat_recal": "**6**",
+          "Rationale": "Metal-bodied mag/Coriolis rated 16–40 bar"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement (abbreviated)",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Under?",
+        "Over?",
+        "Impact",
+        "prod_rel"
+      ],
+      "rows": [
+        {
+          "#": "ES-01",
+          "Statement (abbreviated)": "Turndown covers idle→peak pump",
+          "Imp": "8",
+          "Sat": "6",
+          "Opp": "**10.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "false"
+        },
+        {
+          "#": "ES-02",
+          "Statement (abbreviated)": "Single platform DN15–DN25",
+          "Imp": "7",
+          "Sat": "7",
+          "Opp": "**7.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "cost",
+          "prod_rel": "true"
+        },
+        {
+          "#": "ES-03",
+          "Statement (abbreviated)": "Commissioning water/PG25/EG25",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "**9.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "skill",
+          "prod_rel": "true"
+        },
+        {
+          "#": "ES-04",
+          "Statement (abbreviated)": "Install orientation <2% bias",
+          "Imp": "8",
+          "Sat": "6",
+          "Opp": "**10.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "false"
+        },
+        {
+          "#": "ES-05",
+          "Statement (abbreviated)": "Modbus/BACnet/MQTT BMS",
+          "Imp": "7",
+          "Sat": "7",
+          "Opp": "**7.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "time",
+          "prod_rel": "false"
+        },
+        {
+          "#": "ES-06",
+          "Statement (abbreviated)": "Empty-pipe detect <5s",
+          "Imp": "9",
+          "Sat": "4",
+          "Opp": "**14.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "safety",
+          "prod_rel": "true"
+        },
+        {
+          "#": "ES-07",
+          "Statement (abbreviated)": "Self-diag at start cycle",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "**9.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "false"
+        },
+        {
+          "#": "ES-08",
+          "Statement (abbreviated)": "Gate GPU on OCP 1.5 L/min/kW",
+          "Imp": "9",
+          "Sat": "4",
+          "Opp": "**14.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "safety",
+          "prod_rel": "false"
+        },
+        {
+          "#": "ES-09",
+          "Statement (abbreviated)": "±2% over 40,000 h",
+          "Imp": "9",
+          "Sat": "6",
+          "Opp": "**12.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "false"
+        },
+        {
+          "#": "ES-10",
+          "Statement (abbreviated)": "Air >2% vol after glycol top-up",
+          "Imp": "8",
+          "Sat": "5",
+          "Opp": "**11.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "true"
+        },
+        {
+          "#": "ES-11",
+          "Statement (abbreviated)": "Step-change loss-of-flow <2s",
+          "Imp": "10",
+          "Sat": "5",
+          "Opp": "**15.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "safety",
+          "prod_rel": "false"
+        },
+        {
+          "#": "ES-12",
+          "Statement (abbreviated)": "Single-body flow×ΔT kW",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "**13.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "cost",
+          "prod_rel": "true"
+        },
+        {
+          "#": "ES-13",
+          "Statement (abbreviated)": "ΔP <50 mbar @ 30 L/min",
+          "Imp": "7",
+          "Sat": "7",
+          "Opp": "**7.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "cost",
+          "prod_rel": "false"
+        },
+        {
+          "#": "ES-14",
+          "Statement (abbreviated)": "Pulsation oscillation <5%",
+          "Imp": "6",
+          "Sat": "5",
+          "Opp": "**7.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "false"
+        },
+        {
+          "#": "ES-15",
+          "Statement (abbreviated)": "Reverse-flow detect <1s",
+          "Imp": "7",
+          "Sat": "6",
+          "Opp": "**8.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "safety",
+          "prod_rel": "true"
+        },
+        {
+          "#": "ES-16",
+          "Statement (abbreviated)": "Undetected degradation >10%",
+          "Imp": "9",
+          "Sat": "5",
+          "Opp": "**13.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "safety",
+          "prod_rel": "false"
+        },
+        {
+          "#": "ES-17",
+          "Statement (abbreviated)": "Drift ±0.5% / 30d over 24mo",
+          "Imp": "8",
+          "Sat": "5",
+          "Opp": "**11.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "false"
+        },
+        {
+          "#": "ES-18",
+          "Statement (abbreviated)": "1-sec telemetry to DCIM",
+          "Imp": "8",
+          "Sat": "6",
+          "Opp": "**10.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "cost",
+          "prod_rel": "false"
+        },
+        {
+          "#": "ES-19",
+          "Statement (abbreviated)": "Biofilm/scale <2% / 5yr",
+          "Imp": "7",
+          "Sat": "6",
+          "Opp": "**8.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "false"
+        },
+        {
+          "#": "ES-20",
+          "Statement (abbreviated)": "Incipient leak signatures",
+          "Imp": "9",
+          "Sat": "3",
+          "Opp": "**15.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "safety",
+          "prod_rel": "true"
+        },
+        {
+          "#": "ES-21",
+          "Statement (abbreviated)": "Acoustic-coupling drift <1% / 5yr",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "**9.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "true"
+        },
+        {
+          "#": "ES-22",
+          "Statement (abbreviated)": "Replace without draining",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "**13.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "time",
+          "prod_rel": "false"
+        },
+        {
+          "#": "ES-23",
+          "Statement (abbreviated)": "Recal <1 per 5-yr cycle",
+          "Imp": "7",
+          "Sat": "6",
+          "Opp": "**8.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "cost",
+          "prod_rel": "false"
+        },
+        {
+          "#": "ES-24",
+          "Statement (abbreviated)": "Remote firmware push via BMS",
+          "Imp": "6",
+          "Sat": "3",
+          "Opp": "**9.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "time",
+          "prod_rel": "false"
+        },
+        {
+          "#": "ES-25",
+          "Statement (abbreviated)": "ASHRAE TC 9.9 traceable telemetry",
+          "Imp": "8",
+          "Sat": "5",
+          "Opp": "**11.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "cost",
+          "prod_rel": "false"
+        },
+        {
+          "#": "ES-26",
+          "Statement (abbreviated)": "Hyperscaler escalations <24mo",
+          "Imp": "8",
+          "Sat": "5",
+          "Opp": "**11.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "cost",
+          "prod_rel": "false"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement (abbreviated)",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Under?",
+        "Over?",
+        "Impact",
+        "prod_rel"
+      ],
+      "rows": [
+        {
+          "#": "PRN-01",
+          "Statement (abbreviated)": "Glycol inhibitor acoustic drift",
+          "Imp": "7",
+          "Sat": "6",
+          "Opp": "**8.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "true"
+        },
+        {
+          "#": "PRN-02",
+          "Statement (abbreviated)": "90 °C housing limit",
+          "Imp": "5",
+          "Sat": "7",
+          "Opp": "**5.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "true"
+        },
+        {
+          "#": "PRN-03",
+          "Statement (abbreviated)": "DN20 4.2 L/min SNR floor",
+          "Imp": "8",
+          "Sat": "6",
+          "Opp": "**10.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "true"
+        },
+        {
+          "#": "PRN-04",
+          "Statement (abbreviated)": "Sub-threshold air bias",
+          "Imp": "8",
+          "Sat": "5",
+          "Opp": "**11.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "true"
+        },
+        {
+          "#": "PRN-05",
+          "Statement (abbreviated)": "Empty-pipe drain-and-fill blackout",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "**9.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "true"
+        },
+        {
+          "#": "PRN-06",
+          "Statement (abbreviated)": "Single-chord path bias",
+          "Imp": "7",
+          "Sat": "6",
+          "Opp": "**8.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "true"
+        },
+        {
+          "#": "PRN-07",
+          "Statement (abbreviated)": "Speed-of-sound transient",
+          "Imp": "7",
+          "Sat": "6",
+          "Opp": "**8.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "true"
+        },
+        {
+          "#": "PRN-08",
+          "Statement (abbreviated)": "10 bar polymer housing limit",
+          "Imp": "5",
+          "Sat": "6",
+          "Opp": "**5.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "true"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Metric",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Metric": "**Market**",
+          "Value": "Data Processing, Hosting, and Related Services (NAICS 518210)"
+        },
+        {
+          "Metric": "**Total Needs**",
+          "Value": "34"
+        },
+        {
+          "Metric": "**Underserved Count**",
+          "Value": "5"
+        },
+        {
+          "Metric": "**Overserved Count**",
+          "Value": "0"
+        },
+        {
+          "Metric": "**Avg Opportunity Score**",
+          "Value": "9.85"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Rank",
+        "#",
+        "Error Statement",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Zone"
+      ],
+      "rows": [
+        {
+          "Rank": "1",
+          "#": "ES-11",
+          "Error Statement": "Minimize the time to detect a step-change loss-of-flow event (leak, valve closure, pump trip) to under 2 seconds",
+          "Imp": "10",
+          "Sat": "5",
+          "Opp": "**15.00**",
+          "Zone": "Underserved"
+        },
+        {
+          "Rank": "2",
+          "#": "ES-20",
+          "Error Statement": "Increase the ability to detect incipient leak signatures (sub-threshold flow decay) before visible coolant loss",
+          "Imp": "9",
+          "Sat": "3",
+          "Opp": "**15.00**",
+          "Zone": "Underserved"
+        },
+        {
+          "Rank": "3",
+          "#": "ES-06",
+          "Error Statement": "Minimize the time to detect empty-pipe or air-lock in the secondary loop before IT power-on to under 5 seconds",
+          "Imp": "9",
+          "Sat": "4",
+          "Opp": "**14.00**",
+          "Zone": "Underserved"
+        },
+        {
+          "Rank": "4",
+          "#": "ES-08",
+          "Error Statement": "Minimize the likelihood of enabling GPU load with secondary-loop flow below the OCP 1.5 L/min/kW safety threshold",
+          "Imp": "9",
+          "Sat": "4",
+          "Opp": "**14.00**",
+          "Zone": "Underserved"
+        },
+        {
+          "Rank": "5",
+          "#": "ES-16",
+          "Error Statement": "Minimize the likelihood of GPU throttling events triggered by undetected flow degradation exceeding 10% from setpoint",
+          "Imp": "9",
+          "Sat": "5",
+          "Opp": "**13.00**",
+          "Zone": "Underserved"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Zone",
+        "Score Range",
+        "Count",
+        "% of Total"
+      ],
+      "rows": [
+        {
+          "Zone": "Highly Underserved",
+          "Score Range": "> 15",
+          "Count": "0",
+          "% of Total": "0.0%"
+        },
+        {
+          "Zone": "Underserved",
+          "Score Range": "12–15",
+          "Count": "8",
+          "% of Total": "23.5%"
+        },
+        {
+          "Zone": "Appropriately Served",
+          "Score Range": "10–12",
+          "Count": "9",
+          "% of Total": "26.5%"
+        },
+        {
+          "Zone": "Overserved",
+          "Score Range": "< 10",
+          "Count": "17",
+          "% of Total": "50.0%"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Metric",
+        "Value",
+        "Source"
+      ],
+      "rows": [
+        {
+          "Metric": "ODI avg_opportunity_score",
+          "Value": "9.85",
+          "Source": "This analysis"
+        },
+        {
+          "Metric": "Feature-Fit avg (tech features)",
+          "Value": "5.73",
+          "Source": "FIT_data_processing_hosting §09a (mean of 7 overall_fit values: 6.00, 6.56, 3.56, 6.78, 5.00, 7.56, 4.67)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Condition",
+        "Triggered?",
+        "Note"
+      ],
+      "rows": [
+        {
+          "Condition": "ODI avg > 12 AND Feature-Fit avg < 4",
+          "Triggered?": "**NO**",
+          "Note": "Feature-Fit avg = 5.73"
+        },
+        {
+          "Condition": "ODI avg < 8 AND Feature-Fit avg > 7",
+          "Triggered?": "**NO**",
+          "Note": "ODI avg = 9.85"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result",
+        "Note"
+      ],
+      "rows": [
+        {
+          "#": "Q1",
+          "Check": "Formula correct",
+          "Result": "**PASS**",
+          "Note": "Spot-check: ES-11 (10+max(10-5,0)=15), ES-20 (9+max(9-3,0)=15), ES-13 (7+max(7-7,0)=7), PRN-02 (5+max(5-7,0)=5), ES-22 (8+max(8-3,0)=13). All match."
+        },
+        {
+          "#": "Q2",
+          "Check": "Underserved flags correct",
+          "Result": "**PASS**",
+          "Note": "5 entries with imp>7 AND sat<5: ES-06(9,4), ES-08(9,4), ES-12(8,3), ES-20(9,3), ES-22(8,3). ES-11(10,5)=NO (5 not <5)."
+        },
+        {
+          "#": "Q3",
+          "Check": "Overserved flags correct",
+          "Result": "**PASS**",
+          "Note": "0 entries with imp<3 AND sat>7. Minimum importance across all 34 entries is 5."
+        },
+        {
+          "#": "Q4",
+          "Check": "Need count preserved",
+          "Result": "**PASS**",
+          "Note": "26 (Step 06) + 8 (Step 10) = 34 ≥ 26"
+        },
+        {
+          "#": "Q5",
+          "Check": "Top-5 ordering correct",
+          "Result": "**PASS**",
+          "Note": "15 ≥ 15 ≥ 14 ≥ 14 ≥ 13 — descending by opp; ties broken by importance then need#"
+        },
+        {
+          "#": "Q6",
+          "Check": "Cross-check ran",
+          "Result": "**PASS**",
+          "Note": "ODI vs Feature-Fit comparison completed; no inconsistencies"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "odi_matrix",
+      "naics_code": "518210",
+      "naics_title": "Data Processing, Hosting, and Related Services",
+      "market_name": "Data Processing, Hosting, and Related Services",
+      "product_name": "Ultrasonic Flow Sensor",
+      "vendor_name": "Marquardt",
+      "entries": [
+        {
+          "error_statement": "Minimize the likelihood of selecting a flow sensor whose turndown ratio cannot cover variable-speed pump operation from idle to peak GPU load",
+          "importance": 8,
+          "satisfaction_current": 6,
+          "opportunity_score": 10.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": false,
+          "job_step_number": 1,
+          "job_step_name": "DEFINE"
+        },
+        {
+          "error_statement": "Increase the ability to specify one sensor platform across DN15-DN25 CDU variants without redesigning the secondary manifold",
+          "importance": 7,
+          "satisfaction_current": 7,
+          "opportunity_score": 7.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "cost",
+          "product_related": true,
+          "job_step_number": 1,
+          "job_step_name": "DEFINE"
+        },
+        {
+          "error_statement": "Minimize the commissioning time required to configure fluid acoustic properties for facility-specific water / PG25 / EG25 blends",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "skill",
+          "product_related": true,
+          "job_step_number": 3,
+          "job_step_name": "PREPARE"
+        },
+        {
+          "error_statement": "Minimize the likelihood of incorrect installation orientation causing flow measurement bias exceeding 2% of reading",
+          "importance": 8,
+          "satisfaction_current": 6,
+          "opportunity_score": 10.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": false,
+          "job_step_number": 3,
+          "job_step_name": "PREPARE"
+        },
+        {
+          "error_statement": "Increase the ability to integrate the sensor into existing CDU BMS stacks (Modbus / BACnet / MQTT) without custom gateway development",
+          "importance": 7,
+          "satisfaction_current": 7,
+          "opportunity_score": 7.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "time",
+          "product_related": false,
+          "job_step_number": 3,
+          "job_step_name": "PREPARE"
+        },
+        {
+          "error_statement": "Minimize the time to detect empty-pipe or air-lock in the secondary loop before IT power-on to under 5 seconds",
+          "importance": 9,
+          "satisfaction_current": 4,
+          "opportunity_score": 14.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "impact_category": "safety",
+          "product_related": true,
+          "job_step_number": 4,
+          "job_step_name": "CONFIRM"
+        },
+        {
+          "error_statement": "Increase the ability to verify sensor signal integrity through automated self-diagnostics at each CDU start cycle",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": false,
+          "job_step_number": 4,
+          "job_step_name": "CONFIRM"
+        },
+        {
+          "error_statement": "Minimize the likelihood of enabling GPU load with secondary-loop flow below the OCP 1.5 L/min/kW safety threshold",
+          "importance": 9,
+          "satisfaction_current": 4,
+          "opportunity_score": 14.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "impact_category": "safety",
+          "product_related": false,
+          "job_step_number": 4,
+          "job_step_name": "CONFIRM"
+        },
+        {
+          "error_statement": "Increase the ability to maintain flow accuracy within +/-2% of reading over 40,000 hours of continuous 24x7 operation",
+          "importance": 9,
+          "satisfaction_current": 6,
+          "opportunity_score": 12.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": false,
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE"
+        },
+        {
+          "error_statement": "Minimize the likelihood of air entrainment >2% vol after glycol top-up causing signal loss during a GPU workload ramp",
+          "importance": 8,
+          "satisfaction_current": 5,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": true,
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE"
+        },
+        {
+          "error_statement": "Minimize the time to detect a step-change loss-of-flow event (leak, valve closure, pump trip) to under 2 seconds",
+          "importance": 10,
+          "satisfaction_current": 5,
+          "opportunity_score": 15.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "safety",
+          "product_related": false,
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE"
+        },
+        {
+          "error_statement": "Increase the ability to compute secondary-loop thermal duty (kW) from flow x delta-T within a single sensor body, sub-second",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "impact_category": "cost",
+          "product_related": true,
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE"
+        },
+        {
+          "error_statement": "Minimize the flow sensor's contribution to CDU secondary-loop pressure drop below 50 mbar at 30 L/min design flow",
+          "importance": 7,
+          "satisfaction_current": 7,
+          "opportunity_score": 7.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "cost",
+          "product_related": false,
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE"
+        },
+        {
+          "error_statement": "Minimize the likelihood of pump-pulsation-induced flow reading oscillation exceeding 5% of steady-state value",
+          "importance": 6,
+          "satisfaction_current": 5,
+          "opportunity_score": 7.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": false,
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE"
+        },
+        {
+          "error_statement": "Increase the ability to detect reverse-flow direction (bypass-valve misoperation) within 1 second of onset",
+          "importance": 7,
+          "satisfaction_current": 6,
+          "opportunity_score": 8.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "safety",
+          "product_related": true,
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE"
+        },
+        {
+          "error_statement": "Minimize the likelihood of GPU throttling events triggered by undetected flow degradation exceeding 10% from setpoint",
+          "importance": 9,
+          "satisfaction_current": 5,
+          "opportunity_score": 13.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "safety",
+          "product_related": false,
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE"
+        },
+        {
+          "error_statement": "Increase the ability to detect calibration drift exceeding +/-0.5% within 30 days of occurrence over 24 months continuous operation",
+          "importance": 8,
+          "satisfaction_current": 5,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": false,
+          "job_step_number": 6,
+          "job_step_name": "MONITOR"
+        },
+        {
+          "error_statement": "Increase the ability to stream 1-second-granularity flow + temperature telemetry into DCIM for real-time PUE/WUE reporting",
+          "importance": 8,
+          "satisfaction_current": 6,
+          "opportunity_score": 10.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "cost",
+          "product_related": false,
+          "job_step_number": 6,
+          "job_step_name": "MONITOR"
+        },
+        {
+          "error_statement": "Minimize the likelihood of biofilm / scale / particulate buildup degrading accuracy by more than 2% within 5-year service life",
+          "importance": 7,
+          "satisfaction_current": 6,
+          "opportunity_score": 8.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": false,
+          "job_step_number": 6,
+          "job_step_name": "MONITOR"
+        },
+        {
+          "error_statement": "Increase the ability to detect incipient leak signatures (sub-threshold flow decay) before visible coolant loss",
+          "importance": 9,
+          "satisfaction_current": 3,
+          "opportunity_score": 15.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "impact_category": "safety",
+          "product_related": true,
+          "job_step_number": 6,
+          "job_step_name": "MONITOR"
+        },
+        {
+          "error_statement": "Minimize the likelihood of acoustic-coupling degradation causing error >1% within the first 5 years of operation",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": true,
+          "job_step_number": 6,
+          "job_step_name": "MONITOR"
+        },
+        {
+          "error_statement": "Minimize the time required to replace a degraded flow sensor without draining the secondary loop or taking the CDU offline",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "impact_category": "time",
+          "product_related": false,
+          "job_step_number": 7,
+          "job_step_name": "MODIFY"
+        },
+        {
+          "error_statement": "Minimize the frequency of mandated field recalibration to no more than once per 5-year CDU service cycle",
+          "importance": 7,
+          "satisfaction_current": 6,
+          "opportunity_score": 8.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "cost",
+          "product_related": false,
+          "job_step_number": 7,
+          "job_step_name": "MODIFY"
+        },
+        {
+          "error_statement": "Increase the ability to push firmware / compensation-table updates to the sensor remotely via the CDU BMS bus",
+          "importance": 6,
+          "satisfaction_current": 3,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "time",
+          "product_related": false,
+          "job_step_number": 7,
+          "job_step_name": "MODIFY"
+        },
+        {
+          "error_statement": "Increase the ability to evidence ASHRAE TC 9.9 H-class liquid-cooling envelope compliance through traceable per-rack flow telemetry",
+          "importance": 8,
+          "satisfaction_current": 5,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "cost",
+          "product_related": false,
+          "job_step_number": 6,
+          "job_step_name": "MONITOR"
+        },
+        {
+          "error_statement": "Minimize the frequency of hyperscaler customer escalations attributed to flow-sensor malfunction within first 24 months after CDU deployment",
+          "importance": 8,
+          "satisfaction_current": 5,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "cost",
+          "product_related": false,
+          "job_step_number": 6,
+          "job_step_name": "MONITOR"
+        },
+        {
+          "error_statement": "Minimize the likelihood of measurement drift from acoustic-impedance mismatch when facility-specific glycol inhibitor packages alter the coolant's speed of sound beyond the commissioned compensation profile",
+          "importance": 7,
+          "satisfaction_current": 6,
+          "opportunity_score": 8.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": true,
+          "job_step_number": 0,
+          "job_step_name": "product_constraint"
+        },
+        {
+          "error_statement": "Minimize the residual headroom concern when future ASHRAE W4/W5 warm-water liquid cooling drives CDU secondary-loop supply to the 90 C polymer housing limit",
+          "importance": 5,
+          "satisfaction_current": 7,
+          "opportunity_score": 5.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": true,
+          "job_step_number": 0,
+          "job_step_name": "product_constraint"
+        },
+        {
+          "error_statement": "Minimize the unmeasured-flow window at the DN20 4.2 L/min SNR threshold during CDU idle / low-load states, below which the OCP 1.5 L/min/kW interlock cannot discriminate low flow from no flow",
+          "importance": 8,
+          "satisfaction_current": 6,
+          "opportunity_score": 10.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": true,
+          "job_step_number": 0,
+          "job_step_name": "product_constraint"
+        },
+        {
+          "error_statement": "Minimize the probability of sub-threshold air entrainment (1-2% vol) following glycol top-up or venting biasing flow telemetry fed to the OCP safety interlock, without triggering the >2% loss-of-signal alarm",
+          "importance": 8,
+          "satisfaction_current": 5,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": true,
+          "job_step_number": 0,
+          "job_step_name": "product_constraint"
+        },
+        {
+          "error_statement": "Minimize the time the CDU controller spends in empty-pipe fault state during secondary-loop drain-and-fill maintenance cycles, during which the sensor provides no measurement and the prove-flow gate cannot be satisfied",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": true,
+          "job_step_number": 0,
+          "job_step_name": "product_constraint"
+        },
+        {
+          "error_statement": "Minimize the installation-induced flow-profile bias from insufficient upstream straight-pipe run (<5x DN) inside space-constrained rack CDU manifolds where single-chord acoustic path sampling cannot correct for swirl",
+          "importance": 7,
+          "satisfaction_current": 6,
+          "opportunity_score": 8.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": true,
+          "job_step_number": 0,
+          "job_step_name": "product_constraint"
+        },
+        {
+          "error_statement": "Minimize the transient kW duty miscalculation when a GPU workload spike drives secondary-supply temperature transients >5 C/min that outpace the NTC thermistor's compensation response, during which flow x delta-T telemetry deviates from true thermal load",
+          "importance": 7,
+          "satisfaction_current": 6,
+          "opportunity_score": 8.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": true,
+          "job_step_number": 0,
+          "job_step_name": "product_constraint"
+        },
+        {
+          "error_statement": "Minimize the deployment gap at hyperscaler facility-loop pressures exceeding 10 bar where the polymer housing rating forecloses direct-facility-loop installation and forces placement downstream of the brazed-plate HX",
+          "importance": 5,
+          "satisfaction_current": 6,
+          "opportunity_score": 5.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "impact_category": "reliability",
+          "product_related": true,
+          "job_step_number": 0,
+          "job_step_name": "product_constraint"
+        }
+      ],
+      "market_summary": {
+        "market_name": "Data Processing, Hosting, and Related Services",
+        "naics_code": "518210",
+        "total_needs": 34,
+        "underserved_count": 5,
+        "overserved_count": 0,
+        "avg_opportunity_score": 9.85,
+        "top_opportunities": [
+          "Minimize the time to detect a step-change loss-of-flow event (leak, valve closure, pump trip) to under 2 seconds",
+          "Increase the ability to detect incipient leak signatures (sub-threshold flow decay) before visible coolant loss",
+          "Minimize the time to detect empty-pipe or air-lock in the secondary loop before IT power-on to under 5 seconds",
+          "Minimize the likelihood of enabling GPU load with secondary-loop flow below the OCP 1.5 L/min/kW safety threshold",
+          "Minimize the likelihood of GPU throttling events triggered by undetected flow degradation exceeding 10% from setpoint"
+        ]
+      },
+      "cross_check": {
+        "odi_avg_opportunity_score": 9.85,
+        "feature_fit_avg": 5.73,
+        "high_opp_low_fit_triggered": false,
+        "low_opp_high_fit_triggered": false,
+        "inconsistencies": []
+      },
+      "entities_produced": {
+        "nodes": [
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix80": "Minimize the time to detect a step-change loss-of-flow event (leak, valve closure",
+              "naics_code": "518210",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 15.0,
+            "is_underserved": false
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix80": "Increase the ability to detect incipient leak signatures (sub-threshold flow dec",
+              "naics_code": "518210",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 15.0,
+            "is_underserved": true
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix80": "Minimize the time to detect empty-pipe or air-lock in the secondary loop before",
+              "naics_code": "518210",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 14.0,
+            "is_underserved": true
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix80": "Minimize the likelihood of enabling GPU load with secondary-loop flow below the",
+              "naics_code": "518210",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 14.0,
+            "is_underserved": true
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement_prefix80": "Minimize the likelihood of GPU throttling events triggered by undetected flow d",
+              "naics_code": "518210",
+              "run_id": "TBD"
+            },
+            "opportunity_score": 13.0,
+            "is_underserved": false
+          }
+        ],
+        "relationships": [
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:Data Processing, Hosting, and Related Services (518210)",
+            "target": "OpportunityScore:ES-11"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:Data Processing, Hosting, and Related Services (518210)",
+            "target": "OpportunityScore:ES-20"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:Data Processing, Hosting, and Related Services (518210)",
+            "target": "OpportunityScore:ES-06"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:Data Processing, Hosting, and Related Services (518210)",
+            "target": "OpportunityScore:ES-08"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:Data Processing, Hosting, and Related Services (518210)",
+            "target": "OpportunityScore:ES-16"
+          }
+        ],
+        "property_updates": [
+          {
+            "node": "Market:Data Processing, Hosting, and Related Services (518210)",
+            "property": "odi_total_needs",
+            "value": 34
+          },
+          {
+            "node": "Market:Data Processing, Hosting, and Related Services (518210)",
+            "property": "odi_underserved_count",
+            "value": 5
+          },
+          {
+            "node": "Market:Data Processing, Hosting, and Related Services (518210)",
+            "property": "odi_overserved_count",
+            "value": 0
+          },
+          {
+            "node": "Market:Data Processing, Hosting, and Related Services (518210)",
+            "property": "odi_avg_opportunity_score",
+            "value": 9.85
+          }
+        ]
+      }
+    }
+  ],
+  "has_bom": false,
+  "naics_sector_type": "non_manufacturing"
+}

@@ -1,0 +1,1339 @@
+{
+  "id": "BOM_flowmeters_src_01_product_decomposition_",
+  "title": "BOM — Product Bill of Materials: NAICS 334513 — All Output Types",
+  "type": "product_bom",
+  "market_slug": "flowmeters_src_01_product_decomposition_",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Header",
+      "content": "| Field | Value |\n|---|---|\n| **CFJ** | Design, manufacture, calibrate, and deliver instruments that measure, display, and control industrial process variables to enable safe, efficient, and compliant operation of process plants |\n| **Output Type (primary)** | Inline Transit-Time Ultrasonic Flow Sensor — compact, DN20, wetted transducers, hydronic/utility service |\n| **L4 Subsystems (OT-1)** | Acoustic Sensing · Signal Processing & Electronics · Hydraulic Body · Enclosure & Sealing |\n| **BOM Domain** | L4–L0 (what is IN the sensor the customer buys) |\n| **Market Context** | Global ultrasonic flowmeter market ~$2.0B (2024); transit-time = 80–85% of ultrasonic; ~$0.8–1.3B ultrasonic segment [SRC: Fortune Business Insights, Mordor Intelligence, web_search] |\n\n---"
+    },
+    {
+      "title": "OT-1 — Inline Transit-Time Ultrasonic Flow Sensor, DN20 (Full BOM)",
+      "content": "### B.1 — L4 Subsystems\n\n```\nOUTPUT TYPE (L5) — Inline Transit-Time Ultrasonic Flow Sensor, DN20\n|\n+-- L4.1  Acoustic Sensing Subsystem\n|         The piezoelectric transducer pair (A/B) that converts electrical\n|         excitation to acoustic pulses and receives the return signal.\n|         Delivers the time-of-flight differential that encodes flow velocity.\n|\n+-- L4.2  Signal Processing & Electronics Subsystem\n|         PCB with MCU/ASIC, time-of-flight measurement, analog front end,\n|         temperature sensing, power management, and output interface.\n|\n+-- L4.3  Hydraulic Body Subsystem\n|         The metering spool with precision-machined transducer bores\n|         and flow-path geometry; the wetted pressure boundary.\n|\n+-- L4.4  Enclosure & Sealing Subsystem\n          Electronics housing, cover, cable entry, and O-ring sealing system\n          (IP-rated, environmental protection).\n```\n\n---\n\n### B.2 — Full Decomposition (L4 → L0)\n\n#### L4.1 — Acoustic Sensing Subsystem\n\n```\nL4.1  Acoustic Sensing Subsystem\n│\n└─ L3.1.1  Piezoelectric Transducer Assembly (×2, A-path and B-path)\n   │\n   ├─ L2.1.1.1  Piezo Element (active sensing crystal/ceramic)\n   │            [ALTERNATIVES — see B.3]\n   │\n   ├─ L2.1.1.2  Acoustic Backing Layer\n   │            Epoxy-based damping material behind piezo; suppresses ring-down.\n   │            └─ L0  Epoxy resin + tungsten filler (acoustic impedance tuning)\n   │\n   ├─ L2.1.1.3  Acoustic Matching Layer\n   │            Quarter-wavelength layer between piezo and fluid; maximises\n   │            energy transfer across piezo–water impedance mismatch.\n   │            └─ L0  Filled epoxy or cast polymer (impedance 2–5 MRayl)\n   │\n   └─ L1.1.1.4  Transducer Housing / Cap\n                Hermetic enclosure pressed or threaded into flow body bore.\n                [ALTERNATIVES — see B.3]\n```\n\n#### L4.2 — Signal Processing & Electronics Subsystem\n\n```\nL4.2  Signal Processing & Electronics Subsystem\n│\n├─ L3.2.1  Measurement Electronics PCB\n│  │\n│  ├─ L2.2.1.1  MCU / Ultrasonic ASIC\n│  │            Drives transducers, measures ToF differential, computes flow\n│  │            and temperature, runs output protocol.\n│  │            [ALTERNATIVES — see B.3]\n│  │\n│  ├─ L1.2.1.2  Precision Reference Oscillator (TCXO or crystal)\n│  │            Timing reference for TDC / ToF resolution.\n│  │\n│  ├─ L1.2.1.3  Piezo Driver Stage\n│  │            High-voltage or current-mode excitation circuit for burst\n│  │            generation at 1–2 MHz.\n│  │\n│  ├─ L1.2.1.4  Analog Front-End ICs (amplifier + comparator)\n│  │            Low-noise receive chain; threshold detection or full ADC path.\n│  │\n│  ├─ L1.2.1.5  Temperature Sensor Element (Pt1000 / NTC)\n│  │            On-body temperature measurement for flow compensation.\n│  │\n│  └─ L0.2.1.6  PCB Substrate\n│               [ALTERNATIVES — see B.3]\n│\n├─ L3.2.2  Power Management Module\n│  ├─ L1  DC-DC converter or LDO (3.3 V / 5 V rail from 5–24 V supply)\n│  └─ L1  Decoupling and bulk capacitor array\n│\n└─ L3.2.3  Output & Communication Interface\n           [ALTERNATIVES — see B.3]\n```\n\n#### L4.3 — Hydraulic Body Subsystem\n\n```\nL4.3  Hydraulic Body Subsystem\n│\n├─ L3.3.1  Flow Spool / Metering Tube\n│          Precision machined. Contains transducer bores at defined angle,\n│          reflector geometry (if Z-path or W-path), and process connection.\n│          [ALTERNATIVES — see B.3]\n│          └─ L0  Brass alloy CW617N/CW614N, or SS 316L, or PPS/PVDF resin\n│\n├─ L2.3.2  Reflector / Flow-Path Insert (Z-path or W-path geometry)\n│          Machined flat or angled surfaces directing acoustic beam.\n│          L1 — Reflector plate (stainless insert or integral machined surface)\n│\n└─ L2.3.3  Process Connection Fittings\n           [ALTERNATIVES — see B.3]\n```\n\n#### L4.4 — Enclosure & Sealing Subsystem\n\n```\nL4.4  Enclosure & Sealing Subsystem\n│\n├─ L3.4.1  Electronics Housing / Cover\n│          [ALTERNATIVES — see B.3]\n│\n├─ L3.4.2  Transducer O-Rings (×2, wetted)\n│          Seal between transducer housing and flow body bore; pressure boundary.\n│          [ALTERNATIVES — see B.3]\n│\n├─ L2.4.3  Housing Cover Seal (IP65/IP67, non-wetted)\n│          Gasket or moulded seal at electronics cover interface.\n│\n└─ L1.4.4  Cable Gland / Entry Fitting\n           PG7 / M12 cable gland; provides strain relief and IP protection.\n```\n\n---\n\n### B.3 — Alternatives at Every Level\n\n#### L4.1 · L2.1.1.1 — Piezo Element (active acoustic element)\n\n| Alternative | Share | Trend | Confidence | Source |\n|---|---|---|---|---|\n| PZT-5A / PZT-5H polycrystalline ceramic | ~65% | Stable | MEDIUM | APC International; piceramic.com; analyst est. |\n| PZT-4 / PZT-8 (hard PZT, power-ultrasound) | ~10% | Stable | MEDIUM | PI Ceramic, APC |\n| PMN-PT single crystal | ~10% | Growing | MEDIUM | CTS Corp PMN-PT brochure; pmc.ncbi.nlm.nih.gov |\n| BNT-based lead-free ceramic | ~5% | Growing | LOW | Nature Microsystems 2023; analyst est. |\n| AlN thin-film PMUT (MEMS) | ~5% | Emerging | LOW | Nature Microsystems & Nanoengineering 2023 |\n| PZN-PT / LiNbO₃ single crystal | ~5% | Stable | LOW | americanpiezo.com; analyst est. |\n\n> **Note:** EU RoHS / REACH pressure on lead-containing PZT is the primary driver behind lead-free BNT and AlN share gain. For DN20 hydronic at 1–2 MHz, PZT-5H dominates due to cost and availability.\n\n#### L4.1 · L1.1.1.4 — Transducer Housing / Cap\n\n| Alternative | Share | Trend | Confidence | Source |\n|---|---|---|---|---|\n| Stainless steel 316L (machined) | ~60% | Stable | LOW | Product catalog analysis (Audiowell, BMAG); analyst est. |\n| PEEK polymer | ~25% | Growing | LOW | Analyst est. (corrosive media, thermal isolation) |\n| Titanium grade 2 | ~10% | Stable | LOW | Analyst est. (aggressive media, high-temp) |\n| Brass (CW614N) | ~5% | Declining | LOW | Analyst est. |\n\n#### L4.2 · L2.2.1.1 — MCU / Ultrasonic ASIC\n\n| Alternative | Share | Trend | Confidence | Source |\n|---|---|---|---|---|\n| Integrated ultrasonic-sensing MCU (e.g., TI MSP430FR6043 USS) | ~45% | Growing | MEDIUM | TI reference design TIDM; DigiKey; EDN flow meter tutorial |\n| Discrete MCU + separate TDC IC (e.g., GP22, TDC7200) | ~35% | Stable | MEDIUM | TI TIDM-ULTRASONIC-FLOW-TDC; NXP DRM138 |\n| Custom ASIC (Tier-1 OEM proprietary) | ~15% | Stable | LOW | Analyst est. (E+H, Siemens, Kamstrup) |\n| FPGA-based (high-accuracy / research-grade) | ~5% | Stable | LOW | Analyst est. |\n\n> **Note:** Integrated USS-MCU dominates in battery-powered heat meters and compact sensors. TI MSP430FR6043 is the reference design IC for the exact Marquardt application class (compact, low-power, DN20 utility).\n\n#### L4.2 · L0.2.1.6 — PCB Substrate\n\n| Alternative | Share | Trend | Confidence | Source |\n|---|---|---|---|---|\n| FR4 epoxy glass (standard) | ~80% | Stable | MEDIUM | Industry standard |\n| High-Tg FR4 (≥170°C glass transition) | ~15% | Stable | MEDIUM | Required for 90°C ambient variants |\n| Ceramic substrate (alumina) | ~5% | Stable | LOW | Analyst est. (specialist high-T versions) |\n\n#### L4.2 · L3.2.3 — Output & Communication Interface\n\n| Alternative | Share | Trend | Confidence | Source |\n|---|---|---|---|---|\n| 4–20 mA analog output | ~35% | Declining | MEDIUM | Analyst est. (dominant in process / HVAC OEM) |\n| Pulse / frequency output | ~25% | Stable | MEDIUM | Analyst est. (heat meter totaliser interface) |\n| M-Bus (EN 13757) | ~20% | Growing | MEDIUM | Analyst est. (EU heat metering mandate) |\n| HART (over 4–20 mA) | ~10% | Stable | MEDIUM | Analyst est. (process automation) |\n| IO-Link | ~5% | Emerging | LOW | Analyst est. (Industry 4.0 OEM integration) |\n| RS-485 / Modbus RTU | ~5% | Stable | LOW | Analyst est. |\n\n#### L4.3 · L3.3.1 — Flow Spool Material\n\n| Alternative | Share | Trend | Confidence | Source |\n|---|---|---|---|---|\n| Brass CW617N / CW614N (dezincification-resistant) | ~55% | Stable | MEDIUM | Amazon product listings (Audiowell HS0002/HS0003, BMAG); analyst est. |\n| Stainless steel 316L | ~30% | Growing | MEDIUM | Analyst est. (drinking water, higher T, glycol) |\n| Reinforced PPS or PVDF polymer | ~12% | Growing | LOW | Analyst est. (corrosive, low-cost OEM) |\n| Bronze (CuSn) | ~3% | Declining | LOW | Analyst est. |\n\n> **Note:** Brass dominates in the compact heat-meter / hydronic OEM segment (cost, machinability, sufficient rating at ≤90°C, ≤6 bar). SS 316L gains share in glycol > 30% and drinking-water applications.\n\n#### L4.3 · L2.3.3 — Process Connection Type\n\n| Alternative | Share | Trend | Confidence | Source |\n|---|---|---|---|---|\n| G-thread / BSP (ISO 228) | ~45% | Stable | LOW | Analyst est. (EU hydronic / heat meter) |\n| NPT (ANSI/ASME B1.20.1) | ~25% | Stable | LOW | Analyst est. (North America) |\n| Flanged PN6/PN16 (DN20 flange) | ~15% | Stable | LOW | Analyst est. (industrial process) |\n| Push-fit / compression (e.g., 22 mm Speedfit) | ~10% | Growing | LOW | Analyst est. (HVAC installer market) |\n| Weld-end (butt weld) | ~5% | Stable | LOW | Analyst est. |\n\n#### L4.4 · L3.4.1 — Electronics Housing Material\n\n| Alternative | Share | Trend | Confidence | Source |\n|---|---|---|---|---|\n| Thermoplastic (ABS / PC / PA66) | ~55% | Stable | LOW | Analyst est. (cost, moulding, IP54–IP67) |\n| Die-cast aluminium | ~30% | Stable | LOW | Analyst est. (IP67, robust OEM housing) |\n| Stainless steel sheet metal | ~15% | Stable | LOW | Analyst est. (hygienic / food-adjacent) |\n\n#### L4.4 · L3.4.2 — Transducer O-Ring Material (wetted)\n\n| Alternative | Share | Trend | Confidence | Source |\n|---|---|---|---|---|\n| EPDM | ~50% | Stable | LOW | Analyst est. (water/HVAC, UV/steam resistance) |\n| FKM / Viton | ~35% | Stable | LOW | Analyst est. (glycol, oils, wide T range) |\n| NBR | ~10% | Declining | LOW | Analyst est. (legacy hydronic) |\n| PTFE / FFKM | ~5% | Stable | LOW | Analyst est. (high-T, aggressive media) |\n\n> **For Marquardt DN20 (max 90°C, max 50% glycol):** FKM is technically preferred; EPDM is acceptable for pure water; NBR is marginal at 90°C.\n\n---\n\n### B.4 — Component Category Mapping: Ultrasonic Flow Sensor in End-Product BOMs\n\nThe Marquardt DN20 sensor is itself an L5 product of NAICS 334513. It also appears as an L-level component inside larger systems. Two positions are commercially significant:\n\n**Position 1: Inside a Compact Heat Meter (L5 end-product of NAICS 334514)**\n```\nL4  Metering Assembly\n └─ L3  Flow Measurement Module\n     └─ L2  Ultrasonic Flow Sensor (= the Marquardt product as a bought-in subassembly)\n             Function: measure volumetric flow; deliver pulse or M-Bus output to heat calculator\n             Safety-critical: NO (billing accuracy, not life-safety)\n             Alternatives at this position:\n               - Ultrasonic transit-time inline sensor          ~50%  (Kamstrup, Siemens, Marquardt)\n               - Electromagnetic (magmeter) module             ~18%\n               - Vortex sensor module                          ~12%\n               - Mechanical (turbine/positive displacement)    ~20%  Declining\n```\n\n**Position 2: Inside a Hydronic Controller / Heat Interface Unit (HIU)**\n```\nL4  Hydraulic Control Assembly\n └─ L3  Flow & Energy Sensing Module\n     └─ L2  Ultrasonic Flow Sensor (compact inline, DN20)\n             Function: energy-billing sub-metering; commissioning flow balance verification\n             Safety-critical: NO\n             Alternatives at this position:\n               - Ultrasonic inline (transit-time)              ~45%  Growing\n               - Electromagnetic inline                        ~30%  Stable\n               - Paddle-wheel / turbine insert                 ~20%  Declining\n               - Differential pressure (orifice plate)        ~5%   Stable\n```\n\n**Insight:** At both positions, the Marquardt sensor competes primarily with electromagnetic (magmeter) modules. The magmeter's advantage is no moving parts and insensitivity to gas bubbles; the ultrasonic's advantage is bi-directional measurement, lower pressure drop, and operation with partially deaerated glycol mixes.\n\n---\n\n---"
+    },
+    {
+      "title": "Part B — Per-Output-Type BOMs (NAICS 334513)",
+      "content": "> OT-1 (Inline Transit-Time Ultrasonic Flow Sensor, DN20) is documented in full above. The following sections provide L4→L0 BOMs for all remaining output types of NAICS 334513. Output types sourced from industry VN analysis and NAICS 334513 product scope.\n\n**Output type index:**\n- OT-2: Electromagnetic (Mag) Flowmeter\n- OT-3: Coriolis Mass Flowmeter\n- OT-4: Vortex Flowmeter\n- OT-5: Turbine Flowmeter\n- OT-6: Differential Pressure (DP) Flow Transmitter + Primary Element\n- OT-7: Thermal Mass Flowmeter (Gas Service)\n- OT-8: Pressure Transmitter / Instrument\n- OT-9: Temperature Transmitter + RTD / TC Assembly\n- OT-10: Level Instrument (Radar / GWR / Ultrasonic / Hydrostatic)\n- OT-11: Analytical Instrument (pH / Conductivity / DO)\n- OT-12: Control & Recording Instrument (PID Controller / Paperless Recorder)\n\n---\n\n### OT-2 — Electromagnetic (Mag) Flowmeter\n\n> **Typical specs:** DN25–DN1200, conductive liquids (≥5 µS/cm), process and utility service, IP67, flanged or wafer body\n> **Market position:** ~26–32% of global flowmeter market (~$2.1B in 2024); dominant in water/wastewater and chemical service\n> **Key OEMs:** Endress+Hauser (Promag), Emerson (Rosemount), Siemens (SITRANS FM), ABB (AquaMaster, ProcessMaster), KROHNE (OPTIFLUX)\n\n```\nOUTPUT TYPE (L5): Electromagnetic (Mag) Flowmeter — flanged, conductive liquid, process/utility\n\n  L4.1  Electromagnetic Transducer Subsystem\n  │     The Faraday-law sensing core. Generates a magnetic field across the bore;\n  │     induced EMF across electrodes encodes flow velocity.\n  │\n  ├─ L3.1.1  Excitation Coil Pair\n  │  ├─ L2.1.1.1  Coil Bobbin\n  │  │            PA66-GF or PTFE former (no meaningful alternatives at scale)\n  │  ├─ L1.1.1.2  Copper Magnet Wire (AWG 28–34, enameled)\n  │  │            L0 — Copper rod + polyimide/polyester enamel coating\n  │  └─ L2.1.1.3  Coil Core\n  │               alternatives: Silicon steel laminations ~65%, Ferrite ~30%,\n  │               Air-core (coreless) ~5%  [LOW]\n  │               L0 — Silicon steel sheet / ferrite powder + binder\n  │\n  ├─ L3.1.2  Measurement Electrode Pair (×2, diametrically opposed, wetted)\n  │           alternatives: SS 316L ~55%, Hastelloy C-276 ~20%,\n  │           Platinum ~10%, Titanium grade 2 ~10%, Tantalum ~5%  [MEDIUM]\n  │           L0 — Alloy bar stock per electrode material\n  │\n  └─ L3.1.3  Grounding Ring / Electrode (×1–2, end-face, wetted)\n             alternatives: SS 316L ~65%, Hastelloy C-276 ~25%, Platinum ~10%  [LOW]\n\n  L4.2  Signal Processing & Electronics Subsystem\n  │\n  ├─ L3.2.1  Measurement PCB\n  │  ├─ L2.2.1.1  MCU / Signal Processor\n  │  │            alternatives: Dedicated flowmeter ASIC ~60%,\n  │  │            MCU + external ADC ~35%, FPGA ~5%  [MEDIUM]\n  │  │            L0 — Silicon die (CMOS process)\n  │  ├─ L1.2.1.2  Instrumentation Amplifier (×2 differential channels)\n  │  │            Low-noise, high-CMRR front-end; detects µV-range EMF signal.\n  │  └─ L0.2.1.3  PCB Substrate\n  │               alternatives: FR4 ~80%, High-Tg FR4 ~15%, Ceramic ~5%  [MEDIUM]\n  │\n  ├─ L3.2.2  Excitation Current Source\n  │           Generates alternating DC or low-frequency AC (~6–12.5 Hz) to\n  │           the coils. Alternating avoids electrode polarisation.\n  │           L2 — H-bridge driver + precision current-sense resistor\n  │\n  └─ L3.2.3  Output & Communication Interface\n             alternatives: 4-20 mA + HART ~40%, PROFIBUS PA/DP ~25%,\n             Pulse/frequency ~15%, Foundation Fieldbus ~10%,\n             IO-Link ~5%, Modbus RTU ~5%  [MEDIUM]\n\n  L4.3  Flow Tube & Liner Subsystem\n  │     The wetted pressure boundary. Must be non-magnetic (no steel),\n  │     electrically insulated inside (liner), and sized to bore.\n  │\n  ├─ L3.3.1  Flow Tube Body\n  │           alternatives: Carbon steel + epoxy/zinc coat ~50%,\n  │           SS 304/316L ~35%, PP/HDPE polymer body ~10%,\n  │           Ductile iron ~5%  [MEDIUM]\n  │           L0 — Carbon steel or SS tube blank\n  │\n  ├─ L3.3.2  Liner (insulating, wetted inner surface)\n  │           alternatives: PTFE ~40%, Hard rubber (natural/EPDM) ~30%,\n  │           PFA ~15%, Ceramic (Al₂O₃, 99.7%) ~10%,\n  │           Polyurethane ~5%  [MEDIUM]\n  │           L0 — PTFE resin / rubber compound / alumina powder + binder\n  │\n  └─ L3.3.3  Process Flanges (×2)\n             alternatives: Carbon steel + zinc-coat ~50%, SS 304 ~30%,\n             GF-PP/GRP ~15%, Ductile iron ~5%  [LOW]\n\n  L4.4  Transmitter Housing & Connection Subsystem\n  │\n  ├─ L3.4.1  Transmitter Housing (integral or remote)\n  │           alternatives: Die-cast aluminium (IP67) ~60%,\n  │           PA66/PP thermoplastic ~30%, SS 316L sheet ~10%  [LOW]\n  ├─ L3.4.2  Cable Entry / Conduit\n  │           alternatives: M20×1.5 ~50%, NPT ½\" ~30%, M25 ~20%  [LOW]\n  └─ L3.4.3  Local Display (optional)\n             alternatives: 2-line LCD ~60%, LED 4-digit ~25%,\n             2.4\" color TFT ~15%  [LOW]\n```\n\n**Key differentiator vs. OT-1:** The liner replaces all wetted seals/O-rings. Liner choice drives media compatibility, temperature rating, and abrasion resistance. Ceramic liner = no mechanical seal failure mode, but brittle and limited to DN15–DN200. PTFE covers widest chemical range.\n\n---\n\n### OT-3 — Coriolis Mass Flowmeter\n\n> **Typical specs:** DN6–DN150, direct mass flow + density, ±0.1% accuracy, SS or Hastelloy, process/custody-transfer\n> **Market position:** Highest ASP of all flowmeter types (~$3,000–$25,000); ~$1.5–1.8B globally (2024); growing at 5% CAGR\n> **Key OEMs:** Emerson (Micro Motion ELITE), Endress+Hauser (Promass), KROHNE (Optimass), Yokogawa (RotaMASS)\n\n```\nOUTPUT TYPE (L5): Coriolis Mass Flowmeter — dual-tube, flanged, process/custody-transfer\n\n  L4.1  Vibrating Tube Assembly\n  │     The primary sensing element. Two matched tubes vibrate at resonance;\n  │     Coriolis forces cause phase shift proportional to mass flow rate.\n  │     Tube frequency also yields fluid density.\n  │\n  ├─ L3.1.1  Measuring Tube Pair\n  │           alternatives: SS 316L dual U-tube ~40%,\n  │           SS 316L dual straight-tube ~30%,\n  │           Hastelloy C-276 (U or straight) ~20%,\n  │           Titanium grade 9 ~8%, Duplex SS 2205 ~2%  [MEDIUM]\n  │           L0 — Seamless SS/Hastelloy/Ti tube (precision wall tolerance ±0.05 mm)\n  │\n  ├─ L3.1.2  Node Braces / Spacer Bars (×2–4)\n  │           Fix tube pair at vibration nodes; define active tube length.\n  │           L1 — Machined brace block (same alloy as tubes for thermal expansion match)\n  │           L0 — Bar stock (SS 316L / Hastelloy / Ti)\n  │\n  └─ L3.1.3  Balance Beam / Counterbalance (straight-tube designs only)\n             Eliminates vibration transmission to manifold.\n             L1 — Counterbalance mass (SS 316L, precision-machined)\n\n  L4.2  Drive & Pickoff Subsystem\n  │     Sustains tube resonance and measures the phase/time difference\n  │     between inlet and outlet tube motion.\n  │\n  ├─ L3.2.1  Drive Coil Assembly (×1, midpoint)\n  │  ├─ L2.2.1.1  Drive Permanent Magnet (fixed to one tube)\n  │  │            alternatives: NdFeB rare-earth ~70%, Alnico ~20%, Ferrite ~10%  [LOW]\n  │  │            L0 — NdFeB sintered magnet (Nd₂Fe₁₄B)\n  │  └─ L2.2.1.2  Drive Coil (fixed to opposing tube, air gap <1 mm)\n  │               L1 — Copper wire coil on SS former\n  │               L0 — Enameled copper wire\n  │\n  └─ L3.2.2  Velocity Pickoff Pair (×2, inlet and outlet)\n             alternatives: Electromagnetic (moving-magnet coil) ~90%,\n             Optical fiber strain ~5%, Piezoelectric ~5%  [MEDIUM]\n             Same coil+magnet construction as drive but in sense-only mode.\n\n  L4.3  Manifold & Case Subsystem\n  │\n  ├─ L3.3.1  Split Manifold (×2, inlet and outlet)\n  │           Distributes flow into tube pair; seals to process connection.\n  │           alternatives: Machined SS 316L ~60%, Hastelloy C-276 ~30%,\n  │           Titanium ~8%, Duplex SS ~2%  [MEDIUM]\n  │           L0 — Bar or forged blank (alloy matches tubes)\n  │\n  ├─ L3.3.2  Outer Case / Canister\n  │           Protects tube assembly; explosion-proof rating possible.\n  │           alternatives: SS 304 sheet-metal ~55%, Carbon steel + coat ~35%,\n  │           Aluminium alloy ~10%  [LOW]\n  │\n  └─ L3.3.3  Process Connection Flanges\n             alternatives: ANSI 150#/300# (raised face) ~50%,\n             EN 1092-1 PN40 ~35%, ASME BPE (sanitary, tri-clamp) ~10%,\n             DIN 11851 dairy coupling ~5%  [MEDIUM]\n\n  L4.4  Transmitter Electronics Subsystem\n  │\n  ├─ L3.4.1  Phase / Frequency Measurement Board\n  │           Captures time difference between pickoff signals (µs range);\n  │           computes mass flow rate and density.\n  │           L2 — FPGA or high-speed DSP + precision time-stamping circuit\n  │           alternatives: Proprietary ASIC ~55%, FPGA-based ~35%,\n  │           DSP + analog phase detector ~10%  [LOW]\n  │\n  ├─ L3.4.2  Power Supply & Isolation Module\n  │           L1 — DC-DC converter + galvanic isolation transformer\n  │\n  └─ L3.4.3  Output & Communication Interface\n             alternatives: 4-20 mA + HART ~45%, PROFIBUS PA ~25%,\n             Foundation Fieldbus ~15%, Modbus RTU ~10%,\n             EtherNet/IP ~5%  [MEDIUM]\n```\n\n**Key differentiator vs. all other flow types:** Only instrument measuring true mass flow directly (not inferred from volumetric + density). Tube alloy and geometry are the dominant BOM cost drivers (~60% of manufactured cost in the tube assembly alone). No liner, no electrodes, no acoustic elements.\n\n---\n\n### OT-4 — Vortex Flowmeter\n\n> **Typical specs:** DN25–DN300, liquid/gas/steam service, flanged, ±0.5–1% accuracy, up to 400°C\n> **Market position:** ~8–12% of global flowmeter market; strong in steam metering\n> **Key OEMs:** Endress+Hauser (Prowirl), Emerson (Rosemount 8800), Yokogawa (YEWFLO), Siemens (SITRANS FX)\n\n```\nOUTPUT TYPE (L5): Vortex Flowmeter — flanged, liquid/gas/steam, process\n\n  L4.1  Bluff Body & Vortex Sensing Subsystem\n  │     The bluff body (shedder bar) creates von Kármán vortex shedding;\n  │     the sensor detects pressure oscillations at shedding frequency.\n  │\n  ├─ L3.1.1  Bluff Body (Shedder Bar)\n  │           alternatives: SS 316L ~70%, Hastelloy C-276 ~20%,\n  │           Titanium grade 2 ~10%  [MEDIUM]\n  │           L0 — Alloy bar stock (precision-machined bluff geometry)\n  │\n  ├─ L3.1.2  Vortex Sensor Element (embedded in or behind bluff body)\n  │           alternatives: Piezoelectric crystal ~50%, Capacitive diaphragm ~30%,\n  │           Differential pressure thermal ~15%,\n  │           Ultrasonic/acoustic ~5%  [MEDIUM]\n  │           L0 (piezo path): PZT-5H ceramic disc\n  │           L0 (capacitive path): metallized polymer diaphragm\n  │\n  └─ L3.1.3  Sensor Isolation / Potting\n             Mechanically decouples sensing element from pipe vibration.\n             L2 — Epoxy or silicone potting compound + SS housing insert\n\n  L4.2  Signal Processing & Electronics Subsystem\n  │\n  ├─ L3.2.1  Measurement PCB\n  │  ├─ L2.2.1.1  MCU + frequency counter\n  │  │            alternatives: Integrated vortex ASIC ~55%,\n  │  │            General MCU + external filters ~35%, FPGA ~10%  [LOW]\n  │  ├─ L1.2.1.2  Bandpass filter (hardware) — attenuates vibration noise\n  │  └─ L0.2.1.3  PCB Substrate — FR4 ~85%, High-Tg FR4 ~15%  [MEDIUM]\n  │\n  └─ L3.2.2  Output & Communication Interface\n             alternatives: 4-20 mA + HART ~50%, Pulse/frequency ~25%,\n             PROFIBUS ~15%, Foundation Fieldbus ~10%  [MEDIUM]\n\n  L4.3  Flow Body Subsystem\n  │\n  ├─ L3.3.1  Flow Body (flanged pipe section with bluff body port)\n  │           alternatives: SS 316L wafer body ~35%, SS 316L flanged ~35%,\n  │           Carbon steel flanged ~20%, Hastelloy flanged ~10%  [MEDIUM]\n  │           L0 — CS or SS bar/forging blank\n  │\n  └─ L3.3.2  Process Flange Facing\n             alternatives: Raised face (RF) ~65%, Ring type joint (RTJ) ~25%,\n             Flat face (FF) ~10%  [LOW]\n\n  L4.4  Enclosure & Sealing Subsystem\n  ├─ L3.4.1  Transmitter Housing\n  │           alternatives: Die-cast Al (IP67) ~55%, PA66 thermoplastic ~30%,\n  │           SS sheet ~15%  [LOW]\n  └─ L3.4.2  Sensor-to-Body Seal (wetted)\n             alternatives: PTFE gasket ~50%, Graphite ~30%, SS spiral wound ~20%  [LOW]\n```\n\n**Key differentiator:** No moving parts, no wetted electrical connections. Bluff body + sensor integration defines reliability. Steam service drives SS 316L + SS 316L spiral-wound seals (PTFE derates above 200°C). Vibration immunity is the primary engineering challenge.\n\n---\n\n### OT-5 — Turbine Flowmeter\n\n> **Typical specs:** DN15–DN300, clean liquid or gas, ±0.25–0.5% accuracy, threaded or flanged, up to 150°C\n> **Market position:** ~10–12% of flowmeter market; declining in process but strong in custody transfer (fiscal metering) for clean liquids and fuels\n> **Key OEMs:** Hoffer Flow Controls, FAURE HERMAN, Flow Technology (FTI), KOBOLD, Badger Meter\n\n```\nOUTPUT TYPE (L5): Turbine Flowmeter — inline, clean liquid/gas, flanged or threaded\n\n  L4.1  Rotor Assembly\n  │     The spinning element. Rotation rate proportional to volumetric flow.\n  │\n  ├─ L3.1.1  Rotor / Impeller (bladed turbine wheel)\n  │           alternatives: SS 316L (6-blade helical) ~45%,\n  │           Acetal (Delrin) polymer ~25%, Titanium grade 2 ~15%,\n  │           PEEK ~10%, Hastelloy C-276 ~5%  [MEDIUM]\n  │           L0 — Alloy disc blank / polymer rod (CNC or investment-cast)\n  │\n  ├─ L3.1.2  Rotor Bearing / Spindle Support\n  │           alternatives: Tungsten carbide journal bearings ~55%,\n  │           Sapphire / ruby jewel bearings ~30%,\n  │           SS 440C ball bearings ~15%  [MEDIUM]\n  │           L0 (WC path): WC-Co sintered compact\n  │           L0 (jewel path): synthetic corundum (Al₂O₃) rod\n  │\n  └─ L3.1.3  Rotor Shaft / Axis Pin\n             L1 — Tungsten carbide rod (DN15–DN50) or SS 440C pin (DN80+)\n\n  L4.2  Pickup & Signal Detection Subsystem\n  │\n  ├─ L3.2.1  Electromagnetic Pickup Coil Assembly\n  │           alternatives: Variable reluctance (VR) magnetic ~70%,\n  │           RF carrier / modulated reluctance ~15%,\n  │           Hall-effect proximity ~15%  [MEDIUM]\n  │  ├─ L2.2.1.1  Permanent Magnet (in coil or rotor blade tip)\n  │  │            L0 — NdFeB magnet or AlNiCo\n  │  └─ L2.2.1.2  Pickup Coil (copper wire on ferrite core)\n  │               L0 — Enameled copper wire + ferrite rod\n  │\n  └─ L3.2.2  Pre-amplifier / Schmitt Trigger Board\n             L1 — Pulse conditioner PCB (signal squaring + noise suppression)\n\n  L4.3  Flow Body & End Fittings Subsystem\n  │\n  ├─ L3.3.1  Flow Body\n  │           alternatives: SS 316L ~50%, Brass CW617N ~30%,\n  │           Carbon steel ~15%, Thermoplastic (PP/PVDF) ~5%  [MEDIUM]\n  │           L0 — SS or brass bar stock (precision-bored internal geometry)\n  │\n  ├─ L3.3.2  Flow Conditioner / Straightener (upstream)\n  │           L2 — Tube bundle or plate straightener (SS 316L)\n  │           Reduces swirl; mandatory for accurate measurement.\n  │\n  └─ L3.3.3  Process Connection\n             alternatives: NPT threaded ~35%, Flanged ANSI/EN ~30%,\n             G-thread BSP ~25%, Sanitary tri-clamp ~10%  [LOW]\n\n  L4.4  Enclosure & Output Subsystem\n  ├─ L3.4.1  Pickup Housing / Head\n  │           alternatives: SS 316L machined ~60%, Die-cast Al ~30%,\n  │           Brass ~10%  [LOW]\n  └─ L3.4.2  Output Electronics (preamplifier → output)\n             alternatives: Pulse output (passive) ~50%,\n             4-20 mA + totaliser ~30%, HART ~15%, RS-485 ~5%  [MEDIUM]\n```\n\n**Key differentiator:** Only flowmeter type with bearings as a primary wear element. Bearing choice determines service life (WC/jewel = 10+ years clean liquid; ball bearing = lower cost, shorter life). Rotor material defines media compatibility. No wetted electronic components.\n\n---\n\n### OT-6 — Differential Pressure (DP) Flow Transmitter + Primary Element\n\n> **Typical specs:** Primary element (orifice/Venturi) + DP transmitter pair; process service, DN25–DN600, up to 420°C/420 bar\n> **Market position:** Largest single flow measurement technology by installed base; declining share but ~20% of new installations; ~$1.2B DP transmitter market globally\n> **Key OEMs:** Emerson (Rosemount 3051), Endress+Hauser (Deltabar), ABB (2600T), Yokogawa (EJX), Honeywell (Smartline)\n\n```\nOUTPUT TYPE (L5): DP Flow Transmitter + Primary Element — flanged, process/utility\n\n  L4.1  Primary Element (Flow Restriction) Subsystem\n  │     Creates a differential pressure proportional to flow²;\n  │     separate from the transmitter and installed in the pipe.\n  │\n  ├─ L3.1.1  Primary Element Type (defines ΔP characteristic)\n  │           alternatives: Orifice plate (sharp-edge, ISO 5167) ~55%,\n  │           Venturi tube ~20%, Flow nozzle (ASME PTC 6) ~12%,\n  │           V-cone / cone element ~8%, Annubar/pitot array ~5%  [MEDIUM]\n  │\n  ├─ L3.1.2  Primary Element Material\n  │           alternatives: SS 316/316L ~70%, Carbon steel ~15%,\n  │           Hastelloy C-276 ~10%, Plastic/PTFE (low-pressure) ~5%  [MEDIUM]\n  │           L0 — Plate, tube, or cone blank (alloy per service)\n  │\n  └─ L3.1.3  Orifice Plate Carrier / Flange Assembly (orifice type only)\n             L2 — Orifice flange union (ANSI 150–2500, SS or CS)\n             L1 — Paddle plate (precision-machined, bore tolerance ±0.01 mm)\n\n  L4.2  Differential Pressure Sensing Capsule\n  │     The heart of the transmitter; converts ΔP to an electrical signal.\n  │\n  ├─ L3.2.1  Sensing Technology\n  │           alternatives: Piezoresistive silicon (micromachined) ~45%,\n  │           Capacitive metallic capsule ~35%,\n  │           Metallic strain-gauge (Wheatstone bridge) ~15%,\n  │           Inductive / resonant wire ~5%  [MEDIUM]\n  │           L0 (piezo-Si path): Silicon wafer + boron diffusion\n  │           L0 (capacitive path): Inconel diaphragm + glass frits\n  │\n  ├─ L3.2.2  Isolating Diaphragm (×2, high-side and low-side)\n  │           Separates process fluid from fill fluid / sensing element.\n  │           alternatives: SS 316L ~55%, Hastelloy C-276 ~25%,\n  │           Tantalum ~12%, Gold-coated SS (HF service) ~8%  [MEDIUM]\n  │           L0 — Rolled alloy foil (0.05–0.1 mm)\n  │\n  └─ L3.2.3  Fill Fluid (transmits pressure to sensing element)\n             alternatives: Silicone oil DC704 ~60%, Fluorinated oil (Halocarbon) ~25%,\n             Glycerine/water ~10%, Dry fill (no fluid, diaphragm seal only) ~5%  [MEDIUM]\n             L0 — Synthetic oil (per grade)\n\n  L4.3  Process Body & Manifold Subsystem\n  │\n  ├─ L3.3.1  Process Flanges / Wetted Body\n  │           alternatives: SS 316L ~60%, Carbon steel ~25%,\n  │           Hastelloy ~12%, CPVC/PP ~3%  [MEDIUM]\n  │           L0 — Forged flange blank (alloy per service)\n  │\n  └─ L3.3.2  3-Valve or 5-Valve Manifold\n             Isolates transmitter from process for maintenance.\n             alternatives: 3-valve manifold ~55%, 5-valve manifold ~35%,\n             Integral manifold (built-in) ~10%  [MEDIUM]\n             L0 — SS or CS machined block + needle valve stems\n\n  L4.4  Electronics & Housing Subsystem\n  │\n  ├─ L3.4.1  Signal Conditioning PCB\n  │  ├─ L2.4.1.1  ADC (24-bit) + MCU\n  │  ├─ L1.4.1.2  Temperature compensation circuit (on-body RTD)\n  │  └─ L0.4.1.3  PCB Substrate — FR4 ~80%, High-Tg FR4 ~20%  [MEDIUM]\n  │\n  ├─ L3.4.2  Output & Communication Interface\n  │           alternatives: 4-20 mA + HART 7 ~55%, PROFIBUS PA ~20%,\n  │           Foundation Fieldbus ~15%, Wireless HART ~7%, IO-Link ~3%  [MEDIUM]\n  │\n  └─ L3.4.3  Transmitter Housing\n             alternatives: Die-cast aluminium (IP67) ~65%,\n             SS 316L ~25%, PA66/PC thermoplastic ~10%  [LOW]\n```\n\n**Key differentiator:** Two-component system (primary element + transmitter). Orifice plates are the most standardized industrial measurement artifact (ISO 5167 calculates discharge coefficient without calibration). DP transmitter accuracy limited by impulse line effects; electronic DP transmitters now integrate temperature compensation and multivariable output.\n\n---\n\n### OT-7 — Thermal Mass Flowmeter (Gas Service)\n\n> **Typical specs:** Gas/air service, DN15–DN300 inline or insertion probe, 0–500 SLPM to 50,000 SLPM, ±1–2% accuracy, no pressure correction required\n> **Market position:** ~3–5% of flowmeter market; dominant for N₂, air, natural gas, biogas, H₂ in low-flow and industrial utility roles\n> **Key OEMs:** Bronkhorst (for lab/precision), Brooks Instrument, Sierra Instruments, Alicat Scientific, ifm electronic, KROHNE (Optisonic TM for gas)\n\n```\nOUTPUT TYPE (L5): Thermal Mass Flowmeter — inline or insertion, gas service\n\n  L4.1  Thermal Sensing Element Subsystem\n  │     Two RTD probes: one heated (self-heated), one reference (ambient T).\n  │     Flow-induced cooling of the heated element encodes mass flow rate.\n  │\n  ├─ L3.1.1  Sensing Principle Architecture\n  │           alternatives: Constant-temperature anemometry (CTA) ~40%,\n  │           Constant-power (calorimetric differential) ~35%,\n  │           Capillary thermal (bypass tube) ~25%  [MEDIUM]\n  │\n  ├─ L3.1.2  RTD Probe Elements (×2: heated + reference)\n  │           alternatives: Pt100 RTD (Class A, wire-wound) ~85%,\n  │           NTC thermistor ~10%, Thin-film Pt ~5%  [MEDIUM]\n  │           L0 — Platinum wire / Pt-Al₂O₃ thin-film on ceramic substrate\n  │\n  ├─ L3.1.3  Probe Tip / Sensor Finger Material\n  │           alternatives: SS 316L ~55%, Hastelloy C-276 ~30%,\n  │           Silicon nitride (Si₃N₄) ceramic ~10%, PEEK ~5%  [MEDIUM]\n  │           L0 — Alloy tube (precision-drawn, 3–6 mm OD)\n  │\n  └─ L3.1.4  Probe Potting / Seal\n             L2 — Ceramic cement or epoxy encapsulant around RTD leads\n             L0 — Al₂O₃-based ceramic cement\n\n  L4.2  Signal Processing & Electronics Subsystem\n  │\n  ├─ L3.2.1  Wheatstone Bridge / Control Circuit\n  │           In CTA: servo amplifier maintains constant T difference.\n  │           In CP: measures differential T between probes.\n  │           L2 — Bridge resistor network + op-amp feedback circuit\n  │\n  ├─ L3.2.2  MCU / Signal Processor\n  │           alternatives: Integrated MCU (ARM Cortex-M) ~70%,\n  │           Discrete analog + V/F converter ~20%, FPGA ~10%  [LOW]\n  │           L0 — Silicon die; FR4 PCB substrate\n  │\n  └─ L3.2.3  Output & Communication Interface\n             alternatives: 4-20 mA ~45%, Pulse/frequency ~25%,\n             RS-485/Modbus ~15%, IO-Link ~10%, HART ~5%  [MEDIUM]\n\n  L4.3  Flow Body / Probe Assembly Subsystem\n  │\n  ├─ L3.3.1  Installation Architecture\n  │           alternatives: Inline flow body (full-bore) ~50%,\n  │           Insertion probe (hot-tap capable) ~40%,\n  │           Bypass/capillary spool (low-flow precision) ~10%  [MEDIUM]\n  │\n  ├─ L3.3.2  Flow Body / Conduit Material (inline type)\n  │           alternatives: SS 316L ~65%, Carbon steel ~25%, Aluminium ~10%  [LOW]\n  │           L0 — SS or CS tube\n  │\n  └─ L3.3.3  Process Connection\n             alternatives: Compression fitting ~40%, Flanged ANSI/EN ~35%,\n             Threaded G/NPT ~25%  [LOW]\n\n  L4.4  Enclosure & Sealing Subsystem\n  ├─ L3.4.1  Transmitter Housing\n  │           alternatives: Die-cast Al ~60%, PA66/PP ~30%, SS ~10%  [LOW]\n  └─ L3.4.2  Probe Entry Seal (insertion types)\n             alternatives: Compression fitting (SS Swagelok-style) ~60%,\n             Flanged entry ~30%, PTFE-packed gland ~10%  [LOW]\n```\n\n**Key differentiator:** Only flow technology that measures mass flow without requiring temperature/pressure correction (contrast with DP and vortex). No moving parts. Requires dry, clean gas (liquid droplets cause measurement error and probe damage). H₂ service drives ceramic Si₃N₄ probe tip due to embrittlement of SS at high H₂ concentrations.\n\n---\n\n### OT-8 — Pressure Transmitter / Pressure Instrument\n\n> **Typical specs:** 0–10 mbar to 0–1000 bar range, gauge/absolute/differential, 4-20 mA + HART, process service\n> **Market position:** Largest single instrument type in NAICS 334513 by unit volume; ~$3.5–4.0B globally (2024)\n> **Key OEMs:** Emerson (Rosemount 3051), Endress+Hauser (Cerabar, PMC/PMP), ABB (2600T Series), Siemens (SITRANS P), Yokogawa (EJX/EJA), Honeywell\n\n```\nOUTPUT TYPE (L5): Pressure Transmitter — process, 4-20 mA/HART, flanged or threaded\n\n  L4.1  Pressure Sensing Element Subsystem\n  │     Converts process pressure into an electrical signal.\n  │\n  ├─ L3.1.1  Sensing Technology\n  │           alternatives: Piezoresistive silicon (MEMS) ~45%,\n  │           Capacitive metallic capsule ~30%,\n  │           Piezoelectric crystal (dynamic/high-T) ~10%,\n  │           Metallic strain gauge (Wheatstone bridge) ~10%,\n  │           Inductive / resonant wire ~5%  [MEDIUM]\n  │           L0 (piezo-Si): Silicon wafer + boron/phosphorus diffusion (MEMS fab)\n  │           L0 (capacitive): Inconel or SS foil diaphragm\n  │\n  ├─ L3.1.2  Isolating Diaphragm (wetted, process-side)\n  │           alternatives: SS 316L ~50%, Hastelloy C-276 ~20%,\n  │           Inconel 625 ~15%, Tantalum ~10%, Titanium ~5%  [MEDIUM]\n  │           L0 — Rolled alloy foil (0.05–0.15 mm thickness)\n  │\n  └─ L3.1.3  Fill Fluid\n             alternatives: Silicone oil DC200/DC704 ~65%,\n             Fluorinated oil (Halocarbon 4.2) ~25%,\n             Glycerine (food/pharma) ~8%, Dry fill (diaphragm seal) ~2%  [MEDIUM]\n             L0 — Synthetic oil per grade\n\n  L4.2  Signal Conditioning & Electronics Subsystem\n  │\n  ├─ L3.2.1  Signal Conditioning PCB\n  │  ├─ L2.2.1.1  24-bit Sigma-Delta ADC + MCU\n  │  │            alternatives: Proprietary ASIC ~60%,\n  │  │            General-purpose MCU + ADC combo ~35%, FPGA ~5%  [LOW]\n  │  ├─ L1.2.1.2  On-board temperature compensation sensor (NTC or Pt100)\n  │  └─ L0.2.1.3  PCB Substrate\n  │               alternatives: FR4 ~75%, High-Tg FR4 ~20%, Ceramic ~5%  [MEDIUM]\n  │\n  └─ L3.2.2  Output & Communication Interface\n             alternatives: 4-20 mA + HART 7 ~60%, Foundation Fieldbus ~15%,\n             PROFIBUS PA ~12%, Wireless HART ~8%, IO-Link ~5%  [MEDIUM]\n\n  L4.3  Process Connection Body Subsystem\n  │\n  ├─ L3.3.1  Wetted Body / Process Flange\n  │           alternatives: SS 316L ~55%, Carbon steel ~20%,\n  │           Hastelloy C-276 ~15%, PP/CPVC ~10%  [MEDIUM]\n  │           L0 — Forged or bar-stock blank (alloy per service)\n  │\n  └─ L3.3.2  Process Connection Type\n             alternatives: ½\" NPT ~40%, G ½\" (ISO 228) ~25%,\n             ¼\" NPT ~20%, M20×1.5 ~10%, Flanged PN40 ~5%  [MEDIUM]\n\n  L4.4  Transmitter Housing Subsystem\n  ├─ L3.4.1  Main Housing\n  │           alternatives: Die-cast aluminium (IP66/IP67) ~60%,\n  │           SS 316L ~25%, PA66/PC thermoplastic ~15%  [LOW]\n  ├─ L3.4.2  Electronic Insert / Cover\n  │           L1 — Machined aluminium or SS lid + O-ring (EPDM or FKM)\n  └─ L3.4.3  Local Display (optional)\n             alternatives: LCD 2-line ~55%, LED bargraph ~30%,\n             No display (blind) ~15%  [LOW]\n```\n\n**Key differentiator vs. DP flow transmitter:** Single-sided sensing (no high/low side manifold). Most pressure transmitters use exactly the same electronics subsystem (L4.2) as DP transmitters — the sensing capsule (L4.1) is the differentiator. MEMS piezoresistive dominates on sensitivity and miniaturization; capacitive dominates at high overpressure ratios (>20:1).\n\n---\n\n### OT-9 — Temperature Transmitter + RTD / TC Assembly\n\n> **Typical specs:** −200°C to +600°C (RTD) or −200°C to +1,700°C (TC), 4-20 mA / HART, thermowell + element + connection head\n> **Market position:** Most installed instrument type globally; ~$2.5B (2024) temperature instrument segment of NAICS 334513\n> **Key OEMs:** Endress+Hauser (iTEMP TMT), Emerson (Rosemount 3144P), ABB (TTF300), Siemens (SITRANS TH), WIKA, JUMO\n\n```\nOUTPUT TYPE (L5): Temperature Transmitter + RTD/TC Assembly — process, thermowell-mounted\n\n  L4.1  Primary Temperature Sensing Element Subsystem\n  │     Converts temperature to a resistance (RTD) or EMF (TC) signal.\n  │\n  ├─ L3.1.1  Sensing Type\n  │           alternatives: Pt100 RTD (IEC 60751 Class A/AA) ~65%,\n  │           Thermocouple (TC, various types) ~25%,\n  │           Pt1000 RTD ~8%, NTC thermistor ~2%  [MEDIUM]\n  │\n  ├─ L3.1.2  RTD Construction (RTD path)\n  │           alternatives: Wire-wound (coil, all-metal) ~50%,\n  │           Thin-film (Pt on Al₂O₃ substrate) ~40%,\n  │           Coiled-element (loosely wound, expanded) ~10%  [MEDIUM]\n  │           L0 — Platinum wire (0.05–0.1 mm, 99.99% purity) / Pt paste\n  │\n  ├─ L3.1.3  Thermocouple Type (TC path)\n  │           alternatives: Type K (NiCr/NiAl) ~45%, Type J (Fe/CuNi) ~25%,\n  │           Type T (Cu/CuNi) ~15%, Type N ~8%, Type S/R/B (noble) ~7%  [MEDIUM]\n  │           L0 — Wire pair per alloy type (Ni-Cr, Fe, Cu-Ni)\n  │\n  └─ L3.1.4  Protective Sheath (inner, around element)\n             alternatives: SS 316L ~60%, Inconel 600 ~25%,\n             Hastelloy X ~12%, Ceramic Al₂O₃ (high-T/corrosive) ~3%  [MEDIUM]\n             L0 — Drawn tube (alloy per service)\n\n  L4.2  Signal Conditioning Transmitter Subsystem\n  │     Converts resistance/EMF to a standardized 4-20 mA output.\n  │\n  ├─ L3.2.1  Transmitter Type\n  │           alternatives: 2-wire 4-20 mA + HART (DIN rail or head mount) ~60%,\n  │           4-wire direct (no transmitter, DCS/PLC direct input) ~25%,\n  │           WirelessHART transmitter ~10%, PROFIBUS PA head ~5%  [MEDIUM]\n  │\n  ├─ L3.2.2  ADC Resolution\n  │           alternatives: 24-bit sigma-delta ~80%, 16-bit ~20%  [MEDIUM]\n  │           L0 — Silicon die (CMOS)\n  │\n  └─ L3.2.3  Cold-Junction Compensation (TC only)\n             L1 — On-board NTC or Pt100 reference junction sensor\n\n  L4.3  Thermowell / Protection Tube Subsystem\n  │     Pressure-rated protection tube protecting the element from process.\n  │\n  ├─ L3.3.1  Thermowell Material\n  │           alternatives: SS 316/316L ~60%, Hastelloy C-276 ~20%,\n  │           Carbon steel +coat ~12%, Ceramic Al₂O₃ ~8%  [MEDIUM]\n  │           L0 — Bar stock (drilled and turned to dimensional standard PTC 19.3)\n  │\n  ├─ L3.3.2  Thermowell Tip Geometry\n  │           alternatives: Straight (constant OD) ~50%,\n  │           Tapered (reduced tip) ~35%, Stepped (Omegadyne-style) ~15%  [LOW]\n  │\n  └─ L3.3.3  Process Connection (thermowell to pipe)\n             alternatives: Threaded (½\" NPT or G ½\") ~55%,\n             Flanged (ANSI 150#/300# or EN PN40) ~30%,\n             Weld-in (socket weld or butt weld) ~15%  [MEDIUM]\n\n  L4.4  Connection Head & Wiring Subsystem\n  ├─ L3.4.1  Connection Head (houses transmitter board + terminals)\n  │           alternatives: Die-cast aluminium (IP65) ~70%,\n  │           PP/PA66 thermoplastic ~20%, SS ~10%  [LOW]\n  └─ L3.4.2  Terminal Block / Wiring\n             L1 — Screw-terminal block (PBT housing, tin-plated brass contacts)\n```\n\n**Key differentiator:** Three physically separate assemblies (element, thermowell, transmitter head) that are usually sold together but sourced independently in large projects. Thermowell wake-frequency calculation (ASME PTC 19.3 TW) is the critical mechanical design constraint — a thermowell that resonates with process flow will fail by fatigue. RTD dominates in -200°C to +600°C; TC dominates above 600°C.\n\n---\n\n### OT-10 — Level Instrument (Radar / GWR / Ultrasonic / Hydrostatic)\n\n> **Typical specs:** Non-contact or contact level in tanks, silos, or open channels; 0–40 m range typical; process/storage/utility\n> **Market position:** ~$2.2B globally (2024); growing at 5–6% CAGR driven by radar share gain; most diverse technology mix of any NAICS 334513 output type\n> **Key OEMs:** Endress+Hauser (Micropilot, Levelflex), Emerson (Rosemount), VEGA (VEGAPULS, VEGAFLEX), ABB, Siemens (SITRANS LR)\n\n```\nOUTPUT TYPE (L5): Level Instrument — process tank / silo / channel\n\n  L4.1  Level Sensing Technology Subsystem\n  │     The primary physical principle of level detection varies substantially.\n  │     Technology choice at this level determines all other L4–L0 choices.\n  │\n  ├─ Technology selection at L3 level (mutually exclusive):\n  │   alternatives: Capacitance (probe-contact) ~25%,\n  │   Guided Wave Radar / TDR (GWR, probe-contact) ~22%,\n  │   Hydrostatic pressure (submersible or flange-mount) ~20%,\n  │   Free-space FMCW radar (non-contact) ~18%,\n  │   Ultrasonic (non-contact, open/closed tank) ~10%,\n  │   Magnetostrictive (float + float tube) ~5%  [MEDIUM]\n  │\n  ├─── [Path A — Guided Wave Radar (GWR / TDR), dominant in process]\n  │    │\n  │    ├─ L3.1.A1  RF Transceiver Module\n  │    │           alternatives: 1 GHz TDR pulse ~45%, 1–3 GHz FMCW ~35%,\n  │    │           High-speed TDR (6 GHz equiv.) ~20%  [LOW]\n  │    │           L0 — GaAs or SiGe MMIC die + ceramic package\n  │    │\n  │    ├─ L3.1.A2  Probe Assembly (waveguide, wetted)\n  │    │           alternatives: Single-rod (SS 316L) ~50%,\n  │    │           Twin-rod / coaxial ~25%,\n  │    │           Rope probe (flexible, SS wire) ~20%,\n  │    │           Coaxial (high-viscosity, high accuracy) ~5%  [MEDIUM]\n  │    │           L0 — Drawn SS 316L or PTFE-coated rod / wire rope\n  │    │\n  │    └─ L3.1.A3  Probe Process Seal (wetted, top flange)\n  │                alternatives: PEEK ~45%, PTFE ~35%, PPS ~20%  [LOW]\n  │\n  ├─── [Path B — Free-Space FMCW Radar, non-contact]\n  │    │\n  │    ├─ L3.1.B1  Radar Transceiver / Antenna Module\n  │    │           alternatives: 26 GHz band-type FMCW ~55%,\n  │    │           80 GHz narrow-beam FMCW ~35%,\n  │    │           6.3 GHz pulse radar (legacy) ~10%  [MEDIUM]\n  │    │           L0 — SiGe RFIC die + aluminum / plastic horn antenna\n  │    │\n  │    └─ L3.1.B2  Antenna Type\n  │                alternatives: Horn (conical) ~55%, Rod antenna ~25%,\n  │                Parabolic dish ~15%, Planar array (80 GHz) ~5%  [LOW]\n  │\n  └─── [Path C — Hydrostatic Pressure (submersible), low cost]\n       │\n       ├─ L3.1.C1  Pressure Sensing Capsule\n       │           Same as OT-8 L4.1 (piezoresistive dominant ~50%,\n       │           capacitive ~40%, strain gauge ~10%)  [MEDIUM]\n       │\n       └─ L3.1.C2  Submersible Cable / Vent Tube\n                   L1 — PUR/PVC cable + capillary vent tube (SS or PTFE)\n                   L0 — PUR or PVC compound + SS braid\n\n  L4.2  Signal Processing & Electronics Subsystem\n  │     Architecture same across all level technologies.\n  │\n  ├─ L3.2.1  MCU / Signal Processor\n  │           alternatives: ARM Cortex-M + DSP co-processor ~65%,\n  │           Proprietary ASIC (VEGA, E+H) ~25%, FPGA ~10%  [LOW]\n  │\n  └─ L3.2.2  Output & Communication Interface\n             alternatives: 4-20 mA + HART ~55%, Foundation Fieldbus ~15%,\n             PROFIBUS PA ~15%, Wireless HART ~10%, IO-Link ~5%  [MEDIUM]\n\n  L4.3  Process Connection & Housing Assembly\n  │\n  ├─ L3.3.1  Process Nozzle Connection\n  │           alternatives: Flanged EN/ANSI PN40 / 150# ~50%,\n  │           Threaded G1½\" ~30%, NPT 1½\" ~15%, Tri-clamp (sanitary) ~5%  [MEDIUM]\n  │\n  └─ L3.3.2  Process Wetted Material (connection / probe top fitting)\n             alternatives: SS 316L ~65%, Hastelloy C-276 ~20%,\n             PVDF ~10%, PTFE-lined ~5%  [LOW]\n\n  L4.4  Transmitter Housing Subsystem\n  ├─ L3.4.1  Housing Material\n  │           alternatives: Die-cast aluminium ~65%,\n  │           PP/PA66 thermoplastic ~25%, SS 316L ~10%  [LOW]\n  └─ L3.4.2  Local Display\n             alternatives: LCD 4-digit ~50%, 2.4\" graphical LCD ~35%,\n             Color TFT 3.5\" ~15%  [LOW]\n```\n\n**Key differentiator:** Highest technology diversity of all NAICS 334513 output types. Radar (GWR + free-space) is displacing all other technologies above DN100/1 m range due to falling RFIC costs. 80 GHz FMCW radar (E+H Micropilot 80) is the current growth driver — tighter beam angle means smaller nozzle, easier installation, and fewer false echoes. Capacitance probes remain dominant in small/simple tanks due to cost.\n\n---\n\n### OT-11 — Analytical Instrument (pH / Conductivity / Dissolved Oxygen)\n\n> **Typical specs:** Inline or submersion probes; pH 0–14, conductivity 0.05 µS/cm–2 S/cm, DO 0–40 mg/L; process or environmental monitoring\n> **Market position:** ~$1.8B globally (2024); dominated by water treatment, pharma, food & beverage, and chemical process industries\n> **Key OEMs:** Endress+Hauser (Memosens), Mettler-Toledo (InPro), HACH (Orbisphere), Yokogawa (FLXA), Emerson, Hamilton\n\n```\nOUTPUT TYPE (L5): Analytical Instrument — inline pH/conductivity/DO transmitter + sensor\n\n  L4.1  Primary Sensing Electrode Assembly\n  │     Technology depends on measured parameter (pH, conductivity, or DO).\n  │\n  ├─ Technology selection (mutually exclusive by parameter):\n  │   alternatives (by installed base): pH ~55%, Conductivity ~30%, DO ~15%  [MEDIUM]\n  │\n  ├─── [Path A — pH Measurement]\n  │    │\n  │    ├─ L3.1.A1  pH Measurement Electrode\n  │    │           alternatives: Glass membrane (H⁺-selective borosilicate) ~65%,\n  │    │           ISFET semiconductor (solid-state) ~30%,\n  │    │           Metal oxide (e.g., RuO₂, IrOx) ~5%  [MEDIUM]\n  │    │           L0 (glass): Borosilicate glass bulb (Li₂O-SiO₂-La₂O₃ composition)\n  │    │           L0 (ISFET): Si die + Si₃N₄ gate insulator\n  │    │\n  │    ├─ L3.1.A2  Reference Electrode\n  │    │           alternatives: Ag/AgCl single-junction (gel-filled) ~65%,\n  │    │           Ag/AgCl double-junction ~25%,\n  │    │           Calomel (Hg/Hg₂Cl₂) legacy ~10%  [MEDIUM]\n  │    │           L0 — Silver wire + AgCl coating + KCl electrolyte gel\n  │    │\n  │    └─ L3.1.A3  Reference Electrolyte\n  │                alternatives: KCl gel (3.0–3.5 mol/L) ~60%,\n  │                KCl liquid ~30%, Proprietary polymer gel ~10%  [LOW]\n  │                L0 — KCl salt + gel polymer matrix\n  │\n  ├─── [Path B — Conductivity Measurement]\n  │    │\n  │    ├─ L3.1.B1  Conductivity Sensing Element\n  │    │           alternatives: Contacting 2-electrode (graphite or Pt) ~40%,\n  │    │           Contacting 4-electrode (Pt ring) ~35%,\n  │    │           Toroidal/inductive (no contact) ~25%  [MEDIUM]\n  │    │           L0 (Pt): Platinum foil / Pt-plated SS\n  │    │           L0 (graphite): Vitreous carbon or graphite\n  │    │\n  │    └─ L3.1.B2  Cell Body Material\n  │                alternatives: PEEK ~40%, PVDF ~30%, CPVC ~20%,\n  │                Titanium ~10%  [LOW]\n  │\n  └─── [Path C — Dissolved Oxygen Measurement]\n       │\n       ├─ L3.1.C1  DO Sensing Principle\n       │           alternatives: Amperometric (Clark cell, polarographic) ~50%,\n       │           Optical (luminescent O₂-quenching fluorophore) ~40%,\n       │           Galvanic (lead/zinc anode) ~10%  [MEDIUM]\n       │           L0 (optical): Ru(II)-dye coated sensor cap on glass substrate\n       │           L0 (Clark): Pt cathode + Ag anode + KCl electrolyte\n       │\n       └─ L3.1.C2  Permeable Membrane (Clark/galvanic type)\n                   alternatives: PTFE membrane (25 µm) ~55%,\n                   Silicone membrane ~35%, FEP membrane ~10%  [LOW]\n                   L0 — PTFE/silicone film\n\n  L4.2  Electrode Body & Housing Assembly\n  │\n  ├─ L3.2.1  Electrode Outer Body Material\n  │           alternatives: Glass body (traditional) ~40%,\n  │           PEEK/PVDF (robust, digital) ~35%,\n  │           SS 316L (fully metallic, Memosens-type) ~25%  [MEDIUM]\n  │           L0 — Borosilicate glass tube / PEEK rod / SS 316L tube\n  │\n  └─ L3.2.2  Process Connection / Installation Type\n             alternatives: Submersion (direct immersion) ~40%,\n             Inline flow assembly ~35%, Retractable (hot-swap) ~20%,\n             Flanged nozzle ~5%  [MEDIUM]\n\n  L4.3  Signal Conditioning Transmitter\n  │\n  ├─ L3.3.1  Transmitter PCB\n  │  ├─ Very high input impedance pre-amp (>10¹² Ω for glass pH electrode)\n  │  └─ MCU with temperature compensation (on-board NTC or Pt1000)\n  │\n  └─ L3.3.2  Output & Communication Interface\n             alternatives: 4-20 mA + HART ~55%, Modbus RTU ~20%,\n             Digital/inductive (Memosens) ~15%, PROFIBUS ~10%  [MEDIUM]\n\n  L4.4  Process Connection & Enclosure\n  ├─ L3.4.1  Probe Wetted Body\n  │           alternatives: PEEK ~40%, PVDF ~30%, SS 316L ~20%, CPVC ~10%  [LOW]\n  └─ L3.4.2  Transmitter Housing\n             alternatives: PP/PA66 compact ~55%, Die-cast Al ~30%, SS ~15%  [LOW]\n```\n\n**Key differentiator:** Glass membrane pH electrodes are the most consumed analytical consumable in process industry (replaced every 6–18 months). Memosens (digital inductive coupling, Endress+Hauser) is the dominant design trend — shifts value to the reusable transmitter and standardizes the calibratable-in-the-lab sensor. Optical DO is displacing Clark cell due to zero electrolyte consumption and longer sensor life.\n\n---\n\n### OT-12 — Control & Recording Instrument (PID Controller / Paperless Recorder)\n\n> **Typical specs:** Panel-mount (1/4 DIN, 1/8 DIN) or DIN-rail; 1–64+ channel; PID control or trend recording; -40°C to +50°C ambient\n> **Market position:** ~$1.5B globally (2024); panel controllers declining (DCS/PLC displacement); paperless recorders growing in pharma/food compliance roles\n> **Key OEMs:** Yokogawa (DX / MW100), Endress+Hauser (RSG), Honeywell (Minitrend GR), JUMO, Eurotherm (by Schneider), Omega Engineering\n\n```\nOUTPUT TYPE (L5): Control & Recording Instrument — panel-mount PID controller or paperless recorder\n\n  L4.1  Input / Signal Measurement Subsystem\n  │     Accepts process variable signals from sensors and transmitters.\n  │\n  ├─ L3.1.1  Input Module Type\n  │           alternatives: Universal input (TC/RTD/mV/V/mA) ~60%,\n  │           Dedicated TC input ~20%, Dedicated RTD ~15%, 4-20 mA only ~5%  [MEDIUM]\n  │\n  ├─ L3.1.2  Analog-to-Digital Converter\n  │           alternatives: 24-bit sigma-delta ~55%, 16-bit SAR ADC ~35%,\n  │           12-bit legacy ~10%  [MEDIUM]\n  │           L0 — Silicon die (CMOS mixed-signal)\n  │\n  └─ L3.1.3  Input Isolation\n             alternatives: Optical isolation (opto-coupler) ~70%,\n             Transformer isolation ~20%, No isolation (ground-referenced) ~10%  [LOW]\n             L0 — GaAs LED + photodetector pair\n\n  L4.2  Processing & Computing Subsystem\n  │\n  ├─ L3.2.1  Microcontroller / Processor\n  │           alternatives: ARM Cortex-M (32-bit, embedded) ~75%,\n  │           Legacy PIC / AVR (8/16-bit) ~20%,\n  │           Proprietary DSP ~5%  [MEDIUM]\n  │           L0 — Silicon die (CMOS)\n  │\n  ├─ L3.2.2  Non-Volatile Memory (data storage, recorder function)\n  │           alternatives: Flash NAND (internal, 1–16 GB) ~50%,\n  │           SD/microSD card ~35%, CF card legacy ~10%, USB flash ~5%  [LOW]\n  │           L0 — Silicon die (NAND flash process)\n  │\n  └─ L3.2.3  Real-Time Clock Module (recorder time-stamping)\n             L1 — RTC IC (e.g., DS3231 or equivalent) + coin-cell battery backup\n             L0 — CMOS silicon + CR2032 (LiMnO₂)\n\n  L4.3  Display Subsystem\n  │\n  ├─ L3.3.1  Display Type\n  │           alternatives: Color TFT LCD (3.5\"–12\") ~85%,\n  │           Monochrome LCD (2×16 to 4×20 char) ~10%,\n  │           LED bargraph + 4-digit numerical ~5%  [MEDIUM]\n  │           L0 — TFT glass panel + LED backlight strip\n  │\n  └─ L3.3.2  Front Panel Interface\n             alternatives: Capacitive or resistive touchscreen ~40%,\n             Push-button keypad (6-10 keys) ~45%,\n             Membrane keypad (flat) ~15%  [LOW]\n             L0 — ITO-coated glass (touch) / tactile dome switches (buttons)\n\n  L4.4  Housing, I/O & Connectivity Subsystem\n  │\n  ├─ L3.4.1  Housing / Mounting Format\n  │           alternatives: DIN-rail mount ~50%, 1/4 DIN panel mount ~25%,\n  │           1/8 DIN panel mount ~15%, 19\" rack-mount ~10%  [MEDIUM]\n  │           L0 — ABS/PC thermoplastic moulding (UL 94 V-0)\n  │\n  ├─ L3.4.2  Control Output Type (PID controller)\n  │           alternatives: Relay output (SPDT) ~50%, 4-20 mA analog ~35%,\n  │           Solid-state relay (SSR, triac) ~15%  [MEDIUM]\n  │           L0 (relay): Ag alloy contacts + electromagnetic coil + plastic body\n  │\n  └─ L3.4.3  Communication Interface\n             alternatives: RS-485 Modbus RTU ~45%, Ethernet TCP/IP ~30%,\n             USB host/device ~15%, Wireless (Wi-Fi/BT) ~10%  [MEDIUM]\n             L0 — RJ-45 jack + Ethernet controller IC / RS-485 transceiver\n```\n\n**Key differentiator:** The only output type in NAICS 334513 where the primary function is information management rather than physical measurement. PID controller is being displaced by DCS/PLC (boundary with NAICS 334514 and 334112); standalone recorders survive primarily in FDA 21 CFR Part 11 and GAMP 5 regulated environments where instrument-level audit trails are mandatory. Non-volatile data storage (flash vs. SD) is the key reliability differentiator.\n\n---"
+    },
+    {
+      "title": "Cross-Output-Type Alternatives Summary",
+      "content": "> Components that appear across multiple NAICS 334513 output types — showing how the same BOM position has different dominant alternatives depending on output type.\n\n| Component Position | OT-1 Ultrasonic | OT-2 Mag | OT-3 Coriolis | OT-6 DP | OT-8 Pressure |\n|---|---|---|---|---|---|\n| **Wetted body material** | Brass 55% / SS 30% | CS+coat 50% / SS 35% | SS316L 60% / Hastelloy 30% | SS316L 60% / CS 25% | SS316L 55% / CS 20% |\n| **Primary output protocol** | 4-20 mA 35% / Pulse 25% | 4-20mA+HART 40% / PROFIBUS 25% | 4-20mA+HART 45% / ProfibusPA 25% | 4-20mA+HART 55% | 4-20mA+HART 60% |\n| **Electronics housing** | Thermoplastic 55% / Al 30% | Die-cast Al 60% / Thermoplastic 30% | SS 316L 55% / Die-cast Al 30% | Die-cast Al 65% / SS 25% | Die-cast Al 60% / SS 25% |\n| **PCB substrate** | FR4 80% / High-Tg 15% | FR4 80% / High-Tg 15% | FR4 75% / High-Tg 20% | FR4 80% / High-Tg 20% | FR4 75% / High-Tg 20% |\n\n**Insight:** PCB substrate choice is nearly identical across all output types (FR4 dominates everywhere). The differences that define each output type's BOM are concentrated in L4.1 (the primary sensing element) and L4.3 (the wetted body/liner). Electronics (L4.2) and housing (L4.4) are commoditized across the NAICS.\n\n---"
+    },
+    {
+      "title": "Structured Data JSON",
+      "content": "```json\n{\n  \"bom_naics_334513\": {\n    \"naics_code\": \"334513\",\n    \"output_types\": [\n      {\n        \"id\": \"OT-1\",\n        \"name\": \"Inline Transit-Time Ultrasonic Flow Sensor\",\n        \"typical_specs\": \"DN20, compact, wetted transducers, hydronic/utility\",\n        \"market_share_of_naics\": \"~4-6% of NAICS 334513 revenue\",\n        \"l4_subsystems\": [\"Acoustic Sensing\", \"Signal Processing & Electronics\", \"Hydraulic Body\", \"Enclosure & Sealing\"],\n        \"key_alternatives\": {\n          \"primary_sensing_element\": [\n            {\"name\": \"PZT-5A/5H polycrystalline ceramic\", \"market_share\": 65, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"PMN-PT single crystal\", \"market_share\": 10, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"BNT lead-free ceramic\", \"market_share\": 5, \"confidence\": \"LOW\"}\n          ],\n          \"flow_body_material\": [\n            {\"name\": \"Brass CW617N/CW614N\", \"market_share\": 55, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"SS 316L\", \"market_share\": 30, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"PPS/PVDF polymer\", \"market_share\": 12, \"confidence\": \"LOW\"}\n          ],\n          \"output_protocol\": [\n            {\"name\": \"4-20 mA\", \"market_share\": 35, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Pulse/frequency\", \"market_share\": 25, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"M-Bus\", \"market_share\": 20, \"confidence\": \"MEDIUM\"}\n          ]\n        }\n      },\n      {\n        \"id\": \"OT-2\",\n        \"name\": \"Electromagnetic (Mag) Flowmeter\",\n        \"typical_specs\": \"DN25-DN1200, conductive liquids ≥5 µS/cm, flanged, IP67\",\n        \"market_share_of_naics\": \"~24-30% of flow instrument market\",\n        \"l4_subsystems\": [\"Electromagnetic Transducer\", \"Signal Processing & Electronics\", \"Flow Tube & Liner\", \"Transmitter Housing & Connection\"],\n        \"key_alternatives\": {\n          \"liner_material\": [\n            {\"name\": \"PTFE\", \"market_share\": 40, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Hard rubber\", \"market_share\": 30, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"PFA\", \"market_share\": 15, \"confidence\": \"LOW\"},\n            {\"name\": \"Ceramic Al2O3\", \"market_share\": 10, \"confidence\": \"LOW\"},\n            {\"name\": \"Polyurethane\", \"market_share\": 5, \"confidence\": \"LOW\"}\n          ],\n          \"electrode_material\": [\n            {\"name\": \"SS 316L\", \"market_share\": 55, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Hastelloy C-276\", \"market_share\": 20, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Platinum\", \"market_share\": 10, \"confidence\": \"LOW\"},\n            {\"name\": \"Titanium grade 2\", \"market_share\": 10, \"confidence\": \"LOW\"},\n            {\"name\": \"Tantalum\", \"market_share\": 5, \"confidence\": \"LOW\"}\n          ]\n        }\n      },\n      {\n        \"id\": \"OT-3\",\n        \"name\": \"Coriolis Mass Flowmeter\",\n        \"typical_specs\": \"DN6-DN150, direct mass flow + density, ±0.1% accuracy, SS or Hastelloy\",\n        \"market_share_of_naics\": \"~12-15% of flow instrument revenue (highest ASP)\",\n        \"l4_subsystems\": [\"Vibrating Tube Assembly\", \"Drive & Pickoff System\", \"Manifold & Case\", \"Transmitter Electronics\"],\n        \"key_alternatives\": {\n          \"tube_geometry_material\": [\n            {\"name\": \"SS 316L dual U-tube\", \"market_share\": 40, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"SS 316L dual straight-tube\", \"market_share\": 30, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Hastelloy C-276\", \"market_share\": 20, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Titanium grade 9\", \"market_share\": 8, \"confidence\": \"LOW\"},\n            {\"name\": \"Duplex SS 2205\", \"market_share\": 2, \"confidence\": \"LOW\"}\n          ],\n          \"drive_magnet\": [\n            {\"name\": \"NdFeB rare-earth\", \"market_share\": 70, \"confidence\": \"LOW\"},\n            {\"name\": \"Alnico\", \"market_share\": 20, \"confidence\": \"LOW\"},\n            {\"name\": \"Ferrite\", \"market_share\": 10, \"confidence\": \"LOW\"}\n          ]\n        }\n      },\n      {\n        \"id\": \"OT-4\",\n        \"name\": \"Vortex Flowmeter\",\n        \"typical_specs\": \"DN25-DN300, liquid/gas/steam, flanged, up to 400°C\",\n        \"market_share_of_naics\": \"~8-12% of flow instrument market\",\n        \"l4_subsystems\": [\"Bluff Body & Vortex Sensing\", \"Signal Processing & Electronics\", \"Flow Body\", \"Enclosure & Sealing\"],\n        \"key_alternatives\": {\n          \"bluff_body_material\": [\n            {\"name\": \"SS 316L\", \"market_share\": 70, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Hastelloy C-276\", \"market_share\": 20, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Titanium grade 2\", \"market_share\": 10, \"confidence\": \"LOW\"}\n          ],\n          \"vortex_sensor_element\": [\n            {\"name\": \"Piezoelectric crystal\", \"market_share\": 50, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Capacitive diaphragm\", \"market_share\": 30, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Differential pressure thermal\", \"market_share\": 15, \"confidence\": \"LOW\"},\n            {\"name\": \"Ultrasonic/acoustic\", \"market_share\": 5, \"confidence\": \"LOW\"}\n          ]\n        }\n      },\n      {\n        \"id\": \"OT-5\",\n        \"name\": \"Turbine Flowmeter\",\n        \"typical_specs\": \"DN15-DN300, clean liquid or gas, ±0.25-0.5% accuracy, threaded or flanged\",\n        \"market_share_of_naics\": \"~10-12% of flow instrument market, declining\",\n        \"l4_subsystems\": [\"Rotor Assembly\", \"Pickup & Signal Detection\", \"Flow Body & End Fittings\", \"Enclosure & Output\"],\n        \"key_alternatives\": {\n          \"rotor_material\": [\n            {\"name\": \"SS 316L (6-blade helical)\", \"market_share\": 45, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Acetal (Delrin) polymer\", \"market_share\": 25, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Titanium grade 2\", \"market_share\": 15, \"confidence\": \"LOW\"},\n            {\"name\": \"PEEK\", \"market_share\": 10, \"confidence\": \"LOW\"},\n            {\"name\": \"Hastelloy C-276\", \"market_share\": 5, \"confidence\": \"LOW\"}\n          ],\n          \"bearing_type\": [\n            {\"name\": \"Tungsten carbide journal\", \"market_share\": 55, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Sapphire/ruby jewel\", \"market_share\": 30, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"SS 440C ball bearing\", \"market_share\": 15, \"confidence\": \"LOW\"}\n          ]\n        }\n      },\n      {\n        \"id\": \"OT-6\",\n        \"name\": \"Differential Pressure (DP) Flow Transmitter + Primary Element\",\n        \"typical_specs\": \"Primary element + DP transmitter pair; DN25-DN600; up to 420°C / 420 bar\",\n        \"market_share_of_naics\": \"~20% of new flow installations (largest legacy installed base)\",\n        \"l4_subsystems\": [\"Primary Element\", \"DP Sensing Capsule\", \"Process Body & Manifold\", \"Electronics & Housing\"],\n        \"key_alternatives\": {\n          \"primary_element_type\": [\n            {\"name\": \"Orifice plate (ISO 5167)\", \"market_share\": 55, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Venturi tube\", \"market_share\": 20, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Flow nozzle (ASME PTC 6)\", \"market_share\": 12, \"confidence\": \"LOW\"},\n            {\"name\": \"V-cone / cone element\", \"market_share\": 8, \"confidence\": \"LOW\"},\n            {\"name\": \"Annubar / pitot array\", \"market_share\": 5, \"confidence\": \"LOW\"}\n          ],\n          \"sensing_technology\": [\n            {\"name\": \"Piezoresistive silicon (MEMS)\", \"market_share\": 45, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Capacitive metallic capsule\", \"market_share\": 35, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Metallic strain gauge\", \"market_share\": 15, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Inductive / resonant wire\", \"market_share\": 5, \"confidence\": \"LOW\"}\n          ],\n          \"isolating_diaphragm\": [\n            {\"name\": \"SS 316L\", \"market_share\": 55, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Hastelloy C-276\", \"market_share\": 25, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Tantalum\", \"market_share\": 12, \"confidence\": \"LOW\"},\n            {\"name\": \"Gold-coated SS\", \"market_share\": 8, \"confidence\": \"LOW\"}\n          ]\n        }\n      },\n      {\n        \"id\": \"OT-7\",\n        \"name\": \"Thermal Mass Flowmeter (Gas Service)\",\n        \"typical_specs\": \"Gas/air service, DN15-DN300 inline or insertion, 0-500 to 50000 SLPM, ±1-2%\",\n        \"market_share_of_naics\": \"~3-5% of flow instrument market\",\n        \"l4_subsystems\": [\"Thermal Sensing Element\", \"Signal Processing & Electronics\", \"Flow Body / Probe Assembly\", \"Enclosure & Sealing\"],\n        \"key_alternatives\": {\n          \"sensing_principle\": [\n            {\"name\": \"Constant-temperature anemometry (CTA)\", \"market_share\": 40, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Constant-power (calorimetric differential)\", \"market_share\": 35, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Capillary thermal (bypass tube)\", \"market_share\": 25, \"confidence\": \"MEDIUM\"}\n          ],\n          \"probe_tip_material\": [\n            {\"name\": \"SS 316L\", \"market_share\": 55, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Hastelloy C-276\", \"market_share\": 30, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Silicon nitride (Si3N4) ceramic\", \"market_share\": 10, \"confidence\": \"LOW\"},\n            {\"name\": \"PEEK\", \"market_share\": 5, \"confidence\": \"LOW\"}\n          ]\n        }\n      },\n      {\n        \"id\": \"OT-8\",\n        \"name\": \"Pressure Transmitter / Pressure Instrument\",\n        \"typical_specs\": \"0-10 mbar to 0-1000 bar, gauge/absolute/differential, 4-20 mA + HART, process\",\n        \"market_share_of_naics\": \"~30-35% of NAICS 334513 revenue (largest OT by revenue)\",\n        \"l4_subsystems\": [\"Pressure Sensing Element\", \"Signal Conditioning & Electronics\", \"Process Connection Body\", \"Transmitter Housing\"],\n        \"key_alternatives\": {\n          \"sensing_technology\": [\n            {\"name\": \"Piezoresistive silicon (MEMS)\", \"market_share\": 45, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Capacitive metallic capsule\", \"market_share\": 30, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Piezoelectric crystal (dynamic)\", \"market_share\": 10, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Metallic strain gauge\", \"market_share\": 10, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Inductive / resonant wire\", \"market_share\": 5, \"confidence\": \"LOW\"}\n          ],\n          \"isolating_diaphragm\": [\n            {\"name\": \"SS 316L\", \"market_share\": 50, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Hastelloy C-276\", \"market_share\": 20, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Inconel 625\", \"market_share\": 15, \"confidence\": \"LOW\"},\n            {\"name\": \"Tantalum\", \"market_share\": 10, \"confidence\": \"LOW\"},\n            {\"name\": \"Titanium\", \"market_share\": 5, \"confidence\": \"LOW\"}\n          ]\n        }\n      },\n      {\n        \"id\": \"OT-9\",\n        \"name\": \"Temperature Transmitter + RTD / TC Assembly\",\n        \"typical_specs\": \"-200°C to +1700°C, 4-20 mA / HART, thermowell + element + connection head\",\n        \"market_share_of_naics\": \"~20-25% of NAICS 334513 revenue\",\n        \"l4_subsystems\": [\"Primary Temperature Sensing Element\", \"Signal Conditioning Transmitter\", \"Thermowell / Protection Tube\", \"Connection Head & Wiring\"],\n        \"key_alternatives\": {\n          \"sensing_type\": [\n            {\"name\": \"Pt100 RTD (IEC 60751 Class A/AA)\", \"market_share\": 65, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Thermocouple (all types)\", \"market_share\": 25, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Pt1000 RTD\", \"market_share\": 8, \"confidence\": \"LOW\"},\n            {\"name\": \"NTC thermistor\", \"market_share\": 2, \"confidence\": \"LOW\"}\n          ],\n          \"rtd_construction\": [\n            {\"name\": \"Wire-wound (coil)\", \"market_share\": 50, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Thin-film Pt on Al2O3\", \"market_share\": 40, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Coiled-element (expanded)\", \"market_share\": 10, \"confidence\": \"LOW\"}\n          ],\n          \"thermowell_material\": [\n            {\"name\": \"SS 316/316L\", \"market_share\": 60, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Hastelloy C-276\", \"market_share\": 20, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Carbon steel + coat\", \"market_share\": 12, \"confidence\": \"LOW\"},\n            {\"name\": \"Ceramic Al2O3\", \"market_share\": 8, \"confidence\": \"LOW\"}\n          ]\n        }\n      },\n      {\n        \"id\": \"OT-10\",\n        \"name\": \"Level Instrument (Radar / GWR / Ultrasonic / Hydrostatic)\",\n        \"typical_specs\": \"Non-contact or contact level; 0-40 m range; process / storage / utility\",\n        \"market_share_of_naics\": \"~18-22% of NAICS 334513 revenue\",\n        \"l4_subsystems\": [\"Level Sensing Technology\", \"Signal Processing & Electronics\", \"Process Connection & Housing\", \"Transmitter Housing\"],\n        \"key_alternatives\": {\n          \"sensing_technology\": [\n            {\"name\": \"Capacitance probe (contact)\", \"market_share\": 25, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Guided Wave Radar / TDR (GWR)\", \"market_share\": 22, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Hydrostatic pressure (submersible)\", \"market_share\": 20, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Free-space FMCW radar (non-contact)\", \"market_share\": 18, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Ultrasonic (non-contact)\", \"market_share\": 10, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Magnetostrictive (float)\", \"market_share\": 5, \"confidence\": \"LOW\"}\n          ],\n          \"radar_frequency_band\": [\n            {\"name\": \"26 GHz band-type FMCW\", \"market_share\": 55, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"80 GHz narrow-beam FMCW\", \"market_share\": 35, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"6.3 GHz pulse radar (legacy)\", \"market_share\": 10, \"confidence\": \"LOW\"}\n          ]\n        }\n      },\n      {\n        \"id\": \"OT-11\",\n        \"name\": \"Analytical Instrument (pH / Conductivity / DO)\",\n        \"typical_specs\": \"pH 0-14, conductivity 0.05 µS/cm-2 S/cm, DO 0-40 mg/L; inline or submersion\",\n        \"market_share_of_naics\": \"~8-12% of NAICS 334513 revenue\",\n        \"l4_subsystems\": [\"Primary Sensing Electrode Assembly\", \"Electrode Body & Housing\", \"Signal Conditioning Transmitter\", \"Process Connection & Enclosure\"],\n        \"key_alternatives\": {\n          \"parameter_mix\": [\n            {\"name\": \"pH instruments\", \"market_share\": 55, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Conductivity instruments\", \"market_share\": 30, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Dissolved oxygen instruments\", \"market_share\": 15, \"confidence\": \"MEDIUM\"}\n          ],\n          \"ph_electrode_type\": [\n            {\"name\": \"Glass membrane (borosilicate)\", \"market_share\": 65, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"ISFET semiconductor (solid-state)\", \"market_share\": 30, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Metal oxide (RuO2, IrOx)\", \"market_share\": 5, \"confidence\": \"LOW\"}\n          ],\n          \"do_sensing_principle\": [\n            {\"name\": \"Amperometric (Clark cell)\", \"market_share\": 50, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Optical (luminescent O2-quenching)\", \"market_share\": 40, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Galvanic (Pb/Zn anode)\", \"market_share\": 10, \"confidence\": \"LOW\"}\n          ]\n        }\n      },\n      {\n        \"id\": \"OT-12\",\n        \"name\": \"Control & Recording Instrument (PID Controller / Paperless Recorder)\",\n        \"typical_specs\": \"Panel-mount 1/4 DIN or 1/8 DIN; 1-64 channel; PID or trend recording\",\n        \"market_share_of_naics\": \"~5-8% of NAICS 334513 revenue\",\n        \"l4_subsystems\": [\"Input / Signal Measurement\", \"Processing & Computing\", \"Display\", \"Housing, I/O & Connectivity\"],\n        \"key_alternatives\": {\n          \"display_type\": [\n            {\"name\": \"Color TFT LCD (3.5\\\"-12\\\")\", \"market_share\": 85, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Monochrome LCD\", \"market_share\": 10, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"LED bargraph + numerical\", \"market_share\": 5, \"confidence\": \"LOW\"}\n          ],\n          \"communication_interface\": [\n            {\"name\": \"RS-485 Modbus RTU\", \"market_share\": 45, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"Ethernet TCP/IP\", \"market_share\": 30, \"confidence\": \"MEDIUM\"},\n            {\"name\": \"USB host/device\", \"market_share\": 15, \"confidence\": \"LOW\"},\n            {\"name\": \"Wireless (Wi-Fi / BT)\", \"market_share\": 10, \"confidence\": \"LOW\"}\n          ]\n        }\n      }\n    ],\n    \"shared_key_raw_materials\": [\n      {\"name\": \"SS 316L (austenitic stainless steel)\", \"feeds\": [\"Wetted bodies OT-2 through OT-12\", \"Thermowell OT-9\", \"Flow bodies OT-4, OT-5, OT-7\"]},\n      {\"name\": \"Hastelloy C-276 (NiMoCr alloy)\", \"feeds\": [\"High-corrosion-resistance wetted parts across all OTs\"]},\n      {\"name\": \"PTFE resin\", \"feeds\": [\"Liners OT-2\", \"Probe seals OT-10\", \"Wetted bodies OT-11\"]},\n      {\"name\": \"FR4 epoxy glass laminate\", \"feeds\": [\"PCB substrate L4.2 across all 12 OTs\"]},\n      {\"name\": \"Silicon wafer (MEMS grade)\", \"feeds\": [\"Piezoresistive sensing elements OT-6, OT-8\"]},\n      {\"name\": \"Lead zirconate titanate (PZT) ceramic\", \"feeds\": [\"Transducers OT-1\", \"Vortex sensors OT-4\"]},\n      {\"name\": \"Platinum wire (99.99% purity)\", \"feeds\": [\"RTD elements OT-9\", \"Conductivity electrodes OT-11\"]},\n      {\"name\": \"NdFeB sintered magnet (Nd2Fe14B)\", \"feeds\": [\"Drive coils OT-3\", \"Pickups OT-5\"]},\n      {\"name\": \"Borosilicate glass (pH-selective composition)\", \"feeds\": [\"pH electrode membrane OT-11\"]},\n      {\"name\": \"ABS/PC/PA66 thermoplastic resin\", \"feeds\": [\"Housing L4.4 across all 12 OTs\"]}\n    ],\n    \"market_context\": {\n      \"naics_334513_global_revenue_2024_usd_bn\": \"~22-25\",\n      \"largest_ot_by_revenue\": \"OT-8 Pressure Transmitter (~30-35% of NAICS)\",\n      \"fastest_growing_ot\": \"OT-10 Level (radar FMCW 80 GHz) and OT-3 Coriolis\",\n      \"declining_ot\": \"OT-5 Turbine (displacement by ultrasonic), OT-6 DP (displacement by dedicated flow types)\",\n      \"sources\": [\n        \"Fortune Business Insights — Ultrasonic Flow Meter Market 2032\",\n        \"Mordor Intelligence — Ultrasonic Flow Meters Market\",\n        \"Market Research Future — Coriolis Meters Market\",\n        \"Emerson Automation — Rosemount product catalog\",\n        \"Endress+Hauser — Product portfolio and technical papers\",\n        \"TI application notes TIDM-ULTRASONIC-WATER-FLOW-MEASUREMENT\",\n        \"Markets and Markets — Level Transmitter Market\",\n        \"Bronkhorst — Thermal mass flow operating principles\",\n        \"Instrumentation Tools — Vortex flowmeter sensor types\",\n        \"DwyerOmega — RTD Pt100 vs Pt1000 comparison\",\n        \"Sea-Bird Scientific — ISFET and glass electrode pH sensors\",\n        \"Omega — Paperless Recorders product documentation\"\n      ]\n    }\n  }\n}\n```\n\n---\n\n*Sources: [Fortune Business Insights — Ultrasonic Flow Meter Market](https://www.fortunebusinessinsights.com/industry-reports/ultrasonic-flow-meter-market-100662) · [Mordor Intelligence — Ultrasonic Flow Meters](https://www.mordorintelligence.com/industry-reports/ultrasonic-flow-meters-market) · [Straits Research — Ultrasonic Flowmeter 2033](https://straitsresearch.com/report/ultrasonic-flowmeter-market) · [TI TIDM-ULTRASONIC-FLOW-TDC](https://www.ti.com/tool/TIDM-ULTRASONIC-FLOW-TDC) · [TI MSP430FR6043](https://www.ti.com/product/MSP430FR6043) · [DigiKey — Ultrasonic Sensing in Smart Water Meters](https://www.digikey.com/en/articles/how-to-use-ultrasonic-sensing-in-smart-water-meters) · [CTS PMN-PT Single Crystal](https://www.ctscorp.com/Files/Brochures/Piezoelectric/CTS-Piezoelectric-Single-Crystal-PMN-PT-Brochure.pdf) · [Nature Microsystems & Nanoengineering — ScAlN PMUT](https://www.nature.com/articles/s41378-023-00518-y) · [Market Research Future — Coriolis Meters](https://www.marketresearchfuture.com/reports/coriolis-meters-market-10882) · [Markets and Markets — Level Transmitter](https://www.marketsandmarkets.com/Market-Reports/level-transmitter-market-23472700.html) · [Bronkhorst — Thermal Mass Flow](https://www.bronkhorst.com/knowledge-base/constant-temperature-anemometry-working-principle/) · [Sea-Bird Scientific — ISFET pH](https://www.seabird.com/news/ISFET-and-glass-electrode-pH-sensors) · [DwyerOmega — RTD Sensors](https://www.dwyeromega.com/en-us/resources/rtd-pt100-vs-pt1000)*"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**CFJ**",
+          "Value": "Design, manufacture, calibrate, and deliver instruments that measure, display, and control industrial process variables to enable safe, efficient, and compliant operation of process plants"
+        },
+        {
+          "Field": "**Output Type (primary)**",
+          "Value": "Inline Transit-Time Ultrasonic Flow Sensor — compact, DN20, wetted transducers, hydronic/utility service"
+        },
+        {
+          "Field": "**L4 Subsystems (OT-1)**",
+          "Value": "Acoustic Sensing · Signal Processing & Electronics · Hydraulic Body · Enclosure & Sealing"
+        },
+        {
+          "Field": "**BOM Domain**",
+          "Value": "L4–L0 (what is IN the sensor the customer buys)"
+        },
+        {
+          "Field": "**Market Context**",
+          "Value": "Global ultrasonic flowmeter market ~$2.0B (2024); transit-time = 80–85% of ultrasonic; ~$0.8–1.3B ultrasonic segment [SRC: Fortune Business Insights, Mordor Intelligence, web_search]"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share",
+        "Trend",
+        "Confidence",
+        "Source"
+      ],
+      "rows": [
+        {
+          "Alternative": "PZT-5A / PZT-5H polycrystalline ceramic",
+          "Share": "~65%",
+          "Trend": "Stable",
+          "Confidence": "MEDIUM",
+          "Source": "APC International; piceramic.com; analyst est."
+        },
+        {
+          "Alternative": "PZT-4 / PZT-8 (hard PZT, power-ultrasound)",
+          "Share": "~10%",
+          "Trend": "Stable",
+          "Confidence": "MEDIUM",
+          "Source": "PI Ceramic, APC"
+        },
+        {
+          "Alternative": "PMN-PT single crystal",
+          "Share": "~10%",
+          "Trend": "Growing",
+          "Confidence": "MEDIUM",
+          "Source": "CTS Corp PMN-PT brochure; pmc.ncbi.nlm.nih.gov"
+        },
+        {
+          "Alternative": "BNT-based lead-free ceramic",
+          "Share": "~5%",
+          "Trend": "Growing",
+          "Confidence": "LOW",
+          "Source": "Nature Microsystems 2023; analyst est."
+        },
+        {
+          "Alternative": "AlN thin-film PMUT (MEMS)",
+          "Share": "~5%",
+          "Trend": "Emerging",
+          "Confidence": "LOW",
+          "Source": "Nature Microsystems & Nanoengineering 2023"
+        },
+        {
+          "Alternative": "PZN-PT / LiNbO₃ single crystal",
+          "Share": "~5%",
+          "Trend": "Stable",
+          "Confidence": "LOW",
+          "Source": "americanpiezo.com; analyst est."
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share",
+        "Trend",
+        "Confidence",
+        "Source"
+      ],
+      "rows": [
+        {
+          "Alternative": "Stainless steel 316L (machined)",
+          "Share": "~60%",
+          "Trend": "Stable",
+          "Confidence": "LOW",
+          "Source": "Product catalog analysis (Audiowell, BMAG); analyst est."
+        },
+        {
+          "Alternative": "PEEK polymer",
+          "Share": "~25%",
+          "Trend": "Growing",
+          "Confidence": "LOW",
+          "Source": "Analyst est. (corrosive media, thermal isolation)"
+        },
+        {
+          "Alternative": "Titanium grade 2",
+          "Share": "~10%",
+          "Trend": "Stable",
+          "Confidence": "LOW",
+          "Source": "Analyst est. (aggressive media, high-temp)"
+        },
+        {
+          "Alternative": "Brass (CW614N)",
+          "Share": "~5%",
+          "Trend": "Declining",
+          "Confidence": "LOW",
+          "Source": "Analyst est."
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share",
+        "Trend",
+        "Confidence",
+        "Source"
+      ],
+      "rows": [
+        {
+          "Alternative": "Integrated ultrasonic-sensing MCU (e.g., TI MSP430FR6043 USS)",
+          "Share": "~45%",
+          "Trend": "Growing",
+          "Confidence": "MEDIUM",
+          "Source": "TI reference design TIDM; DigiKey; EDN flow meter tutorial"
+        },
+        {
+          "Alternative": "Discrete MCU + separate TDC IC (e.g., GP22, TDC7200)",
+          "Share": "~35%",
+          "Trend": "Stable",
+          "Confidence": "MEDIUM",
+          "Source": "TI TIDM-ULTRASONIC-FLOW-TDC; NXP DRM138"
+        },
+        {
+          "Alternative": "Custom ASIC (Tier-1 OEM proprietary)",
+          "Share": "~15%",
+          "Trend": "Stable",
+          "Confidence": "LOW",
+          "Source": "Analyst est. (E+H, Siemens, Kamstrup)"
+        },
+        {
+          "Alternative": "FPGA-based (high-accuracy / research-grade)",
+          "Share": "~5%",
+          "Trend": "Stable",
+          "Confidence": "LOW",
+          "Source": "Analyst est."
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share",
+        "Trend",
+        "Confidence",
+        "Source"
+      ],
+      "rows": [
+        {
+          "Alternative": "FR4 epoxy glass (standard)",
+          "Share": "~80%",
+          "Trend": "Stable",
+          "Confidence": "MEDIUM",
+          "Source": "Industry standard"
+        },
+        {
+          "Alternative": "High-Tg FR4 (≥170°C glass transition)",
+          "Share": "~15%",
+          "Trend": "Stable",
+          "Confidence": "MEDIUM",
+          "Source": "Required for 90°C ambient variants"
+        },
+        {
+          "Alternative": "Ceramic substrate (alumina)",
+          "Share": "~5%",
+          "Trend": "Stable",
+          "Confidence": "LOW",
+          "Source": "Analyst est. (specialist high-T versions)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share",
+        "Trend",
+        "Confidence",
+        "Source"
+      ],
+      "rows": [
+        {
+          "Alternative": "4–20 mA analog output",
+          "Share": "~35%",
+          "Trend": "Declining",
+          "Confidence": "MEDIUM",
+          "Source": "Analyst est. (dominant in process / HVAC OEM)"
+        },
+        {
+          "Alternative": "Pulse / frequency output",
+          "Share": "~25%",
+          "Trend": "Stable",
+          "Confidence": "MEDIUM",
+          "Source": "Analyst est. (heat meter totaliser interface)"
+        },
+        {
+          "Alternative": "M-Bus (EN 13757)",
+          "Share": "~20%",
+          "Trend": "Growing",
+          "Confidence": "MEDIUM",
+          "Source": "Analyst est. (EU heat metering mandate)"
+        },
+        {
+          "Alternative": "HART (over 4–20 mA)",
+          "Share": "~10%",
+          "Trend": "Stable",
+          "Confidence": "MEDIUM",
+          "Source": "Analyst est. (process automation)"
+        },
+        {
+          "Alternative": "IO-Link",
+          "Share": "~5%",
+          "Trend": "Emerging",
+          "Confidence": "LOW",
+          "Source": "Analyst est. (Industry 4.0 OEM integration)"
+        },
+        {
+          "Alternative": "RS-485 / Modbus RTU",
+          "Share": "~5%",
+          "Trend": "Stable",
+          "Confidence": "LOW",
+          "Source": "Analyst est."
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share",
+        "Trend",
+        "Confidence",
+        "Source"
+      ],
+      "rows": [
+        {
+          "Alternative": "Brass CW617N / CW614N (dezincification-resistant)",
+          "Share": "~55%",
+          "Trend": "Stable",
+          "Confidence": "MEDIUM",
+          "Source": "Amazon product listings (Audiowell HS0002/HS0003, BMAG); analyst est."
+        },
+        {
+          "Alternative": "Stainless steel 316L",
+          "Share": "~30%",
+          "Trend": "Growing",
+          "Confidence": "MEDIUM",
+          "Source": "Analyst est. (drinking water, higher T, glycol)"
+        },
+        {
+          "Alternative": "Reinforced PPS or PVDF polymer",
+          "Share": "~12%",
+          "Trend": "Growing",
+          "Confidence": "LOW",
+          "Source": "Analyst est. (corrosive, low-cost OEM)"
+        },
+        {
+          "Alternative": "Bronze (CuSn)",
+          "Share": "~3%",
+          "Trend": "Declining",
+          "Confidence": "LOW",
+          "Source": "Analyst est."
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share",
+        "Trend",
+        "Confidence",
+        "Source"
+      ],
+      "rows": [
+        {
+          "Alternative": "G-thread / BSP (ISO 228)",
+          "Share": "~45%",
+          "Trend": "Stable",
+          "Confidence": "LOW",
+          "Source": "Analyst est. (EU hydronic / heat meter)"
+        },
+        {
+          "Alternative": "NPT (ANSI/ASME B1.20.1)",
+          "Share": "~25%",
+          "Trend": "Stable",
+          "Confidence": "LOW",
+          "Source": "Analyst est. (North America)"
+        },
+        {
+          "Alternative": "Flanged PN6/PN16 (DN20 flange)",
+          "Share": "~15%",
+          "Trend": "Stable",
+          "Confidence": "LOW",
+          "Source": "Analyst est. (industrial process)"
+        },
+        {
+          "Alternative": "Push-fit / compression (e.g., 22 mm Speedfit)",
+          "Share": "~10%",
+          "Trend": "Growing",
+          "Confidence": "LOW",
+          "Source": "Analyst est. (HVAC installer market)"
+        },
+        {
+          "Alternative": "Weld-end (butt weld)",
+          "Share": "~5%",
+          "Trend": "Stable",
+          "Confidence": "LOW",
+          "Source": "Analyst est."
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share",
+        "Trend",
+        "Confidence",
+        "Source"
+      ],
+      "rows": [
+        {
+          "Alternative": "Thermoplastic (ABS / PC / PA66)",
+          "Share": "~55%",
+          "Trend": "Stable",
+          "Confidence": "LOW",
+          "Source": "Analyst est. (cost, moulding, IP54–IP67)"
+        },
+        {
+          "Alternative": "Die-cast aluminium",
+          "Share": "~30%",
+          "Trend": "Stable",
+          "Confidence": "LOW",
+          "Source": "Analyst est. (IP67, robust OEM housing)"
+        },
+        {
+          "Alternative": "Stainless steel sheet metal",
+          "Share": "~15%",
+          "Trend": "Stable",
+          "Confidence": "LOW",
+          "Source": "Analyst est. (hygienic / food-adjacent)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share",
+        "Trend",
+        "Confidence",
+        "Source"
+      ],
+      "rows": [
+        {
+          "Alternative": "EPDM",
+          "Share": "~50%",
+          "Trend": "Stable",
+          "Confidence": "LOW",
+          "Source": "Analyst est. (water/HVAC, UV/steam resistance)"
+        },
+        {
+          "Alternative": "FKM / Viton",
+          "Share": "~35%",
+          "Trend": "Stable",
+          "Confidence": "LOW",
+          "Source": "Analyst est. (glycol, oils, wide T range)"
+        },
+        {
+          "Alternative": "NBR",
+          "Share": "~10%",
+          "Trend": "Declining",
+          "Confidence": "LOW",
+          "Source": "Analyst est. (legacy hydronic)"
+        },
+        {
+          "Alternative": "PTFE / FFKM",
+          "Share": "~5%",
+          "Trend": "Stable",
+          "Confidence": "LOW",
+          "Source": "Analyst est. (high-T, aggressive media)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Component Position",
+        "OT-1 Ultrasonic",
+        "OT-2 Mag",
+        "OT-3 Coriolis",
+        "OT-6 DP",
+        "OT-8 Pressure"
+      ],
+      "rows": [
+        {
+          "Component Position": "**Wetted body material**",
+          "OT-1 Ultrasonic": "Brass 55% / SS 30%",
+          "OT-2 Mag": "CS+coat 50% / SS 35%",
+          "OT-3 Coriolis": "SS316L 60% / Hastelloy 30%",
+          "OT-6 DP": "SS316L 60% / CS 25%",
+          "OT-8 Pressure": "SS316L 55% / CS 20%"
+        },
+        {
+          "Component Position": "**Primary output protocol**",
+          "OT-1 Ultrasonic": "4-20 mA 35% / Pulse 25%",
+          "OT-2 Mag": "4-20mA+HART 40% / PROFIBUS 25%",
+          "OT-3 Coriolis": "4-20mA+HART 45% / ProfibusPA 25%",
+          "OT-6 DP": "4-20mA+HART 55%",
+          "OT-8 Pressure": "4-20mA+HART 60%"
+        },
+        {
+          "Component Position": "**Electronics housing**",
+          "OT-1 Ultrasonic": "Thermoplastic 55% / Al 30%",
+          "OT-2 Mag": "Die-cast Al 60% / Thermoplastic 30%",
+          "OT-3 Coriolis": "SS 316L 55% / Die-cast Al 30%",
+          "OT-6 DP": "Die-cast Al 65% / SS 25%",
+          "OT-8 Pressure": "Die-cast Al 60% / SS 25%"
+        },
+        {
+          "Component Position": "**PCB substrate**",
+          "OT-1 Ultrasonic": "FR4 80% / High-Tg 15%",
+          "OT-2 Mag": "FR4 80% / High-Tg 15%",
+          "OT-3 Coriolis": "FR4 75% / High-Tg 20%",
+          "OT-6 DP": "FR4 80% / High-Tg 20%",
+          "OT-8 Pressure": "FR4 75% / High-Tg 20%"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "bom_naics_334513": {
+        "naics_code": "334513",
+        "output_types": [
+          {
+            "id": "OT-1",
+            "name": "Inline Transit-Time Ultrasonic Flow Sensor",
+            "typical_specs": "DN20, compact, wetted transducers, hydronic/utility",
+            "market_share_of_naics": "~4-6% of NAICS 334513 revenue",
+            "l4_subsystems": [
+              "Acoustic Sensing",
+              "Signal Processing & Electronics",
+              "Hydraulic Body",
+              "Enclosure & Sealing"
+            ],
+            "key_alternatives": {
+              "primary_sensing_element": [
+                {
+                  "name": "PZT-5A/5H polycrystalline ceramic",
+                  "market_share": 65,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "PMN-PT single crystal",
+                  "market_share": 10,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "BNT lead-free ceramic",
+                  "market_share": 5,
+                  "confidence": "LOW"
+                }
+              ],
+              "flow_body_material": [
+                {
+                  "name": "Brass CW617N/CW614N",
+                  "market_share": 55,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "SS 316L",
+                  "market_share": 30,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "PPS/PVDF polymer",
+                  "market_share": 12,
+                  "confidence": "LOW"
+                }
+              ],
+              "output_protocol": [
+                {
+                  "name": "4-20 mA",
+                  "market_share": 35,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Pulse/frequency",
+                  "market_share": 25,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "M-Bus",
+                  "market_share": 20,
+                  "confidence": "MEDIUM"
+                }
+              ]
+            }
+          },
+          {
+            "id": "OT-2",
+            "name": "Electromagnetic (Mag) Flowmeter",
+            "typical_specs": "DN25-DN1200, conductive liquids ≥5 µS/cm, flanged, IP67",
+            "market_share_of_naics": "~24-30% of flow instrument market",
+            "l4_subsystems": [
+              "Electromagnetic Transducer",
+              "Signal Processing & Electronics",
+              "Flow Tube & Liner",
+              "Transmitter Housing & Connection"
+            ],
+            "key_alternatives": {
+              "liner_material": [
+                {
+                  "name": "PTFE",
+                  "market_share": 40,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Hard rubber",
+                  "market_share": 30,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "PFA",
+                  "market_share": 15,
+                  "confidence": "LOW"
+                },
+                {
+                  "name": "Ceramic Al2O3",
+                  "market_share": 10,
+                  "confidence": "LOW"
+                },
+                {
+                  "name": "Polyurethane",
+                  "market_share": 5,
+                  "confidence": "LOW"
+                }
+              ],
+              "electrode_material": [
+                {
+                  "name": "SS 316L",
+                  "market_share": 55,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Hastelloy C-276",
+                  "market_share": 20,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Platinum",
+                  "market_share": 10,
+                  "confidence": "LOW"
+                },
+                {
+                  "name": "Titanium grade 2",
+                  "market_share": 10,
+                  "confidence": "LOW"
+                },
+                {
+                  "name": "Tantalum",
+                  "market_share": 5,
+                  "confidence": "LOW"
+                }
+              ]
+            }
+          },
+          {
+            "id": "OT-3",
+            "name": "Coriolis Mass Flowmeter",
+            "typical_specs": "DN6-DN150, direct mass flow + density, ±0.1% accuracy, SS or Hastelloy",
+            "market_share_of_naics": "~12-15% of flow instrument revenue (highest ASP)",
+            "l4_subsystems": [
+              "Vibrating Tube Assembly",
+              "Drive & Pickoff System",
+              "Manifold & Case",
+              "Transmitter Electronics"
+            ],
+            "key_alternatives": {
+              "tube_geometry_material": [
+                {
+                  "name": "SS 316L dual U-tube",
+                  "market_share": 40,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "SS 316L dual straight-tube",
+                  "market_share": 30,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Hastelloy C-276",
+                  "market_share": 20,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Titanium grade 9",
+                  "market_share": 8,
+                  "confidence": "LOW"
+                },
+                {
+                  "name": "Duplex SS 2205",
+                  "market_share": 2,
+                  "confidence": "LOW"
+                }
+              ],
+              "drive_magnet": [
+                {
+                  "name": "NdFeB rare-earth",
+                  "market_share": 70,
+                  "confidence": "LOW"
+                },
+                {
+                  "name": "Alnico",
+                  "market_share": 20,
+                  "confidence": "LOW"
+                },
+                {
+                  "name": "Ferrite",
+                  "market_share": 10,
+                  "confidence": "LOW"
+                }
+              ]
+            }
+          },
+          {
+            "id": "OT-4",
+            "name": "Vortex Flowmeter",
+            "typical_specs": "DN25-DN300, liquid/gas/steam, flanged, up to 400°C",
+            "market_share_of_naics": "~8-12% of flow instrument market",
+            "l4_subsystems": [
+              "Bluff Body & Vortex Sensing",
+              "Signal Processing & Electronics",
+              "Flow Body",
+              "Enclosure & Sealing"
+            ],
+            "key_alternatives": {
+              "bluff_body_material": [
+                {
+                  "name": "SS 316L",
+                  "market_share": 70,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Hastelloy C-276",
+                  "market_share": 20,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Titanium grade 2",
+                  "market_share": 10,
+                  "confidence": "LOW"
+                }
+              ],
+              "vortex_sensor_element": [
+                {
+                  "name": "Piezoelectric crystal",
+                  "market_share": 50,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Capacitive diaphragm",
+                  "market_share": 30,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Differential pressure thermal",
+                  "market_share": 15,
+                  "confidence": "LOW"
+                },
+                {
+                  "name": "Ultrasonic/acoustic",
+                  "market_share": 5,
+                  "confidence": "LOW"
+                }
+              ]
+            }
+          },
+          {
+            "id": "OT-5",
+            "name": "Turbine Flowmeter",
+            "typical_specs": "DN15-DN300, clean liquid or gas, ±0.25-0.5% accuracy, threaded or flanged",
+            "market_share_of_naics": "~10-12% of flow instrument market, declining",
+            "l4_subsystems": [
+              "Rotor Assembly",
+              "Pickup & Signal Detection",
+              "Flow Body & End Fittings",
+              "Enclosure & Output"
+            ],
+            "key_alternatives": {
+              "rotor_material": [
+                {
+                  "name": "SS 316L (6-blade helical)",
+                  "market_share": 45,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Acetal (Delrin) polymer",
+                  "market_share": 25,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Titanium grade 2",
+                  "market_share": 15,
+                  "confidence": "LOW"
+                },
+                {
+                  "name": "PEEK",
+                  "market_share": 10,
+                  "confidence": "LOW"
+                },
+                {
+                  "name": "Hastelloy C-276",
+                  "market_share": 5,
+                  "confidence": "LOW"
+                }
+              ],
+              "bearing_type": [
+                {
+                  "name": "Tungsten carbide journal",
+                  "market_share": 55,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Sapphire/ruby jewel",
+                  "market_share": 30,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "SS 440C ball bearing",
+                  "market_share": 15,
+                  "confidence": "LOW"
+                }
+              ]
+            }
+          },
+          {
+            "id": "OT-6",
+            "name": "Differential Pressure (DP) Flow Transmitter + Primary Element",
+            "typical_specs": "Primary element + DP transmitter pair; DN25-DN600; up to 420°C / 420 bar",
+            "market_share_of_naics": "~20% of new flow installations (largest legacy installed base)",
+            "l4_subsystems": [
+              "Primary Element",
+              "DP Sensing Capsule",
+              "Process Body & Manifold",
+              "Electronics & Housing"
+            ],
+            "key_alternatives": {
+              "primary_element_type": [
+                {
+                  "name": "Orifice plate (ISO 5167)",
+                  "market_share": 55,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Venturi tube",
+                  "market_share": 20,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Flow nozzle (ASME PTC 6)",
+                  "market_share": 12,
+                  "confidence": "LOW"
+                },
+                {
+                  "name": "V-cone / cone element",
+                  "market_share": 8,
+                  "confidence": "LOW"
+                },
+                {
+                  "name": "Annubar / pitot array",
+                  "market_share": 5,
+                  "confidence": "LOW"
+                }
+              ],
+              "sensing_technology": [
+                {
+                  "name": "Piezoresistive silicon (MEMS)",
+                  "market_share": 45,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Capacitive metallic capsule",
+                  "market_share": 35,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Metallic strain gauge",
+                  "market_share": 15,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Inductive / resonant wire",
+                  "market_share": 5,
+                  "confidence": "LOW"
+                }
+              ],
+              "isolating_diaphragm": [
+                {
+                  "name": "SS 316L",
+                  "market_share": 55,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Hastelloy C-276",
+                  "market_share": 25,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Tantalum",
+                  "market_share": 12,
+                  "confidence": "LOW"
+                },
+                {
+                  "name": "Gold-coated SS",
+                  "market_share": 8,
+                  "confidence": "LOW"
+                }
+              ]
+            }
+          },
+          {
+            "id": "OT-7",
+            "name": "Thermal Mass Flowmeter (Gas Service)",
+            "typical_specs": "Gas/air service, DN15-DN300 inline or insertion, 0-500 to 50000 SLPM, ±1-2%",
+            "market_share_of_naics": "~3-5% of flow instrument market",
+            "l4_subsystems": [
+              "Thermal Sensing Element",
+              "Signal Processing & Electronics",
+              "Flow Body / Probe Assembly",
+              "Enclosure & Sealing"
+            ],
+            "key_alternatives": {
+              "sensing_principle": [
+                {
+                  "name": "Constant-temperature anemometry (CTA)",
+                  "market_share": 40,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Constant-power (calorimetric differential)",
+                  "market_share": 35,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Capillary thermal (bypass tube)",
+                  "market_share": 25,
+                  "confidence": "MEDIUM"
+                }
+              ],
+              "probe_tip_material": [
+                {
+                  "name": "SS 316L",
+                  "market_share": 55,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Hastelloy C-276",
+                  "market_share": 30,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Silicon nitride (Si3N4) ceramic",
+                  "market_share": 10,
+                  "confidence": "LOW"
+                },
+                {
+                  "name": "PEEK",
+                  "market_share": 5,
+                  "confidence": "LOW"
+                }
+              ]
+            }
+          },
+          {
+            "id": "OT-8",
+            "name": "Pressure Transmitter / Pressure Instrument",
+            "typical_specs": "0-10 mbar to 0-1000 bar, gauge/absolute/differential, 4-20 mA + HART, process",
+            "market_share_of_naics": "~30-35% of NAICS 334513 revenue (largest OT by revenue)",
+            "l4_subsystems": [
+              "Pressure Sensing Element",
+              "Signal Conditioning & Electronics",
+              "Process Connection Body",
+              "Transmitter Housing"
+            ],
+            "key_alternatives": {
+              "sensing_technology": [
+                {
+                  "name": "Piezoresistive silicon (MEMS)",
+                  "market_share": 45,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Capacitive metallic capsule",
+                  "market_share": 30,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Piezoelectric crystal (dynamic)",
+                  "market_share": 10,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Metallic strain gauge",
+                  "market_share": 10,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Inductive / resonant wire",
+                  "market_share": 5,
+                  "confidence": "LOW"
+                }
+              ],
+              "isolating_diaphragm": [
+                {
+                  "name": "SS 316L",
+                  "market_share": 50,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Hastelloy C-276",
+                  "market_share": 20,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Inconel 625",
+                  "market_share": 15,
+                  "confidence": "LOW"
+                },
+                {
+                  "name": "Tantalum",
+                  "market_share": 10,
+                  "confidence": "LOW"
+                },
+                {
+                  "name": "Titanium",
+                  "market_share": 5,
+                  "confidence": "LOW"
+                }
+              ]
+            }
+          },
+          {
+            "id": "OT-9",
+            "name": "Temperature Transmitter + RTD / TC Assembly",
+            "typical_specs": "-200°C to +1700°C, 4-20 mA / HART, thermowell + element + connection head",
+            "market_share_of_naics": "~20-25% of NAICS 334513 revenue",
+            "l4_subsystems": [
+              "Primary Temperature Sensing Element",
+              "Signal Conditioning Transmitter",
+              "Thermowell / Protection Tube",
+              "Connection Head & Wiring"
+            ],
+            "key_alternatives": {
+              "sensing_type": [
+                {
+                  "name": "Pt100 RTD (IEC 60751 Class A/AA)",
+                  "market_share": 65,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Thermocouple (all types)",
+                  "market_share": 25,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Pt1000 RTD",
+                  "market_share": 8,
+                  "confidence": "LOW"
+                },
+                {
+                  "name": "NTC thermistor",
+                  "market_share": 2,
+                  "confidence": "LOW"
+                }
+              ],
+              "rtd_construction": [
+                {
+                  "name": "Wire-wound (coil)",
+                  "market_share": 50,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Thin-film Pt on Al2O3",
+                  "market_share": 40,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Coiled-element (expanded)",
+                  "market_share": 10,
+                  "confidence": "LOW"
+                }
+              ],
+              "thermowell_material": [
+                {
+                  "name": "SS 316/316L",
+                  "market_share": 60,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Hastelloy C-276",
+                  "market_share": 20,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Carbon steel + coat",
+                  "market_share": 12,
+                  "confidence": "LOW"
+                },
+                {
+                  "name": "Ceramic Al2O3",
+                  "market_share": 8,
+                  "confidence": "LOW"
+                }
+              ]
+            }
+          },
+          {
+            "id": "OT-10",
+            "name": "Level Instrument (Radar / GWR / Ultrasonic / Hydrostatic)",
+            "typical_specs": "Non-contact or contact level; 0-40 m range; process / storage / utility",
+            "market_share_of_naics": "~18-22% of NAICS 334513 revenue",
+            "l4_subsystems": [
+              "Level Sensing Technology",
+              "Signal Processing & Electronics",
+              "Process Connection & Housing",
+              "Transmitter Housing"
+            ],
+            "key_alternatives": {
+              "sensing_technology": [
+                {
+                  "name": "Capacitance probe (contact)",
+                  "market_share": 25,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Guided Wave Radar / TDR (GWR)",
+                  "market_share": 22,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Hydrostatic pressure (submersible)",
+                  "market_share": 20,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Free-space FMCW radar (non-contact)",
+                  "market_share": 18,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Ultrasonic (non-contact)",
+                  "market_share": 10,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Magnetostrictive (float)",
+                  "market_share": 5,
+                  "confidence": "LOW"
+                }
+              ],
+              "radar_frequency_band": [
+                {
+                  "name": "26 GHz band-type FMCW",
+                  "market_share": 55,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "80 GHz narrow-beam FMCW",
+                  "market_share": 35,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "6.3 GHz pulse radar (legacy)",
+                  "market_share": 10,
+                  "confidence": "LOW"
+                }
+              ]
+            }
+          },
+          {
+            "id": "OT-11",
+            "name": "Analytical Instrument (pH / Conductivity / DO)",
+            "typical_specs": "pH 0-14, conductivity 0.05 µS/cm-2 S/cm, DO 0-40 mg/L; inline or submersion",
+            "market_share_of_naics": "~8-12% of NAICS 334513 revenue",
+            "l4_subsystems": [
+              "Primary Sensing Electrode Assembly",
+              "Electrode Body & Housing",
+              "Signal Conditioning Transmitter",
+              "Process Connection & Enclosure"
+            ],
+            "key_alternatives": {
+              "parameter_mix": [
+                {
+                  "name": "pH instruments",
+                  "market_share": 55,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Conductivity instruments",
+                  "market_share": 30,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Dissolved oxygen instruments",
+                  "market_share": 15,
+                  "confidence": "MEDIUM"
+                }
+              ],
+              "ph_electrode_type": [
+                {
+                  "name": "Glass membrane (borosilicate)",
+                  "market_share": 65,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "ISFET semiconductor (solid-state)",
+                  "market_share": 30,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Metal oxide (RuO2, IrOx)",
+                  "market_share": 5,
+                  "confidence": "LOW"
+                }
+              ],
+              "do_sensing_principle": [
+                {
+                  "name": "Amperometric (Clark cell)",
+                  "market_share": 50,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Optical (luminescent O2-quenching)",
+                  "market_share": 40,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Galvanic (Pb/Zn anode)",
+                  "market_share": 10,
+                  "confidence": "LOW"
+                }
+              ]
+            }
+          },
+          {
+            "id": "OT-12",
+            "name": "Control & Recording Instrument (PID Controller / Paperless Recorder)",
+            "typical_specs": "Panel-mount 1/4 DIN or 1/8 DIN; 1-64 channel; PID or trend recording",
+            "market_share_of_naics": "~5-8% of NAICS 334513 revenue",
+            "l4_subsystems": [
+              "Input / Signal Measurement",
+              "Processing & Computing",
+              "Display",
+              "Housing, I/O & Connectivity"
+            ],
+            "key_alternatives": {
+              "display_type": [
+                {
+                  "name": "Color TFT LCD (3.5\"-12\")",
+                  "market_share": 85,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Monochrome LCD",
+                  "market_share": 10,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "LED bargraph + numerical",
+                  "market_share": 5,
+                  "confidence": "LOW"
+                }
+              ],
+              "communication_interface": [
+                {
+                  "name": "RS-485 Modbus RTU",
+                  "market_share": 45,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "Ethernet TCP/IP",
+                  "market_share": 30,
+                  "confidence": "MEDIUM"
+                },
+                {
+                  "name": "USB host/device",
+                  "market_share": 15,
+                  "confidence": "LOW"
+                },
+                {
+                  "name": "Wireless (Wi-Fi / BT)",
+                  "market_share": 10,
+                  "confidence": "LOW"
+                }
+              ]
+            }
+          }
+        ],
+        "shared_key_raw_materials": [
+          {
+            "name": "SS 316L (austenitic stainless steel)",
+            "feeds": [
+              "Wetted bodies OT-2 through OT-12",
+              "Thermowell OT-9",
+              "Flow bodies OT-4, OT-5, OT-7"
+            ]
+          },
+          {
+            "name": "Hastelloy C-276 (NiMoCr alloy)",
+            "feeds": [
+              "High-corrosion-resistance wetted parts across all OTs"
+            ]
+          },
+          {
+            "name": "PTFE resin",
+            "feeds": [
+              "Liners OT-2",
+              "Probe seals OT-10",
+              "Wetted bodies OT-11"
+            ]
+          },
+          {
+            "name": "FR4 epoxy glass laminate",
+            "feeds": [
+              "PCB substrate L4.2 across all 12 OTs"
+            ]
+          },
+          {
+            "name": "Silicon wafer (MEMS grade)",
+            "feeds": [
+              "Piezoresistive sensing elements OT-6, OT-8"
+            ]
+          },
+          {
+            "name": "Lead zirconate titanate (PZT) ceramic",
+            "feeds": [
+              "Transducers OT-1",
+              "Vortex sensors OT-4"
+            ]
+          },
+          {
+            "name": "Platinum wire (99.99% purity)",
+            "feeds": [
+              "RTD elements OT-9",
+              "Conductivity electrodes OT-11"
+            ]
+          },
+          {
+            "name": "NdFeB sintered magnet (Nd2Fe14B)",
+            "feeds": [
+              "Drive coils OT-3",
+              "Pickups OT-5"
+            ]
+          },
+          {
+            "name": "Borosilicate glass (pH-selective composition)",
+            "feeds": [
+              "pH electrode membrane OT-11"
+            ]
+          },
+          {
+            "name": "ABS/PC/PA66 thermoplastic resin",
+            "feeds": [
+              "Housing L4.4 across all 12 OTs"
+            ]
+          }
+        ],
+        "market_context": {
+          "naics_334513_global_revenue_2024_usd_bn": "~22-25",
+          "largest_ot_by_revenue": "OT-8 Pressure Transmitter (~30-35% of NAICS)",
+          "fastest_growing_ot": "OT-10 Level (radar FMCW 80 GHz) and OT-3 Coriolis",
+          "declining_ot": "OT-5 Turbine (displacement by ultrasonic), OT-6 DP (displacement by dedicated flow types)",
+          "sources": [
+            "Fortune Business Insights — Ultrasonic Flow Meter Market 2032",
+            "Mordor Intelligence — Ultrasonic Flow Meters Market",
+            "Market Research Future — Coriolis Meters Market",
+            "Emerson Automation — Rosemount product catalog",
+            "Endress+Hauser — Product portfolio and technical papers",
+            "TI application notes TIDM-ULTRASONIC-WATER-FLOW-MEASUREMENT",
+            "Markets and Markets — Level Transmitter Market",
+            "Bronkhorst — Thermal mass flow operating principles",
+            "Instrumentation Tools — Vortex flowmeter sensor types",
+            "DwyerOmega — RTD Pt100 vs Pt1000 comparison",
+            "Sea-Bird Scientific — ISFET and glass electrode pH sensors",
+            "Omega — Paperless Recorders product documentation"
+          ]
+        }
+      }
+    }
+  ],
+  "has_bom": true,
+  "naics_sector_type": "manufacturing"
+}

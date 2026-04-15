@@ -1,0 +1,319 @@
+{
+  "id": "COMPAT_data_processing_hosting",
+  "title": "COMPAT — NAICS 518210 (Data Processing, Hosting, and Related Services)",
+  "type": "constraint_compatibility",
+  "market_slug": "data_processing_hosting",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Verdict Summary",
+      "content": "| # | Constraint | Verdict | Rationale |\n|---|---|---|---|\n| C1 | Aqueous Media Requirement | none | CDU secondary loop uses water or PG/EG25 glycol — fits aqueous + ≤50% glycol envelope. |\n| C2 | Maximum Medium Temperature (90 °C) | none | Facility CHW 14–27 °C; secondary TCS supply 20–45 °C (Rubin-class). Max ~45 °C is half the 90 °C limit. |\n| C3 | Air Bubble / Void Fraction (2 % vol) | none | CDU loops are closed, de-aerated via expansion reservoir, and chemically treated. Void fraction stays well below 2 %. |\n| C4 | Temperature-Dependent Accuracy | none | CDU loops run steady-state with slow setpoint ramps. Integrated NTC compensation handles the regime; ~0.2 % accuracy is adequate for ΔT × flow kW duty. |\n| C5 | Wetted Material Chemical Compatibility | none | HVAC-grade treated water + PG/EG glycol + standard corrosion inhibitor — compatible with polymer housing and KTW/WRAS seals. |\n| C6 | Pipe Full Condition | none | CDU secondary is a closed, pressurized loop — always full by design. |\n| C7 | Minimum Flow Rate (4.2 l/min DN20) | none | Rack secondary loop flows 5–30 l/min — above the DN20 lower detection limit. |\n| C8 | Maximum Operating Pressure (10 bar) | none | CDU secondary loops run 2–6 bar — well within the 10 bar rating. |\n| C9 | Minimum Straight Pipe Run (5–10 × DN) | **mitigable** | CDU skids are compact and pre-plumbed with elbows near the sensor port. Installation guidance or a short flow conditioner resolves it. |\n| C10 | Life Endurance Ceiling (3,000 m³) | **mitigable** | **Key issue.** At 20 l/min continuous 24/7, endurance = ~104 days; at 30 l/min, ~69 days. Data-center duty cycle burns the current sensor in weeks to months. Needs a higher-endurance variant or scheduled-replacement consumable model. |\n| C11 | No Explosive Atmosphere Certification | none | Data halls are not classified hazardous areas. ATEX not required. |\n| C12 | Ambient Temperature Range (−20 to +60 °C) | none | White-space ambient is 18–27 °C (ASHRAE A1/A2). Electronics and RAST 2.5 connector operate well within range. |\n\n**Knockouts:** 0\n**Mitigable:** 2 (C9 installation geometry, C10 life endurance)\n**None:** 10\n**Market status:** SURVIVES — proceed to fit scoring.\n\n---"
+    },
+    {
+      "title": "Mitigable Detail",
+      "content": "### C9 — Minimum Straight Pipe Run\n\n| Field | Value |\n|---|---|\n| **Mitigation actions** | (1) Publish CDU-specific installation guide with required upstream straight length, (2) offer a bolt-on flow-conditioner insert (honeycomb or perforated plate), (3) validate accuracy curve with 3 × DN upstream via factory calibration. |\n| **Cost estimate** | low (<$10K per variant NRE; unit cost add <$5) |\n| **Time estimate** | 2–4 months |\n\n### C10 — Life Endurance Ceiling\n\n| Field | Value |\n|---|---|\n| **Mitigation actions** | (1) Develop industrial-duty variant with reinforced transducer bonding and upgraded seals targeting ≥30,000 m³ throughput (10× current), (2) reposition the current sensor as a scheduled-replacement consumable aligned with annual CDU service intervals, (3) alternatively, qualify a DCIM firmware model that tracks cumulative throughput and triggers proactive swap alerts before drift. |\n| **Cost estimate** | high (>$100K — new variant NRE, qualification testing, possibly new transducer adhesive system) |\n| **Time estimate** | 12–18 months for the hardware variant; 3–6 months for the consumable/alert path |\n\n---"
+    },
+    {
+      "title": "Fit Read",
+      "content": "The sensor's measurement envelope is a near-perfect match for CDU and RDHx secondary-loop conditions. Integrated ΔT sensing delivers built-in thermal-duty telemetry (flow × ΔT → kW) that DCIM/PUE calculations otherwise require two sensors for — this is a latent FP-extension advantage, not a constraint issue.\n\nThe only structural barrier is **C10 life endurance**. The 3,000 m³ ceiling was sized for residential/commercial HVAC intermittent duty; hyperscale liquid-cooling is 24/7 continuous. Without a higher-endurance variant or an explicit consumable-sensor commercial model, field replacement cadence becomes operationally painful. This is mitigable, not a knockout, but it is the dominant engineering and go-to-market question for this market.\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"product_name\": \"Ultrasonic Flow Sensor DN20\",\n  \"vendor_name\": \"Marquardt\",\n  \"component\": \"constraint_market_compatibility\",\n  \"market_name\": \"Data Processing, Hosting, and Related Services\",\n  \"naics_code\": \"518210\",\n  \"naics_title\": \"Data Processing, Hosting, and Related Services\",\n  \"market_status\": \"surviving\",\n  \"knockout_count\": 0,\n  \"mitigable_count\": 2,\n  \"none_count\": 10,\n  \"assessments\": [\n    {\n      \"constraint_name\": \"Aqueous Media Requirement\",\n      \"market_name\": \"Data Processing, Hosting, and Related Services\",\n      \"naics_code\": \"518210\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"CDU secondary loop uses water or PG/EG25 glycol blend — aqueous media with <=50% glycol fits the sensor envelope directly.\"\n    },\n    {\n      \"constraint_name\": \"Maximum Medium Temperature\",\n      \"market_name\": \"Data Processing, Hosting, and Related Services\",\n      \"naics_code\": \"518210\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Facility CHW 14-27 degC; Rubin-class secondary TCS supply 20-45 degC. Maximum ~45 degC is half the 90 degC limit.\"\n    },\n    {\n      \"constraint_name\": \"Air Bubble / Void Fraction Limit\",\n      \"market_name\": \"Data Processing, Hosting, and Related Services\",\n      \"naics_code\": \"518210\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Closed, de-aerated CDU loop with expansion reservoir holds void fraction well below 2%.\"\n    },\n    {\n      \"constraint_name\": \"Temperature-Dependent Accuracy\",\n      \"market_name\": \"Data Processing, Hosting, and Related Services\",\n      \"naics_code\": \"518210\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"CDU loops run steady-state. Integrated NTC compensation delivers ~0.2% accuracy — adequate for thermal-duty and PUE telemetry.\"\n    },\n    {\n      \"constraint_name\": \"Wetted Material Chemical Compatibility\",\n      \"market_name\": \"Data Processing, Hosting, and Related Services\",\n      \"naics_code\": \"518210\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"HVAC-grade treated water plus PG/EG glycol and standard corrosion inhibitor are compatible with polymer housing and KTW/WRAS seals.\"\n    },\n    {\n      \"constraint_name\": \"Pipe Full Condition Required\",\n      \"market_name\": \"Data Processing, Hosting, and Related Services\",\n      \"naics_code\": \"518210\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"CDU secondary is a closed pressurized loop — always full by design.\"\n    },\n    {\n      \"constraint_name\": \"Minimum Flow Rate Detection\",\n      \"market_name\": \"Data Processing, Hosting, and Related Services\",\n      \"naics_code\": \"518210\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Rack secondary loops flow 5-30 l/min, above the DN20 lower detection limit of 4.2 l/min.\"\n    },\n    {\n      \"constraint_name\": \"Maximum Operating Pressure\",\n      \"market_name\": \"Data Processing, Hosting, and Related Services\",\n      \"naics_code\": \"518210\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"CDU secondary loops operate at 2-6 bar, well within the 10 bar rating.\"\n    },\n    {\n      \"constraint_name\": \"Minimum Straight Pipe Run\",\n      \"market_name\": \"Data Processing, Hosting, and Related Services\",\n      \"naics_code\": \"518210\",\n      \"verdict\": \"mitigable\",\n      \"mitigation_actions\": [\n        \"Publish CDU-specific installation guide specifying upstream straight-run length\",\n        \"Offer a bolt-on flow-conditioner insert (honeycomb or perforated plate)\",\n        \"Factory-calibrate an accuracy curve for 3 x DN upstream to support compact skid layouts\"\n      ],\n      \"mitigation_cost_estimate\": \"low\",\n      \"mitigation_time_estimate\": \"2-4 months\",\n      \"knockout_reason\": null,\n      \"rationale\": \"CDU skids are compact and often have elbows near sensor ports. A flow conditioner or validated short-run calibration addresses it at low cost.\"\n    },\n    {\n      \"constraint_name\": \"Life Endurance Ceiling\",\n      \"market_name\": \"Data Processing, Hosting, and Related Services\",\n      \"naics_code\": \"518210\",\n      \"verdict\": \"mitigable\",\n      \"mitigation_actions\": [\n        \"Develop an industrial-duty DN20 variant with reinforced transducer bonding targeting >=30,000 m3 throughput\",\n        \"Alternatively, reposition the current sensor as a scheduled-replacement consumable aligned with annual CDU service intervals\",\n        \"Ship DCIM firmware that tracks cumulative throughput and fires a proactive replacement alert before drift\"\n      ],\n      \"mitigation_cost_estimate\": \"high\",\n      \"mitigation_time_estimate\": \"12-18 months for hardware variant; 3-6 months for consumable/alert path\",\n      \"knockout_reason\": null,\n      \"rationale\": \"At 20-30 l/min continuous 24/7, 3,000 m3 endurance equates to ~69-104 days. Data-center duty cycle burns out the current sensor in weeks to months — the dominant commercial/engineering question for this market.\"\n    },\n    {\n      \"constraint_name\": \"No Explosive Atmosphere Certification\",\n      \"market_name\": \"Data Processing, Hosting, and Related Services\",\n      \"naics_code\": \"518210\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Data halls are not classified hazardous areas. ATEX/IECEx not required.\"\n    },\n    {\n      \"constraint_name\": \"Ambient Temperature Range\",\n      \"market_name\": \"Data Processing, Hosting, and Related Services\",\n      \"naics_code\": \"518210\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"White-space ambient is 18-27 degC (ASHRAE A1/A2). Electronics and RAST 2.5 connector operate well within range.\"\n    }\n  ],\n  \"markets_eliminated\": [],\n  \"markets_surviving\": [\"518210\"],\n  \"dominant_mitigation\": {\n    \"constraint_name\": \"Life Endurance Ceiling\",\n    \"why\": \"Continuous 24/7 duty cycle at CDU flow rates exhausts 3,000 m3 throughput in 69-104 days. Demands either a hardware variant or an explicit consumable-sensor commercial model.\"\n  }\n}\n```\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- 01_product_decomposition.md — spec envelope (DN20, 4.2–46.6 l/min, 0–6 bar, +2 to 90 °C, 3,000 m³ endurance)\n- 03_constraints.md — 12 constraints with thresholds and absolute/mitigable classification\n- VN_data_processing_hosting.md — CDU/RDHx anchor, secondary-loop conditions (20–45 °C, 2–6 bar, 5–30 l/min, water/PG25)\n- Tom's Hardware, Network World — 2025–26 liquid-cooling trend and Rubin-class supply temperatures"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "#",
+        "Constraint",
+        "Verdict",
+        "Rationale"
+      ],
+      "rows": [
+        {
+          "#": "C1",
+          "Constraint": "Aqueous Media Requirement",
+          "Verdict": "none",
+          "Rationale": "CDU secondary loop uses water or PG/EG25 glycol — fits aqueous + ≤50% glycol envelope."
+        },
+        {
+          "#": "C2",
+          "Constraint": "Maximum Medium Temperature (90 °C)",
+          "Verdict": "none",
+          "Rationale": "Facility CHW 14–27 °C; secondary TCS supply 20–45 °C (Rubin-class). Max ~45 °C is half the 90 °C limit."
+        },
+        {
+          "#": "C3",
+          "Constraint": "Air Bubble / Void Fraction (2 % vol)",
+          "Verdict": "none",
+          "Rationale": "CDU loops are closed, de-aerated via expansion reservoir, and chemically treated. Void fraction stays well below 2 %."
+        },
+        {
+          "#": "C4",
+          "Constraint": "Temperature-Dependent Accuracy",
+          "Verdict": "none",
+          "Rationale": "CDU loops run steady-state with slow setpoint ramps. Integrated NTC compensation handles the regime; ~0.2 % accuracy is adequate for ΔT × flow kW duty."
+        },
+        {
+          "#": "C5",
+          "Constraint": "Wetted Material Chemical Compatibility",
+          "Verdict": "none",
+          "Rationale": "HVAC-grade treated water + PG/EG glycol + standard corrosion inhibitor — compatible with polymer housing and KTW/WRAS seals."
+        },
+        {
+          "#": "C6",
+          "Constraint": "Pipe Full Condition",
+          "Verdict": "none",
+          "Rationale": "CDU secondary is a closed, pressurized loop — always full by design."
+        },
+        {
+          "#": "C7",
+          "Constraint": "Minimum Flow Rate (4.2 l/min DN20)",
+          "Verdict": "none",
+          "Rationale": "Rack secondary loop flows 5–30 l/min — above the DN20 lower detection limit."
+        },
+        {
+          "#": "C8",
+          "Constraint": "Maximum Operating Pressure (10 bar)",
+          "Verdict": "none",
+          "Rationale": "CDU secondary loops run 2–6 bar — well within the 10 bar rating."
+        },
+        {
+          "#": "C9",
+          "Constraint": "Minimum Straight Pipe Run (5–10 × DN)",
+          "Verdict": "**mitigable**",
+          "Rationale": "CDU skids are compact and pre-plumbed with elbows near the sensor port. Installation guidance or a short flow conditioner resolves it."
+        },
+        {
+          "#": "C10",
+          "Constraint": "Life Endurance Ceiling (3,000 m³)",
+          "Verdict": "**mitigable**",
+          "Rationale": "**Key issue.** At 20 l/min continuous 24/7, endurance = ~104 days; at 30 l/min, ~69 days. Data-center duty cycle burns the current sensor in weeks to months. Needs a higher-endurance variant or scheduled-replacement consumable model."
+        },
+        {
+          "#": "C11",
+          "Constraint": "No Explosive Atmosphere Certification",
+          "Verdict": "none",
+          "Rationale": "Data halls are not classified hazardous areas. ATEX not required."
+        },
+        {
+          "#": "C12",
+          "Constraint": "Ambient Temperature Range (−20 to +60 °C)",
+          "Verdict": "none",
+          "Rationale": "White-space ambient is 18–27 °C (ASHRAE A1/A2). Electronics and RAST 2.5 connector operate well within range."
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**Mitigation actions**",
+          "Value": "(1) Publish CDU-specific installation guide with required upstream straight length, (2) offer a bolt-on flow-conditioner insert (honeycomb or perforated plate), (3) validate accuracy curve with 3 × DN upstream via factory calibration."
+        },
+        {
+          "Field": "**Cost estimate**",
+          "Value": "low (<$10K per variant NRE; unit cost add <$5)"
+        },
+        {
+          "Field": "**Time estimate**",
+          "Value": "2–4 months"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**Mitigation actions**",
+          "Value": "(1) Develop industrial-duty variant with reinforced transducer bonding and upgraded seals targeting ≥30,000 m³ throughput (10× current), (2) reposition the current sensor as a scheduled-replacement consumable aligned with annual CDU service intervals, (3) alternatively, qualify a DCIM firmware model that tracks cumulative throughput and triggers proactive swap alerts before drift."
+        },
+        {
+          "Field": "**Cost estimate**",
+          "Value": "high (>$100K — new variant NRE, qualification testing, possibly new transducer adhesive system)"
+        },
+        {
+          "Field": "**Time estimate**",
+          "Value": "12–18 months for the hardware variant; 3–6 months for the consumable/alert path"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "product_name": "Ultrasonic Flow Sensor DN20",
+      "vendor_name": "Marquardt",
+      "component": "constraint_market_compatibility",
+      "market_name": "Data Processing, Hosting, and Related Services",
+      "naics_code": "518210",
+      "naics_title": "Data Processing, Hosting, and Related Services",
+      "market_status": "surviving",
+      "knockout_count": 0,
+      "mitigable_count": 2,
+      "none_count": 10,
+      "assessments": [
+        {
+          "constraint_name": "Aqueous Media Requirement",
+          "market_name": "Data Processing, Hosting, and Related Services",
+          "naics_code": "518210",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "CDU secondary loop uses water or PG/EG25 glycol blend — aqueous media with <=50% glycol fits the sensor envelope directly."
+        },
+        {
+          "constraint_name": "Maximum Medium Temperature",
+          "market_name": "Data Processing, Hosting, and Related Services",
+          "naics_code": "518210",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Facility CHW 14-27 degC; Rubin-class secondary TCS supply 20-45 degC. Maximum ~45 degC is half the 90 degC limit."
+        },
+        {
+          "constraint_name": "Air Bubble / Void Fraction Limit",
+          "market_name": "Data Processing, Hosting, and Related Services",
+          "naics_code": "518210",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Closed, de-aerated CDU loop with expansion reservoir holds void fraction well below 2%."
+        },
+        {
+          "constraint_name": "Temperature-Dependent Accuracy",
+          "market_name": "Data Processing, Hosting, and Related Services",
+          "naics_code": "518210",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "CDU loops run steady-state. Integrated NTC compensation delivers ~0.2% accuracy — adequate for thermal-duty and PUE telemetry."
+        },
+        {
+          "constraint_name": "Wetted Material Chemical Compatibility",
+          "market_name": "Data Processing, Hosting, and Related Services",
+          "naics_code": "518210",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "HVAC-grade treated water plus PG/EG glycol and standard corrosion inhibitor are compatible with polymer housing and KTW/WRAS seals."
+        },
+        {
+          "constraint_name": "Pipe Full Condition Required",
+          "market_name": "Data Processing, Hosting, and Related Services",
+          "naics_code": "518210",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "CDU secondary is a closed pressurized loop — always full by design."
+        },
+        {
+          "constraint_name": "Minimum Flow Rate Detection",
+          "market_name": "Data Processing, Hosting, and Related Services",
+          "naics_code": "518210",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Rack secondary loops flow 5-30 l/min, above the DN20 lower detection limit of 4.2 l/min."
+        },
+        {
+          "constraint_name": "Maximum Operating Pressure",
+          "market_name": "Data Processing, Hosting, and Related Services",
+          "naics_code": "518210",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "CDU secondary loops operate at 2-6 bar, well within the 10 bar rating."
+        },
+        {
+          "constraint_name": "Minimum Straight Pipe Run",
+          "market_name": "Data Processing, Hosting, and Related Services",
+          "naics_code": "518210",
+          "verdict": "mitigable",
+          "mitigation_actions": [
+            "Publish CDU-specific installation guide specifying upstream straight-run length",
+            "Offer a bolt-on flow-conditioner insert (honeycomb or perforated plate)",
+            "Factory-calibrate an accuracy curve for 3 x DN upstream to support compact skid layouts"
+          ],
+          "mitigation_cost_estimate": "low",
+          "mitigation_time_estimate": "2-4 months",
+          "knockout_reason": null,
+          "rationale": "CDU skids are compact and often have elbows near sensor ports. A flow conditioner or validated short-run calibration addresses it at low cost."
+        },
+        {
+          "constraint_name": "Life Endurance Ceiling",
+          "market_name": "Data Processing, Hosting, and Related Services",
+          "naics_code": "518210",
+          "verdict": "mitigable",
+          "mitigation_actions": [
+            "Develop an industrial-duty DN20 variant with reinforced transducer bonding targeting >=30,000 m3 throughput",
+            "Alternatively, reposition the current sensor as a scheduled-replacement consumable aligned with annual CDU service intervals",
+            "Ship DCIM firmware that tracks cumulative throughput and fires a proactive replacement alert before drift"
+          ],
+          "mitigation_cost_estimate": "high",
+          "mitigation_time_estimate": "12-18 months for hardware variant; 3-6 months for consumable/alert path",
+          "knockout_reason": null,
+          "rationale": "At 20-30 l/min continuous 24/7, 3,000 m3 endurance equates to ~69-104 days. Data-center duty cycle burns out the current sensor in weeks to months — the dominant commercial/engineering question for this market."
+        },
+        {
+          "constraint_name": "No Explosive Atmosphere Certification",
+          "market_name": "Data Processing, Hosting, and Related Services",
+          "naics_code": "518210",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Data halls are not classified hazardous areas. ATEX/IECEx not required."
+        },
+        {
+          "constraint_name": "Ambient Temperature Range",
+          "market_name": "Data Processing, Hosting, and Related Services",
+          "naics_code": "518210",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "White-space ambient is 18-27 degC (ASHRAE A1/A2). Electronics and RAST 2.5 connector operate well within range."
+        }
+      ],
+      "markets_eliminated": [],
+      "markets_surviving": [
+        "518210"
+      ],
+      "dominant_mitigation": {
+        "constraint_name": "Life Endurance Ceiling",
+        "why": "Continuous 24/7 duty cycle at CDU flow rates exhausts 3,000 m3 throughput in 69-104 days. Demands either a hardware variant or an explicit consumable-sensor commercial model."
+      }
+    }
+  ],
+  "has_bom": false,
+  "naics_sector_type": "non_manufacturing"
+}

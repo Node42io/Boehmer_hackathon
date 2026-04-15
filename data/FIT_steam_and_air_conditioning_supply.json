@@ -1,0 +1,943 @@
+{
+  "id": "FIT_steam_and_air_conditioning_supply",
+  "title": "Feature-Market Fit — Steam and Air-Conditioning Supply (NAICS 221330)",
+  "type": "feature_market_fit",
+  "market_slug": "steam_and_air_conditioning_supply",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Step 09 — Technology-Level Feature-Market Fit",
+      "content": "Technology-scope features (from 01_product_decomposition) scored against NAICS 221330 market needs (from JTBD_steam_and_air_conditioning_supply).\n\n### 09a — Per-Market Kano + ODI Fit Scoring\n\n| Feature | Kano | Time | Cost | Safety | Reliab. | Skill | Stress | Pain | Confid. | Delight | Overall |\n|---|---|---|---|---|---|---|---|---|---|---|---|\n| **Transit-Time Flow Measurement** | must_be | 5 | 7 | 4 | 8 | 4 | 5 | 6 | 7 | 3 | **5.44** |\n| **Integrated Temperature Sensing** | attractive | 6 | 8 | 3 | 7 | 6 | 5 | 7 | 7 | 5 | **6.00** |\n| **Zero Pressure Drop Flow Path** | one_dimensional | 2 | 5 | 2 | 4 | 3 | 2 | 3 | 3 | 2 | **2.89** |\n| **No Moving Parts** | one_dimensional | 4 | 9 | 4 | 9 | 5 | 7 | 8 | 8 | 4 | **6.44** |\n| **Bidirectional Flow Detection** | attractive | 3 | 6 | 4 | 5 | 5 | 5 | 5 | 6 | 6 | **5.00** |\n| **Digital Anomaly Detection** | attractive | 5 | 7 | 7 | 6 | 6 | 7 | 6 | 8 | 6 | **6.44** |\n| **Real-Time Compensation Algorithms** | must_be | 2 | 5 | 3 | 7 | 5 | 4 | 4 | 6 | 2 | **4.22** |\n\n### 09a — Rationales\n\n**Transit-Time Flow Measurement** (must_be, 5.44): Core commodity function — every flowmeter quantifies flow rate. Expected in district energy metering. Primary drivers: Reliability (8) — no mechanical wear means stable long-term accuracy per EN 1434; Cost (7) — eliminates revenue leakage from calibration drift. Grounded in N01 (flow accuracy ±2%, imp=10) and N25 (field failure rate <0.1%, imp=9). [SRC: JTBD_steam]\n\n**Integrated Temperature Sensing** (attractive, 6.00): Traditional district energy substations use separate flow sensor + temperature probes. Combined flow+temp in a single body is a genuine delighter — eliminates a component, reduces wiring, and ensures co-located measurement. Directly addresses N22 (single-point flow + temperature, opp=12). Primary drivers: Cost (8) — eliminates separate temp probe; Reliability (7) — one fewer failure point; Pain (7) — removes installation labor for second sensor. [SRC: JTBD_steam, 01_product_decomposition]\n\n**Zero Pressure Drop Flow Path** (one_dimensional, 2.89): Unobstructed bore avoids head-loss penalty. In district substations, the heat exchanger and control valve dominate pressure drop — the meter's contribution is marginal. One_dimensional rather than indifferent because hydraulic designers do value zero head-loss, but the magnitude of contribution is small. Primary driver: Cost (5) — marginal pump energy savings. [SRC: 01_product_decomposition]\n\n**No Moving Parts** (one_dimensional, 6.44): Strongest differentiator vs the incumbent mechanical impeller meter (40-50% market share). Eliminates magnetite seizure (N11, opp=15), calibration drift from bearing wear (N13, opp=15), and mandatory 5-6 year fleet replacement cycles (N12, opp=13). Primary drivers: Cost (9) — eliminates fleet-wide replacement cycle; Reliability (9) — eliminates all mechanical failure modes; Pain (8) — removes the entire maintenance scheduling burden across hundreds of substations; Confidence (8) — stable calibration over 15+ years builds billing trust. [SRC: JTBD_steam]\n\n**Bidirectional Flow Detection** (attractive, 5.00): Inherent to transit-time principle. Critical for 4th/5th generation low-temperature prosumer networks where buildings inject excess heat back into the grid. Mechanical impeller meters cannot detect reverse flow. Genuine delighter for network operators transitioning to bidirectional operation. Primary drivers: Cost (6) — eliminates need for separate check valves or reverse-flow sensors; Delight (6) — \"the meter handles bidirectional billing automatically\" is genuinely surprising to legacy operators; Confidence (6) — accurate net-energy billing in prosumer networks. [SRC: JTBD_steam segment 6: 4th/5th gen low-temperature network]\n\n**Digital Anomaly Detection** (attractive, 6.44): Detects bubbles, empty pipes, glycol presence. Traditional meters have zero diagnostic capability — air entrainment silently biases billing for months (N07, opp=15). Distinguishing genuine zero-flow from transient signal anomalies prevents both false alarms and missed real failures (N17, opp=13). Primary drivers: Confidence (8) — operators know when measurement is valid vs compromised; Safety (7) — empty-pipe alarm and flow-stoppage discrimination; Cost (7) — prevents silent billing errors from undetected air. [SRC: JTBD_steam]\n\n**Real-Time Compensation Algorithms** (must_be, 4.22): District heating supply temperatures swing 50-120°C seasonally (N03, opp=14). Speed of sound in water changes ~2.4 m/s per °C. Without compensation, error reaches ~1.5%. Must_be because any flow sensor deployed in a temperature-varying environment MUST compensate — absence would be disqualifying. Primary driver: Reliability (7) — reduces temperature-induced error from ~1.5% to ~0.2%. [SRC: 01_product_decomposition, JTBD_steam]\n\n### 09b — Validation Summary\n\n| Check | Result |\n|---|---|\n| Kano cross-market consistency | N/A — single market |\n| safety >= 7 AND confidence <= 3 | PASS — no violations |\n| skill >= 7 AND stress <= 3 | PASS — no violations |\n| overall_fit arithmetic | PASS — all recomputed |\n| No feature scores 10 on all dimensions | PASS |\n| Feature names comply with 1.pdf rules | PASS — spec-visible noun phrases, no brands, no outcome claims |\n\n---"
+    },
+    {
+      "title": "Step 10 — Product-Related Needs (Burleson Product Jobs)",
+      "content": "Needs that exist BECAUSE of the ultrasonic transit-time technology choice. Each traces to a specific product constraint from 01_product_decomposition. Would disappear if a fundamentally different technology (electromagnetic, Coriolis, mechanical) were chosen.\n\n### 10a — Constraint-Derived Needs\n\n| ID | Source Constraint | Statement | Imp. | Sat. | Litmus |\n|---|---|---|---|---|---|\n| PRN-01 | Maximum Medium Temperature | Minimize the risk of polymer housing and seal degradation when district heating supply temperatures approach the 90°C material limit during winter peak-load conditions, reducing sensor service life below the 15-year fleet expectation | 8 | 3 | PASS — metal-housed sensors tolerate 130°C+ |\n| PRN-02 | Maximum Operating Pressure | Minimize the deployment exclusion at building substations where network operating pressure exceeds the 10-bar polymer housing structural rating during peak demand or water-hammer events | 6 | 3 | PASS — metal/ceramic housings withstand 16-40 bar |\n| PRN-03 | Minimum Flow Rate Detection | Minimize the unmeasured energy delivery below the ultrasonic transit-time signal-to-noise detection threshold (4.2 l/min for DN20) during summer domestic hot water standby operation | 7 | 4 | PASS — electromagnetic meters measure from ~0.01 m/s; mechanical impellers stall differently |\n| PRN-04 | Air Bubble Tolerance | Minimize the cumulative billing error from degraded ultrasonic transit-time accuracy during sub-threshold air entrainment events (1-2% by volume) that do not trigger signal-loss alarms but silently bias flow readings | 7 | 3 | PASS — electromagnetic meters unaffected by air bubbles |\n| PRN-05 | Pipe Full Condition | Minimize the duration of measurement blackout when ultrasonic signal is lost due to partial pipe fill during network maintenance operations that temporarily drain the pipe section | 5 | 4 | PASS — partial fill is an acoustic-path-specific constraint; mechanical meters still rotate in partial fill |\n| PRN-06 | Minimum Straight Pipe Run | Minimize the systematic measurement bias from single-chord acoustic path sampling in asymmetric flow profiles caused by insufficient upstream straight-pipe run (<5x DN) in compact building substations | 7 | 5 | PASS — multi-chord ultrasonic or electromagnetic meters less sensitive to installation effects |\n| PRN-07 | Temperature-Dependent Accuracy | Minimize residual flow measurement error from speed-of-sound variation during rapid supply-temperature transients (>5°C/min) that outpace the NTC thermistor compensation response time | 6 | 5 | PASS — electromagnetic measurement uses Faraday induction, independent of speed of sound |\n\n### 10a — Deduplication Check\n\n| Step 10 Need | JTBD P1 Need | Overlap? | Resolution |\n|---|---|---|---|\n| PRN-01 (90°C housing limit) | — | No overlap | Unique |\n| PRN-02 (10 bar pressure limit) | — | No overlap | Unique |\n| PRN-03 (min flow detection) | N14 (impeller stall <1 l/min) | Different mechanism | N14 is mechanical-specific; PRN-03 is ultrasonic SNR-specific |\n| PRN-04 (sub-threshold air bias) | N15 (complete signal loss from air) | Complementary | N15 covers signal loss; PRN-04 covers accuracy degradation below loss threshold |\n| PRN-05 (partial-fill blackout) | N17 (zero-flow vs signal-loss) | Different failure mode | N17 covers diagnostic discrimination; PRN-05 covers measurement gap duration |\n| PRN-06 (single-chord path bias) | N08 (non-ideal flow profiles) | Overlapping scope | N08 is P2 market-level (all meters affected); PRN-06 is ultrasonic-specific (single chord) — retained |\n| PRN-07 (speed-of-sound transient) | N03 (seasonal temp swing) | Different scope | N03 is P2 market-level (all meters affected by temperature); PRN-07 is ultrasonic-specific mechanism |\n\n### 10b — Validation Summary\n\n| Check | Result |\n|---|---|\n| Litmus test (all needs technology-specific) | PASS — all 7 would disappear with different technology |\n| Source constraint traceability | PASS — each traces to a named constraint in 01_product_decomposition |\n| Affected market plausibility | PASS — all 7 manifest in NAICS 221330 |\n| Completeness (every constraint covered) | PASS — all 8 constraints generate at least one need; Media Limitation covered implicitly by PRN-04 (acoustic coupling sensitivity to medium properties) |\n| No importance < 3 AND satisfaction > 7 | PASS |\n\n---"
+    },
+    {
+      "title": "Step 11 — Vendor Feature-Market Fit (Marquardt vs Incumbent)",
+      "content": "Vendor-scope features (from 01_product_decomposition, scope=vendor) scored against NAICS 221330. Best incumbent: Kamstrup MULTICAL 303/403 (dominant district energy meter platform, ~30-40% global market share in heat metering). [SRC: JTBD_steam alternatives, 05_market_discovery]\n\n### 11a — Vendor vs Incumbent Comparison\n\n| Feature | Kano | Vendor | Incumbent | Inc. Technology | Advantage | \n|---|---|---|---|---|---|\n| **Modular Pipe Diameter Variants** | one_dimensional | 6 | 9 | Ultrasonic (Kamstrup) | **inferior** |\n| **Customizable Communication Interface** | indifferent | 3 | 9 | Ultrasonic (Kamstrup) | **inferior** |\n| **Customizable Mechanical Interface** | one_dimensional | 5 | 8 | Ultrasonic (Kamstrup) | **inferior** |\n| **Low-Energy Battery Mode** | attractive | 7 | 8 | Ultrasonic (Kamstrup) | **parity** |\n| **Pre-Calibrated Delivery** | must_be | 6 | 9 | Ultrasonic (Kamstrup) | **inferior** |\n| **KTW/WRAS Drinking Water Approval** | indifferent | 7 | 3 | Ultrasonic (Kamstrup) | **superior** |\n\n### 11a — Rationales\n\n**Modular Pipe Diameter Variants** (one_dimensional, inferior): Marquardt offers DN12/DN14/DN20/DN25 with shared RAST 2.5 electronics, but DN20 is the only serial production variant; others are concept/development. Kamstrup MULTICAL covers DN15-DN100 in full production with shared electronics and documented installation kits. District networks need DN15-DN25 for residential and DN50+ for commercial — Marquardt's range covers only the residential segment and is not yet production-ready across all variants. Addresses N24 (variant count, opp=10). [SRC: 01_product_decomposition, JTBD_steam]\n\n**Customizable Communication Interface** (indifferent, inferior): Marquardt supports UART, LIN, and frequency output — protocols suited for automotive/appliance OEM integration. District energy requires M-Bus (EN 13757), wM-Bus (wireless), or pulse input for energy calculator integration per MID requirements. Kamstrup provides M-Bus, wM-Bus, pulse, Modbus, and BACnet. Marquardt's protocol suite is misaligned with this market's standard. Indifferent because the protocols Marquardt offers are simply not used in district energy. [SRC: 01_product_decomposition, JTBD_steam L6.4 Metering & Billing]\n\n**Customizable Mechanical Interface** (one_dimensional, inferior): Marquardt offers threaded and plug-in connections suited for OEM appliance integration. Kamstrup provides purpose-built substation housing integration with documented installation kits, flange adapters, and thermal insulation accessories. District substations have specific space and accessibility constraints that purpose-built meter housings address better. [SRC: 01_product_decomposition, JTBD_steam N19 installation footprint]\n\n**Low-Energy Battery Mode** (attractive, parity): Marquardt achieves <5 uA standby current, enabling battery-powered operation for remote or underground substations without mains power. Kamstrup MULTICAL 303 is purpose-built as a battery-powered heat meter with documented 16-year battery life in fleet operation. Both offer excellent battery performance; Kamstrup has proven fleet-scale track record while Marquardt has the raw power specification. Gap is within parity (1 point). [SRC: 01_product_decomposition]\n\n**Pre-Calibrated Delivery** (must_be, inferior): Marquardt ships sensors individually calibrated with 100% automated final test — strong for OEM integration. However, Kamstrup delivers MID-certified, EN 1434-verified meters with metrological seal, tamper detection, and full calibration traceability documentation. District energy billing REQUIRES MID certification (EU Measuring Instruments Directive) — Marquardt does not currently hold this. This is the single largest barrier to market entry. Addresses N26 (MID/EN 1434 at every connection, opp=15) and N27 (EU EED compliance, opp=14). [SRC: JTBD_steam]\n\n**KTW/WRAS Drinking Water Approval** (indifferent, superior): Marquardt holds KTW (German) and WRAS (UK) potable water contact approval. Most district energy heat meter manufacturers (Kamstrup, Danfoss) do not pursue drinking water certification because district networks use treated recirculated water, not potable water. The superior rating has no commercial value in this market context — the feature is indifferent because the approval addresses a requirement that does not exist here. [SRC: 01_product_decomposition]\n\n### 11b — Objectivity Review\n\n| Check | Result |\n|---|---|\n| Vendor bias (>70% superior) | PASS — 1 superior / 1 parity / 4 inferior (17% superior). Marquardt is a new entrant against Kamstrup, the category leader. |\n| Anti-vendor bias (>70% inferior) | PASS — 67% inferior. Justified: Kamstrup's MULTICAL is purpose-built for district energy with 20+ years of market presence. Marquardt's sensor is designed for HVAC OEM, not district energy metering. |\n| Advantage classification arithmetic | PASS — all gaps verified |\n| Kano must_be scores >= 5 | PASS — Pre-Calibrated Delivery: vendor=6, incumbent=9 |\n| Rationale specificity | PASS — all reference specific vendor specs vs incumbent capabilities |\n\n### Market Entry Assessment Summary\n\n| Dimension | Verdict | Key Issue |\n|---|---|---|\n| Technology fit | **Strong** | Ultrasonic transit-time is the dominant growing technology in district energy metering (35-45% share, displacing mechanical) |\n| Product fit | **Moderate** | DN20/DN25 covers residential substations; 90°C and 10 bar limits fit most building-level applications |\n| Vendor fit | **Weak** | Missing MID/EN 1434 certification, wrong communication protocols (UART/LIN vs M-Bus), no substation-specific housing |\n| Competitive position | **Component OEM** | Strongest path: supply ultrasonic flow sensing modules to existing energy meter manufacturers (Kamstrup, Danfoss, Siemens) who handle certification, housing, and market access |\n\n---"
+    },
+    {
+      "title": "QA Checklist",
+      "content": "| # | Check | Result |\n|---|---|---|\n| 1 | All 7 technology-scope features assessed | PASS |\n| 2 | Kano classification with rationale per feature | PASS |\n| 3 | 9-dimension ODI scores with recomputed overall_fit | PASS |\n| 4 | Product-related needs trace to specific constraints | PASS — all 7 trace to named constraints |\n| 5 | Litmus test applied to all product-related needs | PASS — all disappear with different technology |\n| 6 | No duplication with JTBD P1 needs | PASS — deduplication table provided |\n| 7 | Vendor features assessed against best incumbent | PASS — Kamstrup MULTICAL |\n| 8 | Objectivity review on vendor scoring | PASS — 17% superior, no bias detected |\n| 9 | Source tags on all factual claims | PASS |\n| 10 | Web search NOT used | PASS — all derived from upstream files |\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"feature_market_fit\",\n  \"naics_code\": \"221330\",\n  \"naics_title\": \"Steam and Air-Conditioning Supply\",\n  \"market_name\": \"Steam and Air-Conditioning Supply\",\n  \"product_name\": \"Ultrasonic Flow Sensor\",\n  \"vendor_name\": \"Marquardt\",\n  \"technology_class\": \"Ultrasonic Transit-Time Flow Measurement\",\n  \"step_09_tech_feature_market_fit\": {\n    \"features_assessed\": 7,\n    \"market_count\": 1,\n    \"entries\": [\n      {\n        \"feature_name\": \"Transit-Time Flow Measurement\",\n        \"market_name\": \"Steam and Air-Conditioning Supply\",\n        \"naics_code\": \"221330\",\n        \"kano_class\": \"must_be\",\n        \"fit_score_time\": 5,\n        \"fit_score_cost\": 7,\n        \"fit_score_safety\": 4,\n        \"fit_score_reliability\": 8,\n        \"fit_score_skill\": 4,\n        \"fit_score_stress\": 5,\n        \"fit_score_pain\": 6,\n        \"fit_score_confidence\": 7,\n        \"fit_score_delight\": 3,\n        \"overall_fit\": 5.44,\n        \"rationale\": \"Core commodity function — every flowmeter measures flow rate. Expected in district energy metering. Primary drivers: Reliability (8) — no mechanical wear means stable EN 1434 accuracy; Cost (7) — eliminates revenue leakage from calibration drift. Grounded in N01 (flow accuracy ±2%, imp=10) and N25 (failure rate <0.1%, imp=9).\"\n      },\n      {\n        \"feature_name\": \"Integrated Temperature Sensing\",\n        \"market_name\": \"Steam and Air-Conditioning Supply\",\n        \"naics_code\": \"221330\",\n        \"kano_class\": \"attractive\",\n        \"fit_score_time\": 6,\n        \"fit_score_cost\": 8,\n        \"fit_score_safety\": 3,\n        \"fit_score_reliability\": 7,\n        \"fit_score_skill\": 6,\n        \"fit_score_stress\": 5,\n        \"fit_score_pain\": 7,\n        \"fit_score_confidence\": 7,\n        \"fit_score_delight\": 5,\n        \"overall_fit\": 6.00,\n        \"rationale\": \"Traditional substations use separate flow + temperature probes. Combined single-body measurement eliminates a component, reduces wiring, and ensures co-located data. Directly addresses N22 (single-point flow+temp, opp=12). Primary drivers: Cost (8) — eliminates probe; Reliability (7) — one fewer failure point; Pain (7) — removes second-sensor installation labor.\"\n      },\n      {\n        \"feature_name\": \"Zero Pressure Drop Flow Path\",\n        \"market_name\": \"Steam and Air-Conditioning Supply\",\n        \"naics_code\": \"221330\",\n        \"kano_class\": \"one_dimensional\",\n        \"fit_score_time\": 2,\n        \"fit_score_cost\": 5,\n        \"fit_score_safety\": 2,\n        \"fit_score_reliability\": 4,\n        \"fit_score_skill\": 3,\n        \"fit_score_stress\": 2,\n        \"fit_score_pain\": 3,\n        \"fit_score_confidence\": 3,\n        \"fit_score_delight\": 2,\n        \"overall_fit\": 2.89,\n        \"rationale\": \"Unobstructed bore avoids head-loss penalty. In district substations, the heat exchanger and control valve dominate pressure drop — meter contribution is marginal. One_dimensional because less pressure drop is linearly better, but magnitude of contribution is small in this application.\"\n      },\n      {\n        \"feature_name\": \"No Moving Parts\",\n        \"market_name\": \"Steam and Air-Conditioning Supply\",\n        \"naics_code\": \"221330\",\n        \"kano_class\": \"one_dimensional\",\n        \"fit_score_time\": 4,\n        \"fit_score_cost\": 9,\n        \"fit_score_safety\": 4,\n        \"fit_score_reliability\": 9,\n        \"fit_score_skill\": 5,\n        \"fit_score_stress\": 7,\n        \"fit_score_pain\": 8,\n        \"fit_score_confidence\": 8,\n        \"fit_score_delight\": 4,\n        \"overall_fit\": 6.44,\n        \"rationale\": \"Strongest differentiator vs incumbent mechanical impeller (40-50% share). Eliminates magnetite seizure (N11, opp=15), calibration drift from bearing wear (N13, opp=15), and mandatory 5-6yr fleet replacement (N12, opp=13). Primary drivers: Cost (9) and Reliability (9) — eliminates all mechanical failure modes; Pain (8) — removes fleet-wide replacement burden; Confidence (8) — stable calibration over 15+ years.\"\n      },\n      {\n        \"feature_name\": \"Bidirectional Flow Detection\",\n        \"market_name\": \"Steam and Air-Conditioning Supply\",\n        \"naics_code\": \"221330\",\n        \"kano_class\": \"attractive\",\n        \"fit_score_time\": 3,\n        \"fit_score_cost\": 6,\n        \"fit_score_safety\": 4,\n        \"fit_score_reliability\": 5,\n        \"fit_score_skill\": 5,\n        \"fit_score_stress\": 5,\n        \"fit_score_pain\": 5,\n        \"fit_score_confidence\": 6,\n        \"fit_score_delight\": 6,\n        \"overall_fit\": 5.00,\n        \"rationale\": \"Inherent to transit-time principle. Critical for 4th/5th gen low-temperature prosumer networks with bidirectional heat exchange. Mechanical impellers cannot detect reverse flow. Genuine delighter for operators transitioning to bidirectional operation. Primary drivers: Cost (6) — eliminates reverse-flow hardware; Delight (6) — automatic bidirectional billing; Confidence (6) — net-energy accuracy in prosumer networks.\"\n      },\n      {\n        \"feature_name\": \"Digital Anomaly Detection\",\n        \"market_name\": \"Steam and Air-Conditioning Supply\",\n        \"naics_code\": \"221330\",\n        \"kano_class\": \"attractive\",\n        \"fit_score_time\": 5,\n        \"fit_score_cost\": 7,\n        \"fit_score_safety\": 7,\n        \"fit_score_reliability\": 6,\n        \"fit_score_skill\": 6,\n        \"fit_score_stress\": 7,\n        \"fit_score_pain\": 6,\n        \"fit_score_confidence\": 8,\n        \"fit_score_delight\": 6,\n        \"overall_fit\": 6.44,\n        \"rationale\": \"Traditional meters have zero diagnostic capability. Air entrainment silently biases billing (N07, opp=15). Distinguishing zero-flow from transient signal anomalies prevents false alarms and missed failures (N17, opp=13). Primary drivers: Confidence (8) — operators know when measurement is valid; Safety (7) — empty-pipe alarm and flow-stoppage discrimination; Cost (7) — prevents silent billing errors.\"\n      },\n      {\n        \"feature_name\": \"Real-Time Compensation Algorithms\",\n        \"market_name\": \"Steam and Air-Conditioning Supply\",\n        \"naics_code\": \"221330\",\n        \"kano_class\": \"must_be\",\n        \"fit_score_time\": 2,\n        \"fit_score_cost\": 5,\n        \"fit_score_safety\": 3,\n        \"fit_score_reliability\": 7,\n        \"fit_score_skill\": 5,\n        \"fit_score_stress\": 4,\n        \"fit_score_pain\": 4,\n        \"fit_score_confidence\": 6,\n        \"fit_score_delight\": 2,\n        \"overall_fit\": 4.22,\n        \"rationale\": \"District heating temperatures swing 50-120°C seasonally (N03, opp=14). Speed of sound changes ~2.4 m/s per °C. Without compensation, error reaches ~1.5%. Must_be because any sensor in temperature-varying environments must compensate. Primary driver: Reliability (7) — reduces error from ~1.5% to ~0.2%.\"\n      }\n    ]\n  },\n  \"step_10_product_related_needs\": {\n    \"technology_class\": \"Ultrasonic Transit-Time Flow Measurement\",\n    \"needs_count\": 7,\n    \"entries\": [\n      {\n        \"id\": \"PRN-01\",\n        \"statement\": \"Minimize the risk of polymer housing and seal degradation when district heating supply temperatures approach the 90°C material limit during winter peak-load conditions, reducing sensor service life below the 15-year fleet expectation\",\n        \"source_constraint\": \"Maximum Medium Temperature\",\n        \"affected_markets\": [\"Steam and Air-Conditioning Supply\"],\n        \"importance\": 8,\n        \"satisfaction_current\": 3\n      },\n      {\n        \"id\": \"PRN-02\",\n        \"statement\": \"Minimize the deployment exclusion at building substations where network operating pressure exceeds the 10-bar polymer housing structural rating during peak demand or water-hammer events\",\n        \"source_constraint\": \"Maximum Operating Pressure\",\n        \"affected_markets\": [\"Steam and Air-Conditioning Supply\"],\n        \"importance\": 6,\n        \"satisfaction_current\": 3\n      },\n      {\n        \"id\": \"PRN-03\",\n        \"statement\": \"Minimize the unmeasured energy delivery below the ultrasonic transit-time signal-to-noise detection threshold (4.2 l/min for DN20) during summer domestic hot water standby operation\",\n        \"source_constraint\": \"Minimum Flow Rate Detection\",\n        \"affected_markets\": [\"Steam and Air-Conditioning Supply\"],\n        \"importance\": 7,\n        \"satisfaction_current\": 4\n      },\n      {\n        \"id\": \"PRN-04\",\n        \"statement\": \"Minimize the cumulative billing error from degraded ultrasonic transit-time accuracy during sub-threshold air entrainment events (1-2% by volume) that do not trigger signal-loss alarms but silently bias flow readings\",\n        \"source_constraint\": \"Air Bubble Tolerance\",\n        \"affected_markets\": [\"Steam and Air-Conditioning Supply\"],\n        \"importance\": 7,\n        \"satisfaction_current\": 3\n      },\n      {\n        \"id\": \"PRN-05\",\n        \"statement\": \"Minimize the duration of measurement blackout when ultrasonic signal is lost due to partial pipe fill during network maintenance operations that temporarily drain the pipe section\",\n        \"source_constraint\": \"Pipe Full Condition\",\n        \"affected_markets\": [\"Steam and Air-Conditioning Supply\"],\n        \"importance\": 5,\n        \"satisfaction_current\": 4\n      },\n      {\n        \"id\": \"PRN-06\",\n        \"statement\": \"Minimize the systematic measurement bias from single-chord acoustic path sampling in asymmetric flow profiles caused by insufficient upstream straight-pipe run (<5x DN) in compact building substations\",\n        \"source_constraint\": \"Minimum Straight Pipe Run\",\n        \"affected_markets\": [\"Steam and Air-Conditioning Supply\"],\n        \"importance\": 7,\n        \"satisfaction_current\": 5\n      },\n      {\n        \"id\": \"PRN-07\",\n        \"statement\": \"Minimize residual flow measurement error from speed-of-sound variation during rapid supply-temperature transients (>5°C/min) that outpace the NTC thermistor compensation response time\",\n        \"source_constraint\": \"Temperature-Dependent Accuracy\",\n        \"affected_markets\": [\"Steam and Air-Conditioning Supply\"],\n        \"importance\": 6,\n        \"satisfaction_current\": 5\n      }\n    ]\n  },\n  \"step_11_vendor_feature_market_fit\": {\n    \"vendor_name\": \"Marquardt\",\n    \"vendor_product\": \"US Flow Sensor (DN20 serial, DN12/DN14/DN25 development)\",\n    \"best_incumbent\": \"Kamstrup MULTICAL 303/403\",\n    \"features_assessed\": 6,\n    \"entries\": [\n      {\n        \"feature_name\": \"Modular Pipe Diameter Variants\",\n        \"feature_description\": \"Serve multiple pipe sizes via interchangeable flow bodies sharing common electronics platform\",\n        \"market_name\": \"Steam and Air-Conditioning Supply\",\n        \"naics_code\": \"221330\",\n        \"vendor_score\": 6,\n        \"best_incumbent_score\": 9,\n        \"best_incumbent_technology\": \"Ultrasonic Transit-Time (Kamstrup MULTICAL)\",\n        \"advantage\": \"inferior\",\n        \"kano_class\": \"one_dimensional\",\n        \"rationale\": \"Marquardt: DN12/14/20/25 with RAST 2.5, but only DN20 in serial production. Kamstrup MULTICAL: DN15-DN100 in full production with shared electronics, documented installation kits, substation-specific housings. District networks need DN15-DN25 (residential) and DN50+ (commercial) — Marquardt covers only the lower segment with a single production variant.\"\n      },\n      {\n        \"feature_name\": \"Customizable Communication Interface\",\n        \"feature_description\": \"Support multiple digital communication protocols for host controller integration\",\n        \"market_name\": \"Steam and Air-Conditioning Supply\",\n        \"naics_code\": \"221330\",\n        \"vendor_score\": 3,\n        \"best_incumbent_score\": 9,\n        \"best_incumbent_technology\": \"Ultrasonic Transit-Time (Kamstrup MULTICAL)\",\n        \"advantage\": \"inferior\",\n        \"kano_class\": \"indifferent\",\n        \"rationale\": \"Marquardt: UART, LIN, frequency output — automotive/appliance OEM protocols. District energy standard is M-Bus (EN 13757) for energy calculator integration, wM-Bus for remote reading, pulse for legacy calculators. Marquardt's protocol suite has zero overlap with district energy requirements. Indifferent because the offered protocols are unused in this market.\"\n      },\n      {\n        \"feature_name\": \"Customizable Mechanical Interface\",\n        \"feature_description\": \"Accept threaded or plug-in pipe connections for flexible installation\",\n        \"market_name\": \"Steam and Air-Conditioning Supply\",\n        \"naics_code\": \"221330\",\n        \"vendor_score\": 5,\n        \"best_incumbent_score\": 8,\n        \"best_incumbent_technology\": \"Ultrasonic Transit-Time (Kamstrup MULTICAL)\",\n        \"advantage\": \"inferior\",\n        \"kano_class\": \"one_dimensional\",\n        \"rationale\": \"Marquardt: threaded and plug-in connections suited for appliance OEM assembly. Kamstrup: purpose-built substation housing integration with flanged adapters, thermal insulation accessories, and documented installation kits for compact substation enclosures. District substations have specific space and accessibility constraints (N19, opp=9) that purpose-built housings address better.\"\n      },\n      {\n        \"feature_name\": \"Low-Energy Battery Mode\",\n        \"feature_description\": \"Operate at ultra-low current consumption for battery-powered remote installations\",\n        \"market_name\": \"Steam and Air-Conditioning Supply\",\n        \"naics_code\": \"221330\",\n        \"vendor_score\": 7,\n        \"best_incumbent_score\": 8,\n        \"best_incumbent_technology\": \"Ultrasonic Transit-Time (Kamstrup MULTICAL 303)\",\n        \"advantage\": \"parity\",\n        \"kano_class\": \"attractive\",\n        \"rationale\": \"Marquardt: <5 uA standby, enabling battery-powered operation for underground or remote substations. Kamstrup MULTICAL 303: purpose-built battery-powered heat meter with documented 16-year battery life in fleet operation. Both offer excellent battery performance. Kamstrup has proven fleet-scale track record; Marquardt has the raw power specification. Gap within parity (1 point).\"\n      },\n      {\n        \"feature_name\": \"Pre-Calibrated Delivery\",\n        \"feature_description\": \"Ship fully calibrated and tested to customer-specific medium and flow profile\",\n        \"market_name\": \"Steam and Air-Conditioning Supply\",\n        \"naics_code\": \"221330\",\n        \"vendor_score\": 6,\n        \"best_incumbent_score\": 9,\n        \"best_incumbent_technology\": \"Ultrasonic Transit-Time (Kamstrup MULTICAL)\",\n        \"advantage\": \"inferior\",\n        \"kano_class\": \"must_be\",\n        \"rationale\": \"Marquardt: factory calibration with 100% automated test — strong for OEM delivery. Kamstrup: MID-certified, EN 1434-verified, metrological seal, tamper detection, full calibration traceability. District energy billing REQUIRES MID certification per EU Measuring Instruments Directive. Marquardt does not hold MID certification — the single largest barrier to market entry. Addresses N26 (MID at every connection, opp=15).\"\n      },\n      {\n        \"feature_name\": \"KTW/WRAS Drinking Water Approval\",\n        \"feature_description\": \"Wetted parts approved for potable water contact per German and UK standards\",\n        \"market_name\": \"Steam and Air-Conditioning Supply\",\n        \"naics_code\": \"221330\",\n        \"vendor_score\": 7,\n        \"best_incumbent_score\": 3,\n        \"best_incumbent_technology\": \"Ultrasonic Transit-Time (Kamstrup MULTICAL)\",\n        \"advantage\": \"superior\",\n        \"kano_class\": \"indifferent\",\n        \"rationale\": \"Marquardt holds KTW/WRAS certification. Most heat meter manufacturers do not pursue drinking water approval because district networks use treated recirculated water, not potable water. Superior rating has no commercial value in this market — the requirement does not exist for district energy metering.\"\n      }\n    ],\n    \"advantage_distribution\": {\n      \"superior\": 1,\n      \"parity\": 1,\n      \"inferior\": 4,\n      \"note\": \"Distribution reflects Marquardt's position as HVAC OEM sensor entering a specialized utility metering market dominated by Kamstrup. The single superior feature (KTW/WRAS) is on an indifferent Kano dimension.\"\n    }\n  },\n  \"entities_produced\": {\n    \"nodes\": [\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"PRN-01..PRN-07 (first 120 chars)\", \"run_id\": \"TBD\"}, \"count\": 7, \"properties\": {\"product_related\": true}}\n    ],\n    \"relationships\": [\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Transit-Time Flow Measurement\", \"target\": \"Market:221330\", \"properties\": {\"feature_scope\": \"technology\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Integrated Temperature Sensing\", \"target\": \"Market:221330\", \"properties\": {\"feature_scope\": \"technology\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Zero Pressure Drop Flow Path\", \"target\": \"Market:221330\", \"properties\": {\"feature_scope\": \"technology\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:No Moving Parts\", \"target\": \"Market:221330\", \"properties\": {\"feature_scope\": \"technology\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Bidirectional Flow Detection\", \"target\": \"Market:221330\", \"properties\": {\"feature_scope\": \"technology\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Digital Anomaly Detection\", \"target\": \"Market:221330\", \"properties\": {\"feature_scope\": \"technology\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Real-Time Compensation Algorithms\", \"target\": \"Market:221330\", \"properties\": {\"feature_scope\": \"technology\"}},\n      {\"type\": \"generates_need\", \"source\": \"Constraint:Maximum Medium Temperature\", \"target\": \"ErrorStatement:PRN-01\"},\n      {\"type\": \"generates_need\", \"source\": \"Constraint:Maximum Operating Pressure\", \"target\": \"ErrorStatement:PRN-02\"},\n      {\"type\": \"generates_need\", \"source\": \"Constraint:Minimum Flow Rate Detection\", \"target\": \"ErrorStatement:PRN-03\"},\n      {\"type\": \"generates_need\", \"source\": \"Constraint:Air Bubble Tolerance\", \"target\": \"ErrorStatement:PRN-04\"},\n      {\"type\": \"generates_need\", \"source\": \"Constraint:Pipe Full Condition\", \"target\": \"ErrorStatement:PRN-05\"},\n      {\"type\": \"generates_need\", \"source\": \"Constraint:Minimum Straight Pipe Run\", \"target\": \"ErrorStatement:PRN-06\"},\n      {\"type\": \"generates_need\", \"source\": \"Constraint:Temperature-Dependent Accuracy\", \"target\": \"ErrorStatement:PRN-07\"},\n      {\"type\": \"has_product_need\", \"source\": \"NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement\", \"target\": \"ErrorStatement:PRN-01..PRN-07\"},\n      {\"type\": \"applies_to_market\", \"source\": \"ErrorStatement:PRN-01..PRN-07\", \"target\": \"Market:221330\"},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Modular Pipe Diameter Variants\", \"target\": \"Market:221330\", \"properties\": {\"feature_scope\": \"vendor\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Customizable Communication Interface\", \"target\": \"Market:221330\", \"properties\": {\"feature_scope\": \"vendor\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Customizable Mechanical Interface\", \"target\": \"Market:221330\", \"properties\": {\"feature_scope\": \"vendor\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Low-Energy Battery Mode\", \"target\": \"Market:221330\", \"properties\": {\"feature_scope\": \"vendor\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Pre-Calibrated Delivery\", \"target\": \"Market:221330\", \"properties\": {\"feature_scope\": \"vendor\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:KTW/WRAS Drinking Water Approval\", \"target\": \"Market:221330\", \"properties\": {\"feature_scope\": \"vendor\"}},\n      {\"type\": \"has_feature\", \"source\": \"Product:US Flow Sensor (Marquardt)\", \"target\": \"Feature:Modular Pipe Diameter Variants\"},\n      {\"type\": \"has_feature\", \"source\": \"Product:US Flow Sensor (Marquardt)\", \"target\": \"Feature:Customizable Communication Interface\"},\n      {\"type\": \"has_feature\", \"source\": \"Product:US Flow Sensor (Marquardt)\", \"target\": \"Feature:Customizable Mechanical Interface\"},\n      {\"type\": \"has_feature\", \"source\": \"Product:US Flow Sensor (Marquardt)\", \"target\": \"Feature:Low-Energy Battery Mode\"},\n      {\"type\": \"has_feature\", \"source\": \"Product:US Flow Sensor (Marquardt)\", \"target\": \"Feature:Pre-Calibrated Delivery\"},\n      {\"type\": \"has_feature\", \"source\": \"Product:US Flow Sensor (Marquardt)\", \"target\": \"Feature:KTW/WRAS Drinking Water Approval\"}\n    ]\n  }\n}\n```\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- 01_product_decomposition.md — Features, constraints, specifications, UNSPSC classification\n- 02_functional_promise.md — Commodity FP, FP extension, required complements\n- 05_market_discovery.md — NAICS 221330 candidate detail, architecture distance scoring\n- JTBD_steam_and_air_conditioning_supply.md — CFJ, job map, alternatives, error statements (N01-N29)\n- Marquardt Customer Presentation: \"US Flow Sensor\" (03.12.2025, CONFIDENTIAL)"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "Feature",
+        "Kano",
+        "Time",
+        "Cost",
+        "Safety",
+        "Reliab.",
+        "Skill",
+        "Stress",
+        "Pain",
+        "Confid.",
+        "Delight",
+        "Overall"
+      ],
+      "rows": [
+        {
+          "Feature": "**Transit-Time Flow Measurement**",
+          "Kano": "must_be",
+          "Time": "5",
+          "Cost": "7",
+          "Safety": "4",
+          "Reliab.": "8",
+          "Skill": "4",
+          "Stress": "5",
+          "Pain": "6",
+          "Confid.": "7",
+          "Delight": "3",
+          "Overall": "**5.44**"
+        },
+        {
+          "Feature": "**Integrated Temperature Sensing**",
+          "Kano": "attractive",
+          "Time": "6",
+          "Cost": "8",
+          "Safety": "3",
+          "Reliab.": "7",
+          "Skill": "6",
+          "Stress": "5",
+          "Pain": "7",
+          "Confid.": "7",
+          "Delight": "5",
+          "Overall": "**6.00**"
+        },
+        {
+          "Feature": "**Zero Pressure Drop Flow Path**",
+          "Kano": "one_dimensional",
+          "Time": "2",
+          "Cost": "5",
+          "Safety": "2",
+          "Reliab.": "4",
+          "Skill": "3",
+          "Stress": "2",
+          "Pain": "3",
+          "Confid.": "3",
+          "Delight": "2",
+          "Overall": "**2.89**"
+        },
+        {
+          "Feature": "**No Moving Parts**",
+          "Kano": "one_dimensional",
+          "Time": "4",
+          "Cost": "9",
+          "Safety": "4",
+          "Reliab.": "9",
+          "Skill": "5",
+          "Stress": "7",
+          "Pain": "8",
+          "Confid.": "8",
+          "Delight": "4",
+          "Overall": "**6.44**"
+        },
+        {
+          "Feature": "**Bidirectional Flow Detection**",
+          "Kano": "attractive",
+          "Time": "3",
+          "Cost": "6",
+          "Safety": "4",
+          "Reliab.": "5",
+          "Skill": "5",
+          "Stress": "5",
+          "Pain": "5",
+          "Confid.": "6",
+          "Delight": "6",
+          "Overall": "**5.00**"
+        },
+        {
+          "Feature": "**Digital Anomaly Detection**",
+          "Kano": "attractive",
+          "Time": "5",
+          "Cost": "7",
+          "Safety": "7",
+          "Reliab.": "6",
+          "Skill": "6",
+          "Stress": "7",
+          "Pain": "6",
+          "Confid.": "8",
+          "Delight": "6",
+          "Overall": "**6.44**"
+        },
+        {
+          "Feature": "**Real-Time Compensation Algorithms**",
+          "Kano": "must_be",
+          "Time": "2",
+          "Cost": "5",
+          "Safety": "3",
+          "Reliab.": "7",
+          "Skill": "5",
+          "Stress": "4",
+          "Pain": "4",
+          "Confid.": "6",
+          "Delight": "2",
+          "Overall": "**4.22**"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "Check": "Kano cross-market consistency",
+          "Result": "N/A — single market"
+        },
+        {
+          "Check": "safety >= 7 AND confidence <= 3",
+          "Result": "PASS — no violations"
+        },
+        {
+          "Check": "skill >= 7 AND stress <= 3",
+          "Result": "PASS — no violations"
+        },
+        {
+          "Check": "overall_fit arithmetic",
+          "Result": "PASS — all recomputed"
+        },
+        {
+          "Check": "No feature scores 10 on all dimensions",
+          "Result": "PASS"
+        },
+        {
+          "Check": "Feature names comply with 1.pdf rules",
+          "Result": "PASS — spec-visible noun phrases, no brands, no outcome claims"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Source Constraint",
+        "Statement",
+        "Imp.",
+        "Sat.",
+        "Litmus"
+      ],
+      "rows": [
+        {
+          "ID": "PRN-01",
+          "Source Constraint": "Maximum Medium Temperature",
+          "Statement": "Minimize the risk of polymer housing and seal degradation when district heating supply temperatures approach the 90°C material limit during winter peak-load conditions, reducing sensor service life below the 15-year fleet expectation",
+          "Imp.": "8",
+          "Sat.": "3",
+          "Litmus": "PASS — metal-housed sensors tolerate 130°C+"
+        },
+        {
+          "ID": "PRN-02",
+          "Source Constraint": "Maximum Operating Pressure",
+          "Statement": "Minimize the deployment exclusion at building substations where network operating pressure exceeds the 10-bar polymer housing structural rating during peak demand or water-hammer events",
+          "Imp.": "6",
+          "Sat.": "3",
+          "Litmus": "PASS — metal/ceramic housings withstand 16-40 bar"
+        },
+        {
+          "ID": "PRN-03",
+          "Source Constraint": "Minimum Flow Rate Detection",
+          "Statement": "Minimize the unmeasured energy delivery below the ultrasonic transit-time signal-to-noise detection threshold (4.2 l/min for DN20) during summer domestic hot water standby operation",
+          "Imp.": "7",
+          "Sat.": "4",
+          "Litmus": "PASS — electromagnetic meters measure from ~0.01 m/s; mechanical impellers stall differently"
+        },
+        {
+          "ID": "PRN-04",
+          "Source Constraint": "Air Bubble Tolerance",
+          "Statement": "Minimize the cumulative billing error from degraded ultrasonic transit-time accuracy during sub-threshold air entrainment events (1-2% by volume) that do not trigger signal-loss alarms but silently bias flow readings",
+          "Imp.": "7",
+          "Sat.": "3",
+          "Litmus": "PASS — electromagnetic meters unaffected by air bubbles"
+        },
+        {
+          "ID": "PRN-05",
+          "Source Constraint": "Pipe Full Condition",
+          "Statement": "Minimize the duration of measurement blackout when ultrasonic signal is lost due to partial pipe fill during network maintenance operations that temporarily drain the pipe section",
+          "Imp.": "5",
+          "Sat.": "4",
+          "Litmus": "PASS — partial fill is an acoustic-path-specific constraint; mechanical meters still rotate in partial fill"
+        },
+        {
+          "ID": "PRN-06",
+          "Source Constraint": "Minimum Straight Pipe Run",
+          "Statement": "Minimize the systematic measurement bias from single-chord acoustic path sampling in asymmetric flow profiles caused by insufficient upstream straight-pipe run (<5x DN) in compact building substations",
+          "Imp.": "7",
+          "Sat.": "5",
+          "Litmus": "PASS — multi-chord ultrasonic or electromagnetic meters less sensitive to installation effects"
+        },
+        {
+          "ID": "PRN-07",
+          "Source Constraint": "Temperature-Dependent Accuracy",
+          "Statement": "Minimize residual flow measurement error from speed-of-sound variation during rapid supply-temperature transients (>5°C/min) that outpace the NTC thermistor compensation response time",
+          "Imp.": "6",
+          "Sat.": "5",
+          "Litmus": "PASS — electromagnetic measurement uses Faraday induction, independent of speed of sound"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Step 10 Need",
+        "JTBD P1 Need",
+        "Overlap?",
+        "Resolution"
+      ],
+      "rows": [
+        {
+          "Step 10 Need": "PRN-01 (90°C housing limit)",
+          "JTBD P1 Need": "—",
+          "Overlap?": "No overlap",
+          "Resolution": "Unique"
+        },
+        {
+          "Step 10 Need": "PRN-02 (10 bar pressure limit)",
+          "JTBD P1 Need": "—",
+          "Overlap?": "No overlap",
+          "Resolution": "Unique"
+        },
+        {
+          "Step 10 Need": "PRN-03 (min flow detection)",
+          "JTBD P1 Need": "N14 (impeller stall <1 l/min)",
+          "Overlap?": "Different mechanism",
+          "Resolution": "N14 is mechanical-specific; PRN-03 is ultrasonic SNR-specific"
+        },
+        {
+          "Step 10 Need": "PRN-04 (sub-threshold air bias)",
+          "JTBD P1 Need": "N15 (complete signal loss from air)",
+          "Overlap?": "Complementary",
+          "Resolution": "N15 covers signal loss; PRN-04 covers accuracy degradation below loss threshold"
+        },
+        {
+          "Step 10 Need": "PRN-05 (partial-fill blackout)",
+          "JTBD P1 Need": "N17 (zero-flow vs signal-loss)",
+          "Overlap?": "Different failure mode",
+          "Resolution": "N17 covers diagnostic discrimination; PRN-05 covers measurement gap duration"
+        },
+        {
+          "Step 10 Need": "PRN-06 (single-chord path bias)",
+          "JTBD P1 Need": "N08 (non-ideal flow profiles)",
+          "Overlap?": "Overlapping scope",
+          "Resolution": "N08 is P2 market-level (all meters affected); PRN-06 is ultrasonic-specific (single chord) — retained"
+        },
+        {
+          "Step 10 Need": "PRN-07 (speed-of-sound transient)",
+          "JTBD P1 Need": "N03 (seasonal temp swing)",
+          "Overlap?": "Different scope",
+          "Resolution": "N03 is P2 market-level (all meters affected by temperature); PRN-07 is ultrasonic-specific mechanism"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "Check": "Litmus test (all needs technology-specific)",
+          "Result": "PASS — all 7 would disappear with different technology"
+        },
+        {
+          "Check": "Source constraint traceability",
+          "Result": "PASS — each traces to a named constraint in 01_product_decomposition"
+        },
+        {
+          "Check": "Affected market plausibility",
+          "Result": "PASS — all 7 manifest in NAICS 221330"
+        },
+        {
+          "Check": "Completeness (every constraint covered)",
+          "Result": "PASS — all 8 constraints generate at least one need; Media Limitation covered implicitly by PRN-04 (acoustic coupling sensitivity to medium properties)"
+        },
+        {
+          "Check": "No importance < 3 AND satisfaction > 7",
+          "Result": "PASS"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "Check": "Vendor bias (>70% superior)",
+          "Result": "PASS — 1 superior / 1 parity / 4 inferior (17% superior). Marquardt is a new entrant against Kamstrup, the category leader."
+        },
+        {
+          "Check": "Anti-vendor bias (>70% inferior)",
+          "Result": "PASS — 67% inferior. Justified: Kamstrup's MULTICAL is purpose-built for district energy with 20+ years of market presence. Marquardt's sensor is designed for HVAC OEM, not district energy metering."
+        },
+        {
+          "Check": "Advantage classification arithmetic",
+          "Result": "PASS — all gaps verified"
+        },
+        {
+          "Check": "Kano must_be scores >= 5",
+          "Result": "PASS — Pre-Calibrated Delivery: vendor=6, incumbent=9"
+        },
+        {
+          "Check": "Rationale specificity",
+          "Result": "PASS — all reference specific vendor specs vs incumbent capabilities"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Dimension",
+        "Verdict",
+        "Key Issue"
+      ],
+      "rows": [
+        {
+          "Dimension": "Technology fit",
+          "Verdict": "**Strong**",
+          "Key Issue": "Ultrasonic transit-time is the dominant growing technology in district energy metering (35-45% share, displacing mechanical)"
+        },
+        {
+          "Dimension": "Product fit",
+          "Verdict": "**Moderate**",
+          "Key Issue": "DN20/DN25 covers residential substations; 90°C and 10 bar limits fit most building-level applications"
+        },
+        {
+          "Dimension": "Vendor fit",
+          "Verdict": "**Weak**",
+          "Key Issue": "Missing MID/EN 1434 certification, wrong communication protocols (UART/LIN vs M-Bus), no substation-specific housing"
+        },
+        {
+          "Dimension": "Competitive position",
+          "Verdict": "**Component OEM**",
+          "Key Issue": "Strongest path: supply ultrasonic flow sensing modules to existing energy meter manufacturers (Kamstrup, Danfoss, Siemens) who handle certification, housing, and market access"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Check": "All 7 technology-scope features assessed",
+          "Result": "PASS"
+        },
+        {
+          "#": "2",
+          "Check": "Kano classification with rationale per feature",
+          "Result": "PASS"
+        },
+        {
+          "#": "3",
+          "Check": "9-dimension ODI scores with recomputed overall_fit",
+          "Result": "PASS"
+        },
+        {
+          "#": "4",
+          "Check": "Product-related needs trace to specific constraints",
+          "Result": "PASS — all 7 trace to named constraints"
+        },
+        {
+          "#": "5",
+          "Check": "Litmus test applied to all product-related needs",
+          "Result": "PASS — all disappear with different technology"
+        },
+        {
+          "#": "6",
+          "Check": "No duplication with JTBD P1 needs",
+          "Result": "PASS — deduplication table provided"
+        },
+        {
+          "#": "7",
+          "Check": "Vendor features assessed against best incumbent",
+          "Result": "PASS — Kamstrup MULTICAL"
+        },
+        {
+          "#": "8",
+          "Check": "Objectivity review on vendor scoring",
+          "Result": "PASS — 17% superior, no bias detected"
+        },
+        {
+          "#": "9",
+          "Check": "Source tags on all factual claims",
+          "Result": "PASS"
+        },
+        {
+          "#": "10",
+          "Check": "Web search NOT used",
+          "Result": "PASS — all derived from upstream files"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "feature_market_fit",
+      "naics_code": "221330",
+      "naics_title": "Steam and Air-Conditioning Supply",
+      "market_name": "Steam and Air-Conditioning Supply",
+      "product_name": "Ultrasonic Flow Sensor",
+      "vendor_name": "Marquardt",
+      "technology_class": "Ultrasonic Transit-Time Flow Measurement",
+      "step_09_tech_feature_market_fit": {
+        "features_assessed": 7,
+        "market_count": 1,
+        "entries": [
+          {
+            "feature_name": "Transit-Time Flow Measurement",
+            "market_name": "Steam and Air-Conditioning Supply",
+            "naics_code": "221330",
+            "kano_class": "must_be",
+            "fit_score_time": 5,
+            "fit_score_cost": 7,
+            "fit_score_safety": 4,
+            "fit_score_reliability": 8,
+            "fit_score_skill": 4,
+            "fit_score_stress": 5,
+            "fit_score_pain": 6,
+            "fit_score_confidence": 7,
+            "fit_score_delight": 3,
+            "overall_fit": 5.44,
+            "rationale": "Core commodity function — every flowmeter measures flow rate. Expected in district energy metering. Primary drivers: Reliability (8) — no mechanical wear means stable EN 1434 accuracy; Cost (7) — eliminates revenue leakage from calibration drift. Grounded in N01 (flow accuracy ±2%, imp=10) and N25 (failure rate <0.1%, imp=9)."
+          },
+          {
+            "feature_name": "Integrated Temperature Sensing",
+            "market_name": "Steam and Air-Conditioning Supply",
+            "naics_code": "221330",
+            "kano_class": "attractive",
+            "fit_score_time": 6,
+            "fit_score_cost": 8,
+            "fit_score_safety": 3,
+            "fit_score_reliability": 7,
+            "fit_score_skill": 6,
+            "fit_score_stress": 5,
+            "fit_score_pain": 7,
+            "fit_score_confidence": 7,
+            "fit_score_delight": 5,
+            "overall_fit": 6.0,
+            "rationale": "Traditional substations use separate flow + temperature probes. Combined single-body measurement eliminates a component, reduces wiring, and ensures co-located data. Directly addresses N22 (single-point flow+temp, opp=12). Primary drivers: Cost (8) — eliminates probe; Reliability (7) — one fewer failure point; Pain (7) — removes second-sensor installation labor."
+          },
+          {
+            "feature_name": "Zero Pressure Drop Flow Path",
+            "market_name": "Steam and Air-Conditioning Supply",
+            "naics_code": "221330",
+            "kano_class": "one_dimensional",
+            "fit_score_time": 2,
+            "fit_score_cost": 5,
+            "fit_score_safety": 2,
+            "fit_score_reliability": 4,
+            "fit_score_skill": 3,
+            "fit_score_stress": 2,
+            "fit_score_pain": 3,
+            "fit_score_confidence": 3,
+            "fit_score_delight": 2,
+            "overall_fit": 2.89,
+            "rationale": "Unobstructed bore avoids head-loss penalty. In district substations, the heat exchanger and control valve dominate pressure drop — meter contribution is marginal. One_dimensional because less pressure drop is linearly better, but magnitude of contribution is small in this application."
+          },
+          {
+            "feature_name": "No Moving Parts",
+            "market_name": "Steam and Air-Conditioning Supply",
+            "naics_code": "221330",
+            "kano_class": "one_dimensional",
+            "fit_score_time": 4,
+            "fit_score_cost": 9,
+            "fit_score_safety": 4,
+            "fit_score_reliability": 9,
+            "fit_score_skill": 5,
+            "fit_score_stress": 7,
+            "fit_score_pain": 8,
+            "fit_score_confidence": 8,
+            "fit_score_delight": 4,
+            "overall_fit": 6.44,
+            "rationale": "Strongest differentiator vs incumbent mechanical impeller (40-50% share). Eliminates magnetite seizure (N11, opp=15), calibration drift from bearing wear (N13, opp=15), and mandatory 5-6yr fleet replacement (N12, opp=13). Primary drivers: Cost (9) and Reliability (9) — eliminates all mechanical failure modes; Pain (8) — removes fleet-wide replacement burden; Confidence (8) — stable calibration over 15+ years."
+          },
+          {
+            "feature_name": "Bidirectional Flow Detection",
+            "market_name": "Steam and Air-Conditioning Supply",
+            "naics_code": "221330",
+            "kano_class": "attractive",
+            "fit_score_time": 3,
+            "fit_score_cost": 6,
+            "fit_score_safety": 4,
+            "fit_score_reliability": 5,
+            "fit_score_skill": 5,
+            "fit_score_stress": 5,
+            "fit_score_pain": 5,
+            "fit_score_confidence": 6,
+            "fit_score_delight": 6,
+            "overall_fit": 5.0,
+            "rationale": "Inherent to transit-time principle. Critical for 4th/5th gen low-temperature prosumer networks with bidirectional heat exchange. Mechanical impellers cannot detect reverse flow. Genuine delighter for operators transitioning to bidirectional operation. Primary drivers: Cost (6) — eliminates reverse-flow hardware; Delight (6) — automatic bidirectional billing; Confidence (6) — net-energy accuracy in prosumer networks."
+          },
+          {
+            "feature_name": "Digital Anomaly Detection",
+            "market_name": "Steam and Air-Conditioning Supply",
+            "naics_code": "221330",
+            "kano_class": "attractive",
+            "fit_score_time": 5,
+            "fit_score_cost": 7,
+            "fit_score_safety": 7,
+            "fit_score_reliability": 6,
+            "fit_score_skill": 6,
+            "fit_score_stress": 7,
+            "fit_score_pain": 6,
+            "fit_score_confidence": 8,
+            "fit_score_delight": 6,
+            "overall_fit": 6.44,
+            "rationale": "Traditional meters have zero diagnostic capability. Air entrainment silently biases billing (N07, opp=15). Distinguishing zero-flow from transient signal anomalies prevents false alarms and missed failures (N17, opp=13). Primary drivers: Confidence (8) — operators know when measurement is valid; Safety (7) — empty-pipe alarm and flow-stoppage discrimination; Cost (7) — prevents silent billing errors."
+          },
+          {
+            "feature_name": "Real-Time Compensation Algorithms",
+            "market_name": "Steam and Air-Conditioning Supply",
+            "naics_code": "221330",
+            "kano_class": "must_be",
+            "fit_score_time": 2,
+            "fit_score_cost": 5,
+            "fit_score_safety": 3,
+            "fit_score_reliability": 7,
+            "fit_score_skill": 5,
+            "fit_score_stress": 4,
+            "fit_score_pain": 4,
+            "fit_score_confidence": 6,
+            "fit_score_delight": 2,
+            "overall_fit": 4.22,
+            "rationale": "District heating temperatures swing 50-120°C seasonally (N03, opp=14). Speed of sound changes ~2.4 m/s per °C. Without compensation, error reaches ~1.5%. Must_be because any sensor in temperature-varying environments must compensate. Primary driver: Reliability (7) — reduces error from ~1.5% to ~0.2%."
+          }
+        ]
+      },
+      "step_10_product_related_needs": {
+        "technology_class": "Ultrasonic Transit-Time Flow Measurement",
+        "needs_count": 7,
+        "entries": [
+          {
+            "id": "PRN-01",
+            "statement": "Minimize the risk of polymer housing and seal degradation when district heating supply temperatures approach the 90°C material limit during winter peak-load conditions, reducing sensor service life below the 15-year fleet expectation",
+            "source_constraint": "Maximum Medium Temperature",
+            "affected_markets": [
+              "Steam and Air-Conditioning Supply"
+            ],
+            "importance": 8,
+            "satisfaction_current": 3
+          },
+          {
+            "id": "PRN-02",
+            "statement": "Minimize the deployment exclusion at building substations where network operating pressure exceeds the 10-bar polymer housing structural rating during peak demand or water-hammer events",
+            "source_constraint": "Maximum Operating Pressure",
+            "affected_markets": [
+              "Steam and Air-Conditioning Supply"
+            ],
+            "importance": 6,
+            "satisfaction_current": 3
+          },
+          {
+            "id": "PRN-03",
+            "statement": "Minimize the unmeasured energy delivery below the ultrasonic transit-time signal-to-noise detection threshold (4.2 l/min for DN20) during summer domestic hot water standby operation",
+            "source_constraint": "Minimum Flow Rate Detection",
+            "affected_markets": [
+              "Steam and Air-Conditioning Supply"
+            ],
+            "importance": 7,
+            "satisfaction_current": 4
+          },
+          {
+            "id": "PRN-04",
+            "statement": "Minimize the cumulative billing error from degraded ultrasonic transit-time accuracy during sub-threshold air entrainment events (1-2% by volume) that do not trigger signal-loss alarms but silently bias flow readings",
+            "source_constraint": "Air Bubble Tolerance",
+            "affected_markets": [
+              "Steam and Air-Conditioning Supply"
+            ],
+            "importance": 7,
+            "satisfaction_current": 3
+          },
+          {
+            "id": "PRN-05",
+            "statement": "Minimize the duration of measurement blackout when ultrasonic signal is lost due to partial pipe fill during network maintenance operations that temporarily drain the pipe section",
+            "source_constraint": "Pipe Full Condition",
+            "affected_markets": [
+              "Steam and Air-Conditioning Supply"
+            ],
+            "importance": 5,
+            "satisfaction_current": 4
+          },
+          {
+            "id": "PRN-06",
+            "statement": "Minimize the systematic measurement bias from single-chord acoustic path sampling in asymmetric flow profiles caused by insufficient upstream straight-pipe run (<5x DN) in compact building substations",
+            "source_constraint": "Minimum Straight Pipe Run",
+            "affected_markets": [
+              "Steam and Air-Conditioning Supply"
+            ],
+            "importance": 7,
+            "satisfaction_current": 5
+          },
+          {
+            "id": "PRN-07",
+            "statement": "Minimize residual flow measurement error from speed-of-sound variation during rapid supply-temperature transients (>5°C/min) that outpace the NTC thermistor compensation response time",
+            "source_constraint": "Temperature-Dependent Accuracy",
+            "affected_markets": [
+              "Steam and Air-Conditioning Supply"
+            ],
+            "importance": 6,
+            "satisfaction_current": 5
+          }
+        ]
+      },
+      "step_11_vendor_feature_market_fit": {
+        "vendor_name": "Marquardt",
+        "vendor_product": "US Flow Sensor (DN20 serial, DN12/DN14/DN25 development)",
+        "best_incumbent": "Kamstrup MULTICAL 303/403",
+        "features_assessed": 6,
+        "entries": [
+          {
+            "feature_name": "Modular Pipe Diameter Variants",
+            "feature_description": "Serve multiple pipe sizes via interchangeable flow bodies sharing common electronics platform",
+            "market_name": "Steam and Air-Conditioning Supply",
+            "naics_code": "221330",
+            "vendor_score": 6,
+            "best_incumbent_score": 9,
+            "best_incumbent_technology": "Ultrasonic Transit-Time (Kamstrup MULTICAL)",
+            "advantage": "inferior",
+            "kano_class": "one_dimensional",
+            "rationale": "Marquardt: DN12/14/20/25 with RAST 2.5, but only DN20 in serial production. Kamstrup MULTICAL: DN15-DN100 in full production with shared electronics, documented installation kits, substation-specific housings. District networks need DN15-DN25 (residential) and DN50+ (commercial) — Marquardt covers only the lower segment with a single production variant."
+          },
+          {
+            "feature_name": "Customizable Communication Interface",
+            "feature_description": "Support multiple digital communication protocols for host controller integration",
+            "market_name": "Steam and Air-Conditioning Supply",
+            "naics_code": "221330",
+            "vendor_score": 3,
+            "best_incumbent_score": 9,
+            "best_incumbent_technology": "Ultrasonic Transit-Time (Kamstrup MULTICAL)",
+            "advantage": "inferior",
+            "kano_class": "indifferent",
+            "rationale": "Marquardt: UART, LIN, frequency output — automotive/appliance OEM protocols. District energy standard is M-Bus (EN 13757) for energy calculator integration, wM-Bus for remote reading, pulse for legacy calculators. Marquardt's protocol suite has zero overlap with district energy requirements. Indifferent because the offered protocols are unused in this market."
+          },
+          {
+            "feature_name": "Customizable Mechanical Interface",
+            "feature_description": "Accept threaded or plug-in pipe connections for flexible installation",
+            "market_name": "Steam and Air-Conditioning Supply",
+            "naics_code": "221330",
+            "vendor_score": 5,
+            "best_incumbent_score": 8,
+            "best_incumbent_technology": "Ultrasonic Transit-Time (Kamstrup MULTICAL)",
+            "advantage": "inferior",
+            "kano_class": "one_dimensional",
+            "rationale": "Marquardt: threaded and plug-in connections suited for appliance OEM assembly. Kamstrup: purpose-built substation housing integration with flanged adapters, thermal insulation accessories, and documented installation kits for compact substation enclosures. District substations have specific space and accessibility constraints (N19, opp=9) that purpose-built housings address better."
+          },
+          {
+            "feature_name": "Low-Energy Battery Mode",
+            "feature_description": "Operate at ultra-low current consumption for battery-powered remote installations",
+            "market_name": "Steam and Air-Conditioning Supply",
+            "naics_code": "221330",
+            "vendor_score": 7,
+            "best_incumbent_score": 8,
+            "best_incumbent_technology": "Ultrasonic Transit-Time (Kamstrup MULTICAL 303)",
+            "advantage": "parity",
+            "kano_class": "attractive",
+            "rationale": "Marquardt: <5 uA standby, enabling battery-powered operation for underground or remote substations. Kamstrup MULTICAL 303: purpose-built battery-powered heat meter with documented 16-year battery life in fleet operation. Both offer excellent battery performance. Kamstrup has proven fleet-scale track record; Marquardt has the raw power specification. Gap within parity (1 point)."
+          },
+          {
+            "feature_name": "Pre-Calibrated Delivery",
+            "feature_description": "Ship fully calibrated and tested to customer-specific medium and flow profile",
+            "market_name": "Steam and Air-Conditioning Supply",
+            "naics_code": "221330",
+            "vendor_score": 6,
+            "best_incumbent_score": 9,
+            "best_incumbent_technology": "Ultrasonic Transit-Time (Kamstrup MULTICAL)",
+            "advantage": "inferior",
+            "kano_class": "must_be",
+            "rationale": "Marquardt: factory calibration with 100% automated test — strong for OEM delivery. Kamstrup: MID-certified, EN 1434-verified, metrological seal, tamper detection, full calibration traceability. District energy billing REQUIRES MID certification per EU Measuring Instruments Directive. Marquardt does not hold MID certification — the single largest barrier to market entry. Addresses N26 (MID at every connection, opp=15)."
+          },
+          {
+            "feature_name": "KTW/WRAS Drinking Water Approval",
+            "feature_description": "Wetted parts approved for potable water contact per German and UK standards",
+            "market_name": "Steam and Air-Conditioning Supply",
+            "naics_code": "221330",
+            "vendor_score": 7,
+            "best_incumbent_score": 3,
+            "best_incumbent_technology": "Ultrasonic Transit-Time (Kamstrup MULTICAL)",
+            "advantage": "superior",
+            "kano_class": "indifferent",
+            "rationale": "Marquardt holds KTW/WRAS certification. Most heat meter manufacturers do not pursue drinking water approval because district networks use treated recirculated water, not potable water. Superior rating has no commercial value in this market — the requirement does not exist for district energy metering."
+          }
+        ],
+        "advantage_distribution": {
+          "superior": 1,
+          "parity": 1,
+          "inferior": 4,
+          "note": "Distribution reflects Marquardt's position as HVAC OEM sensor entering a specialized utility metering market dominated by Kamstrup. The single superior feature (KTW/WRAS) is on an indifferent Kano dimension."
+        }
+      },
+      "entities_produced": {
+        "nodes": [
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "PRN-01..PRN-07 (first 120 chars)",
+              "run_id": "TBD"
+            },
+            "count": 7,
+            "properties": {
+              "product_related": true
+            }
+          }
+        ],
+        "relationships": [
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Transit-Time Flow Measurement",
+            "target": "Market:221330",
+            "properties": {
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Integrated Temperature Sensing",
+            "target": "Market:221330",
+            "properties": {
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Zero Pressure Drop Flow Path",
+            "target": "Market:221330",
+            "properties": {
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:No Moving Parts",
+            "target": "Market:221330",
+            "properties": {
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Bidirectional Flow Detection",
+            "target": "Market:221330",
+            "properties": {
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Digital Anomaly Detection",
+            "target": "Market:221330",
+            "properties": {
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Real-Time Compensation Algorithms",
+            "target": "Market:221330",
+            "properties": {
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "generates_need",
+            "source": "Constraint:Maximum Medium Temperature",
+            "target": "ErrorStatement:PRN-01"
+          },
+          {
+            "type": "generates_need",
+            "source": "Constraint:Maximum Operating Pressure",
+            "target": "ErrorStatement:PRN-02"
+          },
+          {
+            "type": "generates_need",
+            "source": "Constraint:Minimum Flow Rate Detection",
+            "target": "ErrorStatement:PRN-03"
+          },
+          {
+            "type": "generates_need",
+            "source": "Constraint:Air Bubble Tolerance",
+            "target": "ErrorStatement:PRN-04"
+          },
+          {
+            "type": "generates_need",
+            "source": "Constraint:Pipe Full Condition",
+            "target": "ErrorStatement:PRN-05"
+          },
+          {
+            "type": "generates_need",
+            "source": "Constraint:Minimum Straight Pipe Run",
+            "target": "ErrorStatement:PRN-06"
+          },
+          {
+            "type": "generates_need",
+            "source": "Constraint:Temperature-Dependent Accuracy",
+            "target": "ErrorStatement:PRN-07"
+          },
+          {
+            "type": "has_product_need",
+            "source": "NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement",
+            "target": "ErrorStatement:PRN-01..PRN-07"
+          },
+          {
+            "type": "applies_to_market",
+            "source": "ErrorStatement:PRN-01..PRN-07",
+            "target": "Market:221330"
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Modular Pipe Diameter Variants",
+            "target": "Market:221330",
+            "properties": {
+              "feature_scope": "vendor"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Customizable Communication Interface",
+            "target": "Market:221330",
+            "properties": {
+              "feature_scope": "vendor"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Customizable Mechanical Interface",
+            "target": "Market:221330",
+            "properties": {
+              "feature_scope": "vendor"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Low-Energy Battery Mode",
+            "target": "Market:221330",
+            "properties": {
+              "feature_scope": "vendor"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Pre-Calibrated Delivery",
+            "target": "Market:221330",
+            "properties": {
+              "feature_scope": "vendor"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:KTW/WRAS Drinking Water Approval",
+            "target": "Market:221330",
+            "properties": {
+              "feature_scope": "vendor"
+            }
+          },
+          {
+            "type": "has_feature",
+            "source": "Product:US Flow Sensor (Marquardt)",
+            "target": "Feature:Modular Pipe Diameter Variants"
+          },
+          {
+            "type": "has_feature",
+            "source": "Product:US Flow Sensor (Marquardt)",
+            "target": "Feature:Customizable Communication Interface"
+          },
+          {
+            "type": "has_feature",
+            "source": "Product:US Flow Sensor (Marquardt)",
+            "target": "Feature:Customizable Mechanical Interface"
+          },
+          {
+            "type": "has_feature",
+            "source": "Product:US Flow Sensor (Marquardt)",
+            "target": "Feature:Low-Energy Battery Mode"
+          },
+          {
+            "type": "has_feature",
+            "source": "Product:US Flow Sensor (Marquardt)",
+            "target": "Feature:Pre-Calibrated Delivery"
+          },
+          {
+            "type": "has_feature",
+            "source": "Product:US Flow Sensor (Marquardt)",
+            "target": "Feature:KTW/WRAS Drinking Water Approval"
+          }
+        ]
+      }
+    }
+  ],
+  "has_bom": false,
+  "naics_sector_type": "non_manufacturing"
+}

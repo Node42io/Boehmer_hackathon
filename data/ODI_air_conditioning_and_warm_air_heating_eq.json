@@ -1,0 +1,1794 @@
+{
+  "id": "ODI_air_conditioning_and_warm_air_heating_eq",
+  "title": "ODI Matrix — NAICS 333415",
+  "type": "odi_matrix",
+  "market_slug": "air_conditioning_and_warm_air_heating_eq",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Step 1 — Needs Gathered",
+      "content": "| Source | Count | Description |\n|---|---|---|\n| Step 06 (JTBD) | 27 | Market-level error statements ES-01 through ES-27 |\n| Step 10 (FIT) | 8 | Product-related constraint needs PRN-01 through PRN-08 |\n| **Total** | **35** | Merged per ODI Matrix merge rule |\n\nStep 10 needs injected with `job_step_number=0`, `job_step_name=\"product_constraint\"`, `impact_category=\"reliability\"`, `product_related=true`.\n\n---"
+    },
+    {
+      "title": "Step 2 — Satisfaction Recalibration",
+      "content": "Recalibrated against 6 incumbent technologies from Step 03 (04_incumbents_home):\n\n| Technology | Share | Key Strength | Key Weakness |\n|---|---|---|---|\n| Vortex (SIKA, Huba) | dominant >40% | No moving parts, bubble detection | Pressure drop, low-flow instability |\n| Impeller / Turbine | significant 15-40% | Lowest cost, 30:1 turndown | Bearing wear, drift, clogging |\n| Pump-Integrated Est. | significant 15-40% | Zero cost | ±10-20% accuracy, EU disqualified |\n| Electromagnetic | niche 5-15% | Zero pressure drop, ±0.2% | 5-10x cost, physically larger |\n| Differential Pressure | niche 5-15% | No electronics in flow | Permanent pressure loss, 4:1 turndown |\n| Balance Valve Manual | emerging <5% | Dual-purpose | Spot-check only, no continuous output |\n\n### Key Recalibrations\n\n| ID | Original Sat | Recal. Sat | Direction | Reasoning |\n|---|---|---|---|---|\n| ES-05 | 4.0 | 5.0 | +1.0 | Vortex (dominant) doesn't require acoustic calibration — avoids glycol config entirely |\n| ES-07 | 4.0 | 3.5 | -0.5 | Vortex detects bubbles but NOT rapid empty-pipe detection <5s; most incumbents poor |\n| ES-08 | 4.0 | 3.5 | -0.5 | No incumbent offers automated self-diagnostics at startup |\n| ES-09 | 6.0 | 5.5 | -0.5 | Turbine installed base (15-40% share) drifts significantly; weighted average lower |\n| ES-10 | 4.0 | 4.5 | +0.5 | Vortex bubble detection is a known strength; EM immune |\n| ES-14 | 4.0 | 3.5 | -0.5 | Only EM (niche) detects direction; vortex/turbine/paddle all poor |\n| ES-15 | 6.0 | 5.0 | -1.0 | Vortex has \"moderate pressure drop\" (known weakness); turbine also drops pressure |\n| ES-16 | 5.0 | 4.5 | -0.5 | Vortex degrades at low flow (known weakness); pump estimation ±10-20% |\n| ES-17 | 5.0 | 4.5 | -0.5 | No incumbent self-detects calibration drift |\n| ES-19 | 5.0 | 4.5 | -0.5 | Vortex bluff body accumulates debris; turbine clogs from particles |\n| ES-20 | 4.0 | 3.0 | -1.0 | No incumbent except ultrasonic offers combined flow+temp in single body |\n| ES-23 | 5.0 | 5.5 | +0.5 | Vortex is genuinely stable — no moving parts, no calibration drift |\n| ES-26 | 5.0 | 4.5 | -0.5 | Turbine drift + pump estimation disqualification = audit risk |\n| PRN-01 | 6.0 | 7.0 | +1.0 | All major incumbents (vortex, EM, turbine) immune to acoustic coupling |\n| PRN-05 | 4.0 | 5.0 | +1.0 | Vortex and EM largely unaffected by air bubbles |\n| PRN-07 | 4.0 | 4.5 | +0.5 | EM measures full cross-section (immune); vortex less sensitive |\n| PRN-08 | 5.0 | 5.5 | +0.5 | EM immune to speed-of-sound; vortex uses frequency (not SoS dependent) |\n\nNeeds not listed above: satisfaction unchanged from Step 06 / Step 10 original values.\n\n---"
+    },
+    {
+      "title": "Step 3 — ODI Scores (Deterministic)",
+      "content": "**Formula:** `opportunity_score = importance + max(importance - satisfaction, 0)`\n**Underserved:** `importance > 7 AND satisfaction < 5`\n**Overserved:** `importance < 3 AND satisfaction > 7`\n\n### Market-Level Needs (Step 06)\n\n| ID | Statement (abbreviated) | Step | Imp | Sat | Opp | Under | Over | Prod |\n|---|---|---|---|---|---|---|---|---|\n| ES-07 | Detect empty-pipe/air-lock before compressor enable (<5s) | CONFIRM | 9.0 | 3.5 | **14.50** | **yes** | no | true |\n| ES-16 | Prevent compressor short-cycling from undetected low-flow (>10s) | EXECUTE | 9.0 | 4.5 | **13.50** | **yes** | no | false |\n| ES-20 | Compute real-time thermal energy (kW) via single-body flow+temp | MONITOR | 8.0 | 3.0 | **13.00** | **yes** | no | true |\n| ES-09 | Maintain ±3% accuracy over 10,000 operating hours | EXECUTE | 9.0 | 5.5 | **12.50** | no | no | false |\n| ES-06 | Auto-compensate for glycol concentration variations (<50%) | PREPARE | 8.0 | 4.0 | **12.00** | **yes** | no | false |\n| ES-25 | Demonstrate EU EcoDesign compliance via traceable flow data | BRIDGE | 8.0 | 4.0 | **12.00** | **yes** | no | false |\n| ES-10 | Prevent air entrainment >2% vol causing signal loss | EXECUTE | 8.0 | 4.5 | **11.50** | **yes** | no | true |\n| ES-17 | Detect calibration drift >±0.5% within 30 days | MONITOR | 8.0 | 4.5 | **11.50** | **yes** | no | false |\n| ES-26 | Prevent audit findings from flow measurement inaccuracy | BRIDGE | 8.0 | 4.5 | **11.50** | **yes** | no | false |\n| ES-04 | Prevent incorrect orientation causing bias >2% | PREPARE | 8.0 | 5.0 | **11.00** | no | no | false |\n| ES-11 | Measure accurately across full turndown range | EXECUTE | 8.0 | 5.0 | **11.00** | no | no | false |\n| ES-21 | Prevent acoustic coupling degradation >1% error in 5yr | MONITOR | 8.0 | 5.0 | **11.00** | no | no | true |\n| ES-27 | Minimize warranty callbacks from sensor malfunction (<24 mo) | BRIDGE | 8.0 | 5.0 | **11.00** | no | no | false |\n| ES-08 | Verify sensor signal integrity via self-diagnostics at startup | CONFIRM | 7.0 | 3.5 | **10.50** | no | no | false |\n| ES-14 | Detect and report reverse flow within 1 second | EXECUTE | 7.0 | 3.5 | **10.50** | no | no | true |\n| ES-23 | No field recalibration within rated service life | MODIFY | 8.0 | 5.5 | **10.50** | no | no | false |\n| ES-18 | Distinguish process deviations from sensor artifacts >95% | MONITOR | 7.0 | 4.0 | **10.00** | no | no | false |\n| ES-22 | Recalibrate/replace sensor without draining circuit | MODIFY | 7.0 | 4.0 | **10.00** | no | no | false |\n| ES-19 | Prevent scale/sediment degrading accuracy >2% in service life | MONITOR | 7.0 | 4.5 | **9.50** | no | no | false |\n| ES-01 | Prevent turndown ratio mismatch for part-load to full-load | DEFINE | 7.0 | 5.0 | **9.00** | no | no | false |\n| ES-03 | Assembly integration <3 minutes per unit | PREPARE | 7.0 | 5.0 | **9.00** | no | no | false |\n| ES-05 | Minimize glycol acoustic property configuration effort | PREPARE | 7.0 | 5.0 | **9.00** | no | no | true |\n| ES-13 | Prevent temperature transient measurement error >1% (>30s) | EXECUTE | 7.0 | 5.0 | **9.00** | no | no | true |\n| ES-15 | Pressure drop contribution <50 mbar at design flow | EXECUTE | 7.0 | 5.0 | **9.00** | no | no | false |\n| ES-24 | Remote sensor health diagnostics via BMS bus | MODIFY | 6.0 | 3.0 | **9.00** | no | no | false |\n| ES-02 | Single sensor platform across DN12-DN25 | DEFINE | 6.0 | 4.0 | **8.00** | no | no | true |\n| ES-12 | Prevent pump pulsation causing >5% flow oscillation | EXECUTE | 6.0 | 5.0 | **7.00** | no | no | false |\n\n### Product-Related Needs (Step 10)\n\n| ID | Statement (abbreviated) | Source Constraint | Imp | Sat | Opp | Under | Over |\n|---|---|---|---|---|---|---|---|\n| PRN-05 | Ultrasonic signal attenuation from air entrainment >2% vol | Air Bubble Tolerance | 8.0 | 5.0 | **11.00** | no | no |\n| PRN-04 | Signal loss below ultrasonic transit-time noise floor at part-load | Minimum Flow Rate Detection | 7.0 | 5.0 | **9.00** | no | no |\n| PRN-07 | Accuracy sensitivity to asymmetric flow profiles in compact enclosures | Minimum Straight Pipe Run | 7.0 | 4.5 | **9.50** | no | no |\n| PRN-08 | Transit-time error from rapid speed-of-sound changes | Temperature-Dependent Accuracy | 7.0 | 5.5 | **8.50** | no | no |\n| PRN-06 | Measurement loss from partially filled pipes | Pipe Full Condition | 6.0 | 5.0 | **7.00** | no | no |\n| PRN-02 | Polymer housing degradation near 90°C thermal limit | Maximum Medium Temperature | 5.0 | 5.0 | **5.00** | no | no |\n| PRN-03 | Housing failure from pressure spikes >10 bar | Maximum Operating Pressure | 5.0 | 6.0 | **5.00** | no | no |\n| PRN-01 | Acoustic impedance mismatch from non-aqueous contaminants | Media Limitation | 4.0 | 7.0 | **4.00** | no | no |\n\n---"
+    },
+    {
+      "title": "Step 4 — Market ODI Summary",
+      "content": "| Metric | Value |\n|---|---|\n| **Market** | Air Conditioning and Warm Air Heating Equipment |\n| **NAICS** | 333415 |\n| **Total Needs** | 35 |\n| **Underserved Count** | 8 |\n| **Overserved Count** | 0 |\n| **Avg Opportunity Score** | 9.86 |\n\n### Top 5 Opportunities\n\n| Rank | ID | Statement | Opp | Zone |\n|---|---|---|---|---|\n| 1 | ES-07 | Minimize the time to detect an empty-pipe or air-lock condition before enabling the compressor to under 5 seconds | 14.50 | Underserved |\n| 2 | ES-16 | Minimize the likelihood of compressor short-cycling due to undetected low-flow conditions persisting longer than 10 seconds | 13.50 | Underserved |\n| 3 | ES-20 | Increase the ability to compute real-time thermal energy output (kW) by combining volumetric flow and temperature delta within a single sensor body | 13.00 | Underserved |\n| 4 | ES-09 | Increase the ability to maintain measurement accuracy within ±3% of reading over 10,000 operating hours of steady-state operation | 12.50 | Underserved |\n| 5 | ES-06 | Increase the ability to automatically compensate for glycol concentration variations up to 50% without manual reconfiguration | 12.00 | Underserved |\n\n### Opportunity Zone Distribution\n\n| Zone | Score Range | Count | % |\n|---|---|---|---|\n| Highly Underserved | >15 | 0 | 0% |\n| Underserved | 12–15 | 6 | 17% |\n| Appropriately Served | 10–12 | 14 | 40% |\n| Overserved | <10 | 15 | 43% |\n\n---"
+    },
+    {
+      "title": "Step 5 — Cross-Check vs Feature-Market Fit",
+      "content": "| Metric | Value |\n|---|---|\n| ODI avg opportunity score | 9.86 |\n| Feature-Fit avg overall score (Step 09) | 5.11 |\n| Threshold: ODI avg > 12 AND Feature-Fit avg < 4 | NOT triggered |\n| Threshold: ODI avg < 8 AND Feature-Fit avg > 7 | NOT triggered |\n| **Result** | **No inconsistencies detected** |\n\n### Top Underserved Needs vs Feature Alignment\n\n| Underserved Need | Opp | Addressing Feature | Feature Fit | Alignment |\n|---|---|---|---|---|\n| ES-07 Empty-pipe detection | 14.50 | Digital Anomaly Detection | 6.67 | Strong — highest-fit feature addresses highest-opp need |\n| ES-16 Low-flow / short-cycling | 13.50 | Transit-Time Flow Measurement | 5.00 | Moderate — core FP covers this but accuracy at low flow is a challenge |\n| ES-20 Single-body kW calculation | 13.00 | Integrated Temperature Sensing | 5.67 | Strong — unique capability; no incumbent matches |\n| ES-06 Glycol auto-compensation | 12.00 | Real-Time Compensation Algorithms | 4.56 | Moderate — addresses need but vortex avoids it entirely |\n| ES-25 EU EcoDesign compliance | 12.00 | Transit-Time Flow Measurement + Integrated Temp | 5.00/5.67 | Strong — combined flow+temp enables heat metering compliance |\n\n---"
+    },
+    {
+      "title": "QA Checklist",
+      "content": "| # | Check | Pass Condition | Result |\n|---|---|---|---|\n| Q1 | Formula correct | Spot-check 5 entries match `opp = imp + max(imp - sat, 0)` | **PASS** — ES-07: 9+max(9-3.5,0)=14.5; ES-16: 9+max(9-4.5,0)=13.5; ES-20: 8+max(8-3,0)=13; PRN-01: 4+max(4-7,0)=4; ES-12: 6+max(6-5,0)=7 |\n| Q2 | Underserved flags correct | Every entry with imp>7 AND sat<5 has is_underserved=true | **PASS** — 8 entries flagged; verified all 8 meet criteria |\n| Q3 | Overserved flags correct | Every entry with imp<3 AND sat>7 has is_overserved=true | **PASS** — 0 entries; no entry has imp<3 AND sat>7 |\n| Q4 | Need count preserved | Total entries ≥ Step 06 count (27) + Step 10 applicable (8) | **PASS** — 35 = 27 + 8 |\n| Q5 | Top-5 ordering correct | Sorted by descending opportunity_score | **PASS** — 14.5 > 13.5 > 13.0 > 12.5 > 12.0 |\n| Q6 | Cross-check ran | ODI vs Feature-Fit inconsistencies checked | **PASS** — no inconsistencies detected |\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"odi_matrix\",\n  \"naics_code\": \"333415\",\n  \"naics_title\": \"Air-Conditioning and Warm Air Heating Equipment and Commercial and Industrial Refrigeration Equipment Manufacturing\",\n  \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n  \"product_name\": \"Ultrasonic Flow Sensor\",\n  \"vendor_name\": \"Marquardt\",\n  \"technology_class\": \"Ultrasonic Transit-Time Flow Measurement\",\n  \"entries\": [\n    {\n      \"error_statement\": \"Minimize the time to detect an empty-pipe or air-lock condition before enabling the compressor to under 5 seconds\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 9.0,\n      \"satisfaction_current\": 3.5,\n      \"opportunity_score\": 14.50,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 4,\n      \"job_step_name\": \"CONFIRM\",\n      \"impact_category\": \"safety\",\n      \"source_id\": \"ES-07\",\n      \"recalibration_delta\": -0.5,\n      \"recalibration_reason\": \"Vortex detects bubbles but NOT rapid empty-pipe in <5s; most incumbents poor at this specific capability\"\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of compressor short-cycling due to undetected low-flow conditions persisting longer than 10 seconds\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 9.0,\n      \"satisfaction_current\": 4.5,\n      \"opportunity_score\": 13.50,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"impact_category\": \"safety\",\n      \"source_id\": \"ES-16\",\n      \"recalibration_delta\": -0.5,\n      \"recalibration_reason\": \"Vortex degrades at low flow (known weakness); pump estimation ±10-20% misses low-flow events\"\n    },\n    {\n      \"error_statement\": \"Increase the ability to compute real-time thermal energy output (kW) by combining volumetric flow and temperature delta within a single sensor body\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 3.0,\n      \"opportunity_score\": 13.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"impact_category\": \"cost\",\n      \"source_id\": \"ES-20\",\n      \"recalibration_delta\": -1.0,\n      \"recalibration_reason\": \"No incumbent except ultrasonic offers combined flow+temp in single body; vortex, turbine, EM all require separate temp probe\"\n    },\n    {\n      \"error_statement\": \"Increase the ability to maintain measurement accuracy within ±3% of reading over 10,000 operating hours of steady-state operation\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 9.0,\n      \"satisfaction_current\": 5.5,\n      \"opportunity_score\": 12.50,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"impact_category\": \"reliability\",\n      \"source_id\": \"ES-09\",\n      \"recalibration_delta\": -0.5,\n      \"recalibration_reason\": \"Turbine installed base (15-40% share) drifts significantly over time; weighted average satisfaction lower\"\n    },\n    {\n      \"error_statement\": \"Increase the ability to automatically compensate for glycol concentration variations up to 50% without manual reconfiguration\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 12.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": 3,\n      \"job_step_name\": \"PREPARE\",\n      \"impact_category\": \"reliability\",\n      \"source_id\": \"ES-06\",\n      \"recalibration_delta\": 0.0,\n      \"recalibration_reason\": \"Unchanged — vortex has moderate fluid property sensitivity; turbine affected by viscosity; mixed picture\"\n    },\n    {\n      \"error_statement\": \"Increase the ability to demonstrate EU EcoDesign energy efficiency compliance through traceable, sensor-based flow measurement data\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 12.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": 0,\n      \"job_step_name\": \"BRIDGE\",\n      \"impact_category\": \"cost\",\n      \"source_id\": \"ES-25\",\n      \"recalibration_delta\": 0.0,\n      \"recalibration_reason\": \"Unchanged — pump estimation EU-disqualified; balance valve spot-check only; dedicated sensors can provide data but traceability gaps remain\"\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of air entrainment exceeding 2% by volume causing complete measurement signal loss during thermal cycling\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 4.5,\n      \"opportunity_score\": 11.50,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"impact_category\": \"reliability\",\n      \"source_id\": \"ES-10\",\n      \"recalibration_delta\": 0.5,\n      \"recalibration_reason\": \"Vortex (dominant) has bubble detection as a known strength; EM immune to air entrainment\"\n    },\n    {\n      \"error_statement\": \"Increase the ability to detect calibration drift exceeding ±0.5% within 30 days of occurrence over 12 months of continuous operation\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 4.5,\n      \"opportunity_score\": 11.50,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"impact_category\": \"reliability\",\n      \"source_id\": \"ES-17\",\n      \"recalibration_delta\": -0.5,\n      \"recalibration_reason\": \"No incumbent self-detects calibration drift; turbine drifts silently; vortex is stable but lacks drift alerting\"\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of field audit findings revealing flow measurement inaccuracy that would cause energy label downgrade\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 4.5,\n      \"opportunity_score\": 11.50,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": 0,\n      \"job_step_name\": \"BRIDGE\",\n      \"impact_category\": \"cost\",\n      \"source_id\": \"ES-26\",\n      \"recalibration_delta\": -0.5,\n      \"recalibration_reason\": \"Turbine drift + pump estimation disqualification creates audit risk across significant installed base\"\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of incorrect sensor orientation during installation causing flow measurement bias exceeding 2% of reading\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 5.0,\n      \"opportunity_score\": 11.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": 3,\n      \"job_step_name\": \"PREPARE\",\n      \"impact_category\": \"reliability\",\n      \"source_id\": \"ES-04\",\n      \"recalibration_delta\": 0.0,\n      \"recalibration_reason\": \"Unchanged — all inline sensors have orientation sensitivity; no incumbent advantage\"\n    },\n    {\n      \"error_statement\": \"Increase the ability to measure flow rate accurately across the full turndown range from minimum to maximum system load\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 5.0,\n      \"opportunity_score\": 11.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"impact_category\": \"reliability\",\n      \"source_id\": \"ES-11\",\n      \"recalibration_delta\": 0.0,\n      \"recalibration_reason\": \"Unchanged — vortex limited at low flow, turbine has 30:1 turndown; mixed picture\"\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of acoustic coupling degradation between transducer and fluid causing measurement error exceeding 1% within the first 5 years of operation\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 5.0,\n      \"opportunity_score\": 11.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"impact_category\": \"reliability\",\n      \"source_id\": \"ES-21\",\n      \"recalibration_delta\": 0.0,\n      \"recalibration_reason\": \"Unchanged — technology-specific to ultrasonic; incumbent ultrasonic share (35%) sets baseline\"\n    },\n    {\n      \"error_statement\": \"Minimize the frequency of warranty callbacks attributed to flow sensor malfunction within the first 24 months of equipment operation\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 5.0,\n      \"opportunity_score\": 11.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": 0,\n      \"job_step_name\": \"BRIDGE\",\n      \"impact_category\": \"cost\",\n      \"source_id\": \"ES-27\",\n      \"recalibration_delta\": 0.0,\n      \"recalibration_reason\": \"Unchanged — vortex (dominant) is reliable; turbine drives most callbacks but declining share\"\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of ultrasonic signal attenuation from air entrainment exceeding 2% by volume during thermal cycling or system startup\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 5.0,\n      \"opportunity_score\": 11.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 0,\n      \"job_step_name\": \"product_constraint\",\n      \"impact_category\": \"reliability\",\n      \"source_id\": \"PRN-05\",\n      \"recalibration_delta\": 1.0,\n      \"recalibration_reason\": \"Vortex and EM largely unaffected by air bubbles; dominant incumbents handle this better than ultrasonic\"\n    },\n    {\n      \"error_statement\": \"Increase the ability to verify sensor signal integrity through automated self-diagnostics at each system startup\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 3.5,\n      \"opportunity_score\": 10.50,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": 4,\n      \"job_step_name\": \"CONFIRM\",\n      \"impact_category\": \"reliability\",\n      \"source_id\": \"ES-08\",\n      \"recalibration_delta\": -0.5,\n      \"recalibration_reason\": \"No incumbent offers automated self-diagnostics at startup; degraded sensors operate undetected\"\n    },\n    {\n      \"error_statement\": \"Increase the ability to detect and report reverse flow direction to the system controller within 1 second of flow reversal\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 3.5,\n      \"opportunity_score\": 10.50,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"impact_category\": \"safety\",\n      \"source_id\": \"ES-14\",\n      \"recalibration_delta\": -0.5,\n      \"recalibration_reason\": \"Only EM (niche 5-15%) detects direction; vortex/turbine/paddle all poor at directional sensing\"\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of requiring field recalibration more frequently than once within the rated equipment service life\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 8.0,\n      \"satisfaction_current\": 5.5,\n      \"opportunity_score\": 10.50,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": 7,\n      \"job_step_name\": \"MODIFY\",\n      \"impact_category\": \"cost\",\n      \"source_id\": \"ES-23\",\n      \"recalibration_delta\": 0.5,\n      \"recalibration_reason\": \"Vortex (dominant) is genuinely stable — no moving parts, minimal calibration drift over service life\"\n    },\n    {\n      \"error_statement\": \"Increase the ability to distinguish genuine process deviations from sensor artifacts with >95% classification accuracy\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 10.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"impact_category\": \"reliability\",\n      \"source_id\": \"ES-18\",\n      \"recalibration_delta\": 0.0,\n      \"recalibration_reason\": \"Unchanged — most incumbents lack diagnostic sophistication\"\n    },\n    {\n      \"error_statement\": \"Minimize the time required to recalibrate or replace a degraded flow sensor without draining the hydronic circuit\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 10.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": 7,\n      \"job_step_name\": \"MODIFY\",\n      \"impact_category\": \"time\",\n      \"source_id\": \"ES-22\",\n      \"recalibration_delta\": 0.0,\n      \"recalibration_reason\": \"Unchanged — all inline sensors require system shutdown for replacement\"\n    },\n    {\n      \"error_statement\": \"Minimize the sensitivity of transit-time measurement accuracy to asymmetric flow profiles from elbows, valves, or tees in compact equipment enclosures\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 4.5,\n      \"opportunity_score\": 9.50,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 0,\n      \"job_step_name\": \"product_constraint\",\n      \"impact_category\": \"reliability\",\n      \"source_id\": \"PRN-07\",\n      \"recalibration_delta\": 0.5,\n      \"recalibration_reason\": \"EM measures full cross-section (immune to flow profile); vortex less sensitive to asymmetry\"\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of scale or sediment buildup degrading measurement accuracy by more than 2% within the sensor's rated service life\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 4.5,\n      \"opportunity_score\": 9.50,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"impact_category\": \"reliability\",\n      \"source_id\": \"ES-19\",\n      \"recalibration_delta\": -0.5,\n      \"recalibration_reason\": \"Vortex bluff body accumulates debris (known weakness); turbine clogs from particles and sediment\"\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of selecting a flow sensor with insufficient turndown ratio for the system's part-load to full-load operating range\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 5.0,\n      \"opportunity_score\": 9.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"impact_category\": \"reliability\",\n      \"source_id\": \"ES-01\",\n      \"recalibration_delta\": 0.0,\n      \"recalibration_reason\": \"Unchanged — mixed picture: vortex limited at low flow, turbine has 30:1 turndown\"\n    },\n    {\n      \"error_statement\": \"Minimize the time required to mechanically integrate the flow sensor into the hydronic circuit during OEM assembly to under 3 minutes per unit\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 5.0,\n      \"opportunity_score\": 9.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": 3,\n      \"job_step_name\": \"PREPARE\",\n      \"impact_category\": \"time\",\n      \"source_id\": \"ES-03\",\n      \"recalibration_delta\": 0.0,\n      \"recalibration_reason\": \"Unchanged — all inline sensors install similarly\"\n    },\n    {\n      \"error_statement\": \"Minimize the commissioning effort required to configure fluid acoustic properties for varying water-glycol concentrations\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 5.0,\n      \"opportunity_score\": 9.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 3,\n      \"job_step_name\": \"PREPARE\",\n      \"impact_category\": \"skill\",\n      \"source_id\": \"ES-05\",\n      \"recalibration_delta\": 1.0,\n      \"recalibration_reason\": \"Vortex (dominant) doesn't require acoustic calibration — avoids glycol configuration entirely\"\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of rapid temperature transients exceeding compensation algorithm response, causing measurement error >1% for more than 30 seconds\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 5.0,\n      \"opportunity_score\": 9.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"impact_category\": \"reliability\",\n      \"source_id\": \"ES-13\",\n      \"recalibration_delta\": 0.0,\n      \"recalibration_reason\": \"Unchanged — vortex has some temperature sensitivity; EM immune; mixed\"\n    },\n    {\n      \"error_statement\": \"Minimize the flow sensor's contribution to system pressure drop below 50 mbar at design flow rate\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 5.0,\n      \"opportunity_score\": 9.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"impact_category\": \"cost\",\n      \"source_id\": \"ES-15\",\n      \"recalibration_delta\": -1.0,\n      \"recalibration_reason\": \"Vortex has 'moderate pressure drop' (known weakness); turbine also creates pressure drop; only EM has zero\"\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of measurement signal loss when system flow rate falls below the ultrasonic transit-time noise floor during part-load VFD operation\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 5.0,\n      \"opportunity_score\": 9.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 0,\n      \"job_step_name\": \"product_constraint\",\n      \"impact_category\": \"reliability\",\n      \"source_id\": \"PRN-04\",\n      \"recalibration_delta\": 0.0,\n      \"recalibration_reason\": \"Unchanged — vortex also struggles at low flow; turbine has good low-flow range; mixed\"\n    },\n    {\n      \"error_statement\": \"Increase the ability to remotely diagnose flow sensor health status via the existing BMS communication bus without physical inspection\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 6.0,\n      \"satisfaction_current\": 3.0,\n      \"opportunity_score\": 9.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": 7,\n      \"job_step_name\": \"MODIFY\",\n      \"impact_category\": \"time\",\n      \"source_id\": \"ES-24\",\n      \"recalibration_delta\": 0.0,\n      \"recalibration_reason\": \"Unchanged — most legacy sensors lack remote diagnostics\"\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of transit-time measurement error from rapid speed-of-sound changes during heating-cooling mode transitions exceeding compensation algorithm response time\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 7.0,\n      \"satisfaction_current\": 5.5,\n      \"opportunity_score\": 8.50,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 0,\n      \"job_step_name\": \"product_constraint\",\n      \"impact_category\": \"reliability\",\n      \"source_id\": \"PRN-08\",\n      \"recalibration_delta\": 0.5,\n      \"recalibration_reason\": \"EM immune to speed-of-sound changes; vortex uses frequency not SoS — dominant incumbents less affected\"\n    },\n    {\n      \"error_statement\": \"Increase the ability to specify a single sensor platform across multiple pipe diameters (DN12-DN25) without redesigning the hydraulic assembly\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 6.0,\n      \"satisfaction_current\": 4.0,\n      \"opportunity_score\": 8.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"impact_category\": \"cost\",\n      \"source_id\": \"ES-02\",\n      \"recalibration_delta\": 0.0,\n      \"recalibration_reason\": \"Unchanged — SIKA vortex offers VVX15/20/25 but unclear if shared electronics platform\"\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of circulation pump pressure pulsations causing flow reading oscillations exceeding 5% of steady-state value\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 6.0,\n      \"satisfaction_current\": 5.0,\n      \"opportunity_score\": 7.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false,\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"impact_category\": \"reliability\",\n      \"source_id\": \"ES-12\",\n      \"recalibration_delta\": 0.0,\n      \"recalibration_reason\": \"Unchanged — all sensor types somewhat affected by pump pulsations\"\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of complete measurement loss from partially filled pipe sections during system charging, maintenance drain-down, or gravity-return operation\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 6.0,\n      \"satisfaction_current\": 5.0,\n      \"opportunity_score\": 7.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 0,\n      \"job_step_name\": \"product_constraint\",\n      \"impact_category\": \"reliability\",\n      \"source_id\": \"PRN-06\",\n      \"recalibration_delta\": 0.0,\n      \"recalibration_reason\": \"Unchanged — vortex and turbine also require full pipe; EM recovers faster but niche share\"\n    },\n    {\n      \"error_statement\": \"Minimize the risk of polymer housing and seal degradation from sustained operation near the 90°C thermal limit in high-temperature heating configurations\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 5.0,\n      \"satisfaction_current\": 5.0,\n      \"opportunity_score\": 5.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 0,\n      \"job_step_name\": \"product_constraint\",\n      \"impact_category\": \"reliability\",\n      \"source_id\": \"PRN-02\",\n      \"recalibration_delta\": 0.0,\n      \"recalibration_reason\": \"Unchanged — vortex (SIKA) also uses plastic housing; EM uses metal; mixed\"\n    },\n    {\n      \"error_statement\": \"Minimize the risk of sensor housing failure from pressure spikes exceeding 10 bar continuous rating during water hammer or pump surge events\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 5.0,\n      \"satisfaction_current\": 6.0,\n      \"opportunity_score\": 5.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 0,\n      \"job_step_name\": \"product_constraint\",\n      \"impact_category\": \"reliability\",\n      \"source_id\": \"PRN-03\",\n      \"recalibration_delta\": 0.0,\n      \"recalibration_reason\": \"Unchanged — EM has higher pressure rating (metal housing) but vortex similar to ultrasonic\"\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of measurement failure from acoustic impedance mismatch when non-aqueous contaminants enter the hydronic circuit\",\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"importance\": 4.0,\n      \"satisfaction_current\": 7.0,\n      \"opportunity_score\": 4.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true,\n      \"job_step_number\": 0,\n      \"job_step_name\": \"product_constraint\",\n      \"impact_category\": \"reliability\",\n      \"source_id\": \"PRN-01\",\n      \"recalibration_delta\": 1.0,\n      \"recalibration_reason\": \"All major incumbents (vortex, EM, turbine) immune to acoustic coupling issues; market well-served\"\n    }\n  ],\n  \"market_summaries\": [\n    {\n      \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n      \"naics_code\": \"333415\",\n      \"total_needs\": 35,\n      \"underserved_count\": 8,\n      \"overserved_count\": 0,\n      \"avg_opportunity_score\": 9.86,\n      \"top_opportunities\": [\n        \"Minimize the time to detect an empty-pipe or air-lock condition before enabling the compressor to under 5 seconds\",\n        \"Minimize the likelihood of compressor short-cycling due to undetected low-flow conditions persisting longer than 10 seconds\",\n        \"Increase the ability to compute real-time thermal energy output (kW) by combining volumetric flow and temperature delta within a single sensor body\",\n        \"Increase the ability to maintain measurement accuracy within ±3% of reading over 10,000 operating hours of steady-state operation\",\n        \"Increase the ability to automatically compensate for glycol concentration variations up to 50% without manual reconfiguration\"\n      ]\n    }\n  ],\n  \"cross_check\": {\n    \"step_09_available\": true,\n    \"odi_avg\": 9.86,\n    \"feature_fit_avg\": 5.11,\n    \"inconsistencies\": [],\n    \"result\": \"No inconsistencies detected\"\n  },\n  \"entities_produced\": {\n    \"nodes\": [\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the time to detect an empty-pipe or air-lock condition before enabli\", \"naics_code\": \"333415\", \"run_id\": \"TBD\"}, \"props\": {\"full_statement\": \"Minimize the time to detect an empty-pipe or air-lock condition before enabling the compressor to under 5 seconds\", \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\", \"importance\": 9.0, \"satisfaction_current\": 3.5, \"opportunity_score\": 14.50, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the likelihood of compressor short-cycling due to undetected low-flo\", \"naics_code\": \"333415\", \"run_id\": \"TBD\"}, \"props\": {\"full_statement\": \"Minimize the likelihood of compressor short-cycling due to undetected low-flow conditions persisting longer than 10 seconds\", \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\", \"importance\": 9.0, \"satisfaction_current\": 4.5, \"opportunity_score\": 13.50, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Increase the ability to compute real-time thermal energy output (kW) by combi\", \"naics_code\": \"333415\", \"run_id\": \"TBD\"}, \"props\": {\"full_statement\": \"Increase the ability to compute real-time thermal energy output (kW) by combining volumetric flow and temperature delta within a single sensor body\", \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\", \"importance\": 8.0, \"satisfaction_current\": 3.0, \"opportunity_score\": 13.00, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Increase the ability to maintain measurement accuracy within ±3% of reading o\", \"naics_code\": \"333415\", \"run_id\": \"TBD\"}, \"props\": {\"full_statement\": \"Increase the ability to maintain measurement accuracy within ±3% of reading over 10,000 operating hours of steady-state operation\", \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\", \"importance\": 9.0, \"satisfaction_current\": 5.5, \"opportunity_score\": 12.50, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Increase the ability to automatically compensate for glycol concentration vari\", \"naics_code\": \"333415\", \"run_id\": \"TBD\"}, \"props\": {\"full_statement\": \"Increase the ability to automatically compensate for glycol concentration variations up to 50% without manual reconfiguration\", \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\", \"importance\": 8.0, \"satisfaction_current\": 4.0, \"opportunity_score\": 12.00, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": false}}\n    ],\n    \"relationships\": [\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:ES-07\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:ES-16\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:ES-20\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:ES-09\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:ES-06\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:ES-25\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:ES-10\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:ES-17\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:ES-26\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:ES-04\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:ES-11\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:ES-21\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:ES-27\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:PRN-05\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:ES-08\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:ES-14\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:ES-23\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:ES-18\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:ES-22\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:PRN-07\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:ES-19\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:ES-01\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:ES-03\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:ES-05\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:ES-13\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:ES-15\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:PRN-04\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:ES-24\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:PRN-08\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:ES-02\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:ES-12\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:PRN-06\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:PRN-02\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:PRN-03\"},\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:333415\", \"target\": \"OpportunityScore:PRN-01\"}\n    ],\n    \"market_odi_props\": {\n      \"naics_code\": \"333415\",\n      \"odi_total_needs\": 35,\n      \"odi_underserved_count\": 8,\n      \"odi_overserved_count\": 0,\n      \"odi_avg_opportunity_score\": 9.86,\n      \"odi_top_opportunities\": \"[\\\"Minimize the time to detect an empty-pipe or air-lock condition before enabling the compressor to under 5 seconds\\\",\\\"Minimize the likelihood of compressor short-cycling due to undetected low-flow conditions persisting longer than 10 seconds\\\",\\\"Increase the ability to compute real-time thermal energy output (kW) by combining volumetric flow and temperature delta within a single sensor body\\\",\\\"Increase the ability to maintain measurement accuracy within ±3% of reading over 10,000 operating hours of steady-state operation\\\",\\\"Increase the ability to automatically compensate for glycol concentration variations up to 50% without manual reconfiguration\\\"]\"\n    }\n  }\n}\n```\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [SRC: JTBD_air_conditioning_and_warm_air_heating_eq] — 27 error statements (Step 06), importance and satisfaction scores, job map\n- [SRC: FIT_air_conditioning_and_warm_air_heating_eq] — 8 product-related needs (Step 10), feature-market fit scores (Step 09)\n- [SRC: 04_incumbents_home] — 6 incumbent technology profiles with strengths, weaknesses, market share\n- [SRC: 01_product_decomposition] — Product constraints feeding PRN needs\n- [SRC: 02_functional_promise] — Commodity FP, product FP"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "Source",
+        "Count",
+        "Description"
+      ],
+      "rows": [
+        {
+          "Source": "Step 06 (JTBD)",
+          "Count": "27",
+          "Description": "Market-level error statements ES-01 through ES-27"
+        },
+        {
+          "Source": "Step 10 (FIT)",
+          "Count": "8",
+          "Description": "Product-related constraint needs PRN-01 through PRN-08"
+        },
+        {
+          "Source": "**Total**",
+          "Count": "**35**",
+          "Description": "Merged per ODI Matrix merge rule"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Technology",
+        "Share",
+        "Key Strength",
+        "Key Weakness"
+      ],
+      "rows": [
+        {
+          "Technology": "Vortex (SIKA, Huba)",
+          "Share": "dominant >40%",
+          "Key Strength": "No moving parts, bubble detection",
+          "Key Weakness": "Pressure drop, low-flow instability"
+        },
+        {
+          "Technology": "Impeller / Turbine",
+          "Share": "significant 15-40%",
+          "Key Strength": "Lowest cost, 30:1 turndown",
+          "Key Weakness": "Bearing wear, drift, clogging"
+        },
+        {
+          "Technology": "Pump-Integrated Est.",
+          "Share": "significant 15-40%",
+          "Key Strength": "Zero cost",
+          "Key Weakness": "±10-20% accuracy, EU disqualified"
+        },
+        {
+          "Technology": "Electromagnetic",
+          "Share": "niche 5-15%",
+          "Key Strength": "Zero pressure drop, ±0.2%",
+          "Key Weakness": "5-10x cost, physically larger"
+        },
+        {
+          "Technology": "Differential Pressure",
+          "Share": "niche 5-15%",
+          "Key Strength": "No electronics in flow",
+          "Key Weakness": "Permanent pressure loss, 4:1 turndown"
+        },
+        {
+          "Technology": "Balance Valve Manual",
+          "Share": "emerging <5%",
+          "Key Strength": "Dual-purpose",
+          "Key Weakness": "Spot-check only, no continuous output"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Original Sat",
+        "Recal. Sat",
+        "Direction",
+        "Reasoning"
+      ],
+      "rows": [
+        {
+          "ID": "ES-05",
+          "Original Sat": "4.0",
+          "Recal. Sat": "5.0",
+          "Direction": "+1.0",
+          "Reasoning": "Vortex (dominant) doesn't require acoustic calibration — avoids glycol config entirely"
+        },
+        {
+          "ID": "ES-07",
+          "Original Sat": "4.0",
+          "Recal. Sat": "3.5",
+          "Direction": "-0.5",
+          "Reasoning": "Vortex detects bubbles but NOT rapid empty-pipe detection <5s; most incumbents poor"
+        },
+        {
+          "ID": "ES-08",
+          "Original Sat": "4.0",
+          "Recal. Sat": "3.5",
+          "Direction": "-0.5",
+          "Reasoning": "No incumbent offers automated self-diagnostics at startup"
+        },
+        {
+          "ID": "ES-09",
+          "Original Sat": "6.0",
+          "Recal. Sat": "5.5",
+          "Direction": "-0.5",
+          "Reasoning": "Turbine installed base (15-40% share) drifts significantly; weighted average lower"
+        },
+        {
+          "ID": "ES-10",
+          "Original Sat": "4.0",
+          "Recal. Sat": "4.5",
+          "Direction": "+0.5",
+          "Reasoning": "Vortex bubble detection is a known strength; EM immune"
+        },
+        {
+          "ID": "ES-14",
+          "Original Sat": "4.0",
+          "Recal. Sat": "3.5",
+          "Direction": "-0.5",
+          "Reasoning": "Only EM (niche) detects direction; vortex/turbine/paddle all poor"
+        },
+        {
+          "ID": "ES-15",
+          "Original Sat": "6.0",
+          "Recal. Sat": "5.0",
+          "Direction": "-1.0",
+          "Reasoning": "Vortex has \"moderate pressure drop\" (known weakness); turbine also drops pressure"
+        },
+        {
+          "ID": "ES-16",
+          "Original Sat": "5.0",
+          "Recal. Sat": "4.5",
+          "Direction": "-0.5",
+          "Reasoning": "Vortex degrades at low flow (known weakness); pump estimation ±10-20%"
+        },
+        {
+          "ID": "ES-17",
+          "Original Sat": "5.0",
+          "Recal. Sat": "4.5",
+          "Direction": "-0.5",
+          "Reasoning": "No incumbent self-detects calibration drift"
+        },
+        {
+          "ID": "ES-19",
+          "Original Sat": "5.0",
+          "Recal. Sat": "4.5",
+          "Direction": "-0.5",
+          "Reasoning": "Vortex bluff body accumulates debris; turbine clogs from particles"
+        },
+        {
+          "ID": "ES-20",
+          "Original Sat": "4.0",
+          "Recal. Sat": "3.0",
+          "Direction": "-1.0",
+          "Reasoning": "No incumbent except ultrasonic offers combined flow+temp in single body"
+        },
+        {
+          "ID": "ES-23",
+          "Original Sat": "5.0",
+          "Recal. Sat": "5.5",
+          "Direction": "+0.5",
+          "Reasoning": "Vortex is genuinely stable — no moving parts, no calibration drift"
+        },
+        {
+          "ID": "ES-26",
+          "Original Sat": "5.0",
+          "Recal. Sat": "4.5",
+          "Direction": "-0.5",
+          "Reasoning": "Turbine drift + pump estimation disqualification = audit risk"
+        },
+        {
+          "ID": "PRN-01",
+          "Original Sat": "6.0",
+          "Recal. Sat": "7.0",
+          "Direction": "+1.0",
+          "Reasoning": "All major incumbents (vortex, EM, turbine) immune to acoustic coupling"
+        },
+        {
+          "ID": "PRN-05",
+          "Original Sat": "4.0",
+          "Recal. Sat": "5.0",
+          "Direction": "+1.0",
+          "Reasoning": "Vortex and EM largely unaffected by air bubbles"
+        },
+        {
+          "ID": "PRN-07",
+          "Original Sat": "4.0",
+          "Recal. Sat": "4.5",
+          "Direction": "+0.5",
+          "Reasoning": "EM measures full cross-section (immune); vortex less sensitive"
+        },
+        {
+          "ID": "PRN-08",
+          "Original Sat": "5.0",
+          "Recal. Sat": "5.5",
+          "Direction": "+0.5",
+          "Reasoning": "EM immune to speed-of-sound; vortex uses frequency (not SoS dependent)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Statement (abbreviated)",
+        "Step",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Under",
+        "Over",
+        "Prod"
+      ],
+      "rows": [
+        {
+          "ID": "ES-07",
+          "Statement (abbreviated)": "Detect empty-pipe/air-lock before compressor enable (<5s)",
+          "Step": "CONFIRM",
+          "Imp": "9.0",
+          "Sat": "3.5",
+          "Opp": "**14.50**",
+          "Under": "**yes**",
+          "Over": "no",
+          "Prod": "true"
+        },
+        {
+          "ID": "ES-16",
+          "Statement (abbreviated)": "Prevent compressor short-cycling from undetected low-flow (>10s)",
+          "Step": "EXECUTE",
+          "Imp": "9.0",
+          "Sat": "4.5",
+          "Opp": "**13.50**",
+          "Under": "**yes**",
+          "Over": "no",
+          "Prod": "false"
+        },
+        {
+          "ID": "ES-20",
+          "Statement (abbreviated)": "Compute real-time thermal energy (kW) via single-body flow+temp",
+          "Step": "MONITOR",
+          "Imp": "8.0",
+          "Sat": "3.0",
+          "Opp": "**13.00**",
+          "Under": "**yes**",
+          "Over": "no",
+          "Prod": "true"
+        },
+        {
+          "ID": "ES-09",
+          "Statement (abbreviated)": "Maintain ±3% accuracy over 10,000 operating hours",
+          "Step": "EXECUTE",
+          "Imp": "9.0",
+          "Sat": "5.5",
+          "Opp": "**12.50**",
+          "Under": "no",
+          "Over": "no",
+          "Prod": "false"
+        },
+        {
+          "ID": "ES-06",
+          "Statement (abbreviated)": "Auto-compensate for glycol concentration variations (<50%)",
+          "Step": "PREPARE",
+          "Imp": "8.0",
+          "Sat": "4.0",
+          "Opp": "**12.00**",
+          "Under": "**yes**",
+          "Over": "no",
+          "Prod": "false"
+        },
+        {
+          "ID": "ES-25",
+          "Statement (abbreviated)": "Demonstrate EU EcoDesign compliance via traceable flow data",
+          "Step": "BRIDGE",
+          "Imp": "8.0",
+          "Sat": "4.0",
+          "Opp": "**12.00**",
+          "Under": "**yes**",
+          "Over": "no",
+          "Prod": "false"
+        },
+        {
+          "ID": "ES-10",
+          "Statement (abbreviated)": "Prevent air entrainment >2% vol causing signal loss",
+          "Step": "EXECUTE",
+          "Imp": "8.0",
+          "Sat": "4.5",
+          "Opp": "**11.50**",
+          "Under": "**yes**",
+          "Over": "no",
+          "Prod": "true"
+        },
+        {
+          "ID": "ES-17",
+          "Statement (abbreviated)": "Detect calibration drift >±0.5% within 30 days",
+          "Step": "MONITOR",
+          "Imp": "8.0",
+          "Sat": "4.5",
+          "Opp": "**11.50**",
+          "Under": "**yes**",
+          "Over": "no",
+          "Prod": "false"
+        },
+        {
+          "ID": "ES-26",
+          "Statement (abbreviated)": "Prevent audit findings from flow measurement inaccuracy",
+          "Step": "BRIDGE",
+          "Imp": "8.0",
+          "Sat": "4.5",
+          "Opp": "**11.50**",
+          "Under": "**yes**",
+          "Over": "no",
+          "Prod": "false"
+        },
+        {
+          "ID": "ES-04",
+          "Statement (abbreviated)": "Prevent incorrect orientation causing bias >2%",
+          "Step": "PREPARE",
+          "Imp": "8.0",
+          "Sat": "5.0",
+          "Opp": "**11.00**",
+          "Under": "no",
+          "Over": "no",
+          "Prod": "false"
+        },
+        {
+          "ID": "ES-11",
+          "Statement (abbreviated)": "Measure accurately across full turndown range",
+          "Step": "EXECUTE",
+          "Imp": "8.0",
+          "Sat": "5.0",
+          "Opp": "**11.00**",
+          "Under": "no",
+          "Over": "no",
+          "Prod": "false"
+        },
+        {
+          "ID": "ES-21",
+          "Statement (abbreviated)": "Prevent acoustic coupling degradation >1% error in 5yr",
+          "Step": "MONITOR",
+          "Imp": "8.0",
+          "Sat": "5.0",
+          "Opp": "**11.00**",
+          "Under": "no",
+          "Over": "no",
+          "Prod": "true"
+        },
+        {
+          "ID": "ES-27",
+          "Statement (abbreviated)": "Minimize warranty callbacks from sensor malfunction (<24 mo)",
+          "Step": "BRIDGE",
+          "Imp": "8.0",
+          "Sat": "5.0",
+          "Opp": "**11.00**",
+          "Under": "no",
+          "Over": "no",
+          "Prod": "false"
+        },
+        {
+          "ID": "ES-08",
+          "Statement (abbreviated)": "Verify sensor signal integrity via self-diagnostics at startup",
+          "Step": "CONFIRM",
+          "Imp": "7.0",
+          "Sat": "3.5",
+          "Opp": "**10.50**",
+          "Under": "no",
+          "Over": "no",
+          "Prod": "false"
+        },
+        {
+          "ID": "ES-14",
+          "Statement (abbreviated)": "Detect and report reverse flow within 1 second",
+          "Step": "EXECUTE",
+          "Imp": "7.0",
+          "Sat": "3.5",
+          "Opp": "**10.50**",
+          "Under": "no",
+          "Over": "no",
+          "Prod": "true"
+        },
+        {
+          "ID": "ES-23",
+          "Statement (abbreviated)": "No field recalibration within rated service life",
+          "Step": "MODIFY",
+          "Imp": "8.0",
+          "Sat": "5.5",
+          "Opp": "**10.50**",
+          "Under": "no",
+          "Over": "no",
+          "Prod": "false"
+        },
+        {
+          "ID": "ES-18",
+          "Statement (abbreviated)": "Distinguish process deviations from sensor artifacts >95%",
+          "Step": "MONITOR",
+          "Imp": "7.0",
+          "Sat": "4.0",
+          "Opp": "**10.00**",
+          "Under": "no",
+          "Over": "no",
+          "Prod": "false"
+        },
+        {
+          "ID": "ES-22",
+          "Statement (abbreviated)": "Recalibrate/replace sensor without draining circuit",
+          "Step": "MODIFY",
+          "Imp": "7.0",
+          "Sat": "4.0",
+          "Opp": "**10.00**",
+          "Under": "no",
+          "Over": "no",
+          "Prod": "false"
+        },
+        {
+          "ID": "ES-19",
+          "Statement (abbreviated)": "Prevent scale/sediment degrading accuracy >2% in service life",
+          "Step": "MONITOR",
+          "Imp": "7.0",
+          "Sat": "4.5",
+          "Opp": "**9.50**",
+          "Under": "no",
+          "Over": "no",
+          "Prod": "false"
+        },
+        {
+          "ID": "ES-01",
+          "Statement (abbreviated)": "Prevent turndown ratio mismatch for part-load to full-load",
+          "Step": "DEFINE",
+          "Imp": "7.0",
+          "Sat": "5.0",
+          "Opp": "**9.00**",
+          "Under": "no",
+          "Over": "no",
+          "Prod": "false"
+        },
+        {
+          "ID": "ES-03",
+          "Statement (abbreviated)": "Assembly integration <3 minutes per unit",
+          "Step": "PREPARE",
+          "Imp": "7.0",
+          "Sat": "5.0",
+          "Opp": "**9.00**",
+          "Under": "no",
+          "Over": "no",
+          "Prod": "false"
+        },
+        {
+          "ID": "ES-05",
+          "Statement (abbreviated)": "Minimize glycol acoustic property configuration effort",
+          "Step": "PREPARE",
+          "Imp": "7.0",
+          "Sat": "5.0",
+          "Opp": "**9.00**",
+          "Under": "no",
+          "Over": "no",
+          "Prod": "true"
+        },
+        {
+          "ID": "ES-13",
+          "Statement (abbreviated)": "Prevent temperature transient measurement error >1% (>30s)",
+          "Step": "EXECUTE",
+          "Imp": "7.0",
+          "Sat": "5.0",
+          "Opp": "**9.00**",
+          "Under": "no",
+          "Over": "no",
+          "Prod": "true"
+        },
+        {
+          "ID": "ES-15",
+          "Statement (abbreviated)": "Pressure drop contribution <50 mbar at design flow",
+          "Step": "EXECUTE",
+          "Imp": "7.0",
+          "Sat": "5.0",
+          "Opp": "**9.00**",
+          "Under": "no",
+          "Over": "no",
+          "Prod": "false"
+        },
+        {
+          "ID": "ES-24",
+          "Statement (abbreviated)": "Remote sensor health diagnostics via BMS bus",
+          "Step": "MODIFY",
+          "Imp": "6.0",
+          "Sat": "3.0",
+          "Opp": "**9.00**",
+          "Under": "no",
+          "Over": "no",
+          "Prod": "false"
+        },
+        {
+          "ID": "ES-02",
+          "Statement (abbreviated)": "Single sensor platform across DN12-DN25",
+          "Step": "DEFINE",
+          "Imp": "6.0",
+          "Sat": "4.0",
+          "Opp": "**8.00**",
+          "Under": "no",
+          "Over": "no",
+          "Prod": "true"
+        },
+        {
+          "ID": "ES-12",
+          "Statement (abbreviated)": "Prevent pump pulsation causing >5% flow oscillation",
+          "Step": "EXECUTE",
+          "Imp": "6.0",
+          "Sat": "5.0",
+          "Opp": "**7.00**",
+          "Under": "no",
+          "Over": "no",
+          "Prod": "false"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Statement (abbreviated)",
+        "Source Constraint",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Under",
+        "Over"
+      ],
+      "rows": [
+        {
+          "ID": "PRN-05",
+          "Statement (abbreviated)": "Ultrasonic signal attenuation from air entrainment >2% vol",
+          "Source Constraint": "Air Bubble Tolerance",
+          "Imp": "8.0",
+          "Sat": "5.0",
+          "Opp": "**11.00**",
+          "Under": "no",
+          "Over": "no"
+        },
+        {
+          "ID": "PRN-04",
+          "Statement (abbreviated)": "Signal loss below ultrasonic transit-time noise floor at part-load",
+          "Source Constraint": "Minimum Flow Rate Detection",
+          "Imp": "7.0",
+          "Sat": "5.0",
+          "Opp": "**9.00**",
+          "Under": "no",
+          "Over": "no"
+        },
+        {
+          "ID": "PRN-07",
+          "Statement (abbreviated)": "Accuracy sensitivity to asymmetric flow profiles in compact enclosures",
+          "Source Constraint": "Minimum Straight Pipe Run",
+          "Imp": "7.0",
+          "Sat": "4.5",
+          "Opp": "**9.50**",
+          "Under": "no",
+          "Over": "no"
+        },
+        {
+          "ID": "PRN-08",
+          "Statement (abbreviated)": "Transit-time error from rapid speed-of-sound changes",
+          "Source Constraint": "Temperature-Dependent Accuracy",
+          "Imp": "7.0",
+          "Sat": "5.5",
+          "Opp": "**8.50**",
+          "Under": "no",
+          "Over": "no"
+        },
+        {
+          "ID": "PRN-06",
+          "Statement (abbreviated)": "Measurement loss from partially filled pipes",
+          "Source Constraint": "Pipe Full Condition",
+          "Imp": "6.0",
+          "Sat": "5.0",
+          "Opp": "**7.00**",
+          "Under": "no",
+          "Over": "no"
+        },
+        {
+          "ID": "PRN-02",
+          "Statement (abbreviated)": "Polymer housing degradation near 90°C thermal limit",
+          "Source Constraint": "Maximum Medium Temperature",
+          "Imp": "5.0",
+          "Sat": "5.0",
+          "Opp": "**5.00**",
+          "Under": "no",
+          "Over": "no"
+        },
+        {
+          "ID": "PRN-03",
+          "Statement (abbreviated)": "Housing failure from pressure spikes >10 bar",
+          "Source Constraint": "Maximum Operating Pressure",
+          "Imp": "5.0",
+          "Sat": "6.0",
+          "Opp": "**5.00**",
+          "Under": "no",
+          "Over": "no"
+        },
+        {
+          "ID": "PRN-01",
+          "Statement (abbreviated)": "Acoustic impedance mismatch from non-aqueous contaminants",
+          "Source Constraint": "Media Limitation",
+          "Imp": "4.0",
+          "Sat": "7.0",
+          "Opp": "**4.00**",
+          "Under": "no",
+          "Over": "no"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Metric",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Metric": "**Market**",
+          "Value": "Air Conditioning and Warm Air Heating Equipment"
+        },
+        {
+          "Metric": "**NAICS**",
+          "Value": "333415"
+        },
+        {
+          "Metric": "**Total Needs**",
+          "Value": "35"
+        },
+        {
+          "Metric": "**Underserved Count**",
+          "Value": "8"
+        },
+        {
+          "Metric": "**Overserved Count**",
+          "Value": "0"
+        },
+        {
+          "Metric": "**Avg Opportunity Score**",
+          "Value": "9.86"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Rank",
+        "ID",
+        "Statement",
+        "Opp",
+        "Zone"
+      ],
+      "rows": [
+        {
+          "Rank": "1",
+          "ID": "ES-07",
+          "Statement": "Minimize the time to detect an empty-pipe or air-lock condition before enabling the compressor to under 5 seconds",
+          "Opp": "14.50",
+          "Zone": "Underserved"
+        },
+        {
+          "Rank": "2",
+          "ID": "ES-16",
+          "Statement": "Minimize the likelihood of compressor short-cycling due to undetected low-flow conditions persisting longer than 10 seconds",
+          "Opp": "13.50",
+          "Zone": "Underserved"
+        },
+        {
+          "Rank": "3",
+          "ID": "ES-20",
+          "Statement": "Increase the ability to compute real-time thermal energy output (kW) by combining volumetric flow and temperature delta within a single sensor body",
+          "Opp": "13.00",
+          "Zone": "Underserved"
+        },
+        {
+          "Rank": "4",
+          "ID": "ES-09",
+          "Statement": "Increase the ability to maintain measurement accuracy within ±3% of reading over 10,000 operating hours of steady-state operation",
+          "Opp": "12.50",
+          "Zone": "Underserved"
+        },
+        {
+          "Rank": "5",
+          "ID": "ES-06",
+          "Statement": "Increase the ability to automatically compensate for glycol concentration variations up to 50% without manual reconfiguration",
+          "Opp": "12.00",
+          "Zone": "Underserved"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Zone",
+        "Score Range",
+        "Count",
+        "%"
+      ],
+      "rows": [
+        {
+          "Zone": "Highly Underserved",
+          "Score Range": ">15",
+          "Count": "0",
+          "%": "0%"
+        },
+        {
+          "Zone": "Underserved",
+          "Score Range": "12–15",
+          "Count": "6",
+          "%": "17%"
+        },
+        {
+          "Zone": "Appropriately Served",
+          "Score Range": "10–12",
+          "Count": "14",
+          "%": "40%"
+        },
+        {
+          "Zone": "Overserved",
+          "Score Range": "<10",
+          "Count": "15",
+          "%": "43%"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Metric",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Metric": "ODI avg opportunity score",
+          "Value": "9.86"
+        },
+        {
+          "Metric": "Feature-Fit avg overall score (Step 09)",
+          "Value": "5.11"
+        },
+        {
+          "Metric": "Threshold: ODI avg > 12 AND Feature-Fit avg < 4",
+          "Value": "NOT triggered"
+        },
+        {
+          "Metric": "Threshold: ODI avg < 8 AND Feature-Fit avg > 7",
+          "Value": "NOT triggered"
+        },
+        {
+          "Metric": "**Result**",
+          "Value": "**No inconsistencies detected**"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Underserved Need",
+        "Opp",
+        "Addressing Feature",
+        "Feature Fit",
+        "Alignment"
+      ],
+      "rows": [
+        {
+          "Underserved Need": "ES-07 Empty-pipe detection",
+          "Opp": "14.50",
+          "Addressing Feature": "Digital Anomaly Detection",
+          "Feature Fit": "6.67",
+          "Alignment": "Strong — highest-fit feature addresses highest-opp need"
+        },
+        {
+          "Underserved Need": "ES-16 Low-flow / short-cycling",
+          "Opp": "13.50",
+          "Addressing Feature": "Transit-Time Flow Measurement",
+          "Feature Fit": "5.00",
+          "Alignment": "Moderate — core FP covers this but accuracy at low flow is a challenge"
+        },
+        {
+          "Underserved Need": "ES-20 Single-body kW calculation",
+          "Opp": "13.00",
+          "Addressing Feature": "Integrated Temperature Sensing",
+          "Feature Fit": "5.67",
+          "Alignment": "Strong — unique capability; no incumbent matches"
+        },
+        {
+          "Underserved Need": "ES-06 Glycol auto-compensation",
+          "Opp": "12.00",
+          "Addressing Feature": "Real-Time Compensation Algorithms",
+          "Feature Fit": "4.56",
+          "Alignment": "Moderate — addresses need but vortex avoids it entirely"
+        },
+        {
+          "Underserved Need": "ES-25 EU EcoDesign compliance",
+          "Opp": "12.00",
+          "Addressing Feature": "Transit-Time Flow Measurement + Integrated Temp",
+          "Feature Fit": "5.00/5.67",
+          "Alignment": "Strong — combined flow+temp enables heat metering compliance"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Pass Condition",
+        "Result"
+      ],
+      "rows": [
+        {
+          "#": "Q1",
+          "Check": "Formula correct",
+          "Pass Condition": "Spot-check 5 entries match `opp = imp + max(imp - sat, 0)`",
+          "Result": "**PASS** — ES-07: 9+max(9-3.5,0)=14.5; ES-16: 9+max(9-4.5,0)=13.5; ES-20: 8+max(8-3,0)=13; PRN-01: 4+max(4-7,0)=4; ES-12: 6+max(6-5,0)=7"
+        },
+        {
+          "#": "Q2",
+          "Check": "Underserved flags correct",
+          "Pass Condition": "Every entry with imp>7 AND sat<5 has is_underserved=true",
+          "Result": "**PASS** — 8 entries flagged; verified all 8 meet criteria"
+        },
+        {
+          "#": "Q3",
+          "Check": "Overserved flags correct",
+          "Pass Condition": "Every entry with imp<3 AND sat>7 has is_overserved=true",
+          "Result": "**PASS** — 0 entries; no entry has imp<3 AND sat>7"
+        },
+        {
+          "#": "Q4",
+          "Check": "Need count preserved",
+          "Pass Condition": "Total entries ≥ Step 06 count (27) + Step 10 applicable (8)",
+          "Result": "**PASS** — 35 = 27 + 8"
+        },
+        {
+          "#": "Q5",
+          "Check": "Top-5 ordering correct",
+          "Pass Condition": "Sorted by descending opportunity_score",
+          "Result": "**PASS** — 14.5 > 13.5 > 13.0 > 12.5 > 12.0"
+        },
+        {
+          "#": "Q6",
+          "Check": "Cross-check ran",
+          "Pass Condition": "ODI vs Feature-Fit inconsistencies checked",
+          "Result": "**PASS** — no inconsistencies detected"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "odi_matrix",
+      "naics_code": "333415",
+      "naics_title": "Air-Conditioning and Warm Air Heating Equipment and Commercial and Industrial Refrigeration Equipment Manufacturing",
+      "market_name": "Air Conditioning and Warm Air Heating Equipment",
+      "product_name": "Ultrasonic Flow Sensor",
+      "vendor_name": "Marquardt",
+      "technology_class": "Ultrasonic Transit-Time Flow Measurement",
+      "entries": [
+        {
+          "error_statement": "Minimize the time to detect an empty-pipe or air-lock condition before enabling the compressor to under 5 seconds",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 9.0,
+          "satisfaction_current": 3.5,
+          "opportunity_score": 14.5,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 4,
+          "job_step_name": "CONFIRM",
+          "impact_category": "safety",
+          "source_id": "ES-07",
+          "recalibration_delta": -0.5,
+          "recalibration_reason": "Vortex detects bubbles but NOT rapid empty-pipe in <5s; most incumbents poor at this specific capability"
+        },
+        {
+          "error_statement": "Minimize the likelihood of compressor short-cycling due to undetected low-flow conditions persisting longer than 10 seconds",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 9.0,
+          "satisfaction_current": 4.5,
+          "opportunity_score": 13.5,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "impact_category": "safety",
+          "source_id": "ES-16",
+          "recalibration_delta": -0.5,
+          "recalibration_reason": "Vortex degrades at low flow (known weakness); pump estimation ±10-20% misses low-flow events"
+        },
+        {
+          "error_statement": "Increase the ability to compute real-time thermal energy output (kW) by combining volumetric flow and temperature delta within a single sensor body",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 8.0,
+          "satisfaction_current": 3.0,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "impact_category": "cost",
+          "source_id": "ES-20",
+          "recalibration_delta": -1.0,
+          "recalibration_reason": "No incumbent except ultrasonic offers combined flow+temp in single body; vortex, turbine, EM all require separate temp probe"
+        },
+        {
+          "error_statement": "Increase the ability to maintain measurement accuracy within ±3% of reading over 10,000 operating hours of steady-state operation",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 9.0,
+          "satisfaction_current": 5.5,
+          "opportunity_score": 12.5,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "impact_category": "reliability",
+          "source_id": "ES-09",
+          "recalibration_delta": -0.5,
+          "recalibration_reason": "Turbine installed base (15-40% share) drifts significantly over time; weighted average satisfaction lower"
+        },
+        {
+          "error_statement": "Increase the ability to automatically compensate for glycol concentration variations up to 50% without manual reconfiguration",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 8.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 12.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": 3,
+          "job_step_name": "PREPARE",
+          "impact_category": "reliability",
+          "source_id": "ES-06",
+          "recalibration_delta": 0.0,
+          "recalibration_reason": "Unchanged — vortex has moderate fluid property sensitivity; turbine affected by viscosity; mixed picture"
+        },
+        {
+          "error_statement": "Increase the ability to demonstrate EU EcoDesign energy efficiency compliance through traceable, sensor-based flow measurement data",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 8.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 12.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": 0,
+          "job_step_name": "BRIDGE",
+          "impact_category": "cost",
+          "source_id": "ES-25",
+          "recalibration_delta": 0.0,
+          "recalibration_reason": "Unchanged — pump estimation EU-disqualified; balance valve spot-check only; dedicated sensors can provide data but traceability gaps remain"
+        },
+        {
+          "error_statement": "Minimize the likelihood of air entrainment exceeding 2% by volume causing complete measurement signal loss during thermal cycling",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 8.0,
+          "satisfaction_current": 4.5,
+          "opportunity_score": 11.5,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "impact_category": "reliability",
+          "source_id": "ES-10",
+          "recalibration_delta": 0.5,
+          "recalibration_reason": "Vortex (dominant) has bubble detection as a known strength; EM immune to air entrainment"
+        },
+        {
+          "error_statement": "Increase the ability to detect calibration drift exceeding ±0.5% within 30 days of occurrence over 12 months of continuous operation",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 8.0,
+          "satisfaction_current": 4.5,
+          "opportunity_score": 11.5,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "impact_category": "reliability",
+          "source_id": "ES-17",
+          "recalibration_delta": -0.5,
+          "recalibration_reason": "No incumbent self-detects calibration drift; turbine drifts silently; vortex is stable but lacks drift alerting"
+        },
+        {
+          "error_statement": "Minimize the likelihood of field audit findings revealing flow measurement inaccuracy that would cause energy label downgrade",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 8.0,
+          "satisfaction_current": 4.5,
+          "opportunity_score": 11.5,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": 0,
+          "job_step_name": "BRIDGE",
+          "impact_category": "cost",
+          "source_id": "ES-26",
+          "recalibration_delta": -0.5,
+          "recalibration_reason": "Turbine drift + pump estimation disqualification creates audit risk across significant installed base"
+        },
+        {
+          "error_statement": "Minimize the likelihood of incorrect sensor orientation during installation causing flow measurement bias exceeding 2% of reading",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 8.0,
+          "satisfaction_current": 5.0,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": 3,
+          "job_step_name": "PREPARE",
+          "impact_category": "reliability",
+          "source_id": "ES-04",
+          "recalibration_delta": 0.0,
+          "recalibration_reason": "Unchanged — all inline sensors have orientation sensitivity; no incumbent advantage"
+        },
+        {
+          "error_statement": "Increase the ability to measure flow rate accurately across the full turndown range from minimum to maximum system load",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 8.0,
+          "satisfaction_current": 5.0,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "impact_category": "reliability",
+          "source_id": "ES-11",
+          "recalibration_delta": 0.0,
+          "recalibration_reason": "Unchanged — vortex limited at low flow, turbine has 30:1 turndown; mixed picture"
+        },
+        {
+          "error_statement": "Minimize the likelihood of acoustic coupling degradation between transducer and fluid causing measurement error exceeding 1% within the first 5 years of operation",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 8.0,
+          "satisfaction_current": 5.0,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "impact_category": "reliability",
+          "source_id": "ES-21",
+          "recalibration_delta": 0.0,
+          "recalibration_reason": "Unchanged — technology-specific to ultrasonic; incumbent ultrasonic share (35%) sets baseline"
+        },
+        {
+          "error_statement": "Minimize the frequency of warranty callbacks attributed to flow sensor malfunction within the first 24 months of equipment operation",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 8.0,
+          "satisfaction_current": 5.0,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": 0,
+          "job_step_name": "BRIDGE",
+          "impact_category": "cost",
+          "source_id": "ES-27",
+          "recalibration_delta": 0.0,
+          "recalibration_reason": "Unchanged — vortex (dominant) is reliable; turbine drives most callbacks but declining share"
+        },
+        {
+          "error_statement": "Minimize the likelihood of ultrasonic signal attenuation from air entrainment exceeding 2% by volume during thermal cycling or system startup",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 8.0,
+          "satisfaction_current": 5.0,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 0,
+          "job_step_name": "product_constraint",
+          "impact_category": "reliability",
+          "source_id": "PRN-05",
+          "recalibration_delta": 1.0,
+          "recalibration_reason": "Vortex and EM largely unaffected by air bubbles; dominant incumbents handle this better than ultrasonic"
+        },
+        {
+          "error_statement": "Increase the ability to verify sensor signal integrity through automated self-diagnostics at each system startup",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 7.0,
+          "satisfaction_current": 3.5,
+          "opportunity_score": 10.5,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": 4,
+          "job_step_name": "CONFIRM",
+          "impact_category": "reliability",
+          "source_id": "ES-08",
+          "recalibration_delta": -0.5,
+          "recalibration_reason": "No incumbent offers automated self-diagnostics at startup; degraded sensors operate undetected"
+        },
+        {
+          "error_statement": "Increase the ability to detect and report reverse flow direction to the system controller within 1 second of flow reversal",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 7.0,
+          "satisfaction_current": 3.5,
+          "opportunity_score": 10.5,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "impact_category": "safety",
+          "source_id": "ES-14",
+          "recalibration_delta": -0.5,
+          "recalibration_reason": "Only EM (niche 5-15%) detects direction; vortex/turbine/paddle all poor at directional sensing"
+        },
+        {
+          "error_statement": "Minimize the likelihood of requiring field recalibration more frequently than once within the rated equipment service life",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 8.0,
+          "satisfaction_current": 5.5,
+          "opportunity_score": 10.5,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": 7,
+          "job_step_name": "MODIFY",
+          "impact_category": "cost",
+          "source_id": "ES-23",
+          "recalibration_delta": 0.5,
+          "recalibration_reason": "Vortex (dominant) is genuinely stable — no moving parts, minimal calibration drift over service life"
+        },
+        {
+          "error_statement": "Increase the ability to distinguish genuine process deviations from sensor artifacts with >95% classification accuracy",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 7.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 10.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "impact_category": "reliability",
+          "source_id": "ES-18",
+          "recalibration_delta": 0.0,
+          "recalibration_reason": "Unchanged — most incumbents lack diagnostic sophistication"
+        },
+        {
+          "error_statement": "Minimize the time required to recalibrate or replace a degraded flow sensor without draining the hydronic circuit",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 7.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 10.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": 7,
+          "job_step_name": "MODIFY",
+          "impact_category": "time",
+          "source_id": "ES-22",
+          "recalibration_delta": 0.0,
+          "recalibration_reason": "Unchanged — all inline sensors require system shutdown for replacement"
+        },
+        {
+          "error_statement": "Minimize the sensitivity of transit-time measurement accuracy to asymmetric flow profiles from elbows, valves, or tees in compact equipment enclosures",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 7.0,
+          "satisfaction_current": 4.5,
+          "opportunity_score": 9.5,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 0,
+          "job_step_name": "product_constraint",
+          "impact_category": "reliability",
+          "source_id": "PRN-07",
+          "recalibration_delta": 0.5,
+          "recalibration_reason": "EM measures full cross-section (immune to flow profile); vortex less sensitive to asymmetry"
+        },
+        {
+          "error_statement": "Minimize the likelihood of scale or sediment buildup degrading measurement accuracy by more than 2% within the sensor's rated service life",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 7.0,
+          "satisfaction_current": 4.5,
+          "opportunity_score": 9.5,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "impact_category": "reliability",
+          "source_id": "ES-19",
+          "recalibration_delta": -0.5,
+          "recalibration_reason": "Vortex bluff body accumulates debris (known weakness); turbine clogs from particles and sediment"
+        },
+        {
+          "error_statement": "Minimize the likelihood of selecting a flow sensor with insufficient turndown ratio for the system's part-load to full-load operating range",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 7.0,
+          "satisfaction_current": 5.0,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "impact_category": "reliability",
+          "source_id": "ES-01",
+          "recalibration_delta": 0.0,
+          "recalibration_reason": "Unchanged — mixed picture: vortex limited at low flow, turbine has 30:1 turndown"
+        },
+        {
+          "error_statement": "Minimize the time required to mechanically integrate the flow sensor into the hydronic circuit during OEM assembly to under 3 minutes per unit",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 7.0,
+          "satisfaction_current": 5.0,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": 3,
+          "job_step_name": "PREPARE",
+          "impact_category": "time",
+          "source_id": "ES-03",
+          "recalibration_delta": 0.0,
+          "recalibration_reason": "Unchanged — all inline sensors install similarly"
+        },
+        {
+          "error_statement": "Minimize the commissioning effort required to configure fluid acoustic properties for varying water-glycol concentrations",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 7.0,
+          "satisfaction_current": 5.0,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 3,
+          "job_step_name": "PREPARE",
+          "impact_category": "skill",
+          "source_id": "ES-05",
+          "recalibration_delta": 1.0,
+          "recalibration_reason": "Vortex (dominant) doesn't require acoustic calibration — avoids glycol configuration entirely"
+        },
+        {
+          "error_statement": "Minimize the likelihood of rapid temperature transients exceeding compensation algorithm response, causing measurement error >1% for more than 30 seconds",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 7.0,
+          "satisfaction_current": 5.0,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "impact_category": "reliability",
+          "source_id": "ES-13",
+          "recalibration_delta": 0.0,
+          "recalibration_reason": "Unchanged — vortex has some temperature sensitivity; EM immune; mixed"
+        },
+        {
+          "error_statement": "Minimize the flow sensor's contribution to system pressure drop below 50 mbar at design flow rate",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 7.0,
+          "satisfaction_current": 5.0,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "impact_category": "cost",
+          "source_id": "ES-15",
+          "recalibration_delta": -1.0,
+          "recalibration_reason": "Vortex has 'moderate pressure drop' (known weakness); turbine also creates pressure drop; only EM has zero"
+        },
+        {
+          "error_statement": "Minimize the likelihood of measurement signal loss when system flow rate falls below the ultrasonic transit-time noise floor during part-load VFD operation",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 7.0,
+          "satisfaction_current": 5.0,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 0,
+          "job_step_name": "product_constraint",
+          "impact_category": "reliability",
+          "source_id": "PRN-04",
+          "recalibration_delta": 0.0,
+          "recalibration_reason": "Unchanged — vortex also struggles at low flow; turbine has good low-flow range; mixed"
+        },
+        {
+          "error_statement": "Increase the ability to remotely diagnose flow sensor health status via the existing BMS communication bus without physical inspection",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 6.0,
+          "satisfaction_current": 3.0,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": 7,
+          "job_step_name": "MODIFY",
+          "impact_category": "time",
+          "source_id": "ES-24",
+          "recalibration_delta": 0.0,
+          "recalibration_reason": "Unchanged — most legacy sensors lack remote diagnostics"
+        },
+        {
+          "error_statement": "Minimize the likelihood of transit-time measurement error from rapid speed-of-sound changes during heating-cooling mode transitions exceeding compensation algorithm response time",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 7.0,
+          "satisfaction_current": 5.5,
+          "opportunity_score": 8.5,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 0,
+          "job_step_name": "product_constraint",
+          "impact_category": "reliability",
+          "source_id": "PRN-08",
+          "recalibration_delta": 0.5,
+          "recalibration_reason": "EM immune to speed-of-sound changes; vortex uses frequency not SoS — dominant incumbents less affected"
+        },
+        {
+          "error_statement": "Increase the ability to specify a single sensor platform across multiple pipe diameters (DN12-DN25) without redesigning the hydraulic assembly",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 6.0,
+          "satisfaction_current": 4.0,
+          "opportunity_score": 8.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "impact_category": "cost",
+          "source_id": "ES-02",
+          "recalibration_delta": 0.0,
+          "recalibration_reason": "Unchanged — SIKA vortex offers VVX15/20/25 but unclear if shared electronics platform"
+        },
+        {
+          "error_statement": "Minimize the likelihood of circulation pump pressure pulsations causing flow reading oscillations exceeding 5% of steady-state value",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 6.0,
+          "satisfaction_current": 5.0,
+          "opportunity_score": 7.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false,
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "impact_category": "reliability",
+          "source_id": "ES-12",
+          "recalibration_delta": 0.0,
+          "recalibration_reason": "Unchanged — all sensor types somewhat affected by pump pulsations"
+        },
+        {
+          "error_statement": "Minimize the likelihood of complete measurement loss from partially filled pipe sections during system charging, maintenance drain-down, or gravity-return operation",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 6.0,
+          "satisfaction_current": 5.0,
+          "opportunity_score": 7.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 0,
+          "job_step_name": "product_constraint",
+          "impact_category": "reliability",
+          "source_id": "PRN-06",
+          "recalibration_delta": 0.0,
+          "recalibration_reason": "Unchanged — vortex and turbine also require full pipe; EM recovers faster but niche share"
+        },
+        {
+          "error_statement": "Minimize the risk of polymer housing and seal degradation from sustained operation near the 90°C thermal limit in high-temperature heating configurations",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 5.0,
+          "satisfaction_current": 5.0,
+          "opportunity_score": 5.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 0,
+          "job_step_name": "product_constraint",
+          "impact_category": "reliability",
+          "source_id": "PRN-02",
+          "recalibration_delta": 0.0,
+          "recalibration_reason": "Unchanged — vortex (SIKA) also uses plastic housing; EM uses metal; mixed"
+        },
+        {
+          "error_statement": "Minimize the risk of sensor housing failure from pressure spikes exceeding 10 bar continuous rating during water hammer or pump surge events",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 5.0,
+          "satisfaction_current": 6.0,
+          "opportunity_score": 5.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 0,
+          "job_step_name": "product_constraint",
+          "impact_category": "reliability",
+          "source_id": "PRN-03",
+          "recalibration_delta": 0.0,
+          "recalibration_reason": "Unchanged — EM has higher pressure rating (metal housing) but vortex similar to ultrasonic"
+        },
+        {
+          "error_statement": "Minimize the likelihood of measurement failure from acoustic impedance mismatch when non-aqueous contaminants enter the hydronic circuit",
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "importance": 4.0,
+          "satisfaction_current": 7.0,
+          "opportunity_score": 4.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true,
+          "job_step_number": 0,
+          "job_step_name": "product_constraint",
+          "impact_category": "reliability",
+          "source_id": "PRN-01",
+          "recalibration_delta": 1.0,
+          "recalibration_reason": "All major incumbents (vortex, EM, turbine) immune to acoustic coupling issues; market well-served"
+        }
+      ],
+      "market_summaries": [
+        {
+          "market_name": "Air Conditioning and Warm Air Heating Equipment",
+          "naics_code": "333415",
+          "total_needs": 35,
+          "underserved_count": 8,
+          "overserved_count": 0,
+          "avg_opportunity_score": 9.86,
+          "top_opportunities": [
+            "Minimize the time to detect an empty-pipe or air-lock condition before enabling the compressor to under 5 seconds",
+            "Minimize the likelihood of compressor short-cycling due to undetected low-flow conditions persisting longer than 10 seconds",
+            "Increase the ability to compute real-time thermal energy output (kW) by combining volumetric flow and temperature delta within a single sensor body",
+            "Increase the ability to maintain measurement accuracy within ±3% of reading over 10,000 operating hours of steady-state operation",
+            "Increase the ability to automatically compensate for glycol concentration variations up to 50% without manual reconfiguration"
+          ]
+        }
+      ],
+      "cross_check": {
+        "step_09_available": true,
+        "odi_avg": 9.86,
+        "feature_fit_avg": 5.11,
+        "inconsistencies": [],
+        "result": "No inconsistencies detected"
+      },
+      "entities_produced": {
+        "nodes": [
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the time to detect an empty-pipe or air-lock condition before enabli",
+              "naics_code": "333415",
+              "run_id": "TBD"
+            },
+            "props": {
+              "full_statement": "Minimize the time to detect an empty-pipe or air-lock condition before enabling the compressor to under 5 seconds",
+              "market_name": "Air Conditioning and Warm Air Heating Equipment",
+              "importance": 9.0,
+              "satisfaction_current": 3.5,
+              "opportunity_score": 14.5,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the likelihood of compressor short-cycling due to undetected low-flo",
+              "naics_code": "333415",
+              "run_id": "TBD"
+            },
+            "props": {
+              "full_statement": "Minimize the likelihood of compressor short-cycling due to undetected low-flow conditions persisting longer than 10 seconds",
+              "market_name": "Air Conditioning and Warm Air Heating Equipment",
+              "importance": 9.0,
+              "satisfaction_current": 4.5,
+              "opportunity_score": 13.5,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Increase the ability to compute real-time thermal energy output (kW) by combi",
+              "naics_code": "333415",
+              "run_id": "TBD"
+            },
+            "props": {
+              "full_statement": "Increase the ability to compute real-time thermal energy output (kW) by combining volumetric flow and temperature delta within a single sensor body",
+              "market_name": "Air Conditioning and Warm Air Heating Equipment",
+              "importance": 8.0,
+              "satisfaction_current": 3.0,
+              "opportunity_score": 13.0,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Increase the ability to maintain measurement accuracy within ±3% of reading o",
+              "naics_code": "333415",
+              "run_id": "TBD"
+            },
+            "props": {
+              "full_statement": "Increase the ability to maintain measurement accuracy within ±3% of reading over 10,000 operating hours of steady-state operation",
+              "market_name": "Air Conditioning and Warm Air Heating Equipment",
+              "importance": 9.0,
+              "satisfaction_current": 5.5,
+              "opportunity_score": 12.5,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Increase the ability to automatically compensate for glycol concentration vari",
+              "naics_code": "333415",
+              "run_id": "TBD"
+            },
+            "props": {
+              "full_statement": "Increase the ability to automatically compensate for glycol concentration variations up to 50% without manual reconfiguration",
+              "market_name": "Air Conditioning and Warm Air Heating Equipment",
+              "importance": 8.0,
+              "satisfaction_current": 4.0,
+              "opportunity_score": 12.0,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": false
+            }
+          }
+        ],
+        "relationships": [
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:ES-07"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:ES-16"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:ES-20"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:ES-09"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:ES-06"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:ES-25"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:ES-10"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:ES-17"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:ES-26"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:ES-04"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:ES-11"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:ES-21"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:ES-27"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:PRN-05"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:ES-08"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:ES-14"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:ES-23"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:ES-18"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:ES-22"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:PRN-07"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:ES-19"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:ES-01"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:ES-03"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:ES-05"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:ES-13"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:ES-15"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:PRN-04"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:ES-24"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:PRN-08"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:ES-02"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:ES-12"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:PRN-06"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:PRN-02"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:PRN-03"
+          },
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:333415",
+            "target": "OpportunityScore:PRN-01"
+          }
+        ],
+        "market_odi_props": {
+          "naics_code": "333415",
+          "odi_total_needs": 35,
+          "odi_underserved_count": 8,
+          "odi_overserved_count": 0,
+          "odi_avg_opportunity_score": 9.86,
+          "odi_top_opportunities": "[\"Minimize the time to detect an empty-pipe or air-lock condition before enabling the compressor to under 5 seconds\",\"Minimize the likelihood of compressor short-cycling due to undetected low-flow conditions persisting longer than 10 seconds\",\"Increase the ability to compute real-time thermal energy output (kW) by combining volumetric flow and temperature delta within a single sensor body\",\"Increase the ability to maintain measurement accuracy within ±3% of reading over 10,000 operating hours of steady-state operation\",\"Increase the ability to automatically compensate for glycol concentration variations up to 50% without manual reconfiguration\"]"
+        }
+      }
+    }
+  ],
+  "has_bom": true,
+  "naics_sector_type": "manufacturing"
+}

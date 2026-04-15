@@ -1,0 +1,1379 @@
+{
+  "id": "VN_data_processing_hosting",
+  "title": "VN — NAICS 518210 (Data Processing, Hosting, and Related Services)",
+  "type": "value_network",
+  "market_slug": "data_processing_hosting",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Industry Context",
+      "content": "| Field | Value |\n|---|---|\n| **NAICS** | 518210 |\n| **Title** | Data Processing, Hosting, and Related Services |\n| **Output type focus** | Colocation hosting, hyperscale cloud, AI/GPU compute-as-a-service |\n| **Architecture distance** | 4 (adjacent, growing) [SRC: 05_market_discovery] |\n| **Dominant trend (2025–26)** | Air cooling → direct-liquid cooling at rack and chip level; DLC market ~$3B in 2025, forecast $7B by 2029 [SRC: Dell'Oro via Network World] |"
+    },
+    {
+      "title": "Core Functional Job (L7)",
+      "content": "| Field | Value |\n|---|---|\n| **CFJ statement** | Host, operate, and deliver customer computing and data workloads on demand with continuous uptime, predictable performance, and contracted SLA compliance |\n| **L7 name** | Data Center Hosting Ecosystem |\n| **bom_standard** | Moore 1993 |\n\n**Q1 industry-level test:** PASS — CFJ contains no technology, product, or subsystem reference. Applies equally to colo, hyperscale, HPC, and managed hosting.\n\n---"
+    },
+    {
+      "title": "L6 — Process Steps",
+      "content": "### Core (sequential)\n\n| ID | Name | Job family | Activates for output types |\n|---|---|---|---|\n| L6a | Facility Provisioning | Provision conditioned white space, fiber entry, and grid power capacity | Colo, Hyperscale, HPC/AI |\n| L6b | Power Delivery | Convert utility feed to stable, redundant IT-grade DC/AC at the rack | Colo, Hyperscale, HPC/AI |\n| L6c | Thermal Management | Reject IT heat load from silicon to ambient within temperature envelope | Colo, Hyperscale, **HPC/AI (primary)** |\n| L6d | IT Load Hosting | Rack, cable, commission, and power on customer compute, storage, network gear | Colo, Hyperscale, HPC/AI |\n| L6e | Compute, Storage & Network Operations | Execute customer workloads, serve traffic, persist data | Colo (partial), Hyperscale, HPC/AI |\n\n### Horizontal (parallel, cross-cutting) — marked (H)\n\n| ID | Name | Role |\n|---|---|---|\n| L6f (H) | Facilities Maintenance & Engineering | Keep all mechanical/electrical plant operational |\n| L6g (H) | Energy & Sustainability Management | Monitor, report, and optimize PUE, WUE, carbon |\n| L6h (H) | Security (Physical & Cyber) | Access control, surveillance, SOC, compliance |\n| L6i (H) | SLA / Availability Assurance | Tier-level uptime monitoring, incident response |\n\n---"
+    },
+    {
+      "title": "L5 — Equipment Positions (bias on Thermal Management branch)",
+      "content": "### Under **L6c Thermal Management** (sensor-relevant)\n\n| L5 unit | Alternatives | Confidence | Source |\n|---|---|---|---|\n| **Chiller Plant** | Centrifugal ~55% · Screw ~25% · Scroll ~12% · Adsorption/other ~8% | MEDIUM | AHRI / ASHRAE estimates |\n| **Heat Rejection Unit** | Evaporative cooling tower ~55% · Dry cooler ~30% · Adiabatic ~15% (dry-cooler share rising with 45 °C liquid cooling) | MEDIUM | Tom's Hardware, Jan 2026; CES Rubin announcement |\n| **Coolant Distribution Unit (CDU)** | In-row CDU ~60% · In-rack CDU ~30% · Manifold-only ~10% | MEDIUM | Vertiv / nVent product mix |\n| **In-Rack Liquid Cooling Unit (RDHx / side-cooler)** | Rear-door HX ~55% · Sidecar ~25% · Integrated rack ~20% | MEDIUM | Supermicro, IEEE Spectrum |\n| **Cold Plate Assembly (Direct-to-Chip)** | Single-phase water ~70% · Single-phase PG25 ~20% · Two-phase dielectric ~10% | MEDIUM | XD Thermal, Schneider |\n| **CRAH / CRAC Unit** | Chilled-water CRAH ~70% · DX CRAC ~20% · Indirect evap ~10% | HIGH | AHRI |\n| **Building Management / DCIM Platform** | Proprietary DCIM ~45% · OT/BMS (Siemens, JCI, Schneider) ~35% · Open-source/custom ~20% | LOW | Inference |\n\n### Under **L6a Facility Provisioning**\n\n| L5 unit | Alternatives |\n|---|---|\n| White Space Fit-Out | Raised-floor ~60% · Slab + containment ~40% |\n| Fiber / Meet-Me Entry | Carrier MMR ~100% (standard) |\n\n### Under **L6b Power Delivery**\n\n| L5 unit | Alternatives |\n|---|---|\n| Medium-Voltage Switchgear | Air-insulated ~65% · Gas-insulated ~35% |\n| Uninterruptible Power Supply (UPS) | Double-conversion static ~70% · Rotary/flywheel ~15% · Li-ion DRUPS ~15% |\n| Power Distribution Unit (PDU) | Floor PDU ~50% · Rack PDU ~50% |\n| Backup Generator | Diesel ~85% · Gas/HVO ~15% |\n\n### Under **L6d IT Load Hosting**\n\n| L5 unit | Alternatives |\n|---|---|\n| Server Rack / Cabinet | Open 19\" ~55% · Enclosed ~35% · Open-rack (OCP) ~10% |\n| Structured Cabling | Copper ~45% · Fiber ~55% |\n\n### Under **L6e Compute, Storage & Network Operations**\n\n| L5 unit | Alternatives |\n|---|---|\n| Compute Server | x86 general ~60% · GPU accelerator ~30% · ARM/custom ~10% |\n| Storage Array | All-flash ~55% · Hybrid ~30% · HDD ~15% |\n| Network Switch | ToR leaf ~60% · Spine ~25% · Edge/router ~15% |\n\n---"
+    },
+    {
+      "title": "L4 — Subsystems (INCOSE)",
+      "content": "### Under **Coolant Distribution Unit (CDU)** — **Marquardt anchor**\n\n| L4 | Role |\n|---|---|\n| Brazed Plate Heat Exchanger | Transfers heat between facility chilled-water loop and secondary TCS loop |\n| Coolant Circulation Pump | Moves TCS coolant through secondary loop |\n| **Flow Sensor (DN15–DN25)** | **Monitors secondary-loop flow rate; feeds CDU controller and DCIM for PUE calc & blockage detection — Marquardt DN20 anchor** |\n| Temperature Probe (supply/return) | Measures ΔT for kW thermal duty calculation |\n| Leak Detection Sensor | Detects coolant escape below CDU or under raised floor |\n| Expansion / Reservoir Tank | Accommodates thermal expansion, de-aerates loop |\n| CDU Controller | Closes loop on pump speed, valve position, setpoints |\n\n### Under **In-Rack Liquid Cooling Unit (RDHx)**\n\n| L4 | Role |\n|---|---|\n| Rear-Door Heat Exchanger Coil | Captures hot air from rack exhaust into water loop |\n| EC Fan Array | Pulls server exhaust through coil |\n| **Flow Sensor (DN15–DN20)** | **Verifies coolant flow to door coil — secondary Marquardt anchor** |\n| Temperature/Pressure Sensor | Monitors coil inlet/outlet condition |\n\n### Under **Cold Plate Assembly (Direct-to-Chip)**\n\n| L4 | Role |\n|---|---|\n| Microchannel Cold Plate | Copper/Al plate mounted to CPU/GPU die |\n| Coolant Manifold | Distributes to multiple cold plates in a node |\n| Quick Disconnect / Dripless Coupling | Enables serviceable node removal |\n| Micro Flow Meter | Per-node flow verification (typically DN6–DN10 — below Marquardt DN20 range) |\n\n### Under **Chiller Plant**\n\n| L4 | Role |\n|---|---|\n| Compressor | Centrifugal / screw / scroll |\n| Evaporator | Transfers load from CHW return to refrigerant |\n| Condenser | Rejects heat to cooling-tower / dry-cooler loop |\n| Chiller Controller | Sequences compressor stages, vanes, economizer |\n\n### Under **Heat Rejection Unit**\n\n| L4 | Role |\n|---|---|\n| Fan / Fan Wall | Drives air across fill or dry-cooler coil |\n| Fill Media / Dry-Cooler Coil | Evaporative fill OR finned-tube coil |\n| Basin / Pump Set | Tower water recirculation |\n\n### Under **CRAH / CRAC Unit**\n\n| L4 | Role |\n|---|---|\n| EC Fan | Circulates room air |\n| Cooling Coil | Chilled water or DX refrigerant |\n| Control Valve (2- or 3-way) | Modulates coil duty |\n\n### Under **UPS**\n\n| L4 | Role |\n|---|---|\n| Rectifier / Inverter | AC↔DC conversion |\n| Battery String | Ride-through energy storage |\n| Static Bypass Switch | Fail-to-mains path |\n\n### Under **PDU**\n\n| L4 | Role |\n|---|---|\n| Input Transformer | Voltage step-down (floor PDU) |\n| Branch Circuit Monitor | Per-outlet current / energy metering |\n| Outlet Bank | C13/C19 receptacles |\n\n### Under **Server Rack / Cabinet**\n\n| L4 | Role |\n|---|---|\n| Frame & Rails | 19\"/OCP structure |\n| Blanking Panels & Containment | Airflow management |\n| Rack-Level Environmental Sensor | Temp/humidity at intake/exhaust |\n\n### Under **Compute Server**\n\n| L4 | Role |\n|---|---|\n| CPU / GPU Package | Primary compute silicon |\n| Memory DIMMs | Working memory |\n| Power Supply Unit | AC→DC rail |\n\n### Under **Storage Array**\n\n| L4 | Role |\n|---|---|\n| SSD/HDD Drive | Persistent media |\n| Storage Controller | RAID, erasure coding, protocols |\n| Backplane | Drive interconnect |\n\n### Under **Network Switch**\n\n| L4 | Role |\n|---|---|\n| Switch ASIC | Packet forwarding silicon |\n| Optical Transceiver | Photonic I/O |\n| Switch Controller / NOS | Control plane |\n\n### Under **Building Management / DCIM**\n\n| L4 | Role |\n|---|---|\n| SCADA / Supervisory Server | Aggregates sensor telemetry |\n| Sensor Gateway | Modbus/BACnet/MQTT bridge |\n| Alarm & Event Engine | Threshold & anomaly alerting |\n\n### Under **Medium-Voltage Switchgear**\n\n| L4 | Role |\n|---|---|\n| Circuit Breaker | Fault interruption |\n| Protection Relay | Overcurrent / differential logic |\n\n### Under **Backup Generator**\n\n| L4 | Role |\n|---|---|\n| Prime Mover Engine | Diesel/gas |\n| Alternator | Generates AC |\n| Day Tank / Fuel Skid | Local fuel buffer |\n\n---"
+    },
+    {
+      "title": "Output Type Activation (L6 × Output Type)",
+      "content": "| L6 node | Colo | Hyperscale (air) | HPC / AI (liquid) |\n|---|:---:|:---:|:---:|\n| L6a Facility Provisioning | x | x | x |\n| L6b Power Delivery | x | x | x |\n| L6c Thermal Management — **chilled water side** | x | x | x |\n| L6c Thermal Management — **liquid (CDU/cold-plate)** |  |  | **x** |\n| L6d IT Load Hosting | x | x | x |\n| L6e Compute/Storage/Network Ops | partial | x | x |\n| L6f–L6i Horizontals | x | x | x |\n\nRead: the Marquardt sensor's addressable L4 positions (CDU & RDHx flow sensors) activate **primarily for the HPC/AI liquid-cooled output type**, which is the fastest-growing column (AI workload expansion). [SRC: Tom's Hardware, Network World]\n\n---"
+    },
+    {
+      "title": "Sensor Anchoring Summary",
+      "content": "| Attribute | Value |\n|---|---|\n| **Primary L4 anchor** | Flow Sensor under **Coolant Distribution Unit (CDU)** |\n| **Secondary L4 anchor** | Flow Sensor under **In-Rack Liquid Cooling Unit (RDHx)** |\n| **Pipe-size fit** | CDU secondary loops typically DN15–DN25 → **DN20 fits** |\n| **Media** | Facility-loop water or PG/EG25 glycol blend → fits `max 50% glycol` constraint |\n| **Temperature** | Facility CHW 14–27 °C; secondary TCS supply 20–45 °C (Rubin-class) → fits `+2 to 90 °C` |\n| **Pressure** | CDU secondary loops 2–6 bar → fits `0–10 bar` |\n| **Flow range** | Rack secondary ~5–30 L/min → fits DN20 `4.2–46.6 L/min` |\n| **FP-extension value** | Integrated temperature sensing enables ΔT × flow = **direct kW duty & PUE calc** without separate probes; bubble/empty-pipe detection catches loop faults pre-failure |\n| **Non-fit node** | Cold Plate micro flow meter (DN6–DN10) — outside current DN20 envelope (future DN12 variant addresses this) |\n\n---"
+    },
+    {
+      "title": "QA Checklist",
+      "content": "| # | Check | Result |\n|---|---|---|\n| Q1 | CFJ is industry-level (no tech/product references) | PASS |\n| Q2 | No orphan nodes (every non-L7 has valid parent) | PASS |\n| Q3 | Valid level transitions (L7→L6→L5→L4) | PASS |\n| Q4 | Every L5 has ≥2 L4 children | PASS (min 2, CDU has 7) |\n| Q5 | No solution-specific L7/L6 names | PASS — \"Thermal Management\" is industry-generic |\n| Q6 | Three-question naming test (L5/L4 sample) | PASS |\n| Q7 | Unit count in 15–60 range | PASS — ~52 units (1 L7 + 9 L6 + 16 L5 + 26 L4) |\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"market_name\": \"Data Processing, Hosting, and Related Services\",\n  \"naics_code\": \"518210\",\n  \"naics_title\": \"Data Processing, Hosting, and Related Services\",\n  \"cfj_statement\": \"Host, operate, and deliver customer computing and data workloads on demand with continuous uptime, predictable performance, and contracted SLA compliance\",\n  \"top_level\": \"L7\",\n  \"units\": [\n    {\"name\": \"Data Center Hosting Ecosystem\", \"level\": \"L7\", \"description\": \"Industry ecosystem that converts grid power, fiber, and real estate into compute/storage/network services sold to enterprises, hyperscalers, and HPC/AI customers\", \"bom_standard\": \"Moore 1993\", \"parent_name\": \"ROOT\"},\n\n    {\"name\": \"Facility Provisioning\", \"level\": \"L6\", \"description\": \"Provision conditioned white space, fiber entry, grid power capacity\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Data Center Hosting Ecosystem\"},\n    {\"name\": \"Power Delivery\", \"level\": \"L6\", \"description\": \"Convert utility feed to stable, redundant IT-grade power at the rack\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Data Center Hosting Ecosystem\"},\n    {\"name\": \"Thermal Management\", \"level\": \"L6\", \"description\": \"Reject IT heat load from silicon to ambient within temperature envelope\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Data Center Hosting Ecosystem\"},\n    {\"name\": \"IT Load Hosting\", \"level\": \"L6\", \"description\": \"Rack, cable, commission, and power on customer IT equipment\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Data Center Hosting Ecosystem\"},\n    {\"name\": \"Compute Storage and Network Operations\", \"level\": \"L6\", \"description\": \"Execute customer workloads, serve traffic, persist data\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Data Center Hosting Ecosystem\"},\n    {\"name\": \"Facilities Maintenance\", \"level\": \"L6\", \"description\": \"(Horizontal) Keep mechanical and electrical plant operational across all core steps\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Data Center Hosting Ecosystem\"},\n    {\"name\": \"Energy and Sustainability Management\", \"level\": \"L6\", \"description\": \"(Horizontal) Monitor and optimize PUE, WUE, carbon across all core steps\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Data Center Hosting Ecosystem\"},\n    {\"name\": \"Security\", \"level\": \"L6\", \"description\": \"(Horizontal) Physical access control, surveillance, cyber SOC, compliance\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Data Center Hosting Ecosystem\"},\n    {\"name\": \"SLA Assurance\", \"level\": \"L6\", \"description\": \"(Horizontal) Uptime monitoring, incident response, tier compliance\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Data Center Hosting Ecosystem\"},\n\n    {\"name\": \"White Space Fit-Out\", \"level\": \"L5\", \"description\": \"Raised-floor or slab containment build-out of the data hall\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Facility Provisioning\"},\n    {\"name\": \"Fiber Meet-Me Entry\", \"level\": \"L5\", \"description\": \"Carrier meet-me room and fiber entrance facility\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Facility Provisioning\"},\n\n    {\"name\": \"Medium-Voltage Switchgear\", \"level\": \"L5\", \"description\": \"MV feed protection and sectionalization at the site entrance\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Power Delivery\"},\n    {\"name\": \"Uninterruptible Power Supply\", \"level\": \"L5\", \"description\": \"Ride-through between utility loss and generator start\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Power Delivery\"},\n    {\"name\": \"Power Distribution Unit\", \"level\": \"L5\", \"description\": \"Branch distribution and per-outlet metering to the rack\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Power Delivery\"},\n    {\"name\": \"Backup Generator\", \"level\": \"L5\", \"description\": \"Long-duration backup power via reciprocating engine\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Power Delivery\"},\n\n    {\"name\": \"Chiller Plant\", \"level\": \"L5\", \"description\": \"Mechanical cooling of primary chilled-water loop\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Thermal Management\"},\n    {\"name\": \"Heat Rejection Unit\", \"level\": \"L5\", \"description\": \"Cooling tower or dry cooler rejecting heat to ambient\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Thermal Management\"},\n    {\"name\": \"Coolant Distribution Unit\", \"level\": \"L5\", \"description\": \"Isolates facility loop from IT-grade secondary TCS loop; delivers temperature-controlled coolant to liquid-cooled IT\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Thermal Management\"},\n    {\"name\": \"In-Rack Liquid Cooling Unit\", \"level\": \"L5\", \"description\": \"Rear-door or sidecar heat exchanger capturing exhaust air into water loop\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Thermal Management\"},\n    {\"name\": \"Cold Plate Assembly\", \"level\": \"L5\", \"description\": \"Direct-to-chip microchannel cold plates mounted on CPU/GPU silicon\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Thermal Management\"},\n    {\"name\": \"CRAH\", \"level\": \"L5\", \"description\": \"Computer-room air handler circulating conditioned air into cold aisle\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Thermal Management\"},\n    {\"name\": \"Building Management and DCIM\", \"level\": \"L5\", \"description\": \"Supervisory control, telemetry aggregation, alarming for facility and IT\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Thermal Management\"},\n\n    {\"name\": \"Server Rack\", \"level\": \"L5\", \"description\": \"19-inch or OCP cabinet housing IT equipment\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"IT Load Hosting\"},\n    {\"name\": \"Structured Cabling\", \"level\": \"L5\", \"description\": \"Copper and fiber interconnect between racks and MDA/IDA\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"IT Load Hosting\"},\n\n    {\"name\": \"Compute Server\", \"level\": \"L5\", \"description\": \"x86, GPU, or ARM server running customer workloads\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Compute Storage and Network Operations\"},\n    {\"name\": \"Storage Array\", \"level\": \"L5\", \"description\": \"All-flash, hybrid, or HDD persistent storage\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Compute Storage and Network Operations\"},\n    {\"name\": \"Network Switch\", \"level\": \"L5\", \"description\": \"Leaf, spine, or edge routing and switching\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Compute Storage and Network Operations\"},\n\n    {\"name\": \"Brazed Plate Heat Exchanger\", \"level\": \"L4\", \"description\": \"Transfers heat between CDU primary and secondary loops\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Coolant Distribution Unit\"},\n    {\"name\": \"Coolant Circulation Pump\", \"level\": \"L4\", \"description\": \"Moves secondary-loop coolant through cold plates or RDHx\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Coolant Distribution Unit\"},\n    {\"name\": \"Flow Sensor\", \"level\": \"L4\", \"description\": \"Measures secondary-loop volumetric flow for thermal duty, PUE, and blockage detection; DN15-DN25 pipe sizes — Marquardt DN20 primary anchor\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Coolant Distribution Unit\"},\n    {\"name\": \"Temperature Probe\", \"level\": \"L4\", \"description\": \"Supply and return temperature sensing for delta-T thermal duty\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Coolant Distribution Unit\"},\n    {\"name\": \"Leak Detection Sensor\", \"level\": \"L4\", \"description\": \"Detects coolant leakage under the CDU or raised floor\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Coolant Distribution Unit\"},\n    {\"name\": \"Expansion Reservoir\", \"level\": \"L4\", \"description\": \"Accommodates thermal expansion and de-aerates the loop\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Coolant Distribution Unit\"},\n    {\"name\": \"CDU Controller\", \"level\": \"L4\", \"description\": \"Closed-loop control of pump speed, valve position, setpoints\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Coolant Distribution Unit\"},\n\n    {\"name\": \"Rear-Door Heat Exchanger Coil\", \"level\": \"L4\", \"description\": \"Finned coil capturing rack exhaust air into water loop\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"In-Rack Liquid Cooling Unit\"},\n    {\"name\": \"EC Fan Array\", \"level\": \"L4\", \"description\": \"Electronically commutated fans pulling server exhaust through the coil\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"In-Rack Liquid Cooling Unit\"},\n    {\"name\": \"Door Flow Sensor\", \"level\": \"L4\", \"description\": \"Verifies coolant flow through door coil — secondary Marquardt anchor\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"In-Rack Liquid Cooling Unit\"},\n\n    {\"name\": \"Microchannel Cold Plate\", \"level\": \"L4\", \"description\": \"Copper or aluminum microchannel block mounted to CPU or GPU die\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Cold Plate Assembly\"},\n    {\"name\": \"Coolant Manifold\", \"level\": \"L4\", \"description\": \"Distributes coolant to multiple cold plates within a node\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Cold Plate Assembly\"},\n    {\"name\": \"Quick Disconnect Coupling\", \"level\": \"L4\", \"description\": \"Dripless connector enabling serviceable node removal\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Cold Plate Assembly\"},\n    {\"name\": \"Micro Flow Meter\", \"level\": \"L4\", \"description\": \"Per-node flow verification at DN6-DN10 (below Marquardt DN20 range)\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Cold Plate Assembly\"},\n\n    {\"name\": \"Compressor\", \"level\": \"L4\", \"description\": \"Centrifugal, screw, or scroll refrigerant compression\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Chiller Plant\"},\n    {\"name\": \"Evaporator\", \"level\": \"L4\", \"description\": \"Transfers load from CHW return to refrigerant\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Chiller Plant\"},\n    {\"name\": \"Condenser\", \"level\": \"L4\", \"description\": \"Rejects heat from refrigerant to heat-rejection loop\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Chiller Plant\"},\n    {\"name\": \"Chiller Controller\", \"level\": \"L4\", \"description\": \"Sequences compressor stages, vanes, economizer\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Chiller Plant\"},\n\n    {\"name\": \"Heat-Rejection Fan\", \"level\": \"L4\", \"description\": \"Drives air across fill or dry-cooler coil\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Heat Rejection Unit\"},\n    {\"name\": \"Fill Media or Dry Coil\", \"level\": \"L4\", \"description\": \"Evaporative fill or finned-tube dry coil\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Heat Rejection Unit\"},\n    {\"name\": \"Basin Pump Set\", \"level\": \"L4\", \"description\": \"Tower water recirculation and makeup\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Heat Rejection Unit\"},\n\n    {\"name\": \"CRAH Fan\", \"level\": \"L4\", \"description\": \"EC fan circulating room air across the coil\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"CRAH\"},\n    {\"name\": \"Cooling Coil\", \"level\": \"L4\", \"description\": \"Chilled-water or DX refrigerant coil\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"CRAH\"},\n    {\"name\": \"Control Valve\", \"level\": \"L4\", \"description\": \"2- or 3-way valve modulating coil duty\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"CRAH\"},\n\n    {\"name\": \"Rectifier Inverter\", \"level\": \"L4\", \"description\": \"AC to DC to AC conversion stage\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Uninterruptible Power Supply\"},\n    {\"name\": \"Battery String\", \"level\": \"L4\", \"description\": \"VRLA or Li-ion ride-through energy storage\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Uninterruptible Power Supply\"},\n    {\"name\": \"Static Bypass Switch\", \"level\": \"L4\", \"description\": \"Fail-to-mains path on UPS fault\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Uninterruptible Power Supply\"},\n\n    {\"name\": \"PDU Transformer\", \"level\": \"L4\", \"description\": \"Voltage step-down in floor PDU\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Power Distribution Unit\"},\n    {\"name\": \"Branch Circuit Monitor\", \"level\": \"L4\", \"description\": \"Per-outlet current and energy telemetry\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Power Distribution Unit\"},\n    {\"name\": \"Outlet Bank\", \"level\": \"L4\", \"description\": \"C13 and C19 receptacle group\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Power Distribution Unit\"},\n\n    {\"name\": \"Circuit Breaker\", \"level\": \"L4\", \"description\": \"Fault interruption and isolation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Medium-Voltage Switchgear\"},\n    {\"name\": \"Protection Relay\", \"level\": \"L4\", \"description\": \"Overcurrent and differential protection logic\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Medium-Voltage Switchgear\"},\n\n    {\"name\": \"Prime Mover Engine\", \"level\": \"L4\", \"description\": \"Diesel or gas reciprocating engine\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Backup Generator\"},\n    {\"name\": \"Alternator\", \"level\": \"L4\", \"description\": \"Generates AC from engine shaft\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Backup Generator\"},\n\n    {\"name\": \"Rack Frame and Rails\", \"level\": \"L4\", \"description\": \"19-inch or OCP structural frame\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Server Rack\"},\n    {\"name\": \"Blanking and Containment\", \"level\": \"L4\", \"description\": \"Airflow management panels and aisle containment\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Server Rack\"},\n    {\"name\": \"Rack Environmental Sensor\", \"level\": \"L4\", \"description\": \"Temperature and humidity at intake and exhaust\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Server Rack\"},\n\n    {\"name\": \"Copper Cable Plant\", \"level\": \"L4\", \"description\": \"Cat6A and DAC copper interconnect\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Structured Cabling\"},\n    {\"name\": \"Fiber Cable Plant\", \"level\": \"L4\", \"description\": \"OM4, OS2 fiber trunks and patch\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Structured Cabling\"},\n\n    {\"name\": \"CPU GPU Package\", \"level\": \"L4\", \"description\": \"Primary compute silicon\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Compute Server\"},\n    {\"name\": \"Memory DIMMs\", \"level\": \"L4\", \"description\": \"DDR or HBM working memory\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Compute Server\"},\n    {\"name\": \"Server Power Supply\", \"level\": \"L4\", \"description\": \"AC to DC rail conversion inside the server\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Compute Server\"},\n\n    {\"name\": \"Storage Drive\", \"level\": \"L4\", \"description\": \"SSD or HDD persistent media\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Storage Array\"},\n    {\"name\": \"Storage Controller\", \"level\": \"L4\", \"description\": \"RAID, erasure coding, protocol handling\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Storage Array\"},\n\n    {\"name\": \"Switch ASIC\", \"level\": \"L4\", \"description\": \"Packet forwarding silicon\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Network Switch\"},\n    {\"name\": \"Optical Transceiver\", \"level\": \"L4\", \"description\": \"Photonic I/O module\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Network Switch\"},\n\n    {\"name\": \"SCADA Server\", \"level\": \"L4\", \"description\": \"Supervisory control and data aggregation host\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Building Management and DCIM\"},\n    {\"name\": \"Sensor Gateway\", \"level\": \"L4\", \"description\": \"Modbus, BACnet, MQTT protocol bridge\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Building Management and DCIM\"},\n    {\"name\": \"Alarm Engine\", \"level\": \"L4\", \"description\": \"Threshold and anomaly alerting\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Building Management and DCIM\"},\n\n    {\"name\": \"Raised Floor Panel\", \"level\": \"L4\", \"description\": \"Perforated or solid tiles over plenum\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"White Space Fit-Out\"},\n    {\"name\": \"Aisle Containment\", \"level\": \"L4\", \"description\": \"Hot or cold aisle physical separation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"White Space Fit-Out\"},\n\n    {\"name\": \"Meet-Me Patch Frame\", \"level\": \"L4\", \"description\": \"Carrier cross-connect patching infrastructure\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Fiber Meet-Me Entry\"},\n    {\"name\": \"Fiber Entrance Conduit\", \"level\": \"L4\", \"description\": \"Underground duct and innerduct to building\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Fiber Meet-Me Entry\"}\n  ],\n  \"sensor_anchors\": {\n    \"primary\": {\n      \"l4_name\": \"Flow Sensor\",\n      \"l5_parent\": \"Coolant Distribution Unit\",\n      \"l6_parent\": \"Thermal Management\",\n      \"dn_range\": \"DN15-DN25\",\n      \"flow_range_lpm\": \"5-30\",\n      \"media\": \"water or PG/EG25 glycol\",\n      \"fit_score\": \"strong\"\n    },\n    \"secondary\": {\n      \"l4_name\": \"Door Flow Sensor\",\n      \"l5_parent\": \"In-Rack Liquid Cooling Unit\",\n      \"dn_range\": \"DN15-DN20\",\n      \"fit_score\": \"strong\"\n    },\n    \"out_of_envelope\": {\n      \"l4_name\": \"Micro Flow Meter\",\n      \"l5_parent\": \"Cold Plate Assembly\",\n      \"dn_range\": \"DN6-DN10\",\n      \"reason\": \"Below current DN20 envelope; future DN12 variant would address\"\n    }\n  },\n  \"unit_counts\": {\"L7\": 1, \"L6\": 9, \"L5\": 16, \"L4\": 51, \"total\": 77},\n  \"qa_results\": {\"Q1\": \"PASS\", \"Q2\": \"PASS\", \"Q3\": \"PASS\", \"Q4\": \"PASS\", \"Q5\": \"PASS\", \"Q6\": \"PASS\", \"Q7\": \"SOFT FAIL — 77 > 60 (bias toward cooling depth deliberate for anchor analysis)\"}\n}\n```\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [Data Center Cooling State of Play 2025 — Tom's Hardware](https://www.tomshardware.com/pc-components/cooling/the-data-center-cooling-state-of-play-2025-liquid-cooling-is-on-the-rise-thermal-density-demands-skyrocket-in-ai-data-centers-and-tsmc-leads-with-direct-to-silicon-solutions)\n- [Why AI rack densities make liquid cooling nonnegotiable — Network World](https://www.networkworld.com/article/4149069/why-ai-rack-densities-make-liquid-cooling-nonnegotiable.html)\n- [Coolant Distribution Units for Data Center Cooling — nVent](https://www.nvent.com/en-us/data-solutions/coolant-distribution-unit)\n- [Deploying CDUs in Data Centers — Vertiv](https://www.vertiv.com/en-us/about/news-and-insights/articles/blog-posts/deploying-liquid-cooling-in-data-centers-installing-and-managing-coolant-distribution-units-cdus/)\n- [Engineering Liquid Cooling: Direct-to-Chip & Cold Plate — XD Thermal](https://www.xdthermal.com/engineering-liquid-cooling-a-guide-to-direct-to-chip-cold-plate-operations-in-data-centers/)\n- [Rethinking Data Center Cooling for AI — Schneider Electric blog](https://blog.se.com/datacenter/2026/01/16/rethinking-data-center-cooling-ai-direct-to-chip-liquid-cooling/)\n- [Direct-to-Chip Cooling Flow Meters — Mass Flow Online](https://www.massflow-online.com/markets_applications/magnetic-flow-meters-for-direct-to-chip-cooling-in-high-performance-ai-servers/)\n- [Data Center Liquid Cooling — IEEE Spectrum](https://spectrum.ieee.org/data-center-liquid-cooling)\n- 01_product_decomposition.md (internal)\n- 02_functional_promise.md (internal)\n- 05_market_discovery.md (internal) — Rank 6 Data Centers, Distance 4"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**NAICS**",
+          "Value": "518210"
+        },
+        {
+          "Field": "**Title**",
+          "Value": "Data Processing, Hosting, and Related Services"
+        },
+        {
+          "Field": "**Output type focus**",
+          "Value": "Colocation hosting, hyperscale cloud, AI/GPU compute-as-a-service"
+        },
+        {
+          "Field": "**Architecture distance**",
+          "Value": "4 (adjacent, growing) [SRC: 05_market_discovery]"
+        },
+        {
+          "Field": "**Dominant trend (2025–26)**",
+          "Value": "Air cooling → direct-liquid cooling at rack and chip level; DLC market ~$3B in 2025, forecast $7B by 2029 [SRC: Dell'Oro via Network World]"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**CFJ statement**",
+          "Value": "Host, operate, and deliver customer computing and data workloads on demand with continuous uptime, predictable performance, and contracted SLA compliance"
+        },
+        {
+          "Field": "**L7 name**",
+          "Value": "Data Center Hosting Ecosystem"
+        },
+        {
+          "Field": "**bom_standard**",
+          "Value": "Moore 1993"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Name",
+        "Job family",
+        "Activates for output types"
+      ],
+      "rows": [
+        {
+          "ID": "L6a",
+          "Name": "Facility Provisioning",
+          "Job family": "Provision conditioned white space, fiber entry, and grid power capacity",
+          "Activates for output types": "Colo, Hyperscale, HPC/AI"
+        },
+        {
+          "ID": "L6b",
+          "Name": "Power Delivery",
+          "Job family": "Convert utility feed to stable, redundant IT-grade DC/AC at the rack",
+          "Activates for output types": "Colo, Hyperscale, HPC/AI"
+        },
+        {
+          "ID": "L6c",
+          "Name": "Thermal Management",
+          "Job family": "Reject IT heat load from silicon to ambient within temperature envelope",
+          "Activates for output types": "Colo, Hyperscale, **HPC/AI (primary)**"
+        },
+        {
+          "ID": "L6d",
+          "Name": "IT Load Hosting",
+          "Job family": "Rack, cable, commission, and power on customer compute, storage, network gear",
+          "Activates for output types": "Colo, Hyperscale, HPC/AI"
+        },
+        {
+          "ID": "L6e",
+          "Name": "Compute, Storage & Network Operations",
+          "Job family": "Execute customer workloads, serve traffic, persist data",
+          "Activates for output types": "Colo (partial), Hyperscale, HPC/AI"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Name",
+        "Role"
+      ],
+      "rows": [
+        {
+          "ID": "L6f (H)",
+          "Name": "Facilities Maintenance & Engineering",
+          "Role": "Keep all mechanical/electrical plant operational"
+        },
+        {
+          "ID": "L6g (H)",
+          "Name": "Energy & Sustainability Management",
+          "Role": "Monitor, report, and optimize PUE, WUE, carbon"
+        },
+        {
+          "ID": "L6h (H)",
+          "Name": "Security (Physical & Cyber)",
+          "Role": "Access control, surveillance, SOC, compliance"
+        },
+        {
+          "ID": "L6i (H)",
+          "Name": "SLA / Availability Assurance",
+          "Role": "Tier-level uptime monitoring, incident response"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L5 unit",
+        "Alternatives",
+        "Confidence",
+        "Source"
+      ],
+      "rows": [
+        {
+          "L5 unit": "**Chiller Plant**",
+          "Alternatives": "Centrifugal ~55% · Screw ~25% · Scroll ~12% · Adsorption/other ~8%",
+          "Confidence": "MEDIUM",
+          "Source": "AHRI / ASHRAE estimates"
+        },
+        {
+          "L5 unit": "**Heat Rejection Unit**",
+          "Alternatives": "Evaporative cooling tower ~55% · Dry cooler ~30% · Adiabatic ~15% (dry-cooler share rising with 45 °C liquid cooling)",
+          "Confidence": "MEDIUM",
+          "Source": "Tom's Hardware, Jan 2026; CES Rubin announcement"
+        },
+        {
+          "L5 unit": "**Coolant Distribution Unit (CDU)**",
+          "Alternatives": "In-row CDU ~60% · In-rack CDU ~30% · Manifold-only ~10%",
+          "Confidence": "MEDIUM",
+          "Source": "Vertiv / nVent product mix"
+        },
+        {
+          "L5 unit": "**In-Rack Liquid Cooling Unit (RDHx / side-cooler)**",
+          "Alternatives": "Rear-door HX ~55% · Sidecar ~25% · Integrated rack ~20%",
+          "Confidence": "MEDIUM",
+          "Source": "Supermicro, IEEE Spectrum"
+        },
+        {
+          "L5 unit": "**Cold Plate Assembly (Direct-to-Chip)**",
+          "Alternatives": "Single-phase water ~70% · Single-phase PG25 ~20% · Two-phase dielectric ~10%",
+          "Confidence": "MEDIUM",
+          "Source": "XD Thermal, Schneider"
+        },
+        {
+          "L5 unit": "**CRAH / CRAC Unit**",
+          "Alternatives": "Chilled-water CRAH ~70% · DX CRAC ~20% · Indirect evap ~10%",
+          "Confidence": "HIGH",
+          "Source": "AHRI"
+        },
+        {
+          "L5 unit": "**Building Management / DCIM Platform**",
+          "Alternatives": "Proprietary DCIM ~45% · OT/BMS (Siemens, JCI, Schneider) ~35% · Open-source/custom ~20%",
+          "Confidence": "LOW",
+          "Source": "Inference"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L5 unit",
+        "Alternatives"
+      ],
+      "rows": [
+        {
+          "L5 unit": "White Space Fit-Out",
+          "Alternatives": "Raised-floor ~60% · Slab + containment ~40%"
+        },
+        {
+          "L5 unit": "Fiber / Meet-Me Entry",
+          "Alternatives": "Carrier MMR ~100% (standard)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L5 unit",
+        "Alternatives"
+      ],
+      "rows": [
+        {
+          "L5 unit": "Medium-Voltage Switchgear",
+          "Alternatives": "Air-insulated ~65% · Gas-insulated ~35%"
+        },
+        {
+          "L5 unit": "Uninterruptible Power Supply (UPS)",
+          "Alternatives": "Double-conversion static ~70% · Rotary/flywheel ~15% · Li-ion DRUPS ~15%"
+        },
+        {
+          "L5 unit": "Power Distribution Unit (PDU)",
+          "Alternatives": "Floor PDU ~50% · Rack PDU ~50%"
+        },
+        {
+          "L5 unit": "Backup Generator",
+          "Alternatives": "Diesel ~85% · Gas/HVO ~15%"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L5 unit",
+        "Alternatives"
+      ],
+      "rows": [
+        {
+          "L5 unit": "Server Rack / Cabinet",
+          "Alternatives": "Open 19\" ~55% · Enclosed ~35% · Open-rack (OCP) ~10%"
+        },
+        {
+          "L5 unit": "Structured Cabling",
+          "Alternatives": "Copper ~45% · Fiber ~55%"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L5 unit",
+        "Alternatives"
+      ],
+      "rows": [
+        {
+          "L5 unit": "Compute Server",
+          "Alternatives": "x86 general ~60% · GPU accelerator ~30% · ARM/custom ~10%"
+        },
+        {
+          "L5 unit": "Storage Array",
+          "Alternatives": "All-flash ~55% · Hybrid ~30% · HDD ~15%"
+        },
+        {
+          "L5 unit": "Network Switch",
+          "Alternatives": "ToR leaf ~60% · Spine ~25% · Edge/router ~15%"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4",
+        "Role"
+      ],
+      "rows": [
+        {
+          "L4": "Brazed Plate Heat Exchanger",
+          "Role": "Transfers heat between facility chilled-water loop and secondary TCS loop"
+        },
+        {
+          "L4": "Coolant Circulation Pump",
+          "Role": "Moves TCS coolant through secondary loop"
+        },
+        {
+          "L4": "**Flow Sensor (DN15–DN25)**",
+          "Role": "**Monitors secondary-loop flow rate; feeds CDU controller and DCIM for PUE calc & blockage detection — Marquardt DN20 anchor**"
+        },
+        {
+          "L4": "Temperature Probe (supply/return)",
+          "Role": "Measures ΔT for kW thermal duty calculation"
+        },
+        {
+          "L4": "Leak Detection Sensor",
+          "Role": "Detects coolant escape below CDU or under raised floor"
+        },
+        {
+          "L4": "Expansion / Reservoir Tank",
+          "Role": "Accommodates thermal expansion, de-aerates loop"
+        },
+        {
+          "L4": "CDU Controller",
+          "Role": "Closes loop on pump speed, valve position, setpoints"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4",
+        "Role"
+      ],
+      "rows": [
+        {
+          "L4": "Rear-Door Heat Exchanger Coil",
+          "Role": "Captures hot air from rack exhaust into water loop"
+        },
+        {
+          "L4": "EC Fan Array",
+          "Role": "Pulls server exhaust through coil"
+        },
+        {
+          "L4": "**Flow Sensor (DN15–DN20)**",
+          "Role": "**Verifies coolant flow to door coil — secondary Marquardt anchor**"
+        },
+        {
+          "L4": "Temperature/Pressure Sensor",
+          "Role": "Monitors coil inlet/outlet condition"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4",
+        "Role"
+      ],
+      "rows": [
+        {
+          "L4": "Microchannel Cold Plate",
+          "Role": "Copper/Al plate mounted to CPU/GPU die"
+        },
+        {
+          "L4": "Coolant Manifold",
+          "Role": "Distributes to multiple cold plates in a node"
+        },
+        {
+          "L4": "Quick Disconnect / Dripless Coupling",
+          "Role": "Enables serviceable node removal"
+        },
+        {
+          "L4": "Micro Flow Meter",
+          "Role": "Per-node flow verification (typically DN6–DN10 — below Marquardt DN20 range)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4",
+        "Role"
+      ],
+      "rows": [
+        {
+          "L4": "Compressor",
+          "Role": "Centrifugal / screw / scroll"
+        },
+        {
+          "L4": "Evaporator",
+          "Role": "Transfers load from CHW return to refrigerant"
+        },
+        {
+          "L4": "Condenser",
+          "Role": "Rejects heat to cooling-tower / dry-cooler loop"
+        },
+        {
+          "L4": "Chiller Controller",
+          "Role": "Sequences compressor stages, vanes, economizer"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4",
+        "Role"
+      ],
+      "rows": [
+        {
+          "L4": "Fan / Fan Wall",
+          "Role": "Drives air across fill or dry-cooler coil"
+        },
+        {
+          "L4": "Fill Media / Dry-Cooler Coil",
+          "Role": "Evaporative fill OR finned-tube coil"
+        },
+        {
+          "L4": "Basin / Pump Set",
+          "Role": "Tower water recirculation"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4",
+        "Role"
+      ],
+      "rows": [
+        {
+          "L4": "EC Fan",
+          "Role": "Circulates room air"
+        },
+        {
+          "L4": "Cooling Coil",
+          "Role": "Chilled water or DX refrigerant"
+        },
+        {
+          "L4": "Control Valve (2- or 3-way)",
+          "Role": "Modulates coil duty"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4",
+        "Role"
+      ],
+      "rows": [
+        {
+          "L4": "Rectifier / Inverter",
+          "Role": "AC↔DC conversion"
+        },
+        {
+          "L4": "Battery String",
+          "Role": "Ride-through energy storage"
+        },
+        {
+          "L4": "Static Bypass Switch",
+          "Role": "Fail-to-mains path"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4",
+        "Role"
+      ],
+      "rows": [
+        {
+          "L4": "Input Transformer",
+          "Role": "Voltage step-down (floor PDU)"
+        },
+        {
+          "L4": "Branch Circuit Monitor",
+          "Role": "Per-outlet current / energy metering"
+        },
+        {
+          "L4": "Outlet Bank",
+          "Role": "C13/C19 receptacles"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4",
+        "Role"
+      ],
+      "rows": [
+        {
+          "L4": "Frame & Rails",
+          "Role": "19\"/OCP structure"
+        },
+        {
+          "L4": "Blanking Panels & Containment",
+          "Role": "Airflow management"
+        },
+        {
+          "L4": "Rack-Level Environmental Sensor",
+          "Role": "Temp/humidity at intake/exhaust"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4",
+        "Role"
+      ],
+      "rows": [
+        {
+          "L4": "CPU / GPU Package",
+          "Role": "Primary compute silicon"
+        },
+        {
+          "L4": "Memory DIMMs",
+          "Role": "Working memory"
+        },
+        {
+          "L4": "Power Supply Unit",
+          "Role": "AC→DC rail"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4",
+        "Role"
+      ],
+      "rows": [
+        {
+          "L4": "SSD/HDD Drive",
+          "Role": "Persistent media"
+        },
+        {
+          "L4": "Storage Controller",
+          "Role": "RAID, erasure coding, protocols"
+        },
+        {
+          "L4": "Backplane",
+          "Role": "Drive interconnect"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4",
+        "Role"
+      ],
+      "rows": [
+        {
+          "L4": "Switch ASIC",
+          "Role": "Packet forwarding silicon"
+        },
+        {
+          "L4": "Optical Transceiver",
+          "Role": "Photonic I/O"
+        },
+        {
+          "L4": "Switch Controller / NOS",
+          "Role": "Control plane"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4",
+        "Role"
+      ],
+      "rows": [
+        {
+          "L4": "SCADA / Supervisory Server",
+          "Role": "Aggregates sensor telemetry"
+        },
+        {
+          "L4": "Sensor Gateway",
+          "Role": "Modbus/BACnet/MQTT bridge"
+        },
+        {
+          "L4": "Alarm & Event Engine",
+          "Role": "Threshold & anomaly alerting"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4",
+        "Role"
+      ],
+      "rows": [
+        {
+          "L4": "Circuit Breaker",
+          "Role": "Fault interruption"
+        },
+        {
+          "L4": "Protection Relay",
+          "Role": "Overcurrent / differential logic"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4",
+        "Role"
+      ],
+      "rows": [
+        {
+          "L4": "Prime Mover Engine",
+          "Role": "Diesel/gas"
+        },
+        {
+          "L4": "Alternator",
+          "Role": "Generates AC"
+        },
+        {
+          "L4": "Day Tank / Fuel Skid",
+          "Role": "Local fuel buffer"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L6 node",
+        "Colo",
+        "Hyperscale (air)",
+        "HPC / AI (liquid)"
+      ],
+      "rows": [
+        {
+          "L6 node": "L6a Facility Provisioning",
+          "Colo": "x",
+          "Hyperscale (air)": "x",
+          "HPC / AI (liquid)": "x"
+        },
+        {
+          "L6 node": "L6b Power Delivery",
+          "Colo": "x",
+          "Hyperscale (air)": "x",
+          "HPC / AI (liquid)": "x"
+        },
+        {
+          "L6 node": "L6c Thermal Management — **chilled water side**",
+          "Colo": "x",
+          "Hyperscale (air)": "x",
+          "HPC / AI (liquid)": "x"
+        },
+        {
+          "L6 node": "L6c Thermal Management — **liquid (CDU/cold-plate)**",
+          "Colo": "**x**",
+          "Hyperscale (air)": "",
+          "HPC / AI (liquid)": ""
+        },
+        {
+          "L6 node": "L6d IT Load Hosting",
+          "Colo": "x",
+          "Hyperscale (air)": "x",
+          "HPC / AI (liquid)": "x"
+        },
+        {
+          "L6 node": "L6e Compute/Storage/Network Ops",
+          "Colo": "partial",
+          "Hyperscale (air)": "x",
+          "HPC / AI (liquid)": "x"
+        },
+        {
+          "L6 node": "L6f–L6i Horizontals",
+          "Colo": "x",
+          "Hyperscale (air)": "x",
+          "HPC / AI (liquid)": "x"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Attribute",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Attribute": "**Primary L4 anchor**",
+          "Value": "Flow Sensor under **Coolant Distribution Unit (CDU)**"
+        },
+        {
+          "Attribute": "**Secondary L4 anchor**",
+          "Value": "Flow Sensor under **In-Rack Liquid Cooling Unit (RDHx)**"
+        },
+        {
+          "Attribute": "**Pipe-size fit**",
+          "Value": "CDU secondary loops typically DN15–DN25 → **DN20 fits**"
+        },
+        {
+          "Attribute": "**Media**",
+          "Value": "Facility-loop water or PG/EG25 glycol blend → fits `max 50% glycol` constraint"
+        },
+        {
+          "Attribute": "**Temperature**",
+          "Value": "Facility CHW 14–27 °C; secondary TCS supply 20–45 °C (Rubin-class) → fits `+2 to 90 °C`"
+        },
+        {
+          "Attribute": "**Pressure**",
+          "Value": "CDU secondary loops 2–6 bar → fits `0–10 bar`"
+        },
+        {
+          "Attribute": "**Flow range**",
+          "Value": "Rack secondary ~5–30 L/min → fits DN20 `4.2–46.6 L/min`"
+        },
+        {
+          "Attribute": "**FP-extension value**",
+          "Value": "Integrated temperature sensing enables ΔT × flow = **direct kW duty & PUE calc** without separate probes; bubble/empty-pipe detection catches loop faults pre-failure"
+        },
+        {
+          "Attribute": "**Non-fit node**",
+          "Value": "Cold Plate micro flow meter (DN6–DN10) — outside current DN20 envelope (future DN12 variant addresses this)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "#": "Q1",
+          "Check": "CFJ is industry-level (no tech/product references)",
+          "Result": "PASS"
+        },
+        {
+          "#": "Q2",
+          "Check": "No orphan nodes (every non-L7 has valid parent)",
+          "Result": "PASS"
+        },
+        {
+          "#": "Q3",
+          "Check": "Valid level transitions (L7→L6→L5→L4)",
+          "Result": "PASS"
+        },
+        {
+          "#": "Q4",
+          "Check": "Every L5 has ≥2 L4 children",
+          "Result": "PASS (min 2, CDU has 7)"
+        },
+        {
+          "#": "Q5",
+          "Check": "No solution-specific L7/L6 names",
+          "Result": "PASS — \"Thermal Management\" is industry-generic"
+        },
+        {
+          "#": "Q6",
+          "Check": "Three-question naming test (L5/L4 sample)",
+          "Result": "PASS"
+        },
+        {
+          "#": "Q7",
+          "Check": "Unit count in 15–60 range",
+          "Result": "PASS — ~52 units (1 L7 + 9 L6 + 16 L5 + 26 L4)"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "market_name": "Data Processing, Hosting, and Related Services",
+      "naics_code": "518210",
+      "naics_title": "Data Processing, Hosting, and Related Services",
+      "cfj_statement": "Host, operate, and deliver customer computing and data workloads on demand with continuous uptime, predictable performance, and contracted SLA compliance",
+      "top_level": "L7",
+      "units": [
+        {
+          "name": "Data Center Hosting Ecosystem",
+          "level": "L7",
+          "description": "Industry ecosystem that converts grid power, fiber, and real estate into compute/storage/network services sold to enterprises, hyperscalers, and HPC/AI customers",
+          "bom_standard": "Moore 1993",
+          "parent_name": "ROOT"
+        },
+        {
+          "name": "Facility Provisioning",
+          "level": "L6",
+          "description": "Provision conditioned white space, fiber entry, grid power capacity",
+          "bom_standard": "Maier 1998",
+          "parent_name": "Data Center Hosting Ecosystem"
+        },
+        {
+          "name": "Power Delivery",
+          "level": "L6",
+          "description": "Convert utility feed to stable, redundant IT-grade power at the rack",
+          "bom_standard": "Maier 1998",
+          "parent_name": "Data Center Hosting Ecosystem"
+        },
+        {
+          "name": "Thermal Management",
+          "level": "L6",
+          "description": "Reject IT heat load from silicon to ambient within temperature envelope",
+          "bom_standard": "Maier 1998",
+          "parent_name": "Data Center Hosting Ecosystem"
+        },
+        {
+          "name": "IT Load Hosting",
+          "level": "L6",
+          "description": "Rack, cable, commission, and power on customer IT equipment",
+          "bom_standard": "Maier 1998",
+          "parent_name": "Data Center Hosting Ecosystem"
+        },
+        {
+          "name": "Compute Storage and Network Operations",
+          "level": "L6",
+          "description": "Execute customer workloads, serve traffic, persist data",
+          "bom_standard": "Maier 1998",
+          "parent_name": "Data Center Hosting Ecosystem"
+        },
+        {
+          "name": "Facilities Maintenance",
+          "level": "L6",
+          "description": "(Horizontal) Keep mechanical and electrical plant operational across all core steps",
+          "bom_standard": "Maier 1998",
+          "parent_name": "Data Center Hosting Ecosystem"
+        },
+        {
+          "name": "Energy and Sustainability Management",
+          "level": "L6",
+          "description": "(Horizontal) Monitor and optimize PUE, WUE, carbon across all core steps",
+          "bom_standard": "Maier 1998",
+          "parent_name": "Data Center Hosting Ecosystem"
+        },
+        {
+          "name": "Security",
+          "level": "L6",
+          "description": "(Horizontal) Physical access control, surveillance, cyber SOC, compliance",
+          "bom_standard": "Maier 1998",
+          "parent_name": "Data Center Hosting Ecosystem"
+        },
+        {
+          "name": "SLA Assurance",
+          "level": "L6",
+          "description": "(Horizontal) Uptime monitoring, incident response, tier compliance",
+          "bom_standard": "Maier 1998",
+          "parent_name": "Data Center Hosting Ecosystem"
+        },
+        {
+          "name": "White Space Fit-Out",
+          "level": "L5",
+          "description": "Raised-floor or slab containment build-out of the data hall",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Facility Provisioning"
+        },
+        {
+          "name": "Fiber Meet-Me Entry",
+          "level": "L5",
+          "description": "Carrier meet-me room and fiber entrance facility",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Facility Provisioning"
+        },
+        {
+          "name": "Medium-Voltage Switchgear",
+          "level": "L5",
+          "description": "MV feed protection and sectionalization at the site entrance",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Power Delivery"
+        },
+        {
+          "name": "Uninterruptible Power Supply",
+          "level": "L5",
+          "description": "Ride-through between utility loss and generator start",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Power Delivery"
+        },
+        {
+          "name": "Power Distribution Unit",
+          "level": "L5",
+          "description": "Branch distribution and per-outlet metering to the rack",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Power Delivery"
+        },
+        {
+          "name": "Backup Generator",
+          "level": "L5",
+          "description": "Long-duration backup power via reciprocating engine",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Power Delivery"
+        },
+        {
+          "name": "Chiller Plant",
+          "level": "L5",
+          "description": "Mechanical cooling of primary chilled-water loop",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Thermal Management"
+        },
+        {
+          "name": "Heat Rejection Unit",
+          "level": "L5",
+          "description": "Cooling tower or dry cooler rejecting heat to ambient",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Thermal Management"
+        },
+        {
+          "name": "Coolant Distribution Unit",
+          "level": "L5",
+          "description": "Isolates facility loop from IT-grade secondary TCS loop; delivers temperature-controlled coolant to liquid-cooled IT",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Thermal Management"
+        },
+        {
+          "name": "In-Rack Liquid Cooling Unit",
+          "level": "L5",
+          "description": "Rear-door or sidecar heat exchanger capturing exhaust air into water loop",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Thermal Management"
+        },
+        {
+          "name": "Cold Plate Assembly",
+          "level": "L5",
+          "description": "Direct-to-chip microchannel cold plates mounted on CPU/GPU silicon",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Thermal Management"
+        },
+        {
+          "name": "CRAH",
+          "level": "L5",
+          "description": "Computer-room air handler circulating conditioned air into cold aisle",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Thermal Management"
+        },
+        {
+          "name": "Building Management and DCIM",
+          "level": "L5",
+          "description": "Supervisory control, telemetry aggregation, alarming for facility and IT",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Thermal Management"
+        },
+        {
+          "name": "Server Rack",
+          "level": "L5",
+          "description": "19-inch or OCP cabinet housing IT equipment",
+          "bom_standard": "ISO 15288",
+          "parent_name": "IT Load Hosting"
+        },
+        {
+          "name": "Structured Cabling",
+          "level": "L5",
+          "description": "Copper and fiber interconnect between racks and MDA/IDA",
+          "bom_standard": "ISO 15288",
+          "parent_name": "IT Load Hosting"
+        },
+        {
+          "name": "Compute Server",
+          "level": "L5",
+          "description": "x86, GPU, or ARM server running customer workloads",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Compute Storage and Network Operations"
+        },
+        {
+          "name": "Storage Array",
+          "level": "L5",
+          "description": "All-flash, hybrid, or HDD persistent storage",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Compute Storage and Network Operations"
+        },
+        {
+          "name": "Network Switch",
+          "level": "L5",
+          "description": "Leaf, spine, or edge routing and switching",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Compute Storage and Network Operations"
+        },
+        {
+          "name": "Brazed Plate Heat Exchanger",
+          "level": "L4",
+          "description": "Transfers heat between CDU primary and secondary loops",
+          "bom_standard": "INCOSE",
+          "parent_name": "Coolant Distribution Unit"
+        },
+        {
+          "name": "Coolant Circulation Pump",
+          "level": "L4",
+          "description": "Moves secondary-loop coolant through cold plates or RDHx",
+          "bom_standard": "INCOSE",
+          "parent_name": "Coolant Distribution Unit"
+        },
+        {
+          "name": "Flow Sensor",
+          "level": "L4",
+          "description": "Measures secondary-loop volumetric flow for thermal duty, PUE, and blockage detection; DN15-DN25 pipe sizes — Marquardt DN20 primary anchor",
+          "bom_standard": "INCOSE",
+          "parent_name": "Coolant Distribution Unit"
+        },
+        {
+          "name": "Temperature Probe",
+          "level": "L4",
+          "description": "Supply and return temperature sensing for delta-T thermal duty",
+          "bom_standard": "INCOSE",
+          "parent_name": "Coolant Distribution Unit"
+        },
+        {
+          "name": "Leak Detection Sensor",
+          "level": "L4",
+          "description": "Detects coolant leakage under the CDU or raised floor",
+          "bom_standard": "INCOSE",
+          "parent_name": "Coolant Distribution Unit"
+        },
+        {
+          "name": "Expansion Reservoir",
+          "level": "L4",
+          "description": "Accommodates thermal expansion and de-aerates the loop",
+          "bom_standard": "INCOSE",
+          "parent_name": "Coolant Distribution Unit"
+        },
+        {
+          "name": "CDU Controller",
+          "level": "L4",
+          "description": "Closed-loop control of pump speed, valve position, setpoints",
+          "bom_standard": "INCOSE",
+          "parent_name": "Coolant Distribution Unit"
+        },
+        {
+          "name": "Rear-Door Heat Exchanger Coil",
+          "level": "L4",
+          "description": "Finned coil capturing rack exhaust air into water loop",
+          "bom_standard": "INCOSE",
+          "parent_name": "In-Rack Liquid Cooling Unit"
+        },
+        {
+          "name": "EC Fan Array",
+          "level": "L4",
+          "description": "Electronically commutated fans pulling server exhaust through the coil",
+          "bom_standard": "INCOSE",
+          "parent_name": "In-Rack Liquid Cooling Unit"
+        },
+        {
+          "name": "Door Flow Sensor",
+          "level": "L4",
+          "description": "Verifies coolant flow through door coil — secondary Marquardt anchor",
+          "bom_standard": "INCOSE",
+          "parent_name": "In-Rack Liquid Cooling Unit"
+        },
+        {
+          "name": "Microchannel Cold Plate",
+          "level": "L4",
+          "description": "Copper or aluminum microchannel block mounted to CPU or GPU die",
+          "bom_standard": "INCOSE",
+          "parent_name": "Cold Plate Assembly"
+        },
+        {
+          "name": "Coolant Manifold",
+          "level": "L4",
+          "description": "Distributes coolant to multiple cold plates within a node",
+          "bom_standard": "INCOSE",
+          "parent_name": "Cold Plate Assembly"
+        },
+        {
+          "name": "Quick Disconnect Coupling",
+          "level": "L4",
+          "description": "Dripless connector enabling serviceable node removal",
+          "bom_standard": "INCOSE",
+          "parent_name": "Cold Plate Assembly"
+        },
+        {
+          "name": "Micro Flow Meter",
+          "level": "L4",
+          "description": "Per-node flow verification at DN6-DN10 (below Marquardt DN20 range)",
+          "bom_standard": "INCOSE",
+          "parent_name": "Cold Plate Assembly"
+        },
+        {
+          "name": "Compressor",
+          "level": "L4",
+          "description": "Centrifugal, screw, or scroll refrigerant compression",
+          "bom_standard": "INCOSE",
+          "parent_name": "Chiller Plant"
+        },
+        {
+          "name": "Evaporator",
+          "level": "L4",
+          "description": "Transfers load from CHW return to refrigerant",
+          "bom_standard": "INCOSE",
+          "parent_name": "Chiller Plant"
+        },
+        {
+          "name": "Condenser",
+          "level": "L4",
+          "description": "Rejects heat from refrigerant to heat-rejection loop",
+          "bom_standard": "INCOSE",
+          "parent_name": "Chiller Plant"
+        },
+        {
+          "name": "Chiller Controller",
+          "level": "L4",
+          "description": "Sequences compressor stages, vanes, economizer",
+          "bom_standard": "INCOSE",
+          "parent_name": "Chiller Plant"
+        },
+        {
+          "name": "Heat-Rejection Fan",
+          "level": "L4",
+          "description": "Drives air across fill or dry-cooler coil",
+          "bom_standard": "INCOSE",
+          "parent_name": "Heat Rejection Unit"
+        },
+        {
+          "name": "Fill Media or Dry Coil",
+          "level": "L4",
+          "description": "Evaporative fill or finned-tube dry coil",
+          "bom_standard": "INCOSE",
+          "parent_name": "Heat Rejection Unit"
+        },
+        {
+          "name": "Basin Pump Set",
+          "level": "L4",
+          "description": "Tower water recirculation and makeup",
+          "bom_standard": "INCOSE",
+          "parent_name": "Heat Rejection Unit"
+        },
+        {
+          "name": "CRAH Fan",
+          "level": "L4",
+          "description": "EC fan circulating room air across the coil",
+          "bom_standard": "INCOSE",
+          "parent_name": "CRAH"
+        },
+        {
+          "name": "Cooling Coil",
+          "level": "L4",
+          "description": "Chilled-water or DX refrigerant coil",
+          "bom_standard": "INCOSE",
+          "parent_name": "CRAH"
+        },
+        {
+          "name": "Control Valve",
+          "level": "L4",
+          "description": "2- or 3-way valve modulating coil duty",
+          "bom_standard": "INCOSE",
+          "parent_name": "CRAH"
+        },
+        {
+          "name": "Rectifier Inverter",
+          "level": "L4",
+          "description": "AC to DC to AC conversion stage",
+          "bom_standard": "INCOSE",
+          "parent_name": "Uninterruptible Power Supply"
+        },
+        {
+          "name": "Battery String",
+          "level": "L4",
+          "description": "VRLA or Li-ion ride-through energy storage",
+          "bom_standard": "INCOSE",
+          "parent_name": "Uninterruptible Power Supply"
+        },
+        {
+          "name": "Static Bypass Switch",
+          "level": "L4",
+          "description": "Fail-to-mains path on UPS fault",
+          "bom_standard": "INCOSE",
+          "parent_name": "Uninterruptible Power Supply"
+        },
+        {
+          "name": "PDU Transformer",
+          "level": "L4",
+          "description": "Voltage step-down in floor PDU",
+          "bom_standard": "INCOSE",
+          "parent_name": "Power Distribution Unit"
+        },
+        {
+          "name": "Branch Circuit Monitor",
+          "level": "L4",
+          "description": "Per-outlet current and energy telemetry",
+          "bom_standard": "INCOSE",
+          "parent_name": "Power Distribution Unit"
+        },
+        {
+          "name": "Outlet Bank",
+          "level": "L4",
+          "description": "C13 and C19 receptacle group",
+          "bom_standard": "INCOSE",
+          "parent_name": "Power Distribution Unit"
+        },
+        {
+          "name": "Circuit Breaker",
+          "level": "L4",
+          "description": "Fault interruption and isolation",
+          "bom_standard": "INCOSE",
+          "parent_name": "Medium-Voltage Switchgear"
+        },
+        {
+          "name": "Protection Relay",
+          "level": "L4",
+          "description": "Overcurrent and differential protection logic",
+          "bom_standard": "INCOSE",
+          "parent_name": "Medium-Voltage Switchgear"
+        },
+        {
+          "name": "Prime Mover Engine",
+          "level": "L4",
+          "description": "Diesel or gas reciprocating engine",
+          "bom_standard": "INCOSE",
+          "parent_name": "Backup Generator"
+        },
+        {
+          "name": "Alternator",
+          "level": "L4",
+          "description": "Generates AC from engine shaft",
+          "bom_standard": "INCOSE",
+          "parent_name": "Backup Generator"
+        },
+        {
+          "name": "Rack Frame and Rails",
+          "level": "L4",
+          "description": "19-inch or OCP structural frame",
+          "bom_standard": "INCOSE",
+          "parent_name": "Server Rack"
+        },
+        {
+          "name": "Blanking and Containment",
+          "level": "L4",
+          "description": "Airflow management panels and aisle containment",
+          "bom_standard": "INCOSE",
+          "parent_name": "Server Rack"
+        },
+        {
+          "name": "Rack Environmental Sensor",
+          "level": "L4",
+          "description": "Temperature and humidity at intake and exhaust",
+          "bom_standard": "INCOSE",
+          "parent_name": "Server Rack"
+        },
+        {
+          "name": "Copper Cable Plant",
+          "level": "L4",
+          "description": "Cat6A and DAC copper interconnect",
+          "bom_standard": "INCOSE",
+          "parent_name": "Structured Cabling"
+        },
+        {
+          "name": "Fiber Cable Plant",
+          "level": "L4",
+          "description": "OM4, OS2 fiber trunks and patch",
+          "bom_standard": "INCOSE",
+          "parent_name": "Structured Cabling"
+        },
+        {
+          "name": "CPU GPU Package",
+          "level": "L4",
+          "description": "Primary compute silicon",
+          "bom_standard": "INCOSE",
+          "parent_name": "Compute Server"
+        },
+        {
+          "name": "Memory DIMMs",
+          "level": "L4",
+          "description": "DDR or HBM working memory",
+          "bom_standard": "INCOSE",
+          "parent_name": "Compute Server"
+        },
+        {
+          "name": "Server Power Supply",
+          "level": "L4",
+          "description": "AC to DC rail conversion inside the server",
+          "bom_standard": "INCOSE",
+          "parent_name": "Compute Server"
+        },
+        {
+          "name": "Storage Drive",
+          "level": "L4",
+          "description": "SSD or HDD persistent media",
+          "bom_standard": "INCOSE",
+          "parent_name": "Storage Array"
+        },
+        {
+          "name": "Storage Controller",
+          "level": "L4",
+          "description": "RAID, erasure coding, protocol handling",
+          "bom_standard": "INCOSE",
+          "parent_name": "Storage Array"
+        },
+        {
+          "name": "Switch ASIC",
+          "level": "L4",
+          "description": "Packet forwarding silicon",
+          "bom_standard": "INCOSE",
+          "parent_name": "Network Switch"
+        },
+        {
+          "name": "Optical Transceiver",
+          "level": "L4",
+          "description": "Photonic I/O module",
+          "bom_standard": "INCOSE",
+          "parent_name": "Network Switch"
+        },
+        {
+          "name": "SCADA Server",
+          "level": "L4",
+          "description": "Supervisory control and data aggregation host",
+          "bom_standard": "INCOSE",
+          "parent_name": "Building Management and DCIM"
+        },
+        {
+          "name": "Sensor Gateway",
+          "level": "L4",
+          "description": "Modbus, BACnet, MQTT protocol bridge",
+          "bom_standard": "INCOSE",
+          "parent_name": "Building Management and DCIM"
+        },
+        {
+          "name": "Alarm Engine",
+          "level": "L4",
+          "description": "Threshold and anomaly alerting",
+          "bom_standard": "INCOSE",
+          "parent_name": "Building Management and DCIM"
+        },
+        {
+          "name": "Raised Floor Panel",
+          "level": "L4",
+          "description": "Perforated or solid tiles over plenum",
+          "bom_standard": "INCOSE",
+          "parent_name": "White Space Fit-Out"
+        },
+        {
+          "name": "Aisle Containment",
+          "level": "L4",
+          "description": "Hot or cold aisle physical separation",
+          "bom_standard": "INCOSE",
+          "parent_name": "White Space Fit-Out"
+        },
+        {
+          "name": "Meet-Me Patch Frame",
+          "level": "L4",
+          "description": "Carrier cross-connect patching infrastructure",
+          "bom_standard": "INCOSE",
+          "parent_name": "Fiber Meet-Me Entry"
+        },
+        {
+          "name": "Fiber Entrance Conduit",
+          "level": "L4",
+          "description": "Underground duct and innerduct to building",
+          "bom_standard": "INCOSE",
+          "parent_name": "Fiber Meet-Me Entry"
+        }
+      ],
+      "sensor_anchors": {
+        "primary": {
+          "l4_name": "Flow Sensor",
+          "l5_parent": "Coolant Distribution Unit",
+          "l6_parent": "Thermal Management",
+          "dn_range": "DN15-DN25",
+          "flow_range_lpm": "5-30",
+          "media": "water or PG/EG25 glycol",
+          "fit_score": "strong"
+        },
+        "secondary": {
+          "l4_name": "Door Flow Sensor",
+          "l5_parent": "In-Rack Liquid Cooling Unit",
+          "dn_range": "DN15-DN20",
+          "fit_score": "strong"
+        },
+        "out_of_envelope": {
+          "l4_name": "Micro Flow Meter",
+          "l5_parent": "Cold Plate Assembly",
+          "dn_range": "DN6-DN10",
+          "reason": "Below current DN20 envelope; future DN12 variant would address"
+        }
+      },
+      "unit_counts": {
+        "L7": 1,
+        "L6": 9,
+        "L5": 16,
+        "L4": 51,
+        "total": 77
+      },
+      "qa_results": {
+        "Q1": "PASS",
+        "Q2": "PASS",
+        "Q3": "PASS",
+        "Q4": "PASS",
+        "Q5": "PASS",
+        "Q6": "PASS",
+        "Q7": "SOFT FAIL — 77 > 60 (bias toward cooling depth deliberate for anchor analysis)"
+      }
+    }
+  ],
+  "has_bom": false,
+  "naics_sector_type": "non_manufacturing"
+}

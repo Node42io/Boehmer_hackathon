@@ -1,0 +1,1295 @@
+{
+  "id": "FIT_air_conditioning_and_warm_air_heating_eq",
+  "title": "Feature-Market Fit — NAICS 333415",
+  "type": "feature_market_fit",
+  "market_slug": "air_conditioning_and_warm_air_heating_eq",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Step 09 — Technology-Level Feature-Market Fit",
+      "content": "7 technology-scope features assessed against NAICS 333415. Kano classification + 9-dimension ODI fit scoring per feature. Top 10 market needs (from JTBD analysis) used as scoring context.\n\n### Top 10 Market Needs (scoring context)\n\n| Rank | ID | Statement (abbreviated) | Opp | Imp | Sat |\n|---|---|---|---|---|---|\n| 1 | ES-07 | Detect empty-pipe / air-lock before compressor enable (<5s) | 14 | 9 | 4 |\n| 2 | ES-16 | Prevent compressor short-cycling from undetected low-flow (>10s) | 13 | 9 | 5 |\n| 3 | ES-06 | Auto-compensate for glycol concentration variations (<50%) | 12 | 8 | 4 |\n| 4 | ES-09 | Maintain ±3% accuracy over 10,000 operating hours | 12 | 9 | 6 |\n| 5 | ES-10 | Prevent air entrainment >2% vol causing signal loss | 12 | 8 | 4 |\n| 6 | ES-25 | Demonstrate EU EcoDesign compliance via traceable flow data | 12 | 8 | 4 |\n| 7 | ES-04 | Minimize incorrect orientation causing bias >2% | 11 | 8 | 5 |\n| 8 | ES-11 | Measure accurately across full turndown range | 11 | 8 | 5 |\n| 9 | ES-17 | Detect calibration drift >±0.5% within 30 days | 11 | 8 | 5 |\n| 10 | ES-21 | Minimize acoustic coupling degradation causing >1% error in 5yr | 11 | 8 | 5 |\n\n[SRC: JTBD_air_conditioning_and_warm_air_heating_eq]\n\n### 09a — Per-Market Kano + ODI Fit Scoring\n\n| Feature | Kano | Time | Cost | Safety | Rel. | Skill | Stress | Pain | Conf. | Delight | Overall |\n|---|---|---|---|---|---|---|---|---|---|---|---|\n| Transit-Time Flow Measurement | must_be | 5 | 4 | 7 | 8 | 3 | 5 | 4 | 7 | 2 | **5.00** |\n| Integrated Temperature Sensing | attractive | 6 | 7 | 3 | 6 | 5 | 5 | 7 | 7 | 5 | **5.67** |\n| Zero Pressure Drop Flow Path | one_dimensional | 2 | 7 | 2 | 3 | 2 | 2 | 3 | 2 | 3 | **2.89** |\n| No Moving Parts | attractive | 3 | 8 | 3 | 9 | 6 | 6 | 8 | 6 | 5 | **6.00** |\n| Bidirectional Flow Detection | attractive | 4 | 5 | 7 | 5 | 4 | 5 | 5 | 6 | 4 | **5.00** |\n| Digital Anomaly Detection | attractive | 7 | 6 | 8 | 7 | 5 | 7 | 6 | 8 | 6 | **6.67** |\n| Real-Time Compensation Algorithms | one_dimensional | 3 | 4 | 3 | 7 | 5 | 4 | 5 | 7 | 3 | **4.56** |\n\n### 09b — Rationale per Feature\n\n**Transit-Time Flow Measurement** (must_be, 5.00): Delivers the commodity FP — \"quantify volumetric flow rate.\" Every HVAC system with hydronic circuits requires flow measurement; its absence is not tolerated. Primary drivers: Reliability (8) — no mechanical failure modes in the measurement principle; Safety (7) — enables compressor protection against low-flow and empty-pipe conditions (ES-16, ES-07). Market evidence: 35% installed base already uses ultrasonic transit-time [SRC: JTBD].\n\n**Integrated Temperature Sensing** (attractive, 5.67): Not standard across all flowmeter technologies — separate temperature probes are the norm. Enables single-body kW calculation (flow x ΔT x Cp), directly addressing ES-20 (Opp 12). Primary drivers: Cost (7) — eliminates separate probe purchase, wiring, and commissioning; Pain (7) — removes the task of sourcing and mounting a second sensor; Confidence (7) — co-located measurement avoids spatial/temporal mismatch in energy calculation. Attractive because absence does not cause dissatisfaction (separate probes work), but presence creates disproportionate satisfaction.\n\n**Zero Pressure Drop Flow Path** (one_dimensional, 2.89): More is proportionally better — every mbar saved reduces pump energy. Turbine meters impose 100–300 mbar; ultrasonic delivers <50 mbar (ES-15). Primary driver: Cost (7) — reduced pump sizing and continuous energy savings. All other dimensions are 1–3 because the benefit is narrowly hydraulic. One-dimensional because satisfaction scales linearly with pressure-drop reduction.\n\n**No Moving Parts** (attractive, 6.00): Eliminates the primary failure mode of 30% of the installed base (turbine/impeller bearing wear). Not expected by buyers accustomed to mechanical sensors. Primary drivers: Reliability (9) — no bearing wear, no impeller jamming, no seal degradation; Cost (8) and Pain (8) — eliminates scheduled bearing replacement and unplanned downtime. Addresses ES-23 (minimize field recalibration) and ES-27 (minimize warranty callbacks). Attractive because turbine sensors are accepted as normal — zero maintenance is a genuine surprise.\n\n**Bidirectional Flow Detection** (attractive, 5.00): Inherent to transit-time principle at no added cost. Detects check valve failure and pump malfunction (ES-14, Opp 10). Primary drivers: Safety (7) — catches potentially damaging reverse flow within 1 second; Confidence (6) — directional awareness builds system control trust. Attractive because paddle switches and basic turbine meters lack this capability entirely.\n\n**Digital Anomaly Detection** (attractive, 6.67): Highest-scoring feature. Directly addresses the market's top underserved need ES-07 (Opp 14) — empty-pipe detection before compressor enable. Also addresses ES-10 (air entrainment signal loss, Opp 12). Primary drivers: Safety (8) — empty-pipe compressor start causes high-pressure trip or freeze damage; Confidence (8) — diagnostic flags validate measurement integrity in real time; Time (7) — immediate detection (<5s) vs waiting for compressor fault trip. Most flowmeters provide only the measurement itself — system health diagnostics are a genuine delighter.\n\n**Real-Time Compensation Algorithms** (one_dimensional, 4.56): More accurate compensation = proportionally better measurement. Addresses ES-06 (glycol compensation, Opp 12) and ES-13 (temperature transient response). Primary drivers: Reliability (7) — maintains specified accuracy across operating envelope; Confidence (7) — knowing readings are compensated builds trust. One-dimensional because all modern sensors offer some compensation; better algorithms yield better accuracy linearly.\n\n### 09b — Validation Summary\n\n| # | Check | Result |\n|---|---|---|\n| 1 | Kano cross-market consistency | PASS — single market, no cross-market comparison needed |\n| 2 | safety ≥ 7 but confidence ≤ 3 | PASS — no occurrences |\n| 3 | skill ≥ 7 but stress ≤ 3 | PASS — no occurrences |\n| 4 | overall_fit arithmetic | PASS — all 7 recomputed deterministically |\n| 5 | No feature scores 10 on all dimensions | PASS — max single score is 9 (Reliability on No Moving Parts) |\n| 6 | Feature names comply with 2–6 word noun phrases | PASS |\n| 7 | Measurement accuracy feature scores 1 on Reliability | PASS — Transit-Time=8, Compensation=7 |\n\n---"
+    },
+    {
+      "title": "Step 10 — Product-Related Needs (Burleson Product Jobs)",
+      "content": "Needs derived from the product's 8 constraints. Each need WOULD DISAPPEAR if a fundamentally different flow measurement technology were chosen (electromagnetic, Coriolis, turbine). Litmus test applied per need.\n\n### 10a — Product-Related Needs\n\n| # | Statement | Source Constraint | Imp | Sat | Litmus |\n|---|---|---|---|---|---|\n| PRN-01 | Minimize the likelihood of measurement failure from acoustic impedance mismatch when non-aqueous contaminants enter the hydronic circuit | Media Limitation | 4 | 6 | Electromagnetic/Coriolis unaffected by acoustic coupling — PASS |\n| PRN-02 | Minimize the risk of polymer housing and seal degradation from sustained operation near the 90°C thermal limit in high-temperature heating configurations | Maximum Medium Temperature | 5 | 5 | Metal-bodied sensors (electromagnetic, Coriolis) tolerate >150°C — PASS |\n| PRN-03 | Minimize the risk of sensor housing failure from pressure spikes exceeding 10 bar continuous rating during water hammer or pump surge events | Maximum Operating Pressure | 5 | 6 | Metal-bodied sensors tolerate >40 bar continuous — PASS |\n| PRN-04 | Minimize the likelihood of measurement signal loss when system flow rate falls below the ultrasonic transit-time noise floor during part-load VFD operation | Minimum Flow Rate Detection | 7 | 5 | Coriolis meters measure to near-zero flow; ultrasonic has specific SNR threshold — PASS |\n| PRN-05 | Minimize the likelihood of ultrasonic signal attenuation from air entrainment exceeding 2% by volume during thermal cycling or system startup | Air Bubble Tolerance | 8 | 4 | Electromagnetic meters are insensitive to air bubbles; turbine meters less affected — PASS |\n| PRN-06 | Minimize the likelihood of complete measurement loss from partially filled pipe sections during system charging, maintenance drain-down, or gravity-return operation | Pipe Full Condition | 6 | 5 | DP sensors function in partially filled pipes; electromagnetic recovers faster — PASS |\n| PRN-07 | Minimize the sensitivity of transit-time measurement accuracy to asymmetric flow profiles from elbows, valves, or tees in compact equipment enclosures | Minimum Straight Pipe Run | 7 | 4 | Coriolis sensors are orientation/profile-independent; ultrasonic requires laminar profile — PASS |\n| PRN-08 | Minimize the likelihood of transit-time measurement error from rapid speed-of-sound changes during heating-cooling mode transitions exceeding compensation algorithm response time | Temperature-Dependent Accuracy | 7 | 5 | Electromagnetic/Coriolis measurement insensitive to speed of sound — PASS |\n\n### 10b — Validation Summary\n\n| # | Check | Result |\n|---|---|---|\n| 1 | Litmus test — would need disappear with different technology? | PASS — all 8 needs are specific to ultrasonic transit-time principle |\n| 2 | Source constraint traceability — constraint exists? | PASS — all 8 constraints from 01_product_decomposition |\n| 3 | Affected market plausibility | PASS — all 8 constraints manifest in HVAC hydronic circuits |\n| 4 | Completeness — every constraint generates ≥1 need | PASS — 8 constraints → 8 needs (1:1) |\n| 5 | No market-level needs included | PASS — none duplicate Step 06 error statements |\n| 6 | importance < 3 AND satisfaction > 7 | PASS — no occurrences |\n| 7 | Error-first statement format | PASS — all \"Minimize the likelihood of…\" or \"Minimize the risk of…\" |\n\n---"
+    },
+    {
+      "title": "Step 11 — Vendor Feature-Market Fit (Marquardt)",
+      "content": "6 vendor-scope features assessed against NAICS 333415. Vendor implementation scored against best incumbent on 0–10 scale. Advantage: superior (>1pt gap), parity (≤1pt), inferior (>1pt behind).\n\n### 11a — Vendor vs. Incumbent Comparison\n\n| Feature | Kano | Vendor | Incumbent | Inc. Tech | Adv. |\n|---|---|---|---|---|---|\n| Modular Pipe Diameter Variants | one_dimensional | 7 | 5 | Turbine / Impeller Sensor | **superior** |\n| Customizable Communication Interface | one_dimensional | 7 | 6 | Ultrasonic (Kamstrup) | parity |\n| Customizable Mechanical Interface | one_dimensional | 6 | 6 | Turbine / Impeller Sensor | parity |\n| Low-Energy Battery Mode | indifferent | 8 | 2 | Ultrasonic (generic) | superior* |\n| Pre-Calibrated Delivery | must_be | 8 | 7 | Ultrasonic (Kamstrup/Danfoss) | parity |\n| KTW/WRAS Drinking Water Approval | must_be | 7 | 8 | Ultrasonic (Kamstrup) | parity |\n\n*Superior implementation but indifferent Kano class — market does not value battery mode in OEM HVAC equipment.\n\n### 11a — Rationale per Feature\n\n**Modular Pipe Diameter Variants** (one_dimensional, superior): Marquardt offers DN12/14/20/25 sharing one electronics platform and RAST 2.5 connector. OEMs produce multiple capacity variants — shared electronics across DN sizes reduces BOM complexity and qualification effort (ES-02). Best incumbent turbine sensors typically require separate electronics per DN size. Vendor 7 vs incumbent 5 → gap of 2 = superior.\n\n**Customizable Communication Interface** (one_dimensional, parity): Marquardt offers UART, LIN, and frequency output selectable at order level. Competing ultrasonic sensors (Kamstrup, Danfoss) offer 2–3 protocol options with similar flexibility. Vendor 7 vs incumbent 6 → gap of 1 = parity.\n\n**Customizable Mechanical Interface** (one_dimensional, parity): Marquardt offers threaded and plug-in pipe connections. Competing sensors also offer adapter systems for OEM integration. Both meet OEM assembly line requirements. Vendor 6 vs incumbent 6 → gap of 0 = parity.\n\n**Low-Energy Battery Mode** (indifferent, superior*): Marquardt achieves genuine <5 μA standby current enabling battery-powered operation. Most HVAC inline sensors require mains power. However, in NAICS 333415, all OEM equipment has permanent DC power supply — battery mode is unused. Vendor 8 vs incumbent 2 → gap of 6, but Kano = indifferent neutralizes the advantage.\n\n**Pre-Calibrated Delivery** (must_be, parity): Marquardt delivers individually calibrated to customer-specific medium with 100% automated final test. Kamstrup and Danfoss offer factory calibration with standard media profiles. OEMs expect calibrated delivery — this is table stakes. Vendor 8 vs incumbent 7 → gap of 1 = parity.\n\n**KTW/WRAS Drinking Water Approval** (must_be, parity): Marquardt holds KTW (German) and WRAS (UK) approvals. Kamstrup holds KTW, WRAS, and NSF/ANSI 61 (US). For HVAC hydronic circuits the KTW/WRAS coverage is sufficient, but Kamstrup's broader set gives slight edge. Vendor 7 vs incumbent 8 → gap of 1 = parity.\n\n### 11b — Bias Check\n\n| # | Check | Result |\n|---|---|---|\n| 1 | >70% superior verdicts (vendor bias) | PASS — 1 of 6 = 17% (2 if counting indifferent) |\n| 2 | >70% inferior verdicts (anti-vendor bias) | PASS — 0 of 6 = 0% |\n| 3 | Advantage classification arithmetic | PASS — all 6 entries verified |\n| 4 | must_be features: both scores ≥ 5 | PASS — Pre-Calibrated (8/7), KTW/WRAS (7/8) |\n| 5 | Rationale references specific specs | PASS — DN sizes, protocols, μA figures cited |\n| 6 | No straw-man incumbents | PASS — Kamstrup/Danfoss are genuine market leaders |\n\n---"
+    },
+    {
+      "title": "Summary",
+      "content": "### Feature Fit Ranking (Step 09)\n\n| Rank | Feature | Kano | Overall Fit | Primary Value |\n|---|---|---|---|---|\n| 1 | Digital Anomaly Detection | attractive | **6.67** | Empty-pipe/air-lock detection (ES-07, Opp 14) |\n| 2 | No Moving Parts | attractive | **6.00** | Zero mechanical maintenance (ES-23, ES-27) |\n| 3 | Integrated Temperature Sensing | attractive | **5.67** | Single-body kW calculation (ES-20, Opp 12) |\n| 4 | Transit-Time Flow Measurement | must_be | **5.00** | Core commodity FP delivery |\n| 5 | Bidirectional Flow Detection | attractive | **5.00** | Reverse flow / check valve fault (ES-14) |\n| 6 | Real-Time Compensation Algorithms | one_dimensional | **4.56** | Glycol + temperature compensation (ES-06, ES-13) |\n| 7 | Zero Pressure Drop Flow Path | one_dimensional | **2.89** | Pump energy savings (ES-15) |\n\n### Vendor Competitive Position (Step 11)\n\n| Verdict | Count | Features |\n|---|---|---|\n| Superior | 1 | Modular Pipe Diameter Variants |\n| Parity | 4 | Communication Interface, Mechanical Interface, Pre-Calibrated Delivery, KTW/WRAS |\n| Inferior | 0 | — |\n| Superior (indifferent market) | 1 | Low-Energy Battery Mode |\n\n**Key insight:** Marquardt's strongest competitive advantage in NAICS 333415 is the modular DN platform (4 variants, shared electronics), which directly addresses OEM multi-capacity product line needs. Most other vendor features are at parity with established incumbents (Kamstrup, Danfoss). The technology-scope delighters — Digital Anomaly Detection, No Moving Parts, Integrated Temperature — provide the strongest market pull, but these are shared with all ultrasonic transit-time sensors, not Marquardt-specific.\n\n### Product-Related Risk Summary (Step 10)\n\n| Risk Level | Constraint | PRN | Imp | Sat |\n|---|---|---|---|---|\n| **High** | Air Bubble Tolerance | PRN-05 | 8 | 4 |\n| **Medium** | Minimum Straight Pipe Run | PRN-07 | 7 | 4 |\n| **Medium** | Minimum Flow Rate Detection | PRN-04 | 7 | 5 |\n| **Medium** | Temperature-Dependent Accuracy | PRN-08 | 7 | 5 |\n| **Medium** | Pipe Full Condition | PRN-06 | 6 | 5 |\n| **Low** | Maximum Medium Temperature | PRN-02 | 5 | 5 |\n| **Low** | Maximum Operating Pressure | PRN-03 | 5 | 6 |\n| **Low** | Media Limitation | PRN-01 | 4 | 6 |\n\n---"
+    },
+    {
+      "title": "QA Checklist",
+      "content": "| # | Check | Result |\n|---|---|---|\n| 1 | Step 09: all 7 technology-scope features assessed | PASS |\n| 2 | Step 09: Kano class + 9 ODI scores + overall_fit per feature | PASS |\n| 3 | Step 09: overall_fit = arithmetic mean (deterministic) | PASS |\n| 4 | Step 09: rationale references market needs with IDs | PASS |\n| 5 | Step 10: all 8 constraints generate ≥1 product-related need | PASS |\n| 6 | Step 10: litmus test applied to every need | PASS |\n| 7 | Step 10: no market-level needs duplicated from Step 06 | PASS |\n| 8 | Step 10: error-first statement format | PASS |\n| 9 | Step 11: all 6 vendor-scope features assessed | PASS |\n| 10 | Step 11: vendor vs best incumbent scoring with advantage | PASS |\n| 11 | Step 11: bias check passed (mix of verdicts) | PASS |\n| 12 | Feature names: 2–6 word noun phrases, no brands/superlatives | PASS |\n| 13 | No web search used — all derived from upstream files | PASS |\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"feature_market_fit\",\n  \"naics_code\": \"333415\",\n  \"naics_title\": \"Air-Conditioning and Warm Air Heating Equipment and Commercial and Industrial Refrigeration Equipment Manufacturing\",\n  \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n  \"product_name\": \"Ultrasonic Flow Sensor\",\n  \"vendor_name\": \"Marquardt\",\n  \"technology_class\": \"Ultrasonic Transit-Time Flow Measurement\",\n  \"commodity_functional_promise\": \"Quantify the volumetric or mass flow rate of fluids traversing a closed conduit\",\n  \"unspsc_code\": \"41112501\",\n  \"step_09_tech_feature_market_fit\": {\n    \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n    \"naics_code\": \"333415\",\n    \"n_features\": 7,\n    \"entries\": [\n      {\n        \"feature_name\": \"Transit-Time Flow Measurement\",\n        \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n        \"naics_code\": \"333415\",\n        \"kano_class\": \"must_be\",\n        \"fit_score_time\": 5,\n        \"fit_score_cost\": 4,\n        \"fit_score_safety\": 7,\n        \"fit_score_reliability\": 8,\n        \"fit_score_skill\": 3,\n        \"fit_score_stress\": 5,\n        \"fit_score_pain\": 4,\n        \"fit_score_confidence\": 7,\n        \"fit_score_delight\": 2,\n        \"overall_fit\": 5.00,\n        \"rationale\": \"Delivers commodity FP — flow measurement is table stakes in hydronic HVAC. Primary drivers: Reliability (8) — no mechanical failure modes; Safety (7) — enables compressor protection (ES-16 Opp 13, ES-07 Opp 14). 35% installed base already uses ultrasonic.\"\n      },\n      {\n        \"feature_name\": \"Integrated Temperature Sensing\",\n        \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n        \"naics_code\": \"333415\",\n        \"kano_class\": \"attractive\",\n        \"fit_score_time\": 6,\n        \"fit_score_cost\": 7,\n        \"fit_score_safety\": 3,\n        \"fit_score_reliability\": 6,\n        \"fit_score_skill\": 5,\n        \"fit_score_stress\": 5,\n        \"fit_score_pain\": 7,\n        \"fit_score_confidence\": 7,\n        \"fit_score_delight\": 5,\n        \"overall_fit\": 5.67,\n        \"rationale\": \"Not standard across flowmeter technologies — separate probes are the norm. Enables single-body kW calculation (ES-20 Opp 12). Primary drivers: Cost (7) — eliminates separate probe; Pain (7) — removes second sensor sourcing/wiring; Confidence (7) — co-located measurement avoids spatial mismatch.\"\n      },\n      {\n        \"feature_name\": \"Zero Pressure Drop Flow Path\",\n        \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n        \"naics_code\": \"333415\",\n        \"kano_class\": \"one_dimensional\",\n        \"fit_score_time\": 2,\n        \"fit_score_cost\": 7,\n        \"fit_score_safety\": 2,\n        \"fit_score_reliability\": 3,\n        \"fit_score_skill\": 2,\n        \"fit_score_stress\": 2,\n        \"fit_score_pain\": 3,\n        \"fit_score_confidence\": 2,\n        \"fit_score_delight\": 3,\n        \"overall_fit\": 2.89,\n        \"rationale\": \"Benefit is narrowly hydraulic — turbine meters impose 100-300 mbar vs ultrasonic <50 mbar (ES-15 Opp 8). Primary driver: Cost (7) — reduced pump sizing and continuous energy savings over equipment lifetime. All other dimensions 1-3 because the benefit doesn't extend beyond hydraulic efficiency.\"\n      },\n      {\n        \"feature_name\": \"No Moving Parts\",\n        \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n        \"naics_code\": \"333415\",\n        \"kano_class\": \"attractive\",\n        \"fit_score_time\": 3,\n        \"fit_score_cost\": 8,\n        \"fit_score_safety\": 3,\n        \"fit_score_reliability\": 9,\n        \"fit_score_skill\": 6,\n        \"fit_score_stress\": 6,\n        \"fit_score_pain\": 8,\n        \"fit_score_confidence\": 6,\n        \"fit_score_delight\": 5,\n        \"overall_fit\": 6.00,\n        \"rationale\": \"Eliminates the primary failure mode of 30% installed base (turbine bearing wear). Primary drivers: Reliability (9) — no bearing/impeller failure modes; Cost (8) and Pain (8) — eliminates scheduled bearing replacement and unplanned downtime. Addresses ES-23 (minimize recalibration) and ES-27 (minimize warranty callbacks). Attractive because mechanical sensors are accepted as normal.\"\n      },\n      {\n        \"feature_name\": \"Bidirectional Flow Detection\",\n        \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n        \"naics_code\": \"333415\",\n        \"kano_class\": \"attractive\",\n        \"fit_score_time\": 4,\n        \"fit_score_cost\": 5,\n        \"fit_score_safety\": 7,\n        \"fit_score_reliability\": 5,\n        \"fit_score_skill\": 4,\n        \"fit_score_stress\": 5,\n        \"fit_score_pain\": 5,\n        \"fit_score_confidence\": 6,\n        \"fit_score_delight\": 4,\n        \"overall_fit\": 5.00,\n        \"rationale\": \"Inherent to transit-time principle at no added cost. Detects check valve failure and pump malfunction (ES-14 Opp 10). Primary driver: Safety (7) — catches reverse flow within 1 second. Attractive because paddle switches and basic turbine meters lack directional awareness entirely.\"\n      },\n      {\n        \"feature_name\": \"Digital Anomaly Detection\",\n        \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n        \"naics_code\": \"333415\",\n        \"kano_class\": \"attractive\",\n        \"fit_score_time\": 7,\n        \"fit_score_cost\": 6,\n        \"fit_score_safety\": 8,\n        \"fit_score_reliability\": 7,\n        \"fit_score_skill\": 5,\n        \"fit_score_stress\": 7,\n        \"fit_score_pain\": 6,\n        \"fit_score_confidence\": 8,\n        \"fit_score_delight\": 6,\n        \"overall_fit\": 6.67,\n        \"rationale\": \"Highest-scoring feature. Directly addresses top underserved need ES-07 (Opp 14) — empty-pipe detection <5s before compressor enable. Also addresses ES-10 (air entrainment signal loss, Opp 12). Primary drivers: Safety (8) — prevents compressor damage from dry start; Confidence (8) — diagnostic flags validate measurement in real time; Time (7) — immediate detection vs waiting for compressor fault.\"\n      },\n      {\n        \"feature_name\": \"Real-Time Compensation Algorithms\",\n        \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n        \"naics_code\": \"333415\",\n        \"kano_class\": \"one_dimensional\",\n        \"fit_score_time\": 3,\n        \"fit_score_cost\": 4,\n        \"fit_score_safety\": 3,\n        \"fit_score_reliability\": 7,\n        \"fit_score_skill\": 5,\n        \"fit_score_stress\": 4,\n        \"fit_score_pain\": 5,\n        \"fit_score_confidence\": 7,\n        \"fit_score_delight\": 3,\n        \"overall_fit\": 4.56,\n        \"rationale\": \"Better compensation = better measurement, linearly. Addresses ES-06 (glycol compensation, Opp 12) and ES-13 (temperature transients). Primary drivers: Reliability (7) — maintains accuracy across operating envelope; Confidence (7) — compensated readings build trust. One-dimensional because all modern sensors offer some compensation.\"\n      }\n    ]\n  },\n  \"step_10_product_related_needs\": {\n    \"technology_class\": \"Ultrasonic Transit-Time Flow Measurement\",\n    \"underlying_mechanism\": \"Piezoelectric transducers in transit-time configuration; transit-time difference proportional to fluid velocity\",\n    \"n_needs\": 8,\n    \"entries\": [\n      {\n        \"statement\": \"Minimize the likelihood of measurement failure from acoustic impedance mismatch when non-aqueous contaminants enter the hydronic circuit\",\n        \"source_constraint\": \"Media Limitation\",\n        \"affected_markets\": [\"Air Conditioning and Warm Air Heating Equipment\"],\n        \"importance\": 4.0,\n        \"satisfaction_current\": 6.0\n      },\n      {\n        \"statement\": \"Minimize the risk of polymer housing and seal degradation from sustained operation near the 90°C thermal limit in high-temperature heating configurations\",\n        \"source_constraint\": \"Maximum Medium Temperature\",\n        \"affected_markets\": [\"Air Conditioning and Warm Air Heating Equipment\"],\n        \"importance\": 5.0,\n        \"satisfaction_current\": 5.0\n      },\n      {\n        \"statement\": \"Minimize the risk of sensor housing failure from pressure spikes exceeding 10 bar continuous rating during water hammer or pump surge events\",\n        \"source_constraint\": \"Maximum Operating Pressure\",\n        \"affected_markets\": [\"Air Conditioning and Warm Air Heating Equipment\"],\n        \"importance\": 5.0,\n        \"satisfaction_current\": 6.0\n      },\n      {\n        \"statement\": \"Minimize the likelihood of measurement signal loss when system flow rate falls below the ultrasonic transit-time noise floor during part-load VFD operation\",\n        \"source_constraint\": \"Minimum Flow Rate Detection\",\n        \"affected_markets\": [\"Air Conditioning and Warm Air Heating Equipment\"],\n        \"importance\": 7.0,\n        \"satisfaction_current\": 5.0\n      },\n      {\n        \"statement\": \"Minimize the likelihood of ultrasonic signal attenuation from air entrainment exceeding 2% by volume during thermal cycling or system startup\",\n        \"source_constraint\": \"Air Bubble Tolerance\",\n        \"affected_markets\": [\"Air Conditioning and Warm Air Heating Equipment\"],\n        \"importance\": 8.0,\n        \"satisfaction_current\": 4.0\n      },\n      {\n        \"statement\": \"Minimize the likelihood of complete measurement loss from partially filled pipe sections during system charging, maintenance drain-down, or gravity-return operation\",\n        \"source_constraint\": \"Pipe Full Condition\",\n        \"affected_markets\": [\"Air Conditioning and Warm Air Heating Equipment\"],\n        \"importance\": 6.0,\n        \"satisfaction_current\": 5.0\n      },\n      {\n        \"statement\": \"Minimize the sensitivity of transit-time measurement accuracy to asymmetric flow profiles from elbows, valves, or tees in compact equipment enclosures\",\n        \"source_constraint\": \"Minimum Straight Pipe Run\",\n        \"affected_markets\": [\"Air Conditioning and Warm Air Heating Equipment\"],\n        \"importance\": 7.0,\n        \"satisfaction_current\": 4.0\n      },\n      {\n        \"statement\": \"Minimize the likelihood of transit-time measurement error from rapid speed-of-sound changes during heating-cooling mode transitions exceeding compensation algorithm response time\",\n        \"source_constraint\": \"Temperature-Dependent Accuracy\",\n        \"affected_markets\": [\"Air Conditioning and Warm Air Heating Equipment\"],\n        \"importance\": 7.0,\n        \"satisfaction_current\": 5.0\n      }\n    ]\n  },\n  \"step_11_vendor_feature_market_fit\": {\n    \"vendor_name\": \"Marquardt\",\n    \"vendor_product\": \"US Flow Sensor (DN20 serial, DN12/DN14/DN25 development)\",\n    \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n    \"naics_code\": \"333415\",\n    \"n_comparisons\": 6,\n    \"entries\": [\n      {\n        \"feature_name\": \"Modular Pipe Diameter Variants\",\n        \"feature_description\": \"Serve multiple pipe sizes via interchangeable flow bodies sharing one electronics platform and RAST 2.5 connector\",\n        \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n        \"naics_code\": \"333415\",\n        \"vendor_score\": 7,\n        \"best_incumbent_score\": 5,\n        \"best_incumbent_technology\": \"Turbine / Impeller Flow Sensor\",\n        \"advantage\": \"superior\",\n        \"kano_class\": \"one_dimensional\",\n        \"rationale\": \"Marquardt DN12/14/20/25 share one electronics platform and RAST 2.5 connector. Incumbent turbine sensors typically require separate electronics per DN size, increasing OEM BOM complexity. Gap of 2 points = superior. Directly addresses ES-02 (multi-DN platform without hydraulic redesign).\"\n      },\n      {\n        \"feature_name\": \"Customizable Communication Interface\",\n        \"feature_description\": \"Support UART, LIN, and frequency output protocols selectable at order level for diverse controller architectures\",\n        \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n        \"naics_code\": \"333415\",\n        \"vendor_score\": 7,\n        \"best_incumbent_score\": 6,\n        \"best_incumbent_technology\": \"Ultrasonic Transit-Time Sensor (Kamstrup)\",\n        \"advantage\": \"parity\",\n        \"kano_class\": \"one_dimensional\",\n        \"rationale\": \"Marquardt offers 3 protocols (UART, LIN, frequency). Kamstrup/Danfoss offer 2-3 protocol options with similar flexibility. Gap of 1 point = parity. LIN automotive-grade bus is a minor differentiator for heat pump OEMs with automotive supply chain origins.\"\n      },\n      {\n        \"feature_name\": \"Customizable Mechanical Interface\",\n        \"feature_description\": \"Accept threaded or plug-in pipe connections to match OEM assembly line requirements\",\n        \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n        \"naics_code\": \"333415\",\n        \"vendor_score\": 6,\n        \"best_incumbent_score\": 6,\n        \"best_incumbent_technology\": \"Turbine / Impeller Flow Sensor\",\n        \"advantage\": \"parity\",\n        \"kano_class\": \"one_dimensional\",\n        \"rationale\": \"Marquardt offers threaded and plug-in options. Incumbent turbine and ultrasonic sensors also offer adapter systems for OEM integration. Gap of 0 = parity. Both meet OEM assembly line requirements for <3 min integration (ES-03).\"\n      },\n      {\n        \"feature_name\": \"Low-Energy Battery Mode\",\n        \"feature_description\": \"Operate at ultra-low current consumption (<5 μA standby) for battery-powered remote installations\",\n        \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n        \"naics_code\": \"333415\",\n        \"vendor_score\": 8,\n        \"best_incumbent_score\": 2,\n        \"best_incumbent_technology\": \"Ultrasonic Transit-Time Sensor (generic)\",\n        \"advantage\": \"superior\",\n        \"kano_class\": \"indifferent\",\n        \"rationale\": \"Marquardt achieves genuine <5 μA standby, enabling real battery operation. Most HVAC inline sensors require permanent mains/DC power. However, in OEM HVAC equipment (heat pumps, chillers), all units have permanent DC supply — battery mode is unused. Kano = indifferent neutralizes the 6-point gap.\"\n      },\n      {\n        \"feature_name\": \"Pre-Calibrated Delivery\",\n        \"feature_description\": \"Ship fully calibrated and tested to customer-specific medium and flow profile with 100% automated final test\",\n        \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n        \"naics_code\": \"333415\",\n        \"vendor_score\": 8,\n        \"best_incumbent_score\": 7,\n        \"best_incumbent_technology\": \"Ultrasonic Transit-Time Sensor (Kamstrup/Danfoss)\",\n        \"advantage\": \"parity\",\n        \"kano_class\": \"must_be\",\n        \"rationale\": \"Marquardt calibrates to customer-specific medium (e.g., 30% glycol mix) with 100% automated test. Kamstrup/Danfoss offer factory calibration with standard media profiles. Gap of 1 = parity. OEMs expect calibrated delivery — this is table stakes (must_be). Marquardt's customer-specific calibration is a minor edge.\"\n      },\n      {\n        \"feature_name\": \"KTW/WRAS Drinking Water Approval\",\n        \"feature_description\": \"Wetted parts approved for potable water contact under KTW (German) and WRAS (UK) standards\",\n        \"market_name\": \"Air Conditioning and Warm Air Heating Equipment\",\n        \"naics_code\": \"333415\",\n        \"vendor_score\": 7,\n        \"best_incumbent_score\": 8,\n        \"best_incumbent_technology\": \"Ultrasonic Transit-Time Sensor (Kamstrup)\",\n        \"advantage\": \"parity\",\n        \"kano_class\": \"must_be\",\n        \"rationale\": \"Marquardt holds KTW and WRAS — the two major European standards. Kamstrup holds KTW, WRAS, plus NSF/ANSI 61 (US market access). For European HVAC hydronic circuits, KTW/WRAS is sufficient. Gap of 1 = parity, though Kamstrup has broader geographic coverage.\"\n      }\n    ]\n  },\n  \"entities_produced\": {\n    \"relationships\": [\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Transit-Time Flow Measurement\", \"target\": \"Market:333415\", \"props\": {\"kano_class\": \"must_be\", \"overall_fit\": 5.00, \"feature_scope\": \"technology\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Integrated Temperature Sensing\", \"target\": \"Market:333415\", \"props\": {\"kano_class\": \"attractive\", \"overall_fit\": 5.67, \"feature_scope\": \"technology\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Zero Pressure Drop Flow Path\", \"target\": \"Market:333415\", \"props\": {\"kano_class\": \"one_dimensional\", \"overall_fit\": 2.89, \"feature_scope\": \"technology\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:No Moving Parts\", \"target\": \"Market:333415\", \"props\": {\"kano_class\": \"attractive\", \"overall_fit\": 6.00, \"feature_scope\": \"technology\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Bidirectional Flow Detection\", \"target\": \"Market:333415\", \"props\": {\"kano_class\": \"attractive\", \"overall_fit\": 5.00, \"feature_scope\": \"technology\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Digital Anomaly Detection\", \"target\": \"Market:333415\", \"props\": {\"kano_class\": \"attractive\", \"overall_fit\": 6.67, \"feature_scope\": \"technology\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Real-Time Compensation Algorithms\", \"target\": \"Market:333415\", \"props\": {\"kano_class\": \"one_dimensional\", \"overall_fit\": 4.56, \"feature_scope\": \"technology\"}}\n    ],\n    \"nodes\": [\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement_prefix\": \"Minimize the likelihood of measurement failure from acoustic impedance mismatch\", \"run_id\": \"TBD\"}, \"props\": {\"product_related\": true, \"source_constraint\": \"Media Limitation\", \"importance\": 4.0, \"satisfaction_current\": 6.0}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement_prefix\": \"Minimize the risk of polymer housing and seal degradation from sustained opera\", \"run_id\": \"TBD\"}, \"props\": {\"product_related\": true, \"source_constraint\": \"Maximum Medium Temperature\", \"importance\": 5.0, \"satisfaction_current\": 5.0}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement_prefix\": \"Minimize the risk of sensor housing failure from pressure spikes exceeding 10\", \"run_id\": \"TBD\"}, \"props\": {\"product_related\": true, \"source_constraint\": \"Maximum Operating Pressure\", \"importance\": 5.0, \"satisfaction_current\": 6.0}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement_prefix\": \"Minimize the likelihood of measurement signal loss when system flow rate fall\", \"run_id\": \"TBD\"}, \"props\": {\"product_related\": true, \"source_constraint\": \"Minimum Flow Rate Detection\", \"importance\": 7.0, \"satisfaction_current\": 5.0}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement_prefix\": \"Minimize the likelihood of ultrasonic signal attenuation from air entrainmen\", \"run_id\": \"TBD\"}, \"props\": {\"product_related\": true, \"source_constraint\": \"Air Bubble Tolerance\", \"importance\": 8.0, \"satisfaction_current\": 4.0}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement_prefix\": \"Minimize the likelihood of complete measurement loss from partially filled pi\", \"run_id\": \"TBD\"}, \"props\": {\"product_related\": true, \"source_constraint\": \"Pipe Full Condition\", \"importance\": 6.0, \"satisfaction_current\": 5.0}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement_prefix\": \"Minimize the sensitivity of transit-time measurement accuracy to asymmetric\", \"run_id\": \"TBD\"}, \"props\": {\"product_related\": true, \"source_constraint\": \"Minimum Straight Pipe Run\", \"importance\": 7.0, \"satisfaction_current\": 4.0}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement_prefix\": \"Minimize the likelihood of transit-time measurement error from rapid speed-of\", \"run_id\": \"TBD\"}, \"props\": {\"product_related\": true, \"source_constraint\": \"Temperature-Dependent Accuracy\", \"importance\": 7.0, \"satisfaction_current\": 5.0}}\n    ],\n    \"vendor_relationships\": [\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Modular Pipe Diameter Variants\", \"target\": \"Market:333415\", \"props\": {\"kano_class\": \"one_dimensional\", \"vendor_score\": 7, \"best_incumbent_score\": 5, \"advantage\": \"superior\", \"feature_scope\": \"vendor\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Customizable Communication Interface\", \"target\": \"Market:333415\", \"props\": {\"kano_class\": \"one_dimensional\", \"vendor_score\": 7, \"best_incumbent_score\": 6, \"advantage\": \"parity\", \"feature_scope\": \"vendor\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Customizable Mechanical Interface\", \"target\": \"Market:333415\", \"props\": {\"kano_class\": \"one_dimensional\", \"vendor_score\": 6, \"best_incumbent_score\": 6, \"advantage\": \"parity\", \"feature_scope\": \"vendor\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Low-Energy Battery Mode\", \"target\": \"Market:333415\", \"props\": {\"kano_class\": \"indifferent\", \"vendor_score\": 8, \"best_incumbent_score\": 2, \"advantage\": \"superior\", \"feature_scope\": \"vendor\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Pre-Calibrated Delivery\", \"target\": \"Market:333415\", \"props\": {\"kano_class\": \"must_be\", \"vendor_score\": 8, \"best_incumbent_score\": 7, \"advantage\": \"parity\", \"feature_scope\": \"vendor\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:KTW/WRAS Drinking Water Approval\", \"target\": \"Market:333415\", \"props\": {\"kano_class\": \"must_be\", \"vendor_score\": 7, \"best_incumbent_score\": 8, \"advantage\": \"parity\", \"feature_scope\": \"vendor\"}}\n    ]\n  }\n}\n```\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [SRC: 01_product_decomposition] — Technology-scope features, vendor-scope features, constraints, UNSPSC classification\n- [SRC: 02_functional_promise] — Commodity FP, product FP, FP extension, complements\n- [SRC: 05_market_discovery] — NAICS 333415 excluded as home market; architecture distance scoring criteria\n- [SRC: JTBD_air_conditioning_and_warm_air_heating_eq] — 27 error statements, alternatives, scenarios, job map"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "Rank",
+        "ID",
+        "Statement (abbreviated)",
+        "Opp",
+        "Imp",
+        "Sat"
+      ],
+      "rows": [
+        {
+          "Rank": "1",
+          "ID": "ES-07",
+          "Statement (abbreviated)": "Detect empty-pipe / air-lock before compressor enable (<5s)",
+          "Opp": "14",
+          "Imp": "9",
+          "Sat": "4"
+        },
+        {
+          "Rank": "2",
+          "ID": "ES-16",
+          "Statement (abbreviated)": "Prevent compressor short-cycling from undetected low-flow (>10s)",
+          "Opp": "13",
+          "Imp": "9",
+          "Sat": "5"
+        },
+        {
+          "Rank": "3",
+          "ID": "ES-06",
+          "Statement (abbreviated)": "Auto-compensate for glycol concentration variations (<50%)",
+          "Opp": "12",
+          "Imp": "8",
+          "Sat": "4"
+        },
+        {
+          "Rank": "4",
+          "ID": "ES-09",
+          "Statement (abbreviated)": "Maintain ±3% accuracy over 10,000 operating hours",
+          "Opp": "12",
+          "Imp": "9",
+          "Sat": "6"
+        },
+        {
+          "Rank": "5",
+          "ID": "ES-10",
+          "Statement (abbreviated)": "Prevent air entrainment >2% vol causing signal loss",
+          "Opp": "12",
+          "Imp": "8",
+          "Sat": "4"
+        },
+        {
+          "Rank": "6",
+          "ID": "ES-25",
+          "Statement (abbreviated)": "Demonstrate EU EcoDesign compliance via traceable flow data",
+          "Opp": "12",
+          "Imp": "8",
+          "Sat": "4"
+        },
+        {
+          "Rank": "7",
+          "ID": "ES-04",
+          "Statement (abbreviated)": "Minimize incorrect orientation causing bias >2%",
+          "Opp": "11",
+          "Imp": "8",
+          "Sat": "5"
+        },
+        {
+          "Rank": "8",
+          "ID": "ES-11",
+          "Statement (abbreviated)": "Measure accurately across full turndown range",
+          "Opp": "11",
+          "Imp": "8",
+          "Sat": "5"
+        },
+        {
+          "Rank": "9",
+          "ID": "ES-17",
+          "Statement (abbreviated)": "Detect calibration drift >±0.5% within 30 days",
+          "Opp": "11",
+          "Imp": "8",
+          "Sat": "5"
+        },
+        {
+          "Rank": "10",
+          "ID": "ES-21",
+          "Statement (abbreviated)": "Minimize acoustic coupling degradation causing >1% error in 5yr",
+          "Opp": "11",
+          "Imp": "8",
+          "Sat": "5"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Feature",
+        "Kano",
+        "Time",
+        "Cost",
+        "Safety",
+        "Rel.",
+        "Skill",
+        "Stress",
+        "Pain",
+        "Conf.",
+        "Delight",
+        "Overall"
+      ],
+      "rows": [
+        {
+          "Feature": "Transit-Time Flow Measurement",
+          "Kano": "must_be",
+          "Time": "5",
+          "Cost": "4",
+          "Safety": "7",
+          "Rel.": "8",
+          "Skill": "3",
+          "Stress": "5",
+          "Pain": "4",
+          "Conf.": "7",
+          "Delight": "2",
+          "Overall": "**5.00**"
+        },
+        {
+          "Feature": "Integrated Temperature Sensing",
+          "Kano": "attractive",
+          "Time": "6",
+          "Cost": "7",
+          "Safety": "3",
+          "Rel.": "6",
+          "Skill": "5",
+          "Stress": "5",
+          "Pain": "7",
+          "Conf.": "7",
+          "Delight": "5",
+          "Overall": "**5.67**"
+        },
+        {
+          "Feature": "Zero Pressure Drop Flow Path",
+          "Kano": "one_dimensional",
+          "Time": "2",
+          "Cost": "7",
+          "Safety": "2",
+          "Rel.": "3",
+          "Skill": "2",
+          "Stress": "2",
+          "Pain": "3",
+          "Conf.": "2",
+          "Delight": "3",
+          "Overall": "**2.89**"
+        },
+        {
+          "Feature": "No Moving Parts",
+          "Kano": "attractive",
+          "Time": "3",
+          "Cost": "8",
+          "Safety": "3",
+          "Rel.": "9",
+          "Skill": "6",
+          "Stress": "6",
+          "Pain": "8",
+          "Conf.": "6",
+          "Delight": "5",
+          "Overall": "**6.00**"
+        },
+        {
+          "Feature": "Bidirectional Flow Detection",
+          "Kano": "attractive",
+          "Time": "4",
+          "Cost": "5",
+          "Safety": "7",
+          "Rel.": "5",
+          "Skill": "4",
+          "Stress": "5",
+          "Pain": "5",
+          "Conf.": "6",
+          "Delight": "4",
+          "Overall": "**5.00**"
+        },
+        {
+          "Feature": "Digital Anomaly Detection",
+          "Kano": "attractive",
+          "Time": "7",
+          "Cost": "6",
+          "Safety": "8",
+          "Rel.": "7",
+          "Skill": "5",
+          "Stress": "7",
+          "Pain": "6",
+          "Conf.": "8",
+          "Delight": "6",
+          "Overall": "**6.67**"
+        },
+        {
+          "Feature": "Real-Time Compensation Algorithms",
+          "Kano": "one_dimensional",
+          "Time": "3",
+          "Cost": "4",
+          "Safety": "3",
+          "Rel.": "7",
+          "Skill": "5",
+          "Stress": "4",
+          "Pain": "5",
+          "Conf.": "7",
+          "Delight": "3",
+          "Overall": "**4.56**"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Check": "Kano cross-market consistency",
+          "Result": "PASS — single market, no cross-market comparison needed"
+        },
+        {
+          "#": "2",
+          "Check": "safety ≥ 7 but confidence ≤ 3",
+          "Result": "PASS — no occurrences"
+        },
+        {
+          "#": "3",
+          "Check": "skill ≥ 7 but stress ≤ 3",
+          "Result": "PASS — no occurrences"
+        },
+        {
+          "#": "4",
+          "Check": "overall_fit arithmetic",
+          "Result": "PASS — all 7 recomputed deterministically"
+        },
+        {
+          "#": "5",
+          "Check": "No feature scores 10 on all dimensions",
+          "Result": "PASS — max single score is 9 (Reliability on No Moving Parts)"
+        },
+        {
+          "#": "6",
+          "Check": "Feature names comply with 2–6 word noun phrases",
+          "Result": "PASS"
+        },
+        {
+          "#": "7",
+          "Check": "Measurement accuracy feature scores 1 on Reliability",
+          "Result": "PASS — Transit-Time=8, Compensation=7"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement",
+        "Source Constraint",
+        "Imp",
+        "Sat",
+        "Litmus"
+      ],
+      "rows": [
+        {
+          "#": "PRN-01",
+          "Statement": "Minimize the likelihood of measurement failure from acoustic impedance mismatch when non-aqueous contaminants enter the hydronic circuit",
+          "Source Constraint": "Media Limitation",
+          "Imp": "4",
+          "Sat": "6",
+          "Litmus": "Electromagnetic/Coriolis unaffected by acoustic coupling — PASS"
+        },
+        {
+          "#": "PRN-02",
+          "Statement": "Minimize the risk of polymer housing and seal degradation from sustained operation near the 90°C thermal limit in high-temperature heating configurations",
+          "Source Constraint": "Maximum Medium Temperature",
+          "Imp": "5",
+          "Sat": "5",
+          "Litmus": "Metal-bodied sensors (electromagnetic, Coriolis) tolerate >150°C — PASS"
+        },
+        {
+          "#": "PRN-03",
+          "Statement": "Minimize the risk of sensor housing failure from pressure spikes exceeding 10 bar continuous rating during water hammer or pump surge events",
+          "Source Constraint": "Maximum Operating Pressure",
+          "Imp": "5",
+          "Sat": "6",
+          "Litmus": "Metal-bodied sensors tolerate >40 bar continuous — PASS"
+        },
+        {
+          "#": "PRN-04",
+          "Statement": "Minimize the likelihood of measurement signal loss when system flow rate falls below the ultrasonic transit-time noise floor during part-load VFD operation",
+          "Source Constraint": "Minimum Flow Rate Detection",
+          "Imp": "7",
+          "Sat": "5",
+          "Litmus": "Coriolis meters measure to near-zero flow; ultrasonic has specific SNR threshold — PASS"
+        },
+        {
+          "#": "PRN-05",
+          "Statement": "Minimize the likelihood of ultrasonic signal attenuation from air entrainment exceeding 2% by volume during thermal cycling or system startup",
+          "Source Constraint": "Air Bubble Tolerance",
+          "Imp": "8",
+          "Sat": "4",
+          "Litmus": "Electromagnetic meters are insensitive to air bubbles; turbine meters less affected — PASS"
+        },
+        {
+          "#": "PRN-06",
+          "Statement": "Minimize the likelihood of complete measurement loss from partially filled pipe sections during system charging, maintenance drain-down, or gravity-return operation",
+          "Source Constraint": "Pipe Full Condition",
+          "Imp": "6",
+          "Sat": "5",
+          "Litmus": "DP sensors function in partially filled pipes; electromagnetic recovers faster — PASS"
+        },
+        {
+          "#": "PRN-07",
+          "Statement": "Minimize the sensitivity of transit-time measurement accuracy to asymmetric flow profiles from elbows, valves, or tees in compact equipment enclosures",
+          "Source Constraint": "Minimum Straight Pipe Run",
+          "Imp": "7",
+          "Sat": "4",
+          "Litmus": "Coriolis sensors are orientation/profile-independent; ultrasonic requires laminar profile — PASS"
+        },
+        {
+          "#": "PRN-08",
+          "Statement": "Minimize the likelihood of transit-time measurement error from rapid speed-of-sound changes during heating-cooling mode transitions exceeding compensation algorithm response time",
+          "Source Constraint": "Temperature-Dependent Accuracy",
+          "Imp": "7",
+          "Sat": "5",
+          "Litmus": "Electromagnetic/Coriolis measurement insensitive to speed of sound — PASS"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Check": "Litmus test — would need disappear with different technology?",
+          "Result": "PASS — all 8 needs are specific to ultrasonic transit-time principle"
+        },
+        {
+          "#": "2",
+          "Check": "Source constraint traceability — constraint exists?",
+          "Result": "PASS — all 8 constraints from 01_product_decomposition"
+        },
+        {
+          "#": "3",
+          "Check": "Affected market plausibility",
+          "Result": "PASS — all 8 constraints manifest in HVAC hydronic circuits"
+        },
+        {
+          "#": "4",
+          "Check": "Completeness — every constraint generates ≥1 need",
+          "Result": "PASS — 8 constraints → 8 needs (1:1)"
+        },
+        {
+          "#": "5",
+          "Check": "No market-level needs included",
+          "Result": "PASS — none duplicate Step 06 error statements"
+        },
+        {
+          "#": "6",
+          "Check": "importance < 3 AND satisfaction > 7",
+          "Result": "PASS — no occurrences"
+        },
+        {
+          "#": "7",
+          "Check": "Error-first statement format",
+          "Result": "PASS — all \"Minimize the likelihood of…\" or \"Minimize the risk of…\""
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Feature",
+        "Kano",
+        "Vendor",
+        "Incumbent",
+        "Inc. Tech",
+        "Adv."
+      ],
+      "rows": [
+        {
+          "Feature": "Modular Pipe Diameter Variants",
+          "Kano": "one_dimensional",
+          "Vendor": "7",
+          "Incumbent": "5",
+          "Inc. Tech": "Turbine / Impeller Sensor",
+          "Adv.": "**superior**"
+        },
+        {
+          "Feature": "Customizable Communication Interface",
+          "Kano": "one_dimensional",
+          "Vendor": "7",
+          "Incumbent": "6",
+          "Inc. Tech": "Ultrasonic (Kamstrup)",
+          "Adv.": "parity"
+        },
+        {
+          "Feature": "Customizable Mechanical Interface",
+          "Kano": "one_dimensional",
+          "Vendor": "6",
+          "Incumbent": "6",
+          "Inc. Tech": "Turbine / Impeller Sensor",
+          "Adv.": "parity"
+        },
+        {
+          "Feature": "Low-Energy Battery Mode",
+          "Kano": "indifferent",
+          "Vendor": "8",
+          "Incumbent": "2",
+          "Inc. Tech": "Ultrasonic (generic)",
+          "Adv.": "superior*"
+        },
+        {
+          "Feature": "Pre-Calibrated Delivery",
+          "Kano": "must_be",
+          "Vendor": "8",
+          "Incumbent": "7",
+          "Inc. Tech": "Ultrasonic (Kamstrup/Danfoss)",
+          "Adv.": "parity"
+        },
+        {
+          "Feature": "KTW/WRAS Drinking Water Approval",
+          "Kano": "must_be",
+          "Vendor": "7",
+          "Incumbent": "8",
+          "Inc. Tech": "Ultrasonic (Kamstrup)",
+          "Adv.": "parity"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Check": ">70% superior verdicts (vendor bias)",
+          "Result": "PASS — 1 of 6 = 17% (2 if counting indifferent)"
+        },
+        {
+          "#": "2",
+          "Check": ">70% inferior verdicts (anti-vendor bias)",
+          "Result": "PASS — 0 of 6 = 0%"
+        },
+        {
+          "#": "3",
+          "Check": "Advantage classification arithmetic",
+          "Result": "PASS — all 6 entries verified"
+        },
+        {
+          "#": "4",
+          "Check": "must_be features: both scores ≥ 5",
+          "Result": "PASS — Pre-Calibrated (8/7), KTW/WRAS (7/8)"
+        },
+        {
+          "#": "5",
+          "Check": "Rationale references specific specs",
+          "Result": "PASS — DN sizes, protocols, μA figures cited"
+        },
+        {
+          "#": "6",
+          "Check": "No straw-man incumbents",
+          "Result": "PASS — Kamstrup/Danfoss are genuine market leaders"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Rank",
+        "Feature",
+        "Kano",
+        "Overall Fit",
+        "Primary Value"
+      ],
+      "rows": [
+        {
+          "Rank": "1",
+          "Feature": "Digital Anomaly Detection",
+          "Kano": "attractive",
+          "Overall Fit": "**6.67**",
+          "Primary Value": "Empty-pipe/air-lock detection (ES-07, Opp 14)"
+        },
+        {
+          "Rank": "2",
+          "Feature": "No Moving Parts",
+          "Kano": "attractive",
+          "Overall Fit": "**6.00**",
+          "Primary Value": "Zero mechanical maintenance (ES-23, ES-27)"
+        },
+        {
+          "Rank": "3",
+          "Feature": "Integrated Temperature Sensing",
+          "Kano": "attractive",
+          "Overall Fit": "**5.67**",
+          "Primary Value": "Single-body kW calculation (ES-20, Opp 12)"
+        },
+        {
+          "Rank": "4",
+          "Feature": "Transit-Time Flow Measurement",
+          "Kano": "must_be",
+          "Overall Fit": "**5.00**",
+          "Primary Value": "Core commodity FP delivery"
+        },
+        {
+          "Rank": "5",
+          "Feature": "Bidirectional Flow Detection",
+          "Kano": "attractive",
+          "Overall Fit": "**5.00**",
+          "Primary Value": "Reverse flow / check valve fault (ES-14)"
+        },
+        {
+          "Rank": "6",
+          "Feature": "Real-Time Compensation Algorithms",
+          "Kano": "one_dimensional",
+          "Overall Fit": "**4.56**",
+          "Primary Value": "Glycol + temperature compensation (ES-06, ES-13)"
+        },
+        {
+          "Rank": "7",
+          "Feature": "Zero Pressure Drop Flow Path",
+          "Kano": "one_dimensional",
+          "Overall Fit": "**2.89**",
+          "Primary Value": "Pump energy savings (ES-15)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Verdict",
+        "Count",
+        "Features"
+      ],
+      "rows": [
+        {
+          "Verdict": "Superior",
+          "Count": "1",
+          "Features": "Modular Pipe Diameter Variants"
+        },
+        {
+          "Verdict": "Parity",
+          "Count": "4",
+          "Features": "Communication Interface, Mechanical Interface, Pre-Calibrated Delivery, KTW/WRAS"
+        },
+        {
+          "Verdict": "Inferior",
+          "Count": "0",
+          "Features": "—"
+        },
+        {
+          "Verdict": "Superior (indifferent market)",
+          "Count": "1",
+          "Features": "Low-Energy Battery Mode"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Risk Level",
+        "Constraint",
+        "PRN",
+        "Imp",
+        "Sat"
+      ],
+      "rows": [
+        {
+          "Risk Level": "**High**",
+          "Constraint": "Air Bubble Tolerance",
+          "PRN": "PRN-05",
+          "Imp": "8",
+          "Sat": "4"
+        },
+        {
+          "Risk Level": "**Medium**",
+          "Constraint": "Minimum Straight Pipe Run",
+          "PRN": "PRN-07",
+          "Imp": "7",
+          "Sat": "4"
+        },
+        {
+          "Risk Level": "**Medium**",
+          "Constraint": "Minimum Flow Rate Detection",
+          "PRN": "PRN-04",
+          "Imp": "7",
+          "Sat": "5"
+        },
+        {
+          "Risk Level": "**Medium**",
+          "Constraint": "Temperature-Dependent Accuracy",
+          "PRN": "PRN-08",
+          "Imp": "7",
+          "Sat": "5"
+        },
+        {
+          "Risk Level": "**Medium**",
+          "Constraint": "Pipe Full Condition",
+          "PRN": "PRN-06",
+          "Imp": "6",
+          "Sat": "5"
+        },
+        {
+          "Risk Level": "**Low**",
+          "Constraint": "Maximum Medium Temperature",
+          "PRN": "PRN-02",
+          "Imp": "5",
+          "Sat": "5"
+        },
+        {
+          "Risk Level": "**Low**",
+          "Constraint": "Maximum Operating Pressure",
+          "PRN": "PRN-03",
+          "Imp": "5",
+          "Sat": "6"
+        },
+        {
+          "Risk Level": "**Low**",
+          "Constraint": "Media Limitation",
+          "PRN": "PRN-01",
+          "Imp": "4",
+          "Sat": "6"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Check": "Step 09: all 7 technology-scope features assessed",
+          "Result": "PASS"
+        },
+        {
+          "#": "2",
+          "Check": "Step 09: Kano class + 9 ODI scores + overall_fit per feature",
+          "Result": "PASS"
+        },
+        {
+          "#": "3",
+          "Check": "Step 09: overall_fit = arithmetic mean (deterministic)",
+          "Result": "PASS"
+        },
+        {
+          "#": "4",
+          "Check": "Step 09: rationale references market needs with IDs",
+          "Result": "PASS"
+        },
+        {
+          "#": "5",
+          "Check": "Step 10: all 8 constraints generate ≥1 product-related need",
+          "Result": "PASS"
+        },
+        {
+          "#": "6",
+          "Check": "Step 10: litmus test applied to every need",
+          "Result": "PASS"
+        },
+        {
+          "#": "7",
+          "Check": "Step 10: no market-level needs duplicated from Step 06",
+          "Result": "PASS"
+        },
+        {
+          "#": "8",
+          "Check": "Step 10: error-first statement format",
+          "Result": "PASS"
+        },
+        {
+          "#": "9",
+          "Check": "Step 11: all 6 vendor-scope features assessed",
+          "Result": "PASS"
+        },
+        {
+          "#": "10",
+          "Check": "Step 11: vendor vs best incumbent scoring with advantage",
+          "Result": "PASS"
+        },
+        {
+          "#": "11",
+          "Check": "Step 11: bias check passed (mix of verdicts)",
+          "Result": "PASS"
+        },
+        {
+          "#": "12",
+          "Check": "Feature names: 2–6 word noun phrases, no brands/superlatives",
+          "Result": "PASS"
+        },
+        {
+          "#": "13",
+          "Check": "No web search used — all derived from upstream files",
+          "Result": "PASS"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "feature_market_fit",
+      "naics_code": "333415",
+      "naics_title": "Air-Conditioning and Warm Air Heating Equipment and Commercial and Industrial Refrigeration Equipment Manufacturing",
+      "market_name": "Air Conditioning and Warm Air Heating Equipment",
+      "product_name": "Ultrasonic Flow Sensor",
+      "vendor_name": "Marquardt",
+      "technology_class": "Ultrasonic Transit-Time Flow Measurement",
+      "commodity_functional_promise": "Quantify the volumetric or mass flow rate of fluids traversing a closed conduit",
+      "unspsc_code": "41112501",
+      "step_09_tech_feature_market_fit": {
+        "market_name": "Air Conditioning and Warm Air Heating Equipment",
+        "naics_code": "333415",
+        "n_features": 7,
+        "entries": [
+          {
+            "feature_name": "Transit-Time Flow Measurement",
+            "market_name": "Air Conditioning and Warm Air Heating Equipment",
+            "naics_code": "333415",
+            "kano_class": "must_be",
+            "fit_score_time": 5,
+            "fit_score_cost": 4,
+            "fit_score_safety": 7,
+            "fit_score_reliability": 8,
+            "fit_score_skill": 3,
+            "fit_score_stress": 5,
+            "fit_score_pain": 4,
+            "fit_score_confidence": 7,
+            "fit_score_delight": 2,
+            "overall_fit": 5.0,
+            "rationale": "Delivers commodity FP — flow measurement is table stakes in hydronic HVAC. Primary drivers: Reliability (8) — no mechanical failure modes; Safety (7) — enables compressor protection (ES-16 Opp 13, ES-07 Opp 14). 35% installed base already uses ultrasonic."
+          },
+          {
+            "feature_name": "Integrated Temperature Sensing",
+            "market_name": "Air Conditioning and Warm Air Heating Equipment",
+            "naics_code": "333415",
+            "kano_class": "attractive",
+            "fit_score_time": 6,
+            "fit_score_cost": 7,
+            "fit_score_safety": 3,
+            "fit_score_reliability": 6,
+            "fit_score_skill": 5,
+            "fit_score_stress": 5,
+            "fit_score_pain": 7,
+            "fit_score_confidence": 7,
+            "fit_score_delight": 5,
+            "overall_fit": 5.67,
+            "rationale": "Not standard across flowmeter technologies — separate probes are the norm. Enables single-body kW calculation (ES-20 Opp 12). Primary drivers: Cost (7) — eliminates separate probe; Pain (7) — removes second sensor sourcing/wiring; Confidence (7) — co-located measurement avoids spatial mismatch."
+          },
+          {
+            "feature_name": "Zero Pressure Drop Flow Path",
+            "market_name": "Air Conditioning and Warm Air Heating Equipment",
+            "naics_code": "333415",
+            "kano_class": "one_dimensional",
+            "fit_score_time": 2,
+            "fit_score_cost": 7,
+            "fit_score_safety": 2,
+            "fit_score_reliability": 3,
+            "fit_score_skill": 2,
+            "fit_score_stress": 2,
+            "fit_score_pain": 3,
+            "fit_score_confidence": 2,
+            "fit_score_delight": 3,
+            "overall_fit": 2.89,
+            "rationale": "Benefit is narrowly hydraulic — turbine meters impose 100-300 mbar vs ultrasonic <50 mbar (ES-15 Opp 8). Primary driver: Cost (7) — reduced pump sizing and continuous energy savings over equipment lifetime. All other dimensions 1-3 because the benefit doesn't extend beyond hydraulic efficiency."
+          },
+          {
+            "feature_name": "No Moving Parts",
+            "market_name": "Air Conditioning and Warm Air Heating Equipment",
+            "naics_code": "333415",
+            "kano_class": "attractive",
+            "fit_score_time": 3,
+            "fit_score_cost": 8,
+            "fit_score_safety": 3,
+            "fit_score_reliability": 9,
+            "fit_score_skill": 6,
+            "fit_score_stress": 6,
+            "fit_score_pain": 8,
+            "fit_score_confidence": 6,
+            "fit_score_delight": 5,
+            "overall_fit": 6.0,
+            "rationale": "Eliminates the primary failure mode of 30% installed base (turbine bearing wear). Primary drivers: Reliability (9) — no bearing/impeller failure modes; Cost (8) and Pain (8) — eliminates scheduled bearing replacement and unplanned downtime. Addresses ES-23 (minimize recalibration) and ES-27 (minimize warranty callbacks). Attractive because mechanical sensors are accepted as normal."
+          },
+          {
+            "feature_name": "Bidirectional Flow Detection",
+            "market_name": "Air Conditioning and Warm Air Heating Equipment",
+            "naics_code": "333415",
+            "kano_class": "attractive",
+            "fit_score_time": 4,
+            "fit_score_cost": 5,
+            "fit_score_safety": 7,
+            "fit_score_reliability": 5,
+            "fit_score_skill": 4,
+            "fit_score_stress": 5,
+            "fit_score_pain": 5,
+            "fit_score_confidence": 6,
+            "fit_score_delight": 4,
+            "overall_fit": 5.0,
+            "rationale": "Inherent to transit-time principle at no added cost. Detects check valve failure and pump malfunction (ES-14 Opp 10). Primary driver: Safety (7) — catches reverse flow within 1 second. Attractive because paddle switches and basic turbine meters lack directional awareness entirely."
+          },
+          {
+            "feature_name": "Digital Anomaly Detection",
+            "market_name": "Air Conditioning and Warm Air Heating Equipment",
+            "naics_code": "333415",
+            "kano_class": "attractive",
+            "fit_score_time": 7,
+            "fit_score_cost": 6,
+            "fit_score_safety": 8,
+            "fit_score_reliability": 7,
+            "fit_score_skill": 5,
+            "fit_score_stress": 7,
+            "fit_score_pain": 6,
+            "fit_score_confidence": 8,
+            "fit_score_delight": 6,
+            "overall_fit": 6.67,
+            "rationale": "Highest-scoring feature. Directly addresses top underserved need ES-07 (Opp 14) — empty-pipe detection <5s before compressor enable. Also addresses ES-10 (air entrainment signal loss, Opp 12). Primary drivers: Safety (8) — prevents compressor damage from dry start; Confidence (8) — diagnostic flags validate measurement in real time; Time (7) — immediate detection vs waiting for compressor fault."
+          },
+          {
+            "feature_name": "Real-Time Compensation Algorithms",
+            "market_name": "Air Conditioning and Warm Air Heating Equipment",
+            "naics_code": "333415",
+            "kano_class": "one_dimensional",
+            "fit_score_time": 3,
+            "fit_score_cost": 4,
+            "fit_score_safety": 3,
+            "fit_score_reliability": 7,
+            "fit_score_skill": 5,
+            "fit_score_stress": 4,
+            "fit_score_pain": 5,
+            "fit_score_confidence": 7,
+            "fit_score_delight": 3,
+            "overall_fit": 4.56,
+            "rationale": "Better compensation = better measurement, linearly. Addresses ES-06 (glycol compensation, Opp 12) and ES-13 (temperature transients). Primary drivers: Reliability (7) — maintains accuracy across operating envelope; Confidence (7) — compensated readings build trust. One-dimensional because all modern sensors offer some compensation."
+          }
+        ]
+      },
+      "step_10_product_related_needs": {
+        "technology_class": "Ultrasonic Transit-Time Flow Measurement",
+        "underlying_mechanism": "Piezoelectric transducers in transit-time configuration; transit-time difference proportional to fluid velocity",
+        "n_needs": 8,
+        "entries": [
+          {
+            "statement": "Minimize the likelihood of measurement failure from acoustic impedance mismatch when non-aqueous contaminants enter the hydronic circuit",
+            "source_constraint": "Media Limitation",
+            "affected_markets": [
+              "Air Conditioning and Warm Air Heating Equipment"
+            ],
+            "importance": 4.0,
+            "satisfaction_current": 6.0
+          },
+          {
+            "statement": "Minimize the risk of polymer housing and seal degradation from sustained operation near the 90°C thermal limit in high-temperature heating configurations",
+            "source_constraint": "Maximum Medium Temperature",
+            "affected_markets": [
+              "Air Conditioning and Warm Air Heating Equipment"
+            ],
+            "importance": 5.0,
+            "satisfaction_current": 5.0
+          },
+          {
+            "statement": "Minimize the risk of sensor housing failure from pressure spikes exceeding 10 bar continuous rating during water hammer or pump surge events",
+            "source_constraint": "Maximum Operating Pressure",
+            "affected_markets": [
+              "Air Conditioning and Warm Air Heating Equipment"
+            ],
+            "importance": 5.0,
+            "satisfaction_current": 6.0
+          },
+          {
+            "statement": "Minimize the likelihood of measurement signal loss when system flow rate falls below the ultrasonic transit-time noise floor during part-load VFD operation",
+            "source_constraint": "Minimum Flow Rate Detection",
+            "affected_markets": [
+              "Air Conditioning and Warm Air Heating Equipment"
+            ],
+            "importance": 7.0,
+            "satisfaction_current": 5.0
+          },
+          {
+            "statement": "Minimize the likelihood of ultrasonic signal attenuation from air entrainment exceeding 2% by volume during thermal cycling or system startup",
+            "source_constraint": "Air Bubble Tolerance",
+            "affected_markets": [
+              "Air Conditioning and Warm Air Heating Equipment"
+            ],
+            "importance": 8.0,
+            "satisfaction_current": 4.0
+          },
+          {
+            "statement": "Minimize the likelihood of complete measurement loss from partially filled pipe sections during system charging, maintenance drain-down, or gravity-return operation",
+            "source_constraint": "Pipe Full Condition",
+            "affected_markets": [
+              "Air Conditioning and Warm Air Heating Equipment"
+            ],
+            "importance": 6.0,
+            "satisfaction_current": 5.0
+          },
+          {
+            "statement": "Minimize the sensitivity of transit-time measurement accuracy to asymmetric flow profiles from elbows, valves, or tees in compact equipment enclosures",
+            "source_constraint": "Minimum Straight Pipe Run",
+            "affected_markets": [
+              "Air Conditioning and Warm Air Heating Equipment"
+            ],
+            "importance": 7.0,
+            "satisfaction_current": 4.0
+          },
+          {
+            "statement": "Minimize the likelihood of transit-time measurement error from rapid speed-of-sound changes during heating-cooling mode transitions exceeding compensation algorithm response time",
+            "source_constraint": "Temperature-Dependent Accuracy",
+            "affected_markets": [
+              "Air Conditioning and Warm Air Heating Equipment"
+            ],
+            "importance": 7.0,
+            "satisfaction_current": 5.0
+          }
+        ]
+      },
+      "step_11_vendor_feature_market_fit": {
+        "vendor_name": "Marquardt",
+        "vendor_product": "US Flow Sensor (DN20 serial, DN12/DN14/DN25 development)",
+        "market_name": "Air Conditioning and Warm Air Heating Equipment",
+        "naics_code": "333415",
+        "n_comparisons": 6,
+        "entries": [
+          {
+            "feature_name": "Modular Pipe Diameter Variants",
+            "feature_description": "Serve multiple pipe sizes via interchangeable flow bodies sharing one electronics platform and RAST 2.5 connector",
+            "market_name": "Air Conditioning and Warm Air Heating Equipment",
+            "naics_code": "333415",
+            "vendor_score": 7,
+            "best_incumbent_score": 5,
+            "best_incumbent_technology": "Turbine / Impeller Flow Sensor",
+            "advantage": "superior",
+            "kano_class": "one_dimensional",
+            "rationale": "Marquardt DN12/14/20/25 share one electronics platform and RAST 2.5 connector. Incumbent turbine sensors typically require separate electronics per DN size, increasing OEM BOM complexity. Gap of 2 points = superior. Directly addresses ES-02 (multi-DN platform without hydraulic redesign)."
+          },
+          {
+            "feature_name": "Customizable Communication Interface",
+            "feature_description": "Support UART, LIN, and frequency output protocols selectable at order level for diverse controller architectures",
+            "market_name": "Air Conditioning and Warm Air Heating Equipment",
+            "naics_code": "333415",
+            "vendor_score": 7,
+            "best_incumbent_score": 6,
+            "best_incumbent_technology": "Ultrasonic Transit-Time Sensor (Kamstrup)",
+            "advantage": "parity",
+            "kano_class": "one_dimensional",
+            "rationale": "Marquardt offers 3 protocols (UART, LIN, frequency). Kamstrup/Danfoss offer 2-3 protocol options with similar flexibility. Gap of 1 point = parity. LIN automotive-grade bus is a minor differentiator for heat pump OEMs with automotive supply chain origins."
+          },
+          {
+            "feature_name": "Customizable Mechanical Interface",
+            "feature_description": "Accept threaded or plug-in pipe connections to match OEM assembly line requirements",
+            "market_name": "Air Conditioning and Warm Air Heating Equipment",
+            "naics_code": "333415",
+            "vendor_score": 6,
+            "best_incumbent_score": 6,
+            "best_incumbent_technology": "Turbine / Impeller Flow Sensor",
+            "advantage": "parity",
+            "kano_class": "one_dimensional",
+            "rationale": "Marquardt offers threaded and plug-in options. Incumbent turbine and ultrasonic sensors also offer adapter systems for OEM integration. Gap of 0 = parity. Both meet OEM assembly line requirements for <3 min integration (ES-03)."
+          },
+          {
+            "feature_name": "Low-Energy Battery Mode",
+            "feature_description": "Operate at ultra-low current consumption (<5 μA standby) for battery-powered remote installations",
+            "market_name": "Air Conditioning and Warm Air Heating Equipment",
+            "naics_code": "333415",
+            "vendor_score": 8,
+            "best_incumbent_score": 2,
+            "best_incumbent_technology": "Ultrasonic Transit-Time Sensor (generic)",
+            "advantage": "superior",
+            "kano_class": "indifferent",
+            "rationale": "Marquardt achieves genuine <5 μA standby, enabling real battery operation. Most HVAC inline sensors require permanent mains/DC power. However, in OEM HVAC equipment (heat pumps, chillers), all units have permanent DC supply — battery mode is unused. Kano = indifferent neutralizes the 6-point gap."
+          },
+          {
+            "feature_name": "Pre-Calibrated Delivery",
+            "feature_description": "Ship fully calibrated and tested to customer-specific medium and flow profile with 100% automated final test",
+            "market_name": "Air Conditioning and Warm Air Heating Equipment",
+            "naics_code": "333415",
+            "vendor_score": 8,
+            "best_incumbent_score": 7,
+            "best_incumbent_technology": "Ultrasonic Transit-Time Sensor (Kamstrup/Danfoss)",
+            "advantage": "parity",
+            "kano_class": "must_be",
+            "rationale": "Marquardt calibrates to customer-specific medium (e.g., 30% glycol mix) with 100% automated test. Kamstrup/Danfoss offer factory calibration with standard media profiles. Gap of 1 = parity. OEMs expect calibrated delivery — this is table stakes (must_be). Marquardt's customer-specific calibration is a minor edge."
+          },
+          {
+            "feature_name": "KTW/WRAS Drinking Water Approval",
+            "feature_description": "Wetted parts approved for potable water contact under KTW (German) and WRAS (UK) standards",
+            "market_name": "Air Conditioning and Warm Air Heating Equipment",
+            "naics_code": "333415",
+            "vendor_score": 7,
+            "best_incumbent_score": 8,
+            "best_incumbent_technology": "Ultrasonic Transit-Time Sensor (Kamstrup)",
+            "advantage": "parity",
+            "kano_class": "must_be",
+            "rationale": "Marquardt holds KTW and WRAS — the two major European standards. Kamstrup holds KTW, WRAS, plus NSF/ANSI 61 (US market access). For European HVAC hydronic circuits, KTW/WRAS is sufficient. Gap of 1 = parity, though Kamstrup has broader geographic coverage."
+          }
+        ]
+      },
+      "entities_produced": {
+        "relationships": [
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Transit-Time Flow Measurement",
+            "target": "Market:333415",
+            "props": {
+              "kano_class": "must_be",
+              "overall_fit": 5.0,
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Integrated Temperature Sensing",
+            "target": "Market:333415",
+            "props": {
+              "kano_class": "attractive",
+              "overall_fit": 5.67,
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Zero Pressure Drop Flow Path",
+            "target": "Market:333415",
+            "props": {
+              "kano_class": "one_dimensional",
+              "overall_fit": 2.89,
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:No Moving Parts",
+            "target": "Market:333415",
+            "props": {
+              "kano_class": "attractive",
+              "overall_fit": 6.0,
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Bidirectional Flow Detection",
+            "target": "Market:333415",
+            "props": {
+              "kano_class": "attractive",
+              "overall_fit": 5.0,
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Digital Anomaly Detection",
+            "target": "Market:333415",
+            "props": {
+              "kano_class": "attractive",
+              "overall_fit": 6.67,
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Real-Time Compensation Algorithms",
+            "target": "Market:333415",
+            "props": {
+              "kano_class": "one_dimensional",
+              "overall_fit": 4.56,
+              "feature_scope": "technology"
+            }
+          }
+        ],
+        "nodes": [
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement_prefix": "Minimize the likelihood of measurement failure from acoustic impedance mismatch",
+              "run_id": "TBD"
+            },
+            "props": {
+              "product_related": true,
+              "source_constraint": "Media Limitation",
+              "importance": 4.0,
+              "satisfaction_current": 6.0
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement_prefix": "Minimize the risk of polymer housing and seal degradation from sustained opera",
+              "run_id": "TBD"
+            },
+            "props": {
+              "product_related": true,
+              "source_constraint": "Maximum Medium Temperature",
+              "importance": 5.0,
+              "satisfaction_current": 5.0
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement_prefix": "Minimize the risk of sensor housing failure from pressure spikes exceeding 10",
+              "run_id": "TBD"
+            },
+            "props": {
+              "product_related": true,
+              "source_constraint": "Maximum Operating Pressure",
+              "importance": 5.0,
+              "satisfaction_current": 6.0
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement_prefix": "Minimize the likelihood of measurement signal loss when system flow rate fall",
+              "run_id": "TBD"
+            },
+            "props": {
+              "product_related": true,
+              "source_constraint": "Minimum Flow Rate Detection",
+              "importance": 7.0,
+              "satisfaction_current": 5.0
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement_prefix": "Minimize the likelihood of ultrasonic signal attenuation from air entrainmen",
+              "run_id": "TBD"
+            },
+            "props": {
+              "product_related": true,
+              "source_constraint": "Air Bubble Tolerance",
+              "importance": 8.0,
+              "satisfaction_current": 4.0
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement_prefix": "Minimize the likelihood of complete measurement loss from partially filled pi",
+              "run_id": "TBD"
+            },
+            "props": {
+              "product_related": true,
+              "source_constraint": "Pipe Full Condition",
+              "importance": 6.0,
+              "satisfaction_current": 5.0
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement_prefix": "Minimize the sensitivity of transit-time measurement accuracy to asymmetric",
+              "run_id": "TBD"
+            },
+            "props": {
+              "product_related": true,
+              "source_constraint": "Minimum Straight Pipe Run",
+              "importance": 7.0,
+              "satisfaction_current": 4.0
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement_prefix": "Minimize the likelihood of transit-time measurement error from rapid speed-of",
+              "run_id": "TBD"
+            },
+            "props": {
+              "product_related": true,
+              "source_constraint": "Temperature-Dependent Accuracy",
+              "importance": 7.0,
+              "satisfaction_current": 5.0
+            }
+          }
+        ],
+        "vendor_relationships": [
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Modular Pipe Diameter Variants",
+            "target": "Market:333415",
+            "props": {
+              "kano_class": "one_dimensional",
+              "vendor_score": 7,
+              "best_incumbent_score": 5,
+              "advantage": "superior",
+              "feature_scope": "vendor"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Customizable Communication Interface",
+            "target": "Market:333415",
+            "props": {
+              "kano_class": "one_dimensional",
+              "vendor_score": 7,
+              "best_incumbent_score": 6,
+              "advantage": "parity",
+              "feature_scope": "vendor"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Customizable Mechanical Interface",
+            "target": "Market:333415",
+            "props": {
+              "kano_class": "one_dimensional",
+              "vendor_score": 6,
+              "best_incumbent_score": 6,
+              "advantage": "parity",
+              "feature_scope": "vendor"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Low-Energy Battery Mode",
+            "target": "Market:333415",
+            "props": {
+              "kano_class": "indifferent",
+              "vendor_score": 8,
+              "best_incumbent_score": 2,
+              "advantage": "superior",
+              "feature_scope": "vendor"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Pre-Calibrated Delivery",
+            "target": "Market:333415",
+            "props": {
+              "kano_class": "must_be",
+              "vendor_score": 8,
+              "best_incumbent_score": 7,
+              "advantage": "parity",
+              "feature_scope": "vendor"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:KTW/WRAS Drinking Water Approval",
+            "target": "Market:333415",
+            "props": {
+              "kano_class": "must_be",
+              "vendor_score": 7,
+              "best_incumbent_score": 8,
+              "advantage": "parity",
+              "feature_scope": "vendor"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "has_bom": true,
+  "naics_sector_type": "manufacturing"
+}

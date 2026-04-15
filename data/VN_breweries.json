@@ -1,0 +1,2212 @@
+{
+  "id": "VN_breweries",
+  "title": "VN — Value Network: Breweries (NAICS 312120)",
+  "type": "value_network",
+  "market_slug": "breweries",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Header",
+      "content": "| Field | Value |\n|---|---|\n| **NAICS Code** | 312120 — Breweries |\n| **CFJ** | Transform water, malt, hops, and yeast into packaged beer through controlled biochemical and physical processes |\n| **Output Types** | Lager; Ale; Stout / Porter; Wheat beer; Sour / Wild ale; Non-alcoholic beer; Hard seltzer / FMB; Seasonal / Specialty |\n| **Hierarchy** | Process VN (L7 through L4) — what process steps and equipment compose the beer manufacturing chain |\n| **Key OEMs** | Alfa Laval, GEA Group, Krones AG, KASPAR SCHULZ, Paul Mueller Company, BrauKon, Meura, Praj Industries, Della Toffola, Criveller Group, DME Brewing Solutions, Portland Kettleworks, Ss Brewtech |\n| **Market Size** | ~$18–23B globally (brewery equipment, 2025); ~$600B global beer market [SRC: web_search] |\n| **Architecture Distance** | 4 (adjacent — water/glycol circuits match; food-grade certs needed) [SRC: 05_market_discovery] |\n\n---"
+    },
+    {
+      "title": "L7 — Ecosystem",
+      "content": "### L7: Beer Manufacturing Ecosystem\n\nThe complete ecosystem of interdependent breweries, equipment OEMs, ingredient suppliers, packaging companies, distributors, regulators (TTB, FDA, HACCP), and retailers coordinated around the production and sale of beer and malt beverages. NAICS 312120 comprises ~5,000 active U.S. establishments (~62,000 employees). The global brewery equipment market reached ~$18.5B in 2024 with a CAGR of 5–6% driven by craft brewery expansion, automation adoption, and sustainability mandates. [SRC: web_search, Census Bureau]\n\n---"
+    },
+    {
+      "title": "L6 — System-of-Systems Decomposition",
+      "content": "Five L6 core process steps follow the physical transformation sequence from grain to packaged beer. Four L6 horizontal steps run in parallel across all core steps.\n\n| L6 ID | Name | Type | Description |\n|---|---|---|---|\n| **L6.1** | Grain Handling & Milling | Core | Receive, store, and crush malt and adjuncts into grist for mashing. |\n| **L6.2** | Brewhouse | Core | Mash grist with hot water, separate wort, boil with hops, whirlpool, and cool — the core sugar extraction and flavour development sequence. |\n| **L6.3** | Fermentation & Conditioning | Core | Pitch yeast into cooled wort; convert sugars to alcohol and CO2; mature beer to flavour target. |\n| **L6.4** | Bright Beer Processing | Core | Filter, carbonate, and stabilize finished beer for packaging. |\n| **L6.5** | Packaging | Core | Fill beer into bottles, cans, kegs, or bulk containers for distribution. |\n| **L6.6** | Glycol Cooling & Refrigeration (H) | Horizontal | Central glycol/water chiller system distributing coolant to fermenters, bright tanks, and cold rooms. **Marquardt primary position.** |\n| **L6.7** | Clean-In-Place & Sanitation (H) | Horizontal | Automated cleaning of all vessels, lines, and heat exchangers without disassembly. **Marquardt secondary position.** |\n| **L6.8** | Water Treatment & Liquor Supply (H) | Horizontal | Treat, store, and distribute brewing water (\"liquor\") at required temperatures. **Marquardt tertiary position.** |\n| **L6.9** | Utilities, CO2 & Quality Assurance (H) | Horizontal | Steam generation, compressed air, CO2 recovery, wastewater treatment, and laboratory QA. |\n\n---"
+    },
+    {
+      "title": "L6.1 — Grain Handling & Milling",
+      "content": "First step in the transformation chain. Malt quality and grist consistency directly determine mashing efficiency and wort yield.\n\n### L5 Systems under L6.1\n\n#### L5.1.1: Grain Silo & Storage\n\nBulk storage of base malt, specialty malts, and adjuncts (rice, corn, wheat). Temperature and moisture monitoring prevents spoilage.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.1.1.1: Silo Vessel | Stainless steel or galvanized vertical silo; 5–100 t capacity |\n| L4.1.1.2: Conveying & Transfer | Bucket elevator, screw conveyor, or pneumatic transport from silo to mill |\n| L4.1.1.3: Moisture & Temperature Monitor | Capacitive moisture probe and thermocouple for grain condition tracking |\n\n#### L5.1.2: Malt Mill\n\nCrushes grain into grist, exposing starch granules for enzyme access during mashing. Roller gap setting is critical — too fine clogs the lauter; too coarse reduces yield.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.1.2.1: Roller Assembly | Two-roller or four-roller mill; gap adjustable 0.7–1.5 mm |\n| L4.1.2.2: Mill Drive Motor | Electric motor 2–15 kW depending on throughput |\n| L4.1.2.3: Grist Hopper & Dust Extraction | Collection hopper below rollers; aspiration system for grain dust (explosion safety) |\n\n---"
+    },
+    {
+      "title": "L6.2 — Brewhouse",
+      "content": "The heart of the brewery. Four sequential sub-operations — mashing, lautering, boiling, and whirlpool — extract fermentable sugars from grain, develop flavour with hops, and produce clear, sterile wort. Wort cooling completes the brewhouse cycle.\n\n### L5 Systems under L6.2\n\n#### L5.2.1: Mash Tun / Mash Mixer\n\nVessel where grist is mixed with hot water (\"liquor\") at controlled temperatures (62–72 °C) to activate enzymes that convert starch to fermentable sugars. [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.2.1.1: Vessel & False Bottom | Insulated stainless vessel with perforated false bottom or mash screen |\n| L4.2.1.2: Agitator / Rake | Variable-speed rake or paddle maintaining uniform temperature and preventing dough balls |\n| L4.2.1.3: Temperature Sensor & Steam Jacket | Pt100/NTC sensor + steam or electric jacket for step-mash temperature control |\n\n#### L5.2.2: Lauter Tun\n\nSeparates sweet wort from spent grain. The grain bed acts as a natural filter. Sparging (rinsing) extracts residual sugars. Lauter efficiency determines brewhouse yield (typically 75–85%). [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.2.2.1: Lauter Vessel & Screen | Vessel with slotted false bottom; diameter-to-depth ratio optimized for grain bed depth |\n| L4.2.2.2: Raking Mechanism | Motorized knives cutting channels in grain bed to maintain runoff rate |\n| L4.2.2.3: Sparge Arm & Flow Control | Rotating sparge arm distributing hot water over grain bed; flow rate controls extract efficiency |\n\n#### L5.2.3: Brew Kettle\n\nBoils wort for 60–90 minutes. Purposes: hop isomerization (bitterness), protein coagulation (hot break), sterilization, and dimethyl sulfide (DMS) drive-off. Energy-intensive step (~35% of total brewery energy). [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.2.3.1: Kettle Vessel & Heating System | Stainless vessel with internal calandria, external boiler, or direct-fire burner |\n| L4.2.3.2: Vapour Condenser / Energy Recovery | Captures steam for hot-water pre-heating; reduces energy consumption 15–20% |\n| L4.2.3.3: Hop Dosing System | Manual or automated hop addition at timed intervals (bittering, flavour, aroma) |\n\n#### L5.2.4: Whirlpool\n\nSeparates trub (coagulated protein, hop debris) from clear wort using centrifugal settling. Tangential inlet creates vortex; solids collect in a cone at the centre. [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.2.4.1: Whirlpool Vessel | Flat-bottomed stainless vessel; may be combined with kettle in small breweries |\n| L4.2.4.2: Tangential Inlet Nozzle | High-velocity inlet creating rotational flow; positioning determines separation efficiency |\n| L4.2.4.3: Trub Collection & Drain | Centre drain and trub discharge valve; trub sent to spent grain handling |\n\n#### L5.2.5: Wort Heat Exchanger\n\nRapidly cools wort from ~100 °C to fermentation temperature (10–20 °C) in minutes. Speed prevents contamination and DMS formation. Counter-flow plate heat exchanger is standard; cold liquor from CLT absorbs heat and is recovered as hot liquor in the HLT. [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.2.5.1: Plate Heat Exchanger | Gasketed or brazed stainless plate pack; 2-stage (water + glycol) in larger breweries |\n| L4.2.5.2: Cold Liquor Supply Valve | Modulating valve controlling cold water flow to match wort outlet temperature setpoint |\n| L4.2.5.3: Hot Liquor Recovery Valve | Diverts heated water to HLT for energy recovery; saves 10–20% of heating energy |\n\n---"
+    },
+    {
+      "title": "L6.3 — Fermentation & Conditioning",
+      "content": "The biochemical core of brewing. Yeast converts wort sugars (maltose, glucose) to ethanol, CO2, and flavour compounds. Fermentation temperature control is critical: ales 15–22 °C, lagers 8–14 °C. Conditioning (lagering) matures flavour over days to weeks.\n\n### L5 Systems under L6.3\n\n#### L5.3.1: Conical Fermenter / Unitank\n\nPrimary fermentation vessel. Cylindro-conical design (CCT) dominates — cone bottom allows yeast harvesting and CIP without transfer. Unitanks combine fermentation and conditioning in one vessel. Glycol-jacketed for precise temperature control (±0.5 °C). [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.3.1.1: Stainless Vessel & Cone | 304 or 316L stainless; 60° cone; 5–500 hL capacity |\n| L4.3.1.2: Glycol Jacket (Dimple Plate) | Dimple-welded or pillow-plate jacket on cone and sidewall for cooling/heating |\n| L4.3.1.3: Pressure Relief & Spunding Valve | PRV + adjustable spunding valve for natural carbonation under pressure |\n| L4.3.1.4: Temperature Probe & Thermowell | Pt100 or RTD in stainless thermowell; input to glycol PID controller |\n\n#### L5.3.2: Yeast Management\n\nPropagate, pitch, harvest, and store yeast. Healthy yeast at correct cell count (0.75–1.5 M cells/mL/°P) determines fermentation performance and flavour consistency.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.3.2.1: Yeast Propagation Tank | Aerated, temperature-controlled vessel for building yeast biomass from lab culture |\n| L4.3.2.2: Yeast Dosing Pump | Sanitary positive-displacement pump for accurate pitching volume |\n| L4.3.2.3: Yeast Storage Vessel | Chilled (2–4 °C) brink for harvested yeast between generations |\n\n#### L5.3.3: Conditioning / Maturation Tank\n\nSecondary maturation for flavour development, haze reduction, and natural carbonation. Lagers may condition 2–6 weeks at 0–2 °C (lagering). Some breweries use unitanks for combined fermentation + conditioning.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.3.3.1: Horizontal / Vertical Tank | Stainless vessel optimized for low-turbulence maturation |\n| L4.3.3.2: Glycol Jacket | Cooling jacket for crash cooling and cold conditioning |\n| L4.3.3.3: Carbonation Stone | Sintered stainless stone for CO2 injection during conditioning |\n\n---"
+    },
+    {
+      "title": "L6.4 — Bright Beer Processing",
+      "content": "Final preparation before packaging. Beer is filtered (unless hazy/unfiltered style), force-carbonated to target volumes of CO2, and held in pressure-rated bright tanks at 0–2 °C.\n\n### L5 Systems under L6.4\n\n#### L5.4.1: Beer Filtration\n\nRemoves yeast, haze-forming proteins, and particles. Not used for all styles (many craft ales are unfiltered). Technologies: plate-and-frame (DE), candle filter, cross-flow membrane.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.4.1.1: Plate & Frame / Candle Filter | DE (diatomaceous earth) or cellulose sheet filtration; 0.5–5 μm |\n| L4.4.1.2: Cross-Flow Membrane Filter | Ceramic or polymer membrane; rising adoption in craft (no DE waste) |\n| L4.4.1.3: Filter Aid Dosing & Recovery | DE slurry dosing pump and spent-DE handling |\n\n#### L5.4.2: Carbonation System\n\nInjects CO2 to achieve target carbonation (2.2–2.8 vol for most styles). Inline carbonation stone downstream of filter, upstream of bright tank.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.4.2.1: Inline Carbonation Stone | Sintered stainless stone or membrane diffuser in beer line |\n| L4.4.2.2: CO2 Flow Controller | Mass flow controller dosing CO2 proportional to beer flow rate |\n| L4.4.2.3: Dissolved CO2 Sensor | Inline optical or thermal conductivity sensor measuring carbonation level |\n\n#### L5.4.3: Bright Beer Tank (BBT)\n\nPressure-rated holding tank (0.5–2.0 bar) for filtered, carbonated beer ready for packaging. Buffer between cellar and packaging line.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.4.3.1: Pressure-Rated Stainless Tank | 304/316L; rated to 2 bar; 10–500 hL |\n| L4.4.3.2: Pressure & Level Sensors | Pressure transducer + capacitive or hydrostatic level sensor |\n| L4.4.3.3: CIP Spray Ball | 360° coverage spray ball for automated cleaning |\n\n---"
+    },
+    {
+      "title": "L6.5 — Packaging",
+      "content": "Final step in the transformation chain. Beer is filled into consumer or trade containers. Packaging line selection depends on output type and volume. Oxygen pickup during packaging is the primary quality risk — dissolved oxygen target <50 ppb.\n\n### L5 Systems under L6.5\n\n#### L5.5.1: Bottle Filling Line\n\nRinse, counter-pressure fill, crown, and label glass bottles. Typical speeds: 20–600 bottles/min depending on brewery scale.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.5.1.1: Bottle Rinser / Washer | Water or air rinser removing dust and debris before filling |\n| L4.5.1.2: Counter-Pressure Filler & Crowner | Isobaric filler minimizing CO2 loss; integrated crown applicator |\n| L4.5.1.3: Labeler & Date Coder | Pressure-sensitive, glue, or shrink-sleeve labeler; inkjet date coder |\n\n#### L5.5.2: Can Filling Line\n\nPurge, fill, and seam aluminium cans. Fastest-growing packaging format in craft beer. Typical speeds: 30–2,000 cans/min. [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.5.2.1: Can Purger & Rinser | CO2 purge and water rinse reducing dissolved oxygen pickup |\n| L4.5.2.2: Can Filler | Gravity or counter-pressure filler; 4–80 fill heads |\n| L4.5.2.3: Can Seamer | Double-seam closure head applying lid to filled can |\n\n#### L5.5.3: Keg Filling Line\n\nWash, sanitize, fill, and seal stainless steel kegs (1/6 bbl, 1/4 bbl, 1/2 bbl). Keg washing is critical — returning kegs carry residual beer and potential contaminants.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.5.3.1: Keg Washer & Sanitizer | Multi-station automated washer: caustic → acid → rinse → CO2 purge |\n| L4.5.3.2: Keg Filler | Counter-pressure filler maintaining carbonation; isobaric or volumetric |\n| L4.5.3.3: Keg Capper & Spear Valve | Applies cap and checks spear valve integrity |\n\n#### L5.5.4: Pasteurizer\n\nHeat-treats packaged beer (62–72 °C for 15–30 s flash; or tunnel at 60 °C for 20 min) for shelf stability. Required for unpasteurized beer destined for warm-chain distribution; most craft draft skips this step.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.5.4.1: Tunnel / Flash Pasteurizer | Tunnel: water spray zones; Flash: plate heat exchanger before filler |\n| L4.5.4.2: Temperature Controller | PID controller maintaining pasteurization temperature setpoint |\n| L4.5.4.3: Pasteurization Unit (PU) Monitor | Calculates cumulative PU (time × temperature) for compliance verification |\n\n---"
+    },
+    {
+      "title": "L6.6 — Glycol Cooling & Refrigeration (H)",
+      "content": "Horizontal process running across L6.3 (Fermentation), L6.4 (Bright Beer), and L6.5 (Packaging cold rooms). A central glycol chiller circulates propylene glycol/water mixture (typically 30–35% glycol, −5 to +5 °C) through jacketed vessels and cold rooms. **This is where Marquardt's ultrasonic flow sensor provides the highest value** — glycol is a water/glycol mixture within the sensor's exact specification, and per-loop flow monitoring enables energy optimization and fault detection. [SRC: web_search]\n\n### L5 Systems under L6.6\n\n#### L5.6.1: Glycol Chiller Unit\n\nCentral refrigeration package cooling the glycol/water reservoir. Compressor types: scroll (small craft), screw (mid-size), centrifugal (large). Sized to total cooling load (typically 5–500 kW). [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.6.1.1: Refrigeration Compressor | Scroll, screw, or reciprocating compressor; R-410A or R-449A refrigerant |\n| L4.6.1.2: Condenser | Air-cooled or water-cooled condenser rejecting heat to ambient |\n| L4.6.1.3: Evaporator / Plate Heat Exchanger | Brazed plate or shell-and-tube exchanger transferring cold to glycol loop |\n\n#### L5.6.2: Glycol Distribution\n\nPiping, pumps, and valves distributing glycol from chiller to all consuming vessels and back. Pipe sizing (typically DN20–DN50) must balance flow velocity and pressure drop.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.6.2.1: Glycol Circulation Pump | Centrifugal pump (cast iron or stainless); variable-speed for energy savings |\n| L4.6.2.2: Distribution Manifold & Zone Valves | Header with solenoid or motorized valves per cooling zone (per fermenter, BBT, cold room) |\n| L4.6.2.3: Glycol Piping & Insulation | Stainless or copper pipe with closed-cell foam insulation preventing condensation |\n\n#### L5.6.3: Glycol Sensing & Control\n\nSensors monitoring glycol flow rate, temperature, and pressure at each cooling zone. Flow data enables per-fermenter energy accounting and early detection of jacket blockage or pump degradation. **MARQUARDT PRIMARY POSITION.** [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.6.3.1: Ultrasonic Flow Sensor | Transit-time ultrasonic measurement of glycol/water flow; no moving parts, zero pressure drop, glycol-tolerant. **MARQUARDT POSITION.** |\n| L4.6.3.2: Paddle-Wheel / Turbine Flow Sensor | Mechanical flow sensor; incumbent in craft breweries; wears out in glycol service |\n| L4.6.3.3: Temperature Probe (RTD / NTC) | Pt100 or NTC measuring glycol supply and return temperature per zone |\n| L4.6.3.4: Pressure Transducer | Monitors glycol loop pressure for pump performance and leak detection |\n\n#### L5.6.4: Glycol Reservoir\n\nInsulated buffer tank holding glycol/water mixture. Provides thermal inertia and decouples chiller operation from instantaneous cooling demand.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.6.4.1: Reservoir Tank | Insulated stainless or polyethylene tank; 200–5,000 L |\n| L4.6.4.2: Level Sensor & Makeup Dosing | Float or ultrasonic level sensor; glycol dosing to maintain concentration |\n| L4.6.4.3: Glycol Concentration Monitor | Refractometer or density meter verifying glycol % (freeze protection) |\n\n---"
+    },
+    {
+      "title": "L6.7 — Clean-In-Place & Sanitation (H)",
+      "content": "Horizontal process running across all core L6 domains. CIP is non-negotiable in brewing — microbial contamination causes off-flavours, spoilage, and product loss. A typical 4-step cycle: pre-rinse → caustic wash (2–3% NaOH, 75–85 °C) → acid wash (1% phosphoric, 50–60 °C) → final rinse. All steps are flow-rate-dependent for effective cleaning. **Marquardt secondary position** — flow sensors verify CIP solution delivery at each circuit. [SRC: web_search]\n\n### L5 Systems under L6.7\n\n#### L5.7.1: CIP Station / Skid\n\nCentralized chemical storage, heating, and pumping unit. Typically 2–4 tanks (caustic, acid, rinse water, recovered rinse) with a supply and return pump. [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.7.1.1: Caustic Tank & Heater | Insulated stainless tank (500–5,000 L) with electric or steam heating |\n| L4.7.1.2: Acid Tank | Stainless tank for phosphoric or peracetic acid solution |\n| L4.7.1.3: CIP Supply Pump | Sanitary centrifugal pump providing 2–4 bar, 50–200 L/min per circuit |\n\n#### L5.7.2: CIP Distribution & Spray Devices\n\nPiping, valves, and spray devices routing cleaning solution to every vessel, heat exchanger, and pipeline in the brewery.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.7.2.1: CIP Routing Valves | Pneumatic butterfly or mix-proof valves automating circuit selection |\n| L4.7.2.2: CIP Return Pump | Returns spent solution to CIP station for reuse or drain |\n| L4.7.2.3: Spray Balls & Rotary Jets | Static spray balls in tanks; rotary jet heads for large vessels (>50 hL) |\n\n#### L5.7.3: CIP Sensing & Control\n\nSensors verifying that each CIP step meets time, temperature, flow rate, and chemical concentration targets. Flow rate verification ensures turbulent flow (Re > 30,000) for effective soil removal. **MARQUARDT SECONDARY POSITION.** [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.7.3.1: Flow Sensor | Verifies cleaning solution flow rate per circuit. Ultrasonic (Marquardt) or electromagnetic. **MARQUARDT SECONDARY.** |\n| L4.7.3.2: Temperature Sensor | Pt100 monitoring CIP solution temperature at supply and return |\n| L4.7.3.3: Conductivity Sensor | Measures chemical concentration (caustic vs rinse water) for step transitions |\n| L4.7.3.4: CIP Controller / PLC | Automates sequence timing, valve actuation, and alarm generation |\n\n---"
+    },
+    {
+      "title": "L6.8 — Water Treatment & Liquor Supply (H)",
+      "content": "Horizontal process serving all core L6 domains. Brewing water (\"liquor\") represents ~90–95% of beer by weight. Water chemistry (Ca2+, Mg2+, SO42−, Cl−, alkalinity, pH) directly influences mash pH, hop character, and yeast health. A brewery uses 4–8 hL of water per hL of beer produced (including CIP and utilities). [SRC: web_search]\n\n### L5 Systems under L6.8\n\n#### L5.8.1: Water Treatment System\n\nFilters and adjusts municipal or well water to target brewing profiles. Technologies: carbon filtration (chlorine removal), reverse osmosis (demineralization), UV sterilization, mineral dosing.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.8.1.1: Carbon Filter | Activated carbon removing chlorine and chloramine from municipal water |\n| L4.8.1.2: Reverse Osmosis Membrane | RO system stripping >95% of dissolved minerals for base-water consistency |\n| L4.8.1.3: Mineral Dosing & pH Adjustment | Chemical feed pumps adding CaCl2, CaSO4 (gypsum), lactic acid to target ion profile |\n\n#### L5.8.2: Hot Liquor Tank (HLT)\n\nHeated water storage (75–85 °C) for mashing and sparging. Receives pre-heated water recovered from wort cooling, reducing energy consumption. [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.8.2.1: Insulated Vessel | Stainless vessel; 1–3× batch size; standing loss <2 °C/hr |\n| L4.8.2.2: Heating Element / Steam Coil | Electric immersion heater (small) or steam coil (large) |\n| L4.8.2.3: Temperature Controller & Sensor | PID controller with Pt100 maintaining setpoint ±1 °C |\n\n#### L5.8.3: Cold Liquor Tank (CLT)\n\nChilled water storage (1–4 °C) for wort cooling via the plate heat exchanger. May be glycol-cooled or filled with pre-chilled municipal water overnight. [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.8.3.1: Insulated Vessel | Stainless or polyethylene vessel with closed-cell insulation |\n| L4.8.3.2: Cooling Coil / Glycol Jacket | Glycol-fed jacket or immersed coil maintaining 1–4 °C |\n| L4.8.3.3: Temperature Controller & Sensor | PID controller ensuring cold liquor is at target before brew day |\n\n#### L5.8.4: Water Flow Metering\n\nMeasures water intake (municipal meter), distribution to brewhouse, CIP, and packaging. Data drives water-use efficiency reporting (hL water / hL beer). **MARQUARDT TERTIARY POSITION** — water is the ideal medium for ultrasonic transit-time flow measurement.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.8.4.1: Ultrasonic Flow Sensor | Transit-time measurement on water intake and distribution lines. **MARQUARDT TERTIARY.** |\n| L4.8.4.2: Electromagnetic Flow Meter | Mag-meter alternative; higher cost but handles higher conductivity variations |\n| L4.8.4.3: Turbine Flow Meter | Mechanical incumbent; lower cost but moving parts wear in continuous service |\n\n---"
+    },
+    {
+      "title": "L6.9 — Utilities, CO2 & Quality Assurance (H)",
+      "content": "Combined horizontal domain covering steam/heat, compressed air, CO2 management, wastewater, and laboratory quality control.\n\n### L5 Systems under L6.9\n\n#### L5.9.1: Steam / Hot Water Generation\n\nProvides process heat for brewhouse (kettle boil), CIP heating, and pasteurization. Natural gas fire-tube boilers dominate; electric boilers emerging in smaller craft facilities.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.9.1.1: Steam Boiler / Hot Water Generator | Fire-tube or water-tube boiler; 100–2,000 kW |\n| L4.9.1.2: Condensate Return System | Recovers condensate for boiler feedwater; reduces water and energy consumption |\n| L4.9.1.3: Steam Trap & Pressure Reducer | Maintains steam pressure at point of use; prevents water hammer |\n\n#### L5.9.2: Compressed Air System\n\nPlant air for pneumatic valve actuation, packaging equipment, and grain conveying. Sterile-filtered air for wort aeration.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.9.2.1: Air Compressor | Oil-free rotary screw or scroll compressor; food-grade air required |\n| L4.9.2.2: Air Dryer & Sterile Filter | Refrigerated dryer + 0.01 μm sterile filter for process air |\n| L4.9.2.3: Distribution Manifold | Header with regulators per consumer zone |\n\n#### L5.9.3: CO2 Recovery & Distribution\n\nCaptures CO2 generated during fermentation, purifies, liquefies, and stores for reuse in carbonation, packaging purge, and tank blanketing. Reduces purchased CO2 costs by 50–80% in mid-to-large breweries.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.9.3.1: CO2 Scrubber & Purifier | Water scrubber + activated carbon removing volatile organics; food-grade CO2 output |\n| L4.9.3.2: CO2 Compressor & Liquefier | Two-stage compressor + condenser liquefying CO2 for storage at −20 °C, 20 bar |\n| L4.9.3.3: CO2 Storage Tank | Insulated pressure vessel (1–50 t) with level gauge and safety relief |\n\n#### L5.9.4: Quality Assurance Laboratory\n\nIn-process and finished-product testing ensuring beer meets specifications. Tests: original gravity, alcohol by volume, pH, colour (SRM/EBC), bitterness (IBU), dissolved oxygen, microbiological stability.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.9.4.1: Density / Alcohol Analyzer | Digital density meter (Anton Paar) or distillation unit for ABV measurement |\n| L4.9.4.2: pH & Dissolved Oxygen Meter | Benchtop or inline sensors for critical quality parameters |\n| L4.9.4.3: Microbiological Testing Kit | Membrane filtration + incubator for spoilage organism detection |\n\n#### L5.9.5: Wastewater Treatment\n\nBrewery effluent (BOD 2,000–6,000 mg/L) must be treated before municipal discharge. On-site treatment reduces surcharges and environmental impact.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.9.5.1: pH Adjustment & Equalization Tank | Neutralizes acidic/caustic effluent (pH 2–12) to 6.5–8.5 range |\n| L4.9.5.2: Aerobic / Anaerobic Digester | Reduces BOD/COD by 80–95%; anaerobic produces biogas for energy recovery |\n| L4.9.5.3: Solids Separator | Dissolved air flotation (DAF) or settling tank removing suspended solids |\n\n---"
+    },
+    {
+      "title": "Output Type Activation Matrix",
+      "content": "| L6 Domain | Lager | Ale | Stout | Wheat | Sour | Non-Alc | Seltzer | Specialty |\n|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|\n| L6.1 Grain Handling | Y | Y | Y | Y | Y | Y | partial | Y |\n| L6.2 Brewhouse | Y | Y | Y | Y | Y | Y | partial | Y |\n| L6.3 Fermentation | Y | Y | Y | Y | Y | Y | Y | Y |\n| L6.4 Bright Beer | Y | partial | partial | partial | partial | Y | Y | partial |\n| L6.5 Packaging | Y | Y | Y | Y | Y | Y | Y | Y |\n| L6.6 Glycol Cooling (H) | Y | Y | Y | Y | Y | Y | Y | Y |\n| L6.7 CIP (H) | Y | Y | Y | Y | Y | Y | Y | Y |\n| L6.8 Water Treatment (H) | Y | Y | Y | Y | Y | Y | Y | Y |\n| L6.9 Utilities/CO2/QA (H) | Y | Y | Y | Y | Y | Y | Y | Y |\n\nNotes: L6.6–L6.9 are universal horizontal — every output type requires cooling, cleaning, water, and utilities. Lager activates all core steps fully (including extended cold conditioning in L6.3 and filtration in L6.4). Hard seltzer/FMB may skip traditional mashing (sugar-wash base) — \"partial\" for L6.1/L6.2. Many craft ales and stouts skip filtration (L6.4 partial). Sour ales may add extended conditioning with Brettanomyces/Lactobacillus (months to years in L6.3).\n\n---"
+    },
+    {
+      "title": "Marquardt Position in the Value Network",
+      "content": "```\nL7   Beer Manufacturing Ecosystem\n |\n +-- L6.6  Glycol Cooling & Refrigeration (H)  [PRIMARY]\n |    |\n |    +-- L5.6.3  Glycol Sensing & Control\n |         |\n |         +-- L4.6.3.1  Ultrasonic Flow Sensor  <-- MARQUARDT PRIMARY\n |         +-- L4.6.3.2  Paddle-Wheel / Turbine Flow Sensor (incumbent)\n |         +-- L4.6.3.3  Temperature Probe (RTD / NTC)\n |         +-- L4.6.3.4  Pressure Transducer\n |\n +-- L6.7  Clean-In-Place & Sanitation (H)  [SECONDARY]\n |    |\n |    +-- L5.7.3  CIP Sensing & Control\n |         |\n |         +-- L4.7.3.1  Flow Sensor  <-- MARQUARDT SECONDARY\n |\n +-- L6.8  Water Treatment & Liquor Supply (H)  [TERTIARY]\n      |\n      +-- L5.8.4  Water Flow Metering\n           |\n           +-- L4.8.4.1  Ultrasonic Flow Sensor  <-- MARQUARDT TERTIARY\n```\n\n**Primary L-path:** L7 > L6.6 Glycol Cooling & Refrigeration > L5.6.3 Glycol Sensing & Control > L4.6.3.1 Ultrasonic Flow Sensor\n\n**Why this market:** Breweries operate water and glycol circuits in closed loops at 0–90 °C and <10 bar — exactly within Marquardt's operating envelope. Three positions offer cumulative volume per brewery:\n\n| Position | Circuit | Medium | Why Marquardt Wins |\n|---|---|---|---|\n| **Primary** | Glycol cooling loops | 30–35% propylene glycol/water | Glycol tolerance is a key differentiator; no-moving-parts avoids glycol-induced wear on turbine blades; glycol detection (FP extension) adds unique diagnostic value |\n| **Secondary** | CIP return-flow verification | Water, caustic solution, acid solution | Zero pressure drop avoids flow restriction in CIP circuits; no moving parts eliminates contamination risk from sensor internals |\n| **Tertiary** | Water intake & distribution | Municipal/treated water | Direct commodity match (flowmeter on water); KTW/WRAS approval enables potable-water circuits |\n\n**Cost of failure:** Glycol flow sensor failure or inaccuracy leads to fermentation temperature excursions (±2 °C can produce off-flavours costing $5K–50K per batch in a mid-size brewery). CIP flow verification failure risks incomplete cleaning → contamination → spoiled batches. Water metering failure undermines efficiency reporting and regulatory compliance (water-use permits).\n\n**Barriers:** (1) Food-grade material certifications (FDA 21 CFR 177, EC 1935/2004) — achievable but not yet held by Marquardt; (2) sanitary fittings (tri-clamp) for wort/beer-contact lines — only needed for CIP and water lines where standard threaded fittings are acceptable for glycol and utility water; (3) unfamiliar customer segment — brewery operations/engineering teams, especially craft, have different procurement patterns than HVAC OEMs. [SRC: 05_market_discovery]\n\n---"
+    },
+    {
+      "title": "Structural Validation Summary",
+      "content": "| Check | Result |\n|---|---|\n| Exactly one L7 node | PASS — 1 L7 (Beer Manufacturing Ecosystem) |\n| L6 count in range (3–8 core + horizontals) | PASS — 5 core + 4 horizontal = 9 L6 nodes |\n| L5 count per L6 in range (2–5) | PASS — L6.1: 2, L6.2: 5, L6.3: 3, L6.4: 3, L6.5: 4, L6.6: 4, L6.7: 3, L6.8: 4, L6.9: 5 |\n| L4 count per L5 >= 2 | PASS — all L5 nodes have 3–4 L4 children |\n| No orphan nodes | PASS — every node has a parent |\n| No level skipping | PASS — L7>L6>L5>L4 strictly followed |\n| Valid parent-child transitions | PASS |\n| No company names in L7/L6 names | PASS |\n| Three-question naming test (5 spot-checks) | PASS — \"Mash Tun,\" \"Lauter Tun,\" \"Conical Fermenter,\" \"Glycol Chiller Unit,\" \"Brew Kettle\" — all industry-standard terms |\n| Unit count in range (15–60, extended for mfg) | PASS — 1 + 9 + 33 + 103 = 146 total units |\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"value_network_construction\",\n  \"naics_code\": \"312120\",\n  \"naics_title\": \"Breweries\",\n  \"cfj_statement\": \"Transform water, malt, hops, and yeast into packaged beer through controlled biochemical and physical processes\",\n  \"l7_solution\": \"Beer Manufacturing Ecosystem\",\n  \"top_level\": \"L7\",\n  \"market_name\": \"Breweries\",\n  \"architecture_distance\": 4,\n  \"already_uses_technology\": true,\n  \"output_types\": [\n    \"Lager\",\n    \"Ale\",\n    \"Stout / Porter\",\n    \"Wheat beer\",\n    \"Sour / Wild ale\",\n    \"Non-alcoholic beer\",\n    \"Hard seltzer / FMB\",\n    \"Seasonal / Specialty\"\n  ],\n  \"value_network\": {\n    \"naics_code\": \"312120\",\n    \"naics_title\": \"Breweries\",\n    \"cfj_statement\": \"Transform water, malt, hops, and yeast into packaged beer through controlled biochemical and physical processes\",\n    \"l7_solution\": \"Beer Manufacturing Ecosystem\",\n    \"units\": [\n      {\"name\": \"Beer Manufacturing Ecosystem\", \"level\": \"L7\", \"description\": \"Complete ecosystem of breweries, equipment OEMs, ingredient suppliers, packaging companies, distributors, regulators, and retailers coordinated around beer production\", \"bom_standard\": \"Moore 1993\", \"parent_name\": \"ROOT\"},\n\n      {\"name\": \"Grain Handling & Milling\", \"level\": \"L6\", \"description\": \"Receive, store, and crush malt and adjuncts into grist for mashing\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Beer Manufacturing Ecosystem\"},\n      {\"name\": \"Brewhouse\", \"level\": \"L6\", \"description\": \"Mash, lauter, boil, whirlpool, and cool wort — sugar extraction and flavour development\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Beer Manufacturing Ecosystem\"},\n      {\"name\": \"Fermentation & Conditioning\", \"level\": \"L6\", \"description\": \"Yeast converts wort sugars to alcohol and CO2; beer is matured to flavour target\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Beer Manufacturing Ecosystem\"},\n      {\"name\": \"Bright Beer Processing\", \"level\": \"L6\", \"description\": \"Filter, carbonate, and stabilize finished beer for packaging\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Beer Manufacturing Ecosystem\"},\n      {\"name\": \"Packaging\", \"level\": \"L6\", \"description\": \"Fill beer into bottles, cans, kegs, or bulk containers for distribution\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Beer Manufacturing Ecosystem\"},\n      {\"name\": \"Glycol Cooling & Refrigeration\", \"level\": \"L6\", \"description\": \"Central glycol chiller distributing coolant to fermenters, bright tanks, and cold rooms (horizontal)\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Beer Manufacturing Ecosystem\"},\n      {\"name\": \"Clean-In-Place & Sanitation\", \"level\": \"L6\", \"description\": \"Automated cleaning of all vessels, lines, and heat exchangers without disassembly (horizontal)\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Beer Manufacturing Ecosystem\"},\n      {\"name\": \"Water Treatment & Liquor Supply\", \"level\": \"L6\", \"description\": \"Treat, store, and distribute brewing water at required temperatures (horizontal)\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Beer Manufacturing Ecosystem\"},\n      {\"name\": \"Utilities, CO2 & Quality Assurance\", \"level\": \"L6\", \"description\": \"Steam, compressed air, CO2 recovery, wastewater, and laboratory QA (horizontal)\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Beer Manufacturing Ecosystem\"},\n\n      {\"name\": \"Grain Silo & Storage\", \"level\": \"L5\", \"description\": \"Bulk storage of base malt, specialty malts, and adjuncts\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Grain Handling & Milling\"},\n      {\"name\": \"Malt Mill\", \"level\": \"L5\", \"description\": \"Two- or four-roller mill crushing grain into grist\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Grain Handling & Milling\"},\n\n      {\"name\": \"Mash Tun\", \"level\": \"L5\", \"description\": \"Vessel mixing grist with hot water at controlled temperatures for enzymatic conversion\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Brewhouse\"},\n      {\"name\": \"Lauter Tun\", \"level\": \"L5\", \"description\": \"Separates sweet wort from spent grain via false-bottom filtration and sparging\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Brewhouse\"},\n      {\"name\": \"Brew Kettle\", \"level\": \"L5\", \"description\": \"Boils wort with hops for bitterness, sterilization, and protein coagulation\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Brewhouse\"},\n      {\"name\": \"Whirlpool\", \"level\": \"L5\", \"description\": \"Tangential-flow separator removing trub and hop debris from clear wort\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Brewhouse\"},\n      {\"name\": \"Wort Heat Exchanger\", \"level\": \"L5\", \"description\": \"Counter-flow plate heat exchanger rapidly cooling wort from 100C to fermentation temperature\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Brewhouse\"},\n\n      {\"name\": \"Conical Fermenter\", \"level\": \"L5\", \"description\": \"Cylindro-conical tank for primary fermentation with glycol jacket temperature control\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Fermentation & Conditioning\"},\n      {\"name\": \"Yeast Management\", \"level\": \"L5\", \"description\": \"Propagation, pitching, harvesting, and storage of brewing yeast\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Fermentation & Conditioning\"},\n      {\"name\": \"Conditioning Tank\", \"level\": \"L5\", \"description\": \"Secondary maturation/lagering vessel for flavour development and haze reduction\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Fermentation & Conditioning\"},\n\n      {\"name\": \"Beer Filtration\", \"level\": \"L5\", \"description\": \"Removes yeast, haze-forming proteins, and particles from finished beer\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Bright Beer Processing\"},\n      {\"name\": \"Carbonation System\", \"level\": \"L5\", \"description\": \"Inline CO2 injection to achieve target carbonation volumes\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Bright Beer Processing\"},\n      {\"name\": \"Bright Beer Tank\", \"level\": \"L5\", \"description\": \"Pressure-rated holding tank for filtered, carbonated beer awaiting packaging\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Bright Beer Processing\"},\n\n      {\"name\": \"Bottle Filling Line\", \"level\": \"L5\", \"description\": \"Rinse, counter-pressure fill, crown, and label glass bottles\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Packaging\"},\n      {\"name\": \"Can Filling Line\", \"level\": \"L5\", \"description\": \"Purge, fill, and seam aluminium cans\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Packaging\"},\n      {\"name\": \"Keg Filling Line\", \"level\": \"L5\", \"description\": \"Wash, sanitize, fill, and seal stainless steel kegs\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Packaging\"},\n      {\"name\": \"Pasteurizer\", \"level\": \"L5\", \"description\": \"Tunnel or flash heat treatment for shelf stability\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Packaging\"},\n\n      {\"name\": \"Glycol Chiller Unit\", \"level\": \"L5\", \"description\": \"Central refrigeration package cooling glycol/water reservoir\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Glycol Cooling & Refrigeration\"},\n      {\"name\": \"Glycol Distribution\", \"level\": \"L5\", \"description\": \"Piping, pumps, and zone valves distributing glycol to consuming vessels\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Glycol Cooling & Refrigeration\"},\n      {\"name\": \"Glycol Sensing & Control\", \"level\": \"L5\", \"description\": \"Flow, temperature, and pressure sensors for per-zone glycol monitoring. MARQUARDT PRIMARY POSITION.\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Glycol Cooling & Refrigeration\"},\n      {\"name\": \"Glycol Reservoir\", \"level\": \"L5\", \"description\": \"Insulated buffer tank holding glycol/water mixture\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Glycol Cooling & Refrigeration\"},\n\n      {\"name\": \"CIP Station\", \"level\": \"L5\", \"description\": \"Centralized chemical storage, heating, and pumping unit for automated cleaning\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Clean-In-Place & Sanitation\"},\n      {\"name\": \"CIP Distribution & Spray Devices\", \"level\": \"L5\", \"description\": \"Piping, valves, and spray devices routing cleaning solution to equipment\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Clean-In-Place & Sanitation\"},\n      {\"name\": \"CIP Sensing & Control\", \"level\": \"L5\", \"description\": \"Flow, temperature, and conductivity sensors verifying CIP cycle parameters. MARQUARDT SECONDARY POSITION.\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Clean-In-Place & Sanitation\"},\n\n      {\"name\": \"Water Treatment System\", \"level\": \"L5\", \"description\": \"Carbon filtration, RO, UV, and mineral dosing to target brewing water profile\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Water Treatment & Liquor Supply\"},\n      {\"name\": \"Hot Liquor Tank\", \"level\": \"L5\", \"description\": \"Heated water storage (75-85C) for mashing and sparging\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Water Treatment & Liquor Supply\"},\n      {\"name\": \"Cold Liquor Tank\", \"level\": \"L5\", \"description\": \"Chilled water storage (1-4C) for wort cooling\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Water Treatment & Liquor Supply\"},\n      {\"name\": \"Water Flow Metering\", \"level\": \"L5\", \"description\": \"Measures water intake and distribution for efficiency reporting. MARQUARDT TERTIARY POSITION.\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Water Treatment & Liquor Supply\"},\n\n      {\"name\": \"Steam / Hot Water Generation\", \"level\": \"L5\", \"description\": \"Boiler or hot water generator providing process heat\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Utilities, CO2 & Quality Assurance\"},\n      {\"name\": \"Compressed Air System\", \"level\": \"L5\", \"description\": \"Food-grade compressed air for pneumatic valves and grain conveying\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Utilities, CO2 & Quality Assurance\"},\n      {\"name\": \"CO2 Recovery & Distribution\", \"level\": \"L5\", \"description\": \"Captures fermentation CO2 for reuse in carbonation and packaging\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Utilities, CO2 & Quality Assurance\"},\n      {\"name\": \"Quality Assurance Laboratory\", \"level\": \"L5\", \"description\": \"In-process and finished-product testing for specifications compliance\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Utilities, CO2 & Quality Assurance\"},\n      {\"name\": \"Wastewater Treatment\", \"level\": \"L5\", \"description\": \"Treats brewery effluent (high BOD) before municipal discharge\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Utilities, CO2 & Quality Assurance\"},\n\n      {\"name\": \"Silo Vessel\", \"level\": \"L4\", \"description\": \"Stainless or galvanized vertical silo; 5-100 t capacity\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Grain Silo & Storage\"},\n      {\"name\": \"Conveying & Transfer\", \"level\": \"L4\", \"description\": \"Bucket elevator, screw conveyor, or pneumatic transport from silo to mill\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Grain Silo & Storage\"},\n      {\"name\": \"Moisture & Temperature Monitor\", \"level\": \"L4\", \"description\": \"Capacitive moisture probe and thermocouple for grain condition tracking\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Grain Silo & Storage\"},\n\n      {\"name\": \"Roller Assembly\", \"level\": \"L4\", \"description\": \"Two- or four-roller mill; gap adjustable 0.7-1.5 mm\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Malt Mill\"},\n      {\"name\": \"Mill Drive Motor\", \"level\": \"L4\", \"description\": \"Electric motor 2-15 kW depending on throughput\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Malt Mill\"},\n      {\"name\": \"Grist Hopper & Dust Extraction\", \"level\": \"L4\", \"description\": \"Collection hopper below rollers; aspiration system for grain dust\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Malt Mill\"},\n\n      {\"name\": \"Vessel & False Bottom\", \"level\": \"L4\", \"description\": \"Insulated stainless vessel with perforated false bottom or mash screen\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Mash Tun\"},\n      {\"name\": \"Agitator / Rake\", \"level\": \"L4\", \"description\": \"Variable-speed rake or paddle maintaining uniform temperature\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Mash Tun\"},\n      {\"name\": \"Mash Temperature Sensor & Steam Jacket\", \"level\": \"L4\", \"description\": \"Pt100/NTC sensor + steam or electric jacket for step-mash control\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Mash Tun\"},\n\n      {\"name\": \"Lauter Vessel & Screen\", \"level\": \"L4\", \"description\": \"Vessel with slotted false bottom optimized for grain bed depth\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Lauter Tun\"},\n      {\"name\": \"Raking Mechanism\", \"level\": \"L4\", \"description\": \"Motorized knives cutting channels in grain bed for runoff rate\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Lauter Tun\"},\n      {\"name\": \"Sparge Arm & Flow Control\", \"level\": \"L4\", \"description\": \"Rotating arm distributing hot water over grain bed; flow rate controls yield\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Lauter Tun\"},\n\n      {\"name\": \"Kettle Vessel & Heating System\", \"level\": \"L4\", \"description\": \"Stainless vessel with internal calandria, external boiler, or direct-fire burner\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Brew Kettle\"},\n      {\"name\": \"Vapour Condenser / Energy Recovery\", \"level\": \"L4\", \"description\": \"Captures steam for hot-water pre-heating; reduces energy 15-20%\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Brew Kettle\"},\n      {\"name\": \"Hop Dosing System\", \"level\": \"L4\", \"description\": \"Manual or automated hop addition at timed intervals\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Brew Kettle\"},\n\n      {\"name\": \"Whirlpool Vessel\", \"level\": \"L4\", \"description\": \"Flat-bottomed stainless vessel; may combine with kettle in small breweries\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Whirlpool\"},\n      {\"name\": \"Tangential Inlet Nozzle\", \"level\": \"L4\", \"description\": \"High-velocity inlet creating rotational flow for trub separation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Whirlpool\"},\n      {\"name\": \"Trub Collection & Drain\", \"level\": \"L4\", \"description\": \"Centre drain and trub discharge valve\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Whirlpool\"},\n\n      {\"name\": \"Plate Heat Exchanger\", \"level\": \"L4\", \"description\": \"Gasketed or brazed stainless plate pack; 2-stage in larger breweries\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Wort Heat Exchanger\"},\n      {\"name\": \"Cold Liquor Supply Valve\", \"level\": \"L4\", \"description\": \"Modulating valve controlling cold water flow to match outlet temp setpoint\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Wort Heat Exchanger\"},\n      {\"name\": \"Hot Liquor Recovery Valve\", \"level\": \"L4\", \"description\": \"Diverts heated water to HLT for energy recovery\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Wort Heat Exchanger\"},\n\n      {\"name\": \"Stainless Vessel & Cone\", \"level\": \"L4\", \"description\": \"304/316L stainless; 60-degree cone; 5-500 hL capacity\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Conical Fermenter\"},\n      {\"name\": \"Glycol Jacket (Dimple Plate)\", \"level\": \"L4\", \"description\": \"Dimple-welded or pillow-plate jacket on cone and sidewall for cooling\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Conical Fermenter\"},\n      {\"name\": \"Pressure Relief & Spunding Valve\", \"level\": \"L4\", \"description\": \"PRV + adjustable spunding valve for natural carbonation under pressure\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Conical Fermenter\"},\n      {\"name\": \"Fermenter Temperature Probe\", \"level\": \"L4\", \"description\": \"Pt100 or RTD in stainless thermowell; input to glycol PID controller\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Conical Fermenter\"},\n\n      {\"name\": \"Yeast Propagation Tank\", \"level\": \"L4\", \"description\": \"Aerated, temperature-controlled vessel for building yeast biomass\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Yeast Management\"},\n      {\"name\": \"Yeast Dosing Pump\", \"level\": \"L4\", \"description\": \"Sanitary positive-displacement pump for accurate pitching volume\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Yeast Management\"},\n      {\"name\": \"Yeast Storage Vessel\", \"level\": \"L4\", \"description\": \"Chilled (2-4C) brink for harvested yeast between generations\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Yeast Management\"},\n\n      {\"name\": \"Conditioning Vessel\", \"level\": \"L4\", \"description\": \"Stainless vessel optimized for low-turbulence maturation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Conditioning Tank\"},\n      {\"name\": \"Conditioning Glycol Jacket\", \"level\": \"L4\", \"description\": \"Cooling jacket for crash cooling and cold conditioning\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Conditioning Tank\"},\n      {\"name\": \"Conditioning Carbonation Stone\", \"level\": \"L4\", \"description\": \"Sintered stainless stone for CO2 injection during conditioning\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Conditioning Tank\"},\n\n      {\"name\": \"Plate & Frame / Candle Filter\", \"level\": \"L4\", \"description\": \"DE or cellulose sheet filtration; 0.5-5 um\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Beer Filtration\"},\n      {\"name\": \"Cross-Flow Membrane Filter\", \"level\": \"L4\", \"description\": \"Ceramic or polymer membrane; no DE waste\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Beer Filtration\"},\n      {\"name\": \"Filter Aid Dosing & Recovery\", \"level\": \"L4\", \"description\": \"DE slurry dosing pump and spent-DE handling\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Beer Filtration\"},\n\n      {\"name\": \"Inline Carbonation Stone\", \"level\": \"L4\", \"description\": \"Sintered stainless stone or membrane diffuser in beer line\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Carbonation System\"},\n      {\"name\": \"CO2 Flow Controller\", \"level\": \"L4\", \"description\": \"Mass flow controller dosing CO2 proportional to beer flow rate\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Carbonation System\"},\n      {\"name\": \"Dissolved CO2 Sensor\", \"level\": \"L4\", \"description\": \"Inline optical or thermal sensor measuring carbonation level\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Carbonation System\"},\n\n      {\"name\": \"BBT Pressure-Rated Tank\", \"level\": \"L4\", \"description\": \"304/316L stainless; rated to 2 bar; 10-500 hL\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Bright Beer Tank\"},\n      {\"name\": \"BBT Pressure & Level Sensors\", \"level\": \"L4\", \"description\": \"Pressure transducer + capacitive or hydrostatic level sensor\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Bright Beer Tank\"},\n      {\"name\": \"BBT CIP Spray Ball\", \"level\": \"L4\", \"description\": \"360-degree coverage spray ball for automated cleaning\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Bright Beer Tank\"},\n\n      {\"name\": \"Bottle Rinser / Washer\", \"level\": \"L4\", \"description\": \"Water or air rinser removing dust and debris before filling\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Bottle Filling Line\"},\n      {\"name\": \"Counter-Pressure Filler & Crowner\", \"level\": \"L4\", \"description\": \"Isobaric filler minimizing CO2 loss; integrated crown applicator\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Bottle Filling Line\"},\n      {\"name\": \"Labeler & Date Coder\", \"level\": \"L4\", \"description\": \"Pressure-sensitive or shrink-sleeve labeler; inkjet date coder\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Bottle Filling Line\"},\n\n      {\"name\": \"Can Purger & Rinser\", \"level\": \"L4\", \"description\": \"CO2 purge and water rinse reducing dissolved oxygen pickup\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Can Filling Line\"},\n      {\"name\": \"Can Filler\", \"level\": \"L4\", \"description\": \"Gravity or counter-pressure filler; 4-80 fill heads\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Can Filling Line\"},\n      {\"name\": \"Can Seamer\", \"level\": \"L4\", \"description\": \"Double-seam closure head applying lid to filled can\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Can Filling Line\"},\n\n      {\"name\": \"Keg Washer & Sanitizer\", \"level\": \"L4\", \"description\": \"Multi-station automated washer: caustic, acid, rinse, CO2 purge\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Keg Filling Line\"},\n      {\"name\": \"Keg Filler\", \"level\": \"L4\", \"description\": \"Counter-pressure filler maintaining carbonation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Keg Filling Line\"},\n      {\"name\": \"Keg Capper & Spear Valve\", \"level\": \"L4\", \"description\": \"Applies cap and checks spear valve integrity\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Keg Filling Line\"},\n\n      {\"name\": \"Tunnel / Flash Pasteurizer\", \"level\": \"L4\", \"description\": \"Tunnel: water spray zones; Flash: plate HX before filler\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Pasteurizer\"},\n      {\"name\": \"Pasteurizer Temperature Controller\", \"level\": \"L4\", \"description\": \"PID controller maintaining pasteurization temperature setpoint\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Pasteurizer\"},\n      {\"name\": \"PU Monitor\", \"level\": \"L4\", \"description\": \"Calculates cumulative pasteurization units for compliance\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Pasteurizer\"},\n\n      {\"name\": \"Refrigeration Compressor\", \"level\": \"L4\", \"description\": \"Scroll, screw, or reciprocating; R-410A or R-449A refrigerant\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Glycol Chiller Unit\"},\n      {\"name\": \"Condenser\", \"level\": \"L4\", \"description\": \"Air-cooled or water-cooled condenser rejecting heat to ambient\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Glycol Chiller Unit\"},\n      {\"name\": \"Evaporator / Plate Heat Exchanger\", \"level\": \"L4\", \"description\": \"Brazed plate or shell-and-tube transferring cold to glycol loop\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Glycol Chiller Unit\"},\n\n      {\"name\": \"Glycol Circulation Pump\", \"level\": \"L4\", \"description\": \"Centrifugal pump; variable-speed for energy savings\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Glycol Distribution\"},\n      {\"name\": \"Distribution Manifold & Zone Valves\", \"level\": \"L4\", \"description\": \"Header with solenoid or motorized valves per cooling zone\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Glycol Distribution\"},\n      {\"name\": \"Glycol Piping & Insulation\", \"level\": \"L4\", \"description\": \"Stainless or copper pipe with closed-cell foam insulation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Glycol Distribution\"},\n\n      {\"name\": \"Ultrasonic Flow Sensor\", \"level\": \"L4\", \"description\": \"Transit-time ultrasonic measurement of glycol/water flow; no moving parts, zero pressure drop, glycol-tolerant. MARQUARDT PRIMARY POSITION.\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Glycol Sensing & Control\"},\n      {\"name\": \"Paddle-Wheel / Turbine Flow Sensor\", \"level\": \"L4\", \"description\": \"Mechanical flow sensor; incumbent in craft breweries; wears in glycol\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Glycol Sensing & Control\"},\n      {\"name\": \"Glycol Temperature Probe\", \"level\": \"L4\", \"description\": \"Pt100 or NTC measuring glycol supply and return temperature per zone\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Glycol Sensing & Control\"},\n      {\"name\": \"Glycol Pressure Transducer\", \"level\": \"L4\", \"description\": \"Monitors loop pressure for pump performance and leak detection\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Glycol Sensing & Control\"},\n\n      {\"name\": \"Glycol Reservoir Tank\", \"level\": \"L4\", \"description\": \"Insulated stainless or polyethylene tank; 200-5,000 L\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Glycol Reservoir\"},\n      {\"name\": \"Glycol Level Sensor & Makeup Dosing\", \"level\": \"L4\", \"description\": \"Float or ultrasonic level sensor; glycol dosing to maintain concentration\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Glycol Reservoir\"},\n      {\"name\": \"Glycol Concentration Monitor\", \"level\": \"L4\", \"description\": \"Refractometer or density meter verifying glycol % for freeze protection\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Glycol Reservoir\"},\n\n      {\"name\": \"Caustic Tank & Heater\", \"level\": \"L4\", \"description\": \"Insulated stainless tank (500-5,000 L) with electric or steam heating\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"CIP Station\"},\n      {\"name\": \"Acid Tank\", \"level\": \"L4\", \"description\": \"Stainless tank for phosphoric or peracetic acid solution\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"CIP Station\"},\n      {\"name\": \"CIP Supply Pump\", \"level\": \"L4\", \"description\": \"Sanitary centrifugal pump; 2-4 bar, 50-200 L/min per circuit\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"CIP Station\"},\n\n      {\"name\": \"CIP Routing Valves\", \"level\": \"L4\", \"description\": \"Pneumatic butterfly or mix-proof valves automating circuit selection\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"CIP Distribution & Spray Devices\"},\n      {\"name\": \"CIP Return Pump\", \"level\": \"L4\", \"description\": \"Returns spent solution to CIP station for reuse or drain\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"CIP Distribution & Spray Devices\"},\n      {\"name\": \"Spray Balls & Rotary Jets\", \"level\": \"L4\", \"description\": \"Static spray balls in tanks; rotary jet heads for large vessels (>50 hL)\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"CIP Distribution & Spray Devices\"},\n\n      {\"name\": \"CIP Flow Sensor\", \"level\": \"L4\", \"description\": \"Verifies cleaning solution flow rate per circuit. Ultrasonic or electromagnetic. MARQUARDT SECONDARY POSITION.\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"CIP Sensing & Control\"},\n      {\"name\": \"CIP Temperature Sensor\", \"level\": \"L4\", \"description\": \"Pt100 monitoring CIP solution temperature at supply and return\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"CIP Sensing & Control\"},\n      {\"name\": \"Conductivity Sensor\", \"level\": \"L4\", \"description\": \"Measures chemical concentration for CIP step transitions\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"CIP Sensing & Control\"},\n      {\"name\": \"CIP Controller / PLC\", \"level\": \"L4\", \"description\": \"Automates sequence timing, valve actuation, and alarm generation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"CIP Sensing & Control\"},\n\n      {\"name\": \"Carbon Filter\", \"level\": \"L4\", \"description\": \"Activated carbon removing chlorine and chloramine from municipal water\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Water Treatment System\"},\n      {\"name\": \"Reverse Osmosis Membrane\", \"level\": \"L4\", \"description\": \"RO system stripping >95% of dissolved minerals\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Water Treatment System\"},\n      {\"name\": \"Mineral Dosing & pH Adjustment\", \"level\": \"L4\", \"description\": \"Chemical feed pumps adding CaCl2, gypsum, lactic acid to target ion profile\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Water Treatment System\"},\n\n      {\"name\": \"HLT Insulated Vessel\", \"level\": \"L4\", \"description\": \"Stainless vessel; 1-3x batch size; standing loss <2C/hr\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Hot Liquor Tank\"},\n      {\"name\": \"HLT Heating Element / Steam Coil\", \"level\": \"L4\", \"description\": \"Electric immersion heater (small) or steam coil (large)\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Hot Liquor Tank\"},\n      {\"name\": \"HLT Temperature Controller\", \"level\": \"L4\", \"description\": \"PID controller with Pt100 maintaining setpoint +/-1C\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Hot Liquor Tank\"},\n\n      {\"name\": \"CLT Insulated Vessel\", \"level\": \"L4\", \"description\": \"Stainless or polyethylene vessel with closed-cell insulation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Cold Liquor Tank\"},\n      {\"name\": \"CLT Cooling Coil / Glycol Jacket\", \"level\": \"L4\", \"description\": \"Glycol-fed jacket or immersed coil maintaining 1-4C\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Cold Liquor Tank\"},\n      {\"name\": \"CLT Temperature Controller\", \"level\": \"L4\", \"description\": \"PID controller ensuring cold liquor at target before brew day\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Cold Liquor Tank\"},\n\n      {\"name\": \"Water Ultrasonic Flow Sensor\", \"level\": \"L4\", \"description\": \"Transit-time measurement on water intake and distribution lines. MARQUARDT TERTIARY POSITION.\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Water Flow Metering\"},\n      {\"name\": \"Water Electromagnetic Flow Meter\", \"level\": \"L4\", \"description\": \"Mag-meter alternative; higher cost but handles conductivity variations\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Water Flow Metering\"},\n      {\"name\": \"Water Turbine Flow Meter\", \"level\": \"L4\", \"description\": \"Mechanical incumbent; lower cost but moving parts wear in continuous service\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Water Flow Metering\"},\n\n      {\"name\": \"Steam Boiler\", \"level\": \"L4\", \"description\": \"Fire-tube or water-tube boiler; 100-2,000 kW\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Steam / Hot Water Generation\"},\n      {\"name\": \"Condensate Return System\", \"level\": \"L4\", \"description\": \"Recovers condensate for boiler feedwater\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Steam / Hot Water Generation\"},\n      {\"name\": \"Steam Trap & Pressure Reducer\", \"level\": \"L4\", \"description\": \"Maintains steam pressure at point of use\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Steam / Hot Water Generation\"},\n\n      {\"name\": \"Air Compressor\", \"level\": \"L4\", \"description\": \"Oil-free rotary screw or scroll; food-grade air required\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Compressed Air System\"},\n      {\"name\": \"Air Dryer & Sterile Filter\", \"level\": \"L4\", \"description\": \"Refrigerated dryer + 0.01 um sterile filter for process air\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Compressed Air System\"},\n      {\"name\": \"Air Distribution Manifold\", \"level\": \"L4\", \"description\": \"Header with regulators per consumer zone\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Compressed Air System\"},\n\n      {\"name\": \"CO2 Scrubber & Purifier\", \"level\": \"L4\", \"description\": \"Water scrubber + activated carbon; food-grade CO2 output\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"CO2 Recovery & Distribution\"},\n      {\"name\": \"CO2 Compressor & Liquefier\", \"level\": \"L4\", \"description\": \"Two-stage compressor + condenser liquefying CO2 at -20C, 20 bar\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"CO2 Recovery & Distribution\"},\n      {\"name\": \"CO2 Storage Tank\", \"level\": \"L4\", \"description\": \"Insulated pressure vessel (1-50 t) with level gauge and safety relief\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"CO2 Recovery & Distribution\"},\n\n      {\"name\": \"Density / Alcohol Analyzer\", \"level\": \"L4\", \"description\": \"Digital density meter or distillation unit for ABV measurement\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Quality Assurance Laboratory\"},\n      {\"name\": \"pH & Dissolved Oxygen Meter\", \"level\": \"L4\", \"description\": \"Benchtop or inline sensors for critical quality parameters\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Quality Assurance Laboratory\"},\n      {\"name\": \"Microbiological Testing Kit\", \"level\": \"L4\", \"description\": \"Membrane filtration + incubator for spoilage organism detection\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Quality Assurance Laboratory\"},\n\n      {\"name\": \"pH Adjustment & Equalization Tank\", \"level\": \"L4\", \"description\": \"Neutralizes acidic/caustic effluent to pH 6.5-8.5\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Wastewater Treatment\"},\n      {\"name\": \"Aerobic / Anaerobic Digester\", \"level\": \"L4\", \"description\": \"Reduces BOD/COD by 80-95%; anaerobic produces biogas\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Wastewater Treatment\"},\n      {\"name\": \"Solids Separator\", \"level\": \"L4\", \"description\": \"Dissolved air flotation or settling tank removing suspended solids\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Wastewater Treatment\"}\n    ]\n  },\n  \"marquardt_position\": {\n    \"l_path\": \"L7 > L6.6 Glycol Cooling & Refrigeration > L5.6.3 Glycol Sensing & Control > L4.6.3.1 Ultrasonic Flow Sensor\",\n    \"l7\": \"Beer Manufacturing Ecosystem\",\n    \"l6\": \"Glycol Cooling & Refrigeration\",\n    \"l5\": \"Glycol Sensing & Control\",\n    \"l4\": \"Ultrasonic Flow Sensor\",\n    \"secondary_positions\": [\n      {\"l6\": \"Clean-In-Place & Sanitation\", \"l5\": \"CIP Sensing & Control\", \"l4\": \"CIP Flow Sensor\"},\n      {\"l6\": \"Water Treatment & Liquor Supply\", \"l5\": \"Water Flow Metering\", \"l4\": \"Water Ultrasonic Flow Sensor\"}\n    ],\n    \"alternatives_at_l4\": [\n      {\"name\": \"Paddle-Wheel / Turbine Flow Sensor\", \"status\": \"incumbent, declining\", \"share_estimate\": \"50-60%\", \"confidence\": \"MEDIUM\"},\n      {\"name\": \"Ultrasonic Flow Sensor\", \"status\": \"growing\", \"share_estimate\": \"15-25%\", \"confidence\": \"LOW\"},\n      {\"name\": \"Electromagnetic Flow Meter\", \"status\": \"established (large breweries)\", \"share_estimate\": \"15-25%\", \"confidence\": \"MEDIUM\"},\n      {\"name\": \"Rotameter / Visual Indicator\", \"status\": \"legacy, craft\", \"share_estimate\": \"5-10%\", \"confidence\": \"LOW\"}\n    ]\n  },\n  \"entities_produced\": {\n    \"nodes\": [\n      {\"label\": \"ValueNetwork\", \"key\": {\"naics_code\": \"312120\", \"run_id\": \"TBD\"}, \"properties\": {\"naics_title\": \"Breweries\", \"cfj_statement\": \"Transform water, malt, hops, and yeast into packaged beer through controlled biochemical and physical processes\", \"l7_solution\": \"Beer Manufacturing Ecosystem\", \"top_level\": \"L7\", \"unit_count\": 146, \"enriched\": true}},\n      {\"label\": \"ValueNetworkUnit\", \"key\": {\"name\": \"<per unit>\", \"naics_code\": \"312120\", \"level\": \"<per unit>\", \"run_id\": \"TBD\"}, \"count\": 146}\n    ],\n    \"relationships\": [\n      {\"type\": \"has_value_network\", \"source\": \"Market:312120\", \"target\": \"ValueNetwork:312120\"},\n      {\"type\": \"contains_unit\", \"source\": \"ValueNetwork:312120\", \"target\": \"ValueNetworkUnit:<each>\", \"count\": 146},\n      {\"type\": \"has_child\", \"source\": \"ValueNetworkUnit:<parent>\", \"target\": \"ValueNetworkUnit:<child>\", \"count\": 145}\n    ]\n  },\n  \"qa_checklist\": {\n    \"Q1_cfj_industry_level\": {\"pass\": true, \"note\": \"CFJ describes entire industry purpose — no reference to specific technology or product\"},\n    \"Q2_no_orphan_nodes\": {\"pass\": true, \"note\": \"Every unit except L7 has valid parent_name\"},\n    \"Q3_valid_level_transitions\": {\"pass\": true, \"note\": \"L7>L6>L5>L4 strictly followed, no skipping\"},\n    \"Q4_l4_children_per_l5\": {\"pass\": true, \"note\": \"All L5 nodes have 3-4 L4 children\"},\n    \"Q5_no_solution_specific_l7_l6\": {\"pass\": true, \"note\": \"L7 and L6 names are industry-generic\"},\n    \"Q6_naming_test\": {\"pass\": true, \"note\": \"Spot-checked: Mash Tun, Lauter Tun, Conical Fermenter, Glycol Chiller Unit, Brew Kettle — all industry-standard\"},\n    \"Q7_unit_count_in_range\": {\"pass\": true, \"note\": \"146 units total (within extended range for manufacturing NAICS)\"}\n  }\n}\n```\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [NAICS 312120 — U.S. Census Bureau](https://www.census.gov/naics/?input=312120&year=2022&details=312120)\n- [Brewing Process Step-By-Step — Micet Craft](https://www.micetcraft.com/brewing-process/)\n- [Brewery Equipment List — Tiantai](https://www.craftbreweryequipment.com/brewery-equipment-list-brewery-construction-considerations/)\n- [Flow Meters for Brewing Beer — Tameson](https://tameson.com/pages/beer-flow-meter)\n- [Flow Meters for Craft Beer Brewing — Assured Automation](https://assuredautomation.com/news-and-training/flow-meter-beer-brewing/)\n- [SU Ultrasonic Flow Meter Sanitary Applications — ifm](https://www.ifm.com/us/en/us/learn-more/flow/su-puresonic/sanitary-applications)\n- [Glycol Chiller Systems for Breweries — MoreBeer](https://morebeer.com/collections/glycol-systems)\n- [Commercial Brewery Chilling — Paul Mueller Company](https://www.paulmueller.com/industries/commercial-brewing-equipment/commercial-brewery-chilling-solution)\n- [CIP in Breweries — Portland Kettleworks](https://www.portlandkettleworks.com/clean-in-place-systems/)\n- [Basics of CIP in a Brewery — Paul Mueller Academy](https://academy.paulmueller.com/basics-of-clean-in-place-in-brewery)\n- [Cold Liquor Tank for Wort Cooling — Thermaline](https://www.thermaline.com/content/more-info/recent-news/application-cold-liquor-tanks-beer-wort-cooling/)\n- [Brewery Equipment Market Size — Grand View Research](https://www.grandviewresearch.com/industry-analysis/brewery-equipment-market)\n- [Brewery Equipment Market — MarketsandMarkets](https://www.marketsandmarkets.com/Market-Reports/brewery-equipment-market-129804657.html)\n- [Beer Fermentation Tanks — YoLong Brewtech](https://yolongbrewtech.com/beer-fermentation-tank-20240119/)\n- Marquardt Customer Presentation: \"US Flow Sensor\" (03.12.2025, CONFIDENTIAL)\n- 05_market_discovery.md — Architecture distance scoring for NAICS 312120\n\n---\n\n*End of VN — feeds JTBD Analysis, Competitive Landscape, and Fit Assessment for the Breweries market. The Marquardt primary L-path (L7 > L6.6 > L5.6.3 > L4.6.3.1) is the anchor for all downstream coverage and ODI scoring. Secondary (CIP) and tertiary (water metering) positions provide additional volume per brewery installation.*"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**NAICS Code**",
+          "Value": "312120 — Breweries"
+        },
+        {
+          "Field": "**CFJ**",
+          "Value": "Transform water, malt, hops, and yeast into packaged beer through controlled biochemical and physical processes"
+        },
+        {
+          "Field": "**Output Types**",
+          "Value": "Lager; Ale; Stout / Porter; Wheat beer; Sour / Wild ale; Non-alcoholic beer; Hard seltzer / FMB; Seasonal / Specialty"
+        },
+        {
+          "Field": "**Hierarchy**",
+          "Value": "Process VN (L7 through L4) — what process steps and equipment compose the beer manufacturing chain"
+        },
+        {
+          "Field": "**Key OEMs**",
+          "Value": "Alfa Laval, GEA Group, Krones AG, KASPAR SCHULZ, Paul Mueller Company, BrauKon, Meura, Praj Industries, Della Toffola, Criveller Group, DME Brewing Solutions, Portland Kettleworks, Ss Brewtech"
+        },
+        {
+          "Field": "**Market Size**",
+          "Value": "~$18–23B globally (brewery equipment, 2025); ~$600B global beer market [SRC: web_search]"
+        },
+        {
+          "Field": "**Architecture Distance**",
+          "Value": "4 (adjacent — water/glycol circuits match; food-grade certs needed) [SRC: 05_market_discovery]"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L6 ID",
+        "Name",
+        "Type",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L6 ID": "**L6.1**",
+          "Name": "Grain Handling & Milling",
+          "Type": "Core",
+          "Description": "Receive, store, and crush malt and adjuncts into grist for mashing."
+        },
+        {
+          "L6 ID": "**L6.2**",
+          "Name": "Brewhouse",
+          "Type": "Core",
+          "Description": "Mash grist with hot water, separate wort, boil with hops, whirlpool, and cool — the core sugar extraction and flavour development sequence."
+        },
+        {
+          "L6 ID": "**L6.3**",
+          "Name": "Fermentation & Conditioning",
+          "Type": "Core",
+          "Description": "Pitch yeast into cooled wort; convert sugars to alcohol and CO2; mature beer to flavour target."
+        },
+        {
+          "L6 ID": "**L6.4**",
+          "Name": "Bright Beer Processing",
+          "Type": "Core",
+          "Description": "Filter, carbonate, and stabilize finished beer for packaging."
+        },
+        {
+          "L6 ID": "**L6.5**",
+          "Name": "Packaging",
+          "Type": "Core",
+          "Description": "Fill beer into bottles, cans, kegs, or bulk containers for distribution."
+        },
+        {
+          "L6 ID": "**L6.6**",
+          "Name": "Glycol Cooling & Refrigeration (H)",
+          "Type": "Horizontal",
+          "Description": "Central glycol/water chiller system distributing coolant to fermenters, bright tanks, and cold rooms. **Marquardt primary position.**"
+        },
+        {
+          "L6 ID": "**L6.7**",
+          "Name": "Clean-In-Place & Sanitation (H)",
+          "Type": "Horizontal",
+          "Description": "Automated cleaning of all vessels, lines, and heat exchangers without disassembly. **Marquardt secondary position.**"
+        },
+        {
+          "L6 ID": "**L6.8**",
+          "Name": "Water Treatment & Liquor Supply (H)",
+          "Type": "Horizontal",
+          "Description": "Treat, store, and distribute brewing water (\"liquor\") at required temperatures. **Marquardt tertiary position.**"
+        },
+        {
+          "L6 ID": "**L6.9**",
+          "Name": "Utilities, CO2 & Quality Assurance (H)",
+          "Type": "Horizontal",
+          "Description": "Steam generation, compressed air, CO2 recovery, wastewater treatment, and laboratory QA."
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.1.1.1: Silo Vessel",
+          "Description": "Stainless steel or galvanized vertical silo; 5–100 t capacity"
+        },
+        {
+          "L4 Subsystem": "L4.1.1.2: Conveying & Transfer",
+          "Description": "Bucket elevator, screw conveyor, or pneumatic transport from silo to mill"
+        },
+        {
+          "L4 Subsystem": "L4.1.1.3: Moisture & Temperature Monitor",
+          "Description": "Capacitive moisture probe and thermocouple for grain condition tracking"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.1.2.1: Roller Assembly",
+          "Description": "Two-roller or four-roller mill; gap adjustable 0.7–1.5 mm"
+        },
+        {
+          "L4 Subsystem": "L4.1.2.2: Mill Drive Motor",
+          "Description": "Electric motor 2–15 kW depending on throughput"
+        },
+        {
+          "L4 Subsystem": "L4.1.2.3: Grist Hopper & Dust Extraction",
+          "Description": "Collection hopper below rollers; aspiration system for grain dust (explosion safety)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.2.1.1: Vessel & False Bottom",
+          "Description": "Insulated stainless vessel with perforated false bottom or mash screen"
+        },
+        {
+          "L4 Subsystem": "L4.2.1.2: Agitator / Rake",
+          "Description": "Variable-speed rake or paddle maintaining uniform temperature and preventing dough balls"
+        },
+        {
+          "L4 Subsystem": "L4.2.1.3: Temperature Sensor & Steam Jacket",
+          "Description": "Pt100/NTC sensor + steam or electric jacket for step-mash temperature control"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.2.2.1: Lauter Vessel & Screen",
+          "Description": "Vessel with slotted false bottom; diameter-to-depth ratio optimized for grain bed depth"
+        },
+        {
+          "L4 Subsystem": "L4.2.2.2: Raking Mechanism",
+          "Description": "Motorized knives cutting channels in grain bed to maintain runoff rate"
+        },
+        {
+          "L4 Subsystem": "L4.2.2.3: Sparge Arm & Flow Control",
+          "Description": "Rotating sparge arm distributing hot water over grain bed; flow rate controls extract efficiency"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.2.3.1: Kettle Vessel & Heating System",
+          "Description": "Stainless vessel with internal calandria, external boiler, or direct-fire burner"
+        },
+        {
+          "L4 Subsystem": "L4.2.3.2: Vapour Condenser / Energy Recovery",
+          "Description": "Captures steam for hot-water pre-heating; reduces energy consumption 15–20%"
+        },
+        {
+          "L4 Subsystem": "L4.2.3.3: Hop Dosing System",
+          "Description": "Manual or automated hop addition at timed intervals (bittering, flavour, aroma)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.2.4.1: Whirlpool Vessel",
+          "Description": "Flat-bottomed stainless vessel; may be combined with kettle in small breweries"
+        },
+        {
+          "L4 Subsystem": "L4.2.4.2: Tangential Inlet Nozzle",
+          "Description": "High-velocity inlet creating rotational flow; positioning determines separation efficiency"
+        },
+        {
+          "L4 Subsystem": "L4.2.4.3: Trub Collection & Drain",
+          "Description": "Centre drain and trub discharge valve; trub sent to spent grain handling"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.2.5.1: Plate Heat Exchanger",
+          "Description": "Gasketed or brazed stainless plate pack; 2-stage (water + glycol) in larger breweries"
+        },
+        {
+          "L4 Subsystem": "L4.2.5.2: Cold Liquor Supply Valve",
+          "Description": "Modulating valve controlling cold water flow to match wort outlet temperature setpoint"
+        },
+        {
+          "L4 Subsystem": "L4.2.5.3: Hot Liquor Recovery Valve",
+          "Description": "Diverts heated water to HLT for energy recovery; saves 10–20% of heating energy"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.3.1.1: Stainless Vessel & Cone",
+          "Description": "304 or 316L stainless; 60° cone; 5–500 hL capacity"
+        },
+        {
+          "L4 Subsystem": "L4.3.1.2: Glycol Jacket (Dimple Plate)",
+          "Description": "Dimple-welded or pillow-plate jacket on cone and sidewall for cooling/heating"
+        },
+        {
+          "L4 Subsystem": "L4.3.1.3: Pressure Relief & Spunding Valve",
+          "Description": "PRV + adjustable spunding valve for natural carbonation under pressure"
+        },
+        {
+          "L4 Subsystem": "L4.3.1.4: Temperature Probe & Thermowell",
+          "Description": "Pt100 or RTD in stainless thermowell; input to glycol PID controller"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.3.2.1: Yeast Propagation Tank",
+          "Description": "Aerated, temperature-controlled vessel for building yeast biomass from lab culture"
+        },
+        {
+          "L4 Subsystem": "L4.3.2.2: Yeast Dosing Pump",
+          "Description": "Sanitary positive-displacement pump for accurate pitching volume"
+        },
+        {
+          "L4 Subsystem": "L4.3.2.3: Yeast Storage Vessel",
+          "Description": "Chilled (2–4 °C) brink for harvested yeast between generations"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.3.3.1: Horizontal / Vertical Tank",
+          "Description": "Stainless vessel optimized for low-turbulence maturation"
+        },
+        {
+          "L4 Subsystem": "L4.3.3.2: Glycol Jacket",
+          "Description": "Cooling jacket for crash cooling and cold conditioning"
+        },
+        {
+          "L4 Subsystem": "L4.3.3.3: Carbonation Stone",
+          "Description": "Sintered stainless stone for CO2 injection during conditioning"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.4.1.1: Plate & Frame / Candle Filter",
+          "Description": "DE (diatomaceous earth) or cellulose sheet filtration; 0.5–5 μm"
+        },
+        {
+          "L4 Subsystem": "L4.4.1.2: Cross-Flow Membrane Filter",
+          "Description": "Ceramic or polymer membrane; rising adoption in craft (no DE waste)"
+        },
+        {
+          "L4 Subsystem": "L4.4.1.3: Filter Aid Dosing & Recovery",
+          "Description": "DE slurry dosing pump and spent-DE handling"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.4.2.1: Inline Carbonation Stone",
+          "Description": "Sintered stainless stone or membrane diffuser in beer line"
+        },
+        {
+          "L4 Subsystem": "L4.4.2.2: CO2 Flow Controller",
+          "Description": "Mass flow controller dosing CO2 proportional to beer flow rate"
+        },
+        {
+          "L4 Subsystem": "L4.4.2.3: Dissolved CO2 Sensor",
+          "Description": "Inline optical or thermal conductivity sensor measuring carbonation level"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.4.3.1: Pressure-Rated Stainless Tank",
+          "Description": "304/316L; rated to 2 bar; 10–500 hL"
+        },
+        {
+          "L4 Subsystem": "L4.4.3.2: Pressure & Level Sensors",
+          "Description": "Pressure transducer + capacitive or hydrostatic level sensor"
+        },
+        {
+          "L4 Subsystem": "L4.4.3.3: CIP Spray Ball",
+          "Description": "360° coverage spray ball for automated cleaning"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.5.1.1: Bottle Rinser / Washer",
+          "Description": "Water or air rinser removing dust and debris before filling"
+        },
+        {
+          "L4 Subsystem": "L4.5.1.2: Counter-Pressure Filler & Crowner",
+          "Description": "Isobaric filler minimizing CO2 loss; integrated crown applicator"
+        },
+        {
+          "L4 Subsystem": "L4.5.1.3: Labeler & Date Coder",
+          "Description": "Pressure-sensitive, glue, or shrink-sleeve labeler; inkjet date coder"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.5.2.1: Can Purger & Rinser",
+          "Description": "CO2 purge and water rinse reducing dissolved oxygen pickup"
+        },
+        {
+          "L4 Subsystem": "L4.5.2.2: Can Filler",
+          "Description": "Gravity or counter-pressure filler; 4–80 fill heads"
+        },
+        {
+          "L4 Subsystem": "L4.5.2.3: Can Seamer",
+          "Description": "Double-seam closure head applying lid to filled can"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.5.3.1: Keg Washer & Sanitizer",
+          "Description": "Multi-station automated washer: caustic → acid → rinse → CO2 purge"
+        },
+        {
+          "L4 Subsystem": "L4.5.3.2: Keg Filler",
+          "Description": "Counter-pressure filler maintaining carbonation; isobaric or volumetric"
+        },
+        {
+          "L4 Subsystem": "L4.5.3.3: Keg Capper & Spear Valve",
+          "Description": "Applies cap and checks spear valve integrity"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.5.4.1: Tunnel / Flash Pasteurizer",
+          "Description": "Tunnel: water spray zones; Flash: plate heat exchanger before filler"
+        },
+        {
+          "L4 Subsystem": "L4.5.4.2: Temperature Controller",
+          "Description": "PID controller maintaining pasteurization temperature setpoint"
+        },
+        {
+          "L4 Subsystem": "L4.5.4.3: Pasteurization Unit (PU) Monitor",
+          "Description": "Calculates cumulative PU (time × temperature) for compliance verification"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.6.1.1: Refrigeration Compressor",
+          "Description": "Scroll, screw, or reciprocating compressor; R-410A or R-449A refrigerant"
+        },
+        {
+          "L4 Subsystem": "L4.6.1.2: Condenser",
+          "Description": "Air-cooled or water-cooled condenser rejecting heat to ambient"
+        },
+        {
+          "L4 Subsystem": "L4.6.1.3: Evaporator / Plate Heat Exchanger",
+          "Description": "Brazed plate or shell-and-tube exchanger transferring cold to glycol loop"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.6.2.1: Glycol Circulation Pump",
+          "Description": "Centrifugal pump (cast iron or stainless); variable-speed for energy savings"
+        },
+        {
+          "L4 Subsystem": "L4.6.2.2: Distribution Manifold & Zone Valves",
+          "Description": "Header with solenoid or motorized valves per cooling zone (per fermenter, BBT, cold room)"
+        },
+        {
+          "L4 Subsystem": "L4.6.2.3: Glycol Piping & Insulation",
+          "Description": "Stainless or copper pipe with closed-cell foam insulation preventing condensation"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.6.3.1: Ultrasonic Flow Sensor",
+          "Description": "Transit-time ultrasonic measurement of glycol/water flow; no moving parts, zero pressure drop, glycol-tolerant. **MARQUARDT POSITION.**"
+        },
+        {
+          "L4 Subsystem": "L4.6.3.2: Paddle-Wheel / Turbine Flow Sensor",
+          "Description": "Mechanical flow sensor; incumbent in craft breweries; wears out in glycol service"
+        },
+        {
+          "L4 Subsystem": "L4.6.3.3: Temperature Probe (RTD / NTC)",
+          "Description": "Pt100 or NTC measuring glycol supply and return temperature per zone"
+        },
+        {
+          "L4 Subsystem": "L4.6.3.4: Pressure Transducer",
+          "Description": "Monitors glycol loop pressure for pump performance and leak detection"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.6.4.1: Reservoir Tank",
+          "Description": "Insulated stainless or polyethylene tank; 200–5,000 L"
+        },
+        {
+          "L4 Subsystem": "L4.6.4.2: Level Sensor & Makeup Dosing",
+          "Description": "Float or ultrasonic level sensor; glycol dosing to maintain concentration"
+        },
+        {
+          "L4 Subsystem": "L4.6.4.3: Glycol Concentration Monitor",
+          "Description": "Refractometer or density meter verifying glycol % (freeze protection)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.7.1.1: Caustic Tank & Heater",
+          "Description": "Insulated stainless tank (500–5,000 L) with electric or steam heating"
+        },
+        {
+          "L4 Subsystem": "L4.7.1.2: Acid Tank",
+          "Description": "Stainless tank for phosphoric or peracetic acid solution"
+        },
+        {
+          "L4 Subsystem": "L4.7.1.3: CIP Supply Pump",
+          "Description": "Sanitary centrifugal pump providing 2–4 bar, 50–200 L/min per circuit"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.7.2.1: CIP Routing Valves",
+          "Description": "Pneumatic butterfly or mix-proof valves automating circuit selection"
+        },
+        {
+          "L4 Subsystem": "L4.7.2.2: CIP Return Pump",
+          "Description": "Returns spent solution to CIP station for reuse or drain"
+        },
+        {
+          "L4 Subsystem": "L4.7.2.3: Spray Balls & Rotary Jets",
+          "Description": "Static spray balls in tanks; rotary jet heads for large vessels (>50 hL)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.7.3.1: Flow Sensor",
+          "Description": "Verifies cleaning solution flow rate per circuit. Ultrasonic (Marquardt) or electromagnetic. **MARQUARDT SECONDARY.**"
+        },
+        {
+          "L4 Subsystem": "L4.7.3.2: Temperature Sensor",
+          "Description": "Pt100 monitoring CIP solution temperature at supply and return"
+        },
+        {
+          "L4 Subsystem": "L4.7.3.3: Conductivity Sensor",
+          "Description": "Measures chemical concentration (caustic vs rinse water) for step transitions"
+        },
+        {
+          "L4 Subsystem": "L4.7.3.4: CIP Controller / PLC",
+          "Description": "Automates sequence timing, valve actuation, and alarm generation"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.8.1.1: Carbon Filter",
+          "Description": "Activated carbon removing chlorine and chloramine from municipal water"
+        },
+        {
+          "L4 Subsystem": "L4.8.1.2: Reverse Osmosis Membrane",
+          "Description": "RO system stripping >95% of dissolved minerals for base-water consistency"
+        },
+        {
+          "L4 Subsystem": "L4.8.1.3: Mineral Dosing & pH Adjustment",
+          "Description": "Chemical feed pumps adding CaCl2, CaSO4 (gypsum), lactic acid to target ion profile"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.8.2.1: Insulated Vessel",
+          "Description": "Stainless vessel; 1–3× batch size; standing loss <2 °C/hr"
+        },
+        {
+          "L4 Subsystem": "L4.8.2.2: Heating Element / Steam Coil",
+          "Description": "Electric immersion heater (small) or steam coil (large)"
+        },
+        {
+          "L4 Subsystem": "L4.8.2.3: Temperature Controller & Sensor",
+          "Description": "PID controller with Pt100 maintaining setpoint ±1 °C"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.8.3.1: Insulated Vessel",
+          "Description": "Stainless or polyethylene vessel with closed-cell insulation"
+        },
+        {
+          "L4 Subsystem": "L4.8.3.2: Cooling Coil / Glycol Jacket",
+          "Description": "Glycol-fed jacket or immersed coil maintaining 1–4 °C"
+        },
+        {
+          "L4 Subsystem": "L4.8.3.3: Temperature Controller & Sensor",
+          "Description": "PID controller ensuring cold liquor is at target before brew day"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.8.4.1: Ultrasonic Flow Sensor",
+          "Description": "Transit-time measurement on water intake and distribution lines. **MARQUARDT TERTIARY.**"
+        },
+        {
+          "L4 Subsystem": "L4.8.4.2: Electromagnetic Flow Meter",
+          "Description": "Mag-meter alternative; higher cost but handles higher conductivity variations"
+        },
+        {
+          "L4 Subsystem": "L4.8.4.3: Turbine Flow Meter",
+          "Description": "Mechanical incumbent; lower cost but moving parts wear in continuous service"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.9.1.1: Steam Boiler / Hot Water Generator",
+          "Description": "Fire-tube or water-tube boiler; 100–2,000 kW"
+        },
+        {
+          "L4 Subsystem": "L4.9.1.2: Condensate Return System",
+          "Description": "Recovers condensate for boiler feedwater; reduces water and energy consumption"
+        },
+        {
+          "L4 Subsystem": "L4.9.1.3: Steam Trap & Pressure Reducer",
+          "Description": "Maintains steam pressure at point of use; prevents water hammer"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.9.2.1: Air Compressor",
+          "Description": "Oil-free rotary screw or scroll compressor; food-grade air required"
+        },
+        {
+          "L4 Subsystem": "L4.9.2.2: Air Dryer & Sterile Filter",
+          "Description": "Refrigerated dryer + 0.01 μm sterile filter for process air"
+        },
+        {
+          "L4 Subsystem": "L4.9.2.3: Distribution Manifold",
+          "Description": "Header with regulators per consumer zone"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.9.3.1: CO2 Scrubber & Purifier",
+          "Description": "Water scrubber + activated carbon removing volatile organics; food-grade CO2 output"
+        },
+        {
+          "L4 Subsystem": "L4.9.3.2: CO2 Compressor & Liquefier",
+          "Description": "Two-stage compressor + condenser liquefying CO2 for storage at −20 °C, 20 bar"
+        },
+        {
+          "L4 Subsystem": "L4.9.3.3: CO2 Storage Tank",
+          "Description": "Insulated pressure vessel (1–50 t) with level gauge and safety relief"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.9.4.1: Density / Alcohol Analyzer",
+          "Description": "Digital density meter (Anton Paar) or distillation unit for ABV measurement"
+        },
+        {
+          "L4 Subsystem": "L4.9.4.2: pH & Dissolved Oxygen Meter",
+          "Description": "Benchtop or inline sensors for critical quality parameters"
+        },
+        {
+          "L4 Subsystem": "L4.9.4.3: Microbiological Testing Kit",
+          "Description": "Membrane filtration + incubator for spoilage organism detection"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.9.5.1: pH Adjustment & Equalization Tank",
+          "Description": "Neutralizes acidic/caustic effluent (pH 2–12) to 6.5–8.5 range"
+        },
+        {
+          "L4 Subsystem": "L4.9.5.2: Aerobic / Anaerobic Digester",
+          "Description": "Reduces BOD/COD by 80–95%; anaerobic produces biogas for energy recovery"
+        },
+        {
+          "L4 Subsystem": "L4.9.5.3: Solids Separator",
+          "Description": "Dissolved air flotation (DAF) or settling tank removing suspended solids"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L6 Domain",
+        "Lager",
+        "Ale",
+        "Stout",
+        "Wheat",
+        "Sour",
+        "Non-Alc",
+        "Seltzer",
+        "Specialty"
+      ],
+      "rows": [
+        {
+          "L6 Domain": "L6.1 Grain Handling",
+          "Lager": "Y",
+          "Ale": "Y",
+          "Stout": "Y",
+          "Wheat": "Y",
+          "Sour": "Y",
+          "Non-Alc": "Y",
+          "Seltzer": "partial",
+          "Specialty": "Y"
+        },
+        {
+          "L6 Domain": "L6.2 Brewhouse",
+          "Lager": "Y",
+          "Ale": "Y",
+          "Stout": "Y",
+          "Wheat": "Y",
+          "Sour": "Y",
+          "Non-Alc": "Y",
+          "Seltzer": "partial",
+          "Specialty": "Y"
+        },
+        {
+          "L6 Domain": "L6.3 Fermentation",
+          "Lager": "Y",
+          "Ale": "Y",
+          "Stout": "Y",
+          "Wheat": "Y",
+          "Sour": "Y",
+          "Non-Alc": "Y",
+          "Seltzer": "Y",
+          "Specialty": "Y"
+        },
+        {
+          "L6 Domain": "L6.4 Bright Beer",
+          "Lager": "Y",
+          "Ale": "partial",
+          "Stout": "partial",
+          "Wheat": "partial",
+          "Sour": "partial",
+          "Non-Alc": "Y",
+          "Seltzer": "Y",
+          "Specialty": "partial"
+        },
+        {
+          "L6 Domain": "L6.5 Packaging",
+          "Lager": "Y",
+          "Ale": "Y",
+          "Stout": "Y",
+          "Wheat": "Y",
+          "Sour": "Y",
+          "Non-Alc": "Y",
+          "Seltzer": "Y",
+          "Specialty": "Y"
+        },
+        {
+          "L6 Domain": "L6.6 Glycol Cooling (H)",
+          "Lager": "Y",
+          "Ale": "Y",
+          "Stout": "Y",
+          "Wheat": "Y",
+          "Sour": "Y",
+          "Non-Alc": "Y",
+          "Seltzer": "Y",
+          "Specialty": "Y"
+        },
+        {
+          "L6 Domain": "L6.7 CIP (H)",
+          "Lager": "Y",
+          "Ale": "Y",
+          "Stout": "Y",
+          "Wheat": "Y",
+          "Sour": "Y",
+          "Non-Alc": "Y",
+          "Seltzer": "Y",
+          "Specialty": "Y"
+        },
+        {
+          "L6 Domain": "L6.8 Water Treatment (H)",
+          "Lager": "Y",
+          "Ale": "Y",
+          "Stout": "Y",
+          "Wheat": "Y",
+          "Sour": "Y",
+          "Non-Alc": "Y",
+          "Seltzer": "Y",
+          "Specialty": "Y"
+        },
+        {
+          "L6 Domain": "L6.9 Utilities/CO2/QA (H)",
+          "Lager": "Y",
+          "Ale": "Y",
+          "Stout": "Y",
+          "Wheat": "Y",
+          "Sour": "Y",
+          "Non-Alc": "Y",
+          "Seltzer": "Y",
+          "Specialty": "Y"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Position",
+        "Circuit",
+        "Medium",
+        "Why Marquardt Wins"
+      ],
+      "rows": [
+        {
+          "Position": "**Primary**",
+          "Circuit": "Glycol cooling loops",
+          "Medium": "30–35% propylene glycol/water",
+          "Why Marquardt Wins": "Glycol tolerance is a key differentiator; no-moving-parts avoids glycol-induced wear on turbine blades; glycol detection (FP extension) adds unique diagnostic value"
+        },
+        {
+          "Position": "**Secondary**",
+          "Circuit": "CIP return-flow verification",
+          "Medium": "Water, caustic solution, acid solution",
+          "Why Marquardt Wins": "Zero pressure drop avoids flow restriction in CIP circuits; no moving parts eliminates contamination risk from sensor internals"
+        },
+        {
+          "Position": "**Tertiary**",
+          "Circuit": "Water intake & distribution",
+          "Medium": "Municipal/treated water",
+          "Why Marquardt Wins": "Direct commodity match (flowmeter on water); KTW/WRAS approval enables potable-water circuits"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "Check": "Exactly one L7 node",
+          "Result": "PASS — 1 L7 (Beer Manufacturing Ecosystem)"
+        },
+        {
+          "Check": "L6 count in range (3–8 core + horizontals)",
+          "Result": "PASS — 5 core + 4 horizontal = 9 L6 nodes"
+        },
+        {
+          "Check": "L5 count per L6 in range (2–5)",
+          "Result": "PASS — L6.1: 2, L6.2: 5, L6.3: 3, L6.4: 3, L6.5: 4, L6.6: 4, L6.7: 3, L6.8: 4, L6.9: 5"
+        },
+        {
+          "Check": "L4 count per L5 >= 2",
+          "Result": "PASS — all L5 nodes have 3–4 L4 children"
+        },
+        {
+          "Check": "No orphan nodes",
+          "Result": "PASS — every node has a parent"
+        },
+        {
+          "Check": "No level skipping",
+          "Result": "PASS — L7>L6>L5>L4 strictly followed"
+        },
+        {
+          "Check": "Valid parent-child transitions",
+          "Result": "PASS"
+        },
+        {
+          "Check": "No company names in L7/L6 names",
+          "Result": "PASS"
+        },
+        {
+          "Check": "Three-question naming test (5 spot-checks)",
+          "Result": "PASS — \"Mash Tun,\" \"Lauter Tun,\" \"Conical Fermenter,\" \"Glycol Chiller Unit,\" \"Brew Kettle\" — all industry-standard terms"
+        },
+        {
+          "Check": "Unit count in range (15–60, extended for mfg)",
+          "Result": "PASS — 1 + 9 + 33 + 103 = 146 total units"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "value_network_construction",
+      "naics_code": "312120",
+      "naics_title": "Breweries",
+      "cfj_statement": "Transform water, malt, hops, and yeast into packaged beer through controlled biochemical and physical processes",
+      "l7_solution": "Beer Manufacturing Ecosystem",
+      "top_level": "L7",
+      "market_name": "Breweries",
+      "architecture_distance": 4,
+      "already_uses_technology": true,
+      "output_types": [
+        "Lager",
+        "Ale",
+        "Stout / Porter",
+        "Wheat beer",
+        "Sour / Wild ale",
+        "Non-alcoholic beer",
+        "Hard seltzer / FMB",
+        "Seasonal / Specialty"
+      ],
+      "value_network": {
+        "naics_code": "312120",
+        "naics_title": "Breweries",
+        "cfj_statement": "Transform water, malt, hops, and yeast into packaged beer through controlled biochemical and physical processes",
+        "l7_solution": "Beer Manufacturing Ecosystem",
+        "units": [
+          {
+            "name": "Beer Manufacturing Ecosystem",
+            "level": "L7",
+            "description": "Complete ecosystem of breweries, equipment OEMs, ingredient suppliers, packaging companies, distributors, regulators, and retailers coordinated around beer production",
+            "bom_standard": "Moore 1993",
+            "parent_name": "ROOT"
+          },
+          {
+            "name": "Grain Handling & Milling",
+            "level": "L6",
+            "description": "Receive, store, and crush malt and adjuncts into grist for mashing",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Beer Manufacturing Ecosystem"
+          },
+          {
+            "name": "Brewhouse",
+            "level": "L6",
+            "description": "Mash, lauter, boil, whirlpool, and cool wort — sugar extraction and flavour development",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Beer Manufacturing Ecosystem"
+          },
+          {
+            "name": "Fermentation & Conditioning",
+            "level": "L6",
+            "description": "Yeast converts wort sugars to alcohol and CO2; beer is matured to flavour target",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Beer Manufacturing Ecosystem"
+          },
+          {
+            "name": "Bright Beer Processing",
+            "level": "L6",
+            "description": "Filter, carbonate, and stabilize finished beer for packaging",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Beer Manufacturing Ecosystem"
+          },
+          {
+            "name": "Packaging",
+            "level": "L6",
+            "description": "Fill beer into bottles, cans, kegs, or bulk containers for distribution",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Beer Manufacturing Ecosystem"
+          },
+          {
+            "name": "Glycol Cooling & Refrigeration",
+            "level": "L6",
+            "description": "Central glycol chiller distributing coolant to fermenters, bright tanks, and cold rooms (horizontal)",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Beer Manufacturing Ecosystem"
+          },
+          {
+            "name": "Clean-In-Place & Sanitation",
+            "level": "L6",
+            "description": "Automated cleaning of all vessels, lines, and heat exchangers without disassembly (horizontal)",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Beer Manufacturing Ecosystem"
+          },
+          {
+            "name": "Water Treatment & Liquor Supply",
+            "level": "L6",
+            "description": "Treat, store, and distribute brewing water at required temperatures (horizontal)",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Beer Manufacturing Ecosystem"
+          },
+          {
+            "name": "Utilities, CO2 & Quality Assurance",
+            "level": "L6",
+            "description": "Steam, compressed air, CO2 recovery, wastewater, and laboratory QA (horizontal)",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Beer Manufacturing Ecosystem"
+          },
+          {
+            "name": "Grain Silo & Storage",
+            "level": "L5",
+            "description": "Bulk storage of base malt, specialty malts, and adjuncts",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Grain Handling & Milling"
+          },
+          {
+            "name": "Malt Mill",
+            "level": "L5",
+            "description": "Two- or four-roller mill crushing grain into grist",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Grain Handling & Milling"
+          },
+          {
+            "name": "Mash Tun",
+            "level": "L5",
+            "description": "Vessel mixing grist with hot water at controlled temperatures for enzymatic conversion",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Brewhouse"
+          },
+          {
+            "name": "Lauter Tun",
+            "level": "L5",
+            "description": "Separates sweet wort from spent grain via false-bottom filtration and sparging",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Brewhouse"
+          },
+          {
+            "name": "Brew Kettle",
+            "level": "L5",
+            "description": "Boils wort with hops for bitterness, sterilization, and protein coagulation",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Brewhouse"
+          },
+          {
+            "name": "Whirlpool",
+            "level": "L5",
+            "description": "Tangential-flow separator removing trub and hop debris from clear wort",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Brewhouse"
+          },
+          {
+            "name": "Wort Heat Exchanger",
+            "level": "L5",
+            "description": "Counter-flow plate heat exchanger rapidly cooling wort from 100C to fermentation temperature",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Brewhouse"
+          },
+          {
+            "name": "Conical Fermenter",
+            "level": "L5",
+            "description": "Cylindro-conical tank for primary fermentation with glycol jacket temperature control",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Fermentation & Conditioning"
+          },
+          {
+            "name": "Yeast Management",
+            "level": "L5",
+            "description": "Propagation, pitching, harvesting, and storage of brewing yeast",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Fermentation & Conditioning"
+          },
+          {
+            "name": "Conditioning Tank",
+            "level": "L5",
+            "description": "Secondary maturation/lagering vessel for flavour development and haze reduction",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Fermentation & Conditioning"
+          },
+          {
+            "name": "Beer Filtration",
+            "level": "L5",
+            "description": "Removes yeast, haze-forming proteins, and particles from finished beer",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Bright Beer Processing"
+          },
+          {
+            "name": "Carbonation System",
+            "level": "L5",
+            "description": "Inline CO2 injection to achieve target carbonation volumes",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Bright Beer Processing"
+          },
+          {
+            "name": "Bright Beer Tank",
+            "level": "L5",
+            "description": "Pressure-rated holding tank for filtered, carbonated beer awaiting packaging",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Bright Beer Processing"
+          },
+          {
+            "name": "Bottle Filling Line",
+            "level": "L5",
+            "description": "Rinse, counter-pressure fill, crown, and label glass bottles",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Packaging"
+          },
+          {
+            "name": "Can Filling Line",
+            "level": "L5",
+            "description": "Purge, fill, and seam aluminium cans",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Packaging"
+          },
+          {
+            "name": "Keg Filling Line",
+            "level": "L5",
+            "description": "Wash, sanitize, fill, and seal stainless steel kegs",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Packaging"
+          },
+          {
+            "name": "Pasteurizer",
+            "level": "L5",
+            "description": "Tunnel or flash heat treatment for shelf stability",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Packaging"
+          },
+          {
+            "name": "Glycol Chiller Unit",
+            "level": "L5",
+            "description": "Central refrigeration package cooling glycol/water reservoir",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Glycol Cooling & Refrigeration"
+          },
+          {
+            "name": "Glycol Distribution",
+            "level": "L5",
+            "description": "Piping, pumps, and zone valves distributing glycol to consuming vessels",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Glycol Cooling & Refrigeration"
+          },
+          {
+            "name": "Glycol Sensing & Control",
+            "level": "L5",
+            "description": "Flow, temperature, and pressure sensors for per-zone glycol monitoring. MARQUARDT PRIMARY POSITION.",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Glycol Cooling & Refrigeration"
+          },
+          {
+            "name": "Glycol Reservoir",
+            "level": "L5",
+            "description": "Insulated buffer tank holding glycol/water mixture",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Glycol Cooling & Refrigeration"
+          },
+          {
+            "name": "CIP Station",
+            "level": "L5",
+            "description": "Centralized chemical storage, heating, and pumping unit for automated cleaning",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Clean-In-Place & Sanitation"
+          },
+          {
+            "name": "CIP Distribution & Spray Devices",
+            "level": "L5",
+            "description": "Piping, valves, and spray devices routing cleaning solution to equipment",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Clean-In-Place & Sanitation"
+          },
+          {
+            "name": "CIP Sensing & Control",
+            "level": "L5",
+            "description": "Flow, temperature, and conductivity sensors verifying CIP cycle parameters. MARQUARDT SECONDARY POSITION.",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Clean-In-Place & Sanitation"
+          },
+          {
+            "name": "Water Treatment System",
+            "level": "L5",
+            "description": "Carbon filtration, RO, UV, and mineral dosing to target brewing water profile",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Water Treatment & Liquor Supply"
+          },
+          {
+            "name": "Hot Liquor Tank",
+            "level": "L5",
+            "description": "Heated water storage (75-85C) for mashing and sparging",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Water Treatment & Liquor Supply"
+          },
+          {
+            "name": "Cold Liquor Tank",
+            "level": "L5",
+            "description": "Chilled water storage (1-4C) for wort cooling",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Water Treatment & Liquor Supply"
+          },
+          {
+            "name": "Water Flow Metering",
+            "level": "L5",
+            "description": "Measures water intake and distribution for efficiency reporting. MARQUARDT TERTIARY POSITION.",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Water Treatment & Liquor Supply"
+          },
+          {
+            "name": "Steam / Hot Water Generation",
+            "level": "L5",
+            "description": "Boiler or hot water generator providing process heat",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Utilities, CO2 & Quality Assurance"
+          },
+          {
+            "name": "Compressed Air System",
+            "level": "L5",
+            "description": "Food-grade compressed air for pneumatic valves and grain conveying",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Utilities, CO2 & Quality Assurance"
+          },
+          {
+            "name": "CO2 Recovery & Distribution",
+            "level": "L5",
+            "description": "Captures fermentation CO2 for reuse in carbonation and packaging",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Utilities, CO2 & Quality Assurance"
+          },
+          {
+            "name": "Quality Assurance Laboratory",
+            "level": "L5",
+            "description": "In-process and finished-product testing for specifications compliance",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Utilities, CO2 & Quality Assurance"
+          },
+          {
+            "name": "Wastewater Treatment",
+            "level": "L5",
+            "description": "Treats brewery effluent (high BOD) before municipal discharge",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Utilities, CO2 & Quality Assurance"
+          },
+          {
+            "name": "Silo Vessel",
+            "level": "L4",
+            "description": "Stainless or galvanized vertical silo; 5-100 t capacity",
+            "bom_standard": "INCOSE",
+            "parent_name": "Grain Silo & Storage"
+          },
+          {
+            "name": "Conveying & Transfer",
+            "level": "L4",
+            "description": "Bucket elevator, screw conveyor, or pneumatic transport from silo to mill",
+            "bom_standard": "INCOSE",
+            "parent_name": "Grain Silo & Storage"
+          },
+          {
+            "name": "Moisture & Temperature Monitor",
+            "level": "L4",
+            "description": "Capacitive moisture probe and thermocouple for grain condition tracking",
+            "bom_standard": "INCOSE",
+            "parent_name": "Grain Silo & Storage"
+          },
+          {
+            "name": "Roller Assembly",
+            "level": "L4",
+            "description": "Two- or four-roller mill; gap adjustable 0.7-1.5 mm",
+            "bom_standard": "INCOSE",
+            "parent_name": "Malt Mill"
+          },
+          {
+            "name": "Mill Drive Motor",
+            "level": "L4",
+            "description": "Electric motor 2-15 kW depending on throughput",
+            "bom_standard": "INCOSE",
+            "parent_name": "Malt Mill"
+          },
+          {
+            "name": "Grist Hopper & Dust Extraction",
+            "level": "L4",
+            "description": "Collection hopper below rollers; aspiration system for grain dust",
+            "bom_standard": "INCOSE",
+            "parent_name": "Malt Mill"
+          },
+          {
+            "name": "Vessel & False Bottom",
+            "level": "L4",
+            "description": "Insulated stainless vessel with perforated false bottom or mash screen",
+            "bom_standard": "INCOSE",
+            "parent_name": "Mash Tun"
+          },
+          {
+            "name": "Agitator / Rake",
+            "level": "L4",
+            "description": "Variable-speed rake or paddle maintaining uniform temperature",
+            "bom_standard": "INCOSE",
+            "parent_name": "Mash Tun"
+          },
+          {
+            "name": "Mash Temperature Sensor & Steam Jacket",
+            "level": "L4",
+            "description": "Pt100/NTC sensor + steam or electric jacket for step-mash control",
+            "bom_standard": "INCOSE",
+            "parent_name": "Mash Tun"
+          },
+          {
+            "name": "Lauter Vessel & Screen",
+            "level": "L4",
+            "description": "Vessel with slotted false bottom optimized for grain bed depth",
+            "bom_standard": "INCOSE",
+            "parent_name": "Lauter Tun"
+          },
+          {
+            "name": "Raking Mechanism",
+            "level": "L4",
+            "description": "Motorized knives cutting channels in grain bed for runoff rate",
+            "bom_standard": "INCOSE",
+            "parent_name": "Lauter Tun"
+          },
+          {
+            "name": "Sparge Arm & Flow Control",
+            "level": "L4",
+            "description": "Rotating arm distributing hot water over grain bed; flow rate controls yield",
+            "bom_standard": "INCOSE",
+            "parent_name": "Lauter Tun"
+          },
+          {
+            "name": "Kettle Vessel & Heating System",
+            "level": "L4",
+            "description": "Stainless vessel with internal calandria, external boiler, or direct-fire burner",
+            "bom_standard": "INCOSE",
+            "parent_name": "Brew Kettle"
+          },
+          {
+            "name": "Vapour Condenser / Energy Recovery",
+            "level": "L4",
+            "description": "Captures steam for hot-water pre-heating; reduces energy 15-20%",
+            "bom_standard": "INCOSE",
+            "parent_name": "Brew Kettle"
+          },
+          {
+            "name": "Hop Dosing System",
+            "level": "L4",
+            "description": "Manual or automated hop addition at timed intervals",
+            "bom_standard": "INCOSE",
+            "parent_name": "Brew Kettle"
+          },
+          {
+            "name": "Whirlpool Vessel",
+            "level": "L4",
+            "description": "Flat-bottomed stainless vessel; may combine with kettle in small breweries",
+            "bom_standard": "INCOSE",
+            "parent_name": "Whirlpool"
+          },
+          {
+            "name": "Tangential Inlet Nozzle",
+            "level": "L4",
+            "description": "High-velocity inlet creating rotational flow for trub separation",
+            "bom_standard": "INCOSE",
+            "parent_name": "Whirlpool"
+          },
+          {
+            "name": "Trub Collection & Drain",
+            "level": "L4",
+            "description": "Centre drain and trub discharge valve",
+            "bom_standard": "INCOSE",
+            "parent_name": "Whirlpool"
+          },
+          {
+            "name": "Plate Heat Exchanger",
+            "level": "L4",
+            "description": "Gasketed or brazed stainless plate pack; 2-stage in larger breweries",
+            "bom_standard": "INCOSE",
+            "parent_name": "Wort Heat Exchanger"
+          },
+          {
+            "name": "Cold Liquor Supply Valve",
+            "level": "L4",
+            "description": "Modulating valve controlling cold water flow to match outlet temp setpoint",
+            "bom_standard": "INCOSE",
+            "parent_name": "Wort Heat Exchanger"
+          },
+          {
+            "name": "Hot Liquor Recovery Valve",
+            "level": "L4",
+            "description": "Diverts heated water to HLT for energy recovery",
+            "bom_standard": "INCOSE",
+            "parent_name": "Wort Heat Exchanger"
+          },
+          {
+            "name": "Stainless Vessel & Cone",
+            "level": "L4",
+            "description": "304/316L stainless; 60-degree cone; 5-500 hL capacity",
+            "bom_standard": "INCOSE",
+            "parent_name": "Conical Fermenter"
+          },
+          {
+            "name": "Glycol Jacket (Dimple Plate)",
+            "level": "L4",
+            "description": "Dimple-welded or pillow-plate jacket on cone and sidewall for cooling",
+            "bom_standard": "INCOSE",
+            "parent_name": "Conical Fermenter"
+          },
+          {
+            "name": "Pressure Relief & Spunding Valve",
+            "level": "L4",
+            "description": "PRV + adjustable spunding valve for natural carbonation under pressure",
+            "bom_standard": "INCOSE",
+            "parent_name": "Conical Fermenter"
+          },
+          {
+            "name": "Fermenter Temperature Probe",
+            "level": "L4",
+            "description": "Pt100 or RTD in stainless thermowell; input to glycol PID controller",
+            "bom_standard": "INCOSE",
+            "parent_name": "Conical Fermenter"
+          },
+          {
+            "name": "Yeast Propagation Tank",
+            "level": "L4",
+            "description": "Aerated, temperature-controlled vessel for building yeast biomass",
+            "bom_standard": "INCOSE",
+            "parent_name": "Yeast Management"
+          },
+          {
+            "name": "Yeast Dosing Pump",
+            "level": "L4",
+            "description": "Sanitary positive-displacement pump for accurate pitching volume",
+            "bom_standard": "INCOSE",
+            "parent_name": "Yeast Management"
+          },
+          {
+            "name": "Yeast Storage Vessel",
+            "level": "L4",
+            "description": "Chilled (2-4C) brink for harvested yeast between generations",
+            "bom_standard": "INCOSE",
+            "parent_name": "Yeast Management"
+          },
+          {
+            "name": "Conditioning Vessel",
+            "level": "L4",
+            "description": "Stainless vessel optimized for low-turbulence maturation",
+            "bom_standard": "INCOSE",
+            "parent_name": "Conditioning Tank"
+          },
+          {
+            "name": "Conditioning Glycol Jacket",
+            "level": "L4",
+            "description": "Cooling jacket for crash cooling and cold conditioning",
+            "bom_standard": "INCOSE",
+            "parent_name": "Conditioning Tank"
+          },
+          {
+            "name": "Conditioning Carbonation Stone",
+            "level": "L4",
+            "description": "Sintered stainless stone for CO2 injection during conditioning",
+            "bom_standard": "INCOSE",
+            "parent_name": "Conditioning Tank"
+          },
+          {
+            "name": "Plate & Frame / Candle Filter",
+            "level": "L4",
+            "description": "DE or cellulose sheet filtration; 0.5-5 um",
+            "bom_standard": "INCOSE",
+            "parent_name": "Beer Filtration"
+          },
+          {
+            "name": "Cross-Flow Membrane Filter",
+            "level": "L4",
+            "description": "Ceramic or polymer membrane; no DE waste",
+            "bom_standard": "INCOSE",
+            "parent_name": "Beer Filtration"
+          },
+          {
+            "name": "Filter Aid Dosing & Recovery",
+            "level": "L4",
+            "description": "DE slurry dosing pump and spent-DE handling",
+            "bom_standard": "INCOSE",
+            "parent_name": "Beer Filtration"
+          },
+          {
+            "name": "Inline Carbonation Stone",
+            "level": "L4",
+            "description": "Sintered stainless stone or membrane diffuser in beer line",
+            "bom_standard": "INCOSE",
+            "parent_name": "Carbonation System"
+          },
+          {
+            "name": "CO2 Flow Controller",
+            "level": "L4",
+            "description": "Mass flow controller dosing CO2 proportional to beer flow rate",
+            "bom_standard": "INCOSE",
+            "parent_name": "Carbonation System"
+          },
+          {
+            "name": "Dissolved CO2 Sensor",
+            "level": "L4",
+            "description": "Inline optical or thermal sensor measuring carbonation level",
+            "bom_standard": "INCOSE",
+            "parent_name": "Carbonation System"
+          },
+          {
+            "name": "BBT Pressure-Rated Tank",
+            "level": "L4",
+            "description": "304/316L stainless; rated to 2 bar; 10-500 hL",
+            "bom_standard": "INCOSE",
+            "parent_name": "Bright Beer Tank"
+          },
+          {
+            "name": "BBT Pressure & Level Sensors",
+            "level": "L4",
+            "description": "Pressure transducer + capacitive or hydrostatic level sensor",
+            "bom_standard": "INCOSE",
+            "parent_name": "Bright Beer Tank"
+          },
+          {
+            "name": "BBT CIP Spray Ball",
+            "level": "L4",
+            "description": "360-degree coverage spray ball for automated cleaning",
+            "bom_standard": "INCOSE",
+            "parent_name": "Bright Beer Tank"
+          },
+          {
+            "name": "Bottle Rinser / Washer",
+            "level": "L4",
+            "description": "Water or air rinser removing dust and debris before filling",
+            "bom_standard": "INCOSE",
+            "parent_name": "Bottle Filling Line"
+          },
+          {
+            "name": "Counter-Pressure Filler & Crowner",
+            "level": "L4",
+            "description": "Isobaric filler minimizing CO2 loss; integrated crown applicator",
+            "bom_standard": "INCOSE",
+            "parent_name": "Bottle Filling Line"
+          },
+          {
+            "name": "Labeler & Date Coder",
+            "level": "L4",
+            "description": "Pressure-sensitive or shrink-sleeve labeler; inkjet date coder",
+            "bom_standard": "INCOSE",
+            "parent_name": "Bottle Filling Line"
+          },
+          {
+            "name": "Can Purger & Rinser",
+            "level": "L4",
+            "description": "CO2 purge and water rinse reducing dissolved oxygen pickup",
+            "bom_standard": "INCOSE",
+            "parent_name": "Can Filling Line"
+          },
+          {
+            "name": "Can Filler",
+            "level": "L4",
+            "description": "Gravity or counter-pressure filler; 4-80 fill heads",
+            "bom_standard": "INCOSE",
+            "parent_name": "Can Filling Line"
+          },
+          {
+            "name": "Can Seamer",
+            "level": "L4",
+            "description": "Double-seam closure head applying lid to filled can",
+            "bom_standard": "INCOSE",
+            "parent_name": "Can Filling Line"
+          },
+          {
+            "name": "Keg Washer & Sanitizer",
+            "level": "L4",
+            "description": "Multi-station automated washer: caustic, acid, rinse, CO2 purge",
+            "bom_standard": "INCOSE",
+            "parent_name": "Keg Filling Line"
+          },
+          {
+            "name": "Keg Filler",
+            "level": "L4",
+            "description": "Counter-pressure filler maintaining carbonation",
+            "bom_standard": "INCOSE",
+            "parent_name": "Keg Filling Line"
+          },
+          {
+            "name": "Keg Capper & Spear Valve",
+            "level": "L4",
+            "description": "Applies cap and checks spear valve integrity",
+            "bom_standard": "INCOSE",
+            "parent_name": "Keg Filling Line"
+          },
+          {
+            "name": "Tunnel / Flash Pasteurizer",
+            "level": "L4",
+            "description": "Tunnel: water spray zones; Flash: plate HX before filler",
+            "bom_standard": "INCOSE",
+            "parent_name": "Pasteurizer"
+          },
+          {
+            "name": "Pasteurizer Temperature Controller",
+            "level": "L4",
+            "description": "PID controller maintaining pasteurization temperature setpoint",
+            "bom_standard": "INCOSE",
+            "parent_name": "Pasteurizer"
+          },
+          {
+            "name": "PU Monitor",
+            "level": "L4",
+            "description": "Calculates cumulative pasteurization units for compliance",
+            "bom_standard": "INCOSE",
+            "parent_name": "Pasteurizer"
+          },
+          {
+            "name": "Refrigeration Compressor",
+            "level": "L4",
+            "description": "Scroll, screw, or reciprocating; R-410A or R-449A refrigerant",
+            "bom_standard": "INCOSE",
+            "parent_name": "Glycol Chiller Unit"
+          },
+          {
+            "name": "Condenser",
+            "level": "L4",
+            "description": "Air-cooled or water-cooled condenser rejecting heat to ambient",
+            "bom_standard": "INCOSE",
+            "parent_name": "Glycol Chiller Unit"
+          },
+          {
+            "name": "Evaporator / Plate Heat Exchanger",
+            "level": "L4",
+            "description": "Brazed plate or shell-and-tube transferring cold to glycol loop",
+            "bom_standard": "INCOSE",
+            "parent_name": "Glycol Chiller Unit"
+          },
+          {
+            "name": "Glycol Circulation Pump",
+            "level": "L4",
+            "description": "Centrifugal pump; variable-speed for energy savings",
+            "bom_standard": "INCOSE",
+            "parent_name": "Glycol Distribution"
+          },
+          {
+            "name": "Distribution Manifold & Zone Valves",
+            "level": "L4",
+            "description": "Header with solenoid or motorized valves per cooling zone",
+            "bom_standard": "INCOSE",
+            "parent_name": "Glycol Distribution"
+          },
+          {
+            "name": "Glycol Piping & Insulation",
+            "level": "L4",
+            "description": "Stainless or copper pipe with closed-cell foam insulation",
+            "bom_standard": "INCOSE",
+            "parent_name": "Glycol Distribution"
+          },
+          {
+            "name": "Ultrasonic Flow Sensor",
+            "level": "L4",
+            "description": "Transit-time ultrasonic measurement of glycol/water flow; no moving parts, zero pressure drop, glycol-tolerant. MARQUARDT PRIMARY POSITION.",
+            "bom_standard": "INCOSE",
+            "parent_name": "Glycol Sensing & Control"
+          },
+          {
+            "name": "Paddle-Wheel / Turbine Flow Sensor",
+            "level": "L4",
+            "description": "Mechanical flow sensor; incumbent in craft breweries; wears in glycol",
+            "bom_standard": "INCOSE",
+            "parent_name": "Glycol Sensing & Control"
+          },
+          {
+            "name": "Glycol Temperature Probe",
+            "level": "L4",
+            "description": "Pt100 or NTC measuring glycol supply and return temperature per zone",
+            "bom_standard": "INCOSE",
+            "parent_name": "Glycol Sensing & Control"
+          },
+          {
+            "name": "Glycol Pressure Transducer",
+            "level": "L4",
+            "description": "Monitors loop pressure for pump performance and leak detection",
+            "bom_standard": "INCOSE",
+            "parent_name": "Glycol Sensing & Control"
+          },
+          {
+            "name": "Glycol Reservoir Tank",
+            "level": "L4",
+            "description": "Insulated stainless or polyethylene tank; 200-5,000 L",
+            "bom_standard": "INCOSE",
+            "parent_name": "Glycol Reservoir"
+          },
+          {
+            "name": "Glycol Level Sensor & Makeup Dosing",
+            "level": "L4",
+            "description": "Float or ultrasonic level sensor; glycol dosing to maintain concentration",
+            "bom_standard": "INCOSE",
+            "parent_name": "Glycol Reservoir"
+          },
+          {
+            "name": "Glycol Concentration Monitor",
+            "level": "L4",
+            "description": "Refractometer or density meter verifying glycol % for freeze protection",
+            "bom_standard": "INCOSE",
+            "parent_name": "Glycol Reservoir"
+          },
+          {
+            "name": "Caustic Tank & Heater",
+            "level": "L4",
+            "description": "Insulated stainless tank (500-5,000 L) with electric or steam heating",
+            "bom_standard": "INCOSE",
+            "parent_name": "CIP Station"
+          },
+          {
+            "name": "Acid Tank",
+            "level": "L4",
+            "description": "Stainless tank for phosphoric or peracetic acid solution",
+            "bom_standard": "INCOSE",
+            "parent_name": "CIP Station"
+          },
+          {
+            "name": "CIP Supply Pump",
+            "level": "L4",
+            "description": "Sanitary centrifugal pump; 2-4 bar, 50-200 L/min per circuit",
+            "bom_standard": "INCOSE",
+            "parent_name": "CIP Station"
+          },
+          {
+            "name": "CIP Routing Valves",
+            "level": "L4",
+            "description": "Pneumatic butterfly or mix-proof valves automating circuit selection",
+            "bom_standard": "INCOSE",
+            "parent_name": "CIP Distribution & Spray Devices"
+          },
+          {
+            "name": "CIP Return Pump",
+            "level": "L4",
+            "description": "Returns spent solution to CIP station for reuse or drain",
+            "bom_standard": "INCOSE",
+            "parent_name": "CIP Distribution & Spray Devices"
+          },
+          {
+            "name": "Spray Balls & Rotary Jets",
+            "level": "L4",
+            "description": "Static spray balls in tanks; rotary jet heads for large vessels (>50 hL)",
+            "bom_standard": "INCOSE",
+            "parent_name": "CIP Distribution & Spray Devices"
+          },
+          {
+            "name": "CIP Flow Sensor",
+            "level": "L4",
+            "description": "Verifies cleaning solution flow rate per circuit. Ultrasonic or electromagnetic. MARQUARDT SECONDARY POSITION.",
+            "bom_standard": "INCOSE",
+            "parent_name": "CIP Sensing & Control"
+          },
+          {
+            "name": "CIP Temperature Sensor",
+            "level": "L4",
+            "description": "Pt100 monitoring CIP solution temperature at supply and return",
+            "bom_standard": "INCOSE",
+            "parent_name": "CIP Sensing & Control"
+          },
+          {
+            "name": "Conductivity Sensor",
+            "level": "L4",
+            "description": "Measures chemical concentration for CIP step transitions",
+            "bom_standard": "INCOSE",
+            "parent_name": "CIP Sensing & Control"
+          },
+          {
+            "name": "CIP Controller / PLC",
+            "level": "L4",
+            "description": "Automates sequence timing, valve actuation, and alarm generation",
+            "bom_standard": "INCOSE",
+            "parent_name": "CIP Sensing & Control"
+          },
+          {
+            "name": "Carbon Filter",
+            "level": "L4",
+            "description": "Activated carbon removing chlorine and chloramine from municipal water",
+            "bom_standard": "INCOSE",
+            "parent_name": "Water Treatment System"
+          },
+          {
+            "name": "Reverse Osmosis Membrane",
+            "level": "L4",
+            "description": "RO system stripping >95% of dissolved minerals",
+            "bom_standard": "INCOSE",
+            "parent_name": "Water Treatment System"
+          },
+          {
+            "name": "Mineral Dosing & pH Adjustment",
+            "level": "L4",
+            "description": "Chemical feed pumps adding CaCl2, gypsum, lactic acid to target ion profile",
+            "bom_standard": "INCOSE",
+            "parent_name": "Water Treatment System"
+          },
+          {
+            "name": "HLT Insulated Vessel",
+            "level": "L4",
+            "description": "Stainless vessel; 1-3x batch size; standing loss <2C/hr",
+            "bom_standard": "INCOSE",
+            "parent_name": "Hot Liquor Tank"
+          },
+          {
+            "name": "HLT Heating Element / Steam Coil",
+            "level": "L4",
+            "description": "Electric immersion heater (small) or steam coil (large)",
+            "bom_standard": "INCOSE",
+            "parent_name": "Hot Liquor Tank"
+          },
+          {
+            "name": "HLT Temperature Controller",
+            "level": "L4",
+            "description": "PID controller with Pt100 maintaining setpoint +/-1C",
+            "bom_standard": "INCOSE",
+            "parent_name": "Hot Liquor Tank"
+          },
+          {
+            "name": "CLT Insulated Vessel",
+            "level": "L4",
+            "description": "Stainless or polyethylene vessel with closed-cell insulation",
+            "bom_standard": "INCOSE",
+            "parent_name": "Cold Liquor Tank"
+          },
+          {
+            "name": "CLT Cooling Coil / Glycol Jacket",
+            "level": "L4",
+            "description": "Glycol-fed jacket or immersed coil maintaining 1-4C",
+            "bom_standard": "INCOSE",
+            "parent_name": "Cold Liquor Tank"
+          },
+          {
+            "name": "CLT Temperature Controller",
+            "level": "L4",
+            "description": "PID controller ensuring cold liquor at target before brew day",
+            "bom_standard": "INCOSE",
+            "parent_name": "Cold Liquor Tank"
+          },
+          {
+            "name": "Water Ultrasonic Flow Sensor",
+            "level": "L4",
+            "description": "Transit-time measurement on water intake and distribution lines. MARQUARDT TERTIARY POSITION.",
+            "bom_standard": "INCOSE",
+            "parent_name": "Water Flow Metering"
+          },
+          {
+            "name": "Water Electromagnetic Flow Meter",
+            "level": "L4",
+            "description": "Mag-meter alternative; higher cost but handles conductivity variations",
+            "bom_standard": "INCOSE",
+            "parent_name": "Water Flow Metering"
+          },
+          {
+            "name": "Water Turbine Flow Meter",
+            "level": "L4",
+            "description": "Mechanical incumbent; lower cost but moving parts wear in continuous service",
+            "bom_standard": "INCOSE",
+            "parent_name": "Water Flow Metering"
+          },
+          {
+            "name": "Steam Boiler",
+            "level": "L4",
+            "description": "Fire-tube or water-tube boiler; 100-2,000 kW",
+            "bom_standard": "INCOSE",
+            "parent_name": "Steam / Hot Water Generation"
+          },
+          {
+            "name": "Condensate Return System",
+            "level": "L4",
+            "description": "Recovers condensate for boiler feedwater",
+            "bom_standard": "INCOSE",
+            "parent_name": "Steam / Hot Water Generation"
+          },
+          {
+            "name": "Steam Trap & Pressure Reducer",
+            "level": "L4",
+            "description": "Maintains steam pressure at point of use",
+            "bom_standard": "INCOSE",
+            "parent_name": "Steam / Hot Water Generation"
+          },
+          {
+            "name": "Air Compressor",
+            "level": "L4",
+            "description": "Oil-free rotary screw or scroll; food-grade air required",
+            "bom_standard": "INCOSE",
+            "parent_name": "Compressed Air System"
+          },
+          {
+            "name": "Air Dryer & Sterile Filter",
+            "level": "L4",
+            "description": "Refrigerated dryer + 0.01 um sterile filter for process air",
+            "bom_standard": "INCOSE",
+            "parent_name": "Compressed Air System"
+          },
+          {
+            "name": "Air Distribution Manifold",
+            "level": "L4",
+            "description": "Header with regulators per consumer zone",
+            "bom_standard": "INCOSE",
+            "parent_name": "Compressed Air System"
+          },
+          {
+            "name": "CO2 Scrubber & Purifier",
+            "level": "L4",
+            "description": "Water scrubber + activated carbon; food-grade CO2 output",
+            "bom_standard": "INCOSE",
+            "parent_name": "CO2 Recovery & Distribution"
+          },
+          {
+            "name": "CO2 Compressor & Liquefier",
+            "level": "L4",
+            "description": "Two-stage compressor + condenser liquefying CO2 at -20C, 20 bar",
+            "bom_standard": "INCOSE",
+            "parent_name": "CO2 Recovery & Distribution"
+          },
+          {
+            "name": "CO2 Storage Tank",
+            "level": "L4",
+            "description": "Insulated pressure vessel (1-50 t) with level gauge and safety relief",
+            "bom_standard": "INCOSE",
+            "parent_name": "CO2 Recovery & Distribution"
+          },
+          {
+            "name": "Density / Alcohol Analyzer",
+            "level": "L4",
+            "description": "Digital density meter or distillation unit for ABV measurement",
+            "bom_standard": "INCOSE",
+            "parent_name": "Quality Assurance Laboratory"
+          },
+          {
+            "name": "pH & Dissolved Oxygen Meter",
+            "level": "L4",
+            "description": "Benchtop or inline sensors for critical quality parameters",
+            "bom_standard": "INCOSE",
+            "parent_name": "Quality Assurance Laboratory"
+          },
+          {
+            "name": "Microbiological Testing Kit",
+            "level": "L4",
+            "description": "Membrane filtration + incubator for spoilage organism detection",
+            "bom_standard": "INCOSE",
+            "parent_name": "Quality Assurance Laboratory"
+          },
+          {
+            "name": "pH Adjustment & Equalization Tank",
+            "level": "L4",
+            "description": "Neutralizes acidic/caustic effluent to pH 6.5-8.5",
+            "bom_standard": "INCOSE",
+            "parent_name": "Wastewater Treatment"
+          },
+          {
+            "name": "Aerobic / Anaerobic Digester",
+            "level": "L4",
+            "description": "Reduces BOD/COD by 80-95%; anaerobic produces biogas",
+            "bom_standard": "INCOSE",
+            "parent_name": "Wastewater Treatment"
+          },
+          {
+            "name": "Solids Separator",
+            "level": "L4",
+            "description": "Dissolved air flotation or settling tank removing suspended solids",
+            "bom_standard": "INCOSE",
+            "parent_name": "Wastewater Treatment"
+          }
+        ]
+      },
+      "marquardt_position": {
+        "l_path": "L7 > L6.6 Glycol Cooling & Refrigeration > L5.6.3 Glycol Sensing & Control > L4.6.3.1 Ultrasonic Flow Sensor",
+        "l7": "Beer Manufacturing Ecosystem",
+        "l6": "Glycol Cooling & Refrigeration",
+        "l5": "Glycol Sensing & Control",
+        "l4": "Ultrasonic Flow Sensor",
+        "secondary_positions": [
+          {
+            "l6": "Clean-In-Place & Sanitation",
+            "l5": "CIP Sensing & Control",
+            "l4": "CIP Flow Sensor"
+          },
+          {
+            "l6": "Water Treatment & Liquor Supply",
+            "l5": "Water Flow Metering",
+            "l4": "Water Ultrasonic Flow Sensor"
+          }
+        ],
+        "alternatives_at_l4": [
+          {
+            "name": "Paddle-Wheel / Turbine Flow Sensor",
+            "status": "incumbent, declining",
+            "share_estimate": "50-60%",
+            "confidence": "MEDIUM"
+          },
+          {
+            "name": "Ultrasonic Flow Sensor",
+            "status": "growing",
+            "share_estimate": "15-25%",
+            "confidence": "LOW"
+          },
+          {
+            "name": "Electromagnetic Flow Meter",
+            "status": "established (large breweries)",
+            "share_estimate": "15-25%",
+            "confidence": "MEDIUM"
+          },
+          {
+            "name": "Rotameter / Visual Indicator",
+            "status": "legacy, craft",
+            "share_estimate": "5-10%",
+            "confidence": "LOW"
+          }
+        ]
+      },
+      "entities_produced": {
+        "nodes": [
+          {
+            "label": "ValueNetwork",
+            "key": {
+              "naics_code": "312120",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "naics_title": "Breweries",
+              "cfj_statement": "Transform water, malt, hops, and yeast into packaged beer through controlled biochemical and physical processes",
+              "l7_solution": "Beer Manufacturing Ecosystem",
+              "top_level": "L7",
+              "unit_count": 146,
+              "enriched": true
+            }
+          },
+          {
+            "label": "ValueNetworkUnit",
+            "key": {
+              "name": "<per unit>",
+              "naics_code": "312120",
+              "level": "<per unit>",
+              "run_id": "TBD"
+            },
+            "count": 146
+          }
+        ],
+        "relationships": [
+          {
+            "type": "has_value_network",
+            "source": "Market:312120",
+            "target": "ValueNetwork:312120"
+          },
+          {
+            "type": "contains_unit",
+            "source": "ValueNetwork:312120",
+            "target": "ValueNetworkUnit:<each>",
+            "count": 146
+          },
+          {
+            "type": "has_child",
+            "source": "ValueNetworkUnit:<parent>",
+            "target": "ValueNetworkUnit:<child>",
+            "count": 145
+          }
+        ]
+      },
+      "qa_checklist": {
+        "Q1_cfj_industry_level": {
+          "pass": true,
+          "note": "CFJ describes entire industry purpose — no reference to specific technology or product"
+        },
+        "Q2_no_orphan_nodes": {
+          "pass": true,
+          "note": "Every unit except L7 has valid parent_name"
+        },
+        "Q3_valid_level_transitions": {
+          "pass": true,
+          "note": "L7>L6>L5>L4 strictly followed, no skipping"
+        },
+        "Q4_l4_children_per_l5": {
+          "pass": true,
+          "note": "All L5 nodes have 3-4 L4 children"
+        },
+        "Q5_no_solution_specific_l7_l6": {
+          "pass": true,
+          "note": "L7 and L6 names are industry-generic"
+        },
+        "Q6_naming_test": {
+          "pass": true,
+          "note": "Spot-checked: Mash Tun, Lauter Tun, Conical Fermenter, Glycol Chiller Unit, Brew Kettle — all industry-standard"
+        },
+        "Q7_unit_count_in_range": {
+          "pass": true,
+          "note": "146 units total (within extended range for manufacturing NAICS)"
+        }
+      }
+    }
+  ],
+  "has_bom": true,
+  "naics_sector_type": "manufacturing"
+}

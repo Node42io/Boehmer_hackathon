@@ -1,0 +1,2702 @@
+{
+  "id": "JTBD_other_commercial_and_service_industry_ma",
+  "title": "JTBD Analysis — Other Commercial and Service Industry Machinery Manufacturing (NAICS 333318)",
+  "type": "jtbd_analysis",
+  "market_slug": "other_commercial_and_service_industry_ma",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Phase 1 — Industry Landscape",
+      "content": "### 1.1 CFJ, Output Types, Offering Level\n\n| Field | Value |\n|---|---|\n| **NAICS** | 333318 |\n| **CFJ** | Manufacture and deploy water-using commercial machinery that cleans, treats, purifies, or dispenses aqueous fluids for commercial and institutional operations [SRC: VN_other_commercial_and_service_industry_ma] |\n| **Offering Level** | L5 (Product) — standalone commercial equipment |\n\n| Output Type | VN Level |\n|---|---|\n| Commercial washer-extractor | L5 |\n| Continuous tunnel washer | L5 |\n| Commercial dryer / ironer | L5 (dry process — no flow sensing) |\n| Tunnel car wash system | L5 |\n| In-bay automatic car wash | L5 |\n| Self-service car wash bay | L5 |\n| Commercial water purification system (RO/UV) | L5 |\n| Commercial water softener | L5 (pre-treatment only) |\n| Commercial ice machine | L5 |\n| Beverage vending / dispensing machine | L5 |\n\n### 1.2 Segments (by circumstance)\n\n| # | Segment | Circumstance | Alternatives Differ? |\n|---|---|---|---|\n| 1 | **High-volume vended laundry** | Self-service laundromat; 10+ machines running 8–14 cycles/day; pay-per-use billing requires per-cycle water metering; harshest consumer abuse; highest downtime cost | Yes — pay-per-use billing demands metered consumption; no operator present to detect faults |\n| 2 | **On-premises institutional laundry** | Hotel, hospital, prison, nursing home; captive use; regulatory hygiene standards (HLAC, TRSA); water audit and sustainability reporting required; dedicated operator on shift | Yes — compliance documentation and water-use benchmarking (10–15 L/kg target) drive sensor accuracy requirements [SRC: web_search — Girbau, Ecolab] |\n| 3 | **Express tunnel car wash** | 100–400 vehicles/day; water recycling mandatory in many jurisdictions; speed critical (3–5 min/vehicle); continuous high-volume operation; 50–80% water reclaim typical [SRC: web_search — NCS, EPA WaterSense] | Yes — recycled water quality variability (TDS, turbidity) stresses sensor robustness |\n| 4 | **In-bay / self-service car wash** | Customer-operated or automatic single-bay; moderate volume; payment-metered; often unmanned; lower water volume per wash (15–19 gal with reclaim) [SRC: web_search — EPA] | Yes — unmanned operation demands autonomous fault detection |\n| 5 | **Commercial water purification** | Restaurant, office, healthcare; food safety compliance (NSF 61); potable water quality; lower flow rates (1–10 l/min); filter saturation and membrane fouling detection critical | Yes — purity requirements and NSF/FDA compliance change alternative selection |\n| 6 | **Commercial ice & beverage dispensing** | Food service; hygiene-critical; water consumption tracking for cost control; seasonal demand variation; small pipe diameters (DN12–DN15) | Yes — small bore and intermittent flow challenge sensor low-end range |\n\n### 1.3 Process Value Network\n\nEight L6 domains (from VN file):\n\n| L6 | Domain | Type | Marquardt Relevance |\n|---|---|---|---|\n| L6.1 | Water Supply & Pre-Treatment | Core | Indirect — flow data verifies inlet supply adequacy |\n| **L6.2** | **Fluid Circuit & Distribution** | **Core** | **Direct — sensor sits here at L4.2.4.1** |\n| L6.3 | Thermal Management | Core | Indirect — flow × ΔT = thermal energy transfer |\n| L6.4 | Chemical Dosing & Application | Core | Adjacent — dosing accuracy depends on known flow rate |\n| L6.5 | Core Process Execution | Core | Indirect — wash/spray quality depends on flow delivery |\n| L6.6 | Drainage, Recovery & Recycling | Core | Adjacent — reclaim flow measurement for water balance |\n| L6.7 | Control, Automation & Payment | Core | Direct — sensor feeds controller and IoT data |\n| L6.8 | Safety, Compliance & Service | Horizontal | Direct — water efficiency certification requires measured data |\n\n### 1.4–1.5 Product BOM and Edges\n\nFull BOM hierarchy documented in VN file (119 units across L7→L4). Key edges relevant to flow sensing:\n\n| BOM Position | Process Step | Edge Type | Rationale |\n|---|---|---|---|\n| Circulation Pump (L5.2.1) | L6.2 Fluid Circuit & Distribution | **HARD** | Pump capacity sets flow range; sensor must match |\n| Solenoid Valve Array (L4.2.3.1) | L6.2 Fluid Circuit & Distribution | **SOFT** | Valve sequencing affects flow profiles but not sensor category |\n| High-Pressure Pump (L5.2.2) | L6.2 Fluid Circuit & Distribution | **HARD** | Car wash high-pressure circuits (50–150 bar) exceed sensor rating — different measurement point required |\n| Machine Controller / PLC (L5.7.1) | L6.7 Control & Payment | **HARD** | Controller protocol (UART/LIN/frequency) determines sensor interface requirement |\n| Water Recycling System (L5.6.2) | L6.6 Drainage & Recycling | **SOFT** | Reclaim water quality affects measurement accuracy but not sensor category |\n\n---"
+    },
+    {
+      "title": "Phase 2 — Company Enters",
+      "content": "### 2.1 VN Anchor\n\n| Field | Value |\n|---|---|\n| **Route** | PROCESS_VN — sensor is equipment used to MAKE the customer's output (commercial machinery); it does not end up in the end-customer's hands |\n| **Anchor Unit** | Ultrasonic Flow Sensor (L4.2.4.1) |\n| **Anchor Level** | L4 (component/subsystem) |\n| **Parent VN Unit** | Flow Sensing & Measurement (L5.2.4) |\n| **Parent Level** | L5 |\n| **Grandparent** | Fluid Circuit & Distribution (L6.2) |\n| **L-Path** | L7 Commercial Water-Using Machinery Ecosystem > L6.2 Fluid Circuit & Distribution > L5.2.4 Flow Sensing & Measurement > L4.2.4.1 Ultrasonic Flow Sensor |\n\n### 2.2 Lens Formation\n\n| Field | Value |\n|---|---|\n| **Route** | Maker — PRODUCT_BOM (sensor becomes part of the commercial machine, which IS the OEM's product) |\n| **Function Verb** | Measure (from BOM position function: what the component DOES within the parent system) |\n| **Lens** | \"What [measurement] does this [fluid circuit & distribution system] need to perform its job?\" |\n\n**Segment filtering:**\n\n| Segment | Level A (VN serves?) | Level B (Product modality?) | Result |\n|---|---|---|---|\n| High-volume vended laundry | Yes | Yes — DN14/DN20, water + detergent, 5–85 °C | **Active** |\n| On-premises institutional laundry | Yes | Yes — same specs, higher duty cycle | **Active** |\n| Express tunnel car wash | Yes | Partial — low-pressure circuits only (DN20/DN25); high-pressure spray >10 bar excluded | **Active (with caveat)** |\n| In-bay / self-service car wash | Yes | Yes — low-pressure rinse/reclaim circuits within spec | **Active** |\n| Commercial water purification | Yes | Yes — clean water, DN12–DN20, low pressure | **Active** |\n| Commercial ice & beverage | Yes | Partial — DN12 in development; very low flow rates near minimum detection | **Active (with caveat)** |\n\n### 2.3 Product Job Statement\n\n> **\"Help Flow Sensing & Measurement to measure volumetric flow rate in commercial water-using machinery fluid circuits without obstructing flow or introducing maintenance-prone moving parts\"**\n\nTest: 3+ alternatives from different categories? Ultrasonic (acoustic), Turbine/paddle-wheel (mechanical), Electromagnetic (inductive), Solenoid-valve dosing (inferred), Do nothing — **PASS**.\n\n### 2.4 Alternatives (5)\n\n| # | Alternative | UNSPSC | Inherent Trade-Offs |\n|---|---|---|---|\n| 1 | **Turbine / Paddle-Wheel Flow Sensor** (incumbent) | 41112501 | Moving rotor clogs from lint, detergent residue, and mineral scale in commercial wash water; bearing wear causes calibration drift ±5%/year; requires periodic manual cleaning; $5–15 unit cost but 1–3 year effective life in harsh media [SRC: web_search — KEYENCE, ICON Process Controls] |\n| 2 | **Ultrasonic Flow Sensor** (transit-time) | 41112501 | Accuracy degrades with >2% air entrainment by volume (detergent foam, recycled water aeration); requires pipe-full condition; higher unit cost vs turbine (3–5x at OEM volume); requires fluid-type configuration at commissioning [SRC: 01_product_decomposition] |\n| 3 | **Electromagnetic Flowmeter** | 41112501 | Highest accuracy (±0.5%) but 5–10x cost vs turbine; requires power supply (no battery mode); larger installation footprint; conductive fluid required (water qualifies); over-specified for most commercial equipment applications [SRC: web_search — Lanry Instruments] |\n| 4 | **Solenoid-Valve Volumetric Dosing** (timed fill) | — | Zero sensor hardware cost; accuracy only ±10–20%; degrades with supply pressure variation; cannot detect leaks, blockages, or anomalies; no consumption data for billing or reporting; budget fallback in price-sensitive equipment [SRC: VN_other_commercial_and_service_industry_ma] |\n| 5 | **Do nothing / no measurement** [Status Quo] | — | Zero cost, zero P1 lifecycle burden; water consumption unknown; cannot support pay-per-use billing; cannot meet WaterSense/Energy Star water efficiency reporting; faults and leaks undetectable; water waste invisible |\n\n**Merge test:** Each alternative creates distinct P1 lifecycle burdens — turbine has cleaning/replacement cycles, ultrasonic has configuration/acoustic concerns, electromagnetic has cost/power concerns, solenoid dosing and do-nothing have zero measurement burden but zero detection capability. No merge needed.\n\n### 2.5 Scenarios and Output Type Activation\n\n| Scenario | Activated Output Types | BOM Positions in Play |\n|---|---|---|\n| **S1: Vended laundry per-cycle billing** | Commercial washer-extractor | Circulation Pump, Solenoid Valve Array, Flow Sensor, Payment System |\n| **S2: Tunnel car wash water reclaim monitoring** | Tunnel car wash system | Circulation Pump, Water Recycling System, Flow Sensor, Effluent Flow Meter |\n| **S3: Institutional laundry water audit** | Continuous tunnel washer | Circulation Pump, Flow Sensor, IoT & Connectivity, Chemical Dispensing |\n| **S4: Water purification filter monitoring** | Commercial water purification (RO/UV) | Pre-Filtration, RO Membrane, Flow Sensor, Controller |\n| **S5: Ice machine consumption tracking** | Commercial ice machine | Water Inlet Assembly, Flow Sensor, Controller |\n| **S6: In-bay car wash leak detection** | In-bay automatic car wash | High-Pressure Pump, Flow Sensor, Leak Detection, Controller |\n\nSparsity check: S4 and S5 activate different output types; S2 uniquely activates recycling-related BOM. **PASS** — not every scenario activates every type.\n\n---"
+    },
+    {
+      "title": "Phase 3 — Needs Derivation",
+      "content": "### 3.0 Stakeholder Roles for This Market\n\n| Role | Who (in NAICS 333318 context) |\n|---|---|\n| **Job Executor** | OEM assembly technician / field service installer — integrates and installs the sensor in the machine |\n| **Job Overseer** | OEM product engineering manager — accountable for machine performance, water efficiency, and certification |\n| **Job Beneficiary** | Laundromat owner, hotel facility manager, car wash operator — receives water-use data and operational reliability |\n| **Product Lifecycle Support** | Specifier (OEM design engineer), assembler, commissioning tech, field service technician, disposer |\n| **Purchase Executor** | OEM procurement manager — selects and sources sensor components for production |\n| **Purchase Influencer** | Water utility auditor, EPA/WaterSense certifier, franchise compliance officer |\n\n### 3.1 Job Map (8 Universal Steps — Ulwick 2005)\n\n| # | Step | Statement | Relevant to Product? | Relevance Rationale |\n|---|---|---|---|---|\n| 1 | **DEFINE** | Define the required flow rate range, pipe diameter, media compatibility (water + detergent + recycled water), temperature envelope, and communication protocol for the machine's fluid circuit | **Yes** | Sensor specifications must match the machine's diverse operating conditions across output types |\n| 2 | **LOCATE** | Locate the optimal insertion point in the machine's internal piping where flow profile is developed and space constraints of the machine enclosure are met | **Yes** | Commercial machines have compact enclosures; sensor body size and straight-pipe requirements directly affect packaging feasibility |\n| 3 | **PREPARE** | Prepare the pipe section, electrical connections (UART/LIN/frequency), and controller interface for sensor integration on the OEM assembly line | **Yes** | Mechanical and electrical integration into high-volume OEM production is core to product adoption |\n| 4 | **CONFIRM** | Confirm sensor readiness at end-of-line: verify pipe-full condition, absence of air pockets, correct wiring, and communication handshake with machine controller | **Yes** | Pre-shipment quality validation is critical — field failures in vended/unmanned equipment are costly |\n| 5 | **EXECUTE** | Execute continuous flow measurement, providing real-time volumetric flow rate, consumption totals, temperature, and diagnostic flags to the machine controller | **Yes** | This IS the core value-creating action of the product |\n| 6 | **MONITOR** | Monitor measurement quality indicators: signal strength, air bubble events, empty-pipe alarms, flow anomalies indicating leaks or blockages | **Yes** | Ongoing measurement integrity enables IoT water monitoring, predictive maintenance, and leak detection |\n| 7 | **MODIFY** | Adjust or recalibrate if measurement deviates — re-zero, update fluid properties, replace sensor | No | Ultrasonic sensors require minimal in-service adjustment; commercial equipment is rarely field-recalibrated |\n| 8 | **CONCLUDE** | Conclude service life: decommission sensor during machine disposal or recycling | No | Standard end-of-life; not a differentiating step for flow sensors in commercial equipment |\n\n**Relevant steps: 6 of 8** (Steps 1–6). Steps 7–8 not relevant to product differentiation.\n\n### 3.2 P1 + P2 Needs: Error Statements\n\n#### P2 — Core Job Needs (solution-independent)\n\n| ID | Job Step | Error Type | Statement | Importance | Satisfaction | Opp. Score | Impact | Confidence | product_related |\n|---|---|---|---|---|---|---|---|---|---|\n| N01 | EXECUTE | ACCURACY | Minimize the likelihood of volumetric flow reading deviating more than ±3% from true value when measuring detergent-laden or chemically treated water across the 0.5–50 l/min operating range | 9 | 4 | 14 | reliability | 0.8 | false |\n| N02 | EXECUTE | ROBUSTNESS | Minimize measurement degradation when water contains suspended detergent residues, lint particles, or chemical dosing additives at concentrations typical of commercial wash cycles | 8 | 3 | 13 | reliability | 0.8 | false |\n| N03 | EXECUTE | CONSISTENCY | Minimize variability of water consumption readings between identical wash/rinse cycles under the same programme settings (repeatability >±1%) | 8 | 5 | 11 | reliability | 0.7 | false |\n| N04 | MONITOR | DETECTION | Minimize time to detect a water supply failure or pipe-empty condition to less than 5 seconds to prevent dry-run damage to pumps and heating elements | 9 | 4 | 14 | safety | 0.8 | false |\n| N05 | EXECUTE | THROUGHPUT | Increase the ability to measure across the full machine flow range (trickle-fill 0.5 l/min to high-volume rinse 40 l/min) in a single sensor without changing hardware | 7 | 5 | 9 | reliability | 0.7 | false |\n| N06 | MONITOR | DETECTION | Minimize the number of undetected water leaks within the machine's internal fluid circuit that waste more than 50 litres per day | 8 | 3 | 13 | cost | 0.7 | false |\n| N07 | DEFINE | ACCURACY | Minimize the likelihood of specifying a sensor whose pressure rating or media compatibility is incompatible with the machine's operating conditions across its full output-type range | 7 | 5 | 9 | cost | 0.6 | false |\n| N08 | EXECUTE | ACCURACY | Increase the ability to measure water consumption per cycle with sufficient accuracy (±2%) to support pay-per-use billing models and per-machine water-use reporting | 8 | 3 | 13 | cost | 0.8 | false |\n| N09 | EXECUTE | ROBUSTNESS | Minimize measurement failure when water temperature ranges from 5 °C (cold fill) to 85 °C (hot wash cycle) within a single machine operating envelope | 7 | 5 | 9 | reliability | 0.7 | false |\n\n#### P1 — Product Jobs per Alternative (Lifecycle Stages)\n\n**Alternative 1: Turbine / Paddle-Wheel Flow Sensor (incumbent)**\n\n| ID | Lifecycle Stage | Error Type | Statement | Imp. | Sat. | Opp. | Impact | Conf. | product_related |\n|---|---|---|---|---|---|---|---|---|---|\n| N10 | Usage | ROBUSTNESS | Minimize the likelihood of flow sensor rotor clogging from lint, detergent residue, or mineral scale within 12 months of installation in commercial laundry or car wash equipment [SRC: web_search — KEYENCE, ICON Process Controls] | 8 | 2 | 14 | reliability | 0.9 | true |\n| N11 | Maintenance | EFFORT | Minimize the frequency of manual sensor disassembly and cleaning required to prevent accumulated debris from degrading flow measurement accuracy below ±5% | 7 | 3 | 11 | cost | 0.8 | true |\n| N12 | Usage | CONSISTENCY | Minimize calibration drift exceeding ±5% per year caused by mechanical wear of paddle-wheel bearings and blade erosion in detergent-laden water [SRC: web_search — KEYENCE] | 8 | 3 | 13 | reliability | 0.8 | true |\n| N12b | Usage | THROUGHPUT | Increase the ability to maintain accurate readings at low flow rates (<2 l/min) where turbine/paddle-wheel rotors stall due to insufficient fluid momentum to overcome mechanical inertia | 7 | 3 | 11 | reliability | 0.7 | true |\n\n**Alternative 2: Ultrasonic Flow Sensor (transit-time)**\n\n| ID | Lifecycle Stage | Error Type | Statement | Imp. | Sat. | Opp. | Impact | Conf. | product_related |\n|---|---|---|---|---|---|---|---|---|---|\n| N13 | Preparation | EFFORT | Minimize the OEM integration time required to configure fluid-type parameters and verify acoustic coupling for each machine variant during assembly-line commissioning | 6 | 5 | 7 | time | 0.7 | true |\n| N14 | Usage | ROBUSTNESS | Minimize the likelihood of signal loss when air bubbles from detergent agitation or water recycling aeration pass through the sensor during normal operation | 7 | 4 | 10 | reliability | 0.8 | true |\n| N14b | Acquisition | EFFORT | Minimize the OEM qualification cost for validating acoustic performance across multiple machine platforms with different pipe diameters (DN14–DN25) and media compositions | 6 | 4 | 8 | cost | 0.6 | true |\n| N14c | Usage | DETECTION | Increase the ability to distinguish genuine zero-flow conditions from ultrasonic signal loss caused by detergent foam or entrained air from recycled water systems | 8 | 3 | 13 | safety | 0.7 | true |\n\n**Alternative 4: Solenoid-Valve Volumetric Dosing (timed fill)**\n\n| ID | Lifecycle Stage | Error Type | Statement | Imp. | Sat. | Opp. | Impact | Conf. | product_related |\n|---|---|---|---|---|---|---|---|---|---|\n| N15 | Usage | ACCURACY | Minimize the likelihood of water fill volume deviating more than ±15% from target due to supply pressure variations that invalidate timed-fill calibration | 7 | 2 | 12 | reliability | 0.7 | true |\n| N15b | Usage | DETECTION | Minimize the number of undetected water circuit faults (partial blockage, stuck valve, internal leak) that timed-fill dosing cannot sense because it lacks direct flow measurement | 8 | 2 | 14 | safety | 0.7 | true |\n\n#### P2 — Additional Core Job Needs (Executor + Overseer)\n\n| ID | Job Step | Error Type | Statement | Imp. | Sat. | Opp. | Impact | Conf. | product_related |\n|---|---|---|---|---|---|---|---|---|---|\n| N16 | LOCATE | EFFORT | Minimize the required installation envelope (sensor body length and straight-pipe clearance) to fit within space-constrained commercial machine enclosures without requiring piping redesign | 7 | 5 | 9 | cost | 0.7 | false |\n| N16b | LOCATE | ACCURACY | Minimize the likelihood of mounting the sensor at a location where turbulence from upstream valves, elbows, or T-junctions causes more than 2% systematic reading bias | 7 | 4 | 10 | reliability | 0.7 | false |\n| N17 | PREPARE | EFFORT | Minimize the total OEM assembly-line integration time from unpacking to first valid reading, including mechanical fitting, electrical connection, and protocol handshake | 7 | 5 | 9 | time | 0.7 | false |\n| N18 | CONFIRM | DETECTION | Minimize the likelihood of a sensor passing end-of-line quality test while having an undetected installation defect (misalignment, air pocket, reversed orientation) that causes field failure | 7 | 5 | 9 | skill | 0.6 | false |\n| N18b | CONFIRM | ACCURACY | Minimize the likelihood of releasing a machine from end-of-line testing with a flow sensor calibration error exceeding ±3% that goes undetected during the automated test cycle | 8 | 5 | 11 | reliability | 0.7 | false |\n| N19 | EXECUTE | ACCURACY | Increase the ability to provide real-time per-cycle water consumption data to the machine controller for IoT dashboard reporting and water-efficiency compliance documentation [SRC: web_search — Speed Queen Insights, EPA WaterSense] | 8 | 3 | 13 | cost | 0.8 | false |\n| N20 | MONITOR | DETECTION | Increase the ability to detect abnormal water consumption patterns (e.g., >20% above baseline for the same cycle programme) indicating component degradation, valve failure, or internal leak | 7 | 3 | 11 | reliability | 0.6 | false |\n| N21 | DEFINE | EFFORT | Minimize the number of sensor variants an OEM must qualify and stock to cover its full product range of water-using equipment across DN12–DN25 pipe sizes | 6 | 4 | 8 | cost | 0.6 | false |\n| N22 | EXECUTE | ROBUSTNESS | Minimize the likelihood of flow measurement failure when water recycling systems introduce variable water quality (TDS 200–2,000 ppm, turbidity, temperature cycling) into the machine supply [SRC: web_search — NCS, Sensorex] | 8 | 3 | 13 | reliability | 0.8 | false |\n\n#### P2 — Overseer Needs (OEM Engineering Manager)\n\n| ID | Job Step | Error Type | Statement | Imp. | Sat. | Opp. | Impact | Conf. | product_related |\n|---|---|---|---|---|---|---|---|---|---|\n| N23 | EXECUTE | ROBUSTNESS | Minimize the field failure rate of the flow sensing subsystem to below 0.2% within the 10-year commercial machine design life | 9 | 5 | 13 | reliability | 0.8 | false |\n| N24 | DEFINE | ACCURACY | Increase the ability to document measured water consumption per cycle for EPA WaterSense, Energy Star, or EU Ecodesign water efficiency certification using onboard sensor data [SRC: web_search — EPA WaterSense] | 8 | 3 | 13 | cost | 0.7 | false |\n\n### 3.3 P3–P5 Needs: Bridge Questions\n\n#### P3 — Role Identity\n\n| Role | Retrieval | Bridge | Need |\n|---|---|---|---|\n| **OEM Engineer (Overseer)** | \"By getting water metering right, this person becomes the engineer whose equipment platform consistently earns WaterSense / Energy Star certification and wins sustainability-focused RFPs.\" | \"What must the product do so they CAN become that engineer?\" | — |\n\n| ID | Statement | Imp. | Sat. | Opp. | Impact | Conf. | product_related |\n|---|---|---|---|---|---|---|---|\n| N25 | Increase the ability to demonstrate measured water efficiency data that qualifies the equipment for WaterSense or equivalent eco-labels on the first certification submission | 7 | 3 | 11 | cost | 0.6 | false |\n\n#### P4 — Image Identity\n\n| Role | Retrieval | Bridge | Need |\n|---|---|---|---|\n| **OEM Brand (via Overseer)** | \"Franchise operators and facility managers are watching. They must see an equipment manufacturer that delivers transparent, verifiable water-use data — not one relying on timed-fill estimates.\" | \"What must the product do so franchise operators SEE that impression?\" | — |\n\n| ID | Statement | Imp. | Sat. | Opp. | Impact | Conf. | product_related |\n|---|---|---|---|---|---|---|---|\n| N26 | Increase the ability to provide per-cycle water usage data visible on the machine HMI or IoT dashboard that commercial customers (hotel chains, car wash franchises) can include in sustainability reporting | 7 | 3 | 11 | skill | 0.5 | false |\n\n#### P5 — Emotional [hypothesis]\n\n| Role | Retrieval | Bridge | Need |\n|---|---|---|---|\n| **Facility Manager (Beneficiary)** | \"Wants to feel confident that water costs are under control; wants to avoid the anxiety of unexpected water utility bills from undetected equipment waste.\" | \"What must the product do so the facility manager FEELS confident?\" | — |\n\n| ID | Statement | Imp. | Sat. | Opp. | Impact | Conf. | product_related |\n|---|---|---|---|---|---|---|---|\n| N27 | Minimize the likelihood of a facility operator receiving an unexpected water utility bill exceeding budget by more than 15% due to undetected equipment water waste that the sensor could have flagged [hypothesis] | 7 | 3 | 11 | cost | 0.5 | false |\n\n### 3.4 ODI Summary Table\n\n| ID | Statement (abbreviated) | Imp. | Sat. | Opp. | Impact | product_related | Pyramid |\n|---|---|---|---|---|---|---|---|\n| N01 | Flow reading deviation >±3% in detergent water | 9 | 4 | 14 | reliability | false | P2 |\n| N04 | Detect supply failure / empty pipe >5 s | 9 | 4 | 14 | safety | false | P2 |\n| N10 | Rotor clogging from lint/detergent <12 mo | 8 | 2 | 14 | reliability | true | P1 |\n| N15b | Undetected faults invisible to timed-fill dosing | 8 | 2 | 14 | safety | true | P1 |\n| N02 | Measurement degradation in detergent water | 8 | 3 | 13 | reliability | false | P2 |\n| N06 | Undetected water leaks >50 L/day | 8 | 3 | 13 | cost | false | P2 |\n| N08 | Per-cycle accuracy ±2% for pay-per-use billing | 8 | 3 | 13 | cost | false | P2 |\n| N12 | Calibration drift >±5%/yr from bearing wear | 8 | 3 | 13 | reliability | true | P1 |\n| N14c | Distinguish zero-flow from signal loss | 8 | 3 | 13 | safety | true | P1 |\n| N19 | Real-time per-cycle data for IoT/compliance | 8 | 3 | 13 | cost | false | P2 |\n| N22 | Measurement failure on recycled water quality | 8 | 3 | 13 | reliability | false | P2 |\n| N23 | Field failure rate >0.2% in 10-yr life | 9 | 5 | 13 | reliability | false | P2 |\n| N24 | Documented consumption for WaterSense/EnStar | 8 | 3 | 13 | cost | false | P2 |\n| N15 | Timed-fill deviation >±15% from pressure variation | 7 | 2 | 12 | reliability | true | P1 |\n| N03 | Repeatability >±1% across identical cycles | 8 | 5 | 11 | reliability | false | P2 |\n| N11 | Manual cleaning frequency for turbine sensor | 7 | 3 | 11 | cost | true | P1 |\n| N12b | Turbine low-flow dead band <2 l/min | 7 | 3 | 11 | reliability | true | P1 |\n| N18b | End-of-line calibration error >±3% undetected | 8 | 5 | 11 | reliability | false | P2 |\n| N20 | Detect abnormal consumption >20% above baseline | 7 | 3 | 11 | reliability | false | P2 |\n| N25 | Measured data for eco-label certification | 7 | 3 | 11 | cost | false | P3 |\n| N26 | Per-cycle data visible on HMI/IoT dashboard | 7 | 3 | 11 | skill | false | P4 |\n| N27 | Unexpected water bill >15% over budget | 7 | 3 | 11 | cost | false | P5 |\n| N14 | Signal loss from detergent foam/air bubbles | 7 | 4 | 10 | reliability | true | P1 |\n| N16b | Mounting turbulence >2% bias | 7 | 4 | 10 | reliability | false | P2 |\n| N05 | Turndown ratio 0.5–40 l/min in single sensor | 7 | 5 | 9 | reliability | false | P2 |\n| N07 | Sensor spec mismatch with machine conditions | 7 | 5 | 9 | cost | false | P2 |\n| N09 | Measurement failure at 5–85 °C range | 7 | 5 | 9 | reliability | false | P2 |\n| N16 | Installation envelope / straight-pipe space | 7 | 5 | 9 | cost | false | P2 |\n| N17 | Assembly-line integration time | 7 | 5 | 9 | time | false | P2 |\n| N18 | Undetected installation defect at end-of-line | 7 | 5 | 9 | skill | false | P2 |\n| N14b | OEM qualification cost across platforms | 6 | 4 | 8 | cost | true | P1 |\n| N21 | Sensor variant count to cover DN range | 6 | 4 | 8 | cost | false | P2 |\n| N13 | Commissioning config time (ultrasonic) | 6 | 5 | 7 | time | true | P1 |\n\n### 3.5 Underserved / Overserved Classification\n\n**Underserved (importance > 7 AND satisfaction < 5):**\n\n| ID | Statement (abbreviated) | Opp. |\n|---|---|---|\n| N01 | Flow reading deviation >±3% in detergent water | 14 |\n| N04 | Detect supply failure / empty pipe >5 s | 14 |\n| N10 | Rotor clogging from lint/detergent <12 mo | 14 |\n| N15b | Undetected faults invisible to timed-fill | 14 |\n| N02 | Measurement degradation in detergent water | 13 |\n| N06 | Undetected water leaks >50 L/day | 13 |\n| N08 | Per-cycle accuracy for billing | 13 |\n| N12 | Calibration drift from bearing wear | 13 |\n| N14c | Distinguish zero-flow from signal loss | 13 |\n| N19 | Real-time per-cycle IoT data | 13 |\n| N22 | Measurement failure on recycled water | 13 |\n| N24 | Documented consumption for WaterSense | 13 |\n| N15 | Timed-fill deviation from pressure variation | 12 |\n\n**Overserved:** None identified. No need has importance < 3 AND satisfaction > 7.\n\n---"
+    },
+    {
+      "title": "Yield Validation",
+      "content": "| Metric | Target | Actual | Pass? |\n|---|---|---|---|\n| Error statements per market | 15–30 | **33** | NOTE — slightly above; justified by 5 alternatives × 5 lifecycle stages + IoT/billing needs specific to this market |\n| Needs per relevant job step (6 relevant) | ≥ 2 | DEFINE: 3, LOCATE: 2, PREPARE: 2, CONFIRM: 2, EXECUTE: 14, MONITOR: 4 | PASS |\n| Market-inherent (product_related=false) | 60–70% | 23/33 = **70%** | PASS |\n| Technology-specific (product_related=true) | 30–40% | 10/33 = **30%** | PASS |\n| \"Minimize\" vs \"Increase\" mix | ~60/40 | 23/10 = **70/30** | PASS (acceptable) |\n| Job map steps | 8 exactly | **8** | PASS |\n| Relevant steps | 3–6 typical | **6** | PASS |\n\n---"
+    },
+    {
+      "title": "QA Validation",
+      "content": "| # | Check | Result |\n|---|---|---|\n| V1 | Format compliance — all statements start with \"Minimize…\" or \"Increase…\" with ONE KPI | PASS |\n| V2 | product_related=true ONLY for technology-caused needs | PASS — N10–N15b are specific to turbine/ultrasonic/solenoid technology; disappear with different tech |\n| V3 | Importance/satisfaction sanity — no unrealistic patterns | PASS — range: imp 6–9, sat 2–5; safety/mission-critical at 8–9 |\n| V4 | Impact category matches KPI | PASS — e.g., flow accuracy = reliability; per-cycle billing = cost |\n| V5 | Coverage — ≥2 per relevant step, no obvious duplicates | PASS |\n| V6 | Solution-agnostic — zero product/vendor/mechanism references in P2 needs | PASS — P1 needs name technology class as expected |\n| V7 | Anchor level matches product abstraction | PASS — component = L4 |\n| V8 | Product job references parent VN unit | PASS — \"Help Flow Sensing & Measurement to…\" |\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"jtbd_analysis\",\n  \"naics_code\": \"333318\",\n  \"naics_title\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n  \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n  \"product_name\": \"Ultrasonic Flow Sensor\",\n  \"vendor_name\": \"Marquardt\",\n  \"cfj_statement\": \"Manufacture and deploy water-using commercial machinery that cleans, treats, purifies, or dispenses aqueous fluids for commercial and institutional operations\",\n  \"job_map\": {\n    \"naics_code\": \"333318\",\n    \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n    \"anchor_vn_unit\": \"Ultrasonic Flow Sensor\",\n    \"anchor_level\": \"L4\",\n    \"parent_vn_unit\": \"Flow Sensing & Measurement\",\n    \"parent_level\": \"L5\",\n    \"product_job_statement\": \"Help Flow Sensing & Measurement to measure volumetric flow rate in commercial water-using machinery fluid circuits without obstructing flow or introducing maintenance-prone moving parts\",\n    \"steps\": [\n      {\"step_number\": 1, \"step_name\": \"DEFINE\", \"statement\": \"Define the required flow rate range, pipe diameter, media compatibility, temperature envelope, and communication protocol for the machine's fluid circuit\", \"relevant_to_product\": true, \"relevance_rationale\": \"Sensor specifications must match the machine's diverse operating conditions across output types\"},\n      {\"step_number\": 2, \"step_name\": \"LOCATE\", \"statement\": \"Locate the optimal insertion point in the machine's internal piping where flow profile is developed and space constraints of the machine enclosure are met\", \"relevant_to_product\": true, \"relevance_rationale\": \"Commercial machines have compact enclosures; sensor body size and straight-pipe requirements directly affect packaging feasibility\"},\n      {\"step_number\": 3, \"step_name\": \"PREPARE\", \"statement\": \"Prepare the pipe section, electrical connections, and controller interface for sensor integration on the OEM assembly line\", \"relevant_to_product\": true, \"relevance_rationale\": \"Mechanical and electrical integration into high-volume OEM production is core to product adoption\"},\n      {\"step_number\": 4, \"step_name\": \"CONFIRM\", \"statement\": \"Confirm sensor readiness at end-of-line: verify pipe-full condition, absence of air pockets, correct wiring, and communication handshake with machine controller\", \"relevant_to_product\": true, \"relevance_rationale\": \"Pre-shipment quality validation is critical — field failures in vended/unmanned equipment are costly\"},\n      {\"step_number\": 5, \"step_name\": \"EXECUTE\", \"statement\": \"Execute continuous flow measurement, providing real-time volumetric flow rate, consumption totals, temperature, and diagnostic flags to the machine controller\", \"relevant_to_product\": true, \"relevance_rationale\": \"This IS the core value-creating action of the product\"},\n      {\"step_number\": 6, \"step_name\": \"MONITOR\", \"statement\": \"Monitor measurement quality indicators: signal strength, air bubble events, empty-pipe alarms, flow anomalies indicating leaks or blockages\", \"relevant_to_product\": true, \"relevance_rationale\": \"Ongoing measurement integrity enables IoT water monitoring, predictive maintenance, and leak detection\"},\n      {\"step_number\": 7, \"step_name\": \"MODIFY\", \"statement\": \"Adjust or recalibrate if measurement deviates — re-zero, update fluid properties, replace sensor\", \"relevant_to_product\": false, \"relevance_rationale\": \"Ultrasonic sensors require minimal in-service adjustment; commercial equipment is rarely field-recalibrated\"},\n      {\"step_number\": 8, \"step_name\": \"CONCLUDE\", \"statement\": \"Conclude service life: decommission sensor during machine disposal or recycling\", \"relevant_to_product\": false, \"relevance_rationale\": \"Standard end-of-life; not a differentiating step\"}\n    ]\n  },\n  \"alternatives\": [\n    {\n      \"name\": \"Turbine / Paddle-Wheel Flow Sensor\",\n      \"unspsc_code\": \"41112501\",\n      \"status\": \"incumbent\",\n      \"market_share_estimate\": \"45-55%\",\n      \"trade_offs\": [\n        \"Moving rotor clogs from lint, detergent residue, and mineral scale\",\n        \"Bearing wear causes calibration drift ±5%/year\",\n        \"Requires periodic manual disassembly and cleaning\",\n        \"$5-15 unit cost but 1-3 year effective life in harsh media\",\n        \"Low-flow dead band below ~2 l/min due to rotor inertia\"\n      ]\n    },\n    {\n      \"name\": \"Ultrasonic Flow Sensor (transit-time)\",\n      \"unspsc_code\": \"41112501\",\n      \"status\": \"new_entrant\",\n      \"market_share_estimate\": \"<5%\",\n      \"trade_offs\": [\n        \"Accuracy degrades with >2% air entrainment by volume (detergent foam)\",\n        \"Requires pipe-full condition for valid measurement\",\n        \"Higher unit cost vs turbine (3-5x at OEM volume)\",\n        \"Requires fluid-type configuration at commissioning\"\n      ]\n    },\n    {\n      \"name\": \"Electromagnetic Flowmeter\",\n      \"unspsc_code\": \"41112501\",\n      \"status\": \"niche\",\n      \"market_share_estimate\": \"3-5%\",\n      \"trade_offs\": [\n        \"Highest accuracy (±0.5%) but 5-10x cost vs turbine\",\n        \"Requires power supply (no battery mode)\",\n        \"Larger installation footprint\",\n        \"Over-specified and over-priced for most commercial equipment\"\n      ]\n    },\n    {\n      \"name\": \"Solenoid-Valve Volumetric Dosing (timed fill)\",\n      \"unspsc_code\": null,\n      \"status\": \"budget_fallback\",\n      \"market_share_estimate\": \"30-40%\",\n      \"trade_offs\": [\n        \"Accuracy only ±10-20%\",\n        \"Degrades with supply pressure variation\",\n        \"Cannot detect leaks, blockages, or anomalies\",\n        \"No consumption data for billing or reporting\"\n      ]\n    },\n    {\n      \"name\": \"Do nothing / no measurement\",\n      \"unspsc_code\": null,\n      \"status\": \"status_quo\",\n      \"market_share_estimate\": null,\n      \"trade_offs\": [\n        \"Zero cost, zero P1 lifecycle burden\",\n        \"Water consumption unknown\",\n        \"Cannot support pay-per-use billing\",\n        \"Cannot meet WaterSense/Energy Star certification\",\n        \"Faults and leaks undetectable\"\n      ]\n    }\n  ],\n  \"error_statements\": [\n    {\n      \"id\": \"N01\",\n      \"statement\": \"Minimize the likelihood of volumetric flow reading deviating more than ±3% from true value when measuring detergent-laden or chemically treated water across the 0.5–50 l/min operating range\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ACCURACY\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 9,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 14,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Commercial wash water contains surfactants, lint, and chemical additives. Accurate flow measurement enables water-use reporting, chemical dosing accuracy, and per-cycle billing. A ±3% flow error propagates directly to ±3% billing/dosing error.\",\n      \"confidence\": 0.8,\n      \"product_related\": false,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N02\",\n      \"statement\": \"Minimize measurement degradation when water contains suspended detergent residues, lint particles, or chemical dosing additives at concentrations typical of commercial wash cycles\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ROBUSTNESS\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Detergent-laden water is the standard operating medium in commercial laundry (surfactant concentration 0.5-2 g/L) and car wash (foam, wax). Turbine sensors clog; any viable sensor must handle contaminated media without degradation.\",\n      \"confidence\": 0.8,\n      \"product_related\": false,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N03\",\n      \"statement\": \"Minimize variability of water consumption readings between identical wash/rinse cycles under the same programme settings (repeatability >±1%)\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"CONSISTENCY\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 8,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 11,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Pay-per-use billing and water-use benchmarking require repeatable consumption measurements. Poor repeatability causes disputes with vended-laundry operators and invalidates water-efficiency audits.\",\n      \"confidence\": 0.7,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N04\",\n      \"statement\": \"Minimize time to detect a water supply failure or pipe-empty condition to less than 5 seconds to prevent dry-run damage to pumps and heating elements\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"error_type\": \"DETECTION\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 9,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 14,\n      \"impact_category\": \"safety\",\n      \"rationale\": \"Dry-run conditions destroy circulation pumps and heating elements within minutes. In unmanned vended/car-wash equipment, no human is present to notice. Rapid empty-pipe detection is a safety-critical requirement.\",\n      \"confidence\": 0.8,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N05\",\n      \"statement\": \"Increase the ability to measure across the full machine flow range (trickle-fill 0.5 l/min to high-volume rinse 40 l/min) in a single sensor without changing hardware\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"THROUGHPUT\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Commercial machines run diverse programmes with very different flow rates. A single sensor covering the full range eliminates multi-sensor installations and reduces OEM BOM complexity.\",\n      \"confidence\": 0.7,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N06\",\n      \"statement\": \"Minimize the number of undetected water leaks within the machine's internal fluid circuit that waste more than 50 litres per day\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"error_type\": \"DETECTION\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"Internal leaks (worn seals, cracked hoses, failed check valves) waste water and can cause property damage. In unmanned equipment, leaks persist for days before detection. A flow sensor can detect non-zero flow during idle periods.\",\n      \"confidence\": 0.7,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N07\",\n      \"statement\": \"Minimize the likelihood of specifying a sensor whose pressure rating or media compatibility is incompatible with the machine's operating conditions across its full output-type range\",\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"error_type\": \"ACCURACY\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"OEMs producing multiple machine types (laundry + car wash + water treatment) need a sensor that works across diverse conditions. Mis-specification leads to field failures and warranty claims.\",\n      \"confidence\": 0.6,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N08\",\n      \"statement\": \"Increase the ability to measure water consumption per cycle with sufficient accuracy (±2%) to support pay-per-use billing models and per-machine water-use reporting\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ACCURACY\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"Pay-per-use vended laundry and car wash models require metered consumption for fair billing. Water-use reporting is increasingly required by franchise operators and sustainability auditors. Timed-fill (±10-20%) is insufficient.\",\n      \"confidence\": 0.8,\n      \"product_related\": false,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N09\",\n      \"statement\": \"Minimize measurement failure when water temperature ranges from 5 °C (cold fill) to 85 °C (hot wash cycle) within a single machine operating envelope\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ROBUSTNESS\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Commercial washers cycle between cold fill and hot wash within minutes. Speed of sound in water changes ~2.4 m/s per °C. Sensors without real-time temperature compensation accumulate error during rapid thermal transients.\",\n      \"confidence\": 0.7,\n      \"product_related\": false,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N10\",\n      \"statement\": \"Minimize the likelihood of flow sensor rotor clogging from lint, detergent residue, or mineral scale within 12 months of installation in commercial laundry or car wash equipment\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ROBUSTNESS\",\n      \"pyramid_level\": \"P1\",\n      \"importance\": 8,\n      \"satisfaction_current\": 2,\n      \"opportunity_score\": 14,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Turbine/paddle-wheel rotors in commercial wash water are exposed to lint, surfactant residue, and mineral deposits. Fragments break off from scaling buildup and jam the rotor. Most turbine sensors in commercial laundry fail or drift significantly within 1-2 years.\",\n      \"confidence\": 0.9,\n      \"product_related\": true,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N11\",\n      \"statement\": \"Minimize the frequency of manual sensor disassembly and cleaning required to prevent accumulated debris from degrading flow measurement accuracy below ±5%\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"error_type\": \"EFFORT\",\n      \"pyramid_level\": \"P1\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"Field service calls to clean turbine sensors cost $150-300 per visit. In a fleet of 50+ machines, quarterly cleaning schedules create significant ongoing maintenance expense that erodes total cost of ownership.\",\n      \"confidence\": 0.8,\n      \"product_related\": true,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N12\",\n      \"statement\": \"Minimize calibration drift exceeding ±5% per year caused by mechanical wear of paddle-wheel bearings and blade erosion in detergent-laden water\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"CONSISTENCY\",\n      \"pyramid_level\": \"P1\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Paddle-wheel bearings in detergent water experience accelerated wear. Blade erosion from particulates changes the flow-to-pulse relationship. Drift is silent — no alarm indicates gradual accuracy loss — leading to undetected billing and dosing errors.\",\n      \"confidence\": 0.8,\n      \"product_related\": true,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N12b\",\n      \"statement\": \"Increase the ability to maintain accurate readings at low flow rates (<2 l/min) where turbine/paddle-wheel rotors stall due to insufficient fluid momentum to overcome mechanical inertia\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"THROUGHPUT\",\n      \"pyramid_level\": \"P1\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Trickle-fill and pre-rinse cycles operate at low flow rates where mechanical rotors cannot start. This creates a measurement dead zone for turbine sensors, missing water consumption that should be tracked.\",\n      \"confidence\": 0.7,\n      \"product_related\": true,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N13\",\n      \"statement\": \"Minimize the OEM integration time required to configure fluid-type parameters and verify acoustic coupling for each machine variant during assembly-line commissioning\",\n      \"job_step_number\": 3,\n      \"job_step_name\": \"PREPARE\",\n      \"error_type\": \"EFFORT\",\n      \"pyramid_level\": \"P1\",\n      \"importance\": 6,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 7,\n      \"impact_category\": \"time\",\n      \"rationale\": \"OEM assembly lines target <30 seconds per sensor station. Acoustic coupling verification and fluid-type parameter configuration add setup steps not present with simple pulse-output turbine sensors. Pre-calibrated delivery mitigates this.\",\n      \"confidence\": 0.7,\n      \"product_related\": true,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N14\",\n      \"statement\": \"Minimize the likelihood of signal loss when air bubbles from detergent agitation or water recycling aeration pass through the sensor during normal operation\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ROBUSTNESS\",\n      \"pyramid_level\": \"P1\",\n      \"importance\": 7,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 10,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Detergent agitation in wash cycles and aeration in water recycling systems introduce air bubbles >2% vol intermittently. Ultrasonic transit-time sensors lose signal during these events. In car wash reclaim systems, aeration is continuous.\",\n      \"confidence\": 0.8,\n      \"product_related\": true,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N14b\",\n      \"statement\": \"Minimize the OEM qualification cost for validating acoustic performance across multiple machine platforms with different pipe diameters (DN14–DN25) and media compositions\",\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"error_type\": \"EFFORT\",\n      \"pyramid_level\": \"P1\",\n      \"importance\": 6,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 8,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"OEMs producing diverse machine types need to validate sensor performance across each platform. Ultrasonic sensors require acoustic validation per DN variant and fluid type — a qualification matrix that turbine sensors (simple pulse output) do not require.\",\n      \"confidence\": 0.6,\n      \"product_related\": true,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N14c\",\n      \"statement\": \"Increase the ability to distinguish genuine zero-flow conditions from ultrasonic signal loss caused by detergent foam or entrained air from recycled water systems\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"DETECTION\",\n      \"pyramid_level\": \"P1\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13,\n      \"impact_category\": \"safety\",\n      \"rationale\": \"In commercial laundry and car wash, the controller must differentiate between an actual supply failure (requiring pump shutdown) and temporary signal loss from foam/bubbles (normal operation). False-positive empty-pipe alarms cause unnecessary cycle interruptions; missed true failures cause pump damage.\",\n      \"confidence\": 0.7,\n      \"product_related\": true,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N15\",\n      \"statement\": \"Minimize the likelihood of water fill volume deviating more than ±15% from target due to supply pressure variations that invalidate timed-fill calibration\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ACCURACY\",\n      \"pyramid_level\": \"P1\",\n      \"importance\": 7,\n      \"satisfaction_current\": 2,\n      \"opportunity_score\": 12,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Timed-fill calibration assumes constant supply pressure. In multi-machine installations, simultaneous fill cycles drop pressure 20-40%, causing underfill. Peak demand periods produce opposite overfill. Neither condition is detected.\",\n      \"confidence\": 0.7,\n      \"product_related\": true,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N15b\",\n      \"statement\": \"Minimize the number of undetected water circuit faults (partial blockage, stuck valve, internal leak) that timed-fill dosing cannot sense because it lacks direct flow measurement\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"DETECTION\",\n      \"pyramid_level\": \"P1\",\n      \"importance\": 8,\n      \"satisfaction_current\": 2,\n      \"opportunity_score\": 14,\n      \"impact_category\": \"safety\",\n      \"rationale\": \"Solenoid-valve timed fill has zero fault-detection capability. A stuck-open valve, a partial blockage, or an internal leak produces no alarm. The fault persists until a human notices wet floors or abnormal wash results — potentially days in unmanned equipment.\",\n      \"confidence\": 0.7,\n      \"product_related\": true,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N16\",\n      \"statement\": \"Minimize the required installation envelope (sensor body length and straight-pipe clearance) to fit within space-constrained commercial machine enclosures without requiring piping redesign\",\n      \"job_step_number\": 2,\n      \"job_step_name\": \"LOCATE\",\n      \"error_type\": \"EFFORT\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"Commercial machine enclosures are compact and highly optimized. Adding a flow sensor requires physical space for the sensor body plus 5-10x DN straight-pipe run upstream. Smaller sensors with shorter straight-run requirements enable retrofitting without piping redesign.\",\n      \"confidence\": 0.7,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N16b\",\n      \"statement\": \"Minimize the likelihood of mounting the sensor at a location where turbulence from upstream valves, elbows, or T-junctions causes more than 2% systematic reading bias\",\n      \"job_step_number\": 2,\n      \"job_step_name\": \"LOCATE\",\n      \"error_type\": \"ACCURACY\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 7,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 10,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Machine internal piping is short and dense with frequent directional changes. Ideal straight-run requirements (5-10x DN) are often impossible to meet. Sensors tolerant of disturbed flow profiles are preferred.\",\n      \"confidence\": 0.7,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N17\",\n      \"statement\": \"Minimize the total OEM assembly-line integration time from unpacking to first valid reading, including mechanical fitting, electrical connection, and protocol handshake\",\n      \"job_step_number\": 3,\n      \"job_step_name\": \"PREPARE\",\n      \"error_type\": \"EFFORT\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9,\n      \"impact_category\": \"time\",\n      \"rationale\": \"Commercial equipment OEMs produce hundreds to thousands of machines per year. Every additional minute of sensor integration time on the assembly line translates to measurable production cost. Plug-and-play sensors with auto-sensing are preferred.\",\n      \"confidence\": 0.7,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N18\",\n      \"statement\": \"Minimize the likelihood of a sensor passing end-of-line quality test while having an undetected installation defect (misalignment, air pocket, reversed orientation) that causes field failure\",\n      \"job_step_number\": 4,\n      \"job_step_name\": \"CONFIRM\",\n      \"error_type\": \"DETECTION\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9,\n      \"impact_category\": \"skill\",\n      \"rationale\": \"End-of-line tests may not catch subtle installation defects. Reversed sensor orientation, for example, gives correct flow magnitude but inverted direction — undetectable in a single-direction test. Built-in self-diagnostics reduce escape rates.\",\n      \"confidence\": 0.6,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N18b\",\n      \"statement\": \"Minimize the likelihood of releasing a machine from end-of-line testing with a flow sensor calibration error exceeding ±3% that goes undetected during the automated test cycle\",\n      \"job_step_number\": 4,\n      \"job_step_name\": \"CONFIRM\",\n      \"error_type\": \"ACCURACY\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 8,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 11,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"OEM end-of-line tests typically verify sensor communication and gross function but not calibration accuracy against a traceable reference. Pre-calibrated sensors eliminate this risk at the sensor level.\",\n      \"confidence\": 0.7,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N19\",\n      \"statement\": \"Increase the ability to provide real-time per-cycle water consumption data to the machine controller for IoT dashboard reporting and water-efficiency compliance documentation\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ACCURACY\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"IoT-enabled commercial equipment (Speed Queen Insights, WashTec SmartCare) demands per-cycle water data for fleet dashboards. Water-efficiency certification (EPA WaterSense, Energy Star) increasingly requires measured — not estimated — consumption data.\",\n      \"confidence\": 0.8,\n      \"product_related\": false,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N20\",\n      \"statement\": \"Increase the ability to detect abnormal water consumption patterns (e.g., >20% above baseline for the same cycle programme) indicating component degradation, valve failure, or internal leak\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"error_type\": \"DETECTION\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Trend analysis of per-cycle consumption enables predictive maintenance — detecting valve degradation, seal wear, or developing leaks before they become catastrophic. Requires baseline measurement capability that timed-fill systems lack.\",\n      \"confidence\": 0.6,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N21\",\n      \"statement\": \"Minimize the number of sensor variants an OEM must qualify and stock to cover its full product range of water-using equipment across DN12–DN25 pipe sizes\",\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"error_type\": \"EFFORT\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 6,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 8,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"OEMs producing multiple machine types prefer a single sensor platform with interchangeable flow bodies. Marquardt's shared-electronics platform across DN variants directly addresses this. Fewer part numbers reduce procurement, warehousing, and quality management overhead.\",\n      \"confidence\": 0.6,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N22\",\n      \"statement\": \"Minimize the likelihood of flow measurement failure when water recycling systems introduce variable water quality (TDS 200–2,000 ppm, turbidity, temperature cycling) into the machine supply\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ROBUSTNESS\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Car wash water recycling systems reclaim 50-80% of water. Reclaimed water has higher TDS, variable turbidity, and temperature cycling that challenge sensor robustness. Any sensor deployed downstream of reclaim must tolerate this variability.\",\n      \"confidence\": 0.8,\n      \"product_related\": false,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N23\",\n      \"statement\": \"Minimize the field failure rate of the flow sensing subsystem to below 0.2% within the 10-year commercial machine design life\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ROBUSTNESS\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 9,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 13,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Commercial equipment OEMs target 10-year appliance design life with <0.5% warranty claim rate for any component. Flow sensor failure in unmanned vended equipment causes revenue loss and expensive field service dispatches.\",\n      \"confidence\": 0.8,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N24\",\n      \"statement\": \"Increase the ability to document measured water consumption per cycle for EPA WaterSense, Energy Star, or EU Ecodesign water efficiency certification using onboard sensor data\",\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"error_type\": \"ACCURACY\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"EPA WaterSense and Energy Star water-efficiency labels are increasingly required for institutional procurement and franchise compliance. Measured per-cycle data from onboard sensors provides certification evidence that estimated data cannot.\",\n      \"confidence\": 0.7,\n      \"product_related\": false,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N25\",\n      \"statement\": \"Increase the ability to demonstrate measured water efficiency data that qualifies the equipment for WaterSense or equivalent eco-labels on the first certification submission\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ACCURACY\",\n      \"pyramid_level\": \"P3\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"P3 Role Identity: The OEM engineer whose equipment consistently earns sustainability certifications. Measured flow data enables first-pass certification, avoiding costly resubmissions.\",\n      \"confidence\": 0.6,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N26\",\n      \"statement\": \"Increase the ability to provide per-cycle water usage data visible on the machine HMI or IoT dashboard that commercial customers can include in sustainability reporting\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ACCURACY\",\n      \"pyramid_level\": \"P4\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11,\n      \"impact_category\": \"skill\",\n      \"rationale\": \"P4 Image Identity: Franchise operators and facility managers are watching. They need verifiable water-use data for ESG reporting. Equipment that provides transparent, measured data builds brand trust.\",\n      \"confidence\": 0.5,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N27\",\n      \"statement\": \"Minimize the likelihood of a facility operator receiving an unexpected water utility bill exceeding budget by more than 15% due to undetected equipment water waste that the sensor could have flagged\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"error_type\": \"DETECTION\",\n      \"pyramid_level\": \"P5\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"P5 Emotional [hypothesis]: Facility managers want to feel confident water costs are controlled. Unexpected utility spikes cause anxiety and erode trust in equipment. Continuous flow monitoring provides early warning of waste.\",\n      \"confidence\": 0.5,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    }\n  ],\n  \"entities_produced\": {\n    \"nodes\": [\n      {\"label\": \"JobMap\", \"key\": {\"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"JobStep\", \"key\": {\"step_number\": 1, \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"JobStep\", \"key\": {\"step_number\": 2, \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"JobStep\", \"key\": {\"step_number\": 3, \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"JobStep\", \"key\": {\"step_number\": 4, \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"JobStep\", \"key\": {\"step_number\": 5, \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"JobStep\", \"key\": {\"step_number\": 6, \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"JobStep\", \"key\": {\"step_number\": 7, \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"JobStep\", \"key\": {\"step_number\": 8, \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N01\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N02\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N03\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N04\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N05\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N06\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N07\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N08\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N09\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N10\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N11\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N12\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N12b\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N13\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N14\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N14b\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N14c\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N15\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N15b\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N16\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N16b\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N17\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N18\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N18b\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N19\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N20\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N21\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N22\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N23\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N24\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N25\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N26\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"N27\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"IncumbentAnchor\", \"key\": {\"technology_name\": \"Turbine / Paddle-Wheel Flow Sensor\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}},\n      {\"label\": \"IncumbentAnchor\", \"key\": {\"technology_name\": \"Solenoid-Valve Volumetric Dosing\", \"naics_code\": \"333318\", \"run_id\": \"TBD\"}}\n    ],\n    \"relationships\": [\n      {\"type\": \"has_job_map\", \"source\": \"Market:333318\", \"target\": \"JobMap:333318\"},\n      {\"type\": \"anchored_at\", \"source\": \"JobMap:333318\", \"target\": \"ValueNetworkUnit:Flow Sensing & Measurement\"},\n      {\"type\": \"has_job_step\", \"source\": \"JobMap:333318\", \"target\": \"JobStep:1-8\"},\n      {\"type\": \"has_error_statement\", \"source\": \"JobStep:*\", \"target\": \"ErrorStatement:N01-N27\"},\n      {\"type\": \"has_need\", \"source\": \"Market:333318\", \"target\": \"ErrorStatement:N01-N27\"},\n      {\"type\": \"has_incumbent_anchor\", \"source\": \"Market:333318\", \"target\": \"IncumbentAnchor:Turbine / Paddle-Wheel Flow Sensor\"},\n      {\"type\": \"has_incumbent_anchor\", \"source\": \"Market:333318\", \"target\": \"IncumbentAnchor:Solenoid-Valve Volumetric Dosing\"},\n      {\"type\": \"anchored_at\", \"source\": \"IncumbentAnchor:Turbine / Paddle-Wheel Flow Sensor\", \"target\": \"ValueNetworkUnit:Flow Sensing & Measurement\"},\n      {\"type\": \"anchored_at\", \"source\": \"IncumbentAnchor:Solenoid-Valve Volumetric Dosing\", \"target\": \"ValueNetworkUnit:Flow Sensing & Measurement\"}\n    ]\n  }\n}\n```\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [Water Flow Meter 2025: Top Models & How to Choose — ICON Process Controls](https://iconprocon.com/blog-post/water-flow-meter-2025-top-models-how-to-choose/)\n- [Sources of Trouble for Flow Meters — KEYENCE](https://www.keyence.com/ss/products/process/flowknowledge/sources/trouble_01.jsp)\n- [Turbine vs Paddle Wheel Flow Meters — ICON Process Controls](https://iconprocon.com/blog-post/turbine-vs-paddle-wheel-flow-meters-whats-the-difference/)\n- [Comparing Turbine and Ultrasonic Flow Meters — Lanry Instruments](https://www.lanry-instruments.com/support/comparing-turbine-and-ultrasonic-flow-meters-a-complete-overview/)\n- [WaterSense at Work Section 5.4: Vehicle Washes — EPA](https://www.epa.gov/system/files/documents/2023-11/ws-commercial-bmp-watersenseatwork_section5.4_vehiclewashes.pdf)\n- [WaterSense at Work Section 3.5: Laundry Equipment — EPA](https://www.epa.gov/system/files/documents/2023-06/ws-commercial-watersense-at-work_Section_3.5_Laundry_Equipment.pdf)\n- [Car Wash Water Recycling System — NCS National Carwash Solutions](https://ncswash.com/what-is-a-car-wash-water-recycling-system/)\n- [Pros and Cons of Recycling Car Wash Water — Sensorex](https://sensorex.com/pros-cons-recycling-car-wash-water/)\n- [Speed Queen Technology Offerings — Alliance Laundry Systems](https://alliancelaundry.com/news/speed-queens-game-changing-technology-offerings-will-change-the-way-multi-housing-residents-do-laundry/)\n- [Maximizing Water Savings in Professional Laundry — Girbau](https://www.girbau.com/blog/maximizing-water-savings-in-the-professional-laundry-sector/)\n- [Water & Energy Reduction at a European Commercial Laundry — Ecolab](https://en-uk.ecolab.com/articles/2024/07/water-and-energy-reduction-at-a-european-commercial-laundry)\n- [Water Conservation Strategies for Industrial Laundry Plants 2026 — Softrol](https://softrol.com/feeds/blog/water-conservation-industrial-laundry)\n- Marquardt Customer Presentation: \"US Flow Sensor\" (03.12.2025, CONFIDENTIAL)\n- VN_other_commercial_and_service_industry_ma.md (upstream input)"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**NAICS**",
+          "Value": "333318"
+        },
+        {
+          "Field": "**CFJ**",
+          "Value": "Manufacture and deploy water-using commercial machinery that cleans, treats, purifies, or dispenses aqueous fluids for commercial and institutional operations [SRC: VN_other_commercial_and_service_industry_ma]"
+        },
+        {
+          "Field": "**Offering Level**",
+          "Value": "L5 (Product) — standalone commercial equipment"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Output Type",
+        "VN Level"
+      ],
+      "rows": [
+        {
+          "Output Type": "Commercial washer-extractor",
+          "VN Level": "L5"
+        },
+        {
+          "Output Type": "Continuous tunnel washer",
+          "VN Level": "L5"
+        },
+        {
+          "Output Type": "Commercial dryer / ironer",
+          "VN Level": "L5 (dry process — no flow sensing)"
+        },
+        {
+          "Output Type": "Tunnel car wash system",
+          "VN Level": "L5"
+        },
+        {
+          "Output Type": "In-bay automatic car wash",
+          "VN Level": "L5"
+        },
+        {
+          "Output Type": "Self-service car wash bay",
+          "VN Level": "L5"
+        },
+        {
+          "Output Type": "Commercial water purification system (RO/UV)",
+          "VN Level": "L5"
+        },
+        {
+          "Output Type": "Commercial water softener",
+          "VN Level": "L5 (pre-treatment only)"
+        },
+        {
+          "Output Type": "Commercial ice machine",
+          "VN Level": "L5"
+        },
+        {
+          "Output Type": "Beverage vending / dispensing machine",
+          "VN Level": "L5"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Segment",
+        "Circumstance",
+        "Alternatives Differ?"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Segment": "**High-volume vended laundry**",
+          "Circumstance": "Self-service laundromat; 10+ machines running 8–14 cycles/day; pay-per-use billing requires per-cycle water metering; harshest consumer abuse; highest downtime cost",
+          "Alternatives Differ?": "Yes — pay-per-use billing demands metered consumption; no operator present to detect faults"
+        },
+        {
+          "#": "2",
+          "Segment": "**On-premises institutional laundry**",
+          "Circumstance": "Hotel, hospital, prison, nursing home; captive use; regulatory hygiene standards (HLAC, TRSA); water audit and sustainability reporting required; dedicated operator on shift",
+          "Alternatives Differ?": "Yes — compliance documentation and water-use benchmarking (10–15 L/kg target) drive sensor accuracy requirements [SRC: web_search — Girbau, Ecolab]"
+        },
+        {
+          "#": "3",
+          "Segment": "**Express tunnel car wash**",
+          "Circumstance": "100–400 vehicles/day; water recycling mandatory in many jurisdictions; speed critical (3–5 min/vehicle); continuous high-volume operation; 50–80% water reclaim typical [SRC: web_search — NCS, EPA WaterSense]",
+          "Alternatives Differ?": "Yes — recycled water quality variability (TDS, turbidity) stresses sensor robustness"
+        },
+        {
+          "#": "4",
+          "Segment": "**In-bay / self-service car wash**",
+          "Circumstance": "Customer-operated or automatic single-bay; moderate volume; payment-metered; often unmanned; lower water volume per wash (15–19 gal with reclaim) [SRC: web_search — EPA]",
+          "Alternatives Differ?": "Yes — unmanned operation demands autonomous fault detection"
+        },
+        {
+          "#": "5",
+          "Segment": "**Commercial water purification**",
+          "Circumstance": "Restaurant, office, healthcare; food safety compliance (NSF 61); potable water quality; lower flow rates (1–10 l/min); filter saturation and membrane fouling detection critical",
+          "Alternatives Differ?": "Yes — purity requirements and NSF/FDA compliance change alternative selection"
+        },
+        {
+          "#": "6",
+          "Segment": "**Commercial ice & beverage dispensing**",
+          "Circumstance": "Food service; hygiene-critical; water consumption tracking for cost control; seasonal demand variation; small pipe diameters (DN12–DN15)",
+          "Alternatives Differ?": "Yes — small bore and intermittent flow challenge sensor low-end range"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L6",
+        "Domain",
+        "Type",
+        "Marquardt Relevance"
+      ],
+      "rows": [
+        {
+          "L6": "L6.1",
+          "Domain": "Water Supply & Pre-Treatment",
+          "Type": "Core",
+          "Marquardt Relevance": "Indirect — flow data verifies inlet supply adequacy"
+        },
+        {
+          "L6": "**L6.2**",
+          "Domain": "**Fluid Circuit & Distribution**",
+          "Type": "**Core**",
+          "Marquardt Relevance": "**Direct — sensor sits here at L4.2.4.1**"
+        },
+        {
+          "L6": "L6.3",
+          "Domain": "Thermal Management",
+          "Type": "Core",
+          "Marquardt Relevance": "Indirect — flow × ΔT = thermal energy transfer"
+        },
+        {
+          "L6": "L6.4",
+          "Domain": "Chemical Dosing & Application",
+          "Type": "Core",
+          "Marquardt Relevance": "Adjacent — dosing accuracy depends on known flow rate"
+        },
+        {
+          "L6": "L6.5",
+          "Domain": "Core Process Execution",
+          "Type": "Core",
+          "Marquardt Relevance": "Indirect — wash/spray quality depends on flow delivery"
+        },
+        {
+          "L6": "L6.6",
+          "Domain": "Drainage, Recovery & Recycling",
+          "Type": "Core",
+          "Marquardt Relevance": "Adjacent — reclaim flow measurement for water balance"
+        },
+        {
+          "L6": "L6.7",
+          "Domain": "Control, Automation & Payment",
+          "Type": "Core",
+          "Marquardt Relevance": "Direct — sensor feeds controller and IoT data"
+        },
+        {
+          "L6": "L6.8",
+          "Domain": "Safety, Compliance & Service",
+          "Type": "Horizontal",
+          "Marquardt Relevance": "Direct — water efficiency certification requires measured data"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "BOM Position",
+        "Process Step",
+        "Edge Type",
+        "Rationale"
+      ],
+      "rows": [
+        {
+          "BOM Position": "Circulation Pump (L5.2.1)",
+          "Process Step": "L6.2 Fluid Circuit & Distribution",
+          "Edge Type": "**HARD**",
+          "Rationale": "Pump capacity sets flow range; sensor must match"
+        },
+        {
+          "BOM Position": "Solenoid Valve Array (L4.2.3.1)",
+          "Process Step": "L6.2 Fluid Circuit & Distribution",
+          "Edge Type": "**SOFT**",
+          "Rationale": "Valve sequencing affects flow profiles but not sensor category"
+        },
+        {
+          "BOM Position": "High-Pressure Pump (L5.2.2)",
+          "Process Step": "L6.2 Fluid Circuit & Distribution",
+          "Edge Type": "**HARD**",
+          "Rationale": "Car wash high-pressure circuits (50–150 bar) exceed sensor rating — different measurement point required"
+        },
+        {
+          "BOM Position": "Machine Controller / PLC (L5.7.1)",
+          "Process Step": "L6.7 Control & Payment",
+          "Edge Type": "**HARD**",
+          "Rationale": "Controller protocol (UART/LIN/frequency) determines sensor interface requirement"
+        },
+        {
+          "BOM Position": "Water Recycling System (L5.6.2)",
+          "Process Step": "L6.6 Drainage & Recycling",
+          "Edge Type": "**SOFT**",
+          "Rationale": "Reclaim water quality affects measurement accuracy but not sensor category"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**Route**",
+          "Value": "PROCESS_VN — sensor is equipment used to MAKE the customer's output (commercial machinery); it does not end up in the end-customer's hands"
+        },
+        {
+          "Field": "**Anchor Unit**",
+          "Value": "Ultrasonic Flow Sensor (L4.2.4.1)"
+        },
+        {
+          "Field": "**Anchor Level**",
+          "Value": "L4 (component/subsystem)"
+        },
+        {
+          "Field": "**Parent VN Unit**",
+          "Value": "Flow Sensing & Measurement (L5.2.4)"
+        },
+        {
+          "Field": "**Parent Level**",
+          "Value": "L5"
+        },
+        {
+          "Field": "**Grandparent**",
+          "Value": "Fluid Circuit & Distribution (L6.2)"
+        },
+        {
+          "Field": "**L-Path**",
+          "Value": "L7 Commercial Water-Using Machinery Ecosystem > L6.2 Fluid Circuit & Distribution > L5.2.4 Flow Sensing & Measurement > L4.2.4.1 Ultrasonic Flow Sensor"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**Route**",
+          "Value": "Maker — PRODUCT_BOM (sensor becomes part of the commercial machine, which IS the OEM's product)"
+        },
+        {
+          "Field": "**Function Verb**",
+          "Value": "Measure (from BOM position function: what the component DOES within the parent system)"
+        },
+        {
+          "Field": "**Lens**",
+          "Value": "\"What [measurement] does this [fluid circuit & distribution system] need to perform its job?\""
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Segment",
+        "Level A (VN serves?)",
+        "Level B (Product modality?)",
+        "Result"
+      ],
+      "rows": [
+        {
+          "Segment": "High-volume vended laundry",
+          "Level A (VN serves?)": "Yes",
+          "Level B (Product modality?)": "Yes — DN14/DN20, water + detergent, 5–85 °C",
+          "Result": "**Active**"
+        },
+        {
+          "Segment": "On-premises institutional laundry",
+          "Level A (VN serves?)": "Yes",
+          "Level B (Product modality?)": "Yes — same specs, higher duty cycle",
+          "Result": "**Active**"
+        },
+        {
+          "Segment": "Express tunnel car wash",
+          "Level A (VN serves?)": "Yes",
+          "Level B (Product modality?)": "Partial — low-pressure circuits only (DN20/DN25); high-pressure spray >10 bar excluded",
+          "Result": "**Active (with caveat)**"
+        },
+        {
+          "Segment": "In-bay / self-service car wash",
+          "Level A (VN serves?)": "Yes",
+          "Level B (Product modality?)": "Yes — low-pressure rinse/reclaim circuits within spec",
+          "Result": "**Active**"
+        },
+        {
+          "Segment": "Commercial water purification",
+          "Level A (VN serves?)": "Yes",
+          "Level B (Product modality?)": "Yes — clean water, DN12–DN20, low pressure",
+          "Result": "**Active**"
+        },
+        {
+          "Segment": "Commercial ice & beverage",
+          "Level A (VN serves?)": "Yes",
+          "Level B (Product modality?)": "Partial — DN12 in development; very low flow rates near minimum detection",
+          "Result": "**Active (with caveat)**"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Alternative",
+        "UNSPSC",
+        "Inherent Trade-Offs"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Alternative": "**Turbine / Paddle-Wheel Flow Sensor** (incumbent)",
+          "UNSPSC": "41112501",
+          "Inherent Trade-Offs": "Moving rotor clogs from lint, detergent residue, and mineral scale in commercial wash water; bearing wear causes calibration drift ±5%/year; requires periodic manual cleaning; $5–15 unit cost but 1–3 year effective life in harsh media [SRC: web_search — KEYENCE, ICON Process Controls]"
+        },
+        {
+          "#": "2",
+          "Alternative": "**Ultrasonic Flow Sensor** (transit-time)",
+          "UNSPSC": "41112501",
+          "Inherent Trade-Offs": "Accuracy degrades with >2% air entrainment by volume (detergent foam, recycled water aeration); requires pipe-full condition; higher unit cost vs turbine (3–5x at OEM volume); requires fluid-type configuration at commissioning [SRC: 01_product_decomposition]"
+        },
+        {
+          "#": "3",
+          "Alternative": "**Electromagnetic Flowmeter**",
+          "UNSPSC": "41112501",
+          "Inherent Trade-Offs": "Highest accuracy (±0.5%) but 5–10x cost vs turbine; requires power supply (no battery mode); larger installation footprint; conductive fluid required (water qualifies); over-specified for most commercial equipment applications [SRC: web_search — Lanry Instruments]"
+        },
+        {
+          "#": "4",
+          "Alternative": "**Solenoid-Valve Volumetric Dosing** (timed fill)",
+          "UNSPSC": "—",
+          "Inherent Trade-Offs": "Zero sensor hardware cost; accuracy only ±10–20%; degrades with supply pressure variation; cannot detect leaks, blockages, or anomalies; no consumption data for billing or reporting; budget fallback in price-sensitive equipment [SRC: VN_other_commercial_and_service_industry_ma]"
+        },
+        {
+          "#": "5",
+          "Alternative": "**Do nothing / no measurement** [Status Quo]",
+          "UNSPSC": "—",
+          "Inherent Trade-Offs": "Zero cost, zero P1 lifecycle burden; water consumption unknown; cannot support pay-per-use billing; cannot meet WaterSense/Energy Star water efficiency reporting; faults and leaks undetectable; water waste invisible"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Scenario",
+        "Activated Output Types",
+        "BOM Positions in Play"
+      ],
+      "rows": [
+        {
+          "Scenario": "**S1: Vended laundry per-cycle billing**",
+          "Activated Output Types": "Commercial washer-extractor",
+          "BOM Positions in Play": "Circulation Pump, Solenoid Valve Array, Flow Sensor, Payment System"
+        },
+        {
+          "Scenario": "**S2: Tunnel car wash water reclaim monitoring**",
+          "Activated Output Types": "Tunnel car wash system",
+          "BOM Positions in Play": "Circulation Pump, Water Recycling System, Flow Sensor, Effluent Flow Meter"
+        },
+        {
+          "Scenario": "**S3: Institutional laundry water audit**",
+          "Activated Output Types": "Continuous tunnel washer",
+          "BOM Positions in Play": "Circulation Pump, Flow Sensor, IoT & Connectivity, Chemical Dispensing"
+        },
+        {
+          "Scenario": "**S4: Water purification filter monitoring**",
+          "Activated Output Types": "Commercial water purification (RO/UV)",
+          "BOM Positions in Play": "Pre-Filtration, RO Membrane, Flow Sensor, Controller"
+        },
+        {
+          "Scenario": "**S5: Ice machine consumption tracking**",
+          "Activated Output Types": "Commercial ice machine",
+          "BOM Positions in Play": "Water Inlet Assembly, Flow Sensor, Controller"
+        },
+        {
+          "Scenario": "**S6: In-bay car wash leak detection**",
+          "Activated Output Types": "In-bay automatic car wash",
+          "BOM Positions in Play": "High-Pressure Pump, Flow Sensor, Leak Detection, Controller"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Role",
+        "Who (in NAICS 333318 context)"
+      ],
+      "rows": [
+        {
+          "Role": "**Job Executor**",
+          "Who (in NAICS 333318 context)": "OEM assembly technician / field service installer — integrates and installs the sensor in the machine"
+        },
+        {
+          "Role": "**Job Overseer**",
+          "Who (in NAICS 333318 context)": "OEM product engineering manager — accountable for machine performance, water efficiency, and certification"
+        },
+        {
+          "Role": "**Job Beneficiary**",
+          "Who (in NAICS 333318 context)": "Laundromat owner, hotel facility manager, car wash operator — receives water-use data and operational reliability"
+        },
+        {
+          "Role": "**Product Lifecycle Support**",
+          "Who (in NAICS 333318 context)": "Specifier (OEM design engineer), assembler, commissioning tech, field service technician, disposer"
+        },
+        {
+          "Role": "**Purchase Executor**",
+          "Who (in NAICS 333318 context)": "OEM procurement manager — selects and sources sensor components for production"
+        },
+        {
+          "Role": "**Purchase Influencer**",
+          "Who (in NAICS 333318 context)": "Water utility auditor, EPA/WaterSense certifier, franchise compliance officer"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Step",
+        "Statement",
+        "Relevant to Product?",
+        "Relevance Rationale"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Step": "**DEFINE**",
+          "Statement": "Define the required flow rate range, pipe diameter, media compatibility (water + detergent + recycled water), temperature envelope, and communication protocol for the machine's fluid circuit",
+          "Relevant to Product?": "**Yes**",
+          "Relevance Rationale": "Sensor specifications must match the machine's diverse operating conditions across output types"
+        },
+        {
+          "#": "2",
+          "Step": "**LOCATE**",
+          "Statement": "Locate the optimal insertion point in the machine's internal piping where flow profile is developed and space constraints of the machine enclosure are met",
+          "Relevant to Product?": "**Yes**",
+          "Relevance Rationale": "Commercial machines have compact enclosures; sensor body size and straight-pipe requirements directly affect packaging feasibility"
+        },
+        {
+          "#": "3",
+          "Step": "**PREPARE**",
+          "Statement": "Prepare the pipe section, electrical connections (UART/LIN/frequency), and controller interface for sensor integration on the OEM assembly line",
+          "Relevant to Product?": "**Yes**",
+          "Relevance Rationale": "Mechanical and electrical integration into high-volume OEM production is core to product adoption"
+        },
+        {
+          "#": "4",
+          "Step": "**CONFIRM**",
+          "Statement": "Confirm sensor readiness at end-of-line: verify pipe-full condition, absence of air pockets, correct wiring, and communication handshake with machine controller",
+          "Relevant to Product?": "**Yes**",
+          "Relevance Rationale": "Pre-shipment quality validation is critical — field failures in vended/unmanned equipment are costly"
+        },
+        {
+          "#": "5",
+          "Step": "**EXECUTE**",
+          "Statement": "Execute continuous flow measurement, providing real-time volumetric flow rate, consumption totals, temperature, and diagnostic flags to the machine controller",
+          "Relevant to Product?": "**Yes**",
+          "Relevance Rationale": "This IS the core value-creating action of the product"
+        },
+        {
+          "#": "6",
+          "Step": "**MONITOR**",
+          "Statement": "Monitor measurement quality indicators: signal strength, air bubble events, empty-pipe alarms, flow anomalies indicating leaks or blockages",
+          "Relevant to Product?": "**Yes**",
+          "Relevance Rationale": "Ongoing measurement integrity enables IoT water monitoring, predictive maintenance, and leak detection"
+        },
+        {
+          "#": "7",
+          "Step": "**MODIFY**",
+          "Statement": "Adjust or recalibrate if measurement deviates — re-zero, update fluid properties, replace sensor",
+          "Relevant to Product?": "No",
+          "Relevance Rationale": "Ultrasonic sensors require minimal in-service adjustment; commercial equipment is rarely field-recalibrated"
+        },
+        {
+          "#": "8",
+          "Step": "**CONCLUDE**",
+          "Statement": "Conclude service life: decommission sensor during machine disposal or recycling",
+          "Relevant to Product?": "No",
+          "Relevance Rationale": "Standard end-of-life; not a differentiating step for flow sensors in commercial equipment"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Job Step",
+        "Error Type",
+        "Statement",
+        "Importance",
+        "Satisfaction",
+        "Opp. Score",
+        "Impact",
+        "Confidence",
+        "product_related"
+      ],
+      "rows": [
+        {
+          "ID": "N01",
+          "Job Step": "EXECUTE",
+          "Error Type": "ACCURACY",
+          "Statement": "Minimize the likelihood of volumetric flow reading deviating more than ±3% from true value when measuring detergent-laden or chemically treated water across the 0.5–50 l/min operating range",
+          "Importance": "9",
+          "Satisfaction": "4",
+          "Opp. Score": "14",
+          "Impact": "reliability",
+          "Confidence": "0.8",
+          "product_related": "false"
+        },
+        {
+          "ID": "N02",
+          "Job Step": "EXECUTE",
+          "Error Type": "ROBUSTNESS",
+          "Statement": "Minimize measurement degradation when water contains suspended detergent residues, lint particles, or chemical dosing additives at concentrations typical of commercial wash cycles",
+          "Importance": "8",
+          "Satisfaction": "3",
+          "Opp. Score": "13",
+          "Impact": "reliability",
+          "Confidence": "0.8",
+          "product_related": "false"
+        },
+        {
+          "ID": "N03",
+          "Job Step": "EXECUTE",
+          "Error Type": "CONSISTENCY",
+          "Statement": "Minimize variability of water consumption readings between identical wash/rinse cycles under the same programme settings (repeatability >±1%)",
+          "Importance": "8",
+          "Satisfaction": "5",
+          "Opp. Score": "11",
+          "Impact": "reliability",
+          "Confidence": "0.7",
+          "product_related": "false"
+        },
+        {
+          "ID": "N04",
+          "Job Step": "MONITOR",
+          "Error Type": "DETECTION",
+          "Statement": "Minimize time to detect a water supply failure or pipe-empty condition to less than 5 seconds to prevent dry-run damage to pumps and heating elements",
+          "Importance": "9",
+          "Satisfaction": "4",
+          "Opp. Score": "14",
+          "Impact": "safety",
+          "Confidence": "0.8",
+          "product_related": "false"
+        },
+        {
+          "ID": "N05",
+          "Job Step": "EXECUTE",
+          "Error Type": "THROUGHPUT",
+          "Statement": "Increase the ability to measure across the full machine flow range (trickle-fill 0.5 l/min to high-volume rinse 40 l/min) in a single sensor without changing hardware",
+          "Importance": "7",
+          "Satisfaction": "5",
+          "Opp. Score": "9",
+          "Impact": "reliability",
+          "Confidence": "0.7",
+          "product_related": "false"
+        },
+        {
+          "ID": "N06",
+          "Job Step": "MONITOR",
+          "Error Type": "DETECTION",
+          "Statement": "Minimize the number of undetected water leaks within the machine's internal fluid circuit that waste more than 50 litres per day",
+          "Importance": "8",
+          "Satisfaction": "3",
+          "Opp. Score": "13",
+          "Impact": "cost",
+          "Confidence": "0.7",
+          "product_related": "false"
+        },
+        {
+          "ID": "N07",
+          "Job Step": "DEFINE",
+          "Error Type": "ACCURACY",
+          "Statement": "Minimize the likelihood of specifying a sensor whose pressure rating or media compatibility is incompatible with the machine's operating conditions across its full output-type range",
+          "Importance": "7",
+          "Satisfaction": "5",
+          "Opp. Score": "9",
+          "Impact": "cost",
+          "Confidence": "0.6",
+          "product_related": "false"
+        },
+        {
+          "ID": "N08",
+          "Job Step": "EXECUTE",
+          "Error Type": "ACCURACY",
+          "Statement": "Increase the ability to measure water consumption per cycle with sufficient accuracy (±2%) to support pay-per-use billing models and per-machine water-use reporting",
+          "Importance": "8",
+          "Satisfaction": "3",
+          "Opp. Score": "13",
+          "Impact": "cost",
+          "Confidence": "0.8",
+          "product_related": "false"
+        },
+        {
+          "ID": "N09",
+          "Job Step": "EXECUTE",
+          "Error Type": "ROBUSTNESS",
+          "Statement": "Minimize measurement failure when water temperature ranges from 5 °C (cold fill) to 85 °C (hot wash cycle) within a single machine operating envelope",
+          "Importance": "7",
+          "Satisfaction": "5",
+          "Opp. Score": "9",
+          "Impact": "reliability",
+          "Confidence": "0.7",
+          "product_related": "false"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Lifecycle Stage",
+        "Error Type",
+        "Statement",
+        "Imp.",
+        "Sat.",
+        "Opp.",
+        "Impact",
+        "Conf.",
+        "product_related"
+      ],
+      "rows": [
+        {
+          "ID": "N10",
+          "Lifecycle Stage": "Usage",
+          "Error Type": "ROBUSTNESS",
+          "Statement": "Minimize the likelihood of flow sensor rotor clogging from lint, detergent residue, or mineral scale within 12 months of installation in commercial laundry or car wash equipment [SRC: web_search — KEYENCE, ICON Process Controls]",
+          "Imp.": "8",
+          "Sat.": "2",
+          "Opp.": "14",
+          "Impact": "reliability",
+          "Conf.": "0.9",
+          "product_related": "true"
+        },
+        {
+          "ID": "N11",
+          "Lifecycle Stage": "Maintenance",
+          "Error Type": "EFFORT",
+          "Statement": "Minimize the frequency of manual sensor disassembly and cleaning required to prevent accumulated debris from degrading flow measurement accuracy below ±5%",
+          "Imp.": "7",
+          "Sat.": "3",
+          "Opp.": "11",
+          "Impact": "cost",
+          "Conf.": "0.8",
+          "product_related": "true"
+        },
+        {
+          "ID": "N12",
+          "Lifecycle Stage": "Usage",
+          "Error Type": "CONSISTENCY",
+          "Statement": "Minimize calibration drift exceeding ±5% per year caused by mechanical wear of paddle-wheel bearings and blade erosion in detergent-laden water [SRC: web_search — KEYENCE]",
+          "Imp.": "8",
+          "Sat.": "3",
+          "Opp.": "13",
+          "Impact": "reliability",
+          "Conf.": "0.8",
+          "product_related": "true"
+        },
+        {
+          "ID": "N12b",
+          "Lifecycle Stage": "Usage",
+          "Error Type": "THROUGHPUT",
+          "Statement": "Increase the ability to maintain accurate readings at low flow rates (<2 l/min) where turbine/paddle-wheel rotors stall due to insufficient fluid momentum to overcome mechanical inertia",
+          "Imp.": "7",
+          "Sat.": "3",
+          "Opp.": "11",
+          "Impact": "reliability",
+          "Conf.": "0.7",
+          "product_related": "true"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Lifecycle Stage",
+        "Error Type",
+        "Statement",
+        "Imp.",
+        "Sat.",
+        "Opp.",
+        "Impact",
+        "Conf.",
+        "product_related"
+      ],
+      "rows": [
+        {
+          "ID": "N13",
+          "Lifecycle Stage": "Preparation",
+          "Error Type": "EFFORT",
+          "Statement": "Minimize the OEM integration time required to configure fluid-type parameters and verify acoustic coupling for each machine variant during assembly-line commissioning",
+          "Imp.": "6",
+          "Sat.": "5",
+          "Opp.": "7",
+          "Impact": "time",
+          "Conf.": "0.7",
+          "product_related": "true"
+        },
+        {
+          "ID": "N14",
+          "Lifecycle Stage": "Usage",
+          "Error Type": "ROBUSTNESS",
+          "Statement": "Minimize the likelihood of signal loss when air bubbles from detergent agitation or water recycling aeration pass through the sensor during normal operation",
+          "Imp.": "7",
+          "Sat.": "4",
+          "Opp.": "10",
+          "Impact": "reliability",
+          "Conf.": "0.8",
+          "product_related": "true"
+        },
+        {
+          "ID": "N14b",
+          "Lifecycle Stage": "Acquisition",
+          "Error Type": "EFFORT",
+          "Statement": "Minimize the OEM qualification cost for validating acoustic performance across multiple machine platforms with different pipe diameters (DN14–DN25) and media compositions",
+          "Imp.": "6",
+          "Sat.": "4",
+          "Opp.": "8",
+          "Impact": "cost",
+          "Conf.": "0.6",
+          "product_related": "true"
+        },
+        {
+          "ID": "N14c",
+          "Lifecycle Stage": "Usage",
+          "Error Type": "DETECTION",
+          "Statement": "Increase the ability to distinguish genuine zero-flow conditions from ultrasonic signal loss caused by detergent foam or entrained air from recycled water systems",
+          "Imp.": "8",
+          "Sat.": "3",
+          "Opp.": "13",
+          "Impact": "safety",
+          "Conf.": "0.7",
+          "product_related": "true"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Lifecycle Stage",
+        "Error Type",
+        "Statement",
+        "Imp.",
+        "Sat.",
+        "Opp.",
+        "Impact",
+        "Conf.",
+        "product_related"
+      ],
+      "rows": [
+        {
+          "ID": "N15",
+          "Lifecycle Stage": "Usage",
+          "Error Type": "ACCURACY",
+          "Statement": "Minimize the likelihood of water fill volume deviating more than ±15% from target due to supply pressure variations that invalidate timed-fill calibration",
+          "Imp.": "7",
+          "Sat.": "2",
+          "Opp.": "12",
+          "Impact": "reliability",
+          "Conf.": "0.7",
+          "product_related": "true"
+        },
+        {
+          "ID": "N15b",
+          "Lifecycle Stage": "Usage",
+          "Error Type": "DETECTION",
+          "Statement": "Minimize the number of undetected water circuit faults (partial blockage, stuck valve, internal leak) that timed-fill dosing cannot sense because it lacks direct flow measurement",
+          "Imp.": "8",
+          "Sat.": "2",
+          "Opp.": "14",
+          "Impact": "safety",
+          "Conf.": "0.7",
+          "product_related": "true"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Job Step",
+        "Error Type",
+        "Statement",
+        "Imp.",
+        "Sat.",
+        "Opp.",
+        "Impact",
+        "Conf.",
+        "product_related"
+      ],
+      "rows": [
+        {
+          "ID": "N16",
+          "Job Step": "LOCATE",
+          "Error Type": "EFFORT",
+          "Statement": "Minimize the required installation envelope (sensor body length and straight-pipe clearance) to fit within space-constrained commercial machine enclosures without requiring piping redesign",
+          "Imp.": "7",
+          "Sat.": "5",
+          "Opp.": "9",
+          "Impact": "cost",
+          "Conf.": "0.7",
+          "product_related": "false"
+        },
+        {
+          "ID": "N16b",
+          "Job Step": "LOCATE",
+          "Error Type": "ACCURACY",
+          "Statement": "Minimize the likelihood of mounting the sensor at a location where turbulence from upstream valves, elbows, or T-junctions causes more than 2% systematic reading bias",
+          "Imp.": "7",
+          "Sat.": "4",
+          "Opp.": "10",
+          "Impact": "reliability",
+          "Conf.": "0.7",
+          "product_related": "false"
+        },
+        {
+          "ID": "N17",
+          "Job Step": "PREPARE",
+          "Error Type": "EFFORT",
+          "Statement": "Minimize the total OEM assembly-line integration time from unpacking to first valid reading, including mechanical fitting, electrical connection, and protocol handshake",
+          "Imp.": "7",
+          "Sat.": "5",
+          "Opp.": "9",
+          "Impact": "time",
+          "Conf.": "0.7",
+          "product_related": "false"
+        },
+        {
+          "ID": "N18",
+          "Job Step": "CONFIRM",
+          "Error Type": "DETECTION",
+          "Statement": "Minimize the likelihood of a sensor passing end-of-line quality test while having an undetected installation defect (misalignment, air pocket, reversed orientation) that causes field failure",
+          "Imp.": "7",
+          "Sat.": "5",
+          "Opp.": "9",
+          "Impact": "skill",
+          "Conf.": "0.6",
+          "product_related": "false"
+        },
+        {
+          "ID": "N18b",
+          "Job Step": "CONFIRM",
+          "Error Type": "ACCURACY",
+          "Statement": "Minimize the likelihood of releasing a machine from end-of-line testing with a flow sensor calibration error exceeding ±3% that goes undetected during the automated test cycle",
+          "Imp.": "8",
+          "Sat.": "5",
+          "Opp.": "11",
+          "Impact": "reliability",
+          "Conf.": "0.7",
+          "product_related": "false"
+        },
+        {
+          "ID": "N19",
+          "Job Step": "EXECUTE",
+          "Error Type": "ACCURACY",
+          "Statement": "Increase the ability to provide real-time per-cycle water consumption data to the machine controller for IoT dashboard reporting and water-efficiency compliance documentation [SRC: web_search — Speed Queen Insights, EPA WaterSense]",
+          "Imp.": "8",
+          "Sat.": "3",
+          "Opp.": "13",
+          "Impact": "cost",
+          "Conf.": "0.8",
+          "product_related": "false"
+        },
+        {
+          "ID": "N20",
+          "Job Step": "MONITOR",
+          "Error Type": "DETECTION",
+          "Statement": "Increase the ability to detect abnormal water consumption patterns (e.g., >20% above baseline for the same cycle programme) indicating component degradation, valve failure, or internal leak",
+          "Imp.": "7",
+          "Sat.": "3",
+          "Opp.": "11",
+          "Impact": "reliability",
+          "Conf.": "0.6",
+          "product_related": "false"
+        },
+        {
+          "ID": "N21",
+          "Job Step": "DEFINE",
+          "Error Type": "EFFORT",
+          "Statement": "Minimize the number of sensor variants an OEM must qualify and stock to cover its full product range of water-using equipment across DN12–DN25 pipe sizes",
+          "Imp.": "6",
+          "Sat.": "4",
+          "Opp.": "8",
+          "Impact": "cost",
+          "Conf.": "0.6",
+          "product_related": "false"
+        },
+        {
+          "ID": "N22",
+          "Job Step": "EXECUTE",
+          "Error Type": "ROBUSTNESS",
+          "Statement": "Minimize the likelihood of flow measurement failure when water recycling systems introduce variable water quality (TDS 200–2,000 ppm, turbidity, temperature cycling) into the machine supply [SRC: web_search — NCS, Sensorex]",
+          "Imp.": "8",
+          "Sat.": "3",
+          "Opp.": "13",
+          "Impact": "reliability",
+          "Conf.": "0.8",
+          "product_related": "false"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Job Step",
+        "Error Type",
+        "Statement",
+        "Imp.",
+        "Sat.",
+        "Opp.",
+        "Impact",
+        "Conf.",
+        "product_related"
+      ],
+      "rows": [
+        {
+          "ID": "N23",
+          "Job Step": "EXECUTE",
+          "Error Type": "ROBUSTNESS",
+          "Statement": "Minimize the field failure rate of the flow sensing subsystem to below 0.2% within the 10-year commercial machine design life",
+          "Imp.": "9",
+          "Sat.": "5",
+          "Opp.": "13",
+          "Impact": "reliability",
+          "Conf.": "0.8",
+          "product_related": "false"
+        },
+        {
+          "ID": "N24",
+          "Job Step": "DEFINE",
+          "Error Type": "ACCURACY",
+          "Statement": "Increase the ability to document measured water consumption per cycle for EPA WaterSense, Energy Star, or EU Ecodesign water efficiency certification using onboard sensor data [SRC: web_search — EPA WaterSense]",
+          "Imp.": "8",
+          "Sat.": "3",
+          "Opp.": "13",
+          "Impact": "cost",
+          "Conf.": "0.7",
+          "product_related": "false"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Role",
+        "Retrieval",
+        "Bridge",
+        "Need"
+      ],
+      "rows": [
+        {
+          "Role": "**OEM Engineer (Overseer)**",
+          "Retrieval": "\"By getting water metering right, this person becomes the engineer whose equipment platform consistently earns WaterSense / Energy Star certification and wins sustainability-focused RFPs.\"",
+          "Bridge": "\"What must the product do so they CAN become that engineer?\"",
+          "Need": "—"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Statement",
+        "Imp.",
+        "Sat.",
+        "Opp.",
+        "Impact",
+        "Conf.",
+        "product_related"
+      ],
+      "rows": [
+        {
+          "ID": "N25",
+          "Statement": "Increase the ability to demonstrate measured water efficiency data that qualifies the equipment for WaterSense or equivalent eco-labels on the first certification submission",
+          "Imp.": "7",
+          "Sat.": "3",
+          "Opp.": "11",
+          "Impact": "cost",
+          "Conf.": "0.6",
+          "product_related": "false"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Role",
+        "Retrieval",
+        "Bridge",
+        "Need"
+      ],
+      "rows": [
+        {
+          "Role": "**OEM Brand (via Overseer)**",
+          "Retrieval": "\"Franchise operators and facility managers are watching. They must see an equipment manufacturer that delivers transparent, verifiable water-use data — not one relying on timed-fill estimates.\"",
+          "Bridge": "\"What must the product do so franchise operators SEE that impression?\"",
+          "Need": "—"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Statement",
+        "Imp.",
+        "Sat.",
+        "Opp.",
+        "Impact",
+        "Conf.",
+        "product_related"
+      ],
+      "rows": [
+        {
+          "ID": "N26",
+          "Statement": "Increase the ability to provide per-cycle water usage data visible on the machine HMI or IoT dashboard that commercial customers (hotel chains, car wash franchises) can include in sustainability reporting",
+          "Imp.": "7",
+          "Sat.": "3",
+          "Opp.": "11",
+          "Impact": "skill",
+          "Conf.": "0.5",
+          "product_related": "false"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Role",
+        "Retrieval",
+        "Bridge",
+        "Need"
+      ],
+      "rows": [
+        {
+          "Role": "**Facility Manager (Beneficiary)**",
+          "Retrieval": "\"Wants to feel confident that water costs are under control; wants to avoid the anxiety of unexpected water utility bills from undetected equipment waste.\"",
+          "Bridge": "\"What must the product do so the facility manager FEELS confident?\"",
+          "Need": "—"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Statement",
+        "Imp.",
+        "Sat.",
+        "Opp.",
+        "Impact",
+        "Conf.",
+        "product_related"
+      ],
+      "rows": [
+        {
+          "ID": "N27",
+          "Statement": "Minimize the likelihood of a facility operator receiving an unexpected water utility bill exceeding budget by more than 15% due to undetected equipment water waste that the sensor could have flagged [hypothesis]",
+          "Imp.": "7",
+          "Sat.": "3",
+          "Opp.": "11",
+          "Impact": "cost",
+          "Conf.": "0.5",
+          "product_related": "false"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Statement (abbreviated)",
+        "Imp.",
+        "Sat.",
+        "Opp.",
+        "Impact",
+        "product_related",
+        "Pyramid"
+      ],
+      "rows": [
+        {
+          "ID": "N01",
+          "Statement (abbreviated)": "Flow reading deviation >±3% in detergent water",
+          "Imp.": "9",
+          "Sat.": "4",
+          "Opp.": "14",
+          "Impact": "reliability",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N04",
+          "Statement (abbreviated)": "Detect supply failure / empty pipe >5 s",
+          "Imp.": "9",
+          "Sat.": "4",
+          "Opp.": "14",
+          "Impact": "safety",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N10",
+          "Statement (abbreviated)": "Rotor clogging from lint/detergent <12 mo",
+          "Imp.": "8",
+          "Sat.": "2",
+          "Opp.": "14",
+          "Impact": "reliability",
+          "product_related": "true",
+          "Pyramid": "P1"
+        },
+        {
+          "ID": "N15b",
+          "Statement (abbreviated)": "Undetected faults invisible to timed-fill dosing",
+          "Imp.": "8",
+          "Sat.": "2",
+          "Opp.": "14",
+          "Impact": "safety",
+          "product_related": "true",
+          "Pyramid": "P1"
+        },
+        {
+          "ID": "N02",
+          "Statement (abbreviated)": "Measurement degradation in detergent water",
+          "Imp.": "8",
+          "Sat.": "3",
+          "Opp.": "13",
+          "Impact": "reliability",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N06",
+          "Statement (abbreviated)": "Undetected water leaks >50 L/day",
+          "Imp.": "8",
+          "Sat.": "3",
+          "Opp.": "13",
+          "Impact": "cost",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N08",
+          "Statement (abbreviated)": "Per-cycle accuracy ±2% for pay-per-use billing",
+          "Imp.": "8",
+          "Sat.": "3",
+          "Opp.": "13",
+          "Impact": "cost",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N12",
+          "Statement (abbreviated)": "Calibration drift >±5%/yr from bearing wear",
+          "Imp.": "8",
+          "Sat.": "3",
+          "Opp.": "13",
+          "Impact": "reliability",
+          "product_related": "true",
+          "Pyramid": "P1"
+        },
+        {
+          "ID": "N14c",
+          "Statement (abbreviated)": "Distinguish zero-flow from signal loss",
+          "Imp.": "8",
+          "Sat.": "3",
+          "Opp.": "13",
+          "Impact": "safety",
+          "product_related": "true",
+          "Pyramid": "P1"
+        },
+        {
+          "ID": "N19",
+          "Statement (abbreviated)": "Real-time per-cycle data for IoT/compliance",
+          "Imp.": "8",
+          "Sat.": "3",
+          "Opp.": "13",
+          "Impact": "cost",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N22",
+          "Statement (abbreviated)": "Measurement failure on recycled water quality",
+          "Imp.": "8",
+          "Sat.": "3",
+          "Opp.": "13",
+          "Impact": "reliability",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N23",
+          "Statement (abbreviated)": "Field failure rate >0.2% in 10-yr life",
+          "Imp.": "9",
+          "Sat.": "5",
+          "Opp.": "13",
+          "Impact": "reliability",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N24",
+          "Statement (abbreviated)": "Documented consumption for WaterSense/EnStar",
+          "Imp.": "8",
+          "Sat.": "3",
+          "Opp.": "13",
+          "Impact": "cost",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N15",
+          "Statement (abbreviated)": "Timed-fill deviation >±15% from pressure variation",
+          "Imp.": "7",
+          "Sat.": "2",
+          "Opp.": "12",
+          "Impact": "reliability",
+          "product_related": "true",
+          "Pyramid": "P1"
+        },
+        {
+          "ID": "N03",
+          "Statement (abbreviated)": "Repeatability >±1% across identical cycles",
+          "Imp.": "8",
+          "Sat.": "5",
+          "Opp.": "11",
+          "Impact": "reliability",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N11",
+          "Statement (abbreviated)": "Manual cleaning frequency for turbine sensor",
+          "Imp.": "7",
+          "Sat.": "3",
+          "Opp.": "11",
+          "Impact": "cost",
+          "product_related": "true",
+          "Pyramid": "P1"
+        },
+        {
+          "ID": "N12b",
+          "Statement (abbreviated)": "Turbine low-flow dead band <2 l/min",
+          "Imp.": "7",
+          "Sat.": "3",
+          "Opp.": "11",
+          "Impact": "reliability",
+          "product_related": "true",
+          "Pyramid": "P1"
+        },
+        {
+          "ID": "N18b",
+          "Statement (abbreviated)": "End-of-line calibration error >±3% undetected",
+          "Imp.": "8",
+          "Sat.": "5",
+          "Opp.": "11",
+          "Impact": "reliability",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N20",
+          "Statement (abbreviated)": "Detect abnormal consumption >20% above baseline",
+          "Imp.": "7",
+          "Sat.": "3",
+          "Opp.": "11",
+          "Impact": "reliability",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N25",
+          "Statement (abbreviated)": "Measured data for eco-label certification",
+          "Imp.": "7",
+          "Sat.": "3",
+          "Opp.": "11",
+          "Impact": "cost",
+          "product_related": "false",
+          "Pyramid": "P3"
+        },
+        {
+          "ID": "N26",
+          "Statement (abbreviated)": "Per-cycle data visible on HMI/IoT dashboard",
+          "Imp.": "7",
+          "Sat.": "3",
+          "Opp.": "11",
+          "Impact": "skill",
+          "product_related": "false",
+          "Pyramid": "P4"
+        },
+        {
+          "ID": "N27",
+          "Statement (abbreviated)": "Unexpected water bill >15% over budget",
+          "Imp.": "7",
+          "Sat.": "3",
+          "Opp.": "11",
+          "Impact": "cost",
+          "product_related": "false",
+          "Pyramid": "P5"
+        },
+        {
+          "ID": "N14",
+          "Statement (abbreviated)": "Signal loss from detergent foam/air bubbles",
+          "Imp.": "7",
+          "Sat.": "4",
+          "Opp.": "10",
+          "Impact": "reliability",
+          "product_related": "true",
+          "Pyramid": "P1"
+        },
+        {
+          "ID": "N16b",
+          "Statement (abbreviated)": "Mounting turbulence >2% bias",
+          "Imp.": "7",
+          "Sat.": "4",
+          "Opp.": "10",
+          "Impact": "reliability",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N05",
+          "Statement (abbreviated)": "Turndown ratio 0.5–40 l/min in single sensor",
+          "Imp.": "7",
+          "Sat.": "5",
+          "Opp.": "9",
+          "Impact": "reliability",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N07",
+          "Statement (abbreviated)": "Sensor spec mismatch with machine conditions",
+          "Imp.": "7",
+          "Sat.": "5",
+          "Opp.": "9",
+          "Impact": "cost",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N09",
+          "Statement (abbreviated)": "Measurement failure at 5–85 °C range",
+          "Imp.": "7",
+          "Sat.": "5",
+          "Opp.": "9",
+          "Impact": "reliability",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N16",
+          "Statement (abbreviated)": "Installation envelope / straight-pipe space",
+          "Imp.": "7",
+          "Sat.": "5",
+          "Opp.": "9",
+          "Impact": "cost",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N17",
+          "Statement (abbreviated)": "Assembly-line integration time",
+          "Imp.": "7",
+          "Sat.": "5",
+          "Opp.": "9",
+          "Impact": "time",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N18",
+          "Statement (abbreviated)": "Undetected installation defect at end-of-line",
+          "Imp.": "7",
+          "Sat.": "5",
+          "Opp.": "9",
+          "Impact": "skill",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N14b",
+          "Statement (abbreviated)": "OEM qualification cost across platforms",
+          "Imp.": "6",
+          "Sat.": "4",
+          "Opp.": "8",
+          "Impact": "cost",
+          "product_related": "true",
+          "Pyramid": "P1"
+        },
+        {
+          "ID": "N21",
+          "Statement (abbreviated)": "Sensor variant count to cover DN range",
+          "Imp.": "6",
+          "Sat.": "4",
+          "Opp.": "8",
+          "Impact": "cost",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N13",
+          "Statement (abbreviated)": "Commissioning config time (ultrasonic)",
+          "Imp.": "6",
+          "Sat.": "5",
+          "Opp.": "7",
+          "Impact": "time",
+          "product_related": "true",
+          "Pyramid": "P1"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Statement (abbreviated)",
+        "Opp."
+      ],
+      "rows": [
+        {
+          "ID": "N01",
+          "Statement (abbreviated)": "Flow reading deviation >±3% in detergent water",
+          "Opp.": "14"
+        },
+        {
+          "ID": "N04",
+          "Statement (abbreviated)": "Detect supply failure / empty pipe >5 s",
+          "Opp.": "14"
+        },
+        {
+          "ID": "N10",
+          "Statement (abbreviated)": "Rotor clogging from lint/detergent <12 mo",
+          "Opp.": "14"
+        },
+        {
+          "ID": "N15b",
+          "Statement (abbreviated)": "Undetected faults invisible to timed-fill",
+          "Opp.": "14"
+        },
+        {
+          "ID": "N02",
+          "Statement (abbreviated)": "Measurement degradation in detergent water",
+          "Opp.": "13"
+        },
+        {
+          "ID": "N06",
+          "Statement (abbreviated)": "Undetected water leaks >50 L/day",
+          "Opp.": "13"
+        },
+        {
+          "ID": "N08",
+          "Statement (abbreviated)": "Per-cycle accuracy for billing",
+          "Opp.": "13"
+        },
+        {
+          "ID": "N12",
+          "Statement (abbreviated)": "Calibration drift from bearing wear",
+          "Opp.": "13"
+        },
+        {
+          "ID": "N14c",
+          "Statement (abbreviated)": "Distinguish zero-flow from signal loss",
+          "Opp.": "13"
+        },
+        {
+          "ID": "N19",
+          "Statement (abbreviated)": "Real-time per-cycle IoT data",
+          "Opp.": "13"
+        },
+        {
+          "ID": "N22",
+          "Statement (abbreviated)": "Measurement failure on recycled water",
+          "Opp.": "13"
+        },
+        {
+          "ID": "N24",
+          "Statement (abbreviated)": "Documented consumption for WaterSense",
+          "Opp.": "13"
+        },
+        {
+          "ID": "N15",
+          "Statement (abbreviated)": "Timed-fill deviation from pressure variation",
+          "Opp.": "12"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Metric",
+        "Target",
+        "Actual",
+        "Pass?"
+      ],
+      "rows": [
+        {
+          "Metric": "Error statements per market",
+          "Target": "15–30",
+          "Actual": "**33**",
+          "Pass?": "NOTE — slightly above; justified by 5 alternatives × 5 lifecycle stages + IoT/billing needs specific to this market"
+        },
+        {
+          "Metric": "Needs per relevant job step (6 relevant)",
+          "Target": "≥ 2",
+          "Actual": "DEFINE: 3, LOCATE: 2, PREPARE: 2, CONFIRM: 2, EXECUTE: 14, MONITOR: 4",
+          "Pass?": "PASS"
+        },
+        {
+          "Metric": "Market-inherent (product_related=false)",
+          "Target": "60–70%",
+          "Actual": "23/33 = **70%**",
+          "Pass?": "PASS"
+        },
+        {
+          "Metric": "Technology-specific (product_related=true)",
+          "Target": "30–40%",
+          "Actual": "10/33 = **30%**",
+          "Pass?": "PASS"
+        },
+        {
+          "Metric": "\"Minimize\" vs \"Increase\" mix",
+          "Target": "~60/40",
+          "Actual": "23/10 = **70/30**",
+          "Pass?": "PASS (acceptable)"
+        },
+        {
+          "Metric": "Job map steps",
+          "Target": "8 exactly",
+          "Actual": "**8**",
+          "Pass?": "PASS"
+        },
+        {
+          "Metric": "Relevant steps",
+          "Target": "3–6 typical",
+          "Actual": "**6**",
+          "Pass?": "PASS"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "#": "V1",
+          "Check": "Format compliance — all statements start with \"Minimize…\" or \"Increase…\" with ONE KPI",
+          "Result": "PASS"
+        },
+        {
+          "#": "V2",
+          "Check": "product_related=true ONLY for technology-caused needs",
+          "Result": "PASS — N10–N15b are specific to turbine/ultrasonic/solenoid technology; disappear with different tech"
+        },
+        {
+          "#": "V3",
+          "Check": "Importance/satisfaction sanity — no unrealistic patterns",
+          "Result": "PASS — range: imp 6–9, sat 2–5; safety/mission-critical at 8–9"
+        },
+        {
+          "#": "V4",
+          "Check": "Impact category matches KPI",
+          "Result": "PASS — e.g., flow accuracy = reliability; per-cycle billing = cost"
+        },
+        {
+          "#": "V5",
+          "Check": "Coverage — ≥2 per relevant step, no obvious duplicates",
+          "Result": "PASS"
+        },
+        {
+          "#": "V6",
+          "Check": "Solution-agnostic — zero product/vendor/mechanism references in P2 needs",
+          "Result": "PASS — P1 needs name technology class as expected"
+        },
+        {
+          "#": "V7",
+          "Check": "Anchor level matches product abstraction",
+          "Result": "PASS — component = L4"
+        },
+        {
+          "#": "V8",
+          "Check": "Product job references parent VN unit",
+          "Result": "PASS — \"Help Flow Sensing & Measurement to…\""
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "jtbd_analysis",
+      "naics_code": "333318",
+      "naics_title": "Other Commercial and Service Industry Machinery Manufacturing",
+      "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+      "product_name": "Ultrasonic Flow Sensor",
+      "vendor_name": "Marquardt",
+      "cfj_statement": "Manufacture and deploy water-using commercial machinery that cleans, treats, purifies, or dispenses aqueous fluids for commercial and institutional operations",
+      "job_map": {
+        "naics_code": "333318",
+        "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+        "anchor_vn_unit": "Ultrasonic Flow Sensor",
+        "anchor_level": "L4",
+        "parent_vn_unit": "Flow Sensing & Measurement",
+        "parent_level": "L5",
+        "product_job_statement": "Help Flow Sensing & Measurement to measure volumetric flow rate in commercial water-using machinery fluid circuits without obstructing flow or introducing maintenance-prone moving parts",
+        "steps": [
+          {
+            "step_number": 1,
+            "step_name": "DEFINE",
+            "statement": "Define the required flow rate range, pipe diameter, media compatibility, temperature envelope, and communication protocol for the machine's fluid circuit",
+            "relevant_to_product": true,
+            "relevance_rationale": "Sensor specifications must match the machine's diverse operating conditions across output types"
+          },
+          {
+            "step_number": 2,
+            "step_name": "LOCATE",
+            "statement": "Locate the optimal insertion point in the machine's internal piping where flow profile is developed and space constraints of the machine enclosure are met",
+            "relevant_to_product": true,
+            "relevance_rationale": "Commercial machines have compact enclosures; sensor body size and straight-pipe requirements directly affect packaging feasibility"
+          },
+          {
+            "step_number": 3,
+            "step_name": "PREPARE",
+            "statement": "Prepare the pipe section, electrical connections, and controller interface for sensor integration on the OEM assembly line",
+            "relevant_to_product": true,
+            "relevance_rationale": "Mechanical and electrical integration into high-volume OEM production is core to product adoption"
+          },
+          {
+            "step_number": 4,
+            "step_name": "CONFIRM",
+            "statement": "Confirm sensor readiness at end-of-line: verify pipe-full condition, absence of air pockets, correct wiring, and communication handshake with machine controller",
+            "relevant_to_product": true,
+            "relevance_rationale": "Pre-shipment quality validation is critical — field failures in vended/unmanned equipment are costly"
+          },
+          {
+            "step_number": 5,
+            "step_name": "EXECUTE",
+            "statement": "Execute continuous flow measurement, providing real-time volumetric flow rate, consumption totals, temperature, and diagnostic flags to the machine controller",
+            "relevant_to_product": true,
+            "relevance_rationale": "This IS the core value-creating action of the product"
+          },
+          {
+            "step_number": 6,
+            "step_name": "MONITOR",
+            "statement": "Monitor measurement quality indicators: signal strength, air bubble events, empty-pipe alarms, flow anomalies indicating leaks or blockages",
+            "relevant_to_product": true,
+            "relevance_rationale": "Ongoing measurement integrity enables IoT water monitoring, predictive maintenance, and leak detection"
+          },
+          {
+            "step_number": 7,
+            "step_name": "MODIFY",
+            "statement": "Adjust or recalibrate if measurement deviates — re-zero, update fluid properties, replace sensor",
+            "relevant_to_product": false,
+            "relevance_rationale": "Ultrasonic sensors require minimal in-service adjustment; commercial equipment is rarely field-recalibrated"
+          },
+          {
+            "step_number": 8,
+            "step_name": "CONCLUDE",
+            "statement": "Conclude service life: decommission sensor during machine disposal or recycling",
+            "relevant_to_product": false,
+            "relevance_rationale": "Standard end-of-life; not a differentiating step"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "name": "Turbine / Paddle-Wheel Flow Sensor",
+          "unspsc_code": "41112501",
+          "status": "incumbent",
+          "market_share_estimate": "45-55%",
+          "trade_offs": [
+            "Moving rotor clogs from lint, detergent residue, and mineral scale",
+            "Bearing wear causes calibration drift ±5%/year",
+            "Requires periodic manual disassembly and cleaning",
+            "$5-15 unit cost but 1-3 year effective life in harsh media",
+            "Low-flow dead band below ~2 l/min due to rotor inertia"
+          ]
+        },
+        {
+          "name": "Ultrasonic Flow Sensor (transit-time)",
+          "unspsc_code": "41112501",
+          "status": "new_entrant",
+          "market_share_estimate": "<5%",
+          "trade_offs": [
+            "Accuracy degrades with >2% air entrainment by volume (detergent foam)",
+            "Requires pipe-full condition for valid measurement",
+            "Higher unit cost vs turbine (3-5x at OEM volume)",
+            "Requires fluid-type configuration at commissioning"
+          ]
+        },
+        {
+          "name": "Electromagnetic Flowmeter",
+          "unspsc_code": "41112501",
+          "status": "niche",
+          "market_share_estimate": "3-5%",
+          "trade_offs": [
+            "Highest accuracy (±0.5%) but 5-10x cost vs turbine",
+            "Requires power supply (no battery mode)",
+            "Larger installation footprint",
+            "Over-specified and over-priced for most commercial equipment"
+          ]
+        },
+        {
+          "name": "Solenoid-Valve Volumetric Dosing (timed fill)",
+          "unspsc_code": null,
+          "status": "budget_fallback",
+          "market_share_estimate": "30-40%",
+          "trade_offs": [
+            "Accuracy only ±10-20%",
+            "Degrades with supply pressure variation",
+            "Cannot detect leaks, blockages, or anomalies",
+            "No consumption data for billing or reporting"
+          ]
+        },
+        {
+          "name": "Do nothing / no measurement",
+          "unspsc_code": null,
+          "status": "status_quo",
+          "market_share_estimate": null,
+          "trade_offs": [
+            "Zero cost, zero P1 lifecycle burden",
+            "Water consumption unknown",
+            "Cannot support pay-per-use billing",
+            "Cannot meet WaterSense/Energy Star certification",
+            "Faults and leaks undetectable"
+          ]
+        }
+      ],
+      "error_statements": [
+        {
+          "id": "N01",
+          "statement": "Minimize the likelihood of volumetric flow reading deviating more than ±3% from true value when measuring detergent-laden or chemically treated water across the 0.5–50 l/min operating range",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ACCURACY",
+          "pyramid_level": "P2",
+          "importance": 9,
+          "satisfaction_current": 4,
+          "opportunity_score": 14,
+          "impact_category": "reliability",
+          "rationale": "Commercial wash water contains surfactants, lint, and chemical additives. Accurate flow measurement enables water-use reporting, chemical dosing accuracy, and per-cycle billing. A ±3% flow error propagates directly to ±3% billing/dosing error.",
+          "confidence": 0.8,
+          "product_related": false,
+          "source": "web_search"
+        },
+        {
+          "id": "N02",
+          "statement": "Minimize measurement degradation when water contains suspended detergent residues, lint particles, or chemical dosing additives at concentrations typical of commercial wash cycles",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ROBUSTNESS",
+          "pyramid_level": "P2",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13,
+          "impact_category": "reliability",
+          "rationale": "Detergent-laden water is the standard operating medium in commercial laundry (surfactant concentration 0.5-2 g/L) and car wash (foam, wax). Turbine sensors clog; any viable sensor must handle contaminated media without degradation.",
+          "confidence": 0.8,
+          "product_related": false,
+          "source": "web_search"
+        },
+        {
+          "id": "N03",
+          "statement": "Minimize variability of water consumption readings between identical wash/rinse cycles under the same programme settings (repeatability >±1%)",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "CONSISTENCY",
+          "pyramid_level": "P2",
+          "importance": 8,
+          "satisfaction_current": 5,
+          "opportunity_score": 11,
+          "impact_category": "reliability",
+          "rationale": "Pay-per-use billing and water-use benchmarking require repeatable consumption measurements. Poor repeatability causes disputes with vended-laundry operators and invalidates water-efficiency audits.",
+          "confidence": 0.7,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N04",
+          "statement": "Minimize time to detect a water supply failure or pipe-empty condition to less than 5 seconds to prevent dry-run damage to pumps and heating elements",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "error_type": "DETECTION",
+          "pyramid_level": "P2",
+          "importance": 9,
+          "satisfaction_current": 4,
+          "opportunity_score": 14,
+          "impact_category": "safety",
+          "rationale": "Dry-run conditions destroy circulation pumps and heating elements within minutes. In unmanned vended/car-wash equipment, no human is present to notice. Rapid empty-pipe detection is a safety-critical requirement.",
+          "confidence": 0.8,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N05",
+          "statement": "Increase the ability to measure across the full machine flow range (trickle-fill 0.5 l/min to high-volume rinse 40 l/min) in a single sensor without changing hardware",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "THROUGHPUT",
+          "pyramid_level": "P2",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9,
+          "impact_category": "reliability",
+          "rationale": "Commercial machines run diverse programmes with very different flow rates. A single sensor covering the full range eliminates multi-sensor installations and reduces OEM BOM complexity.",
+          "confidence": 0.7,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N06",
+          "statement": "Minimize the number of undetected water leaks within the machine's internal fluid circuit that waste more than 50 litres per day",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "error_type": "DETECTION",
+          "pyramid_level": "P2",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13,
+          "impact_category": "cost",
+          "rationale": "Internal leaks (worn seals, cracked hoses, failed check valves) waste water and can cause property damage. In unmanned equipment, leaks persist for days before detection. A flow sensor can detect non-zero flow during idle periods.",
+          "confidence": 0.7,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N07",
+          "statement": "Minimize the likelihood of specifying a sensor whose pressure rating or media compatibility is incompatible with the machine's operating conditions across its full output-type range",
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "error_type": "ACCURACY",
+          "pyramid_level": "P2",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9,
+          "impact_category": "cost",
+          "rationale": "OEMs producing multiple machine types (laundry + car wash + water treatment) need a sensor that works across diverse conditions. Mis-specification leads to field failures and warranty claims.",
+          "confidence": 0.6,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N08",
+          "statement": "Increase the ability to measure water consumption per cycle with sufficient accuracy (±2%) to support pay-per-use billing models and per-machine water-use reporting",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ACCURACY",
+          "pyramid_level": "P2",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13,
+          "impact_category": "cost",
+          "rationale": "Pay-per-use vended laundry and car wash models require metered consumption for fair billing. Water-use reporting is increasingly required by franchise operators and sustainability auditors. Timed-fill (±10-20%) is insufficient.",
+          "confidence": 0.8,
+          "product_related": false,
+          "source": "web_search"
+        },
+        {
+          "id": "N09",
+          "statement": "Minimize measurement failure when water temperature ranges from 5 °C (cold fill) to 85 °C (hot wash cycle) within a single machine operating envelope",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ROBUSTNESS",
+          "pyramid_level": "P2",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9,
+          "impact_category": "reliability",
+          "rationale": "Commercial washers cycle between cold fill and hot wash within minutes. Speed of sound in water changes ~2.4 m/s per °C. Sensors without real-time temperature compensation accumulate error during rapid thermal transients.",
+          "confidence": 0.7,
+          "product_related": false,
+          "source": "web_search"
+        },
+        {
+          "id": "N10",
+          "statement": "Minimize the likelihood of flow sensor rotor clogging from lint, detergent residue, or mineral scale within 12 months of installation in commercial laundry or car wash equipment",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ROBUSTNESS",
+          "pyramid_level": "P1",
+          "importance": 8,
+          "satisfaction_current": 2,
+          "opportunity_score": 14,
+          "impact_category": "reliability",
+          "rationale": "Turbine/paddle-wheel rotors in commercial wash water are exposed to lint, surfactant residue, and mineral deposits. Fragments break off from scaling buildup and jam the rotor. Most turbine sensors in commercial laundry fail or drift significantly within 1-2 years.",
+          "confidence": 0.9,
+          "product_related": true,
+          "source": "web_search"
+        },
+        {
+          "id": "N11",
+          "statement": "Minimize the frequency of manual sensor disassembly and cleaning required to prevent accumulated debris from degrading flow measurement accuracy below ±5%",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "error_type": "EFFORT",
+          "pyramid_level": "P1",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11,
+          "impact_category": "cost",
+          "rationale": "Field service calls to clean turbine sensors cost $150-300 per visit. In a fleet of 50+ machines, quarterly cleaning schedules create significant ongoing maintenance expense that erodes total cost of ownership.",
+          "confidence": 0.8,
+          "product_related": true,
+          "source": "web_search"
+        },
+        {
+          "id": "N12",
+          "statement": "Minimize calibration drift exceeding ±5% per year caused by mechanical wear of paddle-wheel bearings and blade erosion in detergent-laden water",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "CONSISTENCY",
+          "pyramid_level": "P1",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13,
+          "impact_category": "reliability",
+          "rationale": "Paddle-wheel bearings in detergent water experience accelerated wear. Blade erosion from particulates changes the flow-to-pulse relationship. Drift is silent — no alarm indicates gradual accuracy loss — leading to undetected billing and dosing errors.",
+          "confidence": 0.8,
+          "product_related": true,
+          "source": "web_search"
+        },
+        {
+          "id": "N12b",
+          "statement": "Increase the ability to maintain accurate readings at low flow rates (<2 l/min) where turbine/paddle-wheel rotors stall due to insufficient fluid momentum to overcome mechanical inertia",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "THROUGHPUT",
+          "pyramid_level": "P1",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11,
+          "impact_category": "reliability",
+          "rationale": "Trickle-fill and pre-rinse cycles operate at low flow rates where mechanical rotors cannot start. This creates a measurement dead zone for turbine sensors, missing water consumption that should be tracked.",
+          "confidence": 0.7,
+          "product_related": true,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N13",
+          "statement": "Minimize the OEM integration time required to configure fluid-type parameters and verify acoustic coupling for each machine variant during assembly-line commissioning",
+          "job_step_number": 3,
+          "job_step_name": "PREPARE",
+          "error_type": "EFFORT",
+          "pyramid_level": "P1",
+          "importance": 6,
+          "satisfaction_current": 5,
+          "opportunity_score": 7,
+          "impact_category": "time",
+          "rationale": "OEM assembly lines target <30 seconds per sensor station. Acoustic coupling verification and fluid-type parameter configuration add setup steps not present with simple pulse-output turbine sensors. Pre-calibrated delivery mitigates this.",
+          "confidence": 0.7,
+          "product_related": true,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N14",
+          "statement": "Minimize the likelihood of signal loss when air bubbles from detergent agitation or water recycling aeration pass through the sensor during normal operation",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ROBUSTNESS",
+          "pyramid_level": "P1",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10,
+          "impact_category": "reliability",
+          "rationale": "Detergent agitation in wash cycles and aeration in water recycling systems introduce air bubbles >2% vol intermittently. Ultrasonic transit-time sensors lose signal during these events. In car wash reclaim systems, aeration is continuous.",
+          "confidence": 0.8,
+          "product_related": true,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N14b",
+          "statement": "Minimize the OEM qualification cost for validating acoustic performance across multiple machine platforms with different pipe diameters (DN14–DN25) and media compositions",
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "error_type": "EFFORT",
+          "pyramid_level": "P1",
+          "importance": 6,
+          "satisfaction_current": 4,
+          "opportunity_score": 8,
+          "impact_category": "cost",
+          "rationale": "OEMs producing diverse machine types need to validate sensor performance across each platform. Ultrasonic sensors require acoustic validation per DN variant and fluid type — a qualification matrix that turbine sensors (simple pulse output) do not require.",
+          "confidence": 0.6,
+          "product_related": true,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N14c",
+          "statement": "Increase the ability to distinguish genuine zero-flow conditions from ultrasonic signal loss caused by detergent foam or entrained air from recycled water systems",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "DETECTION",
+          "pyramid_level": "P1",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13,
+          "impact_category": "safety",
+          "rationale": "In commercial laundry and car wash, the controller must differentiate between an actual supply failure (requiring pump shutdown) and temporary signal loss from foam/bubbles (normal operation). False-positive empty-pipe alarms cause unnecessary cycle interruptions; missed true failures cause pump damage.",
+          "confidence": 0.7,
+          "product_related": true,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N15",
+          "statement": "Minimize the likelihood of water fill volume deviating more than ±15% from target due to supply pressure variations that invalidate timed-fill calibration",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ACCURACY",
+          "pyramid_level": "P1",
+          "importance": 7,
+          "satisfaction_current": 2,
+          "opportunity_score": 12,
+          "impact_category": "reliability",
+          "rationale": "Timed-fill calibration assumes constant supply pressure. In multi-machine installations, simultaneous fill cycles drop pressure 20-40%, causing underfill. Peak demand periods produce opposite overfill. Neither condition is detected.",
+          "confidence": 0.7,
+          "product_related": true,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N15b",
+          "statement": "Minimize the number of undetected water circuit faults (partial blockage, stuck valve, internal leak) that timed-fill dosing cannot sense because it lacks direct flow measurement",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "DETECTION",
+          "pyramid_level": "P1",
+          "importance": 8,
+          "satisfaction_current": 2,
+          "opportunity_score": 14,
+          "impact_category": "safety",
+          "rationale": "Solenoid-valve timed fill has zero fault-detection capability. A stuck-open valve, a partial blockage, or an internal leak produces no alarm. The fault persists until a human notices wet floors or abnormal wash results — potentially days in unmanned equipment.",
+          "confidence": 0.7,
+          "product_related": true,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N16",
+          "statement": "Minimize the required installation envelope (sensor body length and straight-pipe clearance) to fit within space-constrained commercial machine enclosures without requiring piping redesign",
+          "job_step_number": 2,
+          "job_step_name": "LOCATE",
+          "error_type": "EFFORT",
+          "pyramid_level": "P2",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9,
+          "impact_category": "cost",
+          "rationale": "Commercial machine enclosures are compact and highly optimized. Adding a flow sensor requires physical space for the sensor body plus 5-10x DN straight-pipe run upstream. Smaller sensors with shorter straight-run requirements enable retrofitting without piping redesign.",
+          "confidence": 0.7,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N16b",
+          "statement": "Minimize the likelihood of mounting the sensor at a location where turbulence from upstream valves, elbows, or T-junctions causes more than 2% systematic reading bias",
+          "job_step_number": 2,
+          "job_step_name": "LOCATE",
+          "error_type": "ACCURACY",
+          "pyramid_level": "P2",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10,
+          "impact_category": "reliability",
+          "rationale": "Machine internal piping is short and dense with frequent directional changes. Ideal straight-run requirements (5-10x DN) are often impossible to meet. Sensors tolerant of disturbed flow profiles are preferred.",
+          "confidence": 0.7,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N17",
+          "statement": "Minimize the total OEM assembly-line integration time from unpacking to first valid reading, including mechanical fitting, electrical connection, and protocol handshake",
+          "job_step_number": 3,
+          "job_step_name": "PREPARE",
+          "error_type": "EFFORT",
+          "pyramid_level": "P2",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9,
+          "impact_category": "time",
+          "rationale": "Commercial equipment OEMs produce hundreds to thousands of machines per year. Every additional minute of sensor integration time on the assembly line translates to measurable production cost. Plug-and-play sensors with auto-sensing are preferred.",
+          "confidence": 0.7,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N18",
+          "statement": "Minimize the likelihood of a sensor passing end-of-line quality test while having an undetected installation defect (misalignment, air pocket, reversed orientation) that causes field failure",
+          "job_step_number": 4,
+          "job_step_name": "CONFIRM",
+          "error_type": "DETECTION",
+          "pyramid_level": "P2",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9,
+          "impact_category": "skill",
+          "rationale": "End-of-line tests may not catch subtle installation defects. Reversed sensor orientation, for example, gives correct flow magnitude but inverted direction — undetectable in a single-direction test. Built-in self-diagnostics reduce escape rates.",
+          "confidence": 0.6,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N18b",
+          "statement": "Minimize the likelihood of releasing a machine from end-of-line testing with a flow sensor calibration error exceeding ±3% that goes undetected during the automated test cycle",
+          "job_step_number": 4,
+          "job_step_name": "CONFIRM",
+          "error_type": "ACCURACY",
+          "pyramid_level": "P2",
+          "importance": 8,
+          "satisfaction_current": 5,
+          "opportunity_score": 11,
+          "impact_category": "reliability",
+          "rationale": "OEM end-of-line tests typically verify sensor communication and gross function but not calibration accuracy against a traceable reference. Pre-calibrated sensors eliminate this risk at the sensor level.",
+          "confidence": 0.7,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N19",
+          "statement": "Increase the ability to provide real-time per-cycle water consumption data to the machine controller for IoT dashboard reporting and water-efficiency compliance documentation",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ACCURACY",
+          "pyramid_level": "P2",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13,
+          "impact_category": "cost",
+          "rationale": "IoT-enabled commercial equipment (Speed Queen Insights, WashTec SmartCare) demands per-cycle water data for fleet dashboards. Water-efficiency certification (EPA WaterSense, Energy Star) increasingly requires measured — not estimated — consumption data.",
+          "confidence": 0.8,
+          "product_related": false,
+          "source": "web_search"
+        },
+        {
+          "id": "N20",
+          "statement": "Increase the ability to detect abnormal water consumption patterns (e.g., >20% above baseline for the same cycle programme) indicating component degradation, valve failure, or internal leak",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "error_type": "DETECTION",
+          "pyramid_level": "P2",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11,
+          "impact_category": "reliability",
+          "rationale": "Trend analysis of per-cycle consumption enables predictive maintenance — detecting valve degradation, seal wear, or developing leaks before they become catastrophic. Requires baseline measurement capability that timed-fill systems lack.",
+          "confidence": 0.6,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N21",
+          "statement": "Minimize the number of sensor variants an OEM must qualify and stock to cover its full product range of water-using equipment across DN12–DN25 pipe sizes",
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "error_type": "EFFORT",
+          "pyramid_level": "P2",
+          "importance": 6,
+          "satisfaction_current": 4,
+          "opportunity_score": 8,
+          "impact_category": "cost",
+          "rationale": "OEMs producing multiple machine types prefer a single sensor platform with interchangeable flow bodies. Marquardt's shared-electronics platform across DN variants directly addresses this. Fewer part numbers reduce procurement, warehousing, and quality management overhead.",
+          "confidence": 0.6,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N22",
+          "statement": "Minimize the likelihood of flow measurement failure when water recycling systems introduce variable water quality (TDS 200–2,000 ppm, turbidity, temperature cycling) into the machine supply",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ROBUSTNESS",
+          "pyramid_level": "P2",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13,
+          "impact_category": "reliability",
+          "rationale": "Car wash water recycling systems reclaim 50-80% of water. Reclaimed water has higher TDS, variable turbidity, and temperature cycling that challenge sensor robustness. Any sensor deployed downstream of reclaim must tolerate this variability.",
+          "confidence": 0.8,
+          "product_related": false,
+          "source": "web_search"
+        },
+        {
+          "id": "N23",
+          "statement": "Minimize the field failure rate of the flow sensing subsystem to below 0.2% within the 10-year commercial machine design life",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ROBUSTNESS",
+          "pyramid_level": "P2",
+          "importance": 9,
+          "satisfaction_current": 5,
+          "opportunity_score": 13,
+          "impact_category": "reliability",
+          "rationale": "Commercial equipment OEMs target 10-year appliance design life with <0.5% warranty claim rate for any component. Flow sensor failure in unmanned vended equipment causes revenue loss and expensive field service dispatches.",
+          "confidence": 0.8,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N24",
+          "statement": "Increase the ability to document measured water consumption per cycle for EPA WaterSense, Energy Star, or EU Ecodesign water efficiency certification using onboard sensor data",
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "error_type": "ACCURACY",
+          "pyramid_level": "P2",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13,
+          "impact_category": "cost",
+          "rationale": "EPA WaterSense and Energy Star water-efficiency labels are increasingly required for institutional procurement and franchise compliance. Measured per-cycle data from onboard sensors provides certification evidence that estimated data cannot.",
+          "confidence": 0.7,
+          "product_related": false,
+          "source": "web_search"
+        },
+        {
+          "id": "N25",
+          "statement": "Increase the ability to demonstrate measured water efficiency data that qualifies the equipment for WaterSense or equivalent eco-labels on the first certification submission",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ACCURACY",
+          "pyramid_level": "P3",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11,
+          "impact_category": "cost",
+          "rationale": "P3 Role Identity: The OEM engineer whose equipment consistently earns sustainability certifications. Measured flow data enables first-pass certification, avoiding costly resubmissions.",
+          "confidence": 0.6,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N26",
+          "statement": "Increase the ability to provide per-cycle water usage data visible on the machine HMI or IoT dashboard that commercial customers can include in sustainability reporting",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ACCURACY",
+          "pyramid_level": "P4",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11,
+          "impact_category": "skill",
+          "rationale": "P4 Image Identity: Franchise operators and facility managers are watching. They need verifiable water-use data for ESG reporting. Equipment that provides transparent, measured data builds brand trust.",
+          "confidence": 0.5,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N27",
+          "statement": "Minimize the likelihood of a facility operator receiving an unexpected water utility bill exceeding budget by more than 15% due to undetected equipment water waste that the sensor could have flagged",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "error_type": "DETECTION",
+          "pyramid_level": "P5",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11,
+          "impact_category": "cost",
+          "rationale": "P5 Emotional [hypothesis]: Facility managers want to feel confident water costs are controlled. Unexpected utility spikes cause anxiety and erode trust in equipment. Continuous flow monitoring provides early warning of waste.",
+          "confidence": 0.5,
+          "product_related": false,
+          "source": "domain_knowledge"
+        }
+      ],
+      "entities_produced": {
+        "nodes": [
+          {
+            "label": "JobMap",
+            "key": {
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "JobStep",
+            "key": {
+              "step_number": 1,
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "JobStep",
+            "key": {
+              "step_number": 2,
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "JobStep",
+            "key": {
+              "step_number": 3,
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "JobStep",
+            "key": {
+              "step_number": 4,
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "JobStep",
+            "key": {
+              "step_number": 5,
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "JobStep",
+            "key": {
+              "step_number": 6,
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "JobStep",
+            "key": {
+              "step_number": 7,
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "JobStep",
+            "key": {
+              "step_number": 8,
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N01",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N02",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N03",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N04",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N05",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N06",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N07",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N08",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N09",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N10",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N11",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N12",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N12b",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N13",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N14",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N14b",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N14c",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N15",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N15b",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N16",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N16b",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N17",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N18",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N18b",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N19",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N20",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N21",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N22",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N23",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N24",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N25",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N26",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "N27",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "IncumbentAnchor",
+            "key": {
+              "technology_name": "Turbine / Paddle-Wheel Flow Sensor",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          },
+          {
+            "label": "IncumbentAnchor",
+            "key": {
+              "technology_name": "Solenoid-Valve Volumetric Dosing",
+              "naics_code": "333318",
+              "run_id": "TBD"
+            }
+          }
+        ],
+        "relationships": [
+          {
+            "type": "has_job_map",
+            "source": "Market:333318",
+            "target": "JobMap:333318"
+          },
+          {
+            "type": "anchored_at",
+            "source": "JobMap:333318",
+            "target": "ValueNetworkUnit:Flow Sensing & Measurement"
+          },
+          {
+            "type": "has_job_step",
+            "source": "JobMap:333318",
+            "target": "JobStep:1-8"
+          },
+          {
+            "type": "has_error_statement",
+            "source": "JobStep:*",
+            "target": "ErrorStatement:N01-N27"
+          },
+          {
+            "type": "has_need",
+            "source": "Market:333318",
+            "target": "ErrorStatement:N01-N27"
+          },
+          {
+            "type": "has_incumbent_anchor",
+            "source": "Market:333318",
+            "target": "IncumbentAnchor:Turbine / Paddle-Wheel Flow Sensor"
+          },
+          {
+            "type": "has_incumbent_anchor",
+            "source": "Market:333318",
+            "target": "IncumbentAnchor:Solenoid-Valve Volumetric Dosing"
+          },
+          {
+            "type": "anchored_at",
+            "source": "IncumbentAnchor:Turbine / Paddle-Wheel Flow Sensor",
+            "target": "ValueNetworkUnit:Flow Sensing & Measurement"
+          },
+          {
+            "type": "anchored_at",
+            "source": "IncumbentAnchor:Solenoid-Valve Volumetric Dosing",
+            "target": "ValueNetworkUnit:Flow Sensing & Measurement"
+          }
+        ]
+      }
+    }
+  ],
+  "has_bom": true,
+  "naics_sector_type": "manufacturing"
+}

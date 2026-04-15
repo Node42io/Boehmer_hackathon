@@ -1,0 +1,1394 @@
+{
+  "id": "BOM_air_conditioning_and_warm_air_heating_eq",
+  "title": "Product BOM Decomposition — NAICS 333415",
+  "type": "product_bom",
+  "market_slug": "air_conditioning_and_warm_air_heating_eq",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Output Type Scoping",
+      "content": "| OT | Name | Hydronic Circuit? | Sensor Fit |\n|---|---|---|---|\n| OT-1 | Residential Split/Packaged AC | No | — |\n| OT-2 | Water-Source Heat Pump | **Yes** | **Primary fit** — water loop flow measurement |\n| OT-3 | Warm Air Furnace | No | — |\n| OT-4 | Commercial Rooftop Unit | No | — |\n| OT-5 | Water-Cooled Chiller | **Yes** | **Primary fit** — chilled water + condenser water loops |\n| OT-6 | Commercial Refrigeration | No | — |\n| OT-7 | Industrial Refrigeration | Partial | Secondary fit — glycol loop ≤50% |\n\n---"
+    },
+    {
+      "title": "L4 — Subsystems (Generic Cross-OT View)",
+      "content": "| L4 ID | Subsystem | Approx. % BOM Cost | Key Design Choice | Alternatives (market share) |\n|---|---|---|---|---|\n| L4-A | **Refrigerant Circuit** | ~35% | Compression technology | Scroll 48% · Rotary 25% · Screw 15% · Centrifugal 8% · Reciprocating 4% |\n| L4-B | **Heat Exchanger** | ~25% | HX geometry | Brazed-plate 55% · Shell-and-tube 30% · Microchannel 15% |\n| L4-C | **Hydronic Circuit** | ~12% | Piping & instrumentation | Copper 60% · Stainless 25% · CPVC/PEX 15% |\n| L4-D | **Controls & Electrical** | ~15% | Controller platform | Proprietary ECU 65% · Third-party BMS gateway 35% |\n| L4-E | **Enclosure & Structure** | ~8% | Sheet metal material | G90 galv. steel 70% · Powder-coat aluminum 20% · SS 10% |\n| L4-F | **Refrigerant Charge** | ~5% | Refrigerant fluid | R-410A 64% · R-32 18% · R-454B 12% · R-407C 4% · CO₂ 2% |\n\n---"
+    },
+    {
+      "title": "L3 — Modules (per subsystem)",
+      "content": "### L4-A · Refrigerant Circuit\n| L3 ID | Module | Alternatives |\n|---|---|---|\n| L3-A1 | **Compressor Module** | Inverter-scroll (dominant) · Fixed-scroll · Twin-rotary · Screw |\n| L3-A2 | **Expansion Module** | EEV/electronic 70% · TXV 30% |\n| L3-A3 | **Four-Way Reversing Valve** (OT-2 only) | Solenoid-actuated spool valve (near-universal) |\n| L3-A4 | **Refrigerant Piping** | Brazed copper 85% · Stainless flex 15% |\n\n### L4-B · Heat Exchanger\n| L3 ID | Module | Alternatives |\n|---|---|---|\n| L3-B1 | **Evaporator (water-side)** | Brazed-plate dominant for OT-2/OT-5 · DX coil for OT-1/OT-4 |\n| L3-B2 | **Condenser (water-side)** | Shell-and-tube 40% · Brazed-plate 35% · Tube-and-fin 25% |\n\n### L4-C · Hydronic Circuit ← Marquardt sensor location\n| L3 ID | Module | Alternatives |\n|---|---|---|\n| L3-C1 | **Circulation Pump Module** | Wet-rotor ECM 60% · Dry-rotor centrifugal 40% |\n| L3-C2 | **Flow & Temperature Measurement Assembly** ← DN20 lives here | Ultrasonic transit-time 45% · Vortex 25% · Electromagnetic 20% · Turbine 10% |\n| L3-C3 | **Pressure & Safety Valve Assembly** | Spring-loaded PRV + pressure transducer |\n| L3-C4 | **Hydronic Manifold & Balancing Valves** | Cast iron 55% · Brass 35% · SS 10% |\n\n### L4-D · Controls & Electrical\n| L3 ID | Module | Alternatives |\n|---|---|---|\n| L3-D1 | **Main Control Board (ECU)** | Proprietary MCU · Third-party PLC |\n| L3-D2 | **Power Electronics & Inverter Drive** | IGBT-based VFD (dominant) · SiC emerging |\n| L3-D3 | **Wiring Harness & Terminal Block** | — |\n| L3-D4 | **Communication Interface Module** | BACnet/Modbus 60% · LonWorks 20% · Proprietary 20% |\n\n---"
+    },
+    {
+      "title": "L2 — Assemblies",
+      "content": "| L2 ID | Assembly | Parent L3 | Alternatives / Key Players |\n|---|---|---|---|\n| L2-A1a | Scroll compressor body + motor | L3-A1 | Copeland/Emerson 24% · Daikin 18% · LG 14% · Panasonic 10% · Other 34% |\n| L2-A2a | EEV body + stepper actuator | L3-A2 | Danfoss 35% · Sporlan/Parker 28% · Fujikoki 22% · Other 15% |\n| L2-B1a | Brazed-plate HX core (stainless) | L3-B1 | Alfa Laval 32% · Danfoss/SWEP 28% · Kelvion 18% · Other 22% |\n| L2-C1a | Pump casing + wet-rotor motor | L3-C1 | Grundfos 38% · Wilo 28% · Taco 14% · Other 20% |\n| L2-C2a | **Flow sensor body + transducer pair** ← Marquardt DN20 | L3-C2 | Marquardt · Honeywell · Sensirion · Gems · ifm |\n| L2-D1a | PCB + MCU + power supply | L3-D1 | — |\n\n---"
+    },
+    {
+      "title": "L1 — Parts",
+      "content": "| L1 ID | Part | Parent L2 | Material / Technology |\n|---|---|---|---|\n| L1-A1a-1 | Scroll wrap set (fixed + orbiting) | L2-A1a | Powder-metallurgy steel or cast iron |\n| L1-A1a-2 | Hermetic motor winding | L2-A1a | Enameled copper wire, laminated silicon steel |\n| L1-A2a-1 | Valve needle + seat | L2-A2a | Hardened SS, PTFE seat |\n| L1-A2a-2 | Stepper motor | L2-A2a | Rare-earth PM rotor |\n| L1-B1a-1 | Pressed stainless steel plates | L2-B1a | 316L stainless |\n| L1-B1a-2 | Copper brazing foil | L2-B1a | >99% Cu |\n| L1-C2a-1 | **Piezo transducer pair (A + B)** ← Marquardt core | L2-C2a | PZT ceramic (lead zirconate titanate) |\n| L1-C2a-2 | **Sensor body / flow tube (DN20)** | L2-C2a | PPS/PVDF or brass |\n| L1-C2a-3 | **Signal processing PCB** | L2-C2a | FR-4, SMD components |\n| L1-D1a-1 | MCU / SoC | L2-D1a | ARM Cortex-M, 28–40 nm process node |\n| L1-D1a-2 | IGBT / SiC power module | L2-D1a | Si IGBT or SiC MOSFET |\n\n---"
+    },
+    {
+      "title": "L0 — Raw Materials",
+      "content": "| L0 ID | Raw Material | Primary Use Nodes | Notes |\n|---|---|---|---|\n| L0-1 | **Copper** (Cu) | HX cores, wiring, tubes | 27% HX material share; Aurubis, Codelco |\n| L0-2 | **Aluminum** (Al) | Fin arrays, enclosure panels | 18% HX material share |\n| L0-3 | **Stainless Steel 316L** | Brazed-plate HX, piping | 40% HX material share; Outokumpu, Aperam |\n| L0-4 | **Galvanized / pre-painted steel** | Enclosure sheet metal | ArcelorMittal, POSCO |\n| L0-5 | **PZT ceramic** | Piezo transducer pair | PI Ceramics, APC International, TDK |\n| L0-6 | **PPS / PVDF polymer** | Sensor flow tube body | Solvay, Ticona |\n| L0-7 | **R-454B / R-32 refrigerant** | Refrigerant charge | Phase-out of R-410A began Jan 2025; R-454B shortage driving 300%+ price spike |\n| L0-8 | **NdFeB rare-earth magnets** | Compressor + pump motors | MP Materials, Shin-Etsu |\n| L0-9 | **Silicon wafer** | MCU, IGBT, SiC modules | TSMC, Infineon, ON Semi |\n| L0-10 | **Copper brazing alloy (BCuP)** | HX plate brazing | Harris Products, Lucas-Milhaupt |\n\n---"
+    },
+    {
+      "title": "Marquardt Sensor Placement",
+      "content": "```\nOT-2 / OT-5 End Product\n└── L4-C  Hydronic Circuit Subsystem\n    └── L3-C2  Flow & Temperature Measurement Assembly\n        └── L2-C2a  Flow sensor body + transducer pair   ← Marquardt DN20\n            ├── L1-C2a-1  PZT piezo transducer pair (A+B)\n            ├── L1-C2a-2  DN20 flow tube (PPS/PVDF/brass)\n            └── L1-C2a-3  Signal processing PCB\n                └── L0-5  PZT ceramic\n                └── L0-6  PPS / PVDF polymer\n```\n\n**Sensor technology share at L2-C2a:** Ultrasonic transit-time **45%** (fastest growing, non-invasive) · Vortex 25% · Electromagnetic 20% · Turbine 10%.\n\n---"
+    },
+    {
+      "title": "Per-Output-Type BOM Trees",
+      "content": "> Full L4 → L0 decomposition for each of the 7 output types produced by NAICS 333415. Alternatives shown with market share % where real data exists; confidence rated HIGH / MEDIUM / LOW. Branches are decomposed deeper where technology or material choices exist; commodity branches with no meaningful alternatives are abbreviated.\n\n---\n\n### OUTPUT TYPE: OT-1 — Residential Split/Packaged AC\n\n> Sub-types: window units · single-zone mini-splits · multi-zone mini-splits · packaged residential. No hydronic circuit. No combustion. All-electric vapor-compression cooling (and heating in heat-pump variants — see OT-2).\n\n```\nOT-1  Residential Split/Packaged AC\n│\n├── L4-A  Refrigerant Circuit  [~35% BOM cost]\n│   │\n│   ├── L3-A1  Compressor Module\n│   │         Alternatives: Rotary twin-cylinder 45% · Fixed-scroll 38% ·\n│   │         Inverter-rotary (variable-speed) 12% · Reciprocating 5%  [HIGH]\n│   │   └── L2-A1a  Compressor body + hermetic motor assembly\n│   │       ├── L1-A1a-1  Compression element (rotary cylinder+roller OR scroll wraps)\n│   │       │             L0  Cast iron · OR · sintered powder-metallurgy steel\n│   │       ├── L1-A1a-2  Hermetic motor winding (2-pole, 50/60 Hz)\n│   │       │             L0  Enameled copper wire (180°C class) ·\n│   │       │                 silicon-steel laminations (M19–M36)\n│   │       └── L1-A1a-3  Crankshaft + bearing set\n│   │                     L0  Alloy steel (carburized) · sintered iron bearings\n│   │\n│   ├── L3-A2  Expansion Module\n│   │         Alternatives: EEV (electronic expansion valve) 65% ·\n│   │         TXV (thermostatic) 35%  [HIGH]\n│   │   └── L2-A2a  EEV body + stepper-motor actuator\n│   │       ├── L1-A2a-1  Valve needle + seat\n│   │       │             L0  Hardened stainless steel 440C · PTFE seat\n│   │       └── L1-A2a-2  Stepper motor (rare-earth PM rotor)\n│   │                     L0  NdFeB rare-earth magnets · enameled copper wire\n│   │\n│   ├── L3-A3  Refrigerant Piping & Accessories\n│   │   ├── L2-A3a  Pre-charged lineset OR field-brazed copper tube set\n│   │   │   ├── L1-A3a-1  Liquid-line copper tube (3/8\" OD, 0.028\" wall)\n│   │   │   │             L0  Copper C12200 (ETP grade)\n│   │   │   └── L1-A3a-2  Suction-line copper tube (3/4\"–7/8\" OD)\n│   │   │                 L0  Copper C12200 (ETP grade)\n│   │   └── L2-A3b  Filter-drier assembly\n│   │       ├── L1-A3b-1  Copper shell\n│   │       │             L0  Copper\n│   │       └── L1-A3b-2  Desiccant core\n│   │                     L0  Molecular sieve (zeolite 3A/4A) · activated alumina\n│   │\n│   └── L3-A4  Refrigerant Charge\n│             Alternatives: R-454B (A2L, GWP 466) 60% · R-32 (A2L, GWP 675) 22% ·\n│             R-410A (legacy, banned in new equip. Jan 2025) 12% ·\n│             R-407C 4% · R-22 (<2%, retrofit only)  [HIGH]\n│\n├── L4-B  Heat Exchanger Section  [~22% BOM cost]\n│   │\n│   ├── L3-B1  Condenser Coil (outdoor, air-to-refrigerant)\n│   │         Alternatives: Cu-tube / Al-fin (RTPF) 72% ·\n│   │         All-Al microchannel (MCHX) 25% · Cu-tube / Cu-fin 3%  [MEDIUM]\n│   │   ├── L2-B1a  Round-tube / plate-fin coil core  [Alt A — dominant]\n│   │   │   ├── L1-B1a-1  Copper refrigerant tubes (3/8\" OD, 0.020\" wall)\n│   │   │   │             L0  Copper C12200\n│   │   │   ├── L1-B1a-2  Aluminum fin array (0.006\"–0.008\" thick, louvered)\n│   │   │   │             L0  Aluminum alloy 3003 (or 7072 anti-corrosion variant)\n│   │   │   └── L1-B1a-3  Copper U-bends + return headers\n│   │   │                 L0  Copper C12200\n│   │   └── L2-B1b  Microchannel flat-tube coil  [Alt B]\n│   │       ├── L1-B1b-1  Extruded Al multiport flat tube\n│   │       │             L0  Aluminum alloy 3003 (extrusion grade)\n│   │       ├── L1-B1b-2  Louvered corrugated fin strip\n│   │       │             L0  Aluminum alloy 3003\n│   │       └── L1-B1b-3  Brazed Al headers/manifolds\n│   │                     L0  Aluminum 3003 · Al brazing filler 4045 clad sheet\n│   │\n│   └── L3-B2  Evaporator Coil (indoor, air-to-refrigerant)\n│             Alternatives: Cu-tube / Al-fin 78% · All-Al microchannel 20% ·\n│             Cu-tube / Cu-fin 2%  [MEDIUM]\n│       └── L2-B2a  Tube-and-fin evaporator core\n│           ├── L1-B2a-1  Copper tubes (3/8\" OD, 0.020\" wall)\n│           │             L0  Copper C12200\n│           └── L1-B2a-2  Aluminum fins (0.0045\"–0.006\" thick)\n│                         L0  Aluminum alloy 3003\n│\n├── L4-C  Fan & Air Distribution  [~12% BOM cost]\n│   │\n│   ├── L3-C1  Condenser Fan Module (outdoor propeller fan)\n│   │         Alternatives: Single-blade propeller 70% · Dual-blade propeller 25% ·\n│   │         Axial cross-flow 5%  [MEDIUM]\n│   │   ├── L2-C1a  Fan blade + hub assembly\n│   │   │   ├── L1-C1a-1  Propeller blade (4–6 blades)\n│   │   │   │             L0  Glass-fiber-reinforced polypropylene (GFR-PP) ·\n│   │   │   │                 OR · 6xxx aluminum alloy\n│   │   │   └── L1-C1a-2  Fan hub + guard ring\n│   │   │                 L0  Zinc alloy (Zamak) die-cast · OR · carbon steel\n│   │   └── L2-C1b  Condenser fan motor\n│   │             Alternatives: PSC motor 55% · ECM (DC brushless) 45%  [MEDIUM]\n│   │       ├── L1-C1b-1  Motor stator + winding\n│   │       │             L0  Enameled copper wire · silicon-steel laminations\n│   │       └── L1-C1b-2  PM rotor (ECM variant only)\n│   │                     L0  NdFeB rare-earth magnets\n│   │\n│   └── L3-C2  Indoor Blower Module\n│             Alternatives: ECM centrifugal 70% · PSC centrifugal 25% ·\n│             DC BLDC inverter 5%  [HIGH]\n│       └── L2-C2a  Centrifugal blower wheel + motor\n│           ├── L1-C2a-1  Forward-curved blower wheel\n│           │             L0  Galvanized steel (G60) · OR · GFR-polypropylene\n│           └── L1-C2a-2  ECM motor (brushless DC, integrated inverter drive)\n│                         L0  Copper windings · NdFeB magnets ·\n│                             silicon-steel laminations ·\n│                             silicon wafer (IGBT/MOSFET, inverter PCB)\n│\n├── L4-D  Controls & Electrical  [~15% BOM cost]\n│   │\n│   ├── L3-D1  Main Control Board (ECU)\n│   │         Alternatives: Proprietary OEM MCU 72% ·\n│   │         Smart-home-open-API board (Nest/ecobee compatible) 28%  [MEDIUM]\n│   │   └── L2-D1a  PCB + MCU + power supply module\n│   │       ├── L1-D1a-1  MCU/SoC (ARM Cortex-M, 28–40 nm)\n│   │       │             L0  Silicon wafer (TSMC, Infineon, STMicro)\n│   │       ├── L1-D1a-2  Gate drivers + power MOSFETs\n│   │       │             L0  Silicon (MOSFET die) · copper lead-frame\n│   │       └── L1-D1a-3  Electrolytic capacitors (DC link, signal rail)\n│   │                     L0  Aluminum electrolytic · tantalum\n│   │\n│   ├── L3-D2  Contactor & Capacitor Bank\n│   │   └── L2-D2a  Motor-run + motor-start capacitor set\n│   │       └── L1  Metallized polypropylene film capacitor (440 VAC)\n│   │             L0  Biaxially oriented polypropylene (BOPP) · Al metallization\n│   │\n│   └── L3-D3  Wiring Harness & Terminal Blocks\n│       └── L2-D3a  Pre-terminated wire harness\n│           └── L1  Multi-conductor PVC-insulated wire (18–12 AWG)\n│                 L0  Annealed copper conductor · PVC insulation\n│\n└── L4-E  Enclosure & Structure  [~8% BOM cost]\n    │\n    ├── L3-E1  Outdoor Unit Cabinet\n    │         Alternatives: G90 galvanized pre-painted steel 75% ·\n    │         Powder-coat aluminum 18% · 304 SS 7%  [HIGH]\n    │   └── L2-E1a  Top panel + louver side panels + base rail\n    │       ├── L1-E1a-1  Stamped/formed cabinet panel\n    │       │             L0  G90 galvanized steel 0.7–1.2 mm pre-painted\n    │       │                 (ArcelorMittal, POSCO, Nippon Steel)\n    │       └── L1-E1a-2  Wire guard (condenser fan protection)\n    │                     L0  Carbon steel wire, hot-dip galvanized\n    │\n    └── L3-E2  Indoor Air Handler Cabinet\n        └── L2-E2a  Insulated liner + condensate pan + drain fitting\n            ├── L1-E2a-1  Galvanized steel inner panel\n            │             L0  G60 galvanized steel\n            ├── L1-E2a-2  ABS condensate drain pan\n            │             L0  ABS polymer (BASF, LG Chem)\n            └── L1-E2a-3  Foam vibration + thermal liner\n                          L0  Closed-cell polyethylene foam\n```\n\n---\n\n### OUTPUT TYPE: OT-2 — Heat Pump (Air-Source & Water-Source)\n\n> Sub-types: Air-source HP (ASHP) · Water-source HP (WSHP) · Ground-source HP (GSHP). The hydronic circuit (L4-C) exists **only** in WSHP/GSHP variants — this is the primary Marquardt DN20 application. ASHP branches that differ from OT-1 are noted inline.\n\n```\nOT-2  Heat Pump (Air-Source & Water-Source)\n│\n├── L4-A  Refrigerant Circuit  [~35% BOM cost]\n│   │\n│   ├── L3-A1  Compressor Module\n│   │         Alternatives: Inverter-scroll 50% · Fixed-scroll 30% ·\n│   │         Inverter-rotary 15% · Reciprocating 5%  [HIGH]\n│   │         [Inverter-scroll higher than OT-1 due to cold-climate efficiency need]\n│   │   └── L2-A1a  Compressor body + hermetic motor assembly\n│   │       ├── L1-A1a-1  Scroll element (orbiting + fixed scroll wraps)\n│   │       │             L0  Cast iron · OR · sintered powder-metallurgy steel\n│   │       ├── L1-A1a-2  Motor winding + PM rotor (inverter variant)\n│   │       │             L0  Enameled copper wire · NdFeB magnets ·\n│   │       │                 silicon-steel laminations\n│   │       └── L1-A1a-3  Integrated inverter drive PCB (inverter-scroll only)\n│   │                     L0  Silicon wafer (IGBT/SiC) · FR-4 PCB · NdFeB\n│   │\n│   ├── L3-A2  Expansion Module\n│   │         Alternatives: EEV (electronic) 70% · TXV (thermostatic) 30%  [HIGH]\n│   │   └── L2-A2a  EEV body + stepper-motor actuator\n│   │       (same structure as OT-1 L3-A2)\n│   │\n│   ├── L3-A3  Four-Way Reversing Valve  [present in all HP variants; absent in OT-1 cooling-only]\n│   │         Alternatives: Solenoid pilot-operated spool valve ~99% ·\n│   │         Ball-type reversing valve <1%  [HIGH]\n│   │   └── L2-A3a  Valve body + solenoid pilot + spool\n│   │       ├── L1-A3a-1  Brass or copper valve body\n│   │       │             L0  Brass (Cu-Zn alloy) · OR · copper\n│   │       └── L1-A3a-2  Solenoid coil + iron plunger (pilot)\n│   │                     L0  Enameled copper wire · iron-silicon core\n│   │\n│   ├── L3-A4  Refrigerant Piping & Accessories\n│   │         (same structure as OT-1 L3-A3)\n│   │\n│   └── L3-A5  Refrigerant Charge\n│             Alternatives: R-454B (A2L) 60% · R-32 (A2L) 22% ·\n│             R-410A (legacy) 12% · R-407C 4% · R-134a (WSHP secondary, minor) 2%  [HIGH]\n│\n├── L4-B  Heat Exchanger Section  [~25% BOM cost]\n│   │\n│   ├── L3-B1  Outdoor Air-to-Refrigerant Coil  [ASHP only — absent in WSHP]\n│   │         Alternatives: Cu-tube / Al-fin 68% · All-Al MCHX 27% ·\n│   │         Cu-tube / Cu-fin 5%  [MEDIUM]\n│   │         (same coil structure as OT-1 L3-B1)\n│   │\n│   ├── L3-B2  Indoor Refrigerant-to-Air Coil  [ASHP] OR\n│   │          Water-to-Refrigerant HX (source-side)  [WSHP]\n│   │         [ASHP indoor coil: same as OT-1 L3-B2]\n│   │\n│   └── L3-B3  Water-to-Refrigerant Plate Heat Exchanger  [WSHP/GSHP only]\n│             Alternatives: Brazed-plate (BPHE) 65% · Shell-and-tube 30% ·\n│             Welded-plate 5%  [HIGH]\n│       ├── L2-B3a  Brazed-plate HX core (316L SS)  [Alt A — dominant]\n│       │   ├── L1-B3a-1  Pressed 316L SS plates (0.4–0.6 mm, herringbone)\n│       │   │             L0  316L stainless steel (Outokumpu, Aperam, Acerinox)\n│       │   └── L1-B3a-2  Copper brazing foil (CuP alloy, >99% Cu)\n│       │                 L0  Copper BCuP brazing filler alloy\n│       └── L2-B3b  Shell-and-tube water/refrigerant HX  [Alt B]\n│           ├── L1-B3b-1  Carbon steel pressure vessel shell\n│           │             L0  Carbon steel A516 Gr. 70\n│           └── L1-B3b-2  Copper enhanced-surface tubes (3/4\" OD)\n│                         L0  Copper C12200 (internally grooved)\n│\n├── L4-C  Hydronic Circuit  [~12% BOM cost — WSHP/GSHP only; absent in ASHP]\n│   │      ←  PRIMARY Marquardt DN20 application\n│   │\n│   ├── L3-C1  Circulation Pump Module\n│   │         Alternatives: Wet-rotor ECM inline pump 60% ·\n│   │         Dry-rotor centrifugal pump 40%  [MEDIUM]\n│   │   └── L2-C1a  Pump casing + wet-rotor ECM motor\n│   │       ├── L1-C1a-1  Pump casing + impeller\n│   │       │             L0  Cast iron (standard) ·\n│   │       │                 OR · 304 SS (premium / glycol service)\n│   │       └── L1-C1a-2  ECM motor rotor + stator\n│   │                     L0  Ferrite or NdFeB magnets · copper winding ·\n│   │                         silicon-steel laminations\n│   │\n│   ├── L3-C2  Flow & Temperature Measurement Assembly  ← Marquardt DN20\n│   │         Alternatives: Ultrasonic transit-time 45% · Vortex 25% ·\n│   │         Electromagnetic 20% · Turbine 10%  [HIGH]\n│   │   └── L2-C2a  Flow sensor body + transducer pair  ← Marquardt DN20\n│   │       ├── L1-C2a-1  Piezo transducer pair (A + B)\n│   │       │             L0  PZT ceramic (PI Ceramics, APC International, TDK)\n│   │       ├── L1-C2a-2  Sensor body / flow tube (DN20)\n│   │       │             L0  PPS polymer · OR · PVDF · OR · brass\n│   │       └── L1-C2a-3  Signal processing PCB\n│   │                     L0  FR-4 substrate · silicon wafer (MCU) · SMD components\n│   │\n│   ├── L3-C3  Pressure & Safety Valve Assembly\n│   │   └── L2-C3a  Spring-loaded PRV + pressure transducer\n│   │       └── L1  Brass PRV body + stainless-steel spring\n│   │             L0  Brass · stainless steel (spring wire, 302/304)\n│   │\n│   ├── L3-C4  Hydronic Manifold & Balancing Valves\n│   │         Alternatives: Cast iron 55% · Brass 35% · 304 SS 10%  [MEDIUM]\n│   │   └── L2-C4a  Manifold body + balancing valve set\n│   │       ├── L1  Cast iron manifold body\n│   │       │     L0  Gray cast iron GJL-250\n│   │       └── L1  Brass isolation/balancing valve\n│   │             L0  Brass CW617N (dezincification-resistant)\n│   │\n│   └── L3-C5  Hydronic Piping\n│             Alternatives: Copper 60% · Stainless 25% · CPVC/PEX 15%  [MEDIUM]\n│       └── L2-C5a  Pipe sections + fittings\n│           └── L1  Copper tube (ASTM B88 Type L, 3/4\"–1.5\" OD)\n│                 L0  Copper C12200\n│\n├── L4-D  Controls & Electrical  [~15% BOM cost]\n│   │\n│   ├── L3-D1  Main Control Board (ECU) + Defrost Control Module\n│   │         Alternatives: Proprietary MCU with defrost timer 65% ·\n│   │         Third-party BMS gateway (BACnet/Modbus) 35%  [MEDIUM]\n│   │   └── L2-D1a  PCB + MCU + power supply + defrost relay\n│   │       (same electronics as OT-1 L3-D1, plus defrost relay + outdoor temp sensor)\n│   │\n│   ├── L3-D2  Power Electronics & Inverter Drive (inverter models)\n│   │         Alternatives: IGBT-based VFD 78% · SiC MOSFET VFD (emerging) 22%  [MEDIUM]\n│   │   └── L2-D2a  IGBT or SiC power module + heatsink\n│   │       ├── L1-D2a-1  IGBT / SiC MOSFET die\n│   │       │             L0  Silicon (IGBT) · OR · silicon carbide SiC\n│   │       │                 (Infineon, ON Semi, Wolfspeed)\n│   │       └── L1-D2a-2  Heatsink (extruded Al, anodized)\n│   │                     L0  Aluminum alloy 6063\n│   │\n│   └── L3-D3  Communication Interface Module\n│             Alternatives: BACnet/Modbus 60% · LonWorks 20% · Proprietary 20%  [MEDIUM]\n│\n└── L4-E  Enclosure & Structure  [~7% BOM cost]\n          (same as OT-1 L4-E; outdoor panels heavier gauge for freeze-protection applications)\n```\n\n---\n\n### OUTPUT TYPE: OT-3 — Warm Air Furnace\n\n> Sub-types: Natural-gas condensing (90%+ AFUE) · Natural-gas non-condensing (80% AFUE) · Propane · Oil-fired · Electric forced-air. **No refrigerant circuit. No HFC refrigerant. No compressor.** Primary function: combustion → heat transfer → forced-air distribution. Condensing units add a secondary stainless-steel or polymer HX to recover latent heat from flue gas.\n\n```\nOT-3  Warm Air Furnace\n│\n├── L4-A  Combustion Section  [~20% BOM cost]\n│   │\n│   ├── L3-A1  Burner Assembly\n│   │         Alternatives: Inshot burner 65% · Upshot burner 20% ·\n│   │         Premix (condensing, modulating) 12% · Power burner (oil/gas combo) 3%  [HIGH]\n│   │   └── L2-A1a  Burner head + flame retention ring\n│   │       ├── L1-A1a-1  Burner port / nozzle\n│   │       │             L0  Gray cast iron GJL-150 · OR · aluminized steel\n│   │       └── L1-A1a-2  Gas metering orifice (drilled)\n│   │                     L0  Brass CW617N\n│   │\n│   ├── L3-A2  Gas Valve & Pressure Regulator\n│   │         Alternatives: Single-stage gas valve 45% · Two-stage 35% ·\n│   │         Modulating (variable output) 20%  [HIGH]\n│   │   └── L2-A2a  Combination gas valve (shutoff + regulator + solenoid)\n│   │       ├── L1-A2a-1  Valve body\n│   │       │             L0  Aluminum die-cast · OR · zinc die-cast\n│   │       └── L1-A2a-2  Solenoid coil + iron plunger\n│   │                     L0  Enameled copper wire · iron core\n│   │\n│   └── L3-A3  Ignition Module\n│             Alternatives: Hot surface ignitor (HSI, Si₃N₄ or SiC) 46% ·\n│             Electronic direct spark (DSI) 24% · Intermittent pilot (IP) 12% ·\n│             Standing pilot 12% · Other electronic 6%  [HIGH]\n│             [Electronic ignition total: 82% of new 2024 installations]\n│       ├── L2-A3a  Hot-surface ignitor element + holder  [Alt A — dominant]\n│       │   ├── L1-A3a-1  HSI element (silicon nitride or silicon carbide ceramic)\n│       │   │             L0  Silicon nitride Si₃N₄ · OR · silicon carbide SiC\n│       │   └── L1-A3a-2  Porcelain / alumina insulating holder\n│       │                 L0  Alumina ceramic Al₂O₃\n│       └── L2-A3b  Flame rod + ceramic insulator (ionization sensing)\n│           └── L1  High-temp stainless flame rod\n│                 L0  Stainless steel 310 (Fe-Ni-Cr, high-temperature alloy)\n│\n├── L4-B  Primary Heat Exchanger  [~22% BOM cost]\n│   │\n│   └── L3-B1  Primary HX Cell Array (clamshell or tubular cells)\n│             Alternatives: Aluminized steel Type-1 78% · 409 ferritic SS 18% ·\n│             Titanium-stabilized 439 SS 4%  [HIGH]\n│       └── L2-B1a  Formed clamshell HX cells (multiple cells in parallel)\n│           ├── L1-B1a-1  Clamshell HX cell body (stamped, deep-drawn)\n│           │             L0  Aluminized steel Type-1 (Al-Si coating on low-C steel;\n│           │                 POSCO, Worthington Industries)\n│           │             OR  L0  409 ferritic stainless steel (10.5% Cr; Outokumpu)\n│           └── L1-B1a-2  End caps + collars (wrinkle-formed)\n│                         L0  Aluminized steel (same grade as cell)\n│\n├── L4-C  Secondary Heat Exchanger (Condensing Units ~44% of installed base)\n│   │      [~12% BOM cost — condensing units only; absent in non-condensing (56% of market)]\n│   │\n│   ├── L3-C1  Condensate HX Coil (latent heat recovery from flue gas)\n│   │         Alternatives: 304/316L stainless steel coil 55% ·\n│   │         Duplex SS 2205 20% · Polypropylene HX 20% · 409 SS 5%  [HIGH]\n│   │   └── L2-C1a  SS serpentine tube bundle OR polymer coil\n│   │       ├── L1-C1a-1  SS tube (1/2\" OD, 0.035\" wall) OR PP tube\n│   │       │             L0  304 SS · OR · 316L SS (Outokumpu, Aperam) ·\n│   │       │                 OR · polypropylene (BASF Ultrason)\n│   │       └── L1-C1a-2  Tube support baffles\n│   │                     L0  304 SS sheet · OR · polypropylene\n│   │\n│   └── L3-C2  Condensate Collection & Drain Assembly\n│       └── L2-C2a  PVC or ABS condensate pan + drain trap + neutralizer\n│           └── L1  ABS or PVC condensate pan\n│                 L0  ABS polymer · OR · PVC\n│\n├── L4-D  Blower & Air Distribution  [~12% BOM cost]\n│   │\n│   ├── L3-D1  Main Blower Assembly\n│   │         Alternatives: ECM multi-speed blower 70% · PSC single/multi-speed 25% ·\n│   │         DC variable-speed 5%  [HIGH]\n│   │   └── L2-D1a  Centrifugal blower wheel + motor\n│   │       ├── L1-D1a-1  Forward-curved blower wheel\n│   │       │             L0  Galvanized steel · OR · GFR-polypropylene\n│   │       └── L1-D1a-2  ECM motor (brushless DC, 1/3–1 HP)\n│   │                     L0  Copper windings · NdFeB magnets ·\n│   │                         silicon-steel laminations · Si wafer (IGBT inverter)\n│   │\n│   └── L3-D2  Draft Inducer Fan Assembly (power-vent + condensing units)\n│             Alternatives: Single-speed PSC inducer 55% ·\n│             Variable-speed ECM inducer 45%  [MEDIUM]\n│       └── L2-D2a  Centrifugal inducer wheel + motor\n│           ├── L1-D2a-1  Inducer wheel (PP or aluminum — must resist condensate)\n│           │             L0  Polypropylene (corrosion-resistant) · OR · 6xxx Al alloy\n│           └── L1-D2a-2  PSC or ECM inducer motor\n│                         L0  Copper windings · silicon-steel laminations\n│\n├── L4-E  Controls & Ignition Electronics  [~10% BOM cost]\n│   │\n│   ├── L3-E1  Integrated Furnace Control Board (IFC)\n│   │         Alternatives: Proprietary OEM board (field-replaceable) 80% ·\n│   │         Universal replacement board 20%  [MEDIUM]\n│   │   └── L2-E1a  PCB + MCU + relay array + LED fault display\n│   │       ├── L1-E1a-1  MCU (ARM Cortex-M or 8-bit PIC/AVR)\n│   │       │             L0  Silicon wafer\n│   │       └── L1-E1a-2  Electromechanical relays (24VAC switching)\n│   │                     L0  Copper contacts · iron core\n│   │\n│   ├── L3-E2  24VAC Control Transformer\n│   │   └── L2-E2a  Step-down transformer (120V→24V, 40–75 VA)\n│   │       └── L1  Laminated silicon-steel core + copper windings\n│   │             L0  Silicon-steel laminations (M6 grain-oriented) · copper wire\n│   │\n│   └── L3-E3  Safety Limit Switches (overheat + rollout protection)\n│       └── L2-E3a  Bi-metal disc thermostat (auto-reset + manual-reset pair)\n│           └── L1  Bi-metal disc element + housing\n│                 L0  Bimetal strip (Invar/brass laminate) · brass housing\n│\n├── L4-F  Enclosure & Structural  [~8% BOM cost]\n│   │\n│   ├── L3-F1  Cabinet Assembly\n│   │         Alternatives: G90 galvanized steel 80% · Aluminized steel 15% ·\n│   │         304 SS 5%  [HIGH]\n│   │   └── L2-F1a  Sheet-metal cabinet panels (top, sides, access doors)\n│   │       └── L1  Stamped/formed panel (20–22 ga)\n│   │             L0  G90 galvanized cold-rolled steel (ArcelorMittal, POSCO)\n│   │\n│   └── L3-F2  Combustion Chamber Insulation Lining\n│       └── L2-F2a  Refractory ceramic-fiber blanket\n│           └── L1  Ceramic-fiber mat (AlSiO₂)\n│                 L0  Alumino-silicate ceramic fiber (Kaowool / Unifrax)\n│\n└── L4-G  Fuel & Gas Supply System  [~3% BOM cost]\n    │\n    ├── L3-G1  Gas Supply Manifold & Connections\n    │   └── L2-G1a  Manifold pipe + fittings\n    │       └── L1  Black iron pipe (ASTM A53) + brass fittings\n    │             L0  Carbon steel A53 · brass CW617N\n    │\n    └── L3-G2  Pressure Switch Assembly (draft + gas pressure monitoring)\n        └── L2-G2a  Diaphragm pressure switch\n            └── L1  Diaphragm switch body\n                  L0  Neoprene diaphragm · copper switch contacts · ABS housing\n```\n\n---\n\n### OUTPUT TYPE: OT-4 — Commercial Rooftop Unit (RTU)\n\n> Capacity: 2–150 tons (5–500 kW). Packaged unit combining cooling + heating + ventilation in a single weather-resistant rooftop cabinet. Unique additions vs. OT-1: economizer module, gas heating section, multi-fan array, heavy structural curb-mount frame, and commercial BACnet controls.\n\n```\nOT-4  Commercial Rooftop Unit (RTU)\n│\n├── L4-A  Compressor Section  [~32% BOM cost]\n│   │\n│   ├── L3-A1  Compressor Module  [capacity-split alternatives]\n│   │         < 15 ton: Inverter-scroll 42% · Fixed-scroll 38% ·\n│   │                   Tandem-scroll 15% · Reciprocating 5%  [HIGH]\n│   │         ≥ 15 ton: Twin-screw 55% · Scroll tandem 30% ·\n│   │                   Reciprocating 10% · Centrifugal 5%  [HIGH]\n│   │   ├── L2-A1a  Scroll compressor (< 15 ton)\n│   │   │         (same structure as OT-1 L2-A1a)\n│   │   └── L2-A1b  Twin-screw compressor (≥ 15 ton)\n│   │       ├── L1-A1b-1  Male + female rotor pair (helical twin-screw)\n│   │       │             L0  Case-hardened alloy steel Cr-Mo (58–62 HRC case;\n│   │       │                 Bitzer, Howden, Carlyle)\n│   │       └── L1-A1b-2  Screw compressor motor (open-drive or semi-hermetic)\n│   │                     L0  Enameled copper wire · silicon-steel laminations\n│   │\n│   └── L3-A2  Expansion Module & Refrigerant Piping\n│             (same as OT-1 — EEV 65% · TXV 35%  [HIGH])\n│\n├── L4-B  Heat Exchanger Section  [~18% BOM cost]\n│   │     (same as OT-1 L4-B coil types — Cu/Al-fin dominant; microchannel growing)\n│   │     [Multi-row, multi-circuit design for capacity staging]\n│   │\n│   ├── L3-B1  Condenser Coil Array (outdoor / weather-exposed, multi-row)\n│   │         Alternatives: Cu-tube / Al-fin 65% · All-Al MCHX 28% ·\n│   │         Cu-tube / Cu-fin 7%  [MEDIUM]\n│   │         (same tube/fin structure as OT-1 L3-B1 but larger multi-row assembly)\n│   │\n│   └── L3-B2  Evaporator Coil (indoor / supply-air side, multi-circuit)\n│             (same tube/fin structure as OT-1 L3-B2)\n│\n├── L4-C  Economizer Module  [~6% BOM cost — required by most commercial energy codes]\n│   │\n│   ├── L3-C1  Economizer Damper + Actuator Assembly\n│   │         Alternatives: Dry-bulb economizer 65% · Enthalpy economizer 30% ·\n│   │         Differential enthalpy 5%  [MEDIUM]\n│   │   └── L2-C1a  Multi-blade outdoor-air damper + modulating actuator\n│   │       ├── L1-C1a-1  Multi-blade aluminum damper\n│   │       │             L0  Aluminum alloy 6063 (extruded blades) ·\n│   │       │                 polymer blade edge seal\n│   │       └── L1-C1a-2  Spring-return electric actuator\n│   │                     L0  DC or stepper motor · zinc die-cast housing ·\n│   │                         return spring (spring steel)\n│   │\n│   └── L3-C2  Economizer Sensor (controller input)\n│             Alternatives: Dry-bulb NTC thermistor 65% ·\n│             Combined T+RH enthalpy sensor 30% · CO₂/IAQ sensor 5%  [MEDIUM]\n│       └── L2-C2a  Sensor probe assembly\n│           ├── L1  NTC thermistor element (dry-bulb)\n│           │     L0  Metal-oxide composite (NTC material)\n│           └── L1  Capacitive RH sensor die (enthalpy version)\n│                 L0  Hygroscopic polymer film (PTFE or SiO₂ hydrophilic)\n│\n├── L4-D  Gas Heating Section  [~15% BOM cost — present in most RTUs; absent in cooling-only]\n│   │\n│   ├── L3-D1  Inshot Burner Array\n│   │         Alternatives: Single-stage 40% · Two-stage 40% · Modulating 20%  [HIGH]\n│   │         (same burner + ignition structure as OT-3 L4-A)\n│   │\n│   ├── L3-D2  Tubular or Clamshell Commercial Heat Exchanger\n│   │   └── L2-D2a  Aluminized or 409 SS tube HX\n│   │       └── L1  Aluminized steel tube + end caps\n│   │             L0  Aluminized steel Type-1 · OR · 409 SS\n│   │\n│   └── L3-D3  Induced Draft Fan (sealed combustion)\n│             (same structure as OT-3 L4-D draft inducer)\n│\n├── L4-E  Multi-Fan & Air Distribution  [~12% BOM cost]\n│   │\n│   ├── L3-E1  Supply-Air Blower Array\n│   │         Alternatives: Single DWDI centrifugal (< 10 ton) 55% ·\n│   │         Twin DWDI array (10–30 ton) 30% · Plenum/plug fan (> 30 ton) 15%  [MEDIUM]\n│   │   └── L2-E1a  Double-width / double-inlet (DWDI) centrifugal blower\n│   │       ├── L1-E1a-1  DWDI blower wheel (forward-curved)\n│   │       │             L0  Galvanized steel · OR · GFR-PP\n│   │       └── L1-E1a-2  3-phase ECM or inverter-drive motor\n│   │                     L0  Copper windings · silicon-steel laminations ·\n│   │                         Si wafer (IGBT VFD)\n│   │\n│   └── L3-E2  Condenser Fan Array (2–4 propeller fans per unit)\n│             Alternatives: Direct-drive propeller array 75% · Single large axial 20% ·\n│             Centrifugal (indoor condenser variant) 5%  [MEDIUM]\n│             (same propeller fan structure as OT-1 L3-C1, replicated 2–4×)\n│\n├── L4-F  Controls & Electrical  [~12% BOM cost]\n│   │\n│   ├── L3-F1  Main Unit Controller (commercial, open-protocol)\n│   │         Alternatives: BACnet-native proprietary 60% · Modbus RTU 25% ·\n│   │         Proprietary-only (no open protocol) 15%  [MEDIUM]\n│   │   └── L2-F1a  Commercial RTU controller PCB + I/O module\n│   │       ├── L1-F1a-1  MCU/SoC + 24VAC interface (ARM Cortex-A or -M)\n│   │       │             L0  Silicon wafer\n│   │       └── L1-F1a-2  Relay array (multi-stage compressor + heat control)\n│   │                     L0  Copper contacts · iron core\n│   │\n│   └── L3-F2  Variable Frequency Drive (compressor + supply fan)\n│             Alternatives: IGBT VFD 78% · SiC VFD (emerging) 22%  [MEDIUM]\n│             (same VFD structure as OT-2 L3-D2)\n│\n└── L4-G  Enclosure & Structural Frame  [~5% BOM cost]\n    │\n    ├── L3-G1  Rooftop Cabinet (weather-grade, UV-resistant)\n    │         Alternatives: G90 galvanized steel 70% · Pre-painted Galvalume 22% ·\n    │         304 SS (coastal / corrosive environments) 8%  [HIGH]\n    │   ├── L2-G1a  Heavy-gauge side panels + top + base rail (14–16 ga)\n    │   │   ├── L1-G1a-1  Structural base rail + corner posts (14 ga)\n    │   │   │             L0  G90 galvanized steel 1.5–2.0 mm\n    │   │   └── L1-G1a-2  Baked-enamel exterior panels\n    │   │                 L0  Pre-painted galvanized steel (Galvalume® or PVDF-coat)\n    │   └── L2-G1b  Roof curb adapter (building-parapet mount)\n    │       └── L1  Structural steel curb frame\n    │             L0  G90 galvanized steel · OR · Al alloy 6063 (coastal)\n    │\n    └── L3-G2  Acoustic Insulation Liner (interior cabinet lining)\n        └── L2-G2a  Fiberglass or mineral-wool mat (2\" thick, foil-faced)\n            └── L1  Compressed fiberglass batt\n                  L0  E-glass fibers · phenolic or acrylic binder · aluminum foil face\n```\n\n---\n\n### OUTPUT TYPE: OT-5 — Chiller (Air-Cooled & Water-Cooled)\n\n> Capacity: 10–5,000+ tons (35–17,500+ kW). Central cooling plant. Water-cooled chillers (56.4% market share) have both a chilled-water (CHW) loop and condenser-water (CW) loop — **two separate Marquardt DN20 install positions**. Air-cooled variants have only the CHW loop.\n\n```\nOT-5  Chiller (Air-Cooled & Water-Cooled)\n│\n├── L4-A  Compressor Section  [~38% BOM cost]\n│   │\n│   ├── L3-A1  Compressor Module\n│   │         50–300 ton: Screw 50% · Scroll tandem 25% ·\n│   │                     Centrifugal 20% · Reciprocating 5%  [HIGH]\n│   │         300–5,000+ ton: Centrifugal 55% · Screw 40% ·\n│   │                         Reciprocating 5%  [HIGH]\n│   │   ├── L2-A1a  Twin-screw compressor (dominant mid-size)\n│   │   │   ├── L1-A1a-1  Twin-screw rotor pair (helical, male + female)\n│   │   │   │             L0  Case-hardened Cr-Mo alloy steel 58–62 HRC\n│   │   │   │                 (Howden, Bitzer, Carlyle, Hansen)\n│   │   │   ├── L1-A1a-2  Screw compressor motor (semi-hermetic, 3-phase)\n│   │   │   │             L0  Enameled copper wire · silicon-steel laminations\n│   │   │   └── L1-A1a-3  Oil separator + oil cooler (integral)\n│   │   │                 L0  Carbon steel shell · copper coil (oil cooler)\n│   │   └── L2-A1b  Centrifugal compressor assembly (large chillers)\n│   │       ├── L1-A1b-1  Impeller + shaft (single or multi-stage)\n│   │       │             L0  High-strength titanium alloy ·\n│   │       │                 OR · 17-4 PH stainless steel ·\n│   │       │                 OR · Inconel 718 (high-temp variants)\n│   │       ├── L1-A1b-2  Magnetic bearing assembly (oil-free designs)\n│   │       │             L0  NdFeB rare-earth magnets · silicon steel ·\n│   │       │                 copper coil windings\n│   │       └── L1-A1b-3  Inlet guide vanes + modulating actuator\n│   │                     L0  Aluminum alloy cast · stainless steel vane blades\n│   │\n│   └── L3-A2  Expansion Module\n│             Alternatives: EEV 65% · TXV 20% · Float valve (flooded evap.) 15%  [HIGH]\n│             (same EEV structure as OT-1 L3-A2)\n│\n├── L4-B  Evaporator (Chilled-Water Side — Water-to-Refrigerant HX)  [~20% BOM cost]\n│   │\n│   └── L3-B1  Evaporator Heat Exchanger Assembly\n│             Alternatives: Shell-and-tube (flooded or DX) 55% ·\n│             Brazed-plate 30% · Welded-plate 15%  [HIGH]\n│       ├── L2-B1a  Shell-and-tube evaporator  [Alt A — dominant]\n│       │   ├── L1-B1a-1  Carbon steel pressure vessel shell (ASME VIII)\n│       │   │             L0  Carbon steel A516 Gr. 70\n│       │   ├── L1-B1a-2  Copper enhanced-surface refrigerant tubes (3/4\" OD)\n│       │   │             L0  Copper C12200 (internally grooved Turbo-B/Gewa-B)\n│       │   └── L1-B1a-3  Tube sheet (naval brass or carbon steel)\n│       │                 L0  Naval brass C46400 · OR · carbon steel\n│       └── L2-B1b  Brazed-plate evaporator  [Alt B — smaller chillers]\n│           ├── L1-B1b-1  316L SS plates (herringbone, 0.4–0.6 mm)\n│           │             L0  316L stainless steel (Alfa Laval, SWEP/Danfoss)\n│           └── L1-B1b-2  Copper BCuP brazing filler\n│                         L0  Copper BCuP-5 alloy\n│\n├── L4-C  Condenser  [~15% BOM cost]\n│   │\n│   ├── L3-C1  Air-Cooled Condenser Coil  [air-cooled chiller only]\n│   │         Alternatives: Cu-tube / Al-fin 60% · All-Al MCHX 32% ·\n│   │         Cu-tube / Cu-fin 8%  [MEDIUM]\n│   │         (same coil structure as OT-1 L3-B1, but much larger multi-row assembly)\n│   │\n│   └── L3-C2  Water-Cooled Condenser Shell-and-Tube  [water-cooled chiller only]\n│             Alternatives: Shell-and-tube 75% · Brazed/welded plate 25%  [HIGH]\n│       └── L2-C2a  Shell-and-tube condenser\n│           ├── L1-C2a-1  Carbon steel pressure vessel shell\n│           │             L0  Carbon steel A516 Gr. 70\n│           ├── L1-C2a-2  Copper condenser tubes (enhanced OD surface)\n│           │             L0  Copper C12200 (Turbo-C) ·\n│           │                 OR · 90/10 CuNi (brackish water service)\n│           └── L1-C2a-3  Tube sheet\n│                         L0  Naval brass C46400 · OR · carbon steel\n│\n├── L4-D  Hydronic Circuits (CHW loop + CW loop)  [~10% BOM cost]\n│   │      ← TWO Marquardt DN20 application positions in water-cooled chiller\n│   │\n│   ├── L3-D1  Chilled-Water (CHW) Circuit\n│   │   ├── L3-D1a  Flow & Temperature Measurement (CHW loop)  ← Marquardt DN20\n│   │   │         Alternatives: Ultrasonic transit-time 45% ·\n│   │   │         Electromagnetic 30% · Vortex 20% · Turbine 5%  [HIGH]\n│   │   │   └── L2-D1a  Flow sensor body + transducer pair  ← Marquardt DN20\n│   │   │       (same L1/L0 structure as OT-2 L3-C2)\n│   │   └── L3-D1b  Chilled-Water Pump (sometimes owner-supplied)\n│   │             Alternatives: End-suction centrifugal 55% ·\n│   │             In-line centrifugal 30% · Vertical turbine 15%  [MEDIUM]\n│   │       └── L2-D1b  Pump casing + motor\n│   │           └── L1  Cast iron or ductile iron pump casing\n│   │                 L0  Gray cast iron GJL-250 · OR · ductile iron GJS-500\n│   │\n│   └── L3-D2  Condenser-Water (CW) Circuit  [water-cooled chiller only]\n│       └── L3-D2a  Flow & Temperature Measurement (CW loop)  ← Marquardt DN20 (#2)\n│                 (same alternatives and structure as CHW loop)\n│\n├── L4-E  Controls & Electrical  [~12% BOM cost]\n│   │\n│   ├── L3-E1  Chiller Controller (CPC)\n│   │         Alternatives: BACnet/IP native 60% · Modbus RTU 25% ·\n│   │         Proprietary-only 15%  [MEDIUM]\n│   │   └── L2-E1a  Commercial controller PCB + I/O module\n│   │       ├── L1-E1a-1  DSP / ARM-A class MCU (TI, STM, NXP)\n│   │       │             L0  Silicon wafer\n│   │       └── L1-E1a-2  Analog I/O modules (pressure + temperature sensors)\n│   │                     L0  Silicon op-amp ICs · tantalum capacitors\n│   │\n│   ├── L3-E2  VFD (variable-speed chiller compressor + pumps)\n│   │         Alternatives: IGBT VFD 75% · SiC MOSFET VFD 25%  [MEDIUM]\n│   │         (same VFD structure as OT-2 L3-D2)\n│   │\n│   └── L3-E3  Electrical Power Distribution Panel (MCC)\n│       └── L2-E3a  Motor control center + circuit breakers\n│           └── L1  Copper bus bars\n│                 L0  Copper ETP bus-bar grade\n│\n├── L4-F  Enclosure & Frame  [~5% BOM cost]\n│   │\n│   ├── L3-F1  Chiller Structural Frame & Drip-Pan Skid\n│   │         Alternatives: Carbon steel frame 80% · SS frame 12% ·\n│   │         Aluminum (small chillers) 8%  [MEDIUM]\n│   │   └── L2-F1a  Welded structural steel frame + drip pan\n│   │       └── L1  Structural steel channel + plate\n│   │             L0  Carbon steel A36 / S235\n│   │\n│   └── L3-F2  Piping Acoustic + Thermal Insulation\n│       └── L2-F2a  Elastomeric foam insulation wrap (1–2\" thick)\n│           └── L1  Closed-cell elastomeric foam tube insulation\n│                 L0  EPDM rubber · OR · nitrile rubber (Armaflex, K-Flex)\n│\n└── L4-G  Refrigerant Charge  [~3% BOM cost]\n          Alternatives: R-134a (HFC, GWP 1430, declining) 35% ·\n          R-1234ze(E) (HFO, GWP 7, growing) 30% · R-1233zd(E) (HCFO) 18% ·\n          R-514A 10% · R-410A (small/legacy chillers) 7%  [MEDIUM]\n          [R-1234ze reached 75%+ adoption in France by 2024; USA transition accelerating]\n```\n\n---\n\n### OUTPUT TYPE: OT-6 — Commercial Refrigeration Equipment\n\n> Sub-types: Reach-in glass-door display cases · Open multideck display cases · Walk-in cooler/freezer · Self-contained condensing unit + remote evaporator. Unique subsystems vs. HVAC OTs: thermal insulation system (major cost driver) and display/access system (glass doors, LED lighting). Refrigerant is transitioning away from R-404A (EPA ban on new equipment Jan 1, 2026).\n\n```\nOT-6  Commercial Refrigeration Equipment\n│\n├── L4-A  Refrigerant Circuit  [~26% BOM cost]\n│   │\n│   ├── L3-A1  Compressor Module\n│   │         Alternatives: Hermetic reciprocating 50% · Scroll 28% ·\n│   │         Semi-hermetic reciprocating 18% · Rotary 4%  [HIGH]\n│   │   └── L2-A1a  Hermetic reciprocating compressor\n│   │       ├── L1-A1a-1  Piston + connecting rod + crankshaft\n│   │       │             L0  Cast iron (piston) · carbon steel (rod) ·\n│   │       │                 alloy steel (crankshaft, carburized)\n│   │       └── L1-A1a-2  Hermetic motor winding\n│   │                     L0  Enameled copper wire · silicon-steel laminations\n│   │\n│   ├── L3-A2  Expansion Module\n│   │         Alternatives: TXV (thermostatic) 55% · EEV (electronic) 40% ·\n│   │         Capillary tube 5%  [MEDIUM]\n│   │         [TXV dominant at low refrigeration temps; simpler control than EEV]\n│   │   └── L2-A2a  TXV body + remote sensing bulb + external equalizer\n│   │       └── L1  Brass TXV body + sensing bulb\n│   │             L0  Brass CW617N · sensing fluid (refrigerant or cross-charge fluid)\n│   │\n│   ├── L3-A3  Refrigerant Piping & Accessories\n│   │         (same copper tube structure as OT-1 L3-A3)\n│   │\n│   └── L3-A4  Refrigerant Charge\n│             Alternatives: R-448A (HFC blend, GWP 1387) 38% ·\n│             R-449A (GWP 1397) 20% · R-404A (legacy, EPA ban Jan 2026) 18% ·\n│             CO₂ R-744 transcritical 15% · R-290 propane (A3, small vol.) 9%  [HIGH]\n│\n├── L4-B  Evaporator & Air Distribution  [~14% BOM cost]\n│   │\n│   ├── L3-B1  Evaporator Coil Assembly (DX, low-temp)\n│   │         Alternatives: Cu-tube / Al-fin 72% · All-Al MCHX 20% ·\n│   │         Cu-tube / Cu-fin (high-humidity corrosion-resistant) 8%  [MEDIUM]\n│   │   └── L2-B1a  Tube-and-fin DX evaporator coil\n│   │       ├── L1-B1a-1  Copper tubes (3/8\" OD, internally grooved)\n│   │       │             L0  Copper C12200\n│   │       └── L1-B1a-2  Aluminum fins (louvered, 0.004\"–0.006\" thick)\n│   │                     L0  Aluminum alloy 3003\n│   │\n│   └── L3-B2  Evaporator Fan & Air Distribution\n│             Alternatives: Direct-drive axial PSC 60% · ECM axial 35% ·\n│             Cross-flow fan 5%  [MEDIUM]\n│       └── L2-B2a  Axial fan blade + motor + wire guard\n│           ├── L1  Plastic fan blade (GFR-PP, 4–8 blades)\n│           │     L0  Glass-fiber reinforced polypropylene\n│           └── L1  PSC or ECM fan motor\n│                 L0  Copper windings · silicon-steel laminations ·\n│                     NdFeB magnets (ECM variant)\n│\n├── L4-C  Thermal Insulation System  [~18% BOM cost — largest single differentiator vs. HVAC OTs]\n│   │\n│   ├── L3-C1  Insulation Core (sidewalls + top + bottom panels)\n│   │         Alternatives: Polyurethane (PUR) foam in-place 70% ·\n│   │         EPS (expanded polystyrene) board 20% · XPS board 10%  [HIGH]\n│   │   ├── L2-C1a  Foamed-in-place PUR insulation  [Alt A — dominant]\n│   │   │         [R-value 6.0–8.0 per inch; 2.5\"–4\" thickness standard]\n│   │   │   └── L1-C1a-1  PUR foam (2-part pour-in-place)\n│   │   │                 L0  Polyol (MDI-based) · isocyanate (MDI/TDI blend;\n│   │   │                     BASF, Covestro, Huntsman) ·\n│   │   │                     blowing agent (HFC-245fa or HFO-1234ze transition)\n│   │   └── L2-C1b  EPS panel  [Alt B]\n│   │         [R-value 3.5–4.0 per inch; 3\"–5\" thickness needed to compensate]\n│   │       └── L1  EPS foam board\n│   │             L0  Expandable polystyrene beads (BASF, INEOS Styrolution)\n│   │\n│   └── L3-C2  Structural Insulated Panel (SIP) Assembly  [walk-in cooler/freezer only]\n│             Alternatives: Metal-skin SIP with PUR core 75% ·\n│             Metal-skin SIP with EPS core 25%  [HIGH]\n│       └── L2-C2a  SIP panel (steel skins + foam core + cam-lock connector)\n│           ├── L1-C2a-1  G90 galvanized steel skin (inner + outer, 26 ga)\n│           │             L0  G90 galvanized cold-rolled steel\n│           ├── L1-C2a-2  PUR or EPS foam core (4\"–6\" freezer / 2\"–4\" cooler)\n│           │             L0  Polyurethane · OR · expanded polystyrene (as above)\n│           └── L1-C2a-3  Cam-lock connector (panel joining hardware)\n│                         L0  Zinc die-cast · OR · stainless steel 304\n│\n├── L4-D  Display & Access System  [~15% BOM cost — unique to OT-6]\n│   │\n│   ├── L3-D1  Door Assembly\n│   │         Alternatives: Double-pane insulating glass 58% ·\n│   │         Triple-pane Low-E glass 32% · Solid opaque door (freezer) 10%  [MEDIUM]\n│   │   ├── L2-D1a  Double-pane glass door unit  [Alt A — standard]\n│   │   │   ├── L1-D1a-1  Two panes tempered safety glass (6 mm) + spacer + seal\n│   │   │   │             L0  Soda-lime-silica float glass (tempered) ·\n│   │   │   │                 aluminum spacer bar (warm-edge) · silicone edge seal\n│   │   │   ├── L1-D1a-2  Anti-condensate heated frame\n│   │   │   │             L0  Anodized aluminum frame ·\n│   │   │   │                 nichrome resistance wire (frame heater element)\n│   │   │   └── L1-D1a-3  Hinge + magnetic door gasket\n│   │   │                 L0  Stainless steel hinge · EPDM rubber gasket ·\n│   │   │                     ferrite magnet strip\n│   │   └── L2-D1b  Triple-pane Low-E door  [Alt B — premium]\n│   │       └── L1-D1b-1  Three panes tempered glass + 2× spacer + argon fill\n│   │                     L0  Soda-lime-silica glass (Low-E coated) ·\n│   │                         argon gas · aluminum warm-edge spacer\n│   │\n│   └── L3-D2  LED Lighting Assembly\n│             Alternatives: LED linear modules 85% · Fluorescent T8/T5 (legacy) 15%  [HIGH]\n│       └── L2-D2a  LED light bar assembly\n│           ├── L1-D2a-1  LED driver + PCB substrate\n│           │             L0  Silicon wafer (LED die, InGaN/GaAs) ·\n│           │                 aluminum PCB substrate (MCPCB)\n│           └── L1-D2a-2  Polycarbonate lens / diffuser\n│                         L0  Polycarbonate (Covestro Makrolon)\n│\n├── L4-E  Controls & Defrost System  [~9% BOM cost]\n│   │\n│   ├── L3-E1  Electronic Case Controller\n│   │         Alternatives: Proprietary single-case controller 55% ·\n│   │         Centralized refrigeration management system (RMS) node 45%  [MEDIUM]\n│   │   └── L2-E1a  Controller PCB + NTC temp sensors + LED display\n│   │       └── L1  MCU + relay + NTC probe\n│   │             L0  Silicon wafer · copper relay contacts · NTC metal oxide ceramic\n│   │\n│   └── L3-E2  Defrost System\n│             Alternatives: Electric resistance defrost 60% ·\n│             Hot-gas bypass defrost 32% · Off-cycle defrost 8%  [HIGH]\n│             [Hot-gas defrost 40–60% more efficient vs. electric; higher equip. cost]\n│       ├── L2-E2a  Electric resistance heater assembly  [Alt A — most common]\n│       │   └── L1-E2a-1  Sheathed resistance heater element\n│       │                 L0  Nichrome NiCr 80/20 · OR · Incoloy 800 ·\n│       │                     MgO powder insulation · steel sheath\n│       └── L2-E2b  Hot-gas bypass solenoid valve assembly  [Alt B]\n│           └── L1-E2b-1  Normally-closed solenoid valve (hot-gas bypass line)\n│                         L0  Brass body · PTFE seat ·\n│                             enameled copper solenoid coil\n│\n├── L4-F  Cabinet & Structure  [~8% BOM cost]\n│   │\n│   ├── L3-F1  Display Case Cabinet (frame + inner liner)\n│   │         Alternatives: G90 galvanized steel 70% · 304 SS (foodservice) 22% ·\n│   │         Anodized aluminum 8%  [MEDIUM]\n│   │   └── L2-F1a  Outer frame + inner liner panels\n│   │       ├── L1-F1a-1  Outer formed steel panel (18–20 ga)\n│   │       │             L0  G90 galvanized steel · OR · 304 SS\n│   │       └── L1-F1a-2  Plastic inner liner (ABS or PVC, smooth cleanable)\n│   │                     L0  ABS · OR · PVC\n│   │\n│   └── L3-F2  Condensate Drain Management\n│       └── L2-F2a  Stainless or ABS drain pan + drain heater cable\n│           ├── L1  Drain pan\n│           │     L0  304 SS · OR · ABS\n│           └── L1  Drain-line heater cable (self-regulating)\n│                 L0  Nichrome resistance wire · PVC jacket\n│\n└── L4-G  [Refrigerant Charge already shown in L4-A L3-A4]\n```\n\n---\n\n### OUTPUT TYPE: OT-7 — Industrial Refrigeration Equipment\n\n> Sub-types: Ammonia (R-717) packaged systems · CO₂ (R-744) transcritical systems · HFC legacy systems · Blast freezers · Cold storage · Industrial process cooling. **Copper and copper alloys are PROHIBITED in ammonia service** — ammonia attacks copper forming explosive copper-ammonia complexes. All refrigerant-wetted metalwork must be carbon steel, cast iron, or 316L stainless. This makes OT-7 the only output type in NAICS 333415 where the standard copper-tube BOM is entirely absent.\n\n```\nOT-7  Industrial Refrigeration Equipment\n│\n├── L4-A  Compressor Section  [~34% BOM cost]\n│   │\n│   ├── L3-A1  Compressor Module\n│   │         Alternatives: Semi-hermetic reciprocating 45% ·\n│   │         Twin-screw (oil-injected) 40% · Centrifugal 12% ·\n│   │         Rotary vane 3%  [HIGH]\n│   │   ├── L2-A1a  Semi-hermetic reciprocating compressor  [Alt A — dominant]\n│   │   │   ├── L1-A1a-1  Cylinder block + piston + connecting rod + crankshaft\n│   │   │   │             L0  Gray cast iron GJL-250 (cylinder block) ·\n│   │   │   │                 carbon steel (piston, rod) ·\n│   │   │   │                 alloy steel (crankshaft, carburized)\n│   │   │   │                 *** NO COPPER — all steel/cast iron ***\n│   │   │   └── L1-A1a-2  Open-drive motor (external, coupled via flexible coupling)\n│   │   │                 L0  Enameled copper wire (motor only — not in NH₃ path) ·\n│   │   │                     silicon-steel laminations\n│   │   └── L2-A1b  Twin-screw compressor  [Alt B — growing]\n│   │       ├── L1-A1b-1  Male + female rotor pair\n│   │       │             L0  Ductile iron GJS-500 · OR · case-hardened alloy steel\n│   │       ├── L1-A1b-2  Compressor body\n│   │       │             L0  Gray cast iron GJL-300\n│   │       └── L1-A1b-3  Integral oil separator + oil cooler\n│   │                     L0  Carbon steel shell · 316L SS tube bundle\n│   │\n│   ├── L3-A2  Expansion Module (ammonia-rated)\n│   │         Alternatives: Hand expansion valve (HEV, flooded sys.) 40% ·\n│   │         Float valve (high/low-side) 30% · EEV (DX systems) 20% ·\n│   │         Pilot-operated TXV 10%  [MEDIUM]\n│   │   └── L2-A2a  Float valve assembly  [flooded systems, most common]\n│   │       └── L1-A2a-1  Float ball + needle valve + body (ammonia-rated)\n│   │                     L0  316L stainless steel (body, needle, seat) —\n│   │                         *** NO brass — brass prohibited in NH₃ service ***\n│   │\n│   └── L3-A3  Refrigerant Piping (ammonia-rated, schedule 40/80)\n│             Alternatives: Schedule 40/80 carbon steel pipe A53/A106 70% ·\n│             316L SS pipe 25% · Ductile iron 5%  [HIGH]\n│       └── L2-A3a  Carbon steel pipe sections + flanged/welded fittings\n│           ├── L1-A3a-1  CS pipe (ASTM A53 Gr. B, Sch 40 minimum)\n│           │             L0  Carbon steel A106 Gr. B (seamless, high-temp service)\n│           └── L1-A3a-2  Steel flanges + gaskets (ammonia service)\n│                         L0  Carbon steel flanges ASME B16.5 ·\n│                             PTFE-encapsulated gaskets ·\n│                             OR · spiral-wound SS/PTFE gaskets\n│\n├── L4-B  Heat Exchanger Section  [~22% BOM cost]\n│   │\n│   ├── L3-B1  Condenser (ammonia-service)\n│   │         Alternatives: Evaporative condenser 60% ·\n│   │         Shell-and-tube water-cooled 28% · Air-cooled finned coil 12%  [HIGH]\n│   │   ├── L2-B1a  Evaporative condenser assembly  [Alt A — dominant in USA industrial]\n│   │   │   ├── L1-B1a-1  Galvanized steel shell + water distribution header\n│   │   │   │             L0  G90 galvanized steel heavy-gauge ·\n│   │   │   │                 OR · 316L SS (coastal/harsh environments)\n│   │   │   ├── L1-B1a-2  Galvanized steel coil (ammonia-wetted side)\n│   │   │   │             L0  Carbon steel coil hot-dip galvanized ·\n│   │   │   │                 OR · 316L SS coil\n│   │   │   └── L1-B1a-3  Fan assembly + drift eliminators + water basin\n│   │   │                 L0  Galvanized steel fan blade · FRP or HDPE basin ·\n│   │   │                     HDPE drift eliminator\n│   │   └── L2-B1b  Shell-and-tube condenser (water-cooled, Alt B)\n│   │       ├── L1-B1b-1  Carbon steel pressure vessel shell (ASME VIII)\n│   │       │             L0  Carbon steel A516 Gr. 70\n│   │       ├── L1-B1b-2  Steel tubes (*** NO copper — steel required for ammonia ***)\n│   │       │             L0  Carbon steel ASTM A179 · OR · 316L SS\n│   │       └── L1-B1b-3  Steel tube sheets\n│   │                     L0  Carbon steel A516 · OR · 316L SS\n│   │\n│   └── L3-B2  Evaporator (ammonia-service)\n│             Alternatives: Flooded shell-and-tube 50% ·\n│             Semi-welded plate-and-frame 30% ·\n│             Forced-draft air-cooled unit cooler 20%  [HIGH]\n│       ├── L2-B2a  Flooded shell-and-tube evaporator  [Alt A — dominant]\n│       │   ├── L1-B2a-1  Carbon steel pressure vessel shell\n│       │   │             L0  Carbon steel A516 Gr. 70\n│       │   ├── L1-B2a-2  Steel tubes (bare or internally enhanced)\n│       │   │             L0  Carbon steel ASTM A179 cold-drawn seamless ·\n│       │   │                 OR · 316L SS (enhanced surface)\n│       │   └── L1-B2a-3  Steel tube sheet + support baffles\n│       │                 L0  Carbon steel A516 · OR · 316L SS\n│       └── L2-B2b  Semi-welded plate-and-frame evaporator  [Alt B]\n│           ├── L1-B2b-1  Laser-welded 316L SS plate pairs\n│           │             L0  316L stainless steel (Alfa Laval AlfaVap, Danfoss XGF)\n│           └── L1-B2b-2  EPDM rubber gasket (ammonia-compatible)\n│                         L0  EPDM rubber\n│                             *** NOT nitrile — nitrile attacked by ammonia ***\n│\n├── L4-C  Liquid Management System  [~14% BOM cost]\n│   │\n│   ├── L3-C1  Low-Pressure Receiver / Surge Drum\n│   │         Alternatives: Carbon steel pressure vessel 80% · SS vessel 20%  [HIGH]\n│   │   └── L2-C1a  ASME VIII carbon steel vessel + nozzles + level indicator\n│   │       ├── L1-C1a-1  CS pressure vessel shell + nozzle weld assembly\n│   │       │             L0  Carbon steel A516 Gr. 70 (pressure vessel)\n│   │       └── L1-C1a-2  Magnetic float level indicator (steel)\n│   │                     L0  316L SS float + graduated scale\n│   │\n│   ├── L3-C2  Liquid Recirculation Pump\n│   │         Alternatives: Centrifugal pump with mechanical seal 55% ·\n│   │         Hermetically sealed canned pump 30% · Sealless canned motor 15%  [MEDIUM]\n│   │   └── L2-C2a  Centrifugal pump + mechanical seal (ammonia-rated)\n│   │       ├── L1-C2a-1  Cast iron pump casing + ductile iron impeller\n│   │       │             L0  Gray cast iron · ductile iron GJS-400\n│   │       └── L1-C2a-2  Mechanical seal faces (SiC/SiC, ammonia-rated)\n│   │                     L0  Silicon carbide (SiC) seal faces · carbon graphite ·\n│   │                         Viton® O-rings (fluoroelastomer, NH₃-compatible) ·\n│   │                         316L SS spring\n│   │\n│   └── L3-C3  Oil Drain & Return System\n│             Alternatives: Manual double-valve drain 50% ·\n│             Automatic oil return system 50%  [MEDIUM]\n│       └── L2-C3a  Oil separator vessel + double-valve drain arrangement\n│           ├── L1-C3a-1  CS oil separator vessel\n│           │             L0  Carbon steel A516\n│           └── L1-C3a-2  Double-valve oil drain (safety code requirement ANSI/IIAR 3)\n│                         L0  Forged carbon steel globe valves ASTM A105 ·\n│                             PTFE packing\n│\n├── L4-D  Safety & Purge Systems  [~8% BOM cost — mandatory per IIAR/ASHRAE codes]\n│   │\n│   ├── L3-D1  Purger (non-condensable gas removal)\n│   │         Alternatives: Manual purger 40% · Automatic electronic purger 60%  [MEDIUM]\n│   │   └── L2-D1a  Automatic purger vessel + solenoid + controller\n│   │       └── L1-D1a-1  CS pressure vessel + refrigerant-rated solenoid body\n│   │                     L0  Carbon steel A516 · 316L SS solenoid body\n│   │\n│   ├── L3-D2  Safety Relief Valves (ASME-rated, mandatory)\n│   │         Alternatives: Single spring-loaded relief 55% ·\n│   │         Dual relief with 3-way changeover valve 45%  [HIGH]\n│   │   └── L2-D2a  Spring-loaded ASME relief valve\n│   │       └── L1-D2a-1  Valve body + disc + spring\n│   │                     L0  Forged carbon steel body ·\n│   │                         316L SS disc · Cr-V alloy spring steel\n│   │\n│   └── L3-D3  Ammonia Detection & Alarm System (mandatory per ASHRAE 15 / IIAR 2)\n│             Alternatives: Electrochemical cell 55% · Semiconductor 30% ·\n│             Optical/IR 15%  [HIGH]\n│       └── L2-D3a  Fixed NH₃ detector + control panel\n│           └── L1-D3a-1  Electrochemical sensing cell (0–300 ppm range)\n│                         L0  Platinum-electrode electrochemical cell ·\n│                             liquid electrolyte (KCl/H₂SO₄)\n│\n├── L4-E  Controls & Electrical  [~14% BOM cost]\n│   │\n│   ├── L3-E1  Industrial Refrigeration PLC / DCS Controller\n│   │         Alternatives: Dedicated refrig. PLC (Siemens, Allen-Bradley) 55% ·\n│   │         Packaged refrig. controller (Danfoss, Carel, JCI) 35% ·\n│   │         BMS gateway integration 10%  [MEDIUM]\n│   │   └── L2-E1a  Industrial PLC + I/O cards + HMI touchscreen\n│   │       ├── L1-E1a-1  PLC processor module\n│   │       │             L0  Silicon wafer (ASIC / FPGA / ARM core)\n│   │       └── L1-E1a-2  Analog I/O card (temp, pressure, level sensors)\n│   │                     L0  Silicon ADC ICs · copper bus\n│   │\n│   └── L3-E2  Motor Control Center (MCC) + VFD\n│       └── L2-E2a  Switchgear + VFD + motor protection relays\n│           ├── L1-E2a-1  Copper bus bars (MCC distribution)\n│           │             L0  Copper ETP bus-bar grade\n│           └── L1-E2a-2  VFD module (compressor speed control)\n│                         L0  Silicon (IGBT / SiC die) · FR-4 PCB\n│\n├── L4-F  Process Piping & Structural Frame  [~8% BOM cost]\n│   │\n│   ├── L3-F1  Main Process Piping (same ammonia-rated carbon steel as L4-A L3-A3)\n│   │         L0  Carbon steel A106 Gr. B (NO copper anywhere in NH₃ circuit)\n│   │\n│   └── L3-F2  Structural Frame / Equipment Skid\n│             Alternatives: Carbon steel structural frame 90% ·\n│             304/316 SS skid (food-grade facilities) 10%  [HIGH]\n│       └── L2-F2a  Welded structural steel base frame\n│           └── L1  Structural steel I-beam + plate\n│                 L0  Carbon steel A36 / S235JR\n│\n└── L4-G  Refrigerant & Lubricant Charge  [~4% BOM cost]\n    │\n    ├── L3-G1  Refrigerant\n    │         Alternatives: Ammonia R-717 (natural, GWP 0) 80–90% (USA industrial) ·\n    │         CO₂ R-744 (natural, GWP 1) 8% · HFCs (legacy, declining) 2%  [HIGH]\n    │\n    └── L3-G2  Lubricating Oil (separate system in NH₃ — not miscible)\n              Alternatives: Naphthenic mineral oil 55% · Alkylbenzene (AB) oil 30% ·\n              Polyalphaolefin (PAO) 15%  [MEDIUM]\n          └── L2-G2a  Oil make-up reservoir + feed system\n              └── L1  Carbon steel oil reservoir + sight glass\n                    L0  Carbon steel A36 · naphthenic base oil\n                        (TotalEnergies Planetelf, Petro-Canada Reflo)\n```\n\n---"
+    },
+    {
+      "title": "Cross-OT Material Exclusion Map",
+      "content": "| Material | OT-1 | OT-2 | OT-3 | OT-4 | OT-5 | OT-6 | OT-7 |\n|---|---|---|---|---|---|---|---|\n| Copper (refrigerant tubes, HX) | ✓ | ✓ | — | ✓ | ✓ | ✓ | **✗ PROHIBITED** |\n| Copper (wiring/motor) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ (motor only) |\n| Aluminized steel (HX cells) | — | — | ✓ | ✓ | — | — | — |\n| 316L stainless steel (HX plates) | — | ✓ | ✓ | — | ✓ | — | ✓ |\n| Cast iron (compressor body) | ✓ | ✓ | — | ✓ | ✓ | ✓ | ✓ |\n| Carbon steel A516 (pressure vessel) | — | — | — | — | ✓ | — | ✓ |\n| PZT ceramic (flow sensor) | — | ✓ | — | — | ✓ | — | — |\n| PPS/PVDF polymer (sensor body) | — | ✓ | — | — | ✓ | — | — |\n| NdFeB rare-earth magnets | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n| PUR foam insulation | — | — | — | — | — | ✓ | — |\n| SiC (compressor bearing / seal) | — | — | — | — | ✓ | — | ✓ |\n| Ammonia R-717 | — | — | — | — | — | — | ✓ |\n\n---"
+    },
+    {
+      "title": "Structured Data JSON",
+      "content": "```json\n{\n  \"naics\": \"333415\",\n  \"naics_name\": \"Air-Conditioning and Warm Air Heating Equipment Manufacturing\",\n  \"sensor_context\": {\n    \"product\": \"Marquardt Ultrasonic Flow Sensor DN20\",\n    \"technology\": \"piezo transit-time\",\n    \"primary_placement\": [\"OT-2 WSHP hydronic circuit\", \"OT-5 CHW loop\", \"OT-5 CW loop\"],\n    \"secondary_placement\": [\"OT-7 glycol loop (≤50% application)\"],\n    \"spec\": {\n      \"flow_range_lpm\": [1.5, 46.6],\n      \"temp_range_c\": [2, 90],\n      \"pressure_max_bar\": 6,\n      \"media\": \"water / hydronic fluid up to 50% glycol\",\n      \"connection\": \"DN20\"\n    }\n  },\n  \"output_types\": [\n    {\n      \"id\": \"OT-1\",\n      \"name\": \"Residential Split/Packaged AC\",\n      \"hydronic_circuit\": false,\n      \"sensor_fit\": \"none\",\n      \"bom_cost_split_pct\": {\n        \"refrigerant_circuit\": 35,\n        \"heat_exchanger\": 22,\n        \"fan_air_distribution\": 12,\n        \"controls_electrical\": 15,\n        \"enclosure_structure\": 8,\n        \"refrigerant_charge\": 3,\n        \"other\": 5\n      },\n      \"key_alternatives\": {\n        \"compressor\": [\n          {\"technology\": \"rotary twin-cylinder\", \"share_pct\": 45},\n          {\"technology\": \"fixed-scroll\", \"share_pct\": 38},\n          {\"technology\": \"inverter-rotary\", \"share_pct\": 12},\n          {\"technology\": \"reciprocating\", \"share_pct\": 5}\n        ],\n        \"refrigerant\": [\n          {\"fluid\": \"R-454B\", \"gwp\": 466, \"share_pct\": 60, \"status\": \"new standard\"},\n          {\"fluid\": \"R-32\", \"gwp\": 675, \"share_pct\": 22},\n          {\"fluid\": \"R-410A\", \"gwp\": 2088, \"share_pct\": 12, \"status\": \"banned in new equip. Jan 2025\"},\n          {\"fluid\": \"R-407C\", \"gwp\": 1774, \"share_pct\": 4},\n          {\"fluid\": \"R-22\", \"gwp\": 1810, \"share_pct\": 2, \"status\": \"retrofit only\"}\n        ],\n        \"condenser_coil\": [\n          {\"technology\": \"Cu-tube / Al-fin RTPF\", \"share_pct\": 72},\n          {\"technology\": \"All-Al microchannel MCHX\", \"share_pct\": 25},\n          {\"technology\": \"Cu-tube / Cu-fin\", \"share_pct\": 3}\n        ],\n        \"indoor_blower_motor\": [\n          {\"technology\": \"ECM brushless DC\", \"share_pct\": 70},\n          {\"technology\": \"PSC\", \"share_pct\": 25},\n          {\"technology\": \"DC BLDC inverter\", \"share_pct\": 5}\n        ]\n      },\n      \"key_raw_materials\": [\"copper C12200\", \"aluminum 3003\", \"G90 galvanized steel\", \"R-454B or R-32\", \"NdFeB magnets\", \"silicon wafer\", \"enameled copper wire\", \"silicon-steel laminations\"]\n    },\n    {\n      \"id\": \"OT-2\",\n      \"name\": \"Heat Pump (Air-Source & Water-Source)\",\n      \"hydronic_circuit\": true,\n      \"hydronic_circuit_note\": \"Present in WSHP/GSHP sub-type only; absent in ASHP\",\n      \"sensor_fit\": \"primary — water loop flow measurement in WSHP/GSHP\",\n      \"sensor_position\": \"L4-C > L3-C2 > L2-C2a\",\n      \"bom_cost_split_pct\": {\n        \"refrigerant_circuit\": 35,\n        \"heat_exchanger\": 25,\n        \"hydronic_circuit_wshp_only\": 12,\n        \"controls_electrical\": 15,\n        \"enclosure_structure\": 7,\n        \"refrigerant_charge\": 3,\n        \"other\": 3\n      },\n      \"key_alternatives\": {\n        \"compressor\": [\n          {\"technology\": \"inverter-scroll\", \"share_pct\": 50},\n          {\"technology\": \"fixed-scroll\", \"share_pct\": 30},\n          {\"technology\": \"inverter-rotary\", \"share_pct\": 15},\n          {\"technology\": \"reciprocating\", \"share_pct\": 5}\n        ],\n        \"water_refrigerant_hx\": [\n          {\"technology\": \"brazed-plate BPHE (316L SS)\", \"share_pct\": 65},\n          {\"technology\": \"shell-and-tube\", \"share_pct\": 30},\n          {\"technology\": \"welded-plate\", \"share_pct\": 5}\n        ],\n        \"flow_sensor_at_L3C2\": [\n          {\"technology\": \"ultrasonic transit-time\", \"share_pct\": 45, \"marquardt_fit\": true},\n          {\"technology\": \"vortex\", \"share_pct\": 25},\n          {\"technology\": \"electromagnetic\", \"share_pct\": 20},\n          {\"technology\": \"turbine\", \"share_pct\": 10}\n        ],\n        \"refrigerant\": [\n          {\"fluid\": \"R-454B\", \"gwp\": 466, \"share_pct\": 60},\n          {\"fluid\": \"R-32\", \"gwp\": 675, \"share_pct\": 22},\n          {\"fluid\": \"R-410A\", \"gwp\": 2088, \"share_pct\": 12, \"status\": \"legacy\"},\n          {\"fluid\": \"R-407C\", \"share_pct\": 4},\n          {\"fluid\": \"R-134a\", \"share_pct\": 2, \"note\": \"WSHP secondary loop, minor\"}\n        ]\n      }\n    },\n    {\n      \"id\": \"OT-3\",\n      \"name\": \"Warm Air Furnace\",\n      \"hydronic_circuit\": false,\n      \"refrigerant_circuit\": false,\n      \"sensor_fit\": \"none\",\n      \"bom_note\": \"No refrigerant circuit. No HFC refrigerant. No compressor. Combustion-based.\",\n      \"bom_cost_split_pct\": {\n        \"combustion_section\": 20,\n        \"primary_heat_exchanger\": 22,\n        \"secondary_heat_exchanger_condensing_only\": 12,\n        \"blower_air_distribution\": 12,\n        \"controls_ignition\": 10,\n        \"enclosure_structural\": 8,\n        \"fuel_system\": 3,\n        \"other\": 13\n      },\n      \"key_alternatives\": {\n        \"furnace_type\": [\n          {\"technology\": \"non-condensing (80% AFUE)\", \"share_pct\": 56},\n          {\"technology\": \"condensing (90%+ AFUE)\", \"share_pct\": 44}\n        ],\n        \"primary_hx_material\": [\n          {\"material\": \"aluminized steel Type-1\", \"share_pct\": 78},\n          {\"material\": \"409 ferritic stainless steel\", \"share_pct\": 18},\n          {\"material\": \"439 SS titanium-stabilized\", \"share_pct\": 4}\n        ],\n        \"secondary_hx_material_condensing\": [\n          {\"material\": \"304/316L stainless steel coil\", \"share_pct\": 55},\n          {\"material\": \"duplex SS 2205\", \"share_pct\": 20},\n          {\"material\": \"polypropylene HX\", \"share_pct\": 20},\n          {\"material\": \"409 SS\", \"share_pct\": 5}\n        ],\n        \"burner_type\": [\n          {\"technology\": \"inshot burner\", \"share_pct\": 65},\n          {\"technology\": \"upshot burner\", \"share_pct\": 20},\n          {\"technology\": \"premix modulating\", \"share_pct\": 12},\n          {\"technology\": \"power burner (oil/gas)\", \"share_pct\": 3}\n        ],\n        \"gas_valve_staging\": [\n          {\"technology\": \"single-stage\", \"share_pct\": 45},\n          {\"technology\": \"two-stage\", \"share_pct\": 35},\n          {\"technology\": \"modulating variable output\", \"share_pct\": 20}\n        ],\n        \"ignition_system\": [\n          {\"technology\": \"hot surface ignitor (HSI, Si3N4 or SiC)\", \"share_pct\": 46},\n          {\"technology\": \"electronic direct spark (DSI)\", \"share_pct\": 24},\n          {\"technology\": \"intermittent pilot (IP)\", \"share_pct\": 12},\n          {\"technology\": \"standing pilot (legacy)\", \"share_pct\": 12},\n          {\"technology\": \"other electronic\", \"share_pct\": 6}\n        ],\n        \"blower_motor\": [\n          {\"technology\": \"ECM multi-speed\", \"share_pct\": 70},\n          {\"technology\": \"PSC single/multi-speed\", \"share_pct\": 25},\n          {\"technology\": \"DC variable-speed\", \"share_pct\": 5}\n        ]\n      },\n      \"key_raw_materials\": [\"aluminized steel Type-1\", \"409 stainless steel\", \"316L stainless steel\", \"gray cast iron\", \"brass\", \"G90 galvanized steel\", \"silicon nitride (HSI)\", \"silicon carbide (HSI alt)\", \"copper wire (motor)\", \"alumino-silicate ceramic fiber (insulation)\"]\n    },\n    {\n      \"id\": \"OT-4\",\n      \"name\": \"Commercial Rooftop Unit (RTU)\",\n      \"hydronic_circuit\": false,\n      \"sensor_fit\": \"none\",\n      \"bom_cost_split_pct\": {\n        \"compressor_section\": 32,\n        \"heat_exchanger\": 18,\n        \"economizer_module\": 6,\n        \"gas_heating_section\": 15,\n        \"fan_air_distribution\": 12,\n        \"controls_electrical\": 12,\n        \"enclosure_structural_frame\": 5\n      },\n      \"key_alternatives\": {\n        \"compressor_under_15ton\": [\n          {\"technology\": \"inverter-scroll\", \"share_pct\": 42},\n          {\"technology\": \"fixed-scroll\", \"share_pct\": 38},\n          {\"technology\": \"tandem-scroll\", \"share_pct\": 15},\n          {\"technology\": \"reciprocating\", \"share_pct\": 5}\n        ],\n        \"compressor_over_15ton\": [\n          {\"technology\": \"twin-screw\", \"share_pct\": 55},\n          {\"technology\": \"scroll tandem/multiple\", \"share_pct\": 30},\n          {\"technology\": \"reciprocating\", \"share_pct\": 10},\n          {\"technology\": \"centrifugal\", \"share_pct\": 5}\n        ],\n        \"economizer_type\": [\n          {\"technology\": \"dry-bulb temperature\", \"share_pct\": 65},\n          {\"technology\": \"enthalpy (T+RH)\", \"share_pct\": 30},\n          {\"technology\": \"differential enthalpy\", \"share_pct\": 5}\n        ],\n        \"controls_protocol\": [\n          {\"technology\": \"BACnet-native proprietary\", \"share_pct\": 60},\n          {\"technology\": \"Modbus RTU\", \"share_pct\": 25},\n          {\"technology\": \"proprietary-only\", \"share_pct\": 15}\n        ]\n      }\n    },\n    {\n      \"id\": \"OT-5\",\n      \"name\": \"Chiller (Air-Cooled & Water-Cooled)\",\n      \"hydronic_circuit\": true,\n      \"hydronic_circuit_note\": \"Water-cooled chiller has CHW loop AND CW loop — two sensor positions\",\n      \"sensor_fit\": \"primary — chilled-water loop + condenser-water loop\",\n      \"sensor_positions\": [\n        {\"loop\": \"chilled-water (CHW)\", \"path\": \"L4-D > L3-D1 > L3-D1a > L2-D1a\"},\n        {\"loop\": \"condenser-water (CW)\", \"path\": \"L4-D > L3-D2 > L3-D2a > L2-D2a\"}\n      ],\n      \"market_split\": {\n        \"water_cooled\": 56.4,\n        \"air_cooled\": 43.6\n      },\n      \"bom_cost_split_pct\": {\n        \"compressor_section\": 38,\n        \"evaporator_chw_hx\": 20,\n        \"condenser_cw_hx\": 15,\n        \"hydronic_circuits\": 10,\n        \"controls_electrical\": 12,\n        \"enclosure_frame\": 5\n      },\n      \"key_alternatives\": {\n        \"compressor_50_300ton\": [\n          {\"technology\": \"screw\", \"share_pct\": 50},\n          {\"technology\": \"scroll tandem\", \"share_pct\": 25},\n          {\"technology\": \"centrifugal\", \"share_pct\": 20},\n          {\"technology\": \"reciprocating\", \"share_pct\": 5}\n        ],\n        \"compressor_300plus_ton\": [\n          {\"technology\": \"centrifugal\", \"share_pct\": 55},\n          {\"technology\": \"screw\", \"share_pct\": 40},\n          {\"technology\": \"reciprocating\", \"share_pct\": 5}\n        ],\n        \"evaporator_hx_type\": [\n          {\"technology\": \"shell-and-tube (flooded or DX)\", \"share_pct\": 55},\n          {\"technology\": \"brazed-plate\", \"share_pct\": 30},\n          {\"technology\": \"welded-plate\", \"share_pct\": 15}\n        ],\n        \"flow_sensor_at_chw_cw\": [\n          {\"technology\": \"ultrasonic transit-time\", \"share_pct\": 45, \"marquardt_fit\": true},\n          {\"technology\": \"electromagnetic\", \"share_pct\": 30},\n          {\"technology\": \"vortex\", \"share_pct\": 20},\n          {\"technology\": \"turbine\", \"share_pct\": 5}\n        ],\n        \"refrigerant\": [\n          {\"fluid\": \"R-134a\", \"gwp\": 1430, \"share_pct\": 35, \"status\": \"declining, phase-down\"},\n          {\"fluid\": \"R-1234ze(E)\", \"gwp\": 7, \"share_pct\": 30, \"status\": \"growing standard\"},\n          {\"fluid\": \"R-1233zd(E)\", \"gwp\": 1, \"share_pct\": 18},\n          {\"fluid\": \"R-514A\", \"gwp\": 2, \"share_pct\": 10},\n          {\"fluid\": \"R-410A\", \"gwp\": 2088, \"share_pct\": 7, \"note\": \"small/legacy chillers\"}\n        ]\n      }\n    },\n    {\n      \"id\": \"OT-6\",\n      \"name\": \"Commercial Refrigeration Equipment\",\n      \"hydronic_circuit\": false,\n      \"sensor_fit\": \"none\",\n      \"bom_cost_split_pct\": {\n        \"refrigerant_circuit\": 26,\n        \"evaporator_air_distribution\": 14,\n        \"thermal_insulation\": 18,\n        \"display_access\": 15,\n        \"controls_defrost\": 9,\n        \"cabinet_structure\": 8,\n        \"other\": 10\n      },\n      \"key_alternatives\": {\n        \"compressor\": [\n          {\"technology\": \"hermetic reciprocating\", \"share_pct\": 50},\n          {\"technology\": \"scroll\", \"share_pct\": 28},\n          {\"technology\": \"semi-hermetic reciprocating\", \"share_pct\": 18},\n          {\"technology\": \"rotary\", \"share_pct\": 4}\n        ],\n        \"insulation_core\": [\n          {\"material\": \"PUR foam in-place\", \"r_value_per_inch\": 7, \"share_pct\": 70},\n          {\"material\": \"EPS board\", \"r_value_per_inch\": 3.8, \"share_pct\": 20},\n          {\"material\": \"XPS board\", \"r_value_per_inch\": 5.0, \"share_pct\": 10}\n        ],\n        \"door_type\": [\n          {\"technology\": \"double-pane insulating glass\", \"share_pct\": 58},\n          {\"technology\": \"triple-pane Low-E glass\", \"share_pct\": 32},\n          {\"technology\": \"solid opaque (freezer)\", \"share_pct\": 10}\n        ],\n        \"defrost_method\": [\n          {\"technology\": \"electric resistance\", \"share_pct\": 60},\n          {\"technology\": \"hot-gas bypass\", \"share_pct\": 32},\n          {\"technology\": \"off-cycle\", \"share_pct\": 8}\n        ],\n        \"refrigerant\": [\n          {\"fluid\": \"R-448A\", \"gwp\": 1387, \"share_pct\": 38, \"status\": \"primary replacement\"},\n          {\"fluid\": \"R-449A\", \"gwp\": 1397, \"share_pct\": 20},\n          {\"fluid\": \"R-404A\", \"gwp\": 3922, \"share_pct\": 18, \"status\": \"EPA ban new equip. Jan 2026\"},\n          {\"fluid\": \"CO2 R-744\", \"gwp\": 1, \"share_pct\": 15, \"status\": \"growing transcritical\"},\n          {\"fluid\": \"R-290 propane\", \"gwp\": 3, \"share_pct\": 9, \"status\": \"small-volume niche\"}\n        ]\n      }\n    },\n    {\n      \"id\": \"OT-7\",\n      \"name\": \"Industrial Refrigeration Equipment\",\n      \"hydronic_circuit\": false,\n      \"sensor_fit\": \"secondary — glycol loop in ≤50% of applications\",\n      \"bom_note\": \"Copper PROHIBITED in ammonia service. All refrigerant-wetted metalwork must be carbon steel, cast iron, or 316L SS.\",\n      \"bom_cost_split_pct\": {\n        \"compressor_section\": 34,\n        \"heat_exchanger\": 22,\n        \"liquid_management\": 14,\n        \"safety_purge_systems\": 8,\n        \"controls_electrical\": 14,\n        \"piping_structural\": 8\n      },\n      \"key_alternatives\": {\n        \"compressor\": [\n          {\"technology\": \"semi-hermetic reciprocating\", \"share_pct\": 45},\n          {\"technology\": \"twin-screw (oil-injected)\", \"share_pct\": 40},\n          {\"technology\": \"centrifugal\", \"share_pct\": 12},\n          {\"technology\": \"rotary vane\", \"share_pct\": 3}\n        ],\n        \"condenser_type\": [\n          {\"technology\": \"evaporative condenser\", \"share_pct\": 60},\n          {\"technology\": \"shell-and-tube water-cooled\", \"share_pct\": 28},\n          {\"technology\": \"air-cooled finned\", \"share_pct\": 12}\n        ],\n        \"evaporator_type\": [\n          {\"technology\": \"flooded shell-and-tube\", \"share_pct\": 50},\n          {\"technology\": \"semi-welded plate-and-frame\", \"share_pct\": 30},\n          {\"technology\": \"forced-draft air-cooled unit cooler\", \"share_pct\": 20}\n        ],\n        \"refrigerant\": [\n          {\"fluid\": \"ammonia R-717\", \"gwp\": 0, \"share_pct\": 85, \"status\": \"dominant in USA industrial\"},\n          {\"fluid\": \"CO2 R-744\", \"gwp\": 1, \"share_pct\": 8, \"status\": \"emerging in smaller systems\"},\n          {\"fluid\": \"HFCs (legacy)\", \"gwp_range\": \"1000-4000\", \"share_pct\": 7, \"status\": \"declining\"}\n        ],\n        \"lubricant_oil\": [\n          {\"type\": \"naphthenic mineral oil\", \"share_pct\": 55},\n          {\"type\": \"alkylbenzene (AB) oil\", \"share_pct\": 30},\n          {\"type\": \"polyalphaolefin (PAO)\", \"share_pct\": 15}\n        ]\n      },\n      \"prohibited_materials\": [\"copper\", \"brass\", \"zinc plating\", \"aluminum (wetted side)\", \"nitrile rubber gaskets\"]\n    }\n  ],\n  \"bom_levels\": {\n    \"L4\": \"Subsystem — part of a system with system properties of its own (ISO 15288)\",\n    \"L3\": \"Module — self-contained functional unit with defined interfaces (IEC 61131-3)\",\n    \"L2\": \"Assembly — two or more parts forming a re-disassemblable functional unit (DIN EN ISO 10209)\",\n    \"L1\": \"Part — non-demountable object manufactured per a work plan (DIN EN ISO 10209)\",\n    \"L0\": \"Raw material — substance defined by chemical/physical properties, no geometry (DIN 8580)\"\n  }\n}\n```\n\n---\n\n*Sources: Grand View Research (heat pump market, HVAC compressor North America); Future Market Insights (water-source heat pump, EEV, rotary compressor markets); Meticulous Research (rotary compressor); Credence Research (expansion valves); Research Nester (piezoelectric sensor market); Badger Meter / Pumps & Systems (ultrasonic flow in hydronic HVAC); LG Global / ACIQ (refrigerant transitions 2025, R-454B share); MarketsandMarkets (heat exchanger, water-based heating & cooling); Market Research Future (residential furnace, industrial refrigeration compressor); WiseGuy Reports (hot surface ignitor market 2033); Koch Applied (condensing furnace secondary HX materials); Fortune Business Insights (U.S. natural refrigerants, ammonia market); Freonwell / EPA (R-404A phaseout schedule); NREL (refrigerant market trends); Mordor Intelligence (chiller market); IndexBox (HVAC centrifugal compressor forecast); GM Insights (variable-speed heat pump); InsuLspan (EPS vs PUR insulation); Emergent Coils (Cu vs Al HVAC coils); Perceptiv (ECM vs PSC motor market); IIAR (Ammonia Refrigeration Institute standards ANSI/IIAR 2, 3); ASHRAE 15 (Safety Standard for Refrigeration Systems); Alfa Laval / Danfoss technical literature (semi-welded plate HX for ammonia); Optigo Networks (BACnet vs Modbus commercial HVAC).*"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "OT",
+        "Name",
+        "Hydronic Circuit?",
+        "Sensor Fit"
+      ],
+      "rows": [
+        {
+          "OT": "OT-1",
+          "Name": "Residential Split/Packaged AC",
+          "Hydronic Circuit?": "No",
+          "Sensor Fit": "—"
+        },
+        {
+          "OT": "OT-2",
+          "Name": "Water-Source Heat Pump",
+          "Hydronic Circuit?": "**Yes**",
+          "Sensor Fit": "**Primary fit** — water loop flow measurement"
+        },
+        {
+          "OT": "OT-3",
+          "Name": "Warm Air Furnace",
+          "Hydronic Circuit?": "No",
+          "Sensor Fit": "—"
+        },
+        {
+          "OT": "OT-4",
+          "Name": "Commercial Rooftop Unit",
+          "Hydronic Circuit?": "No",
+          "Sensor Fit": "—"
+        },
+        {
+          "OT": "OT-5",
+          "Name": "Water-Cooled Chiller",
+          "Hydronic Circuit?": "**Yes**",
+          "Sensor Fit": "**Primary fit** — chilled water + condenser water loops"
+        },
+        {
+          "OT": "OT-6",
+          "Name": "Commercial Refrigeration",
+          "Hydronic Circuit?": "No",
+          "Sensor Fit": "—"
+        },
+        {
+          "OT": "OT-7",
+          "Name": "Industrial Refrigeration",
+          "Hydronic Circuit?": "Partial",
+          "Sensor Fit": "Secondary fit — glycol loop ≤50%"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 ID",
+        "Subsystem",
+        "Approx. % BOM Cost",
+        "Key Design Choice",
+        "Alternatives (market share)"
+      ],
+      "rows": [
+        {
+          "L4 ID": "L4-A",
+          "Subsystem": "**Refrigerant Circuit**",
+          "Approx. % BOM Cost": "~35%",
+          "Key Design Choice": "Compression technology",
+          "Alternatives (market share)": "Scroll 48% · Rotary 25% · Screw 15% · Centrifugal 8% · Reciprocating 4%"
+        },
+        {
+          "L4 ID": "L4-B",
+          "Subsystem": "**Heat Exchanger**",
+          "Approx. % BOM Cost": "~25%",
+          "Key Design Choice": "HX geometry",
+          "Alternatives (market share)": "Brazed-plate 55% · Shell-and-tube 30% · Microchannel 15%"
+        },
+        {
+          "L4 ID": "L4-C",
+          "Subsystem": "**Hydronic Circuit**",
+          "Approx. % BOM Cost": "~12%",
+          "Key Design Choice": "Piping & instrumentation",
+          "Alternatives (market share)": "Copper 60% · Stainless 25% · CPVC/PEX 15%"
+        },
+        {
+          "L4 ID": "L4-D",
+          "Subsystem": "**Controls & Electrical**",
+          "Approx. % BOM Cost": "~15%",
+          "Key Design Choice": "Controller platform",
+          "Alternatives (market share)": "Proprietary ECU 65% · Third-party BMS gateway 35%"
+        },
+        {
+          "L4 ID": "L4-E",
+          "Subsystem": "**Enclosure & Structure**",
+          "Approx. % BOM Cost": "~8%",
+          "Key Design Choice": "Sheet metal material",
+          "Alternatives (market share)": "G90 galv. steel 70% · Powder-coat aluminum 20% · SS 10%"
+        },
+        {
+          "L4 ID": "L4-F",
+          "Subsystem": "**Refrigerant Charge**",
+          "Approx. % BOM Cost": "~5%",
+          "Key Design Choice": "Refrigerant fluid",
+          "Alternatives (market share)": "R-410A 64% · R-32 18% · R-454B 12% · R-407C 4% · CO₂ 2%"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L3 ID",
+        "Module",
+        "Alternatives"
+      ],
+      "rows": [
+        {
+          "L3 ID": "L3-A1",
+          "Module": "**Compressor Module**",
+          "Alternatives": "Inverter-scroll (dominant) · Fixed-scroll · Twin-rotary · Screw"
+        },
+        {
+          "L3 ID": "L3-A2",
+          "Module": "**Expansion Module**",
+          "Alternatives": "EEV/electronic 70% · TXV 30%"
+        },
+        {
+          "L3 ID": "L3-A3",
+          "Module": "**Four-Way Reversing Valve** (OT-2 only)",
+          "Alternatives": "Solenoid-actuated spool valve (near-universal)"
+        },
+        {
+          "L3 ID": "L3-A4",
+          "Module": "**Refrigerant Piping**",
+          "Alternatives": "Brazed copper 85% · Stainless flex 15%"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L3 ID",
+        "Module",
+        "Alternatives"
+      ],
+      "rows": [
+        {
+          "L3 ID": "L3-B1",
+          "Module": "**Evaporator (water-side)**",
+          "Alternatives": "Brazed-plate dominant for OT-2/OT-5 · DX coil for OT-1/OT-4"
+        },
+        {
+          "L3 ID": "L3-B2",
+          "Module": "**Condenser (water-side)**",
+          "Alternatives": "Shell-and-tube 40% · Brazed-plate 35% · Tube-and-fin 25%"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L3 ID",
+        "Module",
+        "Alternatives"
+      ],
+      "rows": [
+        {
+          "L3 ID": "L3-C1",
+          "Module": "**Circulation Pump Module**",
+          "Alternatives": "Wet-rotor ECM 60% · Dry-rotor centrifugal 40%"
+        },
+        {
+          "L3 ID": "L3-C2",
+          "Module": "**Flow & Temperature Measurement Assembly** ← DN20 lives here",
+          "Alternatives": "Ultrasonic transit-time 45% · Vortex 25% · Electromagnetic 20% · Turbine 10%"
+        },
+        {
+          "L3 ID": "L3-C3",
+          "Module": "**Pressure & Safety Valve Assembly**",
+          "Alternatives": "Spring-loaded PRV + pressure transducer"
+        },
+        {
+          "L3 ID": "L3-C4",
+          "Module": "**Hydronic Manifold & Balancing Valves**",
+          "Alternatives": "Cast iron 55% · Brass 35% · SS 10%"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L3 ID",
+        "Module",
+        "Alternatives"
+      ],
+      "rows": [
+        {
+          "L3 ID": "L3-D1",
+          "Module": "**Main Control Board (ECU)**",
+          "Alternatives": "Proprietary MCU · Third-party PLC"
+        },
+        {
+          "L3 ID": "L3-D2",
+          "Module": "**Power Electronics & Inverter Drive**",
+          "Alternatives": "IGBT-based VFD (dominant) · SiC emerging"
+        },
+        {
+          "L3 ID": "L3-D3",
+          "Module": "**Wiring Harness & Terminal Block**",
+          "Alternatives": "—"
+        },
+        {
+          "L3 ID": "L3-D4",
+          "Module": "**Communication Interface Module**",
+          "Alternatives": "BACnet/Modbus 60% · LonWorks 20% · Proprietary 20%"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L2 ID",
+        "Assembly",
+        "Parent L3",
+        "Alternatives / Key Players"
+      ],
+      "rows": [
+        {
+          "L2 ID": "L2-A1a",
+          "Assembly": "Scroll compressor body + motor",
+          "Parent L3": "L3-A1",
+          "Alternatives / Key Players": "Copeland/Emerson 24% · Daikin 18% · LG 14% · Panasonic 10% · Other 34%"
+        },
+        {
+          "L2 ID": "L2-A2a",
+          "Assembly": "EEV body + stepper actuator",
+          "Parent L3": "L3-A2",
+          "Alternatives / Key Players": "Danfoss 35% · Sporlan/Parker 28% · Fujikoki 22% · Other 15%"
+        },
+        {
+          "L2 ID": "L2-B1a",
+          "Assembly": "Brazed-plate HX core (stainless)",
+          "Parent L3": "L3-B1",
+          "Alternatives / Key Players": "Alfa Laval 32% · Danfoss/SWEP 28% · Kelvion 18% · Other 22%"
+        },
+        {
+          "L2 ID": "L2-C1a",
+          "Assembly": "Pump casing + wet-rotor motor",
+          "Parent L3": "L3-C1",
+          "Alternatives / Key Players": "Grundfos 38% · Wilo 28% · Taco 14% · Other 20%"
+        },
+        {
+          "L2 ID": "L2-C2a",
+          "Assembly": "**Flow sensor body + transducer pair** ← Marquardt DN20",
+          "Parent L3": "L3-C2",
+          "Alternatives / Key Players": "Marquardt · Honeywell · Sensirion · Gems · ifm"
+        },
+        {
+          "L2 ID": "L2-D1a",
+          "Assembly": "PCB + MCU + power supply",
+          "Parent L3": "L3-D1",
+          "Alternatives / Key Players": "—"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L1 ID",
+        "Part",
+        "Parent L2",
+        "Material / Technology"
+      ],
+      "rows": [
+        {
+          "L1 ID": "L1-A1a-1",
+          "Part": "Scroll wrap set (fixed + orbiting)",
+          "Parent L2": "L2-A1a",
+          "Material / Technology": "Powder-metallurgy steel or cast iron"
+        },
+        {
+          "L1 ID": "L1-A1a-2",
+          "Part": "Hermetic motor winding",
+          "Parent L2": "L2-A1a",
+          "Material / Technology": "Enameled copper wire, laminated silicon steel"
+        },
+        {
+          "L1 ID": "L1-A2a-1",
+          "Part": "Valve needle + seat",
+          "Parent L2": "L2-A2a",
+          "Material / Technology": "Hardened SS, PTFE seat"
+        },
+        {
+          "L1 ID": "L1-A2a-2",
+          "Part": "Stepper motor",
+          "Parent L2": "L2-A2a",
+          "Material / Technology": "Rare-earth PM rotor"
+        },
+        {
+          "L1 ID": "L1-B1a-1",
+          "Part": "Pressed stainless steel plates",
+          "Parent L2": "L2-B1a",
+          "Material / Technology": "316L stainless"
+        },
+        {
+          "L1 ID": "L1-B1a-2",
+          "Part": "Copper brazing foil",
+          "Parent L2": "L2-B1a",
+          "Material / Technology": ">99% Cu"
+        },
+        {
+          "L1 ID": "L1-C2a-1",
+          "Part": "**Piezo transducer pair (A + B)** ← Marquardt core",
+          "Parent L2": "L2-C2a",
+          "Material / Technology": "PZT ceramic (lead zirconate titanate)"
+        },
+        {
+          "L1 ID": "L1-C2a-2",
+          "Part": "**Sensor body / flow tube (DN20)**",
+          "Parent L2": "L2-C2a",
+          "Material / Technology": "PPS/PVDF or brass"
+        },
+        {
+          "L1 ID": "L1-C2a-3",
+          "Part": "**Signal processing PCB**",
+          "Parent L2": "L2-C2a",
+          "Material / Technology": "FR-4, SMD components"
+        },
+        {
+          "L1 ID": "L1-D1a-1",
+          "Part": "MCU / SoC",
+          "Parent L2": "L2-D1a",
+          "Material / Technology": "ARM Cortex-M, 28–40 nm process node"
+        },
+        {
+          "L1 ID": "L1-D1a-2",
+          "Part": "IGBT / SiC power module",
+          "Parent L2": "L2-D1a",
+          "Material / Technology": "Si IGBT or SiC MOSFET"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L0 ID",
+        "Raw Material",
+        "Primary Use Nodes",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "L0 ID": "L0-1",
+          "Raw Material": "**Copper** (Cu)",
+          "Primary Use Nodes": "HX cores, wiring, tubes",
+          "Notes": "27% HX material share; Aurubis, Codelco"
+        },
+        {
+          "L0 ID": "L0-2",
+          "Raw Material": "**Aluminum** (Al)",
+          "Primary Use Nodes": "Fin arrays, enclosure panels",
+          "Notes": "18% HX material share"
+        },
+        {
+          "L0 ID": "L0-3",
+          "Raw Material": "**Stainless Steel 316L**",
+          "Primary Use Nodes": "Brazed-plate HX, piping",
+          "Notes": "40% HX material share; Outokumpu, Aperam"
+        },
+        {
+          "L0 ID": "L0-4",
+          "Raw Material": "**Galvanized / pre-painted steel**",
+          "Primary Use Nodes": "Enclosure sheet metal",
+          "Notes": "ArcelorMittal, POSCO"
+        },
+        {
+          "L0 ID": "L0-5",
+          "Raw Material": "**PZT ceramic**",
+          "Primary Use Nodes": "Piezo transducer pair",
+          "Notes": "PI Ceramics, APC International, TDK"
+        },
+        {
+          "L0 ID": "L0-6",
+          "Raw Material": "**PPS / PVDF polymer**",
+          "Primary Use Nodes": "Sensor flow tube body",
+          "Notes": "Solvay, Ticona"
+        },
+        {
+          "L0 ID": "L0-7",
+          "Raw Material": "**R-454B / R-32 refrigerant**",
+          "Primary Use Nodes": "Refrigerant charge",
+          "Notes": "Phase-out of R-410A began Jan 2025; R-454B shortage driving 300%+ price spike"
+        },
+        {
+          "L0 ID": "L0-8",
+          "Raw Material": "**NdFeB rare-earth magnets**",
+          "Primary Use Nodes": "Compressor + pump motors",
+          "Notes": "MP Materials, Shin-Etsu"
+        },
+        {
+          "L0 ID": "L0-9",
+          "Raw Material": "**Silicon wafer**",
+          "Primary Use Nodes": "MCU, IGBT, SiC modules",
+          "Notes": "TSMC, Infineon, ON Semi"
+        },
+        {
+          "L0 ID": "L0-10",
+          "Raw Material": "**Copper brazing alloy (BCuP)**",
+          "Primary Use Nodes": "HX plate brazing",
+          "Notes": "Harris Products, Lucas-Milhaupt"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Material",
+        "OT-1",
+        "OT-2",
+        "OT-3",
+        "OT-4",
+        "OT-5",
+        "OT-6",
+        "OT-7"
+      ],
+      "rows": [
+        {
+          "Material": "Copper (refrigerant tubes, HX)",
+          "OT-1": "✓",
+          "OT-2": "✓",
+          "OT-3": "—",
+          "OT-4": "✓",
+          "OT-5": "✓",
+          "OT-6": "✓",
+          "OT-7": "**✗ PROHIBITED**"
+        },
+        {
+          "Material": "Copper (wiring/motor)",
+          "OT-1": "✓",
+          "OT-2": "✓",
+          "OT-3": "✓",
+          "OT-4": "✓",
+          "OT-5": "✓",
+          "OT-6": "✓",
+          "OT-7": "✓ (motor only)"
+        },
+        {
+          "Material": "Aluminized steel (HX cells)",
+          "OT-1": "—",
+          "OT-2": "—",
+          "OT-3": "✓",
+          "OT-4": "✓",
+          "OT-5": "—",
+          "OT-6": "—",
+          "OT-7": "—"
+        },
+        {
+          "Material": "316L stainless steel (HX plates)",
+          "OT-1": "—",
+          "OT-2": "✓",
+          "OT-3": "✓",
+          "OT-4": "—",
+          "OT-5": "✓",
+          "OT-6": "—",
+          "OT-7": "✓"
+        },
+        {
+          "Material": "Cast iron (compressor body)",
+          "OT-1": "✓",
+          "OT-2": "✓",
+          "OT-3": "—",
+          "OT-4": "✓",
+          "OT-5": "✓",
+          "OT-6": "✓",
+          "OT-7": "✓"
+        },
+        {
+          "Material": "Carbon steel A516 (pressure vessel)",
+          "OT-1": "—",
+          "OT-2": "—",
+          "OT-3": "—",
+          "OT-4": "—",
+          "OT-5": "✓",
+          "OT-6": "—",
+          "OT-7": "✓"
+        },
+        {
+          "Material": "PZT ceramic (flow sensor)",
+          "OT-1": "—",
+          "OT-2": "✓",
+          "OT-3": "—",
+          "OT-4": "—",
+          "OT-5": "✓",
+          "OT-6": "—",
+          "OT-7": "—"
+        },
+        {
+          "Material": "PPS/PVDF polymer (sensor body)",
+          "OT-1": "—",
+          "OT-2": "✓",
+          "OT-3": "—",
+          "OT-4": "—",
+          "OT-5": "✓",
+          "OT-6": "—",
+          "OT-7": "—"
+        },
+        {
+          "Material": "NdFeB rare-earth magnets",
+          "OT-1": "✓",
+          "OT-2": "✓",
+          "OT-3": "✓",
+          "OT-4": "✓",
+          "OT-5": "✓",
+          "OT-6": "✓",
+          "OT-7": "✓"
+        },
+        {
+          "Material": "PUR foam insulation",
+          "OT-1": "—",
+          "OT-2": "—",
+          "OT-3": "—",
+          "OT-4": "—",
+          "OT-5": "—",
+          "OT-6": "✓",
+          "OT-7": "—"
+        },
+        {
+          "Material": "SiC (compressor bearing / seal)",
+          "OT-1": "—",
+          "OT-2": "—",
+          "OT-3": "—",
+          "OT-4": "—",
+          "OT-5": "✓",
+          "OT-6": "—",
+          "OT-7": "✓"
+        },
+        {
+          "Material": "Ammonia R-717",
+          "OT-1": "—",
+          "OT-2": "—",
+          "OT-3": "—",
+          "OT-4": "—",
+          "OT-5": "—",
+          "OT-6": "—",
+          "OT-7": "✓"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "naics": "333415",
+      "naics_name": "Air-Conditioning and Warm Air Heating Equipment Manufacturing",
+      "sensor_context": {
+        "product": "Marquardt Ultrasonic Flow Sensor DN20",
+        "technology": "piezo transit-time",
+        "primary_placement": [
+          "OT-2 WSHP hydronic circuit",
+          "OT-5 CHW loop",
+          "OT-5 CW loop"
+        ],
+        "secondary_placement": [
+          "OT-7 glycol loop (≤50% application)"
+        ],
+        "spec": {
+          "flow_range_lpm": [
+            1.5,
+            46.6
+          ],
+          "temp_range_c": [
+            2,
+            90
+          ],
+          "pressure_max_bar": 6,
+          "media": "water / hydronic fluid up to 50% glycol",
+          "connection": "DN20"
+        }
+      },
+      "output_types": [
+        {
+          "id": "OT-1",
+          "name": "Residential Split/Packaged AC",
+          "hydronic_circuit": false,
+          "sensor_fit": "none",
+          "bom_cost_split_pct": {
+            "refrigerant_circuit": 35,
+            "heat_exchanger": 22,
+            "fan_air_distribution": 12,
+            "controls_electrical": 15,
+            "enclosure_structure": 8,
+            "refrigerant_charge": 3,
+            "other": 5
+          },
+          "key_alternatives": {
+            "compressor": [
+              {
+                "technology": "rotary twin-cylinder",
+                "share_pct": 45
+              },
+              {
+                "technology": "fixed-scroll",
+                "share_pct": 38
+              },
+              {
+                "technology": "inverter-rotary",
+                "share_pct": 12
+              },
+              {
+                "technology": "reciprocating",
+                "share_pct": 5
+              }
+            ],
+            "refrigerant": [
+              {
+                "fluid": "R-454B",
+                "gwp": 466,
+                "share_pct": 60,
+                "status": "new standard"
+              },
+              {
+                "fluid": "R-32",
+                "gwp": 675,
+                "share_pct": 22
+              },
+              {
+                "fluid": "R-410A",
+                "gwp": 2088,
+                "share_pct": 12,
+                "status": "banned in new equip. Jan 2025"
+              },
+              {
+                "fluid": "R-407C",
+                "gwp": 1774,
+                "share_pct": 4
+              },
+              {
+                "fluid": "R-22",
+                "gwp": 1810,
+                "share_pct": 2,
+                "status": "retrofit only"
+              }
+            ],
+            "condenser_coil": [
+              {
+                "technology": "Cu-tube / Al-fin RTPF",
+                "share_pct": 72
+              },
+              {
+                "technology": "All-Al microchannel MCHX",
+                "share_pct": 25
+              },
+              {
+                "technology": "Cu-tube / Cu-fin",
+                "share_pct": 3
+              }
+            ],
+            "indoor_blower_motor": [
+              {
+                "technology": "ECM brushless DC",
+                "share_pct": 70
+              },
+              {
+                "technology": "PSC",
+                "share_pct": 25
+              },
+              {
+                "technology": "DC BLDC inverter",
+                "share_pct": 5
+              }
+            ]
+          },
+          "key_raw_materials": [
+            "copper C12200",
+            "aluminum 3003",
+            "G90 galvanized steel",
+            "R-454B or R-32",
+            "NdFeB magnets",
+            "silicon wafer",
+            "enameled copper wire",
+            "silicon-steel laminations"
+          ]
+        },
+        {
+          "id": "OT-2",
+          "name": "Heat Pump (Air-Source & Water-Source)",
+          "hydronic_circuit": true,
+          "hydronic_circuit_note": "Present in WSHP/GSHP sub-type only; absent in ASHP",
+          "sensor_fit": "primary — water loop flow measurement in WSHP/GSHP",
+          "sensor_position": "L4-C > L3-C2 > L2-C2a",
+          "bom_cost_split_pct": {
+            "refrigerant_circuit": 35,
+            "heat_exchanger": 25,
+            "hydronic_circuit_wshp_only": 12,
+            "controls_electrical": 15,
+            "enclosure_structure": 7,
+            "refrigerant_charge": 3,
+            "other": 3
+          },
+          "key_alternatives": {
+            "compressor": [
+              {
+                "technology": "inverter-scroll",
+                "share_pct": 50
+              },
+              {
+                "technology": "fixed-scroll",
+                "share_pct": 30
+              },
+              {
+                "technology": "inverter-rotary",
+                "share_pct": 15
+              },
+              {
+                "technology": "reciprocating",
+                "share_pct": 5
+              }
+            ],
+            "water_refrigerant_hx": [
+              {
+                "technology": "brazed-plate BPHE (316L SS)",
+                "share_pct": 65
+              },
+              {
+                "technology": "shell-and-tube",
+                "share_pct": 30
+              },
+              {
+                "technology": "welded-plate",
+                "share_pct": 5
+              }
+            ],
+            "flow_sensor_at_L3C2": [
+              {
+                "technology": "ultrasonic transit-time",
+                "share_pct": 45,
+                "marquardt_fit": true
+              },
+              {
+                "technology": "vortex",
+                "share_pct": 25
+              },
+              {
+                "technology": "electromagnetic",
+                "share_pct": 20
+              },
+              {
+                "technology": "turbine",
+                "share_pct": 10
+              }
+            ],
+            "refrigerant": [
+              {
+                "fluid": "R-454B",
+                "gwp": 466,
+                "share_pct": 60
+              },
+              {
+                "fluid": "R-32",
+                "gwp": 675,
+                "share_pct": 22
+              },
+              {
+                "fluid": "R-410A",
+                "gwp": 2088,
+                "share_pct": 12,
+                "status": "legacy"
+              },
+              {
+                "fluid": "R-407C",
+                "share_pct": 4
+              },
+              {
+                "fluid": "R-134a",
+                "share_pct": 2,
+                "note": "WSHP secondary loop, minor"
+              }
+            ]
+          }
+        },
+        {
+          "id": "OT-3",
+          "name": "Warm Air Furnace",
+          "hydronic_circuit": false,
+          "refrigerant_circuit": false,
+          "sensor_fit": "none",
+          "bom_note": "No refrigerant circuit. No HFC refrigerant. No compressor. Combustion-based.",
+          "bom_cost_split_pct": {
+            "combustion_section": 20,
+            "primary_heat_exchanger": 22,
+            "secondary_heat_exchanger_condensing_only": 12,
+            "blower_air_distribution": 12,
+            "controls_ignition": 10,
+            "enclosure_structural": 8,
+            "fuel_system": 3,
+            "other": 13
+          },
+          "key_alternatives": {
+            "furnace_type": [
+              {
+                "technology": "non-condensing (80% AFUE)",
+                "share_pct": 56
+              },
+              {
+                "technology": "condensing (90%+ AFUE)",
+                "share_pct": 44
+              }
+            ],
+            "primary_hx_material": [
+              {
+                "material": "aluminized steel Type-1",
+                "share_pct": 78
+              },
+              {
+                "material": "409 ferritic stainless steel",
+                "share_pct": 18
+              },
+              {
+                "material": "439 SS titanium-stabilized",
+                "share_pct": 4
+              }
+            ],
+            "secondary_hx_material_condensing": [
+              {
+                "material": "304/316L stainless steel coil",
+                "share_pct": 55
+              },
+              {
+                "material": "duplex SS 2205",
+                "share_pct": 20
+              },
+              {
+                "material": "polypropylene HX",
+                "share_pct": 20
+              },
+              {
+                "material": "409 SS",
+                "share_pct": 5
+              }
+            ],
+            "burner_type": [
+              {
+                "technology": "inshot burner",
+                "share_pct": 65
+              },
+              {
+                "technology": "upshot burner",
+                "share_pct": 20
+              },
+              {
+                "technology": "premix modulating",
+                "share_pct": 12
+              },
+              {
+                "technology": "power burner (oil/gas)",
+                "share_pct": 3
+              }
+            ],
+            "gas_valve_staging": [
+              {
+                "technology": "single-stage",
+                "share_pct": 45
+              },
+              {
+                "technology": "two-stage",
+                "share_pct": 35
+              },
+              {
+                "technology": "modulating variable output",
+                "share_pct": 20
+              }
+            ],
+            "ignition_system": [
+              {
+                "technology": "hot surface ignitor (HSI, Si3N4 or SiC)",
+                "share_pct": 46
+              },
+              {
+                "technology": "electronic direct spark (DSI)",
+                "share_pct": 24
+              },
+              {
+                "technology": "intermittent pilot (IP)",
+                "share_pct": 12
+              },
+              {
+                "technology": "standing pilot (legacy)",
+                "share_pct": 12
+              },
+              {
+                "technology": "other electronic",
+                "share_pct": 6
+              }
+            ],
+            "blower_motor": [
+              {
+                "technology": "ECM multi-speed",
+                "share_pct": 70
+              },
+              {
+                "technology": "PSC single/multi-speed",
+                "share_pct": 25
+              },
+              {
+                "technology": "DC variable-speed",
+                "share_pct": 5
+              }
+            ]
+          },
+          "key_raw_materials": [
+            "aluminized steel Type-1",
+            "409 stainless steel",
+            "316L stainless steel",
+            "gray cast iron",
+            "brass",
+            "G90 galvanized steel",
+            "silicon nitride (HSI)",
+            "silicon carbide (HSI alt)",
+            "copper wire (motor)",
+            "alumino-silicate ceramic fiber (insulation)"
+          ]
+        },
+        {
+          "id": "OT-4",
+          "name": "Commercial Rooftop Unit (RTU)",
+          "hydronic_circuit": false,
+          "sensor_fit": "none",
+          "bom_cost_split_pct": {
+            "compressor_section": 32,
+            "heat_exchanger": 18,
+            "economizer_module": 6,
+            "gas_heating_section": 15,
+            "fan_air_distribution": 12,
+            "controls_electrical": 12,
+            "enclosure_structural_frame": 5
+          },
+          "key_alternatives": {
+            "compressor_under_15ton": [
+              {
+                "technology": "inverter-scroll",
+                "share_pct": 42
+              },
+              {
+                "technology": "fixed-scroll",
+                "share_pct": 38
+              },
+              {
+                "technology": "tandem-scroll",
+                "share_pct": 15
+              },
+              {
+                "technology": "reciprocating",
+                "share_pct": 5
+              }
+            ],
+            "compressor_over_15ton": [
+              {
+                "technology": "twin-screw",
+                "share_pct": 55
+              },
+              {
+                "technology": "scroll tandem/multiple",
+                "share_pct": 30
+              },
+              {
+                "technology": "reciprocating",
+                "share_pct": 10
+              },
+              {
+                "technology": "centrifugal",
+                "share_pct": 5
+              }
+            ],
+            "economizer_type": [
+              {
+                "technology": "dry-bulb temperature",
+                "share_pct": 65
+              },
+              {
+                "technology": "enthalpy (T+RH)",
+                "share_pct": 30
+              },
+              {
+                "technology": "differential enthalpy",
+                "share_pct": 5
+              }
+            ],
+            "controls_protocol": [
+              {
+                "technology": "BACnet-native proprietary",
+                "share_pct": 60
+              },
+              {
+                "technology": "Modbus RTU",
+                "share_pct": 25
+              },
+              {
+                "technology": "proprietary-only",
+                "share_pct": 15
+              }
+            ]
+          }
+        },
+        {
+          "id": "OT-5",
+          "name": "Chiller (Air-Cooled & Water-Cooled)",
+          "hydronic_circuit": true,
+          "hydronic_circuit_note": "Water-cooled chiller has CHW loop AND CW loop — two sensor positions",
+          "sensor_fit": "primary — chilled-water loop + condenser-water loop",
+          "sensor_positions": [
+            {
+              "loop": "chilled-water (CHW)",
+              "path": "L4-D > L3-D1 > L3-D1a > L2-D1a"
+            },
+            {
+              "loop": "condenser-water (CW)",
+              "path": "L4-D > L3-D2 > L3-D2a > L2-D2a"
+            }
+          ],
+          "market_split": {
+            "water_cooled": 56.4,
+            "air_cooled": 43.6
+          },
+          "bom_cost_split_pct": {
+            "compressor_section": 38,
+            "evaporator_chw_hx": 20,
+            "condenser_cw_hx": 15,
+            "hydronic_circuits": 10,
+            "controls_electrical": 12,
+            "enclosure_frame": 5
+          },
+          "key_alternatives": {
+            "compressor_50_300ton": [
+              {
+                "technology": "screw",
+                "share_pct": 50
+              },
+              {
+                "technology": "scroll tandem",
+                "share_pct": 25
+              },
+              {
+                "technology": "centrifugal",
+                "share_pct": 20
+              },
+              {
+                "technology": "reciprocating",
+                "share_pct": 5
+              }
+            ],
+            "compressor_300plus_ton": [
+              {
+                "technology": "centrifugal",
+                "share_pct": 55
+              },
+              {
+                "technology": "screw",
+                "share_pct": 40
+              },
+              {
+                "technology": "reciprocating",
+                "share_pct": 5
+              }
+            ],
+            "evaporator_hx_type": [
+              {
+                "technology": "shell-and-tube (flooded or DX)",
+                "share_pct": 55
+              },
+              {
+                "technology": "brazed-plate",
+                "share_pct": 30
+              },
+              {
+                "technology": "welded-plate",
+                "share_pct": 15
+              }
+            ],
+            "flow_sensor_at_chw_cw": [
+              {
+                "technology": "ultrasonic transit-time",
+                "share_pct": 45,
+                "marquardt_fit": true
+              },
+              {
+                "technology": "electromagnetic",
+                "share_pct": 30
+              },
+              {
+                "technology": "vortex",
+                "share_pct": 20
+              },
+              {
+                "technology": "turbine",
+                "share_pct": 5
+              }
+            ],
+            "refrigerant": [
+              {
+                "fluid": "R-134a",
+                "gwp": 1430,
+                "share_pct": 35,
+                "status": "declining, phase-down"
+              },
+              {
+                "fluid": "R-1234ze(E)",
+                "gwp": 7,
+                "share_pct": 30,
+                "status": "growing standard"
+              },
+              {
+                "fluid": "R-1233zd(E)",
+                "gwp": 1,
+                "share_pct": 18
+              },
+              {
+                "fluid": "R-514A",
+                "gwp": 2,
+                "share_pct": 10
+              },
+              {
+                "fluid": "R-410A",
+                "gwp": 2088,
+                "share_pct": 7,
+                "note": "small/legacy chillers"
+              }
+            ]
+          }
+        },
+        {
+          "id": "OT-6",
+          "name": "Commercial Refrigeration Equipment",
+          "hydronic_circuit": false,
+          "sensor_fit": "none",
+          "bom_cost_split_pct": {
+            "refrigerant_circuit": 26,
+            "evaporator_air_distribution": 14,
+            "thermal_insulation": 18,
+            "display_access": 15,
+            "controls_defrost": 9,
+            "cabinet_structure": 8,
+            "other": 10
+          },
+          "key_alternatives": {
+            "compressor": [
+              {
+                "technology": "hermetic reciprocating",
+                "share_pct": 50
+              },
+              {
+                "technology": "scroll",
+                "share_pct": 28
+              },
+              {
+                "technology": "semi-hermetic reciprocating",
+                "share_pct": 18
+              },
+              {
+                "technology": "rotary",
+                "share_pct": 4
+              }
+            ],
+            "insulation_core": [
+              {
+                "material": "PUR foam in-place",
+                "r_value_per_inch": 7,
+                "share_pct": 70
+              },
+              {
+                "material": "EPS board",
+                "r_value_per_inch": 3.8,
+                "share_pct": 20
+              },
+              {
+                "material": "XPS board",
+                "r_value_per_inch": 5.0,
+                "share_pct": 10
+              }
+            ],
+            "door_type": [
+              {
+                "technology": "double-pane insulating glass",
+                "share_pct": 58
+              },
+              {
+                "technology": "triple-pane Low-E glass",
+                "share_pct": 32
+              },
+              {
+                "technology": "solid opaque (freezer)",
+                "share_pct": 10
+              }
+            ],
+            "defrost_method": [
+              {
+                "technology": "electric resistance",
+                "share_pct": 60
+              },
+              {
+                "technology": "hot-gas bypass",
+                "share_pct": 32
+              },
+              {
+                "technology": "off-cycle",
+                "share_pct": 8
+              }
+            ],
+            "refrigerant": [
+              {
+                "fluid": "R-448A",
+                "gwp": 1387,
+                "share_pct": 38,
+                "status": "primary replacement"
+              },
+              {
+                "fluid": "R-449A",
+                "gwp": 1397,
+                "share_pct": 20
+              },
+              {
+                "fluid": "R-404A",
+                "gwp": 3922,
+                "share_pct": 18,
+                "status": "EPA ban new equip. Jan 2026"
+              },
+              {
+                "fluid": "CO2 R-744",
+                "gwp": 1,
+                "share_pct": 15,
+                "status": "growing transcritical"
+              },
+              {
+                "fluid": "R-290 propane",
+                "gwp": 3,
+                "share_pct": 9,
+                "status": "small-volume niche"
+              }
+            ]
+          }
+        },
+        {
+          "id": "OT-7",
+          "name": "Industrial Refrigeration Equipment",
+          "hydronic_circuit": false,
+          "sensor_fit": "secondary — glycol loop in ≤50% of applications",
+          "bom_note": "Copper PROHIBITED in ammonia service. All refrigerant-wetted metalwork must be carbon steel, cast iron, or 316L SS.",
+          "bom_cost_split_pct": {
+            "compressor_section": 34,
+            "heat_exchanger": 22,
+            "liquid_management": 14,
+            "safety_purge_systems": 8,
+            "controls_electrical": 14,
+            "piping_structural": 8
+          },
+          "key_alternatives": {
+            "compressor": [
+              {
+                "technology": "semi-hermetic reciprocating",
+                "share_pct": 45
+              },
+              {
+                "technology": "twin-screw (oil-injected)",
+                "share_pct": 40
+              },
+              {
+                "technology": "centrifugal",
+                "share_pct": 12
+              },
+              {
+                "technology": "rotary vane",
+                "share_pct": 3
+              }
+            ],
+            "condenser_type": [
+              {
+                "technology": "evaporative condenser",
+                "share_pct": 60
+              },
+              {
+                "technology": "shell-and-tube water-cooled",
+                "share_pct": 28
+              },
+              {
+                "technology": "air-cooled finned",
+                "share_pct": 12
+              }
+            ],
+            "evaporator_type": [
+              {
+                "technology": "flooded shell-and-tube",
+                "share_pct": 50
+              },
+              {
+                "technology": "semi-welded plate-and-frame",
+                "share_pct": 30
+              },
+              {
+                "technology": "forced-draft air-cooled unit cooler",
+                "share_pct": 20
+              }
+            ],
+            "refrigerant": [
+              {
+                "fluid": "ammonia R-717",
+                "gwp": 0,
+                "share_pct": 85,
+                "status": "dominant in USA industrial"
+              },
+              {
+                "fluid": "CO2 R-744",
+                "gwp": 1,
+                "share_pct": 8,
+                "status": "emerging in smaller systems"
+              },
+              {
+                "fluid": "HFCs (legacy)",
+                "gwp_range": "1000-4000",
+                "share_pct": 7,
+                "status": "declining"
+              }
+            ],
+            "lubricant_oil": [
+              {
+                "type": "naphthenic mineral oil",
+                "share_pct": 55
+              },
+              {
+                "type": "alkylbenzene (AB) oil",
+                "share_pct": 30
+              },
+              {
+                "type": "polyalphaolefin (PAO)",
+                "share_pct": 15
+              }
+            ]
+          },
+          "prohibited_materials": [
+            "copper",
+            "brass",
+            "zinc plating",
+            "aluminum (wetted side)",
+            "nitrile rubber gaskets"
+          ]
+        }
+      ],
+      "bom_levels": {
+        "L4": "Subsystem — part of a system with system properties of its own (ISO 15288)",
+        "L3": "Module — self-contained functional unit with defined interfaces (IEC 61131-3)",
+        "L2": "Assembly — two or more parts forming a re-disassemblable functional unit (DIN EN ISO 10209)",
+        "L1": "Part — non-demountable object manufactured per a work plan (DIN EN ISO 10209)",
+        "L0": "Raw material — substance defined by chemical/physical properties, no geometry (DIN 8580)"
+      }
+    }
+  ],
+  "has_bom": true,
+  "naics_sector_type": "manufacturing"
+}

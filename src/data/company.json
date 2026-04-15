@@ -1,0 +1,59 @@
+{
+  "profile": {
+    "legalName": "Böhmer Systemtechnik GmbH",
+    "legalForm": "GmbH",
+    "headquarters": "Im Aisple 5, 88515 Langenenslingen, Germany",
+    "countryCode": "DE",
+    "region": "Baden-Württemberg",
+    "founded": 1947,
+    "foundedNote": "Locksmith workshop; INSTRUCTIONS.md states 1951 — website takes precedence",
+    "ownership": "family_owned",
+    "ownershipDetail": "Böhmer family; succession from 2nd to 3rd generation in progress",
+    "employees": 130,
+    "employeesNote": "~130 incl. 17 trainees per web research; briefing states ~100",
+    "revenueEurM": "<10",
+    "revenueConfidence": "low_estimate — private GmbH, single web source, upper bound",
+    "naicsPrimary": "332312",
+    "naicsSecondary": ["332710", "333111"],
+    "vatId": "DE248230480",
+    "handelsregister": "HRB 489-R Biberach"
+  },
+  "crossValidation": [
+    { "metric": "Employees", "instructionsMd": "~100", "webResearch": "~130 (incl. 17 trainees)", "delta": "+30%", "status": "FLAG" },
+    { "metric": "Revenue (EUR M)", "instructionsMd": "not stated", "webResearch": "<10", "delta": "—", "status": "SINGLE SOURCE" },
+    { "metric": "Founded", "instructionsMd": "1951", "webResearch": "1947", "delta": "-4 yrs", "status": "FLAG" }
+  ],
+  "divisions": [
+    {
+      "name": "Steel Fabrication",
+      "nameLocal": "Systemtechnik / Lohnfertigung",
+      "description": "Contract manufacturing: laser cutting, bending, MIG/MAG-TIG welding, structural steel, assemblies",
+      "focus": "core",
+      "status": "mature / declining volume"
+    },
+    {
+      "name": "Equestrian Products",
+      "nameLocal": "Reitsportprodukte",
+      "description": "Own-brand welded steel equestrian equipment: Heuraufe (hay rack) and Paddockbox (mobile paddock enclosure)",
+      "focus": "growth",
+      "status": "nascent — target: first sales within 3 years"
+    }
+  ],
+  "keyPersons": [
+    { "name": "Dipl.-Ing. Josef Böhmer", "role": "Geschäftsführer", "generation": 2, "relevance": "Legal signatory, current owner" },
+    { "name": "Matthias Lukas Böhmer", "role": "Designated Successor", "generation": 3, "ageApprox": 29, "relevance": "Strategic driver of product business launch; succession pending" },
+    { "name": "Michael Emhart", "role": "Ansprechpartner", "relevance": "Operations liaison" },
+    { "name": "Daniel Zeug", "role": "Ansprechpartner", "relevance": "Operations liaison" }
+  ],
+  "certifications": [
+    { "name": "Quality Management", "standard": "DIN EN ISO 9001:2015", "scope": "Company-wide" },
+    { "name": "Welding Quality", "standard": "DIN EN ISO 3834-2", "scope": "Production" },
+    { "name": "Structural Steel", "standard": "DIN EN 1090-1 / 1090-2", "scope": "Production" }
+  ],
+  "strategicContext": "Böhmer is a classic German Mittelstand Lohnfertiger (contract manufacturer) executing a value chain jump — from pure job-shop welding to OEM product business. The trigger is structural: as larger B2B customers verticalize, Böhmer's contract order book has been declining. The 3rd generation (Matthias Böhmer) sees underutilized capacity and domain expertise in equestrian sports as a natural fit for two own-brand products.",
+  "keyConstraintsOnTransformation": [
+    "No prior experience with working capital, product inventory, or outbound sales",
+    "Transition from JIT pull (customer brings material) to push (buy-stock-produce-sell) model",
+    "Capacity must serve both existing contract business and new product ramp simultaneously"
+  ]
+}

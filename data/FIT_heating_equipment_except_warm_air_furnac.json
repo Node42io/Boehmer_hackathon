@@ -1,0 +1,1063 @@
+{
+  "id": "FIT_heating_equipment_except_warm_air_furnac",
+  "title": "Feature-Market Fit — Heating Equipment (except Warm Air Furnaces) Manufacturing (NAICS 333414)",
+  "type": "feature_market_fit",
+  "market_slug": "heating_equipment_except_warm_air_furnac",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Step 09 — Technology-Level Feature-Market Fit",
+      "content": "Seven technology-scope features from Step 01 scored against NAICS 333414 using Kano classification and 9-dimension ODI fit scoring. Market needs referenced from `JTBD_heating_equipment_except_warm_air_furnac.md`.\n\n### 09a — Per-Market Kano + ODI Fit Scoring\n\n| Feature | Kano | Time | Cost | Safety | Reliab. | Skill | Stress | Pain | Conf. | Delight | Overall |\n|---|---|---|---|---|---|---|---|---|---|---|---|\n| **Transit-Time Flow Measurement** | must_be | 6 | 5 | 7 | 8 | 4 | 5 | 6 | 7 | 3 | **5.67** |\n| **Integrated Temperature Sensing** | attractive | 5 | 8 | 4 | 6 | 6 | 5 | 7 | 7 | 6 | **6.00** |\n| **Zero Pressure Drop Flow Path** | one_dimensional | 3 | 6 | 3 | 5 | 3 | 3 | 4 | 4 | 3 | **3.78** |\n| **No Moving Parts** | attractive | 3 | 7 | 5 | 9 | 5 | 6 | 8 | 6 | 5 | **6.00** |\n| **Bidirectional Flow Detection** | attractive | 4 | 5 | 6 | 4 | 3 | 4 | 3 | 5 | 4 | **4.22** |\n| **Digital Anomaly Detection** | attractive | 5 | 5 | 8 | 7 | 6 | 7 | 5 | 8 | 6 | **6.33** |\n| **Real-Time Compensation Algorithms** | one_dimensional | 3 | 4 | 4 | 8 | 5 | 5 | 4 | 7 | 3 | **4.78** |\n\n### 09a — Rationales\n\n**Transit-Time Flow Measurement** — `must_be`. This IS the commodity FP (\"quantify volumetric or mass flow rate of fluids traversing a conduit\"). Every alternative in this market — turbine, vortex, DP estimation — provides some form of flow measurement. Primary drivers: Reliability (8) — solid-state transit-time principle delivers consistent readings without mechanical degradation, directly addressing N01 (flow deviation >±3%, Opp=13) and N24 (field failure <0.1% in 15-yr life, Opp=13); Safety (7) — rapid flow-change detection enables boiler dry-fire prevention and low-water safety cutoffs per N04 (flow stoppage >2s, Opp=13). [SRC: 01_product_decomposition, JTBD N01/N04/N24]\n\n**Integrated Temperature Sensing** — `attractive`. Most flowmeters in the heating OEM market do NOT include temperature measurement; separate NTC/PT1000 probes are standard in boiler designs. Combined flow + temperature from a single sensor body enables onboard thermal energy calculation (Q = flow × ΔT × Cp) — a critical OEM differentiator for EU EcoDesign energy labeling. Primary drivers: Cost (8) — eliminates separate temperature probe, wiring, and controller input, directly addressing N19 (single-point flow + temp, Opp=12); Confidence (7) — matched flow/temp from the same point reduces thermal energy calculation noise per N22 (Opp=12) and enables documented measured efficiency per N25 (Opp=13). [SRC: 02_functional_promise differentiator #4, JTBD N19/N22/N25]\n\n**Zero Pressure Drop Flow Path** — `one_dimensional`. Less pressure drop is proportionally better for hydronic system design — every mbar counts in circulator pump sizing. Heating OEMs optimize system hydraulic resistance carefully. Primary drivers: Cost (6) — reduces circulator pump sizing burden and eliminates head-loss penalty in system design; Reliability (5) — no flow obstruction means no sensor-as-clogging-point. Scores kept moderate because while valuable, zero pressure drop alone does not transform the product category. [SRC: 01_product_decomposition differentiator #2]\n\n**No Moving Parts** — `attractive`. The incumbent alternative (impeller/turbine, 55-65% market share) suffers from magnetite fouling, bearing wear, and calibration drift — the top three pain points in this market per the JTBD analysis. Zero mechanical wear is a genuine delighter for OEM engineering managers who budget for turbine warranty claims. Primary drivers: Reliability (9) — eliminates the dominant failure mechanisms: magnetite rotor seizure per N10 (Opp=13) and calibration drift from blade erosion per N12 (Opp=13); Pain (8) — eliminates annual maintenance for cleaning/inspection per N11 (Opp=11), and removes the 3-5 year replacement schedule in hard-water circuits. [SRC: 01_product_decomposition differentiator #1, JTBD N10/N11/N12/N24]\n\n**Bidirectional Flow Detection** — `attractive`. Not expected from standard heating equipment flow sensors. Detects backflow conditions caused by check-valve failure or reversed pump wiring during commissioning — useful as a diagnostic but not a primary value driver in this OEM market. Primary drivers: Safety (6) — detects reversed circulation that could cause thermal stratification or boiler short-cycling; Cost (5) — eliminates need for separate backflow detection hardware. Lower overall fit because backflow is an infrequent failure mode in well-designed hydronic systems. [SRC: 01_product_decomposition differentiator #5, JTBD N18]\n\n**Digital Anomaly Detection** — `attractive`. Bubble detection, empty-pipe detection, and glycol presence monitoring are diagnostics that no incumbent turbine or vortex sensor provides. For heating equipment OEMs, this creates a sensor that actively participates in system health monitoring. Primary drivers: Safety (8) — empty-pipe detection prevents boiler dry-fire, the most critical safety interlock per N04 (Opp=13); Confidence (8) — real-time diagnostic flags (air, empty pipe, glycol shift) directly address N07 (undetected air >2% vol, Opp=13) and N14c (distinguish zero-flow from signal loss, Opp=13); Stress (7) — automated anomaly detection reduces OEM warranty engineering anxiety and installer troubleshooting burden. [SRC: 01_product_decomposition, JTBD N04/N07/N14c/N27]\n\n**Real-Time Compensation Algorithms** — `one_dimensional`. More accurate compensation = proportionally better readings across the operating envelope. Linear relationship. In hydronic heating, temperature swings during cold starts (15°C to 75°C) are routine and directly degrade uncompensated flow measurement. Primary drivers: Reliability (8) — reduces temperature-induced measurement error from ~1.5% to ~0.2% via NTC compensation, directly addressing N03 (degradation at ΔT >20°C, Opp=12) and N09 (glycol >50% failure, Opp=12); Confidence (7) — auto-compensated readings enable accurate thermal energy calculation across the full operating envelope per N22 (Opp=12). [SRC: 01_product_decomposition, JTBD N03/N09/N22]\n\n### 09b — Validation\n\n| # | Check | Result |\n|---|---|---|\n| 1 | Kano cross-market consistency | PASS — must_be only for core measurement (commodity FP baseline); 4 features classified attractive (all genuinely unexpected vs turbine incumbent at 55-65% share); 2 one_dimensional (linear performance scaling) |\n| 2 | Safety >= 7 but Confidence <= 3 | PASS — no violation. Max safety = 8 (Digital Anomaly Detection), corresponding confidence = 8 |\n| 3 | Skill >= 7 but Stress <= 3 | PASS — no violation. Max skill = 6, corresponding stress >= 5 |\n| 4 | overall_fit arithmetic | PASS — all 7 values recomputed: (sum of 9 scores) / 9, rounded to 2 decimal places |\n| 5 | No feature scores 10 on all dimensions | PASS — max single score = 9 (No Moving Parts → Reliability) |\n| 6 | Feature names comply with 1.pdf rules | PASS — spec-visible noun phrases, 2-6 words, no brand names, no outcome claims |\n| 7 | Indifferent features score 1-3 on all dimensions | N/A — no indifferent features in this market |\n\n---"
+    },
+    {
+      "title": "Step 10 — Product-Related Needs (Burleson Product Jobs)",
+      "content": "Needs derived from the ultrasonic transit-time technology's constraints. Each passes the litmus test: **would this need disappear if a different technology (electromagnetic, Coriolis, turbine) were chosen? YES.**\n\n| # | Statement | Source Constraint | Affected Markets | Imp | Sat |\n|---|---|---|---|---|---|\n| 1 | Minimize the likelihood of measurement failure when hydronic circuit additives (corrosion inhibitors, anti-scale agents, biocides) shift the medium's acoustic impedance beyond the piezoelectric transducer's coupling range | Media Limitation | 333414 | 5 | 6 |\n| 2 | Minimize the likelihood of polymer housing seal degradation when boiler circuits operate at sustained supply temperatures of 80-90°C near the sensor's material service limit | Maximum Medium Temperature | 333414 | 7 | 5 |\n| 3 | Minimize the likelihood of measurement dead zones during low-modulation boiler operation where flow rates drop below the minimum detectable threshold (4.2 l/min DN20) at 20-25% burner output | Minimum Flow Rate Detection | 333414 | 8 | 4 |\n| 4 | Minimize the measurement error caused by micro-bubble entrainment exceeding 2% by volume during system filling, de-aeration, and cold-start operations that temporarily aerate the hydronic medium | Air Bubble Tolerance | 333414 | 7 | 3 |\n| 5 | Minimize the duration of invalid measurement during system drain-down events in solar-hybrid heating circuits with drain-back designs that periodically empty the sensor's measurement section | Pipe Full Condition | 333414 | 5 | 4 |\n| 6 | Minimize the installation footprint penalty from the 5-10× DN straight-pipe requirement that competes for space within compact boiler enclosures and wall-hung appliance housings | Minimum Straight Pipe Run | 333414 | 8 | 4 |\n| 7 | Minimize the residual transit-time measurement error during rapid cold-start temperature ramps (15°C to 75°C in <10 minutes) where speed-of-sound changes temporarily outpace the NTC compensation algorithm's response | Temperature-Dependent Accuracy | 333414 | 7 | 5 |\n| 8 | Minimize the likelihood of acoustic coupling degradation when glycol concentration changes between seasonal fill operations shift the speed-of-sound calibration baseline beyond the pre-configured fluid-type setting | Media Limitation | 333414 | 6 | 4 |\n\n### 10b — Validation\n\n| # | Check | Result |\n|---|---|---|\n| 1 | Litmus test — would need disappear with different technology? | PASS — all 8 needs trace to ultrasonic transit-time specific constraints; electromagnetic sensors are unaffected by air bubbles (#4), have no acoustic coupling (#1/#8), no straight-run requirement for most designs (#6), metallic housings survive >150°C (#2) |\n| 2 | Source constraint traceability | PASS — all 8 constraints exist in Step 01 constraint list; each constraint logically causes the stated failure mode |\n| 3 | Affected markets plausibility | PASS — all 8 apply to 333414 (boiler circuits use water/glycol, undergo cold starts, have space-constrained enclosures, operate at 60-90°C) |\n| 4 | Completeness — every constraint generates >= 1 need | PASS — Media Limitation generates 2 (#1 additive failure, #8 glycol coupling); Maximum Operating Pressure omitted because hydronic heating circuits operate at 1.5-3 bar, well below 10 bar limit — constraint does not manifest |\n| 5 | importance < 3 AND satisfaction > 7 | PASS — no such entries; minimum importance = 5, maximum satisfaction = 6 |\n| 6 | No market-level needs included | PASS — no generic accuracy, cost, or regulatory needs; all trace to specific ultrasonic mechanisms |\n\n---"
+    },
+    {
+      "title": "Step 11 — Vendor Feature-Market Fit (Marquardt vs Best Incumbent)",
+      "content": "Six vendor-scope features (Marquardt-specific) scored against NAICS 333414. Vendor score and best incumbent score use the same 0-10 scale. Incumbents are heating equipment OEM-embedded flow sensors.\n\n| Feature | Kano | Vendor | Incumbent | Inc. Tech | Advantage |\n|---|---|---|---|---|---|\n| **Modular Pipe Diameter Variants** | one_dimensional | 7 | 6 | Impeller/Turbine Flow Sensor | parity |\n| **Customizable Communication Interface** | one_dimensional | 8 | 5 | Impeller/Turbine Flow Sensor | superior |\n| **Customizable Mechanical Interface** | one_dimensional | 7 | 6 | Impeller/Turbine Flow Sensor | parity |\n| **Low-Energy Battery Mode** | indifferent | 7 | 2 | Impeller/Turbine Flow Sensor | superior |\n| **Pre-Calibrated Delivery** | attractive | 8 | 5 | Impeller/Turbine Flow Sensor | superior |\n| **KTW/WRAS Drinking Water Approval** | must_be | 8 | 7 | Impeller/Turbine Flow Sensor | parity |\n\n### Advantage Distribution\n\n| Advantage | Count | % |\n|---|---|---|\n| superior | 3 | 50% |\n| parity | 3 | 50% |\n| inferior | 0 | 0% |\n\n### 11a — Rationales\n\n**Modular Pipe Diameter Variants** — `one_dimensional`, `parity`. Marquardt offers DN12/14/20/25 on a shared electronics platform with standardized RAST 2.5 connector, allowing OEMs to cover their full boiler range from a single supplier. Turbine incumbents (e.g., Grundfos VFS, Sika VT) typically offer 2-3 DN sizes per product family but require different connector types per size. Marquardt's shared-platform approach reduces OEM qualification effort per N21 (variant count, Opp=8). Gap of 1 point = parity because DN12/14/25 variants are still in development, reducing current practical advantage. [SRC: 01_product_decomposition, JTBD N21]\n\n**Customizable Communication Interface** — `one_dimensional`, `superior`. Marquardt's triple-protocol option (UART/LIN/frequency) directly matches the heating OEM integration model — boiler controllers use embedded serial buses, not building management protocols. UART provides full digital data (flow, temperature, diagnostics); LIN enables automotive-grade boiler platforms; frequency output maintains backward compatibility with legacy controllers. Turbine incumbents typically offer only pulse/frequency output with no digital data channel. Gap of 3 points reflects a meaningful capability difference: digital diagnostics data (air bubble events, glycol status, self-test results) cannot be transmitted via pulse output alone. Addresses N27 (installer-visible measured performance data, Opp=11). [SRC: 01_product_decomposition, JTBD N25/N27]\n\n**Customizable Mechanical Interface** — `one_dimensional`, `parity`. Both Marquardt (threaded + plug-in) and turbine incumbents (threaded + push-fit) offer connection options for standard hydronic pipe sizes. Marquardt's plug-in quick-connect reduces OEM assembly line installation time per N17 (OEM integration time, Opp=9). Turbine sensors have similarly evolved to quick-fit connections. Gap = 1 point = parity. [SRC: 01_product_decomposition, JTBD N17]\n\n**Low-Energy Battery Mode** — `indifferent`, `superior`. In the heating equipment manufacturing market (NAICS 333414), all boilers and heating appliances have mains power — the sensor is embedded in a powered appliance. Battery mode provides no value in the primary OEM use case. Vendor score of 7 reflects technical excellence (<5 μA standby); incumbent score of 2 reflects that no one offers it because no one needs it. Technically superior but market-indifferent. Note: may become relevant for a niche retrofit/monitoring aftermarket segment, but not for primary OEM boiler integration. [SRC: 01_product_decomposition]\n\n**Pre-Calibrated Delivery** — `attractive`, `superior`. Marquardt delivers each sensor individually calibrated to the customer's specified medium (water, glycol mix percentage) and tested across the operating flow profile with 100% automated final test. This eliminates field calibration and reduces OEM integration time per N17 (Opp=9) and commissioning configuration per N13 (Opp=7). Turbine incumbents ship with generic factory calibration based on water at 20°C; OEMs or installers must adjust for actual medium and operating conditions. Marquardt's customer-specific pre-calibration addresses the OEM overseer's need for documented measured accuracy per N26 (A-rated label on first certification, Opp=12). Gap of 3 points reflects a genuine process advantage. [SRC: 01_product_decomposition, JTBD N13/N17/N26]\n\n**KTW/WRAS Drinking Water Approval** — `must_be`, `parity`. Boiler manufacturers building combi boilers (DHW + space heating) require potable water-contact approval for the DHW circuit's flow sensor. KTW (German) and WRAS (UK) are the relevant standards in the primary European heating equipment market. Marquardt holds both. Established turbine sensor suppliers (e.g., Digmesa, Bürkert) also hold these approvals. Both adequate; Marquardt's coverage matches incumbents. Gap = 1 point = parity. [SRC: 01_product_decomposition]\n\n### 11b — Objectivity Review\n\n| # | Check | Result |\n|---|---|---|\n| 1 | Vendor bias (>70% superior) | PASS — 50% superior; justified by OEM-specific advantages (digital protocols, pre-calibration) vs turbine incumbents that lack these capabilities |\n| 2 | Anti-vendor bias (>70% inferior) | PASS — 0% inferior; plausible because this market (distance=2) is the closest to the sensor's home market |\n| 3 | Straw-man incumbents | PASS — impeller/turbine flow sensors are the genuine dominant incumbent (55-65% market share per JTBD analysis); not using weak alternatives |\n| 4 | Advantage classification arithmetic | PASS — superior: all gaps > 1 (3, 5, 3); parity: all gaps <= 1 (1, 1, 1) |\n| 5 | must_be features have both scores >= 5 | PASS — KTW/WRAS: vendor 8, incumbent 7 |\n| 6 | Rationale specificity | PASS — each references specific protocols (UART/LIN/frequency vs pulse-only), certifications (KTW/WRAS), DN sizes, or calibration processes |\n\n---"
+    },
+    {
+      "title": "Key Findings",
+      "content": "| Insight | Detail |\n|---|---|\n| **Strongest technology fit** | Digital Anomaly Detection (overall 6.33) — empty-pipe/air/glycol diagnostics address the 3 highest-opportunity needs in this market (N04, N07, N14c, all Opp=13) |\n| **Highest-value delighter** | No Moving Parts (overall 6.00) — directly eliminates the market's dominant pain: magnetite fouling and bearing wear in turbine sensors (N10, N12, both Opp=13) |\n| **Biggest OEM differentiator** | Integrated Temperature Sensing (attractive, 6.00) — enables onboard thermal energy calculation for EU EcoDesign energy labeling without separate temperature probe (N19, N25, both Opp=12-13) |\n| **Strongest vendor advantage** | Pre-Calibrated Delivery (superior, 8 vs 5) — customer-specific medium calibration eliminates field adjustment and supports first-submission energy label certification (N26, Opp=12) |\n| **Product-related risk** | Minimum straight pipe run (Imp=8, Sat=4) — 5-10× DN space requirement conflicts with compact boiler enclosure design; and low-flow dead zone (Imp=8, Sat=4) — DN20 minimum of 4.2 l/min may miss boiler minimum-modulation flow rates at 20-25% output |\n| **Market-indifferent vendor feature** | Low-Energy Battery Mode — technically superior but irrelevant for mains-powered OEM boiler integration |\n| **Market entry implication** | Architecture distance = 2 (closest market); 4 of 7 technology features are `attractive`; 3 of 6 vendor features are `superior` vs turbine incumbent — strong overall fit with OEM boiler/heater manufacturers |\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"feature_market_fit\",\n  \"naics_code\": \"333414\",\n  \"naics_title\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n  \"product_name\": \"Ultrasonic Flow Sensor\",\n  \"vendor_name\": \"Marquardt\",\n  \"technology_class\": \"Ultrasonic Transit-Time Flow Measurement\",\n  \"step_09_tech_feature_market_fit\": {\n    \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n    \"naics_code\": \"333414\",\n    \"n_features_assessed\": 7,\n    \"entries\": [\n      {\n        \"feature_name\": \"Transit-Time Flow Measurement\",\n        \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n        \"naics_code\": \"333414\",\n        \"kano_class\": \"must_be\",\n        \"fit_score_time\": 6,\n        \"fit_score_cost\": 5,\n        \"fit_score_safety\": 7,\n        \"fit_score_reliability\": 8,\n        \"fit_score_skill\": 4,\n        \"fit_score_stress\": 5,\n        \"fit_score_pain\": 6,\n        \"fit_score_confidence\": 7,\n        \"fit_score_delight\": 3,\n        \"overall_fit\": 5.67,\n        \"rationale\": \"Must_be — this IS the commodity FP (quantify volumetric flow rate). Every alternative provides flow measurement. Primary drivers: Reliability (8) — solid-state principle delivers consistent readings addressing N01 (flow deviation >3%, Opp=13) and N24 (field failure <0.1% in 15-yr life, Opp=13); Safety (7) — rapid flow-change detection enables boiler dry-fire prevention per N04 (Opp=13).\"\n      },\n      {\n        \"feature_name\": \"Integrated Temperature Sensing\",\n        \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n        \"naics_code\": \"333414\",\n        \"kano_class\": \"attractive\",\n        \"fit_score_time\": 5,\n        \"fit_score_cost\": 8,\n        \"fit_score_safety\": 4,\n        \"fit_score_reliability\": 6,\n        \"fit_score_skill\": 6,\n        \"fit_score_stress\": 5,\n        \"fit_score_pain\": 7,\n        \"fit_score_confidence\": 7,\n        \"fit_score_delight\": 6,\n        \"overall_fit\": 6.00,\n        \"rationale\": \"Attractive — most heating OEM flowmeters do NOT include temperature. Combined flow+temp enables onboard thermal energy calculation (Q = flow x delta-T x Cp) for EU EcoDesign energy labeling. Primary drivers: Cost (8) — eliminates separate temperature probe per N19 (Opp=12); Confidence (7) — matched flow/temp reduces thermal energy calc noise per N22 (Opp=12) and enables documented measured efficiency per N25 (Opp=13).\"\n      },\n      {\n        \"feature_name\": \"Zero Pressure Drop Flow Path\",\n        \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n        \"naics_code\": \"333414\",\n        \"kano_class\": \"one_dimensional\",\n        \"fit_score_time\": 3,\n        \"fit_score_cost\": 6,\n        \"fit_score_safety\": 3,\n        \"fit_score_reliability\": 5,\n        \"fit_score_skill\": 3,\n        \"fit_score_stress\": 3,\n        \"fit_score_pain\": 4,\n        \"fit_score_confidence\": 4,\n        \"fit_score_delight\": 3,\n        \"overall_fit\": 3.78,\n        \"rationale\": \"One_dimensional — less pressure drop is proportionally better for hydronic system design. Heating OEMs optimize circulator pump sizing to every mbar. Primary drivers: Cost (6) — reduces pump sizing burden and eliminates head-loss penalty; Reliability (5) — no flow obstruction means no sensor-as-clogging-point.\"\n      },\n      {\n        \"feature_name\": \"No Moving Parts\",\n        \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n        \"naics_code\": \"333414\",\n        \"kano_class\": \"attractive\",\n        \"fit_score_time\": 3,\n        \"fit_score_cost\": 7,\n        \"fit_score_safety\": 5,\n        \"fit_score_reliability\": 9,\n        \"fit_score_skill\": 5,\n        \"fit_score_stress\": 6,\n        \"fit_score_pain\": 8,\n        \"fit_score_confidence\": 6,\n        \"fit_score_delight\": 5,\n        \"overall_fit\": 6.00,\n        \"rationale\": \"Attractive — incumbent turbine sensors (55-65% share) suffer magnetite fouling and bearing wear. Zero mechanical wear is a genuine delighter for OEM engineering managers budgeting turbine warranty claims. Primary drivers: Reliability (9) — eliminates magnetite rotor seizure per N10 (Opp=13) and calibration drift per N12 (Opp=13); Pain (8) — removes annual maintenance schedule per N11 (Opp=11) and 3-5 year replacement cycle.\"\n      },\n      {\n        \"feature_name\": \"Bidirectional Flow Detection\",\n        \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n        \"naics_code\": \"333414\",\n        \"kano_class\": \"attractive\",\n        \"fit_score_time\": 4,\n        \"fit_score_cost\": 5,\n        \"fit_score_safety\": 6,\n        \"fit_score_reliability\": 4,\n        \"fit_score_skill\": 3,\n        \"fit_score_stress\": 4,\n        \"fit_score_pain\": 3,\n        \"fit_score_confidence\": 5,\n        \"fit_score_delight\": 4,\n        \"overall_fit\": 4.22,\n        \"rationale\": \"Attractive — not expected from standard heating OEM flow sensors. Detects reversed circulation from check-valve failure or incorrect pump wiring. Primary drivers: Safety (6) — detects reversed flow that could cause thermal stratification or boiler short-cycling; Cost (5) — eliminates separate backflow detection hardware. Lower fit because backflow is infrequent in well-designed hydronic systems.\"\n      },\n      {\n        \"feature_name\": \"Digital Anomaly Detection\",\n        \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n        \"naics_code\": \"333414\",\n        \"kano_class\": \"attractive\",\n        \"fit_score_time\": 5,\n        \"fit_score_cost\": 5,\n        \"fit_score_safety\": 8,\n        \"fit_score_reliability\": 7,\n        \"fit_score_skill\": 6,\n        \"fit_score_stress\": 7,\n        \"fit_score_pain\": 5,\n        \"fit_score_confidence\": 8,\n        \"fit_score_delight\": 6,\n        \"overall_fit\": 6.33,\n        \"rationale\": \"Attractive — bubble/empty-pipe/glycol diagnostics are capabilities no incumbent turbine or vortex sensor provides. Primary drivers: Safety (8) — empty-pipe detection prevents boiler dry-fire per N04 (Opp=13); Confidence (8) — real-time diagnostics address N07 (undetected air >2%, Opp=13) and N14c (distinguish zero-flow from signal loss, Opp=13); Stress (7) — automated anomaly detection reduces OEM warranty engineering burden.\"\n      },\n      {\n        \"feature_name\": \"Real-Time Compensation Algorithms\",\n        \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n        \"naics_code\": \"333414\",\n        \"kano_class\": \"one_dimensional\",\n        \"fit_score_time\": 3,\n        \"fit_score_cost\": 4,\n        \"fit_score_safety\": 4,\n        \"fit_score_reliability\": 8,\n        \"fit_score_skill\": 5,\n        \"fit_score_stress\": 5,\n        \"fit_score_pain\": 4,\n        \"fit_score_confidence\": 7,\n        \"fit_score_delight\": 3,\n        \"overall_fit\": 4.78,\n        \"rationale\": \"One_dimensional — better compensation linearly improves measurement accuracy across the operating envelope. Primary drivers: Reliability (8) — reduces temperature-induced error from ~1.5% to ~0.2% via NTC compensation per N03 (ΔT >20°C degradation, Opp=12) and N09 (glycol >50%, Opp=12); Confidence (7) — auto-compensated readings enable accurate thermal energy calculation per N22 (Opp=12).\"\n      }\n    ]\n  },\n  \"step_10_product_related_needs\": {\n    \"n_needs\": 8,\n    \"n_constraints_covered\": 7,\n    \"entries\": [\n      {\n        \"statement\": \"Minimize the likelihood of measurement failure when hydronic circuit additives (corrosion inhibitors, anti-scale agents, biocides) shift the medium's acoustic impedance beyond the piezoelectric transducer's coupling range\",\n        \"source_constraint\": \"Media Limitation\",\n        \"affected_markets\": [\"Heating Equipment (except Warm Air Furnaces) Manufacturing\"],\n        \"importance\": 5.0,\n        \"satisfaction_current\": 6.0\n      },\n      {\n        \"statement\": \"Minimize the likelihood of polymer housing seal degradation when boiler circuits operate at sustained supply temperatures of 80-90 degrees C near the sensor's material service limit\",\n        \"source_constraint\": \"Maximum Medium Temperature\",\n        \"affected_markets\": [\"Heating Equipment (except Warm Air Furnaces) Manufacturing\"],\n        \"importance\": 7.0,\n        \"satisfaction_current\": 5.0\n      },\n      {\n        \"statement\": \"Minimize the likelihood of measurement dead zones during low-modulation boiler operation where flow rates drop below the minimum detectable threshold (4.2 l/min DN20) at 20-25% burner output\",\n        \"source_constraint\": \"Minimum Flow Rate Detection\",\n        \"affected_markets\": [\"Heating Equipment (except Warm Air Furnaces) Manufacturing\"],\n        \"importance\": 8.0,\n        \"satisfaction_current\": 4.0\n      },\n      {\n        \"statement\": \"Minimize the measurement error caused by micro-bubble entrainment exceeding 2% by volume during system filling, de-aeration, and cold-start operations that temporarily aerate the hydronic medium\",\n        \"source_constraint\": \"Air Bubble Tolerance\",\n        \"affected_markets\": [\"Heating Equipment (except Warm Air Furnaces) Manufacturing\"],\n        \"importance\": 7.0,\n        \"satisfaction_current\": 3.0\n      },\n      {\n        \"statement\": \"Minimize the duration of invalid measurement during system drain-down events in solar-hybrid heating circuits with drain-back designs that periodically empty the sensor's measurement section\",\n        \"source_constraint\": \"Pipe Full Condition\",\n        \"affected_markets\": [\"Heating Equipment (except Warm Air Furnaces) Manufacturing\"],\n        \"importance\": 5.0,\n        \"satisfaction_current\": 4.0\n      },\n      {\n        \"statement\": \"Minimize the installation footprint penalty from the 5-10x DN straight-pipe requirement that competes for space within compact boiler enclosures and wall-hung appliance housings\",\n        \"source_constraint\": \"Minimum Straight Pipe Run\",\n        \"affected_markets\": [\"Heating Equipment (except Warm Air Furnaces) Manufacturing\"],\n        \"importance\": 8.0,\n        \"satisfaction_current\": 4.0\n      },\n      {\n        \"statement\": \"Minimize the residual transit-time measurement error during rapid cold-start temperature ramps (15 degrees C to 75 degrees C in less than 10 minutes) where speed-of-sound changes temporarily outpace the NTC compensation algorithm's response\",\n        \"source_constraint\": \"Temperature-Dependent Accuracy\",\n        \"affected_markets\": [\"Heating Equipment (except Warm Air Furnaces) Manufacturing\"],\n        \"importance\": 7.0,\n        \"satisfaction_current\": 5.0\n      },\n      {\n        \"statement\": \"Minimize the likelihood of acoustic coupling degradation when glycol concentration changes between seasonal fill operations shift the speed-of-sound calibration baseline beyond the pre-configured fluid-type setting\",\n        \"source_constraint\": \"Media Limitation\",\n        \"affected_markets\": [\"Heating Equipment (except Warm Air Furnaces) Manufacturing\"],\n        \"importance\": 6.0,\n        \"satisfaction_current\": 4.0\n      }\n    ]\n  },\n  \"step_11_vendor_feature_market_fit\": {\n    \"vendor_name\": \"Marquardt\",\n    \"vendor_product\": \"US Flow Sensor (DN20 serial, DN12/DN14/DN25 development)\",\n    \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n    \"naics_code\": \"333414\",\n    \"n_features_assessed\": 6,\n    \"advantage_distribution\": {\n      \"superior\": 3,\n      \"parity\": 3,\n      \"inferior\": 0\n    },\n    \"entries\": [\n      {\n        \"feature_name\": \"Modular Pipe Diameter Variants\",\n        \"feature_description\": \"Serve multiple pipe sizes via interchangeable flow bodies sharing a common electronics platform and RAST 2.5 connector\",\n        \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n        \"naics_code\": \"333414\",\n        \"vendor_score\": 7,\n        \"best_incumbent_score\": 6,\n        \"best_incumbent_technology\": \"Impeller/Turbine Flow Sensor\",\n        \"advantage\": \"parity\",\n        \"kano_class\": \"one_dimensional\",\n        \"rationale\": \"Marquardt offers DN12/14/20/25 on shared electronics with standardized RAST 2.5 connector, reducing OEM qualification effort per N21 (Opp=8). Turbine incumbents (Grundfos VFS, Sika VT) offer 2-3 DN sizes per family but require different connectors per size. Gap = 1 point = parity because DN12/14/25 are still in development.\"\n      },\n      {\n        \"feature_name\": \"Customizable Communication Interface\",\n        \"feature_description\": \"Support UART, LIN, and frequency output protocols selectable at order level for embedded controller integration\",\n        \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n        \"naics_code\": \"333414\",\n        \"vendor_score\": 8,\n        \"best_incumbent_score\": 5,\n        \"best_incumbent_technology\": \"Impeller/Turbine Flow Sensor\",\n        \"advantage\": \"superior\",\n        \"kano_class\": \"one_dimensional\",\n        \"rationale\": \"Marquardt's UART provides full digital data (flow, temperature, diagnostics); LIN enables automotive-grade boiler platforms; frequency maintains backward compatibility. Turbine incumbents offer only pulse/frequency output — no digital diagnostic channel. Gap of 3 points: digital diagnostics data (air events, glycol status, self-test) cannot be transmitted via pulse output. Addresses N25 (documented measured efficiency, Opp=13) and N27 (installer-visible data, Opp=11).\"\n      },\n      {\n        \"feature_name\": \"Customizable Mechanical Interface\",\n        \"feature_description\": \"Accept threaded or plug-in pipe connections for flexible OEM assembly line integration\",\n        \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n        \"naics_code\": \"333414\",\n        \"vendor_score\": 7,\n        \"best_incumbent_score\": 6,\n        \"best_incumbent_technology\": \"Impeller/Turbine Flow Sensor\",\n        \"advantage\": \"parity\",\n        \"kano_class\": \"one_dimensional\",\n        \"rationale\": \"Both offer threaded connections for standard hydronic piping. Marquardt's plug-in quick-connect reduces OEM assembly line time per N17 (Opp=9). Turbine sensors have evolved to push-fit connections. Gap = 1 point = parity.\"\n      },\n      {\n        \"feature_name\": \"Low-Energy Battery Mode\",\n        \"feature_description\": \"Operate at ultra-low current consumption for battery-powered applications without mains power\",\n        \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n        \"naics_code\": \"333414\",\n        \"vendor_score\": 7,\n        \"best_incumbent_score\": 2,\n        \"best_incumbent_technology\": \"Impeller/Turbine Flow Sensor\",\n        \"advantage\": \"superior\",\n        \"kano_class\": \"indifferent\",\n        \"rationale\": \"All boilers and heating appliances have mains power — the sensor is embedded in a powered appliance. Battery mode provides no value for OEM boiler integration. Vendor score of 7 reflects technical excellence (<5 uA standby); incumbent score of 2 reflects no one offers it because no one needs it. Technically superior but market-indifferent.\"\n      },\n      {\n        \"feature_name\": \"Pre-Calibrated Delivery\",\n        \"feature_description\": \"Ship fully calibrated and tested to customer-specific medium and flow profile with 100% automated final test\",\n        \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n        \"naics_code\": \"333414\",\n        \"vendor_score\": 8,\n        \"best_incumbent_score\": 5,\n        \"best_incumbent_technology\": \"Impeller/Turbine Flow Sensor\",\n        \"advantage\": \"superior\",\n        \"kano_class\": \"attractive\",\n        \"rationale\": \"Marquardt delivers each sensor individually calibrated to the customer's specified medium (water, glycol mix %) and tested across the operating flow profile. Eliminates field calibration per N13 (Opp=7), reduces OEM integration time per N17 (Opp=9). Turbine incumbents ship with generic factory calibration (water at 20C); OEMs must adjust for actual conditions. Supports first-submission energy label certification per N26 (Opp=12). Gap of 3 points.\"\n      },\n      {\n        \"feature_name\": \"KTW/WRAS Drinking Water Approval\",\n        \"feature_description\": \"Provide wetted parts approved for potable water contact per German and UK drinking water standards\",\n        \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n        \"naics_code\": \"333414\",\n        \"vendor_score\": 8,\n        \"best_incumbent_score\": 7,\n        \"best_incumbent_technology\": \"Impeller/Turbine Flow Sensor\",\n        \"advantage\": \"parity\",\n        \"kano_class\": \"must_be\",\n        \"rationale\": \"Combi boiler manufacturers (DHW + space heating) require potable water-contact approval for the DHW circuit flow sensor. KTW (DE) and WRAS (UK) are the relevant standards. Marquardt holds both. Established turbine suppliers (Digmesa, Burkert) also hold these approvals. Gap = 1 point = parity.\"\n      }\n    ]\n  },\n  \"entities_produced\": {\n    \"nodes\": [\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement_prefix\": \"Minimize the likelihood of measurement failure when hydronic circuit additives (corrosion inhibitors\", \"run_id\": \"TBD\"}, \"product_related\": true},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement_prefix\": \"Minimize the likelihood of polymer housing seal degradation when boiler circuits operate at\", \"run_id\": \"TBD\"}, \"product_related\": true},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement_prefix\": \"Minimize the likelihood of measurement dead zones during low-modulation boiler operation where\", \"run_id\": \"TBD\"}, \"product_related\": true},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement_prefix\": \"Minimize the measurement error caused by micro-bubble entrainment exceeding 2% by volume during\", \"run_id\": \"TBD\"}, \"product_related\": true},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement_prefix\": \"Minimize the duration of invalid measurement during system drain-down events in solar-hybrid\", \"run_id\": \"TBD\"}, \"product_related\": true},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement_prefix\": \"Minimize the installation footprint penalty from the 5-10x DN straight-pipe requirement that\", \"run_id\": \"TBD\"}, \"product_related\": true},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement_prefix\": \"Minimize the residual transit-time measurement error during rapid cold-start temperature ramps\", \"run_id\": \"TBD\"}, \"product_related\": true},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement_prefix\": \"Minimize the likelihood of acoustic coupling degradation when glycol concentration changes between\", \"run_id\": \"TBD\"}, \"product_related\": true}\n    ],\n    \"relationships\": [\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Transit-Time Flow Measurement\", \"target\": \"Market:333414\", \"props\": {\"kano_class\": \"must_be\", \"overall_fit\": 5.67, \"feature_scope\": \"technology\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Integrated Temperature Sensing\", \"target\": \"Market:333414\", \"props\": {\"kano_class\": \"attractive\", \"overall_fit\": 6.00, \"feature_scope\": \"technology\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Zero Pressure Drop Flow Path\", \"target\": \"Market:333414\", \"props\": {\"kano_class\": \"one_dimensional\", \"overall_fit\": 3.78, \"feature_scope\": \"technology\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:No Moving Parts\", \"target\": \"Market:333414\", \"props\": {\"kano_class\": \"attractive\", \"overall_fit\": 6.00, \"feature_scope\": \"technology\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Bidirectional Flow Detection\", \"target\": \"Market:333414\", \"props\": {\"kano_class\": \"attractive\", \"overall_fit\": 4.22, \"feature_scope\": \"technology\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Digital Anomaly Detection\", \"target\": \"Market:333414\", \"props\": {\"kano_class\": \"attractive\", \"overall_fit\": 6.33, \"feature_scope\": \"technology\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Real-Time Compensation Algorithms\", \"target\": \"Market:333414\", \"props\": {\"kano_class\": \"one_dimensional\", \"overall_fit\": 4.78, \"feature_scope\": \"technology\"}},\n      {\"type\": \"generates_need\", \"source\": \"Constraint:Media Limitation\", \"target\": \"ErrorStatement:measurement failure hydronic additives\"},\n      {\"type\": \"generates_need\", \"source\": \"Constraint:Maximum Medium Temperature\", \"target\": \"ErrorStatement:polymer housing seal degradation\"},\n      {\"type\": \"generates_need\", \"source\": \"Constraint:Minimum Flow Rate Detection\", \"target\": \"ErrorStatement:measurement dead zones low-modulation\"},\n      {\"type\": \"generates_need\", \"source\": \"Constraint:Air Bubble Tolerance\", \"target\": \"ErrorStatement:micro-bubble entrainment\"},\n      {\"type\": \"generates_need\", \"source\": \"Constraint:Pipe Full Condition\", \"target\": \"ErrorStatement:invalid measurement drain-down\"},\n      {\"type\": \"generates_need\", \"source\": \"Constraint:Minimum Straight Pipe Run\", \"target\": \"ErrorStatement:footprint penalty straight-pipe\"},\n      {\"type\": \"generates_need\", \"source\": \"Constraint:Temperature-Dependent Accuracy\", \"target\": \"ErrorStatement:cold-start temperature ramp error\"},\n      {\"type\": \"generates_need\", \"source\": \"Constraint:Media Limitation\", \"target\": \"ErrorStatement:acoustic coupling glycol concentration\"},\n      {\"type\": \"has_product_need\", \"source\": \"NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement\", \"target\": \"ErrorStatement:*all 8*\"},\n      {\"type\": \"applies_to_market\", \"source\": \"ErrorStatement:*all 8*\", \"target\": \"Market:333414\"},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Modular Pipe Diameter Variants\", \"target\": \"Market:333414\", \"props\": {\"kano_class\": \"one_dimensional\", \"vendor_score\": 7, \"best_incumbent_score\": 6, \"advantage\": \"parity\", \"feature_scope\": \"vendor\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Customizable Communication Interface\", \"target\": \"Market:333414\", \"props\": {\"kano_class\": \"one_dimensional\", \"vendor_score\": 8, \"best_incumbent_score\": 5, \"advantage\": \"superior\", \"feature_scope\": \"vendor\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Customizable Mechanical Interface\", \"target\": \"Market:333414\", \"props\": {\"kano_class\": \"one_dimensional\", \"vendor_score\": 7, \"best_incumbent_score\": 6, \"advantage\": \"parity\", \"feature_scope\": \"vendor\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Low-Energy Battery Mode\", \"target\": \"Market:333414\", \"props\": {\"kano_class\": \"indifferent\", \"vendor_score\": 7, \"best_incumbent_score\": 2, \"advantage\": \"superior\", \"feature_scope\": \"vendor\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Pre-Calibrated Delivery\", \"target\": \"Market:333414\", \"props\": {\"kano_class\": \"attractive\", \"vendor_score\": 8, \"best_incumbent_score\": 5, \"advantage\": \"superior\", \"feature_scope\": \"vendor\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:KTW/WRAS Drinking Water Approval\", \"target\": \"Market:333414\", \"props\": {\"kano_class\": \"must_be\", \"vendor_score\": 8, \"best_incumbent_score\": 7, \"advantage\": \"parity\", \"feature_scope\": \"vendor\"}},\n      {\"type\": \"has_feature\", \"source\": \"Product:US Flow Sensor (Marquardt)\", \"target\": \"Feature:Modular Pipe Diameter Variants\"},\n      {\"type\": \"has_feature\", \"source\": \"Product:US Flow Sensor (Marquardt)\", \"target\": \"Feature:Customizable Communication Interface\"},\n      {\"type\": \"has_feature\", \"source\": \"Product:US Flow Sensor (Marquardt)\", \"target\": \"Feature:Customizable Mechanical Interface\"},\n      {\"type\": \"has_feature\", \"source\": \"Product:US Flow Sensor (Marquardt)\", \"target\": \"Feature:Low-Energy Battery Mode\"},\n      {\"type\": \"has_feature\", \"source\": \"Product:US Flow Sensor (Marquardt)\", \"target\": \"Feature:Pre-Calibrated Delivery\"},\n      {\"type\": \"has_feature\", \"source\": \"Product:US Flow Sensor (Marquardt)\", \"target\": \"Feature:KTW/WRAS Drinking Water Approval\"}\n    ]\n  }\n}\n```\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [SRC: 01_product_decomposition] — Product features, constraints, specifications, UNSPSC classification\n- [SRC: 02_functional_promise] — Product FP, commodity FP, FP extension, complements\n- [SRC: 05_market_discovery] — NAICS 333414 candidate details, architecture distance scoring (distance=2)\n- [SRC: JTBD_heating_equipment_except_warm_air_furnac] — 33 error statements (N01-N28), job map, 5 alternatives, 7 segments, OEM overseer needs"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "Feature",
+        "Kano",
+        "Time",
+        "Cost",
+        "Safety",
+        "Reliab.",
+        "Skill",
+        "Stress",
+        "Pain",
+        "Conf.",
+        "Delight",
+        "Overall"
+      ],
+      "rows": [
+        {
+          "Feature": "**Transit-Time Flow Measurement**",
+          "Kano": "must_be",
+          "Time": "6",
+          "Cost": "5",
+          "Safety": "7",
+          "Reliab.": "8",
+          "Skill": "4",
+          "Stress": "5",
+          "Pain": "6",
+          "Conf.": "7",
+          "Delight": "3",
+          "Overall": "**5.67**"
+        },
+        {
+          "Feature": "**Integrated Temperature Sensing**",
+          "Kano": "attractive",
+          "Time": "5",
+          "Cost": "8",
+          "Safety": "4",
+          "Reliab.": "6",
+          "Skill": "6",
+          "Stress": "5",
+          "Pain": "7",
+          "Conf.": "7",
+          "Delight": "6",
+          "Overall": "**6.00**"
+        },
+        {
+          "Feature": "**Zero Pressure Drop Flow Path**",
+          "Kano": "one_dimensional",
+          "Time": "3",
+          "Cost": "6",
+          "Safety": "3",
+          "Reliab.": "5",
+          "Skill": "3",
+          "Stress": "3",
+          "Pain": "4",
+          "Conf.": "4",
+          "Delight": "3",
+          "Overall": "**3.78**"
+        },
+        {
+          "Feature": "**No Moving Parts**",
+          "Kano": "attractive",
+          "Time": "3",
+          "Cost": "7",
+          "Safety": "5",
+          "Reliab.": "9",
+          "Skill": "5",
+          "Stress": "6",
+          "Pain": "8",
+          "Conf.": "6",
+          "Delight": "5",
+          "Overall": "**6.00**"
+        },
+        {
+          "Feature": "**Bidirectional Flow Detection**",
+          "Kano": "attractive",
+          "Time": "4",
+          "Cost": "5",
+          "Safety": "6",
+          "Reliab.": "4",
+          "Skill": "3",
+          "Stress": "4",
+          "Pain": "3",
+          "Conf.": "5",
+          "Delight": "4",
+          "Overall": "**4.22**"
+        },
+        {
+          "Feature": "**Digital Anomaly Detection**",
+          "Kano": "attractive",
+          "Time": "5",
+          "Cost": "5",
+          "Safety": "8",
+          "Reliab.": "7",
+          "Skill": "6",
+          "Stress": "7",
+          "Pain": "5",
+          "Conf.": "8",
+          "Delight": "6",
+          "Overall": "**6.33**"
+        },
+        {
+          "Feature": "**Real-Time Compensation Algorithms**",
+          "Kano": "one_dimensional",
+          "Time": "3",
+          "Cost": "4",
+          "Safety": "4",
+          "Reliab.": "8",
+          "Skill": "5",
+          "Stress": "5",
+          "Pain": "4",
+          "Conf.": "7",
+          "Delight": "3",
+          "Overall": "**4.78**"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Check": "Kano cross-market consistency",
+          "Result": "PASS — must_be only for core measurement (commodity FP baseline); 4 features classified attractive (all genuinely unexpected vs turbine incumbent at 55-65% share); 2 one_dimensional (linear performance scaling)"
+        },
+        {
+          "#": "2",
+          "Check": "Safety >= 7 but Confidence <= 3",
+          "Result": "PASS — no violation. Max safety = 8 (Digital Anomaly Detection), corresponding confidence = 8"
+        },
+        {
+          "#": "3",
+          "Check": "Skill >= 7 but Stress <= 3",
+          "Result": "PASS — no violation. Max skill = 6, corresponding stress >= 5"
+        },
+        {
+          "#": "4",
+          "Check": "overall_fit arithmetic",
+          "Result": "PASS — all 7 values recomputed: (sum of 9 scores) / 9, rounded to 2 decimal places"
+        },
+        {
+          "#": "5",
+          "Check": "No feature scores 10 on all dimensions",
+          "Result": "PASS — max single score = 9 (No Moving Parts → Reliability)"
+        },
+        {
+          "#": "6",
+          "Check": "Feature names comply with 1.pdf rules",
+          "Result": "PASS — spec-visible noun phrases, 2-6 words, no brand names, no outcome claims"
+        },
+        {
+          "#": "7",
+          "Check": "Indifferent features score 1-3 on all dimensions",
+          "Result": "N/A — no indifferent features in this market"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement",
+        "Source Constraint",
+        "Affected Markets",
+        "Imp",
+        "Sat"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Statement": "Minimize the likelihood of measurement failure when hydronic circuit additives (corrosion inhibitors, anti-scale agents, biocides) shift the medium's acoustic impedance beyond the piezoelectric transducer's coupling range",
+          "Source Constraint": "Media Limitation",
+          "Affected Markets": "333414",
+          "Imp": "5",
+          "Sat": "6"
+        },
+        {
+          "#": "2",
+          "Statement": "Minimize the likelihood of polymer housing seal degradation when boiler circuits operate at sustained supply temperatures of 80-90°C near the sensor's material service limit",
+          "Source Constraint": "Maximum Medium Temperature",
+          "Affected Markets": "333414",
+          "Imp": "7",
+          "Sat": "5"
+        },
+        {
+          "#": "3",
+          "Statement": "Minimize the likelihood of measurement dead zones during low-modulation boiler operation where flow rates drop below the minimum detectable threshold (4.2 l/min DN20) at 20-25% burner output",
+          "Source Constraint": "Minimum Flow Rate Detection",
+          "Affected Markets": "333414",
+          "Imp": "8",
+          "Sat": "4"
+        },
+        {
+          "#": "4",
+          "Statement": "Minimize the measurement error caused by micro-bubble entrainment exceeding 2% by volume during system filling, de-aeration, and cold-start operations that temporarily aerate the hydronic medium",
+          "Source Constraint": "Air Bubble Tolerance",
+          "Affected Markets": "333414",
+          "Imp": "7",
+          "Sat": "3"
+        },
+        {
+          "#": "5",
+          "Statement": "Minimize the duration of invalid measurement during system drain-down events in solar-hybrid heating circuits with drain-back designs that periodically empty the sensor's measurement section",
+          "Source Constraint": "Pipe Full Condition",
+          "Affected Markets": "333414",
+          "Imp": "5",
+          "Sat": "4"
+        },
+        {
+          "#": "6",
+          "Statement": "Minimize the installation footprint penalty from the 5-10× DN straight-pipe requirement that competes for space within compact boiler enclosures and wall-hung appliance housings",
+          "Source Constraint": "Minimum Straight Pipe Run",
+          "Affected Markets": "333414",
+          "Imp": "8",
+          "Sat": "4"
+        },
+        {
+          "#": "7",
+          "Statement": "Minimize the residual transit-time measurement error during rapid cold-start temperature ramps (15°C to 75°C in <10 minutes) where speed-of-sound changes temporarily outpace the NTC compensation algorithm's response",
+          "Source Constraint": "Temperature-Dependent Accuracy",
+          "Affected Markets": "333414",
+          "Imp": "7",
+          "Sat": "5"
+        },
+        {
+          "#": "8",
+          "Statement": "Minimize the likelihood of acoustic coupling degradation when glycol concentration changes between seasonal fill operations shift the speed-of-sound calibration baseline beyond the pre-configured fluid-type setting",
+          "Source Constraint": "Media Limitation",
+          "Affected Markets": "333414",
+          "Imp": "6",
+          "Sat": "4"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Check": "Litmus test — would need disappear with different technology?",
+          "Result": "PASS — all 8 needs trace to ultrasonic transit-time specific constraints; electromagnetic sensors are unaffected by air bubbles (#4), have no acoustic coupling (#1/#8), no straight-run requirement for most designs (#6), metallic housings survive >150°C (#2)"
+        },
+        {
+          "#": "2",
+          "Check": "Source constraint traceability",
+          "Result": "PASS — all 8 constraints exist in Step 01 constraint list; each constraint logically causes the stated failure mode"
+        },
+        {
+          "#": "3",
+          "Check": "Affected markets plausibility",
+          "Result": "PASS — all 8 apply to 333414 (boiler circuits use water/glycol, undergo cold starts, have space-constrained enclosures, operate at 60-90°C)"
+        },
+        {
+          "#": "4",
+          "Check": "Completeness — every constraint generates >= 1 need",
+          "Result": "PASS — Media Limitation generates 2 (#1 additive failure, #8 glycol coupling); Maximum Operating Pressure omitted because hydronic heating circuits operate at 1.5-3 bar, well below 10 bar limit — constraint does not manifest"
+        },
+        {
+          "#": "5",
+          "Check": "importance < 3 AND satisfaction > 7",
+          "Result": "PASS — no such entries; minimum importance = 5, maximum satisfaction = 6"
+        },
+        {
+          "#": "6",
+          "Check": "No market-level needs included",
+          "Result": "PASS — no generic accuracy, cost, or regulatory needs; all trace to specific ultrasonic mechanisms"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Feature",
+        "Kano",
+        "Vendor",
+        "Incumbent",
+        "Inc. Tech",
+        "Advantage"
+      ],
+      "rows": [
+        {
+          "Feature": "**Modular Pipe Diameter Variants**",
+          "Kano": "one_dimensional",
+          "Vendor": "7",
+          "Incumbent": "6",
+          "Inc. Tech": "Impeller/Turbine Flow Sensor",
+          "Advantage": "parity"
+        },
+        {
+          "Feature": "**Customizable Communication Interface**",
+          "Kano": "one_dimensional",
+          "Vendor": "8",
+          "Incumbent": "5",
+          "Inc. Tech": "Impeller/Turbine Flow Sensor",
+          "Advantage": "superior"
+        },
+        {
+          "Feature": "**Customizable Mechanical Interface**",
+          "Kano": "one_dimensional",
+          "Vendor": "7",
+          "Incumbent": "6",
+          "Inc. Tech": "Impeller/Turbine Flow Sensor",
+          "Advantage": "parity"
+        },
+        {
+          "Feature": "**Low-Energy Battery Mode**",
+          "Kano": "indifferent",
+          "Vendor": "7",
+          "Incumbent": "2",
+          "Inc. Tech": "Impeller/Turbine Flow Sensor",
+          "Advantage": "superior"
+        },
+        {
+          "Feature": "**Pre-Calibrated Delivery**",
+          "Kano": "attractive",
+          "Vendor": "8",
+          "Incumbent": "5",
+          "Inc. Tech": "Impeller/Turbine Flow Sensor",
+          "Advantage": "superior"
+        },
+        {
+          "Feature": "**KTW/WRAS Drinking Water Approval**",
+          "Kano": "must_be",
+          "Vendor": "8",
+          "Incumbent": "7",
+          "Inc. Tech": "Impeller/Turbine Flow Sensor",
+          "Advantage": "parity"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Advantage",
+        "Count",
+        "%"
+      ],
+      "rows": [
+        {
+          "Advantage": "superior",
+          "Count": "3",
+          "%": "50%"
+        },
+        {
+          "Advantage": "parity",
+          "Count": "3",
+          "%": "50%"
+        },
+        {
+          "Advantage": "inferior",
+          "Count": "0",
+          "%": "0%"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Check": "Vendor bias (>70% superior)",
+          "Result": "PASS — 50% superior; justified by OEM-specific advantages (digital protocols, pre-calibration) vs turbine incumbents that lack these capabilities"
+        },
+        {
+          "#": "2",
+          "Check": "Anti-vendor bias (>70% inferior)",
+          "Result": "PASS — 0% inferior; plausible because this market (distance=2) is the closest to the sensor's home market"
+        },
+        {
+          "#": "3",
+          "Check": "Straw-man incumbents",
+          "Result": "PASS — impeller/turbine flow sensors are the genuine dominant incumbent (55-65% market share per JTBD analysis); not using weak alternatives"
+        },
+        {
+          "#": "4",
+          "Check": "Advantage classification arithmetic",
+          "Result": "PASS — superior: all gaps > 1 (3, 5, 3); parity: all gaps <= 1 (1, 1, 1)"
+        },
+        {
+          "#": "5",
+          "Check": "must_be features have both scores >= 5",
+          "Result": "PASS — KTW/WRAS: vendor 8, incumbent 7"
+        },
+        {
+          "#": "6",
+          "Check": "Rationale specificity",
+          "Result": "PASS — each references specific protocols (UART/LIN/frequency vs pulse-only), certifications (KTW/WRAS), DN sizes, or calibration processes"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Insight",
+        "Detail"
+      ],
+      "rows": [
+        {
+          "Insight": "**Strongest technology fit**",
+          "Detail": "Digital Anomaly Detection (overall 6.33) — empty-pipe/air/glycol diagnostics address the 3 highest-opportunity needs in this market (N04, N07, N14c, all Opp=13)"
+        },
+        {
+          "Insight": "**Highest-value delighter**",
+          "Detail": "No Moving Parts (overall 6.00) — directly eliminates the market's dominant pain: magnetite fouling and bearing wear in turbine sensors (N10, N12, both Opp=13)"
+        },
+        {
+          "Insight": "**Biggest OEM differentiator**",
+          "Detail": "Integrated Temperature Sensing (attractive, 6.00) — enables onboard thermal energy calculation for EU EcoDesign energy labeling without separate temperature probe (N19, N25, both Opp=12-13)"
+        },
+        {
+          "Insight": "**Strongest vendor advantage**",
+          "Detail": "Pre-Calibrated Delivery (superior, 8 vs 5) — customer-specific medium calibration eliminates field adjustment and supports first-submission energy label certification (N26, Opp=12)"
+        },
+        {
+          "Insight": "**Product-related risk**",
+          "Detail": "Minimum straight pipe run (Imp=8, Sat=4) — 5-10× DN space requirement conflicts with compact boiler enclosure design; and low-flow dead zone (Imp=8, Sat=4) — DN20 minimum of 4.2 l/min may miss boiler minimum-modulation flow rates at 20-25% output"
+        },
+        {
+          "Insight": "**Market-indifferent vendor feature**",
+          "Detail": "Low-Energy Battery Mode — technically superior but irrelevant for mains-powered OEM boiler integration"
+        },
+        {
+          "Insight": "**Market entry implication**",
+          "Detail": "Architecture distance = 2 (closest market); 4 of 7 technology features are `attractive`; 3 of 6 vendor features are `superior` vs turbine incumbent — strong overall fit with OEM boiler/heater manufacturers"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "feature_market_fit",
+      "naics_code": "333414",
+      "naics_title": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+      "product_name": "Ultrasonic Flow Sensor",
+      "vendor_name": "Marquardt",
+      "technology_class": "Ultrasonic Transit-Time Flow Measurement",
+      "step_09_tech_feature_market_fit": {
+        "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+        "naics_code": "333414",
+        "n_features_assessed": 7,
+        "entries": [
+          {
+            "feature_name": "Transit-Time Flow Measurement",
+            "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+            "naics_code": "333414",
+            "kano_class": "must_be",
+            "fit_score_time": 6,
+            "fit_score_cost": 5,
+            "fit_score_safety": 7,
+            "fit_score_reliability": 8,
+            "fit_score_skill": 4,
+            "fit_score_stress": 5,
+            "fit_score_pain": 6,
+            "fit_score_confidence": 7,
+            "fit_score_delight": 3,
+            "overall_fit": 5.67,
+            "rationale": "Must_be — this IS the commodity FP (quantify volumetric flow rate). Every alternative provides flow measurement. Primary drivers: Reliability (8) — solid-state principle delivers consistent readings addressing N01 (flow deviation >3%, Opp=13) and N24 (field failure <0.1% in 15-yr life, Opp=13); Safety (7) — rapid flow-change detection enables boiler dry-fire prevention per N04 (Opp=13)."
+          },
+          {
+            "feature_name": "Integrated Temperature Sensing",
+            "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+            "naics_code": "333414",
+            "kano_class": "attractive",
+            "fit_score_time": 5,
+            "fit_score_cost": 8,
+            "fit_score_safety": 4,
+            "fit_score_reliability": 6,
+            "fit_score_skill": 6,
+            "fit_score_stress": 5,
+            "fit_score_pain": 7,
+            "fit_score_confidence": 7,
+            "fit_score_delight": 6,
+            "overall_fit": 6.0,
+            "rationale": "Attractive — most heating OEM flowmeters do NOT include temperature. Combined flow+temp enables onboard thermal energy calculation (Q = flow x delta-T x Cp) for EU EcoDesign energy labeling. Primary drivers: Cost (8) — eliminates separate temperature probe per N19 (Opp=12); Confidence (7) — matched flow/temp reduces thermal energy calc noise per N22 (Opp=12) and enables documented measured efficiency per N25 (Opp=13)."
+          },
+          {
+            "feature_name": "Zero Pressure Drop Flow Path",
+            "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+            "naics_code": "333414",
+            "kano_class": "one_dimensional",
+            "fit_score_time": 3,
+            "fit_score_cost": 6,
+            "fit_score_safety": 3,
+            "fit_score_reliability": 5,
+            "fit_score_skill": 3,
+            "fit_score_stress": 3,
+            "fit_score_pain": 4,
+            "fit_score_confidence": 4,
+            "fit_score_delight": 3,
+            "overall_fit": 3.78,
+            "rationale": "One_dimensional — less pressure drop is proportionally better for hydronic system design. Heating OEMs optimize circulator pump sizing to every mbar. Primary drivers: Cost (6) — reduces pump sizing burden and eliminates head-loss penalty; Reliability (5) — no flow obstruction means no sensor-as-clogging-point."
+          },
+          {
+            "feature_name": "No Moving Parts",
+            "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+            "naics_code": "333414",
+            "kano_class": "attractive",
+            "fit_score_time": 3,
+            "fit_score_cost": 7,
+            "fit_score_safety": 5,
+            "fit_score_reliability": 9,
+            "fit_score_skill": 5,
+            "fit_score_stress": 6,
+            "fit_score_pain": 8,
+            "fit_score_confidence": 6,
+            "fit_score_delight": 5,
+            "overall_fit": 6.0,
+            "rationale": "Attractive — incumbent turbine sensors (55-65% share) suffer magnetite fouling and bearing wear. Zero mechanical wear is a genuine delighter for OEM engineering managers budgeting turbine warranty claims. Primary drivers: Reliability (9) — eliminates magnetite rotor seizure per N10 (Opp=13) and calibration drift per N12 (Opp=13); Pain (8) — removes annual maintenance schedule per N11 (Opp=11) and 3-5 year replacement cycle."
+          },
+          {
+            "feature_name": "Bidirectional Flow Detection",
+            "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+            "naics_code": "333414",
+            "kano_class": "attractive",
+            "fit_score_time": 4,
+            "fit_score_cost": 5,
+            "fit_score_safety": 6,
+            "fit_score_reliability": 4,
+            "fit_score_skill": 3,
+            "fit_score_stress": 4,
+            "fit_score_pain": 3,
+            "fit_score_confidence": 5,
+            "fit_score_delight": 4,
+            "overall_fit": 4.22,
+            "rationale": "Attractive — not expected from standard heating OEM flow sensors. Detects reversed circulation from check-valve failure or incorrect pump wiring. Primary drivers: Safety (6) — detects reversed flow that could cause thermal stratification or boiler short-cycling; Cost (5) — eliminates separate backflow detection hardware. Lower fit because backflow is infrequent in well-designed hydronic systems."
+          },
+          {
+            "feature_name": "Digital Anomaly Detection",
+            "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+            "naics_code": "333414",
+            "kano_class": "attractive",
+            "fit_score_time": 5,
+            "fit_score_cost": 5,
+            "fit_score_safety": 8,
+            "fit_score_reliability": 7,
+            "fit_score_skill": 6,
+            "fit_score_stress": 7,
+            "fit_score_pain": 5,
+            "fit_score_confidence": 8,
+            "fit_score_delight": 6,
+            "overall_fit": 6.33,
+            "rationale": "Attractive — bubble/empty-pipe/glycol diagnostics are capabilities no incumbent turbine or vortex sensor provides. Primary drivers: Safety (8) — empty-pipe detection prevents boiler dry-fire per N04 (Opp=13); Confidence (8) — real-time diagnostics address N07 (undetected air >2%, Opp=13) and N14c (distinguish zero-flow from signal loss, Opp=13); Stress (7) — automated anomaly detection reduces OEM warranty engineering burden."
+          },
+          {
+            "feature_name": "Real-Time Compensation Algorithms",
+            "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+            "naics_code": "333414",
+            "kano_class": "one_dimensional",
+            "fit_score_time": 3,
+            "fit_score_cost": 4,
+            "fit_score_safety": 4,
+            "fit_score_reliability": 8,
+            "fit_score_skill": 5,
+            "fit_score_stress": 5,
+            "fit_score_pain": 4,
+            "fit_score_confidence": 7,
+            "fit_score_delight": 3,
+            "overall_fit": 4.78,
+            "rationale": "One_dimensional — better compensation linearly improves measurement accuracy across the operating envelope. Primary drivers: Reliability (8) — reduces temperature-induced error from ~1.5% to ~0.2% via NTC compensation per N03 (ΔT >20°C degradation, Opp=12) and N09 (glycol >50%, Opp=12); Confidence (7) — auto-compensated readings enable accurate thermal energy calculation per N22 (Opp=12)."
+          }
+        ]
+      },
+      "step_10_product_related_needs": {
+        "n_needs": 8,
+        "n_constraints_covered": 7,
+        "entries": [
+          {
+            "statement": "Minimize the likelihood of measurement failure when hydronic circuit additives (corrosion inhibitors, anti-scale agents, biocides) shift the medium's acoustic impedance beyond the piezoelectric transducer's coupling range",
+            "source_constraint": "Media Limitation",
+            "affected_markets": [
+              "Heating Equipment (except Warm Air Furnaces) Manufacturing"
+            ],
+            "importance": 5.0,
+            "satisfaction_current": 6.0
+          },
+          {
+            "statement": "Minimize the likelihood of polymer housing seal degradation when boiler circuits operate at sustained supply temperatures of 80-90 degrees C near the sensor's material service limit",
+            "source_constraint": "Maximum Medium Temperature",
+            "affected_markets": [
+              "Heating Equipment (except Warm Air Furnaces) Manufacturing"
+            ],
+            "importance": 7.0,
+            "satisfaction_current": 5.0
+          },
+          {
+            "statement": "Minimize the likelihood of measurement dead zones during low-modulation boiler operation where flow rates drop below the minimum detectable threshold (4.2 l/min DN20) at 20-25% burner output",
+            "source_constraint": "Minimum Flow Rate Detection",
+            "affected_markets": [
+              "Heating Equipment (except Warm Air Furnaces) Manufacturing"
+            ],
+            "importance": 8.0,
+            "satisfaction_current": 4.0
+          },
+          {
+            "statement": "Minimize the measurement error caused by micro-bubble entrainment exceeding 2% by volume during system filling, de-aeration, and cold-start operations that temporarily aerate the hydronic medium",
+            "source_constraint": "Air Bubble Tolerance",
+            "affected_markets": [
+              "Heating Equipment (except Warm Air Furnaces) Manufacturing"
+            ],
+            "importance": 7.0,
+            "satisfaction_current": 3.0
+          },
+          {
+            "statement": "Minimize the duration of invalid measurement during system drain-down events in solar-hybrid heating circuits with drain-back designs that periodically empty the sensor's measurement section",
+            "source_constraint": "Pipe Full Condition",
+            "affected_markets": [
+              "Heating Equipment (except Warm Air Furnaces) Manufacturing"
+            ],
+            "importance": 5.0,
+            "satisfaction_current": 4.0
+          },
+          {
+            "statement": "Minimize the installation footprint penalty from the 5-10x DN straight-pipe requirement that competes for space within compact boiler enclosures and wall-hung appliance housings",
+            "source_constraint": "Minimum Straight Pipe Run",
+            "affected_markets": [
+              "Heating Equipment (except Warm Air Furnaces) Manufacturing"
+            ],
+            "importance": 8.0,
+            "satisfaction_current": 4.0
+          },
+          {
+            "statement": "Minimize the residual transit-time measurement error during rapid cold-start temperature ramps (15 degrees C to 75 degrees C in less than 10 minutes) where speed-of-sound changes temporarily outpace the NTC compensation algorithm's response",
+            "source_constraint": "Temperature-Dependent Accuracy",
+            "affected_markets": [
+              "Heating Equipment (except Warm Air Furnaces) Manufacturing"
+            ],
+            "importance": 7.0,
+            "satisfaction_current": 5.0
+          },
+          {
+            "statement": "Minimize the likelihood of acoustic coupling degradation when glycol concentration changes between seasonal fill operations shift the speed-of-sound calibration baseline beyond the pre-configured fluid-type setting",
+            "source_constraint": "Media Limitation",
+            "affected_markets": [
+              "Heating Equipment (except Warm Air Furnaces) Manufacturing"
+            ],
+            "importance": 6.0,
+            "satisfaction_current": 4.0
+          }
+        ]
+      },
+      "step_11_vendor_feature_market_fit": {
+        "vendor_name": "Marquardt",
+        "vendor_product": "US Flow Sensor (DN20 serial, DN12/DN14/DN25 development)",
+        "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+        "naics_code": "333414",
+        "n_features_assessed": 6,
+        "advantage_distribution": {
+          "superior": 3,
+          "parity": 3,
+          "inferior": 0
+        },
+        "entries": [
+          {
+            "feature_name": "Modular Pipe Diameter Variants",
+            "feature_description": "Serve multiple pipe sizes via interchangeable flow bodies sharing a common electronics platform and RAST 2.5 connector",
+            "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+            "naics_code": "333414",
+            "vendor_score": 7,
+            "best_incumbent_score": 6,
+            "best_incumbent_technology": "Impeller/Turbine Flow Sensor",
+            "advantage": "parity",
+            "kano_class": "one_dimensional",
+            "rationale": "Marquardt offers DN12/14/20/25 on shared electronics with standardized RAST 2.5 connector, reducing OEM qualification effort per N21 (Opp=8). Turbine incumbents (Grundfos VFS, Sika VT) offer 2-3 DN sizes per family but require different connectors per size. Gap = 1 point = parity because DN12/14/25 are still in development."
+          },
+          {
+            "feature_name": "Customizable Communication Interface",
+            "feature_description": "Support UART, LIN, and frequency output protocols selectable at order level for embedded controller integration",
+            "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+            "naics_code": "333414",
+            "vendor_score": 8,
+            "best_incumbent_score": 5,
+            "best_incumbent_technology": "Impeller/Turbine Flow Sensor",
+            "advantage": "superior",
+            "kano_class": "one_dimensional",
+            "rationale": "Marquardt's UART provides full digital data (flow, temperature, diagnostics); LIN enables automotive-grade boiler platforms; frequency maintains backward compatibility. Turbine incumbents offer only pulse/frequency output — no digital diagnostic channel. Gap of 3 points: digital diagnostics data (air events, glycol status, self-test) cannot be transmitted via pulse output. Addresses N25 (documented measured efficiency, Opp=13) and N27 (installer-visible data, Opp=11)."
+          },
+          {
+            "feature_name": "Customizable Mechanical Interface",
+            "feature_description": "Accept threaded or plug-in pipe connections for flexible OEM assembly line integration",
+            "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+            "naics_code": "333414",
+            "vendor_score": 7,
+            "best_incumbent_score": 6,
+            "best_incumbent_technology": "Impeller/Turbine Flow Sensor",
+            "advantage": "parity",
+            "kano_class": "one_dimensional",
+            "rationale": "Both offer threaded connections for standard hydronic piping. Marquardt's plug-in quick-connect reduces OEM assembly line time per N17 (Opp=9). Turbine sensors have evolved to push-fit connections. Gap = 1 point = parity."
+          },
+          {
+            "feature_name": "Low-Energy Battery Mode",
+            "feature_description": "Operate at ultra-low current consumption for battery-powered applications without mains power",
+            "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+            "naics_code": "333414",
+            "vendor_score": 7,
+            "best_incumbent_score": 2,
+            "best_incumbent_technology": "Impeller/Turbine Flow Sensor",
+            "advantage": "superior",
+            "kano_class": "indifferent",
+            "rationale": "All boilers and heating appliances have mains power — the sensor is embedded in a powered appliance. Battery mode provides no value for OEM boiler integration. Vendor score of 7 reflects technical excellence (<5 uA standby); incumbent score of 2 reflects no one offers it because no one needs it. Technically superior but market-indifferent."
+          },
+          {
+            "feature_name": "Pre-Calibrated Delivery",
+            "feature_description": "Ship fully calibrated and tested to customer-specific medium and flow profile with 100% automated final test",
+            "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+            "naics_code": "333414",
+            "vendor_score": 8,
+            "best_incumbent_score": 5,
+            "best_incumbent_technology": "Impeller/Turbine Flow Sensor",
+            "advantage": "superior",
+            "kano_class": "attractive",
+            "rationale": "Marquardt delivers each sensor individually calibrated to the customer's specified medium (water, glycol mix %) and tested across the operating flow profile. Eliminates field calibration per N13 (Opp=7), reduces OEM integration time per N17 (Opp=9). Turbine incumbents ship with generic factory calibration (water at 20C); OEMs must adjust for actual conditions. Supports first-submission energy label certification per N26 (Opp=12). Gap of 3 points."
+          },
+          {
+            "feature_name": "KTW/WRAS Drinking Water Approval",
+            "feature_description": "Provide wetted parts approved for potable water contact per German and UK drinking water standards",
+            "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+            "naics_code": "333414",
+            "vendor_score": 8,
+            "best_incumbent_score": 7,
+            "best_incumbent_technology": "Impeller/Turbine Flow Sensor",
+            "advantage": "parity",
+            "kano_class": "must_be",
+            "rationale": "Combi boiler manufacturers (DHW + space heating) require potable water-contact approval for the DHW circuit flow sensor. KTW (DE) and WRAS (UK) are the relevant standards. Marquardt holds both. Established turbine suppliers (Digmesa, Burkert) also hold these approvals. Gap = 1 point = parity."
+          }
+        ]
+      },
+      "entities_produced": {
+        "nodes": [
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement_prefix": "Minimize the likelihood of measurement failure when hydronic circuit additives (corrosion inhibitors",
+              "run_id": "TBD"
+            },
+            "product_related": true
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement_prefix": "Minimize the likelihood of polymer housing seal degradation when boiler circuits operate at",
+              "run_id": "TBD"
+            },
+            "product_related": true
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement_prefix": "Minimize the likelihood of measurement dead zones during low-modulation boiler operation where",
+              "run_id": "TBD"
+            },
+            "product_related": true
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement_prefix": "Minimize the measurement error caused by micro-bubble entrainment exceeding 2% by volume during",
+              "run_id": "TBD"
+            },
+            "product_related": true
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement_prefix": "Minimize the duration of invalid measurement during system drain-down events in solar-hybrid",
+              "run_id": "TBD"
+            },
+            "product_related": true
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement_prefix": "Minimize the installation footprint penalty from the 5-10x DN straight-pipe requirement that",
+              "run_id": "TBD"
+            },
+            "product_related": true
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement_prefix": "Minimize the residual transit-time measurement error during rapid cold-start temperature ramps",
+              "run_id": "TBD"
+            },
+            "product_related": true
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement_prefix": "Minimize the likelihood of acoustic coupling degradation when glycol concentration changes between",
+              "run_id": "TBD"
+            },
+            "product_related": true
+          }
+        ],
+        "relationships": [
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Transit-Time Flow Measurement",
+            "target": "Market:333414",
+            "props": {
+              "kano_class": "must_be",
+              "overall_fit": 5.67,
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Integrated Temperature Sensing",
+            "target": "Market:333414",
+            "props": {
+              "kano_class": "attractive",
+              "overall_fit": 6.0,
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Zero Pressure Drop Flow Path",
+            "target": "Market:333414",
+            "props": {
+              "kano_class": "one_dimensional",
+              "overall_fit": 3.78,
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:No Moving Parts",
+            "target": "Market:333414",
+            "props": {
+              "kano_class": "attractive",
+              "overall_fit": 6.0,
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Bidirectional Flow Detection",
+            "target": "Market:333414",
+            "props": {
+              "kano_class": "attractive",
+              "overall_fit": 4.22,
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Digital Anomaly Detection",
+            "target": "Market:333414",
+            "props": {
+              "kano_class": "attractive",
+              "overall_fit": 6.33,
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Real-Time Compensation Algorithms",
+            "target": "Market:333414",
+            "props": {
+              "kano_class": "one_dimensional",
+              "overall_fit": 4.78,
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "generates_need",
+            "source": "Constraint:Media Limitation",
+            "target": "ErrorStatement:measurement failure hydronic additives"
+          },
+          {
+            "type": "generates_need",
+            "source": "Constraint:Maximum Medium Temperature",
+            "target": "ErrorStatement:polymer housing seal degradation"
+          },
+          {
+            "type": "generates_need",
+            "source": "Constraint:Minimum Flow Rate Detection",
+            "target": "ErrorStatement:measurement dead zones low-modulation"
+          },
+          {
+            "type": "generates_need",
+            "source": "Constraint:Air Bubble Tolerance",
+            "target": "ErrorStatement:micro-bubble entrainment"
+          },
+          {
+            "type": "generates_need",
+            "source": "Constraint:Pipe Full Condition",
+            "target": "ErrorStatement:invalid measurement drain-down"
+          },
+          {
+            "type": "generates_need",
+            "source": "Constraint:Minimum Straight Pipe Run",
+            "target": "ErrorStatement:footprint penalty straight-pipe"
+          },
+          {
+            "type": "generates_need",
+            "source": "Constraint:Temperature-Dependent Accuracy",
+            "target": "ErrorStatement:cold-start temperature ramp error"
+          },
+          {
+            "type": "generates_need",
+            "source": "Constraint:Media Limitation",
+            "target": "ErrorStatement:acoustic coupling glycol concentration"
+          },
+          {
+            "type": "has_product_need",
+            "source": "NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement",
+            "target": "ErrorStatement:*all 8*"
+          },
+          {
+            "type": "applies_to_market",
+            "source": "ErrorStatement:*all 8*",
+            "target": "Market:333414"
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Modular Pipe Diameter Variants",
+            "target": "Market:333414",
+            "props": {
+              "kano_class": "one_dimensional",
+              "vendor_score": 7,
+              "best_incumbent_score": 6,
+              "advantage": "parity",
+              "feature_scope": "vendor"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Customizable Communication Interface",
+            "target": "Market:333414",
+            "props": {
+              "kano_class": "one_dimensional",
+              "vendor_score": 8,
+              "best_incumbent_score": 5,
+              "advantage": "superior",
+              "feature_scope": "vendor"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Customizable Mechanical Interface",
+            "target": "Market:333414",
+            "props": {
+              "kano_class": "one_dimensional",
+              "vendor_score": 7,
+              "best_incumbent_score": 6,
+              "advantage": "parity",
+              "feature_scope": "vendor"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Low-Energy Battery Mode",
+            "target": "Market:333414",
+            "props": {
+              "kano_class": "indifferent",
+              "vendor_score": 7,
+              "best_incumbent_score": 2,
+              "advantage": "superior",
+              "feature_scope": "vendor"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Pre-Calibrated Delivery",
+            "target": "Market:333414",
+            "props": {
+              "kano_class": "attractive",
+              "vendor_score": 8,
+              "best_incumbent_score": 5,
+              "advantage": "superior",
+              "feature_scope": "vendor"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:KTW/WRAS Drinking Water Approval",
+            "target": "Market:333414",
+            "props": {
+              "kano_class": "must_be",
+              "vendor_score": 8,
+              "best_incumbent_score": 7,
+              "advantage": "parity",
+              "feature_scope": "vendor"
+            }
+          },
+          {
+            "type": "has_feature",
+            "source": "Product:US Flow Sensor (Marquardt)",
+            "target": "Feature:Modular Pipe Diameter Variants"
+          },
+          {
+            "type": "has_feature",
+            "source": "Product:US Flow Sensor (Marquardt)",
+            "target": "Feature:Customizable Communication Interface"
+          },
+          {
+            "type": "has_feature",
+            "source": "Product:US Flow Sensor (Marquardt)",
+            "target": "Feature:Customizable Mechanical Interface"
+          },
+          {
+            "type": "has_feature",
+            "source": "Product:US Flow Sensor (Marquardt)",
+            "target": "Feature:Low-Energy Battery Mode"
+          },
+          {
+            "type": "has_feature",
+            "source": "Product:US Flow Sensor (Marquardt)",
+            "target": "Feature:Pre-Calibrated Delivery"
+          },
+          {
+            "type": "has_feature",
+            "source": "Product:US Flow Sensor (Marquardt)",
+            "target": "Feature:KTW/WRAS Drinking Water Approval"
+          }
+        ]
+      }
+    }
+  ],
+  "has_bom": true,
+  "naics_sector_type": "manufacturing"
+}

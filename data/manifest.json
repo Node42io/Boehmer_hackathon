@@ -1,0 +1,225 @@
+{
+  "analysis_pages": [
+    {
+      "id": "01_product_decomposition",
+      "title": "01 — Product Decomposition",
+      "type": "product_decomposition",
+      "file": "01_product_decomposition.json"
+    },
+    {
+      "id": "02_functional_promise",
+      "title": "02 — Functional Promise",
+      "type": "functional_promise",
+      "file": "02_functional_promise.json"
+    },
+    {
+      "id": "03_constraints",
+      "title": "03 — Constraints Analysis",
+      "type": "constraints",
+      "file": "03_constraints.json"
+    },
+    {
+      "id": "04_incumbents_home",
+      "title": "04 — Incumbent Technology Identification (Home Market)",
+      "type": "home_market_competition",
+      "file": "04_incumbents_home.json"
+    },
+    {
+      "id": "05_market_discovery",
+      "title": "05 — Market Discovery",
+      "type": "market_discovery",
+      "file": "05_market_discovery.json"
+    },
+    {
+      "id": "10_final_ranking",
+      "title": "10 — Final Market Ranking (PCM Step 14)",
+      "type": "final_ranking",
+      "file": "10_final_ranking.json"
+    }
+  ],
+  "markets": [
+    {
+      "slug": "air_conditioning_and_warm_air_heating_eq",
+      "title": "NAICS 333415",
+      "available_analyses": [
+        "product_bom",
+        "constraint_compatibility",
+        "feature_market_fit",
+        "jtbd_analysis",
+        "odi_matrix",
+        "value_network"
+      ],
+      "has_bom": true
+    },
+    {
+      "slug": "breweries",
+      "title": "VN — Value Network: Breweries (NAICS 312120)",
+      "available_analyses": [
+        "product_bom",
+        "constraint_compatibility",
+        "feature_market_fit",
+        "jtbd_analysis",
+        "odi_matrix",
+        "value_network"
+      ],
+      "has_bom": true
+    },
+    {
+      "slug": "data_processing_hosting",
+      "title": "VN — NAICS 518210 (Data Processing, Hosting, and R",
+      "available_analyses": [
+        "constraint_compatibility",
+        "feature_market_fit",
+        "jtbd_analysis",
+        "odi_matrix",
+        "value_network"
+      ],
+      "has_bom": false
+    },
+    {
+      "slug": "finfish_farming_and_fish_hatcheries",
+      "title": "VN — Value Network: Finfish Farming and Fish Hatch",
+      "available_analyses": [
+        "constraint_compatibility",
+        "feature_market_fit",
+        "jtbd_analysis",
+        "odi_matrix",
+        "value_network"
+      ],
+      "has_bom": false
+    },
+    {
+      "slug": "flowmeters_src_01_product_decomposition_",
+      "title": "VN — Value Network: Industrial Process Variable In",
+      "available_analyses": [
+        "product_bom",
+        "constraint_compatibility",
+        "feature_market_fit",
+        "jtbd_analysis",
+        "odi_matrix",
+        "value_network"
+      ],
+      "has_bom": true
+    },
+    {
+      "slug": "heating_equipment_except_warm_air_furnac",
+      "title": "VN — Value Network: Heating Equipment (except Warm",
+      "available_analyses": [
+        "product_bom",
+        "constraint_compatibility",
+        "feature_market_fit",
+        "jtbd_analysis",
+        "odi_matrix",
+        "value_network"
+      ],
+      "has_bom": true
+    },
+    {
+      "slug": "other_commercial_and_service_industry_ma",
+      "title": "VN — Value Network: Other Commercial and Service I",
+      "available_analyses": [
+        "product_bom",
+        "constraint_compatibility",
+        "feature_market_fit",
+        "jtbd_analysis",
+        "odi_matrix",
+        "value_network"
+      ],
+      "has_bom": true
+    },
+    {
+      "slug": "plumbing_heating_and_air_conditioning_co",
+      "title": "VN — Value Network: Plumbing, Heating & Air-Condit",
+      "available_analyses": [
+        "constraint_compatibility",
+        "feature_market_fit",
+        "jtbd_analysis",
+        "odi_matrix",
+        "value_network"
+      ],
+      "has_bom": false
+    },
+    {
+      "slug": "steam_and_air_conditioning_supply",
+      "title": "VN — Value Network: Steam and Air-Conditioning Sup",
+      "available_analyses": [
+        "constraint_compatibility",
+        "feature_market_fit",
+        "jtbd_analysis",
+        "odi_matrix",
+        "value_network"
+      ],
+      "has_bom": false
+    }
+  ],
+  "market_types": {
+    "air_conditioning_and_warm_air_heating_eq": [
+      "product_bom",
+      "constraint_compatibility",
+      "feature_market_fit",
+      "jtbd_analysis",
+      "odi_matrix",
+      "value_network"
+    ],
+    "breweries": [
+      "product_bom",
+      "constraint_compatibility",
+      "feature_market_fit",
+      "jtbd_analysis",
+      "odi_matrix",
+      "value_network"
+    ],
+    "flowmeters_src_01_product_decomposition_": [
+      "product_bom",
+      "constraint_compatibility",
+      "feature_market_fit",
+      "jtbd_analysis",
+      "odi_matrix",
+      "value_network"
+    ],
+    "heating_equipment_except_warm_air_furnac": [
+      "product_bom",
+      "constraint_compatibility",
+      "feature_market_fit",
+      "jtbd_analysis",
+      "odi_matrix",
+      "value_network"
+    ],
+    "other_commercial_and_service_industry_ma": [
+      "product_bom",
+      "constraint_compatibility",
+      "feature_market_fit",
+      "jtbd_analysis",
+      "odi_matrix",
+      "value_network"
+    ],
+    "data_processing_hosting": [
+      "constraint_compatibility",
+      "feature_market_fit",
+      "jtbd_analysis",
+      "odi_matrix",
+      "value_network"
+    ],
+    "finfish_farming_and_fish_hatcheries": [
+      "constraint_compatibility",
+      "feature_market_fit",
+      "jtbd_analysis",
+      "odi_matrix",
+      "value_network"
+    ],
+    "plumbing_heating_and_air_conditioning_co": [
+      "constraint_compatibility",
+      "feature_market_fit",
+      "jtbd_analysis",
+      "odi_matrix",
+      "value_network"
+    ],
+    "steam_and_air_conditioning_supply": [
+      "constraint_compatibility",
+      "feature_market_fit",
+      "jtbd_analysis",
+      "odi_matrix",
+      "value_network"
+    ]
+  }
+}

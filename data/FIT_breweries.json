@@ -1,0 +1,1146 @@
+{
+  "id": "FIT_breweries",
+  "title": "Feature-Market Fit — Breweries (NAICS 312120)",
+  "type": "feature_market_fit",
+  "market_slug": "breweries",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Step 09 — Technology-Level Feature-Market Fit",
+      "content": "7 technology-scope features assessed against Breweries (NAICS 312120). Kano classification + 9-dimension ODI fit scoring grounded in the 24 error statements from JTBD_breweries.\n\n**Commodity FP baseline:** \"Quantify the volumetric or mass flow rate of fluids traversing a closed conduit\" — features delivering this are the must_be baseline.\n\n### 09a — Kano + ODI Scores\n\n| Feature | Kano | Time | Cost | Safety | Reli | Skill | Stress | Pain | Conf | Delight | Fit |\n|---|---|---|---|---|---|---|---|---|---|---|---|\n| **Transit-Time Flow Measurement** | must_be | 5 | 6 | 4 | 8 | 4 | 5 | 6 | 7 | 3 | **5.33** |\n| **Integrated Temperature Sensing** | attractive | 6 | 7 | 3 | 6 | 5 | 5 | 6 | 7 | 7 | **5.78** |\n| **Zero Pressure Drop Flow Path** | one_dimensional | 2 | 7 | 2 | 5 | 3 | 3 | 4 | 4 | 3 | **3.67** |\n| **No Moving Parts** | attractive | 7 | 8 | 4 | 9 | 7 | 7 | 8 | 7 | 6 | **7.00** |\n| **Bidirectional Flow Detection** | indifferent | 2 | 2 | 2 | 3 | 1 | 2 | 1 | 2 | 2 | **1.89** |\n| **Digital Anomaly Detection** | attractive | 7 | 6 | 6 | 8 | 6 | 8 | 7 | 8 | 7 | **7.00** |\n| **Real-Time Compensation Algorithms** | one_dimensional | 3 | 4 | 3 | 7 | 5 | 4 | 4 | 7 | 3 | **4.44** |\n\n### 09a — Rationales\n\n**Transit-Time Flow Measurement** (must_be, 5.33): Directly delivers the commodity FP — measuring glycol flow rate is the entire reason breweries buy a flow sensor. Absence = no product. Primary drivers: Reliability (8) — continuous measurement replaces manual guesswork; Confidence (7) — quantitative flow data vs. visual valve-position estimation. Grounded in needs #5 (jacket blockage detection, Opp=16) and #1 (calibration drift, Opp=12). Must_be because every flowmeter technology provides this. [SRC: JTBD_breweries, 01_product_decomposition]\n\n**Integrated Temperature Sensing** (attractive, 5.78): Breweries need flow + temperature together for thermal energy calculation (kW = flow x delta-T x Cp) in glycol cooling loops. Most flowmeters require a separate temperature probe — having both in one sensor body is genuinely unexpected. Primary drivers: Cost (7) — eliminates separate NTC probe + wiring per measurement point; Confidence (7) — co-located measurement eliminates time-sync errors between separate sensors; Delight (7) — craft brewers find the integration surprising. Not must_be because incumbents (paddle-wheel, mag) don't include it. [SRC: 01_product_decomposition, 02_functional_promise]\n\n**Zero Pressure Drop Flow Path** (one_dimensional, 3.67): A 20-fermenter brewery has 20+ measurement points on glycol distribution. Cumulative pressure drop from restrictive sensors (orifice: 0.1–0.5 bar each) raises pumping cost measurably. More flow restriction = proportionally more energy waste. Primary driver: Cost (7) — eliminated head-loss penalty across 20+ points. Low scores elsewhere because the benefit is purely hydraulic. Grounded in need #20 (pressure drop, Opp=7). [SRC: JTBD_breweries #20, 01_product_decomposition]\n\n**No Moving Parts** (attractive, 7.00): Craft breweries are accustomed to replacing paddle-wheel bearings every 6–18 months in glycol service. A solid-state sensor with no maintenance schedule is genuinely delightful — most brewery operators don't know this is possible. Primary drivers: Reliability (9) — eliminates the dominant failure mode in glycol flow measurement; Pain (8) — eliminates the tedious bearing replacement schedule; Cost (8) — no replacement parts, no labor. Grounded in needs #17 (service life >3yr, Opp=10) and #19 (no contamination, Opp=7). Not must_be because most breweries currently accept mechanical sensors as normal. [SRC: JTBD_breweries #17/#19, 01_product_decomposition]\n\n**Bidirectional Flow Detection** (indifferent, 1.89): Brewery glycol loops are unidirectional — coolant flows from chiller through jackets and back. Backflow events are rare and inconsequential (unlike district heating with complex valve arrangements). Breweries do not need or expect this capability. All dimension scores 1–3 per indifferent classification rules. [SRC: JTBD_breweries — no backflow-related needs in 24 error statements]\n\n**Digital Anomaly Detection** (attractive, 7.00): Detects air bubbles, empty pipes, and glycol concentration changes — capabilities that address the top brewery pain points. Directly addresses need #5 (jacket blockage detection, Opp=16), #4 (false readings from air bubbles, Opp=11), and #24 (discovering temperature excursion too late, Opp=15). Primary drivers: Stress (8) — reduces the anxiety of hidden failures during 2–4 week fermentation cycles; Reliability (8) — automated fault detection vs. manual inspection; Confidence (8) — diagnostic data builds trust in the measurement system. Attractive because legacy brewery monitoring has no automated anomaly detection — this is genuinely new capability. [SRC: JTBD_breweries #5/#4/#24, 01_product_decomposition]\n\n**Real-Time Compensation Algorithms** (one_dimensional, 4.44): Compensates for glycol concentration fluctuations (25–40% propylene glycol), seasonal temperature changes, and viscosity variation. Better compensation = proportionally better accuracy (linear). Primary drivers: Reliability (7) — directly addresses need #2 (glycol concentration accuracy, Opp=13); Confidence (7) — operators trust compensated readings more. One_dimensional because the benefit scales linearly with compensation quality — 0.2% compensated error is proportionally better than 1.5% uncompensated. [SRC: JTBD_breweries #2, 01_product_decomposition]\n\n### 09b — Cross-Market Validation\n\n| # | Check | Result | Note |\n|---|---|---|---|\n| 1 | Kano consistency | **PASS** | Transit-Time = must_be (commodity FP baseline); 3 attractive features validated against brewery status quo (paddle-wheel incumbents don't offer them) |\n| 2 | Safety-Confidence correlation | **PASS** | No feature has safety >= 7 with confidence <= 3 |\n| 3 | Skill-Stress correlation | **PASS** | No Moving Parts: skill=7, stress=7 — consistent (lower skill req does reduce stress) |\n| 4 | Indifferent score range | **PASS** | Bidirectional: all scores 1–3 |\n| 5 | No perfect-10 sweep | **PASS** | Highest single score is 9 (No Moving Parts: Reliability) |\n| 6 | Feature name compliance | **PASS** | All names are spec-visible noun phrases, 2–6 words, no brands, no superlatives |\n| 7 | Overall_fit arithmetic | **PASS** | All recomputed: (sum of 9 scores) / 9, rounded to 2 dp |\n\n---"
+    },
+    {
+      "title": "Step 10 — Product-Related Needs (Burleson Product Jobs)",
+      "content": "Needs that exist BECAUSE of choosing ultrasonic transit-time technology. Each traces to a specific product constraint from 01_product_decomposition. All pass the litmus test: \"Would this need disappear if a different technology were chosen?\" = YES.\n\n### 10a — Product-Related Needs\n\n| # | Statement | Source Constraint | Imp | Sat | Litmus Test |\n|---|---|---|---|---|---|\n| PR-1 | Minimize the likelihood of false flow readings when air entrainment exceeds 2% volume during glycol system refill or valve-switching events | Air Bubble Tolerance | 7 | 4 | YES — electromagnetic flowmeters are unaffected by air bubbles in liquid |\n| PR-2 | Minimize the time to recover valid flow measurement after transient air entrainment events dissipate from the glycol circuit | Air Bubble Tolerance | 6 | 3 | YES — Coriolis meters maintain measurement through air-liquid mixtures |\n| PR-3 | Minimize the measurement accuracy degradation from insufficient straight pipe run in space-constrained brewery glycol manifolds with elbows and T-junctions within 5–10 DN upstream | Minimum Straight Pipe Run | 6 | 4 | YES — Coriolis meters are orientation-independent; mag meters tolerate shorter upstream runs |\n| PR-4 | Minimize the duration of measurement blackout caused by partial pipe drainage during glycol circuit maintenance | Pipe Full Condition | 5 | 3 | YES — differential-pressure sensors degrade gradually; ultrasonic loses signal entirely on partial fill |\n| PR-5 | Minimize the transient measurement error during crash-cooling sequences where glycol temperature changes exceed the compensation algorithm's response rate (>2°C/min) | Temperature-Dependent Accuracy | 6 | 5 | YES — electromagnetic flowmeters are not affected by fluid temperature changes to their flow reading |\n| PR-6 | Minimize the likelihood of signal-to-noise degradation below the transit-time detection threshold during low-demand glycol flow in small cooling zones | Minimum Flow Rate Detection | 5 | 5 | YES — electromagnetic meters maintain signal quality at lower flow rates (turndown 100:1 vs 10:1 ultrasonic) |\n| PR-7 | Minimize the risk of acoustic coupling failure when glycol-to-water ratio shifts outside the validated acoustic impedance range due to uncontrolled top-up or evaporation | Media Limitation | 5 | 4 | YES — electromagnetic flowmeters work with any conductive liquid regardless of acoustic properties |\n\n**Constraints not generating needs for Breweries:**\n\n| Constraint | Why Not Applicable |\n|---|---|\n| Maximum Medium Temperature (90°C) | Brewery glycol operates at 0–30°C, well below threshold |\n| Maximum Operating Pressure (10 bar) | Brewery glycol loops operate at 1–3 bar, well below threshold |\n\n### 10b — Validation\n\n| # | Check | Result | Note |\n|---|---|---|---|\n| 1 | Litmus test | **PASS** | All 7 needs disappear with a different technology (electromagnetic or Coriolis) |\n| 2 | Source constraint traceability | **PASS** | Each constraint exists in 01_product_decomposition; causal mechanism is specific |\n| 3 | Affected market plausibility | **PASS** | All constraints manifest in brewery glycol cooling context |\n| 4 | Completeness | **PASS** | 5 of 8 constraints generate needs for breweries; 2 excluded with rationale (temp/pressure thresholds never reached); Media Limitation included with low-probability scenario |\n| 5 | No market-level duplicates | **PASS** | None duplicate Step 06 market needs (JTBD_breweries) |\n| 6 | Importance/satisfaction sanity | **PASS** | Range 5–7 imp / 3–5 sat; no unrealistic extremes for technology-caused needs |\n\n---"
+    },
+    {
+      "title": "Step 11 — Vendor Feature-Market Fit (Marquardt)",
+      "content": "6 vendor-scope features compared against best incumbent in each brewery application. Marquardt US Flow Sensor (DN20 serial) vs. best incumbent per feature.\n\n### 11a — Vendor vs. Incumbent Comparison\n\n| Feature | Kano | Vendor | Incumbent | Inc. Tech | Advantage | Rationale |\n|---|---|---|---|---|---|---|\n| **Modular Pipe Diameter Variants** | one_dimensional | 6 | 8 | Electromagnetic (E+H Promag) | **inferior** | Marquardt offers 4 variants (DN12/14/20/25); mag meter vendors offer DN3–DN300+. However, DN20/DN25 cover >80% of brewery glycol pipe sizes. Gap narrows in practice but incumbent range is objectively broader. |\n| **Customizable Communication Interface** | must_be | 5 | 8 | Electromagnetic (E+H Promag) | **inferior** | Marquardt offers UART/LIN/frequency output — automotive protocols. Brewery PLCs and building controllers expect 4-20 mA or Modbus RTU, which mag meters provide as standard with HART overlay. UART requires custom integration. |\n| **Customizable Mechanical Interface** | one_dimensional | 7 | 6 | Paddle-wheel (Gems iFT) | **parity** | Marquardt offers threaded + plug-in quick-connect. Paddle-wheel sensors are threaded only. Plug-in option reduces OEM installation time but gap is within 1 point (|7-6|=1). |\n| **Low-Energy Battery Mode** | indifferent | 8 | 2 | Electromagnetic (general) | **superior** | <5 μA standby enables battery-powered remote monitoring. However, brewery glycol loops have cellar power infrastructure — battery mode is unused in the primary application. Mag meters require 10–20 W continuous. Superior implementation but irrelevant market context. |\n| **Pre-Calibrated Delivery** | attractive | 8 | 5 | Electromagnetic (E+H Promag) | **superior** | Marquardt factory-calibrates to customer's specific glycol/water mixture and flow profile with 100% automated final test. Mag meters ship with generic water calibration; field commissioning by instrumentation technician needed for glycol. Directly addresses need #12 (systematic error from incorrect fluid-type configuration, Opp=11). |\n| **KTW/WRAS Drinking Water Approval** | indifferent | 7 | 5 | Paddle-wheel (general) | **superior** | KTW/WRAS certification enables deployment in potable water circuits. For the primary brewery application (glycol cooling), drinking water approval is irrelevant. Relevant only for the secondary water intake metering position (L4.8.4.1). |\n\n### 11b — Objectivity Review\n\n| # | Check | Result | Note |\n|---|---|---|---|\n| 1 | Vendor bias | **PASS** | 3 superior, 1 parity, 2 inferior — balanced distribution; no systematic inflation |\n| 2 | Anti-vendor bias | **PASS** | 2 inferior justified by specific protocol/size-range gaps vs. established industrial standards |\n| 3 | Straw-man check | **PASS** | Best incumbent is E+H Promag (market leader in process flow measurement) and Gems iFT (representative paddle-wheel), not low-end comparisons |\n| 4 | Advantage arithmetic | **PASS** | All gap calculations verified: superior requires >1pt gap vendor-over-incumbent; inferior requires >1pt gap incumbent-over-vendor; parity requires |gap| ≤ 1 |\n| 5 | Kano-score consistency | **PASS** | Must_be (Comm Interface): both scores ≥ 5 ✓; Attractive (Pre-Calibrated): vendor > incumbent ✓ |\n| 6 | Rationale specificity | **PASS** | Each rationale references concrete specs (DN sizes, protocol names, power consumption figures) |\n\n### Competitive Summary\n\n| Dimension | Marquardt Advantage | Marquardt Disadvantage |\n|---|---|---|\n| **Pre-Calibrated Delivery** | Eliminates field commissioning error — biggest craft brewery pain point | — |\n| **Battery Mode** | Enables edge use cases (outdoor hop farm, remote lagering) | Irrelevant for primary cellar application |\n| **Communication Protocol** | — | UART/LIN not industrial standard; breweries need 4-20 mA or Modbus |\n| **Pipe Size Range** | DN20/25 covers primary brewery glycol | No DN50+ for large production brewery mains |\n\n**Key finding:** Marquardt's strongest vendor advantage (Pre-Calibrated Delivery) directly addresses a high-opportunity need (#12, Opp=11). Its weakest point (Communication Interface) is a must_be gap that would block adoption unless addressed with a protocol adapter or firmware variant.\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"feature_market_fit\",\n  \"naics_code\": \"312120\",\n  \"naics_title\": \"Breweries\",\n  \"market_name\": \"Breweries\",\n  \"product_name\": \"Ultrasonic Flow Sensor\",\n  \"vendor_name\": \"Marquardt\",\n  \"technology_class\": \"Ultrasonic Transit-Time Flow Measurement\",\n  \"step_09_tech_feature_market_fit\": {\n    \"n_features\": 7,\n    \"n_markets\": 1,\n    \"entries\": [\n      {\n        \"feature_name\": \"Transit-Time Flow Measurement\",\n        \"market_name\": \"Breweries\",\n        \"naics_code\": \"312120\",\n        \"kano_class\": \"must_be\",\n        \"fit_score_time\": 5,\n        \"fit_score_cost\": 6,\n        \"fit_score_safety\": 4,\n        \"fit_score_reliability\": 8,\n        \"fit_score_skill\": 4,\n        \"fit_score_stress\": 5,\n        \"fit_score_pain\": 6,\n        \"fit_score_confidence\": 7,\n        \"fit_score_delight\": 3,\n        \"overall_fit\": 5.33,\n        \"rationale\": \"Directly delivers the commodity FP — measuring glycol flow rate is the reason breweries buy a flow sensor. Absence = no product. Primary drivers: Reliability (8) — replaces manual guesswork; Confidence (7) — quantitative data vs. visual estimation. Grounded in needs #5 (Opp=16) and #1 (Opp=12). Must_be because every flowmeter technology provides this.\"\n      },\n      {\n        \"feature_name\": \"Integrated Temperature Sensing\",\n        \"market_name\": \"Breweries\",\n        \"naics_code\": \"312120\",\n        \"kano_class\": \"attractive\",\n        \"fit_score_time\": 6,\n        \"fit_score_cost\": 7,\n        \"fit_score_safety\": 3,\n        \"fit_score_reliability\": 6,\n        \"fit_score_skill\": 5,\n        \"fit_score_stress\": 5,\n        \"fit_score_pain\": 6,\n        \"fit_score_confidence\": 7,\n        \"fit_score_delight\": 7,\n        \"overall_fit\": 5.78,\n        \"rationale\": \"Breweries need flow + temperature for thermal energy calculation (kW = flow x delta-T x Cp). Most flowmeters require a separate probe — integration is genuinely unexpected. Primary drivers: Cost (7) — eliminates separate probe + wiring; Delight (7) — craft brewers find integration surprising. Not must_be because incumbents don't include it.\"\n      },\n      {\n        \"feature_name\": \"Zero Pressure Drop Flow Path\",\n        \"market_name\": \"Breweries\",\n        \"naics_code\": \"312120\",\n        \"kano_class\": \"one_dimensional\",\n        \"fit_score_time\": 2,\n        \"fit_score_cost\": 7,\n        \"fit_score_safety\": 2,\n        \"fit_score_reliability\": 5,\n        \"fit_score_skill\": 3,\n        \"fit_score_stress\": 3,\n        \"fit_score_pain\": 4,\n        \"fit_score_confidence\": 4,\n        \"fit_score_delight\": 3,\n        \"overall_fit\": 3.67,\n        \"rationale\": \"A 20-fermenter brewery has 20+ measurement points. Cumulative pressure drop from restrictive sensors raises pumping cost. Less restriction = proportionally less energy waste (linear). Primary driver: Cost (7) — eliminated head-loss penalty. Grounded in need #20 (Opp=7).\"\n      },\n      {\n        \"feature_name\": \"No Moving Parts\",\n        \"market_name\": \"Breweries\",\n        \"naics_code\": \"312120\",\n        \"kano_class\": \"attractive\",\n        \"fit_score_time\": 7,\n        \"fit_score_cost\": 8,\n        \"fit_score_safety\": 4,\n        \"fit_score_reliability\": 9,\n        \"fit_score_skill\": 7,\n        \"fit_score_stress\": 7,\n        \"fit_score_pain\": 8,\n        \"fit_score_confidence\": 7,\n        \"fit_score_delight\": 6,\n        \"overall_fit\": 7.00,\n        \"rationale\": \"Craft breweries replace paddle-wheel bearings every 6-18 months in glycol. Solid-state measurement with no maintenance is genuinely delightful — most operators don't know this is possible. Primary drivers: Reliability (9) — eliminates dominant failure mode; Pain (8) — eliminates bearing replacement; Cost (8) — no parts/labor. Grounded in needs #17 (Opp=10) and #19 (Opp=7).\"\n      },\n      {\n        \"feature_name\": \"Bidirectional Flow Detection\",\n        \"market_name\": \"Breweries\",\n        \"naics_code\": \"312120\",\n        \"kano_class\": \"indifferent\",\n        \"fit_score_time\": 2,\n        \"fit_score_cost\": 2,\n        \"fit_score_safety\": 2,\n        \"fit_score_reliability\": 3,\n        \"fit_score_skill\": 1,\n        \"fit_score_stress\": 2,\n        \"fit_score_pain\": 1,\n        \"fit_score_confidence\": 2,\n        \"fit_score_delight\": 2,\n        \"overall_fit\": 1.89,\n        \"rationale\": \"Brewery glycol loops are unidirectional. Backflow events are rare and inconsequential. No backflow-related needs appear in the 24 error statements from JTBD analysis. All scores 1-3 per indifferent classification rules.\"\n      },\n      {\n        \"feature_name\": \"Digital Anomaly Detection\",\n        \"market_name\": \"Breweries\",\n        \"naics_code\": \"312120\",\n        \"kano_class\": \"attractive\",\n        \"fit_score_time\": 7,\n        \"fit_score_cost\": 6,\n        \"fit_score_safety\": 6,\n        \"fit_score_reliability\": 8,\n        \"fit_score_skill\": 6,\n        \"fit_score_stress\": 8,\n        \"fit_score_pain\": 7,\n        \"fit_score_confidence\": 8,\n        \"fit_score_delight\": 7,\n        \"overall_fit\": 7.00,\n        \"rationale\": \"Detects bubbles, empty pipes, glycol concentration changes — addresses top brewery pain points. Directly serves needs #5 (jacket blockage, Opp=16), #4 (air bubble false readings, Opp=11), #24 (late excursion discovery, Opp=15). Primary drivers: Stress (8) — reduces hidden-failure anxiety during 2-4 week fermentation; Confidence (8) — diagnostic data builds trust. Attractive because legacy brewery monitoring has no automated anomaly detection.\"\n      },\n      {\n        \"feature_name\": \"Real-Time Compensation Algorithms\",\n        \"market_name\": \"Breweries\",\n        \"naics_code\": \"312120\",\n        \"kano_class\": \"one_dimensional\",\n        \"fit_score_time\": 3,\n        \"fit_score_cost\": 4,\n        \"fit_score_safety\": 3,\n        \"fit_score_reliability\": 7,\n        \"fit_score_skill\": 5,\n        \"fit_score_stress\": 4,\n        \"fit_score_pain\": 4,\n        \"fit_score_confidence\": 7,\n        \"fit_score_delight\": 3,\n        \"overall_fit\": 4.44,\n        \"rationale\": \"Compensates for glycol concentration fluctuations (25-40% propylene glycol), temperature, and viscosity. Better compensation = proportionally better accuracy (linear). Primary drivers: Reliability (7) — addresses need #2 (glycol concentration accuracy, Opp=13); Confidence (7) — operators trust compensated readings. One_dimensional because benefit scales linearly.\"\n      }\n    ]\n  },\n  \"step_10_product_related_needs\": {\n    \"n_needs\": 7,\n    \"technology_class\": \"Ultrasonic Transit-Time Flow Measurement\",\n    \"entries\": [\n      {\n        \"statement\": \"Minimize the likelihood of false flow readings when air entrainment exceeds 2% volume during glycol system refill or valve-switching events\",\n        \"source_constraint\": \"Air Bubble Tolerance\",\n        \"affected_markets\": [\"Breweries\"],\n        \"importance\": 7,\n        \"satisfaction_current\": 4\n      },\n      {\n        \"statement\": \"Minimize the time to recover valid flow measurement after transient air entrainment events dissipate from the glycol circuit\",\n        \"source_constraint\": \"Air Bubble Tolerance\",\n        \"affected_markets\": [\"Breweries\"],\n        \"importance\": 6,\n        \"satisfaction_current\": 3\n      },\n      {\n        \"statement\": \"Minimize the measurement accuracy degradation from insufficient straight pipe run in space-constrained brewery glycol manifolds with elbows and T-junctions within 5-10 DN upstream\",\n        \"source_constraint\": \"Minimum Straight Pipe Run\",\n        \"affected_markets\": [\"Breweries\"],\n        \"importance\": 6,\n        \"satisfaction_current\": 4\n      },\n      {\n        \"statement\": \"Minimize the duration of measurement blackout caused by partial pipe drainage during glycol circuit maintenance\",\n        \"source_constraint\": \"Pipe Full Condition\",\n        \"affected_markets\": [\"Breweries\"],\n        \"importance\": 5,\n        \"satisfaction_current\": 3\n      },\n      {\n        \"statement\": \"Minimize the transient measurement error during crash-cooling sequences where glycol temperature changes exceed the compensation algorithm response rate at >2 C/min\",\n        \"source_constraint\": \"Temperature-Dependent Accuracy\",\n        \"affected_markets\": [\"Breweries\"],\n        \"importance\": 6,\n        \"satisfaction_current\": 5\n      },\n      {\n        \"statement\": \"Minimize the likelihood of signal-to-noise degradation below the transit-time detection threshold during low-demand glycol flow in small cooling zones\",\n        \"source_constraint\": \"Minimum Flow Rate Detection\",\n        \"affected_markets\": [\"Breweries\"],\n        \"importance\": 5,\n        \"satisfaction_current\": 5\n      },\n      {\n        \"statement\": \"Minimize the risk of acoustic coupling failure when glycol-to-water ratio shifts outside the validated acoustic impedance range due to uncontrolled top-up or evaporation\",\n        \"source_constraint\": \"Media Limitation\",\n        \"affected_markets\": [\"Breweries\"],\n        \"importance\": 5,\n        \"satisfaction_current\": 4\n      }\n    ],\n    \"constraints_not_applicable\": [\n      {\n        \"constraint\": \"Maximum Medium Temperature\",\n        \"reason\": \"Brewery glycol operates at 0-30 C, well below 90 C threshold\"\n      },\n      {\n        \"constraint\": \"Maximum Operating Pressure\",\n        \"reason\": \"Brewery glycol loops operate at 1-3 bar, well below 10 bar threshold\"\n      }\n    ]\n  },\n  \"step_11_vendor_feature_market_fit\": {\n    \"vendor_name\": \"Marquardt\",\n    \"vendor_product\": \"US Flow Sensor (DN20 serial)\",\n    \"n_comparisons\": 6,\n    \"entries\": [\n      {\n        \"feature_name\": \"Modular Pipe Diameter Variants\",\n        \"feature_description\": \"Serve multiple pipe sizes via interchangeable flow bodies sharing a common electronics platform\",\n        \"market_name\": \"Breweries\",\n        \"naics_code\": \"312120\",\n        \"vendor_score\": 6,\n        \"best_incumbent_score\": 8,\n        \"best_incumbent_technology\": \"Electromagnetic Flow Measurement\",\n        \"advantage\": \"inferior\",\n        \"kano_class\": \"one_dimensional\",\n        \"rationale\": \"Marquardt offers 4 variants (DN12/14/20/25); E+H Promag offers DN3-DN300+. DN20/DN25 cover >80% of brewery glycol pipe sizes, but incumbent range is objectively broader for edge cases (large mains, small sample lines).\"\n      },\n      {\n        \"feature_name\": \"Customizable Communication Interface\",\n        \"feature_description\": \"Support UART, LIN, and frequency output protocols selectable at order level\",\n        \"market_name\": \"Breweries\",\n        \"naics_code\": \"312120\",\n        \"vendor_score\": 5,\n        \"best_incumbent_score\": 8,\n        \"best_incumbent_technology\": \"Electromagnetic Flow Measurement\",\n        \"advantage\": \"inferior\",\n        \"kano_class\": \"must_be\",\n        \"rationale\": \"Marquardt offers UART/LIN/frequency — automotive protocols. Brewery PLCs and BMS controllers expect 4-20 mA analog or Modbus RTU digital bus. E+H Promag provides 4-20 mA + HART + Modbus as standard. UART requires custom integration work.\"\n      },\n      {\n        \"feature_name\": \"Customizable Mechanical Interface\",\n        \"feature_description\": \"Accept threaded or plug-in pipe connections for flexible installation\",\n        \"market_name\": \"Breweries\",\n        \"naics_code\": \"312120\",\n        \"vendor_score\": 7,\n        \"best_incumbent_score\": 6,\n        \"best_incumbent_technology\": \"Paddle-Wheel Flow Sensor\",\n        \"advantage\": \"parity\",\n        \"kano_class\": \"one_dimensional\",\n        \"rationale\": \"Marquardt offers threaded + plug-in quick-connect. Paddle-wheel sensors (Gems iFT, Badger) are threaded only. Plug-in reduces OEM installation time. Gap is within 1 point — parity.\"\n      },\n      {\n        \"feature_name\": \"Low-Energy Battery Mode\",\n        \"feature_description\": \"Operate at ultra-low current consumption (<5 uA) for battery-powered installations\",\n        \"market_name\": \"Breweries\",\n        \"naics_code\": \"312120\",\n        \"vendor_score\": 8,\n        \"best_incumbent_score\": 2,\n        \"best_incumbent_technology\": \"Electromagnetic Flow Measurement\",\n        \"advantage\": \"superior\",\n        \"kano_class\": \"indifferent\",\n        \"rationale\": \"Marquardt achieves <5 uA standby vs. mag meter 10-20 W continuous. Superior implementation, but brewery glycol loops have cellar power infrastructure — battery mode is unused in the primary application. Niche relevance for outdoor glycol runs or remote lagering caves only.\"\n      },\n      {\n        \"feature_name\": \"Pre-Calibrated Delivery\",\n        \"feature_description\": \"Ship fully calibrated and tested to customer-specific medium and flow profile\",\n        \"market_name\": \"Breweries\",\n        \"naics_code\": \"312120\",\n        \"vendor_score\": 8,\n        \"best_incumbent_score\": 5,\n        \"best_incumbent_technology\": \"Electromagnetic Flow Measurement\",\n        \"advantage\": \"superior\",\n        \"kano_class\": \"attractive\",\n        \"rationale\": \"Marquardt factory-calibrates to customer's specific glycol/water mixture with 100% automated final test — eliminates field calibration. E+H Promag ships with generic water calibration; field commissioning by instrumentation technician needed for glycol. Paddle-wheel sensors are uncalibrated. Directly addresses need #12 (systematic error from incorrect fluid-type configuration, Opp=11).\"\n      },\n      {\n        \"feature_name\": \"KTW/WRAS Drinking Water Approval\",\n        \"feature_description\": \"Certify wetted parts for potable water contact per KTW and WRAS standards\",\n        \"market_name\": \"Breweries\",\n        \"naics_code\": \"312120\",\n        \"vendor_score\": 7,\n        \"best_incumbent_score\": 5,\n        \"best_incumbent_technology\": \"Paddle-Wheel Flow Sensor\",\n        \"advantage\": \"superior\",\n        \"kano_class\": \"indifferent\",\n        \"rationale\": \"KTW/WRAS certification is irrelevant for the primary glycol cooling application. Relevant only for the secondary water intake metering position (VN L4.8.4.1). Most paddle-wheel sensors lack formal drinking water certification. Superior on paper, but market context renders it indifferent.\"\n      }\n    ],\n    \"advantage_distribution\": {\n      \"superior\": 3,\n      \"parity\": 1,\n      \"inferior\": 2\n    }\n  },\n  \"entities_produced\": {\n    \"nodes\": [\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Minimize the likelihood of false flow readings when air entrainment exceeds 2% volume during glycol sys\", \"run_id\": \"TBD\"}, \"properties\": {\"product_related\": true, \"source_constraint\": \"Air Bubble Tolerance\", \"importance\": 7, \"satisfaction_current\": 4}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Minimize the time to recover valid flow measurement after transient air entrainment events dissipate f\", \"run_id\": \"TBD\"}, \"properties\": {\"product_related\": true, \"source_constraint\": \"Air Bubble Tolerance\", \"importance\": 6, \"satisfaction_current\": 3}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Minimize the measurement accuracy degradation from insufficient straight pipe run in space-constrained\", \"run_id\": \"TBD\"}, \"properties\": {\"product_related\": true, \"source_constraint\": \"Minimum Straight Pipe Run\", \"importance\": 6, \"satisfaction_current\": 4}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Minimize the duration of measurement blackout caused by partial pipe drainage during glycol circuit mai\", \"run_id\": \"TBD\"}, \"properties\": {\"product_related\": true, \"source_constraint\": \"Pipe Full Condition\", \"importance\": 5, \"satisfaction_current\": 3}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Minimize the transient measurement error during crash-cooling sequences where glycol temperature changes\", \"run_id\": \"TBD\"}, \"properties\": {\"product_related\": true, \"source_constraint\": \"Temperature-Dependent Accuracy\", \"importance\": 6, \"satisfaction_current\": 5}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Minimize the likelihood of signal-to-noise degradation below the transit-time detection threshold durin\", \"run_id\": \"TBD\"}, \"properties\": {\"product_related\": true, \"source_constraint\": \"Minimum Flow Rate Detection\", \"importance\": 5, \"satisfaction_current\": 5}},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"Minimize the risk of acoustic coupling failure when glycol-to-water ratio shifts outside the validated\", \"run_id\": \"TBD\"}, \"properties\": {\"product_related\": true, \"source_constraint\": \"Media Limitation\", \"importance\": 5, \"satisfaction_current\": 4}}\n    ],\n    \"relationships\": [\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Transit-Time Flow Measurement\", \"target\": \"Market:312120\", \"properties\": {\"kano_class\": \"must_be\", \"overall_fit\": 5.33, \"feature_scope\": \"technology\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Integrated Temperature Sensing\", \"target\": \"Market:312120\", \"properties\": {\"kano_class\": \"attractive\", \"overall_fit\": 5.78, \"feature_scope\": \"technology\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Zero Pressure Drop Flow Path\", \"target\": \"Market:312120\", \"properties\": {\"kano_class\": \"one_dimensional\", \"overall_fit\": 3.67, \"feature_scope\": \"technology\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:No Moving Parts\", \"target\": \"Market:312120\", \"properties\": {\"kano_class\": \"attractive\", \"overall_fit\": 7.00, \"feature_scope\": \"technology\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Bidirectional Flow Detection\", \"target\": \"Market:312120\", \"properties\": {\"kano_class\": \"indifferent\", \"overall_fit\": 1.89, \"feature_scope\": \"technology\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Digital Anomaly Detection\", \"target\": \"Market:312120\", \"properties\": {\"kano_class\": \"attractive\", \"overall_fit\": 7.00, \"feature_scope\": \"technology\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Real-Time Compensation Algorithms\", \"target\": \"Market:312120\", \"properties\": {\"kano_class\": \"one_dimensional\", \"overall_fit\": 4.44, \"feature_scope\": \"technology\"}},\n      {\"type\": \"generates_need\", \"source\": \"Constraint:Air Bubble Tolerance\", \"target\": \"ErrorStatement:PR-1\"},\n      {\"type\": \"generates_need\", \"source\": \"Constraint:Air Bubble Tolerance\", \"target\": \"ErrorStatement:PR-2\"},\n      {\"type\": \"generates_need\", \"source\": \"Constraint:Minimum Straight Pipe Run\", \"target\": \"ErrorStatement:PR-3\"},\n      {\"type\": \"generates_need\", \"source\": \"Constraint:Pipe Full Condition\", \"target\": \"ErrorStatement:PR-4\"},\n      {\"type\": \"generates_need\", \"source\": \"Constraint:Temperature-Dependent Accuracy\", \"target\": \"ErrorStatement:PR-5\"},\n      {\"type\": \"generates_need\", \"source\": \"Constraint:Minimum Flow Rate Detection\", \"target\": \"ErrorStatement:PR-6\"},\n      {\"type\": \"generates_need\", \"source\": \"Constraint:Media Limitation\", \"target\": \"ErrorStatement:PR-7\"},\n      {\"type\": \"has_product_need\", \"source\": \"NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement\", \"target\": \"ErrorStatement:PR-1\"},\n      {\"type\": \"has_product_need\", \"source\": \"NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement\", \"target\": \"ErrorStatement:PR-2\"},\n      {\"type\": \"has_product_need\", \"source\": \"NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement\", \"target\": \"ErrorStatement:PR-3\"},\n      {\"type\": \"has_product_need\", \"source\": \"NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement\", \"target\": \"ErrorStatement:PR-4\"},\n      {\"type\": \"has_product_need\", \"source\": \"NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement\", \"target\": \"ErrorStatement:PR-5\"},\n      {\"type\": \"has_product_need\", \"source\": \"NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement\", \"target\": \"ErrorStatement:PR-6\"},\n      {\"type\": \"has_product_need\", \"source\": \"NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement\", \"target\": \"ErrorStatement:PR-7\"},\n      {\"type\": \"applies_to_market\", \"source\": \"ErrorStatement:PR-1\", \"target\": \"Market:312120\"},\n      {\"type\": \"applies_to_market\", \"source\": \"ErrorStatement:PR-2\", \"target\": \"Market:312120\"},\n      {\"type\": \"applies_to_market\", \"source\": \"ErrorStatement:PR-3\", \"target\": \"Market:312120\"},\n      {\"type\": \"applies_to_market\", \"source\": \"ErrorStatement:PR-4\", \"target\": \"Market:312120\"},\n      {\"type\": \"applies_to_market\", \"source\": \"ErrorStatement:PR-5\", \"target\": \"Market:312120\"},\n      {\"type\": \"applies_to_market\", \"source\": \"ErrorStatement:PR-6\", \"target\": \"Market:312120\"},\n      {\"type\": \"applies_to_market\", \"source\": \"ErrorStatement:PR-7\", \"target\": \"Market:312120\"},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Modular Pipe Diameter Variants\", \"target\": \"Market:312120\", \"properties\": {\"kano_class\": \"one_dimensional\", \"vendor_score\": 6, \"best_incumbent_score\": 8, \"advantage\": \"inferior\", \"feature_scope\": \"vendor\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Customizable Communication Interface\", \"target\": \"Market:312120\", \"properties\": {\"kano_class\": \"must_be\", \"vendor_score\": 5, \"best_incumbent_score\": 8, \"advantage\": \"inferior\", \"feature_scope\": \"vendor\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Customizable Mechanical Interface\", \"target\": \"Market:312120\", \"properties\": {\"kano_class\": \"one_dimensional\", \"vendor_score\": 7, \"best_incumbent_score\": 6, \"advantage\": \"parity\", \"feature_scope\": \"vendor\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Low-Energy Battery Mode\", \"target\": \"Market:312120\", \"properties\": {\"kano_class\": \"indifferent\", \"vendor_score\": 8, \"best_incumbent_score\": 2, \"advantage\": \"superior\", \"feature_scope\": \"vendor\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Pre-Calibrated Delivery\", \"target\": \"Market:312120\", \"properties\": {\"kano_class\": \"attractive\", \"vendor_score\": 8, \"best_incumbent_score\": 5, \"advantage\": \"superior\", \"feature_scope\": \"vendor\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:KTW/WRAS Drinking Water Approval\", \"target\": \"Market:312120\", \"properties\": {\"kano_class\": \"indifferent\", \"vendor_score\": 7, \"best_incumbent_score\": 5, \"advantage\": \"superior\", \"feature_scope\": \"vendor\"}},\n      {\"type\": \"has_feature\", \"source\": \"Product:Marquardt US Flow Sensor\", \"target\": \"Feature:Modular Pipe Diameter Variants\"},\n      {\"type\": \"has_feature\", \"source\": \"Product:Marquardt US Flow Sensor\", \"target\": \"Feature:Customizable Communication Interface\"},\n      {\"type\": \"has_feature\", \"source\": \"Product:Marquardt US Flow Sensor\", \"target\": \"Feature:Customizable Mechanical Interface\"},\n      {\"type\": \"has_feature\", \"source\": \"Product:Marquardt US Flow Sensor\", \"target\": \"Feature:Low-Energy Battery Mode\"},\n      {\"type\": \"has_feature\", \"source\": \"Product:Marquardt US Flow Sensor\", \"target\": \"Feature:Pre-Calibrated Delivery\"},\n      {\"type\": \"has_feature\", \"source\": \"Product:Marquardt US Flow Sensor\", \"target\": \"Feature:KTW/WRAS Drinking Water Approval\"}\n    ]\n  }\n}\n```\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- 01_product_decomposition.md (features, constraints, specifications, UNSPSC)\n- 02_functional_promise.md (commodity FP, product FP, differentiators, complements)\n- 05_market_discovery.md (Breweries NAICS 312120 — market context, alternatives, job)\n- JTBD_breweries.md (24 error statements, job map, segments, alternatives, incumbent anchors)"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "Feature",
+        "Kano",
+        "Time",
+        "Cost",
+        "Safety",
+        "Reli",
+        "Skill",
+        "Stress",
+        "Pain",
+        "Conf",
+        "Delight",
+        "Fit"
+      ],
+      "rows": [
+        {
+          "Feature": "**Transit-Time Flow Measurement**",
+          "Kano": "must_be",
+          "Time": "5",
+          "Cost": "6",
+          "Safety": "4",
+          "Reli": "8",
+          "Skill": "4",
+          "Stress": "5",
+          "Pain": "6",
+          "Conf": "7",
+          "Delight": "3",
+          "Fit": "**5.33**"
+        },
+        {
+          "Feature": "**Integrated Temperature Sensing**",
+          "Kano": "attractive",
+          "Time": "6",
+          "Cost": "7",
+          "Safety": "3",
+          "Reli": "6",
+          "Skill": "5",
+          "Stress": "5",
+          "Pain": "6",
+          "Conf": "7",
+          "Delight": "7",
+          "Fit": "**5.78**"
+        },
+        {
+          "Feature": "**Zero Pressure Drop Flow Path**",
+          "Kano": "one_dimensional",
+          "Time": "2",
+          "Cost": "7",
+          "Safety": "2",
+          "Reli": "5",
+          "Skill": "3",
+          "Stress": "3",
+          "Pain": "4",
+          "Conf": "4",
+          "Delight": "3",
+          "Fit": "**3.67**"
+        },
+        {
+          "Feature": "**No Moving Parts**",
+          "Kano": "attractive",
+          "Time": "7",
+          "Cost": "8",
+          "Safety": "4",
+          "Reli": "9",
+          "Skill": "7",
+          "Stress": "7",
+          "Pain": "8",
+          "Conf": "7",
+          "Delight": "6",
+          "Fit": "**7.00**"
+        },
+        {
+          "Feature": "**Bidirectional Flow Detection**",
+          "Kano": "indifferent",
+          "Time": "2",
+          "Cost": "2",
+          "Safety": "2",
+          "Reli": "3",
+          "Skill": "1",
+          "Stress": "2",
+          "Pain": "1",
+          "Conf": "2",
+          "Delight": "2",
+          "Fit": "**1.89**"
+        },
+        {
+          "Feature": "**Digital Anomaly Detection**",
+          "Kano": "attractive",
+          "Time": "7",
+          "Cost": "6",
+          "Safety": "6",
+          "Reli": "8",
+          "Skill": "6",
+          "Stress": "8",
+          "Pain": "7",
+          "Conf": "8",
+          "Delight": "7",
+          "Fit": "**7.00**"
+        },
+        {
+          "Feature": "**Real-Time Compensation Algorithms**",
+          "Kano": "one_dimensional",
+          "Time": "3",
+          "Cost": "4",
+          "Safety": "3",
+          "Reli": "7",
+          "Skill": "5",
+          "Stress": "4",
+          "Pain": "4",
+          "Conf": "7",
+          "Delight": "3",
+          "Fit": "**4.44**"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result",
+        "Note"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Check": "Kano consistency",
+          "Result": "**PASS**",
+          "Note": "Transit-Time = must_be (commodity FP baseline); 3 attractive features validated against brewery status quo (paddle-wheel incumbents don't offer them)"
+        },
+        {
+          "#": "2",
+          "Check": "Safety-Confidence correlation",
+          "Result": "**PASS**",
+          "Note": "No feature has safety >= 7 with confidence <= 3"
+        },
+        {
+          "#": "3",
+          "Check": "Skill-Stress correlation",
+          "Result": "**PASS**",
+          "Note": "No Moving Parts: skill=7, stress=7 — consistent (lower skill req does reduce stress)"
+        },
+        {
+          "#": "4",
+          "Check": "Indifferent score range",
+          "Result": "**PASS**",
+          "Note": "Bidirectional: all scores 1–3"
+        },
+        {
+          "#": "5",
+          "Check": "No perfect-10 sweep",
+          "Result": "**PASS**",
+          "Note": "Highest single score is 9 (No Moving Parts: Reliability)"
+        },
+        {
+          "#": "6",
+          "Check": "Feature name compliance",
+          "Result": "**PASS**",
+          "Note": "All names are spec-visible noun phrases, 2–6 words, no brands, no superlatives"
+        },
+        {
+          "#": "7",
+          "Check": "Overall_fit arithmetic",
+          "Result": "**PASS**",
+          "Note": "All recomputed: (sum of 9 scores) / 9, rounded to 2 dp"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement",
+        "Source Constraint",
+        "Imp",
+        "Sat",
+        "Litmus Test"
+      ],
+      "rows": [
+        {
+          "#": "PR-1",
+          "Statement": "Minimize the likelihood of false flow readings when air entrainment exceeds 2% volume during glycol system refill or valve-switching events",
+          "Source Constraint": "Air Bubble Tolerance",
+          "Imp": "7",
+          "Sat": "4",
+          "Litmus Test": "YES — electromagnetic flowmeters are unaffected by air bubbles in liquid"
+        },
+        {
+          "#": "PR-2",
+          "Statement": "Minimize the time to recover valid flow measurement after transient air entrainment events dissipate from the glycol circuit",
+          "Source Constraint": "Air Bubble Tolerance",
+          "Imp": "6",
+          "Sat": "3",
+          "Litmus Test": "YES — Coriolis meters maintain measurement through air-liquid mixtures"
+        },
+        {
+          "#": "PR-3",
+          "Statement": "Minimize the measurement accuracy degradation from insufficient straight pipe run in space-constrained brewery glycol manifolds with elbows and T-junctions within 5–10 DN upstream",
+          "Source Constraint": "Minimum Straight Pipe Run",
+          "Imp": "6",
+          "Sat": "4",
+          "Litmus Test": "YES — Coriolis meters are orientation-independent; mag meters tolerate shorter upstream runs"
+        },
+        {
+          "#": "PR-4",
+          "Statement": "Minimize the duration of measurement blackout caused by partial pipe drainage during glycol circuit maintenance",
+          "Source Constraint": "Pipe Full Condition",
+          "Imp": "5",
+          "Sat": "3",
+          "Litmus Test": "YES — differential-pressure sensors degrade gradually; ultrasonic loses signal entirely on partial fill"
+        },
+        {
+          "#": "PR-5",
+          "Statement": "Minimize the transient measurement error during crash-cooling sequences where glycol temperature changes exceed the compensation algorithm's response rate (>2°C/min)",
+          "Source Constraint": "Temperature-Dependent Accuracy",
+          "Imp": "6",
+          "Sat": "5",
+          "Litmus Test": "YES — electromagnetic flowmeters are not affected by fluid temperature changes to their flow reading"
+        },
+        {
+          "#": "PR-6",
+          "Statement": "Minimize the likelihood of signal-to-noise degradation below the transit-time detection threshold during low-demand glycol flow in small cooling zones",
+          "Source Constraint": "Minimum Flow Rate Detection",
+          "Imp": "5",
+          "Sat": "5",
+          "Litmus Test": "YES — electromagnetic meters maintain signal quality at lower flow rates (turndown 100:1 vs 10:1 ultrasonic)"
+        },
+        {
+          "#": "PR-7",
+          "Statement": "Minimize the risk of acoustic coupling failure when glycol-to-water ratio shifts outside the validated acoustic impedance range due to uncontrolled top-up or evaporation",
+          "Source Constraint": "Media Limitation",
+          "Imp": "5",
+          "Sat": "4",
+          "Litmus Test": "YES — electromagnetic flowmeters work with any conductive liquid regardless of acoustic properties"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Constraint",
+        "Why Not Applicable"
+      ],
+      "rows": [
+        {
+          "Constraint": "Maximum Medium Temperature (90°C)",
+          "Why Not Applicable": "Brewery glycol operates at 0–30°C, well below threshold"
+        },
+        {
+          "Constraint": "Maximum Operating Pressure (10 bar)",
+          "Why Not Applicable": "Brewery glycol loops operate at 1–3 bar, well below threshold"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result",
+        "Note"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Check": "Litmus test",
+          "Result": "**PASS**",
+          "Note": "All 7 needs disappear with a different technology (electromagnetic or Coriolis)"
+        },
+        {
+          "#": "2",
+          "Check": "Source constraint traceability",
+          "Result": "**PASS**",
+          "Note": "Each constraint exists in 01_product_decomposition; causal mechanism is specific"
+        },
+        {
+          "#": "3",
+          "Check": "Affected market plausibility",
+          "Result": "**PASS**",
+          "Note": "All constraints manifest in brewery glycol cooling context"
+        },
+        {
+          "#": "4",
+          "Check": "Completeness",
+          "Result": "**PASS**",
+          "Note": "5 of 8 constraints generate needs for breweries; 2 excluded with rationale (temp/pressure thresholds never reached); Media Limitation included with low-probability scenario"
+        },
+        {
+          "#": "5",
+          "Check": "No market-level duplicates",
+          "Result": "**PASS**",
+          "Note": "None duplicate Step 06 market needs (JTBD_breweries)"
+        },
+        {
+          "#": "6",
+          "Check": "Importance/satisfaction sanity",
+          "Result": "**PASS**",
+          "Note": "Range 5–7 imp / 3–5 sat; no unrealistic extremes for technology-caused needs"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Feature",
+        "Kano",
+        "Vendor",
+        "Incumbent",
+        "Inc. Tech",
+        "Advantage",
+        "Rationale"
+      ],
+      "rows": [
+        {
+          "Feature": "**Modular Pipe Diameter Variants**",
+          "Kano": "one_dimensional",
+          "Vendor": "6",
+          "Incumbent": "8",
+          "Inc. Tech": "Electromagnetic (E+H Promag)",
+          "Advantage": "**inferior**",
+          "Rationale": "Marquardt offers 4 variants (DN12/14/20/25); mag meter vendors offer DN3–DN300+. However, DN20/DN25 cover >80% of brewery glycol pipe sizes. Gap narrows in practice but incumbent range is objectively broader."
+        },
+        {
+          "Feature": "**Customizable Communication Interface**",
+          "Kano": "must_be",
+          "Vendor": "5",
+          "Incumbent": "8",
+          "Inc. Tech": "Electromagnetic (E+H Promag)",
+          "Advantage": "**inferior**",
+          "Rationale": "Marquardt offers UART/LIN/frequency output — automotive protocols. Brewery PLCs and building controllers expect 4-20 mA or Modbus RTU, which mag meters provide as standard with HART overlay. UART requires custom integration."
+        },
+        {
+          "Feature": "**Customizable Mechanical Interface**",
+          "Kano": "one_dimensional",
+          "Vendor": "7",
+          "Incumbent": "6",
+          "Inc. Tech": "Paddle-wheel (Gems iFT)",
+          "Advantage": "**parity**",
+          "Rationale": "Marquardt offers threaded + plug-in quick-connect. Paddle-wheel sensors are threaded only. Plug-in option reduces OEM installation time but gap is within 1 point ("
+        },
+        {
+          "Feature": "**Low-Energy Battery Mode**",
+          "Kano": "indifferent",
+          "Vendor": "8",
+          "Incumbent": "2",
+          "Inc. Tech": "Electromagnetic (general)",
+          "Advantage": "**superior**",
+          "Rationale": "<5 μA standby enables battery-powered remote monitoring. However, brewery glycol loops have cellar power infrastructure — battery mode is unused in the primary application. Mag meters require 10–20 W continuous. Superior implementation but irrelevant market context."
+        },
+        {
+          "Feature": "**Pre-Calibrated Delivery**",
+          "Kano": "attractive",
+          "Vendor": "8",
+          "Incumbent": "5",
+          "Inc. Tech": "Electromagnetic (E+H Promag)",
+          "Advantage": "**superior**",
+          "Rationale": "Marquardt factory-calibrates to customer's specific glycol/water mixture and flow profile with 100% automated final test. Mag meters ship with generic water calibration; field commissioning by instrumentation technician needed for glycol. Directly addresses need #12 (systematic error from incorrect fluid-type configuration, Opp=11)."
+        },
+        {
+          "Feature": "**KTW/WRAS Drinking Water Approval**",
+          "Kano": "indifferent",
+          "Vendor": "7",
+          "Incumbent": "5",
+          "Inc. Tech": "Paddle-wheel (general)",
+          "Advantage": "**superior**",
+          "Rationale": "KTW/WRAS certification enables deployment in potable water circuits. For the primary brewery application (glycol cooling), drinking water approval is irrelevant. Relevant only for the secondary water intake metering position (L4.8.4.1)."
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result",
+        "Note"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Check": "Vendor bias",
+          "Result": "**PASS**",
+          "Note": "3 superior, 1 parity, 2 inferior — balanced distribution; no systematic inflation"
+        },
+        {
+          "#": "2",
+          "Check": "Anti-vendor bias",
+          "Result": "**PASS**",
+          "Note": "2 inferior justified by specific protocol/size-range gaps vs. established industrial standards"
+        },
+        {
+          "#": "3",
+          "Check": "Straw-man check",
+          "Result": "**PASS**",
+          "Note": "Best incumbent is E+H Promag (market leader in process flow measurement) and Gems iFT (representative paddle-wheel), not low-end comparisons"
+        },
+        {
+          "#": "4",
+          "Check": "Advantage arithmetic",
+          "Result": "**PASS**",
+          "Note": "All gap calculations verified: superior requires >1pt gap vendor-over-incumbent; inferior requires >1pt gap incumbent-over-vendor; parity requires"
+        },
+        {
+          "#": "5",
+          "Check": "Kano-score consistency",
+          "Result": "**PASS**",
+          "Note": "Must_be (Comm Interface): both scores ≥ 5 ✓; Attractive (Pre-Calibrated): vendor > incumbent ✓"
+        },
+        {
+          "#": "6",
+          "Check": "Rationale specificity",
+          "Result": "**PASS**",
+          "Note": "Each rationale references concrete specs (DN sizes, protocol names, power consumption figures)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Dimension",
+        "Marquardt Advantage",
+        "Marquardt Disadvantage"
+      ],
+      "rows": [
+        {
+          "Dimension": "**Pre-Calibrated Delivery**",
+          "Marquardt Advantage": "Eliminates field commissioning error — biggest craft brewery pain point",
+          "Marquardt Disadvantage": "—"
+        },
+        {
+          "Dimension": "**Battery Mode**",
+          "Marquardt Advantage": "Enables edge use cases (outdoor hop farm, remote lagering)",
+          "Marquardt Disadvantage": "Irrelevant for primary cellar application"
+        },
+        {
+          "Dimension": "**Communication Protocol**",
+          "Marquardt Advantage": "—",
+          "Marquardt Disadvantage": "UART/LIN not industrial standard; breweries need 4-20 mA or Modbus"
+        },
+        {
+          "Dimension": "**Pipe Size Range**",
+          "Marquardt Advantage": "DN20/25 covers primary brewery glycol",
+          "Marquardt Disadvantage": "No DN50+ for large production brewery mains"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "feature_market_fit",
+      "naics_code": "312120",
+      "naics_title": "Breweries",
+      "market_name": "Breweries",
+      "product_name": "Ultrasonic Flow Sensor",
+      "vendor_name": "Marquardt",
+      "technology_class": "Ultrasonic Transit-Time Flow Measurement",
+      "step_09_tech_feature_market_fit": {
+        "n_features": 7,
+        "n_markets": 1,
+        "entries": [
+          {
+            "feature_name": "Transit-Time Flow Measurement",
+            "market_name": "Breweries",
+            "naics_code": "312120",
+            "kano_class": "must_be",
+            "fit_score_time": 5,
+            "fit_score_cost": 6,
+            "fit_score_safety": 4,
+            "fit_score_reliability": 8,
+            "fit_score_skill": 4,
+            "fit_score_stress": 5,
+            "fit_score_pain": 6,
+            "fit_score_confidence": 7,
+            "fit_score_delight": 3,
+            "overall_fit": 5.33,
+            "rationale": "Directly delivers the commodity FP — measuring glycol flow rate is the reason breweries buy a flow sensor. Absence = no product. Primary drivers: Reliability (8) — replaces manual guesswork; Confidence (7) — quantitative data vs. visual estimation. Grounded in needs #5 (Opp=16) and #1 (Opp=12). Must_be because every flowmeter technology provides this."
+          },
+          {
+            "feature_name": "Integrated Temperature Sensing",
+            "market_name": "Breweries",
+            "naics_code": "312120",
+            "kano_class": "attractive",
+            "fit_score_time": 6,
+            "fit_score_cost": 7,
+            "fit_score_safety": 3,
+            "fit_score_reliability": 6,
+            "fit_score_skill": 5,
+            "fit_score_stress": 5,
+            "fit_score_pain": 6,
+            "fit_score_confidence": 7,
+            "fit_score_delight": 7,
+            "overall_fit": 5.78,
+            "rationale": "Breweries need flow + temperature for thermal energy calculation (kW = flow x delta-T x Cp). Most flowmeters require a separate probe — integration is genuinely unexpected. Primary drivers: Cost (7) — eliminates separate probe + wiring; Delight (7) — craft brewers find integration surprising. Not must_be because incumbents don't include it."
+          },
+          {
+            "feature_name": "Zero Pressure Drop Flow Path",
+            "market_name": "Breweries",
+            "naics_code": "312120",
+            "kano_class": "one_dimensional",
+            "fit_score_time": 2,
+            "fit_score_cost": 7,
+            "fit_score_safety": 2,
+            "fit_score_reliability": 5,
+            "fit_score_skill": 3,
+            "fit_score_stress": 3,
+            "fit_score_pain": 4,
+            "fit_score_confidence": 4,
+            "fit_score_delight": 3,
+            "overall_fit": 3.67,
+            "rationale": "A 20-fermenter brewery has 20+ measurement points. Cumulative pressure drop from restrictive sensors raises pumping cost. Less restriction = proportionally less energy waste (linear). Primary driver: Cost (7) — eliminated head-loss penalty. Grounded in need #20 (Opp=7)."
+          },
+          {
+            "feature_name": "No Moving Parts",
+            "market_name": "Breweries",
+            "naics_code": "312120",
+            "kano_class": "attractive",
+            "fit_score_time": 7,
+            "fit_score_cost": 8,
+            "fit_score_safety": 4,
+            "fit_score_reliability": 9,
+            "fit_score_skill": 7,
+            "fit_score_stress": 7,
+            "fit_score_pain": 8,
+            "fit_score_confidence": 7,
+            "fit_score_delight": 6,
+            "overall_fit": 7.0,
+            "rationale": "Craft breweries replace paddle-wheel bearings every 6-18 months in glycol. Solid-state measurement with no maintenance is genuinely delightful — most operators don't know this is possible. Primary drivers: Reliability (9) — eliminates dominant failure mode; Pain (8) — eliminates bearing replacement; Cost (8) — no parts/labor. Grounded in needs #17 (Opp=10) and #19 (Opp=7)."
+          },
+          {
+            "feature_name": "Bidirectional Flow Detection",
+            "market_name": "Breweries",
+            "naics_code": "312120",
+            "kano_class": "indifferent",
+            "fit_score_time": 2,
+            "fit_score_cost": 2,
+            "fit_score_safety": 2,
+            "fit_score_reliability": 3,
+            "fit_score_skill": 1,
+            "fit_score_stress": 2,
+            "fit_score_pain": 1,
+            "fit_score_confidence": 2,
+            "fit_score_delight": 2,
+            "overall_fit": 1.89,
+            "rationale": "Brewery glycol loops are unidirectional. Backflow events are rare and inconsequential. No backflow-related needs appear in the 24 error statements from JTBD analysis. All scores 1-3 per indifferent classification rules."
+          },
+          {
+            "feature_name": "Digital Anomaly Detection",
+            "market_name": "Breweries",
+            "naics_code": "312120",
+            "kano_class": "attractive",
+            "fit_score_time": 7,
+            "fit_score_cost": 6,
+            "fit_score_safety": 6,
+            "fit_score_reliability": 8,
+            "fit_score_skill": 6,
+            "fit_score_stress": 8,
+            "fit_score_pain": 7,
+            "fit_score_confidence": 8,
+            "fit_score_delight": 7,
+            "overall_fit": 7.0,
+            "rationale": "Detects bubbles, empty pipes, glycol concentration changes — addresses top brewery pain points. Directly serves needs #5 (jacket blockage, Opp=16), #4 (air bubble false readings, Opp=11), #24 (late excursion discovery, Opp=15). Primary drivers: Stress (8) — reduces hidden-failure anxiety during 2-4 week fermentation; Confidence (8) — diagnostic data builds trust. Attractive because legacy brewery monitoring has no automated anomaly detection."
+          },
+          {
+            "feature_name": "Real-Time Compensation Algorithms",
+            "market_name": "Breweries",
+            "naics_code": "312120",
+            "kano_class": "one_dimensional",
+            "fit_score_time": 3,
+            "fit_score_cost": 4,
+            "fit_score_safety": 3,
+            "fit_score_reliability": 7,
+            "fit_score_skill": 5,
+            "fit_score_stress": 4,
+            "fit_score_pain": 4,
+            "fit_score_confidence": 7,
+            "fit_score_delight": 3,
+            "overall_fit": 4.44,
+            "rationale": "Compensates for glycol concentration fluctuations (25-40% propylene glycol), temperature, and viscosity. Better compensation = proportionally better accuracy (linear). Primary drivers: Reliability (7) — addresses need #2 (glycol concentration accuracy, Opp=13); Confidence (7) — operators trust compensated readings. One_dimensional because benefit scales linearly."
+          }
+        ]
+      },
+      "step_10_product_related_needs": {
+        "n_needs": 7,
+        "technology_class": "Ultrasonic Transit-Time Flow Measurement",
+        "entries": [
+          {
+            "statement": "Minimize the likelihood of false flow readings when air entrainment exceeds 2% volume during glycol system refill or valve-switching events",
+            "source_constraint": "Air Bubble Tolerance",
+            "affected_markets": [
+              "Breweries"
+            ],
+            "importance": 7,
+            "satisfaction_current": 4
+          },
+          {
+            "statement": "Minimize the time to recover valid flow measurement after transient air entrainment events dissipate from the glycol circuit",
+            "source_constraint": "Air Bubble Tolerance",
+            "affected_markets": [
+              "Breweries"
+            ],
+            "importance": 6,
+            "satisfaction_current": 3
+          },
+          {
+            "statement": "Minimize the measurement accuracy degradation from insufficient straight pipe run in space-constrained brewery glycol manifolds with elbows and T-junctions within 5-10 DN upstream",
+            "source_constraint": "Minimum Straight Pipe Run",
+            "affected_markets": [
+              "Breweries"
+            ],
+            "importance": 6,
+            "satisfaction_current": 4
+          },
+          {
+            "statement": "Minimize the duration of measurement blackout caused by partial pipe drainage during glycol circuit maintenance",
+            "source_constraint": "Pipe Full Condition",
+            "affected_markets": [
+              "Breweries"
+            ],
+            "importance": 5,
+            "satisfaction_current": 3
+          },
+          {
+            "statement": "Minimize the transient measurement error during crash-cooling sequences where glycol temperature changes exceed the compensation algorithm response rate at >2 C/min",
+            "source_constraint": "Temperature-Dependent Accuracy",
+            "affected_markets": [
+              "Breweries"
+            ],
+            "importance": 6,
+            "satisfaction_current": 5
+          },
+          {
+            "statement": "Minimize the likelihood of signal-to-noise degradation below the transit-time detection threshold during low-demand glycol flow in small cooling zones",
+            "source_constraint": "Minimum Flow Rate Detection",
+            "affected_markets": [
+              "Breweries"
+            ],
+            "importance": 5,
+            "satisfaction_current": 5
+          },
+          {
+            "statement": "Minimize the risk of acoustic coupling failure when glycol-to-water ratio shifts outside the validated acoustic impedance range due to uncontrolled top-up or evaporation",
+            "source_constraint": "Media Limitation",
+            "affected_markets": [
+              "Breweries"
+            ],
+            "importance": 5,
+            "satisfaction_current": 4
+          }
+        ],
+        "constraints_not_applicable": [
+          {
+            "constraint": "Maximum Medium Temperature",
+            "reason": "Brewery glycol operates at 0-30 C, well below 90 C threshold"
+          },
+          {
+            "constraint": "Maximum Operating Pressure",
+            "reason": "Brewery glycol loops operate at 1-3 bar, well below 10 bar threshold"
+          }
+        ]
+      },
+      "step_11_vendor_feature_market_fit": {
+        "vendor_name": "Marquardt",
+        "vendor_product": "US Flow Sensor (DN20 serial)",
+        "n_comparisons": 6,
+        "entries": [
+          {
+            "feature_name": "Modular Pipe Diameter Variants",
+            "feature_description": "Serve multiple pipe sizes via interchangeable flow bodies sharing a common electronics platform",
+            "market_name": "Breweries",
+            "naics_code": "312120",
+            "vendor_score": 6,
+            "best_incumbent_score": 8,
+            "best_incumbent_technology": "Electromagnetic Flow Measurement",
+            "advantage": "inferior",
+            "kano_class": "one_dimensional",
+            "rationale": "Marquardt offers 4 variants (DN12/14/20/25); E+H Promag offers DN3-DN300+. DN20/DN25 cover >80% of brewery glycol pipe sizes, but incumbent range is objectively broader for edge cases (large mains, small sample lines)."
+          },
+          {
+            "feature_name": "Customizable Communication Interface",
+            "feature_description": "Support UART, LIN, and frequency output protocols selectable at order level",
+            "market_name": "Breweries",
+            "naics_code": "312120",
+            "vendor_score": 5,
+            "best_incumbent_score": 8,
+            "best_incumbent_technology": "Electromagnetic Flow Measurement",
+            "advantage": "inferior",
+            "kano_class": "must_be",
+            "rationale": "Marquardt offers UART/LIN/frequency — automotive protocols. Brewery PLCs and BMS controllers expect 4-20 mA analog or Modbus RTU digital bus. E+H Promag provides 4-20 mA + HART + Modbus as standard. UART requires custom integration work."
+          },
+          {
+            "feature_name": "Customizable Mechanical Interface",
+            "feature_description": "Accept threaded or plug-in pipe connections for flexible installation",
+            "market_name": "Breweries",
+            "naics_code": "312120",
+            "vendor_score": 7,
+            "best_incumbent_score": 6,
+            "best_incumbent_technology": "Paddle-Wheel Flow Sensor",
+            "advantage": "parity",
+            "kano_class": "one_dimensional",
+            "rationale": "Marquardt offers threaded + plug-in quick-connect. Paddle-wheel sensors (Gems iFT, Badger) are threaded only. Plug-in reduces OEM installation time. Gap is within 1 point — parity."
+          },
+          {
+            "feature_name": "Low-Energy Battery Mode",
+            "feature_description": "Operate at ultra-low current consumption (<5 uA) for battery-powered installations",
+            "market_name": "Breweries",
+            "naics_code": "312120",
+            "vendor_score": 8,
+            "best_incumbent_score": 2,
+            "best_incumbent_technology": "Electromagnetic Flow Measurement",
+            "advantage": "superior",
+            "kano_class": "indifferent",
+            "rationale": "Marquardt achieves <5 uA standby vs. mag meter 10-20 W continuous. Superior implementation, but brewery glycol loops have cellar power infrastructure — battery mode is unused in the primary application. Niche relevance for outdoor glycol runs or remote lagering caves only."
+          },
+          {
+            "feature_name": "Pre-Calibrated Delivery",
+            "feature_description": "Ship fully calibrated and tested to customer-specific medium and flow profile",
+            "market_name": "Breweries",
+            "naics_code": "312120",
+            "vendor_score": 8,
+            "best_incumbent_score": 5,
+            "best_incumbent_technology": "Electromagnetic Flow Measurement",
+            "advantage": "superior",
+            "kano_class": "attractive",
+            "rationale": "Marquardt factory-calibrates to customer's specific glycol/water mixture with 100% automated final test — eliminates field calibration. E+H Promag ships with generic water calibration; field commissioning by instrumentation technician needed for glycol. Paddle-wheel sensors are uncalibrated. Directly addresses need #12 (systematic error from incorrect fluid-type configuration, Opp=11)."
+          },
+          {
+            "feature_name": "KTW/WRAS Drinking Water Approval",
+            "feature_description": "Certify wetted parts for potable water contact per KTW and WRAS standards",
+            "market_name": "Breweries",
+            "naics_code": "312120",
+            "vendor_score": 7,
+            "best_incumbent_score": 5,
+            "best_incumbent_technology": "Paddle-Wheel Flow Sensor",
+            "advantage": "superior",
+            "kano_class": "indifferent",
+            "rationale": "KTW/WRAS certification is irrelevant for the primary glycol cooling application. Relevant only for the secondary water intake metering position (VN L4.8.4.1). Most paddle-wheel sensors lack formal drinking water certification. Superior on paper, but market context renders it indifferent."
+          }
+        ],
+        "advantage_distribution": {
+          "superior": 3,
+          "parity": 1,
+          "inferior": 2
+        }
+      },
+      "entities_produced": {
+        "nodes": [
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Minimize the likelihood of false flow readings when air entrainment exceeds 2% volume during glycol sys",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "product_related": true,
+              "source_constraint": "Air Bubble Tolerance",
+              "importance": 7,
+              "satisfaction_current": 4
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Minimize the time to recover valid flow measurement after transient air entrainment events dissipate f",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "product_related": true,
+              "source_constraint": "Air Bubble Tolerance",
+              "importance": 6,
+              "satisfaction_current": 3
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Minimize the measurement accuracy degradation from insufficient straight pipe run in space-constrained",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "product_related": true,
+              "source_constraint": "Minimum Straight Pipe Run",
+              "importance": 6,
+              "satisfaction_current": 4
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Minimize the duration of measurement blackout caused by partial pipe drainage during glycol circuit mai",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "product_related": true,
+              "source_constraint": "Pipe Full Condition",
+              "importance": 5,
+              "satisfaction_current": 3
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Minimize the transient measurement error during crash-cooling sequences where glycol temperature changes",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "product_related": true,
+              "source_constraint": "Temperature-Dependent Accuracy",
+              "importance": 6,
+              "satisfaction_current": 5
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Minimize the likelihood of signal-to-noise degradation below the transit-time detection threshold durin",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "product_related": true,
+              "source_constraint": "Minimum Flow Rate Detection",
+              "importance": 5,
+              "satisfaction_current": 5
+            }
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "Minimize the risk of acoustic coupling failure when glycol-to-water ratio shifts outside the validated",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "product_related": true,
+              "source_constraint": "Media Limitation",
+              "importance": 5,
+              "satisfaction_current": 4
+            }
+          }
+        ],
+        "relationships": [
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Transit-Time Flow Measurement",
+            "target": "Market:312120",
+            "properties": {
+              "kano_class": "must_be",
+              "overall_fit": 5.33,
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Integrated Temperature Sensing",
+            "target": "Market:312120",
+            "properties": {
+              "kano_class": "attractive",
+              "overall_fit": 5.78,
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Zero Pressure Drop Flow Path",
+            "target": "Market:312120",
+            "properties": {
+              "kano_class": "one_dimensional",
+              "overall_fit": 3.67,
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:No Moving Parts",
+            "target": "Market:312120",
+            "properties": {
+              "kano_class": "attractive",
+              "overall_fit": 7.0,
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Bidirectional Flow Detection",
+            "target": "Market:312120",
+            "properties": {
+              "kano_class": "indifferent",
+              "overall_fit": 1.89,
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Digital Anomaly Detection",
+            "target": "Market:312120",
+            "properties": {
+              "kano_class": "attractive",
+              "overall_fit": 7.0,
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Real-Time Compensation Algorithms",
+            "target": "Market:312120",
+            "properties": {
+              "kano_class": "one_dimensional",
+              "overall_fit": 4.44,
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "generates_need",
+            "source": "Constraint:Air Bubble Tolerance",
+            "target": "ErrorStatement:PR-1"
+          },
+          {
+            "type": "generates_need",
+            "source": "Constraint:Air Bubble Tolerance",
+            "target": "ErrorStatement:PR-2"
+          },
+          {
+            "type": "generates_need",
+            "source": "Constraint:Minimum Straight Pipe Run",
+            "target": "ErrorStatement:PR-3"
+          },
+          {
+            "type": "generates_need",
+            "source": "Constraint:Pipe Full Condition",
+            "target": "ErrorStatement:PR-4"
+          },
+          {
+            "type": "generates_need",
+            "source": "Constraint:Temperature-Dependent Accuracy",
+            "target": "ErrorStatement:PR-5"
+          },
+          {
+            "type": "generates_need",
+            "source": "Constraint:Minimum Flow Rate Detection",
+            "target": "ErrorStatement:PR-6"
+          },
+          {
+            "type": "generates_need",
+            "source": "Constraint:Media Limitation",
+            "target": "ErrorStatement:PR-7"
+          },
+          {
+            "type": "has_product_need",
+            "source": "NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement",
+            "target": "ErrorStatement:PR-1"
+          },
+          {
+            "type": "has_product_need",
+            "source": "NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement",
+            "target": "ErrorStatement:PR-2"
+          },
+          {
+            "type": "has_product_need",
+            "source": "NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement",
+            "target": "ErrorStatement:PR-3"
+          },
+          {
+            "type": "has_product_need",
+            "source": "NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement",
+            "target": "ErrorStatement:PR-4"
+          },
+          {
+            "type": "has_product_need",
+            "source": "NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement",
+            "target": "ErrorStatement:PR-5"
+          },
+          {
+            "type": "has_product_need",
+            "source": "NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement",
+            "target": "ErrorStatement:PR-6"
+          },
+          {
+            "type": "has_product_need",
+            "source": "NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement",
+            "target": "ErrorStatement:PR-7"
+          },
+          {
+            "type": "applies_to_market",
+            "source": "ErrorStatement:PR-1",
+            "target": "Market:312120"
+          },
+          {
+            "type": "applies_to_market",
+            "source": "ErrorStatement:PR-2",
+            "target": "Market:312120"
+          },
+          {
+            "type": "applies_to_market",
+            "source": "ErrorStatement:PR-3",
+            "target": "Market:312120"
+          },
+          {
+            "type": "applies_to_market",
+            "source": "ErrorStatement:PR-4",
+            "target": "Market:312120"
+          },
+          {
+            "type": "applies_to_market",
+            "source": "ErrorStatement:PR-5",
+            "target": "Market:312120"
+          },
+          {
+            "type": "applies_to_market",
+            "source": "ErrorStatement:PR-6",
+            "target": "Market:312120"
+          },
+          {
+            "type": "applies_to_market",
+            "source": "ErrorStatement:PR-7",
+            "target": "Market:312120"
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Modular Pipe Diameter Variants",
+            "target": "Market:312120",
+            "properties": {
+              "kano_class": "one_dimensional",
+              "vendor_score": 6,
+              "best_incumbent_score": 8,
+              "advantage": "inferior",
+              "feature_scope": "vendor"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Customizable Communication Interface",
+            "target": "Market:312120",
+            "properties": {
+              "kano_class": "must_be",
+              "vendor_score": 5,
+              "best_incumbent_score": 8,
+              "advantage": "inferior",
+              "feature_scope": "vendor"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Customizable Mechanical Interface",
+            "target": "Market:312120",
+            "properties": {
+              "kano_class": "one_dimensional",
+              "vendor_score": 7,
+              "best_incumbent_score": 6,
+              "advantage": "parity",
+              "feature_scope": "vendor"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Low-Energy Battery Mode",
+            "target": "Market:312120",
+            "properties": {
+              "kano_class": "indifferent",
+              "vendor_score": 8,
+              "best_incumbent_score": 2,
+              "advantage": "superior",
+              "feature_scope": "vendor"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Pre-Calibrated Delivery",
+            "target": "Market:312120",
+            "properties": {
+              "kano_class": "attractive",
+              "vendor_score": 8,
+              "best_incumbent_score": 5,
+              "advantage": "superior",
+              "feature_scope": "vendor"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:KTW/WRAS Drinking Water Approval",
+            "target": "Market:312120",
+            "properties": {
+              "kano_class": "indifferent",
+              "vendor_score": 7,
+              "best_incumbent_score": 5,
+              "advantage": "superior",
+              "feature_scope": "vendor"
+            }
+          },
+          {
+            "type": "has_feature",
+            "source": "Product:Marquardt US Flow Sensor",
+            "target": "Feature:Modular Pipe Diameter Variants"
+          },
+          {
+            "type": "has_feature",
+            "source": "Product:Marquardt US Flow Sensor",
+            "target": "Feature:Customizable Communication Interface"
+          },
+          {
+            "type": "has_feature",
+            "source": "Product:Marquardt US Flow Sensor",
+            "target": "Feature:Customizable Mechanical Interface"
+          },
+          {
+            "type": "has_feature",
+            "source": "Product:Marquardt US Flow Sensor",
+            "target": "Feature:Low-Energy Battery Mode"
+          },
+          {
+            "type": "has_feature",
+            "source": "Product:Marquardt US Flow Sensor",
+            "target": "Feature:Pre-Calibrated Delivery"
+          },
+          {
+            "type": "has_feature",
+            "source": "Product:Marquardt US Flow Sensor",
+            "target": "Feature:KTW/WRAS Drinking Water Approval"
+          }
+        ]
+      }
+    }
+  ],
+  "has_bom": true,
+  "naics_sector_type": "manufacturing"
+}

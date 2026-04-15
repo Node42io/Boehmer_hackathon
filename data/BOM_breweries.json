@@ -1,0 +1,1101 @@
+{
+  "id": "BOM_breweries",
+  "title": "Product BOM Decomposition — NAICS 312120",
+  "type": "product_bom",
+  "market_slug": "breweries",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Output Types Covered",
+      "content": "| ID | Output Type | L5 Product |\n|---|---|---|\n| OT-1 | Lager / Pilsner | Light-colored, bottom-fermented, filtered, carbonated packaged beer |\n| OT-2 | Ale (IPA, Pale, Amber) | Top-fermented, varied hop profile, packaged |\n| OT-3 | Stout / Porter | Dark, roasted-malt dominant, top-fermented |\n| OT-4 | Wheat Beer | ≥50% wheat malt, top-fermented, hazy or filtered |\n| OT-5 | Non-alcoholic Beer | Dealcoholized or arrested-fermentation malt beverage |\n| OT-6 | Hard Seltzer / FMB | Fermented sugar base, flavored, carbonated, low-calorie |\n| OT-7 | Sour / Wild Ale | Mixed fermentation, acid-dominant, barrel/foudre aged |\n| OT-8 | Seasonal / Specialty | Base style + seasonal ingredient module (pumpkin, spice, Märzen, radler) |\n\n---"
+    },
+    {
+      "title": "L4 Subsystem Matrix",
+      "content": "| L4 Subsystem | Function | OT-1 | OT-2 | OT-3 | OT-4 | OT-5 | OT-6 | OT-7 | OT-8 |\n|---|---|---|---|---|---|---|---|---|---|\n| **L4.1 Fermented Liquid Assembly** | Core liquid: water + fermentables + hops + yeast metabolites | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n| **L4.2 Carbonation Module** | CO₂ dissolved in finished product | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n| **L4.3 Stabilization & Clarity** | Filtration, fining, antioxidant treatment | ✓ | ✓ | ✓ | (hazy) | ✓ | ✓ | (minimal) | ✓ |\n| **L4.4 Primary Packaging Assembly** | Container + closure reaching the consumer | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n| **L4.5 Label & Secondary Packaging** | Brand presentation + transport unit | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n\n---"
+    },
+    {
+      "title": "L4 → L0 Decomposition (Generic — Cross-Output-Type Reference)",
+      "content": "### L4.1 — Fermented Liquid Assembly\n\n```\nL4.1 Fermented Liquid Assembly\n├── L3.1  Base Water (brewing liquor — L0)\n├── L3.2  Fermentable Substrate (malt, adjuncts, sugar)\n├── L3.3  Bittering & Aromatic Agent (hops / derivatives)\n├── L3.4  Fermentation Agent (yeast)\n└── L3.5  Adjunct / Flavor Additions (stop at L1)\n```\n\n#### L3.1 Base Water (L0)\n\nWater = 90–94% of finished beer by weight. No substitutable alternative at this position — stop at L0. Ion-profile additives (gypsum, CaCl₂, lactic acid) are process inputs, not product BOM constituents.\n\n**Sensor relevance:** Brewing liquor flow through mash tun, wort copper, and CIP circuits = primary Marquardt measurement window (VN L6.7–L6.8).\n\n#### L3.2 Fermentable Substrate — Alternatives\n\n| Alternative | Share | Trend | OT | Confidence | Source |\n|---|---|---|---|---|---|\n| Barley malt (2-row / 6-row base malt) | 62% | Stable | All beer OTs | HIGH | Brewers Association 2024 |\n| Corn adjunct (flakes, grits, syrup) | 10% | Stable | OT-1 macro lager | HIGH | USDA |\n| Wheat malt | 8% | ↑ Growing | OT-4, OT-2 hefeweizen | HIGH | BA 2024 |\n| Specialty / crystal / roasted malt (added to base) | 8% | Stable | OT-3 (heavy), OT-2 | HIGH | BA 2024 |\n| Rice adjunct | 5% | Stable | OT-1 (Anheuser-Busch profile) | HIGH | USDA |\n| Sugar (sucrose / dextrose) | 5% | ↑ Growing | OT-5, OT-6 | HIGH | BA 2024 |\n| Alternative grains (oats, rye, sorghum, millet) | 2% | ↑ Emerging | OT-2, gluten-free | MEDIUM | analyst estimate |\n\nSum 100%. Shares reflect volume of fermentable material across total US beer production.\n\n#### L3.3 Bittering & Aromatic Agent — Alternatives\n\n| Alternative | Share | Trend | Confidence | Source |\n|---|---|---|---|---|\n| Hop pellets T-90 (compressed whole-leaf) | 55% | ↓ Slight decline | HIGH | Barth-Haas Hop Report 2024 |\n| Hop extracts (CO₂ extract / isomerized alpha-acid) | 28% | ↑ Growing | HIGH | Barth-Haas 2024 |\n| Whole cone hops (fresh / dried) | 10% | Stable | MEDIUM | craft segment data |\n| Cryo / LupuLN₂ hop products (concentrated lupulin) | 5% | ↑ Emerging | MEDIUM | analyst estimate |\n| Non-hop bittering agents (gentian, wormwood, grains of paradise) | 2% | Stable niche | LOW | — |\n\nSum 100%.\n\n**L2 → L0 for hop extract path:** Hop flower (L1) → alpha-acid resin (L0 organic compound). Stop here; no further commercially relevant alternatives.\n\n#### L3.4 Fermentation Agent — Alternatives\n\n| Alternative | Share | Trend | Confidence |\n|---|---|---|---|\n| *Saccharomyces cerevisiae* (ale, top-fermenting) | 45% | Stable | HIGH |\n| *Saccharomyces pastorianus* (lager, bottom-fermenting) | 45% | Stable | HIGH |\n| *Brettanomyces* / mixed-culture (sour / wild ale) | 5% | ↑ Growing | MEDIUM |\n| Kveik strains (Norwegian farmhouse) | 3% | ↑ Emerging | MEDIUM |\n| Non-*Saccharomyces* / adjunct yeast blends | 2% | ↑ Emerging | LOW |\n\nSum 100%. Lager dominates by volume; ale by SKU count.\n\n#### L3.5 Adjunct / Flavor Additions — Stop at L1\n\nFruit purées, lactose, vanilla, coffee, spices, flavoring extracts: commodity ingredients. No single alternative drives structural BOM change. Stop at L1.\n\n---\n\n### L4.2 — Carbonation Module (L0)\n\nCO₂ dissolved into beer post-fermentation. Alternatives at **source supply** only:\n\n| Alternative | Share | Trend | Confidence | Source |\n|---|---|---|---|---|\n| Industrial bulk CO₂ (truck delivery, liquid) | 50% | ↓ Declining | HIGH | industry reports 2024 |\n| Recovered fermentation CO₂ (on-site capture + purification) | 45% | ↑ Growing | HIGH | CO₂ recovery ROI reports 2024 |\n| Nitrogen blend (widget / Guinness-type stout dispensing) | 5% | Stable | HIGH | — |\n\nSum 100%. Recovery trend driven by CO₂ cost spikes (post-2022) and sustainability mandates.\n\n**Sensor relevance:** CO₂ recovery systems require precise flow control on carbonation dosing lines — secondary Marquardt opportunity.\n\n---\n\n### L4.3 — Stabilization & Clarity\n\n```\nL4.3 Stabilization & Clarity\n├── L3.6  Filtration\n├── L3.7  Fining Agent (L0 — chemical substance)\n└── L3.8  Antioxidant Treatment (SO₂, ascorbic acid — stop at L0)\n```\n\n#### L3.6 Filtration — Alternatives\n\n| Alternative | Share | Trend | Confidence | Source |\n|---|---|---|---|---|\n| Kieselguhr (diatomaceous earth) depth filtration | 45% | ↓ Declining | HIGH | Brewing industry reports 2024 |\n| Sheet / cartridge filtration (cellulose or perlite) | 25% | Stable | HIGH | — |\n| Cross-flow / membrane filtration (ceramic or polymer) | 20% | ↑ Growing | HIGH | GEA / Pall Corp product data |\n| Centrifugal separation (no filter media) | 8% | ↑ Growing | HIGH | Alfa Laval/GEA market data |\n| None — hazy / unfiltered (craft segment) | 2% | ↑ Growing | MEDIUM | Brewers Association craft trends |\n\nSum 100%. Kieselguhr declining due to waste disposal regulations and health concerns (silica dust).\n\n#### L3.7 Fining Agent (L0) — Alternatives\n\n| Alternative | Share | Confidence |\n|---|---|---|\n| Isinglass (fish collagen, post-fermentation) | 35% | MEDIUM |\n| Bentonite (montmorillonite clay) | 30% | HIGH |\n| Silica gel (kieselsol, colloidal) | 20% | HIGH |\n| Carrageenan / Irish moss (whirlpool addition) | 10% | HIGH |\n| None (centrifuge / membrane sufficient) | 5% | MEDIUM |\n\nSum 100%.\n\n---\n\n### L4.4 — Primary Packaging Assembly\n\n```\nL4.4 Primary Packaging Assembly\n├── L3.9  Primary Container\n├── L3.10 Closure / Seal\n└── L3.11 Label / Print Layer (stop at L1)\n```\n\n#### L3.9 Primary Container — Alternatives\n\n| Alternative | Share | Trend | Confidence | Source |\n|---|---|---|---|---|\n| Aluminum can (12 oz / 16 oz, 2-piece drawn) | 60% | ↑ Growing | HIGH | Beer Institute 2024 |\n| Glass bottle (12 oz long-neck / 22 oz) | 25% | ↓ Declining | HIGH | Beer Institute 2024 |\n| Stainless keg (1/2-bbl, 1/4-bbl, 1/6-bbl) | 13% | Stable | HIGH | NBWA 2024 |\n| PET bottle (export / single-serve plastic) | 1% | Stable | MEDIUM | — |\n| Bag-in-box / bulk bag (export, event) | 1% | Stable | LOW | — |\n\nSum 100%.\n\n**L2 → L0 for aluminum can path:**\n- L2: Can body + can end assembly\n- L1: Drawn aluminum can body; stamped aluminum end (B64 / CDL profile)\n- L0: Aluminum alloy sheet (3004-H19 body; 5182-H19 end) — stop at L0\n\n#### L3.10 Closure / Seal — Alternatives\n\n| Alternative | Share | Trend | Confidence |\n|---|---|---|---|\n| Aluminum can lid with pull-tab (B64 / CDL) | 60% | ↑ | HIGH |\n| Crown cap (26mm / 29mm, tin-coated steel) | 25% | ↓ | HIGH |\n| Keg spear + coupler port (D-type US, S-type Euro) | 13% | Stable | HIGH |\n| Swing-top / Bügelverschluss (specialty / export) | 1% | Stable | MEDIUM |\n| Screw cap (PET) | 1% | Stable | MEDIUM |\n\nSum 100%.\n\n---\n\n### L4.5 — Label & Secondary Packaging — Stop at L1\n\n- Paper / pressure-sensitive film label: commodity, stop at L1.\n- Corrugated cardboard 4- or 6-pack carrier / 24-pack case: commodity, stop at L1.\n- Shrink sleeve (PET film): commodity, stop at L1.\n\n---"
+    },
+    {
+      "title": "Marquardt Sensor Position Note",
+      "content": "**The Marquardt sensor IS NOT a beer BOM constituent.** It is process equipment, positioned in the VN (how beer is made), not in the product BOM (what beer is made of).\n\n| VN Position | L6 System | What Sensor Measures | Connection to BOM |\n|---|---|---|---|\n| **Primary** | L6.6 Glycol Cooling | Glycol/water mass flow to fermenter jackets and bright tanks | Controls temperature → yeast metabolite profile → L3.4 quality |\n| **Secondary** | L6.7 CIP & Sanitation | Water + caustic + acid flow through vessel circuits | Vessel sterility → L4.3 stability |\n| **Tertiary** | L6.8 Water Treatment | Brewing liquor flow to mash tun and kettle | L3.1 water volume / recipe accuracy |\n\n**Critical failure mode:** Glycol flow loss → temperature excursion during fermentation → diacetyl, acetaldehyde, or ester off-flavor in L4.1 → full batch dump (typical loss: $15–80k per fermenter-batch at mid-to-large craft scale). Sensor is the only non-contact, maintenance-free way to detect glycol circuit failures before batch damage occurs.\n\n---"
+    },
+    {
+      "title": "Per-Output-Type BOM Trees",
+      "content": "> These trees show the specific composition of each output type. Elements that differ materially from the generic cross-output reference above are shown in full. Cross-cutting elements that are identical across all output types (L4.5 label/secondary packaging, standard aluminum can L2 construction) are abbreviated with a note pointing to the generic section.\n\n---\n\n### OT-1: Lager / Pilsner\n\nBottom-fermented, cold-conditioned (4–8 weeks at 0–4 °C), filtered bright. Two sub-variants: (a) macro lager — 20–30% corn or rice adjunct; (b) craft pilsner — all-barley malt. Pale color (3–7 SRM), low IBU (15–25), high carbonation (2.5–2.8 vol CO₂).\n\n```\nOUTPUT TYPE: Lager / Pilsner\n  L4.1 Fermented Liquid Assembly\n    L3.1 Base Water\n      L0  Soft brewing liquor (Ca 40–80 ppm, SO₄ low, Cl moderate — Pilsen/Munich profile)\n    L3.2 Fermentable Substrate\n          — alternatives: 2-row barley base malt (craft pilsner) 45%,\n            2-row + corn adjunct blend (macro lager) 25%,\n            2-row + rice adjunct blend (AB-InBev profile) 20%,\n            6-row barley base (North American macro) 8%,\n            Gluten-free grain base (rice/millet — emerging) 2% [HIGH]\n      L2  Malted grain substrate\n        L1  Malted 2-row barley kernel (modified, diastatic; 2–4 EBC)\n          L0  Barley grain (Hordeum vulgare, 2-row; kilned pale)\n        L1  Corn grits / flakes (gelatinized adjunct path)\n          L0  Dent corn (Zea mays var. indentata, food-grade milling fraction)\n        L1  Rice grits (parboiled / broken adjunct path)\n          L0  Broken milling-grade rice (Oryza sativa)\n    L3.3 Bittering & Aromatic Agent\n          — alternatives: Noble hop pellets T-90 (Saaz, Hallertau, Tettnang) 50%,\n            Isomerized alpha-acid (IAA) liquid extract 30%,\n            Pre-isomerized / RHIA / PIKE kettle-free extract 12%,\n            Whole cone noble hops (contract) 5%,\n            CO₂ supercritical extract (no dry-hop) 3% [HIGH]\n      L2  Hop product\n        L1  Compressed hop pellet T-90 (8 mm, vacuum-sealed foil pouch)\n          L0  Dried hop cone (Humulus lupulus, noble variety; alpha-acid 3–5%)\n    L3.4 Fermentation Agent\n          — alternatives: S. pastorianus Type II / Frohberg strain 65%,\n            S. pastorianus Type I / Saaz strain 25%,\n            S. cerevisiae hybrid lager (warm-tolerant) 7%,\n            Kveik-based lager substitute 3% [HIGH]\n      L1  Liquid yeast slurry (cropped/repitched) or dry pitch\n        L0  Saccharomyces pastorianus culture (2–5 × 10⁶ cells/mL pitching rate)\n    L3.5 Specialty Additions — None (lager = clean profile; L3.5 absent)\n  L4.2 Carbonation Module (2.5–2.8 vol CO₂)\n        — alternatives: Industrial bulk liquid CO₂ 55%,\n          Recovered fermentation CO₂ (on-site capture) 42%,\n          Nitrogen top-up (headspace only) 3% [HIGH]\n    L0  CO₂ gas (food grade, ≥99.9% purity, <50 ppb acetaldehyde)\n  L4.3 Stabilization & Clarity (bright/filtered mandatory for lager)\n    L3.6 Filtration\n          — alternatives: Kieselguhr depth filtration (primary + polishing) 55%,\n            Sheet/cartridge filtration 22%,\n            Cross-flow membrane filtration 15%,\n            Centrifugal disc-stack separator 8% [HIGH]\n      L2  Filter assembly\n        L1  Kieselguhr filter cake (primary filter medium)\n          L0  Diatomaceous earth (amorphous SiO₂, food grade, calcined)\n    L3.7 Fining Agent\n          — alternatives: Silica gel / kieselsol (colloidal SiO₂) 35%,\n            Bentonite (Na-montmorillonite clay) 30%,\n            PVPP (polyvinylpolypyrrolidone — polyphenol removal) 20%,\n            Carrageenan (whirlpool addition) 10%,\n            Isinglass 5% [HIGH]\n      L0  Colloidal silica / Na-montmorillonite / PVPP polymer\n    L3.8 Antioxidant Treatment\n      L0  SO₂ (K₂S₂O₅ potassium metabisulfite) and/or ascorbic acid\n  L4.4 Primary Packaging Assembly\n    L3.9 Primary Container\n          — alternatives: Aluminum can 12 oz 2-piece DWI 65%,\n            Glass bottle 12 oz long-neck (amber) 22%,\n            Stainless steel keg (1/2-bbl US = 15.5 gal) 12%,\n            PET bottle 1% [HIGH]\n      L2  Aluminum can assembly (dominant path)\n        L1  Can body (drawn/ironed, 211 diameter, necked + flanged)\n          L0  Aluminum alloy sheet 3004-H19 (body stock; ~0.099 mm gauge)\n        L1  Can end (B64 or CDL profile, 202 diameter)\n          L0  Aluminum alloy sheet 5182-H19 (end stock; ~0.235 mm gauge)\n      L2  Glass bottle assembly (alternate path)\n        L1  Blown amber glass long-neck 12 oz\n          L0  Soda-lime-silica glass (SiO₂ 70–74%; Fe₂O₃ colorant → amber)\n    L3.10 Closure / Seal\n          — alternatives: Aluminum pull-tab lid (can path) 65%,\n            Crown cap 26mm tin-coated steel + LDPE liner (bottle) 22%,\n            Keg spear + D-type coupler port 12%,\n            Screw cap (PET only) 1% [HIGH]\n      L1  Crown cap (bottle path)\n        L0  Tin-coated low-carbon steel sheet; LDPE plastisol liner\n  L4.5 Label & Secondary Packaging — Stop at L1\n    L1  Pressure-sensitive label (OPP film or paper)\n    L1  4-/6-pack carrier (recyclable corrugated or HDPE ring)\n    L1  24-pack corrugated shipper (B/C flute)\n```\n\n---\n\n### OT-2: Ale (IPA / Pale Ale / Amber Ale)\n\nTop-fermented (15–22 °C), warm-conditioned 1–2 weeks. High hop presence (30–100+ IBU for IPA). Diverse specialty malts. May be hazy (NEIPA) or filtered bright. Dry-hopping is a defining module absent in all other output types except OT-7.\n\n```\nOUTPUT TYPE: Ale (IPA / Pale Ale / Amber Ale)\n  L4.1 Fermented Liquid Assembly\n    L3.1 Base Water\n      L0  Sulfate-forward brewing liquor (Ca 150–200 ppm, SO₄ 200–300 ppm — Burton/London profile)\n    L3.2 Fermentable Substrate\n          — alternatives: 2-row pale malt base 100% malt 55%,\n            2-row base + crystal/caramel malt blend (amber ales; 60–120 EBC) 25%,\n            2-row base + wheat malt ≤20% (haze/body — NEIPA) 10%,\n            2-row base + flaked oats (NEIPA texture) 8%,\n            Brewer's glucose addition (session ale ABV reduction) 2% [HIGH]\n      L2  Malted grain substrate\n        L1  Malted 2-row barley pale malt (2–4 EBC)\n          L0  Barley grain (Hordeum vulgare, 2-row, fully modified)\n        L1  Crystal/caramel malt (amber ales; 60–120 EBC, kilned at green-malt stage)\n          L0  Barley grain (caramelized in-husk during kilning; residual sugars)\n        L1  Flaked oats (NEIPA path; silky texture, haze contribution)\n          L0  Rolled oat grain (Avena sativa, food grade)\n    L3.3 Bittering & Aromatic Agent (HIGH hop rate — distinguishing feature)\n          — alternatives: American pellets T-90 (Citra, Mosaic, Centennial, Cascade) 50%,\n            Cryo/LupuLN₂ pellets (concentrated lupulin) 20%,\n            CO₂ hop extract (kettle bittering) 15%,\n            Whole cone hops (dry-hop specialty) 8%,\n            UK/European pellets T-90 (Fuggles, EKG, Challenger) 5%,\n            Hop oil / terpene extract (aroma only) 2% [HIGH]\n      L2  Hop product (T-90 dominant path)\n        L1  Compressed hop pellet T-90 (8 mm, vacuum-sealed foil)\n          L0  Dried hop cone (Humulus lupulus, American high-alpha/aroma; alpha 8–16%)\n    L3.3a Dry-Hop Module (IPA-specific — present in ~80% of IPAs; absent in lager/stout/wheat)\n          — alternatives: Pellet T-90 dry-hop (tank, cold-side 2–7 °C) 60%,\n            Cryo/LupuLN₂ dry-hop (reduced plant matter) 25%,\n            Hop oil/terpene addition (biotransformation target) 10%,\n            Whole cone dry-hop (specialty craft) 5% [MEDIUM]\n      L1  Late-addition hop pellets (added post-fermentation)\n        L0  Dried hop cone (aroma-forward variety; same path as L3.3 above)\n    L3.4 Fermentation Agent\n          — alternatives: S. cerevisiae US-05 type (clean neutral — pale/IPA) 40%,\n            S. cerevisiae English ale strains (fruity esters) 30%,\n            S. cerevisiae Vermont/London haze yeast (NEIPA) 20%,\n            S. cerevisiae Belgian strains (high ester/phenol) 7%,\n            Kveik strains (high-temp ale) 3% [HIGH]\n      L1  Liquid yeast pitch (propagated) or dry yeast\n        L0  Saccharomyces cerevisiae culture (0.75–1.0 × 10⁶ cells/mL/°P pitching rate)\n    L3.5 Specialty Additions — Stop at L1 (fruit/lactose/vanilla in adjunct sub-styles)\n  L4.2 Carbonation Module (2.2–2.8 vol CO₂)\n        — alternatives: Industrial bulk CO₂ 52%,\n          Recovered fermentation CO₂ 45%,\n          Cask-conditioned natural carbonation (real ale) 3% [HIGH]\n    L0  CO₂ food grade ≥99.9% / natural fermentation CO₂\n  L4.3 Stabilization & Clarity\n    L3.6 Filtration\n          — alternatives: None — unfiltered/unfined (NEIPA; haze intentional) 30%,\n            Sheet/cartridge filtration (light polish) 30%,\n            Kieselguhr depth filtration (clear ale) 25%,\n            Cross-flow membrane 10%,\n            Centrifugal disc-stack 5% [HIGH]\n    L3.7 Fining Agent\n          — alternatives: None (NEIPA — haze desired) 30%,\n            Isinglass (English ale tradition) 25%,\n            Bentonite 20%,\n            Silica gel / kieselsol 15%,\n            Irish moss / carrageenan (whirlpool) 10% [HIGH]\n  L4.4 Primary Packaging Assembly\n    L3.9 Primary Container\n          — alternatives: Aluminum can 12 oz / 16 oz (craft skew) 68%,\n            Glass bottle 12 oz / 22 oz bomber 20%,\n            Stainless keg 1/6-bbl to 1/2-bbl 11%,\n            Growler/crowler (on-site) 1% [HIGH]\n      L2  Aluminum can assembly\n        L1  Can body (211 diameter drawn/ironed)\n          L0  Aluminum alloy sheet 3004-H19\n        L1  Can end (CDL profile 202 — wide-mouth pour preferred)\n          L0  Aluminum alloy sheet 5182-H19\n    L3.10 Closure / Seal — same alternatives as OT-1 (can lid / crown cap / keg spear)\n  L4.5 Label & Secondary Packaging — Stop at L1 (same as OT-1)\n```\n\n---\n\n### OT-3: Stout / Porter\n\nTop-fermented, dark (30–80+ SRM), roasted/bitter. Key structural differentiators: heavy roasted malt module in L3.2, optional lactose (milk stout), nitrogen carbonation option (Guinness widget), and a meaningful keg share because stout is predominantly a draught product.\n\n```\nOUTPUT TYPE: Stout / Porter\n  L4.1 Fermented Liquid Assembly\n    L3.1 Base Water\n      L0  Soft-to-moderate water (Dublin profile: Ca 120 ppm, Cl 190 ppm, low SO₄)\n    L3.2 Fermentable Substrate (ROASTED MALT — distinguishing feature)\n          — alternatives:\n            Base malt 60% + roasted barley 15% + chocolate malt 15% + black patent 10% (dry stout) 35%,\n            Base malt 65% + chocolate malt 20% + crystal 10% + flaked oats 5% (oatmeal stout) 30%,\n            Base malt 70% + brown malt 15% + crystal 10% + chocolate malt 5% (porter) 20%,\n            Base malt 65% + lactose 10% + chocolate malt 15% + roasted barley 10% (milk stout) 10%,\n            Imperial high-gravity bill + adjuncts (imperial stout) 5% [HIGH]\n      L2  Malted grain substrate (roasted path dominant)\n        L1  Roasted barley (500–600 EBC; unmalted, drum-roasted — dry stout)\n          L0  Barley grain (Hordeum vulgare; roasted un-malted for coffee/dry character)\n        L1  Chocolate malt (250–450 EBC; malted barley drum-roasted — porter/stout)\n          L0  Barley grain (Hordeum vulgare, fully modified base malt; drum-roasted)\n        L1  Flaked oats (oatmeal stout path; silky body)\n          L0  Oat grain (Avena sativa, rolled, food grade)\n        L1  Lactose powder (milk stout path; non-fermentable disaccharide)\n          L0  Lactose (C₁₂H₂₂O₁₁; whey-derived dairy by-product, food grade)\n    L3.3 Bittering Agent (subordinate role — low IBU 20–40)\n          — alternatives: English hop pellets T-90 (Fuggles, East Kent Goldings) 55%,\n            CO₂ extract / IAA (bittering only, no aroma target) 30%,\n            American pellets (craft stout) 10%,\n            Whole cone English hops 5% [HIGH]\n      L1  Pellet T-90 (English variety, kettle addition only)\n        L0  Dried hop cone (Humulus lupulus; Fuggles or EKG; alpha 4–6%)\n    L3.4 Fermentation Agent\n          — alternatives: S. cerevisiae Irish/English ale strains (Wyeast 1084 type) 60%,\n            S. cerevisiae US clean ale strain (craft stout) 30%,\n            S. cerevisiae Belgian high-gravity strain (imperial stout) 8%,\n            Mixed fermentation (barrel-aged sour stout) 2% [HIGH]\n      L1  Liquid yeast pitch or dry yeast\n        L0  Saccharomyces cerevisiae culture (Irish/English ale phenotype)\n    L3.5 Specialty Additions (stout-specific)\n          — alternatives: None (traditional dry stout) 50%,\n            Lactose (milk stout — kettle, non-fermentable) 25%,\n            Coffee/espresso extract (craft adjunct) 10%,\n            Vanilla extract/nibs 8%,\n            Chocolate/cocoa nibs 7% [HIGH]\n      L1  Lactose (milk stout — powder or liquid syrup, kettle addition)\n        L0  Lactose (whey-derived; dairy industry by-product)\n  L4.2 Carbonation Module (NITROGEN option — distinguishing feature)\n        — alternatives: CO₂ dissolved (2.0–2.5 vol) — cans/bottles 55%,\n          CO₂/N₂ blend draught — 75:25 N₂:CO₂ (creamy head) 35%,\n          Nitrogen widget system (canned nitro — hollow HDPE ball) 10% [HIGH]\n    L0  CO₂ gas (food grade) + liquid nitrogen (food grade, N₂ ≥99.9%)\n    L1  Nitrogen widget (hollow polyethylene ball ⌀ ~20 mm — nitro can path)\n      L0  HDPE (high-density polyethylene, food contact grade)\n  L4.3 Stabilization & Clarity (stout often served with haze; lighter filtration)\n    L3.6 Filtration\n          — alternatives: Light sheet/cartridge filtration 45%,\n            None — natural sedimentation (craft bottle-conditioned) 25%,\n            Kieselguhr filtration (production volume stout) 20%,\n            Centrifugal disc-stack only 10% [HIGH]\n    L3.7 Fining Agent\n          — alternatives: Isinglass (English tradition) 40%,\n            None (stout haze tolerated) 30%,\n            Bentonite 20%,\n            Irish moss / carrageenan (whirlpool) 10% [HIGH]\n  L4.4 Primary Packaging Assembly\n    L3.9 Primary Container (KEGS relatively large share — draught dominance)\n          — alternatives: Aluminum can standard (non-nitro) 35%,\n            Stainless keg 1/2-bbl or 1/6-bbl (draught stout) 30%,\n            Glass bottle 12 oz / 22 oz bomber 18%,\n            Aluminum can — nitro widget 15%,\n            PET bottle 2% [HIGH]\n      L2  Nitrogen widget can system (nitro path)\n        L1  Aluminum can body + end (same as standard; see OT-1 L2)\n          L0  Aluminum alloy 3004-H19 / 5182-H19\n        L1  Nitrogen widget (hollow HDPE ball ~20 mm diameter)\n          L0  HDPE (high-density polyethylene)\n        L0  Liquid nitrogen charge (20–30 μL pressurized fill inside widget)\n    L3.10 Closure / Seal — same alternatives as OT-1 per container type\n  L4.5 Label & Secondary Packaging — Stop at L1 (same as OT-1)\n```\n\n---\n\n### OT-4: Wheat Beer (Hefeweizen / Witbier / American Wheat)\n\n≥50% wheat malt. Top-fermented with specialized yeast producing phenolic (4-vinyl guaiacol / clove) and ester (isoamyl acetate / banana) character. Traditional Hefeweizen is served unfiltered and hazy; Kristallweizen is filtered bright. Belgian Witbier adds coriander and orange peel in L3.5. Bottle conditioning is relatively common (40%+).\n\n```\nOUTPUT TYPE: Wheat Beer (Hefeweizen / Witbier / American Wheat)\n  L4.1 Fermented Liquid Assembly\n    L3.1 Base Water\n      L0  Soft water (Munich/Belgian profile; Ca 30–60 ppm, SO₄ very low, Cl elevated — enhances wheat softness)\n    L3.2 Fermentable Substrate (WHEAT dominant — ≥50% wheat malt; distinguishing feature)\n          — alternatives: Malted wheat ≥50% + 2-row barley base (German Hefeweizen) 45%,\n            Torrefied/raw wheat ≥30% + oats + barley (Belgian Witbier) 30%,\n            Malted wheat 30–50% + 2-row barley (American wheat — filtered) 20%,\n            Malted wheat + rye addition (Roggenweizen — specialty) 5% [HIGH]\n      L2  Malted grain substrate\n        L1  Malted wheat kernel (pale wheat malt, 2–5 EBC)\n          L0  Wheat grain (Triticum aestivum, brewing variety; malted to develop enzymes)\n        L1  2-row barley base malt (remainder of grist)\n          L0  Barley grain (Hordeum vulgare, 2-row)\n        L1  Torrefied / flaked wheat (Witbier path — raw starch for haze contribution)\n          L0  Wheat grain (raw, heat-popped/torrefied for starch gelatinization)\n    L3.3 Bittering Agent (LOW hop rate — subordinate role; 10–15 IBU)\n          — alternatives: German noble pellets T-90 (Hallertau, Perle, Tradition) 60%,\n            CO₂ extract / IAA (bittering only, no aroma) 28%,\n            Whole cone German hops (traditional) 10%,\n            Belgian Styrian Goldings or Saaz equivalent 2% [HIGH]\n      L1  Hop pellets T-90 (kettle bittering only; no dry-hop in any wheat style)\n        L0  Dried hop cone (noble variety, alpha 3–6%)\n    L3.4 Fermentation Agent (SPECIALIZED YEAST — distinguishing feature)\n          — alternatives: S. cerevisiae Hefeweizen strain (high 4VG + banana ester; POF+) 50%,\n            S. cerevisiae Witbier/Belgian wheat strain (spicy/phenolic) 25%,\n            S. cerevisiae American wheat strain (clean, neutral; POF−) 20%,\n            S. cerevisiae Berliner wheat strain (mild acid production) 5% [HIGH]\n      L1  Liquid yeast pitch (Hefeweizen yeast — Wyeast 3068 / WLP300 phenotype)\n        L0  S. cerevisiae Hefeweizen culture (high 4-vinyl guaiacol phenol-positive strain)\n    L3.5 Specialty Additions (Witbier path only — absent in Hefeweizen)\n          — alternatives: None (German Hefeweizen — yeast character only) 45%,\n            Dried curaçao orange peel + coriander seeds (Belgian Witbier) 40%,\n            Dried orange peel only (Witbier variant) 8%,\n            Chamomile or other botanicals (craft Belgian wheat) 7% [MEDIUM]\n      L1  Dried curaçao orange peel (Citrus aurantium var. amara — Witbier path)\n        L0  Dried bitter orange peel (bitter citrus essential oil: limonene, linalool)\n      L1  Whole coriander seeds (lightly cracked, whirlpool addition)\n        L0  Coriander seed (Coriandrum sativum; linalool, geraniol volatiles)\n  L4.2 Carbonation Module (2.8–4.0 vol CO₂ — HIGHER than other styles)\n        — alternatives: Bottle conditioning — natural CO₂ from residual yeast (traditional Hefe) 40%,\n          Industrial / recovered CO₂ (filtered Kristallweizen) 50%,\n          Yeast rousing / krausening 10% [HIGH]\n    L0  CO₂ (fermentation-derived or industrial food grade)\n  L4.3 Stabilization & Clarity (HAZY intentional for Hefeweizen)\n    L3.6 Filtration\n          — alternatives: None — yeast in suspension (traditional Hefeweizen) 50%,\n            Light sheet filtration (American wheat / Kristallweizen) 30%,\n            Centrifugal disc-stack (partial clarification only) 15%,\n            Kieselguhr (export / shelf-stable wheat) 5% [HIGH]\n    L3.7 Fining Agent\n          — alternatives: None (Hefeweizen — haze desired; no fining) 50%,\n            Irish moss / carrageenan (whirlpool — hot break only) 30%,\n            Bentonite (filtered American wheat) 15%,\n            Isinglass 5% [MEDIUM]\n  L4.4 Primary Packaging Assembly\n    L3.9 Primary Container\n          — alternatives: Aluminum can 12 oz / 16 oz (US craft wheat) 40%,\n            Glass bottle 500 mL tall/narrow (German Hefe tradition) 35%,\n            Glass bottle 12 oz (US craft) 15%,\n            Stainless keg (draught) 9%,\n            PET bottle 1% [MEDIUM]\n      L2  Tall glass bottle assembly (German tradition path)\n        L1  Blown glass 500 mL long-neck (clear or amber, tall profile)\n          L0  Soda-lime-silica glass (clear: low iron SiO₂; tall mold profile)\n    L3.10 Closure / Seal\n          — alternatives: Crown cap 26 mm (all bottle formats) 50%,\n            Aluminum pull-tab lid (can format) 40%,\n            Keg spear / coupler (keg format) 9%,\n            Swing-top / Bügelverschluss (Bavarian specialty export) 1% [HIGH]\n      L1  Swing-top stopper assembly (specialty path)\n        L1  Porcelain stopper (Bügel)\n          L0  Aluminum oxide ceramic (Al₂O₃ slip-cast)\n        L1  Rubber gasket (O-ring seal)\n          L0  Natural rubber (Hevea brasiliensis; food-grade NR compound)\n        L1  Wire bail (swing mechanism)\n          L0  Galvanized steel wire (low-carbon; Ø 2.5 mm)\n  L4.5 Label & Secondary Packaging — Stop at L1 (same as OT-1)\n```\n\n---\n\n### OT-5: Non-Alcoholic Beer (≤0.5% ABV)\n\nTwo fundamentally different production routes: **(a) Arrested fermentation** — remove yeast before full attenuation; **(b) Dealcoholization** — brew normal beer then strip alcohol via vacuum distillation, reverse osmosis, or spinning cone column. Route B produces fuller flavor but requires capital-intensive process equipment (VN, not BOM). Post-process body/flavor rebuilding is a critical BOM module unique to this output type.\n\n```\nOUTPUT TYPE: Non-Alcoholic Beer (≤0.5% ABV)\n  L4.1 Fermented Liquid Assembly\n    L3.1 Base Water\n      L0  Treated brewing liquor (standard; slightly harder for mouthfeel body compensation)\n    L3.2 Fermentable Substrate (modified for low-alcohol target)\n          — alternatives: High-dextrin / low-fermentability malt blend (arrested fermentation path) 40%,\n            Standard 2-row base malt (dealcoholization path — full fermentation then strip) 35%,\n            Base malt + maltodextrin addition (body builder) 15%,\n            Gluten-free grain base (millet, rice, buckwheat) 10% [HIGH]\n      L2  Malt substrate\n        L1  High-dextrin specialty malt (under-modified kilning; minimal fermentable sugars)\n          L0  Barley grain (Hordeum vulgare; under-modified kilning → residual dextrins for body)\n        L1  Maltodextrin (body supplement)\n          L0  Maltodextrin DE 10–20 (starch hydrolysate; corn or wheat derived)\n    L3.3 Bittering Agent\n          — alternatives: IAA / isomerized extract (bitter without hop aroma — alcohol strip safe) 55%,\n            Noble hop pellets T-90 40%,\n            CO₂ hop extract 5% [HIGH]\n      L1  IAA liquid extract (no aromatic volatiles; alcohol-stable)\n        L0  Isomerized alpha-acid solution (potassium salt of iso-alpha acids; food grade)\n    L3.4 Fermentation Agent\n          — alternatives: Low-attenuation S. cerevisiae (arrested fermentation path) 40%,\n            Standard S. pastorianus (lager — dealcoholized path) 30%,\n            Standard S. cerevisiae (ale — dealcoholized path) 20%,\n            Maltose-negative / non-fermenting yeast (0.0% ABV target) 10% [MEDIUM]\n      L1  Yeast slurry / dry pitch (restricted-attenuation strain)\n        L0  Saccharomyces cerevisiae culture (low-attenuation or maltose-negative phenotype)\n    L3.5 Body & Flavor Restoration Module (NA-SPECIFIC — distinguishing module)\n          — alternatives: Malt extract addition (body rebuild post-dealcoholization) 40%,\n            Glycerol (humectant, mouthfeel) 20%,\n            Natural beer flavor — proprietary blend (Givaudan / IFF / Firmenich) 20%,\n            Hop aroma extract (aroma rebuild post-distillation) 15%,\n            Acacia gum / gum arabic (body + foam stability) 5% [MEDIUM]\n      L1  Malt extract liquid concentrate (spray-dried or vacuum-evaporated wort)\n        L0  Evaporated wort (barley malt-derived concentrate; 80° Brix)\n      L1  Glycerol (food-grade, kosher/halal certified)\n        L0  Glycerol (1,2,3-propanetriol; vegetable-derived or synthetic)\n  L4.2 Carbonation Module (2.2–2.7 vol CO₂)\n        — alternatives: Industrial CO₂ 65%,\n          Recovered fermentation CO₂ (limited — minimal fermentation extent) 30%,\n          CO₂ + nitrogen blend (low-ABV creamy niche) 5% [HIGH]\n    L0  CO₂ food grade\n  L4.3 Stabilization & Clarity (thorough — NA must be highly shelf-stable)\n    L3.6 Filtration\n          — alternatives: Cross-flow membrane (preferred — cold, retains aroma) 40%,\n            Sheet/cartridge filtration 35%,\n            Kieselguhr + polishing 20%,\n            Centrifugal + polishing 5% [HIGH]\n    L3.7 Fining Agent\n          — alternatives: PVPP (polyphenol removal — critical for NA oxidation stability) 35%,\n            Bentonite 30%,\n            Silica gel / kieselsol 25%,\n            None 10% [HIGH]\n  L4.4 Primary Packaging Assembly (same container mix as lager)\n    L3.9 Primary Container\n          — alternatives: Aluminum can 12 oz / 330 mL 60%,\n            Glass bottle 12 oz / 330 mL 28%,\n            Stainless keg (foodservice / hospitality) 10%,\n            PET bottle (single-serve convenience) 2% [HIGH]\n      L2  Aluminum can assembly — same construction as OT-1 (3004-H19 body / 5182-H19 end)\n    L3.10 Closure / Seal — same as OT-1 per container type\n  L4.5 Label & Secondary Packaging — Stop at L1 (same as OT-1)\n```\n\n---\n\n### OT-6: Hard Seltzer / FMB (Flavored Malt Beverage)\n\nFermented from a plain sugar-water solution — no grain malt, no hops. ABV 4–6%. Crystal clear, very low calorie (~100 kcal/355 mL), very high carbonation (3.0–3.5 vol CO₂). Natural fruit flavors added post-fermentation. Slim 12 oz can is the dominant primary container (75%+). Structurally the most different BOM from all other OTs.\n\n```\nOUTPUT TYPE: Hard Seltzer / FMB (Flavored Malt Beverage)\n  L4.1 Fermented Liquid Assembly\n    L3.1 Base Water\n      L0  RO-purified water (ultra-pure; TDS <10 ppm pre-mineral; then Ca/Mg added back minimally)\n    L3.2 Fermentable Substrate (SIMPLE SUGAR BASE — no grain malt; distinguishing feature)\n          — alternatives: Refined cane sugar (sucrose, dissolved solution) 50%,\n            HFCS-55 / corn sugar syrup 25%,\n            Dextrose / glucose monohydrate (rapid fermentation) 20%,\n            Malt syrup (maltose-based — TTB malt beverage classification) 5% [HIGH]\n      L1  Refined cane sugar (granulated or liquid, food grade)\n        L0  Sucrose (C₁₂H₂₂O₁₁; sugarcane or sugar beet derived)\n      L1  HFCS-55 (liquid, 55% fructose / 42% glucose)\n        L0  Corn starch hydrolysate (enzymatic isomerization; maize-derived)\n    L3.3 Bittering Agent — ABSENT (no hops in hard seltzer)\n          Note: ~3% of FMBs add nominal hop for TTB malt beverage classification (regulatory only, <5 IBU)\n          — alternatives: No hop addition 97%, Nominal hop addition (regulatory) 3% [HIGH]\n    L3.4 Fermentation Agent (HIGH-ATTENUATING, NEUTRAL YEAST — distinguishing feature)\n          — alternatives: Wine/champagne yeast (EC-1118 type; very high attenuation) 55%,\n            Specially selected brewing yeast (clean, neutral, high attenuation) 30%,\n            Distiller's yeast (fast, neutral, high attenuation) 12%,\n            Kveik strains (temperature-flexible, high attenuation) 3% [HIGH]\n      L1  Dry yeast pitch (wine yeast, EC-1118 or equivalent)\n        L0  Saccharomyces cerevisiae culture (dried, high-gravity tolerant, neutral phenotype)\n    L3.5 Fruit Flavor & Color Module (POST-FERMENTATION — distinguishing module)\n          — alternatives: Natural fruit flavor concentrate (citrus, berry, mango, etc.) 70%,\n            Fruit juice direct addition (<5% volume) 15%,\n            Natural botanical extract (elderflower, ginger, cucumber) 8%,\n            Proprietary flavor compound (IFF / Givaudan / Symrise) 5%,\n            Citric acid (tartness adjustment — co-addition) 2% [MEDIUM]\n      L1  Natural fruit flavor concentrate\n        L0  Fruit volatile / terpene concentrate (CO₂-extracted or spray-dried; food grade)\n  L4.2 Carbonation Module (3.0–3.5 vol CO₂ — HIGHEST carbonation of all OTs)\n        — alternatives: Industrial bulk CO₂ 72%,\n          Recovered fermentation CO₂ 26%,\n          CO₂ + nitrogen (rare, specialty) 2% [HIGH]\n    L0  CO₂ food grade ≥99.9% (high purity required for flavor neutrality)\n  L4.3 Stabilization & Clarity (CRYSTAL CLEAR — stringent filtration mandatory)\n    L3.6 Filtration\n          — alternatives: Cross-flow / membrane (0.2 μm polishing — preferred) 45%,\n            Sheet/cartridge filtration (0.2–0.45 μm) 30%,\n            Kieselguhr + polishing filter 15%,\n            Centrifugal + membrane polish 10% [HIGH]\n    L3.7 Fining Agent\n          — alternatives: None / membrane only (dominant) 45%,\n            Bentonite (protein removal) 30%,\n            Silica gel / kieselsol 20%,\n            PVPP 5% [HIGH]\n    L3.8 Antioxidant Treatment (CRITICAL — flavor neutrality demanded)\n          — alternatives: Ascorbic acid (L-ascorbic acid; preferred for flavor neutrality) 60%,\n            SO₂ / potassium metabisulfite 30%,\n            Combined ascorbic + SO₂ 10% [HIGH]\n      L0  Ascorbic acid (L-ascorbic acid, food grade)\n  L4.4 Primary Packaging Assembly (CAN DOMINANT — 93%)\n    L3.9 Primary Container\n          — alternatives: Aluminum slim can 12 oz / 355 mL (202 diameter) 75%,\n            Aluminum standard can 12 oz 10%,\n            Aluminum can 16 oz 8%,\n            Glass bottle (niche, premium) 5%,\n            PET bottle (sports/convenience) 2% [HIGH]\n      L2  Slim aluminum can assembly (dominant path — 202 diameter, taller profile)\n        L1  Slim can body (drawn/ironed, 202 × 510 or 202 × 412 profile)\n          L0  Aluminum alloy sheet 3004-H19 (body stock; thinner gauge for slim profile)\n        L1  Slim can end (B64 or CDL, 202 diameter)\n          L0  Aluminum alloy sheet 5182-H19\n    L3.10 Closure / Seal\n          — alternatives: Aluminum pull-tab lid (can) 93%,\n            Crown cap (glass bottle) 5%,\n            Screw cap (PET) 2% [HIGH]\n  L4.5 Label & Secondary Packaging — Stop at L1\n    L1  Shrink sleeve or direct-print can decoration (full-body graphics preferred)\n    L1  4-/6-/12-pack variety pack carrier (corrugated or HDPE)\n    L1  24-pack corrugated shipper\n```\n\n---\n\n### OT-7: Sour / Wild Ale\n\nMixed fermentation using Saccharomyces + wild organisms (*Brettanomyces*, *Lactobacillus*, *Pediococcus*). Aged months to years in oak barrels or foudres. Lactic and acetic acid dominate. May include whole fruit additions (kriek, framboise). Spontaneous fermentation (Lambic) is the traditional extreme case; modern American Wild Ale uses controlled pitching. Cork-and-cage 750 mL bottle is a major packaging choice unique to this segment.\n\n```\nOUTPUT TYPE: Sour / Wild Ale\n  L4.1 Fermented Liquid Assembly\n    L3.1 Base Water\n      L0  Soft-to-moderately-hard water (Brussels/Bruges profile for Lambic; varies by style)\n    L3.2 Fermentable Substrate\n          — alternatives: Pale malt + unmalted wheat (Lambic/Gueuze — Belgian tradition) 35%,\n            Pale malt base + malted wheat (American Wild Ale) 30%,\n            Pale malt + oats + wheat (Berliner Weisse / Gose) 20%,\n            Pale malt + Vienna/Munich malt (Flanders Red / Oud Bruin) 15% [HIGH]\n      L2  Malted grain substrate\n        L1  Pale barley malt + raw unmalted wheat (Lambic path — 60:40 ratio)\n          L0  Barley grain (Hordeum vulgare, pale malt)\n          L0  Wheat grain (Triticum aestivum, raw/unmalted — starch for wild enzyme attack)\n    L3.3 Bittering Agent (AGED HOPS — antimicrobial function only, not bitterness)\n          — alternatives: Aged/oxidized whole cone hops (Lambic: 3+ year old stale hops) 40%,\n            Aged hop pellets T-90 (low alpha, antimicrobial only) 30%,\n            No hop addition (Gose / salt-acidified variants) 15%,\n            Fresh noble pellets T-90 (modern American Wild Ale) 15% [MEDIUM]\n      L1  Aged whole cone hops (stale; 3+ years; oxidized bale storage)\n        L0  Dried hop cone (Humulus lupulus; alpha-acids degraded to iso-acids for antimicrobial action; no bitterness function)\n    L3.4 Fermentation Agent (MIXED CULTURE — distinguishing feature)\n          — alternatives: Propagated mixed culture (Brettanomyces + Lactobacillus + Pediococcus) 40%,\n            Spontaneous fermentation (ambient wild yeast + bacteria — Lambic) 25%,\n            Saccharomyces + kettle-souring Lactobacillus (clean-sour shortcut path) 25%,\n            Saccharomyces + Brettanomyces secondary (American Wild Ale) 10% [HIGH]\n      L1  Mixed culture pitch (propagated blend)\n        L0  Brettanomyces bruxellensis / anomalus culture (volatile acid + phenol production)\n        L0  Lactobacillus plantarum culture (lactic acid; pH 3.2–3.8 target)\n        L0  Pediococcus damnosus culture (secondary lactic; ropiness intermediate)\n    L3.5 Fruit & Flavor Additions (KRIEK / FRAMBOISE / PECHE — major differentiation)\n          — alternatives: No fruit (Gueuze, straight Lambic) 40%,\n            Whole sour cherries (kriek — Morello / Schaerbeek) 25%,\n            Raspberry puree or whole fruit (framboise) 15%,\n            Peach puree / whole fruit (pêche) 8%,\n            Blackcurrant, elderflower, or other botanicals 7%,\n            Salt + coriander (Gose path) 5% [HIGH]\n      L1  Whole Morello cherries (kriek — added to aging vessel, 200–400 g/L)\n        L0  Morello sour cherry (Prunus cerasus; fresh or frozen whole fruit)\n      L1  Raspberry puree / whole raspberry\n        L0  Raspberry fruit (Rubus idaeus; crushed puree, food grade)\n      L1  Sea salt + whole coriander seeds (Gose path)\n        L0  NaCl (sodium chloride, food grade) + Coriandrum sativum seed\n  L4.2 Carbonation Module\n        — alternatives: Bottle conditioning (residual yeast refermentation — Gueuze tradition) 50%,\n          Industrial / recovered CO₂ forced (modern Wild Ale) 35%,\n          Cask / keg conditioning (natural draught) 15% [HIGH]\n    L0  CO₂ (fermentation-derived during bottle conditioning, or industrial)\n  L4.3 Stabilization & Clarity (minimal intervention — wild character preserved)\n    L3.6 Filtration\n          — alternatives: None / unfined (Lambic / Gueuze tradition) 50%,\n            Light sheet filtration (commercial wild ale) 30%,\n            Centrifugal disc-stack (partial clarification, pre-blend) 15%,\n            Kieselguhr (commercial Berliner Weisse) 5% [HIGH]\n    L3.7 Fining Agent\n          — alternatives: None (wild character / haze accepted) 65%,\n            Bentonite (commercial sour) 20%,\n            Isinglass 10%,\n            Carrageenan 5% [MEDIUM]\n  L4.4 Primary Packaging Assembly\n    L3.9 Primary Container (750 mL CORK BOTTLE — major unique path)\n          — alternatives: 750 mL cork-finished glass bottle (Belgian tradition / premium) 35%,\n            Aluminum can 12 oz / 16 oz (US craft sour) 35%,\n            Glass bottle 12 oz (US craft sour) 18%,\n            Stainless keg (draught Berliner Weisse, Gose) 12% [HIGH]\n      L2  750 mL champagne-profile glass bottle assembly\n        L1  750 mL amber or clear champagne-weight bottle (pressure-rated)\n          L0  Soda-lime-silica glass (champagne weight; high internal pressure rating)\n    L3.10 Closure / Seal (CORK + CAGE — unique to this output type)\n          — alternatives: Cork + wire cage / muselet (750 mL Belgian tradition) 35%,\n            Aluminum pull-tab lid (can) 35%,\n            Crown cap 26 mm (12 oz bottle) 18%,\n            Keg spear + coupler 12% [HIGH]\n      L1  Natural cork stopper (agglomerated or colmated, 24 × 38 mm champagne profile)\n        L0  Cork (Quercus suber bark; granulated + polyurethane binder for agglomerate)\n      L1  Aluminum wire cage (muselet, 5-turn, ~30-gauge wire)\n        L0  Aluminum wire (low-carbon ductile; Ø ~1.5 mm)\n  L4.5 Label & Secondary Packaging — Stop at L1\n    L1  Wet-glue paper label (Belgian artisanal tradition) or pressure-sensitive\n    L1  Tissue wrap (premium 750 mL presentation — specialty path)\n    L1  6-pack corrugated or 12-pack case\n```\n\n---\n\n### OT-8: Seasonal / Specialty Beer\n\nDefined by seasonal ingredients added to an otherwise conventional base style. Core sub-categories: (a) Pumpkin / Gourd beer; (b) Winter Warmer (spiced strong ale); (c) Märzen / Oktoberfest (amber lager); (d) Summer Shandy / Radler (beer + citrus); (e) Barrel-Aged Specialty. The L4.1 Fermented Liquid Assembly inherits from OT-1 or OT-2. **L3.5 Specialty Ingredient Module is the differentiating BOM position.**\n\n```\nOUTPUT TYPE: Seasonal / Specialty Beer\n  L4.1 Fermented Liquid Assembly\n    L3.1 Base Water — inherits from base style (soft for wheat-based, sulfate for hop-forward)\n    L3.2 Fermentable Substrate (season-modified)\n          — alternatives: Vienna/Munich malt blend (Märzen/Oktoberfest — amber lager) 30%,\n            Dark malt + oats + base malt (Winter Warmer / Holiday ale) 25%,\n            Base malt + pumpkin puree (Pumpkin beer — gourd as adjunct) 20%,\n            Standard pale malt (Summer Shandy base — ale or lager) 15%,\n            High-gravity imperial bill (barrel-aged base) 10% [HIGH]\n      L2  Malt substrate (Märzen path)\n        L1  Vienna malt (5–9 EBC) + Munich malt (10–25 EBC)\n          L0  Barley grain (Vienna kilning: higher temperature → Maillard melanoidins)\n      L2  Pumpkin adjunct (Pumpkin beer path)\n        L1  Cooked pumpkin puree (added to mash or whirlpool)\n          L0  Cucurbita pepo (pumpkin / butternut squash; cooked puree, food grade)\n    L3.3 Bittering Agent (inherits from base style)\n          — alternatives: Noble hops (Märzen/lager base) 40%,\n            English hops (Winter Warmer / spiced ale) 30%,\n            American hops (Summer seasonal / IPA variant) 25%,\n            Minimal/no hops (Shandy base — diluted with juice post-filter) 5% [HIGH]\n    L3.4 Fermentation Agent (inherits from base style)\n          — alternatives: S. pastorianus lager (Märzen) 35%,\n            S. cerevisiae ale (Winter Warmer, Pumpkin, Summer ale) 50%,\n            Belgian S. cerevisiae (strong seasonal, Tripel-style) 12%,\n            Mixed culture (barrel-aged specialty) 3% [HIGH]\n    L3.5 Specialty Ingredient Module (DISTINGUISHING MODULE)\n      Sub-type A — Pumpkin Beer:\n          — alternatives: Pumpkin puree (mash/whirlpool adjunct) 50%,\n            Gourd spice blend alone (cinnamon, nutmeg, allspice, clove) 30%,\n            Pumpkin puree + spice blend (combined) 15%,\n            Artificial pumpkin flavor (cost-reduction path) 5% [MEDIUM]\n        L1  Cooked pumpkin puree (retort-packed or IQF)\n          L0  Cucurbita pepo (pumpkin; 100% gourd flesh, food grade)\n        L1  Spice blend (cinnamon, nutmeg, allspice, clove, ginger — dry, whole or ground)\n          L0  Ground cinnamon (Cinnamomum verum bark)\n          L0  Ground nutmeg (Myristica fragrans seed)\n          L0  Ground allspice (Pimenta dioica berry)\n          L0  Ground clove (Syzygium aromaticum flower bud)\n      Sub-type B — Winter Warmer:\n          — alternatives: Spice blend (cinnamon, ginger, orange peel, star anise) 55%,\n            Vanilla addition (extract or whole bean) 25%,\n            Honey (late addition, partially fermentable) 15%,\n            No spice (unspiced strong dark ale) 5% [MEDIUM]\n        L1  Whole cinnamon stick + star anise (whirlpool or dry-spice addition)\n          L0  Cinnamomum verum bark (whole stick)\n          L0  Illicium verum (whole dried star anise pod)\n        L1  Vanilla extract or whole bean\n          L0  Vanillin / vanilla extract (Vanilla planifolia; alcohol-extracted or synthetic)\n      Sub-type C — Märzen / Oktoberfest:\n          No specialty additions — flavor derived from L3.2 Vienna/Munich malt selection only.\n      Sub-type D — Summer Shandy / Radler:\n          — alternatives: Lemon/citrus juice concentrate (post-filter 30–50% blend) 60%,\n            Grapefruit juice concentrate 20%,\n            Natural lemon flavor (artificial/natural blend) 15%,\n            Elderflower / botanical mix 5% [MEDIUM]\n        L1  Lemon juice concentrate (food grade, Brix 50–60)\n          L0  Lemon juice (Citrus limon; cold-press concentrate; citric acid + limonene)\n  L4.2 Carbonation Module\n        — alternatives: Industrial / recovered CO₂ (same as base style) 95%,\n          Bottle conditioning (seasonal farmhouse / Belgian variant) 5% [HIGH]\n    L0  CO₂ food grade\n  L4.3 Stabilization & Clarity — inherits from base style (see OT-1 or OT-2)\n  L4.4 Primary Packaging Assembly\n    L3.9 Primary Container\n          — alternatives: Aluminum can 12 oz / 16 oz (seasonal 4-pack / variety) 55%,\n            Glass bottle 12 oz / 22 oz (seasonal gift / bomber) 30%,\n            Stainless keg (draught seasonal tap) 12%,\n            750 mL glass bottle (barrel-aged specialty — cork+cage path) 3% [HIGH]\n    L3.10 Closure / Seal — inherits from container choice (see OT-1 through OT-7 per path)\n  L4.5 Label & Secondary Packaging — Stop at L1\n    L1  Seasonal specialty label (limited-edition design; OPP or paper)\n    L1  4-pack seasonal variety carrier or 6-pack corrugated\n    L1  Gift box / paper sleeve (barrel-aged specialty path)\n    L1  24-pack corrugated shipper\n```\n\n---"
+    },
+    {
+      "title": "Structured Data JSON",
+      "content": "```json\n{\n  \"naics\": \"312120\",\n  \"industry\": \"Breweries\",\n  \"bom_root\": \"Packaged Beer\",\n  \"output_types\": [\n    \"Lager/Pilsner\", \"Ale\", \"Stout/Porter\",\n    \"Wheat Beer\", \"Non-alcoholic Beer\", \"Hard Seltzer/FMB\",\n    \"Sour/Wild Ale\", \"Seasonal/Specialty\"\n  ],\n  \"l4_subsystems_generic\": [\n    {\n      \"id\": \"L4.1\",\n      \"name\": \"Fermented Liquid Assembly\",\n      \"l3_modules\": [\n        {\n          \"id\": \"L3.1\",\n          \"name\": \"Base Water\",\n          \"stop_level\": \"L0\",\n          \"note\": \"Universal; ~92% of beer by weight; no substitutable alternative\"\n        },\n        {\n          \"id\": \"L3.2\",\n          \"name\": \"Fermentable Substrate\",\n          \"alternatives\": [\n            {\"name\": \"Barley malt (2-row/6-row base)\", \"share_pct\": 62, \"trend\": \"stable\"},\n            {\"name\": \"Corn adjunct\", \"share_pct\": 10, \"trend\": \"stable\"},\n            {\"name\": \"Wheat malt\", \"share_pct\": 8, \"trend\": \"growing\"},\n            {\"name\": \"Specialty/crystal/roasted malt\", \"share_pct\": 8, \"trend\": \"stable\"},\n            {\"name\": \"Rice adjunct\", \"share_pct\": 5, \"trend\": \"stable\"},\n            {\"name\": \"Sugar (sucrose/dextrose)\", \"share_pct\": 5, \"trend\": \"growing\"},\n            {\"name\": \"Alternative grains (oats, rye, sorghum)\", \"share_pct\": 2, \"trend\": \"emerging\"}\n          ],\n          \"confidence\": \"HIGH\",\n          \"source\": \"Brewers Association 2024 / USDA\"\n        },\n        {\n          \"id\": \"L3.3\",\n          \"name\": \"Bittering & Aromatic Agent\",\n          \"alternatives\": [\n            {\"name\": \"Hop pellets T-90\", \"share_pct\": 55, \"trend\": \"slight_decline\"},\n            {\"name\": \"Hop extracts (CO2/isomerized)\", \"share_pct\": 28, \"trend\": \"growing\"},\n            {\"name\": \"Whole cone hops\", \"share_pct\": 10, \"trend\": \"stable\"},\n            {\"name\": \"Cryo/LupuLN2 hop products\", \"share_pct\": 5, \"trend\": \"emerging\"},\n            {\"name\": \"Non-hop bittering agents\", \"share_pct\": 2, \"trend\": \"stable\"}\n          ],\n          \"confidence\": \"HIGH\",\n          \"source\": \"Barth-Haas Hop Report 2024\"\n        },\n        {\n          \"id\": \"L3.4\",\n          \"name\": \"Fermentation Agent\",\n          \"alternatives\": [\n            {\"name\": \"Saccharomyces cerevisiae (ale)\", \"share_pct\": 45, \"trend\": \"stable\"},\n            {\"name\": \"Saccharomyces pastorianus (lager)\", \"share_pct\": 45, \"trend\": \"stable\"},\n            {\"name\": \"Brettanomyces / mixed culture\", \"share_pct\": 5, \"trend\": \"growing\"},\n            {\"name\": \"Kveik strains\", \"share_pct\": 3, \"trend\": \"emerging\"},\n            {\"name\": \"Non-Saccharomyces blends\", \"share_pct\": 2, \"trend\": \"emerging\"}\n          ],\n          \"confidence\": \"MEDIUM\",\n          \"source\": \"analyst estimate\"\n        }\n      ]\n    },\n    {\n      \"id\": \"L4.2\",\n      \"name\": \"Carbonation Module\",\n      \"stop_level\": \"L0\",\n      \"alternatives\": [\n        {\"name\": \"Industrial bulk CO2\", \"share_pct\": 50, \"trend\": \"declining\"},\n        {\"name\": \"Recovered fermentation CO2\", \"share_pct\": 45, \"trend\": \"growing\"},\n        {\"name\": \"Nitrogen blend (stout/widget)\", \"share_pct\": 5, \"trend\": \"stable\"}\n      ],\n      \"confidence\": \"HIGH\",\n      \"source\": \"CO2 recovery industry reports 2024\"\n    },\n    {\n      \"id\": \"L4.3\",\n      \"name\": \"Stabilization & Clarity\",\n      \"l3_modules\": [\n        {\n          \"id\": \"L3.6\",\n          \"name\": \"Filtration\",\n          \"alternatives\": [\n            {\"name\": \"Kieselguhr depth filtration\", \"share_pct\": 45, \"trend\": \"declining\"},\n            {\"name\": \"Sheet/cartridge filtration\", \"share_pct\": 25, \"trend\": \"stable\"},\n            {\"name\": \"Cross-flow/membrane filtration\", \"share_pct\": 20, \"trend\": \"growing\"},\n            {\"name\": \"Centrifugal separation\", \"share_pct\": 8, \"trend\": \"growing\"},\n            {\"name\": \"None (hazy/unfiltered)\", \"share_pct\": 2, \"trend\": \"growing\"}\n          ],\n          \"confidence\": \"HIGH\",\n          \"source\": \"Brewing industry reports 2024\"\n        },\n        {\n          \"id\": \"L3.7\",\n          \"name\": \"Fining Agent\",\n          \"stop_level\": \"L0\",\n          \"alternatives\": [\n            {\"name\": \"Isinglass (fish collagen)\", \"share_pct\": 35, \"trend\": \"stable\"},\n            {\"name\": \"Bentonite (clay)\", \"share_pct\": 30, \"trend\": \"stable\"},\n            {\"name\": \"Silica gel (kieselsol)\", \"share_pct\": 20, \"trend\": \"stable\"},\n            {\"name\": \"Carrageenan/Irish moss\", \"share_pct\": 10, \"trend\": \"stable\"},\n            {\"name\": \"None\", \"share_pct\": 5, \"trend\": \"stable\"}\n          ],\n          \"confidence\": \"MEDIUM\"\n        }\n      ]\n    },\n    {\n      \"id\": \"L4.4\",\n      \"name\": \"Primary Packaging Assembly\",\n      \"l3_modules\": [\n        {\n          \"id\": \"L3.9\",\n          \"name\": \"Primary Container\",\n          \"alternatives\": [\n            {\"name\": \"Aluminum can (12oz/16oz)\", \"share_pct\": 60, \"trend\": \"growing\"},\n            {\"name\": \"Glass bottle (12oz/22oz)\", \"share_pct\": 25, \"trend\": \"declining\"},\n            {\"name\": \"Stainless keg (1/2-bbl, 1/4-bbl)\", \"share_pct\": 13, \"trend\": \"stable\"},\n            {\"name\": \"PET bottle\", \"share_pct\": 1, \"trend\": \"stable\"},\n            {\"name\": \"Bag-in-box / bulk\", \"share_pct\": 1, \"trend\": \"stable\"}\n          ],\n          \"confidence\": \"HIGH\",\n          \"source\": \"Beer Institute 2024 / NBWA 2024\",\n          \"l0_for_can\": {\n            \"l2\": \"Can body + can end assembly\",\n            \"l1\": \"Drawn aluminum can body; stamped aluminum end (B64/CDL)\",\n            \"l0\": \"Aluminum alloy sheet (3004-H19 body, 5182-H19 end)\"\n          }\n        },\n        {\n          \"id\": \"L3.10\",\n          \"name\": \"Closure / Seal\",\n          \"alternatives\": [\n            {\"name\": \"Aluminum can lid with pull-tab\", \"share_pct\": 60, \"trend\": \"growing\"},\n            {\"name\": \"Crown cap (26/29mm steel)\", \"share_pct\": 25, \"trend\": \"declining\"},\n            {\"name\": \"Keg spear (D-type / S-type)\", \"share_pct\": 13, \"trend\": \"stable\"},\n            {\"name\": \"Swing-top / Bugelverschluss\", \"share_pct\": 1, \"trend\": \"stable\"},\n            {\"name\": \"Screw cap (PET)\", \"share_pct\": 1, \"trend\": \"stable\"}\n          ],\n          \"confidence\": \"HIGH\"\n        }\n      ]\n    }\n  ],\n  \"per_output_type_boms\": [\n    {\n      \"id\": \"OT-1\",\n      \"name\": \"Lager / Pilsner\",\n      \"fermentation\": \"bottom (S. pastorianus, 8–12 °C)\",\n      \"color_srm\": \"3–7\",\n      \"ibu_range\": \"15–25\",\n      \"carbonation_vol\": \"2.5–2.8\",\n      \"key_differentiators\": [\"corn/rice adjuncts (macro path)\", \"noble hops only\", \"bright filtered\", \"cold-conditioned 4–8 weeks\"],\n      \"dominant_substrate\": \"2-row barley malt (45%) or 2-row + corn (25%) or 2-row + rice (20%)\",\n      \"dominant_container\": \"Aluminum can 12oz (65%)\",\n      \"unique_modules\": [],\n      \"absent_modules\": [\"L3.5 specialty additions\", \"nitrogen carbonation\"],\n      \"confidence\": \"HIGH\"\n    },\n    {\n      \"id\": \"OT-2\",\n      \"name\": \"Ale (IPA / Pale / Amber)\",\n      \"fermentation\": \"top (S. cerevisiae, 15–22 °C)\",\n      \"color_srm\": \"5–18\",\n      \"ibu_range\": \"30–100\",\n      \"carbonation_vol\": \"2.2–2.8\",\n      \"key_differentiators\": [\"high/varied hop rate\", \"dry-hop module (IPA)\", \"specialty malt diversity\", \"NEIPA haze option\"],\n      \"dominant_substrate\": \"2-row pale malt 100% (55%) or 2-row + crystal (25%)\",\n      \"dominant_container\": \"Aluminum can 12oz/16oz (68%)\",\n      \"unique_modules\": [\"L3.3a dry-hop module\"],\n      \"absent_modules\": [],\n      \"confidence\": \"HIGH\"\n    },\n    {\n      \"id\": \"OT-3\",\n      \"name\": \"Stout / Porter\",\n      \"fermentation\": \"top (S. cerevisiae, 16–22 °C)\",\n      \"color_srm\": \"30–80+\",\n      \"ibu_range\": \"20–45\",\n      \"carbonation_vol\": \"2.0–2.5\",\n      \"key_differentiators\": [\"roasted barley/chocolate malt dominant\", \"nitrogen carbonation (Guinness widget)\", \"lactose option (milk stout)\", \"keg share elevated for draught\"],\n      \"dominant_substrate\": \"Base 60% + roasted barley 15% + chocolate 15% + black patent 10%\",\n      \"dominant_container\": \"Aluminum can standard (35%) + keg (30%)\",\n      \"unique_modules\": [\"nitrogen widget (L4.2 nitro path)\", \"lactose addition (L3.5 milk stout)\"],\n      \"absent_modules\": [\"L3.5 dry-hop\"],\n      \"confidence\": \"HIGH\"\n    },\n    {\n      \"id\": \"OT-4\",\n      \"name\": \"Wheat Beer (Hefeweizen / Witbier / American Wheat)\",\n      \"fermentation\": \"top (specialized S. cerevisiae Hefeweizen/Witbier strain)\",\n      \"color_srm\": \"3–12\",\n      \"ibu_range\": \"10–18\",\n      \"carbonation_vol\": \"2.8–4.0\",\n      \"key_differentiators\": [\"≥50% wheat malt\", \"specialized phenol-positive yeast (4VG)\", \"unfiltered hazy tradition (Hefe)\", \"Witbier: orange peel + coriander\", \"bottle conditioning 40%+\"],\n      \"dominant_substrate\": \"Malted wheat ≥50% + 2-row barley (German Hefe 45%)\",\n      \"dominant_container\": \"Aluminum can 12oz/16oz (40%) or 500mL glass tall bottle (35%)\",\n      \"unique_modules\": [\"L3.5 curaçao orange peel + coriander (Witbier path)\", \"swing-top bottle closure (specialty path)\"],\n      \"absent_modules\": [\"L3.3a dry-hop\", \"nitrogen carbonation\"],\n      \"confidence\": \"HIGH\"\n    },\n    {\n      \"id\": \"OT-5\",\n      \"name\": \"Non-Alcoholic Beer (≤0.5% ABV)\",\n      \"fermentation\": \"limited (arrested) or full + dealcoholization\",\n      \"color_srm\": \"3–35 (style-dependent)\",\n      \"ibu_range\": \"10–30\",\n      \"carbonation_vol\": \"2.2–2.7\",\n      \"key_differentiators\": [\"dealcoholization step (vacuum distillation, RO, or spinning cone)\", \"body/flavor restoration module (glycerol, malt extract, natural flavor)\", \"high PVPP fining for oxidation stability\", \"low-attenuation or maltose-negative yeast\"],\n      \"dominant_substrate\": \"High-dextrin malt blend (arrested path 40%) or standard malt (dealcoholization path 35%)\",\n      \"dominant_container\": \"Aluminum can 12oz/330mL (60%)\",\n      \"unique_modules\": [\"L3.5 body/flavor restoration (glycerol, malt extract, hop aroma extract)\"],\n      \"absent_modules\": [\"nitrogen widget\", \"dry-hop\"],\n      \"confidence\": \"HIGH\"\n    },\n    {\n      \"id\": \"OT-6\",\n      \"name\": \"Hard Seltzer / FMB\",\n      \"fermentation\": \"top (wine/champagne yeast EC-1118; ferments to dryness)\",\n      \"color_srm\": \"0–1 (water-clear)\",\n      \"ibu_range\": \"0–3\",\n      \"carbonation_vol\": \"3.0–3.5\",\n      \"key_differentiators\": [\"sugar base (no grain malt)\", \"no hops\", \"wine/distiller yeast\", \"fruit flavor post-fermentation\", \"crystal clear mandatory\", \"slim can dominant (75%)\"],\n      \"dominant_substrate\": \"Refined cane sugar (50%) or HFCS-55 (25%)\",\n      \"dominant_container\": \"Aluminum slim can 12oz/355mL (75%)\",\n      \"unique_modules\": [\"L3.5 fruit flavor/color module (post-fermentation)\", \"L3.8 ascorbic acid antioxidant (critical for flavor neutrality)\"],\n      \"absent_modules\": [\"L3.2 grain malt\", \"L3.3 hop bittering\", \"nitrogen carbonation\"],\n      \"confidence\": \"HIGH\"\n    },\n    {\n      \"id\": \"OT-7\",\n      \"name\": \"Sour / Wild Ale\",\n      \"fermentation\": \"mixed (Brettanomyces + Lactobacillus + Pediococcus + Saccharomyces)\",\n      \"color_srm\": \"4–30 (style-dependent)\",\n      \"ibu_range\": \"5–15 (antimicrobial function, not bitterness)\",\n      \"carbonation_vol\": \"2.5–4.0 (bottle-conditioned Gueuze: 3.5+)\",\n      \"key_differentiators\": [\"mixed microbial culture\", \"aged hops (antimicrobial, not bitterness)\", \"barrel/foudre aging (oak compounds migrate into liquid)\", \"fruit additions (kriek, framboise)\", \"cork+cage 750mL bottle (35%)\"],\n      \"dominant_substrate\": \"Pale malt + unmalted wheat (Lambic 35%) or pale malt + malted wheat (AWA 30%)\",\n      \"dominant_container\": \"750mL cork+cage glass (35%) or aluminum can 12oz/16oz (35%)\",\n      \"unique_modules\": [\"L3.4 mixed culture (Brett + Lacto + Pedio)\", \"L3.5 fruit additions (whole cherries, raspberry)\", \"cork + muselet closure\"],\n      \"absent_modules\": [\"nitrogen carbonation\", \"bright filtration (Lambic tradition)\"],\n      \"confidence\": \"MEDIUM\",\n      \"source\": \"Cantillon, Drie Fonteinen, Allagash production data; Lambic.info; analyst estimate for US craft sour\"\n    },\n    {\n      \"id\": \"OT-8\",\n      \"name\": \"Seasonal / Specialty Beer\",\n      \"fermentation\": \"inherits from base style (lager or ale per sub-type)\",\n      \"color_srm\": \"3–40 (sub-type dependent)\",\n      \"ibu_range\": \"15–50 (sub-type dependent)\",\n      \"carbonation_vol\": \"2.3–2.8\",\n      \"key_differentiators\": [\"L3.5 seasonal ingredient module is the sole differentiating BOM position\", \"base style (L4.1) inherits from OT-1 or OT-2\", \"limited-run / seasonal SKU\"],\n      \"sub_types\": [\n        {\"name\": \"Pumpkin Beer\", \"dominant_addition\": \"Cucurbita pepo puree + spice blend\"},\n        {\"name\": \"Winter Warmer\", \"dominant_addition\": \"Cinnamon + star anise + vanilla\"},\n        {\"name\": \"Märzen/Oktoberfest\", \"dominant_addition\": \"Vienna/Munich malt only (no L3.5)\"},\n        {\"name\": \"Summer Shandy/Radler\", \"dominant_addition\": \"Lemon juice concentrate (30–50% blend)\"},\n        {\"name\": \"Barrel-Aged Specialty\", \"dominant_addition\": \"Oak-derived vanillin + lactones (process-origin)\"}\n      ],\n      \"dominant_container\": \"Aluminum can 12oz/16oz (55%) or glass bottle 12oz/22oz (30%)\",\n      \"unique_modules\": [\"L3.5 seasonal ingredient module (pumpkin, spice, citrus juice — sub-type dependent)\"],\n      \"absent_modules\": [\"nitrogen widget (except seasonal nitro stout)\"],\n      \"confidence\": \"MEDIUM\",\n      \"source\": \"Brewers Association seasonal category data 2024; Mintel beer category reports\"\n    }\n  ],\n  \"marquardt_sensor_position\": {\n    \"in_bom\": false,\n    \"in_vn\": true,\n    \"vn_positions\": [\n      {\n        \"priority\": \"primary\",\n        \"level\": \"L6.6\",\n        \"system\": \"Glycol Cooling & Refrigeration\",\n        \"measurement\": \"Glycol/water mass flow to fermenter jackets and bright tanks\",\n        \"bom_impact\": \"Temperature control → yeast metabolite profile (L3.4 quality)\"\n      },\n      {\n        \"priority\": \"secondary\",\n        \"level\": \"L6.7\",\n        \"system\": \"CIP & Sanitation\",\n        \"measurement\": \"Water + caustic + acid flow through vessel circuits\",\n        \"bom_impact\": \"Vessel sterility → L4.3 stability\"\n      },\n      {\n        \"priority\": \"tertiary\",\n        \"level\": \"L6.8\",\n        \"system\": \"Water Treatment & Liquor Supply\",\n        \"measurement\": \"Brewing liquor flow to mash tun and kettle\",\n        \"bom_impact\": \"L3.1 water volume and recipe accuracy\"\n      }\n    ],\n    \"failure_mode\": \"Glycol flow loss → temperature excursion during fermentation → diacetyl/ester off-flavors in L4.1 → batch loss ($15–80k per fermenter-batch at mid/large craft scale)\"\n  }\n}\n```\n\n---\n\n*Sources: Brewers Association 2024 Annual Report; Beer Institute 2024 Packaging Data; NBWA 2024 Distribution Report; Barth-Haas Hop Report 2024; USDA NASS Malt Barley Data; GEA/Alfa Laval filtration product data; CO₂ recovery ROI industry analyses 2024; IQS Directory ultrasonic flow meter review; Mordor Intelligence ultrasonic sensor market 2025; Straits Research ultrasonic flowmeter market 2025; Mintel Beer Category Reports 2024; Cantillon / Drie Fonteinen / Allagash production notes; Lambic.info; craft sour ale segment analyst estimates.*"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "ID",
+        "Output Type",
+        "L5 Product"
+      ],
+      "rows": [
+        {
+          "ID": "OT-1",
+          "Output Type": "Lager / Pilsner",
+          "L5 Product": "Light-colored, bottom-fermented, filtered, carbonated packaged beer"
+        },
+        {
+          "ID": "OT-2",
+          "Output Type": "Ale (IPA, Pale, Amber)",
+          "L5 Product": "Top-fermented, varied hop profile, packaged"
+        },
+        {
+          "ID": "OT-3",
+          "Output Type": "Stout / Porter",
+          "L5 Product": "Dark, roasted-malt dominant, top-fermented"
+        },
+        {
+          "ID": "OT-4",
+          "Output Type": "Wheat Beer",
+          "L5 Product": "≥50% wheat malt, top-fermented, hazy or filtered"
+        },
+        {
+          "ID": "OT-5",
+          "Output Type": "Non-alcoholic Beer",
+          "L5 Product": "Dealcoholized or arrested-fermentation malt beverage"
+        },
+        {
+          "ID": "OT-6",
+          "Output Type": "Hard Seltzer / FMB",
+          "L5 Product": "Fermented sugar base, flavored, carbonated, low-calorie"
+        },
+        {
+          "ID": "OT-7",
+          "Output Type": "Sour / Wild Ale",
+          "L5 Product": "Mixed fermentation, acid-dominant, barrel/foudre aged"
+        },
+        {
+          "ID": "OT-8",
+          "Output Type": "Seasonal / Specialty",
+          "L5 Product": "Base style + seasonal ingredient module (pumpkin, spice, Märzen, radler)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Function",
+        "OT-1",
+        "OT-2",
+        "OT-3",
+        "OT-4",
+        "OT-5",
+        "OT-6",
+        "OT-7",
+        "OT-8"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "**L4.1 Fermented Liquid Assembly**",
+          "Function": "Core liquid: water + fermentables + hops + yeast metabolites",
+          "OT-1": "✓",
+          "OT-2": "✓",
+          "OT-3": "✓",
+          "OT-4": "✓",
+          "OT-5": "✓",
+          "OT-6": "✓",
+          "OT-7": "✓",
+          "OT-8": "✓"
+        },
+        {
+          "L4 Subsystem": "**L4.2 Carbonation Module**",
+          "Function": "CO₂ dissolved in finished product",
+          "OT-1": "✓",
+          "OT-2": "✓",
+          "OT-3": "✓",
+          "OT-4": "✓",
+          "OT-5": "✓",
+          "OT-6": "✓",
+          "OT-7": "✓",
+          "OT-8": "✓"
+        },
+        {
+          "L4 Subsystem": "**L4.3 Stabilization & Clarity**",
+          "Function": "Filtration, fining, antioxidant treatment",
+          "OT-1": "✓",
+          "OT-2": "✓",
+          "OT-3": "✓",
+          "OT-4": "(hazy)",
+          "OT-5": "✓",
+          "OT-6": "✓",
+          "OT-7": "(minimal)",
+          "OT-8": "✓"
+        },
+        {
+          "L4 Subsystem": "**L4.4 Primary Packaging Assembly**",
+          "Function": "Container + closure reaching the consumer",
+          "OT-1": "✓",
+          "OT-2": "✓",
+          "OT-3": "✓",
+          "OT-4": "✓",
+          "OT-5": "✓",
+          "OT-6": "✓",
+          "OT-7": "✓",
+          "OT-8": "✓"
+        },
+        {
+          "L4 Subsystem": "**L4.5 Label & Secondary Packaging**",
+          "Function": "Brand presentation + transport unit",
+          "OT-1": "✓",
+          "OT-2": "✓",
+          "OT-3": "✓",
+          "OT-4": "✓",
+          "OT-5": "✓",
+          "OT-6": "✓",
+          "OT-7": "✓",
+          "OT-8": "✓"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share",
+        "Trend",
+        "OT",
+        "Confidence",
+        "Source"
+      ],
+      "rows": [
+        {
+          "Alternative": "Barley malt (2-row / 6-row base malt)",
+          "Share": "62%",
+          "Trend": "Stable",
+          "OT": "All beer OTs",
+          "Confidence": "HIGH",
+          "Source": "Brewers Association 2024"
+        },
+        {
+          "Alternative": "Corn adjunct (flakes, grits, syrup)",
+          "Share": "10%",
+          "Trend": "Stable",
+          "OT": "OT-1 macro lager",
+          "Confidence": "HIGH",
+          "Source": "USDA"
+        },
+        {
+          "Alternative": "Wheat malt",
+          "Share": "8%",
+          "Trend": "↑ Growing",
+          "OT": "OT-4, OT-2 hefeweizen",
+          "Confidence": "HIGH",
+          "Source": "BA 2024"
+        },
+        {
+          "Alternative": "Specialty / crystal / roasted malt (added to base)",
+          "Share": "8%",
+          "Trend": "Stable",
+          "OT": "OT-3 (heavy), OT-2",
+          "Confidence": "HIGH",
+          "Source": "BA 2024"
+        },
+        {
+          "Alternative": "Rice adjunct",
+          "Share": "5%",
+          "Trend": "Stable",
+          "OT": "OT-1 (Anheuser-Busch profile)",
+          "Confidence": "HIGH",
+          "Source": "USDA"
+        },
+        {
+          "Alternative": "Sugar (sucrose / dextrose)",
+          "Share": "5%",
+          "Trend": "↑ Growing",
+          "OT": "OT-5, OT-6",
+          "Confidence": "HIGH",
+          "Source": "BA 2024"
+        },
+        {
+          "Alternative": "Alternative grains (oats, rye, sorghum, millet)",
+          "Share": "2%",
+          "Trend": "↑ Emerging",
+          "OT": "OT-2, gluten-free",
+          "Confidence": "MEDIUM",
+          "Source": "analyst estimate"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share",
+        "Trend",
+        "Confidence",
+        "Source"
+      ],
+      "rows": [
+        {
+          "Alternative": "Hop pellets T-90 (compressed whole-leaf)",
+          "Share": "55%",
+          "Trend": "↓ Slight decline",
+          "Confidence": "HIGH",
+          "Source": "Barth-Haas Hop Report 2024"
+        },
+        {
+          "Alternative": "Hop extracts (CO₂ extract / isomerized alpha-acid)",
+          "Share": "28%",
+          "Trend": "↑ Growing",
+          "Confidence": "HIGH",
+          "Source": "Barth-Haas 2024"
+        },
+        {
+          "Alternative": "Whole cone hops (fresh / dried)",
+          "Share": "10%",
+          "Trend": "Stable",
+          "Confidence": "MEDIUM",
+          "Source": "craft segment data"
+        },
+        {
+          "Alternative": "Cryo / LupuLN₂ hop products (concentrated lupulin)",
+          "Share": "5%",
+          "Trend": "↑ Emerging",
+          "Confidence": "MEDIUM",
+          "Source": "analyst estimate"
+        },
+        {
+          "Alternative": "Non-hop bittering agents (gentian, wormwood, grains of paradise)",
+          "Share": "2%",
+          "Trend": "Stable niche",
+          "Confidence": "LOW",
+          "Source": "—"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share",
+        "Trend",
+        "Confidence"
+      ],
+      "rows": [
+        {
+          "Alternative": "*Saccharomyces cerevisiae* (ale, top-fermenting)",
+          "Share": "45%",
+          "Trend": "Stable",
+          "Confidence": "HIGH"
+        },
+        {
+          "Alternative": "*Saccharomyces pastorianus* (lager, bottom-fermenting)",
+          "Share": "45%",
+          "Trend": "Stable",
+          "Confidence": "HIGH"
+        },
+        {
+          "Alternative": "*Brettanomyces* / mixed-culture (sour / wild ale)",
+          "Share": "5%",
+          "Trend": "↑ Growing",
+          "Confidence": "MEDIUM"
+        },
+        {
+          "Alternative": "Kveik strains (Norwegian farmhouse)",
+          "Share": "3%",
+          "Trend": "↑ Emerging",
+          "Confidence": "MEDIUM"
+        },
+        {
+          "Alternative": "Non-*Saccharomyces* / adjunct yeast blends",
+          "Share": "2%",
+          "Trend": "↑ Emerging",
+          "Confidence": "LOW"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share",
+        "Trend",
+        "Confidence",
+        "Source"
+      ],
+      "rows": [
+        {
+          "Alternative": "Industrial bulk CO₂ (truck delivery, liquid)",
+          "Share": "50%",
+          "Trend": "↓ Declining",
+          "Confidence": "HIGH",
+          "Source": "industry reports 2024"
+        },
+        {
+          "Alternative": "Recovered fermentation CO₂ (on-site capture + purification)",
+          "Share": "45%",
+          "Trend": "↑ Growing",
+          "Confidence": "HIGH",
+          "Source": "CO₂ recovery ROI reports 2024"
+        },
+        {
+          "Alternative": "Nitrogen blend (widget / Guinness-type stout dispensing)",
+          "Share": "5%",
+          "Trend": "Stable",
+          "Confidence": "HIGH",
+          "Source": "—"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share",
+        "Trend",
+        "Confidence",
+        "Source"
+      ],
+      "rows": [
+        {
+          "Alternative": "Kieselguhr (diatomaceous earth) depth filtration",
+          "Share": "45%",
+          "Trend": "↓ Declining",
+          "Confidence": "HIGH",
+          "Source": "Brewing industry reports 2024"
+        },
+        {
+          "Alternative": "Sheet / cartridge filtration (cellulose or perlite)",
+          "Share": "25%",
+          "Trend": "Stable",
+          "Confidence": "HIGH",
+          "Source": "—"
+        },
+        {
+          "Alternative": "Cross-flow / membrane filtration (ceramic or polymer)",
+          "Share": "20%",
+          "Trend": "↑ Growing",
+          "Confidence": "HIGH",
+          "Source": "GEA / Pall Corp product data"
+        },
+        {
+          "Alternative": "Centrifugal separation (no filter media)",
+          "Share": "8%",
+          "Trend": "↑ Growing",
+          "Confidence": "HIGH",
+          "Source": "Alfa Laval/GEA market data"
+        },
+        {
+          "Alternative": "None — hazy / unfiltered (craft segment)",
+          "Share": "2%",
+          "Trend": "↑ Growing",
+          "Confidence": "MEDIUM",
+          "Source": "Brewers Association craft trends"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share",
+        "Confidence"
+      ],
+      "rows": [
+        {
+          "Alternative": "Isinglass (fish collagen, post-fermentation)",
+          "Share": "35%",
+          "Confidence": "MEDIUM"
+        },
+        {
+          "Alternative": "Bentonite (montmorillonite clay)",
+          "Share": "30%",
+          "Confidence": "HIGH"
+        },
+        {
+          "Alternative": "Silica gel (kieselsol, colloidal)",
+          "Share": "20%",
+          "Confidence": "HIGH"
+        },
+        {
+          "Alternative": "Carrageenan / Irish moss (whirlpool addition)",
+          "Share": "10%",
+          "Confidence": "HIGH"
+        },
+        {
+          "Alternative": "None (centrifuge / membrane sufficient)",
+          "Share": "5%",
+          "Confidence": "MEDIUM"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share",
+        "Trend",
+        "Confidence",
+        "Source"
+      ],
+      "rows": [
+        {
+          "Alternative": "Aluminum can (12 oz / 16 oz, 2-piece drawn)",
+          "Share": "60%",
+          "Trend": "↑ Growing",
+          "Confidence": "HIGH",
+          "Source": "Beer Institute 2024"
+        },
+        {
+          "Alternative": "Glass bottle (12 oz long-neck / 22 oz)",
+          "Share": "25%",
+          "Trend": "↓ Declining",
+          "Confidence": "HIGH",
+          "Source": "Beer Institute 2024"
+        },
+        {
+          "Alternative": "Stainless keg (1/2-bbl, 1/4-bbl, 1/6-bbl)",
+          "Share": "13%",
+          "Trend": "Stable",
+          "Confidence": "HIGH",
+          "Source": "NBWA 2024"
+        },
+        {
+          "Alternative": "PET bottle (export / single-serve plastic)",
+          "Share": "1%",
+          "Trend": "Stable",
+          "Confidence": "MEDIUM",
+          "Source": "—"
+        },
+        {
+          "Alternative": "Bag-in-box / bulk bag (export, event)",
+          "Share": "1%",
+          "Trend": "Stable",
+          "Confidence": "LOW",
+          "Source": "—"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share",
+        "Trend",
+        "Confidence"
+      ],
+      "rows": [
+        {
+          "Alternative": "Aluminum can lid with pull-tab (B64 / CDL)",
+          "Share": "60%",
+          "Trend": "↑",
+          "Confidence": "HIGH"
+        },
+        {
+          "Alternative": "Crown cap (26mm / 29mm, tin-coated steel)",
+          "Share": "25%",
+          "Trend": "↓",
+          "Confidence": "HIGH"
+        },
+        {
+          "Alternative": "Keg spear + coupler port (D-type US, S-type Euro)",
+          "Share": "13%",
+          "Trend": "Stable",
+          "Confidence": "HIGH"
+        },
+        {
+          "Alternative": "Swing-top / Bügelverschluss (specialty / export)",
+          "Share": "1%",
+          "Trend": "Stable",
+          "Confidence": "MEDIUM"
+        },
+        {
+          "Alternative": "Screw cap (PET)",
+          "Share": "1%",
+          "Trend": "Stable",
+          "Confidence": "MEDIUM"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "VN Position",
+        "L6 System",
+        "What Sensor Measures",
+        "Connection to BOM"
+      ],
+      "rows": [
+        {
+          "VN Position": "**Primary**",
+          "L6 System": "L6.6 Glycol Cooling",
+          "What Sensor Measures": "Glycol/water mass flow to fermenter jackets and bright tanks",
+          "Connection to BOM": "Controls temperature → yeast metabolite profile → L3.4 quality"
+        },
+        {
+          "VN Position": "**Secondary**",
+          "L6 System": "L6.7 CIP & Sanitation",
+          "What Sensor Measures": "Water + caustic + acid flow through vessel circuits",
+          "Connection to BOM": "Vessel sterility → L4.3 stability"
+        },
+        {
+          "VN Position": "**Tertiary**",
+          "L6 System": "L6.8 Water Treatment",
+          "What Sensor Measures": "Brewing liquor flow to mash tun and kettle",
+          "Connection to BOM": "L3.1 water volume / recipe accuracy"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "naics": "312120",
+      "industry": "Breweries",
+      "bom_root": "Packaged Beer",
+      "output_types": [
+        "Lager/Pilsner",
+        "Ale",
+        "Stout/Porter",
+        "Wheat Beer",
+        "Non-alcoholic Beer",
+        "Hard Seltzer/FMB",
+        "Sour/Wild Ale",
+        "Seasonal/Specialty"
+      ],
+      "l4_subsystems_generic": [
+        {
+          "id": "L4.1",
+          "name": "Fermented Liquid Assembly",
+          "l3_modules": [
+            {
+              "id": "L3.1",
+              "name": "Base Water",
+              "stop_level": "L0",
+              "note": "Universal; ~92% of beer by weight; no substitutable alternative"
+            },
+            {
+              "id": "L3.2",
+              "name": "Fermentable Substrate",
+              "alternatives": [
+                {
+                  "name": "Barley malt (2-row/6-row base)",
+                  "share_pct": 62,
+                  "trend": "stable"
+                },
+                {
+                  "name": "Corn adjunct",
+                  "share_pct": 10,
+                  "trend": "stable"
+                },
+                {
+                  "name": "Wheat malt",
+                  "share_pct": 8,
+                  "trend": "growing"
+                },
+                {
+                  "name": "Specialty/crystal/roasted malt",
+                  "share_pct": 8,
+                  "trend": "stable"
+                },
+                {
+                  "name": "Rice adjunct",
+                  "share_pct": 5,
+                  "trend": "stable"
+                },
+                {
+                  "name": "Sugar (sucrose/dextrose)",
+                  "share_pct": 5,
+                  "trend": "growing"
+                },
+                {
+                  "name": "Alternative grains (oats, rye, sorghum)",
+                  "share_pct": 2,
+                  "trend": "emerging"
+                }
+              ],
+              "confidence": "HIGH",
+              "source": "Brewers Association 2024 / USDA"
+            },
+            {
+              "id": "L3.3",
+              "name": "Bittering & Aromatic Agent",
+              "alternatives": [
+                {
+                  "name": "Hop pellets T-90",
+                  "share_pct": 55,
+                  "trend": "slight_decline"
+                },
+                {
+                  "name": "Hop extracts (CO2/isomerized)",
+                  "share_pct": 28,
+                  "trend": "growing"
+                },
+                {
+                  "name": "Whole cone hops",
+                  "share_pct": 10,
+                  "trend": "stable"
+                },
+                {
+                  "name": "Cryo/LupuLN2 hop products",
+                  "share_pct": 5,
+                  "trend": "emerging"
+                },
+                {
+                  "name": "Non-hop bittering agents",
+                  "share_pct": 2,
+                  "trend": "stable"
+                }
+              ],
+              "confidence": "HIGH",
+              "source": "Barth-Haas Hop Report 2024"
+            },
+            {
+              "id": "L3.4",
+              "name": "Fermentation Agent",
+              "alternatives": [
+                {
+                  "name": "Saccharomyces cerevisiae (ale)",
+                  "share_pct": 45,
+                  "trend": "stable"
+                },
+                {
+                  "name": "Saccharomyces pastorianus (lager)",
+                  "share_pct": 45,
+                  "trend": "stable"
+                },
+                {
+                  "name": "Brettanomyces / mixed culture",
+                  "share_pct": 5,
+                  "trend": "growing"
+                },
+                {
+                  "name": "Kveik strains",
+                  "share_pct": 3,
+                  "trend": "emerging"
+                },
+                {
+                  "name": "Non-Saccharomyces blends",
+                  "share_pct": 2,
+                  "trend": "emerging"
+                }
+              ],
+              "confidence": "MEDIUM",
+              "source": "analyst estimate"
+            }
+          ]
+        },
+        {
+          "id": "L4.2",
+          "name": "Carbonation Module",
+          "stop_level": "L0",
+          "alternatives": [
+            {
+              "name": "Industrial bulk CO2",
+              "share_pct": 50,
+              "trend": "declining"
+            },
+            {
+              "name": "Recovered fermentation CO2",
+              "share_pct": 45,
+              "trend": "growing"
+            },
+            {
+              "name": "Nitrogen blend (stout/widget)",
+              "share_pct": 5,
+              "trend": "stable"
+            }
+          ],
+          "confidence": "HIGH",
+          "source": "CO2 recovery industry reports 2024"
+        },
+        {
+          "id": "L4.3",
+          "name": "Stabilization & Clarity",
+          "l3_modules": [
+            {
+              "id": "L3.6",
+              "name": "Filtration",
+              "alternatives": [
+                {
+                  "name": "Kieselguhr depth filtration",
+                  "share_pct": 45,
+                  "trend": "declining"
+                },
+                {
+                  "name": "Sheet/cartridge filtration",
+                  "share_pct": 25,
+                  "trend": "stable"
+                },
+                {
+                  "name": "Cross-flow/membrane filtration",
+                  "share_pct": 20,
+                  "trend": "growing"
+                },
+                {
+                  "name": "Centrifugal separation",
+                  "share_pct": 8,
+                  "trend": "growing"
+                },
+                {
+                  "name": "None (hazy/unfiltered)",
+                  "share_pct": 2,
+                  "trend": "growing"
+                }
+              ],
+              "confidence": "HIGH",
+              "source": "Brewing industry reports 2024"
+            },
+            {
+              "id": "L3.7",
+              "name": "Fining Agent",
+              "stop_level": "L0",
+              "alternatives": [
+                {
+                  "name": "Isinglass (fish collagen)",
+                  "share_pct": 35,
+                  "trend": "stable"
+                },
+                {
+                  "name": "Bentonite (clay)",
+                  "share_pct": 30,
+                  "trend": "stable"
+                },
+                {
+                  "name": "Silica gel (kieselsol)",
+                  "share_pct": 20,
+                  "trend": "stable"
+                },
+                {
+                  "name": "Carrageenan/Irish moss",
+                  "share_pct": 10,
+                  "trend": "stable"
+                },
+                {
+                  "name": "None",
+                  "share_pct": 5,
+                  "trend": "stable"
+                }
+              ],
+              "confidence": "MEDIUM"
+            }
+          ]
+        },
+        {
+          "id": "L4.4",
+          "name": "Primary Packaging Assembly",
+          "l3_modules": [
+            {
+              "id": "L3.9",
+              "name": "Primary Container",
+              "alternatives": [
+                {
+                  "name": "Aluminum can (12oz/16oz)",
+                  "share_pct": 60,
+                  "trend": "growing"
+                },
+                {
+                  "name": "Glass bottle (12oz/22oz)",
+                  "share_pct": 25,
+                  "trend": "declining"
+                },
+                {
+                  "name": "Stainless keg (1/2-bbl, 1/4-bbl)",
+                  "share_pct": 13,
+                  "trend": "stable"
+                },
+                {
+                  "name": "PET bottle",
+                  "share_pct": 1,
+                  "trend": "stable"
+                },
+                {
+                  "name": "Bag-in-box / bulk",
+                  "share_pct": 1,
+                  "trend": "stable"
+                }
+              ],
+              "confidence": "HIGH",
+              "source": "Beer Institute 2024 / NBWA 2024",
+              "l0_for_can": {
+                "l2": "Can body + can end assembly",
+                "l1": "Drawn aluminum can body; stamped aluminum end (B64/CDL)",
+                "l0": "Aluminum alloy sheet (3004-H19 body, 5182-H19 end)"
+              }
+            },
+            {
+              "id": "L3.10",
+              "name": "Closure / Seal",
+              "alternatives": [
+                {
+                  "name": "Aluminum can lid with pull-tab",
+                  "share_pct": 60,
+                  "trend": "growing"
+                },
+                {
+                  "name": "Crown cap (26/29mm steel)",
+                  "share_pct": 25,
+                  "trend": "declining"
+                },
+                {
+                  "name": "Keg spear (D-type / S-type)",
+                  "share_pct": 13,
+                  "trend": "stable"
+                },
+                {
+                  "name": "Swing-top / Bugelverschluss",
+                  "share_pct": 1,
+                  "trend": "stable"
+                },
+                {
+                  "name": "Screw cap (PET)",
+                  "share_pct": 1,
+                  "trend": "stable"
+                }
+              ],
+              "confidence": "HIGH"
+            }
+          ]
+        }
+      ],
+      "per_output_type_boms": [
+        {
+          "id": "OT-1",
+          "name": "Lager / Pilsner",
+          "fermentation": "bottom (S. pastorianus, 8–12 °C)",
+          "color_srm": "3–7",
+          "ibu_range": "15–25",
+          "carbonation_vol": "2.5–2.8",
+          "key_differentiators": [
+            "corn/rice adjuncts (macro path)",
+            "noble hops only",
+            "bright filtered",
+            "cold-conditioned 4–8 weeks"
+          ],
+          "dominant_substrate": "2-row barley malt (45%) or 2-row + corn (25%) or 2-row + rice (20%)",
+          "dominant_container": "Aluminum can 12oz (65%)",
+          "unique_modules": [],
+          "absent_modules": [
+            "L3.5 specialty additions",
+            "nitrogen carbonation"
+          ],
+          "confidence": "HIGH"
+        },
+        {
+          "id": "OT-2",
+          "name": "Ale (IPA / Pale / Amber)",
+          "fermentation": "top (S. cerevisiae, 15–22 °C)",
+          "color_srm": "5–18",
+          "ibu_range": "30–100",
+          "carbonation_vol": "2.2–2.8",
+          "key_differentiators": [
+            "high/varied hop rate",
+            "dry-hop module (IPA)",
+            "specialty malt diversity",
+            "NEIPA haze option"
+          ],
+          "dominant_substrate": "2-row pale malt 100% (55%) or 2-row + crystal (25%)",
+          "dominant_container": "Aluminum can 12oz/16oz (68%)",
+          "unique_modules": [
+            "L3.3a dry-hop module"
+          ],
+          "absent_modules": [],
+          "confidence": "HIGH"
+        },
+        {
+          "id": "OT-3",
+          "name": "Stout / Porter",
+          "fermentation": "top (S. cerevisiae, 16–22 °C)",
+          "color_srm": "30–80+",
+          "ibu_range": "20–45",
+          "carbonation_vol": "2.0–2.5",
+          "key_differentiators": [
+            "roasted barley/chocolate malt dominant",
+            "nitrogen carbonation (Guinness widget)",
+            "lactose option (milk stout)",
+            "keg share elevated for draught"
+          ],
+          "dominant_substrate": "Base 60% + roasted barley 15% + chocolate 15% + black patent 10%",
+          "dominant_container": "Aluminum can standard (35%) + keg (30%)",
+          "unique_modules": [
+            "nitrogen widget (L4.2 nitro path)",
+            "lactose addition (L3.5 milk stout)"
+          ],
+          "absent_modules": [
+            "L3.5 dry-hop"
+          ],
+          "confidence": "HIGH"
+        },
+        {
+          "id": "OT-4",
+          "name": "Wheat Beer (Hefeweizen / Witbier / American Wheat)",
+          "fermentation": "top (specialized S. cerevisiae Hefeweizen/Witbier strain)",
+          "color_srm": "3–12",
+          "ibu_range": "10–18",
+          "carbonation_vol": "2.8–4.0",
+          "key_differentiators": [
+            "≥50% wheat malt",
+            "specialized phenol-positive yeast (4VG)",
+            "unfiltered hazy tradition (Hefe)",
+            "Witbier: orange peel + coriander",
+            "bottle conditioning 40%+"
+          ],
+          "dominant_substrate": "Malted wheat ≥50% + 2-row barley (German Hefe 45%)",
+          "dominant_container": "Aluminum can 12oz/16oz (40%) or 500mL glass tall bottle (35%)",
+          "unique_modules": [
+            "L3.5 curaçao orange peel + coriander (Witbier path)",
+            "swing-top bottle closure (specialty path)"
+          ],
+          "absent_modules": [
+            "L3.3a dry-hop",
+            "nitrogen carbonation"
+          ],
+          "confidence": "HIGH"
+        },
+        {
+          "id": "OT-5",
+          "name": "Non-Alcoholic Beer (≤0.5% ABV)",
+          "fermentation": "limited (arrested) or full + dealcoholization",
+          "color_srm": "3–35 (style-dependent)",
+          "ibu_range": "10–30",
+          "carbonation_vol": "2.2–2.7",
+          "key_differentiators": [
+            "dealcoholization step (vacuum distillation, RO, or spinning cone)",
+            "body/flavor restoration module (glycerol, malt extract, natural flavor)",
+            "high PVPP fining for oxidation stability",
+            "low-attenuation or maltose-negative yeast"
+          ],
+          "dominant_substrate": "High-dextrin malt blend (arrested path 40%) or standard malt (dealcoholization path 35%)",
+          "dominant_container": "Aluminum can 12oz/330mL (60%)",
+          "unique_modules": [
+            "L3.5 body/flavor restoration (glycerol, malt extract, hop aroma extract)"
+          ],
+          "absent_modules": [
+            "nitrogen widget",
+            "dry-hop"
+          ],
+          "confidence": "HIGH"
+        },
+        {
+          "id": "OT-6",
+          "name": "Hard Seltzer / FMB",
+          "fermentation": "top (wine/champagne yeast EC-1118; ferments to dryness)",
+          "color_srm": "0–1 (water-clear)",
+          "ibu_range": "0–3",
+          "carbonation_vol": "3.0–3.5",
+          "key_differentiators": [
+            "sugar base (no grain malt)",
+            "no hops",
+            "wine/distiller yeast",
+            "fruit flavor post-fermentation",
+            "crystal clear mandatory",
+            "slim can dominant (75%)"
+          ],
+          "dominant_substrate": "Refined cane sugar (50%) or HFCS-55 (25%)",
+          "dominant_container": "Aluminum slim can 12oz/355mL (75%)",
+          "unique_modules": [
+            "L3.5 fruit flavor/color module (post-fermentation)",
+            "L3.8 ascorbic acid antioxidant (critical for flavor neutrality)"
+          ],
+          "absent_modules": [
+            "L3.2 grain malt",
+            "L3.3 hop bittering",
+            "nitrogen carbonation"
+          ],
+          "confidence": "HIGH"
+        },
+        {
+          "id": "OT-7",
+          "name": "Sour / Wild Ale",
+          "fermentation": "mixed (Brettanomyces + Lactobacillus + Pediococcus + Saccharomyces)",
+          "color_srm": "4–30 (style-dependent)",
+          "ibu_range": "5–15 (antimicrobial function, not bitterness)",
+          "carbonation_vol": "2.5–4.0 (bottle-conditioned Gueuze: 3.5+)",
+          "key_differentiators": [
+            "mixed microbial culture",
+            "aged hops (antimicrobial, not bitterness)",
+            "barrel/foudre aging (oak compounds migrate into liquid)",
+            "fruit additions (kriek, framboise)",
+            "cork+cage 750mL bottle (35%)"
+          ],
+          "dominant_substrate": "Pale malt + unmalted wheat (Lambic 35%) or pale malt + malted wheat (AWA 30%)",
+          "dominant_container": "750mL cork+cage glass (35%) or aluminum can 12oz/16oz (35%)",
+          "unique_modules": [
+            "L3.4 mixed culture (Brett + Lacto + Pedio)",
+            "L3.5 fruit additions (whole cherries, raspberry)",
+            "cork + muselet closure"
+          ],
+          "absent_modules": [
+            "nitrogen carbonation",
+            "bright filtration (Lambic tradition)"
+          ],
+          "confidence": "MEDIUM",
+          "source": "Cantillon, Drie Fonteinen, Allagash production data; Lambic.info; analyst estimate for US craft sour"
+        },
+        {
+          "id": "OT-8",
+          "name": "Seasonal / Specialty Beer",
+          "fermentation": "inherits from base style (lager or ale per sub-type)",
+          "color_srm": "3–40 (sub-type dependent)",
+          "ibu_range": "15–50 (sub-type dependent)",
+          "carbonation_vol": "2.3–2.8",
+          "key_differentiators": [
+            "L3.5 seasonal ingredient module is the sole differentiating BOM position",
+            "base style (L4.1) inherits from OT-1 or OT-2",
+            "limited-run / seasonal SKU"
+          ],
+          "sub_types": [
+            {
+              "name": "Pumpkin Beer",
+              "dominant_addition": "Cucurbita pepo puree + spice blend"
+            },
+            {
+              "name": "Winter Warmer",
+              "dominant_addition": "Cinnamon + star anise + vanilla"
+            },
+            {
+              "name": "Märzen/Oktoberfest",
+              "dominant_addition": "Vienna/Munich malt only (no L3.5)"
+            },
+            {
+              "name": "Summer Shandy/Radler",
+              "dominant_addition": "Lemon juice concentrate (30–50% blend)"
+            },
+            {
+              "name": "Barrel-Aged Specialty",
+              "dominant_addition": "Oak-derived vanillin + lactones (process-origin)"
+            }
+          ],
+          "dominant_container": "Aluminum can 12oz/16oz (55%) or glass bottle 12oz/22oz (30%)",
+          "unique_modules": [
+            "L3.5 seasonal ingredient module (pumpkin, spice, citrus juice — sub-type dependent)"
+          ],
+          "absent_modules": [
+            "nitrogen widget (except seasonal nitro stout)"
+          ],
+          "confidence": "MEDIUM",
+          "source": "Brewers Association seasonal category data 2024; Mintel beer category reports"
+        }
+      ],
+      "marquardt_sensor_position": {
+        "in_bom": false,
+        "in_vn": true,
+        "vn_positions": [
+          {
+            "priority": "primary",
+            "level": "L6.6",
+            "system": "Glycol Cooling & Refrigeration",
+            "measurement": "Glycol/water mass flow to fermenter jackets and bright tanks",
+            "bom_impact": "Temperature control → yeast metabolite profile (L3.4 quality)"
+          },
+          {
+            "priority": "secondary",
+            "level": "L6.7",
+            "system": "CIP & Sanitation",
+            "measurement": "Water + caustic + acid flow through vessel circuits",
+            "bom_impact": "Vessel sterility → L4.3 stability"
+          },
+          {
+            "priority": "tertiary",
+            "level": "L6.8",
+            "system": "Water Treatment & Liquor Supply",
+            "measurement": "Brewing liquor flow to mash tun and kettle",
+            "bom_impact": "L3.1 water volume and recipe accuracy"
+          }
+        ],
+        "failure_mode": "Glycol flow loss → temperature excursion during fermentation → diacetyl/ester off-flavors in L4.1 → batch loss ($15–80k per fermenter-batch at mid/large craft scale)"
+      }
+    }
+  ],
+  "has_bom": true,
+  "naics_sector_type": "manufacturing"
+}

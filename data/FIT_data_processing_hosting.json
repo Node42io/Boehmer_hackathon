@@ -1,0 +1,1045 @@
+{
+  "id": "FIT_data_processing_hosting",
+  "title": "Feature-Market Fit — Data Processing, Hosting, and Related Services (NAICS 518210)",
+  "type": "feature_market_fit",
+  "market_slug": "data_processing_hosting",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Step 09 — Technology-Level Feature-Market Fit",
+      "content": "Technology-scope features (01_product_decomposition) scored against JTBD_data_processing_hosting error statements (ES-01..ES-26). Safety-of-IT-load dominates the top opportunity stack — scoring weights reflect GPU thermal-runaway context.\n\n### 09a — Per-Market Kano + ODI Fit Scoring\n\n| Feature | Kano | Time | Cost | Safety | Reliab. | Skill | Stress | Pain | Confid. | Delight | Overall |\n|---|---|---|---|---|---|---|---|---|---|---|---|\n| **Transit-Time Flow Measurement** | must_be | 6 | 6 | 8 | 8 | 4 | 6 | 5 | 8 | 3 | **6.00** |\n| **Integrated Temperature Sensing** | attractive | 7 | 8 | 6 | 7 | 6 | 5 | 7 | 7 | 6 | **6.56** |\n| **Zero Pressure Drop Flow Path** | one_dimensional | 3 | 6 | 3 | 4 | 3 | 3 | 3 | 4 | 3 | **3.56** |\n| **No Moving Parts** | one_dimensional | 4 | 8 | 7 | 9 | 5 | 7 | 8 | 8 | 5 | **6.78** |\n| **Bidirectional Flow Detection** | attractive | 4 | 5 | 7 | 5 | 4 | 5 | 4 | 6 | 5 | **5.00** |\n| **Digital Anomaly Detection** | attractive | 8 | 7 | 9 | 7 | 7 | 8 | 6 | 9 | 7 | **7.56** |\n| **Real-Time Compensation Algorithms** | must_be | 3 | 5 | 5 | 7 | 5 | 4 | 4 | 6 | 3 | **4.67** |\n\n### 09a — Rationales\n\n**Transit-Time Flow Measurement** (must_be, 6.00): Commodity baseline — every flow alternative in JTBD-2.4 delivers flow quantification. Must_be because a CDU without flow telemetry cannot safely gate GPU load. Primary drivers: Reliability (8) and Confidence (8) — OCP 1.5 L/min/kW threshold (ES-08, imp=9) enforcement; Safety (8) — loss-of-flow detection <2s (ES-11, opp=16). [SRC: JTBD_dph ES-08, ES-11; OCP guidance]\n\n**Integrated Temperature Sensing** (attractive, 6.56): Directly addresses ES-12 (sub-second thermal duty kW = flow × ΔT from a single body, imp=8, opp=12, prod_related). Eliminates separate temperature probe and synchronization error between two sensors feeding the DCIM PUE calculation. Primary drivers: Cost (8) — removes second sensor BOM and wiring; Pain (7) — single commissioning touchpoint; Delight (6) — \"kW out of one can\" is genuinely surprising to CDU integrators. [SRC: JTBD_dph ES-12, ES-18]\n\n**Zero Pressure Drop Flow Path** (one_dimensional, 3.56): CDU secondary-loop pressure drop is dominated by the brazed-plate HX, cold-plate manifolds, and hoses — sensor contribution <50 mbar is marginal at 30 L/min (ES-13, imp=7, opp=8). Linear benefit to pump energy / PUE, but small magnitude. Primary driver: Cost (6) — pump energy savings. [SRC: 01_product_decomposition, JTBD_dph ES-13]\n\n**No Moving Parts** (one_dimensional, 6.78): High-value differentiator vs turbine/impeller incumbents (15% share) in 24×7 GPU fleet. Addresses ES-09 (±2% over 40,000 h, imp=9, opp=13). Bearing wear in turbine sensors silently degrades the flow reading that gates the OCP safety threshold. Primary drivers: Reliability (9) — eliminates mechanical failure modes in the loop that protects GPU thermal envelope; Pain (8) and Cost (8) — removes periodic replacement of in-loop sensors across hundreds of rack CDUs; Confidence (8) — stable calibration reduces false-throttle events (ES-16). [SRC: JTBD_dph ES-09, ES-16]\n\n**Bidirectional Flow Detection** (attractive, 5.00): Addresses ES-15 (reverse-flow detection within 1s, imp=7, opp=10, prod_related) — detects bypass-valve misoperation, mis-piped commissioning, or pump-failure siphon. Turbine and thermal-dispersion alternatives cannot resolve direction. Primary drivers: Safety (7) — detects anti-flow condition before GPU load energizes; Confidence (6) — unambiguous direction signal in the OCP safety interlock chain. [SRC: JTBD_dph ES-15]\n\n**Digital Anomaly Detection** (attractive, 7.56): **Highest-scoring feature.** Directly serves the top of the opportunity stack: empty-pipe pre-IT-power-on (ES-06, opp=15, prod_related), air entrainment after glycol top-up (ES-10, opp=12, prod_related), incipient leak signatures (ES-20, opp=14, prod_related). Traditional mechanical meters provide zero diagnostics. Primary drivers: Safety (9) — the empty-pipe and sub-threshold-leak signals are the gate and early-warning layer that prevent GPU thermal runaway; Confidence (9) — controller knows when a zero-flow reading is real vs diagnostic; Stress (8) — reduces operator anxiety during workload ramps. [SRC: JTBD_dph ES-06, ES-10, ES-20]\n\n**Real-Time Compensation Algorithms** (must_be, 4.67): Must_be because CDU secondary loops run water, PG25, or EG25 blends configured at commissioning (ES-03, prod_related). Without speed-of-sound compensation, a glycol-concentration change silently biases kW duty and PUE telemetry. Primary driver: Reliability (7) — reduces fluid-property-induced error from ~1.5% to ~0.2%. [SRC: 01_product_decomposition; JTBD_dph ES-03]\n\n### 09b — Validation Summary\n\n| Check | Result |\n|---|---|\n| Kano cross-market consistency | N/A — single market |\n| safety >= 7 AND confidence <= 3 | PASS — Digital Anomaly Detection: safety=9, confidence=9 (consistent) |\n| skill >= 7 AND stress <= 3 | PASS — no violations |\n| overall_fit arithmetic | PASS — all recomputed |\n| No feature scores 10 on all dimensions | PASS |\n| Feature names comply with 1.pdf rules | PASS — spec-visible noun phrases, no brands, no outcome claims |\n| Safety-critical coherence | PASS — Transit-Time, No Moving Parts, and Digital Anomaly all score safety >= 7, aligned with market's top 5 needs being safety-driven |\n\n---"
+    },
+    {
+      "title": "Step 10 — Product-Related Needs (Burleson Product Jobs)",
+      "content": "Needs that exist BECAUSE of ultrasonic transit-time technology. Each traces to a constraint in 01_product_decomposition. Litmus test: would the need disappear with electromagnetic or Coriolis measurement? If yes, retain.\n\n### 10a — Constraint-Derived Needs\n\n| ID | Source Constraint | Statement | Imp. | Sat. | Litmus |\n|---|---|---|---|---|---|\n| PRN-01 | Media Limitation | Minimize the likelihood of measurement drift from acoustic-impedance mismatch when facility-specific glycol inhibitor packages (corrosion, antimicrobial) alter the coolant's speed of sound beyond the commissioned compensation profile | 7 | 4 | PASS — electromagnetic (Faraday) unaffected by sound speed |\n| PRN-02 | Maximum Medium Temperature | Minimize the residual headroom concern when future ASHRAE W4/W5 warm-water liquid cooling drives CDU secondary-loop supply to the 90 °C polymer housing limit, capping the sensor's applicability in evolving high-efficiency thermal envelopes | 5 | 5 | PASS — metal-housed magnetic/Coriolis meters tolerate 130 °C+ |\n| PRN-03 | Minimum Flow Rate Detection | Minimize the unmeasured-flow window at the DN20 4.2 L/min SNR threshold during CDU idle / low-load states (single-GPU workloads, redundant-pump slew), below which the OCP 1.5 L/min/kW interlock cannot discriminate \"low flow\" from \"no flow\" | 8 | 4 | PASS — magnetic meters resolve sub-0.1 m/s, thermal switches binary |\n| PRN-04 | Air Bubble Tolerance | Minimize the probability of sub-threshold air entrainment (1–2 % vol) following glycol top-up or venting biasing flow telemetry fed to the OCP safety interlock, without triggering the >2 % loss-of-signal alarm | 8 | 3 | PASS — electromagnetic meters insensitive to air content |\n| PRN-05 | Pipe Full Condition | Minimize the time the CDU controller spends in empty-pipe fault state during secondary-loop drain-and-fill maintenance cycles, during which the sensor provides no measurement and the prove-flow gate cannot be satisfied | 7 | 4 | PASS — mechanical impellers still rotate in partial fill |\n| PRN-06 | Minimum Straight Pipe Run | Minimize the installation-induced flow-profile bias from insufficient upstream straight-pipe run (<5× DN) inside space-constrained rack CDU manifolds where single-chord acoustic path sampling cannot correct for swirl | 7 | 5 | PASS — multi-path ultrasonic or magnetic meters less path-profile sensitive |\n| PRN-07 | Temperature-Dependent Accuracy | Minimize the transient kW duty miscalculation when a GPU workload spike drives secondary-supply temperature transients >5 °C/min that outpace the NTC thermistor's compensation response, during which flow × ΔT telemetry deviates from true thermal load | 7 | 5 | PASS — magnetic measurement is temperature-independent by principle |\n| PRN-08 | Maximum Operating Pressure | Minimize the deployment gap at hyperscaler facility-loop pressures exceeding 10 bar (high-head centralized-pump architectures, water-hammer on rapid valve closure) where the polymer housing rating forecloses direct-facility-loop installation and forces placement downstream of the brazed-plate HX | 5 | 4 | PASS — metal-bodied magnetic/Coriolis withstand 16–40 bar |\n\n### 10a — Deduplication Check\n\n| Step 10 Need | JTBD P1 Need | Overlap? | Resolution |\n|---|---|---|---|\n| PRN-01 (glycol inhibitor acoustic drift) | ES-03 (fluid acoustic commissioning) | Different scope | ES-03 is commissioning-time configuration (product_related); PRN-01 is ongoing in-service drift from inhibitor chemistry |\n| PRN-02 (90 °C ASHRAE W4/W5 headroom) | — | Unique | Forward-looking constraint gap |\n| PRN-03 (SNR threshold vs OCP) | ES-08 (OCP 1.5 L/min/kW) | Different level | ES-08 is the market safety rule; PRN-03 is the ultrasonic-specific detection-floor consequence |\n| PRN-04 (sub-threshold air bias) | ES-10 (air entrainment signal loss, prod_related) | Complementary | ES-10 covers signal-loss alarm; PRN-04 covers silent bias below that threshold |\n| PRN-05 (empty-pipe maintenance blackout) | ES-06 (empty-pipe pre-IT power-on, prod_related) | Different phase | ES-06 is pre-energization gate; PRN-05 is in-service maintenance measurement gap |\n| PRN-06 (single-chord path bias in rack CDU) | ES-04 (installation orientation bias) | Different mechanism | ES-04 is generic orientation; PRN-06 is ultrasonic-specific path sampling in compact manifolds |\n| PRN-07 (speed-of-sound transient) | ES-21 (acoustic-coupling drift, prod_related) | Different timescale | ES-21 is 5-year drift; PRN-07 is sub-minute transient lag |\n| PRN-08 (10 bar facility-loop pressure) | — | Unique | Facility-side placement constraint |\n\n### 10b — Validation Summary\n\n| Check | Result |\n|---|---|\n| Litmus test (all needs technology-specific) | PASS — all 8 disappear with electromagnetic, Coriolis, or vortex technology |\n| Source constraint traceability | PASS — each traces to a named constraint in 01_product_decomposition |\n| Affected market plausibility | PASS — all 8 manifest in CDU secondary-loop context |\n| Completeness (every constraint covered) | PASS — all 8 constraints each generate one need |\n| No importance < 3 AND satisfaction > 7 | PASS |\n\n---"
+    },
+    {
+      "title": "Step 11 — Vendor Feature-Market Fit (Marquardt vs Incumbent)",
+      "content": "Vendor-scope features scored against NAICS 518210 CDU liquid-cooling market. Best incumbent: **Endress+Hauser Promag H (electromagnetic)** — magnetic transit-time is the leading alternative in DLC/CDU secondary-loop flow metering (~35 % share, rising with AI GPU rack deployment). [SRC: JTBD_dph-2.4; Mass Flow Online; IoThrifty]\n\n### 11a — Vendor vs Incumbent Comparison\n\n| Feature | Kano | Vendor | Incumbent | Inc. Technology | Advantage |\n|---|---|---|---|---|---|\n| **Modular Pipe Diameter Variants** | one_dimensional | 5 | 8 | Electromagnetic (E+H Promag H) | **inferior** |\n| **Customizable Communication Interface** | must_be | 3 | 9 | Electromagnetic (E+H Promag H) | **inferior** |\n| **Customizable Mechanical Interface** | attractive | 7 | 6 | Electromagnetic (E+H Promag H) | **superior** |\n| **Low-Energy Battery Mode** | indifferent | 6 | 2 | Electromagnetic (E+H Promag H) | **parity** |\n| **Pre-Calibrated Delivery** | must_be | 7 | 8 | Electromagnetic (E+H Promag H) | **parity** |\n| **KTW/WRAS Drinking Water Approval** | indifferent | 7 | 4 | Electromagnetic (E+H Promag H) | **parity** |\n\n### 11a — Rationales\n\n**Modular Pipe Diameter Variants** (one_dimensional, inferior): Marquardt DN12/14/20/25 shares RAST 2.5 electronics, but only DN20 is serial-production. CDU OEMs (Vertiv, nVent, Motivair) need DN15–DN25 for secondary-loop and DN6–DN10 for cold-plate taps — Marquardt covers the secondary-loop band only, single production variant. E+H Promag H covers DN2–DN150 in full production with the same transmitter. Addresses ES-02 (single platform DN15–DN25, imp=7, prod_related). [SRC: 01_product_decomposition]\n\n**Customizable Communication Interface** (must_be, inferior): **Largest capability gap.** CDU BMS stacks standardize on Modbus RTU/TCP, BACnet/IP, MQTT, and increasingly OPC-UA for DCIM integration (ES-05, imp=7). Marquardt ships UART/LIN/frequency — protocols native to automotive/appliance OEM, with zero BMS overlap. E+H Promag H provides HART, Modbus, PROFIBUS/PROFINET, EtherNet/IP out of the box. Must_be in this market — CDU integrators will not design a custom gateway for a sensor. [SRC: JTBD_dph ES-05]\n\n**Customizable Mechanical Interface** (attractive, superior): Threaded and plug-in connections fit the CDU OEM assembly line — rack CDUs use compact manifolds with quick-connect fittings for field-replaceable modules. E+H Promag H uses flanged or threaded industrial fittings sized for process-plant installation, not rack-CDU serviceability. Marquardt's plug-in option directly serves ES-22 (replace sensor without draining loop or taking CDU offline, imp=8, opp=13). [SRC: 01_product_decomposition; JTBD_dph ES-22]\n\n**Low-Energy Battery Mode** (indifferent, parity): CDUs are mains-powered — battery operation is not a requirement for this market. Marquardt's <5 μA mode is a capability without a buyer here; E+H Promag H is loop-powered with HART and does not support battery operation. Both score on a dimension that does not matter — hence parity on an indifferent Kano class. [SRC: 01_product_decomposition]\n\n**Pre-Calibrated Delivery** (must_be, parity): Marquardt ships 100 %-automated final-test calibration to customer-specified medium. E+H Promag H delivers factory-calibrated with 3.1 material certificates and optional ISO 17025 traceability — the CDU-integrator standard. Both satisfy the commissioning-ready baseline (ES-04, imp=8). No MID-equivalent is required in data-center cooling (unlike district energy), so Marquardt's calibration package is competitive. [SRC: 01_product_decomposition]\n\n**KTW/WRAS Drinking Water Approval** (indifferent, parity): CDU secondary loops use treated, inhibited coolant (DI water, PG25, EG25), not potable water. The certification is not a purchase criterion in this market. Both scores reflect that neither vendor's potable-water position drives adoption — parity on an indifferent dimension. [SRC: 01_product_decomposition]\n\n### 11b — Objectivity Review\n\n| Check | Result |\n|---|---|\n| Vendor bias (>70 % superior) | PASS — 1 superior / 3 parity / 2 inferior (17 % superior). Marquardt is an HVAC/appliance OEM sensor entering a data-center market dominated by E+H / Siemens / Krohne. |\n| Anti-vendor bias (>70 % inferior) | PASS — 33 % inferior. Justified: Marquardt's protocol suite and variant coverage lag the purpose-built industrial line. |\n| Advantage classification arithmetic | PASS — all gaps verified |\n| Kano must_be scores >= 5 | FAIL on Customizable Communication Interface — vendor=3 on must_be. Flagged as primary integration barrier, not scoring error. |\n| Rationale specificity | PASS — all reference specific vendor specs vs incumbent capabilities |\n\n### Market Entry Assessment Summary\n\n| Dimension | Verdict | Key Issue |\n|---|---|---|\n| Technology fit | **Strong** | Ultrasonic transit-time is the second-leading CDU flow technology (30 % and rising); no-wear + integrated temp + digital diagnostics directly address the top-5 safety needs |\n| Product fit | **Strong** | DN20, 90 °C, 10 bar envelope matches rack-CDU secondary-loop operating point (W3/W4 ASHRAE class, 3–6 bar typical); constraint set is compatible with the present GPU-cooling deployment reality |\n| Vendor fit | **Weak** | Missing Modbus/BACnet/MQTT protocols — single largest adoption barrier; serial production limited to DN20; no data-center reference deployments |\n| Competitive position | **Component OEM to CDU makers** | Strongest go-to-market: supply sensor module to Vertiv / nVent / Motivair / CoolIT with a protocol-bridge firmware variant (UART → Modbus) on the CDU controller side. Avoid direct sale to hyperscalers until an OT-ready communication variant exists. |\n\n---"
+    },
+    {
+      "title": "QA Checklist",
+      "content": "| # | Check | Result |\n|---|---|---|\n| 1 | All 7 technology-scope features assessed | PASS |\n| 2 | Kano classification with rationale per feature | PASS |\n| 3 | 9-dimension ODI scores with recomputed overall_fit | PASS |\n| 4 | Product-related needs trace to specific constraints | PASS — all 8 trace to named constraints |\n| 5 | Litmus test applied to all product-related needs | PASS — all disappear with different technology |\n| 6 | No duplication with JTBD P1 needs | PASS — deduplication table provided |\n| 7 | Vendor features assessed against best incumbent | PASS — E+H Promag H (electromagnetic, 35 % share) |\n| 8 | Objectivity review on vendor scoring | PASS — 17 % superior, no bias detected |\n| 9 | Source tags on all factual claims | PASS |\n| 10 | Web search NOT used | PASS — all derived from upstream files |\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"feature_market_fit\",\n  \"naics_code\": \"518210\",\n  \"naics_title\": \"Data Processing, Hosting, and Related Services\",\n  \"market_name\": \"Data Processing, Hosting, and Related Services\",\n  \"product_name\": \"Ultrasonic Flow Sensor\",\n  \"vendor_name\": \"Marquardt\",\n  \"technology_class\": \"Ultrasonic Transit-Time Flow Measurement\",\n  \"step_09_tech_feature_market_fit\": {\n    \"features_assessed\": 7,\n    \"market_count\": 1,\n    \"entries\": [\n      {\n        \"feature_name\": \"Transit-Time Flow Measurement\",\n        \"market_name\": \"Data Processing, Hosting, and Related Services\",\n        \"naics_code\": \"518210\",\n        \"kano_class\": \"must_be\",\n        \"fit_score_time\": 6,\n        \"fit_score_cost\": 6,\n        \"fit_score_safety\": 8,\n        \"fit_score_reliability\": 8,\n        \"fit_score_skill\": 4,\n        \"fit_score_stress\": 6,\n        \"fit_score_pain\": 5,\n        \"fit_score_confidence\": 8,\n        \"fit_score_delight\": 3,\n        \"overall_fit\": 6.00,\n        \"rationale\": \"Commodity baseline — every flow alternative quantifies flow. Must_be because CDU cannot safely gate GPU load without it. Primary drivers: Reliability (8), Confidence (8) — OCP 1.5 L/min/kW threshold; Safety (8) — loss-of-flow <2s (ES-11, opp=16).\"\n      },\n      {\n        \"feature_name\": \"Integrated Temperature Sensing\",\n        \"market_name\": \"Data Processing, Hosting, and Related Services\",\n        \"naics_code\": \"518210\",\n        \"kano_class\": \"attractive\",\n        \"fit_score_time\": 7,\n        \"fit_score_cost\": 8,\n        \"fit_score_safety\": 6,\n        \"fit_score_reliability\": 7,\n        \"fit_score_skill\": 6,\n        \"fit_score_stress\": 5,\n        \"fit_score_pain\": 7,\n        \"fit_score_confidence\": 7,\n        \"fit_score_delight\": 6,\n        \"overall_fit\": 6.56,\n        \"rationale\": \"Addresses ES-12 (flow × ΔT kW duty from single body, opp=12, prod_related). Eliminates separate temp probe and sync error in PUE calculation. Primary drivers: Cost (8) — removes second sensor BOM; Pain (7) — single commissioning touchpoint; Delight (6) — 'kW from one can'.\"\n      },\n      {\n        \"feature_name\": \"Zero Pressure Drop Flow Path\",\n        \"market_name\": \"Data Processing, Hosting, and Related Services\",\n        \"naics_code\": \"518210\",\n        \"kano_class\": \"one_dimensional\",\n        \"fit_score_time\": 3,\n        \"fit_score_cost\": 6,\n        \"fit_score_safety\": 3,\n        \"fit_score_reliability\": 4,\n        \"fit_score_skill\": 3,\n        \"fit_score_stress\": 3,\n        \"fit_score_pain\": 3,\n        \"fit_score_confidence\": 4,\n        \"fit_score_delight\": 3,\n        \"overall_fit\": 3.56,\n        \"rationale\": \"CDU loop ΔP dominated by brazed-plate HX, cold-plate manifold, hoses. Sensor's <50 mbar contribution is marginal (ES-13, opp=8). Linear pump-energy/PUE benefit but small magnitude. Primary driver: Cost (6).\"\n      },\n      {\n        \"feature_name\": \"No Moving Parts\",\n        \"market_name\": \"Data Processing, Hosting, and Related Services\",\n        \"naics_code\": \"518210\",\n        \"kano_class\": \"one_dimensional\",\n        \"fit_score_time\": 4,\n        \"fit_score_cost\": 8,\n        \"fit_score_safety\": 7,\n        \"fit_score_reliability\": 9,\n        \"fit_score_skill\": 5,\n        \"fit_score_stress\": 7,\n        \"fit_score_pain\": 8,\n        \"fit_score_confidence\": 8,\n        \"fit_score_delight\": 5,\n        \"overall_fit\": 6.78,\n        \"rationale\": \"High-value differentiator vs turbine/impeller (15% share) in 24x7 GPU fleet. Addresses ES-09 (±2% over 40,000h, opp=13). Bearing wear silently degrades the OCP gating signal. Primary drivers: Reliability (9), Cost (8), Pain (8) — eliminates fleet-wide in-loop sensor replacement; Confidence (8) — reduces false-throttle events.\"\n      },\n      {\n        \"feature_name\": \"Bidirectional Flow Detection\",\n        \"market_name\": \"Data Processing, Hosting, and Related Services\",\n        \"naics_code\": \"518210\",\n        \"kano_class\": \"attractive\",\n        \"fit_score_time\": 4,\n        \"fit_score_cost\": 5,\n        \"fit_score_safety\": 7,\n        \"fit_score_reliability\": 5,\n        \"fit_score_skill\": 4,\n        \"fit_score_stress\": 5,\n        \"fit_score_pain\": 4,\n        \"fit_score_confidence\": 6,\n        \"fit_score_delight\": 5,\n        \"overall_fit\": 5.00,\n        \"rationale\": \"Addresses ES-15 (reverse-flow <1s, opp=10, prod_related) — detects bypass-valve misoperation, mis-piped commissioning, pump-failure siphon. Turbine and thermal switch cannot resolve direction. Primary drivers: Safety (7), Confidence (6).\"\n      },\n      {\n        \"feature_name\": \"Digital Anomaly Detection\",\n        \"market_name\": \"Data Processing, Hosting, and Related Services\",\n        \"naics_code\": \"518210\",\n        \"kano_class\": \"attractive\",\n        \"fit_score_time\": 8,\n        \"fit_score_cost\": 7,\n        \"fit_score_safety\": 9,\n        \"fit_score_reliability\": 7,\n        \"fit_score_skill\": 7,\n        \"fit_score_stress\": 8,\n        \"fit_score_pain\": 6,\n        \"fit_score_confidence\": 9,\n        \"fit_score_delight\": 7,\n        \"overall_fit\": 7.56,\n        \"rationale\": \"Highest-scoring feature. Serves top opportunity stack: empty-pipe pre-IT power-on (ES-06, opp=15), air entrainment post-glycol top-up (ES-10, opp=12), incipient leak (ES-20, opp=14). Mechanical meters have zero diagnostics. Primary drivers: Safety (9), Confidence (9) — the prevent-thermal-runaway layer.\"\n      },\n      {\n        \"feature_name\": \"Real-Time Compensation Algorithms\",\n        \"market_name\": \"Data Processing, Hosting, and Related Services\",\n        \"naics_code\": \"518210\",\n        \"kano_class\": \"must_be\",\n        \"fit_score_time\": 3,\n        \"fit_score_cost\": 5,\n        \"fit_score_safety\": 5,\n        \"fit_score_reliability\": 7,\n        \"fit_score_skill\": 5,\n        \"fit_score_stress\": 4,\n        \"fit_score_pain\": 4,\n        \"fit_score_confidence\": 6,\n        \"fit_score_delight\": 3,\n        \"overall_fit\": 4.67,\n        \"rationale\": \"Must_be — CDU loops run water/PG25/EG25 configured at commissioning (ES-03, prod_related). Without speed-of-sound compensation, glycol-concentration change silently biases kW duty and PUE. Primary driver: Reliability (7) — reduces error from ~1.5% to ~0.2%.\"\n      }\n    ]\n  },\n  \"step_10_product_related_needs\": {\n    \"technology_class\": \"Ultrasonic Transit-Time Flow Measurement\",\n    \"needs_count\": 8,\n    \"entries\": [\n      {\n        \"id\": \"PRN-01\",\n        \"statement\": \"Minimize the likelihood of measurement drift from acoustic-impedance mismatch when facility-specific glycol inhibitor packages alter the coolant's speed of sound beyond the commissioned compensation profile\",\n        \"source_constraint\": \"Media Limitation\",\n        \"affected_markets\": [\"Data Processing, Hosting, and Related Services\"],\n        \"importance\": 7,\n        \"satisfaction_current\": 4\n      },\n      {\n        \"id\": \"PRN-02\",\n        \"statement\": \"Minimize the residual headroom concern when future ASHRAE W4/W5 warm-water liquid cooling drives CDU secondary-loop supply to the 90C polymer housing limit\",\n        \"source_constraint\": \"Maximum Medium Temperature\",\n        \"affected_markets\": [\"Data Processing, Hosting, and Related Services\"],\n        \"importance\": 5,\n        \"satisfaction_current\": 5\n      },\n      {\n        \"id\": \"PRN-03\",\n        \"statement\": \"Minimize the unmeasured-flow window at the DN20 4.2 L/min SNR threshold during CDU idle / low-load states, below which the OCP 1.5 L/min/kW interlock cannot discriminate low flow from no flow\",\n        \"source_constraint\": \"Minimum Flow Rate Detection\",\n        \"affected_markets\": [\"Data Processing, Hosting, and Related Services\"],\n        \"importance\": 8,\n        \"satisfaction_current\": 4\n      },\n      {\n        \"id\": \"PRN-04\",\n        \"statement\": \"Minimize the probability of sub-threshold air entrainment (1-2% vol) following glycol top-up biasing flow telemetry fed to the OCP safety interlock without triggering the >2% loss-of-signal alarm\",\n        \"source_constraint\": \"Air Bubble Tolerance\",\n        \"affected_markets\": [\"Data Processing, Hosting, and Related Services\"],\n        \"importance\": 8,\n        \"satisfaction_current\": 3\n      },\n      {\n        \"id\": \"PRN-05\",\n        \"statement\": \"Minimize the time the CDU controller spends in empty-pipe fault state during secondary-loop drain-and-fill maintenance cycles where the prove-flow gate cannot be satisfied\",\n        \"source_constraint\": \"Pipe Full Condition\",\n        \"affected_markets\": [\"Data Processing, Hosting, and Related Services\"],\n        \"importance\": 7,\n        \"satisfaction_current\": 4\n      },\n      {\n        \"id\": \"PRN-06\",\n        \"statement\": \"Minimize the installation-induced flow-profile bias from insufficient upstream straight-pipe run (<5x DN) inside space-constrained rack CDU manifolds where single-chord acoustic path sampling cannot correct for swirl\",\n        \"source_constraint\": \"Minimum Straight Pipe Run\",\n        \"affected_markets\": [\"Data Processing, Hosting, and Related Services\"],\n        \"importance\": 7,\n        \"satisfaction_current\": 5\n      },\n      {\n        \"id\": \"PRN-07\",\n        \"statement\": \"Minimize the transient kW duty miscalculation when a GPU workload spike drives secondary-supply temperature transients >5C/min that outpace the NTC thermistor compensation response\",\n        \"source_constraint\": \"Temperature-Dependent Accuracy\",\n        \"affected_markets\": [\"Data Processing, Hosting, and Related Services\"],\n        \"importance\": 7,\n        \"satisfaction_current\": 5\n      },\n      {\n        \"id\": \"PRN-08\",\n        \"statement\": \"Minimize the deployment gap at hyperscaler facility-loop pressures exceeding 10 bar where the polymer housing rating forecloses direct-facility-loop installation and forces placement downstream of the brazed-plate HX\",\n        \"source_constraint\": \"Maximum Operating Pressure\",\n        \"affected_markets\": [\"Data Processing, Hosting, and Related Services\"],\n        \"importance\": 5,\n        \"satisfaction_current\": 4\n      }\n    ]\n  },\n  \"step_11_vendor_feature_market_fit\": {\n    \"vendor_name\": \"Marquardt\",\n    \"vendor_product\": \"US Flow Sensor (DN20 serial, DN12/DN14/DN25 development)\",\n    \"best_incumbent\": \"Endress+Hauser Promag H (electromagnetic)\",\n    \"best_incumbent_rationale\": \"Electromagnetic is the leading alternative in DLC/CDU secondary-loop metering (~35% share, rising with AI GPU deployment). E+H Promag H is the purpose-built industrial electromagnetic meter for hydronic / water-glycol service in the DN15-DN25 band covered by rack CDUs.\",\n    \"features_assessed\": 6,\n    \"entries\": [\n      {\n        \"feature_name\": \"Modular Pipe Diameter Variants\",\n        \"feature_description\": \"Serve multiple pipe sizes via interchangeable flow bodies sharing common electronics\",\n        \"market_name\": \"Data Processing, Hosting, and Related Services\",\n        \"naics_code\": \"518210\",\n        \"vendor_score\": 5,\n        \"best_incumbent_score\": 8,\n        \"best_incumbent_technology\": \"Electromagnetic (E+H Promag H)\",\n        \"advantage\": \"inferior\",\n        \"kano_class\": \"one_dimensional\",\n        \"rationale\": \"Marquardt DN12/14/20/25 shares RAST 2.5 electronics but only DN20 is serial-production. CDU OEMs need DN15-DN25 (secondary) and DN6-DN10 (cold-plate). E+H Promag H covers DN2-DN150 full production, same transmitter. Addresses ES-02 (imp=7).\"\n      },\n      {\n        \"feature_name\": \"Customizable Communication Interface\",\n        \"feature_description\": \"Support multiple digital communication protocols for host controller integration\",\n        \"market_name\": \"Data Processing, Hosting, and Related Services\",\n        \"naics_code\": \"518210\",\n        \"vendor_score\": 3,\n        \"best_incumbent_score\": 9,\n        \"best_incumbent_technology\": \"Electromagnetic (E+H Promag H)\",\n        \"advantage\": \"inferior\",\n        \"kano_class\": \"must_be\",\n        \"rationale\": \"Largest capability gap. CDU BMS standardizes on Modbus, BACnet, MQTT, OPC-UA (ES-05, imp=7). Marquardt ships UART/LIN/frequency — zero BMS overlap. E+H Promag H provides HART, Modbus, PROFIBUS/PROFINET, EtherNet/IP. Must_be in this market.\"\n      },\n      {\n        \"feature_name\": \"Customizable Mechanical Interface\",\n        \"feature_description\": \"Accept threaded or plug-in pipe connections for flexible installation\",\n        \"market_name\": \"Data Processing, Hosting, and Related Services\",\n        \"naics_code\": \"518210\",\n        \"vendor_score\": 7,\n        \"best_incumbent_score\": 6,\n        \"best_incumbent_technology\": \"Electromagnetic (E+H Promag H)\",\n        \"advantage\": \"superior\",\n        \"kano_class\": \"attractive\",\n        \"rationale\": \"Threaded + plug-in connections fit CDU OEM assembly lines with quick-connect fittings for field-replaceable rack CDU modules. E+H Promag H uses flanged industrial fittings sized for process plant. Marquardt's plug-in directly serves ES-22 (replace sensor without draining, imp=8, opp=13).\"\n      },\n      {\n        \"feature_name\": \"Low-Energy Battery Mode\",\n        \"feature_description\": \"Operate at ultra-low current consumption for battery-powered installations\",\n        \"market_name\": \"Data Processing, Hosting, and Related Services\",\n        \"naics_code\": \"518210\",\n        \"vendor_score\": 6,\n        \"best_incumbent_score\": 2,\n        \"best_incumbent_technology\": \"Electromagnetic (E+H Promag H)\",\n        \"advantage\": \"parity\",\n        \"kano_class\": \"indifferent\",\n        \"rationale\": \"CDUs are mains-powered. Marquardt's <5 uA capability has no buyer here; E+H Promag H is loop-powered with HART. Both score on a dimension the market does not value — parity on indifferent Kano class.\"\n      },\n      {\n        \"feature_name\": \"Pre-Calibrated Delivery\",\n        \"feature_description\": \"Ship fully calibrated and tested to customer-specific medium and flow profile\",\n        \"market_name\": \"Data Processing, Hosting, and Related Services\",\n        \"naics_code\": \"518210\",\n        \"vendor_score\": 7,\n        \"best_incumbent_score\": 8,\n        \"best_incumbent_technology\": \"Electromagnetic (E+H Promag H)\",\n        \"advantage\": \"parity\",\n        \"kano_class\": \"must_be\",\n        \"rationale\": \"Marquardt: 100% automated final-test calibration to customer medium. E+H Promag H: factory-calibrated with 3.1 material certs and optional ISO 17025 traceability. Both satisfy commissioning-ready baseline (ES-04, imp=8). No MID-equivalent required in data-center cooling.\"\n      },\n      {\n        \"feature_name\": \"KTW/WRAS Drinking Water Approval\",\n        \"feature_description\": \"Wetted parts approved for potable water contact per German and UK standards\",\n        \"market_name\": \"Data Processing, Hosting, and Related Services\",\n        \"naics_code\": \"518210\",\n        \"vendor_score\": 7,\n        \"best_incumbent_score\": 4,\n        \"best_incumbent_technology\": \"Electromagnetic (E+H Promag H)\",\n        \"advantage\": \"parity\",\n        \"kano_class\": \"indifferent\",\n        \"rationale\": \"CDU secondary loops use inhibited coolant (DI water, PG25, EG25), not potable. Certification not a purchase criterion. Parity on indifferent dimension — neither vendor's potable position drives adoption.\"\n      }\n    ],\n    \"advantage_distribution\": {\n      \"superior\": 1,\n      \"parity\": 3,\n      \"inferior\": 2,\n      \"note\": \"Marquardt has one real advantage (quick-connect serviceability for rack CDUs) and one must_be gap (BMS protocols). Three parity findings reflect that half of Marquardt's vendor-scope features target dimensions that do not matter in this market (battery, potable).\"\n    }\n  },\n  \"market_entry_assessment\": {\n    \"technology_fit\": \"strong\",\n    \"product_fit\": \"strong\",\n    \"vendor_fit\": \"weak\",\n    \"competitive_position\": \"component_oem_to_cdu_makers\",\n    \"primary_barrier\": \"missing Modbus/BACnet/MQTT communication protocols for CDU BMS integration\",\n    \"recommended_go_to_market\": \"Supply sensor module to Vertiv / nVent / Motivair / CoolIT with protocol-bridge firmware on CDU controller side. Avoid direct hyperscaler sale until OT-ready communication variant exists.\"\n  },\n  \"entities_produced\": {\n    \"nodes\": [\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"PRN-01..PRN-08 (first 120 chars)\", \"run_id\": \"TBD\"}, \"count\": 8, \"properties\": {\"product_related\": true}}\n    ],\n    \"relationships\": [\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Transit-Time Flow Measurement\", \"target\": \"Market:518210\", \"properties\": {\"feature_scope\": \"technology\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Integrated Temperature Sensing\", \"target\": \"Market:518210\", \"properties\": {\"feature_scope\": \"technology\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Zero Pressure Drop Flow Path\", \"target\": \"Market:518210\", \"properties\": {\"feature_scope\": \"technology\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:No Moving Parts\", \"target\": \"Market:518210\", \"properties\": {\"feature_scope\": \"technology\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Bidirectional Flow Detection\", \"target\": \"Market:518210\", \"properties\": {\"feature_scope\": \"technology\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Digital Anomaly Detection\", \"target\": \"Market:518210\", \"properties\": {\"feature_scope\": \"technology\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Real-Time Compensation Algorithms\", \"target\": \"Market:518210\", \"properties\": {\"feature_scope\": \"technology\"}},\n      {\"type\": \"generates_need\", \"source\": \"Constraint:Media Limitation\", \"target\": \"ErrorStatement:PRN-01\"},\n      {\"type\": \"generates_need\", \"source\": \"Constraint:Maximum Medium Temperature\", \"target\": \"ErrorStatement:PRN-02\"},\n      {\"type\": \"generates_need\", \"source\": \"Constraint:Minimum Flow Rate Detection\", \"target\": \"ErrorStatement:PRN-03\"},\n      {\"type\": \"generates_need\", \"source\": \"Constraint:Air Bubble Tolerance\", \"target\": \"ErrorStatement:PRN-04\"},\n      {\"type\": \"generates_need\", \"source\": \"Constraint:Pipe Full Condition\", \"target\": \"ErrorStatement:PRN-05\"},\n      {\"type\": \"generates_need\", \"source\": \"Constraint:Minimum Straight Pipe Run\", \"target\": \"ErrorStatement:PRN-06\"},\n      {\"type\": \"generates_need\", \"source\": \"Constraint:Temperature-Dependent Accuracy\", \"target\": \"ErrorStatement:PRN-07\"},\n      {\"type\": \"generates_need\", \"source\": \"Constraint:Maximum Operating Pressure\", \"target\": \"ErrorStatement:PRN-08\"},\n      {\"type\": \"has_product_need\", \"source\": \"NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement\", \"target\": \"ErrorStatement:PRN-01..PRN-08\"},\n      {\"type\": \"applies_to_market\", \"source\": \"ErrorStatement:PRN-01..PRN-08\", \"target\": \"Market:518210\"},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Modular Pipe Diameter Variants\", \"target\": \"Market:518210\", \"properties\": {\"feature_scope\": \"vendor\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Customizable Communication Interface\", \"target\": \"Market:518210\", \"properties\": {\"feature_scope\": \"vendor\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Customizable Mechanical Interface\", \"target\": \"Market:518210\", \"properties\": {\"feature_scope\": \"vendor\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Low-Energy Battery Mode\", \"target\": \"Market:518210\", \"properties\": {\"feature_scope\": \"vendor\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:Pre-Calibrated Delivery\", \"target\": \"Market:518210\", \"properties\": {\"feature_scope\": \"vendor\"}},\n      {\"type\": \"kano_for_market\", \"source\": \"Feature:KTW/WRAS Drinking Water Approval\", \"target\": \"Market:518210\", \"properties\": {\"feature_scope\": \"vendor\"}},\n      {\"type\": \"has_feature\", \"source\": \"Product:US Flow Sensor (Marquardt)\", \"target\": \"Feature:Modular Pipe Diameter Variants\"},\n      {\"type\": \"has_feature\", \"source\": \"Product:US Flow Sensor (Marquardt)\", \"target\": \"Feature:Customizable Communication Interface\"},\n      {\"type\": \"has_feature\", \"source\": \"Product:US Flow Sensor (Marquardt)\", \"target\": \"Feature:Customizable Mechanical Interface\"},\n      {\"type\": \"has_feature\", \"source\": \"Product:US Flow Sensor (Marquardt)\", \"target\": \"Feature:Low-Energy Battery Mode\"},\n      {\"type\": \"has_feature\", \"source\": \"Product:US Flow Sensor (Marquardt)\", \"target\": \"Feature:Pre-Calibrated Delivery\"},\n      {\"type\": \"has_feature\", \"source\": \"Product:US Flow Sensor (Marquardt)\", \"target\": \"Feature:KTW/WRAS Drinking Water Approval\"}\n    ]\n  }\n}\n```\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- 01_product_decomposition.md — Features, constraints, specifications, UNSPSC classification\n- JTBD_data_processing_hosting.md — CFJ, job map, alternatives, error statements (ES-01..ES-26)\n- VN_data_processing_hosting.md — Process VN, CDU parent L5, flow-sensor anchor\n- Marquardt Customer Presentation: \"US Flow Sensor\" (03.12.2025, CONFIDENTIAL)\n- OCP liquid-cooling guidance: 1.5 L/min/kW [via JTBD_dph]\n- Mass Flow Online, IoThrifty — magnetic vs ultrasonic share in DLC/CDU"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "Feature",
+        "Kano",
+        "Time",
+        "Cost",
+        "Safety",
+        "Reliab.",
+        "Skill",
+        "Stress",
+        "Pain",
+        "Confid.",
+        "Delight",
+        "Overall"
+      ],
+      "rows": [
+        {
+          "Feature": "**Transit-Time Flow Measurement**",
+          "Kano": "must_be",
+          "Time": "6",
+          "Cost": "6",
+          "Safety": "8",
+          "Reliab.": "8",
+          "Skill": "4",
+          "Stress": "6",
+          "Pain": "5",
+          "Confid.": "8",
+          "Delight": "3",
+          "Overall": "**6.00**"
+        },
+        {
+          "Feature": "**Integrated Temperature Sensing**",
+          "Kano": "attractive",
+          "Time": "7",
+          "Cost": "8",
+          "Safety": "6",
+          "Reliab.": "7",
+          "Skill": "6",
+          "Stress": "5",
+          "Pain": "7",
+          "Confid.": "7",
+          "Delight": "6",
+          "Overall": "**6.56**"
+        },
+        {
+          "Feature": "**Zero Pressure Drop Flow Path**",
+          "Kano": "one_dimensional",
+          "Time": "3",
+          "Cost": "6",
+          "Safety": "3",
+          "Reliab.": "4",
+          "Skill": "3",
+          "Stress": "3",
+          "Pain": "3",
+          "Confid.": "4",
+          "Delight": "3",
+          "Overall": "**3.56**"
+        },
+        {
+          "Feature": "**No Moving Parts**",
+          "Kano": "one_dimensional",
+          "Time": "4",
+          "Cost": "8",
+          "Safety": "7",
+          "Reliab.": "9",
+          "Skill": "5",
+          "Stress": "7",
+          "Pain": "8",
+          "Confid.": "8",
+          "Delight": "5",
+          "Overall": "**6.78**"
+        },
+        {
+          "Feature": "**Bidirectional Flow Detection**",
+          "Kano": "attractive",
+          "Time": "4",
+          "Cost": "5",
+          "Safety": "7",
+          "Reliab.": "5",
+          "Skill": "4",
+          "Stress": "5",
+          "Pain": "4",
+          "Confid.": "6",
+          "Delight": "5",
+          "Overall": "**5.00**"
+        },
+        {
+          "Feature": "**Digital Anomaly Detection**",
+          "Kano": "attractive",
+          "Time": "8",
+          "Cost": "7",
+          "Safety": "9",
+          "Reliab.": "7",
+          "Skill": "7",
+          "Stress": "8",
+          "Pain": "6",
+          "Confid.": "9",
+          "Delight": "7",
+          "Overall": "**7.56**"
+        },
+        {
+          "Feature": "**Real-Time Compensation Algorithms**",
+          "Kano": "must_be",
+          "Time": "3",
+          "Cost": "5",
+          "Safety": "5",
+          "Reliab.": "7",
+          "Skill": "5",
+          "Stress": "4",
+          "Pain": "4",
+          "Confid.": "6",
+          "Delight": "3",
+          "Overall": "**4.67**"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "Check": "Kano cross-market consistency",
+          "Result": "N/A — single market"
+        },
+        {
+          "Check": "safety >= 7 AND confidence <= 3",
+          "Result": "PASS — Digital Anomaly Detection: safety=9, confidence=9 (consistent)"
+        },
+        {
+          "Check": "skill >= 7 AND stress <= 3",
+          "Result": "PASS — no violations"
+        },
+        {
+          "Check": "overall_fit arithmetic",
+          "Result": "PASS — all recomputed"
+        },
+        {
+          "Check": "No feature scores 10 on all dimensions",
+          "Result": "PASS"
+        },
+        {
+          "Check": "Feature names comply with 1.pdf rules",
+          "Result": "PASS — spec-visible noun phrases, no brands, no outcome claims"
+        },
+        {
+          "Check": "Safety-critical coherence",
+          "Result": "PASS — Transit-Time, No Moving Parts, and Digital Anomaly all score safety >= 7, aligned with market's top 5 needs being safety-driven"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Source Constraint",
+        "Statement",
+        "Imp.",
+        "Sat.",
+        "Litmus"
+      ],
+      "rows": [
+        {
+          "ID": "PRN-01",
+          "Source Constraint": "Media Limitation",
+          "Statement": "Minimize the likelihood of measurement drift from acoustic-impedance mismatch when facility-specific glycol inhibitor packages (corrosion, antimicrobial) alter the coolant's speed of sound beyond the commissioned compensation profile",
+          "Imp.": "7",
+          "Sat.": "4",
+          "Litmus": "PASS — electromagnetic (Faraday) unaffected by sound speed"
+        },
+        {
+          "ID": "PRN-02",
+          "Source Constraint": "Maximum Medium Temperature",
+          "Statement": "Minimize the residual headroom concern when future ASHRAE W4/W5 warm-water liquid cooling drives CDU secondary-loop supply to the 90 °C polymer housing limit, capping the sensor's applicability in evolving high-efficiency thermal envelopes",
+          "Imp.": "5",
+          "Sat.": "5",
+          "Litmus": "PASS — metal-housed magnetic/Coriolis meters tolerate 130 °C+"
+        },
+        {
+          "ID": "PRN-03",
+          "Source Constraint": "Minimum Flow Rate Detection",
+          "Statement": "Minimize the unmeasured-flow window at the DN20 4.2 L/min SNR threshold during CDU idle / low-load states (single-GPU workloads, redundant-pump slew), below which the OCP 1.5 L/min/kW interlock cannot discriminate \"low flow\" from \"no flow\"",
+          "Imp.": "8",
+          "Sat.": "4",
+          "Litmus": "PASS — magnetic meters resolve sub-0.1 m/s, thermal switches binary"
+        },
+        {
+          "ID": "PRN-04",
+          "Source Constraint": "Air Bubble Tolerance",
+          "Statement": "Minimize the probability of sub-threshold air entrainment (1–2 % vol) following glycol top-up or venting biasing flow telemetry fed to the OCP safety interlock, without triggering the >2 % loss-of-signal alarm",
+          "Imp.": "8",
+          "Sat.": "3",
+          "Litmus": "PASS — electromagnetic meters insensitive to air content"
+        },
+        {
+          "ID": "PRN-05",
+          "Source Constraint": "Pipe Full Condition",
+          "Statement": "Minimize the time the CDU controller spends in empty-pipe fault state during secondary-loop drain-and-fill maintenance cycles, during which the sensor provides no measurement and the prove-flow gate cannot be satisfied",
+          "Imp.": "7",
+          "Sat.": "4",
+          "Litmus": "PASS — mechanical impellers still rotate in partial fill"
+        },
+        {
+          "ID": "PRN-06",
+          "Source Constraint": "Minimum Straight Pipe Run",
+          "Statement": "Minimize the installation-induced flow-profile bias from insufficient upstream straight-pipe run (<5× DN) inside space-constrained rack CDU manifolds where single-chord acoustic path sampling cannot correct for swirl",
+          "Imp.": "7",
+          "Sat.": "5",
+          "Litmus": "PASS — multi-path ultrasonic or magnetic meters less path-profile sensitive"
+        },
+        {
+          "ID": "PRN-07",
+          "Source Constraint": "Temperature-Dependent Accuracy",
+          "Statement": "Minimize the transient kW duty miscalculation when a GPU workload spike drives secondary-supply temperature transients >5 °C/min that outpace the NTC thermistor's compensation response, during which flow × ΔT telemetry deviates from true thermal load",
+          "Imp.": "7",
+          "Sat.": "5",
+          "Litmus": "PASS — magnetic measurement is temperature-independent by principle"
+        },
+        {
+          "ID": "PRN-08",
+          "Source Constraint": "Maximum Operating Pressure",
+          "Statement": "Minimize the deployment gap at hyperscaler facility-loop pressures exceeding 10 bar (high-head centralized-pump architectures, water-hammer on rapid valve closure) where the polymer housing rating forecloses direct-facility-loop installation and forces placement downstream of the brazed-plate HX",
+          "Imp.": "5",
+          "Sat.": "4",
+          "Litmus": "PASS — metal-bodied magnetic/Coriolis withstand 16–40 bar"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Step 10 Need",
+        "JTBD P1 Need",
+        "Overlap?",
+        "Resolution"
+      ],
+      "rows": [
+        {
+          "Step 10 Need": "PRN-01 (glycol inhibitor acoustic drift)",
+          "JTBD P1 Need": "ES-03 (fluid acoustic commissioning)",
+          "Overlap?": "Different scope",
+          "Resolution": "ES-03 is commissioning-time configuration (product_related); PRN-01 is ongoing in-service drift from inhibitor chemistry"
+        },
+        {
+          "Step 10 Need": "PRN-02 (90 °C ASHRAE W4/W5 headroom)",
+          "JTBD P1 Need": "—",
+          "Overlap?": "Unique",
+          "Resolution": "Forward-looking constraint gap"
+        },
+        {
+          "Step 10 Need": "PRN-03 (SNR threshold vs OCP)",
+          "JTBD P1 Need": "ES-08 (OCP 1.5 L/min/kW)",
+          "Overlap?": "Different level",
+          "Resolution": "ES-08 is the market safety rule; PRN-03 is the ultrasonic-specific detection-floor consequence"
+        },
+        {
+          "Step 10 Need": "PRN-04 (sub-threshold air bias)",
+          "JTBD P1 Need": "ES-10 (air entrainment signal loss, prod_related)",
+          "Overlap?": "Complementary",
+          "Resolution": "ES-10 covers signal-loss alarm; PRN-04 covers silent bias below that threshold"
+        },
+        {
+          "Step 10 Need": "PRN-05 (empty-pipe maintenance blackout)",
+          "JTBD P1 Need": "ES-06 (empty-pipe pre-IT power-on, prod_related)",
+          "Overlap?": "Different phase",
+          "Resolution": "ES-06 is pre-energization gate; PRN-05 is in-service maintenance measurement gap"
+        },
+        {
+          "Step 10 Need": "PRN-06 (single-chord path bias in rack CDU)",
+          "JTBD P1 Need": "ES-04 (installation orientation bias)",
+          "Overlap?": "Different mechanism",
+          "Resolution": "ES-04 is generic orientation; PRN-06 is ultrasonic-specific path sampling in compact manifolds"
+        },
+        {
+          "Step 10 Need": "PRN-07 (speed-of-sound transient)",
+          "JTBD P1 Need": "ES-21 (acoustic-coupling drift, prod_related)",
+          "Overlap?": "Different timescale",
+          "Resolution": "ES-21 is 5-year drift; PRN-07 is sub-minute transient lag"
+        },
+        {
+          "Step 10 Need": "PRN-08 (10 bar facility-loop pressure)",
+          "JTBD P1 Need": "—",
+          "Overlap?": "Unique",
+          "Resolution": "Facility-side placement constraint"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "Check": "Litmus test (all needs technology-specific)",
+          "Result": "PASS — all 8 disappear with electromagnetic, Coriolis, or vortex technology"
+        },
+        {
+          "Check": "Source constraint traceability",
+          "Result": "PASS — each traces to a named constraint in 01_product_decomposition"
+        },
+        {
+          "Check": "Affected market plausibility",
+          "Result": "PASS — all 8 manifest in CDU secondary-loop context"
+        },
+        {
+          "Check": "Completeness (every constraint covered)",
+          "Result": "PASS — all 8 constraints each generate one need"
+        },
+        {
+          "Check": "No importance < 3 AND satisfaction > 7",
+          "Result": "PASS"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Feature",
+        "Kano",
+        "Vendor",
+        "Incumbent",
+        "Inc. Technology",
+        "Advantage"
+      ],
+      "rows": [
+        {
+          "Feature": "**Modular Pipe Diameter Variants**",
+          "Kano": "one_dimensional",
+          "Vendor": "5",
+          "Incumbent": "8",
+          "Inc. Technology": "Electromagnetic (E+H Promag H)",
+          "Advantage": "**inferior**"
+        },
+        {
+          "Feature": "**Customizable Communication Interface**",
+          "Kano": "must_be",
+          "Vendor": "3",
+          "Incumbent": "9",
+          "Inc. Technology": "Electromagnetic (E+H Promag H)",
+          "Advantage": "**inferior**"
+        },
+        {
+          "Feature": "**Customizable Mechanical Interface**",
+          "Kano": "attractive",
+          "Vendor": "7",
+          "Incumbent": "6",
+          "Inc. Technology": "Electromagnetic (E+H Promag H)",
+          "Advantage": "**superior**"
+        },
+        {
+          "Feature": "**Low-Energy Battery Mode**",
+          "Kano": "indifferent",
+          "Vendor": "6",
+          "Incumbent": "2",
+          "Inc. Technology": "Electromagnetic (E+H Promag H)",
+          "Advantage": "**parity**"
+        },
+        {
+          "Feature": "**Pre-Calibrated Delivery**",
+          "Kano": "must_be",
+          "Vendor": "7",
+          "Incumbent": "8",
+          "Inc. Technology": "Electromagnetic (E+H Promag H)",
+          "Advantage": "**parity**"
+        },
+        {
+          "Feature": "**KTW/WRAS Drinking Water Approval**",
+          "Kano": "indifferent",
+          "Vendor": "7",
+          "Incumbent": "4",
+          "Inc. Technology": "Electromagnetic (E+H Promag H)",
+          "Advantage": "**parity**"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "Check": "Vendor bias (>70 % superior)",
+          "Result": "PASS — 1 superior / 3 parity / 2 inferior (17 % superior). Marquardt is an HVAC/appliance OEM sensor entering a data-center market dominated by E+H / Siemens / Krohne."
+        },
+        {
+          "Check": "Anti-vendor bias (>70 % inferior)",
+          "Result": "PASS — 33 % inferior. Justified: Marquardt's protocol suite and variant coverage lag the purpose-built industrial line."
+        },
+        {
+          "Check": "Advantage classification arithmetic",
+          "Result": "PASS — all gaps verified"
+        },
+        {
+          "Check": "Kano must_be scores >= 5",
+          "Result": "FAIL on Customizable Communication Interface — vendor=3 on must_be. Flagged as primary integration barrier, not scoring error."
+        },
+        {
+          "Check": "Rationale specificity",
+          "Result": "PASS — all reference specific vendor specs vs incumbent capabilities"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Dimension",
+        "Verdict",
+        "Key Issue"
+      ],
+      "rows": [
+        {
+          "Dimension": "Technology fit",
+          "Verdict": "**Strong**",
+          "Key Issue": "Ultrasonic transit-time is the second-leading CDU flow technology (30 % and rising); no-wear + integrated temp + digital diagnostics directly address the top-5 safety needs"
+        },
+        {
+          "Dimension": "Product fit",
+          "Verdict": "**Strong**",
+          "Key Issue": "DN20, 90 °C, 10 bar envelope matches rack-CDU secondary-loop operating point (W3/W4 ASHRAE class, 3–6 bar typical); constraint set is compatible with the present GPU-cooling deployment reality"
+        },
+        {
+          "Dimension": "Vendor fit",
+          "Verdict": "**Weak**",
+          "Key Issue": "Missing Modbus/BACnet/MQTT protocols — single largest adoption barrier; serial production limited to DN20; no data-center reference deployments"
+        },
+        {
+          "Dimension": "Competitive position",
+          "Verdict": "**Component OEM to CDU makers**",
+          "Key Issue": "Strongest go-to-market: supply sensor module to Vertiv / nVent / Motivair / CoolIT with a protocol-bridge firmware variant (UART → Modbus) on the CDU controller side. Avoid direct sale to hyperscalers until an OT-ready communication variant exists."
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Check": "All 7 technology-scope features assessed",
+          "Result": "PASS"
+        },
+        {
+          "#": "2",
+          "Check": "Kano classification with rationale per feature",
+          "Result": "PASS"
+        },
+        {
+          "#": "3",
+          "Check": "9-dimension ODI scores with recomputed overall_fit",
+          "Result": "PASS"
+        },
+        {
+          "#": "4",
+          "Check": "Product-related needs trace to specific constraints",
+          "Result": "PASS — all 8 trace to named constraints"
+        },
+        {
+          "#": "5",
+          "Check": "Litmus test applied to all product-related needs",
+          "Result": "PASS — all disappear with different technology"
+        },
+        {
+          "#": "6",
+          "Check": "No duplication with JTBD P1 needs",
+          "Result": "PASS — deduplication table provided"
+        },
+        {
+          "#": "7",
+          "Check": "Vendor features assessed against best incumbent",
+          "Result": "PASS — E+H Promag H (electromagnetic, 35 % share)"
+        },
+        {
+          "#": "8",
+          "Check": "Objectivity review on vendor scoring",
+          "Result": "PASS — 17 % superior, no bias detected"
+        },
+        {
+          "#": "9",
+          "Check": "Source tags on all factual claims",
+          "Result": "PASS"
+        },
+        {
+          "#": "10",
+          "Check": "Web search NOT used",
+          "Result": "PASS — all derived from upstream files"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "feature_market_fit",
+      "naics_code": "518210",
+      "naics_title": "Data Processing, Hosting, and Related Services",
+      "market_name": "Data Processing, Hosting, and Related Services",
+      "product_name": "Ultrasonic Flow Sensor",
+      "vendor_name": "Marquardt",
+      "technology_class": "Ultrasonic Transit-Time Flow Measurement",
+      "step_09_tech_feature_market_fit": {
+        "features_assessed": 7,
+        "market_count": 1,
+        "entries": [
+          {
+            "feature_name": "Transit-Time Flow Measurement",
+            "market_name": "Data Processing, Hosting, and Related Services",
+            "naics_code": "518210",
+            "kano_class": "must_be",
+            "fit_score_time": 6,
+            "fit_score_cost": 6,
+            "fit_score_safety": 8,
+            "fit_score_reliability": 8,
+            "fit_score_skill": 4,
+            "fit_score_stress": 6,
+            "fit_score_pain": 5,
+            "fit_score_confidence": 8,
+            "fit_score_delight": 3,
+            "overall_fit": 6.0,
+            "rationale": "Commodity baseline — every flow alternative quantifies flow. Must_be because CDU cannot safely gate GPU load without it. Primary drivers: Reliability (8), Confidence (8) — OCP 1.5 L/min/kW threshold; Safety (8) — loss-of-flow <2s (ES-11, opp=16)."
+          },
+          {
+            "feature_name": "Integrated Temperature Sensing",
+            "market_name": "Data Processing, Hosting, and Related Services",
+            "naics_code": "518210",
+            "kano_class": "attractive",
+            "fit_score_time": 7,
+            "fit_score_cost": 8,
+            "fit_score_safety": 6,
+            "fit_score_reliability": 7,
+            "fit_score_skill": 6,
+            "fit_score_stress": 5,
+            "fit_score_pain": 7,
+            "fit_score_confidence": 7,
+            "fit_score_delight": 6,
+            "overall_fit": 6.56,
+            "rationale": "Addresses ES-12 (flow × ΔT kW duty from single body, opp=12, prod_related). Eliminates separate temp probe and sync error in PUE calculation. Primary drivers: Cost (8) — removes second sensor BOM; Pain (7) — single commissioning touchpoint; Delight (6) — 'kW from one can'."
+          },
+          {
+            "feature_name": "Zero Pressure Drop Flow Path",
+            "market_name": "Data Processing, Hosting, and Related Services",
+            "naics_code": "518210",
+            "kano_class": "one_dimensional",
+            "fit_score_time": 3,
+            "fit_score_cost": 6,
+            "fit_score_safety": 3,
+            "fit_score_reliability": 4,
+            "fit_score_skill": 3,
+            "fit_score_stress": 3,
+            "fit_score_pain": 3,
+            "fit_score_confidence": 4,
+            "fit_score_delight": 3,
+            "overall_fit": 3.56,
+            "rationale": "CDU loop ΔP dominated by brazed-plate HX, cold-plate manifold, hoses. Sensor's <50 mbar contribution is marginal (ES-13, opp=8). Linear pump-energy/PUE benefit but small magnitude. Primary driver: Cost (6)."
+          },
+          {
+            "feature_name": "No Moving Parts",
+            "market_name": "Data Processing, Hosting, and Related Services",
+            "naics_code": "518210",
+            "kano_class": "one_dimensional",
+            "fit_score_time": 4,
+            "fit_score_cost": 8,
+            "fit_score_safety": 7,
+            "fit_score_reliability": 9,
+            "fit_score_skill": 5,
+            "fit_score_stress": 7,
+            "fit_score_pain": 8,
+            "fit_score_confidence": 8,
+            "fit_score_delight": 5,
+            "overall_fit": 6.78,
+            "rationale": "High-value differentiator vs turbine/impeller (15% share) in 24x7 GPU fleet. Addresses ES-09 (±2% over 40,000h, opp=13). Bearing wear silently degrades the OCP gating signal. Primary drivers: Reliability (9), Cost (8), Pain (8) — eliminates fleet-wide in-loop sensor replacement; Confidence (8) — reduces false-throttle events."
+          },
+          {
+            "feature_name": "Bidirectional Flow Detection",
+            "market_name": "Data Processing, Hosting, and Related Services",
+            "naics_code": "518210",
+            "kano_class": "attractive",
+            "fit_score_time": 4,
+            "fit_score_cost": 5,
+            "fit_score_safety": 7,
+            "fit_score_reliability": 5,
+            "fit_score_skill": 4,
+            "fit_score_stress": 5,
+            "fit_score_pain": 4,
+            "fit_score_confidence": 6,
+            "fit_score_delight": 5,
+            "overall_fit": 5.0,
+            "rationale": "Addresses ES-15 (reverse-flow <1s, opp=10, prod_related) — detects bypass-valve misoperation, mis-piped commissioning, pump-failure siphon. Turbine and thermal switch cannot resolve direction. Primary drivers: Safety (7), Confidence (6)."
+          },
+          {
+            "feature_name": "Digital Anomaly Detection",
+            "market_name": "Data Processing, Hosting, and Related Services",
+            "naics_code": "518210",
+            "kano_class": "attractive",
+            "fit_score_time": 8,
+            "fit_score_cost": 7,
+            "fit_score_safety": 9,
+            "fit_score_reliability": 7,
+            "fit_score_skill": 7,
+            "fit_score_stress": 8,
+            "fit_score_pain": 6,
+            "fit_score_confidence": 9,
+            "fit_score_delight": 7,
+            "overall_fit": 7.56,
+            "rationale": "Highest-scoring feature. Serves top opportunity stack: empty-pipe pre-IT power-on (ES-06, opp=15), air entrainment post-glycol top-up (ES-10, opp=12), incipient leak (ES-20, opp=14). Mechanical meters have zero diagnostics. Primary drivers: Safety (9), Confidence (9) — the prevent-thermal-runaway layer."
+          },
+          {
+            "feature_name": "Real-Time Compensation Algorithms",
+            "market_name": "Data Processing, Hosting, and Related Services",
+            "naics_code": "518210",
+            "kano_class": "must_be",
+            "fit_score_time": 3,
+            "fit_score_cost": 5,
+            "fit_score_safety": 5,
+            "fit_score_reliability": 7,
+            "fit_score_skill": 5,
+            "fit_score_stress": 4,
+            "fit_score_pain": 4,
+            "fit_score_confidence": 6,
+            "fit_score_delight": 3,
+            "overall_fit": 4.67,
+            "rationale": "Must_be — CDU loops run water/PG25/EG25 configured at commissioning (ES-03, prod_related). Without speed-of-sound compensation, glycol-concentration change silently biases kW duty and PUE. Primary driver: Reliability (7) — reduces error from ~1.5% to ~0.2%."
+          }
+        ]
+      },
+      "step_10_product_related_needs": {
+        "technology_class": "Ultrasonic Transit-Time Flow Measurement",
+        "needs_count": 8,
+        "entries": [
+          {
+            "id": "PRN-01",
+            "statement": "Minimize the likelihood of measurement drift from acoustic-impedance mismatch when facility-specific glycol inhibitor packages alter the coolant's speed of sound beyond the commissioned compensation profile",
+            "source_constraint": "Media Limitation",
+            "affected_markets": [
+              "Data Processing, Hosting, and Related Services"
+            ],
+            "importance": 7,
+            "satisfaction_current": 4
+          },
+          {
+            "id": "PRN-02",
+            "statement": "Minimize the residual headroom concern when future ASHRAE W4/W5 warm-water liquid cooling drives CDU secondary-loop supply to the 90C polymer housing limit",
+            "source_constraint": "Maximum Medium Temperature",
+            "affected_markets": [
+              "Data Processing, Hosting, and Related Services"
+            ],
+            "importance": 5,
+            "satisfaction_current": 5
+          },
+          {
+            "id": "PRN-03",
+            "statement": "Minimize the unmeasured-flow window at the DN20 4.2 L/min SNR threshold during CDU idle / low-load states, below which the OCP 1.5 L/min/kW interlock cannot discriminate low flow from no flow",
+            "source_constraint": "Minimum Flow Rate Detection",
+            "affected_markets": [
+              "Data Processing, Hosting, and Related Services"
+            ],
+            "importance": 8,
+            "satisfaction_current": 4
+          },
+          {
+            "id": "PRN-04",
+            "statement": "Minimize the probability of sub-threshold air entrainment (1-2% vol) following glycol top-up biasing flow telemetry fed to the OCP safety interlock without triggering the >2% loss-of-signal alarm",
+            "source_constraint": "Air Bubble Tolerance",
+            "affected_markets": [
+              "Data Processing, Hosting, and Related Services"
+            ],
+            "importance": 8,
+            "satisfaction_current": 3
+          },
+          {
+            "id": "PRN-05",
+            "statement": "Minimize the time the CDU controller spends in empty-pipe fault state during secondary-loop drain-and-fill maintenance cycles where the prove-flow gate cannot be satisfied",
+            "source_constraint": "Pipe Full Condition",
+            "affected_markets": [
+              "Data Processing, Hosting, and Related Services"
+            ],
+            "importance": 7,
+            "satisfaction_current": 4
+          },
+          {
+            "id": "PRN-06",
+            "statement": "Minimize the installation-induced flow-profile bias from insufficient upstream straight-pipe run (<5x DN) inside space-constrained rack CDU manifolds where single-chord acoustic path sampling cannot correct for swirl",
+            "source_constraint": "Minimum Straight Pipe Run",
+            "affected_markets": [
+              "Data Processing, Hosting, and Related Services"
+            ],
+            "importance": 7,
+            "satisfaction_current": 5
+          },
+          {
+            "id": "PRN-07",
+            "statement": "Minimize the transient kW duty miscalculation when a GPU workload spike drives secondary-supply temperature transients >5C/min that outpace the NTC thermistor compensation response",
+            "source_constraint": "Temperature-Dependent Accuracy",
+            "affected_markets": [
+              "Data Processing, Hosting, and Related Services"
+            ],
+            "importance": 7,
+            "satisfaction_current": 5
+          },
+          {
+            "id": "PRN-08",
+            "statement": "Minimize the deployment gap at hyperscaler facility-loop pressures exceeding 10 bar where the polymer housing rating forecloses direct-facility-loop installation and forces placement downstream of the brazed-plate HX",
+            "source_constraint": "Maximum Operating Pressure",
+            "affected_markets": [
+              "Data Processing, Hosting, and Related Services"
+            ],
+            "importance": 5,
+            "satisfaction_current": 4
+          }
+        ]
+      },
+      "step_11_vendor_feature_market_fit": {
+        "vendor_name": "Marquardt",
+        "vendor_product": "US Flow Sensor (DN20 serial, DN12/DN14/DN25 development)",
+        "best_incumbent": "Endress+Hauser Promag H (electromagnetic)",
+        "best_incumbent_rationale": "Electromagnetic is the leading alternative in DLC/CDU secondary-loop metering (~35% share, rising with AI GPU deployment). E+H Promag H is the purpose-built industrial electromagnetic meter for hydronic / water-glycol service in the DN15-DN25 band covered by rack CDUs.",
+        "features_assessed": 6,
+        "entries": [
+          {
+            "feature_name": "Modular Pipe Diameter Variants",
+            "feature_description": "Serve multiple pipe sizes via interchangeable flow bodies sharing common electronics",
+            "market_name": "Data Processing, Hosting, and Related Services",
+            "naics_code": "518210",
+            "vendor_score": 5,
+            "best_incumbent_score": 8,
+            "best_incumbent_technology": "Electromagnetic (E+H Promag H)",
+            "advantage": "inferior",
+            "kano_class": "one_dimensional",
+            "rationale": "Marquardt DN12/14/20/25 shares RAST 2.5 electronics but only DN20 is serial-production. CDU OEMs need DN15-DN25 (secondary) and DN6-DN10 (cold-plate). E+H Promag H covers DN2-DN150 full production, same transmitter. Addresses ES-02 (imp=7)."
+          },
+          {
+            "feature_name": "Customizable Communication Interface",
+            "feature_description": "Support multiple digital communication protocols for host controller integration",
+            "market_name": "Data Processing, Hosting, and Related Services",
+            "naics_code": "518210",
+            "vendor_score": 3,
+            "best_incumbent_score": 9,
+            "best_incumbent_technology": "Electromagnetic (E+H Promag H)",
+            "advantage": "inferior",
+            "kano_class": "must_be",
+            "rationale": "Largest capability gap. CDU BMS standardizes on Modbus, BACnet, MQTT, OPC-UA (ES-05, imp=7). Marquardt ships UART/LIN/frequency — zero BMS overlap. E+H Promag H provides HART, Modbus, PROFIBUS/PROFINET, EtherNet/IP. Must_be in this market."
+          },
+          {
+            "feature_name": "Customizable Mechanical Interface",
+            "feature_description": "Accept threaded or plug-in pipe connections for flexible installation",
+            "market_name": "Data Processing, Hosting, and Related Services",
+            "naics_code": "518210",
+            "vendor_score": 7,
+            "best_incumbent_score": 6,
+            "best_incumbent_technology": "Electromagnetic (E+H Promag H)",
+            "advantage": "superior",
+            "kano_class": "attractive",
+            "rationale": "Threaded + plug-in connections fit CDU OEM assembly lines with quick-connect fittings for field-replaceable rack CDU modules. E+H Promag H uses flanged industrial fittings sized for process plant. Marquardt's plug-in directly serves ES-22 (replace sensor without draining, imp=8, opp=13)."
+          },
+          {
+            "feature_name": "Low-Energy Battery Mode",
+            "feature_description": "Operate at ultra-low current consumption for battery-powered installations",
+            "market_name": "Data Processing, Hosting, and Related Services",
+            "naics_code": "518210",
+            "vendor_score": 6,
+            "best_incumbent_score": 2,
+            "best_incumbent_technology": "Electromagnetic (E+H Promag H)",
+            "advantage": "parity",
+            "kano_class": "indifferent",
+            "rationale": "CDUs are mains-powered. Marquardt's <5 uA capability has no buyer here; E+H Promag H is loop-powered with HART. Both score on a dimension the market does not value — parity on indifferent Kano class."
+          },
+          {
+            "feature_name": "Pre-Calibrated Delivery",
+            "feature_description": "Ship fully calibrated and tested to customer-specific medium and flow profile",
+            "market_name": "Data Processing, Hosting, and Related Services",
+            "naics_code": "518210",
+            "vendor_score": 7,
+            "best_incumbent_score": 8,
+            "best_incumbent_technology": "Electromagnetic (E+H Promag H)",
+            "advantage": "parity",
+            "kano_class": "must_be",
+            "rationale": "Marquardt: 100% automated final-test calibration to customer medium. E+H Promag H: factory-calibrated with 3.1 material certs and optional ISO 17025 traceability. Both satisfy commissioning-ready baseline (ES-04, imp=8). No MID-equivalent required in data-center cooling."
+          },
+          {
+            "feature_name": "KTW/WRAS Drinking Water Approval",
+            "feature_description": "Wetted parts approved for potable water contact per German and UK standards",
+            "market_name": "Data Processing, Hosting, and Related Services",
+            "naics_code": "518210",
+            "vendor_score": 7,
+            "best_incumbent_score": 4,
+            "best_incumbent_technology": "Electromagnetic (E+H Promag H)",
+            "advantage": "parity",
+            "kano_class": "indifferent",
+            "rationale": "CDU secondary loops use inhibited coolant (DI water, PG25, EG25), not potable. Certification not a purchase criterion. Parity on indifferent dimension — neither vendor's potable position drives adoption."
+          }
+        ],
+        "advantage_distribution": {
+          "superior": 1,
+          "parity": 3,
+          "inferior": 2,
+          "note": "Marquardt has one real advantage (quick-connect serviceability for rack CDUs) and one must_be gap (BMS protocols). Three parity findings reflect that half of Marquardt's vendor-scope features target dimensions that do not matter in this market (battery, potable)."
+        }
+      },
+      "market_entry_assessment": {
+        "technology_fit": "strong",
+        "product_fit": "strong",
+        "vendor_fit": "weak",
+        "competitive_position": "component_oem_to_cdu_makers",
+        "primary_barrier": "missing Modbus/BACnet/MQTT communication protocols for CDU BMS integration",
+        "recommended_go_to_market": "Supply sensor module to Vertiv / nVent / Motivair / CoolIT with protocol-bridge firmware on CDU controller side. Avoid direct hyperscaler sale until OT-ready communication variant exists."
+      },
+      "entities_produced": {
+        "nodes": [
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "PRN-01..PRN-08 (first 120 chars)",
+              "run_id": "TBD"
+            },
+            "count": 8,
+            "properties": {
+              "product_related": true
+            }
+          }
+        ],
+        "relationships": [
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Transit-Time Flow Measurement",
+            "target": "Market:518210",
+            "properties": {
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Integrated Temperature Sensing",
+            "target": "Market:518210",
+            "properties": {
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Zero Pressure Drop Flow Path",
+            "target": "Market:518210",
+            "properties": {
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:No Moving Parts",
+            "target": "Market:518210",
+            "properties": {
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Bidirectional Flow Detection",
+            "target": "Market:518210",
+            "properties": {
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Digital Anomaly Detection",
+            "target": "Market:518210",
+            "properties": {
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Real-Time Compensation Algorithms",
+            "target": "Market:518210",
+            "properties": {
+              "feature_scope": "technology"
+            }
+          },
+          {
+            "type": "generates_need",
+            "source": "Constraint:Media Limitation",
+            "target": "ErrorStatement:PRN-01"
+          },
+          {
+            "type": "generates_need",
+            "source": "Constraint:Maximum Medium Temperature",
+            "target": "ErrorStatement:PRN-02"
+          },
+          {
+            "type": "generates_need",
+            "source": "Constraint:Minimum Flow Rate Detection",
+            "target": "ErrorStatement:PRN-03"
+          },
+          {
+            "type": "generates_need",
+            "source": "Constraint:Air Bubble Tolerance",
+            "target": "ErrorStatement:PRN-04"
+          },
+          {
+            "type": "generates_need",
+            "source": "Constraint:Pipe Full Condition",
+            "target": "ErrorStatement:PRN-05"
+          },
+          {
+            "type": "generates_need",
+            "source": "Constraint:Minimum Straight Pipe Run",
+            "target": "ErrorStatement:PRN-06"
+          },
+          {
+            "type": "generates_need",
+            "source": "Constraint:Temperature-Dependent Accuracy",
+            "target": "ErrorStatement:PRN-07"
+          },
+          {
+            "type": "generates_need",
+            "source": "Constraint:Maximum Operating Pressure",
+            "target": "ErrorStatement:PRN-08"
+          },
+          {
+            "type": "has_product_need",
+            "source": "NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement",
+            "target": "ErrorStatement:PRN-01..PRN-08"
+          },
+          {
+            "type": "applies_to_market",
+            "source": "ErrorStatement:PRN-01..PRN-08",
+            "target": "Market:518210"
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Modular Pipe Diameter Variants",
+            "target": "Market:518210",
+            "properties": {
+              "feature_scope": "vendor"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Customizable Communication Interface",
+            "target": "Market:518210",
+            "properties": {
+              "feature_scope": "vendor"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Customizable Mechanical Interface",
+            "target": "Market:518210",
+            "properties": {
+              "feature_scope": "vendor"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Low-Energy Battery Mode",
+            "target": "Market:518210",
+            "properties": {
+              "feature_scope": "vendor"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:Pre-Calibrated Delivery",
+            "target": "Market:518210",
+            "properties": {
+              "feature_scope": "vendor"
+            }
+          },
+          {
+            "type": "kano_for_market",
+            "source": "Feature:KTW/WRAS Drinking Water Approval",
+            "target": "Market:518210",
+            "properties": {
+              "feature_scope": "vendor"
+            }
+          },
+          {
+            "type": "has_feature",
+            "source": "Product:US Flow Sensor (Marquardt)",
+            "target": "Feature:Modular Pipe Diameter Variants"
+          },
+          {
+            "type": "has_feature",
+            "source": "Product:US Flow Sensor (Marquardt)",
+            "target": "Feature:Customizable Communication Interface"
+          },
+          {
+            "type": "has_feature",
+            "source": "Product:US Flow Sensor (Marquardt)",
+            "target": "Feature:Customizable Mechanical Interface"
+          },
+          {
+            "type": "has_feature",
+            "source": "Product:US Flow Sensor (Marquardt)",
+            "target": "Feature:Low-Energy Battery Mode"
+          },
+          {
+            "type": "has_feature",
+            "source": "Product:US Flow Sensor (Marquardt)",
+            "target": "Feature:Pre-Calibrated Delivery"
+          },
+          {
+            "type": "has_feature",
+            "source": "Product:US Flow Sensor (Marquardt)",
+            "target": "Feature:KTW/WRAS Drinking Water Approval"
+          }
+        ]
+      }
+    }
+  ],
+  "has_bom": false,
+  "naics_sector_type": "non_manufacturing"
+}

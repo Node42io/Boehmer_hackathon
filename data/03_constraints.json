@@ -1,0 +1,1006 @@
+{
+  "id": "03_constraints",
+  "title": "03 — Constraints Analysis",
+  "type": "constraints",
+  "market_slug": null,
+  "is_per_market": false,
+  "sections": [
+    {
+      "title": "Constraint Summary",
+      "content": "| # | Constraint | Type | is_absolute | Threshold | Unit |\n|---|---|---|---|---|---|\n| 1 | Aqueous Media Requirement | physical | **true** | — | — |\n| 2 | Maximum Medium Temperature | physical | false | 90 | °C |\n| 3 | Air Bubble / Void Fraction Limit | physical | **true** | 2 | % vol |\n| 4 | Temperature-Dependent Accuracy | physical | false | 1.5 (uncompensated) | % error |\n| 5 | Wetted Material Chemical Compatibility | chemical | false | — | — |\n| 6 | Pipe Full Condition Required | operational | **true** | 100 | % fill |\n| 7 | Minimum Flow Rate Detection | operational | false | 0.25–4.2 | l/min |\n| 8 | Maximum Operating Pressure | operational | false | 10 | bar |\n| 9 | Minimum Straight Pipe Run | operational | false | 5–10 | × DN |\n| 10 | Life Endurance Ceiling | economic | false | 3,000 | m³ total |\n| 11 | No Explosive Atmosphere Certification | regulatory | false | Zone 1/0 | ATEX zone |\n| 12 | Ambient Temperature Range | environmental | false | −20 to +60 (est.) | °C ambient |\n\n**Totals:** 12 constraints — 3 absolute, 9 conditional. Types: 4 physical, 1 chemical, 4 operational, 1 economic, 1 regulatory, 1 environmental.\n\n---"
+    },
+    {
+      "title": "Detailed Constraints",
+      "content": "### Physical (4)\n\n| Field | C1: Aqueous Media Requirement |\n|---|---|\n| **constraint_type** | physical |\n| **is_absolute** | **true** |\n| **threshold_value** | — |\n| **threshold_unit** | — |\n| **description** | Transit-time ultrasonic measurement requires acoustic coupling between piezoelectric transducers and the fluid. Non-aqueous media (oils, gases, non-polar solvents, polymer melts) have acoustic impedance mismatches that prevent signal propagation through the sensor's current transducer-fluid interface. Water, water-glycol mixtures, and aqueous suspensions are supported. [SRC: 01_product_decomposition — \"Only water and water-like media\"] |\n| **affected_markets_hint** | Oil & Gas processing, petrochemical refining, gas distribution, plastics extrusion, solvent-based chemical manufacturing |\n\n| Field | C2: Maximum Medium Temperature |\n|---|---|\n| **constraint_type** | physical |\n| **is_absolute** | **false** |\n| **threshold_value** | 90 |\n| **threshold_unit** | °C |\n| **description** | Polymer housing and seals degrade above 90°C. Extended operation near the limit reduces service life. This is a material constraint of the current product design, not a fundamental physics limit of transit-time technology — metal-housed ultrasonic sensors exist for higher temperatures. [SRC: 01_product_decomposition — spec \"Medium Temperature: +2 to 90 °C\"] |\n| **affected_markets_hint** | Steam systems, high-temperature industrial processes, sterilization circuits (>121°C), geothermal heating |\n\n| Field | C3: Air Bubble / Void Fraction Limit |\n|---|---|\n| **constraint_type** | physical |\n| **is_absolute** | **true** |\n| **threshold_value** | 2 |\n| **threshold_unit** | % vol |\n| **description** | Air entrainment >2% by volume attenuates the ultrasonic signal and introduces measurement error. Above ~5% void fraction, signal scatter prevents any usable transit-time measurement. The sensor detects bubbles as a diagnostic event but cannot compensate for chronic high-void-fraction media. Systems with persistent air entrainment require upstream de-aerators. [SRC: 01_product_decomposition — \"Air Bubble Tolerance\" constraint + \"Digital Anomaly Detection\" feature] |\n| **affected_markets_hint** | Aerated beverage processing, open-loop cooling towers, pulp & paper (high-consistency stock), fermentation processes |\n\n| Field | C4: Temperature-Dependent Accuracy |\n|---|---|\n| **constraint_type** | physical |\n| **is_absolute** | **false** |\n| **threshold_value** | 1.5 (uncompensated); 0.2 (compensated) |\n| **threshold_unit** | % error |\n| **description** | Speed of sound in the medium changes with temperature. Without compensation, temperature-induced measurement error reaches ~1.5%. The integrated NTC thermistor reduces this to ~0.2% under steady-state conditions. Extreme temperature transients may temporarily exceed compensation response. Fluid type must be configured at commissioning. [SRC: 01_product_decomposition — \"Temperature-Dependent Accuracy\" constraint + \"Integrated Temperature Sensing\" feature] |\n| **affected_markets_hint** | Rapid thermal cycling processes, solar thermal systems with cloud-induced transients, heat recovery with fluctuating source temperatures |\n\n### Chemical (1)\n\n| Field | C5: Wetted Material Chemical Compatibility |\n|---|---|\n| **constraint_type** | chemical |\n| **is_absolute** | **false** |\n| **threshold_value** | — |\n| **threshold_unit** | — |\n| **description** | The sensor's wetted parts (polymer housing, seals) are approved for potable water contact (KTW/WRAS) but are not rated for aggressive chemical media — concentrated acids, bases, oxidizers, or organic solvents would attack the polymer housing and seal materials. Alternative wetted materials (stainless steel, PTFE-lined, Hastelloy) are standard in the flowmeter industry but not available in the current Marquardt product line. [SRC: 01_product_decomposition — \"KTW/WRAS Drinking Water Approval\" feature + polymer housing material implied by temperature/pressure constraints] |\n| **affected_markets_hint** | Chemical manufacturing, semiconductor wet processing, electroplating, pharmaceutical active ingredient synthesis |\n\n### Operational (4)\n\n| Field | C6: Pipe Full Condition Required |\n|---|---|\n| **constraint_type** | operational |\n| **is_absolute** | **true** |\n| **threshold_value** | 100 |\n| **threshold_unit** | % fill |\n| **description** | The pipe must be completely filled with liquid for valid measurement. Partially filled pipes cause complete signal loss — the ultrasonic pulse cannot traverse an air gap. The sensor detects empty-pipe condition as a fault state. This is inherent to inline transit-time technology; no engineering workaround exists for partially filled conduits. [SRC: 01_product_decomposition — \"Pipe Full Condition\" constraint] |\n| **affected_markets_hint** | Open-channel irrigation, gravity-fed drainage, sewer systems, partially filled process drains |\n\n| Field | C7: Minimum Flow Rate Detection |\n|---|---|\n| **constraint_type** | operational |\n| **is_absolute** | **false** |\n| **threshold_value** | 0.25–4.2 |\n| **threshold_unit** | l/min |\n| **description** | Signal-to-noise ratio degrades at very low flow rates — the transit-time difference becomes indistinguishable from noise. The lower detection limit varies by pipe diameter: ~0.25 l/min (DN14), ~4.2 l/min (DN20/DN25). Applications requiring micro-flow measurement below these thresholds cannot use this sensor without a smaller-bore variant. [SRC: 01_product_decomposition — spec \"Flow Range\" per variant] |\n| **affected_markets_hint** | Laboratory dosing, medical infusion, micro-dispensing, semiconductor ultra-pure water (low-flow branches) |\n\n| Field | C8: Maximum Operating Pressure |\n|---|---|\n| **constraint_type** | operational |\n| **is_absolute** | **false** |\n| **threshold_value** | 10 |\n| **threshold_unit** | bar |\n| **description** | Housing structural integrity rated to 10 bar continuous. Burst pressure is 9 bar (low-pressure variant) or 42 bar (high-pressure variant). Exceeding the rating risks seal failure and leakage. Higher-pressure variants or reinforced housings are a standard design path in the flowmeter industry. [SRC: 01_product_decomposition — spec \"Pressure Range: 0–10 bar\", \"Burst Pressure: 9/42 bar\"] |\n| **affected_markets_hint** | High-pressure water-jet cutting, boiler feed water (>10 bar), reverse osmosis systems, fire suppression mains |\n\n| Field | C9: Minimum Straight Pipe Run |\n|---|---|\n| **constraint_type** | operational |\n| **is_absolute** | **false** |\n| **threshold_value** | 5–10 |\n| **threshold_unit** | × DN |\n| **description** | Turbulent or asymmetric flow profiles caused by elbows, valves, or tees upstream degrade measurement accuracy. A minimum of 5–10 pipe diameters of undisturbed straight run is recommended upstream of the sensor. Flow conditioners can reduce this requirement. [SRC: 01_product_decomposition — \"Minimum Straight Pipe Run\" constraint; 02_functional_promise — \"Straight pipe run (upstream)\" complement] |\n| **affected_markets_hint** | Compact appliances (heat pumps, combi boilers), retrofits in constrained piping, skid-mounted process equipment |\n\n### Economic (1)\n\n| Field | C10: Life Endurance Ceiling |\n|---|---|\n| **constraint_type** | economic |\n| **is_absolute** | **false** |\n| **threshold_value** | 3,000 |\n| **threshold_unit** | m³ total throughput |\n| **description** | Total throughput endurance rated at 3,000 m³. At maximum flow (46.6 l/min DN20), this equates to ~1,073 hours (~45 days continuous). High-flow industrial applications running 24/7 would exhaust sensor life within weeks, requiring frequent replacement. For typical residential/commercial HVAC duty cycles (intermittent, lower flow), this equates to years of service. Replacement cost becomes uneconomical in high-throughput continuous-process applications. [SRC: 01_product_decomposition — spec \"Life Endurance: 3,000 m³\"] |\n| **affected_markets_hint** | Municipal water metering (high throughput), industrial process water loops (24/7), district heating mains |\n\n### Regulatory (1)\n\n| Field | C11: No Explosive Atmosphere Certification |\n|---|---|\n| **constraint_type** | regulatory |\n| **is_absolute** | **false** |\n| **threshold_value** | Zone 1/0 |\n| **threshold_unit** | ATEX zone |\n| **description** | The current product configuration has no ATEX/IECEx certification for deployment in explosive atmospheres. No hazardous area approval is mentioned in the product specifications or feature set. A certification path exists via intrinsically safe (Ex-ia) barrier modules or Ex-d/Ex-e enclosure designs — standard practice in the flowmeter industry. [SRC: 01_product_decomposition — absence of any ATEX/Ex feature; KTW/WRAS is the only certification mentioned] |\n| **affected_markets_hint** | Oil refining, petrochemical processing, solvent handling, grain/dust handling facilities, paint manufacturing |\n\n### Environmental (1)\n\n| Field | C12: Ambient Temperature Range |\n|---|---|\n| **constraint_type** | environmental |\n| **is_absolute** | **false** |\n| **threshold_value** | −20 to +60 (est.) |\n| **threshold_unit** | °C ambient |\n| **description** | The sensor electronics and polymer housing are designed for indoor / protected installation environments typical of HVAC and appliance OEM applications. No IP rating beyond basic splash protection is evident from the specifications. Extreme ambient conditions — sub-zero outdoor installations, desert environments, or locations near furnaces — may exceed the electronics' operating range. Heated or cooled enclosures are a standard mitigation. The RAST 2.5 connector is an appliance-grade connector, not an industrial-grade sealed connection. [SRC: 01_product_decomposition — spec \"Supply Voltage: 5/6–30 V DC\", \"Connector: RAST 2.5\"; 02_functional_promise — BOM Level L5 Component, parent subsystem \"hydronic circuit, cooling loop\"] |\n| **affected_markets_hint** | Outdoor water metering (arctic/desert climates), rooftop HVAC in extreme environments, agricultural irrigation in open fields |\n\n---"
+    },
+    {
+      "title": "Constraint Type Coverage",
+      "content": "| Type | Count | Absolute | Conditional |\n|---|---|---|---|\n| physical | 4 | 2 (C1, C3) | 2 (C2, C4) |\n| chemical | 1 | 0 | 1 (C5) |\n| operational | 4 | 1 (C6) | 3 (C7, C8, C9) |\n| economic | 1 | 0 | 1 (C10) |\n| regulatory | 1 | 0 | 1 (C11) |\n| environmental | 1 | 0 | 1 (C12) |\n| **Total** | **12** | **3** | **9** |\n\n---"
+    },
+    {
+      "title": "Absolute vs Conditional Interpretation",
+      "content": "| Classification | Meaning | Constraints |\n|---|---|---|\n| **is_absolute = true** | Fundamental physical impossibility. No redesign, money, or time overcomes it. The constraint IS the physics. | C1 (non-aqueous media), C3 (high void fraction), C6 (partially filled pipe) |\n| **is_absolute = false** | Barrier exists but known engineering solutions, design modifications, or certifications can overcome it. | C2, C4, C5, C7, C8, C9, C10, C11, C12 |\n\n---"
+    },
+    {
+      "title": "Downstream Use",
+      "content": "- **Step 08 (Constraint-Market Compatibility):** Each constraint will be assessed against each candidate market from Market Discovery. Markets with any knockout (absolute constraint exceeded in ALL normal operating conditions) are eliminated.\n- **Fit Assessment:** Mitigable constraints carry cost/time penalties into the Constraint Readiness (CR) dimension of market fit scores.\n- **Market Prioritization:** Eliminated markets are excluded entirely; mitigable costs factor into final ranking.\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"product_name\": \"Ultrasonic Flow Sensor\",\n  \"vendor_name\": \"Marquardt\",\n  \"component\": \"constraints_analysis\",\n  \"technology_class\": \"Ultrasonic Transit-Time Flow Measurement\",\n  \"constraints\": [\n    {\n      \"name\": \"Aqueous Media Requirement\",\n      \"constraint_type\": \"physical\",\n      \"description\": \"Transit-time ultrasonic measurement requires acoustic coupling between piezoelectric transducers and the fluid. Non-aqueous media (oils, gases, non-polar solvents, polymer melts) have acoustic impedance mismatches that prevent signal propagation. Water, water-glycol mixtures, and aqueous suspensions are supported.\",\n      \"threshold_value\": null,\n      \"threshold_unit\": null,\n      \"is_absolute\": true,\n      \"affected_markets_hint\": [\"Oil & Gas processing\", \"Petrochemical refining\", \"Gas distribution\", \"Plastics extrusion\", \"Solvent-based chemical manufacturing\"]\n    },\n    {\n      \"name\": \"Maximum Medium Temperature\",\n      \"constraint_type\": \"physical\",\n      \"description\": \"Polymer housing and seals degrade above 90°C. Extended operation near limit reduces service life. Material constraint of the current product design, not a fundamental limit of transit-time technology.\",\n      \"threshold_value\": \"90\",\n      \"threshold_unit\": \"degC\",\n      \"is_absolute\": false,\n      \"affected_markets_hint\": [\"Steam systems\", \"High-temperature industrial processes\", \"Sterilization circuits\", \"Geothermal heating\"]\n    },\n    {\n      \"name\": \"Air Bubble / Void Fraction Limit\",\n      \"constraint_type\": \"physical\",\n      \"description\": \"Air entrainment >2% by volume attenuates ultrasonic signal. Above ~5% void fraction, signal scatter prevents any usable transit-time measurement. Chronic high-void-fraction media require upstream de-aerators.\",\n      \"threshold_value\": \"2\",\n      \"threshold_unit\": \"% vol\",\n      \"is_absolute\": true,\n      \"affected_markets_hint\": [\"Aerated beverage processing\", \"Open-loop cooling towers\", \"Pulp and paper (high-consistency stock)\", \"Fermentation processes\"]\n    },\n    {\n      \"name\": \"Temperature-Dependent Accuracy\",\n      \"constraint_type\": \"physical\",\n      \"description\": \"Speed of sound changes with temperature. Uncompensated error ~1.5%. Built-in NTC compensation reduces to ~0.2% steady-state. Extreme transients may temporarily exceed compensation response.\",\n      \"threshold_value\": \"1.5\",\n      \"threshold_unit\": \"% error (uncompensated)\",\n      \"is_absolute\": false,\n      \"affected_markets_hint\": [\"Rapid thermal cycling processes\", \"Solar thermal systems\", \"Heat recovery with fluctuating sources\"]\n    },\n    {\n      \"name\": \"Wetted Material Chemical Compatibility\",\n      \"constraint_type\": \"chemical\",\n      \"description\": \"Wetted parts (polymer housing, seals) approved for potable water contact (KTW/WRAS) but not rated for aggressive chemicals — concentrated acids, bases, oxidizers, or organic solvents would attack the housing. Alternative wetted materials are standard in the flowmeter industry but not in the current Marquardt product line.\",\n      \"threshold_value\": null,\n      \"threshold_unit\": null,\n      \"is_absolute\": false,\n      \"affected_markets_hint\": [\"Chemical manufacturing\", \"Semiconductor wet processing\", \"Electroplating\", \"Pharmaceutical API synthesis\"]\n    },\n    {\n      \"name\": \"Pipe Full Condition Required\",\n      \"constraint_type\": \"operational\",\n      \"description\": \"Pipe must be completely filled with liquid. Partially filled pipes cause complete signal loss — ultrasonic pulse cannot traverse an air gap. Inherent to inline transit-time technology.\",\n      \"threshold_value\": \"100\",\n      \"threshold_unit\": \"% fill\",\n      \"is_absolute\": true,\n      \"affected_markets_hint\": [\"Open-channel irrigation\", \"Gravity-fed drainage\", \"Sewer systems\", \"Partially filled process drains\"]\n    },\n    {\n      \"name\": \"Minimum Flow Rate Detection\",\n      \"constraint_type\": \"operational\",\n      \"description\": \"SNR degrades at very low flow rates. Lower detection limit varies by pipe diameter: ~0.25 l/min (DN14), ~4.2 l/min (DN20/DN25).\",\n      \"threshold_value\": \"0.25-4.2\",\n      \"threshold_unit\": \"l/min\",\n      \"is_absolute\": false,\n      \"affected_markets_hint\": [\"Laboratory dosing\", \"Medical infusion\", \"Micro-dispensing\", \"Semiconductor ultra-pure water\"]\n    },\n    {\n      \"name\": \"Maximum Operating Pressure\",\n      \"constraint_type\": \"operational\",\n      \"description\": \"Housing rated to 10 bar continuous. Burst pressure 9 bar (low-pressure variant) or 42 bar (high-pressure variant). Higher-pressure variants are a standard design path.\",\n      \"threshold_value\": \"10\",\n      \"threshold_unit\": \"bar\",\n      \"is_absolute\": false,\n      \"affected_markets_hint\": [\"High-pressure water-jet cutting\", \"Boiler feed water\", \"Reverse osmosis systems\", \"Fire suppression mains\"]\n    },\n    {\n      \"name\": \"Minimum Straight Pipe Run\",\n      \"constraint_type\": \"operational\",\n      \"description\": \"Turbulent or asymmetric flow profiles from upstream disturbances degrade accuracy. 5-10 pipe diameters of straight run recommended upstream. Flow conditioners can reduce this requirement.\",\n      \"threshold_value\": \"5-10\",\n      \"threshold_unit\": \"x DN\",\n      \"is_absolute\": false,\n      \"affected_markets_hint\": [\"Compact appliances\", \"Retrofit constrained piping\", \"Skid-mounted process equipment\"]\n    },\n    {\n      \"name\": \"Life Endurance Ceiling\",\n      \"constraint_type\": \"economic\",\n      \"description\": \"Total throughput endurance rated at 3,000 m³. At max flow (46.6 l/min DN20), this equates to ~45 days continuous. High-flow 24/7 applications exhaust sensor life quickly, making replacement cost uneconomical.\",\n      \"threshold_value\": \"3000\",\n      \"threshold_unit\": \"m3\",\n      \"is_absolute\": false,\n      \"affected_markets_hint\": [\"Municipal water metering (high throughput)\", \"Industrial process water loops (24/7)\", \"District heating mains\"]\n    },\n    {\n      \"name\": \"No Explosive Atmosphere Certification\",\n      \"constraint_type\": \"regulatory\",\n      \"description\": \"No ATEX/IECEx certification for explosive atmospheres. Certification path exists via intrinsically safe (Ex-ia) barrier modules or Ex-d/Ex-e enclosure designs.\",\n      \"threshold_value\": \"Zone 1/0\",\n      \"threshold_unit\": \"ATEX zone\",\n      \"is_absolute\": false,\n      \"affected_markets_hint\": [\"Oil refining\", \"Petrochemical processing\", \"Solvent handling\", \"Grain/dust handling\", \"Paint manufacturing\"]\n    },\n    {\n      \"name\": \"Ambient Temperature Range\",\n      \"constraint_type\": \"environmental\",\n      \"description\": \"Electronics and polymer housing designed for indoor/protected installation. RAST 2.5 connector is appliance-grade. Extreme ambient conditions may exceed electronics operating range. Heated/cooled enclosures are a standard mitigation.\",\n      \"threshold_value\": \"-20 to 60\",\n      \"threshold_unit\": \"degC ambient\",\n      \"is_absolute\": false,\n      \"affected_markets_hint\": [\"Outdoor water metering (arctic/desert)\", \"Rooftop HVAC in extreme environments\", \"Agricultural irrigation\"]\n    }\n  ],\n  \"entities_produced\": {\n    \"nodes\": [\n      {\"label\": \"Constraint\", \"key\": {\"name\": \"Aqueous Media Requirement\", \"run_id\": \"TBD\"}, \"constraint_type\": \"physical\", \"is_absolute\": true},\n      {\"label\": \"Constraint\", \"key\": {\"name\": \"Maximum Medium Temperature\", \"run_id\": \"TBD\"}, \"constraint_type\": \"physical\", \"is_absolute\": false},\n      {\"label\": \"Constraint\", \"key\": {\"name\": \"Air Bubble / Void Fraction Limit\", \"run_id\": \"TBD\"}, \"constraint_type\": \"physical\", \"is_absolute\": true},\n      {\"label\": \"Constraint\", \"key\": {\"name\": \"Temperature-Dependent Accuracy\", \"run_id\": \"TBD\"}, \"constraint_type\": \"physical\", \"is_absolute\": false},\n      {\"label\": \"Constraint\", \"key\": {\"name\": \"Wetted Material Chemical Compatibility\", \"run_id\": \"TBD\"}, \"constraint_type\": \"chemical\", \"is_absolute\": false},\n      {\"label\": \"Constraint\", \"key\": {\"name\": \"Pipe Full Condition Required\", \"run_id\": \"TBD\"}, \"constraint_type\": \"operational\", \"is_absolute\": true},\n      {\"label\": \"Constraint\", \"key\": {\"name\": \"Minimum Flow Rate Detection\", \"run_id\": \"TBD\"}, \"constraint_type\": \"operational\", \"is_absolute\": false},\n      {\"label\": \"Constraint\", \"key\": {\"name\": \"Maximum Operating Pressure\", \"run_id\": \"TBD\"}, \"constraint_type\": \"operational\", \"is_absolute\": false},\n      {\"label\": \"Constraint\", \"key\": {\"name\": \"Minimum Straight Pipe Run\", \"run_id\": \"TBD\"}, \"constraint_type\": \"operational\", \"is_absolute\": false},\n      {\"label\": \"Constraint\", \"key\": {\"name\": \"Life Endurance Ceiling\", \"run_id\": \"TBD\"}, \"constraint_type\": \"economic\", \"is_absolute\": false},\n      {\"label\": \"Constraint\", \"key\": {\"name\": \"No Explosive Atmosphere Certification\", \"run_id\": \"TBD\"}, \"constraint_type\": \"regulatory\", \"is_absolute\": false},\n      {\"label\": \"Constraint\", \"key\": {\"name\": \"Ambient Temperature Range\", \"run_id\": \"TBD\"}, \"constraint_type\": \"environmental\", \"is_absolute\": false}\n    ],\n    \"relationships\": [\n      {\"type\": \"has_constraint\", \"source\": \"NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement\", \"target\": \"Constraint:Aqueous Media Requirement\"},\n      {\"type\": \"has_constraint\", \"source\": \"NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement\", \"target\": \"Constraint:Maximum Medium Temperature\"},\n      {\"type\": \"has_constraint\", \"source\": \"NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement\", \"target\": \"Constraint:Air Bubble / Void Fraction Limit\"},\n      {\"type\": \"has_constraint\", \"source\": \"NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement\", \"target\": \"Constraint:Temperature-Dependent Accuracy\"},\n      {\"type\": \"has_constraint\", \"source\": \"NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement\", \"target\": \"Constraint:Wetted Material Chemical Compatibility\"},\n      {\"type\": \"has_constraint\", \"source\": \"NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement\", \"target\": \"Constraint:Pipe Full Condition Required\"},\n      {\"type\": \"has_constraint\", \"source\": \"NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement\", \"target\": \"Constraint:Minimum Flow Rate Detection\"},\n      {\"type\": \"has_constraint\", \"source\": \"NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement\", \"target\": \"Constraint:Maximum Operating Pressure\"},\n      {\"type\": \"has_constraint\", \"source\": \"NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement\", \"target\": \"Constraint:Minimum Straight Pipe Run\"},\n      {\"type\": \"has_constraint\", \"source\": \"NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement\", \"target\": \"Constraint:Life Endurance Ceiling\"},\n      {\"type\": \"has_constraint\", \"source\": \"NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement\", \"target\": \"Constraint:No Explosive Atmosphere Certification\"},\n      {\"type\": \"has_constraint\", \"source\": \"NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement\", \"target\": \"Constraint:Ambient Temperature Range\"}\n    ]\n  }\n}\n```\n\n---"
+    },
+    {
+      "title": "QA Checklist",
+      "content": "| # | Check | Result |\n|---|---|---|\n| 1 | All 6 constraint types represented | PASS — 4 physical, 1 chemical, 4 operational, 1 economic, 1 regulatory, 1 environmental |\n| 2 | is_absolute only for physics impossibilities | PASS — 3 absolute (media, void fraction, pipe-full); all are fundamental measurement principle limits |\n| 3 | Threshold values are specific numbers with units | PASS — all thresholds have numeric values and units where applicable |\n| 4 | affected_markets_hint present (2–5 per constraint) | PASS — all constraints have 3–5 hints |\n| 5 | No certifiable regulation marked as absolute | PASS — ATEX = is_absolute: false |\n| 6 | No cost barrier marked as absolute | PASS — Life Endurance = is_absolute: false |\n| 7 | All Step 01 constraints enriched | PASS — all 8 original constraints present + 4 new (C5, C10, C11, C12) |\n| 8 | Source tags on factual claims | PASS — [SRC] tags reference upstream files |\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- 01_product_decomposition.md — constraints, specifications, features, technology classification\n- 02_functional_promise.md — complements, BOM position, functional promise scope"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "#",
+        "Constraint",
+        "Type",
+        "is_absolute",
+        "Threshold",
+        "Unit"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Constraint": "Aqueous Media Requirement",
+          "Type": "physical",
+          "is_absolute": "**true**",
+          "Threshold": "—",
+          "Unit": "—"
+        },
+        {
+          "#": "2",
+          "Constraint": "Maximum Medium Temperature",
+          "Type": "physical",
+          "is_absolute": "false",
+          "Threshold": "90",
+          "Unit": "°C"
+        },
+        {
+          "#": "3",
+          "Constraint": "Air Bubble / Void Fraction Limit",
+          "Type": "physical",
+          "is_absolute": "**true**",
+          "Threshold": "2",
+          "Unit": "% vol"
+        },
+        {
+          "#": "4",
+          "Constraint": "Temperature-Dependent Accuracy",
+          "Type": "physical",
+          "is_absolute": "false",
+          "Threshold": "1.5 (uncompensated)",
+          "Unit": "% error"
+        },
+        {
+          "#": "5",
+          "Constraint": "Wetted Material Chemical Compatibility",
+          "Type": "chemical",
+          "is_absolute": "false",
+          "Threshold": "—",
+          "Unit": "—"
+        },
+        {
+          "#": "6",
+          "Constraint": "Pipe Full Condition Required",
+          "Type": "operational",
+          "is_absolute": "**true**",
+          "Threshold": "100",
+          "Unit": "% fill"
+        },
+        {
+          "#": "7",
+          "Constraint": "Minimum Flow Rate Detection",
+          "Type": "operational",
+          "is_absolute": "false",
+          "Threshold": "0.25–4.2",
+          "Unit": "l/min"
+        },
+        {
+          "#": "8",
+          "Constraint": "Maximum Operating Pressure",
+          "Type": "operational",
+          "is_absolute": "false",
+          "Threshold": "10",
+          "Unit": "bar"
+        },
+        {
+          "#": "9",
+          "Constraint": "Minimum Straight Pipe Run",
+          "Type": "operational",
+          "is_absolute": "false",
+          "Threshold": "5–10",
+          "Unit": "× DN"
+        },
+        {
+          "#": "10",
+          "Constraint": "Life Endurance Ceiling",
+          "Type": "economic",
+          "is_absolute": "false",
+          "Threshold": "3,000",
+          "Unit": "m³ total"
+        },
+        {
+          "#": "11",
+          "Constraint": "No Explosive Atmosphere Certification",
+          "Type": "regulatory",
+          "is_absolute": "false",
+          "Threshold": "Zone 1/0",
+          "Unit": "ATEX zone"
+        },
+        {
+          "#": "12",
+          "Constraint": "Ambient Temperature Range",
+          "Type": "environmental",
+          "is_absolute": "false",
+          "Threshold": "−20 to +60 (est.)",
+          "Unit": "°C ambient"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "C1: Aqueous Media Requirement"
+      ],
+      "rows": [
+        {
+          "Field": "**constraint_type**",
+          "C1: Aqueous Media Requirement": "physical"
+        },
+        {
+          "Field": "**is_absolute**",
+          "C1: Aqueous Media Requirement": "**true**"
+        },
+        {
+          "Field": "**threshold_value**",
+          "C1: Aqueous Media Requirement": "—"
+        },
+        {
+          "Field": "**threshold_unit**",
+          "C1: Aqueous Media Requirement": "—"
+        },
+        {
+          "Field": "**description**",
+          "C1: Aqueous Media Requirement": "Transit-time ultrasonic measurement requires acoustic coupling between piezoelectric transducers and the fluid. Non-aqueous media (oils, gases, non-polar solvents, polymer melts) have acoustic impedance mismatches that prevent signal propagation through the sensor's current transducer-fluid interface. Water, water-glycol mixtures, and aqueous suspensions are supported. [SRC: 01_product_decomposition — \"Only water and water-like media\"]"
+        },
+        {
+          "Field": "**affected_markets_hint**",
+          "C1: Aqueous Media Requirement": "Oil & Gas processing, petrochemical refining, gas distribution, plastics extrusion, solvent-based chemical manufacturing"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "C2: Maximum Medium Temperature"
+      ],
+      "rows": [
+        {
+          "Field": "**constraint_type**",
+          "C2: Maximum Medium Temperature": "physical"
+        },
+        {
+          "Field": "**is_absolute**",
+          "C2: Maximum Medium Temperature": "**false**"
+        },
+        {
+          "Field": "**threshold_value**",
+          "C2: Maximum Medium Temperature": "90"
+        },
+        {
+          "Field": "**threshold_unit**",
+          "C2: Maximum Medium Temperature": "°C"
+        },
+        {
+          "Field": "**description**",
+          "C2: Maximum Medium Temperature": "Polymer housing and seals degrade above 90°C. Extended operation near the limit reduces service life. This is a material constraint of the current product design, not a fundamental physics limit of transit-time technology — metal-housed ultrasonic sensors exist for higher temperatures. [SRC: 01_product_decomposition — spec \"Medium Temperature: +2 to 90 °C\"]"
+        },
+        {
+          "Field": "**affected_markets_hint**",
+          "C2: Maximum Medium Temperature": "Steam systems, high-temperature industrial processes, sterilization circuits (>121°C), geothermal heating"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "C3: Air Bubble / Void Fraction Limit"
+      ],
+      "rows": [
+        {
+          "Field": "**constraint_type**",
+          "C3: Air Bubble / Void Fraction Limit": "physical"
+        },
+        {
+          "Field": "**is_absolute**",
+          "C3: Air Bubble / Void Fraction Limit": "**true**"
+        },
+        {
+          "Field": "**threshold_value**",
+          "C3: Air Bubble / Void Fraction Limit": "2"
+        },
+        {
+          "Field": "**threshold_unit**",
+          "C3: Air Bubble / Void Fraction Limit": "% vol"
+        },
+        {
+          "Field": "**description**",
+          "C3: Air Bubble / Void Fraction Limit": "Air entrainment >2% by volume attenuates the ultrasonic signal and introduces measurement error. Above ~5% void fraction, signal scatter prevents any usable transit-time measurement. The sensor detects bubbles as a diagnostic event but cannot compensate for chronic high-void-fraction media. Systems with persistent air entrainment require upstream de-aerators. [SRC: 01_product_decomposition — \"Air Bubble Tolerance\" constraint + \"Digital Anomaly Detection\" feature]"
+        },
+        {
+          "Field": "**affected_markets_hint**",
+          "C3: Air Bubble / Void Fraction Limit": "Aerated beverage processing, open-loop cooling towers, pulp & paper (high-consistency stock), fermentation processes"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "C4: Temperature-Dependent Accuracy"
+      ],
+      "rows": [
+        {
+          "Field": "**constraint_type**",
+          "C4: Temperature-Dependent Accuracy": "physical"
+        },
+        {
+          "Field": "**is_absolute**",
+          "C4: Temperature-Dependent Accuracy": "**false**"
+        },
+        {
+          "Field": "**threshold_value**",
+          "C4: Temperature-Dependent Accuracy": "1.5 (uncompensated); 0.2 (compensated)"
+        },
+        {
+          "Field": "**threshold_unit**",
+          "C4: Temperature-Dependent Accuracy": "% error"
+        },
+        {
+          "Field": "**description**",
+          "C4: Temperature-Dependent Accuracy": "Speed of sound in the medium changes with temperature. Without compensation, temperature-induced measurement error reaches ~1.5%. The integrated NTC thermistor reduces this to ~0.2% under steady-state conditions. Extreme temperature transients may temporarily exceed compensation response. Fluid type must be configured at commissioning. [SRC: 01_product_decomposition — \"Temperature-Dependent Accuracy\" constraint + \"Integrated Temperature Sensing\" feature]"
+        },
+        {
+          "Field": "**affected_markets_hint**",
+          "C4: Temperature-Dependent Accuracy": "Rapid thermal cycling processes, solar thermal systems with cloud-induced transients, heat recovery with fluctuating source temperatures"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "C5: Wetted Material Chemical Compatibility"
+      ],
+      "rows": [
+        {
+          "Field": "**constraint_type**",
+          "C5: Wetted Material Chemical Compatibility": "chemical"
+        },
+        {
+          "Field": "**is_absolute**",
+          "C5: Wetted Material Chemical Compatibility": "**false**"
+        },
+        {
+          "Field": "**threshold_value**",
+          "C5: Wetted Material Chemical Compatibility": "—"
+        },
+        {
+          "Field": "**threshold_unit**",
+          "C5: Wetted Material Chemical Compatibility": "—"
+        },
+        {
+          "Field": "**description**",
+          "C5: Wetted Material Chemical Compatibility": "The sensor's wetted parts (polymer housing, seals) are approved for potable water contact (KTW/WRAS) but are not rated for aggressive chemical media — concentrated acids, bases, oxidizers, or organic solvents would attack the polymer housing and seal materials. Alternative wetted materials (stainless steel, PTFE-lined, Hastelloy) are standard in the flowmeter industry but not available in the current Marquardt product line. [SRC: 01_product_decomposition — \"KTW/WRAS Drinking Water Approval\" feature + polymer housing material implied by temperature/pressure constraints]"
+        },
+        {
+          "Field": "**affected_markets_hint**",
+          "C5: Wetted Material Chemical Compatibility": "Chemical manufacturing, semiconductor wet processing, electroplating, pharmaceutical active ingredient synthesis"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "C6: Pipe Full Condition Required"
+      ],
+      "rows": [
+        {
+          "Field": "**constraint_type**",
+          "C6: Pipe Full Condition Required": "operational"
+        },
+        {
+          "Field": "**is_absolute**",
+          "C6: Pipe Full Condition Required": "**true**"
+        },
+        {
+          "Field": "**threshold_value**",
+          "C6: Pipe Full Condition Required": "100"
+        },
+        {
+          "Field": "**threshold_unit**",
+          "C6: Pipe Full Condition Required": "% fill"
+        },
+        {
+          "Field": "**description**",
+          "C6: Pipe Full Condition Required": "The pipe must be completely filled with liquid for valid measurement. Partially filled pipes cause complete signal loss — the ultrasonic pulse cannot traverse an air gap. The sensor detects empty-pipe condition as a fault state. This is inherent to inline transit-time technology; no engineering workaround exists for partially filled conduits. [SRC: 01_product_decomposition — \"Pipe Full Condition\" constraint]"
+        },
+        {
+          "Field": "**affected_markets_hint**",
+          "C6: Pipe Full Condition Required": "Open-channel irrigation, gravity-fed drainage, sewer systems, partially filled process drains"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "C7: Minimum Flow Rate Detection"
+      ],
+      "rows": [
+        {
+          "Field": "**constraint_type**",
+          "C7: Minimum Flow Rate Detection": "operational"
+        },
+        {
+          "Field": "**is_absolute**",
+          "C7: Minimum Flow Rate Detection": "**false**"
+        },
+        {
+          "Field": "**threshold_value**",
+          "C7: Minimum Flow Rate Detection": "0.25–4.2"
+        },
+        {
+          "Field": "**threshold_unit**",
+          "C7: Minimum Flow Rate Detection": "l/min"
+        },
+        {
+          "Field": "**description**",
+          "C7: Minimum Flow Rate Detection": "Signal-to-noise ratio degrades at very low flow rates — the transit-time difference becomes indistinguishable from noise. The lower detection limit varies by pipe diameter: ~0.25 l/min (DN14), ~4.2 l/min (DN20/DN25). Applications requiring micro-flow measurement below these thresholds cannot use this sensor without a smaller-bore variant. [SRC: 01_product_decomposition — spec \"Flow Range\" per variant]"
+        },
+        {
+          "Field": "**affected_markets_hint**",
+          "C7: Minimum Flow Rate Detection": "Laboratory dosing, medical infusion, micro-dispensing, semiconductor ultra-pure water (low-flow branches)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "C8: Maximum Operating Pressure"
+      ],
+      "rows": [
+        {
+          "Field": "**constraint_type**",
+          "C8: Maximum Operating Pressure": "operational"
+        },
+        {
+          "Field": "**is_absolute**",
+          "C8: Maximum Operating Pressure": "**false**"
+        },
+        {
+          "Field": "**threshold_value**",
+          "C8: Maximum Operating Pressure": "10"
+        },
+        {
+          "Field": "**threshold_unit**",
+          "C8: Maximum Operating Pressure": "bar"
+        },
+        {
+          "Field": "**description**",
+          "C8: Maximum Operating Pressure": "Housing structural integrity rated to 10 bar continuous. Burst pressure is 9 bar (low-pressure variant) or 42 bar (high-pressure variant). Exceeding the rating risks seal failure and leakage. Higher-pressure variants or reinforced housings are a standard design path in the flowmeter industry. [SRC: 01_product_decomposition — spec \"Pressure Range: 0–10 bar\", \"Burst Pressure: 9/42 bar\"]"
+        },
+        {
+          "Field": "**affected_markets_hint**",
+          "C8: Maximum Operating Pressure": "High-pressure water-jet cutting, boiler feed water (>10 bar), reverse osmosis systems, fire suppression mains"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "C9: Minimum Straight Pipe Run"
+      ],
+      "rows": [
+        {
+          "Field": "**constraint_type**",
+          "C9: Minimum Straight Pipe Run": "operational"
+        },
+        {
+          "Field": "**is_absolute**",
+          "C9: Minimum Straight Pipe Run": "**false**"
+        },
+        {
+          "Field": "**threshold_value**",
+          "C9: Minimum Straight Pipe Run": "5–10"
+        },
+        {
+          "Field": "**threshold_unit**",
+          "C9: Minimum Straight Pipe Run": "× DN"
+        },
+        {
+          "Field": "**description**",
+          "C9: Minimum Straight Pipe Run": "Turbulent or asymmetric flow profiles caused by elbows, valves, or tees upstream degrade measurement accuracy. A minimum of 5–10 pipe diameters of undisturbed straight run is recommended upstream of the sensor. Flow conditioners can reduce this requirement. [SRC: 01_product_decomposition — \"Minimum Straight Pipe Run\" constraint; 02_functional_promise — \"Straight pipe run (upstream)\" complement]"
+        },
+        {
+          "Field": "**affected_markets_hint**",
+          "C9: Minimum Straight Pipe Run": "Compact appliances (heat pumps, combi boilers), retrofits in constrained piping, skid-mounted process equipment"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "C10: Life Endurance Ceiling"
+      ],
+      "rows": [
+        {
+          "Field": "**constraint_type**",
+          "C10: Life Endurance Ceiling": "economic"
+        },
+        {
+          "Field": "**is_absolute**",
+          "C10: Life Endurance Ceiling": "**false**"
+        },
+        {
+          "Field": "**threshold_value**",
+          "C10: Life Endurance Ceiling": "3,000"
+        },
+        {
+          "Field": "**threshold_unit**",
+          "C10: Life Endurance Ceiling": "m³ total throughput"
+        },
+        {
+          "Field": "**description**",
+          "C10: Life Endurance Ceiling": "Total throughput endurance rated at 3,000 m³. At maximum flow (46.6 l/min DN20), this equates to ~1,073 hours (~45 days continuous). High-flow industrial applications running 24/7 would exhaust sensor life within weeks, requiring frequent replacement. For typical residential/commercial HVAC duty cycles (intermittent, lower flow), this equates to years of service. Replacement cost becomes uneconomical in high-throughput continuous-process applications. [SRC: 01_product_decomposition — spec \"Life Endurance: 3,000 m³\"]"
+        },
+        {
+          "Field": "**affected_markets_hint**",
+          "C10: Life Endurance Ceiling": "Municipal water metering (high throughput), industrial process water loops (24/7), district heating mains"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "C11: No Explosive Atmosphere Certification"
+      ],
+      "rows": [
+        {
+          "Field": "**constraint_type**",
+          "C11: No Explosive Atmosphere Certification": "regulatory"
+        },
+        {
+          "Field": "**is_absolute**",
+          "C11: No Explosive Atmosphere Certification": "**false**"
+        },
+        {
+          "Field": "**threshold_value**",
+          "C11: No Explosive Atmosphere Certification": "Zone 1/0"
+        },
+        {
+          "Field": "**threshold_unit**",
+          "C11: No Explosive Atmosphere Certification": "ATEX zone"
+        },
+        {
+          "Field": "**description**",
+          "C11: No Explosive Atmosphere Certification": "The current product configuration has no ATEX/IECEx certification for deployment in explosive atmospheres. No hazardous area approval is mentioned in the product specifications or feature set. A certification path exists via intrinsically safe (Ex-ia) barrier modules or Ex-d/Ex-e enclosure designs — standard practice in the flowmeter industry. [SRC: 01_product_decomposition — absence of any ATEX/Ex feature; KTW/WRAS is the only certification mentioned]"
+        },
+        {
+          "Field": "**affected_markets_hint**",
+          "C11: No Explosive Atmosphere Certification": "Oil refining, petrochemical processing, solvent handling, grain/dust handling facilities, paint manufacturing"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "C12: Ambient Temperature Range"
+      ],
+      "rows": [
+        {
+          "Field": "**constraint_type**",
+          "C12: Ambient Temperature Range": "environmental"
+        },
+        {
+          "Field": "**is_absolute**",
+          "C12: Ambient Temperature Range": "**false**"
+        },
+        {
+          "Field": "**threshold_value**",
+          "C12: Ambient Temperature Range": "−20 to +60 (est.)"
+        },
+        {
+          "Field": "**threshold_unit**",
+          "C12: Ambient Temperature Range": "°C ambient"
+        },
+        {
+          "Field": "**description**",
+          "C12: Ambient Temperature Range": "The sensor electronics and polymer housing are designed for indoor / protected installation environments typical of HVAC and appliance OEM applications. No IP rating beyond basic splash protection is evident from the specifications. Extreme ambient conditions — sub-zero outdoor installations, desert environments, or locations near furnaces — may exceed the electronics' operating range. Heated or cooled enclosures are a standard mitigation. The RAST 2.5 connector is an appliance-grade connector, not an industrial-grade sealed connection. [SRC: 01_product_decomposition — spec \"Supply Voltage: 5/6–30 V DC\", \"Connector: RAST 2.5\"; 02_functional_promise — BOM Level L5 Component, parent subsystem \"hydronic circuit, cooling loop\"]"
+        },
+        {
+          "Field": "**affected_markets_hint**",
+          "C12: Ambient Temperature Range": "Outdoor water metering (arctic/desert climates), rooftop HVAC in extreme environments, agricultural irrigation in open fields"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Type",
+        "Count",
+        "Absolute",
+        "Conditional"
+      ],
+      "rows": [
+        {
+          "Type": "physical",
+          "Count": "4",
+          "Absolute": "2 (C1, C3)",
+          "Conditional": "2 (C2, C4)"
+        },
+        {
+          "Type": "chemical",
+          "Count": "1",
+          "Absolute": "0",
+          "Conditional": "1 (C5)"
+        },
+        {
+          "Type": "operational",
+          "Count": "4",
+          "Absolute": "1 (C6)",
+          "Conditional": "3 (C7, C8, C9)"
+        },
+        {
+          "Type": "economic",
+          "Count": "1",
+          "Absolute": "0",
+          "Conditional": "1 (C10)"
+        },
+        {
+          "Type": "regulatory",
+          "Count": "1",
+          "Absolute": "0",
+          "Conditional": "1 (C11)"
+        },
+        {
+          "Type": "environmental",
+          "Count": "1",
+          "Absolute": "0",
+          "Conditional": "1 (C12)"
+        },
+        {
+          "Type": "**Total**",
+          "Count": "**12**",
+          "Absolute": "**3**",
+          "Conditional": "**9**"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Classification",
+        "Meaning",
+        "Constraints"
+      ],
+      "rows": [
+        {
+          "Classification": "**is_absolute = true**",
+          "Meaning": "Fundamental physical impossibility. No redesign, money, or time overcomes it. The constraint IS the physics.",
+          "Constraints": "C1 (non-aqueous media), C3 (high void fraction), C6 (partially filled pipe)"
+        },
+        {
+          "Classification": "**is_absolute = false**",
+          "Meaning": "Barrier exists but known engineering solutions, design modifications, or certifications can overcome it.",
+          "Constraints": "C2, C4, C5, C7, C8, C9, C10, C11, C12"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Check": "All 6 constraint types represented",
+          "Result": "PASS — 4 physical, 1 chemical, 4 operational, 1 economic, 1 regulatory, 1 environmental"
+        },
+        {
+          "#": "2",
+          "Check": "is_absolute only for physics impossibilities",
+          "Result": "PASS — 3 absolute (media, void fraction, pipe-full); all are fundamental measurement principle limits"
+        },
+        {
+          "#": "3",
+          "Check": "Threshold values are specific numbers with units",
+          "Result": "PASS — all thresholds have numeric values and units where applicable"
+        },
+        {
+          "#": "4",
+          "Check": "affected_markets_hint present (2–5 per constraint)",
+          "Result": "PASS — all constraints have 3–5 hints"
+        },
+        {
+          "#": "5",
+          "Check": "No certifiable regulation marked as absolute",
+          "Result": "PASS — ATEX = is_absolute: false"
+        },
+        {
+          "#": "6",
+          "Check": "No cost barrier marked as absolute",
+          "Result": "PASS — Life Endurance = is_absolute: false"
+        },
+        {
+          "#": "7",
+          "Check": "All Step 01 constraints enriched",
+          "Result": "PASS — all 8 original constraints present + 4 new (C5, C10, C11, C12)"
+        },
+        {
+          "#": "8",
+          "Check": "Source tags on factual claims",
+          "Result": "PASS — [SRC] tags reference upstream files"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "product_name": "Ultrasonic Flow Sensor",
+      "vendor_name": "Marquardt",
+      "component": "constraints_analysis",
+      "technology_class": "Ultrasonic Transit-Time Flow Measurement",
+      "constraints": [
+        {
+          "name": "Aqueous Media Requirement",
+          "constraint_type": "physical",
+          "description": "Transit-time ultrasonic measurement requires acoustic coupling between piezoelectric transducers and the fluid. Non-aqueous media (oils, gases, non-polar solvents, polymer melts) have acoustic impedance mismatches that prevent signal propagation. Water, water-glycol mixtures, and aqueous suspensions are supported.",
+          "threshold_value": null,
+          "threshold_unit": null,
+          "is_absolute": true,
+          "affected_markets_hint": [
+            "Oil & Gas processing",
+            "Petrochemical refining",
+            "Gas distribution",
+            "Plastics extrusion",
+            "Solvent-based chemical manufacturing"
+          ]
+        },
+        {
+          "name": "Maximum Medium Temperature",
+          "constraint_type": "physical",
+          "description": "Polymer housing and seals degrade above 90°C. Extended operation near limit reduces service life. Material constraint of the current product design, not a fundamental limit of transit-time technology.",
+          "threshold_value": "90",
+          "threshold_unit": "degC",
+          "is_absolute": false,
+          "affected_markets_hint": [
+            "Steam systems",
+            "High-temperature industrial processes",
+            "Sterilization circuits",
+            "Geothermal heating"
+          ]
+        },
+        {
+          "name": "Air Bubble / Void Fraction Limit",
+          "constraint_type": "physical",
+          "description": "Air entrainment >2% by volume attenuates ultrasonic signal. Above ~5% void fraction, signal scatter prevents any usable transit-time measurement. Chronic high-void-fraction media require upstream de-aerators.",
+          "threshold_value": "2",
+          "threshold_unit": "% vol",
+          "is_absolute": true,
+          "affected_markets_hint": [
+            "Aerated beverage processing",
+            "Open-loop cooling towers",
+            "Pulp and paper (high-consistency stock)",
+            "Fermentation processes"
+          ]
+        },
+        {
+          "name": "Temperature-Dependent Accuracy",
+          "constraint_type": "physical",
+          "description": "Speed of sound changes with temperature. Uncompensated error ~1.5%. Built-in NTC compensation reduces to ~0.2% steady-state. Extreme transients may temporarily exceed compensation response.",
+          "threshold_value": "1.5",
+          "threshold_unit": "% error (uncompensated)",
+          "is_absolute": false,
+          "affected_markets_hint": [
+            "Rapid thermal cycling processes",
+            "Solar thermal systems",
+            "Heat recovery with fluctuating sources"
+          ]
+        },
+        {
+          "name": "Wetted Material Chemical Compatibility",
+          "constraint_type": "chemical",
+          "description": "Wetted parts (polymer housing, seals) approved for potable water contact (KTW/WRAS) but not rated for aggressive chemicals — concentrated acids, bases, oxidizers, or organic solvents would attack the housing. Alternative wetted materials are standard in the flowmeter industry but not in the current Marquardt product line.",
+          "threshold_value": null,
+          "threshold_unit": null,
+          "is_absolute": false,
+          "affected_markets_hint": [
+            "Chemical manufacturing",
+            "Semiconductor wet processing",
+            "Electroplating",
+            "Pharmaceutical API synthesis"
+          ]
+        },
+        {
+          "name": "Pipe Full Condition Required",
+          "constraint_type": "operational",
+          "description": "Pipe must be completely filled with liquid. Partially filled pipes cause complete signal loss — ultrasonic pulse cannot traverse an air gap. Inherent to inline transit-time technology.",
+          "threshold_value": "100",
+          "threshold_unit": "% fill",
+          "is_absolute": true,
+          "affected_markets_hint": [
+            "Open-channel irrigation",
+            "Gravity-fed drainage",
+            "Sewer systems",
+            "Partially filled process drains"
+          ]
+        },
+        {
+          "name": "Minimum Flow Rate Detection",
+          "constraint_type": "operational",
+          "description": "SNR degrades at very low flow rates. Lower detection limit varies by pipe diameter: ~0.25 l/min (DN14), ~4.2 l/min (DN20/DN25).",
+          "threshold_value": "0.25-4.2",
+          "threshold_unit": "l/min",
+          "is_absolute": false,
+          "affected_markets_hint": [
+            "Laboratory dosing",
+            "Medical infusion",
+            "Micro-dispensing",
+            "Semiconductor ultra-pure water"
+          ]
+        },
+        {
+          "name": "Maximum Operating Pressure",
+          "constraint_type": "operational",
+          "description": "Housing rated to 10 bar continuous. Burst pressure 9 bar (low-pressure variant) or 42 bar (high-pressure variant). Higher-pressure variants are a standard design path.",
+          "threshold_value": "10",
+          "threshold_unit": "bar",
+          "is_absolute": false,
+          "affected_markets_hint": [
+            "High-pressure water-jet cutting",
+            "Boiler feed water",
+            "Reverse osmosis systems",
+            "Fire suppression mains"
+          ]
+        },
+        {
+          "name": "Minimum Straight Pipe Run",
+          "constraint_type": "operational",
+          "description": "Turbulent or asymmetric flow profiles from upstream disturbances degrade accuracy. 5-10 pipe diameters of straight run recommended upstream. Flow conditioners can reduce this requirement.",
+          "threshold_value": "5-10",
+          "threshold_unit": "x DN",
+          "is_absolute": false,
+          "affected_markets_hint": [
+            "Compact appliances",
+            "Retrofit constrained piping",
+            "Skid-mounted process equipment"
+          ]
+        },
+        {
+          "name": "Life Endurance Ceiling",
+          "constraint_type": "economic",
+          "description": "Total throughput endurance rated at 3,000 m³. At max flow (46.6 l/min DN20), this equates to ~45 days continuous. High-flow 24/7 applications exhaust sensor life quickly, making replacement cost uneconomical.",
+          "threshold_value": "3000",
+          "threshold_unit": "m3",
+          "is_absolute": false,
+          "affected_markets_hint": [
+            "Municipal water metering (high throughput)",
+            "Industrial process water loops (24/7)",
+            "District heating mains"
+          ]
+        },
+        {
+          "name": "No Explosive Atmosphere Certification",
+          "constraint_type": "regulatory",
+          "description": "No ATEX/IECEx certification for explosive atmospheres. Certification path exists via intrinsically safe (Ex-ia) barrier modules or Ex-d/Ex-e enclosure designs.",
+          "threshold_value": "Zone 1/0",
+          "threshold_unit": "ATEX zone",
+          "is_absolute": false,
+          "affected_markets_hint": [
+            "Oil refining",
+            "Petrochemical processing",
+            "Solvent handling",
+            "Grain/dust handling",
+            "Paint manufacturing"
+          ]
+        },
+        {
+          "name": "Ambient Temperature Range",
+          "constraint_type": "environmental",
+          "description": "Electronics and polymer housing designed for indoor/protected installation. RAST 2.5 connector is appliance-grade. Extreme ambient conditions may exceed electronics operating range. Heated/cooled enclosures are a standard mitigation.",
+          "threshold_value": "-20 to 60",
+          "threshold_unit": "degC ambient",
+          "is_absolute": false,
+          "affected_markets_hint": [
+            "Outdoor water metering (arctic/desert)",
+            "Rooftop HVAC in extreme environments",
+            "Agricultural irrigation"
+          ]
+        }
+      ],
+      "entities_produced": {
+        "nodes": [
+          {
+            "label": "Constraint",
+            "key": {
+              "name": "Aqueous Media Requirement",
+              "run_id": "TBD"
+            },
+            "constraint_type": "physical",
+            "is_absolute": true
+          },
+          {
+            "label": "Constraint",
+            "key": {
+              "name": "Maximum Medium Temperature",
+              "run_id": "TBD"
+            },
+            "constraint_type": "physical",
+            "is_absolute": false
+          },
+          {
+            "label": "Constraint",
+            "key": {
+              "name": "Air Bubble / Void Fraction Limit",
+              "run_id": "TBD"
+            },
+            "constraint_type": "physical",
+            "is_absolute": true
+          },
+          {
+            "label": "Constraint",
+            "key": {
+              "name": "Temperature-Dependent Accuracy",
+              "run_id": "TBD"
+            },
+            "constraint_type": "physical",
+            "is_absolute": false
+          },
+          {
+            "label": "Constraint",
+            "key": {
+              "name": "Wetted Material Chemical Compatibility",
+              "run_id": "TBD"
+            },
+            "constraint_type": "chemical",
+            "is_absolute": false
+          },
+          {
+            "label": "Constraint",
+            "key": {
+              "name": "Pipe Full Condition Required",
+              "run_id": "TBD"
+            },
+            "constraint_type": "operational",
+            "is_absolute": true
+          },
+          {
+            "label": "Constraint",
+            "key": {
+              "name": "Minimum Flow Rate Detection",
+              "run_id": "TBD"
+            },
+            "constraint_type": "operational",
+            "is_absolute": false
+          },
+          {
+            "label": "Constraint",
+            "key": {
+              "name": "Maximum Operating Pressure",
+              "run_id": "TBD"
+            },
+            "constraint_type": "operational",
+            "is_absolute": false
+          },
+          {
+            "label": "Constraint",
+            "key": {
+              "name": "Minimum Straight Pipe Run",
+              "run_id": "TBD"
+            },
+            "constraint_type": "operational",
+            "is_absolute": false
+          },
+          {
+            "label": "Constraint",
+            "key": {
+              "name": "Life Endurance Ceiling",
+              "run_id": "TBD"
+            },
+            "constraint_type": "economic",
+            "is_absolute": false
+          },
+          {
+            "label": "Constraint",
+            "key": {
+              "name": "No Explosive Atmosphere Certification",
+              "run_id": "TBD"
+            },
+            "constraint_type": "regulatory",
+            "is_absolute": false
+          },
+          {
+            "label": "Constraint",
+            "key": {
+              "name": "Ambient Temperature Range",
+              "run_id": "TBD"
+            },
+            "constraint_type": "environmental",
+            "is_absolute": false
+          }
+        ],
+        "relationships": [
+          {
+            "type": "has_constraint",
+            "source": "NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement",
+            "target": "Constraint:Aqueous Media Requirement"
+          },
+          {
+            "type": "has_constraint",
+            "source": "NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement",
+            "target": "Constraint:Maximum Medium Temperature"
+          },
+          {
+            "type": "has_constraint",
+            "source": "NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement",
+            "target": "Constraint:Air Bubble / Void Fraction Limit"
+          },
+          {
+            "type": "has_constraint",
+            "source": "NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement",
+            "target": "Constraint:Temperature-Dependent Accuracy"
+          },
+          {
+            "type": "has_constraint",
+            "source": "NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement",
+            "target": "Constraint:Wetted Material Chemical Compatibility"
+          },
+          {
+            "type": "has_constraint",
+            "source": "NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement",
+            "target": "Constraint:Pipe Full Condition Required"
+          },
+          {
+            "type": "has_constraint",
+            "source": "NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement",
+            "target": "Constraint:Minimum Flow Rate Detection"
+          },
+          {
+            "type": "has_constraint",
+            "source": "NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement",
+            "target": "Constraint:Maximum Operating Pressure"
+          },
+          {
+            "type": "has_constraint",
+            "source": "NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement",
+            "target": "Constraint:Minimum Straight Pipe Run"
+          },
+          {
+            "type": "has_constraint",
+            "source": "NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement",
+            "target": "Constraint:Life Endurance Ceiling"
+          },
+          {
+            "type": "has_constraint",
+            "source": "NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement",
+            "target": "Constraint:No Explosive Atmosphere Certification"
+          },
+          {
+            "type": "has_constraint",
+            "source": "NeutralProductGroup:Ultrasonic Transit-Time Flow Measurement",
+            "target": "Constraint:Ambient Temperature Range"
+          }
+        ]
+      }
+    }
+  ],
+  "has_bom": false
+}

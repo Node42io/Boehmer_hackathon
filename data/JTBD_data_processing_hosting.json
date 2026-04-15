@@ -1,0 +1,1716 @@
+{
+  "id": "JTBD_data_processing_hosting",
+  "title": "JTBD Analysis — NAICS 518210",
+  "type": "jtbd_analysis",
+  "market_slug": "data_processing_hosting",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Phase 1 — Industry Landscape",
+      "content": "### 1.1 CFJ, Output Types, Offering Level\n\n| Field | Value |\n|---|---|\n| **NAICS** | 518210 |\n| **CFJ** | Host, operate, and deliver customer computing and data workloads on demand with continuous uptime, predictable performance, and contracted SLA compliance |\n| **Offering Level** | L7 (Ecosystem) — service NAICS; VN-only (no BOM) |\n\n| ID | Output Type | Description |\n|---|---|---|\n| OT-1 | Colocation Hosting | Space, power, cooling rented to enterprise tenants |\n| OT-2 | Hyperscale Cloud Compute | Self-operated fleets for IaaS/PaaS/SaaS |\n| OT-3 | HPC / AI Compute-as-a-Service | GPU/accelerator-dense liquid-cooled fleets |\n| OT-4 | Managed Hosting | Operated IT on customer behalf |\n\n[SRC: VN_data_processing_hosting]\n\n### 1.2 Segments\n\n| # | Segment | Circumstance | Alternatives Differ? |\n|---|---|---|---|\n| 1 | Enterprise colo tenant | Rents rack space + power, owns IT | Yes — colo vs on-prem vs cloud |\n| 2 | Hyperscale operator | Owns full stack, chases PUE/WUE at scale | Yes — air vs liquid vs immersion |\n| 3 | **AI / HPC operator** | **GPU racks >50 kW, liquid cooling mandatory** | Yes — DLC vs rear-door vs immersion |\n| 4 | Regulated workloads (fin/health/gov) | Tier III/IV uptime + compliance | Yes — on-prem vs sovereign cloud |\n| 5 | Edge / regional hosting | Latency-sensitive, small footprint | Yes — micro-DC vs telco colo |\n| 6 | Sustainability-driven buyer | PUE/WUE/carbon contracted | Yes — evap vs dry vs liquid |\n\n### 1.3 Process VN\n\n9 L6 steps (5 core + 4 horizontal). Sensor-relevant branch = **L6c Thermal Management → L5 CDU / L5 RDHx**. Full hierarchy in VN file. [SRC: VN_data_processing_hosting]\n\n### 1.4 Product BOM\n\nService NAICS — no physical product BOM. Service composition documented via L6 department × output-type activation matrix in VN file.\n\n### 1.5 Edges (Flow Sensor Column)\n\n| L6 Process Step | Edge Type | Rationale |\n|---|---|---|\n| L6c Thermal Management (liquid path) | **HARD** | Sensor technology determines CDU control architecture and leak-detection strategy |\n| L6g Energy & Sustainability | **SOFT** | Flow × ΔT = kW thermal duty feeds PUE telemetry granularity |\n| L6i SLA Assurance | **SOFT** | Flow loss → compressor/pump trip is a top-5 uptime fault |\n| All other L6 steps | INDEPENDENT | No effect on power, IT hosting, compute ops, security, MMR |\n\n---"
+    },
+    {
+      "title": "Phase 2 — Company Enters",
+      "content": "### 2.1 VN Anchor\n\n| Field | Value |\n|---|---|\n| **Route** | PROCESS_VN — sensor is inside CDU equipment used to operate the facility |\n| **Anchor Level** | L4 |\n| **Anchor Node** | Flow Sensor |\n| **Parent L5** | Coolant Distribution Unit (CDU) |\n| **Parent Job Family** | Isolate facility loop from IT-grade secondary TCS loop and deliver temperature-controlled coolant to liquid-cooled IT |\n| **Grandparent L6** | Thermal Management |\n| **Sibling L4s** | Brazed Plate HX, Circulation Pump, Temperature Probe, Leak Sensor, Expansion Reservoir, CDU Controller |\n| **Output Types Activated** | OT-3 (primary), OT-2 (partial — hyperscale liquid-cooled pods) |\n| **Secondary Anchor** | Flow Sensor under **In-Rack Liquid Cooling Unit (RDHx)** — L4 / L5 RDHx |\n\n[SRC: VN_data_processing_hosting]\n\n### 2.2 Lens\n\n| Field | Value |\n|---|---|\n| **Route** | Maker — PROCESS_VN |\n| **Lens Source** | Parent L5 job family (CDU) |\n| **Function Verb** | Measure |\n| **Lens** | \"What flow measurement does the CDU need to safely deliver coolant to GPU racks?\" |\n| **Level A filter** | Segments 2, 3, 6 operate liquid-cooled infrastructure — pass |\n| **Level B filter** | DN20 fits CDU secondary loop (DN15–DN25, 5–30 L/min) — pass for rack CDUs; fails for cold-plate DN6–DN10 |\n\n### 2.3 Product Job + Core Job\n\n**Product Job Statement:**\n\n> \"Help the Coolant Distribution Unit to measure secondary-loop volumetric flow and coolant temperature so GPU racks receive contracted thermal duty without compressor trip, leak escalation, or SLA breach\"\n\n**Core Job (solution-independent):**\n\n> \"Quantify secondary-loop coolant flow and temperature at the CDU to enable thermal duty calculation, loss-of-flow protection, and PUE/WUE telemetry for liquid-cooled IT\"\n\n*Abstraction test: 5 alternatives from different categories (ultrasonic, magnetic, turbine, vortex, paddle/thermal switch) → PASS.*\n\n### 2.4 Alternatives (5)\n\n| # | Alternative | UNSPSC | Share | Trade-Offs |\n|---|---|---|---|---|\n| 1 | Ultrasonic transit-time sensor | 41112501 | 30% | Air-bubble sensitivity >2% vol, pipe-full requirement, acoustic coupling drift |\n| 2 | **Electromagnetic (magnetic) flow meter** | 41112501 | **35%** | Requires conductive fluid (glycol OK, DI water borderline), higher unit cost, larger footprint |\n| 3 | Turbine / impeller | 41112501 | 15% | Bearing wear, particle jamming, pressure drop 100–300 mbar |\n| 4 | Vortex sensor | 41112501 | 10% | Min-Reynolds limit, vibration sensitivity, poor at low flow |\n| 5 | Thermal-dispersion / paddle switch (binary) | 41112501 | 10% | On/off only, no kW duty, but dominant as redundant safety cutout |\n\n*Magnetic flow meters lead in DLC/CDU deployments; ultrasonic growing share driven by no-wear and integrated temperature. [SRC: Mass Flow Online, IoThrifty]*\n\n### 2.5 Scenarios\n\n| # | Scenario | Output Types | In-play units |\n|---|---|---|---|\n| S1 | GPU rack steady-state (120–160 kW) | OT-3 | CDU Pump, Flow Sensor, Temp Probe |\n| S2 | CDU startup — prove-flow before IT load | OT-3 | Flow Sensor (gate signal) |\n| S3 | Workload spike / variable-speed pump response | OT-3 | Flow Sensor, CDU Controller |\n| S4 | Coolant leak / loss-of-flow event | OT-3 | Flow Sensor, Leak Sensor (emergency isolate) |\n| S5 | Seasonal facility-loop ΔT shift | OT-2, OT-3 | Flow Sensor, Temp Probe (PUE recompute) |\n| S6 | Commissioning / glycol top-up | OT-3 | Flow Sensor (acoustic re-config) |\n\n*Sparsity check: S2 and S4 activate only the Flow Sensor → correctly granular. PASS.*\n\n---"
+    },
+    {
+      "title": "Phase 3 — Needs Derivation",
+      "content": "### 3.1 Stakeholder Roles\n\n| Role | Instantiation | P1 | P2 | P3 | P4 | P5 |\n|---|---|---|---|---|---|---|\n| **Job Executor** | CDU Controller (closed-loop control) | ALL | ALL | — | — | — |\n| **Job Overseer** | Data Center Operations / DCIM Engineer | own | own | ALL | ALL | — |\n| **Product Lifecycle Support** | CDU OEM (Vertiv/nVent/Motivair), commissioning tech, service tech | own | — | — | — | — |\n| **Purchase Executor** | CDU OEM Procurement (immediate) / DC capex lead (ultimate) | Acq | — | — | * | — |\n| **Job Beneficiary** | Tenant / hyperscaler workload (SLA recipient) | — | * | — | — | * |\n\n### 3.2 Job Map (Ulwick 8 Steps)\n\n| # | Step | Relevant | Rationale |\n|---|---|---|---|\n| 1 | DEFINE | **Yes** | Match DN, media, flow/temp ranges to CDU spec |\n| 2 | LOCATE | No | CDU integrator concern |\n| 3 | PREPARE | **Yes** | OEM assembly + site commissioning |\n| 4 | CONFIRM | **Yes** | Prove-flow gate before IT load energize |\n| 5 | EXECUTE | **Yes** | Continuous flow + temp for thermal duty |\n| 6 | MONITOR | **Yes** | 24×7 drift, anomaly, leak-signature detection |\n| 7 | MODIFY | **Yes** | Glycol top-up, firmware update, recalibration |\n| 8 | CONCLUDE | No | Handled by CDU decommissioning |\n\n**Relevant steps: 6** (DEFINE, PREPARE, CONFIRM, EXECUTE, MONITOR, MODIFY)\n\n### 3.3 Error Statements (26 Needs)\n\n#### DEFINE — 2 needs\n\n| # | Statement | Type | Role | Imp | Sat | Opp | Impact | Prod-Rel | Conf |\n|---|---|---|---|---|---|---|---|---|---|\n| ES-01 | Minimize the likelihood of selecting a flow sensor whose turndown ratio cannot cover variable-speed pump operation from idle to peak GPU load | ACCURACY | Overseer | 8 | 5 | 11 | reliability | false | 0.7 |\n| ES-02 | Increase the ability to specify one sensor platform across DN15–DN25 CDU variants without redesigning the secondary manifold | EFFORT | Lifecycle (OEM) | 7 | 4 | 10 | cost | true | 0.7 |\n\n#### PREPARE — 3 needs\n\n| # | Statement | Type | Role | Imp | Sat | Opp | Impact | Prod-Rel | Conf |\n|---|---|---|---|---|---|---|---|---|---|\n| ES-03 | Minimize the commissioning time required to configure fluid acoustic properties for facility-specific water / PG25 / EG25 blends | EFFORT | Lifecycle (Commissioning) | 7 | 4 | 10 | skill | true | 0.7 |\n| ES-04 | Minimize the likelihood of incorrect installation orientation causing flow measurement bias exceeding 2% of reading | ACCURACY | Lifecycle (Installer) | 8 | 5 | 11 | reliability | false | 0.8 |\n| ES-05 | Increase the ability to integrate the sensor into existing CDU BMS stacks (Modbus / BACnet / MQTT) without custom gateway development | EFFORT | Lifecycle (OEM) | 7 | 5 | 9 | time | false | 0.7 |\n\n#### CONFIRM — 3 needs\n\n| # | Statement | Type | Role | Imp | Sat | Opp | Impact | Prod-Rel | Conf |\n|---|---|---|---|---|---|---|---|---|---|\n| ES-06 | Minimize the time to detect empty-pipe or air-lock in the secondary loop before IT power-on to under 5 seconds | DETECTION | Executor | **9** | 3 | **15** | safety | true | 0.9 |\n| ES-07 | Increase the ability to verify sensor signal integrity through automated self-diagnostics at each CDU start cycle | DETECTION | Executor | 7 | 4 | 10 | reliability | false | 0.7 |\n| ES-08 | Minimize the likelihood of enabling GPU load with secondary-loop flow below the OCP 1.5 L/min/kW safety threshold | DETECTION | Overseer | **9** | 4 | **14** | safety | false | 0.9 |\n\n*OCP liquid-cooling guidance: 1.5 L/min/kW to guarantee ≤10 °C rise at 1 kW-per-GPU Blackwell TDP. [SRC: Global Semi Research]*\n\n#### EXECUTE — 8 needs\n\n| # | Statement | Type | Role | Imp | Sat | Opp | Impact | Prod-Rel | Conf |\n|---|---|---|---|---|---|---|---|---|---|\n| ES-09 | Increase the ability to maintain flow accuracy within ±2% of reading over 40,000 hours of continuous 24×7 operation | ACCURACY | Executor | **9** | 5 | **13** | reliability | false | 0.8 |\n| ES-10 | Minimize the likelihood of air entrainment >2% vol after glycol top-up causing signal loss during a GPU workload ramp | ROBUSTNESS | Executor | 8 | 4 | 12 | reliability | true | 0.8 |\n| ES-11 | Minimize the time to detect a step-change loss-of-flow event (leak, valve closure, pump trip) to under 2 seconds | DETECTION | Executor | **10** | 4 | **16** | safety | false | 0.9 |\n| ES-12 | Increase the ability to compute secondary-loop thermal duty (kW) from flow × ΔT within a single sensor body, sub-second | THROUGHPUT | Overseer | 8 | 4 | 12 | cost | true | 0.8 |\n| ES-13 | Minimize the flow sensor's contribution to CDU secondary-loop pressure drop below 50 mbar at 30 L/min design flow | EFFORT | Overseer | 7 | 6 | 8 | cost | false | 0.7 |\n| ES-14 | Minimize the likelihood of pump-pulsation-induced flow reading oscillation exceeding 5% of steady-state value | CONSISTENCY | Executor | 6 | 5 | 7 | reliability | false | 0.6 |\n| ES-15 | Increase the ability to detect reverse-flow direction (bypass-valve misoperation) within 1 second of onset | DETECTION | Executor | 7 | 4 | 10 | safety | true | 0.7 |\n| ES-16 | Minimize the likelihood of GPU throttling events triggered by undetected flow degradation exceeding 10% from setpoint | DETECTION | Overseer | **9** | 5 | **13** | safety | false | 0.8 |\n\n*Loss-of-flow in GPU secondary loop causes thermal runaway in seconds; emergency flow-switch logic is industry standard. [SRC: IoThrifty, Chilldyne FAQ]*\n\n#### MONITOR — 5 needs\n\n| # | Statement | Type | Role | Imp | Sat | Opp | Impact | Prod-Rel | Conf |\n|---|---|---|---|---|---|---|---|---|---|\n| ES-17 | Increase the ability to detect calibration drift exceeding ±0.5% within 30 days of occurrence over 24 months continuous operation | DETECTION | Executor | 8 | 4 | 12 | reliability | false | 0.7 |\n| ES-18 | Increase the ability to stream 1-second-granularity flow + temperature telemetry into DCIM for real-time PUE/WUE reporting | THROUGHPUT | Overseer | 8 | 5 | 11 | cost | false | 0.8 |\n| ES-19 | Minimize the likelihood of biofilm / scale / particulate buildup degrading accuracy by more than 2% within 5-year service life | ROBUSTNESS | Executor | 7 | 5 | 9 | reliability | false | 0.7 |\n| ES-20 | Increase the ability to detect incipient leak signatures (sub-threshold flow decay) before visible coolant loss | DETECTION | Overseer | **9** | 4 | **14** | safety | true | 0.8 |\n| ES-21 | Minimize the likelihood of acoustic-coupling degradation causing error >1% within the first 5 years of operation | ROBUSTNESS | Executor | 7 | 5 | 9 | reliability | true | 0.7 |\n\n#### MODIFY — 3 needs\n\n| # | Statement | Type | Role | Imp | Sat | Opp | Impact | Prod-Rel | Conf |\n|---|---|---|---|---|---|---|---|---|---|\n| ES-22 | Minimize the time required to replace a degraded flow sensor without draining the secondary loop or taking the CDU offline | RECOVERY | Lifecycle (Maintainer) | 8 | 3 | 13 | time | false | 0.8 |\n| ES-23 | Minimize the frequency of mandated field recalibration to no more than once per 5-year CDU service cycle | EFFORT | Lifecycle (Maintainer) | 7 | 4 | 10 | cost | false | 0.7 |\n| ES-24 | Increase the ability to push firmware / compensation-table updates to the sensor remotely via the CDU BMS bus | EFFORT | Overseer | 6 | 3 | 9 | time | false | 0.6 |\n\n#### P3–P5 Bridge Needs — 2 needs\n\n| # | Statement | Level | Bridge | Role | Imp | Sat | Opp | Impact | Prod-Rel | Conf |\n|---|---|---|---|---|---|---|---|---|---|---|\n| ES-25 | Increase the ability to evidence ASHRAE TC 9.9 H-class liquid-cooling envelope compliance through traceable per-rack flow telemetry | P3 Role | DC engineer becomes designer of audit-ready liquid infrastructure | Overseer | 8 | 4 | 12 | cost | false | 0.8 |\n| ES-26 | Minimize the frequency of hyperscaler customer escalations attributed to flow-sensor malfunction within first 24 months after CDU deployment | P5 Emotional | Service managers want to feel confident in AI-era CDU reliability | Lifecycle (Maintainer) | 8 | 4 | 12 | cost | false | 0.7 |\n\n*ASHRAE TC 9.9 has expanded to cover direct-to-chip cold-plate design and coolant-quality standards. [SRC: envigilance.com]*\n\n### 3.4 ODI Summary\n\n| Metric | Value |\n|---|---|\n| Total error statements | 26 |\n| Market-inherent (product_related=false) | 19 (73%) |\n| Technology-specific (product_related=true) | 7 (27%) |\n| \"Minimize…\" | 14 (54%) |\n| \"Increase…\" | 12 (46%) |\n| Mean importance | 7.8 |\n| Mean satisfaction | 4.3 |\n| Mean opportunity score | 11.3 |\n\n**Top 5 Underserved Needs (opportunity score):**\n\n| Rank | # | Statement (abbreviated) | Opp | Imp | Sat |\n|---|---|---|---|---|---|\n| 1 | ES-11 | Detect step-change loss-of-flow <2s | **16** | 10 | 4 |\n| 2 | ES-06 | Detect empty-pipe before IT power-on <5s | **15** | 9 | 3 |\n| 3 | ES-08 | Gate GPU load on OCP 1.5 L/min/kW threshold | **14** | 9 | 4 |\n| 4 | ES-20 | Detect incipient leak signatures pre-visible | **14** | 9 | 4 |\n| 5 | ES-09 | Maintain ±2% accuracy over 40,000 h 24×7 | **13** | 9 | 5 |\n\nPattern: **safety-of-IT-load** needs dominate the top of the opportunity stack — this is an **uptime-and-thermal-runaway** market, not a precision-metering market.\n\n---"
+    },
+    {
+      "title": "Incumbent Anchors",
+      "content": "| Technology | Anchor VN Unit | Level | Share | Rationale |\n|---|---|---|---|---|\n| Electromagnetic flow meter | Flow Sensor | L4 | 35% | Dominant in CDU secondary loops; conductive glycol-friendly |\n| Ultrasonic transit-time | Flow Sensor | L4 | 30% | Growing — no-wear, integrated temp, kW duty |\n| Turbine / impeller | Flow Sensor | L4 | 15% | Legacy; declining due to wear and maintenance |\n| Vortex | Flow Sensor | L4 | 10% | Niche in larger primary loops |\n| Paddle / thermal-dispersion switch | Flow Sensor | L4 | 10% | Standard secondary safety cutout, not primary measurement |\n\n---"
+    },
+    {
+      "title": "Validation (QA Pass)",
+      "content": "| # | Check | Result |\n|---|---|---|\n| V1 | Every statement opens with \"Minimize…\" or \"Increase…\" with one measurable KPI | **PASS** |\n| V2 | product_related true only when need disappears with different tech | **PASS** — 7/26 flagged (acoustic coupling, DN modularity, air-bubble, reverse-flow, leak-signature, kW integration, empty-pipe) |\n| V3 | Importance/satisfaction plausible (safety at 9–10, convenience at 6) | **PASS** |\n| V4 | Impact category matches KPI | **PASS** |\n| V5 | ≥2 needs per relevant step; 60–70% market-inherent | **PASS** — 73/27 split |\n| V6 | Solution-agnostic — no mention of ultrasonic, Marquardt, piezoelectric | **PASS** |\n| V7 | Anchor level matches product abstraction (L4 component) | **PASS** |\n| V8 | Product job references parent VN unit (CDU) and context | **PASS** |\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [CDUs: The Brains of Direct Liquid Cooling — DCNN Magazine](https://dcnnmagazine.com/infrastructure/liquid-cooling/cdus-the-brains-of-direct-liquid-cooling/)\n- [Coolant Distribution Units — Vertiv](https://www.vertiv.com/en-us/about/news-and-insights/articles/educational-articles/understanding-coolant-distribution-units-cdus-for-liquid-cooling/)\n- [Ultimate Guide to CDUs — JetCool](https://jetcool.com/post/the-ultimate-guide-to-coolant-distribution-units-cdus-for-ai-and-hpc-jetcools-smartsense-cdu-completes-in-rack-liquid-cooling-solution/)\n- [Monitoring Coolant Flow in High-Density DCs — IoThrifty](https://www.iothrifty.com/blogs/news/monitoring-coolant-flow-in-high-density-liquid-cooled-data-centers)\n- [Data Center Leak Detection — IoThrifty](https://www.iothrifty.com/blogs/news/data-center-leak-detection-and-monitoring-for-liquid-cooled-systems)\n- [Chilldyne Liquid Cooling FAQ](https://chilldyne.com/wp-content/uploads/2025/03/Chilldyne-FAQ-X.4.pdf)\n- [NVIDIA Liquid Cooling Analysis: Blackwell to Rubin — Global Semi Research](https://globalsemiresearch.substack.com/p/nvidia-liquid-cooling-analysis-from)\n- [NVIDIA GB200 NVL72](https://www.nvidia.com/en-us/data-center/gb200-nvl72/)\n- [ASHRAE TC 9.9 Data Center Thermal Guide 2026 — envigilance.com](https://envigilance.com/compliance/ashrae-tc-9-9/)\n- [Direct-to-Chip Cooling Flow Meters — Mass Flow Online](https://www.massflow-online.com/markets_applications/magnetic-flow-meters-for-direct-to-chip-cooling-in-high-performance-ai-servers/)\n- VN_data_processing_hosting.md (internal)\n- 01_product_decomposition.md (internal)\n- 02_functional_promise.md (internal)\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"jtbd_analysis\",\n  \"naics_code\": \"518210\",\n  \"naics_title\": \"Data Processing, Hosting, and Related Services\",\n  \"market_name\": \"Data Processing, Hosting, and Related Services\",\n  \"product_name\": \"Ultrasonic Flow Sensor\",\n  \"vendor_name\": \"Marquardt\",\n  \"cfj_statement\": \"Host, operate, and deliver customer computing and data workloads on demand with continuous uptime, predictable performance, and contracted SLA compliance\",\n  \"product_job_statement\": \"Help the Coolant Distribution Unit to measure secondary-loop volumetric flow and coolant temperature so GPU racks receive contracted thermal duty without compressor trip, leak escalation, or SLA breach\",\n  \"core_job_statement\": \"Quantify secondary-loop coolant flow and temperature at the CDU to enable thermal duty calculation, loss-of-flow protection, and PUE/WUE telemetry for liquid-cooled IT\",\n  \"anchor\": {\n    \"vn_unit\": \"Flow Sensor\",\n    \"level\": \"L4\",\n    \"parent_vn_unit\": \"Coolant Distribution Unit\",\n    \"parent_level\": \"L5\",\n    \"grandparent_vn_unit\": \"Thermal Management\",\n    \"grandparent_level\": \"L6\",\n    \"route\": \"PROCESS_VN\",\n    \"secondary_anchor\": {\"vn_unit\": \"Flow Sensor\", \"level\": \"L4\", \"parent_vn_unit\": \"In-Rack Liquid Cooling Unit\"}\n  },\n  \"segments\": [\n    {\"name\": \"Enterprise colo tenant\", \"circumstance\": \"Rents rack space + power, owns IT\"},\n    {\"name\": \"Hyperscale operator\", \"circumstance\": \"Owns full stack, chases PUE/WUE at scale\"},\n    {\"name\": \"AI / HPC operator\", \"circumstance\": \"GPU racks >50 kW, liquid cooling mandatory\"},\n    {\"name\": \"Regulated workloads\", \"circumstance\": \"Tier III/IV uptime + compliance\"},\n    {\"name\": \"Edge / regional hosting\", \"circumstance\": \"Latency-sensitive, small footprint\"},\n    {\"name\": \"Sustainability-driven buyer\", \"circumstance\": \"PUE/WUE/carbon contracted\"}\n  ],\n  \"alternatives\": [\n    {\"name\": \"Ultrasonic transit-time sensor\", \"unspsc\": \"41112501\", \"market_share_pct\": 30, \"trade_offs\": [\"Air-bubble sensitivity >2% vol\", \"Pipe-full requirement\", \"Acoustic coupling drift\"], \"existential\": false},\n    {\"name\": \"Electromagnetic flow meter\", \"unspsc\": \"41112501\", \"market_share_pct\": 35, \"trade_offs\": [\"Requires conductive fluid\", \"Higher unit cost\", \"Larger footprint\"], \"existential\": false},\n    {\"name\": \"Turbine / impeller\", \"unspsc\": \"41112501\", \"market_share_pct\": 15, \"trade_offs\": [\"Bearing wear\", \"Particle jamming\", \"Pressure drop 100-300 mbar\"], \"existential\": false},\n    {\"name\": \"Vortex sensor\", \"unspsc\": \"41112501\", \"market_share_pct\": 10, \"trade_offs\": [\"Min-Reynolds limit\", \"Vibration sensitivity\", \"Poor at low flow\"], \"existential\": false},\n    {\"name\": \"Thermal-dispersion / paddle switch\", \"unspsc\": \"41112501\", \"market_share_pct\": 10, \"trade_offs\": [\"Binary only\", \"No kW duty\", \"Redundant safety role\"], \"existential\": false}\n  ],\n  \"scenarios\": [\n    {\"id\": \"S1\", \"name\": \"GPU rack steady-state (120-160 kW)\", \"output_types\": [\"OT-3\"], \"units_in_play\": [\"CDU Pump\", \"Flow Sensor\", \"Temperature Probe\"]},\n    {\"id\": \"S2\", \"name\": \"CDU startup prove-flow\", \"output_types\": [\"OT-3\"], \"units_in_play\": [\"Flow Sensor\"]},\n    {\"id\": \"S3\", \"name\": \"Workload spike / variable-speed response\", \"output_types\": [\"OT-3\"], \"units_in_play\": [\"Flow Sensor\", \"CDU Controller\"]},\n    {\"id\": \"S4\", \"name\": \"Coolant leak / loss-of-flow\", \"output_types\": [\"OT-3\"], \"units_in_play\": [\"Flow Sensor\", \"Leak Sensor\"]},\n    {\"id\": \"S5\", \"name\": \"Seasonal facility-loop shift\", \"output_types\": [\"OT-2\", \"OT-3\"], \"units_in_play\": [\"Flow Sensor\", \"Temperature Probe\"]},\n    {\"id\": \"S6\", \"name\": \"Commissioning / glycol top-up\", \"output_types\": [\"OT-3\"], \"units_in_play\": [\"Flow Sensor\"]}\n  ],\n  \"job_map\": {\n    \"naics_code\": \"518210\",\n    \"anchor_vn_unit\": \"Flow Sensor\",\n    \"anchor_level\": \"L4\",\n    \"parent_vn_unit\": \"Coolant Distribution Unit\",\n    \"parent_level\": \"L5\",\n    \"product_job_statement\": \"Help the Coolant Distribution Unit to measure secondary-loop volumetric flow and coolant temperature so GPU racks receive contracted thermal duty without compressor trip, leak escalation, or SLA breach\",\n    \"steps\": [\n      {\"step_number\": 1, \"step_name\": \"DEFINE\", \"relevant_to_product\": true, \"relevance_rationale\": \"Match DN, media, flow/temp ranges to CDU spec\"},\n      {\"step_number\": 2, \"step_name\": \"LOCATE\", \"relevant_to_product\": false, \"relevance_rationale\": \"CDU integrator concern\"},\n      {\"step_number\": 3, \"step_name\": \"PREPARE\", \"relevant_to_product\": true, \"relevance_rationale\": \"OEM assembly + site commissioning\"},\n      {\"step_number\": 4, \"step_name\": \"CONFIRM\", \"relevant_to_product\": true, \"relevance_rationale\": \"Prove-flow gate before IT energize\"},\n      {\"step_number\": 5, \"step_name\": \"EXECUTE\", \"relevant_to_product\": true, \"relevance_rationale\": \"Continuous flow + temp for thermal duty\"},\n      {\"step_number\": 6, \"step_name\": \"MONITOR\", \"relevant_to_product\": true, \"relevance_rationale\": \"24x7 drift, anomaly, leak-signature detection\"},\n      {\"step_number\": 7, \"step_name\": \"MODIFY\", \"relevant_to_product\": true, \"relevance_rationale\": \"Glycol top-up, firmware update, recalibration\"},\n      {\"step_number\": 8, \"step_name\": \"CONCLUDE\", \"relevant_to_product\": false, \"relevance_rationale\": \"Handled by CDU decommissioning\"}\n    ]\n  },\n  \"error_statements\": [\n    {\"id\": \"ES-01\", \"statement\": \"Minimize the likelihood of selecting a flow sensor whose turndown ratio cannot cover variable-speed pump operation from idle to peak GPU load\", \"job_step_number\": 1, \"job_step_name\": \"DEFINE\", \"error_type\": \"ACCURACY\", \"role\": \"Overseer\", \"importance\": 8, \"satisfaction_current\": 5, \"opportunity_score\": 11, \"impact_category\": \"reliability\", \"product_related\": false, \"pyramid_level\": \"P2\", \"confidence\": 0.7},\n    {\"id\": \"ES-02\", \"statement\": \"Increase the ability to specify one sensor platform across DN15-DN25 CDU variants without redesigning the secondary manifold\", \"job_step_number\": 1, \"job_step_name\": \"DEFINE\", \"error_type\": \"EFFORT\", \"role\": \"Lifecycle (OEM)\", \"importance\": 7, \"satisfaction_current\": 4, \"opportunity_score\": 10, \"impact_category\": \"cost\", \"product_related\": true, \"pyramid_level\": \"P1\", \"confidence\": 0.7},\n    {\"id\": \"ES-03\", \"statement\": \"Minimize the commissioning time required to configure fluid acoustic properties for facility-specific water / PG25 / EG25 blends\", \"job_step_number\": 3, \"job_step_name\": \"PREPARE\", \"error_type\": \"EFFORT\", \"role\": \"Lifecycle (Commissioning)\", \"importance\": 7, \"satisfaction_current\": 4, \"opportunity_score\": 10, \"impact_category\": \"skill\", \"product_related\": true, \"pyramid_level\": \"P1\", \"confidence\": 0.7},\n    {\"id\": \"ES-04\", \"statement\": \"Minimize the likelihood of incorrect installation orientation causing flow measurement bias exceeding 2% of reading\", \"job_step_number\": 3, \"job_step_name\": \"PREPARE\", \"error_type\": \"ACCURACY\", \"role\": \"Lifecycle (Installer)\", \"importance\": 8, \"satisfaction_current\": 5, \"opportunity_score\": 11, \"impact_category\": \"reliability\", \"product_related\": false, \"pyramid_level\": \"P1\", \"confidence\": 0.8},\n    {\"id\": \"ES-05\", \"statement\": \"Increase the ability to integrate the sensor into existing CDU BMS stacks (Modbus / BACnet / MQTT) without custom gateway development\", \"job_step_number\": 3, \"job_step_name\": \"PREPARE\", \"error_type\": \"EFFORT\", \"role\": \"Lifecycle (OEM)\", \"importance\": 7, \"satisfaction_current\": 5, \"opportunity_score\": 9, \"impact_category\": \"time\", \"product_related\": false, \"pyramid_level\": \"P1\", \"confidence\": 0.7},\n    {\"id\": \"ES-06\", \"statement\": \"Minimize the time to detect empty-pipe or air-lock in the secondary loop before IT power-on to under 5 seconds\", \"job_step_number\": 4, \"job_step_name\": \"CONFIRM\", \"error_type\": \"DETECTION\", \"role\": \"Executor\", \"importance\": 9, \"satisfaction_current\": 3, \"opportunity_score\": 15, \"impact_category\": \"safety\", \"product_related\": true, \"pyramid_level\": \"P2\", \"confidence\": 0.9},\n    {\"id\": \"ES-07\", \"statement\": \"Increase the ability to verify sensor signal integrity through automated self-diagnostics at each CDU start cycle\", \"job_step_number\": 4, \"job_step_name\": \"CONFIRM\", \"error_type\": \"DETECTION\", \"role\": \"Executor\", \"importance\": 7, \"satisfaction_current\": 4, \"opportunity_score\": 10, \"impact_category\": \"reliability\", \"product_related\": false, \"pyramid_level\": \"P2\", \"confidence\": 0.7},\n    {\"id\": \"ES-08\", \"statement\": \"Minimize the likelihood of enabling GPU load with secondary-loop flow below the OCP 1.5 L/min/kW safety threshold\", \"job_step_number\": 4, \"job_step_name\": \"CONFIRM\", \"error_type\": \"DETECTION\", \"role\": \"Overseer\", \"importance\": 9, \"satisfaction_current\": 4, \"opportunity_score\": 14, \"impact_category\": \"safety\", \"product_related\": false, \"pyramid_level\": \"P2\", \"confidence\": 0.9},\n    {\"id\": \"ES-09\", \"statement\": \"Increase the ability to maintain flow accuracy within plus-minus 2% of reading over 40,000 hours of continuous 24x7 operation\", \"job_step_number\": 5, \"job_step_name\": \"EXECUTE\", \"error_type\": \"ACCURACY\", \"role\": \"Executor\", \"importance\": 9, \"satisfaction_current\": 5, \"opportunity_score\": 13, \"impact_category\": \"reliability\", \"product_related\": false, \"pyramid_level\": \"P2\", \"confidence\": 0.8},\n    {\"id\": \"ES-10\", \"statement\": \"Minimize the likelihood of air entrainment above 2% vol after glycol top-up causing signal loss during a GPU workload ramp\", \"job_step_number\": 5, \"job_step_name\": \"EXECUTE\", \"error_type\": \"ROBUSTNESS\", \"role\": \"Executor\", \"importance\": 8, \"satisfaction_current\": 4, \"opportunity_score\": 12, \"impact_category\": \"reliability\", \"product_related\": true, \"pyramid_level\": \"P2\", \"confidence\": 0.8},\n    {\"id\": \"ES-11\", \"statement\": \"Minimize the time to detect a step-change loss-of-flow event (leak, valve closure, pump trip) to under 2 seconds\", \"job_step_number\": 5, \"job_step_name\": \"EXECUTE\", \"error_type\": \"DETECTION\", \"role\": \"Executor\", \"importance\": 10, \"satisfaction_current\": 4, \"opportunity_score\": 16, \"impact_category\": \"safety\", \"product_related\": false, \"pyramid_level\": \"P2\", \"confidence\": 0.9},\n    {\"id\": \"ES-12\", \"statement\": \"Increase the ability to compute secondary-loop thermal duty (kW) from flow x delta-T within a single sensor body, sub-second\", \"job_step_number\": 5, \"job_step_name\": \"EXECUTE\", \"error_type\": \"THROUGHPUT\", \"role\": \"Overseer\", \"importance\": 8, \"satisfaction_current\": 4, \"opportunity_score\": 12, \"impact_category\": \"cost\", \"product_related\": true, \"pyramid_level\": \"P2\", \"confidence\": 0.8},\n    {\"id\": \"ES-13\", \"statement\": \"Minimize the flow sensor's contribution to CDU secondary-loop pressure drop below 50 mbar at 30 L/min design flow\", \"job_step_number\": 5, \"job_step_name\": \"EXECUTE\", \"error_type\": \"EFFORT\", \"role\": \"Overseer\", \"importance\": 7, \"satisfaction_current\": 6, \"opportunity_score\": 8, \"impact_category\": \"cost\", \"product_related\": false, \"pyramid_level\": \"P2\", \"confidence\": 0.7},\n    {\"id\": \"ES-14\", \"statement\": \"Minimize the likelihood of pump-pulsation-induced flow reading oscillation exceeding 5% of steady-state value\", \"job_step_number\": 5, \"job_step_name\": \"EXECUTE\", \"error_type\": \"CONSISTENCY\", \"role\": \"Executor\", \"importance\": 6, \"satisfaction_current\": 5, \"opportunity_score\": 7, \"impact_category\": \"reliability\", \"product_related\": false, \"pyramid_level\": \"P2\", \"confidence\": 0.6},\n    {\"id\": \"ES-15\", \"statement\": \"Increase the ability to detect reverse-flow direction (bypass-valve misoperation) within 1 second of onset\", \"job_step_number\": 5, \"job_step_name\": \"EXECUTE\", \"error_type\": \"DETECTION\", \"role\": \"Executor\", \"importance\": 7, \"satisfaction_current\": 4, \"opportunity_score\": 10, \"impact_category\": \"safety\", \"product_related\": true, \"pyramid_level\": \"P2\", \"confidence\": 0.7},\n    {\"id\": \"ES-16\", \"statement\": \"Minimize the likelihood of GPU throttling events triggered by undetected flow degradation exceeding 10% from setpoint\", \"job_step_number\": 5, \"job_step_name\": \"EXECUTE\", \"error_type\": \"DETECTION\", \"role\": \"Overseer\", \"importance\": 9, \"satisfaction_current\": 5, \"opportunity_score\": 13, \"impact_category\": \"safety\", \"product_related\": false, \"pyramid_level\": \"P2\", \"confidence\": 0.8},\n    {\"id\": \"ES-17\", \"statement\": \"Increase the ability to detect calibration drift exceeding plus-minus 0.5% within 30 days of occurrence over 24 months continuous operation\", \"job_step_number\": 6, \"job_step_name\": \"MONITOR\", \"error_type\": \"DETECTION\", \"role\": \"Executor\", \"importance\": 8, \"satisfaction_current\": 4, \"opportunity_score\": 12, \"impact_category\": \"reliability\", \"product_related\": false, \"pyramid_level\": \"P2\", \"confidence\": 0.7},\n    {\"id\": \"ES-18\", \"statement\": \"Increase the ability to stream 1-second-granularity flow + temperature telemetry into DCIM for real-time PUE/WUE reporting\", \"job_step_number\": 6, \"job_step_name\": \"MONITOR\", \"error_type\": \"THROUGHPUT\", \"role\": \"Overseer\", \"importance\": 8, \"satisfaction_current\": 5, \"opportunity_score\": 11, \"impact_category\": \"cost\", \"product_related\": false, \"pyramid_level\": \"P2\", \"confidence\": 0.8},\n    {\"id\": \"ES-19\", \"statement\": \"Minimize the likelihood of biofilm / scale / particulate buildup degrading accuracy by more than 2% within 5-year service life\", \"job_step_number\": 6, \"job_step_name\": \"MONITOR\", \"error_type\": \"ROBUSTNESS\", \"role\": \"Executor\", \"importance\": 7, \"satisfaction_current\": 5, \"opportunity_score\": 9, \"impact_category\": \"reliability\", \"product_related\": false, \"pyramid_level\": \"P2\", \"confidence\": 0.7},\n    {\"id\": \"ES-20\", \"statement\": \"Increase the ability to detect incipient leak signatures (sub-threshold flow decay) before visible coolant loss\", \"job_step_number\": 6, \"job_step_name\": \"MONITOR\", \"error_type\": \"DETECTION\", \"role\": \"Overseer\", \"importance\": 9, \"satisfaction_current\": 4, \"opportunity_score\": 14, \"impact_category\": \"safety\", \"product_related\": true, \"pyramid_level\": \"P2\", \"confidence\": 0.8},\n    {\"id\": \"ES-21\", \"statement\": \"Minimize the likelihood of acoustic-coupling degradation causing error above 1% within the first 5 years of operation\", \"job_step_number\": 6, \"job_step_name\": \"MONITOR\", \"error_type\": \"ROBUSTNESS\", \"role\": \"Executor\", \"importance\": 7, \"satisfaction_current\": 5, \"opportunity_score\": 9, \"impact_category\": \"reliability\", \"product_related\": true, \"pyramid_level\": \"P2\", \"confidence\": 0.7},\n    {\"id\": \"ES-22\", \"statement\": \"Minimize the time required to replace a degraded flow sensor without draining the secondary loop or taking the CDU offline\", \"job_step_number\": 7, \"job_step_name\": \"MODIFY\", \"error_type\": \"RECOVERY\", \"role\": \"Lifecycle (Maintainer)\", \"importance\": 8, \"satisfaction_current\": 3, \"opportunity_score\": 13, \"impact_category\": \"time\", \"product_related\": false, \"pyramid_level\": \"P1\", \"confidence\": 0.8},\n    {\"id\": \"ES-23\", \"statement\": \"Minimize the frequency of mandated field recalibration to no more than once per 5-year CDU service cycle\", \"job_step_number\": 7, \"job_step_name\": \"MODIFY\", \"error_type\": \"EFFORT\", \"role\": \"Lifecycle (Maintainer)\", \"importance\": 7, \"satisfaction_current\": 4, \"opportunity_score\": 10, \"impact_category\": \"cost\", \"product_related\": false, \"pyramid_level\": \"P1\", \"confidence\": 0.7},\n    {\"id\": \"ES-24\", \"statement\": \"Increase the ability to push firmware / compensation-table updates to the sensor remotely via the CDU BMS bus\", \"job_step_number\": 7, \"job_step_name\": \"MODIFY\", \"error_type\": \"EFFORT\", \"role\": \"Overseer\", \"importance\": 6, \"satisfaction_current\": 3, \"opportunity_score\": 9, \"impact_category\": \"time\", \"product_related\": false, \"pyramid_level\": \"P1\", \"confidence\": 0.6},\n    {\"id\": \"ES-25\", \"statement\": \"Increase the ability to evidence ASHRAE TC 9.9 H-class liquid-cooling envelope compliance through traceable per-rack flow telemetry\", \"job_step_number\": 6, \"job_step_name\": \"MONITOR\", \"error_type\": \"EVIDENCE\", \"role\": \"Overseer\", \"importance\": 8, \"satisfaction_current\": 4, \"opportunity_score\": 12, \"impact_category\": \"cost\", \"product_related\": false, \"pyramid_level\": \"P3\", \"confidence\": 0.8},\n    {\"id\": \"ES-26\", \"statement\": \"Minimize the frequency of hyperscaler customer escalations attributed to flow-sensor malfunction within first 24 months after CDU deployment\", \"job_step_number\": 6, \"job_step_name\": \"MONITOR\", \"error_type\": \"RELIABILITY\", \"role\": \"Lifecycle (Maintainer)\", \"importance\": 8, \"satisfaction_current\": 4, \"opportunity_score\": 12, \"impact_category\": \"cost\", \"product_related\": false, \"pyramid_level\": \"P5\", \"confidence\": 0.7}\n  ],\n  \"odi_summary\": {\n    \"total_needs\": 26,\n    \"market_inherent_pct\": 73,\n    \"tech_specific_pct\": 27,\n    \"mean_importance\": 7.8,\n    \"mean_satisfaction\": 4.3,\n    \"mean_opportunity\": 11.3,\n    \"top_underserved_ids\": [\"ES-11\", \"ES-06\", \"ES-08\", \"ES-20\", \"ES-09\"]\n  },\n  \"qa_results\": {\"V1\": \"PASS\", \"V2\": \"PASS\", \"V3\": \"PASS\", \"V4\": \"PASS\", \"V5\": \"PASS\", \"V6\": \"PASS\", \"V7\": \"PASS\", \"V8\": \"PASS\"}\n}\n```"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**NAICS**",
+          "Value": "518210"
+        },
+        {
+          "Field": "**CFJ**",
+          "Value": "Host, operate, and deliver customer computing and data workloads on demand with continuous uptime, predictable performance, and contracted SLA compliance"
+        },
+        {
+          "Field": "**Offering Level**",
+          "Value": "L7 (Ecosystem) — service NAICS; VN-only (no BOM)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Output Type",
+        "Description"
+      ],
+      "rows": [
+        {
+          "ID": "OT-1",
+          "Output Type": "Colocation Hosting",
+          "Description": "Space, power, cooling rented to enterprise tenants"
+        },
+        {
+          "ID": "OT-2",
+          "Output Type": "Hyperscale Cloud Compute",
+          "Description": "Self-operated fleets for IaaS/PaaS/SaaS"
+        },
+        {
+          "ID": "OT-3",
+          "Output Type": "HPC / AI Compute-as-a-Service",
+          "Description": "GPU/accelerator-dense liquid-cooled fleets"
+        },
+        {
+          "ID": "OT-4",
+          "Output Type": "Managed Hosting",
+          "Description": "Operated IT on customer behalf"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Segment",
+        "Circumstance",
+        "Alternatives Differ?"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Segment": "Enterprise colo tenant",
+          "Circumstance": "Rents rack space + power, owns IT",
+          "Alternatives Differ?": "Yes — colo vs on-prem vs cloud"
+        },
+        {
+          "#": "2",
+          "Segment": "Hyperscale operator",
+          "Circumstance": "Owns full stack, chases PUE/WUE at scale",
+          "Alternatives Differ?": "Yes — air vs liquid vs immersion"
+        },
+        {
+          "#": "3",
+          "Segment": "**AI / HPC operator**",
+          "Circumstance": "**GPU racks >50 kW, liquid cooling mandatory**",
+          "Alternatives Differ?": "Yes — DLC vs rear-door vs immersion"
+        },
+        {
+          "#": "4",
+          "Segment": "Regulated workloads (fin/health/gov)",
+          "Circumstance": "Tier III/IV uptime + compliance",
+          "Alternatives Differ?": "Yes — on-prem vs sovereign cloud"
+        },
+        {
+          "#": "5",
+          "Segment": "Edge / regional hosting",
+          "Circumstance": "Latency-sensitive, small footprint",
+          "Alternatives Differ?": "Yes — micro-DC vs telco colo"
+        },
+        {
+          "#": "6",
+          "Segment": "Sustainability-driven buyer",
+          "Circumstance": "PUE/WUE/carbon contracted",
+          "Alternatives Differ?": "Yes — evap vs dry vs liquid"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L6 Process Step",
+        "Edge Type",
+        "Rationale"
+      ],
+      "rows": [
+        {
+          "L6 Process Step": "L6c Thermal Management (liquid path)",
+          "Edge Type": "**HARD**",
+          "Rationale": "Sensor technology determines CDU control architecture and leak-detection strategy"
+        },
+        {
+          "L6 Process Step": "L6g Energy & Sustainability",
+          "Edge Type": "**SOFT**",
+          "Rationale": "Flow × ΔT = kW thermal duty feeds PUE telemetry granularity"
+        },
+        {
+          "L6 Process Step": "L6i SLA Assurance",
+          "Edge Type": "**SOFT**",
+          "Rationale": "Flow loss → compressor/pump trip is a top-5 uptime fault"
+        },
+        {
+          "L6 Process Step": "All other L6 steps",
+          "Edge Type": "INDEPENDENT",
+          "Rationale": "No effect on power, IT hosting, compute ops, security, MMR"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**Route**",
+          "Value": "PROCESS_VN — sensor is inside CDU equipment used to operate the facility"
+        },
+        {
+          "Field": "**Anchor Level**",
+          "Value": "L4"
+        },
+        {
+          "Field": "**Anchor Node**",
+          "Value": "Flow Sensor"
+        },
+        {
+          "Field": "**Parent L5**",
+          "Value": "Coolant Distribution Unit (CDU)"
+        },
+        {
+          "Field": "**Parent Job Family**",
+          "Value": "Isolate facility loop from IT-grade secondary TCS loop and deliver temperature-controlled coolant to liquid-cooled IT"
+        },
+        {
+          "Field": "**Grandparent L6**",
+          "Value": "Thermal Management"
+        },
+        {
+          "Field": "**Sibling L4s**",
+          "Value": "Brazed Plate HX, Circulation Pump, Temperature Probe, Leak Sensor, Expansion Reservoir, CDU Controller"
+        },
+        {
+          "Field": "**Output Types Activated**",
+          "Value": "OT-3 (primary), OT-2 (partial — hyperscale liquid-cooled pods)"
+        },
+        {
+          "Field": "**Secondary Anchor**",
+          "Value": "Flow Sensor under **In-Rack Liquid Cooling Unit (RDHx)** — L4 / L5 RDHx"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**Route**",
+          "Value": "Maker — PROCESS_VN"
+        },
+        {
+          "Field": "**Lens Source**",
+          "Value": "Parent L5 job family (CDU)"
+        },
+        {
+          "Field": "**Function Verb**",
+          "Value": "Measure"
+        },
+        {
+          "Field": "**Lens**",
+          "Value": "\"What flow measurement does the CDU need to safely deliver coolant to GPU racks?\""
+        },
+        {
+          "Field": "**Level A filter**",
+          "Value": "Segments 2, 3, 6 operate liquid-cooled infrastructure — pass"
+        },
+        {
+          "Field": "**Level B filter**",
+          "Value": "DN20 fits CDU secondary loop (DN15–DN25, 5–30 L/min) — pass for rack CDUs; fails for cold-plate DN6–DN10"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Alternative",
+        "UNSPSC",
+        "Share",
+        "Trade-Offs"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Alternative": "Ultrasonic transit-time sensor",
+          "UNSPSC": "41112501",
+          "Share": "30%",
+          "Trade-Offs": "Air-bubble sensitivity >2% vol, pipe-full requirement, acoustic coupling drift"
+        },
+        {
+          "#": "2",
+          "Alternative": "**Electromagnetic (magnetic) flow meter**",
+          "UNSPSC": "41112501",
+          "Share": "**35%**",
+          "Trade-Offs": "Requires conductive fluid (glycol OK, DI water borderline), higher unit cost, larger footprint"
+        },
+        {
+          "#": "3",
+          "Alternative": "Turbine / impeller",
+          "UNSPSC": "41112501",
+          "Share": "15%",
+          "Trade-Offs": "Bearing wear, particle jamming, pressure drop 100–300 mbar"
+        },
+        {
+          "#": "4",
+          "Alternative": "Vortex sensor",
+          "UNSPSC": "41112501",
+          "Share": "10%",
+          "Trade-Offs": "Min-Reynolds limit, vibration sensitivity, poor at low flow"
+        },
+        {
+          "#": "5",
+          "Alternative": "Thermal-dispersion / paddle switch (binary)",
+          "UNSPSC": "41112501",
+          "Share": "10%",
+          "Trade-Offs": "On/off only, no kW duty, but dominant as redundant safety cutout"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Scenario",
+        "Output Types",
+        "In-play units"
+      ],
+      "rows": [
+        {
+          "#": "S1",
+          "Scenario": "GPU rack steady-state (120–160 kW)",
+          "Output Types": "OT-3",
+          "In-play units": "CDU Pump, Flow Sensor, Temp Probe"
+        },
+        {
+          "#": "S2",
+          "Scenario": "CDU startup — prove-flow before IT load",
+          "Output Types": "OT-3",
+          "In-play units": "Flow Sensor (gate signal)"
+        },
+        {
+          "#": "S3",
+          "Scenario": "Workload spike / variable-speed pump response",
+          "Output Types": "OT-3",
+          "In-play units": "Flow Sensor, CDU Controller"
+        },
+        {
+          "#": "S4",
+          "Scenario": "Coolant leak / loss-of-flow event",
+          "Output Types": "OT-3",
+          "In-play units": "Flow Sensor, Leak Sensor (emergency isolate)"
+        },
+        {
+          "#": "S5",
+          "Scenario": "Seasonal facility-loop ΔT shift",
+          "Output Types": "OT-2, OT-3",
+          "In-play units": "Flow Sensor, Temp Probe (PUE recompute)"
+        },
+        {
+          "#": "S6",
+          "Scenario": "Commissioning / glycol top-up",
+          "Output Types": "OT-3",
+          "In-play units": "Flow Sensor (acoustic re-config)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Role",
+        "Instantiation",
+        "P1",
+        "P2",
+        "P3",
+        "P4",
+        "P5"
+      ],
+      "rows": [
+        {
+          "Role": "**Job Executor**",
+          "Instantiation": "CDU Controller (closed-loop control)",
+          "P1": "ALL",
+          "P2": "ALL",
+          "P3": "—",
+          "P4": "—",
+          "P5": "—"
+        },
+        {
+          "Role": "**Job Overseer**",
+          "Instantiation": "Data Center Operations / DCIM Engineer",
+          "P1": "own",
+          "P2": "own",
+          "P3": "ALL",
+          "P4": "ALL",
+          "P5": "—"
+        },
+        {
+          "Role": "**Product Lifecycle Support**",
+          "Instantiation": "CDU OEM (Vertiv/nVent/Motivair), commissioning tech, service tech",
+          "P1": "own",
+          "P2": "—",
+          "P3": "—",
+          "P4": "—",
+          "P5": "—"
+        },
+        {
+          "Role": "**Purchase Executor**",
+          "Instantiation": "CDU OEM Procurement (immediate) / DC capex lead (ultimate)",
+          "P1": "Acq",
+          "P2": "—",
+          "P3": "—",
+          "P4": "*",
+          "P5": "—"
+        },
+        {
+          "Role": "**Job Beneficiary**",
+          "Instantiation": "Tenant / hyperscaler workload (SLA recipient)",
+          "P1": "—",
+          "P2": "*",
+          "P3": "—",
+          "P4": "—",
+          "P5": "*"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Step",
+        "Relevant",
+        "Rationale"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Step": "DEFINE",
+          "Relevant": "**Yes**",
+          "Rationale": "Match DN, media, flow/temp ranges to CDU spec"
+        },
+        {
+          "#": "2",
+          "Step": "LOCATE",
+          "Relevant": "No",
+          "Rationale": "CDU integrator concern"
+        },
+        {
+          "#": "3",
+          "Step": "PREPARE",
+          "Relevant": "**Yes**",
+          "Rationale": "OEM assembly + site commissioning"
+        },
+        {
+          "#": "4",
+          "Step": "CONFIRM",
+          "Relevant": "**Yes**",
+          "Rationale": "Prove-flow gate before IT load energize"
+        },
+        {
+          "#": "5",
+          "Step": "EXECUTE",
+          "Relevant": "**Yes**",
+          "Rationale": "Continuous flow + temp for thermal duty"
+        },
+        {
+          "#": "6",
+          "Step": "MONITOR",
+          "Relevant": "**Yes**",
+          "Rationale": "24×7 drift, anomaly, leak-signature detection"
+        },
+        {
+          "#": "7",
+          "Step": "MODIFY",
+          "Relevant": "**Yes**",
+          "Rationale": "Glycol top-up, firmware update, recalibration"
+        },
+        {
+          "#": "8",
+          "Step": "CONCLUDE",
+          "Relevant": "No",
+          "Rationale": "Handled by CDU decommissioning"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement",
+        "Type",
+        "Role",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Impact",
+        "Prod-Rel",
+        "Conf"
+      ],
+      "rows": [
+        {
+          "#": "ES-01",
+          "Statement": "Minimize the likelihood of selecting a flow sensor whose turndown ratio cannot cover variable-speed pump operation from idle to peak GPU load",
+          "Type": "ACCURACY",
+          "Role": "Overseer",
+          "Imp": "8",
+          "Sat": "5",
+          "Opp": "11",
+          "Impact": "reliability",
+          "Prod-Rel": "false",
+          "Conf": "0.7"
+        },
+        {
+          "#": "ES-02",
+          "Statement": "Increase the ability to specify one sensor platform across DN15–DN25 CDU variants without redesigning the secondary manifold",
+          "Type": "EFFORT",
+          "Role": "Lifecycle (OEM)",
+          "Imp": "7",
+          "Sat": "4",
+          "Opp": "10",
+          "Impact": "cost",
+          "Prod-Rel": "true",
+          "Conf": "0.7"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement",
+        "Type",
+        "Role",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Impact",
+        "Prod-Rel",
+        "Conf"
+      ],
+      "rows": [
+        {
+          "#": "ES-03",
+          "Statement": "Minimize the commissioning time required to configure fluid acoustic properties for facility-specific water / PG25 / EG25 blends",
+          "Type": "EFFORT",
+          "Role": "Lifecycle (Commissioning)",
+          "Imp": "7",
+          "Sat": "4",
+          "Opp": "10",
+          "Impact": "skill",
+          "Prod-Rel": "true",
+          "Conf": "0.7"
+        },
+        {
+          "#": "ES-04",
+          "Statement": "Minimize the likelihood of incorrect installation orientation causing flow measurement bias exceeding 2% of reading",
+          "Type": "ACCURACY",
+          "Role": "Lifecycle (Installer)",
+          "Imp": "8",
+          "Sat": "5",
+          "Opp": "11",
+          "Impact": "reliability",
+          "Prod-Rel": "false",
+          "Conf": "0.8"
+        },
+        {
+          "#": "ES-05",
+          "Statement": "Increase the ability to integrate the sensor into existing CDU BMS stacks (Modbus / BACnet / MQTT) without custom gateway development",
+          "Type": "EFFORT",
+          "Role": "Lifecycle (OEM)",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "9",
+          "Impact": "time",
+          "Prod-Rel": "false",
+          "Conf": "0.7"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement",
+        "Type",
+        "Role",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Impact",
+        "Prod-Rel",
+        "Conf"
+      ],
+      "rows": [
+        {
+          "#": "ES-06",
+          "Statement": "Minimize the time to detect empty-pipe or air-lock in the secondary loop before IT power-on to under 5 seconds",
+          "Type": "DETECTION",
+          "Role": "Executor",
+          "Imp": "**9**",
+          "Sat": "3",
+          "Opp": "**15**",
+          "Impact": "safety",
+          "Prod-Rel": "true",
+          "Conf": "0.9"
+        },
+        {
+          "#": "ES-07",
+          "Statement": "Increase the ability to verify sensor signal integrity through automated self-diagnostics at each CDU start cycle",
+          "Type": "DETECTION",
+          "Role": "Executor",
+          "Imp": "7",
+          "Sat": "4",
+          "Opp": "10",
+          "Impact": "reliability",
+          "Prod-Rel": "false",
+          "Conf": "0.7"
+        },
+        {
+          "#": "ES-08",
+          "Statement": "Minimize the likelihood of enabling GPU load with secondary-loop flow below the OCP 1.5 L/min/kW safety threshold",
+          "Type": "DETECTION",
+          "Role": "Overseer",
+          "Imp": "**9**",
+          "Sat": "4",
+          "Opp": "**14**",
+          "Impact": "safety",
+          "Prod-Rel": "false",
+          "Conf": "0.9"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement",
+        "Type",
+        "Role",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Impact",
+        "Prod-Rel",
+        "Conf"
+      ],
+      "rows": [
+        {
+          "#": "ES-09",
+          "Statement": "Increase the ability to maintain flow accuracy within ±2% of reading over 40,000 hours of continuous 24×7 operation",
+          "Type": "ACCURACY",
+          "Role": "Executor",
+          "Imp": "**9**",
+          "Sat": "5",
+          "Opp": "**13**",
+          "Impact": "reliability",
+          "Prod-Rel": "false",
+          "Conf": "0.8"
+        },
+        {
+          "#": "ES-10",
+          "Statement": "Minimize the likelihood of air entrainment >2% vol after glycol top-up causing signal loss during a GPU workload ramp",
+          "Type": "ROBUSTNESS",
+          "Role": "Executor",
+          "Imp": "8",
+          "Sat": "4",
+          "Opp": "12",
+          "Impact": "reliability",
+          "Prod-Rel": "true",
+          "Conf": "0.8"
+        },
+        {
+          "#": "ES-11",
+          "Statement": "Minimize the time to detect a step-change loss-of-flow event (leak, valve closure, pump trip) to under 2 seconds",
+          "Type": "DETECTION",
+          "Role": "Executor",
+          "Imp": "**10**",
+          "Sat": "4",
+          "Opp": "**16**",
+          "Impact": "safety",
+          "Prod-Rel": "false",
+          "Conf": "0.9"
+        },
+        {
+          "#": "ES-12",
+          "Statement": "Increase the ability to compute secondary-loop thermal duty (kW) from flow × ΔT within a single sensor body, sub-second",
+          "Type": "THROUGHPUT",
+          "Role": "Overseer",
+          "Imp": "8",
+          "Sat": "4",
+          "Opp": "12",
+          "Impact": "cost",
+          "Prod-Rel": "true",
+          "Conf": "0.8"
+        },
+        {
+          "#": "ES-13",
+          "Statement": "Minimize the flow sensor's contribution to CDU secondary-loop pressure drop below 50 mbar at 30 L/min design flow",
+          "Type": "EFFORT",
+          "Role": "Overseer",
+          "Imp": "7",
+          "Sat": "6",
+          "Opp": "8",
+          "Impact": "cost",
+          "Prod-Rel": "false",
+          "Conf": "0.7"
+        },
+        {
+          "#": "ES-14",
+          "Statement": "Minimize the likelihood of pump-pulsation-induced flow reading oscillation exceeding 5% of steady-state value",
+          "Type": "CONSISTENCY",
+          "Role": "Executor",
+          "Imp": "6",
+          "Sat": "5",
+          "Opp": "7",
+          "Impact": "reliability",
+          "Prod-Rel": "false",
+          "Conf": "0.6"
+        },
+        {
+          "#": "ES-15",
+          "Statement": "Increase the ability to detect reverse-flow direction (bypass-valve misoperation) within 1 second of onset",
+          "Type": "DETECTION",
+          "Role": "Executor",
+          "Imp": "7",
+          "Sat": "4",
+          "Opp": "10",
+          "Impact": "safety",
+          "Prod-Rel": "true",
+          "Conf": "0.7"
+        },
+        {
+          "#": "ES-16",
+          "Statement": "Minimize the likelihood of GPU throttling events triggered by undetected flow degradation exceeding 10% from setpoint",
+          "Type": "DETECTION",
+          "Role": "Overseer",
+          "Imp": "**9**",
+          "Sat": "5",
+          "Opp": "**13**",
+          "Impact": "safety",
+          "Prod-Rel": "false",
+          "Conf": "0.8"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement",
+        "Type",
+        "Role",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Impact",
+        "Prod-Rel",
+        "Conf"
+      ],
+      "rows": [
+        {
+          "#": "ES-17",
+          "Statement": "Increase the ability to detect calibration drift exceeding ±0.5% within 30 days of occurrence over 24 months continuous operation",
+          "Type": "DETECTION",
+          "Role": "Executor",
+          "Imp": "8",
+          "Sat": "4",
+          "Opp": "12",
+          "Impact": "reliability",
+          "Prod-Rel": "false",
+          "Conf": "0.7"
+        },
+        {
+          "#": "ES-18",
+          "Statement": "Increase the ability to stream 1-second-granularity flow + temperature telemetry into DCIM for real-time PUE/WUE reporting",
+          "Type": "THROUGHPUT",
+          "Role": "Overseer",
+          "Imp": "8",
+          "Sat": "5",
+          "Opp": "11",
+          "Impact": "cost",
+          "Prod-Rel": "false",
+          "Conf": "0.8"
+        },
+        {
+          "#": "ES-19",
+          "Statement": "Minimize the likelihood of biofilm / scale / particulate buildup degrading accuracy by more than 2% within 5-year service life",
+          "Type": "ROBUSTNESS",
+          "Role": "Executor",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "9",
+          "Impact": "reliability",
+          "Prod-Rel": "false",
+          "Conf": "0.7"
+        },
+        {
+          "#": "ES-20",
+          "Statement": "Increase the ability to detect incipient leak signatures (sub-threshold flow decay) before visible coolant loss",
+          "Type": "DETECTION",
+          "Role": "Overseer",
+          "Imp": "**9**",
+          "Sat": "4",
+          "Opp": "**14**",
+          "Impact": "safety",
+          "Prod-Rel": "true",
+          "Conf": "0.8"
+        },
+        {
+          "#": "ES-21",
+          "Statement": "Minimize the likelihood of acoustic-coupling degradation causing error >1% within the first 5 years of operation",
+          "Type": "ROBUSTNESS",
+          "Role": "Executor",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "9",
+          "Impact": "reliability",
+          "Prod-Rel": "true",
+          "Conf": "0.7"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement",
+        "Type",
+        "Role",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Impact",
+        "Prod-Rel",
+        "Conf"
+      ],
+      "rows": [
+        {
+          "#": "ES-22",
+          "Statement": "Minimize the time required to replace a degraded flow sensor without draining the secondary loop or taking the CDU offline",
+          "Type": "RECOVERY",
+          "Role": "Lifecycle (Maintainer)",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "13",
+          "Impact": "time",
+          "Prod-Rel": "false",
+          "Conf": "0.8"
+        },
+        {
+          "#": "ES-23",
+          "Statement": "Minimize the frequency of mandated field recalibration to no more than once per 5-year CDU service cycle",
+          "Type": "EFFORT",
+          "Role": "Lifecycle (Maintainer)",
+          "Imp": "7",
+          "Sat": "4",
+          "Opp": "10",
+          "Impact": "cost",
+          "Prod-Rel": "false",
+          "Conf": "0.7"
+        },
+        {
+          "#": "ES-24",
+          "Statement": "Increase the ability to push firmware / compensation-table updates to the sensor remotely via the CDU BMS bus",
+          "Type": "EFFORT",
+          "Role": "Overseer",
+          "Imp": "6",
+          "Sat": "3",
+          "Opp": "9",
+          "Impact": "time",
+          "Prod-Rel": "false",
+          "Conf": "0.6"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement",
+        "Level",
+        "Bridge",
+        "Role",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Impact",
+        "Prod-Rel",
+        "Conf"
+      ],
+      "rows": [
+        {
+          "#": "ES-25",
+          "Statement": "Increase the ability to evidence ASHRAE TC 9.9 H-class liquid-cooling envelope compliance through traceable per-rack flow telemetry",
+          "Level": "P3 Role",
+          "Bridge": "DC engineer becomes designer of audit-ready liquid infrastructure",
+          "Role": "Overseer",
+          "Imp": "8",
+          "Sat": "4",
+          "Opp": "12",
+          "Impact": "cost",
+          "Prod-Rel": "false",
+          "Conf": "0.8"
+        },
+        {
+          "#": "ES-26",
+          "Statement": "Minimize the frequency of hyperscaler customer escalations attributed to flow-sensor malfunction within first 24 months after CDU deployment",
+          "Level": "P5 Emotional",
+          "Bridge": "Service managers want to feel confident in AI-era CDU reliability",
+          "Role": "Lifecycle (Maintainer)",
+          "Imp": "8",
+          "Sat": "4",
+          "Opp": "12",
+          "Impact": "cost",
+          "Prod-Rel": "false",
+          "Conf": "0.7"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Metric",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Metric": "Total error statements",
+          "Value": "26"
+        },
+        {
+          "Metric": "Market-inherent (product_related=false)",
+          "Value": "19 (73%)"
+        },
+        {
+          "Metric": "Technology-specific (product_related=true)",
+          "Value": "7 (27%)"
+        },
+        {
+          "Metric": "\"Minimize…\"",
+          "Value": "14 (54%)"
+        },
+        {
+          "Metric": "\"Increase…\"",
+          "Value": "12 (46%)"
+        },
+        {
+          "Metric": "Mean importance",
+          "Value": "7.8"
+        },
+        {
+          "Metric": "Mean satisfaction",
+          "Value": "4.3"
+        },
+        {
+          "Metric": "Mean opportunity score",
+          "Value": "11.3"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Rank",
+        "#",
+        "Statement (abbreviated)",
+        "Opp",
+        "Imp",
+        "Sat"
+      ],
+      "rows": [
+        {
+          "Rank": "1",
+          "#": "ES-11",
+          "Statement (abbreviated)": "Detect step-change loss-of-flow <2s",
+          "Opp": "**16**",
+          "Imp": "10",
+          "Sat": "4"
+        },
+        {
+          "Rank": "2",
+          "#": "ES-06",
+          "Statement (abbreviated)": "Detect empty-pipe before IT power-on <5s",
+          "Opp": "**15**",
+          "Imp": "9",
+          "Sat": "3"
+        },
+        {
+          "Rank": "3",
+          "#": "ES-08",
+          "Statement (abbreviated)": "Gate GPU load on OCP 1.5 L/min/kW threshold",
+          "Opp": "**14**",
+          "Imp": "9",
+          "Sat": "4"
+        },
+        {
+          "Rank": "4",
+          "#": "ES-20",
+          "Statement (abbreviated)": "Detect incipient leak signatures pre-visible",
+          "Opp": "**14**",
+          "Imp": "9",
+          "Sat": "4"
+        },
+        {
+          "Rank": "5",
+          "#": "ES-09",
+          "Statement (abbreviated)": "Maintain ±2% accuracy over 40,000 h 24×7",
+          "Opp": "**13**",
+          "Imp": "9",
+          "Sat": "5"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Technology",
+        "Anchor VN Unit",
+        "Level",
+        "Share",
+        "Rationale"
+      ],
+      "rows": [
+        {
+          "Technology": "Electromagnetic flow meter",
+          "Anchor VN Unit": "Flow Sensor",
+          "Level": "L4",
+          "Share": "35%",
+          "Rationale": "Dominant in CDU secondary loops; conductive glycol-friendly"
+        },
+        {
+          "Technology": "Ultrasonic transit-time",
+          "Anchor VN Unit": "Flow Sensor",
+          "Level": "L4",
+          "Share": "30%",
+          "Rationale": "Growing — no-wear, integrated temp, kW duty"
+        },
+        {
+          "Technology": "Turbine / impeller",
+          "Anchor VN Unit": "Flow Sensor",
+          "Level": "L4",
+          "Share": "15%",
+          "Rationale": "Legacy; declining due to wear and maintenance"
+        },
+        {
+          "Technology": "Vortex",
+          "Anchor VN Unit": "Flow Sensor",
+          "Level": "L4",
+          "Share": "10%",
+          "Rationale": "Niche in larger primary loops"
+        },
+        {
+          "Technology": "Paddle / thermal-dispersion switch",
+          "Anchor VN Unit": "Flow Sensor",
+          "Level": "L4",
+          "Share": "10%",
+          "Rationale": "Standard secondary safety cutout, not primary measurement"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "#": "V1",
+          "Check": "Every statement opens with \"Minimize…\" or \"Increase…\" with one measurable KPI",
+          "Result": "**PASS**"
+        },
+        {
+          "#": "V2",
+          "Check": "product_related true only when need disappears with different tech",
+          "Result": "**PASS** — 7/26 flagged (acoustic coupling, DN modularity, air-bubble, reverse-flow, leak-signature, kW integration, empty-pipe)"
+        },
+        {
+          "#": "V3",
+          "Check": "Importance/satisfaction plausible (safety at 9–10, convenience at 6)",
+          "Result": "**PASS**"
+        },
+        {
+          "#": "V4",
+          "Check": "Impact category matches KPI",
+          "Result": "**PASS**"
+        },
+        {
+          "#": "V5",
+          "Check": "≥2 needs per relevant step; 60–70% market-inherent",
+          "Result": "**PASS** — 73/27 split"
+        },
+        {
+          "#": "V6",
+          "Check": "Solution-agnostic — no mention of ultrasonic, Marquardt, piezoelectric",
+          "Result": "**PASS**"
+        },
+        {
+          "#": "V7",
+          "Check": "Anchor level matches product abstraction (L4 component)",
+          "Result": "**PASS**"
+        },
+        {
+          "#": "V8",
+          "Check": "Product job references parent VN unit (CDU) and context",
+          "Result": "**PASS**"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "jtbd_analysis",
+      "naics_code": "518210",
+      "naics_title": "Data Processing, Hosting, and Related Services",
+      "market_name": "Data Processing, Hosting, and Related Services",
+      "product_name": "Ultrasonic Flow Sensor",
+      "vendor_name": "Marquardt",
+      "cfj_statement": "Host, operate, and deliver customer computing and data workloads on demand with continuous uptime, predictable performance, and contracted SLA compliance",
+      "product_job_statement": "Help the Coolant Distribution Unit to measure secondary-loop volumetric flow and coolant temperature so GPU racks receive contracted thermal duty without compressor trip, leak escalation, or SLA breach",
+      "core_job_statement": "Quantify secondary-loop coolant flow and temperature at the CDU to enable thermal duty calculation, loss-of-flow protection, and PUE/WUE telemetry for liquid-cooled IT",
+      "anchor": {
+        "vn_unit": "Flow Sensor",
+        "level": "L4",
+        "parent_vn_unit": "Coolant Distribution Unit",
+        "parent_level": "L5",
+        "grandparent_vn_unit": "Thermal Management",
+        "grandparent_level": "L6",
+        "route": "PROCESS_VN",
+        "secondary_anchor": {
+          "vn_unit": "Flow Sensor",
+          "level": "L4",
+          "parent_vn_unit": "In-Rack Liquid Cooling Unit"
+        }
+      },
+      "segments": [
+        {
+          "name": "Enterprise colo tenant",
+          "circumstance": "Rents rack space + power, owns IT"
+        },
+        {
+          "name": "Hyperscale operator",
+          "circumstance": "Owns full stack, chases PUE/WUE at scale"
+        },
+        {
+          "name": "AI / HPC operator",
+          "circumstance": "GPU racks >50 kW, liquid cooling mandatory"
+        },
+        {
+          "name": "Regulated workloads",
+          "circumstance": "Tier III/IV uptime + compliance"
+        },
+        {
+          "name": "Edge / regional hosting",
+          "circumstance": "Latency-sensitive, small footprint"
+        },
+        {
+          "name": "Sustainability-driven buyer",
+          "circumstance": "PUE/WUE/carbon contracted"
+        }
+      ],
+      "alternatives": [
+        {
+          "name": "Ultrasonic transit-time sensor",
+          "unspsc": "41112501",
+          "market_share_pct": 30,
+          "trade_offs": [
+            "Air-bubble sensitivity >2% vol",
+            "Pipe-full requirement",
+            "Acoustic coupling drift"
+          ],
+          "existential": false
+        },
+        {
+          "name": "Electromagnetic flow meter",
+          "unspsc": "41112501",
+          "market_share_pct": 35,
+          "trade_offs": [
+            "Requires conductive fluid",
+            "Higher unit cost",
+            "Larger footprint"
+          ],
+          "existential": false
+        },
+        {
+          "name": "Turbine / impeller",
+          "unspsc": "41112501",
+          "market_share_pct": 15,
+          "trade_offs": [
+            "Bearing wear",
+            "Particle jamming",
+            "Pressure drop 100-300 mbar"
+          ],
+          "existential": false
+        },
+        {
+          "name": "Vortex sensor",
+          "unspsc": "41112501",
+          "market_share_pct": 10,
+          "trade_offs": [
+            "Min-Reynolds limit",
+            "Vibration sensitivity",
+            "Poor at low flow"
+          ],
+          "existential": false
+        },
+        {
+          "name": "Thermal-dispersion / paddle switch",
+          "unspsc": "41112501",
+          "market_share_pct": 10,
+          "trade_offs": [
+            "Binary only",
+            "No kW duty",
+            "Redundant safety role"
+          ],
+          "existential": false
+        }
+      ],
+      "scenarios": [
+        {
+          "id": "S1",
+          "name": "GPU rack steady-state (120-160 kW)",
+          "output_types": [
+            "OT-3"
+          ],
+          "units_in_play": [
+            "CDU Pump",
+            "Flow Sensor",
+            "Temperature Probe"
+          ]
+        },
+        {
+          "id": "S2",
+          "name": "CDU startup prove-flow",
+          "output_types": [
+            "OT-3"
+          ],
+          "units_in_play": [
+            "Flow Sensor"
+          ]
+        },
+        {
+          "id": "S3",
+          "name": "Workload spike / variable-speed response",
+          "output_types": [
+            "OT-3"
+          ],
+          "units_in_play": [
+            "Flow Sensor",
+            "CDU Controller"
+          ]
+        },
+        {
+          "id": "S4",
+          "name": "Coolant leak / loss-of-flow",
+          "output_types": [
+            "OT-3"
+          ],
+          "units_in_play": [
+            "Flow Sensor",
+            "Leak Sensor"
+          ]
+        },
+        {
+          "id": "S5",
+          "name": "Seasonal facility-loop shift",
+          "output_types": [
+            "OT-2",
+            "OT-3"
+          ],
+          "units_in_play": [
+            "Flow Sensor",
+            "Temperature Probe"
+          ]
+        },
+        {
+          "id": "S6",
+          "name": "Commissioning / glycol top-up",
+          "output_types": [
+            "OT-3"
+          ],
+          "units_in_play": [
+            "Flow Sensor"
+          ]
+        }
+      ],
+      "job_map": {
+        "naics_code": "518210",
+        "anchor_vn_unit": "Flow Sensor",
+        "anchor_level": "L4",
+        "parent_vn_unit": "Coolant Distribution Unit",
+        "parent_level": "L5",
+        "product_job_statement": "Help the Coolant Distribution Unit to measure secondary-loop volumetric flow and coolant temperature so GPU racks receive contracted thermal duty without compressor trip, leak escalation, or SLA breach",
+        "steps": [
+          {
+            "step_number": 1,
+            "step_name": "DEFINE",
+            "relevant_to_product": true,
+            "relevance_rationale": "Match DN, media, flow/temp ranges to CDU spec"
+          },
+          {
+            "step_number": 2,
+            "step_name": "LOCATE",
+            "relevant_to_product": false,
+            "relevance_rationale": "CDU integrator concern"
+          },
+          {
+            "step_number": 3,
+            "step_name": "PREPARE",
+            "relevant_to_product": true,
+            "relevance_rationale": "OEM assembly + site commissioning"
+          },
+          {
+            "step_number": 4,
+            "step_name": "CONFIRM",
+            "relevant_to_product": true,
+            "relevance_rationale": "Prove-flow gate before IT energize"
+          },
+          {
+            "step_number": 5,
+            "step_name": "EXECUTE",
+            "relevant_to_product": true,
+            "relevance_rationale": "Continuous flow + temp for thermal duty"
+          },
+          {
+            "step_number": 6,
+            "step_name": "MONITOR",
+            "relevant_to_product": true,
+            "relevance_rationale": "24x7 drift, anomaly, leak-signature detection"
+          },
+          {
+            "step_number": 7,
+            "step_name": "MODIFY",
+            "relevant_to_product": true,
+            "relevance_rationale": "Glycol top-up, firmware update, recalibration"
+          },
+          {
+            "step_number": 8,
+            "step_name": "CONCLUDE",
+            "relevant_to_product": false,
+            "relevance_rationale": "Handled by CDU decommissioning"
+          }
+        ]
+      },
+      "error_statements": [
+        {
+          "id": "ES-01",
+          "statement": "Minimize the likelihood of selecting a flow sensor whose turndown ratio cannot cover variable-speed pump operation from idle to peak GPU load",
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "error_type": "ACCURACY",
+          "role": "Overseer",
+          "importance": 8,
+          "satisfaction_current": 5,
+          "opportunity_score": 11,
+          "impact_category": "reliability",
+          "product_related": false,
+          "pyramid_level": "P2",
+          "confidence": 0.7
+        },
+        {
+          "id": "ES-02",
+          "statement": "Increase the ability to specify one sensor platform across DN15-DN25 CDU variants without redesigning the secondary manifold",
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "error_type": "EFFORT",
+          "role": "Lifecycle (OEM)",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10,
+          "impact_category": "cost",
+          "product_related": true,
+          "pyramid_level": "P1",
+          "confidence": 0.7
+        },
+        {
+          "id": "ES-03",
+          "statement": "Minimize the commissioning time required to configure fluid acoustic properties for facility-specific water / PG25 / EG25 blends",
+          "job_step_number": 3,
+          "job_step_name": "PREPARE",
+          "error_type": "EFFORT",
+          "role": "Lifecycle (Commissioning)",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10,
+          "impact_category": "skill",
+          "product_related": true,
+          "pyramid_level": "P1",
+          "confidence": 0.7
+        },
+        {
+          "id": "ES-04",
+          "statement": "Minimize the likelihood of incorrect installation orientation causing flow measurement bias exceeding 2% of reading",
+          "job_step_number": 3,
+          "job_step_name": "PREPARE",
+          "error_type": "ACCURACY",
+          "role": "Lifecycle (Installer)",
+          "importance": 8,
+          "satisfaction_current": 5,
+          "opportunity_score": 11,
+          "impact_category": "reliability",
+          "product_related": false,
+          "pyramid_level": "P1",
+          "confidence": 0.8
+        },
+        {
+          "id": "ES-05",
+          "statement": "Increase the ability to integrate the sensor into existing CDU BMS stacks (Modbus / BACnet / MQTT) without custom gateway development",
+          "job_step_number": 3,
+          "job_step_name": "PREPARE",
+          "error_type": "EFFORT",
+          "role": "Lifecycle (OEM)",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9,
+          "impact_category": "time",
+          "product_related": false,
+          "pyramid_level": "P1",
+          "confidence": 0.7
+        },
+        {
+          "id": "ES-06",
+          "statement": "Minimize the time to detect empty-pipe or air-lock in the secondary loop before IT power-on to under 5 seconds",
+          "job_step_number": 4,
+          "job_step_name": "CONFIRM",
+          "error_type": "DETECTION",
+          "role": "Executor",
+          "importance": 9,
+          "satisfaction_current": 3,
+          "opportunity_score": 15,
+          "impact_category": "safety",
+          "product_related": true,
+          "pyramid_level": "P2",
+          "confidence": 0.9
+        },
+        {
+          "id": "ES-07",
+          "statement": "Increase the ability to verify sensor signal integrity through automated self-diagnostics at each CDU start cycle",
+          "job_step_number": 4,
+          "job_step_name": "CONFIRM",
+          "error_type": "DETECTION",
+          "role": "Executor",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10,
+          "impact_category": "reliability",
+          "product_related": false,
+          "pyramid_level": "P2",
+          "confidence": 0.7
+        },
+        {
+          "id": "ES-08",
+          "statement": "Minimize the likelihood of enabling GPU load with secondary-loop flow below the OCP 1.5 L/min/kW safety threshold",
+          "job_step_number": 4,
+          "job_step_name": "CONFIRM",
+          "error_type": "DETECTION",
+          "role": "Overseer",
+          "importance": 9,
+          "satisfaction_current": 4,
+          "opportunity_score": 14,
+          "impact_category": "safety",
+          "product_related": false,
+          "pyramid_level": "P2",
+          "confidence": 0.9
+        },
+        {
+          "id": "ES-09",
+          "statement": "Increase the ability to maintain flow accuracy within plus-minus 2% of reading over 40,000 hours of continuous 24x7 operation",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ACCURACY",
+          "role": "Executor",
+          "importance": 9,
+          "satisfaction_current": 5,
+          "opportunity_score": 13,
+          "impact_category": "reliability",
+          "product_related": false,
+          "pyramid_level": "P2",
+          "confidence": 0.8
+        },
+        {
+          "id": "ES-10",
+          "statement": "Minimize the likelihood of air entrainment above 2% vol after glycol top-up causing signal loss during a GPU workload ramp",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ROBUSTNESS",
+          "role": "Executor",
+          "importance": 8,
+          "satisfaction_current": 4,
+          "opportunity_score": 12,
+          "impact_category": "reliability",
+          "product_related": true,
+          "pyramid_level": "P2",
+          "confidence": 0.8
+        },
+        {
+          "id": "ES-11",
+          "statement": "Minimize the time to detect a step-change loss-of-flow event (leak, valve closure, pump trip) to under 2 seconds",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "DETECTION",
+          "role": "Executor",
+          "importance": 10,
+          "satisfaction_current": 4,
+          "opportunity_score": 16,
+          "impact_category": "safety",
+          "product_related": false,
+          "pyramid_level": "P2",
+          "confidence": 0.9
+        },
+        {
+          "id": "ES-12",
+          "statement": "Increase the ability to compute secondary-loop thermal duty (kW) from flow x delta-T within a single sensor body, sub-second",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "THROUGHPUT",
+          "role": "Overseer",
+          "importance": 8,
+          "satisfaction_current": 4,
+          "opportunity_score": 12,
+          "impact_category": "cost",
+          "product_related": true,
+          "pyramid_level": "P2",
+          "confidence": 0.8
+        },
+        {
+          "id": "ES-13",
+          "statement": "Minimize the flow sensor's contribution to CDU secondary-loop pressure drop below 50 mbar at 30 L/min design flow",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "EFFORT",
+          "role": "Overseer",
+          "importance": 7,
+          "satisfaction_current": 6,
+          "opportunity_score": 8,
+          "impact_category": "cost",
+          "product_related": false,
+          "pyramid_level": "P2",
+          "confidence": 0.7
+        },
+        {
+          "id": "ES-14",
+          "statement": "Minimize the likelihood of pump-pulsation-induced flow reading oscillation exceeding 5% of steady-state value",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "CONSISTENCY",
+          "role": "Executor",
+          "importance": 6,
+          "satisfaction_current": 5,
+          "opportunity_score": 7,
+          "impact_category": "reliability",
+          "product_related": false,
+          "pyramid_level": "P2",
+          "confidence": 0.6
+        },
+        {
+          "id": "ES-15",
+          "statement": "Increase the ability to detect reverse-flow direction (bypass-valve misoperation) within 1 second of onset",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "DETECTION",
+          "role": "Executor",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10,
+          "impact_category": "safety",
+          "product_related": true,
+          "pyramid_level": "P2",
+          "confidence": 0.7
+        },
+        {
+          "id": "ES-16",
+          "statement": "Minimize the likelihood of GPU throttling events triggered by undetected flow degradation exceeding 10% from setpoint",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "DETECTION",
+          "role": "Overseer",
+          "importance": 9,
+          "satisfaction_current": 5,
+          "opportunity_score": 13,
+          "impact_category": "safety",
+          "product_related": false,
+          "pyramid_level": "P2",
+          "confidence": 0.8
+        },
+        {
+          "id": "ES-17",
+          "statement": "Increase the ability to detect calibration drift exceeding plus-minus 0.5% within 30 days of occurrence over 24 months continuous operation",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "error_type": "DETECTION",
+          "role": "Executor",
+          "importance": 8,
+          "satisfaction_current": 4,
+          "opportunity_score": 12,
+          "impact_category": "reliability",
+          "product_related": false,
+          "pyramid_level": "P2",
+          "confidence": 0.7
+        },
+        {
+          "id": "ES-18",
+          "statement": "Increase the ability to stream 1-second-granularity flow + temperature telemetry into DCIM for real-time PUE/WUE reporting",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "error_type": "THROUGHPUT",
+          "role": "Overseer",
+          "importance": 8,
+          "satisfaction_current": 5,
+          "opportunity_score": 11,
+          "impact_category": "cost",
+          "product_related": false,
+          "pyramid_level": "P2",
+          "confidence": 0.8
+        },
+        {
+          "id": "ES-19",
+          "statement": "Minimize the likelihood of biofilm / scale / particulate buildup degrading accuracy by more than 2% within 5-year service life",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "error_type": "ROBUSTNESS",
+          "role": "Executor",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9,
+          "impact_category": "reliability",
+          "product_related": false,
+          "pyramid_level": "P2",
+          "confidence": 0.7
+        },
+        {
+          "id": "ES-20",
+          "statement": "Increase the ability to detect incipient leak signatures (sub-threshold flow decay) before visible coolant loss",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "error_type": "DETECTION",
+          "role": "Overseer",
+          "importance": 9,
+          "satisfaction_current": 4,
+          "opportunity_score": 14,
+          "impact_category": "safety",
+          "product_related": true,
+          "pyramid_level": "P2",
+          "confidence": 0.8
+        },
+        {
+          "id": "ES-21",
+          "statement": "Minimize the likelihood of acoustic-coupling degradation causing error above 1% within the first 5 years of operation",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "error_type": "ROBUSTNESS",
+          "role": "Executor",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9,
+          "impact_category": "reliability",
+          "product_related": true,
+          "pyramid_level": "P2",
+          "confidence": 0.7
+        },
+        {
+          "id": "ES-22",
+          "statement": "Minimize the time required to replace a degraded flow sensor without draining the secondary loop or taking the CDU offline",
+          "job_step_number": 7,
+          "job_step_name": "MODIFY",
+          "error_type": "RECOVERY",
+          "role": "Lifecycle (Maintainer)",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13,
+          "impact_category": "time",
+          "product_related": false,
+          "pyramid_level": "P1",
+          "confidence": 0.8
+        },
+        {
+          "id": "ES-23",
+          "statement": "Minimize the frequency of mandated field recalibration to no more than once per 5-year CDU service cycle",
+          "job_step_number": 7,
+          "job_step_name": "MODIFY",
+          "error_type": "EFFORT",
+          "role": "Lifecycle (Maintainer)",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10,
+          "impact_category": "cost",
+          "product_related": false,
+          "pyramid_level": "P1",
+          "confidence": 0.7
+        },
+        {
+          "id": "ES-24",
+          "statement": "Increase the ability to push firmware / compensation-table updates to the sensor remotely via the CDU BMS bus",
+          "job_step_number": 7,
+          "job_step_name": "MODIFY",
+          "error_type": "EFFORT",
+          "role": "Overseer",
+          "importance": 6,
+          "satisfaction_current": 3,
+          "opportunity_score": 9,
+          "impact_category": "time",
+          "product_related": false,
+          "pyramid_level": "P1",
+          "confidence": 0.6
+        },
+        {
+          "id": "ES-25",
+          "statement": "Increase the ability to evidence ASHRAE TC 9.9 H-class liquid-cooling envelope compliance through traceable per-rack flow telemetry",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "error_type": "EVIDENCE",
+          "role": "Overseer",
+          "importance": 8,
+          "satisfaction_current": 4,
+          "opportunity_score": 12,
+          "impact_category": "cost",
+          "product_related": false,
+          "pyramid_level": "P3",
+          "confidence": 0.8
+        },
+        {
+          "id": "ES-26",
+          "statement": "Minimize the frequency of hyperscaler customer escalations attributed to flow-sensor malfunction within first 24 months after CDU deployment",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "error_type": "RELIABILITY",
+          "role": "Lifecycle (Maintainer)",
+          "importance": 8,
+          "satisfaction_current": 4,
+          "opportunity_score": 12,
+          "impact_category": "cost",
+          "product_related": false,
+          "pyramid_level": "P5",
+          "confidence": 0.7
+        }
+      ],
+      "odi_summary": {
+        "total_needs": 26,
+        "market_inherent_pct": 73,
+        "tech_specific_pct": 27,
+        "mean_importance": 7.8,
+        "mean_satisfaction": 4.3,
+        "mean_opportunity": 11.3,
+        "top_underserved_ids": [
+          "ES-11",
+          "ES-06",
+          "ES-08",
+          "ES-20",
+          "ES-09"
+        ]
+      },
+      "qa_results": {
+        "V1": "PASS",
+        "V2": "PASS",
+        "V3": "PASS",
+        "V4": "PASS",
+        "V5": "PASS",
+        "V6": "PASS",
+        "V7": "PASS",
+        "V8": "PASS"
+      }
+    }
+  ],
+  "has_bom": false,
+  "naics_sector_type": "non_manufacturing"
+}

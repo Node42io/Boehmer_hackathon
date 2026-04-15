@@ -1,0 +1,1830 @@
+{
+  "id": "ODI_finfish_farming_and_fish_hatcheries",
+  "title": "ODI Matrix — Finfish Farming and Fish Hatcheries (NAICS 112511)",
+  "type": "odi_matrix",
+  "market_slug": "finfish_farming_and_fish_hatcheries",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Step 1 — Error Statement Collection",
+      "content": "25 needs from Step 06 (JTBD_finfish_farming_and_fish_hatcheries) + 5 product-related needs from Step 10 (FIT_finfish_farming_and_fish_hatcheries) = **30 total needs**.\n\nStep 10 entries injected with `job_step_number=0`, `job_step_name=\"product_constraint\"`, `impact_category=\"reliability\"`, `product_related=true` per merge rule.\n\nNo markets skipped — 30 needs found for Finfish Farming and Fish Hatcheries.\n\n---"
+    },
+    {
+      "title": "Step 2 — Satisfaction Recalibration (Incumbent-Grounded)",
+      "content": "**Incumbent profiles used for recalibration:**\n\n| Incumbent | Share | Mechanism | Strengths | Weaknesses |\n|---|---|---|---|---|\n| Paddle-wheel / turbine | 45–55% | Rotational (impeller) | Lowest cost ($20–80), simple installation, no fluid config needed, flow-profile-insensitive | Clogs with biofilm every 2–6 weeks in RAS, ±2–5% drift, no diagnostics, moving parts wear |\n| Electromagnetic (mag) | 15–25% | Faraday induction | ±0.5% accuracy, no moving parts, 100:1 turndown, no air/temperature sensitivity | 5–10× cost ($500–2,000+), 10–20 W power, larger footprint, requires conductive liquid |\n| Do nothing / manual | 15–25% | Visual / behavioral observation | Zero cost | Blind to flow failure; relies on fish behavior or downstream DO alarm; catastrophic in RAS |\n\n[SRC: JTBD_finfish_farming §2.4 Alternatives, VN_finfish_farming]\n\n### Recalibration Table — Step 06 Needs\n\n| # | Statement (abbreviated) | Imp | Sat_orig | Sat_recal | Recalibration Rationale |\n|---|---|---|---|---|---|\n| 1 | Flow cessation detection <60s | 10 | 3 | **2** | PW (dominant) + manual (15–25%) provide near-zero real-time per-tank cessation alarm; PW requires SCADA integration most mid-scale farms lack |\n| 2 | Calibration drift <±1% / 12mo | 8 | 3 | **3** | PW drifts 2–5% in biofilm water (dominant); mag stable but minority share |\n| 3 | Temperature accuracy 2–30°C | 7 | 4 | **5** | Both PW and mag measurement principles are temperature-insensitive for flow reading |\n| 4 | Full range 2–60 L/min | 7 | 5 | **5** | Mag excellent turndown (100:1); PW limited at low flow — mixed |\n| 5 | Pump degradation detection >20% | 10 | 2 | **2** | No incumbent trends pump degradation; manual checks only |\n| 6 | Pipe blockage detection >15% | 9 | 3 | **3** | PW detects gross blockage but not subtle 15% restriction; biofilm on PW itself confounds reading |\n| 7 | Anomaly classification >95% | 8 | 3 | **2** | No incumbent provides anomaly classification; PW has zero diagnostics; mag has no classification logic |\n| 8 | False flow-normal during air-lock | 9 | 3 | **3** | PW stalls obviously during complete air-lock; partial air-lock masking remains a concern across technologies |\n| 9 | Flow rate setpoint ±10% of O2 demand | 8 | 3 | **3** | Knowledge/engineering need; sensor-independent |\n| 10 | Per-tank flow calculation effort | 6 | 4 | **4** | Knowledge need; sensor-independent |\n| 11 | Install without draining circuit | 8 | 3 | **3** | All inline sensors require circuit drain for installation |\n| 12 | Medium config error >1% | 7 | 4 | **6** | PW (dominant) needs zero fluid configuration — zero config error risk; mag needs minimal config |\n| 13 | Verify accuracy in 10 min pre-stocking | 8 | 3 | **3** | PW has no self-diagnostics; pre-stocking verification mostly skipped in practice |\n| 14 | False-normal after maintenance | 9 | 3 | **2** | No incumbent has post-maintenance verification logic; unaddressed across all technologies |\n| 15 | Isolate root cause in 3 min | 9 | 2 | **2** | No incumbent provides diagnostic data for root cause isolation |\n| 16 | Operator expertise for alarm data | 8 | 3 | **3** | PW: no diagnostics; mag: complex outputs requiring training |\n| 17 | Service life >5yr zero clogging | 9 | 2 | **2** | PW clogs every 2–6 weeks (catastrophic); dominant incumbent is worst-case for this need |\n| 18 | Installed cost <$400/point | 8 | 4 | **5** | PW at $20–80 well under $400 target; mag at $500–2,000 exceeds it |\n| 19 | No flow path contamination | 7 | 5 | **5** | PW: some debris risk from bearing lubricant; mag: clean — mixed |\n| 20 | Pressure drop minimization | 7 | 5 | **5** | PW and mag both have minimal pressure drop |\n| 21 | Total stock loss from circulation failure | 10 | 3 | **2** | Dominant incumbents (PW + manual = 60–80%) provide inadequate protection against complete stock loss |\n| 22 | Water exchange ±10% all tanks | 8 | 4 | **4** | PW too imprecise for per-tank balancing; mag accurate but expensive per-point |\n| 23 | Quantitative performance data | 7 | 3 | **3** | PW: basic pulse only; mag: good data but too expensive for full deployment |\n| 24 | Overnight mass mortality detection | 10 | 3 | **2** | PW + manual have no reliable overnight alarming at per-tank level |\n| 25 | Anxiety leaving facility unattended | 8 | 3 | **3** | Emotional need; PW lacks reliable remote alerting capability |\n\n### Recalibration Table — Step 10 Product-Related Needs\n\n| # | Statement (abbreviated) | Imp | Sat_orig | Sat_recal | Recalibration Rationale |\n|---|---|---|---|---|---|\n| PRN-1 | Air >2% measurement overestimation | 7 | 4 | **4** | PW jams entirely with air (worse but obvious failure); mag handles air better — mixed |\n| PRN-2 | Pipe partially-filled blackout | 6 | 4 | **4** | PW also loses measurement with partially filled pipe; mag has empty-pipe detection |\n| PRN-3 | Short straight pipe accuracy | 6 | 4 | **5** | PW is flow-profile-insensitive; mag needs shorter straight run (≤5×DN vs 5–10×DN for ultrasonic) |\n| PRN-4 | Rapid temperature transient error | 5 | 6 | **7** | Neither PW nor mag has temperature-dependent flow measurement error; purely ultrasonic concern |\n| PRN-5 | Below minimum detection threshold | 6 | 5 | **6** | PW detects >0.5 l/min; mag detects >0.2 l/min at DN20; both better than ultrasonic DN20 minimum of 4.2 l/min |\n\n---"
+    },
+    {
+      "title": "Step 3 — Opportunity Scores (Deterministic)",
+      "content": "Formula: `opportunity_score = importance + max(importance - satisfaction, 0)`\nUnderserved: `importance > 7 AND satisfaction < 5`\nOverserved: `importance < 3 AND satisfaction > 7`\n\n### Step 06 Needs — Scored\n\n| # | Statement (abbreviated) | Imp | Sat | Opp | Under? | Over? | Impact | prod_rel |\n|---|---|---|---|---|---|---|---|---|\n| 1 | Flow cessation detection <60s | 10 | 2 | **18.00** | YES | no | safety | false |\n| 2 | Calibration drift <±1% / 12mo | 8 | 3 | **13.00** | YES | no | reliability | false |\n| 3 | Temperature accuracy 2–30°C | 7 | 5 | **9.00** | no | no | reliability | false |\n| 4 | Full range 2–60 L/min | 7 | 5 | **9.00** | no | no | reliability | true |\n| 5 | Pump degradation detection >20% | 10 | 2 | **18.00** | YES | no | safety | false |\n| 6 | Pipe blockage detection >15% | 9 | 3 | **15.00** | YES | no | reliability | false |\n| 7 | Anomaly classification >95% | 8 | 2 | **14.00** | YES | no | reliability | false |\n| 8 | False flow-normal during air-lock | 9 | 3 | **15.00** | YES | no | safety | true |\n| 9 | Flow rate setpoint ±10% of O2 demand | 8 | 3 | **13.00** | YES | no | safety | false |\n| 10 | Per-tank flow calculation effort | 6 | 4 | **8.00** | no | no | skill | false |\n| 11 | Install without draining circuit | 8 | 3 | **13.00** | YES | no | time | true |\n| 12 | Medium config error >1% | 7 | 6 | **8.00** | no | no | reliability | true |\n| 13 | Verify accuracy in 10 min pre-stocking | 8 | 3 | **13.00** | YES | no | time | false |\n| 14 | False-normal after maintenance | 9 | 2 | **16.00** | YES | no | safety | false |\n| 15 | Isolate root cause in 3 min | 9 | 2 | **16.00** | YES | no | time | false |\n| 16 | Operator expertise for alarm data | 8 | 3 | **13.00** | YES | no | skill | false |\n| 17 | Service life >5yr zero clogging | 9 | 2 | **16.00** | YES | no | cost | true |\n| 18 | Installed cost <$400/point | 8 | 5 | **11.00** | no | no | cost | true |\n| 19 | No flow path contamination | 7 | 5 | **9.00** | no | no | safety | true |\n| 20 | Pressure drop minimization | 7 | 5 | **9.00** | no | no | cost | true |\n| 21 | Total stock loss from circulation failure | 10 | 2 | **18.00** | YES | no | safety | false |\n| 22 | Water exchange ±10% all tanks | 8 | 4 | **12.00** | YES | no | reliability | false |\n| 23 | Quantitative performance data | 7 | 3 | **11.00** | no | no | skill | false |\n| 24 | Overnight mass mortality detection | 10 | 2 | **18.00** | YES | no | safety | false |\n| 25 | Anxiety leaving facility unattended | 8 | 3 | **13.00** | YES | no | reliability | false |\n\n### Step 10 Product-Related Needs — Scored\n\n| # | Statement (abbreviated) | Imp | Sat | Opp | Under? | Over? | Impact | prod_rel |\n|---|---|---|---|---|---|---|---|---|\n| PRN-1 | Air >2% measurement overestimation | 7 | 4 | **10.00** | no | no | reliability | true |\n| PRN-2 | Pipe partially-filled blackout | 6 | 4 | **8.00** | no | no | reliability | true |\n| PRN-3 | Short straight pipe accuracy | 6 | 5 | **7.00** | no | no | reliability | true |\n| PRN-4 | Rapid temperature transient error | 5 | 7 | **5.00** | no | no | reliability | true |\n| PRN-5 | Below minimum detection threshold | 6 | 6 | **6.00** | no | no | reliability | true |\n\n---"
+    },
+    {
+      "title": "Step 4 — Market ODI Summary",
+      "content": "| Metric | Value |\n|---|---|\n| **Market** | Finfish Farming and Fish Hatcheries (NAICS 112511) |\n| **Total Needs** | 30 |\n| **Underserved Count** | 17 |\n| **Overserved Count** | 0 |\n| **Avg Opportunity Score** | 12.13 |\n\n### Top 5 Opportunities\n\n| Rank | # | Error Statement | Imp | Sat | Opp | Zone |\n|---|---|---|---|---|---|---|\n| 1 | 1 | Minimize the likelihood of undetected flow cessation in a rearing tank supply line persisting longer than 60 seconds before alarm activation | 10 | 2 | **18.00** | Highly Underserved |\n| 2 | 5 | Minimize the time to detect a circulation pump degradation event that reduces tank water exchange rate by >20% before dissolved oxygen drops below 6 mg/L | 10 | 2 | **18.00** | Highly Underserved |\n| 3 | 21 | Minimize the likelihood of a total stock loss event (>10% biomass mortality) caused by undetected water circulation failure in any single rearing unit | 10 | 2 | **18.00** | Highly Underserved |\n| 4 | 24 | Minimize the likelihood of discovering a mass mortality event caused by overnight flow failure that was not detected by the monitoring system | 10 | 2 | **18.00** | Highly Underserved |\n| 5 | 14 | Minimize the likelihood of accepting a false-normal flow reading after system maintenance that masks a partially closed valve or misrouted pipe | 9 | 2 | **16.00** | Highly Underserved |\n\n**Runners-up at Opp=16:** #15 (isolate anomaly root cause in 3 min), #17 (service life >5yr zero clogging).\n\n### Opportunity Landscape\n\n| Zone | Score Range | Count | % of Total |\n|---|---|---|---|\n| Highly Underserved | > 15 | 7 | 23.3% |\n| Underserved | 12–15 | 10 | 33.3% |\n| Appropriately Served | 10–12 | 3 | 10.0% |\n| Overserved | < 10 | 10 | 33.3% |\n\n---"
+    },
+    {
+      "title": "Step 5 — Cross-Check vs Feature-Market Fit",
+      "content": "| Metric | Value | Source |\n|---|---|---|\n| ODI avg_opportunity_score | 12.13 | This analysis |\n| Feature-Fit avg (tech features) | 5.18 | FIT_finfish_farming §09a (mean of 7 features) |\n\n**Cross-check thresholds:**\n\n| Condition | Triggered? | Note |\n|---|---|---|\n| ODI avg > 12 AND Feature-Fit avg < 4 | **NO** | Feature-Fit avg = 5.18 (above 4) |\n| ODI avg < 8 AND Feature-Fit avg > 7 | **NO** | ODI avg = 12.13 (above 8) |\n\n**No inconsistencies detected.** ODI shows extensive unmet needs (17 underserved, 7 highly underserved) while Feature-Fit shows moderate-to-good technology relevance (5.18 avg). The top opportunities (#1, #5, #21, #24 — all at Opp=18) are life-safety needs that align with the sensor's highest-scoring features: Digital Anomaly Detection (fit=6.67) and No Moving Parts (fit=6.89). The market's dominant incumbent (paddle-wheel, 45–55%) is catastrophically poor at the highest-value needs (clogging destroys reliability, no diagnostics for detection), creating a massive opportunity gap for ultrasonic technology.\n\n---"
+    },
+    {
+      "title": "QA Checklist",
+      "content": "| # | Check | Result | Note |\n|---|---|---|---|\n| Q1 | Formula correct | **PASS** | Spot-checked 5 entries: #1 (10+max(10-2,0)=18), #12 (7+max(7-6,0)=8), #17 (9+max(9-2,0)=16), PRN-4 (5+max(5-7,0)=5), PRN-3 (6+max(6-5,0)=7). All match. |\n| Q2 | Underserved flags correct | **PASS** | 17 entries with imp>7 AND sat<5; verified #1(10,2)=YES, #3(7,5)=NO (7 not >7), #18(8,5)=NO (5 not <5), #22(8,4)=YES |\n| Q3 | Overserved flags correct | **PASS** | 0 entries with imp<3 AND sat>7; no need has importance <3 |\n| Q4 | Need count preserved | **PASS** | 25 (Step 06) + 5 (Step 10) = 30 ≥ 25 (Step 06 count) |\n| Q5 | Top-5 ordering correct | **PASS** | 18 > 18 > 18 > 18 > 16 — descending by opp score; ties broken by need number |\n| Q6 | Cross-check ran | **PASS** | ODI vs Feature-Fit comparison completed; no inconsistencies |\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"odi_matrix\",\n  \"naics_code\": \"112511\",\n  \"naics_title\": \"Finfish Farming and Fish Hatcheries\",\n  \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n  \"product_name\": \"Ultrasonic Flow Sensor\",\n  \"vendor_name\": \"Marquardt\",\n  \"entries\": [\n    {\n      \"error_statement\": \"Minimize the likelihood of undetected flow cessation in a rearing tank supply line persisting longer than 60 seconds before alarm activation\",\n      \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n      \"naics_code\": \"112511\",\n      \"importance\": 10,\n      \"satisfaction_current\": 2,\n      \"opportunity_score\": 18.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of undetected calibration drift exceeding ±1% of reading over a 12-month continuous operation period in biofilm-prone water\",\n      \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n      \"naics_code\": \"112511\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize variation in flow measurement accuracy caused by seasonal water temperature fluctuations between 2°C and 30°C across species programs\",\n      \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n      \"naics_code\": \"112511\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Increase the ability to measure flow rate across the full operating range (2–60 L/min per tank feed) without sensor reconfiguration between tank sizes\",\n      \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n      \"naics_code\": \"112511\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the time to detect a circulation pump degradation event that reduces tank water exchange rate by >20% before dissolved oxygen drops below 6 mg/L\",\n      \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n      \"naics_code\": \"112511\",\n      \"importance\": 10,\n      \"satisfaction_current\": 2,\n      \"opportunity_score\": 18.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the number of undetected pipe blockage events (biofilm growth, scale accumulation) that restrict flow by >15% in treatment loops\",\n      \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n      \"naics_code\": \"112511\",\n      \"importance\": 9,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 15.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Increase the ability to distinguish genuine flow anomalies (pump cavitation, valve failure) from sensor measurement artifacts with >95% classification accuracy\",\n      \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n      \"naics_code\": \"112511\",\n      \"importance\": 8,\n      \"satisfaction_current\": 2,\n      \"opportunity_score\": 14.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of false flow-normal readings during air-lock events in recirculation piping that mask actual flow cessation\",\n      \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n      \"naics_code\": \"112511\",\n      \"importance\": 9,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 15.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Increase the ability to determine the correct flow rate setpoint within ±10% of actual biological oxygen demand for each species, stocking density, and growth stage\",\n      \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n      \"naics_code\": \"112511\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the effort required to calculate per-tank flow requirements when stocking density changes during grow-out cycles\",\n      \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n      \"naics_code\": \"112511\",\n      \"importance\": 6,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 8.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the time required to install and commission a flow sensor on an existing RAS pipe loop without draining the circuit or interrupting fish production\",\n      \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n      \"naics_code\": \"112511\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of systematic measurement error >1% caused by incorrect medium configuration at commissioning for recirculated water with varying dissolved solids\",\n      \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n      \"naics_code\": \"112511\",\n      \"importance\": 7,\n      \"satisfaction_current\": 6,\n      \"opportunity_score\": 8.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Increase the ability to verify sensor accuracy on-site within 10 minutes before stocking fish into a newly prepared tank\",\n      \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n      \"naics_code\": \"112511\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of accepting a false-normal flow reading after system maintenance that masks a partially closed valve or misrouted pipe\",\n      \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n      \"naics_code\": \"112511\",\n      \"importance\": 9,\n      \"satisfaction_current\": 2,\n      \"opportunity_score\": 16.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Increase the ability to isolate flow anomaly root cause (sensor fault vs pump failure vs valve position vs pipe blockage) within 3 minutes during an active alarm\",\n      \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n      \"naics_code\": \"112511\",\n      \"importance\": 9,\n      \"satisfaction_current\": 2,\n      \"opportunity_score\": 16.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the operator expertise required to interpret flow alarm data and determine the correct corrective action during a night shift with minimal staffing\",\n      \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n      \"naics_code\": \"112511\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Increase the sensor service life achievable without scheduled maintenance interventions in biofilm-prone recirculated water (target: >5 years with zero clogging events)\",\n      \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n      \"naics_code\": \"112511\",\n      \"importance\": 9,\n      \"satisfaction_current\": 2,\n      \"opportunity_score\": 16.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the total installed cost per water flow measurement point including sensor, wiring, and integration with existing PLC/SCADA (target: <$400)\",\n      \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n      \"naics_code\": \"112511\",\n      \"importance\": 8,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 11.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of sensor-induced flow path contamination or turbulence that affects dissolved oxygen transfer downstream of the measurement point\",\n      \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n      \"naics_code\": \"112511\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the permanent pressure drop across the measurement point that increases circulation pump energy consumption in an energy-intensive RAS facility\",\n      \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n      \"naics_code\": \"112511\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of a total stock loss event (>10% biomass mortality) caused by undetected water circulation failure in any single rearing unit\",\n      \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n      \"naics_code\": \"112511\",\n      \"importance\": 10,\n      \"satisfaction_current\": 2,\n      \"opportunity_score\": 18.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Increase the ability to maintain water exchange rate within ±10% of setpoint across all rearing tanks simultaneously during peak biomass loading\",\n      \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n      \"naics_code\": \"112511\",\n      \"importance\": 8,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 12.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Increase the ability to present quantitative water circulation performance data to facility investors, insurers, and certification auditors as evidence of operational control\",\n      \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n      \"naics_code\": \"112511\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of discovering a mass mortality event caused by overnight flow failure that was not detected by the monitoring system\",\n      \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n      \"naics_code\": \"112511\",\n      \"importance\": 10,\n      \"satisfaction_current\": 2,\n      \"opportunity_score\": 18.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the anxiety associated with leaving a high-value RAS facility ($500K+ biomass at risk) unattended during off-hours by providing reliable remote flow-failure alerts\",\n      \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n      \"naics_code\": \"112511\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of systematic measurement overestimation caused by air entrainment exceeding 2% by volume in recirculation piping during oxygenation injection or post-maintenance air purging\",\n      \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n      \"naics_code\": \"112511\",\n      \"importance\": 7,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 10.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the duration of total measurement blackout during pipe partially-filled states that occur during RAS circuit re-filling, pump restart sequences, or gravity-drain maintenance events\",\n      \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n      \"naics_code\": \"112511\",\n      \"importance\": 6,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 8.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the measurement accuracy degradation caused by turbulent flow profiles from elbows, valves, and tee fittings within 5–10 pipe diameters upstream of the sensor in compact RAS pipe layouts\",\n      \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n      \"naics_code\": \"112511\",\n      \"importance\": 6,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 7.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the residual flow measurement error during rapid water temperature changes exceeding 5°C/hour that outpace the speed-of-sound compensation algorithm response rate\",\n      \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n      \"naics_code\": \"112511\",\n      \"importance\": 5,\n      \"satisfaction_current\": 7,\n      \"opportunity_score\": 5.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the probability of undetected flow reduction events where actual flow rate drops below the sensor minimum detection threshold in small-diameter nursery and fry-rearing feed lines\",\n      \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n      \"naics_code\": \"112511\",\n      \"importance\": 6,\n      \"satisfaction_current\": 6,\n      \"opportunity_score\": 6.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    }\n  ],\n  \"market_summaries\": [\n    {\n      \"market_name\": \"Finfish Farming and Fish Hatcheries\",\n      \"naics_code\": \"112511\",\n      \"total_needs\": 30,\n      \"underserved_count\": 17,\n      \"overserved_count\": 0,\n      \"avg_opportunity_score\": 12.13,\n      \"top_opportunities\": [\n        \"Minimize the likelihood of undetected flow cessation in a rearing tank supply line persisting longer than 60 seconds before alarm activation\",\n        \"Minimize the time to detect a circulation pump degradation event that reduces tank water exchange rate by >20% before dissolved oxygen drops below 6 mg/L\",\n        \"Minimize the likelihood of a total stock loss event (>10% biomass mortality) caused by undetected water circulation failure in any single rearing unit\",\n        \"Minimize the likelihood of discovering a mass mortality event caused by overnight flow failure that was not detected by the monitoring system\",\n        \"Minimize the likelihood of accepting a false-normal flow reading after system maintenance that masks a partially closed valve or misrouted pipe\"\n      ]\n    }\n  ],\n  \"cross_check\": {\n    \"odi_avg\": 12.13,\n    \"feature_fit_avg\": 5.18,\n    \"inconsistencies\": [],\n    \"status\": \"no_inconsistencies\"\n  },\n  \"entities_produced\": {\n    \"nodes\": [\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the likelihood of undetected flow cessation in a rearing tank supply li\", \"naics_code\": \"112511\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the likelihood of undetected flow cessation in a rearing tank supply line persisting longer than 60 seconds before alarm activation\", \"market_name\": \"Finfish Farming and Fish Hatcheries\", \"importance\": 10, \"satisfaction_current\": 2, \"opportunity_score\": 18.00, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the likelihood of undetected calibration drift exceeding ±1% of reading\", \"naics_code\": \"112511\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the likelihood of undetected calibration drift exceeding ±1% of reading over a 12-month continuous operation period in biofilm-prone water\", \"market_name\": \"Finfish Farming and Fish Hatcheries\", \"importance\": 8, \"satisfaction_current\": 3, \"opportunity_score\": 13.00, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize variation in flow measurement accuracy caused by seasonal water temperat\", \"naics_code\": \"112511\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize variation in flow measurement accuracy caused by seasonal water temperature fluctuations between 2°C and 30°C across species programs\", \"market_name\": \"Finfish Farming and Fish Hatcheries\", \"importance\": 7, \"satisfaction_current\": 5, \"opportunity_score\": 9.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Increase the ability to measure flow rate across the full operating range (2–60 \", \"naics_code\": \"112511\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Increase the ability to measure flow rate across the full operating range (2–60 L/min per tank feed) without sensor reconfiguration between tank sizes\", \"market_name\": \"Finfish Farming and Fish Hatcheries\", \"importance\": 7, \"satisfaction_current\": 5, \"opportunity_score\": 9.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the time to detect a circulation pump degradation event that reduces tan\", \"naics_code\": \"112511\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the time to detect a circulation pump degradation event that reduces tank water exchange rate by >20% before dissolved oxygen drops below 6 mg/L\", \"market_name\": \"Finfish Farming and Fish Hatcheries\", \"importance\": 10, \"satisfaction_current\": 2, \"opportunity_score\": 18.00, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the number of undetected pipe blockage events (biofilm growth, scale acc\", \"naics_code\": \"112511\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the number of undetected pipe blockage events (biofilm growth, scale accumulation) that restrict flow by >15% in treatment loops\", \"market_name\": \"Finfish Farming and Fish Hatcheries\", \"importance\": 9, \"satisfaction_current\": 3, \"opportunity_score\": 15.00, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Increase the ability to distinguish genuine flow anomalies (pump cavitation, valv\", \"naics_code\": \"112511\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Increase the ability to distinguish genuine flow anomalies (pump cavitation, valve failure) from sensor measurement artifacts with >95% classification accuracy\", \"market_name\": \"Finfish Farming and Fish Hatcheries\", \"importance\": 8, \"satisfaction_current\": 2, \"opportunity_score\": 14.00, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the likelihood of false flow-normal readings during air-lock events in r\", \"naics_code\": \"112511\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the likelihood of false flow-normal readings during air-lock events in recirculation piping that mask actual flow cessation\", \"market_name\": \"Finfish Farming and Fish Hatcheries\", \"importance\": 9, \"satisfaction_current\": 3, \"opportunity_score\": 15.00, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Increase the ability to determine the correct flow rate setpoint within ±10% of \", \"naics_code\": \"112511\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Increase the ability to determine the correct flow rate setpoint within ±10% of actual biological oxygen demand for each species, stocking density, and growth stage\", \"market_name\": \"Finfish Farming and Fish Hatcheries\", \"importance\": 8, \"satisfaction_current\": 3, \"opportunity_score\": 13.00, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the effort required to calculate per-tank flow requirements when stockin\", \"naics_code\": \"112511\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the effort required to calculate per-tank flow requirements when stocking density changes during grow-out cycles\", \"market_name\": \"Finfish Farming and Fish Hatcheries\", \"importance\": 6, \"satisfaction_current\": 4, \"opportunity_score\": 8.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the time required to install and commission a flow sensor on an existing\", \"naics_code\": \"112511\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the time required to install and commission a flow sensor on an existing RAS pipe loop without draining the circuit or interrupting fish production\", \"market_name\": \"Finfish Farming and Fish Hatcheries\", \"importance\": 8, \"satisfaction_current\": 3, \"opportunity_score\": 13.00, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the likelihood of systematic measurement error >1% caused by incorrect m\", \"naics_code\": \"112511\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the likelihood of systematic measurement error >1% caused by incorrect medium configuration at commissioning for recirculated water with varying dissolved solids\", \"market_name\": \"Finfish Farming and Fish Hatcheries\", \"importance\": 7, \"satisfaction_current\": 6, \"opportunity_score\": 8.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Increase the ability to verify sensor accuracy on-site within 10 minutes before \", \"naics_code\": \"112511\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Increase the ability to verify sensor accuracy on-site within 10 minutes before stocking fish into a newly prepared tank\", \"market_name\": \"Finfish Farming and Fish Hatcheries\", \"importance\": 8, \"satisfaction_current\": 3, \"opportunity_score\": 13.00, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the likelihood of accepting a false-normal flow reading after system mai\", \"naics_code\": \"112511\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the likelihood of accepting a false-normal flow reading after system maintenance that masks a partially closed valve or misrouted pipe\", \"market_name\": \"Finfish Farming and Fish Hatcheries\", \"importance\": 9, \"satisfaction_current\": 2, \"opportunity_score\": 16.00, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Increase the ability to isolate flow anomaly root cause (sensor fault vs pump fai\", \"naics_code\": \"112511\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Increase the ability to isolate flow anomaly root cause (sensor fault vs pump failure vs valve position vs pipe blockage) within 3 minutes during an active alarm\", \"market_name\": \"Finfish Farming and Fish Hatcheries\", \"importance\": 9, \"satisfaction_current\": 2, \"opportunity_score\": 16.00, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the operator expertise required to interpret flow alarm data and determi\", \"naics_code\": \"112511\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the operator expertise required to interpret flow alarm data and determine the correct corrective action during a night shift with minimal staffing\", \"market_name\": \"Finfish Farming and Fish Hatcheries\", \"importance\": 8, \"satisfaction_current\": 3, \"opportunity_score\": 13.00, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Increase the sensor service life achievable without scheduled maintenance interve\", \"naics_code\": \"112511\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Increase the sensor service life achievable without scheduled maintenance interventions in biofilm-prone recirculated water (target: >5 years with zero clogging events)\", \"market_name\": \"Finfish Farming and Fish Hatcheries\", \"importance\": 9, \"satisfaction_current\": 2, \"opportunity_score\": 16.00, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the total installed cost per water flow measurement point including sens\", \"naics_code\": \"112511\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the total installed cost per water flow measurement point including sensor, wiring, and integration with existing PLC/SCADA (target: <$400)\", \"market_name\": \"Finfish Farming and Fish Hatcheries\", \"importance\": 8, \"satisfaction_current\": 5, \"opportunity_score\": 11.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the likelihood of sensor-induced flow path contamination or turbulence t\", \"naics_code\": \"112511\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the likelihood of sensor-induced flow path contamination or turbulence that affects dissolved oxygen transfer downstream of the measurement point\", \"market_name\": \"Finfish Farming and Fish Hatcheries\", \"importance\": 7, \"satisfaction_current\": 5, \"opportunity_score\": 9.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the permanent pressure drop across the measurement point that increases \", \"naics_code\": \"112511\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the permanent pressure drop across the measurement point that increases circulation pump energy consumption in an energy-intensive RAS facility\", \"market_name\": \"Finfish Farming and Fish Hatcheries\", \"importance\": 7, \"satisfaction_current\": 5, \"opportunity_score\": 9.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the likelihood of a total stock loss event (>10% biomass mortality) caus\", \"naics_code\": \"112511\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the likelihood of a total stock loss event (>10% biomass mortality) caused by undetected water circulation failure in any single rearing unit\", \"market_name\": \"Finfish Farming and Fish Hatcheries\", \"importance\": 10, \"satisfaction_current\": 2, \"opportunity_score\": 18.00, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Increase the ability to maintain water exchange rate within ±10% of setpoint acro\", \"naics_code\": \"112511\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Increase the ability to maintain water exchange rate within ±10% of setpoint across all rearing tanks simultaneously during peak biomass loading\", \"market_name\": \"Finfish Farming and Fish Hatcheries\", \"importance\": 8, \"satisfaction_current\": 4, \"opportunity_score\": 12.00, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Increase the ability to present quantitative water circulation performance data t\", \"naics_code\": \"112511\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Increase the ability to present quantitative water circulation performance data to facility investors, insurers, and certification auditors as evidence of operational control\", \"market_name\": \"Finfish Farming and Fish Hatcheries\", \"importance\": 7, \"satisfaction_current\": 3, \"opportunity_score\": 11.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the likelihood of discovering a mass mortality event caused by overnight\", \"naics_code\": \"112511\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the likelihood of discovering a mass mortality event caused by overnight flow failure that was not detected by the monitoring system\", \"market_name\": \"Finfish Farming and Fish Hatcheries\", \"importance\": 10, \"satisfaction_current\": 2, \"opportunity_score\": 18.00, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the anxiety associated with leaving a high-value RAS facility ($500K+ bi\", \"naics_code\": \"112511\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the anxiety associated with leaving a high-value RAS facility ($500K+ biomass at risk) unattended during off-hours by providing reliable remote flow-failure alerts\", \"market_name\": \"Finfish Farming and Fish Hatcheries\", \"importance\": 8, \"satisfaction_current\": 3, \"opportunity_score\": 13.00, \"is_underserved\": true, \"is_overserved\": false, \"product_related\": false}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the likelihood of systematic measurement overestimation caused by air en\", \"naics_code\": \"112511\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the likelihood of systematic measurement overestimation caused by air entrainment exceeding 2% by volume in recirculation piping during oxygenation injection or post-maintenance air purging\", \"market_name\": \"Finfish Farming and Fish Hatcheries\", \"importance\": 7, \"satisfaction_current\": 4, \"opportunity_score\": 10.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the duration of total measurement blackout during pipe partially-filled \", \"naics_code\": \"112511\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the duration of total measurement blackout during pipe partially-filled states that occur during RAS circuit re-filling, pump restart sequences, or gravity-drain maintenance events\", \"market_name\": \"Finfish Farming and Fish Hatcheries\", \"importance\": 6, \"satisfaction_current\": 4, \"opportunity_score\": 8.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the measurement accuracy degradation caused by turbulent flow profiles f\", \"naics_code\": \"112511\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the measurement accuracy degradation caused by turbulent flow profiles from elbows, valves, and tee fittings within 5–10 pipe diameters upstream of the sensor in compact RAS pipe layouts\", \"market_name\": \"Finfish Farming and Fish Hatcheries\", \"importance\": 6, \"satisfaction_current\": 5, \"opportunity_score\": 7.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the residual flow measurement error during rapid water temperature chang\", \"naics_code\": \"112511\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the residual flow measurement error during rapid water temperature changes exceeding 5°C/hour that outpace the speed-of-sound compensation algorithm response rate\", \"market_name\": \"Finfish Farming and Fish Hatcheries\", \"importance\": 5, \"satisfaction_current\": 7, \"opportunity_score\": 5.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": true}},\n      {\"label\": \"OpportunityScore\", \"key\": {\"error_statement\": \"Minimize the probability of undetected flow reduction events where actual flow ra\", \"naics_code\": \"112511\", \"run_id\": \"TBD\"}, \"properties\": {\"full_statement\": \"Minimize the probability of undetected flow reduction events where actual flow rate drops below the sensor minimum detection threshold in small-diameter nursery and fry-rearing feed lines\", \"market_name\": \"Finfish Farming and Fish Hatcheries\", \"importance\": 6, \"satisfaction_current\": 6, \"opportunity_score\": 6.00, \"is_underserved\": false, \"is_overserved\": false, \"product_related\": true}}\n    ],\n    \"relationships\": [\n      {\"type\": \"has_opportunity_score\", \"source\": \"Market:112511\", \"target\": \"OpportunityScore:<each>\", \"count\": 30}\n    ],\n    \"market_odi_props\": {\n      \"naics_code\": \"112511\",\n      \"odi_total_needs\": 30,\n      \"odi_underserved_count\": 17,\n      \"odi_overserved_count\": 0,\n      \"odi_avg_opportunity_score\": 12.13,\n      \"odi_top_opportunities\": \"[\\\"Minimize the likelihood of undetected flow cessation in a rearing tank supply line persisting longer than 60 seconds before alarm activation\\\",\\\"Minimize the time to detect a circulation pump degradation event that reduces tank water exchange rate by >20% before dissolved oxygen drops below 6 mg/L\\\",\\\"Minimize the likelihood of a total stock loss event (>10% biomass mortality) caused by undetected water circulation failure in any single rearing unit\\\",\\\"Minimize the likelihood of discovering a mass mortality event caused by overnight flow failure that was not detected by the monitoring system\\\",\\\"Minimize the likelihood of accepting a false-normal flow reading after system maintenance that masks a partially closed valve or misrouted pipe\\\"]\"\n    }\n  }\n}\n```\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- JTBD_finfish_farming_and_fish_hatcheries.md (25 error statements, incumbent anchors, alternatives, ODI pre-scores)\n- FIT_finfish_farming_and_fish_hatcheries.md (5 product-related needs from Step 10, 7 tech feature-market fit scores from Step 09)\n- VN_finfish_farming_and_fish_hatcheries.md (incumbent technology profiles, market context)\n- 01_product_decomposition.md (constraints generating product-related needs)\n- 02_functional_promise.md (commodity FP baseline)\n- 05_market_discovery.md (NAICS 112511 — market context, alternatives)"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "Incumbent",
+        "Share",
+        "Mechanism",
+        "Strengths",
+        "Weaknesses"
+      ],
+      "rows": [
+        {
+          "Incumbent": "Paddle-wheel / turbine",
+          "Share": "45–55%",
+          "Mechanism": "Rotational (impeller)",
+          "Strengths": "Lowest cost ($20–80), simple installation, no fluid config needed, flow-profile-insensitive",
+          "Weaknesses": "Clogs with biofilm every 2–6 weeks in RAS, ±2–5% drift, no diagnostics, moving parts wear"
+        },
+        {
+          "Incumbent": "Electromagnetic (mag)",
+          "Share": "15–25%",
+          "Mechanism": "Faraday induction",
+          "Strengths": "±0.5% accuracy, no moving parts, 100:1 turndown, no air/temperature sensitivity",
+          "Weaknesses": "5–10× cost ($500–2,000+), 10–20 W power, larger footprint, requires conductive liquid"
+        },
+        {
+          "Incumbent": "Do nothing / manual",
+          "Share": "15–25%",
+          "Mechanism": "Visual / behavioral observation",
+          "Strengths": "Zero cost",
+          "Weaknesses": "Blind to flow failure; relies on fish behavior or downstream DO alarm; catastrophic in RAS"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement (abbreviated)",
+        "Imp",
+        "Sat_orig",
+        "Sat_recal",
+        "Recalibration Rationale"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Statement (abbreviated)": "Flow cessation detection <60s",
+          "Imp": "10",
+          "Sat_orig": "3",
+          "Sat_recal": "**2**",
+          "Recalibration Rationale": "PW (dominant) + manual (15–25%) provide near-zero real-time per-tank cessation alarm; PW requires SCADA integration most mid-scale farms lack"
+        },
+        {
+          "#": "2",
+          "Statement (abbreviated)": "Calibration drift <±1% / 12mo",
+          "Imp": "8",
+          "Sat_orig": "3",
+          "Sat_recal": "**3**",
+          "Recalibration Rationale": "PW drifts 2–5% in biofilm water (dominant); mag stable but minority share"
+        },
+        {
+          "#": "3",
+          "Statement (abbreviated)": "Temperature accuracy 2–30°C",
+          "Imp": "7",
+          "Sat_orig": "4",
+          "Sat_recal": "**5**",
+          "Recalibration Rationale": "Both PW and mag measurement principles are temperature-insensitive for flow reading"
+        },
+        {
+          "#": "4",
+          "Statement (abbreviated)": "Full range 2–60 L/min",
+          "Imp": "7",
+          "Sat_orig": "5",
+          "Sat_recal": "**5**",
+          "Recalibration Rationale": "Mag excellent turndown (100:1); PW limited at low flow — mixed"
+        },
+        {
+          "#": "5",
+          "Statement (abbreviated)": "Pump degradation detection >20%",
+          "Imp": "10",
+          "Sat_orig": "2",
+          "Sat_recal": "**2**",
+          "Recalibration Rationale": "No incumbent trends pump degradation; manual checks only"
+        },
+        {
+          "#": "6",
+          "Statement (abbreviated)": "Pipe blockage detection >15%",
+          "Imp": "9",
+          "Sat_orig": "3",
+          "Sat_recal": "**3**",
+          "Recalibration Rationale": "PW detects gross blockage but not subtle 15% restriction; biofilm on PW itself confounds reading"
+        },
+        {
+          "#": "7",
+          "Statement (abbreviated)": "Anomaly classification >95%",
+          "Imp": "8",
+          "Sat_orig": "3",
+          "Sat_recal": "**2**",
+          "Recalibration Rationale": "No incumbent provides anomaly classification; PW has zero diagnostics; mag has no classification logic"
+        },
+        {
+          "#": "8",
+          "Statement (abbreviated)": "False flow-normal during air-lock",
+          "Imp": "9",
+          "Sat_orig": "3",
+          "Sat_recal": "**3**",
+          "Recalibration Rationale": "PW stalls obviously during complete air-lock; partial air-lock masking remains a concern across technologies"
+        },
+        {
+          "#": "9",
+          "Statement (abbreviated)": "Flow rate setpoint ±10% of O2 demand",
+          "Imp": "8",
+          "Sat_orig": "3",
+          "Sat_recal": "**3**",
+          "Recalibration Rationale": "Knowledge/engineering need; sensor-independent"
+        },
+        {
+          "#": "10",
+          "Statement (abbreviated)": "Per-tank flow calculation effort",
+          "Imp": "6",
+          "Sat_orig": "4",
+          "Sat_recal": "**4**",
+          "Recalibration Rationale": "Knowledge need; sensor-independent"
+        },
+        {
+          "#": "11",
+          "Statement (abbreviated)": "Install without draining circuit",
+          "Imp": "8",
+          "Sat_orig": "3",
+          "Sat_recal": "**3**",
+          "Recalibration Rationale": "All inline sensors require circuit drain for installation"
+        },
+        {
+          "#": "12",
+          "Statement (abbreviated)": "Medium config error >1%",
+          "Imp": "7",
+          "Sat_orig": "4",
+          "Sat_recal": "**6**",
+          "Recalibration Rationale": "PW (dominant) needs zero fluid configuration — zero config error risk; mag needs minimal config"
+        },
+        {
+          "#": "13",
+          "Statement (abbreviated)": "Verify accuracy in 10 min pre-stocking",
+          "Imp": "8",
+          "Sat_orig": "3",
+          "Sat_recal": "**3**",
+          "Recalibration Rationale": "PW has no self-diagnostics; pre-stocking verification mostly skipped in practice"
+        },
+        {
+          "#": "14",
+          "Statement (abbreviated)": "False-normal after maintenance",
+          "Imp": "9",
+          "Sat_orig": "3",
+          "Sat_recal": "**2**",
+          "Recalibration Rationale": "No incumbent has post-maintenance verification logic; unaddressed across all technologies"
+        },
+        {
+          "#": "15",
+          "Statement (abbreviated)": "Isolate root cause in 3 min",
+          "Imp": "9",
+          "Sat_orig": "2",
+          "Sat_recal": "**2**",
+          "Recalibration Rationale": "No incumbent provides diagnostic data for root cause isolation"
+        },
+        {
+          "#": "16",
+          "Statement (abbreviated)": "Operator expertise for alarm data",
+          "Imp": "8",
+          "Sat_orig": "3",
+          "Sat_recal": "**3**",
+          "Recalibration Rationale": "PW: no diagnostics; mag: complex outputs requiring training"
+        },
+        {
+          "#": "17",
+          "Statement (abbreviated)": "Service life >5yr zero clogging",
+          "Imp": "9",
+          "Sat_orig": "2",
+          "Sat_recal": "**2**",
+          "Recalibration Rationale": "PW clogs every 2–6 weeks (catastrophic); dominant incumbent is worst-case for this need"
+        },
+        {
+          "#": "18",
+          "Statement (abbreviated)": "Installed cost <$400/point",
+          "Imp": "8",
+          "Sat_orig": "4",
+          "Sat_recal": "**5**",
+          "Recalibration Rationale": "PW at $20–80 well under $400 target; mag at $500–2,000 exceeds it"
+        },
+        {
+          "#": "19",
+          "Statement (abbreviated)": "No flow path contamination",
+          "Imp": "7",
+          "Sat_orig": "5",
+          "Sat_recal": "**5**",
+          "Recalibration Rationale": "PW: some debris risk from bearing lubricant; mag: clean — mixed"
+        },
+        {
+          "#": "20",
+          "Statement (abbreviated)": "Pressure drop minimization",
+          "Imp": "7",
+          "Sat_orig": "5",
+          "Sat_recal": "**5**",
+          "Recalibration Rationale": "PW and mag both have minimal pressure drop"
+        },
+        {
+          "#": "21",
+          "Statement (abbreviated)": "Total stock loss from circulation failure",
+          "Imp": "10",
+          "Sat_orig": "3",
+          "Sat_recal": "**2**",
+          "Recalibration Rationale": "Dominant incumbents (PW + manual = 60–80%) provide inadequate protection against complete stock loss"
+        },
+        {
+          "#": "22",
+          "Statement (abbreviated)": "Water exchange ±10% all tanks",
+          "Imp": "8",
+          "Sat_orig": "4",
+          "Sat_recal": "**4**",
+          "Recalibration Rationale": "PW too imprecise for per-tank balancing; mag accurate but expensive per-point"
+        },
+        {
+          "#": "23",
+          "Statement (abbreviated)": "Quantitative performance data",
+          "Imp": "7",
+          "Sat_orig": "3",
+          "Sat_recal": "**3**",
+          "Recalibration Rationale": "PW: basic pulse only; mag: good data but too expensive for full deployment"
+        },
+        {
+          "#": "24",
+          "Statement (abbreviated)": "Overnight mass mortality detection",
+          "Imp": "10",
+          "Sat_orig": "3",
+          "Sat_recal": "**2**",
+          "Recalibration Rationale": "PW + manual have no reliable overnight alarming at per-tank level"
+        },
+        {
+          "#": "25",
+          "Statement (abbreviated)": "Anxiety leaving facility unattended",
+          "Imp": "8",
+          "Sat_orig": "3",
+          "Sat_recal": "**3**",
+          "Recalibration Rationale": "Emotional need; PW lacks reliable remote alerting capability"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement (abbreviated)",
+        "Imp",
+        "Sat_orig",
+        "Sat_recal",
+        "Recalibration Rationale"
+      ],
+      "rows": [
+        {
+          "#": "PRN-1",
+          "Statement (abbreviated)": "Air >2% measurement overestimation",
+          "Imp": "7",
+          "Sat_orig": "4",
+          "Sat_recal": "**4**",
+          "Recalibration Rationale": "PW jams entirely with air (worse but obvious failure); mag handles air better — mixed"
+        },
+        {
+          "#": "PRN-2",
+          "Statement (abbreviated)": "Pipe partially-filled blackout",
+          "Imp": "6",
+          "Sat_orig": "4",
+          "Sat_recal": "**4**",
+          "Recalibration Rationale": "PW also loses measurement with partially filled pipe; mag has empty-pipe detection"
+        },
+        {
+          "#": "PRN-3",
+          "Statement (abbreviated)": "Short straight pipe accuracy",
+          "Imp": "6",
+          "Sat_orig": "4",
+          "Sat_recal": "**5**",
+          "Recalibration Rationale": "PW is flow-profile-insensitive; mag needs shorter straight run (≤5×DN vs 5–10×DN for ultrasonic)"
+        },
+        {
+          "#": "PRN-4",
+          "Statement (abbreviated)": "Rapid temperature transient error",
+          "Imp": "5",
+          "Sat_orig": "6",
+          "Sat_recal": "**7**",
+          "Recalibration Rationale": "Neither PW nor mag has temperature-dependent flow measurement error; purely ultrasonic concern"
+        },
+        {
+          "#": "PRN-5",
+          "Statement (abbreviated)": "Below minimum detection threshold",
+          "Imp": "6",
+          "Sat_orig": "5",
+          "Sat_recal": "**6**",
+          "Recalibration Rationale": "PW detects >0.5 l/min; mag detects >0.2 l/min at DN20; both better than ultrasonic DN20 minimum of 4.2 l/min"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement (abbreviated)",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Under?",
+        "Over?",
+        "Impact",
+        "prod_rel"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Statement (abbreviated)": "Flow cessation detection <60s",
+          "Imp": "10",
+          "Sat": "2",
+          "Opp": "**18.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "safety",
+          "prod_rel": "false"
+        },
+        {
+          "#": "2",
+          "Statement (abbreviated)": "Calibration drift <±1% / 12mo",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "**13.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "false"
+        },
+        {
+          "#": "3",
+          "Statement (abbreviated)": "Temperature accuracy 2–30°C",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "**9.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "false"
+        },
+        {
+          "#": "4",
+          "Statement (abbreviated)": "Full range 2–60 L/min",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "**9.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "true"
+        },
+        {
+          "#": "5",
+          "Statement (abbreviated)": "Pump degradation detection >20%",
+          "Imp": "10",
+          "Sat": "2",
+          "Opp": "**18.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "safety",
+          "prod_rel": "false"
+        },
+        {
+          "#": "6",
+          "Statement (abbreviated)": "Pipe blockage detection >15%",
+          "Imp": "9",
+          "Sat": "3",
+          "Opp": "**15.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "false"
+        },
+        {
+          "#": "7",
+          "Statement (abbreviated)": "Anomaly classification >95%",
+          "Imp": "8",
+          "Sat": "2",
+          "Opp": "**14.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "false"
+        },
+        {
+          "#": "8",
+          "Statement (abbreviated)": "False flow-normal during air-lock",
+          "Imp": "9",
+          "Sat": "3",
+          "Opp": "**15.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "safety",
+          "prod_rel": "true"
+        },
+        {
+          "#": "9",
+          "Statement (abbreviated)": "Flow rate setpoint ±10% of O2 demand",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "**13.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "safety",
+          "prod_rel": "false"
+        },
+        {
+          "#": "10",
+          "Statement (abbreviated)": "Per-tank flow calculation effort",
+          "Imp": "6",
+          "Sat": "4",
+          "Opp": "**8.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "skill",
+          "prod_rel": "false"
+        },
+        {
+          "#": "11",
+          "Statement (abbreviated)": "Install without draining circuit",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "**13.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "time",
+          "prod_rel": "true"
+        },
+        {
+          "#": "12",
+          "Statement (abbreviated)": "Medium config error >1%",
+          "Imp": "7",
+          "Sat": "6",
+          "Opp": "**8.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "true"
+        },
+        {
+          "#": "13",
+          "Statement (abbreviated)": "Verify accuracy in 10 min pre-stocking",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "**13.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "time",
+          "prod_rel": "false"
+        },
+        {
+          "#": "14",
+          "Statement (abbreviated)": "False-normal after maintenance",
+          "Imp": "9",
+          "Sat": "2",
+          "Opp": "**16.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "safety",
+          "prod_rel": "false"
+        },
+        {
+          "#": "15",
+          "Statement (abbreviated)": "Isolate root cause in 3 min",
+          "Imp": "9",
+          "Sat": "2",
+          "Opp": "**16.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "time",
+          "prod_rel": "false"
+        },
+        {
+          "#": "16",
+          "Statement (abbreviated)": "Operator expertise for alarm data",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "**13.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "skill",
+          "prod_rel": "false"
+        },
+        {
+          "#": "17",
+          "Statement (abbreviated)": "Service life >5yr zero clogging",
+          "Imp": "9",
+          "Sat": "2",
+          "Opp": "**16.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "cost",
+          "prod_rel": "true"
+        },
+        {
+          "#": "18",
+          "Statement (abbreviated)": "Installed cost <$400/point",
+          "Imp": "8",
+          "Sat": "5",
+          "Opp": "**11.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "cost",
+          "prod_rel": "true"
+        },
+        {
+          "#": "19",
+          "Statement (abbreviated)": "No flow path contamination",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "**9.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "safety",
+          "prod_rel": "true"
+        },
+        {
+          "#": "20",
+          "Statement (abbreviated)": "Pressure drop minimization",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "**9.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "cost",
+          "prod_rel": "true"
+        },
+        {
+          "#": "21",
+          "Statement (abbreviated)": "Total stock loss from circulation failure",
+          "Imp": "10",
+          "Sat": "2",
+          "Opp": "**18.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "safety",
+          "prod_rel": "false"
+        },
+        {
+          "#": "22",
+          "Statement (abbreviated)": "Water exchange ±10% all tanks",
+          "Imp": "8",
+          "Sat": "4",
+          "Opp": "**12.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "false"
+        },
+        {
+          "#": "23",
+          "Statement (abbreviated)": "Quantitative performance data",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "**11.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "skill",
+          "prod_rel": "false"
+        },
+        {
+          "#": "24",
+          "Statement (abbreviated)": "Overnight mass mortality detection",
+          "Imp": "10",
+          "Sat": "2",
+          "Opp": "**18.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "safety",
+          "prod_rel": "false"
+        },
+        {
+          "#": "25",
+          "Statement (abbreviated)": "Anxiety leaving facility unattended",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "**13.00**",
+          "Under?": "YES",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "false"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Statement (abbreviated)",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Under?",
+        "Over?",
+        "Impact",
+        "prod_rel"
+      ],
+      "rows": [
+        {
+          "#": "PRN-1",
+          "Statement (abbreviated)": "Air >2% measurement overestimation",
+          "Imp": "7",
+          "Sat": "4",
+          "Opp": "**10.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "true"
+        },
+        {
+          "#": "PRN-2",
+          "Statement (abbreviated)": "Pipe partially-filled blackout",
+          "Imp": "6",
+          "Sat": "4",
+          "Opp": "**8.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "true"
+        },
+        {
+          "#": "PRN-3",
+          "Statement (abbreviated)": "Short straight pipe accuracy",
+          "Imp": "6",
+          "Sat": "5",
+          "Opp": "**7.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "true"
+        },
+        {
+          "#": "PRN-4",
+          "Statement (abbreviated)": "Rapid temperature transient error",
+          "Imp": "5",
+          "Sat": "7",
+          "Opp": "**5.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "true"
+        },
+        {
+          "#": "PRN-5",
+          "Statement (abbreviated)": "Below minimum detection threshold",
+          "Imp": "6",
+          "Sat": "6",
+          "Opp": "**6.00**",
+          "Under?": "no",
+          "Over?": "no",
+          "Impact": "reliability",
+          "prod_rel": "true"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Metric",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Metric": "**Market**",
+          "Value": "Finfish Farming and Fish Hatcheries (NAICS 112511)"
+        },
+        {
+          "Metric": "**Total Needs**",
+          "Value": "30"
+        },
+        {
+          "Metric": "**Underserved Count**",
+          "Value": "17"
+        },
+        {
+          "Metric": "**Overserved Count**",
+          "Value": "0"
+        },
+        {
+          "Metric": "**Avg Opportunity Score**",
+          "Value": "12.13"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Rank",
+        "#",
+        "Error Statement",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Zone"
+      ],
+      "rows": [
+        {
+          "Rank": "1",
+          "#": "1",
+          "Error Statement": "Minimize the likelihood of undetected flow cessation in a rearing tank supply line persisting longer than 60 seconds before alarm activation",
+          "Imp": "10",
+          "Sat": "2",
+          "Opp": "**18.00**",
+          "Zone": "Highly Underserved"
+        },
+        {
+          "Rank": "2",
+          "#": "5",
+          "Error Statement": "Minimize the time to detect a circulation pump degradation event that reduces tank water exchange rate by >20% before dissolved oxygen drops below 6 mg/L",
+          "Imp": "10",
+          "Sat": "2",
+          "Opp": "**18.00**",
+          "Zone": "Highly Underserved"
+        },
+        {
+          "Rank": "3",
+          "#": "21",
+          "Error Statement": "Minimize the likelihood of a total stock loss event (>10% biomass mortality) caused by undetected water circulation failure in any single rearing unit",
+          "Imp": "10",
+          "Sat": "2",
+          "Opp": "**18.00**",
+          "Zone": "Highly Underserved"
+        },
+        {
+          "Rank": "4",
+          "#": "24",
+          "Error Statement": "Minimize the likelihood of discovering a mass mortality event caused by overnight flow failure that was not detected by the monitoring system",
+          "Imp": "10",
+          "Sat": "2",
+          "Opp": "**18.00**",
+          "Zone": "Highly Underserved"
+        },
+        {
+          "Rank": "5",
+          "#": "14",
+          "Error Statement": "Minimize the likelihood of accepting a false-normal flow reading after system maintenance that masks a partially closed valve or misrouted pipe",
+          "Imp": "9",
+          "Sat": "2",
+          "Opp": "**16.00**",
+          "Zone": "Highly Underserved"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Zone",
+        "Score Range",
+        "Count",
+        "% of Total"
+      ],
+      "rows": [
+        {
+          "Zone": "Highly Underserved",
+          "Score Range": "> 15",
+          "Count": "7",
+          "% of Total": "23.3%"
+        },
+        {
+          "Zone": "Underserved",
+          "Score Range": "12–15",
+          "Count": "10",
+          "% of Total": "33.3%"
+        },
+        {
+          "Zone": "Appropriately Served",
+          "Score Range": "10–12",
+          "Count": "3",
+          "% of Total": "10.0%"
+        },
+        {
+          "Zone": "Overserved",
+          "Score Range": "< 10",
+          "Count": "10",
+          "% of Total": "33.3%"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Metric",
+        "Value",
+        "Source"
+      ],
+      "rows": [
+        {
+          "Metric": "ODI avg_opportunity_score",
+          "Value": "12.13",
+          "Source": "This analysis"
+        },
+        {
+          "Metric": "Feature-Fit avg (tech features)",
+          "Value": "5.18",
+          "Source": "FIT_finfish_farming §09a (mean of 7 features)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Condition",
+        "Triggered?",
+        "Note"
+      ],
+      "rows": [
+        {
+          "Condition": "ODI avg > 12 AND Feature-Fit avg < 4",
+          "Triggered?": "**NO**",
+          "Note": "Feature-Fit avg = 5.18 (above 4)"
+        },
+        {
+          "Condition": "ODI avg < 8 AND Feature-Fit avg > 7",
+          "Triggered?": "**NO**",
+          "Note": "ODI avg = 12.13 (above 8)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result",
+        "Note"
+      ],
+      "rows": [
+        {
+          "#": "Q1",
+          "Check": "Formula correct",
+          "Result": "**PASS**",
+          "Note": "Spot-checked 5 entries: #1 (10+max(10-2,0)=18), #12 (7+max(7-6,0)=8), #17 (9+max(9-2,0)=16), PRN-4 (5+max(5-7,0)=5), PRN-3 (6+max(6-5,0)=7). All match."
+        },
+        {
+          "#": "Q2",
+          "Check": "Underserved flags correct",
+          "Result": "**PASS**",
+          "Note": "17 entries with imp>7 AND sat<5; verified #1(10,2)=YES, #3(7,5)=NO (7 not >7), #18(8,5)=NO (5 not <5), #22(8,4)=YES"
+        },
+        {
+          "#": "Q3",
+          "Check": "Overserved flags correct",
+          "Result": "**PASS**",
+          "Note": "0 entries with imp<3 AND sat>7; no need has importance <3"
+        },
+        {
+          "#": "Q4",
+          "Check": "Need count preserved",
+          "Result": "**PASS**",
+          "Note": "25 (Step 06) + 5 (Step 10) = 30 ≥ 25 (Step 06 count)"
+        },
+        {
+          "#": "Q5",
+          "Check": "Top-5 ordering correct",
+          "Result": "**PASS**",
+          "Note": "18 > 18 > 18 > 18 > 16 — descending by opp score; ties broken by need number"
+        },
+        {
+          "#": "Q6",
+          "Check": "Cross-check ran",
+          "Result": "**PASS**",
+          "Note": "ODI vs Feature-Fit comparison completed; no inconsistencies"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "odi_matrix",
+      "naics_code": "112511",
+      "naics_title": "Finfish Farming and Fish Hatcheries",
+      "market_name": "Finfish Farming and Fish Hatcheries",
+      "product_name": "Ultrasonic Flow Sensor",
+      "vendor_name": "Marquardt",
+      "entries": [
+        {
+          "error_statement": "Minimize the likelihood of undetected flow cessation in a rearing tank supply line persisting longer than 60 seconds before alarm activation",
+          "market_name": "Finfish Farming and Fish Hatcheries",
+          "naics_code": "112511",
+          "importance": 10,
+          "satisfaction_current": 2,
+          "opportunity_score": 18.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the likelihood of undetected calibration drift exceeding ±1% of reading over a 12-month continuous operation period in biofilm-prone water",
+          "market_name": "Finfish Farming and Fish Hatcheries",
+          "naics_code": "112511",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize variation in flow measurement accuracy caused by seasonal water temperature fluctuations between 2°C and 30°C across species programs",
+          "market_name": "Finfish Farming and Fish Hatcheries",
+          "naics_code": "112511",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Increase the ability to measure flow rate across the full operating range (2–60 L/min per tank feed) without sensor reconfiguration between tank sizes",
+          "market_name": "Finfish Farming and Fish Hatcheries",
+          "naics_code": "112511",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the time to detect a circulation pump degradation event that reduces tank water exchange rate by >20% before dissolved oxygen drops below 6 mg/L",
+          "market_name": "Finfish Farming and Fish Hatcheries",
+          "naics_code": "112511",
+          "importance": 10,
+          "satisfaction_current": 2,
+          "opportunity_score": 18.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the number of undetected pipe blockage events (biofilm growth, scale accumulation) that restrict flow by >15% in treatment loops",
+          "market_name": "Finfish Farming and Fish Hatcheries",
+          "naics_code": "112511",
+          "importance": 9,
+          "satisfaction_current": 3,
+          "opportunity_score": 15.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Increase the ability to distinguish genuine flow anomalies (pump cavitation, valve failure) from sensor measurement artifacts with >95% classification accuracy",
+          "market_name": "Finfish Farming and Fish Hatcheries",
+          "naics_code": "112511",
+          "importance": 8,
+          "satisfaction_current": 2,
+          "opportunity_score": 14.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the likelihood of false flow-normal readings during air-lock events in recirculation piping that mask actual flow cessation",
+          "market_name": "Finfish Farming and Fish Hatcheries",
+          "naics_code": "112511",
+          "importance": 9,
+          "satisfaction_current": 3,
+          "opportunity_score": 15.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Increase the ability to determine the correct flow rate setpoint within ±10% of actual biological oxygen demand for each species, stocking density, and growth stage",
+          "market_name": "Finfish Farming and Fish Hatcheries",
+          "naics_code": "112511",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the effort required to calculate per-tank flow requirements when stocking density changes during grow-out cycles",
+          "market_name": "Finfish Farming and Fish Hatcheries",
+          "naics_code": "112511",
+          "importance": 6,
+          "satisfaction_current": 4,
+          "opportunity_score": 8.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the time required to install and commission a flow sensor on an existing RAS pipe loop without draining the circuit or interrupting fish production",
+          "market_name": "Finfish Farming and Fish Hatcheries",
+          "naics_code": "112511",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the likelihood of systematic measurement error >1% caused by incorrect medium configuration at commissioning for recirculated water with varying dissolved solids",
+          "market_name": "Finfish Farming and Fish Hatcheries",
+          "naics_code": "112511",
+          "importance": 7,
+          "satisfaction_current": 6,
+          "opportunity_score": 8.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Increase the ability to verify sensor accuracy on-site within 10 minutes before stocking fish into a newly prepared tank",
+          "market_name": "Finfish Farming and Fish Hatcheries",
+          "naics_code": "112511",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the likelihood of accepting a false-normal flow reading after system maintenance that masks a partially closed valve or misrouted pipe",
+          "market_name": "Finfish Farming and Fish Hatcheries",
+          "naics_code": "112511",
+          "importance": 9,
+          "satisfaction_current": 2,
+          "opportunity_score": 16.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Increase the ability to isolate flow anomaly root cause (sensor fault vs pump failure vs valve position vs pipe blockage) within 3 minutes during an active alarm",
+          "market_name": "Finfish Farming and Fish Hatcheries",
+          "naics_code": "112511",
+          "importance": 9,
+          "satisfaction_current": 2,
+          "opportunity_score": 16.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the operator expertise required to interpret flow alarm data and determine the correct corrective action during a night shift with minimal staffing",
+          "market_name": "Finfish Farming and Fish Hatcheries",
+          "naics_code": "112511",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Increase the sensor service life achievable without scheduled maintenance interventions in biofilm-prone recirculated water (target: >5 years with zero clogging events)",
+          "market_name": "Finfish Farming and Fish Hatcheries",
+          "naics_code": "112511",
+          "importance": 9,
+          "satisfaction_current": 2,
+          "opportunity_score": 16.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the total installed cost per water flow measurement point including sensor, wiring, and integration with existing PLC/SCADA (target: <$400)",
+          "market_name": "Finfish Farming and Fish Hatcheries",
+          "naics_code": "112511",
+          "importance": 8,
+          "satisfaction_current": 5,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the likelihood of sensor-induced flow path contamination or turbulence that affects dissolved oxygen transfer downstream of the measurement point",
+          "market_name": "Finfish Farming and Fish Hatcheries",
+          "naics_code": "112511",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the permanent pressure drop across the measurement point that increases circulation pump energy consumption in an energy-intensive RAS facility",
+          "market_name": "Finfish Farming and Fish Hatcheries",
+          "naics_code": "112511",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the likelihood of a total stock loss event (>10% biomass mortality) caused by undetected water circulation failure in any single rearing unit",
+          "market_name": "Finfish Farming and Fish Hatcheries",
+          "naics_code": "112511",
+          "importance": 10,
+          "satisfaction_current": 2,
+          "opportunity_score": 18.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Increase the ability to maintain water exchange rate within ±10% of setpoint across all rearing tanks simultaneously during peak biomass loading",
+          "market_name": "Finfish Farming and Fish Hatcheries",
+          "naics_code": "112511",
+          "importance": 8,
+          "satisfaction_current": 4,
+          "opportunity_score": 12.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Increase the ability to present quantitative water circulation performance data to facility investors, insurers, and certification auditors as evidence of operational control",
+          "market_name": "Finfish Farming and Fish Hatcheries",
+          "naics_code": "112511",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the likelihood of discovering a mass mortality event caused by overnight flow failure that was not detected by the monitoring system",
+          "market_name": "Finfish Farming and Fish Hatcheries",
+          "naics_code": "112511",
+          "importance": 10,
+          "satisfaction_current": 2,
+          "opportunity_score": 18.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the anxiety associated with leaving a high-value RAS facility ($500K+ biomass at risk) unattended during off-hours by providing reliable remote flow-failure alerts",
+          "market_name": "Finfish Farming and Fish Hatcheries",
+          "naics_code": "112511",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the likelihood of systematic measurement overestimation caused by air entrainment exceeding 2% by volume in recirculation piping during oxygenation injection or post-maintenance air purging",
+          "market_name": "Finfish Farming and Fish Hatcheries",
+          "naics_code": "112511",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the duration of total measurement blackout during pipe partially-filled states that occur during RAS circuit re-filling, pump restart sequences, or gravity-drain maintenance events",
+          "market_name": "Finfish Farming and Fish Hatcheries",
+          "naics_code": "112511",
+          "importance": 6,
+          "satisfaction_current": 4,
+          "opportunity_score": 8.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the measurement accuracy degradation caused by turbulent flow profiles from elbows, valves, and tee fittings within 5–10 pipe diameters upstream of the sensor in compact RAS pipe layouts",
+          "market_name": "Finfish Farming and Fish Hatcheries",
+          "naics_code": "112511",
+          "importance": 6,
+          "satisfaction_current": 5,
+          "opportunity_score": 7.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the residual flow measurement error during rapid water temperature changes exceeding 5°C/hour that outpace the speed-of-sound compensation algorithm response rate",
+          "market_name": "Finfish Farming and Fish Hatcheries",
+          "naics_code": "112511",
+          "importance": 5,
+          "satisfaction_current": 7,
+          "opportunity_score": 5.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the probability of undetected flow reduction events where actual flow rate drops below the sensor minimum detection threshold in small-diameter nursery and fry-rearing feed lines",
+          "market_name": "Finfish Farming and Fish Hatcheries",
+          "naics_code": "112511",
+          "importance": 6,
+          "satisfaction_current": 6,
+          "opportunity_score": 6.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        }
+      ],
+      "market_summaries": [
+        {
+          "market_name": "Finfish Farming and Fish Hatcheries",
+          "naics_code": "112511",
+          "total_needs": 30,
+          "underserved_count": 17,
+          "overserved_count": 0,
+          "avg_opportunity_score": 12.13,
+          "top_opportunities": [
+            "Minimize the likelihood of undetected flow cessation in a rearing tank supply line persisting longer than 60 seconds before alarm activation",
+            "Minimize the time to detect a circulation pump degradation event that reduces tank water exchange rate by >20% before dissolved oxygen drops below 6 mg/L",
+            "Minimize the likelihood of a total stock loss event (>10% biomass mortality) caused by undetected water circulation failure in any single rearing unit",
+            "Minimize the likelihood of discovering a mass mortality event caused by overnight flow failure that was not detected by the monitoring system",
+            "Minimize the likelihood of accepting a false-normal flow reading after system maintenance that masks a partially closed valve or misrouted pipe"
+          ]
+        }
+      ],
+      "cross_check": {
+        "odi_avg": 12.13,
+        "feature_fit_avg": 5.18,
+        "inconsistencies": [],
+        "status": "no_inconsistencies"
+      },
+      "entities_produced": {
+        "nodes": [
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the likelihood of undetected flow cessation in a rearing tank supply li",
+              "naics_code": "112511",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the likelihood of undetected flow cessation in a rearing tank supply line persisting longer than 60 seconds before alarm activation",
+              "market_name": "Finfish Farming and Fish Hatcheries",
+              "importance": 10,
+              "satisfaction_current": 2,
+              "opportunity_score": 18.0,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the likelihood of undetected calibration drift exceeding ±1% of reading",
+              "naics_code": "112511",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the likelihood of undetected calibration drift exceeding ±1% of reading over a 12-month continuous operation period in biofilm-prone water",
+              "market_name": "Finfish Farming and Fish Hatcheries",
+              "importance": 8,
+              "satisfaction_current": 3,
+              "opportunity_score": 13.0,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize variation in flow measurement accuracy caused by seasonal water temperat",
+              "naics_code": "112511",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize variation in flow measurement accuracy caused by seasonal water temperature fluctuations between 2°C and 30°C across species programs",
+              "market_name": "Finfish Farming and Fish Hatcheries",
+              "importance": 7,
+              "satisfaction_current": 5,
+              "opportunity_score": 9.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Increase the ability to measure flow rate across the full operating range (2–60 ",
+              "naics_code": "112511",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Increase the ability to measure flow rate across the full operating range (2–60 L/min per tank feed) without sensor reconfiguration between tank sizes",
+              "market_name": "Finfish Farming and Fish Hatcheries",
+              "importance": 7,
+              "satisfaction_current": 5,
+              "opportunity_score": 9.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the time to detect a circulation pump degradation event that reduces tan",
+              "naics_code": "112511",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the time to detect a circulation pump degradation event that reduces tank water exchange rate by >20% before dissolved oxygen drops below 6 mg/L",
+              "market_name": "Finfish Farming and Fish Hatcheries",
+              "importance": 10,
+              "satisfaction_current": 2,
+              "opportunity_score": 18.0,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the number of undetected pipe blockage events (biofilm growth, scale acc",
+              "naics_code": "112511",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the number of undetected pipe blockage events (biofilm growth, scale accumulation) that restrict flow by >15% in treatment loops",
+              "market_name": "Finfish Farming and Fish Hatcheries",
+              "importance": 9,
+              "satisfaction_current": 3,
+              "opportunity_score": 15.0,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Increase the ability to distinguish genuine flow anomalies (pump cavitation, valv",
+              "naics_code": "112511",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Increase the ability to distinguish genuine flow anomalies (pump cavitation, valve failure) from sensor measurement artifacts with >95% classification accuracy",
+              "market_name": "Finfish Farming and Fish Hatcheries",
+              "importance": 8,
+              "satisfaction_current": 2,
+              "opportunity_score": 14.0,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the likelihood of false flow-normal readings during air-lock events in r",
+              "naics_code": "112511",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the likelihood of false flow-normal readings during air-lock events in recirculation piping that mask actual flow cessation",
+              "market_name": "Finfish Farming and Fish Hatcheries",
+              "importance": 9,
+              "satisfaction_current": 3,
+              "opportunity_score": 15.0,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Increase the ability to determine the correct flow rate setpoint within ±10% of ",
+              "naics_code": "112511",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Increase the ability to determine the correct flow rate setpoint within ±10% of actual biological oxygen demand for each species, stocking density, and growth stage",
+              "market_name": "Finfish Farming and Fish Hatcheries",
+              "importance": 8,
+              "satisfaction_current": 3,
+              "opportunity_score": 13.0,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the effort required to calculate per-tank flow requirements when stockin",
+              "naics_code": "112511",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the effort required to calculate per-tank flow requirements when stocking density changes during grow-out cycles",
+              "market_name": "Finfish Farming and Fish Hatcheries",
+              "importance": 6,
+              "satisfaction_current": 4,
+              "opportunity_score": 8.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the time required to install and commission a flow sensor on an existing",
+              "naics_code": "112511",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the time required to install and commission a flow sensor on an existing RAS pipe loop without draining the circuit or interrupting fish production",
+              "market_name": "Finfish Farming and Fish Hatcheries",
+              "importance": 8,
+              "satisfaction_current": 3,
+              "opportunity_score": 13.0,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the likelihood of systematic measurement error >1% caused by incorrect m",
+              "naics_code": "112511",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the likelihood of systematic measurement error >1% caused by incorrect medium configuration at commissioning for recirculated water with varying dissolved solids",
+              "market_name": "Finfish Farming and Fish Hatcheries",
+              "importance": 7,
+              "satisfaction_current": 6,
+              "opportunity_score": 8.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Increase the ability to verify sensor accuracy on-site within 10 minutes before ",
+              "naics_code": "112511",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Increase the ability to verify sensor accuracy on-site within 10 minutes before stocking fish into a newly prepared tank",
+              "market_name": "Finfish Farming and Fish Hatcheries",
+              "importance": 8,
+              "satisfaction_current": 3,
+              "opportunity_score": 13.0,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the likelihood of accepting a false-normal flow reading after system mai",
+              "naics_code": "112511",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the likelihood of accepting a false-normal flow reading after system maintenance that masks a partially closed valve or misrouted pipe",
+              "market_name": "Finfish Farming and Fish Hatcheries",
+              "importance": 9,
+              "satisfaction_current": 2,
+              "opportunity_score": 16.0,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Increase the ability to isolate flow anomaly root cause (sensor fault vs pump fai",
+              "naics_code": "112511",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Increase the ability to isolate flow anomaly root cause (sensor fault vs pump failure vs valve position vs pipe blockage) within 3 minutes during an active alarm",
+              "market_name": "Finfish Farming and Fish Hatcheries",
+              "importance": 9,
+              "satisfaction_current": 2,
+              "opportunity_score": 16.0,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the operator expertise required to interpret flow alarm data and determi",
+              "naics_code": "112511",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the operator expertise required to interpret flow alarm data and determine the correct corrective action during a night shift with minimal staffing",
+              "market_name": "Finfish Farming and Fish Hatcheries",
+              "importance": 8,
+              "satisfaction_current": 3,
+              "opportunity_score": 13.0,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Increase the sensor service life achievable without scheduled maintenance interve",
+              "naics_code": "112511",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Increase the sensor service life achievable without scheduled maintenance interventions in biofilm-prone recirculated water (target: >5 years with zero clogging events)",
+              "market_name": "Finfish Farming and Fish Hatcheries",
+              "importance": 9,
+              "satisfaction_current": 2,
+              "opportunity_score": 16.0,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the total installed cost per water flow measurement point including sens",
+              "naics_code": "112511",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the total installed cost per water flow measurement point including sensor, wiring, and integration with existing PLC/SCADA (target: <$400)",
+              "market_name": "Finfish Farming and Fish Hatcheries",
+              "importance": 8,
+              "satisfaction_current": 5,
+              "opportunity_score": 11.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the likelihood of sensor-induced flow path contamination or turbulence t",
+              "naics_code": "112511",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the likelihood of sensor-induced flow path contamination or turbulence that affects dissolved oxygen transfer downstream of the measurement point",
+              "market_name": "Finfish Farming and Fish Hatcheries",
+              "importance": 7,
+              "satisfaction_current": 5,
+              "opportunity_score": 9.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the permanent pressure drop across the measurement point that increases ",
+              "naics_code": "112511",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the permanent pressure drop across the measurement point that increases circulation pump energy consumption in an energy-intensive RAS facility",
+              "market_name": "Finfish Farming and Fish Hatcheries",
+              "importance": 7,
+              "satisfaction_current": 5,
+              "opportunity_score": 9.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the likelihood of a total stock loss event (>10% biomass mortality) caus",
+              "naics_code": "112511",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the likelihood of a total stock loss event (>10% biomass mortality) caused by undetected water circulation failure in any single rearing unit",
+              "market_name": "Finfish Farming and Fish Hatcheries",
+              "importance": 10,
+              "satisfaction_current": 2,
+              "opportunity_score": 18.0,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Increase the ability to maintain water exchange rate within ±10% of setpoint acro",
+              "naics_code": "112511",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Increase the ability to maintain water exchange rate within ±10% of setpoint across all rearing tanks simultaneously during peak biomass loading",
+              "market_name": "Finfish Farming and Fish Hatcheries",
+              "importance": 8,
+              "satisfaction_current": 4,
+              "opportunity_score": 12.0,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Increase the ability to present quantitative water circulation performance data t",
+              "naics_code": "112511",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Increase the ability to present quantitative water circulation performance data to facility investors, insurers, and certification auditors as evidence of operational control",
+              "market_name": "Finfish Farming and Fish Hatcheries",
+              "importance": 7,
+              "satisfaction_current": 3,
+              "opportunity_score": 11.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the likelihood of discovering a mass mortality event caused by overnight",
+              "naics_code": "112511",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the likelihood of discovering a mass mortality event caused by overnight flow failure that was not detected by the monitoring system",
+              "market_name": "Finfish Farming and Fish Hatcheries",
+              "importance": 10,
+              "satisfaction_current": 2,
+              "opportunity_score": 18.0,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the anxiety associated with leaving a high-value RAS facility ($500K+ bi",
+              "naics_code": "112511",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the anxiety associated with leaving a high-value RAS facility ($500K+ biomass at risk) unattended during off-hours by providing reliable remote flow-failure alerts",
+              "market_name": "Finfish Farming and Fish Hatcheries",
+              "importance": 8,
+              "satisfaction_current": 3,
+              "opportunity_score": 13.0,
+              "is_underserved": true,
+              "is_overserved": false,
+              "product_related": false
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the likelihood of systematic measurement overestimation caused by air en",
+              "naics_code": "112511",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the likelihood of systematic measurement overestimation caused by air entrainment exceeding 2% by volume in recirculation piping during oxygenation injection or post-maintenance air purging",
+              "market_name": "Finfish Farming and Fish Hatcheries",
+              "importance": 7,
+              "satisfaction_current": 4,
+              "opportunity_score": 10.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the duration of total measurement blackout during pipe partially-filled ",
+              "naics_code": "112511",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the duration of total measurement blackout during pipe partially-filled states that occur during RAS circuit re-filling, pump restart sequences, or gravity-drain maintenance events",
+              "market_name": "Finfish Farming and Fish Hatcheries",
+              "importance": 6,
+              "satisfaction_current": 4,
+              "opportunity_score": 8.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the measurement accuracy degradation caused by turbulent flow profiles f",
+              "naics_code": "112511",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the measurement accuracy degradation caused by turbulent flow profiles from elbows, valves, and tee fittings within 5–10 pipe diameters upstream of the sensor in compact RAS pipe layouts",
+              "market_name": "Finfish Farming and Fish Hatcheries",
+              "importance": 6,
+              "satisfaction_current": 5,
+              "opportunity_score": 7.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the residual flow measurement error during rapid water temperature chang",
+              "naics_code": "112511",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the residual flow measurement error during rapid water temperature changes exceeding 5°C/hour that outpace the speed-of-sound compensation algorithm response rate",
+              "market_name": "Finfish Farming and Fish Hatcheries",
+              "importance": 5,
+              "satisfaction_current": 7,
+              "opportunity_score": 5.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": true
+            }
+          },
+          {
+            "label": "OpportunityScore",
+            "key": {
+              "error_statement": "Minimize the probability of undetected flow reduction events where actual flow ra",
+              "naics_code": "112511",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "full_statement": "Minimize the probability of undetected flow reduction events where actual flow rate drops below the sensor minimum detection threshold in small-diameter nursery and fry-rearing feed lines",
+              "market_name": "Finfish Farming and Fish Hatcheries",
+              "importance": 6,
+              "satisfaction_current": 6,
+              "opportunity_score": 6.0,
+              "is_underserved": false,
+              "is_overserved": false,
+              "product_related": true
+            }
+          }
+        ],
+        "relationships": [
+          {
+            "type": "has_opportunity_score",
+            "source": "Market:112511",
+            "target": "OpportunityScore:<each>",
+            "count": 30
+          }
+        ],
+        "market_odi_props": {
+          "naics_code": "112511",
+          "odi_total_needs": 30,
+          "odi_underserved_count": 17,
+          "odi_overserved_count": 0,
+          "odi_avg_opportunity_score": 12.13,
+          "odi_top_opportunities": "[\"Minimize the likelihood of undetected flow cessation in a rearing tank supply line persisting longer than 60 seconds before alarm activation\",\"Minimize the time to detect a circulation pump degradation event that reduces tank water exchange rate by >20% before dissolved oxygen drops below 6 mg/L\",\"Minimize the likelihood of a total stock loss event (>10% biomass mortality) caused by undetected water circulation failure in any single rearing unit\",\"Minimize the likelihood of discovering a mass mortality event caused by overnight flow failure that was not detected by the monitoring system\",\"Minimize the likelihood of accepting a false-normal flow reading after system maintenance that masks a partially closed valve or misrouted pipe\"]"
+        }
+      }
+    }
+  ],
+  "has_bom": false,
+  "naics_sector_type": "non_manufacturing"
+}

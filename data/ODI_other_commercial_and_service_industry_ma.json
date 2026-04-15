@@ -1,0 +1,1227 @@
+{
+  "id": "ODI_other_commercial_and_service_industry_ma",
+  "title": "ODI Matrix — Other Commercial and Service Industry Machinery Manufacturing (NAICS 333318)",
+  "type": "odi_matrix",
+  "market_slug": "other_commercial_and_service_industry_ma",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Satisfaction Recalibration",
+      "content": "Satisfaction scores recalibrated against incumbent technology profiles from JTBD §2.4:\n\n| Incumbent | Share | Key Strengths | Key Weaknesses |\n|---|---|---|---|\n| Turbine / Paddle-Wheel | 45–55% | Low cost ($5–15), simple | Clogs in 12 mo, ±5%/yr drift, no diagnostics, 1–3 yr life in harsh media |\n| Solenoid-Valve Timed Fill | 30–40% | Zero sensor cost | ±10–20% accuracy, zero detection capability |\n| Electromagnetic | 3–5% | ±0.5% accuracy, robust | 5–10x cost, needs power, over-specified |\n| Ultrasonic (transit-time) | <5% | No moving parts, diagnostics | Air bubble issues, pipe-full required, 3–5x cost |\n\n**Recalibration adjustments (2 of 41):**\n\n| ID | Need | Sat (orig) | Sat (recal) | Rationale |\n|---|---|---|---|---|\n| N04 | Detect supply failure / empty pipe <5 s | 4 | **3** | Turbine (45–55%): detects zero flow but not empty-pipe specifically; timed-fill (30–40%): zero detection. ~85% of installed base has no dedicated empty-pipe detection. |\n| N23 | Field failure rate <0.2% in 10-yr life | 5 | **4** | Turbine (45–55%): 1–3 yr effective life in harsh media, far below 10-yr target. Dominant incumbent fundamentally cannot meet this need. |\n\nAll other satisfaction scores retained — JTBD analysis already incorporated incumbent awareness.\nAll importance scores retained (inherent to the job).\n\n---"
+    },
+    {
+      "title": "ODI Entries (sorted by opportunity score)",
+      "content": "`opportunity_score = importance + max(importance - satisfaction, 0)`\n`is_underserved = importance > 7 AND satisfaction < 5`\n`is_overserved = importance < 3 AND satisfaction > 7`\n\n### Highly Underserved (Opp > 15)\n\n| ID | Error Statement | Imp | Sat | Opp | Under | Impact | P.Rel |\n|---|---|---|---|---|---|---|---|\n| N04 | Minimize time to detect water supply failure or pipe-empty condition to <5 s to prevent dry-run damage to pumps and heating elements | 9 | 3 | **15.00** | true | safety | false |\n\n### Underserved (Opp 12–15)\n\n| ID | Error Statement | Imp | Sat | Opp | Under | Impact | P.Rel |\n|---|---|---|---|---|---|---|---|\n| N01 | Minimize likelihood of flow reading deviating >±3% in detergent-laden water across 0.5–50 l/min | 9 | 4 | **14.00** | true | reliability | false |\n| N10 | Minimize likelihood of turbine rotor clogging from lint/detergent/scale within 12 months | 8 | 2 | **14.00** | true | reliability | true |\n| N15b | Minimize undetected water circuit faults invisible to timed-fill dosing | 8 | 2 | **14.00** | true | safety | true |\n| N23 | Minimize field failure rate of flow sensing subsystem to <0.2% within 10-yr design life | 9 | 4 | **14.00** | true | reliability | false |\n| N02 | Minimize measurement degradation when water contains suspended detergent residues and lint | 8 | 3 | **13.00** | true | reliability | false |\n| N06 | Minimize undetected water leaks >50 L/day within machine fluid circuit | 8 | 3 | **13.00** | true | cost | false |\n| N08 | Increase ability to measure per-cycle consumption ±2% for pay-per-use billing | 8 | 3 | **13.00** | true | cost | false |\n| N12 | Minimize calibration drift >±5%/yr from paddle-wheel bearing wear | 8 | 3 | **13.00** | true | reliability | true |\n| N14c | Increase ability to distinguish genuine zero-flow from ultrasonic signal loss | 8 | 3 | **13.00** | true | safety | true |\n| N19 | Increase ability to provide real-time per-cycle water consumption for IoT/compliance | 8 | 3 | **13.00** | true | cost | false |\n| N22 | Minimize measurement failure when recycled water (TDS 200–2,000 ppm) enters supply | 8 | 3 | **13.00** | true | reliability | false |\n| N24 | Increase ability to document measured consumption for WaterSense/Energy Star certification | 8 | 3 | **13.00** | true | cost | false |\n| PR-1 | Minimize ultrasonic signal attenuation when air entrainment exceeds 2% vol during commercial wash cycles | 8 | 4 | **12.00** | true | reliability | true |\n| N15 | Minimize timed-fill volume deviation >±15% from supply pressure variations | 7 | 2 | **12.00** | false | reliability | true |\n\n### Appropriately Served (Opp 10–12)\n\n| ID | Error Statement | Imp | Sat | Opp | Under | Impact | P.Rel |\n|---|---|---|---|---|---|---|---|\n| N03 | Minimize repeatability variation >±1% between identical wash cycles | 8 | 5 | **11.00** | false | reliability | false |\n| N11 | Minimize frequency of manual turbine sensor disassembly/cleaning | 7 | 3 | **11.00** | false | cost | true |\n| N12b | Increase turbine low-flow accuracy below 2 l/min (rotor stall) | 7 | 3 | **11.00** | false | reliability | true |\n| N18b | Minimize undetected end-of-line calibration error >±3% | 8 | 5 | **11.00** | false | reliability | false |\n| N20 | Increase ability to detect abnormal consumption >20% above baseline | 7 | 3 | **11.00** | false | reliability | false |\n| N25 | Increase ability to demonstrate measured water efficiency for eco-label certification | 7 | 3 | **11.00** | false | cost | false |\n| N26 | Increase ability to provide per-cycle data on HMI/IoT dashboard for sustainability reporting | 7 | 3 | **11.00** | false | skill | false |\n| N27 | Minimize unexpected water utility bill >15% over budget from undetected equipment waste | 7 | 3 | **11.00** | false | cost | false |\n| PR-2 | Minimize time to restore valid flow measurement after transient foam/bubble events dissipate | 7 | 3 | **11.00** | false | reliability | true |\n| N14 | Minimize signal loss from detergent foam/air bubbles during normal operation | 7 | 4 | **10.00** | false | reliability | true |\n| N16b | Minimize mounting-location turbulence causing >2% systematic reading bias | 7 | 4 | **10.00** | false | reliability | false |\n| PR-3 | Minimize invalid output during drain-to-fill transitions (partial pipe fill) | 7 | 4 | **10.00** | false | reliability | true |\n| PR-4 | Minimize measurement error from <5×DN straight pipe run in compact machine enclosures | 7 | 4 | **10.00** | false | reliability | true |\n| PR-5 | Minimize measurement dead zone at trickle-fill below 4.2 l/min (DN20) | 7 | 4 | **10.00** | false | reliability | true |\n\n### Below Threshold (Opp < 10)\n\n| ID | Error Statement | Imp | Sat | Opp | Under | Impact | P.Rel |\n|---|---|---|---|---|---|---|---|\n| N05 | Increase turndown ratio (0.5–40 l/min) in a single sensor | 7 | 5 | **9.00** | false | reliability | false |\n| N07 | Minimize sensor spec mismatch with machine operating conditions | 7 | 5 | **9.00** | false | cost | false |\n| N09 | Minimize measurement failure at 5–85°C temperature range | 7 | 5 | **9.00** | false | reliability | false |\n| N16 | Minimize installation envelope / straight-pipe clearance requirement | 7 | 5 | **9.00** | false | cost | false |\n| N17 | Minimize OEM assembly-line integration time | 7 | 5 | **9.00** | false | time | false |\n| N18 | Minimize undetected installation defect passing end-of-line test | 7 | 5 | **9.00** | false | skill | false |\n| PR-6 | Minimize transient error during rapid temperature cycling (5–85°C) | 7 | 5 | **9.00** | false | reliability | true |\n| N14b | Minimize OEM qualification cost across multiple pipe diameters | 6 | 4 | **8.00** | false | cost | true |\n| N21 | Minimize sensor variant count to cover DN12–DN25 range | 6 | 4 | **8.00** | false | cost | false |\n| N13 | Minimize commissioning configuration time (ultrasonic) | 6 | 5 | **7.00** | false | time | true |\n| PR-7 | Minimize polymer housing seal degradation at 85°C near 90°C limit | 6 | 5 | **7.00** | false | reliability | true |\n| PR-8 | Minimize acoustic coupling degradation from surfactant concentration shifts | 6 | 5 | **7.00** | false | reliability | true |\n\n---"
+    },
+    {
+      "title": "Market ODI Summary",
+      "content": "| Metric | Value |\n|---|---|\n| **Market** | Other Commercial and Service Industry Machinery Manufacturing |\n| **NAICS** | 333318 |\n| **Total Needs** | 41 |\n| **Underserved Count** | 14 |\n| **Overserved Count** | 0 |\n| **Avg Opportunity Score** | 10.98 |\n\n**Top 5 Opportunities:**\n\n| Rank | Opp | Statement |\n|---|---|---|\n| 1 | 15.00 | Minimize time to detect water supply failure or pipe-empty condition to <5 s to prevent dry-run damage |\n| 2 | 14.00 | Minimize likelihood of flow reading deviating >±3% in detergent-laden water |\n| 3 | 14.00 | Minimize field failure rate of flow sensing subsystem to <0.2% within 10-yr design life |\n| 4 | 14.00 | Minimize likelihood of turbine rotor clogging from lint/detergent/scale within 12 months |\n| 5 | 14.00 | Minimize undetected water circuit faults invisible to timed-fill dosing |\n\n**Opportunity distribution:**\n\n| Zone | Count | % |\n|---|---|---|\n| Highly Underserved (>15) | 1 | 2% |\n| Underserved (12–15) | 13 | 32% |\n| Appropriately Served (10–12) | 14 | 34% |\n| Below Threshold (<10) | 13 | 32% |\n\n---"
+    },
+    {
+      "title": "Cross-Check vs Feature-Market Fit (Step 09)",
+      "content": "| Metric | Value |\n|---|---|\n| ODI avg opportunity score | 10.98 |\n| Feature-Fit avg (Step 09) | 4.54 |\n| ODI avg > 12 AND Fit avg < 4? | **No** (10.98, 4.54) |\n| ODI avg < 8 AND Fit avg > 7? | **No** |\n| **Consistency result** | No inconsistencies detected |\n\n**Interpretation:** The ODI average of 10.98 sits at the upper boundary of \"Appropriately Served,\" but the distribution is bimodal — 14 needs are underserved (34%) while 13 are below threshold (32%). This market has concentrated, high-value unmet needs around measurement reliability, fault detection, and maintenance elimination, alongside well-served operational integration needs. The Feature-Fit average of 4.54 is moderate, consistent with the ODI picture: the Marquardt ultrasonic sensor addresses the top underserved needs (no moving parts, anomaly detection, accuracy) but has technology-specific limitations (air bubbles, pipe-full condition) that create their own product-related needs.\n\n---"
+    },
+    {
+      "title": "QA Checklist",
+      "content": "| # | Check | Result | Note |\n|---|---|---|---|\n| Q1 | Formula correct | **PASS** | Spot-checked N04 (9+max(9-3,0)=15), N10 (8+max(8-2,0)=14), N13 (6+max(6-5,0)=7), PR-5 (7+max(7-4,0)=10), N27 (7+max(7-3,0)=11) — all match |\n| Q2 | Underserved flags correct | **PASS** | All 14 entries with imp>7 AND sat<5 flagged; none others |\n| Q3 | Overserved flags correct | **PASS** | 0 entries have imp<3 AND sat>7; none flagged |\n| Q4 | Need count preserved | **PASS** | 33 from Step 06 + 8 from Step 10 = 41 >= 33 |\n| Q5 | Top-5 ordering correct | **PASS** | Sorted by descending opp score; ties broken by importance |\n| Q6 | Cross-check ran | **PASS** | ODI vs Feature-Fit checked; no inconsistencies |\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"odi_matrix\",\n  \"naics_code\": \"333318\",\n  \"naics_title\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n  \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n  \"product_name\": \"Ultrasonic Flow Sensor\",\n  \"vendor_name\": \"Marquardt\",\n  \"recalibration\": {\n    \"adjustments\": [\n      {\n        \"need_id\": \"N04\",\n        \"satisfaction_original\": 4,\n        \"satisfaction_recalibrated\": 3,\n        \"rationale\": \"Turbine (45-55%) detects zero flow but not empty-pipe specifically; timed-fill (30-40%) has zero detection. ~85% of installed base lacks dedicated empty-pipe detection.\"\n      },\n      {\n        \"need_id\": \"N23\",\n        \"satisfaction_original\": 5,\n        \"satisfaction_recalibrated\": 4,\n        \"rationale\": \"Turbine (45-55%) has 1-3 yr effective life in harsh media, far below the 10-yr design life requirement. Dominant incumbent cannot meet this need.\"\n      }\n    ]\n  },\n  \"entries\": [\n    {\n      \"error_statement\": \"Minimize time to detect a water supply failure or pipe-empty condition to less than 5 seconds to prevent dry-run damage to pumps and heating elements\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 9,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 15.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of volumetric flow reading deviating more than plus-or-minus 3 percent from true value when measuring detergent-laden or chemically treated water across the 0.5-50 l/min operating range\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 9,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 14.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of flow sensor rotor clogging from lint, detergent residue, or mineral scale within 12 months of installation in commercial laundry or car wash equipment\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 8,\n      \"satisfaction_current\": 2,\n      \"opportunity_score\": 14.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the number of undetected water circuit faults (partial blockage, stuck valve, internal leak) that timed-fill dosing cannot sense because it lacks direct flow measurement\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 8,\n      \"satisfaction_current\": 2,\n      \"opportunity_score\": 14.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the field failure rate of the flow sensing subsystem to below 0.2 percent within the 10-year commercial machine design life\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 9,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 14.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize measurement degradation when water contains suspended detergent residues, lint particles, or chemical dosing additives at concentrations typical of commercial wash cycles\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the number of undetected water leaks within the machine's internal fluid circuit that waste more than 50 litres per day\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Increase the ability to measure water consumption per cycle with sufficient accuracy (plus-or-minus 2 percent) to support pay-per-use billing models and per-machine water-use reporting\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize calibration drift exceeding plus-or-minus 5 percent per year caused by mechanical wear of paddle-wheel bearings and blade erosion in detergent-laden water\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Increase the ability to distinguish genuine zero-flow conditions from ultrasonic signal loss caused by detergent foam or entrained air from recycled water systems\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Increase the ability to provide real-time per-cycle water consumption data to the machine controller for IoT dashboard reporting and water-efficiency compliance documentation\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of flow measurement failure when water recycling systems introduce variable water quality (TDS 200-2000 ppm, turbidity, temperature cycling) into the machine supply\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Increase the ability to document measured water consumption per cycle for EPA WaterSense, Energy Star, or EU Ecodesign water efficiency certification using onboard sensor data\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of ultrasonic signal attenuation when detergent agitation or water recycling aeration generates air entrainment exceeding 2 percent by volume during commercial wash and rinse cycles\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 8,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 12.00,\n      \"is_underserved\": true,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of water fill volume deviating more than plus-or-minus 15 percent from target due to supply pressure variations that invalidate timed-fill calibration\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 7,\n      \"satisfaction_current\": 2,\n      \"opportunity_score\": 12.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize variability of water consumption readings between identical wash/rinse cycles under the same programme settings (repeatability better than plus-or-minus 1 percent)\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 8,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 11.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the frequency of manual sensor disassembly and cleaning required to prevent accumulated debris from degrading flow measurement accuracy below plus-or-minus 5 percent\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Increase the ability to maintain accurate readings at low flow rates below 2 l/min where turbine/paddle-wheel rotors stall due to insufficient fluid momentum\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of releasing a machine from end-of-line testing with a flow sensor calibration error exceeding plus-or-minus 3 percent that goes undetected during the automated test cycle\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 8,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 11.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Increase the ability to detect abnormal water consumption patterns (e.g., more than 20 percent above baseline for the same cycle programme) indicating component degradation, valve failure, or internal leak\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Increase the ability to demonstrate measured water efficiency data that qualifies the equipment for WaterSense or equivalent eco-labels on the first certification submission\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Increase the ability to provide per-cycle water usage data visible on the machine HMI or IoT dashboard that commercial customers can include in sustainability reporting\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of a facility operator receiving an unexpected water utility bill exceeding budget by more than 15 percent due to undetected equipment water waste that the sensor could have flagged\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the time to restore valid flow measurement after transient foam or bubble events from detergent injection dissipate from the ultrasonic sensor measurement path\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of signal loss when air bubbles from detergent agitation or water recycling aeration pass through the sensor during normal operation\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 7,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 10.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of mounting the sensor at a location where turbulence from upstream valves, elbows, or T-junctions causes more than 2 percent systematic reading bias\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 7,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 10.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the duration of invalid measurement output during machine drain-to-fill transitions when the ultrasonic sensor encounters partial pipe fill that prevents acoustic signal propagation between transducers\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 7,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 10.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the measurement error caused by disturbed flow profiles when the ultrasonic sensor is installed with less than 5xDN straight pipe run in compact commercial machine enclosures with elbows and T-junctions upstream\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 7,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 10.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the measurement dead zone at trickle-fill and pre-rinse flow rates below 4.2 l/min (DN20) where ultrasonic transit-time difference falls below the signal-to-noise detection threshold\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 7,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 10.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Increase the ability to measure across the full machine flow range (trickle-fill 0.5 l/min to high-volume rinse 40 l/min) in a single sensor without changing hardware\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of specifying a sensor whose pressure rating or media compatibility is incompatible with the machine's operating conditions across its full output-type range\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize measurement failure when water temperature ranges from 5 degrees C (cold fill) to 85 degrees C (hot wash cycle) within a single machine operating envelope\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the required installation envelope (sensor body length and straight-pipe clearance) to fit within space-constrained commercial machine enclosures without requiring piping redesign\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the total OEM assembly-line integration time from unpacking to first valid reading, including mechanical fitting, electrical connection, and protocol handshake\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of a sensor passing end-of-line quality test while having an undetected installation defect (misalignment, air pocket, reversed orientation) that causes field failure\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the transient measurement error during rapid temperature cycling between cold fill (5 degrees C) and hot wash (85 degrees C) where ultrasonic speed-of-sound correction lags behind actual medium temperature change rate\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the OEM qualification cost for validating acoustic performance across multiple machine platforms with different pipe diameters (DN14-DN25) and media compositions\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 6,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 8.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the number of sensor variants an OEM must qualify and stock to cover its full product range of water-using equipment across DN12-DN25 pipe sizes\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 6,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 8.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": false\n    },\n    {\n      \"error_statement\": \"Minimize the OEM integration time required to configure fluid-type parameters and verify acoustic coupling for each machine variant during assembly-line commissioning\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 6,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 7.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the risk of polymer housing seal degradation when commercial hot wash cycles operate at 85 degrees C within 5 degrees C of the ultrasonic sensor's 90 degrees C material limit for extended duty cycles\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 6,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 7.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    },\n    {\n      \"error_statement\": \"Minimize the likelihood of acoustic coupling degradation when surfactant concentrations in commercial wash water shift the medium's acoustic impedance outside the ultrasonic transducer's validated operating envelope\",\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"importance\": 6,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 7.00,\n      \"is_underserved\": false,\n      \"is_overserved\": false,\n      \"product_related\": true\n    }\n  ],\n  \"market_summaries\": [\n    {\n      \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n      \"naics_code\": \"333318\",\n      \"total_needs\": 41,\n      \"underserved_count\": 14,\n      \"overserved_count\": 0,\n      \"avg_opportunity_score\": 10.98,\n      \"top_opportunities\": [\n        \"Minimize time to detect a water supply failure or pipe-empty condition to less than 5 seconds to prevent dry-run damage to pumps and heating elements\",\n        \"Minimize the likelihood of volumetric flow reading deviating more than plus-or-minus 3 percent from true value when measuring detergent-laden or chemically treated water across the 0.5-50 l/min operating range\",\n        \"Minimize the field failure rate of the flow sensing subsystem to below 0.2 percent within the 10-year commercial machine design life\",\n        \"Minimize the likelihood of flow sensor rotor clogging from lint, detergent residue, or mineral scale within 12 months of installation in commercial laundry or car wash equipment\",\n        \"Minimize the number of undetected water circuit faults (partial blockage, stuck valve, internal leak) that timed-fill dosing cannot sense because it lacks direct flow measurement\"\n      ]\n    }\n  ]\n}\n```"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "Incumbent",
+        "Share",
+        "Key Strengths",
+        "Key Weaknesses"
+      ],
+      "rows": [
+        {
+          "Incumbent": "Turbine / Paddle-Wheel",
+          "Share": "45–55%",
+          "Key Strengths": "Low cost ($5–15), simple",
+          "Key Weaknesses": "Clogs in 12 mo, ±5%/yr drift, no diagnostics, 1–3 yr life in harsh media"
+        },
+        {
+          "Incumbent": "Solenoid-Valve Timed Fill",
+          "Share": "30–40%",
+          "Key Strengths": "Zero sensor cost",
+          "Key Weaknesses": "±10–20% accuracy, zero detection capability"
+        },
+        {
+          "Incumbent": "Electromagnetic",
+          "Share": "3–5%",
+          "Key Strengths": "±0.5% accuracy, robust",
+          "Key Weaknesses": "5–10x cost, needs power, over-specified"
+        },
+        {
+          "Incumbent": "Ultrasonic (transit-time)",
+          "Share": "<5%",
+          "Key Strengths": "No moving parts, diagnostics",
+          "Key Weaknesses": "Air bubble issues, pipe-full required, 3–5x cost"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Need",
+        "Sat (orig)",
+        "Sat (recal)",
+        "Rationale"
+      ],
+      "rows": [
+        {
+          "ID": "N04",
+          "Need": "Detect supply failure / empty pipe <5 s",
+          "Sat (orig)": "4",
+          "Sat (recal)": "**3**",
+          "Rationale": "Turbine (45–55%): detects zero flow but not empty-pipe specifically; timed-fill (30–40%): zero detection. ~85% of installed base has no dedicated empty-pipe detection."
+        },
+        {
+          "ID": "N23",
+          "Need": "Field failure rate <0.2% in 10-yr life",
+          "Sat (orig)": "5",
+          "Sat (recal)": "**4**",
+          "Rationale": "Turbine (45–55%): 1–3 yr effective life in harsh media, far below 10-yr target. Dominant incumbent fundamentally cannot meet this need."
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Error Statement",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Under",
+        "Impact",
+        "P.Rel"
+      ],
+      "rows": [
+        {
+          "ID": "N04",
+          "Error Statement": "Minimize time to detect water supply failure or pipe-empty condition to <5 s to prevent dry-run damage to pumps and heating elements",
+          "Imp": "9",
+          "Sat": "3",
+          "Opp": "**15.00**",
+          "Under": "true",
+          "Impact": "safety",
+          "P.Rel": "false"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Error Statement",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Under",
+        "Impact",
+        "P.Rel"
+      ],
+      "rows": [
+        {
+          "ID": "N01",
+          "Error Statement": "Minimize likelihood of flow reading deviating >±3% in detergent-laden water across 0.5–50 l/min",
+          "Imp": "9",
+          "Sat": "4",
+          "Opp": "**14.00**",
+          "Under": "true",
+          "Impact": "reliability",
+          "P.Rel": "false"
+        },
+        {
+          "ID": "N10",
+          "Error Statement": "Minimize likelihood of turbine rotor clogging from lint/detergent/scale within 12 months",
+          "Imp": "8",
+          "Sat": "2",
+          "Opp": "**14.00**",
+          "Under": "true",
+          "Impact": "reliability",
+          "P.Rel": "true"
+        },
+        {
+          "ID": "N15b",
+          "Error Statement": "Minimize undetected water circuit faults invisible to timed-fill dosing",
+          "Imp": "8",
+          "Sat": "2",
+          "Opp": "**14.00**",
+          "Under": "true",
+          "Impact": "safety",
+          "P.Rel": "true"
+        },
+        {
+          "ID": "N23",
+          "Error Statement": "Minimize field failure rate of flow sensing subsystem to <0.2% within 10-yr design life",
+          "Imp": "9",
+          "Sat": "4",
+          "Opp": "**14.00**",
+          "Under": "true",
+          "Impact": "reliability",
+          "P.Rel": "false"
+        },
+        {
+          "ID": "N02",
+          "Error Statement": "Minimize measurement degradation when water contains suspended detergent residues and lint",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "**13.00**",
+          "Under": "true",
+          "Impact": "reliability",
+          "P.Rel": "false"
+        },
+        {
+          "ID": "N06",
+          "Error Statement": "Minimize undetected water leaks >50 L/day within machine fluid circuit",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "**13.00**",
+          "Under": "true",
+          "Impact": "cost",
+          "P.Rel": "false"
+        },
+        {
+          "ID": "N08",
+          "Error Statement": "Increase ability to measure per-cycle consumption ±2% for pay-per-use billing",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "**13.00**",
+          "Under": "true",
+          "Impact": "cost",
+          "P.Rel": "false"
+        },
+        {
+          "ID": "N12",
+          "Error Statement": "Minimize calibration drift >±5%/yr from paddle-wheel bearing wear",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "**13.00**",
+          "Under": "true",
+          "Impact": "reliability",
+          "P.Rel": "true"
+        },
+        {
+          "ID": "N14c",
+          "Error Statement": "Increase ability to distinguish genuine zero-flow from ultrasonic signal loss",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "**13.00**",
+          "Under": "true",
+          "Impact": "safety",
+          "P.Rel": "true"
+        },
+        {
+          "ID": "N19",
+          "Error Statement": "Increase ability to provide real-time per-cycle water consumption for IoT/compliance",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "**13.00**",
+          "Under": "true",
+          "Impact": "cost",
+          "P.Rel": "false"
+        },
+        {
+          "ID": "N22",
+          "Error Statement": "Minimize measurement failure when recycled water (TDS 200–2,000 ppm) enters supply",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "**13.00**",
+          "Under": "true",
+          "Impact": "reliability",
+          "P.Rel": "false"
+        },
+        {
+          "ID": "N24",
+          "Error Statement": "Increase ability to document measured consumption for WaterSense/Energy Star certification",
+          "Imp": "8",
+          "Sat": "3",
+          "Opp": "**13.00**",
+          "Under": "true",
+          "Impact": "cost",
+          "P.Rel": "false"
+        },
+        {
+          "ID": "PR-1",
+          "Error Statement": "Minimize ultrasonic signal attenuation when air entrainment exceeds 2% vol during commercial wash cycles",
+          "Imp": "8",
+          "Sat": "4",
+          "Opp": "**12.00**",
+          "Under": "true",
+          "Impact": "reliability",
+          "P.Rel": "true"
+        },
+        {
+          "ID": "N15",
+          "Error Statement": "Minimize timed-fill volume deviation >±15% from supply pressure variations",
+          "Imp": "7",
+          "Sat": "2",
+          "Opp": "**12.00**",
+          "Under": "false",
+          "Impact": "reliability",
+          "P.Rel": "true"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Error Statement",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Under",
+        "Impact",
+        "P.Rel"
+      ],
+      "rows": [
+        {
+          "ID": "N03",
+          "Error Statement": "Minimize repeatability variation >±1% between identical wash cycles",
+          "Imp": "8",
+          "Sat": "5",
+          "Opp": "**11.00**",
+          "Under": "false",
+          "Impact": "reliability",
+          "P.Rel": "false"
+        },
+        {
+          "ID": "N11",
+          "Error Statement": "Minimize frequency of manual turbine sensor disassembly/cleaning",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "**11.00**",
+          "Under": "false",
+          "Impact": "cost",
+          "P.Rel": "true"
+        },
+        {
+          "ID": "N12b",
+          "Error Statement": "Increase turbine low-flow accuracy below 2 l/min (rotor stall)",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "**11.00**",
+          "Under": "false",
+          "Impact": "reliability",
+          "P.Rel": "true"
+        },
+        {
+          "ID": "N18b",
+          "Error Statement": "Minimize undetected end-of-line calibration error >±3%",
+          "Imp": "8",
+          "Sat": "5",
+          "Opp": "**11.00**",
+          "Under": "false",
+          "Impact": "reliability",
+          "P.Rel": "false"
+        },
+        {
+          "ID": "N20",
+          "Error Statement": "Increase ability to detect abnormal consumption >20% above baseline",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "**11.00**",
+          "Under": "false",
+          "Impact": "reliability",
+          "P.Rel": "false"
+        },
+        {
+          "ID": "N25",
+          "Error Statement": "Increase ability to demonstrate measured water efficiency for eco-label certification",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "**11.00**",
+          "Under": "false",
+          "Impact": "cost",
+          "P.Rel": "false"
+        },
+        {
+          "ID": "N26",
+          "Error Statement": "Increase ability to provide per-cycle data on HMI/IoT dashboard for sustainability reporting",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "**11.00**",
+          "Under": "false",
+          "Impact": "skill",
+          "P.Rel": "false"
+        },
+        {
+          "ID": "N27",
+          "Error Statement": "Minimize unexpected water utility bill >15% over budget from undetected equipment waste",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "**11.00**",
+          "Under": "false",
+          "Impact": "cost",
+          "P.Rel": "false"
+        },
+        {
+          "ID": "PR-2",
+          "Error Statement": "Minimize time to restore valid flow measurement after transient foam/bubble events dissipate",
+          "Imp": "7",
+          "Sat": "3",
+          "Opp": "**11.00**",
+          "Under": "false",
+          "Impact": "reliability",
+          "P.Rel": "true"
+        },
+        {
+          "ID": "N14",
+          "Error Statement": "Minimize signal loss from detergent foam/air bubbles during normal operation",
+          "Imp": "7",
+          "Sat": "4",
+          "Opp": "**10.00**",
+          "Under": "false",
+          "Impact": "reliability",
+          "P.Rel": "true"
+        },
+        {
+          "ID": "N16b",
+          "Error Statement": "Minimize mounting-location turbulence causing >2% systematic reading bias",
+          "Imp": "7",
+          "Sat": "4",
+          "Opp": "**10.00**",
+          "Under": "false",
+          "Impact": "reliability",
+          "P.Rel": "false"
+        },
+        {
+          "ID": "PR-3",
+          "Error Statement": "Minimize invalid output during drain-to-fill transitions (partial pipe fill)",
+          "Imp": "7",
+          "Sat": "4",
+          "Opp": "**10.00**",
+          "Under": "false",
+          "Impact": "reliability",
+          "P.Rel": "true"
+        },
+        {
+          "ID": "PR-4",
+          "Error Statement": "Minimize measurement error from <5×DN straight pipe run in compact machine enclosures",
+          "Imp": "7",
+          "Sat": "4",
+          "Opp": "**10.00**",
+          "Under": "false",
+          "Impact": "reliability",
+          "P.Rel": "true"
+        },
+        {
+          "ID": "PR-5",
+          "Error Statement": "Minimize measurement dead zone at trickle-fill below 4.2 l/min (DN20)",
+          "Imp": "7",
+          "Sat": "4",
+          "Opp": "**10.00**",
+          "Under": "false",
+          "Impact": "reliability",
+          "P.Rel": "true"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Error Statement",
+        "Imp",
+        "Sat",
+        "Opp",
+        "Under",
+        "Impact",
+        "P.Rel"
+      ],
+      "rows": [
+        {
+          "ID": "N05",
+          "Error Statement": "Increase turndown ratio (0.5–40 l/min) in a single sensor",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "**9.00**",
+          "Under": "false",
+          "Impact": "reliability",
+          "P.Rel": "false"
+        },
+        {
+          "ID": "N07",
+          "Error Statement": "Minimize sensor spec mismatch with machine operating conditions",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "**9.00**",
+          "Under": "false",
+          "Impact": "cost",
+          "P.Rel": "false"
+        },
+        {
+          "ID": "N09",
+          "Error Statement": "Minimize measurement failure at 5–85°C temperature range",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "**9.00**",
+          "Under": "false",
+          "Impact": "reliability",
+          "P.Rel": "false"
+        },
+        {
+          "ID": "N16",
+          "Error Statement": "Minimize installation envelope / straight-pipe clearance requirement",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "**9.00**",
+          "Under": "false",
+          "Impact": "cost",
+          "P.Rel": "false"
+        },
+        {
+          "ID": "N17",
+          "Error Statement": "Minimize OEM assembly-line integration time",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "**9.00**",
+          "Under": "false",
+          "Impact": "time",
+          "P.Rel": "false"
+        },
+        {
+          "ID": "N18",
+          "Error Statement": "Minimize undetected installation defect passing end-of-line test",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "**9.00**",
+          "Under": "false",
+          "Impact": "skill",
+          "P.Rel": "false"
+        },
+        {
+          "ID": "PR-6",
+          "Error Statement": "Minimize transient error during rapid temperature cycling (5–85°C)",
+          "Imp": "7",
+          "Sat": "5",
+          "Opp": "**9.00**",
+          "Under": "false",
+          "Impact": "reliability",
+          "P.Rel": "true"
+        },
+        {
+          "ID": "N14b",
+          "Error Statement": "Minimize OEM qualification cost across multiple pipe diameters",
+          "Imp": "6",
+          "Sat": "4",
+          "Opp": "**8.00**",
+          "Under": "false",
+          "Impact": "cost",
+          "P.Rel": "true"
+        },
+        {
+          "ID": "N21",
+          "Error Statement": "Minimize sensor variant count to cover DN12–DN25 range",
+          "Imp": "6",
+          "Sat": "4",
+          "Opp": "**8.00**",
+          "Under": "false",
+          "Impact": "cost",
+          "P.Rel": "false"
+        },
+        {
+          "ID": "N13",
+          "Error Statement": "Minimize commissioning configuration time (ultrasonic)",
+          "Imp": "6",
+          "Sat": "5",
+          "Opp": "**7.00**",
+          "Under": "false",
+          "Impact": "time",
+          "P.Rel": "true"
+        },
+        {
+          "ID": "PR-7",
+          "Error Statement": "Minimize polymer housing seal degradation at 85°C near 90°C limit",
+          "Imp": "6",
+          "Sat": "5",
+          "Opp": "**7.00**",
+          "Under": "false",
+          "Impact": "reliability",
+          "P.Rel": "true"
+        },
+        {
+          "ID": "PR-8",
+          "Error Statement": "Minimize acoustic coupling degradation from surfactant concentration shifts",
+          "Imp": "6",
+          "Sat": "5",
+          "Opp": "**7.00**",
+          "Under": "false",
+          "Impact": "reliability",
+          "P.Rel": "true"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Metric",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Metric": "**Market**",
+          "Value": "Other Commercial and Service Industry Machinery Manufacturing"
+        },
+        {
+          "Metric": "**NAICS**",
+          "Value": "333318"
+        },
+        {
+          "Metric": "**Total Needs**",
+          "Value": "41"
+        },
+        {
+          "Metric": "**Underserved Count**",
+          "Value": "14"
+        },
+        {
+          "Metric": "**Overserved Count**",
+          "Value": "0"
+        },
+        {
+          "Metric": "**Avg Opportunity Score**",
+          "Value": "10.98"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Rank",
+        "Opp",
+        "Statement"
+      ],
+      "rows": [
+        {
+          "Rank": "1",
+          "Opp": "15.00",
+          "Statement": "Minimize time to detect water supply failure or pipe-empty condition to <5 s to prevent dry-run damage"
+        },
+        {
+          "Rank": "2",
+          "Opp": "14.00",
+          "Statement": "Minimize likelihood of flow reading deviating >±3% in detergent-laden water"
+        },
+        {
+          "Rank": "3",
+          "Opp": "14.00",
+          "Statement": "Minimize field failure rate of flow sensing subsystem to <0.2% within 10-yr design life"
+        },
+        {
+          "Rank": "4",
+          "Opp": "14.00",
+          "Statement": "Minimize likelihood of turbine rotor clogging from lint/detergent/scale within 12 months"
+        },
+        {
+          "Rank": "5",
+          "Opp": "14.00",
+          "Statement": "Minimize undetected water circuit faults invisible to timed-fill dosing"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Zone",
+        "Count",
+        "%"
+      ],
+      "rows": [
+        {
+          "Zone": "Highly Underserved (>15)",
+          "Count": "1",
+          "%": "2%"
+        },
+        {
+          "Zone": "Underserved (12–15)",
+          "Count": "13",
+          "%": "32%"
+        },
+        {
+          "Zone": "Appropriately Served (10–12)",
+          "Count": "14",
+          "%": "34%"
+        },
+        {
+          "Zone": "Below Threshold (<10)",
+          "Count": "13",
+          "%": "32%"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Metric",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Metric": "ODI avg opportunity score",
+          "Value": "10.98"
+        },
+        {
+          "Metric": "Feature-Fit avg (Step 09)",
+          "Value": "4.54"
+        },
+        {
+          "Metric": "ODI avg > 12 AND Fit avg < 4?",
+          "Value": "**No** (10.98, 4.54)"
+        },
+        {
+          "Metric": "ODI avg < 8 AND Fit avg > 7?",
+          "Value": "**No**"
+        },
+        {
+          "Metric": "**Consistency result**",
+          "Value": "No inconsistencies detected"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result",
+        "Note"
+      ],
+      "rows": [
+        {
+          "#": "Q1",
+          "Check": "Formula correct",
+          "Result": "**PASS**",
+          "Note": "Spot-checked N04 (9+max(9-3,0)=15), N10 (8+max(8-2,0)=14), N13 (6+max(6-5,0)=7), PR-5 (7+max(7-4,0)=10), N27 (7+max(7-3,0)=11) — all match"
+        },
+        {
+          "#": "Q2",
+          "Check": "Underserved flags correct",
+          "Result": "**PASS**",
+          "Note": "All 14 entries with imp>7 AND sat<5 flagged; none others"
+        },
+        {
+          "#": "Q3",
+          "Check": "Overserved flags correct",
+          "Result": "**PASS**",
+          "Note": "0 entries have imp<3 AND sat>7; none flagged"
+        },
+        {
+          "#": "Q4",
+          "Check": "Need count preserved",
+          "Result": "**PASS**",
+          "Note": "33 from Step 06 + 8 from Step 10 = 41 >= 33"
+        },
+        {
+          "#": "Q5",
+          "Check": "Top-5 ordering correct",
+          "Result": "**PASS**",
+          "Note": "Sorted by descending opp score; ties broken by importance"
+        },
+        {
+          "#": "Q6",
+          "Check": "Cross-check ran",
+          "Result": "**PASS**",
+          "Note": "ODI vs Feature-Fit checked; no inconsistencies"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "odi_matrix",
+      "naics_code": "333318",
+      "naics_title": "Other Commercial and Service Industry Machinery Manufacturing",
+      "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+      "product_name": "Ultrasonic Flow Sensor",
+      "vendor_name": "Marquardt",
+      "recalibration": {
+        "adjustments": [
+          {
+            "need_id": "N04",
+            "satisfaction_original": 4,
+            "satisfaction_recalibrated": 3,
+            "rationale": "Turbine (45-55%) detects zero flow but not empty-pipe specifically; timed-fill (30-40%) has zero detection. ~85% of installed base lacks dedicated empty-pipe detection."
+          },
+          {
+            "need_id": "N23",
+            "satisfaction_original": 5,
+            "satisfaction_recalibrated": 4,
+            "rationale": "Turbine (45-55%) has 1-3 yr effective life in harsh media, far below the 10-yr design life requirement. Dominant incumbent cannot meet this need."
+          }
+        ]
+      },
+      "entries": [
+        {
+          "error_statement": "Minimize time to detect a water supply failure or pipe-empty condition to less than 5 seconds to prevent dry-run damage to pumps and heating elements",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 9,
+          "satisfaction_current": 3,
+          "opportunity_score": 15.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the likelihood of volumetric flow reading deviating more than plus-or-minus 3 percent from true value when measuring detergent-laden or chemically treated water across the 0.5-50 l/min operating range",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 9,
+          "satisfaction_current": 4,
+          "opportunity_score": 14.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the likelihood of flow sensor rotor clogging from lint, detergent residue, or mineral scale within 12 months of installation in commercial laundry or car wash equipment",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 8,
+          "satisfaction_current": 2,
+          "opportunity_score": 14.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the number of undetected water circuit faults (partial blockage, stuck valve, internal leak) that timed-fill dosing cannot sense because it lacks direct flow measurement",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 8,
+          "satisfaction_current": 2,
+          "opportunity_score": 14.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the field failure rate of the flow sensing subsystem to below 0.2 percent within the 10-year commercial machine design life",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 9,
+          "satisfaction_current": 4,
+          "opportunity_score": 14.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize measurement degradation when water contains suspended detergent residues, lint particles, or chemical dosing additives at concentrations typical of commercial wash cycles",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the number of undetected water leaks within the machine's internal fluid circuit that waste more than 50 litres per day",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Increase the ability to measure water consumption per cycle with sufficient accuracy (plus-or-minus 2 percent) to support pay-per-use billing models and per-machine water-use reporting",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize calibration drift exceeding plus-or-minus 5 percent per year caused by mechanical wear of paddle-wheel bearings and blade erosion in detergent-laden water",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Increase the ability to distinguish genuine zero-flow conditions from ultrasonic signal loss caused by detergent foam or entrained air from recycled water systems",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Increase the ability to provide real-time per-cycle water consumption data to the machine controller for IoT dashboard reporting and water-efficiency compliance documentation",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the likelihood of flow measurement failure when water recycling systems introduce variable water quality (TDS 200-2000 ppm, turbidity, temperature cycling) into the machine supply",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Increase the ability to document measured water consumption per cycle for EPA WaterSense, Energy Star, or EU Ecodesign water efficiency certification using onboard sensor data",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the likelihood of ultrasonic signal attenuation when detergent agitation or water recycling aeration generates air entrainment exceeding 2 percent by volume during commercial wash and rinse cycles",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 8,
+          "satisfaction_current": 4,
+          "opportunity_score": 12.0,
+          "is_underserved": true,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the likelihood of water fill volume deviating more than plus-or-minus 15 percent from target due to supply pressure variations that invalidate timed-fill calibration",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 7,
+          "satisfaction_current": 2,
+          "opportunity_score": 12.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize variability of water consumption readings between identical wash/rinse cycles under the same programme settings (repeatability better than plus-or-minus 1 percent)",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 8,
+          "satisfaction_current": 5,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the frequency of manual sensor disassembly and cleaning required to prevent accumulated debris from degrading flow measurement accuracy below plus-or-minus 5 percent",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Increase the ability to maintain accurate readings at low flow rates below 2 l/min where turbine/paddle-wheel rotors stall due to insufficient fluid momentum",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the likelihood of releasing a machine from end-of-line testing with a flow sensor calibration error exceeding plus-or-minus 3 percent that goes undetected during the automated test cycle",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 8,
+          "satisfaction_current": 5,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Increase the ability to detect abnormal water consumption patterns (e.g., more than 20 percent above baseline for the same cycle programme) indicating component degradation, valve failure, or internal leak",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Increase the ability to demonstrate measured water efficiency data that qualifies the equipment for WaterSense or equivalent eco-labels on the first certification submission",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Increase the ability to provide per-cycle water usage data visible on the machine HMI or IoT dashboard that commercial customers can include in sustainability reporting",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the likelihood of a facility operator receiving an unexpected water utility bill exceeding budget by more than 15 percent due to undetected equipment water waste that the sensor could have flagged",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the time to restore valid flow measurement after transient foam or bubble events from detergent injection dissipate from the ultrasonic sensor measurement path",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the likelihood of signal loss when air bubbles from detergent agitation or water recycling aeration pass through the sensor during normal operation",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the likelihood of mounting the sensor at a location where turbulence from upstream valves, elbows, or T-junctions causes more than 2 percent systematic reading bias",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the duration of invalid measurement output during machine drain-to-fill transitions when the ultrasonic sensor encounters partial pipe fill that prevents acoustic signal propagation between transducers",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the measurement error caused by disturbed flow profiles when the ultrasonic sensor is installed with less than 5xDN straight pipe run in compact commercial machine enclosures with elbows and T-junctions upstream",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the measurement dead zone at trickle-fill and pre-rinse flow rates below 4.2 l/min (DN20) where ultrasonic transit-time difference falls below the signal-to-noise detection threshold",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Increase the ability to measure across the full machine flow range (trickle-fill 0.5 l/min to high-volume rinse 40 l/min) in a single sensor without changing hardware",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the likelihood of specifying a sensor whose pressure rating or media compatibility is incompatible with the machine's operating conditions across its full output-type range",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize measurement failure when water temperature ranges from 5 degrees C (cold fill) to 85 degrees C (hot wash cycle) within a single machine operating envelope",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the required installation envelope (sensor body length and straight-pipe clearance) to fit within space-constrained commercial machine enclosures without requiring piping redesign",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the total OEM assembly-line integration time from unpacking to first valid reading, including mechanical fitting, electrical connection, and protocol handshake",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the likelihood of a sensor passing end-of-line quality test while having an undetected installation defect (misalignment, air pocket, reversed orientation) that causes field failure",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the transient measurement error during rapid temperature cycling between cold fill (5 degrees C) and hot wash (85 degrees C) where ultrasonic speed-of-sound correction lags behind actual medium temperature change rate",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the OEM qualification cost for validating acoustic performance across multiple machine platforms with different pipe diameters (DN14-DN25) and media compositions",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 6,
+          "satisfaction_current": 4,
+          "opportunity_score": 8.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the number of sensor variants an OEM must qualify and stock to cover its full product range of water-using equipment across DN12-DN25 pipe sizes",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 6,
+          "satisfaction_current": 4,
+          "opportunity_score": 8.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": false
+        },
+        {
+          "error_statement": "Minimize the OEM integration time required to configure fluid-type parameters and verify acoustic coupling for each machine variant during assembly-line commissioning",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 6,
+          "satisfaction_current": 5,
+          "opportunity_score": 7.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the risk of polymer housing seal degradation when commercial hot wash cycles operate at 85 degrees C within 5 degrees C of the ultrasonic sensor's 90 degrees C material limit for extended duty cycles",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 6,
+          "satisfaction_current": 5,
+          "opportunity_score": 7.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        },
+        {
+          "error_statement": "Minimize the likelihood of acoustic coupling degradation when surfactant concentrations in commercial wash water shift the medium's acoustic impedance outside the ultrasonic transducer's validated operating envelope",
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "importance": 6,
+          "satisfaction_current": 5,
+          "opportunity_score": 7.0,
+          "is_underserved": false,
+          "is_overserved": false,
+          "product_related": true
+        }
+      ],
+      "market_summaries": [
+        {
+          "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+          "naics_code": "333318",
+          "total_needs": 41,
+          "underserved_count": 14,
+          "overserved_count": 0,
+          "avg_opportunity_score": 10.98,
+          "top_opportunities": [
+            "Minimize time to detect a water supply failure or pipe-empty condition to less than 5 seconds to prevent dry-run damage to pumps and heating elements",
+            "Minimize the likelihood of volumetric flow reading deviating more than plus-or-minus 3 percent from true value when measuring detergent-laden or chemically treated water across the 0.5-50 l/min operating range",
+            "Minimize the field failure rate of the flow sensing subsystem to below 0.2 percent within the 10-year commercial machine design life",
+            "Minimize the likelihood of flow sensor rotor clogging from lint, detergent residue, or mineral scale within 12 months of installation in commercial laundry or car wash equipment",
+            "Minimize the number of undetected water circuit faults (partial blockage, stuck valve, internal leak) that timed-fill dosing cannot sense because it lacks direct flow measurement"
+          ]
+        }
+      ]
+    }
+  ],
+  "has_bom": true,
+  "naics_sector_type": "manufacturing"
+}

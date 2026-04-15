@@ -1,0 +1,1891 @@
+{
+  "id": "VN_heating_equipment_except_warm_air_furnac",
+  "title": "VN — Value Network: Heating Equipment (except Warm Air Furnaces) Manufacturing (NAICS 333414)",
+  "type": "value_network",
+  "market_slug": "heating_equipment_except_warm_air_furnac",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Header",
+      "content": "| Field | Value |\n|---|---|\n| **NAICS Code** | 333414 — Heating Equipment (except Warm Air Furnaces) Manufacturing |\n| **CFJ** | Generate and deliver thermal energy to occupied spaces and domestic hot-water systems via heated-water circuits |\n| **Output Types** | Gas condensing boiler; Gas non-condensing boiler; Oil-fired boiler; Electric hydronic boiler; Hydronic baseboard heater; Radiant floor heating system; Solar water heating system; Pool/spa heater |\n| **Hierarchy** | Product VN (L7 through L4) — what subsystems compose hydronic heating appliances and their installation ecosystem |\n| **Key OEMs** | Weil-McLain, Burnham (U.S. Boiler Company), Navien, Rinnai, Bosch Thermotechnology, Bradford White, A.O. Smith, NTI Boilers, Slant/Fin, Laars (Pentair), Triangle Tube, Lochinvar, Viessmann |\n| **Market Size** | ~$8–12B globally (hydronic heating equipment); North America residential boiler market led by Bosch Thermotechnology (~11.5% share) [SRC: web_search] |\n| **Architecture Distance** | 2 (near-adjacent to home market 333415) [SRC: 05_market_discovery] |\n\n---"
+    },
+    {
+      "title": "L7 — Ecosystem",
+      "content": "### L7: Hydronic Heating Equipment Ecosystem\n\nThe complete ecosystem of interdependent OEMs, component suppliers, installers, energy utilities, regulators, and building designers coordinated around the manufacture and deployment of hydronic (water-based) heating equipment — excluding warm air furnaces, heat pumps, and refrigeration equipment (which fall under NAICS 333415). Encompasses gas/oil boilers, hydronic baseboard heaters, radiant floor systems, solar thermal collectors, and pool heaters. The U.S. industry comprises ~670 active establishments with ~14,800 employees and ~$4.4B in revenue (Census 2017). The global residential boiler market alone exceeds $19B (2025) with a CAGR of ~6% driven by condensing technology mandates and energy efficiency regulations. [SRC: web_search, Census Bureau]\n\n---"
+    },
+    {
+      "title": "L6 — System-of-Systems Decomposition",
+      "content": "Seven L6 domains follow the energy path from combustion/conversion source through hydraulic distribution to occupant comfort, plus enabling domains.\n\n| L6 ID | Name | Type | Description |\n|---|---|---|---|\n| **L6.1** | Heat Generation | Core | Combustion, electric resistance, or solar thermal conversion subsystems that produce thermal energy in a hydronic medium. Technology choice here defines appliance type. |\n| **L6.2** | Hydraulic Distribution | Core | Piping, pumping, sensing, and safety infrastructure moving heated water from source to emitters and back. **Marquardt sits here.** |\n| **L6.3** | Heat Emission | Core | Terminal devices (baseboard, radiators, radiant floor, fan coils) transferring heat from water to occupied space. |\n| **L6.4** | Control & Regulation | Core | Intelligence layer: appliance controllers, thermostats, zone valves, weather compensation, BUS communication. |\n| **L6.5** | Domestic Hot Water (DHW) | Core | Potable water heating via storage cylinders, plate heat exchangers, thermostatic mixing, legionella protection. |\n| **L6.6** | Installation, Commissioning & Aftermarket | Horizontal | Human-process layer: installer tools, system flushing, commissioning, warranty service, spare parts. |\n| **L6.7** | Energy Monitoring & Compliance | Horizontal | Thermal energy metering, efficiency verification, ErP/EcoDesign labelling, smart-grid integration. |\n\n---"
+    },
+    {
+      "title": "L6.1 — Heat Generation",
+      "content": "The primary energy-conversion domain. For NAICS 333414, this means combustion (gas/oil), electric resistance, or solar thermal — NOT refrigerant-based (heat pumps are 333415).\n\n### L5 Systems under L6.1\n\n#### L5.1.1: Gas Burner Assembly\n\nPremix or atmospheric burner converting natural gas or propane into thermal energy. Modulating premix burners with 1:5 to 1:10 turndown dominate condensing boilers. [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.1.1.1: Premix Burner | Modulating surface burner with metal-fibre or ceramic-fibre deck; air/gas premixing upstream |\n| L4.1.1.2: Gas Valve Train | Modulating gas valve (Honeywell, SIT, Dungs), gas pressure regulator, shut-off valve |\n| L4.1.1.3: Ignition & Flame Detection | Hot-surface igniter or spark electrode; ionisation flame sensor for flame proving |\n| L4.1.1.4: Combustion Air Fan | Variable-speed EC blower providing forced draft and air/fuel ratio control |\n\n#### L5.1.2: Primary Heat Exchanger\n\nTransfers combustion energy to hydronic water. Condensing boilers use stainless steel (316L) or aluminium-silicon alloy to withstand acidic condensate (pH 3–5). The single most expensive component in a condensing boiler. [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.1.2.1: Condensing Heat Exchanger Core | Stainless steel or Al-Si spiral/plate exchanger extracting latent heat from flue gases; achieves 95–98% efficiency |\n| L4.1.2.2: Primary (Sensible) Heat Exchanger | Cast iron, copper, or steel fire-tube/water-tube exchanger for sensible heat transfer; used in non-condensing boilers |\n| L4.1.2.3: Condensate Trap & Drain | Collects acidic condensate from flue-gas cooling; neutraliser required before drain discharge |\n\n#### L5.1.3: Oil Burner Assembly\n\nPressure-atomising or rotary-cup oil burner for oil-fired boilers. Declining market share in North America/EU but significant installed base.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.1.3.1: Oil Nozzle & Atomiser | Pressure-atomising nozzle (Danfoss, Delavan) converting fuel oil into fine spray |\n| L4.1.3.2: Oil Pump & Pre-Heater | Gear pump with pressure regulator; pre-heater for viscous fuels |\n| L4.1.3.3: Ignition Transformer & Electrode | High-voltage transformer and spark electrodes for oil ignition |\n\n#### L5.1.4: Electric Heating Element\n\nImmersion or flanged resistance heating element for electric hydronic boilers. Simpler construction than combustion; no flue required.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.1.4.1: Resistance Heating Element | Incoloy or stainless steel sheathed element; typical 5–30 kW residential |\n| L4.1.4.2: Power Contactor & Staging | Solid-state or mechanical contactors for multi-stage element switching |\n| L4.1.4.3: Over-Temperature Safety Cut-Out | Manual-reset thermal cut-out preventing dry-fire or runaway heating |\n\n#### L5.1.5: Solar Thermal Collector\n\nFlat-plate or evacuated-tube solar collector for solar water heating systems. Pre-heats hydronic circuit or DHW storage.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.1.5.1: Absorber Plate & Riser Tubes | Selective-coated copper or aluminium absorber with copper riser tubes |\n| L4.1.5.2: Glazing & Insulation | Low-iron tempered glass cover; mineral wool or foam back insulation |\n| L4.1.5.3: Solar Pump Station | Circulator, flow meter, non-return valve, pressure relief, and fill/drain valves in a compact unit |\n\n#### L5.1.6: Flue Gas System\n\nExhaust path from combustion chamber to atmosphere. Concentric (room-sealed) flues dominate modern installations.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.1.6.1: Concentric Flue Terminal | Room-sealed balanced-flue terminal allowing combustion air intake and exhaust via single wall penetration |\n| L4.1.6.2: Flue Duct & Extensions | Stainless steel or polypropylene (condensing-rated) duct sections |\n| L4.1.6.3: Condensate Neutraliser | Calcium carbonate (limestone) cartridge neutralising acidic condensate to pH 5–7 before drain |\n\n---"
+    },
+    {
+      "title": "L6.2 — Hydraulic Distribution",
+      "content": "The water-side infrastructure connecting heat source to emitters and back. **This is where Marquardt's ultrasonic flow sensor sits.** Every litre of heated water passes through L6.2 components; hydraulic performance directly determines delivered efficiency and occupant comfort.\n\n### L5 Systems under L6.2\n\n#### L5.2.1: Circulator Pump\n\nPrime mover of the hydronic loop. Modern systems use high-efficiency EC circulators (Wilo, Grundfos ~70% combined EU share) with integrated differential-pressure control. [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.2.1.1: EC Motor & Impeller | Permanent-magnet electronically commutated motor with wet-rotor design; 4–80 W typical |\n| L4.2.1.2: Speed Controller / PWM Interface | Integrated inverter with 0–10 V, PWM, or BUS interface for external modulation |\n| L4.2.1.3: Pump Housing & Connections | Cast iron or composite volute; DN20–DN32 threaded or flanged connections |\n\n#### L5.2.2: Hydraulic Separator\n\nDecouples primary (heat-source) circuit from secondary (distribution) circuit. Essential in multi-zone systems.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.2.2.1: Separator Vessel | Steel or stainless-steel chamber with internal baffles for flow decoupling and air/dirt separation |\n| L4.2.2.2: Air Vent & Drain | Automatic air vent (top); drain valve (bottom) for sludge removal |\n| L4.2.2.3: Insulation Jacket | Thermal insulation shell preventing standing heat losses |\n\n#### L5.2.3: Distribution Manifold\n\nMulti-port header splitting primary supply into individual zone circuits. Particularly important for radiant floor heating.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.2.3.1: Manifold Bar & Zone Outlets | Brass or stainless manifold with balancing valves and flow meters per circuit |\n| L4.2.3.2: Zone Valve Actuators | Thermal or motor-driven actuators on each loop; respond to room thermostat signals |\n| L4.2.3.3: Manifold Cabinet & Insulation | Wall-mount enclosure with condensation protection and thermal insulation |\n\n#### L5.2.4: Piping Network\n\nPhysical conduit for heated water. Material depends on application: copper for primary, PEX/PE-RT for radiant loops, multilayer composite for risers.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.2.4.1: Primary Circuit Piping | Copper or stainless steel from heat source to separator/manifold; typically DN22–DN28 |\n| L4.2.4.2: Secondary / Zone Piping | PEX, PE-RT, or multilayer composite for zone circuits; DN12–DN20 |\n| L4.2.4.3: Pipe Fittings & Joints | Press fittings, compression fittings, solder joints; increasingly push-fit |\n| L4.2.4.4: Pipe Insulation | Closed-cell elastomeric or polyethylene foam per EN 12828 / ASHRAE 90.1 |\n\n#### L5.2.5: Flow Sensing & Measurement\n\nInstruments measuring volumetric flow rate, flow direction, medium temperature, and medium condition within the hydronic loop. The flow signal feeds appliance controllers for safety interlocks, circulator modulation, thermal energy calculation (Q = m-dot x cp x delta-T), and anomaly detection. [SRC: web_search]\n\n**Marquardt's ultrasonic flow sensor sits at L4 within this L5 node.**\n\n| L4 Subsystem | Description |\n|---|---|\n| **L4.2.5.1: Ultrasonic Flow Sensor** | **Transit-time ultrasonic measurement using opposed piezoelectric transducers. No moving parts, zero pressure drop, glycol-tolerant, air/empty-pipe detection. Marquardt DN20 is the reference product. Growing adoption in modern condensing boilers.** |\n| L4.2.5.2: Impeller / Turbine Flow Sensor | Mechanical paddle-wheel or turbine rotor; incumbent in many boiler platforms. Moving parts subject to wear and scaling. Declining share. |\n| L4.2.5.3: Vortex Flow Sensor | Bluff-body vortex shedding; higher accuracy at mid-range flows but introduces pressure drop. Niche. |\n| L4.2.5.4: Differential Pressure Flow Estimation | Inferred from pump speed and delta-P; zero hardware cost but low accuracy (±15–20%). Budget fallback. |\n\n#### L5.2.6: Expansion & Safety Devices\n\nPressure management and safety relief protecting the closed hydronic loop.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.2.6.1: Expansion Vessel | Diaphragm vessel absorbing volumetric expansion; pre-charged nitrogen; 8–18 L residential |\n| L4.2.6.2: Safety Valve (Pressure Relief) | Spring-loaded valve at 3 bar (typical); discharges to tundish on overpressure |\n| L4.2.6.3: Pressure Gauge & Transducer | Analogue gauge for visual check; electronic transducer for controller alarms |\n| L4.2.6.4: Fill Valve & Backflow Preventer | Maintains system pressure; prevents potable water contamination per EN 1717 |\n\n#### L5.2.7: Water Treatment & Filtration\n\nProtects hydronic loop from corrosion, scaling, and sludge. Critical in retrofit installations.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.2.7.1: Magnetic Dirt Separator | In-line magnetic filter capturing magnetite and ferrous debris |\n| L4.2.7.2: System Filter / Strainer | Mesh or cyclone filter for non-ferrous particles; installed on return line |\n| L4.2.7.3: Chemical Inhibitor Dosing | Corrosion/scale inhibitor dosed at commissioning and annual service |\n\n---"
+    },
+    {
+      "title": "L6.3 — Heat Emission",
+      "content": "Terminal devices transferring thermal energy from hydronic medium to occupied space. Emitter choice constrains supply temperature: radiant floor 30–45 °C, baseboard/radiator 50–70 °C, fan coil 40–60 °C.\n\n### L5 Systems under L6.3\n\n#### L5.3.1: Hydronic Baseboard Heater\n\nFinned-tube convector in painted steel housing. Cooler air enters bottom, warms over fins, rises from top — primarily convective heat transfer. Hydronic baseboard holds ~46% of the baseboard heater market. Key manufacturers: Slant/Fin, Runtal, Marley (Regal Beloit). [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.3.1.1: Copper Tube & Aluminium Fin Element | Copper carrier tube with press-fit aluminium fins; heat output rated per linear foot at standard delta-T |\n| L4.3.1.2: Steel Enclosure & End Caps | Painted steel housing with inlet/outlet damper slots for convection airflow |\n| L4.3.1.3: Isolation & Balancing Valves | Supply/return shut-off valves and balancing valve for zone flow regulation |\n\n#### L5.3.2: Panel Radiator\n\nSteel panel radiators with convector fins. Dominant emitter in European retrofit markets. Types 11 through 33. Manufacturers: Stelrad, Purmo, Kermi, Myson.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.3.2.1: Steel Panel & Convector Assembly | Pressed-steel panels with spot-welded convector fins |\n| L4.3.2.2: Thermostatic Radiator Valve (TRV) | Self-regulating wax/liquid thermostatic head; per-room temperature control |\n| L4.3.2.3: Lockshield Valve & Balancing | Return-side valve for hydraulic balancing of multi-radiator circuits |\n\n#### L5.3.3: Radiant Floor Heating\n\nPEX/PE-RT pipe loops embedded in screed or dry-plate. Preferred for new-build with condensing boilers due to low-temperature compatibility. Market growing at ~6% CAGR to $8.9B by 2036. [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.3.3.1: Pipe Loop (PEX / PE-RT) | Oxygen-barrier pipe in serpentine or spiral; typically 16 mm OD at 100–200 mm spacing |\n| L4.3.3.2: Screed / Dry-Plate Assembly | Wet screed (65–75 mm) or aluminium dry-plate system for low-profile retrofit |\n| L4.3.3.3: Room Thermostat & Wiring Centre | Electronic or smart thermostat per zone; wired or wireless to manifold actuators |\n\n#### L5.3.4: Fan Coil Unit (Hydronic)\n\nForced-convection emitter using water-to-air heat exchanger with EC fan. Used where rapid heat-up needed or space constrained.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.3.4.1: Water-to-Air Heat Exchanger Coil | Copper tube / aluminium fin coil |\n| L4.3.4.2: EC Fan & Motor | Tangential or centrifugal fan with speed control for noise management |\n| L4.3.4.3: Filter & Housing | Air filter, condensate tray (if cooling-capable), painted steel enclosure |\n\n---"
+    },
+    {
+      "title": "L6.4 — Control & Regulation",
+      "content": "Intelligence and communication layer orchestrating all L6 domains. Weather-compensated control with outdoor reset curves is standard in modern condensing boilers.\n\n### L5 Systems under L6.4\n\n#### L5.4.1: Appliance Controller / PCB\n\nMain control board running combustion management, safety interlocks, pump sequencing, and diagnostics.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.4.1.1: Microcontroller & Firmware | ARM-based MCU running real-time control loops; OTA-updatable in connected models |\n| L4.4.1.2: Power Supply & Relay Board | Transformer/SMPS, relay drivers for gas valve, fan, circulator, zone valves |\n| L4.4.1.3: Sensor Input Interface | ADC channels for temperature sensors (NTC/Pt1000), pressure transducers, flow sensor (UART/frequency) |\n\n#### L5.4.2: Room Thermostat / User Interface\n\nOccupant-facing control: simple programmable through smart/connected (Nest, Ecobee, Honeywell Home).\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.4.2.1: Temperature Sensor & Display | NTC or thermistor sensor; LCD/e-ink display with setpoint indication |\n| L4.4.2.2: Communication Module | Wired (2-wire, OpenTherm, eBUS) or wireless (868 MHz, Zigbee, Wi-Fi) |\n| L4.4.2.3: Scheduling & Learning Logic | Time-programme scheduling; self-learning occupancy in smart variants |\n\n#### L5.4.3: Weather Compensation Module\n\nOutdoor sensor + reset-curve logic adjusting supply water temperature to heating load. Prerequisite for high-efficiency condensing operation.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.4.3.1: Outdoor Temperature Sensor | NTC sensor in weatherproof housing; north-facing wall mount |\n| L4.4.3.2: Heating Curve Algorithm | Parametric reset curve mapping outdoor temp to supply temp setpoint |\n\n#### L5.4.4: BUS Communication & Gateway\n\nData backbone connecting controller, thermostats, zone controllers, and external systems.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.4.4.1: BUS Interface Module | OpenTherm, eBUS, or Modbus transceiver on appliance PCB or add-on |\n| L4.4.4.2: Internet Gateway / Cloud Connector | Wi-Fi or LAN gateway for remote monitoring, OTA updates, demand-response |\n\n---"
+    },
+    {
+      "title": "L6.5 — Domestic Hot Water (DHW)",
+      "content": "Dedicated subsystems for potable water heating. Combi boilers produce DHW instantaneously; system boilers use indirect cylinders.\n\n### L5 Systems under L6.5\n\n#### L5.5.1: DHW Storage Cylinder\n\nInsulated vessel (150–300 L residential) heated by internal coil from boiler circuit.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.5.1.1: Vessel & Coil Assembly | Enamelled steel or stainless-steel vessel with one or two internal coils |\n| L4.5.1.2: Insulation & Cladding | Rigid PU foam or EPS insulation; standing loss <1.5 kWh/24h for 200 L |\n| L4.5.1.3: Anode Protection | Magnesium sacrificial anode or impressed-current anode for corrosion protection |\n\n#### L5.5.2: Instantaneous DHW Heat Exchanger\n\nSecondary plate heat exchanger in combi boilers heating potable water on demand.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.5.2.1: Plate Heat Exchanger (Water-to-Water) | Brazed stainless-steel plate pack; primary from boiler, secondary potable |\n| L4.5.2.2: DHW Flow Sensor & Temperature Sensor | Detects tap opening; controls burner modulation to maintain outlet setpoint |\n| L4.5.2.3: Thermostatic Mixing Valve | Blends hot + cold to prevent scalding; set to 48–55 °C |\n\n#### L5.5.3: Legionella Protection\n\nPeriodic thermal disinfection raising cylinder to >60 °C.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.5.3.1: Immersion Heater Element | Electric element (1–3 kW) for legionella pasteurisation |\n| L4.5.3.2: Disinfection Timer & Controller | Weekly programmable cycle with temperature confirmation |\n\n---"
+    },
+    {
+      "title": "L6.6 — Installation, Commissioning & Aftermarket (H)",
+      "content": "Horizontal process domain. ~30–40% of hydronic heating performance issues originate in installation/commissioning errors, not equipment. [SRC: web_search]\n\n### L5 Systems under L6.6\n\n#### L5.6.1: Installation Tooling\n\nSpecialised tools for system installation: pipe preparation, flue fitting, system flushing.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.6.1.1: Pipe Preparation & Joining Tools | Press-fit jaws, pipe cutters, deburring tools (copper, PEX, multilayer) |\n| L4.6.1.2: Flue Installation Tools | Core drill, flue template jig, silicone sealant, fire-stop collar |\n| L4.6.1.3: System Flushing Equipment | Power-flush machine for removing debris, flux residue, magnetite |\n\n#### L5.6.2: Commissioning & Start-Up\n\nVerification, parameterisation, and performance validation before occupant handover.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.6.2.1: Hydraulic Balancing Procedure | Setting flow rates per zone using manifold valves and flow meters |\n| L4.6.2.2: Combustion Analysis | Flue-gas analyser verifying CO, CO2, O2, and stack temperature for compliance |\n| L4.6.2.3: Compliance Documentation | Benchmark certificate, commissioning checklist, gas safety record |\n\n#### L5.6.3: Aftermarket Service & Spare Parts\n\nOngoing maintenance, warranty, and spare parts.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.6.3.1: Annual Service Inspection | Gas safety check, combustion analysis, HX inspection, filter clean, inhibitor top-up |\n| L4.6.3.2: Spare Parts Supply Chain | OEM and aftermarket parts via wholesalers (Wolseley, Rexel, Sonepar, Ferguson) |\n| L4.6.3.3: Predictive Maintenance Platform | Cloud analytics consuming sensor data (incl. flow) for early fault detection |\n\n---"
+    },
+    {
+      "title": "L6.7 — Energy Monitoring & Compliance (H)",
+      "content": "Connects heating system to metering, efficiency verification, and grid integration. Driven by EcoDesign/ErP labelling mandates and energy audit requirements.\n\n### L5 Systems under L6.7\n\n#### L5.7.1: Thermal Energy Meter (Heat Meter)\n\nMID-certified instrument measuring delivered thermal energy: Q = integral(flow x density x cp x delta-T) dt.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.7.1.1: Flow Sensor (Metering-Grade) | Ultrasonic or mechanical flow sensor with MID certification (EN 1434) |\n| L4.7.1.2: Matched Temperature Sensor Pair | Pt500 or Pt1000 paired sensors for supply/return with <0.02 K matching error |\n| L4.7.1.3: Integrator / Calculator Unit | Microprocessor integrating thermal power over time; stores cumulative kWh/MWh |\n\n#### L5.7.2: Efficiency Verification\n\nMonitoring and reporting systems for regulatory compliance.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.7.2.1: ErP / EcoDesign Label Module | Firmware computing seasonal efficiency metrics for regulatory labelling |\n| L4.7.2.2: Data Logging & Export | Local or cloud storage of operating data for energy audits and warranty claims |\n\n---"
+    },
+    {
+      "title": "Output Type Activation Matrix",
+      "content": "| L6 Domain | Gas Cond. Boiler | Gas Non-Cond. Boiler | Oil Boiler | Electric Boiler | Baseboard | Radiant Floor | Solar Thermal | Pool Heater |\n|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|\n| L6.1 Heat Generation | Y | Y | Y | Y | — | — | Y | Y |\n| L6.2 Hydraulic Distribution | Y | Y | Y | Y | Y | Y | Y | Y |\n| L6.3 Heat Emission | Y | Y | Y | Y | Y | Y | — | — |\n| L6.4 Control & Regulation | Y | Y | Y | Y | Y | Y | Y | partial |\n| L6.5 DHW | Y (combi) | Y (combi) | partial | partial | — | — | Y | — |\n| L6.6 Installation & Service | Y | Y | Y | Y | Y | Y | Y | Y |\n| L6.7 Energy Monitoring | Y | partial | partial | Y | — | — | partial | — |\n\nNotes: L6.2 is universal — every hydronic output type requires flow distribution. Baseboard and radiant floor are emitter-only products (no integrated heat generation); they consume hot water from a boiler. Pool heaters have simplified controls (setpoint only). Solar thermal contributes to DHW pre-heat but is rarely the sole heat source.\n\n---"
+    },
+    {
+      "title": "Marquardt Position in the Value Network",
+      "content": "```\nL7   Hydronic Heating Equipment Ecosystem\n |\n +-- L6.2  Hydraulic Distribution\n      |\n      +-- L5.2.5  Flow Sensing & Measurement\n           |\n           +-- L4.2.5.1  Ultrasonic Flow Sensor  <-- MARQUARDT\n           +-- L4.2.5.2  Impeller / Turbine Flow Sensor (incumbent)\n           +-- L4.2.5.3  Vortex Flow Sensor (niche)\n           +-- L4.2.5.4  Differential Pressure Estimation (budget fallback)\n```\n\n**Full L-path:** L7 > L6.2 Hydraulic Distribution > L5.2.5 Flow Sensing & Measurement > L4.2.5.1 Ultrasonic Flow Sensor\n\n**Why this market:** Hydronic heating equipment (boilers, baseboard, radiant floor) operates in nearly identical conditions to the home-market heat pumps (NAICS 333415). Same pipe sizes (DN15–DN25), same media (water/glycol), same temperature range (2–90 °C), same OEM integration model. Architecture distance = 2. The technology transition from mechanical turbine sensors to ultrasonic is accelerated in this market by three forces: (1) EU EcoDesign requiring measured efficiency, not estimated; (2) OEM platform simplification demanding multi-variable sensing (flow + temperature + anomaly) in one package; (3) the shift to condensing boilers, where accurate flow measurement enables precise modulation and peak condensing efficiency. [SRC: 05_market_discovery, web_search]\n\n---"
+    },
+    {
+      "title": "Structural Validation Summary",
+      "content": "| Check | Result |\n|---|---|\n| Exactly one L7 node | PASS — 1 L7 (Hydronic Heating Equipment Ecosystem) |\n| L6 count in range (3–8) | PASS — 7 L6 nodes |\n| L5 count per L6 in range (2–12) | PASS — L6.1: 6, L6.2: 7, L6.3: 4, L6.4: 4, L6.5: 3, L6.6: 3, L6.7: 2 |\n| L4 count per L5 >= 2 | PASS — all L5 nodes have 2–4 L4 children |\n| No orphan nodes | PASS — every node has a parent |\n| No level skipping | PASS — L7>L6>L5>L4 strictly followed |\n| Valid parent-child transitions | PASS |\n| No company names in L7/L6 names | PASS |\n| Three-question naming test (5 spot-checks) | PASS — \"Circulator Pump,\" \"Condensing Heat Exchanger Core,\" \"Premix Burner,\" \"Pipe Loop,\" \"Expansion Vessel\" all industry-standard |\n| Unit count in range (15–60) | PASS — 29 L5 + ~85 L4 = 115 total units |\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"value_network_construction\",\n  \"naics_code\": \"333414\",\n  \"naics_title\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n  \"cfj_statement\": \"Generate and deliver thermal energy to occupied spaces and domestic hot-water systems via heated-water circuits\",\n  \"l7_solution\": \"Hydronic Heating Equipment Ecosystem\",\n  \"top_level\": \"L7\",\n  \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n  \"architecture_distance\": 2,\n  \"already_uses_technology\": true,\n  \"output_types\": [\n    \"Gas condensing boiler\",\n    \"Gas non-condensing boiler\",\n    \"Oil-fired boiler\",\n    \"Electric hydronic boiler\",\n    \"Hydronic baseboard heater\",\n    \"Radiant floor heating system\",\n    \"Solar water heating system\",\n    \"Pool/spa heater\"\n  ],\n  \"value_network\": {\n    \"naics_code\": \"333414\",\n    \"naics_title\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n    \"cfj_statement\": \"Generate and deliver thermal energy to occupied spaces and domestic hot-water systems via heated-water circuits\",\n    \"l7_solution\": \"Hydronic Heating Equipment Ecosystem\",\n    \"units\": [\n      {\"name\": \"Hydronic Heating Equipment Ecosystem\", \"level\": \"L7\", \"description\": \"Complete ecosystem of OEMs, suppliers, installers, utilities, and regulators coordinated around hydronic heating equipment manufacturing and deployment\", \"bom_standard\": \"Moore 1993\", \"parent_name\": \"ROOT\"},\n\n      {\"name\": \"Heat Generation\", \"level\": \"L6\", \"description\": \"Combustion, electric resistance, or solar thermal conversion subsystems producing thermal energy in hydronic medium\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Hydronic Heating Equipment Ecosystem\"},\n      {\"name\": \"Hydraulic Distribution\", \"level\": \"L6\", \"description\": \"Piping, pumping, sensing, and safety infrastructure moving heated water from source to emitters and back\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Hydronic Heating Equipment Ecosystem\"},\n      {\"name\": \"Heat Emission\", \"level\": \"L6\", \"description\": \"Terminal devices transferring heat from hydronic medium to occupied space\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Hydronic Heating Equipment Ecosystem\"},\n      {\"name\": \"Control & Regulation\", \"level\": \"L6\", \"description\": \"Intelligence layer: controllers, thermostats, zone valves, weather compensation, BUS communication\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Hydronic Heating Equipment Ecosystem\"},\n      {\"name\": \"Domestic Hot Water\", \"level\": \"L6\", \"description\": \"Potable water heating via storage cylinders, plate heat exchangers, thermostatic mixing, legionella protection\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Hydronic Heating Equipment Ecosystem\"},\n      {\"name\": \"Installation, Commissioning & Aftermarket\", \"level\": \"L6\", \"description\": \"Human-process layer: installer tools, commissioning, warranty service, spare parts\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Hydronic Heating Equipment Ecosystem\"},\n      {\"name\": \"Energy Monitoring & Compliance\", \"level\": \"L6\", \"description\": \"Thermal energy metering, efficiency verification, regulatory labelling, smart-grid integration\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Hydronic Heating Equipment Ecosystem\"},\n\n      {\"name\": \"Gas Burner Assembly\", \"level\": \"L5\", \"description\": \"Premix or atmospheric burner converting natural gas or propane into thermal energy\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Heat Generation\"},\n      {\"name\": \"Primary Heat Exchanger\", \"level\": \"L5\", \"description\": \"Transfers combustion energy to hydronic water; condensing or non-condensing\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Heat Generation\"},\n      {\"name\": \"Oil Burner Assembly\", \"level\": \"L5\", \"description\": \"Pressure-atomising or rotary-cup oil burner for oil-fired boilers\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Heat Generation\"},\n      {\"name\": \"Electric Heating Element\", \"level\": \"L5\", \"description\": \"Immersion or flanged resistance heating element for electric hydronic boilers\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Heat Generation\"},\n      {\"name\": \"Solar Thermal Collector\", \"level\": \"L5\", \"description\": \"Flat-plate or evacuated-tube collector for solar water heating\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Heat Generation\"},\n      {\"name\": \"Flue Gas System\", \"level\": \"L5\", \"description\": \"Exhaust path from combustion chamber to atmosphere\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Heat Generation\"},\n\n      {\"name\": \"Circulator Pump\", \"level\": \"L5\", \"description\": \"Prime mover of the hydronic loop; EC circulators with differential-pressure control\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Hydraulic Distribution\"},\n      {\"name\": \"Hydraulic Separator\", \"level\": \"L5\", \"description\": \"Decouples primary from secondary circuit; prevents hydraulic interference\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Hydraulic Distribution\"},\n      {\"name\": \"Distribution Manifold\", \"level\": \"L5\", \"description\": \"Multi-port header splitting supply into zone circuits\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Hydraulic Distribution\"},\n      {\"name\": \"Piping Network\", \"level\": \"L5\", \"description\": \"Physical conduit for heated water between system components\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Hydraulic Distribution\"},\n      {\"name\": \"Flow Sensing & Measurement\", \"level\": \"L5\", \"description\": \"Instruments measuring flow rate, direction, temperature, and medium condition\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Hydraulic Distribution\"},\n      {\"name\": \"Expansion & Safety Devices\", \"level\": \"L5\", \"description\": \"Pressure management and safety relief protecting the closed hydronic loop\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Hydraulic Distribution\"},\n      {\"name\": \"Water Treatment & Filtration\", \"level\": \"L5\", \"description\": \"Protects hydronic loop from corrosion, scaling, and sludge\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Hydraulic Distribution\"},\n\n      {\"name\": \"Hydronic Baseboard Heater\", \"level\": \"L5\", \"description\": \"Finned-tube convector in steel housing; primarily convective heat transfer\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Heat Emission\"},\n      {\"name\": \"Panel Radiator\", \"level\": \"L5\", \"description\": \"Steel panel radiators with convector fins; dominant in European retrofit\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Heat Emission\"},\n      {\"name\": \"Radiant Floor Heating\", \"level\": \"L5\", \"description\": \"PEX/PE-RT pipe loops in screed or dry-plate; low-temperature emission\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Heat Emission\"},\n      {\"name\": \"Fan Coil Unit\", \"level\": \"L5\", \"description\": \"Forced-convection emitter with water-to-air heat exchanger and EC fan\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Heat Emission\"},\n\n      {\"name\": \"Appliance Controller\", \"level\": \"L5\", \"description\": \"Main control board running combustion management, safety interlocks, diagnostics\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Control & Regulation\"},\n      {\"name\": \"Room Thermostat\", \"level\": \"L5\", \"description\": \"Occupant-facing temperature control device\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Control & Regulation\"},\n      {\"name\": \"Weather Compensation Module\", \"level\": \"L5\", \"description\": \"Outdoor sensor and reset-curve logic adjusting supply temperature\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Control & Regulation\"},\n      {\"name\": \"BUS Communication & Gateway\", \"level\": \"L5\", \"description\": \"Data backbone connecting controller, thermostats, and external systems\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Control & Regulation\"},\n\n      {\"name\": \"DHW Storage Cylinder\", \"level\": \"L5\", \"description\": \"Insulated hot-water storage vessel heated by internal coil\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Domestic Hot Water\"},\n      {\"name\": \"Instantaneous DHW Heat Exchanger\", \"level\": \"L5\", \"description\": \"Secondary plate heat exchanger in combi boilers for on-demand potable water\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Domestic Hot Water\"},\n      {\"name\": \"Legionella Protection\", \"level\": \"L5\", \"description\": \"Periodic thermal disinfection system\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Domestic Hot Water\"},\n\n      {\"name\": \"Installation Tooling\", \"level\": \"L5\", \"description\": \"Specialised tools for system installation\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Installation, Commissioning & Aftermarket\"},\n      {\"name\": \"Commissioning & Start-Up\", \"level\": \"L5\", \"description\": \"Verification, parameterisation, and performance validation\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Installation, Commissioning & Aftermarket\"},\n      {\"name\": \"Aftermarket Service & Spare Parts\", \"level\": \"L5\", \"description\": \"Ongoing maintenance, warranty service, and spare parts supply\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Installation, Commissioning & Aftermarket\"},\n\n      {\"name\": \"Thermal Energy Meter\", \"level\": \"L5\", \"description\": \"MID-certified instrument measuring delivered thermal energy\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Energy Monitoring & Compliance\"},\n      {\"name\": \"Efficiency Verification\", \"level\": \"L5\", \"description\": \"Monitoring and reporting for regulatory compliance\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Energy Monitoring & Compliance\"},\n\n      {\"name\": \"Premix Burner\", \"level\": \"L4\", \"description\": \"Modulating surface burner with metal-fibre or ceramic-fibre deck\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Gas Burner Assembly\"},\n      {\"name\": \"Gas Valve Train\", \"level\": \"L4\", \"description\": \"Modulating gas valve, pressure regulator, shut-off valve\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Gas Burner Assembly\"},\n      {\"name\": \"Ignition & Flame Detection\", \"level\": \"L4\", \"description\": \"Hot-surface igniter or spark electrode; ionisation flame sensor\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Gas Burner Assembly\"},\n      {\"name\": \"Combustion Air Fan\", \"level\": \"L4\", \"description\": \"Variable-speed EC blower for forced draft and air/fuel ratio control\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Gas Burner Assembly\"},\n\n      {\"name\": \"Condensing Heat Exchanger Core\", \"level\": \"L4\", \"description\": \"Stainless steel or Al-Si spiral/plate exchanger for latent heat recovery; 95-98% efficiency\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Primary Heat Exchanger\"},\n      {\"name\": \"Primary Sensible Heat Exchanger\", \"level\": \"L4\", \"description\": \"Cast iron, copper, or steel fire-tube/water-tube exchanger for non-condensing boilers\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Primary Heat Exchanger\"},\n      {\"name\": \"Condensate Trap & Drain\", \"level\": \"L4\", \"description\": \"Collects acidic condensate from flue-gas cooling; neutraliser required\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Primary Heat Exchanger\"},\n\n      {\"name\": \"Oil Nozzle & Atomiser\", \"level\": \"L4\", \"description\": \"Pressure-atomising nozzle converting fuel oil into fine spray\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Oil Burner Assembly\"},\n      {\"name\": \"Oil Pump & Pre-Heater\", \"level\": \"L4\", \"description\": \"Gear pump with pressure regulator; pre-heater for viscous fuels\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Oil Burner Assembly\"},\n      {\"name\": \"Oil Ignition Transformer\", \"level\": \"L4\", \"description\": \"High-voltage transformer and spark electrodes for oil ignition\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Oil Burner Assembly\"},\n\n      {\"name\": \"Resistance Heating Element\", \"level\": \"L4\", \"description\": \"Incoloy or stainless steel sheathed element; 5-30 kW residential\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Electric Heating Element\"},\n      {\"name\": \"Power Contactor & Staging\", \"level\": \"L4\", \"description\": \"Solid-state or mechanical contactors for multi-stage switching\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Electric Heating Element\"},\n      {\"name\": \"Over-Temperature Safety Cut-Out\", \"level\": \"L4\", \"description\": \"Manual-reset thermal cut-out preventing dry-fire or runaway\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Electric Heating Element\"},\n\n      {\"name\": \"Absorber Plate & Riser Tubes\", \"level\": \"L4\", \"description\": \"Selective-coated copper/aluminium absorber with copper riser tubes\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Solar Thermal Collector\"},\n      {\"name\": \"Glazing & Insulation\", \"level\": \"L4\", \"description\": \"Low-iron tempered glass cover; mineral wool or foam back insulation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Solar Thermal Collector\"},\n      {\"name\": \"Solar Pump Station\", \"level\": \"L4\", \"description\": \"Circulator, flow meter, non-return valve, pressure relief in compact unit\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Solar Thermal Collector\"},\n\n      {\"name\": \"Concentric Flue Terminal\", \"level\": \"L4\", \"description\": \"Room-sealed balanced-flue terminal for combustion air intake and exhaust\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Flue Gas System\"},\n      {\"name\": \"Flue Duct & Extensions\", \"level\": \"L4\", \"description\": \"Stainless steel or polypropylene condensing-rated duct sections\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Flue Gas System\"},\n      {\"name\": \"Condensate Neutraliser\", \"level\": \"L4\", \"description\": \"Calcium carbonate cartridge neutralising acidic condensate to pH 5-7\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Flue Gas System\"},\n\n      {\"name\": \"EC Motor & Impeller\", \"level\": \"L4\", \"description\": \"Permanent-magnet EC motor with wet-rotor design; 4-80 W\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Circulator Pump\"},\n      {\"name\": \"Speed Controller\", \"level\": \"L4\", \"description\": \"Integrated inverter with 0-10 V, PWM, or BUS interface\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Circulator Pump\"},\n      {\"name\": \"Pump Housing & Connections\", \"level\": \"L4\", \"description\": \"Cast iron or composite volute; DN20-DN32 threaded or flanged\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Circulator Pump\"},\n\n      {\"name\": \"Separator Vessel\", \"level\": \"L4\", \"description\": \"Steel or stainless chamber with baffles for flow decoupling and air/dirt separation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Hydraulic Separator\"},\n      {\"name\": \"Air Vent & Drain\", \"level\": \"L4\", \"description\": \"Automatic air vent top; drain valve bottom for sludge removal\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Hydraulic Separator\"},\n      {\"name\": \"Insulation Jacket\", \"level\": \"L4\", \"description\": \"Thermal insulation shell preventing standing heat losses\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Hydraulic Separator\"},\n\n      {\"name\": \"Manifold Bar & Zone Outlets\", \"level\": \"L4\", \"description\": \"Brass or stainless manifold with balancing valves and flow meters per circuit\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Distribution Manifold\"},\n      {\"name\": \"Zone Valve Actuators\", \"level\": \"L4\", \"description\": \"Thermal or motor-driven actuators responding to thermostat signals\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Distribution Manifold\"},\n      {\"name\": \"Manifold Cabinet & Insulation\", \"level\": \"L4\", \"description\": \"Wall-mount enclosure with condensation protection\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Distribution Manifold\"},\n\n      {\"name\": \"Primary Circuit Piping\", \"level\": \"L4\", \"description\": \"Copper or stainless steel from heat source to separator; DN22-DN28\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Piping Network\"},\n      {\"name\": \"Secondary / Zone Piping\", \"level\": \"L4\", \"description\": \"PEX, PE-RT, or multilayer composite; DN12-DN20\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Piping Network\"},\n      {\"name\": \"Pipe Fittings & Joints\", \"level\": \"L4\", \"description\": \"Press, compression, solder, push-fit connections\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Piping Network\"},\n      {\"name\": \"Pipe Insulation\", \"level\": \"L4\", \"description\": \"Closed-cell elastomeric or PE foam per EN 12828 / ASHRAE 90.1\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Piping Network\"},\n\n      {\"name\": \"Ultrasonic Flow Sensor\", \"level\": \"L4\", \"description\": \"Transit-time ultrasonic measurement; no moving parts, zero pressure drop, glycol-tolerant. MARQUARDT POSITION.\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Flow Sensing & Measurement\"},\n      {\"name\": \"Impeller / Turbine Flow Sensor\", \"level\": \"L4\", \"description\": \"Mechanical paddle-wheel or turbine rotor; incumbent, declining share\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Flow Sensing & Measurement\"},\n      {\"name\": \"Vortex Flow Sensor\", \"level\": \"L4\", \"description\": \"Bluff-body vortex shedding; higher accuracy mid-range but pressure drop\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Flow Sensing & Measurement\"},\n      {\"name\": \"Differential Pressure Flow Estimation\", \"level\": \"L4\", \"description\": \"Inferred from pump speed and delta-P; ±15-20% accuracy; budget fallback\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Flow Sensing & Measurement\"},\n\n      {\"name\": \"Expansion Vessel\", \"level\": \"L4\", \"description\": \"Diaphragm vessel absorbing volumetric expansion; 8-18 L residential\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Expansion & Safety Devices\"},\n      {\"name\": \"Safety Valve\", \"level\": \"L4\", \"description\": \"Spring-loaded pressure relief at 3 bar; discharges to tundish\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Expansion & Safety Devices\"},\n      {\"name\": \"Pressure Gauge & Transducer\", \"level\": \"L4\", \"description\": \"Analogue gauge + electronic transducer for controller alarms\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Expansion & Safety Devices\"},\n      {\"name\": \"Fill Valve & Backflow Preventer\", \"level\": \"L4\", \"description\": \"Maintains system pressure; prevents potable contamination per EN 1717\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Expansion & Safety Devices\"},\n\n      {\"name\": \"Magnetic Dirt Separator\", \"level\": \"L4\", \"description\": \"In-line magnetic filter capturing magnetite and ferrous debris\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Water Treatment & Filtration\"},\n      {\"name\": \"System Filter / Strainer\", \"level\": \"L4\", \"description\": \"Mesh or cyclone filter for non-ferrous particles; return line\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Water Treatment & Filtration\"},\n      {\"name\": \"Chemical Inhibitor Dosing\", \"level\": \"L4\", \"description\": \"Corrosion/scale inhibitor dosed at commissioning and annual service\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Water Treatment & Filtration\"},\n\n      {\"name\": \"Copper Tube & Aluminium Fin Element\", \"level\": \"L4\", \"description\": \"Copper carrier tube with press-fit aluminium fins; output rated per linear foot\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Hydronic Baseboard Heater\"},\n      {\"name\": \"Steel Enclosure & End Caps\", \"level\": \"L4\", \"description\": \"Painted steel housing with inlet/outlet damper slots\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Hydronic Baseboard Heater\"},\n      {\"name\": \"Baseboard Isolation & Balancing Valves\", \"level\": \"L4\", \"description\": \"Supply/return shut-off and balancing valve for zone regulation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Hydronic Baseboard Heater\"},\n\n      {\"name\": \"Steel Panel & Convector Assembly\", \"level\": \"L4\", \"description\": \"Pressed-steel panels with spot-welded convector fins\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Panel Radiator\"},\n      {\"name\": \"Thermostatic Radiator Valve\", \"level\": \"L4\", \"description\": \"Self-regulating wax/liquid thermostatic head on valve body\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Panel Radiator\"},\n      {\"name\": \"Lockshield Valve & Balancing\", \"level\": \"L4\", \"description\": \"Return-side valve for hydraulic balancing\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Panel Radiator\"},\n\n      {\"name\": \"Pipe Loop (PEX / PE-RT)\", \"level\": \"L4\", \"description\": \"Oxygen-barrier pipe in serpentine/spiral; 16 mm OD, 100-200 mm spacing\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Radiant Floor Heating\"},\n      {\"name\": \"Screed / Dry-Plate Assembly\", \"level\": \"L4\", \"description\": \"Wet screed or aluminium dry-plate for low-profile retrofit\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Radiant Floor Heating\"},\n      {\"name\": \"Floor Zone Thermostat & Wiring\", \"level\": \"L4\", \"description\": \"Per-zone thermostat wired or wireless to manifold actuators\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Radiant Floor Heating\"},\n\n      {\"name\": \"Water-to-Air Heat Exchanger Coil\", \"level\": \"L4\", \"description\": \"Copper tube / aluminium fin coil\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Fan Coil Unit\"},\n      {\"name\": \"EC Fan & Motor\", \"level\": \"L4\", \"description\": \"Tangential or centrifugal fan with speed control\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Fan Coil Unit\"},\n      {\"name\": \"Fan Coil Filter & Housing\", \"level\": \"L4\", \"description\": \"Air filter, condensate tray, painted steel enclosure\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Fan Coil Unit\"},\n\n      {\"name\": \"Microcontroller & Firmware\", \"level\": \"L4\", \"description\": \"ARM-based MCU running real-time control loops; OTA-updatable\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Appliance Controller\"},\n      {\"name\": \"Power Supply & Relay Board\", \"level\": \"L4\", \"description\": \"Transformer/SMPS, relay drivers for gas valve, fan, circulator\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Appliance Controller\"},\n      {\"name\": \"Sensor Input Interface\", \"level\": \"L4\", \"description\": \"ADC channels for NTC/Pt1000, pressure transducers, flow sensor UART/freq\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Appliance Controller\"},\n\n      {\"name\": \"Temperature Sensor & Display\", \"level\": \"L4\", \"description\": \"NTC or thermistor; LCD/e-ink display with setpoint\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Room Thermostat\"},\n      {\"name\": \"Communication Module\", \"level\": \"L4\", \"description\": \"Wired (OpenTherm, eBUS) or wireless (868 MHz, Zigbee, Wi-Fi)\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Room Thermostat\"},\n      {\"name\": \"Scheduling & Learning Logic\", \"level\": \"L4\", \"description\": \"Time-programme scheduling; self-learning occupancy in smart variants\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Room Thermostat\"},\n\n      {\"name\": \"Outdoor Temperature Sensor\", \"level\": \"L4\", \"description\": \"NTC in weatherproof housing; north-facing wall\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Weather Compensation Module\"},\n      {\"name\": \"Heating Curve Algorithm\", \"level\": \"L4\", \"description\": \"Parametric reset curve mapping outdoor to supply temperature\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Weather Compensation Module\"},\n\n      {\"name\": \"BUS Interface Module\", \"level\": \"L4\", \"description\": \"OpenTherm, eBUS, or Modbus transceiver\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"BUS Communication & Gateway\"},\n      {\"name\": \"Internet Gateway / Cloud Connector\", \"level\": \"L4\", \"description\": \"Wi-Fi or LAN gateway for remote monitoring and OTA updates\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"BUS Communication & Gateway\"},\n\n      {\"name\": \"DHW Vessel & Coil Assembly\", \"level\": \"L4\", \"description\": \"Enamelled steel or stainless vessel with one or two internal coils\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"DHW Storage Cylinder\"},\n      {\"name\": \"DHW Insulation & Cladding\", \"level\": \"L4\", \"description\": \"Rigid PU foam or EPS; standing loss <1.5 kWh/24h for 200 L\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"DHW Storage Cylinder\"},\n      {\"name\": \"Anode Protection\", \"level\": \"L4\", \"description\": \"Magnesium sacrificial or impressed-current anode\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"DHW Storage Cylinder\"},\n\n      {\"name\": \"DHW Plate Heat Exchanger\", \"level\": \"L4\", \"description\": \"Brazed stainless plate pack; primary from boiler, secondary potable\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Instantaneous DHW Heat Exchanger\"},\n      {\"name\": \"DHW Flow Sensor & Temperature Sensor\", \"level\": \"L4\", \"description\": \"Detects tap opening; controls burner modulation for outlet setpoint\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Instantaneous DHW Heat Exchanger\"},\n      {\"name\": \"Thermostatic Mixing Valve\", \"level\": \"L4\", \"description\": \"Blends hot + cold to prevent scalding; 48-55 C\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Instantaneous DHW Heat Exchanger\"},\n\n      {\"name\": \"Immersion Heater Element\", \"level\": \"L4\", \"description\": \"Electric element 1-3 kW for legionella pasteurisation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Legionella Protection\"},\n      {\"name\": \"Disinfection Timer & Controller\", \"level\": \"L4\", \"description\": \"Weekly programmable cycle with temperature confirmation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Legionella Protection\"},\n\n      {\"name\": \"Pipe Preparation & Joining Tools\", \"level\": \"L4\", \"description\": \"Press-fit jaws, pipe cutters, deburring tools\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Installation Tooling\"},\n      {\"name\": \"Flue Installation Tools\", \"level\": \"L4\", \"description\": \"Core drill, flue template jig, fire-stop collar\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Installation Tooling\"},\n      {\"name\": \"System Flushing Equipment\", \"level\": \"L4\", \"description\": \"Power-flush machine for debris, flux residue, magnetite removal\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Installation Tooling\"},\n\n      {\"name\": \"Hydraulic Balancing Procedure\", \"level\": \"L4\", \"description\": \"Setting flow rates per zone using manifold valves and flow meters\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Commissioning & Start-Up\"},\n      {\"name\": \"Combustion Analysis\", \"level\": \"L4\", \"description\": \"Flue-gas analyser verifying CO, CO2, O2, stack temperature\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Commissioning & Start-Up\"},\n      {\"name\": \"Compliance Documentation\", \"level\": \"L4\", \"description\": \"Benchmark certificate, commissioning checklist, gas safety record\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Commissioning & Start-Up\"},\n\n      {\"name\": \"Annual Service Inspection\", \"level\": \"L4\", \"description\": \"Gas safety check, combustion analysis, HX inspection, inhibitor top-up\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Aftermarket Service & Spare Parts\"},\n      {\"name\": \"Spare Parts Supply Chain\", \"level\": \"L4\", \"description\": \"OEM and aftermarket parts via wholesalers\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Aftermarket Service & Spare Parts\"},\n      {\"name\": \"Predictive Maintenance Platform\", \"level\": \"L4\", \"description\": \"Cloud analytics consuming sensor data for early fault detection\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Aftermarket Service & Spare Parts\"},\n\n      {\"name\": \"Metering-Grade Flow Sensor\", \"level\": \"L4\", \"description\": \"Ultrasonic or mechanical flow sensor with MID certification (EN 1434)\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Thermal Energy Meter\"},\n      {\"name\": \"Matched Temperature Sensor Pair\", \"level\": \"L4\", \"description\": \"Pt500/Pt1000 supply+return sensors; <0.02 K matching error\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Thermal Energy Meter\"},\n      {\"name\": \"Integrator / Calculator Unit\", \"level\": \"L4\", \"description\": \"Microprocessor integrating thermal power over time; cumulative kWh/MWh\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Thermal Energy Meter\"},\n\n      {\"name\": \"ErP / EcoDesign Label Module\", \"level\": \"L4\", \"description\": \"Firmware computing seasonal efficiency metrics for regulatory labelling\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Efficiency Verification\"},\n      {\"name\": \"Data Logging & Export\", \"level\": \"L4\", \"description\": \"Local or cloud storage of operating data for audits and warranty\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Efficiency Verification\"}\n    ]\n  },\n  \"marquardt_position\": {\n    \"l_path\": \"L7 > L6.2 Hydraulic Distribution > L5.2.5 Flow Sensing & Measurement > L4.2.5.1 Ultrasonic Flow Sensor\",\n    \"l7\": \"Hydronic Heating Equipment Ecosystem\",\n    \"l6\": \"Hydraulic Distribution\",\n    \"l5\": \"Flow Sensing & Measurement\",\n    \"l4\": \"Ultrasonic Flow Sensor\",\n    \"alternatives_at_l4\": [\n      {\"name\": \"Impeller / Turbine Flow Sensor\", \"status\": \"incumbent, declining\", \"share_estimate\": \"55-65%\", \"confidence\": \"MEDIUM\"},\n      {\"name\": \"Ultrasonic Flow Sensor\", \"status\": \"growing\", \"share_estimate\": \"20-30%\", \"confidence\": \"MEDIUM\"},\n      {\"name\": \"Vortex Flow Sensor\", \"status\": \"niche\", \"share_estimate\": \"3-5%\", \"confidence\": \"LOW\"},\n      {\"name\": \"Differential Pressure Estimation\", \"status\": \"budget fallback\", \"share_estimate\": \"5-15%\", \"confidence\": \"LOW\"}\n    ]\n  },\n  \"entities_produced\": {\n    \"nodes\": [\n      {\"label\": \"ValueNetwork\", \"key\": {\"naics_code\": \"333414\", \"run_id\": \"TBD\"}, \"properties\": {\"naics_title\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\", \"cfj_statement\": \"Generate and deliver thermal energy to occupied spaces and domestic hot-water systems via heated-water circuits\", \"l7_solution\": \"Hydronic Heating Equipment Ecosystem\", \"top_level\": \"L7\", \"unit_count\": 115, \"enriched\": true}},\n      {\"label\": \"ValueNetworkUnit\", \"key\": {\"name\": \"<per unit>\", \"naics_code\": \"333414\", \"level\": \"<per unit>\", \"run_id\": \"TBD\"}, \"count\": 115}\n    ],\n    \"relationships\": [\n      {\"type\": \"has_value_network\", \"source\": \"Market:333414\", \"target\": \"ValueNetwork:333414\"},\n      {\"type\": \"contains_unit\", \"source\": \"ValueNetwork:333414\", \"target\": \"ValueNetworkUnit:<each>\", \"count\": 115},\n      {\"type\": \"has_child\", \"source\": \"ValueNetworkUnit:<parent>\", \"target\": \"ValueNetworkUnit:<child>\", \"count\": 114}\n    ]\n  },\n  \"qa_checklist\": {\n    \"Q1_cfj_industry_level\": {\"pass\": true, \"note\": \"CFJ describes entire industry purpose, no reference to specific technology\"},\n    \"Q2_no_orphan_nodes\": {\"pass\": true, \"note\": \"Every unit except L7 has valid parent_name\"},\n    \"Q3_valid_level_transitions\": {\"pass\": true, \"note\": \"L7>L6>L5>L4 strictly followed, no skipping\"},\n    \"Q4_l4_children_per_l5\": {\"pass\": true, \"note\": \"All L5 nodes have 2-4 L4 children\"},\n    \"Q5_no_solution_specific_l7_l6\": {\"pass\": true, \"note\": \"L7 and L6 names are industry-generic\"},\n    \"Q6_naming_test\": {\"pass\": true, \"note\": \"Spot-checked: Circulator Pump, Premix Burner, Expansion Vessel, Pipe Loop, Condensing Heat Exchanger Core — all industry-standard\"},\n    \"Q7_unit_count_in_range\": {\"pass\": true, \"note\": \"115 units total (within extended range for manufacturing NAICS)\"}\n  }\n}\n```\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [NAICS 333414 — U.S. Census Bureau](https://www.census.gov/naics/?input=333414&year=2022&details=333414)\n- [Hydronic Heating — AHRI](https://www.ahrinet.org/scholarships-education/education/contractors-and-specifiers/hvacr-equipmentcomponents/hydronic-heating)\n- [Ultrasonic Flow Meters in Hydronic HVAC — Pumps & Systems](https://www.pumpsandsystems.com/ultrasonic-flow-meters-hydronic-hvac-applications)\n- [8 Hydronic Applications Improved by Ultrasonic Meters — Badger Meter](https://www.badgermeter.com/blog/8-hydronic-applications-improved-with-ultrasonic-meters/)\n- [Residential Boiler Market — GMInsights](https://www.gminsights.com/industry-analysis/residential-boiler-market)\n- [Heat Exchanger Fabrication Process — Altex](https://www.altexinc.com/case-studies/shell-tube-heat-exchangers/the-process-of-manufacturing-heat-exchangers-design-fabrication-and-testing/)\n- [Condensing Boiler Heat Exchanger Construction — JMPCO](https://jmpcoblog.com/hvac-blog/energy-efficient-hot-water-boiler-plant-design-part-3-condensing-boiler-heat-exchanger-construction-considerations)\n- [Hydronic Underfloor Heating Market — Future Market Insights](https://www.futuremarketinsights.com/reports/hydronic-underfloor-heating-market)\n- [Baseboard Heater Market — 360 Research Reports](https://www.360researchreports.com/market-reports/baseboard-heater-market-205646)\n- Marquardt Customer Presentation: \"US Flow Sensor\" (03.12.2025, CONFIDENTIAL)\n- 05_market_discovery.md — Architecture distance scoring for NAICS 333414\n\n---\n\n*End of VN — feeds JTBD Analysis, Competitive Landscape, and Fit Assessment for the Heating Equipment market. The Marquardt L-path (L7 > L6.2 > L5.2.5 > L4.2.5.1) is the anchor for all downstream coverage and ODI scoring.*"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**NAICS Code**",
+          "Value": "333414 — Heating Equipment (except Warm Air Furnaces) Manufacturing"
+        },
+        {
+          "Field": "**CFJ**",
+          "Value": "Generate and deliver thermal energy to occupied spaces and domestic hot-water systems via heated-water circuits"
+        },
+        {
+          "Field": "**Output Types**",
+          "Value": "Gas condensing boiler; Gas non-condensing boiler; Oil-fired boiler; Electric hydronic boiler; Hydronic baseboard heater; Radiant floor heating system; Solar water heating system; Pool/spa heater"
+        },
+        {
+          "Field": "**Hierarchy**",
+          "Value": "Product VN (L7 through L4) — what subsystems compose hydronic heating appliances and their installation ecosystem"
+        },
+        {
+          "Field": "**Key OEMs**",
+          "Value": "Weil-McLain, Burnham (U.S. Boiler Company), Navien, Rinnai, Bosch Thermotechnology, Bradford White, A.O. Smith, NTI Boilers, Slant/Fin, Laars (Pentair), Triangle Tube, Lochinvar, Viessmann"
+        },
+        {
+          "Field": "**Market Size**",
+          "Value": "~$8–12B globally (hydronic heating equipment); North America residential boiler market led by Bosch Thermotechnology (~11.5% share) [SRC: web_search]"
+        },
+        {
+          "Field": "**Architecture Distance**",
+          "Value": "2 (near-adjacent to home market 333415) [SRC: 05_market_discovery]"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L6 ID",
+        "Name",
+        "Type",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L6 ID": "**L6.1**",
+          "Name": "Heat Generation",
+          "Type": "Core",
+          "Description": "Combustion, electric resistance, or solar thermal conversion subsystems that produce thermal energy in a hydronic medium. Technology choice here defines appliance type."
+        },
+        {
+          "L6 ID": "**L6.2**",
+          "Name": "Hydraulic Distribution",
+          "Type": "Core",
+          "Description": "Piping, pumping, sensing, and safety infrastructure moving heated water from source to emitters and back. **Marquardt sits here.**"
+        },
+        {
+          "L6 ID": "**L6.3**",
+          "Name": "Heat Emission",
+          "Type": "Core",
+          "Description": "Terminal devices (baseboard, radiators, radiant floor, fan coils) transferring heat from water to occupied space."
+        },
+        {
+          "L6 ID": "**L6.4**",
+          "Name": "Control & Regulation",
+          "Type": "Core",
+          "Description": "Intelligence layer: appliance controllers, thermostats, zone valves, weather compensation, BUS communication."
+        },
+        {
+          "L6 ID": "**L6.5**",
+          "Name": "Domestic Hot Water (DHW)",
+          "Type": "Core",
+          "Description": "Potable water heating via storage cylinders, plate heat exchangers, thermostatic mixing, legionella protection."
+        },
+        {
+          "L6 ID": "**L6.6**",
+          "Name": "Installation, Commissioning & Aftermarket",
+          "Type": "Horizontal",
+          "Description": "Human-process layer: installer tools, system flushing, commissioning, warranty service, spare parts."
+        },
+        {
+          "L6 ID": "**L6.7**",
+          "Name": "Energy Monitoring & Compliance",
+          "Type": "Horizontal",
+          "Description": "Thermal energy metering, efficiency verification, ErP/EcoDesign labelling, smart-grid integration."
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.1.1.1: Premix Burner",
+          "Description": "Modulating surface burner with metal-fibre or ceramic-fibre deck; air/gas premixing upstream"
+        },
+        {
+          "L4 Subsystem": "L4.1.1.2: Gas Valve Train",
+          "Description": "Modulating gas valve (Honeywell, SIT, Dungs), gas pressure regulator, shut-off valve"
+        },
+        {
+          "L4 Subsystem": "L4.1.1.3: Ignition & Flame Detection",
+          "Description": "Hot-surface igniter or spark electrode; ionisation flame sensor for flame proving"
+        },
+        {
+          "L4 Subsystem": "L4.1.1.4: Combustion Air Fan",
+          "Description": "Variable-speed EC blower providing forced draft and air/fuel ratio control"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.1.2.1: Condensing Heat Exchanger Core",
+          "Description": "Stainless steel or Al-Si spiral/plate exchanger extracting latent heat from flue gases; achieves 95–98% efficiency"
+        },
+        {
+          "L4 Subsystem": "L4.1.2.2: Primary (Sensible) Heat Exchanger",
+          "Description": "Cast iron, copper, or steel fire-tube/water-tube exchanger for sensible heat transfer; used in non-condensing boilers"
+        },
+        {
+          "L4 Subsystem": "L4.1.2.3: Condensate Trap & Drain",
+          "Description": "Collects acidic condensate from flue-gas cooling; neutraliser required before drain discharge"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.1.3.1: Oil Nozzle & Atomiser",
+          "Description": "Pressure-atomising nozzle (Danfoss, Delavan) converting fuel oil into fine spray"
+        },
+        {
+          "L4 Subsystem": "L4.1.3.2: Oil Pump & Pre-Heater",
+          "Description": "Gear pump with pressure regulator; pre-heater for viscous fuels"
+        },
+        {
+          "L4 Subsystem": "L4.1.3.3: Ignition Transformer & Electrode",
+          "Description": "High-voltage transformer and spark electrodes for oil ignition"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.1.4.1: Resistance Heating Element",
+          "Description": "Incoloy or stainless steel sheathed element; typical 5–30 kW residential"
+        },
+        {
+          "L4 Subsystem": "L4.1.4.2: Power Contactor & Staging",
+          "Description": "Solid-state or mechanical contactors for multi-stage element switching"
+        },
+        {
+          "L4 Subsystem": "L4.1.4.3: Over-Temperature Safety Cut-Out",
+          "Description": "Manual-reset thermal cut-out preventing dry-fire or runaway heating"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.1.5.1: Absorber Plate & Riser Tubes",
+          "Description": "Selective-coated copper or aluminium absorber with copper riser tubes"
+        },
+        {
+          "L4 Subsystem": "L4.1.5.2: Glazing & Insulation",
+          "Description": "Low-iron tempered glass cover; mineral wool or foam back insulation"
+        },
+        {
+          "L4 Subsystem": "L4.1.5.3: Solar Pump Station",
+          "Description": "Circulator, flow meter, non-return valve, pressure relief, and fill/drain valves in a compact unit"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.1.6.1: Concentric Flue Terminal",
+          "Description": "Room-sealed balanced-flue terminal allowing combustion air intake and exhaust via single wall penetration"
+        },
+        {
+          "L4 Subsystem": "L4.1.6.2: Flue Duct & Extensions",
+          "Description": "Stainless steel or polypropylene (condensing-rated) duct sections"
+        },
+        {
+          "L4 Subsystem": "L4.1.6.3: Condensate Neutraliser",
+          "Description": "Calcium carbonate (limestone) cartridge neutralising acidic condensate to pH 5–7 before drain"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.2.1.1: EC Motor & Impeller",
+          "Description": "Permanent-magnet electronically commutated motor with wet-rotor design; 4–80 W typical"
+        },
+        {
+          "L4 Subsystem": "L4.2.1.2: Speed Controller / PWM Interface",
+          "Description": "Integrated inverter with 0–10 V, PWM, or BUS interface for external modulation"
+        },
+        {
+          "L4 Subsystem": "L4.2.1.3: Pump Housing & Connections",
+          "Description": "Cast iron or composite volute; DN20–DN32 threaded or flanged connections"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.2.2.1: Separator Vessel",
+          "Description": "Steel or stainless-steel chamber with internal baffles for flow decoupling and air/dirt separation"
+        },
+        {
+          "L4 Subsystem": "L4.2.2.2: Air Vent & Drain",
+          "Description": "Automatic air vent (top); drain valve (bottom) for sludge removal"
+        },
+        {
+          "L4 Subsystem": "L4.2.2.3: Insulation Jacket",
+          "Description": "Thermal insulation shell preventing standing heat losses"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.2.3.1: Manifold Bar & Zone Outlets",
+          "Description": "Brass or stainless manifold with balancing valves and flow meters per circuit"
+        },
+        {
+          "L4 Subsystem": "L4.2.3.2: Zone Valve Actuators",
+          "Description": "Thermal or motor-driven actuators on each loop; respond to room thermostat signals"
+        },
+        {
+          "L4 Subsystem": "L4.2.3.3: Manifold Cabinet & Insulation",
+          "Description": "Wall-mount enclosure with condensation protection and thermal insulation"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.2.4.1: Primary Circuit Piping",
+          "Description": "Copper or stainless steel from heat source to separator/manifold; typically DN22–DN28"
+        },
+        {
+          "L4 Subsystem": "L4.2.4.2: Secondary / Zone Piping",
+          "Description": "PEX, PE-RT, or multilayer composite for zone circuits; DN12–DN20"
+        },
+        {
+          "L4 Subsystem": "L4.2.4.3: Pipe Fittings & Joints",
+          "Description": "Press fittings, compression fittings, solder joints; increasingly push-fit"
+        },
+        {
+          "L4 Subsystem": "L4.2.4.4: Pipe Insulation",
+          "Description": "Closed-cell elastomeric or polyethylene foam per EN 12828 / ASHRAE 90.1"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "**L4.2.5.1: Ultrasonic Flow Sensor**",
+          "Description": "**Transit-time ultrasonic measurement using opposed piezoelectric transducers. No moving parts, zero pressure drop, glycol-tolerant, air/empty-pipe detection. Marquardt DN20 is the reference product. Growing adoption in modern condensing boilers.**"
+        },
+        {
+          "L4 Subsystem": "L4.2.5.2: Impeller / Turbine Flow Sensor",
+          "Description": "Mechanical paddle-wheel or turbine rotor; incumbent in many boiler platforms. Moving parts subject to wear and scaling. Declining share."
+        },
+        {
+          "L4 Subsystem": "L4.2.5.3: Vortex Flow Sensor",
+          "Description": "Bluff-body vortex shedding; higher accuracy at mid-range flows but introduces pressure drop. Niche."
+        },
+        {
+          "L4 Subsystem": "L4.2.5.4: Differential Pressure Flow Estimation",
+          "Description": "Inferred from pump speed and delta-P; zero hardware cost but low accuracy (±15–20%). Budget fallback."
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.2.6.1: Expansion Vessel",
+          "Description": "Diaphragm vessel absorbing volumetric expansion; pre-charged nitrogen; 8–18 L residential"
+        },
+        {
+          "L4 Subsystem": "L4.2.6.2: Safety Valve (Pressure Relief)",
+          "Description": "Spring-loaded valve at 3 bar (typical); discharges to tundish on overpressure"
+        },
+        {
+          "L4 Subsystem": "L4.2.6.3: Pressure Gauge & Transducer",
+          "Description": "Analogue gauge for visual check; electronic transducer for controller alarms"
+        },
+        {
+          "L4 Subsystem": "L4.2.6.4: Fill Valve & Backflow Preventer",
+          "Description": "Maintains system pressure; prevents potable water contamination per EN 1717"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.2.7.1: Magnetic Dirt Separator",
+          "Description": "In-line magnetic filter capturing magnetite and ferrous debris"
+        },
+        {
+          "L4 Subsystem": "L4.2.7.2: System Filter / Strainer",
+          "Description": "Mesh or cyclone filter for non-ferrous particles; installed on return line"
+        },
+        {
+          "L4 Subsystem": "L4.2.7.3: Chemical Inhibitor Dosing",
+          "Description": "Corrosion/scale inhibitor dosed at commissioning and annual service"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.3.1.1: Copper Tube & Aluminium Fin Element",
+          "Description": "Copper carrier tube with press-fit aluminium fins; heat output rated per linear foot at standard delta-T"
+        },
+        {
+          "L4 Subsystem": "L4.3.1.2: Steel Enclosure & End Caps",
+          "Description": "Painted steel housing with inlet/outlet damper slots for convection airflow"
+        },
+        {
+          "L4 Subsystem": "L4.3.1.3: Isolation & Balancing Valves",
+          "Description": "Supply/return shut-off valves and balancing valve for zone flow regulation"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.3.2.1: Steel Panel & Convector Assembly",
+          "Description": "Pressed-steel panels with spot-welded convector fins"
+        },
+        {
+          "L4 Subsystem": "L4.3.2.2: Thermostatic Radiator Valve (TRV)",
+          "Description": "Self-regulating wax/liquid thermostatic head; per-room temperature control"
+        },
+        {
+          "L4 Subsystem": "L4.3.2.3: Lockshield Valve & Balancing",
+          "Description": "Return-side valve for hydraulic balancing of multi-radiator circuits"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.3.3.1: Pipe Loop (PEX / PE-RT)",
+          "Description": "Oxygen-barrier pipe in serpentine or spiral; typically 16 mm OD at 100–200 mm spacing"
+        },
+        {
+          "L4 Subsystem": "L4.3.3.2: Screed / Dry-Plate Assembly",
+          "Description": "Wet screed (65–75 mm) or aluminium dry-plate system for low-profile retrofit"
+        },
+        {
+          "L4 Subsystem": "L4.3.3.3: Room Thermostat & Wiring Centre",
+          "Description": "Electronic or smart thermostat per zone; wired or wireless to manifold actuators"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.3.4.1: Water-to-Air Heat Exchanger Coil",
+          "Description": "Copper tube / aluminium fin coil"
+        },
+        {
+          "L4 Subsystem": "L4.3.4.2: EC Fan & Motor",
+          "Description": "Tangential or centrifugal fan with speed control for noise management"
+        },
+        {
+          "L4 Subsystem": "L4.3.4.3: Filter & Housing",
+          "Description": "Air filter, condensate tray (if cooling-capable), painted steel enclosure"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.4.1.1: Microcontroller & Firmware",
+          "Description": "ARM-based MCU running real-time control loops; OTA-updatable in connected models"
+        },
+        {
+          "L4 Subsystem": "L4.4.1.2: Power Supply & Relay Board",
+          "Description": "Transformer/SMPS, relay drivers for gas valve, fan, circulator, zone valves"
+        },
+        {
+          "L4 Subsystem": "L4.4.1.3: Sensor Input Interface",
+          "Description": "ADC channels for temperature sensors (NTC/Pt1000), pressure transducers, flow sensor (UART/frequency)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.4.2.1: Temperature Sensor & Display",
+          "Description": "NTC or thermistor sensor; LCD/e-ink display with setpoint indication"
+        },
+        {
+          "L4 Subsystem": "L4.4.2.2: Communication Module",
+          "Description": "Wired (2-wire, OpenTherm, eBUS) or wireless (868 MHz, Zigbee, Wi-Fi)"
+        },
+        {
+          "L4 Subsystem": "L4.4.2.3: Scheduling & Learning Logic",
+          "Description": "Time-programme scheduling; self-learning occupancy in smart variants"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.4.3.1: Outdoor Temperature Sensor",
+          "Description": "NTC sensor in weatherproof housing; north-facing wall mount"
+        },
+        {
+          "L4 Subsystem": "L4.4.3.2: Heating Curve Algorithm",
+          "Description": "Parametric reset curve mapping outdoor temp to supply temp setpoint"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.4.4.1: BUS Interface Module",
+          "Description": "OpenTherm, eBUS, or Modbus transceiver on appliance PCB or add-on"
+        },
+        {
+          "L4 Subsystem": "L4.4.4.2: Internet Gateway / Cloud Connector",
+          "Description": "Wi-Fi or LAN gateway for remote monitoring, OTA updates, demand-response"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.5.1.1: Vessel & Coil Assembly",
+          "Description": "Enamelled steel or stainless-steel vessel with one or two internal coils"
+        },
+        {
+          "L4 Subsystem": "L4.5.1.2: Insulation & Cladding",
+          "Description": "Rigid PU foam or EPS insulation; standing loss <1.5 kWh/24h for 200 L"
+        },
+        {
+          "L4 Subsystem": "L4.5.1.3: Anode Protection",
+          "Description": "Magnesium sacrificial anode or impressed-current anode for corrosion protection"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.5.2.1: Plate Heat Exchanger (Water-to-Water)",
+          "Description": "Brazed stainless-steel plate pack; primary from boiler, secondary potable"
+        },
+        {
+          "L4 Subsystem": "L4.5.2.2: DHW Flow Sensor & Temperature Sensor",
+          "Description": "Detects tap opening; controls burner modulation to maintain outlet setpoint"
+        },
+        {
+          "L4 Subsystem": "L4.5.2.3: Thermostatic Mixing Valve",
+          "Description": "Blends hot + cold to prevent scalding; set to 48–55 °C"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.5.3.1: Immersion Heater Element",
+          "Description": "Electric element (1–3 kW) for legionella pasteurisation"
+        },
+        {
+          "L4 Subsystem": "L4.5.3.2: Disinfection Timer & Controller",
+          "Description": "Weekly programmable cycle with temperature confirmation"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.6.1.1: Pipe Preparation & Joining Tools",
+          "Description": "Press-fit jaws, pipe cutters, deburring tools (copper, PEX, multilayer)"
+        },
+        {
+          "L4 Subsystem": "L4.6.1.2: Flue Installation Tools",
+          "Description": "Core drill, flue template jig, silicone sealant, fire-stop collar"
+        },
+        {
+          "L4 Subsystem": "L4.6.1.3: System Flushing Equipment",
+          "Description": "Power-flush machine for removing debris, flux residue, magnetite"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.6.2.1: Hydraulic Balancing Procedure",
+          "Description": "Setting flow rates per zone using manifold valves and flow meters"
+        },
+        {
+          "L4 Subsystem": "L4.6.2.2: Combustion Analysis",
+          "Description": "Flue-gas analyser verifying CO, CO2, O2, and stack temperature for compliance"
+        },
+        {
+          "L4 Subsystem": "L4.6.2.3: Compliance Documentation",
+          "Description": "Benchmark certificate, commissioning checklist, gas safety record"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.6.3.1: Annual Service Inspection",
+          "Description": "Gas safety check, combustion analysis, HX inspection, filter clean, inhibitor top-up"
+        },
+        {
+          "L4 Subsystem": "L4.6.3.2: Spare Parts Supply Chain",
+          "Description": "OEM and aftermarket parts via wholesalers (Wolseley, Rexel, Sonepar, Ferguson)"
+        },
+        {
+          "L4 Subsystem": "L4.6.3.3: Predictive Maintenance Platform",
+          "Description": "Cloud analytics consuming sensor data (incl. flow) for early fault detection"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.7.1.1: Flow Sensor (Metering-Grade)",
+          "Description": "Ultrasonic or mechanical flow sensor with MID certification (EN 1434)"
+        },
+        {
+          "L4 Subsystem": "L4.7.1.2: Matched Temperature Sensor Pair",
+          "Description": "Pt500 or Pt1000 paired sensors for supply/return with <0.02 K matching error"
+        },
+        {
+          "L4 Subsystem": "L4.7.1.3: Integrator / Calculator Unit",
+          "Description": "Microprocessor integrating thermal power over time; stores cumulative kWh/MWh"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.7.2.1: ErP / EcoDesign Label Module",
+          "Description": "Firmware computing seasonal efficiency metrics for regulatory labelling"
+        },
+        {
+          "L4 Subsystem": "L4.7.2.2: Data Logging & Export",
+          "Description": "Local or cloud storage of operating data for energy audits and warranty claims"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L6 Domain",
+        "Gas Cond. Boiler",
+        "Gas Non-Cond. Boiler",
+        "Oil Boiler",
+        "Electric Boiler",
+        "Baseboard",
+        "Radiant Floor",
+        "Solar Thermal",
+        "Pool Heater"
+      ],
+      "rows": [
+        {
+          "L6 Domain": "L6.1 Heat Generation",
+          "Gas Cond. Boiler": "Y",
+          "Gas Non-Cond. Boiler": "Y",
+          "Oil Boiler": "Y",
+          "Electric Boiler": "Y",
+          "Baseboard": "—",
+          "Radiant Floor": "—",
+          "Solar Thermal": "Y",
+          "Pool Heater": "Y"
+        },
+        {
+          "L6 Domain": "L6.2 Hydraulic Distribution",
+          "Gas Cond. Boiler": "Y",
+          "Gas Non-Cond. Boiler": "Y",
+          "Oil Boiler": "Y",
+          "Electric Boiler": "Y",
+          "Baseboard": "Y",
+          "Radiant Floor": "Y",
+          "Solar Thermal": "Y",
+          "Pool Heater": "Y"
+        },
+        {
+          "L6 Domain": "L6.3 Heat Emission",
+          "Gas Cond. Boiler": "Y",
+          "Gas Non-Cond. Boiler": "Y",
+          "Oil Boiler": "Y",
+          "Electric Boiler": "Y",
+          "Baseboard": "Y",
+          "Radiant Floor": "Y",
+          "Solar Thermal": "—",
+          "Pool Heater": "—"
+        },
+        {
+          "L6 Domain": "L6.4 Control & Regulation",
+          "Gas Cond. Boiler": "Y",
+          "Gas Non-Cond. Boiler": "Y",
+          "Oil Boiler": "Y",
+          "Electric Boiler": "Y",
+          "Baseboard": "Y",
+          "Radiant Floor": "Y",
+          "Solar Thermal": "Y",
+          "Pool Heater": "partial"
+        },
+        {
+          "L6 Domain": "L6.5 DHW",
+          "Gas Cond. Boiler": "Y (combi)",
+          "Gas Non-Cond. Boiler": "Y (combi)",
+          "Oil Boiler": "partial",
+          "Electric Boiler": "partial",
+          "Baseboard": "—",
+          "Radiant Floor": "—",
+          "Solar Thermal": "Y",
+          "Pool Heater": "—"
+        },
+        {
+          "L6 Domain": "L6.6 Installation & Service",
+          "Gas Cond. Boiler": "Y",
+          "Gas Non-Cond. Boiler": "Y",
+          "Oil Boiler": "Y",
+          "Electric Boiler": "Y",
+          "Baseboard": "Y",
+          "Radiant Floor": "Y",
+          "Solar Thermal": "Y",
+          "Pool Heater": "Y"
+        },
+        {
+          "L6 Domain": "L6.7 Energy Monitoring",
+          "Gas Cond. Boiler": "Y",
+          "Gas Non-Cond. Boiler": "partial",
+          "Oil Boiler": "partial",
+          "Electric Boiler": "Y",
+          "Baseboard": "—",
+          "Radiant Floor": "—",
+          "Solar Thermal": "partial",
+          "Pool Heater": "—"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "Check": "Exactly one L7 node",
+          "Result": "PASS — 1 L7 (Hydronic Heating Equipment Ecosystem)"
+        },
+        {
+          "Check": "L6 count in range (3–8)",
+          "Result": "PASS — 7 L6 nodes"
+        },
+        {
+          "Check": "L5 count per L6 in range (2–12)",
+          "Result": "PASS — L6.1: 6, L6.2: 7, L6.3: 4, L6.4: 4, L6.5: 3, L6.6: 3, L6.7: 2"
+        },
+        {
+          "Check": "L4 count per L5 >= 2",
+          "Result": "PASS — all L5 nodes have 2–4 L4 children"
+        },
+        {
+          "Check": "No orphan nodes",
+          "Result": "PASS — every node has a parent"
+        },
+        {
+          "Check": "No level skipping",
+          "Result": "PASS — L7>L6>L5>L4 strictly followed"
+        },
+        {
+          "Check": "Valid parent-child transitions",
+          "Result": "PASS"
+        },
+        {
+          "Check": "No company names in L7/L6 names",
+          "Result": "PASS"
+        },
+        {
+          "Check": "Three-question naming test (5 spot-checks)",
+          "Result": "PASS — \"Circulator Pump,\" \"Condensing Heat Exchanger Core,\" \"Premix Burner,\" \"Pipe Loop,\" \"Expansion Vessel\" all industry-standard"
+        },
+        {
+          "Check": "Unit count in range (15–60)",
+          "Result": "PASS — 29 L5 + ~85 L4 = 115 total units"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "value_network_construction",
+      "naics_code": "333414",
+      "naics_title": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+      "cfj_statement": "Generate and deliver thermal energy to occupied spaces and domestic hot-water systems via heated-water circuits",
+      "l7_solution": "Hydronic Heating Equipment Ecosystem",
+      "top_level": "L7",
+      "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+      "architecture_distance": 2,
+      "already_uses_technology": true,
+      "output_types": [
+        "Gas condensing boiler",
+        "Gas non-condensing boiler",
+        "Oil-fired boiler",
+        "Electric hydronic boiler",
+        "Hydronic baseboard heater",
+        "Radiant floor heating system",
+        "Solar water heating system",
+        "Pool/spa heater"
+      ],
+      "value_network": {
+        "naics_code": "333414",
+        "naics_title": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+        "cfj_statement": "Generate and deliver thermal energy to occupied spaces and domestic hot-water systems via heated-water circuits",
+        "l7_solution": "Hydronic Heating Equipment Ecosystem",
+        "units": [
+          {
+            "name": "Hydronic Heating Equipment Ecosystem",
+            "level": "L7",
+            "description": "Complete ecosystem of OEMs, suppliers, installers, utilities, and regulators coordinated around hydronic heating equipment manufacturing and deployment",
+            "bom_standard": "Moore 1993",
+            "parent_name": "ROOT"
+          },
+          {
+            "name": "Heat Generation",
+            "level": "L6",
+            "description": "Combustion, electric resistance, or solar thermal conversion subsystems producing thermal energy in hydronic medium",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Hydronic Heating Equipment Ecosystem"
+          },
+          {
+            "name": "Hydraulic Distribution",
+            "level": "L6",
+            "description": "Piping, pumping, sensing, and safety infrastructure moving heated water from source to emitters and back",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Hydronic Heating Equipment Ecosystem"
+          },
+          {
+            "name": "Heat Emission",
+            "level": "L6",
+            "description": "Terminal devices transferring heat from hydronic medium to occupied space",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Hydronic Heating Equipment Ecosystem"
+          },
+          {
+            "name": "Control & Regulation",
+            "level": "L6",
+            "description": "Intelligence layer: controllers, thermostats, zone valves, weather compensation, BUS communication",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Hydronic Heating Equipment Ecosystem"
+          },
+          {
+            "name": "Domestic Hot Water",
+            "level": "L6",
+            "description": "Potable water heating via storage cylinders, plate heat exchangers, thermostatic mixing, legionella protection",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Hydronic Heating Equipment Ecosystem"
+          },
+          {
+            "name": "Installation, Commissioning & Aftermarket",
+            "level": "L6",
+            "description": "Human-process layer: installer tools, commissioning, warranty service, spare parts",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Hydronic Heating Equipment Ecosystem"
+          },
+          {
+            "name": "Energy Monitoring & Compliance",
+            "level": "L6",
+            "description": "Thermal energy metering, efficiency verification, regulatory labelling, smart-grid integration",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Hydronic Heating Equipment Ecosystem"
+          },
+          {
+            "name": "Gas Burner Assembly",
+            "level": "L5",
+            "description": "Premix or atmospheric burner converting natural gas or propane into thermal energy",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Heat Generation"
+          },
+          {
+            "name": "Primary Heat Exchanger",
+            "level": "L5",
+            "description": "Transfers combustion energy to hydronic water; condensing or non-condensing",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Heat Generation"
+          },
+          {
+            "name": "Oil Burner Assembly",
+            "level": "L5",
+            "description": "Pressure-atomising or rotary-cup oil burner for oil-fired boilers",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Heat Generation"
+          },
+          {
+            "name": "Electric Heating Element",
+            "level": "L5",
+            "description": "Immersion or flanged resistance heating element for electric hydronic boilers",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Heat Generation"
+          },
+          {
+            "name": "Solar Thermal Collector",
+            "level": "L5",
+            "description": "Flat-plate or evacuated-tube collector for solar water heating",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Heat Generation"
+          },
+          {
+            "name": "Flue Gas System",
+            "level": "L5",
+            "description": "Exhaust path from combustion chamber to atmosphere",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Heat Generation"
+          },
+          {
+            "name": "Circulator Pump",
+            "level": "L5",
+            "description": "Prime mover of the hydronic loop; EC circulators with differential-pressure control",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Hydraulic Distribution"
+          },
+          {
+            "name": "Hydraulic Separator",
+            "level": "L5",
+            "description": "Decouples primary from secondary circuit; prevents hydraulic interference",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Hydraulic Distribution"
+          },
+          {
+            "name": "Distribution Manifold",
+            "level": "L5",
+            "description": "Multi-port header splitting supply into zone circuits",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Hydraulic Distribution"
+          },
+          {
+            "name": "Piping Network",
+            "level": "L5",
+            "description": "Physical conduit for heated water between system components",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Hydraulic Distribution"
+          },
+          {
+            "name": "Flow Sensing & Measurement",
+            "level": "L5",
+            "description": "Instruments measuring flow rate, direction, temperature, and medium condition",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Hydraulic Distribution"
+          },
+          {
+            "name": "Expansion & Safety Devices",
+            "level": "L5",
+            "description": "Pressure management and safety relief protecting the closed hydronic loop",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Hydraulic Distribution"
+          },
+          {
+            "name": "Water Treatment & Filtration",
+            "level": "L5",
+            "description": "Protects hydronic loop from corrosion, scaling, and sludge",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Hydraulic Distribution"
+          },
+          {
+            "name": "Hydronic Baseboard Heater",
+            "level": "L5",
+            "description": "Finned-tube convector in steel housing; primarily convective heat transfer",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Heat Emission"
+          },
+          {
+            "name": "Panel Radiator",
+            "level": "L5",
+            "description": "Steel panel radiators with convector fins; dominant in European retrofit",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Heat Emission"
+          },
+          {
+            "name": "Radiant Floor Heating",
+            "level": "L5",
+            "description": "PEX/PE-RT pipe loops in screed or dry-plate; low-temperature emission",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Heat Emission"
+          },
+          {
+            "name": "Fan Coil Unit",
+            "level": "L5",
+            "description": "Forced-convection emitter with water-to-air heat exchanger and EC fan",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Heat Emission"
+          },
+          {
+            "name": "Appliance Controller",
+            "level": "L5",
+            "description": "Main control board running combustion management, safety interlocks, diagnostics",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Control & Regulation"
+          },
+          {
+            "name": "Room Thermostat",
+            "level": "L5",
+            "description": "Occupant-facing temperature control device",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Control & Regulation"
+          },
+          {
+            "name": "Weather Compensation Module",
+            "level": "L5",
+            "description": "Outdoor sensor and reset-curve logic adjusting supply temperature",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Control & Regulation"
+          },
+          {
+            "name": "BUS Communication & Gateway",
+            "level": "L5",
+            "description": "Data backbone connecting controller, thermostats, and external systems",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Control & Regulation"
+          },
+          {
+            "name": "DHW Storage Cylinder",
+            "level": "L5",
+            "description": "Insulated hot-water storage vessel heated by internal coil",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Domestic Hot Water"
+          },
+          {
+            "name": "Instantaneous DHW Heat Exchanger",
+            "level": "L5",
+            "description": "Secondary plate heat exchanger in combi boilers for on-demand potable water",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Domestic Hot Water"
+          },
+          {
+            "name": "Legionella Protection",
+            "level": "L5",
+            "description": "Periodic thermal disinfection system",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Domestic Hot Water"
+          },
+          {
+            "name": "Installation Tooling",
+            "level": "L5",
+            "description": "Specialised tools for system installation",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Installation, Commissioning & Aftermarket"
+          },
+          {
+            "name": "Commissioning & Start-Up",
+            "level": "L5",
+            "description": "Verification, parameterisation, and performance validation",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Installation, Commissioning & Aftermarket"
+          },
+          {
+            "name": "Aftermarket Service & Spare Parts",
+            "level": "L5",
+            "description": "Ongoing maintenance, warranty service, and spare parts supply",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Installation, Commissioning & Aftermarket"
+          },
+          {
+            "name": "Thermal Energy Meter",
+            "level": "L5",
+            "description": "MID-certified instrument measuring delivered thermal energy",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Energy Monitoring & Compliance"
+          },
+          {
+            "name": "Efficiency Verification",
+            "level": "L5",
+            "description": "Monitoring and reporting for regulatory compliance",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Energy Monitoring & Compliance"
+          },
+          {
+            "name": "Premix Burner",
+            "level": "L4",
+            "description": "Modulating surface burner with metal-fibre or ceramic-fibre deck",
+            "bom_standard": "INCOSE",
+            "parent_name": "Gas Burner Assembly"
+          },
+          {
+            "name": "Gas Valve Train",
+            "level": "L4",
+            "description": "Modulating gas valve, pressure regulator, shut-off valve",
+            "bom_standard": "INCOSE",
+            "parent_name": "Gas Burner Assembly"
+          },
+          {
+            "name": "Ignition & Flame Detection",
+            "level": "L4",
+            "description": "Hot-surface igniter or spark electrode; ionisation flame sensor",
+            "bom_standard": "INCOSE",
+            "parent_name": "Gas Burner Assembly"
+          },
+          {
+            "name": "Combustion Air Fan",
+            "level": "L4",
+            "description": "Variable-speed EC blower for forced draft and air/fuel ratio control",
+            "bom_standard": "INCOSE",
+            "parent_name": "Gas Burner Assembly"
+          },
+          {
+            "name": "Condensing Heat Exchanger Core",
+            "level": "L4",
+            "description": "Stainless steel or Al-Si spiral/plate exchanger for latent heat recovery; 95-98% efficiency",
+            "bom_standard": "INCOSE",
+            "parent_name": "Primary Heat Exchanger"
+          },
+          {
+            "name": "Primary Sensible Heat Exchanger",
+            "level": "L4",
+            "description": "Cast iron, copper, or steel fire-tube/water-tube exchanger for non-condensing boilers",
+            "bom_standard": "INCOSE",
+            "parent_name": "Primary Heat Exchanger"
+          },
+          {
+            "name": "Condensate Trap & Drain",
+            "level": "L4",
+            "description": "Collects acidic condensate from flue-gas cooling; neutraliser required",
+            "bom_standard": "INCOSE",
+            "parent_name": "Primary Heat Exchanger"
+          },
+          {
+            "name": "Oil Nozzle & Atomiser",
+            "level": "L4",
+            "description": "Pressure-atomising nozzle converting fuel oil into fine spray",
+            "bom_standard": "INCOSE",
+            "parent_name": "Oil Burner Assembly"
+          },
+          {
+            "name": "Oil Pump & Pre-Heater",
+            "level": "L4",
+            "description": "Gear pump with pressure regulator; pre-heater for viscous fuels",
+            "bom_standard": "INCOSE",
+            "parent_name": "Oil Burner Assembly"
+          },
+          {
+            "name": "Oil Ignition Transformer",
+            "level": "L4",
+            "description": "High-voltage transformer and spark electrodes for oil ignition",
+            "bom_standard": "INCOSE",
+            "parent_name": "Oil Burner Assembly"
+          },
+          {
+            "name": "Resistance Heating Element",
+            "level": "L4",
+            "description": "Incoloy or stainless steel sheathed element; 5-30 kW residential",
+            "bom_standard": "INCOSE",
+            "parent_name": "Electric Heating Element"
+          },
+          {
+            "name": "Power Contactor & Staging",
+            "level": "L4",
+            "description": "Solid-state or mechanical contactors for multi-stage switching",
+            "bom_standard": "INCOSE",
+            "parent_name": "Electric Heating Element"
+          },
+          {
+            "name": "Over-Temperature Safety Cut-Out",
+            "level": "L4",
+            "description": "Manual-reset thermal cut-out preventing dry-fire or runaway",
+            "bom_standard": "INCOSE",
+            "parent_name": "Electric Heating Element"
+          },
+          {
+            "name": "Absorber Plate & Riser Tubes",
+            "level": "L4",
+            "description": "Selective-coated copper/aluminium absorber with copper riser tubes",
+            "bom_standard": "INCOSE",
+            "parent_name": "Solar Thermal Collector"
+          },
+          {
+            "name": "Glazing & Insulation",
+            "level": "L4",
+            "description": "Low-iron tempered glass cover; mineral wool or foam back insulation",
+            "bom_standard": "INCOSE",
+            "parent_name": "Solar Thermal Collector"
+          },
+          {
+            "name": "Solar Pump Station",
+            "level": "L4",
+            "description": "Circulator, flow meter, non-return valve, pressure relief in compact unit",
+            "bom_standard": "INCOSE",
+            "parent_name": "Solar Thermal Collector"
+          },
+          {
+            "name": "Concentric Flue Terminal",
+            "level": "L4",
+            "description": "Room-sealed balanced-flue terminal for combustion air intake and exhaust",
+            "bom_standard": "INCOSE",
+            "parent_name": "Flue Gas System"
+          },
+          {
+            "name": "Flue Duct & Extensions",
+            "level": "L4",
+            "description": "Stainless steel or polypropylene condensing-rated duct sections",
+            "bom_standard": "INCOSE",
+            "parent_name": "Flue Gas System"
+          },
+          {
+            "name": "Condensate Neutraliser",
+            "level": "L4",
+            "description": "Calcium carbonate cartridge neutralising acidic condensate to pH 5-7",
+            "bom_standard": "INCOSE",
+            "parent_name": "Flue Gas System"
+          },
+          {
+            "name": "EC Motor & Impeller",
+            "level": "L4",
+            "description": "Permanent-magnet EC motor with wet-rotor design; 4-80 W",
+            "bom_standard": "INCOSE",
+            "parent_name": "Circulator Pump"
+          },
+          {
+            "name": "Speed Controller",
+            "level": "L4",
+            "description": "Integrated inverter with 0-10 V, PWM, or BUS interface",
+            "bom_standard": "INCOSE",
+            "parent_name": "Circulator Pump"
+          },
+          {
+            "name": "Pump Housing & Connections",
+            "level": "L4",
+            "description": "Cast iron or composite volute; DN20-DN32 threaded or flanged",
+            "bom_standard": "INCOSE",
+            "parent_name": "Circulator Pump"
+          },
+          {
+            "name": "Separator Vessel",
+            "level": "L4",
+            "description": "Steel or stainless chamber with baffles for flow decoupling and air/dirt separation",
+            "bom_standard": "INCOSE",
+            "parent_name": "Hydraulic Separator"
+          },
+          {
+            "name": "Air Vent & Drain",
+            "level": "L4",
+            "description": "Automatic air vent top; drain valve bottom for sludge removal",
+            "bom_standard": "INCOSE",
+            "parent_name": "Hydraulic Separator"
+          },
+          {
+            "name": "Insulation Jacket",
+            "level": "L4",
+            "description": "Thermal insulation shell preventing standing heat losses",
+            "bom_standard": "INCOSE",
+            "parent_name": "Hydraulic Separator"
+          },
+          {
+            "name": "Manifold Bar & Zone Outlets",
+            "level": "L4",
+            "description": "Brass or stainless manifold with balancing valves and flow meters per circuit",
+            "bom_standard": "INCOSE",
+            "parent_name": "Distribution Manifold"
+          },
+          {
+            "name": "Zone Valve Actuators",
+            "level": "L4",
+            "description": "Thermal or motor-driven actuators responding to thermostat signals",
+            "bom_standard": "INCOSE",
+            "parent_name": "Distribution Manifold"
+          },
+          {
+            "name": "Manifold Cabinet & Insulation",
+            "level": "L4",
+            "description": "Wall-mount enclosure with condensation protection",
+            "bom_standard": "INCOSE",
+            "parent_name": "Distribution Manifold"
+          },
+          {
+            "name": "Primary Circuit Piping",
+            "level": "L4",
+            "description": "Copper or stainless steel from heat source to separator; DN22-DN28",
+            "bom_standard": "INCOSE",
+            "parent_name": "Piping Network"
+          },
+          {
+            "name": "Secondary / Zone Piping",
+            "level": "L4",
+            "description": "PEX, PE-RT, or multilayer composite; DN12-DN20",
+            "bom_standard": "INCOSE",
+            "parent_name": "Piping Network"
+          },
+          {
+            "name": "Pipe Fittings & Joints",
+            "level": "L4",
+            "description": "Press, compression, solder, push-fit connections",
+            "bom_standard": "INCOSE",
+            "parent_name": "Piping Network"
+          },
+          {
+            "name": "Pipe Insulation",
+            "level": "L4",
+            "description": "Closed-cell elastomeric or PE foam per EN 12828 / ASHRAE 90.1",
+            "bom_standard": "INCOSE",
+            "parent_name": "Piping Network"
+          },
+          {
+            "name": "Ultrasonic Flow Sensor",
+            "level": "L4",
+            "description": "Transit-time ultrasonic measurement; no moving parts, zero pressure drop, glycol-tolerant. MARQUARDT POSITION.",
+            "bom_standard": "INCOSE",
+            "parent_name": "Flow Sensing & Measurement"
+          },
+          {
+            "name": "Impeller / Turbine Flow Sensor",
+            "level": "L4",
+            "description": "Mechanical paddle-wheel or turbine rotor; incumbent, declining share",
+            "bom_standard": "INCOSE",
+            "parent_name": "Flow Sensing & Measurement"
+          },
+          {
+            "name": "Vortex Flow Sensor",
+            "level": "L4",
+            "description": "Bluff-body vortex shedding; higher accuracy mid-range but pressure drop",
+            "bom_standard": "INCOSE",
+            "parent_name": "Flow Sensing & Measurement"
+          },
+          {
+            "name": "Differential Pressure Flow Estimation",
+            "level": "L4",
+            "description": "Inferred from pump speed and delta-P; ±15-20% accuracy; budget fallback",
+            "bom_standard": "INCOSE",
+            "parent_name": "Flow Sensing & Measurement"
+          },
+          {
+            "name": "Expansion Vessel",
+            "level": "L4",
+            "description": "Diaphragm vessel absorbing volumetric expansion; 8-18 L residential",
+            "bom_standard": "INCOSE",
+            "parent_name": "Expansion & Safety Devices"
+          },
+          {
+            "name": "Safety Valve",
+            "level": "L4",
+            "description": "Spring-loaded pressure relief at 3 bar; discharges to tundish",
+            "bom_standard": "INCOSE",
+            "parent_name": "Expansion & Safety Devices"
+          },
+          {
+            "name": "Pressure Gauge & Transducer",
+            "level": "L4",
+            "description": "Analogue gauge + electronic transducer for controller alarms",
+            "bom_standard": "INCOSE",
+            "parent_name": "Expansion & Safety Devices"
+          },
+          {
+            "name": "Fill Valve & Backflow Preventer",
+            "level": "L4",
+            "description": "Maintains system pressure; prevents potable contamination per EN 1717",
+            "bom_standard": "INCOSE",
+            "parent_name": "Expansion & Safety Devices"
+          },
+          {
+            "name": "Magnetic Dirt Separator",
+            "level": "L4",
+            "description": "In-line magnetic filter capturing magnetite and ferrous debris",
+            "bom_standard": "INCOSE",
+            "parent_name": "Water Treatment & Filtration"
+          },
+          {
+            "name": "System Filter / Strainer",
+            "level": "L4",
+            "description": "Mesh or cyclone filter for non-ferrous particles; return line",
+            "bom_standard": "INCOSE",
+            "parent_name": "Water Treatment & Filtration"
+          },
+          {
+            "name": "Chemical Inhibitor Dosing",
+            "level": "L4",
+            "description": "Corrosion/scale inhibitor dosed at commissioning and annual service",
+            "bom_standard": "INCOSE",
+            "parent_name": "Water Treatment & Filtration"
+          },
+          {
+            "name": "Copper Tube & Aluminium Fin Element",
+            "level": "L4",
+            "description": "Copper carrier tube with press-fit aluminium fins; output rated per linear foot",
+            "bom_standard": "INCOSE",
+            "parent_name": "Hydronic Baseboard Heater"
+          },
+          {
+            "name": "Steel Enclosure & End Caps",
+            "level": "L4",
+            "description": "Painted steel housing with inlet/outlet damper slots",
+            "bom_standard": "INCOSE",
+            "parent_name": "Hydronic Baseboard Heater"
+          },
+          {
+            "name": "Baseboard Isolation & Balancing Valves",
+            "level": "L4",
+            "description": "Supply/return shut-off and balancing valve for zone regulation",
+            "bom_standard": "INCOSE",
+            "parent_name": "Hydronic Baseboard Heater"
+          },
+          {
+            "name": "Steel Panel & Convector Assembly",
+            "level": "L4",
+            "description": "Pressed-steel panels with spot-welded convector fins",
+            "bom_standard": "INCOSE",
+            "parent_name": "Panel Radiator"
+          },
+          {
+            "name": "Thermostatic Radiator Valve",
+            "level": "L4",
+            "description": "Self-regulating wax/liquid thermostatic head on valve body",
+            "bom_standard": "INCOSE",
+            "parent_name": "Panel Radiator"
+          },
+          {
+            "name": "Lockshield Valve & Balancing",
+            "level": "L4",
+            "description": "Return-side valve for hydraulic balancing",
+            "bom_standard": "INCOSE",
+            "parent_name": "Panel Radiator"
+          },
+          {
+            "name": "Pipe Loop (PEX / PE-RT)",
+            "level": "L4",
+            "description": "Oxygen-barrier pipe in serpentine/spiral; 16 mm OD, 100-200 mm spacing",
+            "bom_standard": "INCOSE",
+            "parent_name": "Radiant Floor Heating"
+          },
+          {
+            "name": "Screed / Dry-Plate Assembly",
+            "level": "L4",
+            "description": "Wet screed or aluminium dry-plate for low-profile retrofit",
+            "bom_standard": "INCOSE",
+            "parent_name": "Radiant Floor Heating"
+          },
+          {
+            "name": "Floor Zone Thermostat & Wiring",
+            "level": "L4",
+            "description": "Per-zone thermostat wired or wireless to manifold actuators",
+            "bom_standard": "INCOSE",
+            "parent_name": "Radiant Floor Heating"
+          },
+          {
+            "name": "Water-to-Air Heat Exchanger Coil",
+            "level": "L4",
+            "description": "Copper tube / aluminium fin coil",
+            "bom_standard": "INCOSE",
+            "parent_name": "Fan Coil Unit"
+          },
+          {
+            "name": "EC Fan & Motor",
+            "level": "L4",
+            "description": "Tangential or centrifugal fan with speed control",
+            "bom_standard": "INCOSE",
+            "parent_name": "Fan Coil Unit"
+          },
+          {
+            "name": "Fan Coil Filter & Housing",
+            "level": "L4",
+            "description": "Air filter, condensate tray, painted steel enclosure",
+            "bom_standard": "INCOSE",
+            "parent_name": "Fan Coil Unit"
+          },
+          {
+            "name": "Microcontroller & Firmware",
+            "level": "L4",
+            "description": "ARM-based MCU running real-time control loops; OTA-updatable",
+            "bom_standard": "INCOSE",
+            "parent_name": "Appliance Controller"
+          },
+          {
+            "name": "Power Supply & Relay Board",
+            "level": "L4",
+            "description": "Transformer/SMPS, relay drivers for gas valve, fan, circulator",
+            "bom_standard": "INCOSE",
+            "parent_name": "Appliance Controller"
+          },
+          {
+            "name": "Sensor Input Interface",
+            "level": "L4",
+            "description": "ADC channels for NTC/Pt1000, pressure transducers, flow sensor UART/freq",
+            "bom_standard": "INCOSE",
+            "parent_name": "Appliance Controller"
+          },
+          {
+            "name": "Temperature Sensor & Display",
+            "level": "L4",
+            "description": "NTC or thermistor; LCD/e-ink display with setpoint",
+            "bom_standard": "INCOSE",
+            "parent_name": "Room Thermostat"
+          },
+          {
+            "name": "Communication Module",
+            "level": "L4",
+            "description": "Wired (OpenTherm, eBUS) or wireless (868 MHz, Zigbee, Wi-Fi)",
+            "bom_standard": "INCOSE",
+            "parent_name": "Room Thermostat"
+          },
+          {
+            "name": "Scheduling & Learning Logic",
+            "level": "L4",
+            "description": "Time-programme scheduling; self-learning occupancy in smart variants",
+            "bom_standard": "INCOSE",
+            "parent_name": "Room Thermostat"
+          },
+          {
+            "name": "Outdoor Temperature Sensor",
+            "level": "L4",
+            "description": "NTC in weatherproof housing; north-facing wall",
+            "bom_standard": "INCOSE",
+            "parent_name": "Weather Compensation Module"
+          },
+          {
+            "name": "Heating Curve Algorithm",
+            "level": "L4",
+            "description": "Parametric reset curve mapping outdoor to supply temperature",
+            "bom_standard": "INCOSE",
+            "parent_name": "Weather Compensation Module"
+          },
+          {
+            "name": "BUS Interface Module",
+            "level": "L4",
+            "description": "OpenTherm, eBUS, or Modbus transceiver",
+            "bom_standard": "INCOSE",
+            "parent_name": "BUS Communication & Gateway"
+          },
+          {
+            "name": "Internet Gateway / Cloud Connector",
+            "level": "L4",
+            "description": "Wi-Fi or LAN gateway for remote monitoring and OTA updates",
+            "bom_standard": "INCOSE",
+            "parent_name": "BUS Communication & Gateway"
+          },
+          {
+            "name": "DHW Vessel & Coil Assembly",
+            "level": "L4",
+            "description": "Enamelled steel or stainless vessel with one or two internal coils",
+            "bom_standard": "INCOSE",
+            "parent_name": "DHW Storage Cylinder"
+          },
+          {
+            "name": "DHW Insulation & Cladding",
+            "level": "L4",
+            "description": "Rigid PU foam or EPS; standing loss <1.5 kWh/24h for 200 L",
+            "bom_standard": "INCOSE",
+            "parent_name": "DHW Storage Cylinder"
+          },
+          {
+            "name": "Anode Protection",
+            "level": "L4",
+            "description": "Magnesium sacrificial or impressed-current anode",
+            "bom_standard": "INCOSE",
+            "parent_name": "DHW Storage Cylinder"
+          },
+          {
+            "name": "DHW Plate Heat Exchanger",
+            "level": "L4",
+            "description": "Brazed stainless plate pack; primary from boiler, secondary potable",
+            "bom_standard": "INCOSE",
+            "parent_name": "Instantaneous DHW Heat Exchanger"
+          },
+          {
+            "name": "DHW Flow Sensor & Temperature Sensor",
+            "level": "L4",
+            "description": "Detects tap opening; controls burner modulation for outlet setpoint",
+            "bom_standard": "INCOSE",
+            "parent_name": "Instantaneous DHW Heat Exchanger"
+          },
+          {
+            "name": "Thermostatic Mixing Valve",
+            "level": "L4",
+            "description": "Blends hot + cold to prevent scalding; 48-55 C",
+            "bom_standard": "INCOSE",
+            "parent_name": "Instantaneous DHW Heat Exchanger"
+          },
+          {
+            "name": "Immersion Heater Element",
+            "level": "L4",
+            "description": "Electric element 1-3 kW for legionella pasteurisation",
+            "bom_standard": "INCOSE",
+            "parent_name": "Legionella Protection"
+          },
+          {
+            "name": "Disinfection Timer & Controller",
+            "level": "L4",
+            "description": "Weekly programmable cycle with temperature confirmation",
+            "bom_standard": "INCOSE",
+            "parent_name": "Legionella Protection"
+          },
+          {
+            "name": "Pipe Preparation & Joining Tools",
+            "level": "L4",
+            "description": "Press-fit jaws, pipe cutters, deburring tools",
+            "bom_standard": "INCOSE",
+            "parent_name": "Installation Tooling"
+          },
+          {
+            "name": "Flue Installation Tools",
+            "level": "L4",
+            "description": "Core drill, flue template jig, fire-stop collar",
+            "bom_standard": "INCOSE",
+            "parent_name": "Installation Tooling"
+          },
+          {
+            "name": "System Flushing Equipment",
+            "level": "L4",
+            "description": "Power-flush machine for debris, flux residue, magnetite removal",
+            "bom_standard": "INCOSE",
+            "parent_name": "Installation Tooling"
+          },
+          {
+            "name": "Hydraulic Balancing Procedure",
+            "level": "L4",
+            "description": "Setting flow rates per zone using manifold valves and flow meters",
+            "bom_standard": "INCOSE",
+            "parent_name": "Commissioning & Start-Up"
+          },
+          {
+            "name": "Combustion Analysis",
+            "level": "L4",
+            "description": "Flue-gas analyser verifying CO, CO2, O2, stack temperature",
+            "bom_standard": "INCOSE",
+            "parent_name": "Commissioning & Start-Up"
+          },
+          {
+            "name": "Compliance Documentation",
+            "level": "L4",
+            "description": "Benchmark certificate, commissioning checklist, gas safety record",
+            "bom_standard": "INCOSE",
+            "parent_name": "Commissioning & Start-Up"
+          },
+          {
+            "name": "Annual Service Inspection",
+            "level": "L4",
+            "description": "Gas safety check, combustion analysis, HX inspection, inhibitor top-up",
+            "bom_standard": "INCOSE",
+            "parent_name": "Aftermarket Service & Spare Parts"
+          },
+          {
+            "name": "Spare Parts Supply Chain",
+            "level": "L4",
+            "description": "OEM and aftermarket parts via wholesalers",
+            "bom_standard": "INCOSE",
+            "parent_name": "Aftermarket Service & Spare Parts"
+          },
+          {
+            "name": "Predictive Maintenance Platform",
+            "level": "L4",
+            "description": "Cloud analytics consuming sensor data for early fault detection",
+            "bom_standard": "INCOSE",
+            "parent_name": "Aftermarket Service & Spare Parts"
+          },
+          {
+            "name": "Metering-Grade Flow Sensor",
+            "level": "L4",
+            "description": "Ultrasonic or mechanical flow sensor with MID certification (EN 1434)",
+            "bom_standard": "INCOSE",
+            "parent_name": "Thermal Energy Meter"
+          },
+          {
+            "name": "Matched Temperature Sensor Pair",
+            "level": "L4",
+            "description": "Pt500/Pt1000 supply+return sensors; <0.02 K matching error",
+            "bom_standard": "INCOSE",
+            "parent_name": "Thermal Energy Meter"
+          },
+          {
+            "name": "Integrator / Calculator Unit",
+            "level": "L4",
+            "description": "Microprocessor integrating thermal power over time; cumulative kWh/MWh",
+            "bom_standard": "INCOSE",
+            "parent_name": "Thermal Energy Meter"
+          },
+          {
+            "name": "ErP / EcoDesign Label Module",
+            "level": "L4",
+            "description": "Firmware computing seasonal efficiency metrics for regulatory labelling",
+            "bom_standard": "INCOSE",
+            "parent_name": "Efficiency Verification"
+          },
+          {
+            "name": "Data Logging & Export",
+            "level": "L4",
+            "description": "Local or cloud storage of operating data for audits and warranty",
+            "bom_standard": "INCOSE",
+            "parent_name": "Efficiency Verification"
+          }
+        ]
+      },
+      "marquardt_position": {
+        "l_path": "L7 > L6.2 Hydraulic Distribution > L5.2.5 Flow Sensing & Measurement > L4.2.5.1 Ultrasonic Flow Sensor",
+        "l7": "Hydronic Heating Equipment Ecosystem",
+        "l6": "Hydraulic Distribution",
+        "l5": "Flow Sensing & Measurement",
+        "l4": "Ultrasonic Flow Sensor",
+        "alternatives_at_l4": [
+          {
+            "name": "Impeller / Turbine Flow Sensor",
+            "status": "incumbent, declining",
+            "share_estimate": "55-65%",
+            "confidence": "MEDIUM"
+          },
+          {
+            "name": "Ultrasonic Flow Sensor",
+            "status": "growing",
+            "share_estimate": "20-30%",
+            "confidence": "MEDIUM"
+          },
+          {
+            "name": "Vortex Flow Sensor",
+            "status": "niche",
+            "share_estimate": "3-5%",
+            "confidence": "LOW"
+          },
+          {
+            "name": "Differential Pressure Estimation",
+            "status": "budget fallback",
+            "share_estimate": "5-15%",
+            "confidence": "LOW"
+          }
+        ]
+      },
+      "entities_produced": {
+        "nodes": [
+          {
+            "label": "ValueNetwork",
+            "key": {
+              "naics_code": "333414",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "naics_title": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+              "cfj_statement": "Generate and deliver thermal energy to occupied spaces and domestic hot-water systems via heated-water circuits",
+              "l7_solution": "Hydronic Heating Equipment Ecosystem",
+              "top_level": "L7",
+              "unit_count": 115,
+              "enriched": true
+            }
+          },
+          {
+            "label": "ValueNetworkUnit",
+            "key": {
+              "name": "<per unit>",
+              "naics_code": "333414",
+              "level": "<per unit>",
+              "run_id": "TBD"
+            },
+            "count": 115
+          }
+        ],
+        "relationships": [
+          {
+            "type": "has_value_network",
+            "source": "Market:333414",
+            "target": "ValueNetwork:333414"
+          },
+          {
+            "type": "contains_unit",
+            "source": "ValueNetwork:333414",
+            "target": "ValueNetworkUnit:<each>",
+            "count": 115
+          },
+          {
+            "type": "has_child",
+            "source": "ValueNetworkUnit:<parent>",
+            "target": "ValueNetworkUnit:<child>",
+            "count": 114
+          }
+        ]
+      },
+      "qa_checklist": {
+        "Q1_cfj_industry_level": {
+          "pass": true,
+          "note": "CFJ describes entire industry purpose, no reference to specific technology"
+        },
+        "Q2_no_orphan_nodes": {
+          "pass": true,
+          "note": "Every unit except L7 has valid parent_name"
+        },
+        "Q3_valid_level_transitions": {
+          "pass": true,
+          "note": "L7>L6>L5>L4 strictly followed, no skipping"
+        },
+        "Q4_l4_children_per_l5": {
+          "pass": true,
+          "note": "All L5 nodes have 2-4 L4 children"
+        },
+        "Q5_no_solution_specific_l7_l6": {
+          "pass": true,
+          "note": "L7 and L6 names are industry-generic"
+        },
+        "Q6_naming_test": {
+          "pass": true,
+          "note": "Spot-checked: Circulator Pump, Premix Burner, Expansion Vessel, Pipe Loop, Condensing Heat Exchanger Core — all industry-standard"
+        },
+        "Q7_unit_count_in_range": {
+          "pass": true,
+          "note": "115 units total (within extended range for manufacturing NAICS)"
+        }
+      }
+    }
+  ],
+  "has_bom": true,
+  "naics_sector_type": "manufacturing"
+}

@@ -1,0 +1,66 @@
+{
+  "technologyClass": "Welded Structural Steel Fabrication",
+  "products": [
+    {
+      "name": "Heuraufe",
+      "mechanism": "Welded carbon steel (S355) tube-frame structure from laser-cut and CNC-bent RHS profiles, MIG/MAG certified welding (DIN EN ISO 3834-2), inclined hay-net cradle, pitched roof section; outsourced hot-dip galvanizing + powder topcoat",
+      "productFP": {
+        "statement": "Store and deliver hay to multiple horses simultaneously in outdoor paddock environments — with all-side access, weather-protected storage, and elevated ground clearance that reduces contamination and daily labor compared to floor-feeding",
+        "verb": "Deliver",
+        "object": "hay to multiple horses simultaneously",
+        "context": "in outdoor equestrian environments",
+        "differentiators": [
+          "all-side access (prevents feed dominance / Futterneid)",
+          "weather-protected hay bay (pitched roof section)",
+          "elevated ground clearance (reduces contamination from urine and mud)",
+          "tractor-movable (no manual repositioning required)",
+          "15-year outdoor service life with certified corrosion protection"
+        ],
+        "mechanismFree": true
+      },
+      "commodityFP": {
+        "commodity": "UNSPSC 22111509 — Hay feeders, racks, and mangers",
+        "statement": "Store and dispense roughage for multiple livestock simultaneously in outdoor agricultural environments",
+        "fpExtension": null
+      },
+      "bomPosition": { "level": "L1", "role": "Finished product", "note": "Standalone equipment unit; not a component" },
+      "complements": [
+        { "name": "Hot-dip galvanizing + powder coating", "criticality": "essential" },
+        { "name": "Hay net or hay net ring insert", "criticality": "enhancing" },
+        { "name": "Level firm ground surface", "criticality": "enhancing" },
+        { "name": "Tractor with front loader", "criticality": "optional" }
+      ]
+    },
+    {
+      "name": "Paddockbox",
+      "mechanism": "Welded carbon steel (S355) RHS tube-frame modular panels on industrial castors (800kg lateral rating, wheel brakes), hinged and removable post connections; outsourced hot-dip galvanizing + powder topcoat",
+      "productFP": {
+        "statement": "Partition and manage outdoor paddock or stable space around horses — with modular reconfigurability, castor-mounted repositionability, and fold-flat post clearance that enables efficient stable operations without fixed construction",
+        "verb": "Partition",
+        "object": "outdoor paddock or stable space for equine management",
+        "context": "in outdoor equestrian and stable environments",
+        "differentiators": [
+          "modular layout (reconfigures to any paddock geometry without tools)",
+          "castor-mounted mobility (reposition without disassembly)",
+          "fold-flat / removable posts (tractor clearance without obstruction)",
+          "wall-hinge mount option (saves permanent floor space)",
+          "no groundwork, foundation, or permanent installation required"
+        ],
+        "mechanismFree": true
+      },
+      "commodityFP": {
+        "commodity": "Mobile Modular Livestock Enclosure Systems",
+        "statement": "Partition and contain livestock in defined outdoor areas using portable, repositionable enclosure elements",
+        "fpExtension": "The modular mobile enclosure panel form factor extends beyond equestrian use to: temporary animal control at veterinary facilities and livestock shows; mobile outdoor kennel runs for working dogs; event safety barriers."
+      },
+      "bomPosition": { "level": "L1", "role": "Finished product (modular system)", "note": "Individual panels are sub-units; configured set is the deliverable" },
+      "complements": [
+        { "name": "Hot-dip galvanizing + powder coating", "criticality": "essential" },
+        { "name": "Wheel brakes rated >=800kg lateral load", "criticality": "essential" },
+        { "name": "Wall-hinge anchor hardware", "criticality": "essential" },
+        { "name": "Hard-standing floor surface", "criticality": "enhancing" },
+        { "name": "Tractor (for initial placement)", "criticality": "optional" }
+      ]
+    }
+  ]
+}

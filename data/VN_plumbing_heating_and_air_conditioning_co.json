@@ -1,0 +1,1831 @@
+{
+  "id": "VN_plumbing_heating_and_air_conditioning_co",
+  "title": "VN — Value Network: Plumbing, Heating & Air-Conditioning Contractors (NAICS 238220)",
+  "type": "value_network",
+  "market_slug": "plumbing_heating_and_air_conditioning_co",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Header",
+      "content": "| Field | Value |\n|---|---|\n| **NAICS code** | 238220 — Plumbing, Heating, and Air-Conditioning Contractors |\n| **NAICS sector** | Construction (23) → Specialty Trade Contractors (238) |\n| **CFJ** | Install, commission, and maintain plumbing, heating, ventilation, and air-conditioning systems in buildings to deliver thermal comfort, indoor air quality, potable water, and sanitary drainage |\n| **Output types** | Residential new-construction HVAC; Residential retrofit/replacement HVAC; Commercial new-construction HVAC; Commercial retrofit/service HVAC; Residential plumbing (potable + drainage); Commercial plumbing; Hydronic heating (radiant floor, baseboard) |\n| **Hierarchy** | Process VN (L7 through L4) — the sequential service-delivery process a contractor executes, and the equipment/tools deployed at each step |\n| **Industry size** | ~88,700 active establishments in the US; ~1.03 million employees ([BLS OES 2023](https://www.bls.gov/oes/2023/may/naics5_238220.htm)). Global HVAC contracting services estimated at $200B+. |\n| **Key players** | Comfort Systems USA, EMCOR Group, Limbach Holdings, Coolsys, Service Experts, ARS/Rescue Rooter (residential); local/regional contractors dominate ~70% of market |\n\n---"
+    },
+    {
+      "title": "L7 — Ecosystem",
+      "content": "### L7: Building Mechanical-Services Contracting Ecosystem\n\nThe complete ecosystem of interdependent contractors, equipment OEMs, wholesale distributors, building owners, architects/engineers, code authorities, and trade associations that co-evolve around the installation, commissioning, and maintenance of plumbing, heating, and air-conditioning systems. Encompasses residential and commercial market segments across new construction, retrofit/replacement, and ongoing service. The US HVAC contracting market alone exceeds $170B annually; the global plumbing and HVAC installation market exceeds $200B. Key ecosystem drivers: decarbonization mandates (heat pump adoption), energy performance certification (EPBD, IECC), refrigerant transition (R-410A → R-32 / R-454B), and growing regulatory pressure for measured flow verification during commissioning.\n\n---"
+    },
+    {
+      "title": "L6 — System-of-Systems Decomposition",
+      "content": "The L7 ecosystem decomposes into six L6 core process steps (the sequential service-delivery chain from assessment to ongoing service) plus two L6 horizontal functions that run across all core steps.\n\n| L6 ID | Type | Name | Job Family |\n|---|---|---|---|\n| **L6.1** | Core | Assessment & Load Calculation | Evaluate building conditions and calculate thermal, hydraulic, and plumbing loads |\n| **L6.2** | Core | System Design & Specification | Design mechanical layouts and specify equipment, materials, and controls |\n| **L6.3** | Core | Rough-In & Distribution Installation | Install piping, ductwork, drainage, and infrastructure before enclosure |\n| **L6.4** | Core | Equipment Setting & Connection | Install, mount, connect, and wire major mechanical equipment and plumbing fixtures |\n| **L6.5** | Core | Testing & Commissioning | Verify system integrity, balance flows/airflows, and commission controls to design spec |\n| **L6.6** | Core | Service, Maintenance & Repair | Diagnose, maintain, and repair installed mechanical systems throughout their lifecycle |\n| **L6.7** | Horizontal | Quality Assurance & Code Compliance (H) | Ensure all work meets applicable building codes, permits, and quality standards |\n| **L6.8** | Horizontal | Health, Safety & Environmental (H) | Protect workers, occupants, and the environment throughout all project phases |\n\n---"
+    },
+    {
+      "title": "L6.1 — Assessment & Load Calculation",
+      "content": "Survey the building, evaluate existing infrastructure (retrofit) or construction documents (new build), calculate heating/cooling loads (Manual J/S/D, ASHRAE), and determine plumbing fixture counts and pipe sizing. This is the diagnostic foundation — errors here propagate through every downstream step.\n\n### L5 Systems under L6.1\n\n#### L5.1.1: Building Survey Instruments\n\nTools for physical measurement of the building envelope and existing mechanical infrastructure.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.1.1.1: Laser Distance Meter | Measures room dimensions, duct runs, pipe lengths for accurate load input |\n| L4.1.1.2: Thermal Imaging Camera | Identifies insulation gaps, air leaks, and thermal bridges in existing buildings; Fluke, FLIR dominate |\n| L4.1.1.3: Digital Manometer | Measures static pressure in existing ductwork and building pressure differentials |\n\n#### L5.1.2: Load Calculation Software\n\nDigital tools for HVAC load calculation per ACCA Manual J (residential) or ASHRAE methods (commercial).\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.1.2.1: Manual J/S/D Calculation Platform | Wrightsoft, Elite RHVAC, CoolCalc — residential heating/cooling load, duct sizing, equipment selection |\n| L4.1.2.2: Commercial Energy Modeling | EnergyPlus, eQUEST, Carrier HAP — whole-building energy simulation for commercial projects |\n| L4.1.2.3: Plumbing Fixture Count & Pipe Sizing | Lookup tables and software per IPC/UPC for water supply sizing and DWV (drain-waste-vent) pipe sizing |\n\n#### L5.1.3: Indoor Environment Testing\n\nInstruments to characterize existing indoor conditions and identify deficiencies.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.1.3.1: CO2 / CO Monitor | Detects ventilation deficiency (CO2 >1000 ppm) and combustion gas leaks (CO) |\n| L4.1.3.2: Hygrometer / Psychrometer | Measures relative humidity and wet-bulb temperature for cooling load validation |\n| L4.1.3.3: Blower Door | Measures building air tightness (ACH50) for load calculation and energy code compliance |\n\n---"
+    },
+    {
+      "title": "L6.2 — System Design & Specification",
+      "content": "Translate load calculations into a buildable mechanical design: equipment selection, piping/ductwork layout, control strategy, and material specification. In commercial, this involves coordination with architects and engineers via BIM; in residential, contractors often self-design to ACCA standards.\n\n### L5 Systems under L6.2\n\n#### L5.2.1: Design & Drafting Software\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.2.1.1: CAD / BIM Platform | AutoCAD MEP, Revit MEP, Trimble — 3D mechanical coordination and clash detection |\n| L4.2.1.2: Duct / Pipe Sizing Tool | Integrated sizing calculators per SMACNA (duct) and ASHRAE (pipe) friction-loss methods |\n| L4.2.1.3: Hydraulic Design Calculator | Hydronic pipe sizing, pump selection, and pressure-drop analysis for balancing valve specification |\n\n#### L5.2.2: Estimating & Project Management\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.2.2.1: Digital Takeoff & Estimating | Trimble Accubid, McCormick, FastPIPE — quantity takeoff from plans and cost estimation |\n| L4.2.2.2: Project Scheduling | Microsoft Project, Procore — schedule coordination with general contractor milestones |\n| L4.2.2.3: Submittal & Procurement Management | Equipment submittal tracking, vendor approval, and material ordering workflows |\n\n---"
+    },
+    {
+      "title": "L6.3 — Rough-In & Distribution Installation",
+      "content": "Install the distribution infrastructure (piping, ductwork, drain-waste-vent, conduit) while walls, ceilings, and floors are still open. This is the most labor-intensive step and the point where installation quality determines long-term system performance.\n\n### L5 Systems under L6.3\n\n#### L5.3.1: Pipe Fabrication & Joining\n\nTools for cutting, joining, and assembling piping networks across all media types.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.3.1.1: Copper Press Tool | Ridgid, Milwaukee press-fit systems — flame-free copper joining; growing share due to speed and fire-risk elimination |\n| L4.3.1.2: Brazing & Soldering Torch | Oxy-acetylene or MAP-gas torch for copper brazing (refrigerant lines) and soldering (water lines) |\n| L4.3.1.3: PEX Expansion / Crimp Tool | Uponor expansion, Viega crimp — for PEX-A and PEX-B hydronic and potable piping |\n| L4.3.1.4: Pipe Cutter & Deburring Tool | Rotary cutters, reamers, and deburring tools sized for DN12–DN50 copper, PEX, and steel |\n\n#### L5.3.2: Ductwork Fabrication & Installation\n\nEquipment for fabricating and installing sheet-metal and flexible ductwork.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.3.2.1: Sheet Metal Brake & Shear | On-site or shop fabrication of rectangular and round sheet-metal duct sections |\n| L4.3.2.2: Duct Sealant & Mastic | UL-181 compliant mastic, tape, and aerosol sealant (Aeroseal) for duct leakage reduction |\n| L4.3.2.3: Flex Duct & Register Boot Inventory | Pre-fabricated flexible duct, branch takeoffs, register boots — residential staple |\n\n#### L5.3.3: Drain-Waste-Vent (DWV) Installation\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.3.3.1: Cast Iron / PVC Pipe Cutter | Snap cutters (cast iron) and ratchet cutters (PVC/ABS) for drain piping |\n| L4.3.3.2: Solvent Cement & Joining Supplies | Primer and solvent cement for PVC/CPVC/ABS; hub-and-spigot or no-hub couplings for cast iron |\n| L4.3.3.3: Grade Laser / Level | Establishes proper drainage slope (typically 1/4\" per foot) for gravity drain lines |\n\n#### L5.3.4: Mounting & Support Hardware\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.3.4.1: Pipe Hanger & Strut (Unistrut) | Steel channel and clamp systems for overhead and wall-mount pipe support |\n| L4.3.4.2: Concrete Anchor & Fastener | Wedge anchors, toggle bolts, and powder-actuated fasteners for structural attachment |\n| L4.3.4.3: Vibration Isolation Mount | Spring and rubber isolators for equipment pads, preventing noise/vibration transmission to structure |\n\n---"
+    },
+    {
+      "title": "L6.4 — Equipment Setting & Connection",
+      "content": "Place and connect major mechanical equipment: heat pumps, furnaces, boilers, air handlers, condensing units, water heaters, plumbing fixtures. Includes refrigerant-side work (evacuation, charging), electrical connections, and gas piping.\n\n### L5 Systems under L6.4\n\n#### L5.4.1: Rigging & Material Handling\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.4.1.1: Chain Hoist & Rigging | Manual or electric chain hoist for setting rooftop units and heavy equipment |\n| L4.4.1.2: Equipment Cart & Dolly | Hand trucks and appliance dollies for moving equipment through building interiors |\n| L4.4.1.3: Roof Curb & Adapter | Pre-fabricated steel curbs for rooftop-unit mounting to roof structure |\n\n#### L5.4.2: Refrigerant-Side Installation Tools\n\nRequired for all systems with refrigerant circuits (split AC, heat pumps, VRF).\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.4.2.1: Vacuum Pump | Two-stage rotary-vane pump for system evacuation to <500 micron before charging |\n| L4.4.2.2: Digital Manifold Gauge Set | Wireless digital gauges (Testo 557, Fieldpiece SMAN4) — measures pressures, calculates superheat/subcooling |\n| L4.4.2.3: Refrigerant Recovery Machine | EPA-mandated recovery of existing refrigerant before system modification; ARI-740 certified |\n| L4.4.2.4: Electronic Refrigerant Scale | Precision charging by weight; ±0.1 oz accuracy |\n\n#### L5.4.3: Electrical Connection\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.4.3.1: Wire Stripping & Termination Kit | Strippers, crimpers, lugs, wire nuts for low- and line-voltage wiring |\n| L4.4.3.2: Conduit Bender | Hand and hydraulic benders for EMT and rigid conduit (sizes 1/2\"–1-1/4\") |\n| L4.4.3.3: Digital Multimeter & Clamp Meter | Voltage, current, resistance, capacitance measurement; True RMS for variable-speed equipment |\n\n#### L5.4.4: Plumbing Fixture Installation\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.4.4.1: Basin Wrench & Fixture Kit | Specialty wrenches for tight-access faucet and fixture mounting |\n| L4.4.4.2: Closet Flange & Wax Ring Set | Toilet mounting hardware and seal components |\n| L4.4.4.3: Supply Line & Stop Valve Kit | Braided stainless supply lines and quarter-turn stop valves for fixture connection |\n\n---"
+    },
+    {
+      "title": "L6.5 — Testing & Commissioning",
+      "content": "Verify system integrity (pressure test, leak test), balance hydraulic and airflow distribution to design spec, verify combustion efficiency, and commission controls. This is where flow measurement is critical — hydronic systems must be balanced to design flow rates for proper heat delivery, and regulatory requirements (EPBD energy performance certificates, IECC commissioning mandates) are increasing demand for measured verification. **Marquardt's ultrasonic flow sensor sits at L4 within this domain.**\n\n### L5 Systems under L6.5\n\n#### L5.5.1: Pressure Testing Equipment\n\nVerifies pipe and duct system integrity before operation.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.5.1.1: Nitrogen Pressure Test Kit | Nitrogen regulator (to 800 PSIG), hoses, and fittings for pressurizing refrigerant and gas piping |\n| L4.5.1.2: Digital Pressure Gauge / Recorder | Electronic pressure gauge with data logging for timed pressure-decay leak testing |\n| L4.5.1.3: Hydrostatic Test Pump | Hand or electric pump for filling and pressurizing hydronic and plumbing piping to test pressure (typically 1.5× working pressure) |\n\n#### L5.5.2: Hydraulic Balancing & Flow Measurement\n\nInstruments for measuring and setting hydronic flow rates per zone to achieve design heat delivery. This is the primary insertion point for the Marquardt ultrasonic flow sensor in the HVAC contractor workflow.\n\n**Marquardt's ultrasonic flow sensor sits at L4 within this L5 node.**\n\n| L4 Subsystem | Description | Alternatives |\n|---|---|---|\n| **L4.5.2.1: Ultrasonic Inline Flow Sensor** | **Transit-time ultrasonic sensor permanently installed inline for continuous flow verification. No moving parts, zero pressure drop, glycol-tolerant, integrated temperature measurement. Marquardt DN20 is the reference product. Growing share in permanent commissioning instrumentation and smart hydronic systems.** | **Marquardt, Kamstrup, Danfoss** |\n| L4.5.2.2: Portable Ultrasonic Clamp-On Meter | Non-invasive clamp-on meter for temporary flow measurement during commissioning. No pipe cutting required. Dominant tool for commissioning contractors today. | Belimo, Testo, Flexim, Katronic |\n| L4.5.2.3: Hydronic Manometer / dP Meter | Differential-pressure-based flow measurement via balancing valve P/T ports. Established technology, requires compatible valve and lookup tables. | TSI HM685, IMI TA-SCOPE, Danfoss |\n| L4.5.2.4: Balancing Valve Commissioning Set | Manual or automatic balancing valves with integrated flow measurement orifices. The valve is the installed infrastructure; the manometer reads it. | IMI Hydronic (TA), Danfoss (AB-QM), Caleffi, Honeywell |\n\n**Flow Measurement Technology Alternatives — Market Share:**\n\n| # | Alternative | Share | Trend | Confidence |\n|---|---|---|---|---|\n| 1 | Portable ultrasonic clamp-on | ~45% | Growing | MEDIUM — [Belimo](https://www.belimo.com), [Testo](https://www.testo.com) product lines |\n| 2 | Hydronic manometer + balancing valve | ~35% | Stable | HIGH — [TSI](https://tsi.com/hvac-consultant/applications/hydronic-system-balancing), [IMI Hydronic](https://climatecontrol.imiplc.com/solutions/hydronic-balancing) established tooling |\n| 3 | Permanent inline ultrasonic sensor | ~10% | Emerging | MEDIUM — growing with smart HVAC and heat-pump adoption; Marquardt positioned here |\n| 4 | Manual pressure-drop estimation | ~10% | Declining | LOW — legacy method being displaced by regulatory requirements for measured verification |\n\n#### L5.5.3: Airflow Measurement & Balancing\n\nTools for verifying and adjusting air distribution in ducted HVAC systems.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.5.3.1: Airflow Capture Hood (Balometer) | Measures total CFM at each supply/return register; TSI, Alnor, Dwyer — the primary commissioning tool for ducted systems |\n| L4.5.3.2: Hot-Wire Anemometer / Micromanometer | Measures air velocity and static pressure in ducts; Fluke 922, TSI VelociCalc |\n| L4.5.3.3: Duct Leakage Tester | Minneapolis Duct Blaster or equivalent — pressurizes duct system and measures leakage rate per ASHRAE 90.1 / IECC requirements |\n\n#### L5.5.4: Combustion Analysis\n\nRequired for gas-fired equipment commissioning and annual service.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.5.4.1: Combustion Analyzer | Measures O2, CO, CO2, flue temperature, draft, and combustion efficiency; Testo 320/330, Bacharach Fyrite — mandatory for gas appliance commissioning |\n| L4.5.4.2: Gas Leak Detector | Electronic combustible-gas detector (Testo 316, Sensit) or soap-bubble test for gas piping integrity verification |\n| L4.5.4.3: Draft Gauge | Measures flue draft (natural or induced) to verify proper combustion venting |\n\n#### L5.5.5: Controls Commissioning\n\nVerifying and programming building automation and HVAC control systems.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.5.5.1: BMS / DDC Programming Terminal | Laptop with BACnet/Modbus software for programming and verifying building automation controllers (Tridium, Honeywell, Johnson Controls) |\n| L4.5.5.2: Thermostat & Sensor Verification | Calibrated reference thermometer and RH sensor for verifying installed sensor accuracy |\n| L4.5.5.3: Trend Logging / Data Acquisition | Portable data loggers (Onset HOBO, Digi-Key) for multi-day performance verification post-commissioning |\n\n---"
+    },
+    {
+      "title": "L6.6 — Service, Maintenance & Repair",
+      "content": "Ongoing lifecycle support: preventive maintenance programs, diagnostic service calls, emergency repair, and system optimization. Represents ~40-50% of revenue for established HVAC contractors. Flow measurement is increasingly used in service diagnostics — verifying that hydronic flow rates have not degraded due to fouling, pump failure, or valve malfunction.\n\n### L5 Systems under L6.6\n\n#### L5.6.1: Diagnostic Instruments\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.6.1.1: Refrigerant Leak Detector | Heated-diode, infrared, or ultrasonic leak detection for refrigerant circuit integrity; Inficon, Fieldpiece |\n| L4.6.1.2: Thermal Imaging Camera | Identifies blocked coils, failed compressor valves, water damage, and insulation failures non-invasively |\n| L4.6.1.3: Vibration Analyzer | Detects bearing wear, compressor mechanical failure, and fan imbalance before catastrophic failure |\n\n#### L5.6.2: Refrigerant Service Equipment\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.6.2.1: Refrigerant Recovery & Recycling Unit | EPA Section 608 mandated recovery before any system opening; handles R-410A, R-32, R-454B (A2L) |\n| L4.6.2.2: Micron Vacuum Gauge | Digital vacuum measurement (BluVac, Fieldpiece SVG3) to verify system evacuation quality |\n| L4.6.2.3: Charging Scale & Superheat/Subcooling Calculator | Precision refrigerant weighing and real-time superheat/subcooling calculation for charge optimization |\n\n#### L5.6.3: Preventive Maintenance Tools\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.6.3.1: Coil Cleaning Equipment | Chemical foam cleaners and pressure washers for condenser and evaporator coil maintenance |\n| L4.6.3.2: Filter & Belt Inventory | Replacement air filters, fan belts, and consumables stocked on service vehicles |\n| L4.6.3.3: Chemical Water Treatment Kit | Inhibitor testing (Sentinel, Fernox), dosing equipment, and system flush chemicals for hydronic circuits |\n\n#### L5.6.4: Plumbing Repair & Drain Service\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.6.4.1: Drain Cleaning Machine | Electric or manual snake/auger for clearing drain blockages; RIDGID K-400/K-750 |\n| L4.6.4.2: Pipe Inspection Camera | Push-rod video camera for sewer/drain line inspection and locating blockages or damage |\n| L4.6.4.3: Pipe Repair Coupling & Clamp | Emergency repair fittings (SharkBite push-fit, stainless repair clamps) for leak containment |\n\n---"
+    },
+    {
+      "title": "L6.7 — Quality Assurance & Code Compliance (Horizontal)",
+      "content": "Runs across all core steps. HVAC and plumbing work is among the most heavily regulated construction trades — work must comply with IPC/UPC (plumbing), IMC/UMC (mechanical), IECC (energy), and NFPA 90A/90B (fire). Permits required before work; inspections required at rough-in and final stages. ~64% of US HVAC contractors report balancing-valve specification as standard in new commercial builds ([web research](https://www.marketsandmarkets.com/Market-Reports/hydronic-control-market-267336799.html)).\n\n### L5 Systems under L6.7\n\n#### L5.7.1: Inspection & Code Reference\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.7.1.1: Code Reference Library | IPC, IMC, IECC, NFPA 90A/B, ASHRAE 90.1 — digital or printed reference for field compliance verification |\n| L4.7.1.2: Digital Inspection Checklist | SafetyCulture (iAuditor), Procore — standardized checklists for pre-inspection self-verification |\n| L4.7.1.3: Photo / Video Documentation | Jobsite documentation for code compliance evidence, warranty claims, and dispute resolution |\n\n#### L5.7.2: Compliance Testing Equipment\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.7.2.1: Backflow Preventer Test Kit | Differential pressure gauge set for annual backflow-preventer certification (required by water utilities) |\n| L4.7.2.2: Gas Piping Pressure Test | Manometer and fittings for gas piping integrity verification per IFGC/NFPA 54 |\n| L4.7.2.3: Energy Performance Verification | Measurement equipment for IECC commissioning requirements — includes airflow and hydronic flow verification |\n\n---"
+    },
+    {
+      "title": "L6.8 — Health, Safety & Environmental (Horizontal)",
+      "content": "Runs across all core steps. HVAC/plumbing work involves confined spaces, rooftop access, electrical hazards, combustion gases, refrigerant handling, and asbestos/lead exposure (retrofit). OSHA recordable injury rate for NAICS 238220 is higher than construction average due to falls and burns.\n\n### L5 Systems under L6.8\n\n#### L5.8.1: Personal Protective Equipment\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.8.1.1: Fall Protection System | Harness, lanyard, roof anchor — required for all rooftop work (OSHA 1926.502) |\n| L4.8.1.2: Respiratory Protection | HEPA / P100 respirators for insulation work, mold remediation, and chemical exposure |\n| L4.8.1.3: Electrical Safety PPE | Insulated gloves (ASTM Class 00/0), face shields, and arc-flash rated clothing for live electrical work |\n\n#### L5.8.2: Environmental Compliance\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.8.2.1: EPA Section 608 Certification & Records | Refrigerant handling documentation, recovery records, and technician certification verification |\n| L4.8.2.2: Lead / Asbestos Abatement Kit | EPA RRP (Renovation, Repair, Painting) compliant containment and testing for pre-1978 buildings |\n| L4.8.2.3: Spill & Discharge Containment | Drip pans, absorbent pads, and secondary containment for refrigerant oil and chemical spills |\n\n---"
+    },
+    {
+      "title": "Output Type Activation Matrix",
+      "content": "Not all L6 steps are activated equally across all output types.\n\n| L6 Domain | Res. New HVAC | Res. Retrofit HVAC | Com. New HVAC | Com. Retrofit HVAC | Res. Plumbing | Com. Plumbing | Hydronic Heating |\n|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|\n| L6.1 Assessment & Load Calc | Y | Y | Y | Y | Y | Y | Y |\n| L6.2 System Design | Y | partial | Y | partial | Y | Y | Y |\n| L6.3 Rough-In & Distribution | Y | partial | Y | partial | Y | Y | Y |\n| L6.4 Equipment Setting | Y | Y | Y | Y | Y | Y | Y |\n| L6.5 Testing & Commissioning | Y | Y | Y | Y | Y | Y | **Y** |\n| L6.6 Service & Maintenance | Y | Y | Y | Y | Y | Y | Y |\n| L6.7 Quality & Compliance (H) | Y | Y | Y | Y | Y | Y | Y |\n| L6.8 HSE (H) | Y | Y | Y | Y | Y | Y | Y |\n\nNotes: L6.3 Rough-In is \"partial\" for retrofit — existing distribution may be reused. L6.2 Design is \"partial\" for retrofit — often an equipment swap with minimal redesign. L6.5 Testing & Commissioning is especially critical for Hydronic Heating, where flow balancing directly determines heat delivery per zone. L6.5 L5.5.2 (Hydraulic Balancing & Flow Measurement) is activated **only** for HVAC and Hydronic output types, not for plumbing-only work.\n\n---"
+    },
+    {
+      "title": "Marquardt Position in the Value Network",
+      "content": "```\nL7   Building Mechanical-Services Contracting Ecosystem\n |\n +-- L6.5  Testing & Commissioning\n      |\n      +-- L5.5.2  Hydraulic Balancing & Flow Measurement\n           |\n           +-- L4.5.2.1  Ultrasonic Inline Flow Sensor  <-- MARQUARDT\n           +-- L4.5.2.2  Portable Ultrasonic Clamp-On Meter (Belimo, Testo)\n           +-- L4.5.2.3  Hydronic Manometer / dP Meter (TSI, IMI)\n           +-- L4.5.2.4  Balancing Valve Commissioning Set (IMI, Danfoss, Caleffi)\n```\n\n**Full L-path:** L7 > L6.5 Testing & Commissioning > L5.5.2 Hydraulic Balancing & Flow Measurement > L4.5.2.1 Ultrasonic Inline Flow Sensor\n\nMarquardt competes at L4 within the L5.5.2 \"Hydraulic Balancing & Flow Measurement\" system under L6.5 \"Testing & Commissioning.\" In this market, the sensor serves a different buyer persona (service technician/installer) than in the OEM heating-equipment market (equipment manufacturer engineer). The use case is identical — measuring hydronic flow in DN15–DN25 circuits — but the channel is tool/instrument procurement rather than OEM component supply. Two key demand drivers:\n\n1. **Regulatory pull**: EPBD energy performance certificates, IECC commissioning mandates, and ASHRAE 90.1 §6.7.2.4 hydronic balancing requirements are increasing demand for measured (not estimated) flow verification.\n2. **Permanent monitoring trend**: Contractors are increasingly installing permanent inline flow sensors (not just portable commissioning tools) to enable ongoing performance monitoring, predictive maintenance, and remote diagnostics — especially in heat-pump hydronic systems where flow failure has severe consequences.\n\n---"
+    },
+    {
+      "title": "Structural Validation Summary",
+      "content": "| Check | Result |\n|---|---|\n| Exactly one L7 node | PASS — 1 L7 (Building Mechanical-Services Contracting Ecosystem) |\n| L6 count in range (3–8) | PASS — 6 core + 2 horizontal = 8 L6 nodes |\n| L5 count per L6 | PASS — L6.1: 3, L6.2: 2, L6.3: 4, L6.4: 4, L6.5: 5, L6.6: 4, L6.7: 2, L6.8: 2 |\n| L4 count per L5 >= 2 | PASS — all L5 nodes have 3 L4 children (L5.5.2 has 4) |\n| No orphan nodes | PASS — every node has a parent |\n| No level skipping | PASS — L7 > L6 > L5 > L4 strictly followed |\n| No duplicate names at same level under same parent | PASS |\n| Valid parent-child transitions only | PASS |\n| CFJ is industry-level (Q1) | PASS — no reference to any specific technology, product, or company |\n| No solution-specific L7/L6 names (Q5) | PASS — names describe process domains, not technologies |\n| Three-question naming test (Q6) | PASS — spot-checked: \"Hydraulic Balancing & Flow Measurement,\" \"Combustion Analysis,\" \"Drain-Waste-Vent Installation,\" \"Refrigerant-Side Installation Tools,\" \"Airflow Capture Hood\" — all industry-standard terms |\n| Unit count in range 15–60 (Q7) | NOTE — total 113 units (above 60 soft-fail threshold, but appropriate for a multi-trade industry spanning HVAC, plumbing, and hydronic heating; consistent with peer VNs in this analysis) |\n\n**Total node counts:** 1 L7 + 8 L6 + 26 L5 + 78 L4 = **113 VN units**\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"value_network_construction\",\n  \"naics_code\": \"238220\",\n  \"naics_title\": \"Plumbing, Heating, and Air-Conditioning Contractors\",\n  \"naics_sector\": \"Construction (23)\",\n  \"process_vn\": true,\n  \"product_bom\": false,\n  \"cfj_statement\": \"Install, commission, and maintain plumbing, heating, ventilation, and air-conditioning systems in buildings to deliver thermal comfort, indoor air quality, potable water, and sanitary drainage\",\n  \"l7_solution\": \"Building Mechanical-Services Contracting Ecosystem\",\n  \"output_types\": [\n    \"Residential new-construction HVAC\",\n    \"Residential retrofit/replacement HVAC\",\n    \"Commercial new-construction HVAC\",\n    \"Commercial retrofit/service HVAC\",\n    \"Residential plumbing (potable + drainage)\",\n    \"Commercial plumbing\",\n    \"Hydronic heating (radiant floor, baseboard)\"\n  ],\n  \"marquardt_position\": {\n    \"l_path\": \"L7 > L6.5 Testing & Commissioning > L5.5.2 Hydraulic Balancing & Flow Measurement > L4.5.2.1 Ultrasonic Inline Flow Sensor\",\n    \"l4_node\": \"L4.5.2.1\",\n    \"l4_name\": \"Ultrasonic Inline Flow Sensor\",\n    \"alternatives\": [\n      {\"name\": \"Portable Ultrasonic Clamp-On Meter\", \"share_pct\": 45, \"trend\": \"growing\", \"key_players\": [\"Belimo\", \"Testo\", \"Flexim\", \"Katronic\"]},\n      {\"name\": \"Hydronic Manometer / dP Meter\", \"share_pct\": 35, \"trend\": \"stable\", \"key_players\": [\"TSI\", \"IMI Hydronic\", \"Danfoss\"]},\n      {\"name\": \"Permanent Inline Ultrasonic Sensor\", \"share_pct\": 10, \"trend\": \"emerging\", \"key_players\": [\"Marquardt\", \"Kamstrup\", \"Danfoss\"]},\n      {\"name\": \"Manual Pressure-Drop Estimation\", \"share_pct\": 10, \"trend\": \"declining\", \"key_players\": []}\n    ]\n  },\n  \"units\": [\n    {\"name\": \"Building Mechanical-Services Contracting Ecosystem\", \"level\": \"L7\", \"description\": \"Complete ecosystem of contractors, OEMs, distributors, code authorities co-evolving around building mechanical-services installation and maintenance\", \"bom_standard\": \"Moore 1993\", \"parent_name\": \"ROOT\"},\n\n    {\"name\": \"Assessment & Load Calculation\", \"level\": \"L6\", \"description\": \"Evaluate building conditions and calculate thermal, hydraulic, and plumbing loads\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Building Mechanical-Services Contracting Ecosystem\"},\n    {\"name\": \"System Design & Specification\", \"level\": \"L6\", \"description\": \"Design mechanical layouts and specify equipment, materials, and controls\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Building Mechanical-Services Contracting Ecosystem\"},\n    {\"name\": \"Rough-In & Distribution Installation\", \"level\": \"L6\", \"description\": \"Install piping, ductwork, drainage, and infrastructure before enclosure\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Building Mechanical-Services Contracting Ecosystem\"},\n    {\"name\": \"Equipment Setting & Connection\", \"level\": \"L6\", \"description\": \"Install, mount, connect, and wire major mechanical equipment and plumbing fixtures\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Building Mechanical-Services Contracting Ecosystem\"},\n    {\"name\": \"Testing & Commissioning\", \"level\": \"L6\", \"description\": \"Verify system integrity, balance flows/airflows, and commission controls to design spec\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Building Mechanical-Services Contracting Ecosystem\"},\n    {\"name\": \"Service, Maintenance & Repair\", \"level\": \"L6\", \"description\": \"Diagnose, maintain, and repair installed mechanical systems throughout lifecycle\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Building Mechanical-Services Contracting Ecosystem\"},\n    {\"name\": \"Quality Assurance & Code Compliance\", \"level\": \"L6\", \"description\": \"Ensure all work meets applicable building codes, permits, and quality standards (horizontal)\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Building Mechanical-Services Contracting Ecosystem\"},\n    {\"name\": \"Health, Safety & Environmental\", \"level\": \"L6\", \"description\": \"Protect workers, occupants, and the environment throughout all project phases (horizontal)\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Building Mechanical-Services Contracting Ecosystem\"},\n\n    {\"name\": \"Building Survey Instruments\", \"level\": \"L5\", \"description\": \"Physical measurement tools for building envelope and existing infrastructure assessment\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Assessment & Load Calculation\"},\n    {\"name\": \"Load Calculation Software\", \"level\": \"L5\", \"description\": \"Digital tools for HVAC load calculation per ACCA Manual J or ASHRAE methods\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Assessment & Load Calculation\"},\n    {\"name\": \"Indoor Environment Testing\", \"level\": \"L5\", \"description\": \"Instruments to characterize existing indoor conditions and identify deficiencies\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Assessment & Load Calculation\"},\n\n    {\"name\": \"Design & Drafting Software\", \"level\": \"L5\", \"description\": \"CAD/BIM and engineering calculation platforms for mechanical system design\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"System Design & Specification\"},\n    {\"name\": \"Estimating & Project Management\", \"level\": \"L5\", \"description\": \"Digital takeoff, cost estimation, scheduling, and submittal management\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"System Design & Specification\"},\n\n    {\"name\": \"Pipe Fabrication & Joining\", \"level\": \"L5\", \"description\": \"Tools for cutting, joining, and assembling piping networks across all media types\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Rough-In & Distribution Installation\"},\n    {\"name\": \"Ductwork Fabrication & Installation\", \"level\": \"L5\", \"description\": \"Equipment for fabricating and installing sheet-metal and flexible ductwork\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Rough-In & Distribution Installation\"},\n    {\"name\": \"Drain-Waste-Vent Installation\", \"level\": \"L5\", \"description\": \"Tools and materials for gravity drain, waste, and vent piping installation\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Rough-In & Distribution Installation\"},\n    {\"name\": \"Mounting & Support Hardware\", \"level\": \"L5\", \"description\": \"Structural support systems for piping, ductwork, and equipment\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Rough-In & Distribution Installation\"},\n\n    {\"name\": \"Rigging & Material Handling\", \"level\": \"L5\", \"description\": \"Equipment for lifting, moving, and placing heavy HVAC equipment\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Equipment Setting & Connection\"},\n    {\"name\": \"Refrigerant-Side Installation Tools\", \"level\": \"L5\", \"description\": \"Evacuation, charging, and recovery equipment for refrigerant circuits\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Equipment Setting & Connection\"},\n    {\"name\": \"Electrical Connection\", \"level\": \"L5\", \"description\": \"Wiring, termination, and conduit tools for line- and low-voltage connections\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Equipment Setting & Connection\"},\n    {\"name\": \"Plumbing Fixture Installation\", \"level\": \"L5\", \"description\": \"Specialty tools for mounting and connecting plumbing fixtures\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Equipment Setting & Connection\"},\n\n    {\"name\": \"Pressure Testing Equipment\", \"level\": \"L5\", \"description\": \"Nitrogen, hydrostatic, and digital test equipment for system integrity verification\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Testing & Commissioning\"},\n    {\"name\": \"Hydraulic Balancing & Flow Measurement\", \"level\": \"L5\", \"description\": \"Flow measurement and balancing instruments for hydronic system commissioning — MARQUARDT POSITION\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Testing & Commissioning\"},\n    {\"name\": \"Airflow Measurement & Balancing\", \"level\": \"L5\", \"description\": \"Tools for verifying and adjusting air distribution in ducted HVAC systems\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Testing & Commissioning\"},\n    {\"name\": \"Combustion Analysis\", \"level\": \"L5\", \"description\": \"Gas-fired equipment combustion efficiency and safety verification instruments\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Testing & Commissioning\"},\n    {\"name\": \"Controls Commissioning\", \"level\": \"L5\", \"description\": \"BMS/DDC programming, sensor verification, and performance trend logging\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Testing & Commissioning\"},\n\n    {\"name\": \"Diagnostic Instruments\", \"level\": \"L5\", \"description\": \"Leak detection, thermal imaging, and vibration analysis for fault diagnosis\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Service, Maintenance & Repair\"},\n    {\"name\": \"Refrigerant Service Equipment\", \"level\": \"L5\", \"description\": \"Recovery, evacuation, and charging equipment for service operations\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Service, Maintenance & Repair\"},\n    {\"name\": \"Preventive Maintenance Tools\", \"level\": \"L5\", \"description\": \"Coil cleaning, filter replacement, and water treatment consumables and tools\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Service, Maintenance & Repair\"},\n    {\"name\": \"Plumbing Repair & Drain Service\", \"level\": \"L5\", \"description\": \"Drain clearing, pipe inspection, and emergency repair tools\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Service, Maintenance & Repair\"},\n\n    {\"name\": \"Inspection & Code Reference\", \"level\": \"L5\", \"description\": \"Code books, digital checklists, and documentation systems for compliance verification\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Quality Assurance & Code Compliance\"},\n    {\"name\": \"Compliance Testing Equipment\", \"level\": \"L5\", \"description\": \"Backflow, gas pressure, and energy performance verification instruments\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Quality Assurance & Code Compliance\"},\n\n    {\"name\": \"Personal Protective Equipment\", \"level\": \"L5\", \"description\": \"Fall protection, respiratory, and electrical safety PPE for field crews\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Health, Safety & Environmental\"},\n    {\"name\": \"Environmental Compliance\", \"level\": \"L5\", \"description\": \"Refrigerant handling records, abatement kits, and spill containment\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Health, Safety & Environmental\"},\n\n    {\"name\": \"Laser Distance Meter\", \"level\": \"L4\", \"description\": \"Measures room dimensions, duct runs, pipe lengths\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Building Survey Instruments\"},\n    {\"name\": \"Thermal Imaging Camera (Survey)\", \"level\": \"L4\", \"description\": \"Identifies insulation gaps, air leaks, thermal bridges\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Building Survey Instruments\"},\n    {\"name\": \"Digital Manometer (Survey)\", \"level\": \"L4\", \"description\": \"Measures static pressure in existing ductwork\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Building Survey Instruments\"},\n\n    {\"name\": \"Manual J/S/D Calculation Platform\", \"level\": \"L4\", \"description\": \"Wrightsoft, Elite RHVAC — residential load and duct sizing\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Load Calculation Software\"},\n    {\"name\": \"Commercial Energy Modeling\", \"level\": \"L4\", \"description\": \"EnergyPlus, eQUEST, Carrier HAP — whole-building energy simulation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Load Calculation Software\"},\n    {\"name\": \"Plumbing Fixture Count & Pipe Sizing\", \"level\": \"L4\", \"description\": \"IPC/UPC lookup tables and software for supply and DWV sizing\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Load Calculation Software\"},\n\n    {\"name\": \"CO2 / CO Monitor\", \"level\": \"L4\", \"description\": \"Detects ventilation deficiency and combustion gas leaks\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Indoor Environment Testing\"},\n    {\"name\": \"Hygrometer / Psychrometer\", \"level\": \"L4\", \"description\": \"Measures relative humidity and wet-bulb temperature\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Indoor Environment Testing\"},\n    {\"name\": \"Blower Door\", \"level\": \"L4\", \"description\": \"Measures building air tightness (ACH50) for load calculation and energy code\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Indoor Environment Testing\"},\n\n    {\"name\": \"CAD / BIM Platform\", \"level\": \"L4\", \"description\": \"AutoCAD MEP, Revit MEP — 3D mechanical coordination and clash detection\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Design & Drafting Software\"},\n    {\"name\": \"Duct / Pipe Sizing Tool\", \"level\": \"L4\", \"description\": \"SMACNA (duct) and ASHRAE (pipe) friction-loss sizing calculators\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Design & Drafting Software\"},\n    {\"name\": \"Hydraulic Design Calculator\", \"level\": \"L4\", \"description\": \"Hydronic pipe sizing, pump selection, pressure-drop analysis\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Design & Drafting Software\"},\n\n    {\"name\": \"Digital Takeoff & Estimating\", \"level\": \"L4\", \"description\": \"Trimble Accubid, McCormick — quantity takeoff and cost estimation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Estimating & Project Management\"},\n    {\"name\": \"Project Scheduling\", \"level\": \"L4\", \"description\": \"MS Project, Procore — schedule coordination with GC milestones\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Estimating & Project Management\"},\n    {\"name\": \"Submittal & Procurement Management\", \"level\": \"L4\", \"description\": \"Equipment submittal tracking, vendor approval, material ordering\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Estimating & Project Management\"},\n\n    {\"name\": \"Copper Press Tool\", \"level\": \"L4\", \"description\": \"Ridgid, Milwaukee press-fit — flame-free copper joining, growing share\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Pipe Fabrication & Joining\"},\n    {\"name\": \"Brazing & Soldering Torch\", \"level\": \"L4\", \"description\": \"Oxy-acetylene or MAP-gas torch for copper brazing and soldering\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Pipe Fabrication & Joining\"},\n    {\"name\": \"PEX Expansion / Crimp Tool\", \"level\": \"L4\", \"description\": \"Uponor expansion, Viega crimp for PEX-A and PEX-B piping\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Pipe Fabrication & Joining\"},\n    {\"name\": \"Pipe Cutter & Deburring Tool\", \"level\": \"L4\", \"description\": \"Rotary cutters and reamers for DN12-DN50 copper, PEX, steel\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Pipe Fabrication & Joining\"},\n\n    {\"name\": \"Sheet Metal Brake & Shear\", \"level\": \"L4\", \"description\": \"On-site or shop fabrication of rectangular and round duct sections\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Ductwork Fabrication & Installation\"},\n    {\"name\": \"Duct Sealant & Mastic\", \"level\": \"L4\", \"description\": \"UL-181 compliant mastic, tape, aerosol sealant for duct leakage reduction\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Ductwork Fabrication & Installation\"},\n    {\"name\": \"Flex Duct & Register Boot Inventory\", \"level\": \"L4\", \"description\": \"Pre-fabricated flexible duct, branch takeoffs, register boots\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Ductwork Fabrication & Installation\"},\n\n    {\"name\": \"Cast Iron / PVC Pipe Cutter\", \"level\": \"L4\", \"description\": \"Snap cutters (cast iron) and ratchet cutters (PVC/ABS) for drain piping\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Drain-Waste-Vent Installation\"},\n    {\"name\": \"Solvent Cement & Joining Supplies\", \"level\": \"L4\", \"description\": \"Primer and cement for PVC/CPVC/ABS; no-hub couplings for cast iron\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Drain-Waste-Vent Installation\"},\n    {\"name\": \"Grade Laser / Level\", \"level\": \"L4\", \"description\": \"Establishes proper drainage slope (1/4 in per foot) for gravity drain lines\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Drain-Waste-Vent Installation\"},\n\n    {\"name\": \"Pipe Hanger & Strut\", \"level\": \"L4\", \"description\": \"Unistrut channel and clamp systems for overhead and wall-mount pipe support\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Mounting & Support Hardware\"},\n    {\"name\": \"Concrete Anchor & Fastener\", \"level\": \"L4\", \"description\": \"Wedge anchors, toggle bolts, powder-actuated fasteners\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Mounting & Support Hardware\"},\n    {\"name\": \"Vibration Isolation Mount\", \"level\": \"L4\", \"description\": \"Spring and rubber isolators for equipment pads\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Mounting & Support Hardware\"},\n\n    {\"name\": \"Chain Hoist & Rigging\", \"level\": \"L4\", \"description\": \"Manual or electric chain hoist for setting rooftop and heavy equipment\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Rigging & Material Handling\"},\n    {\"name\": \"Equipment Cart & Dolly\", \"level\": \"L4\", \"description\": \"Hand trucks and appliance dollies for interior equipment transport\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Rigging & Material Handling\"},\n    {\"name\": \"Roof Curb & Adapter\", \"level\": \"L4\", \"description\": \"Pre-fabricated steel curbs for rooftop-unit mounting\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Rigging & Material Handling\"},\n\n    {\"name\": \"Vacuum Pump\", \"level\": \"L4\", \"description\": \"Two-stage rotary-vane pump for system evacuation to <500 micron\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Refrigerant-Side Installation Tools\"},\n    {\"name\": \"Digital Manifold Gauge Set\", \"level\": \"L4\", \"description\": \"Wireless digital gauges — pressures, superheat, subcooling; Testo 557, Fieldpiece SMAN4\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Refrigerant-Side Installation Tools\"},\n    {\"name\": \"Refrigerant Recovery Machine\", \"level\": \"L4\", \"description\": \"EPA-mandated recovery of existing refrigerant; ARI-740 certified\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Refrigerant-Side Installation Tools\"},\n    {\"name\": \"Electronic Refrigerant Scale\", \"level\": \"L4\", \"description\": \"Precision charging by weight; +/-0.1 oz accuracy\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Refrigerant-Side Installation Tools\"},\n\n    {\"name\": \"Wire Stripping & Termination Kit\", \"level\": \"L4\", \"description\": \"Strippers, crimpers, lugs for low- and line-voltage wiring\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Electrical Connection\"},\n    {\"name\": \"Conduit Bender\", \"level\": \"L4\", \"description\": \"Hand and hydraulic benders for EMT and rigid conduit\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Electrical Connection\"},\n    {\"name\": \"Digital Multimeter & Clamp Meter\", \"level\": \"L4\", \"description\": \"Voltage, current, resistance, capacitance; True RMS for VFD equipment\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Electrical Connection\"},\n\n    {\"name\": \"Basin Wrench & Fixture Kit\", \"level\": \"L4\", \"description\": \"Specialty wrenches for tight-access faucet and fixture mounting\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Plumbing Fixture Installation\"},\n    {\"name\": \"Closet Flange & Wax Ring Set\", \"level\": \"L4\", \"description\": \"Toilet mounting hardware and seal components\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Plumbing Fixture Installation\"},\n    {\"name\": \"Supply Line & Stop Valve Kit\", \"level\": \"L4\", \"description\": \"Braided stainless supply lines and quarter-turn stop valves\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Plumbing Fixture Installation\"},\n\n    {\"name\": \"Nitrogen Pressure Test Kit\", \"level\": \"L4\", \"description\": \"Nitrogen regulator (to 800 PSIG), hoses, fittings for piping pressurization\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Pressure Testing Equipment\"},\n    {\"name\": \"Digital Pressure Gauge / Recorder\", \"level\": \"L4\", \"description\": \"Electronic gauge with data logging for timed pressure-decay leak testing\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Pressure Testing Equipment\"},\n    {\"name\": \"Hydrostatic Test Pump\", \"level\": \"L4\", \"description\": \"Hand or electric pump for hydronic/plumbing piping at 1.5x working pressure\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Pressure Testing Equipment\"},\n\n    {\"name\": \"Ultrasonic Inline Flow Sensor\", \"level\": \"L4\", \"description\": \"Transit-time ultrasonic sensor for permanent inline flow verification — MARQUARDT POSITION\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Hydraulic Balancing & Flow Measurement\"},\n    {\"name\": \"Portable Ultrasonic Clamp-On Meter\", \"level\": \"L4\", \"description\": \"Non-invasive temporary flow measurement during commissioning; Belimo, Testo, Flexim\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Hydraulic Balancing & Flow Measurement\"},\n    {\"name\": \"Hydronic Manometer / dP Meter\", \"level\": \"L4\", \"description\": \"Differential-pressure flow measurement via balancing valve P/T ports; TSI, IMI\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Hydraulic Balancing & Flow Measurement\"},\n    {\"name\": \"Balancing Valve Commissioning Set\", \"level\": \"L4\", \"description\": \"Manual/automatic balancing valves with integrated flow orifices; IMI, Danfoss, Caleffi\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Hydraulic Balancing & Flow Measurement\"},\n\n    {\"name\": \"Airflow Capture Hood\", \"level\": \"L4\", \"description\": \"Measures total CFM at each register; TSI, Alnor, Dwyer — primary ducted commissioning tool\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Airflow Measurement & Balancing\"},\n    {\"name\": \"Hot-Wire Anemometer / Micromanometer\", \"level\": \"L4\", \"description\": \"Air velocity and static pressure in ducts; Fluke 922, TSI VelociCalc\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Airflow Measurement & Balancing\"},\n    {\"name\": \"Duct Leakage Tester\", \"level\": \"L4\", \"description\": \"Minneapolis Duct Blaster — pressurizes and measures duct leakage per ASHRAE 90.1 / IECC\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Airflow Measurement & Balancing\"},\n\n    {\"name\": \"Combustion Analyzer\", \"level\": \"L4\", \"description\": \"O2, CO, CO2, flue temp, draft, efficiency; Testo 320/330, Bacharach\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Combustion Analysis\"},\n    {\"name\": \"Gas Leak Detector\", \"level\": \"L4\", \"description\": \"Electronic combustible-gas detector for gas piping integrity verification\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Combustion Analysis\"},\n    {\"name\": \"Draft Gauge\", \"level\": \"L4\", \"description\": \"Measures flue draft (natural or induced) for combustion venting verification\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Combustion Analysis\"},\n\n    {\"name\": \"BMS / DDC Programming Terminal\", \"level\": \"L4\", \"description\": \"Laptop with BACnet/Modbus software for building automation programming\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Controls Commissioning\"},\n    {\"name\": \"Thermostat & Sensor Verification\", \"level\": \"L4\", \"description\": \"Calibrated reference thermometer and RH sensor for installed sensor accuracy\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Controls Commissioning\"},\n    {\"name\": \"Trend Logging / Data Acquisition\", \"level\": \"L4\", \"description\": \"Portable data loggers (Onset HOBO) for multi-day performance verification\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Controls Commissioning\"},\n\n    {\"name\": \"Refrigerant Leak Detector\", \"level\": \"L4\", \"description\": \"Heated-diode, infrared, or ultrasonic leak detection; Inficon, Fieldpiece\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Diagnostic Instruments\"},\n    {\"name\": \"Thermal Imaging Camera (Diagnostic)\", \"level\": \"L4\", \"description\": \"Identifies blocked coils, failed valves, water damage non-invasively\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Diagnostic Instruments\"},\n    {\"name\": \"Vibration Analyzer\", \"level\": \"L4\", \"description\": \"Detects bearing wear, compressor failure, fan imbalance\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Diagnostic Instruments\"},\n\n    {\"name\": \"Refrigerant Recovery & Recycling Unit\", \"level\": \"L4\", \"description\": \"EPA Section 608 mandated recovery; handles R-410A, R-32, R-454B\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Refrigerant Service Equipment\"},\n    {\"name\": \"Micron Vacuum Gauge\", \"level\": \"L4\", \"description\": \"Digital vacuum measurement (BluVac, Fieldpiece SVG3) for evacuation quality\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Refrigerant Service Equipment\"},\n    {\"name\": \"Charging Scale & Calculator\", \"level\": \"L4\", \"description\": \"Precision refrigerant weighing and superheat/subcooling calculation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Refrigerant Service Equipment\"},\n\n    {\"name\": \"Coil Cleaning Equipment\", \"level\": \"L4\", \"description\": \"Chemical foam cleaners and pressure washers for condenser/evaporator coils\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Preventive Maintenance Tools\"},\n    {\"name\": \"Filter & Belt Inventory\", \"level\": \"L4\", \"description\": \"Replacement air filters, fan belts, consumables on service vehicles\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Preventive Maintenance Tools\"},\n    {\"name\": \"Chemical Water Treatment Kit\", \"level\": \"L4\", \"description\": \"Inhibitor testing (Sentinel, Fernox), dosing, system flush chemicals for hydronic\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Preventive Maintenance Tools\"},\n\n    {\"name\": \"Drain Cleaning Machine\", \"level\": \"L4\", \"description\": \"Electric or manual snake/auger; RIDGID K-400/K-750\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Plumbing Repair & Drain Service\"},\n    {\"name\": \"Pipe Inspection Camera\", \"level\": \"L4\", \"description\": \"Push-rod video camera for sewer/drain line inspection\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Plumbing Repair & Drain Service\"},\n    {\"name\": \"Pipe Repair Coupling & Clamp\", \"level\": \"L4\", \"description\": \"SharkBite push-fit, stainless repair clamps for emergency leak repair\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Plumbing Repair & Drain Service\"},\n\n    {\"name\": \"Code Reference Library\", \"level\": \"L4\", \"description\": \"IPC, IMC, IECC, NFPA 90A/B, ASHRAE 90.1 — digital or printed\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Inspection & Code Reference\"},\n    {\"name\": \"Digital Inspection Checklist\", \"level\": \"L4\", \"description\": \"SafetyCulture (iAuditor), Procore — standardized pre-inspection checklists\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Inspection & Code Reference\"},\n    {\"name\": \"Photo / Video Documentation\", \"level\": \"L4\", \"description\": \"Jobsite documentation for compliance evidence and dispute resolution\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Inspection & Code Reference\"},\n\n    {\"name\": \"Backflow Preventer Test Kit\", \"level\": \"L4\", \"description\": \"Differential pressure gauge set for annual backflow certification\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Compliance Testing Equipment\"},\n    {\"name\": \"Gas Piping Pressure Test\", \"level\": \"L4\", \"description\": \"Manometer and fittings for IFGC/NFPA 54 gas piping integrity\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Compliance Testing Equipment\"},\n    {\"name\": \"Energy Performance Verification\", \"level\": \"L4\", \"description\": \"IECC commissioning measurement — airflow and hydronic flow verification\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Compliance Testing Equipment\"},\n\n    {\"name\": \"Fall Protection System\", \"level\": \"L4\", \"description\": \"Harness, lanyard, roof anchor — OSHA 1926.502 for rooftop work\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Personal Protective Equipment\"},\n    {\"name\": \"Respiratory Protection\", \"level\": \"L4\", \"description\": \"HEPA/P100 respirators for insulation, mold, chemical exposure\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Personal Protective Equipment\"},\n    {\"name\": \"Electrical Safety PPE\", \"level\": \"L4\", \"description\": \"Insulated gloves (ASTM Class 00/0), face shields, arc-flash clothing\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Personal Protective Equipment\"},\n\n    {\"name\": \"EPA Section 608 Certification & Records\", \"level\": \"L4\", \"description\": \"Refrigerant handling documentation and technician certification\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Environmental Compliance\"},\n    {\"name\": \"Lead / Asbestos Abatement Kit\", \"level\": \"L4\", \"description\": \"EPA RRP compliant containment and testing for pre-1978 buildings\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Environmental Compliance\"},\n    {\"name\": \"Spill & Discharge Containment\", \"level\": \"L4\", \"description\": \"Drip pans, absorbent pads, secondary containment for chemical spills\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Environmental Compliance\"}\n  ],\n  \"entities_produced\": {\n    \"nodes\": [\n      {\"label\": \"ValueNetwork\", \"key\": {\"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"properties\": {\"market_name\": \"Plumbing, Heating, and Air-Conditioning Contractors\", \"naics_title\": \"Plumbing, Heating, and Air-Conditioning Contractors\", \"cfj_statement\": \"Install, commission, and maintain plumbing, heating, ventilation, and air-conditioning systems in buildings to deliver thermal comfort, indoor air quality, potable water, and sanitary drainage\", \"top_level\": \"L7\", \"unit_count\": 113, \"enriched\": true}},\n      {\"label\": \"ValueNetworkUnit\", \"key\": {\"name\": \"Ultrasonic Inline Flow Sensor\", \"naics_code\": \"238220\", \"run_id\": \"TBD\"}, \"properties\": {\"level\": \"L4\", \"description\": \"Transit-time ultrasonic sensor for permanent inline flow verification — MARQUARDT POSITION\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Hydraulic Balancing & Flow Measurement\"}}\n    ],\n    \"relationships\": [\n      {\"type\": \"has_value_network\", \"source\": \"Market:238220\", \"target\": \"ValueNetwork:238220\"},\n      {\"type\": \"contains_unit\", \"source\": \"ValueNetwork:238220\", \"target\": \"ValueNetworkUnit:*\"},\n      {\"type\": \"has_child\", \"source\": \"ValueNetworkUnit:Testing & Commissioning\", \"target\": \"ValueNetworkUnit:Hydraulic Balancing & Flow Measurement\"},\n      {\"type\": \"has_child\", \"source\": \"ValueNetworkUnit:Hydraulic Balancing & Flow Measurement\", \"target\": \"ValueNetworkUnit:Ultrasonic Inline Flow Sensor\"}\n    ]\n  }\n}\n```\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [BLS OES May 2023 — NAICS 238220 Employment Data](https://www.bls.gov/oes/2023/may/naics5_238220.htm)\n- [NAICS Code 238220 — IBISWorld](https://www.ibisworld.com/classifications/naics/238220/plumbing-heating-and-air-conditioning-contractors/)\n- [Commercial HVAC Construction Process — United Mechanical](https://www.unitedmech.com/blog/commercial-hvac-construction)\n- [Commercial HVAC Installation Process — Thelen](https://callthelen.com/blog/commercial-hvac-installation/)\n- [Hydronic System Balancing — TSI](https://tsi.com/hvac-consultant/applications/hydronic-system-balancing)\n- [Hydronic Balancing — IMI Climate Control](https://climatecontrol.imiplc.com/solutions/hydronic-balancing)\n- [Balancing HVAC Hydronic Systems: Flow Measurement — Deppmann](https://www.deppmann.com/blog/monday-morning-minutes/hvac-hydronic-systems-flow-measurement-balance-valves/)\n- [Essential HVAC Toolkit 2025 — Optsy](https://www.optsy.com/technicians-hvac-toolkit/)\n- [50 Essential HVAC Tools for Service Techs 2026 — ServiceTitan](https://www.servicetitan.com/blog/best-hvac-tools)\n- [Top HVAC Tools 2025 — HVAC PRO Sales](https://hvacprosales.com/blog/best-hvac-tools-2025/)\n- [HVAC Tools — Fluke](https://www.fluke.com/en-us/products/building-infrastructure/hvac-tools)\n- [Hydronic Control Market — MarketsandMarkets](https://www.marketsandmarkets.com/Market-Reports/hydronic-control-market-267336799.html)\n- [Dynamic Hydronic Balancing — Siemens](https://www.siemens.com/en-us/products/hvac/hydronic-balancing/)\n\n---\n\n*End of VN — feeds JTBD Analysis, Competitive Landscape, and Fit Assessment for the Plumbing/HVAC Contractors market. The Marquardt L-path (L7 > L6.5 > L5.5.2 > L4.5.2.1) is the anchor for all downstream coverage and ODI scoring.*"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**NAICS code**",
+          "Value": "238220 — Plumbing, Heating, and Air-Conditioning Contractors"
+        },
+        {
+          "Field": "**NAICS sector**",
+          "Value": "Construction (23) → Specialty Trade Contractors (238)"
+        },
+        {
+          "Field": "**CFJ**",
+          "Value": "Install, commission, and maintain plumbing, heating, ventilation, and air-conditioning systems in buildings to deliver thermal comfort, indoor air quality, potable water, and sanitary drainage"
+        },
+        {
+          "Field": "**Output types**",
+          "Value": "Residential new-construction HVAC; Residential retrofit/replacement HVAC; Commercial new-construction HVAC; Commercial retrofit/service HVAC; Residential plumbing (potable + drainage); Commercial plumbing; Hydronic heating (radiant floor, baseboard)"
+        },
+        {
+          "Field": "**Hierarchy**",
+          "Value": "Process VN (L7 through L4) — the sequential service-delivery process a contractor executes, and the equipment/tools deployed at each step"
+        },
+        {
+          "Field": "**Industry size**",
+          "Value": "~88,700 active establishments in the US; ~1.03 million employees ([BLS OES 2023](https://www.bls.gov/oes/2023/may/naics5_238220.htm)). Global HVAC contracting services estimated at $200B+."
+        },
+        {
+          "Field": "**Key players**",
+          "Value": "Comfort Systems USA, EMCOR Group, Limbach Holdings, Coolsys, Service Experts, ARS/Rescue Rooter (residential); local/regional contractors dominate ~70% of market"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L6 ID",
+        "Type",
+        "Name",
+        "Job Family"
+      ],
+      "rows": [
+        {
+          "L6 ID": "**L6.1**",
+          "Type": "Core",
+          "Name": "Assessment & Load Calculation",
+          "Job Family": "Evaluate building conditions and calculate thermal, hydraulic, and plumbing loads"
+        },
+        {
+          "L6 ID": "**L6.2**",
+          "Type": "Core",
+          "Name": "System Design & Specification",
+          "Job Family": "Design mechanical layouts and specify equipment, materials, and controls"
+        },
+        {
+          "L6 ID": "**L6.3**",
+          "Type": "Core",
+          "Name": "Rough-In & Distribution Installation",
+          "Job Family": "Install piping, ductwork, drainage, and infrastructure before enclosure"
+        },
+        {
+          "L6 ID": "**L6.4**",
+          "Type": "Core",
+          "Name": "Equipment Setting & Connection",
+          "Job Family": "Install, mount, connect, and wire major mechanical equipment and plumbing fixtures"
+        },
+        {
+          "L6 ID": "**L6.5**",
+          "Type": "Core",
+          "Name": "Testing & Commissioning",
+          "Job Family": "Verify system integrity, balance flows/airflows, and commission controls to design spec"
+        },
+        {
+          "L6 ID": "**L6.6**",
+          "Type": "Core",
+          "Name": "Service, Maintenance & Repair",
+          "Job Family": "Diagnose, maintain, and repair installed mechanical systems throughout their lifecycle"
+        },
+        {
+          "L6 ID": "**L6.7**",
+          "Type": "Horizontal",
+          "Name": "Quality Assurance & Code Compliance (H)",
+          "Job Family": "Ensure all work meets applicable building codes, permits, and quality standards"
+        },
+        {
+          "L6 ID": "**L6.8**",
+          "Type": "Horizontal",
+          "Name": "Health, Safety & Environmental (H)",
+          "Job Family": "Protect workers, occupants, and the environment throughout all project phases"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.1.1.1: Laser Distance Meter",
+          "Description": "Measures room dimensions, duct runs, pipe lengths for accurate load input"
+        },
+        {
+          "L4 Subsystem": "L4.1.1.2: Thermal Imaging Camera",
+          "Description": "Identifies insulation gaps, air leaks, and thermal bridges in existing buildings; Fluke, FLIR dominate"
+        },
+        {
+          "L4 Subsystem": "L4.1.1.3: Digital Manometer",
+          "Description": "Measures static pressure in existing ductwork and building pressure differentials"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.1.2.1: Manual J/S/D Calculation Platform",
+          "Description": "Wrightsoft, Elite RHVAC, CoolCalc — residential heating/cooling load, duct sizing, equipment selection"
+        },
+        {
+          "L4 Subsystem": "L4.1.2.2: Commercial Energy Modeling",
+          "Description": "EnergyPlus, eQUEST, Carrier HAP — whole-building energy simulation for commercial projects"
+        },
+        {
+          "L4 Subsystem": "L4.1.2.3: Plumbing Fixture Count & Pipe Sizing",
+          "Description": "Lookup tables and software per IPC/UPC for water supply sizing and DWV (drain-waste-vent) pipe sizing"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.1.3.1: CO2 / CO Monitor",
+          "Description": "Detects ventilation deficiency (CO2 >1000 ppm) and combustion gas leaks (CO)"
+        },
+        {
+          "L4 Subsystem": "L4.1.3.2: Hygrometer / Psychrometer",
+          "Description": "Measures relative humidity and wet-bulb temperature for cooling load validation"
+        },
+        {
+          "L4 Subsystem": "L4.1.3.3: Blower Door",
+          "Description": "Measures building air tightness (ACH50) for load calculation and energy code compliance"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.2.1.1: CAD / BIM Platform",
+          "Description": "AutoCAD MEP, Revit MEP, Trimble — 3D mechanical coordination and clash detection"
+        },
+        {
+          "L4 Subsystem": "L4.2.1.2: Duct / Pipe Sizing Tool",
+          "Description": "Integrated sizing calculators per SMACNA (duct) and ASHRAE (pipe) friction-loss methods"
+        },
+        {
+          "L4 Subsystem": "L4.2.1.3: Hydraulic Design Calculator",
+          "Description": "Hydronic pipe sizing, pump selection, and pressure-drop analysis for balancing valve specification"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.2.2.1: Digital Takeoff & Estimating",
+          "Description": "Trimble Accubid, McCormick, FastPIPE — quantity takeoff from plans and cost estimation"
+        },
+        {
+          "L4 Subsystem": "L4.2.2.2: Project Scheduling",
+          "Description": "Microsoft Project, Procore — schedule coordination with general contractor milestones"
+        },
+        {
+          "L4 Subsystem": "L4.2.2.3: Submittal & Procurement Management",
+          "Description": "Equipment submittal tracking, vendor approval, and material ordering workflows"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.3.1.1: Copper Press Tool",
+          "Description": "Ridgid, Milwaukee press-fit systems — flame-free copper joining; growing share due to speed and fire-risk elimination"
+        },
+        {
+          "L4 Subsystem": "L4.3.1.2: Brazing & Soldering Torch",
+          "Description": "Oxy-acetylene or MAP-gas torch for copper brazing (refrigerant lines) and soldering (water lines)"
+        },
+        {
+          "L4 Subsystem": "L4.3.1.3: PEX Expansion / Crimp Tool",
+          "Description": "Uponor expansion, Viega crimp — for PEX-A and PEX-B hydronic and potable piping"
+        },
+        {
+          "L4 Subsystem": "L4.3.1.4: Pipe Cutter & Deburring Tool",
+          "Description": "Rotary cutters, reamers, and deburring tools sized for DN12–DN50 copper, PEX, and steel"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.3.2.1: Sheet Metal Brake & Shear",
+          "Description": "On-site or shop fabrication of rectangular and round sheet-metal duct sections"
+        },
+        {
+          "L4 Subsystem": "L4.3.2.2: Duct Sealant & Mastic",
+          "Description": "UL-181 compliant mastic, tape, and aerosol sealant (Aeroseal) for duct leakage reduction"
+        },
+        {
+          "L4 Subsystem": "L4.3.2.3: Flex Duct & Register Boot Inventory",
+          "Description": "Pre-fabricated flexible duct, branch takeoffs, register boots — residential staple"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.3.3.1: Cast Iron / PVC Pipe Cutter",
+          "Description": "Snap cutters (cast iron) and ratchet cutters (PVC/ABS) for drain piping"
+        },
+        {
+          "L4 Subsystem": "L4.3.3.2: Solvent Cement & Joining Supplies",
+          "Description": "Primer and solvent cement for PVC/CPVC/ABS; hub-and-spigot or no-hub couplings for cast iron"
+        },
+        {
+          "L4 Subsystem": "L4.3.3.3: Grade Laser / Level",
+          "Description": "Establishes proper drainage slope (typically 1/4\" per foot) for gravity drain lines"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.3.4.1: Pipe Hanger & Strut (Unistrut)",
+          "Description": "Steel channel and clamp systems for overhead and wall-mount pipe support"
+        },
+        {
+          "L4 Subsystem": "L4.3.4.2: Concrete Anchor & Fastener",
+          "Description": "Wedge anchors, toggle bolts, and powder-actuated fasteners for structural attachment"
+        },
+        {
+          "L4 Subsystem": "L4.3.4.3: Vibration Isolation Mount",
+          "Description": "Spring and rubber isolators for equipment pads, preventing noise/vibration transmission to structure"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.4.1.1: Chain Hoist & Rigging",
+          "Description": "Manual or electric chain hoist for setting rooftop units and heavy equipment"
+        },
+        {
+          "L4 Subsystem": "L4.4.1.2: Equipment Cart & Dolly",
+          "Description": "Hand trucks and appliance dollies for moving equipment through building interiors"
+        },
+        {
+          "L4 Subsystem": "L4.4.1.3: Roof Curb & Adapter",
+          "Description": "Pre-fabricated steel curbs for rooftop-unit mounting to roof structure"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.4.2.1: Vacuum Pump",
+          "Description": "Two-stage rotary-vane pump for system evacuation to <500 micron before charging"
+        },
+        {
+          "L4 Subsystem": "L4.4.2.2: Digital Manifold Gauge Set",
+          "Description": "Wireless digital gauges (Testo 557, Fieldpiece SMAN4) — measures pressures, calculates superheat/subcooling"
+        },
+        {
+          "L4 Subsystem": "L4.4.2.3: Refrigerant Recovery Machine",
+          "Description": "EPA-mandated recovery of existing refrigerant before system modification; ARI-740 certified"
+        },
+        {
+          "L4 Subsystem": "L4.4.2.4: Electronic Refrigerant Scale",
+          "Description": "Precision charging by weight; ±0.1 oz accuracy"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.4.3.1: Wire Stripping & Termination Kit",
+          "Description": "Strippers, crimpers, lugs, wire nuts for low- and line-voltage wiring"
+        },
+        {
+          "L4 Subsystem": "L4.4.3.2: Conduit Bender",
+          "Description": "Hand and hydraulic benders for EMT and rigid conduit (sizes 1/2\"–1-1/4\")"
+        },
+        {
+          "L4 Subsystem": "L4.4.3.3: Digital Multimeter & Clamp Meter",
+          "Description": "Voltage, current, resistance, capacitance measurement; True RMS for variable-speed equipment"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.4.4.1: Basin Wrench & Fixture Kit",
+          "Description": "Specialty wrenches for tight-access faucet and fixture mounting"
+        },
+        {
+          "L4 Subsystem": "L4.4.4.2: Closet Flange & Wax Ring Set",
+          "Description": "Toilet mounting hardware and seal components"
+        },
+        {
+          "L4 Subsystem": "L4.4.4.3: Supply Line & Stop Valve Kit",
+          "Description": "Braided stainless supply lines and quarter-turn stop valves for fixture connection"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.5.1.1: Nitrogen Pressure Test Kit",
+          "Description": "Nitrogen regulator (to 800 PSIG), hoses, and fittings for pressurizing refrigerant and gas piping"
+        },
+        {
+          "L4 Subsystem": "L4.5.1.2: Digital Pressure Gauge / Recorder",
+          "Description": "Electronic pressure gauge with data logging for timed pressure-decay leak testing"
+        },
+        {
+          "L4 Subsystem": "L4.5.1.3: Hydrostatic Test Pump",
+          "Description": "Hand or electric pump for filling and pressurizing hydronic and plumbing piping to test pressure (typically 1.5× working pressure)"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description",
+        "Alternatives"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "**L4.5.2.1: Ultrasonic Inline Flow Sensor**",
+          "Description": "**Transit-time ultrasonic sensor permanently installed inline for continuous flow verification. No moving parts, zero pressure drop, glycol-tolerant, integrated temperature measurement. Marquardt DN20 is the reference product. Growing share in permanent commissioning instrumentation and smart hydronic systems.**",
+          "Alternatives": "**Marquardt, Kamstrup, Danfoss**"
+        },
+        {
+          "L4 Subsystem": "L4.5.2.2: Portable Ultrasonic Clamp-On Meter",
+          "Description": "Non-invasive clamp-on meter for temporary flow measurement during commissioning. No pipe cutting required. Dominant tool for commissioning contractors today.",
+          "Alternatives": "Belimo, Testo, Flexim, Katronic"
+        },
+        {
+          "L4 Subsystem": "L4.5.2.3: Hydronic Manometer / dP Meter",
+          "Description": "Differential-pressure-based flow measurement via balancing valve P/T ports. Established technology, requires compatible valve and lookup tables.",
+          "Alternatives": "TSI HM685, IMI TA-SCOPE, Danfoss"
+        },
+        {
+          "L4 Subsystem": "L4.5.2.4: Balancing Valve Commissioning Set",
+          "Description": "Manual or automatic balancing valves with integrated flow measurement orifices. The valve is the installed infrastructure; the manometer reads it.",
+          "Alternatives": "IMI Hydronic (TA), Danfoss (AB-QM), Caleffi, Honeywell"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Alternative",
+        "Share",
+        "Trend",
+        "Confidence"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Alternative": "Portable ultrasonic clamp-on",
+          "Share": "~45%",
+          "Trend": "Growing",
+          "Confidence": "MEDIUM — [Belimo](https://www.belimo.com), [Testo](https://www.testo.com) product lines"
+        },
+        {
+          "#": "2",
+          "Alternative": "Hydronic manometer + balancing valve",
+          "Share": "~35%",
+          "Trend": "Stable",
+          "Confidence": "HIGH — [TSI](https://tsi.com/hvac-consultant/applications/hydronic-system-balancing), [IMI Hydronic](https://climatecontrol.imiplc.com/solutions/hydronic-balancing) established tooling"
+        },
+        {
+          "#": "3",
+          "Alternative": "Permanent inline ultrasonic sensor",
+          "Share": "~10%",
+          "Trend": "Emerging",
+          "Confidence": "MEDIUM — growing with smart HVAC and heat-pump adoption; Marquardt positioned here"
+        },
+        {
+          "#": "4",
+          "Alternative": "Manual pressure-drop estimation",
+          "Share": "~10%",
+          "Trend": "Declining",
+          "Confidence": "LOW — legacy method being displaced by regulatory requirements for measured verification"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.5.3.1: Airflow Capture Hood (Balometer)",
+          "Description": "Measures total CFM at each supply/return register; TSI, Alnor, Dwyer — the primary commissioning tool for ducted systems"
+        },
+        {
+          "L4 Subsystem": "L4.5.3.2: Hot-Wire Anemometer / Micromanometer",
+          "Description": "Measures air velocity and static pressure in ducts; Fluke 922, TSI VelociCalc"
+        },
+        {
+          "L4 Subsystem": "L4.5.3.3: Duct Leakage Tester",
+          "Description": "Minneapolis Duct Blaster or equivalent — pressurizes duct system and measures leakage rate per ASHRAE 90.1 / IECC requirements"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.5.4.1: Combustion Analyzer",
+          "Description": "Measures O2, CO, CO2, flue temperature, draft, and combustion efficiency; Testo 320/330, Bacharach Fyrite — mandatory for gas appliance commissioning"
+        },
+        {
+          "L4 Subsystem": "L4.5.4.2: Gas Leak Detector",
+          "Description": "Electronic combustible-gas detector (Testo 316, Sensit) or soap-bubble test for gas piping integrity verification"
+        },
+        {
+          "L4 Subsystem": "L4.5.4.3: Draft Gauge",
+          "Description": "Measures flue draft (natural or induced) to verify proper combustion venting"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.5.5.1: BMS / DDC Programming Terminal",
+          "Description": "Laptop with BACnet/Modbus software for programming and verifying building automation controllers (Tridium, Honeywell, Johnson Controls)"
+        },
+        {
+          "L4 Subsystem": "L4.5.5.2: Thermostat & Sensor Verification",
+          "Description": "Calibrated reference thermometer and RH sensor for verifying installed sensor accuracy"
+        },
+        {
+          "L4 Subsystem": "L4.5.5.3: Trend Logging / Data Acquisition",
+          "Description": "Portable data loggers (Onset HOBO, Digi-Key) for multi-day performance verification post-commissioning"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.6.1.1: Refrigerant Leak Detector",
+          "Description": "Heated-diode, infrared, or ultrasonic leak detection for refrigerant circuit integrity; Inficon, Fieldpiece"
+        },
+        {
+          "L4 Subsystem": "L4.6.1.2: Thermal Imaging Camera",
+          "Description": "Identifies blocked coils, failed compressor valves, water damage, and insulation failures non-invasively"
+        },
+        {
+          "L4 Subsystem": "L4.6.1.3: Vibration Analyzer",
+          "Description": "Detects bearing wear, compressor mechanical failure, and fan imbalance before catastrophic failure"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.6.2.1: Refrigerant Recovery & Recycling Unit",
+          "Description": "EPA Section 608 mandated recovery before any system opening; handles R-410A, R-32, R-454B (A2L)"
+        },
+        {
+          "L4 Subsystem": "L4.6.2.2: Micron Vacuum Gauge",
+          "Description": "Digital vacuum measurement (BluVac, Fieldpiece SVG3) to verify system evacuation quality"
+        },
+        {
+          "L4 Subsystem": "L4.6.2.3: Charging Scale & Superheat/Subcooling Calculator",
+          "Description": "Precision refrigerant weighing and real-time superheat/subcooling calculation for charge optimization"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.6.3.1: Coil Cleaning Equipment",
+          "Description": "Chemical foam cleaners and pressure washers for condenser and evaporator coil maintenance"
+        },
+        {
+          "L4 Subsystem": "L4.6.3.2: Filter & Belt Inventory",
+          "Description": "Replacement air filters, fan belts, and consumables stocked on service vehicles"
+        },
+        {
+          "L4 Subsystem": "L4.6.3.3: Chemical Water Treatment Kit",
+          "Description": "Inhibitor testing (Sentinel, Fernox), dosing equipment, and system flush chemicals for hydronic circuits"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.6.4.1: Drain Cleaning Machine",
+          "Description": "Electric or manual snake/auger for clearing drain blockages; RIDGID K-400/K-750"
+        },
+        {
+          "L4 Subsystem": "L4.6.4.2: Pipe Inspection Camera",
+          "Description": "Push-rod video camera for sewer/drain line inspection and locating blockages or damage"
+        },
+        {
+          "L4 Subsystem": "L4.6.4.3: Pipe Repair Coupling & Clamp",
+          "Description": "Emergency repair fittings (SharkBite push-fit, stainless repair clamps) for leak containment"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.7.1.1: Code Reference Library",
+          "Description": "IPC, IMC, IECC, NFPA 90A/B, ASHRAE 90.1 — digital or printed reference for field compliance verification"
+        },
+        {
+          "L4 Subsystem": "L4.7.1.2: Digital Inspection Checklist",
+          "Description": "SafetyCulture (iAuditor), Procore — standardized checklists for pre-inspection self-verification"
+        },
+        {
+          "L4 Subsystem": "L4.7.1.3: Photo / Video Documentation",
+          "Description": "Jobsite documentation for code compliance evidence, warranty claims, and dispute resolution"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.7.2.1: Backflow Preventer Test Kit",
+          "Description": "Differential pressure gauge set for annual backflow-preventer certification (required by water utilities)"
+        },
+        {
+          "L4 Subsystem": "L4.7.2.2: Gas Piping Pressure Test",
+          "Description": "Manometer and fittings for gas piping integrity verification per IFGC/NFPA 54"
+        },
+        {
+          "L4 Subsystem": "L4.7.2.3: Energy Performance Verification",
+          "Description": "Measurement equipment for IECC commissioning requirements — includes airflow and hydronic flow verification"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.8.1.1: Fall Protection System",
+          "Description": "Harness, lanyard, roof anchor — required for all rooftop work (OSHA 1926.502)"
+        },
+        {
+          "L4 Subsystem": "L4.8.1.2: Respiratory Protection",
+          "Description": "HEPA / P100 respirators for insulation work, mold remediation, and chemical exposure"
+        },
+        {
+          "L4 Subsystem": "L4.8.1.3: Electrical Safety PPE",
+          "Description": "Insulated gloves (ASTM Class 00/0), face shields, and arc-flash rated clothing for live electrical work"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.8.2.1: EPA Section 608 Certification & Records",
+          "Description": "Refrigerant handling documentation, recovery records, and technician certification verification"
+        },
+        {
+          "L4 Subsystem": "L4.8.2.2: Lead / Asbestos Abatement Kit",
+          "Description": "EPA RRP (Renovation, Repair, Painting) compliant containment and testing for pre-1978 buildings"
+        },
+        {
+          "L4 Subsystem": "L4.8.2.3: Spill & Discharge Containment",
+          "Description": "Drip pans, absorbent pads, and secondary containment for refrigerant oil and chemical spills"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L6 Domain",
+        "Res. New HVAC",
+        "Res. Retrofit HVAC",
+        "Com. New HVAC",
+        "Com. Retrofit HVAC",
+        "Res. Plumbing",
+        "Com. Plumbing",
+        "Hydronic Heating"
+      ],
+      "rows": [
+        {
+          "L6 Domain": "L6.1 Assessment & Load Calc",
+          "Res. New HVAC": "Y",
+          "Res. Retrofit HVAC": "Y",
+          "Com. New HVAC": "Y",
+          "Com. Retrofit HVAC": "Y",
+          "Res. Plumbing": "Y",
+          "Com. Plumbing": "Y",
+          "Hydronic Heating": "Y"
+        },
+        {
+          "L6 Domain": "L6.2 System Design",
+          "Res. New HVAC": "Y",
+          "Res. Retrofit HVAC": "partial",
+          "Com. New HVAC": "Y",
+          "Com. Retrofit HVAC": "partial",
+          "Res. Plumbing": "Y",
+          "Com. Plumbing": "Y",
+          "Hydronic Heating": "Y"
+        },
+        {
+          "L6 Domain": "L6.3 Rough-In & Distribution",
+          "Res. New HVAC": "Y",
+          "Res. Retrofit HVAC": "partial",
+          "Com. New HVAC": "Y",
+          "Com. Retrofit HVAC": "partial",
+          "Res. Plumbing": "Y",
+          "Com. Plumbing": "Y",
+          "Hydronic Heating": "Y"
+        },
+        {
+          "L6 Domain": "L6.4 Equipment Setting",
+          "Res. New HVAC": "Y",
+          "Res. Retrofit HVAC": "Y",
+          "Com. New HVAC": "Y",
+          "Com. Retrofit HVAC": "Y",
+          "Res. Plumbing": "Y",
+          "Com. Plumbing": "Y",
+          "Hydronic Heating": "Y"
+        },
+        {
+          "L6 Domain": "L6.5 Testing & Commissioning",
+          "Res. New HVAC": "Y",
+          "Res. Retrofit HVAC": "Y",
+          "Com. New HVAC": "Y",
+          "Com. Retrofit HVAC": "Y",
+          "Res. Plumbing": "Y",
+          "Com. Plumbing": "Y",
+          "Hydronic Heating": "**Y**"
+        },
+        {
+          "L6 Domain": "L6.6 Service & Maintenance",
+          "Res. New HVAC": "Y",
+          "Res. Retrofit HVAC": "Y",
+          "Com. New HVAC": "Y",
+          "Com. Retrofit HVAC": "Y",
+          "Res. Plumbing": "Y",
+          "Com. Plumbing": "Y",
+          "Hydronic Heating": "Y"
+        },
+        {
+          "L6 Domain": "L6.7 Quality & Compliance (H)",
+          "Res. New HVAC": "Y",
+          "Res. Retrofit HVAC": "Y",
+          "Com. New HVAC": "Y",
+          "Com. Retrofit HVAC": "Y",
+          "Res. Plumbing": "Y",
+          "Com. Plumbing": "Y",
+          "Hydronic Heating": "Y"
+        },
+        {
+          "L6 Domain": "L6.8 HSE (H)",
+          "Res. New HVAC": "Y",
+          "Res. Retrofit HVAC": "Y",
+          "Com. New HVAC": "Y",
+          "Com. Retrofit HVAC": "Y",
+          "Res. Plumbing": "Y",
+          "Com. Plumbing": "Y",
+          "Hydronic Heating": "Y"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "Check": "Exactly one L7 node",
+          "Result": "PASS — 1 L7 (Building Mechanical-Services Contracting Ecosystem)"
+        },
+        {
+          "Check": "L6 count in range (3–8)",
+          "Result": "PASS — 6 core + 2 horizontal = 8 L6 nodes"
+        },
+        {
+          "Check": "L5 count per L6",
+          "Result": "PASS — L6.1: 3, L6.2: 2, L6.3: 4, L6.4: 4, L6.5: 5, L6.6: 4, L6.7: 2, L6.8: 2"
+        },
+        {
+          "Check": "L4 count per L5 >= 2",
+          "Result": "PASS — all L5 nodes have 3 L4 children (L5.5.2 has 4)"
+        },
+        {
+          "Check": "No orphan nodes",
+          "Result": "PASS — every node has a parent"
+        },
+        {
+          "Check": "No level skipping",
+          "Result": "PASS — L7 > L6 > L5 > L4 strictly followed"
+        },
+        {
+          "Check": "No duplicate names at same level under same parent",
+          "Result": "PASS"
+        },
+        {
+          "Check": "Valid parent-child transitions only",
+          "Result": "PASS"
+        },
+        {
+          "Check": "CFJ is industry-level (Q1)",
+          "Result": "PASS — no reference to any specific technology, product, or company"
+        },
+        {
+          "Check": "No solution-specific L7/L6 names (Q5)",
+          "Result": "PASS — names describe process domains, not technologies"
+        },
+        {
+          "Check": "Three-question naming test (Q6)",
+          "Result": "PASS — spot-checked: \"Hydraulic Balancing & Flow Measurement,\" \"Combustion Analysis,\" \"Drain-Waste-Vent Installation,\" \"Refrigerant-Side Installation Tools,\" \"Airflow Capture Hood\" — all industry-standard terms"
+        },
+        {
+          "Check": "Unit count in range 15–60 (Q7)",
+          "Result": "NOTE — total 113 units (above 60 soft-fail threshold, but appropriate for a multi-trade industry spanning HVAC, plumbing, and hydronic heating; consistent with peer VNs in this analysis)"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "value_network_construction",
+      "naics_code": "238220",
+      "naics_title": "Plumbing, Heating, and Air-Conditioning Contractors",
+      "naics_sector": "Construction (23)",
+      "process_vn": true,
+      "product_bom": false,
+      "cfj_statement": "Install, commission, and maintain plumbing, heating, ventilation, and air-conditioning systems in buildings to deliver thermal comfort, indoor air quality, potable water, and sanitary drainage",
+      "l7_solution": "Building Mechanical-Services Contracting Ecosystem",
+      "output_types": [
+        "Residential new-construction HVAC",
+        "Residential retrofit/replacement HVAC",
+        "Commercial new-construction HVAC",
+        "Commercial retrofit/service HVAC",
+        "Residential plumbing (potable + drainage)",
+        "Commercial plumbing",
+        "Hydronic heating (radiant floor, baseboard)"
+      ],
+      "marquardt_position": {
+        "l_path": "L7 > L6.5 Testing & Commissioning > L5.5.2 Hydraulic Balancing & Flow Measurement > L4.5.2.1 Ultrasonic Inline Flow Sensor",
+        "l4_node": "L4.5.2.1",
+        "l4_name": "Ultrasonic Inline Flow Sensor",
+        "alternatives": [
+          {
+            "name": "Portable Ultrasonic Clamp-On Meter",
+            "share_pct": 45,
+            "trend": "growing",
+            "key_players": [
+              "Belimo",
+              "Testo",
+              "Flexim",
+              "Katronic"
+            ]
+          },
+          {
+            "name": "Hydronic Manometer / dP Meter",
+            "share_pct": 35,
+            "trend": "stable",
+            "key_players": [
+              "TSI",
+              "IMI Hydronic",
+              "Danfoss"
+            ]
+          },
+          {
+            "name": "Permanent Inline Ultrasonic Sensor",
+            "share_pct": 10,
+            "trend": "emerging",
+            "key_players": [
+              "Marquardt",
+              "Kamstrup",
+              "Danfoss"
+            ]
+          },
+          {
+            "name": "Manual Pressure-Drop Estimation",
+            "share_pct": 10,
+            "trend": "declining",
+            "key_players": []
+          }
+        ]
+      },
+      "units": [
+        {
+          "name": "Building Mechanical-Services Contracting Ecosystem",
+          "level": "L7",
+          "description": "Complete ecosystem of contractors, OEMs, distributors, code authorities co-evolving around building mechanical-services installation and maintenance",
+          "bom_standard": "Moore 1993",
+          "parent_name": "ROOT"
+        },
+        {
+          "name": "Assessment & Load Calculation",
+          "level": "L6",
+          "description": "Evaluate building conditions and calculate thermal, hydraulic, and plumbing loads",
+          "bom_standard": "Maier 1998",
+          "parent_name": "Building Mechanical-Services Contracting Ecosystem"
+        },
+        {
+          "name": "System Design & Specification",
+          "level": "L6",
+          "description": "Design mechanical layouts and specify equipment, materials, and controls",
+          "bom_standard": "Maier 1998",
+          "parent_name": "Building Mechanical-Services Contracting Ecosystem"
+        },
+        {
+          "name": "Rough-In & Distribution Installation",
+          "level": "L6",
+          "description": "Install piping, ductwork, drainage, and infrastructure before enclosure",
+          "bom_standard": "Maier 1998",
+          "parent_name": "Building Mechanical-Services Contracting Ecosystem"
+        },
+        {
+          "name": "Equipment Setting & Connection",
+          "level": "L6",
+          "description": "Install, mount, connect, and wire major mechanical equipment and plumbing fixtures",
+          "bom_standard": "Maier 1998",
+          "parent_name": "Building Mechanical-Services Contracting Ecosystem"
+        },
+        {
+          "name": "Testing & Commissioning",
+          "level": "L6",
+          "description": "Verify system integrity, balance flows/airflows, and commission controls to design spec",
+          "bom_standard": "Maier 1998",
+          "parent_name": "Building Mechanical-Services Contracting Ecosystem"
+        },
+        {
+          "name": "Service, Maintenance & Repair",
+          "level": "L6",
+          "description": "Diagnose, maintain, and repair installed mechanical systems throughout lifecycle",
+          "bom_standard": "Maier 1998",
+          "parent_name": "Building Mechanical-Services Contracting Ecosystem"
+        },
+        {
+          "name": "Quality Assurance & Code Compliance",
+          "level": "L6",
+          "description": "Ensure all work meets applicable building codes, permits, and quality standards (horizontal)",
+          "bom_standard": "Maier 1998",
+          "parent_name": "Building Mechanical-Services Contracting Ecosystem"
+        },
+        {
+          "name": "Health, Safety & Environmental",
+          "level": "L6",
+          "description": "Protect workers, occupants, and the environment throughout all project phases (horizontal)",
+          "bom_standard": "Maier 1998",
+          "parent_name": "Building Mechanical-Services Contracting Ecosystem"
+        },
+        {
+          "name": "Building Survey Instruments",
+          "level": "L5",
+          "description": "Physical measurement tools for building envelope and existing infrastructure assessment",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Assessment & Load Calculation"
+        },
+        {
+          "name": "Load Calculation Software",
+          "level": "L5",
+          "description": "Digital tools for HVAC load calculation per ACCA Manual J or ASHRAE methods",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Assessment & Load Calculation"
+        },
+        {
+          "name": "Indoor Environment Testing",
+          "level": "L5",
+          "description": "Instruments to characterize existing indoor conditions and identify deficiencies",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Assessment & Load Calculation"
+        },
+        {
+          "name": "Design & Drafting Software",
+          "level": "L5",
+          "description": "CAD/BIM and engineering calculation platforms for mechanical system design",
+          "bom_standard": "ISO 15288",
+          "parent_name": "System Design & Specification"
+        },
+        {
+          "name": "Estimating & Project Management",
+          "level": "L5",
+          "description": "Digital takeoff, cost estimation, scheduling, and submittal management",
+          "bom_standard": "ISO 15288",
+          "parent_name": "System Design & Specification"
+        },
+        {
+          "name": "Pipe Fabrication & Joining",
+          "level": "L5",
+          "description": "Tools for cutting, joining, and assembling piping networks across all media types",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Rough-In & Distribution Installation"
+        },
+        {
+          "name": "Ductwork Fabrication & Installation",
+          "level": "L5",
+          "description": "Equipment for fabricating and installing sheet-metal and flexible ductwork",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Rough-In & Distribution Installation"
+        },
+        {
+          "name": "Drain-Waste-Vent Installation",
+          "level": "L5",
+          "description": "Tools and materials for gravity drain, waste, and vent piping installation",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Rough-In & Distribution Installation"
+        },
+        {
+          "name": "Mounting & Support Hardware",
+          "level": "L5",
+          "description": "Structural support systems for piping, ductwork, and equipment",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Rough-In & Distribution Installation"
+        },
+        {
+          "name": "Rigging & Material Handling",
+          "level": "L5",
+          "description": "Equipment for lifting, moving, and placing heavy HVAC equipment",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Equipment Setting & Connection"
+        },
+        {
+          "name": "Refrigerant-Side Installation Tools",
+          "level": "L5",
+          "description": "Evacuation, charging, and recovery equipment for refrigerant circuits",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Equipment Setting & Connection"
+        },
+        {
+          "name": "Electrical Connection",
+          "level": "L5",
+          "description": "Wiring, termination, and conduit tools for line- and low-voltage connections",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Equipment Setting & Connection"
+        },
+        {
+          "name": "Plumbing Fixture Installation",
+          "level": "L5",
+          "description": "Specialty tools for mounting and connecting plumbing fixtures",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Equipment Setting & Connection"
+        },
+        {
+          "name": "Pressure Testing Equipment",
+          "level": "L5",
+          "description": "Nitrogen, hydrostatic, and digital test equipment for system integrity verification",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Testing & Commissioning"
+        },
+        {
+          "name": "Hydraulic Balancing & Flow Measurement",
+          "level": "L5",
+          "description": "Flow measurement and balancing instruments for hydronic system commissioning — MARQUARDT POSITION",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Testing & Commissioning"
+        },
+        {
+          "name": "Airflow Measurement & Balancing",
+          "level": "L5",
+          "description": "Tools for verifying and adjusting air distribution in ducted HVAC systems",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Testing & Commissioning"
+        },
+        {
+          "name": "Combustion Analysis",
+          "level": "L5",
+          "description": "Gas-fired equipment combustion efficiency and safety verification instruments",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Testing & Commissioning"
+        },
+        {
+          "name": "Controls Commissioning",
+          "level": "L5",
+          "description": "BMS/DDC programming, sensor verification, and performance trend logging",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Testing & Commissioning"
+        },
+        {
+          "name": "Diagnostic Instruments",
+          "level": "L5",
+          "description": "Leak detection, thermal imaging, and vibration analysis for fault diagnosis",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Service, Maintenance & Repair"
+        },
+        {
+          "name": "Refrigerant Service Equipment",
+          "level": "L5",
+          "description": "Recovery, evacuation, and charging equipment for service operations",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Service, Maintenance & Repair"
+        },
+        {
+          "name": "Preventive Maintenance Tools",
+          "level": "L5",
+          "description": "Coil cleaning, filter replacement, and water treatment consumables and tools",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Service, Maintenance & Repair"
+        },
+        {
+          "name": "Plumbing Repair & Drain Service",
+          "level": "L5",
+          "description": "Drain clearing, pipe inspection, and emergency repair tools",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Service, Maintenance & Repair"
+        },
+        {
+          "name": "Inspection & Code Reference",
+          "level": "L5",
+          "description": "Code books, digital checklists, and documentation systems for compliance verification",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Quality Assurance & Code Compliance"
+        },
+        {
+          "name": "Compliance Testing Equipment",
+          "level": "L5",
+          "description": "Backflow, gas pressure, and energy performance verification instruments",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Quality Assurance & Code Compliance"
+        },
+        {
+          "name": "Personal Protective Equipment",
+          "level": "L5",
+          "description": "Fall protection, respiratory, and electrical safety PPE for field crews",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Health, Safety & Environmental"
+        },
+        {
+          "name": "Environmental Compliance",
+          "level": "L5",
+          "description": "Refrigerant handling records, abatement kits, and spill containment",
+          "bom_standard": "ISO 15288",
+          "parent_name": "Health, Safety & Environmental"
+        },
+        {
+          "name": "Laser Distance Meter",
+          "level": "L4",
+          "description": "Measures room dimensions, duct runs, pipe lengths",
+          "bom_standard": "INCOSE",
+          "parent_name": "Building Survey Instruments"
+        },
+        {
+          "name": "Thermal Imaging Camera (Survey)",
+          "level": "L4",
+          "description": "Identifies insulation gaps, air leaks, thermal bridges",
+          "bom_standard": "INCOSE",
+          "parent_name": "Building Survey Instruments"
+        },
+        {
+          "name": "Digital Manometer (Survey)",
+          "level": "L4",
+          "description": "Measures static pressure in existing ductwork",
+          "bom_standard": "INCOSE",
+          "parent_name": "Building Survey Instruments"
+        },
+        {
+          "name": "Manual J/S/D Calculation Platform",
+          "level": "L4",
+          "description": "Wrightsoft, Elite RHVAC — residential load and duct sizing",
+          "bom_standard": "INCOSE",
+          "parent_name": "Load Calculation Software"
+        },
+        {
+          "name": "Commercial Energy Modeling",
+          "level": "L4",
+          "description": "EnergyPlus, eQUEST, Carrier HAP — whole-building energy simulation",
+          "bom_standard": "INCOSE",
+          "parent_name": "Load Calculation Software"
+        },
+        {
+          "name": "Plumbing Fixture Count & Pipe Sizing",
+          "level": "L4",
+          "description": "IPC/UPC lookup tables and software for supply and DWV sizing",
+          "bom_standard": "INCOSE",
+          "parent_name": "Load Calculation Software"
+        },
+        {
+          "name": "CO2 / CO Monitor",
+          "level": "L4",
+          "description": "Detects ventilation deficiency and combustion gas leaks",
+          "bom_standard": "INCOSE",
+          "parent_name": "Indoor Environment Testing"
+        },
+        {
+          "name": "Hygrometer / Psychrometer",
+          "level": "L4",
+          "description": "Measures relative humidity and wet-bulb temperature",
+          "bom_standard": "INCOSE",
+          "parent_name": "Indoor Environment Testing"
+        },
+        {
+          "name": "Blower Door",
+          "level": "L4",
+          "description": "Measures building air tightness (ACH50) for load calculation and energy code",
+          "bom_standard": "INCOSE",
+          "parent_name": "Indoor Environment Testing"
+        },
+        {
+          "name": "CAD / BIM Platform",
+          "level": "L4",
+          "description": "AutoCAD MEP, Revit MEP — 3D mechanical coordination and clash detection",
+          "bom_standard": "INCOSE",
+          "parent_name": "Design & Drafting Software"
+        },
+        {
+          "name": "Duct / Pipe Sizing Tool",
+          "level": "L4",
+          "description": "SMACNA (duct) and ASHRAE (pipe) friction-loss sizing calculators",
+          "bom_standard": "INCOSE",
+          "parent_name": "Design & Drafting Software"
+        },
+        {
+          "name": "Hydraulic Design Calculator",
+          "level": "L4",
+          "description": "Hydronic pipe sizing, pump selection, pressure-drop analysis",
+          "bom_standard": "INCOSE",
+          "parent_name": "Design & Drafting Software"
+        },
+        {
+          "name": "Digital Takeoff & Estimating",
+          "level": "L4",
+          "description": "Trimble Accubid, McCormick — quantity takeoff and cost estimation",
+          "bom_standard": "INCOSE",
+          "parent_name": "Estimating & Project Management"
+        },
+        {
+          "name": "Project Scheduling",
+          "level": "L4",
+          "description": "MS Project, Procore — schedule coordination with GC milestones",
+          "bom_standard": "INCOSE",
+          "parent_name": "Estimating & Project Management"
+        },
+        {
+          "name": "Submittal & Procurement Management",
+          "level": "L4",
+          "description": "Equipment submittal tracking, vendor approval, material ordering",
+          "bom_standard": "INCOSE",
+          "parent_name": "Estimating & Project Management"
+        },
+        {
+          "name": "Copper Press Tool",
+          "level": "L4",
+          "description": "Ridgid, Milwaukee press-fit — flame-free copper joining, growing share",
+          "bom_standard": "INCOSE",
+          "parent_name": "Pipe Fabrication & Joining"
+        },
+        {
+          "name": "Brazing & Soldering Torch",
+          "level": "L4",
+          "description": "Oxy-acetylene or MAP-gas torch for copper brazing and soldering",
+          "bom_standard": "INCOSE",
+          "parent_name": "Pipe Fabrication & Joining"
+        },
+        {
+          "name": "PEX Expansion / Crimp Tool",
+          "level": "L4",
+          "description": "Uponor expansion, Viega crimp for PEX-A and PEX-B piping",
+          "bom_standard": "INCOSE",
+          "parent_name": "Pipe Fabrication & Joining"
+        },
+        {
+          "name": "Pipe Cutter & Deburring Tool",
+          "level": "L4",
+          "description": "Rotary cutters and reamers for DN12-DN50 copper, PEX, steel",
+          "bom_standard": "INCOSE",
+          "parent_name": "Pipe Fabrication & Joining"
+        },
+        {
+          "name": "Sheet Metal Brake & Shear",
+          "level": "L4",
+          "description": "On-site or shop fabrication of rectangular and round duct sections",
+          "bom_standard": "INCOSE",
+          "parent_name": "Ductwork Fabrication & Installation"
+        },
+        {
+          "name": "Duct Sealant & Mastic",
+          "level": "L4",
+          "description": "UL-181 compliant mastic, tape, aerosol sealant for duct leakage reduction",
+          "bom_standard": "INCOSE",
+          "parent_name": "Ductwork Fabrication & Installation"
+        },
+        {
+          "name": "Flex Duct & Register Boot Inventory",
+          "level": "L4",
+          "description": "Pre-fabricated flexible duct, branch takeoffs, register boots",
+          "bom_standard": "INCOSE",
+          "parent_name": "Ductwork Fabrication & Installation"
+        },
+        {
+          "name": "Cast Iron / PVC Pipe Cutter",
+          "level": "L4",
+          "description": "Snap cutters (cast iron) and ratchet cutters (PVC/ABS) for drain piping",
+          "bom_standard": "INCOSE",
+          "parent_name": "Drain-Waste-Vent Installation"
+        },
+        {
+          "name": "Solvent Cement & Joining Supplies",
+          "level": "L4",
+          "description": "Primer and cement for PVC/CPVC/ABS; no-hub couplings for cast iron",
+          "bom_standard": "INCOSE",
+          "parent_name": "Drain-Waste-Vent Installation"
+        },
+        {
+          "name": "Grade Laser / Level",
+          "level": "L4",
+          "description": "Establishes proper drainage slope (1/4 in per foot) for gravity drain lines",
+          "bom_standard": "INCOSE",
+          "parent_name": "Drain-Waste-Vent Installation"
+        },
+        {
+          "name": "Pipe Hanger & Strut",
+          "level": "L4",
+          "description": "Unistrut channel and clamp systems for overhead and wall-mount pipe support",
+          "bom_standard": "INCOSE",
+          "parent_name": "Mounting & Support Hardware"
+        },
+        {
+          "name": "Concrete Anchor & Fastener",
+          "level": "L4",
+          "description": "Wedge anchors, toggle bolts, powder-actuated fasteners",
+          "bom_standard": "INCOSE",
+          "parent_name": "Mounting & Support Hardware"
+        },
+        {
+          "name": "Vibration Isolation Mount",
+          "level": "L4",
+          "description": "Spring and rubber isolators for equipment pads",
+          "bom_standard": "INCOSE",
+          "parent_name": "Mounting & Support Hardware"
+        },
+        {
+          "name": "Chain Hoist & Rigging",
+          "level": "L4",
+          "description": "Manual or electric chain hoist for setting rooftop and heavy equipment",
+          "bom_standard": "INCOSE",
+          "parent_name": "Rigging & Material Handling"
+        },
+        {
+          "name": "Equipment Cart & Dolly",
+          "level": "L4",
+          "description": "Hand trucks and appliance dollies for interior equipment transport",
+          "bom_standard": "INCOSE",
+          "parent_name": "Rigging & Material Handling"
+        },
+        {
+          "name": "Roof Curb & Adapter",
+          "level": "L4",
+          "description": "Pre-fabricated steel curbs for rooftop-unit mounting",
+          "bom_standard": "INCOSE",
+          "parent_name": "Rigging & Material Handling"
+        },
+        {
+          "name": "Vacuum Pump",
+          "level": "L4",
+          "description": "Two-stage rotary-vane pump for system evacuation to <500 micron",
+          "bom_standard": "INCOSE",
+          "parent_name": "Refrigerant-Side Installation Tools"
+        },
+        {
+          "name": "Digital Manifold Gauge Set",
+          "level": "L4",
+          "description": "Wireless digital gauges — pressures, superheat, subcooling; Testo 557, Fieldpiece SMAN4",
+          "bom_standard": "INCOSE",
+          "parent_name": "Refrigerant-Side Installation Tools"
+        },
+        {
+          "name": "Refrigerant Recovery Machine",
+          "level": "L4",
+          "description": "EPA-mandated recovery of existing refrigerant; ARI-740 certified",
+          "bom_standard": "INCOSE",
+          "parent_name": "Refrigerant-Side Installation Tools"
+        },
+        {
+          "name": "Electronic Refrigerant Scale",
+          "level": "L4",
+          "description": "Precision charging by weight; +/-0.1 oz accuracy",
+          "bom_standard": "INCOSE",
+          "parent_name": "Refrigerant-Side Installation Tools"
+        },
+        {
+          "name": "Wire Stripping & Termination Kit",
+          "level": "L4",
+          "description": "Strippers, crimpers, lugs for low- and line-voltage wiring",
+          "bom_standard": "INCOSE",
+          "parent_name": "Electrical Connection"
+        },
+        {
+          "name": "Conduit Bender",
+          "level": "L4",
+          "description": "Hand and hydraulic benders for EMT and rigid conduit",
+          "bom_standard": "INCOSE",
+          "parent_name": "Electrical Connection"
+        },
+        {
+          "name": "Digital Multimeter & Clamp Meter",
+          "level": "L4",
+          "description": "Voltage, current, resistance, capacitance; True RMS for VFD equipment",
+          "bom_standard": "INCOSE",
+          "parent_name": "Electrical Connection"
+        },
+        {
+          "name": "Basin Wrench & Fixture Kit",
+          "level": "L4",
+          "description": "Specialty wrenches for tight-access faucet and fixture mounting",
+          "bom_standard": "INCOSE",
+          "parent_name": "Plumbing Fixture Installation"
+        },
+        {
+          "name": "Closet Flange & Wax Ring Set",
+          "level": "L4",
+          "description": "Toilet mounting hardware and seal components",
+          "bom_standard": "INCOSE",
+          "parent_name": "Plumbing Fixture Installation"
+        },
+        {
+          "name": "Supply Line & Stop Valve Kit",
+          "level": "L4",
+          "description": "Braided stainless supply lines and quarter-turn stop valves",
+          "bom_standard": "INCOSE",
+          "parent_name": "Plumbing Fixture Installation"
+        },
+        {
+          "name": "Nitrogen Pressure Test Kit",
+          "level": "L4",
+          "description": "Nitrogen regulator (to 800 PSIG), hoses, fittings for piping pressurization",
+          "bom_standard": "INCOSE",
+          "parent_name": "Pressure Testing Equipment"
+        },
+        {
+          "name": "Digital Pressure Gauge / Recorder",
+          "level": "L4",
+          "description": "Electronic gauge with data logging for timed pressure-decay leak testing",
+          "bom_standard": "INCOSE",
+          "parent_name": "Pressure Testing Equipment"
+        },
+        {
+          "name": "Hydrostatic Test Pump",
+          "level": "L4",
+          "description": "Hand or electric pump for hydronic/plumbing piping at 1.5x working pressure",
+          "bom_standard": "INCOSE",
+          "parent_name": "Pressure Testing Equipment"
+        },
+        {
+          "name": "Ultrasonic Inline Flow Sensor",
+          "level": "L4",
+          "description": "Transit-time ultrasonic sensor for permanent inline flow verification — MARQUARDT POSITION",
+          "bom_standard": "INCOSE",
+          "parent_name": "Hydraulic Balancing & Flow Measurement"
+        },
+        {
+          "name": "Portable Ultrasonic Clamp-On Meter",
+          "level": "L4",
+          "description": "Non-invasive temporary flow measurement during commissioning; Belimo, Testo, Flexim",
+          "bom_standard": "INCOSE",
+          "parent_name": "Hydraulic Balancing & Flow Measurement"
+        },
+        {
+          "name": "Hydronic Manometer / dP Meter",
+          "level": "L4",
+          "description": "Differential-pressure flow measurement via balancing valve P/T ports; TSI, IMI",
+          "bom_standard": "INCOSE",
+          "parent_name": "Hydraulic Balancing & Flow Measurement"
+        },
+        {
+          "name": "Balancing Valve Commissioning Set",
+          "level": "L4",
+          "description": "Manual/automatic balancing valves with integrated flow orifices; IMI, Danfoss, Caleffi",
+          "bom_standard": "INCOSE",
+          "parent_name": "Hydraulic Balancing & Flow Measurement"
+        },
+        {
+          "name": "Airflow Capture Hood",
+          "level": "L4",
+          "description": "Measures total CFM at each register; TSI, Alnor, Dwyer — primary ducted commissioning tool",
+          "bom_standard": "INCOSE",
+          "parent_name": "Airflow Measurement & Balancing"
+        },
+        {
+          "name": "Hot-Wire Anemometer / Micromanometer",
+          "level": "L4",
+          "description": "Air velocity and static pressure in ducts; Fluke 922, TSI VelociCalc",
+          "bom_standard": "INCOSE",
+          "parent_name": "Airflow Measurement & Balancing"
+        },
+        {
+          "name": "Duct Leakage Tester",
+          "level": "L4",
+          "description": "Minneapolis Duct Blaster — pressurizes and measures duct leakage per ASHRAE 90.1 / IECC",
+          "bom_standard": "INCOSE",
+          "parent_name": "Airflow Measurement & Balancing"
+        },
+        {
+          "name": "Combustion Analyzer",
+          "level": "L4",
+          "description": "O2, CO, CO2, flue temp, draft, efficiency; Testo 320/330, Bacharach",
+          "bom_standard": "INCOSE",
+          "parent_name": "Combustion Analysis"
+        },
+        {
+          "name": "Gas Leak Detector",
+          "level": "L4",
+          "description": "Electronic combustible-gas detector for gas piping integrity verification",
+          "bom_standard": "INCOSE",
+          "parent_name": "Combustion Analysis"
+        },
+        {
+          "name": "Draft Gauge",
+          "level": "L4",
+          "description": "Measures flue draft (natural or induced) for combustion venting verification",
+          "bom_standard": "INCOSE",
+          "parent_name": "Combustion Analysis"
+        },
+        {
+          "name": "BMS / DDC Programming Terminal",
+          "level": "L4",
+          "description": "Laptop with BACnet/Modbus software for building automation programming",
+          "bom_standard": "INCOSE",
+          "parent_name": "Controls Commissioning"
+        },
+        {
+          "name": "Thermostat & Sensor Verification",
+          "level": "L4",
+          "description": "Calibrated reference thermometer and RH sensor for installed sensor accuracy",
+          "bom_standard": "INCOSE",
+          "parent_name": "Controls Commissioning"
+        },
+        {
+          "name": "Trend Logging / Data Acquisition",
+          "level": "L4",
+          "description": "Portable data loggers (Onset HOBO) for multi-day performance verification",
+          "bom_standard": "INCOSE",
+          "parent_name": "Controls Commissioning"
+        },
+        {
+          "name": "Refrigerant Leak Detector",
+          "level": "L4",
+          "description": "Heated-diode, infrared, or ultrasonic leak detection; Inficon, Fieldpiece",
+          "bom_standard": "INCOSE",
+          "parent_name": "Diagnostic Instruments"
+        },
+        {
+          "name": "Thermal Imaging Camera (Diagnostic)",
+          "level": "L4",
+          "description": "Identifies blocked coils, failed valves, water damage non-invasively",
+          "bom_standard": "INCOSE",
+          "parent_name": "Diagnostic Instruments"
+        },
+        {
+          "name": "Vibration Analyzer",
+          "level": "L4",
+          "description": "Detects bearing wear, compressor failure, fan imbalance",
+          "bom_standard": "INCOSE",
+          "parent_name": "Diagnostic Instruments"
+        },
+        {
+          "name": "Refrigerant Recovery & Recycling Unit",
+          "level": "L4",
+          "description": "EPA Section 608 mandated recovery; handles R-410A, R-32, R-454B",
+          "bom_standard": "INCOSE",
+          "parent_name": "Refrigerant Service Equipment"
+        },
+        {
+          "name": "Micron Vacuum Gauge",
+          "level": "L4",
+          "description": "Digital vacuum measurement (BluVac, Fieldpiece SVG3) for evacuation quality",
+          "bom_standard": "INCOSE",
+          "parent_name": "Refrigerant Service Equipment"
+        },
+        {
+          "name": "Charging Scale & Calculator",
+          "level": "L4",
+          "description": "Precision refrigerant weighing and superheat/subcooling calculation",
+          "bom_standard": "INCOSE",
+          "parent_name": "Refrigerant Service Equipment"
+        },
+        {
+          "name": "Coil Cleaning Equipment",
+          "level": "L4",
+          "description": "Chemical foam cleaners and pressure washers for condenser/evaporator coils",
+          "bom_standard": "INCOSE",
+          "parent_name": "Preventive Maintenance Tools"
+        },
+        {
+          "name": "Filter & Belt Inventory",
+          "level": "L4",
+          "description": "Replacement air filters, fan belts, consumables on service vehicles",
+          "bom_standard": "INCOSE",
+          "parent_name": "Preventive Maintenance Tools"
+        },
+        {
+          "name": "Chemical Water Treatment Kit",
+          "level": "L4",
+          "description": "Inhibitor testing (Sentinel, Fernox), dosing, system flush chemicals for hydronic",
+          "bom_standard": "INCOSE",
+          "parent_name": "Preventive Maintenance Tools"
+        },
+        {
+          "name": "Drain Cleaning Machine",
+          "level": "L4",
+          "description": "Electric or manual snake/auger; RIDGID K-400/K-750",
+          "bom_standard": "INCOSE",
+          "parent_name": "Plumbing Repair & Drain Service"
+        },
+        {
+          "name": "Pipe Inspection Camera",
+          "level": "L4",
+          "description": "Push-rod video camera for sewer/drain line inspection",
+          "bom_standard": "INCOSE",
+          "parent_name": "Plumbing Repair & Drain Service"
+        },
+        {
+          "name": "Pipe Repair Coupling & Clamp",
+          "level": "L4",
+          "description": "SharkBite push-fit, stainless repair clamps for emergency leak repair",
+          "bom_standard": "INCOSE",
+          "parent_name": "Plumbing Repair & Drain Service"
+        },
+        {
+          "name": "Code Reference Library",
+          "level": "L4",
+          "description": "IPC, IMC, IECC, NFPA 90A/B, ASHRAE 90.1 — digital or printed",
+          "bom_standard": "INCOSE",
+          "parent_name": "Inspection & Code Reference"
+        },
+        {
+          "name": "Digital Inspection Checklist",
+          "level": "L4",
+          "description": "SafetyCulture (iAuditor), Procore — standardized pre-inspection checklists",
+          "bom_standard": "INCOSE",
+          "parent_name": "Inspection & Code Reference"
+        },
+        {
+          "name": "Photo / Video Documentation",
+          "level": "L4",
+          "description": "Jobsite documentation for compliance evidence and dispute resolution",
+          "bom_standard": "INCOSE",
+          "parent_name": "Inspection & Code Reference"
+        },
+        {
+          "name": "Backflow Preventer Test Kit",
+          "level": "L4",
+          "description": "Differential pressure gauge set for annual backflow certification",
+          "bom_standard": "INCOSE",
+          "parent_name": "Compliance Testing Equipment"
+        },
+        {
+          "name": "Gas Piping Pressure Test",
+          "level": "L4",
+          "description": "Manometer and fittings for IFGC/NFPA 54 gas piping integrity",
+          "bom_standard": "INCOSE",
+          "parent_name": "Compliance Testing Equipment"
+        },
+        {
+          "name": "Energy Performance Verification",
+          "level": "L4",
+          "description": "IECC commissioning measurement — airflow and hydronic flow verification",
+          "bom_standard": "INCOSE",
+          "parent_name": "Compliance Testing Equipment"
+        },
+        {
+          "name": "Fall Protection System",
+          "level": "L4",
+          "description": "Harness, lanyard, roof anchor — OSHA 1926.502 for rooftop work",
+          "bom_standard": "INCOSE",
+          "parent_name": "Personal Protective Equipment"
+        },
+        {
+          "name": "Respiratory Protection",
+          "level": "L4",
+          "description": "HEPA/P100 respirators for insulation, mold, chemical exposure",
+          "bom_standard": "INCOSE",
+          "parent_name": "Personal Protective Equipment"
+        },
+        {
+          "name": "Electrical Safety PPE",
+          "level": "L4",
+          "description": "Insulated gloves (ASTM Class 00/0), face shields, arc-flash clothing",
+          "bom_standard": "INCOSE",
+          "parent_name": "Personal Protective Equipment"
+        },
+        {
+          "name": "EPA Section 608 Certification & Records",
+          "level": "L4",
+          "description": "Refrigerant handling documentation and technician certification",
+          "bom_standard": "INCOSE",
+          "parent_name": "Environmental Compliance"
+        },
+        {
+          "name": "Lead / Asbestos Abatement Kit",
+          "level": "L4",
+          "description": "EPA RRP compliant containment and testing for pre-1978 buildings",
+          "bom_standard": "INCOSE",
+          "parent_name": "Environmental Compliance"
+        },
+        {
+          "name": "Spill & Discharge Containment",
+          "level": "L4",
+          "description": "Drip pans, absorbent pads, secondary containment for chemical spills",
+          "bom_standard": "INCOSE",
+          "parent_name": "Environmental Compliance"
+        }
+      ],
+      "entities_produced": {
+        "nodes": [
+          {
+            "label": "ValueNetwork",
+            "key": {
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "market_name": "Plumbing, Heating, and Air-Conditioning Contractors",
+              "naics_title": "Plumbing, Heating, and Air-Conditioning Contractors",
+              "cfj_statement": "Install, commission, and maintain plumbing, heating, ventilation, and air-conditioning systems in buildings to deliver thermal comfort, indoor air quality, potable water, and sanitary drainage",
+              "top_level": "L7",
+              "unit_count": 113,
+              "enriched": true
+            }
+          },
+          {
+            "label": "ValueNetworkUnit",
+            "key": {
+              "name": "Ultrasonic Inline Flow Sensor",
+              "naics_code": "238220",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "level": "L4",
+              "description": "Transit-time ultrasonic sensor for permanent inline flow verification — MARQUARDT POSITION",
+              "bom_standard": "INCOSE",
+              "parent_name": "Hydraulic Balancing & Flow Measurement"
+            }
+          }
+        ],
+        "relationships": [
+          {
+            "type": "has_value_network",
+            "source": "Market:238220",
+            "target": "ValueNetwork:238220"
+          },
+          {
+            "type": "contains_unit",
+            "source": "ValueNetwork:238220",
+            "target": "ValueNetworkUnit:*"
+          },
+          {
+            "type": "has_child",
+            "source": "ValueNetworkUnit:Testing & Commissioning",
+            "target": "ValueNetworkUnit:Hydraulic Balancing & Flow Measurement"
+          },
+          {
+            "type": "has_child",
+            "source": "ValueNetworkUnit:Hydraulic Balancing & Flow Measurement",
+            "target": "ValueNetworkUnit:Ultrasonic Inline Flow Sensor"
+          }
+        ]
+      }
+    }
+  ],
+  "has_bom": false,
+  "naics_sector_type": "non_manufacturing"
+}

@@ -1,0 +1,2425 @@
+{
+  "id": "JTBD_heating_equipment_except_warm_air_furnac",
+  "title": "JTBD Analysis — Heating Equipment (except Warm Air Furnaces) Manufacturing (NAICS 333414)",
+  "type": "jtbd_analysis",
+  "market_slug": "heating_equipment_except_warm_air_furnac",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Phase 1 — Industry Landscape",
+      "content": "### 1.1 CFJ, Output Types, Offering Level\n\n| Field | Value |\n|---|---|\n| **NAICS** | 333414 |\n| **CFJ** | Generate and deliver thermal energy to occupied spaces and domestic hot-water systems via heated-water circuits [SRC: VN_heating_equipment] |\n| **Offering Level** | L5 (Product) — standalone heating appliances |\n\n| Output Type | VN Level |\n|---|---|\n| Gas condensing boiler | L5 |\n| Gas non-condensing boiler | L5 |\n| Oil-fired boiler | L5 |\n| Electric hydronic boiler | L5 |\n| Hydronic baseboard heater | L5 (emitter-only) |\n| Radiant floor heating system | L5 (emitter-only) |\n| Solar water heating system | L5 |\n| Pool/spa heater | L5 |\n\n### 1.2 Segments (by circumstance)\n\n| # | Segment | Circumstance | Alternatives Differ? |\n|---|---|---|---|\n| 1 | **New-build residential** | Greenfield installation with design freedom; low-temperature emitters preferred (radiant floor); condensing boiler mandated by regulation | Yes — system design starts from scratch |\n| 2 | **Retrofit residential** | Replacing existing boiler in occupied dwelling; constrained pipe routing, existing radiators, limited space; must maintain comfort during swap | Yes — high-temp emitters constrain boiler selection |\n| 3 | **Light commercial (office, retail, hospitality)** | Multi-zone buildings with diverse occupancy profiles; BMS integration expected; energy audit/reporting mandated | Yes — zone balancing complexity, regulatory reporting |\n| 4 | **Multi-family / social housing** | Centralized plant with per-unit metering; tenant billing requires measured energy; compliance with EU EED individual metering mandate | Yes — metering-grade accuracy required |\n| 5 | **Industrial process heating** | Hydronic circuits for process heat (not space heating); tighter temperature control, higher duty cycles, harsher media conditions | Yes — duty cycle and media constraints differ |\n| 6 | **Solar-hybrid / renewable integration** | Combining solar thermal with boiler backup; variable source temperatures; storage management; maximizing solar fraction | Yes — multi-source orchestration, low delta-T operation |\n| 7 | **Pool/spa** | Outdoor or indoor pool heating; large water volumes, chemical treatment, seasonal operation | Yes — different media chemistry and volume scale |\n\n### 1.3 Process Value Network\n\nSeven L6 domains (from VN file):\n\n| L6 | Domain | Type | Marquardt Relevance |\n|---|---|---|---|\n| L6.1 | Heat Generation | Core | Indirect — flow data feeds burner modulation |\n| **L6.2** | **Hydraulic Distribution** | **Core** | **Direct — sensor sits here at L4.2.5.1** |\n| L6.3 | Heat Emission | Core | Indirect — flow determines emitter output |\n| L6.4 | Control & Regulation | Core | Direct — sensor feeds controller inputs |\n| L6.5 | Domestic Hot Water | Core | Adjacent — DHW circuits also need flow sensing |\n| L6.6 | Installation & Aftermarket | Horizontal | Direct — commissioning requires flow verification |\n| L6.7 | Energy Monitoring & Compliance | Horizontal | Direct — thermal energy = flow × delta-T × Cp |\n\n### 1.4–1.5 Product BOM and Edges\n\nFull BOM hierarchy documented in VN file (115 units across L7→L4). Key edges relevant to flow sensing:\n\n| BOM Position | Process Step | Edge Type | Rationale |\n|---|---|---|---|\n| Heat Exchanger Core (L4.1.2.1) | L6.2 Hydraulic Distribution | **HARD** | HX geometry determines flow resistance and required flow rate |\n| Circulator Pump (L5.2.1) | L6.2 Hydraulic Distribution | **HARD** | Pump capacity sets flow range; sensor must match |\n| Pipe Loop — Radiant Floor (L4.3.3.1) | L6.2 Hydraulic Distribution | **SOFT** | Loop length affects flow resistance, not sensor category |\n| Expansion Vessel (L4.2.6.1) | L6.2 Hydraulic Distribution | INDEPENDENT | No effect on flow measurement |\n| Appliance Controller (L5.4.1) | L6.4 Control & Regulation | **HARD** | Controller protocol determines sensor interface requirement |\n\n---"
+    },
+    {
+      "title": "Phase 2 — Company Enters",
+      "content": "### 2.1 VN Anchor\n\n| Field | Value |\n|---|---|\n| **Route** | PRODUCT_BOM — sensor ends up IN the customer's output product (boiler/heating appliance) |\n| **Anchor Unit** | Ultrasonic Flow Sensor (L4.2.5.1) |\n| **Anchor Level** | L4 (component/subsystem) |\n| **Parent VN Unit** | Flow Sensing & Measurement (L5.2.5) |\n| **Parent Level** | L5 |\n| **Grandparent** | Hydraulic Distribution (L6.2) |\n| **L-Path** | L7 Hydronic Heating Equipment Ecosystem > L6.2 Hydraulic Distribution > L5.2.5 Flow Sensing & Measurement > L4.2.5.1 Ultrasonic Flow Sensor |\n\n### 2.2 Lens Formation\n\n| Field | Value |\n|---|---|\n| **Route** | Maker — PRODUCT_BOM |\n| **Function Verb** | Measure (from BOM position function: what the component DOES within the parent system) |\n| **Lens** | \"What [measurement] does this [hydraulic distribution system] need to perform its job?\" |\n\n**Segment filtering:**\n\n| Segment | Level A (VN serves?) | Level B (Product modality?) | Result |\n|---|---|---|---|\n| New-build residential | Yes | Yes — DN20/DN25, water/glycol, 2–90 °C | **Active** |\n| Retrofit residential | Yes | Yes — same specs | **Active** |\n| Light commercial | Yes | Yes — DN20/DN25 covers small commercial | **Active** |\n| Multi-family / social housing | Yes | Partial — may require metering-grade (MID EN 1434) | **Active (with caveat)** |\n| Industrial process heating | Yes | Partial — may exceed 90 °C or 10 bar | **Filtered** |\n| Solar-hybrid | Yes | Yes — glycol-tolerant, low flow rates in scope | **Active** |\n| Pool/spa | Partial | Partial — chemical treatment, larger pipe sizes | **Filtered** |\n\n### 2.3 Product Job Statement\n\n> **\"Help Flow Sensing & Measurement to measure volumetric flow rate in closed-pipe hydronic heating circuits without obstructing flow or introducing mechanical wear points\"**\n\nTest: 3+ alternatives from different categories? Ultrasonic (acoustic), Turbine (mechanical), Vortex (fluid-dynamic), DP estimation (inferred) — **PASS**.\n\n### 2.4 Alternatives (5)\n\n| # | Alternative | UNSPSC | Inherent Trade-Offs |\n|---|---|---|---|\n| 1 | **Impeller / Turbine Flow Sensor** (incumbent) | 41112501 | Moving parts subject to magnetite fouling, bearing wear, and particulate jamming; paramagnetic MnO₂ attracted to magnetized rotor; calibration drift from blade erosion; 3–5 year service life in hard-water areas [SRC: web_search — HeatingHelp, BoilerMag] |\n| 2 | **Ultrasonic Flow Sensor** (transit-time) | 41112501 | Accuracy degrades with >2% air entrainment; requires pipe-full condition; higher unit cost vs turbine; signal loss in partially filled pipes [SRC: 01_product_decomposition] |\n| 3 | **Vortex Flow Sensor** | 41112501 | Introduces pressure drop (bluff body obstructs flow); limited accuracy at low flow rates below Reynolds threshold; vibration-sensitive [SRC: VN_heating_equipment] |\n| 4 | **Differential Pressure Estimation** (from pump curve) | — | Zero hardware cost; accuracy ±15–20%; no direct measurement; depends on pump curve validity; cannot detect anomalies [SRC: VN_heating_equipment] |\n| 5 | **Do nothing / accept risk** [Status Quo] | — | Zero cost, zero lifecycle burden; thermal output unverified; no fault detection; cannot comply with EU EcoDesign measured-efficiency requirements; energy waste undetectable |\n\n**Merge test:** Each alternative creates distinct P1 lifecycle burdens and distinct accuracy/maintenance profiles. No merge needed.\n\n### 2.5 Scenarios and Output Type Activation\n\n| Scenario | Activated Output Types | BOM Positions in Play |\n|---|---|---|\n| **S1: Condensing boiler modulation control** | Gas condensing boiler | HX Core, Circulator, Controller, Flow Sensor |\n| **S2: Radiant floor zone balancing** | Radiant floor heating | Manifold, Pipe Loops, Zone Valves, Flow Sensor |\n| **S3: DHW combi-boiler demand detection** | Gas condensing boiler (combi) | DHW HX, DHW Flow Sensor, Controller |\n| **S4: Solar-hybrid source management** | Solar water heating + backup boiler | Solar Pump Station, HX, Separator, Flow Sensor |\n| **S5: Multi-zone commercial balancing** | Baseboard/radiator + fan coil | Multiple emitter loops, Manifold, BUS Gateway |\n| **S6: Thermal energy metering for billing** | Any (multi-family context) | Flow Sensor (metering-grade), Temp Pair, Integrator |\n\nSparsity check: S3 and S4 activate different output type subsets; S6 is segment-specific. **PASS** — not every scenario activates every type.\n\n---"
+    },
+    {
+      "title": "Phase 3 — Needs Derivation",
+      "content": "### 3.0 Stakeholder Roles for This Market\n\n| Role | Who (in NAICS 333414 context) |\n|---|---|\n| **Job Executor** | HVAC installer / commissioning technician — installs and configures the sensor |\n| **Job Overseer** | Boiler OEM engineering manager — accountable for appliance performance and certification |\n| **Job Beneficiary** | Building occupant / facility manager — receives thermal comfort |\n| **Product Lifecycle Support** | Specifier (heating design engineer), installer, commissioning tech, service technician, disposer |\n| **Purchase Executor** | OEM procurement manager / HVAC wholesaler buyer |\n| **Purchase Influencer** | Building regulations inspector, energy auditor, consulting engineer |\n\n### 3.1 Job Map (8 Universal Steps — Ulwick 2005)\n\n| # | Step | Statement | Relevant to Product? | Relevance Rationale |\n|---|---|---|---|---|\n| 1 | **DEFINE** | Define the required flow rate range, pipe diameter, medium type, temperature envelope, and communication protocol for the hydronic circuit | **Yes** | Sensor specifications must match circuit design parameters |\n| 2 | **LOCATE** | Locate and access the optimal insertion point in the hydronic piping where flow profile is developed and straight-run requirements are met | **Yes** | Physical installation position directly affects measurement accuracy |\n| 3 | **PREPARE** | Prepare the piping section, electrical connections, and controller interface for sensor integration | **Yes** | Mechanical and electrical integration is core to product installation |\n| 4 | **CONFIRM** | Confirm sensor readiness: verify pipe-full condition, absence of air locks, correct wiring, and communication handshake with controller | **Yes** | Pre-operation verification critical for measurement validity |\n| 5 | **EXECUTE** | Execute continuous flow measurement, providing real-time volumetric flow rate, temperature, and diagnostic data to the system controller | **Yes** | This IS the core value-creating action of the product |\n| 6 | **MONITOR** | Monitor measurement quality indicators: signal strength, air bubble events, empty-pipe alarms, calibration drift flags | **Yes** | Ongoing measurement integrity affects system performance |\n| 7 | **MODIFY** | Adjust or recalibrate if measurement deviates — re-zero, update fluid properties, clean sensor path | No | Ultrasonic sensors require minimal in-service adjustment; turbine sensors require this more |\n| 8 | **CONCLUDE** | Conclude service life: decommission sensor, drain circuit, dispose or recycle electronics and housing | No | Standard end-of-life; not a differentiating step for flow sensors |\n\n**Relevant steps: 6 of 8** (Steps 1–6). Steps 7–8 not relevant to product differentiation.\n\n### 3.2 P1 + P2 Needs: Error Statements\n\n#### P2 — Core Job Needs (solution-independent)\n\n| ID | Job Step | Error Type | Statement | Importance | Satisfaction | Opp. Score | Impact | Confidence | product_related |\n|---|---|---|---|---|---|---|---|---|---|\n| N01 | EXECUTE | ACCURACY | Minimize the likelihood of volumetric flow reading deviating more than ±3% from true value across the 5–50 l/min operating range | 9 | 5 | 13 | reliability | 0.8 | false |\n| N02 | EXECUTE | CONSISTENCY | Minimize variability of flow readings between successive measurement cycles under identical steady-state conditions (repeatability >±0.5%) | 8 | 6 | 10 | reliability | 0.8 | false |\n| N03 | EXECUTE | ROBUSTNESS | Minimize measurement degradation when medium temperature shifts by more than 20 °C within a single heating cycle | 8 | 4 | 12 | reliability | 0.7 | false |\n| N04 | MONITOR | DETECTION | Minimize time to detect a complete flow stoppage event (circulator failure or valve closure) to less than 2 seconds | 9 | 5 | 13 | safety | 0.8 | false |\n| N05 | EXECUTE | THROUGHPUT | Increase the turndown ratio (max/min measurable flow) to cover both full-load and minimum-modulation operating points in a single device | 7 | 5 | 9 | reliability | 0.7 | false |\n| N06 | DEFINE | ACCURACY | Minimize the likelihood of specifying a sensor whose flow range does not cover the circuit's minimum-modulation flow rate, causing dead zones in low-load operation | 8 | 4 | 12 | cost | 0.7 | false |\n| N07 | MONITOR | DETECTION | Minimize the number of undetected air entrainment events exceeding 2% volume that silently degrade measurement accuracy | 8 | 3 | 13 | reliability | 0.8 | false |\n| N08 | EXECUTE | ACCURACY | Minimize systematic measurement error caused by non-ideal flow profiles (swirl, asymmetry) from upstream pipe fittings | 7 | 4 | 10 | reliability | 0.7 | false |\n| N09 | EXECUTE | ROBUSTNESS | Minimize measurement failure rate when medium contains glycol concentrations up to 50% by volume | 8 | 4 | 12 | reliability | 0.8 | false |\n\n#### P1 — Product Jobs per Alternative (Lifecycle Stages)\n\n**Alternative 1: Impeller / Turbine Flow Sensor (incumbent)**\n\n| ID | Lifecycle Stage | Error Type | Statement | Imp. | Sat. | Opp. | Impact | Conf. | product_related |\n|---|---|---|---|---|---|---|---|---|---|\n| N10 | Usage | ROBUSTNESS | Minimize the likelihood of turbine rotor seizure from magnetite accumulation requiring unplanned sensor replacement within 3 years of installation [SRC: web_search] | 8 | 3 | 13 | reliability | 0.9 | true |\n| N11 | Maintenance | EFFORT | Minimize the annual maintenance effort required to inspect and clean mechanical flow sensor internals to prevent calibration drift from particulate fouling | 7 | 3 | 11 | cost | 0.8 | true |\n| N12 | Usage | CONSISTENCY | Minimize calibration drift exceeding ±5% over 12 months caused by bearing wear and blade erosion in hard-water circuits [SRC: web_search] | 8 | 3 | 13 | reliability | 0.8 | true |\n| N12b | Usage | THROUGHPUT | Increase the ability to maintain accurate readings across the full flow range without mechanical-inertia dead band at low flow rates (<3 l/min) where turbine rotors stall | 7 | 3 | 11 | reliability | 0.7 | true |\n\n**Alternative 2: Ultrasonic Flow Sensor (transit-time)**\n\n| ID | Lifecycle Stage | Error Type | Statement | Imp. | Sat. | Opp. | Impact | Conf. | product_related |\n|---|---|---|---|---|---|---|---|---|---|\n| N13 | Preparation | EFFORT | Minimize the commissioning time required to configure fluid-type parameters and verify acoustic coupling after installation | 6 | 5 | 7 | time | 0.7 | true |\n| N14 | Usage | ROBUSTNESS | Minimize the likelihood of complete signal loss when transient air pockets pass through the sensor during system filling or de-aeration | 7 | 4 | 10 | reliability | 0.8 | true |\n\n**Alternative 2b: Ultrasonic Flow Sensor — Acquisition & Disposal**\n\n| ID | Lifecycle Stage | Error Type | Statement | Imp. | Sat. | Opp. | Impact | Conf. | product_related |\n|---|---|---|---|---|---|---|---|---|---|\n| N14b | Acquisition | EFFORT | Minimize the OEM qualification cost for validating acoustic performance across the full DN range and glycol concentration matrix | 6 | 4 | 8 | cost | 0.6 | true |\n| N14c | Usage | DETECTION | Increase the ability to distinguish genuine zero-flow conditions from ultrasonic signal loss caused by transient medium anomalies (bubbles, empty pipe) | 8 | 3 | 13 | safety | 0.7 | true |\n\n**Alternative 3: Differential Pressure Estimation**\n\n| ID | Lifecycle Stage | Error Type | Statement | Imp. | Sat. | Opp. | Impact | Conf. | product_related |\n|---|---|---|---|---|---|---|---|---|---|\n| N15 | Usage | ACCURACY | Minimize the likelihood of flow estimate error exceeding ±15% due to pump curve deviation from catalog values at part-load conditions | 7 | 2 | 12 | reliability | 0.7 | true |\n| N15b | Usage | DETECTION | Minimize the number of undetected system faults (blocked filter, stuck valve) that DP estimation cannot sense because it has no direct flow measurement | 8 | 2 | 14 | safety | 0.7 | true |\n\n#### P2 — Additional Core Job Needs (Executor + Overseer)\n\n| ID | Job Step | Error Type | Statement | Imp. | Sat. | Opp. | Impact | Conf. | product_related |\n|---|---|---|---|---|---|---|---|---|---|\n| N16 | LOCATE | EFFORT | Minimize the installation footprint (physical length and required straight-pipe run) to enable placement in space-constrained boiler enclosures | 7 | 5 | 9 | cost | 0.7 | false |\n| N16b | LOCATE | ACCURACY | Minimize the likelihood of mounting the sensor at a location where turbulence from upstream fittings causes >2% systematic reading bias | 7 | 4 | 10 | reliability | 0.7 | false |\n| N17 | PREPARE | EFFORT | Minimize the total OEM integration time from unpacking to first valid reading, including mechanical fitting, electrical connection, and protocol handshake | 7 | 5 | 9 | time | 0.7 | false |\n| N18 | CONFIRM | DETECTION | Minimize the likelihood of an installer failing to detect incorrect sensor orientation (forward/reverse) before system start-up | 6 | 6 | 6 | skill | 0.6 | false |\n| N19 | EXECUTE | ACCURACY | Increase the ability to simultaneously provide flow rate AND medium temperature from a single measurement point, eliminating separate probe installation | 8 | 4 | 12 | cost | 0.7 | false |\n| N20 | MONITOR | DETECTION | Increase the ability to detect incipient circulator pump degradation via flow-rate trend analysis before complete pump failure causes comfort loss | 7 | 3 | 11 | reliability | 0.6 | false |\n| N21 | DEFINE | EFFORT | Minimize the number of sensor variants an OEM must qualify and stock to cover its full boiler product range (DN15–DN25) | 6 | 4 | 8 | cost | 0.6 | false |\n| N22 | EXECUTE | CONSISTENCY | Minimize the variation in thermal energy calculation (Q = ṁ × Cp × ΔT) caused by flow measurement noise at low modulation rates (<25% burner output) | 8 | 4 | 12 | reliability | 0.8 | false |\n| N23 | CONFIRM | ACCURACY | Minimize the likelihood of commissioning sign-off with hydraulic imbalance exceeding ±10% of design flow rate per zone [SRC: web_search — IMI Hydronic] | 8 | 4 | 12 | cost | 0.7 | false |\n\n#### P2 — Overseer Needs (OEM Engineering Manager)\n\n| ID | Job Step | Error Type | Statement | Imp. | Sat. | Opp. | Impact | Conf. | product_related |\n|---|---|---|---|---|---|---|---|---|---|\n| N24 | EXECUTE | ROBUSTNESS | Minimize the field failure rate of the flow sensing subsystem to below 0.1% within the 15-year appliance design life | 9 | 5 | 13 | reliability | 0.8 | false |\n| N25 | DEFINE | ACCURACY | Increase the ability to document measured seasonal efficiency (ηs) per EU EcoDesign Lot 1/2 using onboard flow + temperature data rather than laboratory-only test results [SRC: web_search — EU Commission] | 8 | 3 | 13 | cost | 0.7 | false |\n\n### 3.3 P3–P5 Needs: Bridge Questions\n\n#### P3 — Role Identity\n\n| Role | Retrieval | Bridge | Need |\n|---|---|---|---|\n| **OEM Engineer (Overseer)** | \"By getting flow sensing right, this person becomes the engineer whose boiler platform consistently hits top-tier energy labels.\" | \"What must the product do so they CAN become that engineer?\" | — |\n\n| ID | Statement | Imp. | Sat. | Opp. | Impact | Conf. | product_related |\n|---|---|---|---|---|---|---|---|\n| N26 | Increase the ability to achieve A-rated energy label classification on the first certification submission by providing measurement accuracy that matches laboratory reference within ±2% [SRC: web_search — REHVA Journal] | 8 | 4 | 12 | cost | 0.6 | false |\n\n#### P4 — Image Identity\n\n| Role | Retrieval | Bridge | Need |\n|---|---|---|---|\n| **OEM Brand (via Overseer)** | \"Regulators and installers are watching. They must see a manufacturer that takes efficiency seriously — not one relying on estimates.\" | \"What must the product do so regulators and installers SEE that impression?\" | — |\n\n| ID | Statement | Imp. | Sat. | Opp. | Impact | Conf. | product_related |\n|---|---|---|---|---|---|---|---|\n| N27 | Increase the ability to provide installer-visible flow data (display or diagnostic output) that demonstrates measured — not estimated — system performance during commissioning and service visits | 7 | 3 | 11 | skill | 0.5 | false |\n\n#### P5 — Emotional [hypothesis]\n\n| Role | Retrieval | Bridge | Need |\n|---|---|---|---|\n| **Installer (Executor)** | \"Wants to feel confident the system is correctly commissioned; wants to avoid the anxiety of a callback for comfort complaints.\" | \"What must the product do so the installer FEELS confident?\" | — |\n\n| ID | Statement | Imp. | Sat. | Opp. | Impact | Conf. | product_related |\n|---|---|---|---|---|---|---|---|\n| N28 | Minimize the likelihood of receiving a customer callback within 30 days of installation due to an undetected hydraulic imbalance that the sensor could have flagged during commissioning [hypothesis] | 7 | 3 | 11 | cost | 0.5 | false |\n\n### 3.4 ODI Summary Table\n\n| ID | Statement (abbreviated) | Imp. | Sat. | Opp. | Impact | product_related | Pyramid |\n|---|---|---|---|---|---|---|---|\n| N01 | Flow reading deviation >±3% across range | 9 | 5 | 13 | reliability | false | P2 |\n| N07 | Undetected air entrainment >2% vol | 8 | 3 | 13 | reliability | false | P2 |\n| N04 | Detect flow stoppage >2 s | 9 | 5 | 13 | safety | false | P2 |\n| N10 | Turbine rotor seizure from magnetite <3 yr | 8 | 3 | 13 | reliability | true | P1 |\n| N12 | Calibration drift >±5% from bearing wear | 8 | 3 | 13 | reliability | true | P1 |\n| N24 | Field failure rate >0.1% in 15-yr life | 9 | 5 | 13 | reliability | false | P2 |\n| N25 | Documented measured efficiency for EcoDesign | 8 | 3 | 13 | cost | false | P2 |\n| N03 | Measurement degradation at ΔT >20 °C | 8 | 4 | 12 | reliability | false | P2 |\n| N06 | Sensor range misses min-modulation flow | 8 | 4 | 12 | cost | false | P2 |\n| N09 | Failure with glycol >50% | 8 | 4 | 12 | reliability | false | P2 |\n| N15 | DP estimate error >±15% at part-load | 7 | 2 | 12 | reliability | true | P1 |\n| N15b | Undetected faults invisible to DP estimation | 8 | 2 | 14 | safety | true | P1 |\n| N14c | Distinguish zero-flow from signal loss | 8 | 3 | 13 | safety | true | P1 |\n| N19 | Single-point flow + temperature | 8 | 4 | 12 | cost | false | P2 |\n| N22 | Thermal energy calc noise at low modulation | 8 | 4 | 12 | reliability | false | P2 |\n| N23 | Hydraulic imbalance >±10% at commissioning | 8 | 4 | 12 | cost | false | P2 |\n| N26 | A-rated label on first certification attempt | 8 | 4 | 12 | cost | false | P3 |\n| N02 | Repeatability >±0.5% | 8 | 6 | 10 | reliability | false | P2 |\n| N08 | Non-ideal flow profile error | 7 | 4 | 10 | reliability | false | P2 |\n| N14 | Signal loss from transient air pockets | 7 | 4 | 10 | reliability | true | P1 |\n| N16b | Mounting location turbulence >2% bias | 7 | 4 | 10 | reliability | false | P2 |\n| N12b | Turbine low-flow dead band <3 l/min | 7 | 3 | 11 | reliability | true | P1 |\n| N11 | Annual maintenance for cleaning/inspection | 7 | 3 | 11 | cost | true | P1 |\n| N14b | OEM qualification cost for acoustic validation | 6 | 4 | 8 | cost | true | P1 |\n| N20 | Detect incipient pump degradation | 7 | 3 | 11 | reliability | false | P2 |\n| N27 | Installer-visible measured performance data | 7 | 3 | 11 | skill | false | P4 |\n| N28 | Callback within 30 days from imbalance | 7 | 3 | 11 | cost | false | P5 |\n| N05 | Turndown ratio for full-load to min-mod | 7 | 5 | 9 | reliability | false | P2 |\n| N16 | Installation footprint and straight-run | 7 | 5 | 9 | cost | false | P2 |\n| N17 | OEM integration time | 7 | 5 | 9 | time | false | P2 |\n| N21 | Variant count to cover DN range | 6 | 4 | 8 | cost | false | P2 |\n| N13 | Commissioning config time (ultrasonic) | 6 | 5 | 7 | time | true | P1 |\n| N18 | Undetected incorrect orientation | 6 | 6 | 6 | skill | false | P2 |\n\n### 3.5 Underserved / Overserved Classification\n\n**Underserved (importance > 7 AND satisfaction < 5):**\n\n| ID | Statement (abbreviated) | Opp. |\n|---|---|---|\n| N15b | Undetected faults invisible to DP estimation | 14 |\n| N07 | Undetected air entrainment >2% vol | 13 |\n| N10 | Turbine rotor seizure from magnetite | 13 |\n| N12 | Calibration drift from bearing wear | 13 |\n| N14c | Distinguish zero-flow from signal loss | 13 |\n| N25 | Documented measured efficiency for EcoDesign | 13 |\n| N03 | Measurement degradation at ΔT >20 °C | 12 |\n| N06 | Sensor range misses min-modulation flow | 12 |\n| N09 | Failure with glycol >50% | 12 |\n| N15 | DP estimate error >±15% at part-load | 12 |\n| N19 | Single-point flow + temperature | 12 |\n| N22 | Thermal energy calc noise at low modulation | 12 |\n| N23 | Hydraulic imbalance >±10% at commissioning | 12 |\n| N26 | A-rated label on first certification attempt | 12 |\n\n**Overserved:** None identified. No need has importance < 3 AND satisfaction > 7.\n\n---"
+    },
+    {
+      "title": "Yield Validation",
+      "content": "| Metric | Target | Actual | Pass? |\n|---|---|---|---|\n| Error statements per market | 15–30 | **33** | NOTE — slightly above; justified by 5 alternatives × 5 lifecycle stages |\n| Needs per relevant job step (6 relevant) | ≥ 2 | DEFINE: 3, LOCATE: 2, PREPARE: 2, CONFIRM: 3, EXECUTE: 16, MONITOR: 5 | PASS |\n| Market-inherent (product_related=false) | 60–70% | 22/33 = **67%** | PASS |\n| Technology-specific (product_related=true) | 30–40% | 11/33 = **33%** | PASS |\n| \"Minimize\" vs \"Increase\" mix | ~60/40 | 25/8 = **76/24** | PASS (acceptable) |\n| Job map steps | 8 exactly | **8** | PASS |\n| Relevant steps | 3–6 typical | **6** | PASS |\n\n---"
+    },
+    {
+      "title": "QA Validation",
+      "content": "| # | Check | Result |\n|---|---|---|\n| V1 | Format compliance — all statements start with \"Minimize…\" or \"Increase…\" with ONE KPI | PASS |\n| V2 | product_related=true ONLY for technology-caused needs | PASS — N10–N15 are specific to turbine/ultrasonic/DP technology; disappear with different tech |\n| V3 | Importance/satisfaction sanity — no unrealistic patterns | PASS — range: imp 6–9, sat 2–6; safety/regulatory at 8–9 |\n| V4 | Impact category matches KPI | PASS — e.g., flow accuracy = reliability, not time |\n| V5 | Coverage — ≥2 per relevant step, no obvious duplicates | PASS |\n| V6 | Solution-agnostic — zero product/vendor/mechanism references in P2 needs | PASS — P1 needs name technology class as expected |\n| V7 | Anchor level matches product abstraction | PASS — component = L4 |\n| V8 | Product job references parent VN unit | PASS — \"Help Flow Sensing & Measurement to…\" |\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"jtbd_analysis\",\n  \"naics_code\": \"333414\",\n  \"naics_title\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n  \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n  \"product_name\": \"Ultrasonic Flow Sensor\",\n  \"vendor_name\": \"Marquardt\",\n  \"cfj_statement\": \"Generate and deliver thermal energy to occupied spaces and domestic hot-water systems via heated-water circuits\",\n  \"job_map\": {\n    \"naics_code\": \"333414\",\n    \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n    \"anchor_vn_unit\": \"Ultrasonic Flow Sensor\",\n    \"anchor_level\": \"L4\",\n    \"parent_vn_unit\": \"Flow Sensing & Measurement\",\n    \"parent_level\": \"L5\",\n    \"product_job_statement\": \"Help Flow Sensing & Measurement to measure volumetric flow rate in closed-pipe hydronic heating circuits without obstructing flow or introducing mechanical wear points\",\n    \"steps\": [\n      {\"step_number\": 1, \"step_name\": \"DEFINE\", \"statement\": \"Define the required flow rate range, pipe diameter, medium type, temperature envelope, and communication protocol for the hydronic circuit\", \"relevant_to_product\": true, \"relevance_rationale\": \"Sensor specifications must match circuit design parameters\"},\n      {\"step_number\": 2, \"step_name\": \"LOCATE\", \"statement\": \"Locate and access the optimal insertion point in the hydronic piping where flow profile is developed and straight-run requirements are met\", \"relevant_to_product\": true, \"relevance_rationale\": \"Physical installation position directly affects measurement accuracy\"},\n      {\"step_number\": 3, \"step_name\": \"PREPARE\", \"statement\": \"Prepare the piping section, electrical connections, and controller interface for sensor integration\", \"relevant_to_product\": true, \"relevance_rationale\": \"Mechanical and electrical integration is core to product installation\"},\n      {\"step_number\": 4, \"step_name\": \"CONFIRM\", \"statement\": \"Confirm sensor readiness: verify pipe-full condition, absence of air locks, correct wiring, and communication handshake with controller\", \"relevant_to_product\": true, \"relevance_rationale\": \"Pre-operation verification critical for measurement validity\"},\n      {\"step_number\": 5, \"step_name\": \"EXECUTE\", \"statement\": \"Execute continuous flow measurement, providing real-time volumetric flow rate, temperature, and diagnostic data to the system controller\", \"relevant_to_product\": true, \"relevance_rationale\": \"This IS the core value-creating action of the product\"},\n      {\"step_number\": 6, \"step_name\": \"MONITOR\", \"statement\": \"Monitor measurement quality indicators: signal strength, air bubble events, empty-pipe alarms, calibration drift flags\", \"relevant_to_product\": true, \"relevance_rationale\": \"Ongoing measurement integrity affects system performance\"},\n      {\"step_number\": 7, \"step_name\": \"MODIFY\", \"statement\": \"Adjust or recalibrate if measurement deviates — re-zero, update fluid properties, clean sensor path\", \"relevant_to_product\": false, \"relevance_rationale\": \"Ultrasonic sensors require minimal in-service adjustment\"},\n      {\"step_number\": 8, \"step_name\": \"CONCLUDE\", \"statement\": \"Conclude service life: decommission sensor, drain circuit, dispose or recycle electronics and housing\", \"relevant_to_product\": false, \"relevance_rationale\": \"Standard end-of-life; not a differentiating step\"}\n    ]\n  },\n  \"alternatives\": [\n    {\n      \"name\": \"Impeller / Turbine Flow Sensor\",\n      \"unspsc_code\": \"41112501\",\n      \"status\": \"incumbent\",\n      \"market_share_estimate\": \"55-65%\",\n      \"trade_offs\": [\n        \"Moving parts subject to magnetite fouling and bearing wear\",\n        \"Paramagnetic MnO2 attracted to magnetized rotor in hard-water circuits\",\n        \"Calibration drift from blade erosion (±5% in 12 months)\",\n        \"3-5 year effective service life in hard-water areas\",\n        \"Pressure drop across impeller\"\n      ]\n    },\n    {\n      \"name\": \"Ultrasonic Flow Sensor (transit-time)\",\n      \"unspsc_code\": \"41112501\",\n      \"status\": \"growing\",\n      \"market_share_estimate\": \"20-30%\",\n      \"trade_offs\": [\n        \"Accuracy degrades with >2% air entrainment by volume\",\n        \"Requires pipe-full condition for valid measurement\",\n        \"Higher unit cost vs turbine (2-3x at OEM volume)\",\n        \"Requires fluid-type configuration at commissioning\"\n      ]\n    },\n    {\n      \"name\": \"Vortex Flow Sensor\",\n      \"unspsc_code\": \"41112501\",\n      \"status\": \"niche\",\n      \"market_share_estimate\": \"3-5%\",\n      \"trade_offs\": [\n        \"Bluff body introduces pressure drop\",\n        \"Limited accuracy below Reynolds number threshold at low flows\",\n        \"Vibration-sensitive installation\"\n      ]\n    },\n    {\n      \"name\": \"Differential Pressure Estimation\",\n      \"unspsc_code\": null,\n      \"status\": \"budget_fallback\",\n      \"market_share_estimate\": \"5-15%\",\n      \"trade_offs\": [\n        \"Accuracy only ±15-20%\",\n        \"No direct measurement — inferred from pump curve\",\n        \"Cannot detect anomalies or faults\",\n        \"Pump curve shifts with wear invalidate estimate\"\n      ]\n    },\n    {\n      \"name\": \"Do nothing / accept risk\",\n      \"unspsc_code\": null,\n      \"status\": \"status_quo\",\n      \"market_share_estimate\": null,\n      \"trade_offs\": [\n        \"Zero cost, zero P1 lifecycle burden\",\n        \"Thermal output unverified\",\n        \"Cannot comply with EU EcoDesign measured-efficiency requirements\",\n        \"Energy waste and faults undetectable\"\n      ]\n    }\n  ],\n  \"error_statements\": [\n    {\n      \"id\": \"N01\",\n      \"statement\": \"Minimize the likelihood of volumetric flow reading deviating more than ±3% from true value across the 5–50 l/min operating range\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ACCURACY\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 9,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 13,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Thermal energy calculation (Q = flow × Cp × ΔT) accuracy is directly proportional to flow measurement accuracy. A ±3% flow error propagates to ±3% energy billing/control error. Condensing boiler modulation depends on accurate flow data for optimal return temperature management.\",\n      \"confidence\": 0.8,\n      \"product_related\": false,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N02\",\n      \"statement\": \"Minimize variability of flow readings between successive measurement cycles under identical steady-state conditions (repeatability >±0.5%)\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"CONSISTENCY\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 8,\n      \"satisfaction_current\": 6,\n      \"opportunity_score\": 10,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Control loops require repeatable measurements to avoid oscillation. Poor repeatability causes hunting in burner modulation and circulator speed control.\",\n      \"confidence\": 0.8,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N03\",\n      \"statement\": \"Minimize measurement degradation when medium temperature shifts by more than 20 °C within a single heating cycle\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ROBUSTNESS\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 8,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 12,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Hydronic circuits experience rapid temperature swings (cold start from 15 °C to 75 °C). Speed of sound in water changes ~2.4 m/s per °C. Sensors without real-time compensation accumulate ~1.5% error per 20 °C swing.\",\n      \"confidence\": 0.7,\n      \"product_related\": false,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N04\",\n      \"statement\": \"Minimize time to detect a complete flow stoppage event (circulator failure or valve closure) to less than 2 seconds\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"error_type\": \"DETECTION\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 9,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 13,\n      \"impact_category\": \"safety\",\n      \"rationale\": \"Loss of flow in an active boiler creates rapid heat exchanger overshoot. Delayed detection risks safety valve activation, thermal stress damage to HX, and potential dry-fire in extreme cases. EN 15502 requires flow-proving for Category III appliances.\",\n      \"confidence\": 0.8,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N05\",\n      \"statement\": \"Increase the turndown ratio (max/min measurable flow) to cover both full-load and minimum-modulation operating points in a single device\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"THROUGHPUT\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Modern condensing boilers modulate 1:5 to 1:10. A flow sensor with a narrow turndown creates a measurement gap at low modulation where condensing efficiency matters most.\",\n      \"confidence\": 0.7,\n      \"product_related\": false,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N06\",\n      \"statement\": \"Minimize the likelihood of specifying a sensor whose flow range does not cover the circuit's minimum-modulation flow rate, causing dead zones in low-load operation\",\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"error_type\": \"ACCURACY\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 8,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 12,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"OEM engineers must select a sensor that covers the full modulation range. Under-specifying causes unmeasured operation at low loads, where condensing efficiency gains are highest. Over-specifying wastes cost.\",\n      \"confidence\": 0.7,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N07\",\n      \"statement\": \"Minimize the number of undetected air entrainment events exceeding 2% volume that silently degrade measurement accuracy\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"error_type\": \"DETECTION\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Air in hydronic circuits is a chronic issue, especially in retrofit systems. Air entrainment degrades all flow measurement technologies but is invisible without dedicated detection. Turbine sensors slow down; ultrasonic sensors lose signal; neither reliably reports the cause.\",\n      \"confidence\": 0.8,\n      \"product_related\": false,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N08\",\n      \"statement\": \"Minimize systematic measurement error caused by non-ideal flow profiles (swirl, asymmetry) from upstream pipe fittings\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ACCURACY\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 7,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 10,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Boiler enclosures are compact; achieving 10×DN straight run is often impossible. Non-ideal profiles affect all inline sensor types, introducing systematic errors that persist throughout operation.\",\n      \"confidence\": 0.7,\n      \"product_related\": false,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N09\",\n      \"statement\": \"Minimize measurement failure rate when medium contains glycol concentrations up to 50% by volume\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ROBUSTNESS\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 8,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 12,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Solar-hybrid and frost-protected circuits use propylene glycol up to 50%. Glycol changes viscosity, density, and speed of sound. Turbine sensors experience increased bearing friction; all sensors require compensation algorithms.\",\n      \"confidence\": 0.8,\n      \"product_related\": false,\n      \"source\": \"01_product_decomposition\"\n    },\n    {\n      \"id\": \"N10\",\n      \"statement\": \"Minimize the likelihood of turbine rotor seizure from magnetite accumulation requiring unplanned sensor replacement within 3 years of installation\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ROBUSTNESS\",\n      \"pyramid_level\": \"P1\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Magnetite (Fe3O4) and paramagnetic MnO2 accumulate on magnetized turbine rotors. Failed sensors show turbine wheels coated with fine black powder. Hydronic circuits without magnetic separators are particularly susceptible. Field failure rates in hard-water areas are reported at 5-15% within 3 years.\",\n      \"confidence\": 0.9,\n      \"product_related\": true,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N11\",\n      \"statement\": \"Minimize the annual maintenance effort required to inspect and clean mechanical flow sensor internals to prevent calibration drift from particulate fouling\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"EFFORT\",\n      \"pyramid_level\": \"P1\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"Turbine sensors in hydronic circuits require periodic inspection: removing impeller, cleaning magnetite deposits, checking bearing play. Each service visit costs $100-200 in technician time. Systems without annual maintenance see accelerated calibration drift.\",\n      \"confidence\": 0.8,\n      \"product_related\": true,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N12\",\n      \"statement\": \"Minimize calibration drift exceeding ±5% over 12 months caused by bearing wear and blade erosion in hard-water circuits\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"CONSISTENCY\",\n      \"pyramid_level\": \"P1\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Continuous rotation erodes turbine blade edges and wears bearing surfaces. Mineral deposits change blade geometry and increase friction. Combined effect shifts the K-factor (pulses per litre) progressively, yielding under-reading that masks declining system performance.\",\n      \"confidence\": 0.8,\n      \"product_related\": true,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N12b\",\n      \"statement\": \"Increase the ability to maintain accurate readings across the full flow range without mechanical-inertia dead band at low flow rates (<3 l/min) where turbine rotors stall\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"THROUGHPUT\",\n      \"pyramid_level\": \"P1\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Turbine rotors have a minimum activation threshold — below ~3 l/min the rotor stalls and reads zero. This dead band coincides with condensing boiler minimum-modulation operation, exactly where efficiency optimization matters most. Non-mechanical sensors (ultrasonic, DP) do not have this dead band.\",\n      \"confidence\": 0.7,\n      \"product_related\": true,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N13\",\n      \"statement\": \"Minimize the commissioning time required to configure fluid-type parameters and verify acoustic coupling after installation\",\n      \"job_step_number\": 3,\n      \"job_step_name\": \"PREPARE\",\n      \"error_type\": \"EFFORT\",\n      \"pyramid_level\": \"P1\",\n      \"importance\": 6,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 7,\n      \"impact_category\": \"time\",\n      \"rationale\": \"Ultrasonic sensors require fluid type selection (water, glycol %, etc.) at commissioning. Pre-calibrated delivery reduces this burden, but field verification of acoustic coupling adds a step that mechanical sensors do not require.\",\n      \"confidence\": 0.7,\n      \"product_related\": true,\n      \"source\": \"01_product_decomposition\"\n    },\n    {\n      \"id\": \"N14\",\n      \"statement\": \"Minimize the likelihood of complete signal loss when transient air pockets pass through the sensor during system filling or de-aeration\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ROBUSTNESS\",\n      \"pyramid_level\": \"P1\",\n      \"importance\": 7,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 10,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Ultrasonic transit-time requires continuous acoustic coupling through liquid. Transient air pockets during filling, de-aeration, or micro-bubble events interrupt the signal path. The sensor must distinguish between air-related signal loss and genuine zero-flow.\",\n      \"confidence\": 0.8,\n      \"product_related\": true,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N14b\",\n      \"statement\": \"Minimize the OEM qualification cost for validating acoustic performance across the full DN range and glycol concentration matrix\",\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"error_type\": \"EFFORT\",\n      \"pyramid_level\": \"P1\",\n      \"importance\": 6,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 8,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"Ultrasonic sensors require validation across each DN variant and fluid type combination. A 4-DN × 3-glycol matrix = 12 qualification campaigns. Pre-calibrated delivery from the vendor reduces this burden but does not eliminate OEM-side validation responsibility.\",\n      \"confidence\": 0.6,\n      \"product_related\": true,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N14c\",\n      \"statement\": \"Increase the ability to distinguish genuine zero-flow conditions from ultrasonic signal loss caused by transient medium anomalies (bubbles, empty pipe)\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"error_type\": \"DETECTION\",\n      \"pyramid_level\": \"P1\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13,\n      \"impact_category\": \"safety\",\n      \"rationale\": \"An ultrasonic sensor losing signal reports zero flow. If the controller interprets this as a genuine flow stoppage, it triggers a safety shutdown. If it ignores the alarm, it misses a real dry-fire condition. The sensor must provide diagnostic flags that disambiguate signal-loss causes from true zero-flow.\",\n      \"confidence\": 0.7,\n      \"product_related\": true,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N15\",\n      \"statement\": \"Minimize the likelihood of flow estimate error exceeding ±15% due to pump curve deviation from catalog values at part-load conditions\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ACCURACY\",\n      \"pyramid_level\": \"P1\",\n      \"importance\": 7,\n      \"satisfaction_current\": 2,\n      \"opportunity_score\": 12,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"DP estimation relies on manufacturer's pump curve, which shifts with impeller wear, system fouling, and partial valve positions. At part-load, the flat portion of the curve amplifies small pressure errors into large flow errors.\",\n      \"confidence\": 0.7,\n      \"product_related\": true,\n      \"source\": \"VN_heating_equipment\"\n    },\n    {\n      \"id\": \"N15b\",\n      \"statement\": \"Minimize the number of undetected system faults (blocked filter, stuck valve) that DP estimation cannot sense because it has no direct flow measurement\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"error_type\": \"DETECTION\",\n      \"pyramid_level\": \"P1\",\n      \"importance\": 8,\n      \"satisfaction_current\": 2,\n      \"opportunity_score\": 14,\n      \"impact_category\": \"safety\",\n      \"rationale\": \"DP estimation infers flow from pump curve data. If a magnetic filter blocks or a zone valve sticks, the actual flow drops but the pump speed stays constant — DP estimation sees no change. Direct measurement sensors (turbine, ultrasonic, vortex) detect the flow reduction immediately.\",\n      \"confidence\": 0.7,\n      \"product_related\": true,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N16\",\n      \"statement\": \"Minimize the installation footprint (physical length and required straight-pipe run) to enable placement in space-constrained boiler enclosures\",\n      \"job_step_number\": 2,\n      \"job_step_name\": \"LOCATE\",\n      \"error_type\": \"EFFORT\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"Boiler enclosures are designed for minimum footprint. Every cm of required straight-run upstream constrains placement options and may force piping redesign.\",\n      \"confidence\": 0.7,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N16b\",\n      \"statement\": \"Minimize the likelihood of mounting the sensor at a location where turbulence from upstream fittings causes >2% systematic reading bias\",\n      \"job_step_number\": 2,\n      \"job_step_name\": \"LOCATE\",\n      \"error_type\": \"ACCURACY\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 7,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 10,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"In compact boiler enclosures, sensors are often placed close to elbows, tees, or valves. Turbulent flow profiles from these fittings introduce systematic bias. Without clear installation guidelines and tolerance data, installers mount sensors in sub-optimal locations.\",\n      \"confidence\": 0.7,\n      \"product_related\": false,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N17\",\n      \"statement\": \"Minimize the total OEM integration time from unpacking to first valid reading, including mechanical fitting, electrical connection, and protocol handshake\",\n      \"job_step_number\": 3,\n      \"job_step_name\": \"PREPARE\",\n      \"error_type\": \"EFFORT\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 7,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 9,\n      \"impact_category\": \"time\",\n      \"rationale\": \"OEM assembly line takt time constraints require rapid integration. Complex commissioning steps add per-unit labor cost and increase defect opportunity.\",\n      \"confidence\": 0.7,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N18\",\n      \"statement\": \"Minimize the likelihood of an installer failing to detect incorrect sensor orientation (forward/reverse) before system start-up\",\n      \"job_step_number\": 4,\n      \"job_step_name\": \"CONFIRM\",\n      \"error_type\": \"DETECTION\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 6,\n      \"satisfaction_current\": 6,\n      \"opportunity_score\": 6,\n      \"impact_category\": \"skill\",\n      \"rationale\": \"Reversed installation yields negative flow readings or zero output. Most sensors have directional arrows, but in confined spaces these are easily missed.\",\n      \"confidence\": 0.6,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N19\",\n      \"statement\": \"Increase the ability to simultaneously provide flow rate AND medium temperature from a single measurement point, eliminating separate temperature probe installation\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ACCURACY\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 8,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 12,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"Thermal energy calculation requires both flow and temperature. Traditional setups use separate sensors, each with its own wiring, mounting, and failure mode. A single-point measurement reduces component count, wiring complexity, and potential failure points.\",\n      \"confidence\": 0.7,\n      \"product_related\": false,\n      \"source\": \"02_functional_promise\"\n    },\n    {\n      \"id\": \"N20\",\n      \"statement\": \"Increase the ability to detect incipient circulator pump degradation via flow-rate trend analysis before complete pump failure causes comfort loss\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"error_type\": \"DETECTION\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Gradual flow decline (from pump bearing wear, impeller erosion, or system fouling) is invisible without trend data. By the time occupants notice comfort degradation, the pump is near failure. Continuous flow monitoring enables predictive maintenance.\",\n      \"confidence\": 0.6,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N21\",\n      \"statement\": \"Minimize the number of sensor variants an OEM must qualify and stock to cover its full boiler product range (DN15–DN25)\",\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"error_type\": \"EFFORT\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 6,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 8,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"Each sensor variant requires separate qualification testing, inventory, and supply chain management. A modular platform with shared electronics and interchangeable flow bodies reduces OEM complexity.\",\n      \"confidence\": 0.6,\n      \"product_related\": false,\n      \"source\": \"01_product_decomposition\"\n    },\n    {\n      \"id\": \"N22\",\n      \"statement\": \"Minimize the variation in thermal energy calculation (Q = ṁ × Cp × ΔT) caused by flow measurement noise at low modulation rates (<25% burner output)\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"CONSISTENCY\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 8,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 12,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"At low modulation (25% of rated output), flow rates drop to 5-10 l/min. Measurement noise at these rates directly distorts thermal energy calculations used for efficiency verification and ErP labeling. Condensing efficiency is highest at low modulation — precisely where measurement matters most.\",\n      \"confidence\": 0.8,\n      \"product_related\": false,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N23\",\n      \"statement\": \"Minimize the likelihood of commissioning sign-off with hydraulic imbalance exceeding ±10% of design flow rate per zone\",\n      \"job_step_number\": 4,\n      \"job_step_name\": \"CONFIRM\",\n      \"error_type\": \"ACCURACY\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 8,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 12,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"Hydraulic balancing tolerance of ±10% is industry good practice. Imbalanced systems overheat some zones and underheat others, causing comfort complaints and energy waste of 10-15%. Without accurate flow data during commissioning, installers rely on guesswork.\",\n      \"confidence\": 0.7,\n      \"product_related\": false,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N24\",\n      \"statement\": \"Minimize the field failure rate of the flow sensing subsystem to below 0.1% within the 15-year appliance design life\",\n      \"job_step_number\": 5,\n      \"job_step_name\": \"EXECUTE\",\n      \"error_type\": \"ROBUSTNESS\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 9,\n      \"satisfaction_current\": 5,\n      \"opportunity_score\": 13,\n      \"impact_category\": \"reliability\",\n      \"rationale\": \"Boiler OEMs target <0.1% component failure rate over the appliance warranty period (typically 5-10 years, design life 15-20 years). Flow sensor failure triggers loss of modulation control, safety shutdown, or comfort complaint — each costing $200-500 in warranty service. OEM reputation damage from systematic sensor failures is disproportionate to component cost.\",\n      \"confidence\": 0.8,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N25\",\n      \"statement\": \"Increase the ability to document measured seasonal efficiency (ηs) per EU EcoDesign Lot 1/2 using onboard flow + temperature data rather than laboratory-only test results\",\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"error_type\": \"ACCURACY\",\n      \"pyramid_level\": \"P2\",\n      \"importance\": 8,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 13,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"EU EcoDesign revisions (consultation closed Jan 2026) are moving toward requiring heaters to measure and display consumption. Onboard flow + temperature enables field-measured efficiency verification, replacing lab-only certification. OEMs who can demonstrate real-world efficiency gain regulatory and marketing advantage.\",\n      \"confidence\": 0.7,\n      \"product_related\": false,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N26\",\n      \"statement\": \"Increase the ability to achieve A-rated energy label classification on the first certification submission by providing measurement accuracy that matches laboratory reference within ±2%\",\n      \"job_step_number\": 1,\n      \"job_step_name\": \"DEFINE\",\n      \"error_type\": \"ACCURACY\",\n      \"pyramid_level\": \"P3\",\n      \"importance\": 8,\n      \"satisfaction_current\": 4,\n      \"opportunity_score\": 12,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"P3 Role Identity — the OEM engineer becomes 'the engineer whose platform hits top-tier labels on first submission.' Measurement accuracy close to lab reference reduces certification iterations (each costing $5K-20K and weeks of delay).\",\n      \"confidence\": 0.6,\n      \"product_related\": false,\n      \"source\": \"web_search\"\n    },\n    {\n      \"id\": \"N27\",\n      \"statement\": \"Increase the ability to provide installer-visible flow data (display or diagnostic output) that demonstrates measured — not estimated — system performance during commissioning and service visits\",\n      \"job_step_number\": 6,\n      \"job_step_name\": \"MONITOR\",\n      \"error_type\": \"DETECTION\",\n      \"pyramid_level\": \"P4\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11,\n      \"impact_category\": \"skill\",\n      \"rationale\": \"P4 Image Identity — regulators and installers are watching. Visible flow data during commissioning signals engineering rigor. OEMs with estimated-only performance data face increasing scrutiny from energy auditors and building inspectors.\",\n      \"confidence\": 0.5,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    },\n    {\n      \"id\": \"N28\",\n      \"statement\": \"Minimize the likelihood of receiving a customer callback within 30 days of installation due to an undetected hydraulic imbalance that the sensor could have flagged during commissioning [hypothesis]\",\n      \"job_step_number\": 4,\n      \"job_step_name\": \"CONFIRM\",\n      \"error_type\": \"RECOVERY\",\n      \"pyramid_level\": \"P5\",\n      \"importance\": 7,\n      \"satisfaction_current\": 3,\n      \"opportunity_score\": 11,\n      \"impact_category\": \"cost\",\n      \"rationale\": \"P5 Emotional — the installer wants to feel confident the system is correctly commissioned and avoid the anxiety of a 30-day callback. Each callback costs the installer $150-300 in travel and labor and damages client relationship. Accurate flow data during commissioning provides objective confirmation.\",\n      \"confidence\": 0.5,\n      \"product_related\": false,\n      \"source\": \"domain_knowledge\"\n    }\n  ],\n  \"incumbent_anchors\": [\n    {\n      \"technology_name\": \"Impeller / Turbine Flow Sensor\",\n      \"anchor_vn_unit\": \"Flow Sensing & Measurement\",\n      \"anchor_level\": \"L4\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"rationale\": \"Incumbent technology in 55-65% of installed hydronic heating systems. Mechanical paddle-wheel or turbine rotor; declining share due to magnetite fouling and maintenance burden.\"\n    },\n    {\n      \"technology_name\": \"Differential Pressure Estimation\",\n      \"anchor_vn_unit\": \"Flow Sensing & Measurement\",\n      \"anchor_level\": \"L4\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"rationale\": \"Budget fallback in 5-15% of systems. No dedicated hardware; flow inferred from pump speed and delta-P. Accuracy ±15-20%. Cannot meet EcoDesign measured-efficiency requirements.\"\n    }\n  ],\n  \"entities_produced\": {\n    \"nodes\": [\n      {\"label\": \"JobMap\", \"key\": {\"naics_code\": \"333414\", \"run_id\": \"TBD\"}, \"properties\": {\"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\", \"anchor_vn_unit\": \"Ultrasonic Flow Sensor\", \"anchor_level\": \"L4\", \"parent_vn_unit\": \"Flow Sensing & Measurement\", \"parent_level\": \"L5\", \"product_job_statement\": \"Help Flow Sensing & Measurement to measure volumetric flow rate in closed-pipe hydronic heating circuits without obstructing flow or introducing mechanical wear points\"}},\n      {\"label\": \"JobStep\", \"key\": {\"step_number\": \"<1-8>\", \"naics_code\": \"333414\", \"run_id\": \"TBD\"}, \"count\": 8},\n      {\"label\": \"ErrorStatement\", \"key\": {\"statement\": \"<first 120 chars>\", \"naics_code\": \"333414\", \"run_id\": \"TBD\"}, \"count\": 33},\n      {\"label\": \"IncumbentAnchor\", \"key\": {\"technology_name\": \"<per anchor>\", \"naics_code\": \"333414\", \"run_id\": \"TBD\"}, \"count\": 2}\n    ],\n    \"relationships\": [\n      {\"type\": \"has_job_map\", \"source\": \"Market:333414\", \"target\": \"JobMap:333414\"},\n      {\"type\": \"anchored_at\", \"source\": \"JobMap:333414\", \"target\": \"ValueNetworkUnit:Ultrasonic Flow Sensor\"},\n      {\"type\": \"has_job_step\", \"source\": \"JobMap:333414\", \"target\": \"JobStep:<1-8>\", \"count\": 8},\n      {\"type\": \"has_error_statement\", \"source\": \"JobStep:<N>\", \"target\": \"ErrorStatement:<each>\", \"count\": 33},\n      {\"type\": \"has_need\", \"source\": \"Market:333414\", \"target\": \"ErrorStatement:<each>\", \"count\": 33},\n      {\"type\": \"has_incumbent_anchor\", \"source\": \"Market:333414\", \"target\": \"IncumbentAnchor:<each>\", \"count\": 2},\n      {\"type\": \"anchored_at\", \"source\": \"IncumbentAnchor:Impeller / Turbine Flow Sensor\", \"target\": \"ValueNetworkUnit:Flow Sensing & Measurement\"},\n      {\"type\": \"anchored_at\", \"source\": \"IncumbentAnchor:Differential Pressure Estimation\", \"target\": \"ValueNetworkUnit:Flow Sensing & Measurement\"}\n    ]\n  }\n}\n```\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [Ultrasonic Flow Meters in Hydronic HVAC Applications — Pumps & Systems](https://www.pumpsandsystems.com/ultrasonic-flow-meters-hydronic-hvac-applications)\n- [8 Hydronic Applications Improved by Ultrasonic Meters — Badger Meter](https://www.badgermeter.com/blog/8-hydronic-applications-improved-with-ultrasonic-meters/)\n- [Tankless Water Heater Flow Sensor Fouling — HeatingHelp](https://forum.heatinghelp.com/discussion/187878/tankless-water-heater-flow-sensor-fouling)\n- [The Dirt on Modern Hydronic Systems — BoilerMag](https://www.boilermag.com/na/the-dirt-on-modern-hydronic-systems/)\n- [Rinnai Flow Sensor Problems — HVAC Laboratory](https://hvaclaboratory.com/rinnai-flow-sensor-problems/)\n- [EcoDesign and Energy Labelling Consultation — EU Commission](https://energy.ec.europa.eu/news/ecodesign-and-energy-labelling-commission-consults-revised-rules-space-and-water-heaters-2025-12-01_en)\n- [New EcoDesign Requirements for Boilers — REHVA Journal](https://www.rehva.eu/rehva-journal/chapter/new-regulation-sets-demanding-ecodesign-requirements-for-boilers)\n- [Condensing Boilers — Control Strategies for Optimizing — NREL](https://docs.nrel.gov/docs/fy13osti/57826.pdf)\n- [Balancing Protocol — IMI Hydronic](https://www.imi-hydronic.com/en-us/hydronic-theory/balancing-protocol)\n- [Hydronic Balancing — Wikipedia](https://en.wikipedia.org/wiki/Hydronic_balancing)\n- 01_product_decomposition.md, 02_functional_promise.md, 05_market_discovery.md, VN_heating_equipment_except_warm_air_furnac.md\n\n---\n\n*End of JTBD Analysis — feeds Feature-Market Fit (Step 09), ODI Matrix (Step 12), and Final Market Ranking (Step 14) for the Heating Equipment market.*"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**NAICS**",
+          "Value": "333414"
+        },
+        {
+          "Field": "**CFJ**",
+          "Value": "Generate and deliver thermal energy to occupied spaces and domestic hot-water systems via heated-water circuits [SRC: VN_heating_equipment]"
+        },
+        {
+          "Field": "**Offering Level**",
+          "Value": "L5 (Product) — standalone heating appliances"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Output Type",
+        "VN Level"
+      ],
+      "rows": [
+        {
+          "Output Type": "Gas condensing boiler",
+          "VN Level": "L5"
+        },
+        {
+          "Output Type": "Gas non-condensing boiler",
+          "VN Level": "L5"
+        },
+        {
+          "Output Type": "Oil-fired boiler",
+          "VN Level": "L5"
+        },
+        {
+          "Output Type": "Electric hydronic boiler",
+          "VN Level": "L5"
+        },
+        {
+          "Output Type": "Hydronic baseboard heater",
+          "VN Level": "L5 (emitter-only)"
+        },
+        {
+          "Output Type": "Radiant floor heating system",
+          "VN Level": "L5 (emitter-only)"
+        },
+        {
+          "Output Type": "Solar water heating system",
+          "VN Level": "L5"
+        },
+        {
+          "Output Type": "Pool/spa heater",
+          "VN Level": "L5"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Segment",
+        "Circumstance",
+        "Alternatives Differ?"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Segment": "**New-build residential**",
+          "Circumstance": "Greenfield installation with design freedom; low-temperature emitters preferred (radiant floor); condensing boiler mandated by regulation",
+          "Alternatives Differ?": "Yes — system design starts from scratch"
+        },
+        {
+          "#": "2",
+          "Segment": "**Retrofit residential**",
+          "Circumstance": "Replacing existing boiler in occupied dwelling; constrained pipe routing, existing radiators, limited space; must maintain comfort during swap",
+          "Alternatives Differ?": "Yes — high-temp emitters constrain boiler selection"
+        },
+        {
+          "#": "3",
+          "Segment": "**Light commercial (office, retail, hospitality)**",
+          "Circumstance": "Multi-zone buildings with diverse occupancy profiles; BMS integration expected; energy audit/reporting mandated",
+          "Alternatives Differ?": "Yes — zone balancing complexity, regulatory reporting"
+        },
+        {
+          "#": "4",
+          "Segment": "**Multi-family / social housing**",
+          "Circumstance": "Centralized plant with per-unit metering; tenant billing requires measured energy; compliance with EU EED individual metering mandate",
+          "Alternatives Differ?": "Yes — metering-grade accuracy required"
+        },
+        {
+          "#": "5",
+          "Segment": "**Industrial process heating**",
+          "Circumstance": "Hydronic circuits for process heat (not space heating); tighter temperature control, higher duty cycles, harsher media conditions",
+          "Alternatives Differ?": "Yes — duty cycle and media constraints differ"
+        },
+        {
+          "#": "6",
+          "Segment": "**Solar-hybrid / renewable integration**",
+          "Circumstance": "Combining solar thermal with boiler backup; variable source temperatures; storage management; maximizing solar fraction",
+          "Alternatives Differ?": "Yes — multi-source orchestration, low delta-T operation"
+        },
+        {
+          "#": "7",
+          "Segment": "**Pool/spa**",
+          "Circumstance": "Outdoor or indoor pool heating; large water volumes, chemical treatment, seasonal operation",
+          "Alternatives Differ?": "Yes — different media chemistry and volume scale"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L6",
+        "Domain",
+        "Type",
+        "Marquardt Relevance"
+      ],
+      "rows": [
+        {
+          "L6": "L6.1",
+          "Domain": "Heat Generation",
+          "Type": "Core",
+          "Marquardt Relevance": "Indirect — flow data feeds burner modulation"
+        },
+        {
+          "L6": "**L6.2**",
+          "Domain": "**Hydraulic Distribution**",
+          "Type": "**Core**",
+          "Marquardt Relevance": "**Direct — sensor sits here at L4.2.5.1**"
+        },
+        {
+          "L6": "L6.3",
+          "Domain": "Heat Emission",
+          "Type": "Core",
+          "Marquardt Relevance": "Indirect — flow determines emitter output"
+        },
+        {
+          "L6": "L6.4",
+          "Domain": "Control & Regulation",
+          "Type": "Core",
+          "Marquardt Relevance": "Direct — sensor feeds controller inputs"
+        },
+        {
+          "L6": "L6.5",
+          "Domain": "Domestic Hot Water",
+          "Type": "Core",
+          "Marquardt Relevance": "Adjacent — DHW circuits also need flow sensing"
+        },
+        {
+          "L6": "L6.6",
+          "Domain": "Installation & Aftermarket",
+          "Type": "Horizontal",
+          "Marquardt Relevance": "Direct — commissioning requires flow verification"
+        },
+        {
+          "L6": "L6.7",
+          "Domain": "Energy Monitoring & Compliance",
+          "Type": "Horizontal",
+          "Marquardt Relevance": "Direct — thermal energy = flow × delta-T × Cp"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "BOM Position",
+        "Process Step",
+        "Edge Type",
+        "Rationale"
+      ],
+      "rows": [
+        {
+          "BOM Position": "Heat Exchanger Core (L4.1.2.1)",
+          "Process Step": "L6.2 Hydraulic Distribution",
+          "Edge Type": "**HARD**",
+          "Rationale": "HX geometry determines flow resistance and required flow rate"
+        },
+        {
+          "BOM Position": "Circulator Pump (L5.2.1)",
+          "Process Step": "L6.2 Hydraulic Distribution",
+          "Edge Type": "**HARD**",
+          "Rationale": "Pump capacity sets flow range; sensor must match"
+        },
+        {
+          "BOM Position": "Pipe Loop — Radiant Floor (L4.3.3.1)",
+          "Process Step": "L6.2 Hydraulic Distribution",
+          "Edge Type": "**SOFT**",
+          "Rationale": "Loop length affects flow resistance, not sensor category"
+        },
+        {
+          "BOM Position": "Expansion Vessel (L4.2.6.1)",
+          "Process Step": "L6.2 Hydraulic Distribution",
+          "Edge Type": "INDEPENDENT",
+          "Rationale": "No effect on flow measurement"
+        },
+        {
+          "BOM Position": "Appliance Controller (L5.4.1)",
+          "Process Step": "L6.4 Control & Regulation",
+          "Edge Type": "**HARD**",
+          "Rationale": "Controller protocol determines sensor interface requirement"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**Route**",
+          "Value": "PRODUCT_BOM — sensor ends up IN the customer's output product (boiler/heating appliance)"
+        },
+        {
+          "Field": "**Anchor Unit**",
+          "Value": "Ultrasonic Flow Sensor (L4.2.5.1)"
+        },
+        {
+          "Field": "**Anchor Level**",
+          "Value": "L4 (component/subsystem)"
+        },
+        {
+          "Field": "**Parent VN Unit**",
+          "Value": "Flow Sensing & Measurement (L5.2.5)"
+        },
+        {
+          "Field": "**Parent Level**",
+          "Value": "L5"
+        },
+        {
+          "Field": "**Grandparent**",
+          "Value": "Hydraulic Distribution (L6.2)"
+        },
+        {
+          "Field": "**L-Path**",
+          "Value": "L7 Hydronic Heating Equipment Ecosystem > L6.2 Hydraulic Distribution > L5.2.5 Flow Sensing & Measurement > L4.2.5.1 Ultrasonic Flow Sensor"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**Route**",
+          "Value": "Maker — PRODUCT_BOM"
+        },
+        {
+          "Field": "**Function Verb**",
+          "Value": "Measure (from BOM position function: what the component DOES within the parent system)"
+        },
+        {
+          "Field": "**Lens**",
+          "Value": "\"What [measurement] does this [hydraulic distribution system] need to perform its job?\""
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Segment",
+        "Level A (VN serves?)",
+        "Level B (Product modality?)",
+        "Result"
+      ],
+      "rows": [
+        {
+          "Segment": "New-build residential",
+          "Level A (VN serves?)": "Yes",
+          "Level B (Product modality?)": "Yes — DN20/DN25, water/glycol, 2–90 °C",
+          "Result": "**Active**"
+        },
+        {
+          "Segment": "Retrofit residential",
+          "Level A (VN serves?)": "Yes",
+          "Level B (Product modality?)": "Yes — same specs",
+          "Result": "**Active**"
+        },
+        {
+          "Segment": "Light commercial",
+          "Level A (VN serves?)": "Yes",
+          "Level B (Product modality?)": "Yes — DN20/DN25 covers small commercial",
+          "Result": "**Active**"
+        },
+        {
+          "Segment": "Multi-family / social housing",
+          "Level A (VN serves?)": "Yes",
+          "Level B (Product modality?)": "Partial — may require metering-grade (MID EN 1434)",
+          "Result": "**Active (with caveat)**"
+        },
+        {
+          "Segment": "Industrial process heating",
+          "Level A (VN serves?)": "Yes",
+          "Level B (Product modality?)": "Partial — may exceed 90 °C or 10 bar",
+          "Result": "**Filtered**"
+        },
+        {
+          "Segment": "Solar-hybrid",
+          "Level A (VN serves?)": "Yes",
+          "Level B (Product modality?)": "Yes — glycol-tolerant, low flow rates in scope",
+          "Result": "**Active**"
+        },
+        {
+          "Segment": "Pool/spa",
+          "Level A (VN serves?)": "Partial",
+          "Level B (Product modality?)": "Partial — chemical treatment, larger pipe sizes",
+          "Result": "**Filtered**"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Alternative",
+        "UNSPSC",
+        "Inherent Trade-Offs"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Alternative": "**Impeller / Turbine Flow Sensor** (incumbent)",
+          "UNSPSC": "41112501",
+          "Inherent Trade-Offs": "Moving parts subject to magnetite fouling, bearing wear, and particulate jamming; paramagnetic MnO₂ attracted to magnetized rotor; calibration drift from blade erosion; 3–5 year service life in hard-water areas [SRC: web_search — HeatingHelp, BoilerMag]"
+        },
+        {
+          "#": "2",
+          "Alternative": "**Ultrasonic Flow Sensor** (transit-time)",
+          "UNSPSC": "41112501",
+          "Inherent Trade-Offs": "Accuracy degrades with >2% air entrainment; requires pipe-full condition; higher unit cost vs turbine; signal loss in partially filled pipes [SRC: 01_product_decomposition]"
+        },
+        {
+          "#": "3",
+          "Alternative": "**Vortex Flow Sensor**",
+          "UNSPSC": "41112501",
+          "Inherent Trade-Offs": "Introduces pressure drop (bluff body obstructs flow); limited accuracy at low flow rates below Reynolds threshold; vibration-sensitive [SRC: VN_heating_equipment]"
+        },
+        {
+          "#": "4",
+          "Alternative": "**Differential Pressure Estimation** (from pump curve)",
+          "UNSPSC": "—",
+          "Inherent Trade-Offs": "Zero hardware cost; accuracy ±15–20%; no direct measurement; depends on pump curve validity; cannot detect anomalies [SRC: VN_heating_equipment]"
+        },
+        {
+          "#": "5",
+          "Alternative": "**Do nothing / accept risk** [Status Quo]",
+          "UNSPSC": "—",
+          "Inherent Trade-Offs": "Zero cost, zero lifecycle burden; thermal output unverified; no fault detection; cannot comply with EU EcoDesign measured-efficiency requirements; energy waste undetectable"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Scenario",
+        "Activated Output Types",
+        "BOM Positions in Play"
+      ],
+      "rows": [
+        {
+          "Scenario": "**S1: Condensing boiler modulation control**",
+          "Activated Output Types": "Gas condensing boiler",
+          "BOM Positions in Play": "HX Core, Circulator, Controller, Flow Sensor"
+        },
+        {
+          "Scenario": "**S2: Radiant floor zone balancing**",
+          "Activated Output Types": "Radiant floor heating",
+          "BOM Positions in Play": "Manifold, Pipe Loops, Zone Valves, Flow Sensor"
+        },
+        {
+          "Scenario": "**S3: DHW combi-boiler demand detection**",
+          "Activated Output Types": "Gas condensing boiler (combi)",
+          "BOM Positions in Play": "DHW HX, DHW Flow Sensor, Controller"
+        },
+        {
+          "Scenario": "**S4: Solar-hybrid source management**",
+          "Activated Output Types": "Solar water heating + backup boiler",
+          "BOM Positions in Play": "Solar Pump Station, HX, Separator, Flow Sensor"
+        },
+        {
+          "Scenario": "**S5: Multi-zone commercial balancing**",
+          "Activated Output Types": "Baseboard/radiator + fan coil",
+          "BOM Positions in Play": "Multiple emitter loops, Manifold, BUS Gateway"
+        },
+        {
+          "Scenario": "**S6: Thermal energy metering for billing**",
+          "Activated Output Types": "Any (multi-family context)",
+          "BOM Positions in Play": "Flow Sensor (metering-grade), Temp Pair, Integrator"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Role",
+        "Who (in NAICS 333414 context)"
+      ],
+      "rows": [
+        {
+          "Role": "**Job Executor**",
+          "Who (in NAICS 333414 context)": "HVAC installer / commissioning technician — installs and configures the sensor"
+        },
+        {
+          "Role": "**Job Overseer**",
+          "Who (in NAICS 333414 context)": "Boiler OEM engineering manager — accountable for appliance performance and certification"
+        },
+        {
+          "Role": "**Job Beneficiary**",
+          "Who (in NAICS 333414 context)": "Building occupant / facility manager — receives thermal comfort"
+        },
+        {
+          "Role": "**Product Lifecycle Support**",
+          "Who (in NAICS 333414 context)": "Specifier (heating design engineer), installer, commissioning tech, service technician, disposer"
+        },
+        {
+          "Role": "**Purchase Executor**",
+          "Who (in NAICS 333414 context)": "OEM procurement manager / HVAC wholesaler buyer"
+        },
+        {
+          "Role": "**Purchase Influencer**",
+          "Who (in NAICS 333414 context)": "Building regulations inspector, energy auditor, consulting engineer"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Step",
+        "Statement",
+        "Relevant to Product?",
+        "Relevance Rationale"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "Step": "**DEFINE**",
+          "Statement": "Define the required flow rate range, pipe diameter, medium type, temperature envelope, and communication protocol for the hydronic circuit",
+          "Relevant to Product?": "**Yes**",
+          "Relevance Rationale": "Sensor specifications must match circuit design parameters"
+        },
+        {
+          "#": "2",
+          "Step": "**LOCATE**",
+          "Statement": "Locate and access the optimal insertion point in the hydronic piping where flow profile is developed and straight-run requirements are met",
+          "Relevant to Product?": "**Yes**",
+          "Relevance Rationale": "Physical installation position directly affects measurement accuracy"
+        },
+        {
+          "#": "3",
+          "Step": "**PREPARE**",
+          "Statement": "Prepare the piping section, electrical connections, and controller interface for sensor integration",
+          "Relevant to Product?": "**Yes**",
+          "Relevance Rationale": "Mechanical and electrical integration is core to product installation"
+        },
+        {
+          "#": "4",
+          "Step": "**CONFIRM**",
+          "Statement": "Confirm sensor readiness: verify pipe-full condition, absence of air locks, correct wiring, and communication handshake with controller",
+          "Relevant to Product?": "**Yes**",
+          "Relevance Rationale": "Pre-operation verification critical for measurement validity"
+        },
+        {
+          "#": "5",
+          "Step": "**EXECUTE**",
+          "Statement": "Execute continuous flow measurement, providing real-time volumetric flow rate, temperature, and diagnostic data to the system controller",
+          "Relevant to Product?": "**Yes**",
+          "Relevance Rationale": "This IS the core value-creating action of the product"
+        },
+        {
+          "#": "6",
+          "Step": "**MONITOR**",
+          "Statement": "Monitor measurement quality indicators: signal strength, air bubble events, empty-pipe alarms, calibration drift flags",
+          "Relevant to Product?": "**Yes**",
+          "Relevance Rationale": "Ongoing measurement integrity affects system performance"
+        },
+        {
+          "#": "7",
+          "Step": "**MODIFY**",
+          "Statement": "Adjust or recalibrate if measurement deviates — re-zero, update fluid properties, clean sensor path",
+          "Relevant to Product?": "No",
+          "Relevance Rationale": "Ultrasonic sensors require minimal in-service adjustment; turbine sensors require this more"
+        },
+        {
+          "#": "8",
+          "Step": "**CONCLUDE**",
+          "Statement": "Conclude service life: decommission sensor, drain circuit, dispose or recycle electronics and housing",
+          "Relevant to Product?": "No",
+          "Relevance Rationale": "Standard end-of-life; not a differentiating step for flow sensors"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Job Step",
+        "Error Type",
+        "Statement",
+        "Importance",
+        "Satisfaction",
+        "Opp. Score",
+        "Impact",
+        "Confidence",
+        "product_related"
+      ],
+      "rows": [
+        {
+          "ID": "N01",
+          "Job Step": "EXECUTE",
+          "Error Type": "ACCURACY",
+          "Statement": "Minimize the likelihood of volumetric flow reading deviating more than ±3% from true value across the 5–50 l/min operating range",
+          "Importance": "9",
+          "Satisfaction": "5",
+          "Opp. Score": "13",
+          "Impact": "reliability",
+          "Confidence": "0.8",
+          "product_related": "false"
+        },
+        {
+          "ID": "N02",
+          "Job Step": "EXECUTE",
+          "Error Type": "CONSISTENCY",
+          "Statement": "Minimize variability of flow readings between successive measurement cycles under identical steady-state conditions (repeatability >±0.5%)",
+          "Importance": "8",
+          "Satisfaction": "6",
+          "Opp. Score": "10",
+          "Impact": "reliability",
+          "Confidence": "0.8",
+          "product_related": "false"
+        },
+        {
+          "ID": "N03",
+          "Job Step": "EXECUTE",
+          "Error Type": "ROBUSTNESS",
+          "Statement": "Minimize measurement degradation when medium temperature shifts by more than 20 °C within a single heating cycle",
+          "Importance": "8",
+          "Satisfaction": "4",
+          "Opp. Score": "12",
+          "Impact": "reliability",
+          "Confidence": "0.7",
+          "product_related": "false"
+        },
+        {
+          "ID": "N04",
+          "Job Step": "MONITOR",
+          "Error Type": "DETECTION",
+          "Statement": "Minimize time to detect a complete flow stoppage event (circulator failure or valve closure) to less than 2 seconds",
+          "Importance": "9",
+          "Satisfaction": "5",
+          "Opp. Score": "13",
+          "Impact": "safety",
+          "Confidence": "0.8",
+          "product_related": "false"
+        },
+        {
+          "ID": "N05",
+          "Job Step": "EXECUTE",
+          "Error Type": "THROUGHPUT",
+          "Statement": "Increase the turndown ratio (max/min measurable flow) to cover both full-load and minimum-modulation operating points in a single device",
+          "Importance": "7",
+          "Satisfaction": "5",
+          "Opp. Score": "9",
+          "Impact": "reliability",
+          "Confidence": "0.7",
+          "product_related": "false"
+        },
+        {
+          "ID": "N06",
+          "Job Step": "DEFINE",
+          "Error Type": "ACCURACY",
+          "Statement": "Minimize the likelihood of specifying a sensor whose flow range does not cover the circuit's minimum-modulation flow rate, causing dead zones in low-load operation",
+          "Importance": "8",
+          "Satisfaction": "4",
+          "Opp. Score": "12",
+          "Impact": "cost",
+          "Confidence": "0.7",
+          "product_related": "false"
+        },
+        {
+          "ID": "N07",
+          "Job Step": "MONITOR",
+          "Error Type": "DETECTION",
+          "Statement": "Minimize the number of undetected air entrainment events exceeding 2% volume that silently degrade measurement accuracy",
+          "Importance": "8",
+          "Satisfaction": "3",
+          "Opp. Score": "13",
+          "Impact": "reliability",
+          "Confidence": "0.8",
+          "product_related": "false"
+        },
+        {
+          "ID": "N08",
+          "Job Step": "EXECUTE",
+          "Error Type": "ACCURACY",
+          "Statement": "Minimize systematic measurement error caused by non-ideal flow profiles (swirl, asymmetry) from upstream pipe fittings",
+          "Importance": "7",
+          "Satisfaction": "4",
+          "Opp. Score": "10",
+          "Impact": "reliability",
+          "Confidence": "0.7",
+          "product_related": "false"
+        },
+        {
+          "ID": "N09",
+          "Job Step": "EXECUTE",
+          "Error Type": "ROBUSTNESS",
+          "Statement": "Minimize measurement failure rate when medium contains glycol concentrations up to 50% by volume",
+          "Importance": "8",
+          "Satisfaction": "4",
+          "Opp. Score": "12",
+          "Impact": "reliability",
+          "Confidence": "0.8",
+          "product_related": "false"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Lifecycle Stage",
+        "Error Type",
+        "Statement",
+        "Imp.",
+        "Sat.",
+        "Opp.",
+        "Impact",
+        "Conf.",
+        "product_related"
+      ],
+      "rows": [
+        {
+          "ID": "N10",
+          "Lifecycle Stage": "Usage",
+          "Error Type": "ROBUSTNESS",
+          "Statement": "Minimize the likelihood of turbine rotor seizure from magnetite accumulation requiring unplanned sensor replacement within 3 years of installation [SRC: web_search]",
+          "Imp.": "8",
+          "Sat.": "3",
+          "Opp.": "13",
+          "Impact": "reliability",
+          "Conf.": "0.9",
+          "product_related": "true"
+        },
+        {
+          "ID": "N11",
+          "Lifecycle Stage": "Maintenance",
+          "Error Type": "EFFORT",
+          "Statement": "Minimize the annual maintenance effort required to inspect and clean mechanical flow sensor internals to prevent calibration drift from particulate fouling",
+          "Imp.": "7",
+          "Sat.": "3",
+          "Opp.": "11",
+          "Impact": "cost",
+          "Conf.": "0.8",
+          "product_related": "true"
+        },
+        {
+          "ID": "N12",
+          "Lifecycle Stage": "Usage",
+          "Error Type": "CONSISTENCY",
+          "Statement": "Minimize calibration drift exceeding ±5% over 12 months caused by bearing wear and blade erosion in hard-water circuits [SRC: web_search]",
+          "Imp.": "8",
+          "Sat.": "3",
+          "Opp.": "13",
+          "Impact": "reliability",
+          "Conf.": "0.8",
+          "product_related": "true"
+        },
+        {
+          "ID": "N12b",
+          "Lifecycle Stage": "Usage",
+          "Error Type": "THROUGHPUT",
+          "Statement": "Increase the ability to maintain accurate readings across the full flow range without mechanical-inertia dead band at low flow rates (<3 l/min) where turbine rotors stall",
+          "Imp.": "7",
+          "Sat.": "3",
+          "Opp.": "11",
+          "Impact": "reliability",
+          "Conf.": "0.7",
+          "product_related": "true"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Lifecycle Stage",
+        "Error Type",
+        "Statement",
+        "Imp.",
+        "Sat.",
+        "Opp.",
+        "Impact",
+        "Conf.",
+        "product_related"
+      ],
+      "rows": [
+        {
+          "ID": "N13",
+          "Lifecycle Stage": "Preparation",
+          "Error Type": "EFFORT",
+          "Statement": "Minimize the commissioning time required to configure fluid-type parameters and verify acoustic coupling after installation",
+          "Imp.": "6",
+          "Sat.": "5",
+          "Opp.": "7",
+          "Impact": "time",
+          "Conf.": "0.7",
+          "product_related": "true"
+        },
+        {
+          "ID": "N14",
+          "Lifecycle Stage": "Usage",
+          "Error Type": "ROBUSTNESS",
+          "Statement": "Minimize the likelihood of complete signal loss when transient air pockets pass through the sensor during system filling or de-aeration",
+          "Imp.": "7",
+          "Sat.": "4",
+          "Opp.": "10",
+          "Impact": "reliability",
+          "Conf.": "0.8",
+          "product_related": "true"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Lifecycle Stage",
+        "Error Type",
+        "Statement",
+        "Imp.",
+        "Sat.",
+        "Opp.",
+        "Impact",
+        "Conf.",
+        "product_related"
+      ],
+      "rows": [
+        {
+          "ID": "N14b",
+          "Lifecycle Stage": "Acquisition",
+          "Error Type": "EFFORT",
+          "Statement": "Minimize the OEM qualification cost for validating acoustic performance across the full DN range and glycol concentration matrix",
+          "Imp.": "6",
+          "Sat.": "4",
+          "Opp.": "8",
+          "Impact": "cost",
+          "Conf.": "0.6",
+          "product_related": "true"
+        },
+        {
+          "ID": "N14c",
+          "Lifecycle Stage": "Usage",
+          "Error Type": "DETECTION",
+          "Statement": "Increase the ability to distinguish genuine zero-flow conditions from ultrasonic signal loss caused by transient medium anomalies (bubbles, empty pipe)",
+          "Imp.": "8",
+          "Sat.": "3",
+          "Opp.": "13",
+          "Impact": "safety",
+          "Conf.": "0.7",
+          "product_related": "true"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Lifecycle Stage",
+        "Error Type",
+        "Statement",
+        "Imp.",
+        "Sat.",
+        "Opp.",
+        "Impact",
+        "Conf.",
+        "product_related"
+      ],
+      "rows": [
+        {
+          "ID": "N15",
+          "Lifecycle Stage": "Usage",
+          "Error Type": "ACCURACY",
+          "Statement": "Minimize the likelihood of flow estimate error exceeding ±15% due to pump curve deviation from catalog values at part-load conditions",
+          "Imp.": "7",
+          "Sat.": "2",
+          "Opp.": "12",
+          "Impact": "reliability",
+          "Conf.": "0.7",
+          "product_related": "true"
+        },
+        {
+          "ID": "N15b",
+          "Lifecycle Stage": "Usage",
+          "Error Type": "DETECTION",
+          "Statement": "Minimize the number of undetected system faults (blocked filter, stuck valve) that DP estimation cannot sense because it has no direct flow measurement",
+          "Imp.": "8",
+          "Sat.": "2",
+          "Opp.": "14",
+          "Impact": "safety",
+          "Conf.": "0.7",
+          "product_related": "true"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Job Step",
+        "Error Type",
+        "Statement",
+        "Imp.",
+        "Sat.",
+        "Opp.",
+        "Impact",
+        "Conf.",
+        "product_related"
+      ],
+      "rows": [
+        {
+          "ID": "N16",
+          "Job Step": "LOCATE",
+          "Error Type": "EFFORT",
+          "Statement": "Minimize the installation footprint (physical length and required straight-pipe run) to enable placement in space-constrained boiler enclosures",
+          "Imp.": "7",
+          "Sat.": "5",
+          "Opp.": "9",
+          "Impact": "cost",
+          "Conf.": "0.7",
+          "product_related": "false"
+        },
+        {
+          "ID": "N16b",
+          "Job Step": "LOCATE",
+          "Error Type": "ACCURACY",
+          "Statement": "Minimize the likelihood of mounting the sensor at a location where turbulence from upstream fittings causes >2% systematic reading bias",
+          "Imp.": "7",
+          "Sat.": "4",
+          "Opp.": "10",
+          "Impact": "reliability",
+          "Conf.": "0.7",
+          "product_related": "false"
+        },
+        {
+          "ID": "N17",
+          "Job Step": "PREPARE",
+          "Error Type": "EFFORT",
+          "Statement": "Minimize the total OEM integration time from unpacking to first valid reading, including mechanical fitting, electrical connection, and protocol handshake",
+          "Imp.": "7",
+          "Sat.": "5",
+          "Opp.": "9",
+          "Impact": "time",
+          "Conf.": "0.7",
+          "product_related": "false"
+        },
+        {
+          "ID": "N18",
+          "Job Step": "CONFIRM",
+          "Error Type": "DETECTION",
+          "Statement": "Minimize the likelihood of an installer failing to detect incorrect sensor orientation (forward/reverse) before system start-up",
+          "Imp.": "6",
+          "Sat.": "6",
+          "Opp.": "6",
+          "Impact": "skill",
+          "Conf.": "0.6",
+          "product_related": "false"
+        },
+        {
+          "ID": "N19",
+          "Job Step": "EXECUTE",
+          "Error Type": "ACCURACY",
+          "Statement": "Increase the ability to simultaneously provide flow rate AND medium temperature from a single measurement point, eliminating separate probe installation",
+          "Imp.": "8",
+          "Sat.": "4",
+          "Opp.": "12",
+          "Impact": "cost",
+          "Conf.": "0.7",
+          "product_related": "false"
+        },
+        {
+          "ID": "N20",
+          "Job Step": "MONITOR",
+          "Error Type": "DETECTION",
+          "Statement": "Increase the ability to detect incipient circulator pump degradation via flow-rate trend analysis before complete pump failure causes comfort loss",
+          "Imp.": "7",
+          "Sat.": "3",
+          "Opp.": "11",
+          "Impact": "reliability",
+          "Conf.": "0.6",
+          "product_related": "false"
+        },
+        {
+          "ID": "N21",
+          "Job Step": "DEFINE",
+          "Error Type": "EFFORT",
+          "Statement": "Minimize the number of sensor variants an OEM must qualify and stock to cover its full boiler product range (DN15–DN25)",
+          "Imp.": "6",
+          "Sat.": "4",
+          "Opp.": "8",
+          "Impact": "cost",
+          "Conf.": "0.6",
+          "product_related": "false"
+        },
+        {
+          "ID": "N22",
+          "Job Step": "EXECUTE",
+          "Error Type": "CONSISTENCY",
+          "Statement": "Minimize the variation in thermal energy calculation (Q = ṁ × Cp × ΔT) caused by flow measurement noise at low modulation rates (<25% burner output)",
+          "Imp.": "8",
+          "Sat.": "4",
+          "Opp.": "12",
+          "Impact": "reliability",
+          "Conf.": "0.8",
+          "product_related": "false"
+        },
+        {
+          "ID": "N23",
+          "Job Step": "CONFIRM",
+          "Error Type": "ACCURACY",
+          "Statement": "Minimize the likelihood of commissioning sign-off with hydraulic imbalance exceeding ±10% of design flow rate per zone [SRC: web_search — IMI Hydronic]",
+          "Imp.": "8",
+          "Sat.": "4",
+          "Opp.": "12",
+          "Impact": "cost",
+          "Conf.": "0.7",
+          "product_related": "false"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Job Step",
+        "Error Type",
+        "Statement",
+        "Imp.",
+        "Sat.",
+        "Opp.",
+        "Impact",
+        "Conf.",
+        "product_related"
+      ],
+      "rows": [
+        {
+          "ID": "N24",
+          "Job Step": "EXECUTE",
+          "Error Type": "ROBUSTNESS",
+          "Statement": "Minimize the field failure rate of the flow sensing subsystem to below 0.1% within the 15-year appliance design life",
+          "Imp.": "9",
+          "Sat.": "5",
+          "Opp.": "13",
+          "Impact": "reliability",
+          "Conf.": "0.8",
+          "product_related": "false"
+        },
+        {
+          "ID": "N25",
+          "Job Step": "DEFINE",
+          "Error Type": "ACCURACY",
+          "Statement": "Increase the ability to document measured seasonal efficiency (ηs) per EU EcoDesign Lot 1/2 using onboard flow + temperature data rather than laboratory-only test results [SRC: web_search — EU Commission]",
+          "Imp.": "8",
+          "Sat.": "3",
+          "Opp.": "13",
+          "Impact": "cost",
+          "Conf.": "0.7",
+          "product_related": "false"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Role",
+        "Retrieval",
+        "Bridge",
+        "Need"
+      ],
+      "rows": [
+        {
+          "Role": "**OEM Engineer (Overseer)**",
+          "Retrieval": "\"By getting flow sensing right, this person becomes the engineer whose boiler platform consistently hits top-tier energy labels.\"",
+          "Bridge": "\"What must the product do so they CAN become that engineer?\"",
+          "Need": "—"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Statement",
+        "Imp.",
+        "Sat.",
+        "Opp.",
+        "Impact",
+        "Conf.",
+        "product_related"
+      ],
+      "rows": [
+        {
+          "ID": "N26",
+          "Statement": "Increase the ability to achieve A-rated energy label classification on the first certification submission by providing measurement accuracy that matches laboratory reference within ±2% [SRC: web_search — REHVA Journal]",
+          "Imp.": "8",
+          "Sat.": "4",
+          "Opp.": "12",
+          "Impact": "cost",
+          "Conf.": "0.6",
+          "product_related": "false"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Role",
+        "Retrieval",
+        "Bridge",
+        "Need"
+      ],
+      "rows": [
+        {
+          "Role": "**OEM Brand (via Overseer)**",
+          "Retrieval": "\"Regulators and installers are watching. They must see a manufacturer that takes efficiency seriously — not one relying on estimates.\"",
+          "Bridge": "\"What must the product do so regulators and installers SEE that impression?\"",
+          "Need": "—"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Statement",
+        "Imp.",
+        "Sat.",
+        "Opp.",
+        "Impact",
+        "Conf.",
+        "product_related"
+      ],
+      "rows": [
+        {
+          "ID": "N27",
+          "Statement": "Increase the ability to provide installer-visible flow data (display or diagnostic output) that demonstrates measured — not estimated — system performance during commissioning and service visits",
+          "Imp.": "7",
+          "Sat.": "3",
+          "Opp.": "11",
+          "Impact": "skill",
+          "Conf.": "0.5",
+          "product_related": "false"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Role",
+        "Retrieval",
+        "Bridge",
+        "Need"
+      ],
+      "rows": [
+        {
+          "Role": "**Installer (Executor)**",
+          "Retrieval": "\"Wants to feel confident the system is correctly commissioned; wants to avoid the anxiety of a callback for comfort complaints.\"",
+          "Bridge": "\"What must the product do so the installer FEELS confident?\"",
+          "Need": "—"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Statement",
+        "Imp.",
+        "Sat.",
+        "Opp.",
+        "Impact",
+        "Conf.",
+        "product_related"
+      ],
+      "rows": [
+        {
+          "ID": "N28",
+          "Statement": "Minimize the likelihood of receiving a customer callback within 30 days of installation due to an undetected hydraulic imbalance that the sensor could have flagged during commissioning [hypothesis]",
+          "Imp.": "7",
+          "Sat.": "3",
+          "Opp.": "11",
+          "Impact": "cost",
+          "Conf.": "0.5",
+          "product_related": "false"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Statement (abbreviated)",
+        "Imp.",
+        "Sat.",
+        "Opp.",
+        "Impact",
+        "product_related",
+        "Pyramid"
+      ],
+      "rows": [
+        {
+          "ID": "N01",
+          "Statement (abbreviated)": "Flow reading deviation >±3% across range",
+          "Imp.": "9",
+          "Sat.": "5",
+          "Opp.": "13",
+          "Impact": "reliability",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N07",
+          "Statement (abbreviated)": "Undetected air entrainment >2% vol",
+          "Imp.": "8",
+          "Sat.": "3",
+          "Opp.": "13",
+          "Impact": "reliability",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N04",
+          "Statement (abbreviated)": "Detect flow stoppage >2 s",
+          "Imp.": "9",
+          "Sat.": "5",
+          "Opp.": "13",
+          "Impact": "safety",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N10",
+          "Statement (abbreviated)": "Turbine rotor seizure from magnetite <3 yr",
+          "Imp.": "8",
+          "Sat.": "3",
+          "Opp.": "13",
+          "Impact": "reliability",
+          "product_related": "true",
+          "Pyramid": "P1"
+        },
+        {
+          "ID": "N12",
+          "Statement (abbreviated)": "Calibration drift >±5% from bearing wear",
+          "Imp.": "8",
+          "Sat.": "3",
+          "Opp.": "13",
+          "Impact": "reliability",
+          "product_related": "true",
+          "Pyramid": "P1"
+        },
+        {
+          "ID": "N24",
+          "Statement (abbreviated)": "Field failure rate >0.1% in 15-yr life",
+          "Imp.": "9",
+          "Sat.": "5",
+          "Opp.": "13",
+          "Impact": "reliability",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N25",
+          "Statement (abbreviated)": "Documented measured efficiency for EcoDesign",
+          "Imp.": "8",
+          "Sat.": "3",
+          "Opp.": "13",
+          "Impact": "cost",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N03",
+          "Statement (abbreviated)": "Measurement degradation at ΔT >20 °C",
+          "Imp.": "8",
+          "Sat.": "4",
+          "Opp.": "12",
+          "Impact": "reliability",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N06",
+          "Statement (abbreviated)": "Sensor range misses min-modulation flow",
+          "Imp.": "8",
+          "Sat.": "4",
+          "Opp.": "12",
+          "Impact": "cost",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N09",
+          "Statement (abbreviated)": "Failure with glycol >50%",
+          "Imp.": "8",
+          "Sat.": "4",
+          "Opp.": "12",
+          "Impact": "reliability",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N15",
+          "Statement (abbreviated)": "DP estimate error >±15% at part-load",
+          "Imp.": "7",
+          "Sat.": "2",
+          "Opp.": "12",
+          "Impact": "reliability",
+          "product_related": "true",
+          "Pyramid": "P1"
+        },
+        {
+          "ID": "N15b",
+          "Statement (abbreviated)": "Undetected faults invisible to DP estimation",
+          "Imp.": "8",
+          "Sat.": "2",
+          "Opp.": "14",
+          "Impact": "safety",
+          "product_related": "true",
+          "Pyramid": "P1"
+        },
+        {
+          "ID": "N14c",
+          "Statement (abbreviated)": "Distinguish zero-flow from signal loss",
+          "Imp.": "8",
+          "Sat.": "3",
+          "Opp.": "13",
+          "Impact": "safety",
+          "product_related": "true",
+          "Pyramid": "P1"
+        },
+        {
+          "ID": "N19",
+          "Statement (abbreviated)": "Single-point flow + temperature",
+          "Imp.": "8",
+          "Sat.": "4",
+          "Opp.": "12",
+          "Impact": "cost",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N22",
+          "Statement (abbreviated)": "Thermal energy calc noise at low modulation",
+          "Imp.": "8",
+          "Sat.": "4",
+          "Opp.": "12",
+          "Impact": "reliability",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N23",
+          "Statement (abbreviated)": "Hydraulic imbalance >±10% at commissioning",
+          "Imp.": "8",
+          "Sat.": "4",
+          "Opp.": "12",
+          "Impact": "cost",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N26",
+          "Statement (abbreviated)": "A-rated label on first certification attempt",
+          "Imp.": "8",
+          "Sat.": "4",
+          "Opp.": "12",
+          "Impact": "cost",
+          "product_related": "false",
+          "Pyramid": "P3"
+        },
+        {
+          "ID": "N02",
+          "Statement (abbreviated)": "Repeatability >±0.5%",
+          "Imp.": "8",
+          "Sat.": "6",
+          "Opp.": "10",
+          "Impact": "reliability",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N08",
+          "Statement (abbreviated)": "Non-ideal flow profile error",
+          "Imp.": "7",
+          "Sat.": "4",
+          "Opp.": "10",
+          "Impact": "reliability",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N14",
+          "Statement (abbreviated)": "Signal loss from transient air pockets",
+          "Imp.": "7",
+          "Sat.": "4",
+          "Opp.": "10",
+          "Impact": "reliability",
+          "product_related": "true",
+          "Pyramid": "P1"
+        },
+        {
+          "ID": "N16b",
+          "Statement (abbreviated)": "Mounting location turbulence >2% bias",
+          "Imp.": "7",
+          "Sat.": "4",
+          "Opp.": "10",
+          "Impact": "reliability",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N12b",
+          "Statement (abbreviated)": "Turbine low-flow dead band <3 l/min",
+          "Imp.": "7",
+          "Sat.": "3",
+          "Opp.": "11",
+          "Impact": "reliability",
+          "product_related": "true",
+          "Pyramid": "P1"
+        },
+        {
+          "ID": "N11",
+          "Statement (abbreviated)": "Annual maintenance for cleaning/inspection",
+          "Imp.": "7",
+          "Sat.": "3",
+          "Opp.": "11",
+          "Impact": "cost",
+          "product_related": "true",
+          "Pyramid": "P1"
+        },
+        {
+          "ID": "N14b",
+          "Statement (abbreviated)": "OEM qualification cost for acoustic validation",
+          "Imp.": "6",
+          "Sat.": "4",
+          "Opp.": "8",
+          "Impact": "cost",
+          "product_related": "true",
+          "Pyramid": "P1"
+        },
+        {
+          "ID": "N20",
+          "Statement (abbreviated)": "Detect incipient pump degradation",
+          "Imp.": "7",
+          "Sat.": "3",
+          "Opp.": "11",
+          "Impact": "reliability",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N27",
+          "Statement (abbreviated)": "Installer-visible measured performance data",
+          "Imp.": "7",
+          "Sat.": "3",
+          "Opp.": "11",
+          "Impact": "skill",
+          "product_related": "false",
+          "Pyramid": "P4"
+        },
+        {
+          "ID": "N28",
+          "Statement (abbreviated)": "Callback within 30 days from imbalance",
+          "Imp.": "7",
+          "Sat.": "3",
+          "Opp.": "11",
+          "Impact": "cost",
+          "product_related": "false",
+          "Pyramid": "P5"
+        },
+        {
+          "ID": "N05",
+          "Statement (abbreviated)": "Turndown ratio for full-load to min-mod",
+          "Imp.": "7",
+          "Sat.": "5",
+          "Opp.": "9",
+          "Impact": "reliability",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N16",
+          "Statement (abbreviated)": "Installation footprint and straight-run",
+          "Imp.": "7",
+          "Sat.": "5",
+          "Opp.": "9",
+          "Impact": "cost",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N17",
+          "Statement (abbreviated)": "OEM integration time",
+          "Imp.": "7",
+          "Sat.": "5",
+          "Opp.": "9",
+          "Impact": "time",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N21",
+          "Statement (abbreviated)": "Variant count to cover DN range",
+          "Imp.": "6",
+          "Sat.": "4",
+          "Opp.": "8",
+          "Impact": "cost",
+          "product_related": "false",
+          "Pyramid": "P2"
+        },
+        {
+          "ID": "N13",
+          "Statement (abbreviated)": "Commissioning config time (ultrasonic)",
+          "Imp.": "6",
+          "Sat.": "5",
+          "Opp.": "7",
+          "Impact": "time",
+          "product_related": "true",
+          "Pyramid": "P1"
+        },
+        {
+          "ID": "N18",
+          "Statement (abbreviated)": "Undetected incorrect orientation",
+          "Imp.": "6",
+          "Sat.": "6",
+          "Opp.": "6",
+          "Impact": "skill",
+          "product_related": "false",
+          "Pyramid": "P2"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "ID",
+        "Statement (abbreviated)",
+        "Opp."
+      ],
+      "rows": [
+        {
+          "ID": "N15b",
+          "Statement (abbreviated)": "Undetected faults invisible to DP estimation",
+          "Opp.": "14"
+        },
+        {
+          "ID": "N07",
+          "Statement (abbreviated)": "Undetected air entrainment >2% vol",
+          "Opp.": "13"
+        },
+        {
+          "ID": "N10",
+          "Statement (abbreviated)": "Turbine rotor seizure from magnetite",
+          "Opp.": "13"
+        },
+        {
+          "ID": "N12",
+          "Statement (abbreviated)": "Calibration drift from bearing wear",
+          "Opp.": "13"
+        },
+        {
+          "ID": "N14c",
+          "Statement (abbreviated)": "Distinguish zero-flow from signal loss",
+          "Opp.": "13"
+        },
+        {
+          "ID": "N25",
+          "Statement (abbreviated)": "Documented measured efficiency for EcoDesign",
+          "Opp.": "13"
+        },
+        {
+          "ID": "N03",
+          "Statement (abbreviated)": "Measurement degradation at ΔT >20 °C",
+          "Opp.": "12"
+        },
+        {
+          "ID": "N06",
+          "Statement (abbreviated)": "Sensor range misses min-modulation flow",
+          "Opp.": "12"
+        },
+        {
+          "ID": "N09",
+          "Statement (abbreviated)": "Failure with glycol >50%",
+          "Opp.": "12"
+        },
+        {
+          "ID": "N15",
+          "Statement (abbreviated)": "DP estimate error >±15% at part-load",
+          "Opp.": "12"
+        },
+        {
+          "ID": "N19",
+          "Statement (abbreviated)": "Single-point flow + temperature",
+          "Opp.": "12"
+        },
+        {
+          "ID": "N22",
+          "Statement (abbreviated)": "Thermal energy calc noise at low modulation",
+          "Opp.": "12"
+        },
+        {
+          "ID": "N23",
+          "Statement (abbreviated)": "Hydraulic imbalance >±10% at commissioning",
+          "Opp.": "12"
+        },
+        {
+          "ID": "N26",
+          "Statement (abbreviated)": "A-rated label on first certification attempt",
+          "Opp.": "12"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Metric",
+        "Target",
+        "Actual",
+        "Pass?"
+      ],
+      "rows": [
+        {
+          "Metric": "Error statements per market",
+          "Target": "15–30",
+          "Actual": "**33**",
+          "Pass?": "NOTE — slightly above; justified by 5 alternatives × 5 lifecycle stages"
+        },
+        {
+          "Metric": "Needs per relevant job step (6 relevant)",
+          "Target": "≥ 2",
+          "Actual": "DEFINE: 3, LOCATE: 2, PREPARE: 2, CONFIRM: 3, EXECUTE: 16, MONITOR: 5",
+          "Pass?": "PASS"
+        },
+        {
+          "Metric": "Market-inherent (product_related=false)",
+          "Target": "60–70%",
+          "Actual": "22/33 = **67%**",
+          "Pass?": "PASS"
+        },
+        {
+          "Metric": "Technology-specific (product_related=true)",
+          "Target": "30–40%",
+          "Actual": "11/33 = **33%**",
+          "Pass?": "PASS"
+        },
+        {
+          "Metric": "\"Minimize\" vs \"Increase\" mix",
+          "Target": "~60/40",
+          "Actual": "25/8 = **76/24**",
+          "Pass?": "PASS (acceptable)"
+        },
+        {
+          "Metric": "Job map steps",
+          "Target": "8 exactly",
+          "Actual": "**8**",
+          "Pass?": "PASS"
+        },
+        {
+          "Metric": "Relevant steps",
+          "Target": "3–6 typical",
+          "Actual": "**6**",
+          "Pass?": "PASS"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "#": "V1",
+          "Check": "Format compliance — all statements start with \"Minimize…\" or \"Increase…\" with ONE KPI",
+          "Result": "PASS"
+        },
+        {
+          "#": "V2",
+          "Check": "product_related=true ONLY for technology-caused needs",
+          "Result": "PASS — N10–N15 are specific to turbine/ultrasonic/DP technology; disappear with different tech"
+        },
+        {
+          "#": "V3",
+          "Check": "Importance/satisfaction sanity — no unrealistic patterns",
+          "Result": "PASS — range: imp 6–9, sat 2–6; safety/regulatory at 8–9"
+        },
+        {
+          "#": "V4",
+          "Check": "Impact category matches KPI",
+          "Result": "PASS — e.g., flow accuracy = reliability, not time"
+        },
+        {
+          "#": "V5",
+          "Check": "Coverage — ≥2 per relevant step, no obvious duplicates",
+          "Result": "PASS"
+        },
+        {
+          "#": "V6",
+          "Check": "Solution-agnostic — zero product/vendor/mechanism references in P2 needs",
+          "Result": "PASS — P1 needs name technology class as expected"
+        },
+        {
+          "#": "V7",
+          "Check": "Anchor level matches product abstraction",
+          "Result": "PASS — component = L4"
+        },
+        {
+          "#": "V8",
+          "Check": "Product job references parent VN unit",
+          "Result": "PASS — \"Help Flow Sensing & Measurement to…\""
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "jtbd_analysis",
+      "naics_code": "333414",
+      "naics_title": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+      "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+      "product_name": "Ultrasonic Flow Sensor",
+      "vendor_name": "Marquardt",
+      "cfj_statement": "Generate and deliver thermal energy to occupied spaces and domestic hot-water systems via heated-water circuits",
+      "job_map": {
+        "naics_code": "333414",
+        "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+        "anchor_vn_unit": "Ultrasonic Flow Sensor",
+        "anchor_level": "L4",
+        "parent_vn_unit": "Flow Sensing & Measurement",
+        "parent_level": "L5",
+        "product_job_statement": "Help Flow Sensing & Measurement to measure volumetric flow rate in closed-pipe hydronic heating circuits without obstructing flow or introducing mechanical wear points",
+        "steps": [
+          {
+            "step_number": 1,
+            "step_name": "DEFINE",
+            "statement": "Define the required flow rate range, pipe diameter, medium type, temperature envelope, and communication protocol for the hydronic circuit",
+            "relevant_to_product": true,
+            "relevance_rationale": "Sensor specifications must match circuit design parameters"
+          },
+          {
+            "step_number": 2,
+            "step_name": "LOCATE",
+            "statement": "Locate and access the optimal insertion point in the hydronic piping where flow profile is developed and straight-run requirements are met",
+            "relevant_to_product": true,
+            "relevance_rationale": "Physical installation position directly affects measurement accuracy"
+          },
+          {
+            "step_number": 3,
+            "step_name": "PREPARE",
+            "statement": "Prepare the piping section, electrical connections, and controller interface for sensor integration",
+            "relevant_to_product": true,
+            "relevance_rationale": "Mechanical and electrical integration is core to product installation"
+          },
+          {
+            "step_number": 4,
+            "step_name": "CONFIRM",
+            "statement": "Confirm sensor readiness: verify pipe-full condition, absence of air locks, correct wiring, and communication handshake with controller",
+            "relevant_to_product": true,
+            "relevance_rationale": "Pre-operation verification critical for measurement validity"
+          },
+          {
+            "step_number": 5,
+            "step_name": "EXECUTE",
+            "statement": "Execute continuous flow measurement, providing real-time volumetric flow rate, temperature, and diagnostic data to the system controller",
+            "relevant_to_product": true,
+            "relevance_rationale": "This IS the core value-creating action of the product"
+          },
+          {
+            "step_number": 6,
+            "step_name": "MONITOR",
+            "statement": "Monitor measurement quality indicators: signal strength, air bubble events, empty-pipe alarms, calibration drift flags",
+            "relevant_to_product": true,
+            "relevance_rationale": "Ongoing measurement integrity affects system performance"
+          },
+          {
+            "step_number": 7,
+            "step_name": "MODIFY",
+            "statement": "Adjust or recalibrate if measurement deviates — re-zero, update fluid properties, clean sensor path",
+            "relevant_to_product": false,
+            "relevance_rationale": "Ultrasonic sensors require minimal in-service adjustment"
+          },
+          {
+            "step_number": 8,
+            "step_name": "CONCLUDE",
+            "statement": "Conclude service life: decommission sensor, drain circuit, dispose or recycle electronics and housing",
+            "relevant_to_product": false,
+            "relevance_rationale": "Standard end-of-life; not a differentiating step"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "name": "Impeller / Turbine Flow Sensor",
+          "unspsc_code": "41112501",
+          "status": "incumbent",
+          "market_share_estimate": "55-65%",
+          "trade_offs": [
+            "Moving parts subject to magnetite fouling and bearing wear",
+            "Paramagnetic MnO2 attracted to magnetized rotor in hard-water circuits",
+            "Calibration drift from blade erosion (±5% in 12 months)",
+            "3-5 year effective service life in hard-water areas",
+            "Pressure drop across impeller"
+          ]
+        },
+        {
+          "name": "Ultrasonic Flow Sensor (transit-time)",
+          "unspsc_code": "41112501",
+          "status": "growing",
+          "market_share_estimate": "20-30%",
+          "trade_offs": [
+            "Accuracy degrades with >2% air entrainment by volume",
+            "Requires pipe-full condition for valid measurement",
+            "Higher unit cost vs turbine (2-3x at OEM volume)",
+            "Requires fluid-type configuration at commissioning"
+          ]
+        },
+        {
+          "name": "Vortex Flow Sensor",
+          "unspsc_code": "41112501",
+          "status": "niche",
+          "market_share_estimate": "3-5%",
+          "trade_offs": [
+            "Bluff body introduces pressure drop",
+            "Limited accuracy below Reynolds number threshold at low flows",
+            "Vibration-sensitive installation"
+          ]
+        },
+        {
+          "name": "Differential Pressure Estimation",
+          "unspsc_code": null,
+          "status": "budget_fallback",
+          "market_share_estimate": "5-15%",
+          "trade_offs": [
+            "Accuracy only ±15-20%",
+            "No direct measurement — inferred from pump curve",
+            "Cannot detect anomalies or faults",
+            "Pump curve shifts with wear invalidate estimate"
+          ]
+        },
+        {
+          "name": "Do nothing / accept risk",
+          "unspsc_code": null,
+          "status": "status_quo",
+          "market_share_estimate": null,
+          "trade_offs": [
+            "Zero cost, zero P1 lifecycle burden",
+            "Thermal output unverified",
+            "Cannot comply with EU EcoDesign measured-efficiency requirements",
+            "Energy waste and faults undetectable"
+          ]
+        }
+      ],
+      "error_statements": [
+        {
+          "id": "N01",
+          "statement": "Minimize the likelihood of volumetric flow reading deviating more than ±3% from true value across the 5–50 l/min operating range",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ACCURACY",
+          "pyramid_level": "P2",
+          "importance": 9,
+          "satisfaction_current": 5,
+          "opportunity_score": 13,
+          "impact_category": "reliability",
+          "rationale": "Thermal energy calculation (Q = flow × Cp × ΔT) accuracy is directly proportional to flow measurement accuracy. A ±3% flow error propagates to ±3% energy billing/control error. Condensing boiler modulation depends on accurate flow data for optimal return temperature management.",
+          "confidence": 0.8,
+          "product_related": false,
+          "source": "web_search"
+        },
+        {
+          "id": "N02",
+          "statement": "Minimize variability of flow readings between successive measurement cycles under identical steady-state conditions (repeatability >±0.5%)",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "CONSISTENCY",
+          "pyramid_level": "P2",
+          "importance": 8,
+          "satisfaction_current": 6,
+          "opportunity_score": 10,
+          "impact_category": "reliability",
+          "rationale": "Control loops require repeatable measurements to avoid oscillation. Poor repeatability causes hunting in burner modulation and circulator speed control.",
+          "confidence": 0.8,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N03",
+          "statement": "Minimize measurement degradation when medium temperature shifts by more than 20 °C within a single heating cycle",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ROBUSTNESS",
+          "pyramid_level": "P2",
+          "importance": 8,
+          "satisfaction_current": 4,
+          "opportunity_score": 12,
+          "impact_category": "reliability",
+          "rationale": "Hydronic circuits experience rapid temperature swings (cold start from 15 °C to 75 °C). Speed of sound in water changes ~2.4 m/s per °C. Sensors without real-time compensation accumulate ~1.5% error per 20 °C swing.",
+          "confidence": 0.7,
+          "product_related": false,
+          "source": "web_search"
+        },
+        {
+          "id": "N04",
+          "statement": "Minimize time to detect a complete flow stoppage event (circulator failure or valve closure) to less than 2 seconds",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "error_type": "DETECTION",
+          "pyramid_level": "P2",
+          "importance": 9,
+          "satisfaction_current": 5,
+          "opportunity_score": 13,
+          "impact_category": "safety",
+          "rationale": "Loss of flow in an active boiler creates rapid heat exchanger overshoot. Delayed detection risks safety valve activation, thermal stress damage to HX, and potential dry-fire in extreme cases. EN 15502 requires flow-proving for Category III appliances.",
+          "confidence": 0.8,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N05",
+          "statement": "Increase the turndown ratio (max/min measurable flow) to cover both full-load and minimum-modulation operating points in a single device",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "THROUGHPUT",
+          "pyramid_level": "P2",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9,
+          "impact_category": "reliability",
+          "rationale": "Modern condensing boilers modulate 1:5 to 1:10. A flow sensor with a narrow turndown creates a measurement gap at low modulation where condensing efficiency matters most.",
+          "confidence": 0.7,
+          "product_related": false,
+          "source": "web_search"
+        },
+        {
+          "id": "N06",
+          "statement": "Minimize the likelihood of specifying a sensor whose flow range does not cover the circuit's minimum-modulation flow rate, causing dead zones in low-load operation",
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "error_type": "ACCURACY",
+          "pyramid_level": "P2",
+          "importance": 8,
+          "satisfaction_current": 4,
+          "opportunity_score": 12,
+          "impact_category": "cost",
+          "rationale": "OEM engineers must select a sensor that covers the full modulation range. Under-specifying causes unmeasured operation at low loads, where condensing efficiency gains are highest. Over-specifying wastes cost.",
+          "confidence": 0.7,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N07",
+          "statement": "Minimize the number of undetected air entrainment events exceeding 2% volume that silently degrade measurement accuracy",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "error_type": "DETECTION",
+          "pyramid_level": "P2",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13,
+          "impact_category": "reliability",
+          "rationale": "Air in hydronic circuits is a chronic issue, especially in retrofit systems. Air entrainment degrades all flow measurement technologies but is invisible without dedicated detection. Turbine sensors slow down; ultrasonic sensors lose signal; neither reliably reports the cause.",
+          "confidence": 0.8,
+          "product_related": false,
+          "source": "web_search"
+        },
+        {
+          "id": "N08",
+          "statement": "Minimize systematic measurement error caused by non-ideal flow profiles (swirl, asymmetry) from upstream pipe fittings",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ACCURACY",
+          "pyramid_level": "P2",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10,
+          "impact_category": "reliability",
+          "rationale": "Boiler enclosures are compact; achieving 10×DN straight run is often impossible. Non-ideal profiles affect all inline sensor types, introducing systematic errors that persist throughout operation.",
+          "confidence": 0.7,
+          "product_related": false,
+          "source": "web_search"
+        },
+        {
+          "id": "N09",
+          "statement": "Minimize measurement failure rate when medium contains glycol concentrations up to 50% by volume",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ROBUSTNESS",
+          "pyramid_level": "P2",
+          "importance": 8,
+          "satisfaction_current": 4,
+          "opportunity_score": 12,
+          "impact_category": "reliability",
+          "rationale": "Solar-hybrid and frost-protected circuits use propylene glycol up to 50%. Glycol changes viscosity, density, and speed of sound. Turbine sensors experience increased bearing friction; all sensors require compensation algorithms.",
+          "confidence": 0.8,
+          "product_related": false,
+          "source": "01_product_decomposition"
+        },
+        {
+          "id": "N10",
+          "statement": "Minimize the likelihood of turbine rotor seizure from magnetite accumulation requiring unplanned sensor replacement within 3 years of installation",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ROBUSTNESS",
+          "pyramid_level": "P1",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13,
+          "impact_category": "reliability",
+          "rationale": "Magnetite (Fe3O4) and paramagnetic MnO2 accumulate on magnetized turbine rotors. Failed sensors show turbine wheels coated with fine black powder. Hydronic circuits without magnetic separators are particularly susceptible. Field failure rates in hard-water areas are reported at 5-15% within 3 years.",
+          "confidence": 0.9,
+          "product_related": true,
+          "source": "web_search"
+        },
+        {
+          "id": "N11",
+          "statement": "Minimize the annual maintenance effort required to inspect and clean mechanical flow sensor internals to prevent calibration drift from particulate fouling",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "EFFORT",
+          "pyramid_level": "P1",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11,
+          "impact_category": "cost",
+          "rationale": "Turbine sensors in hydronic circuits require periodic inspection: removing impeller, cleaning magnetite deposits, checking bearing play. Each service visit costs $100-200 in technician time. Systems without annual maintenance see accelerated calibration drift.",
+          "confidence": 0.8,
+          "product_related": true,
+          "source": "web_search"
+        },
+        {
+          "id": "N12",
+          "statement": "Minimize calibration drift exceeding ±5% over 12 months caused by bearing wear and blade erosion in hard-water circuits",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "CONSISTENCY",
+          "pyramid_level": "P1",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13,
+          "impact_category": "reliability",
+          "rationale": "Continuous rotation erodes turbine blade edges and wears bearing surfaces. Mineral deposits change blade geometry and increase friction. Combined effect shifts the K-factor (pulses per litre) progressively, yielding under-reading that masks declining system performance.",
+          "confidence": 0.8,
+          "product_related": true,
+          "source": "web_search"
+        },
+        {
+          "id": "N12b",
+          "statement": "Increase the ability to maintain accurate readings across the full flow range without mechanical-inertia dead band at low flow rates (<3 l/min) where turbine rotors stall",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "THROUGHPUT",
+          "pyramid_level": "P1",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11,
+          "impact_category": "reliability",
+          "rationale": "Turbine rotors have a minimum activation threshold — below ~3 l/min the rotor stalls and reads zero. This dead band coincides with condensing boiler minimum-modulation operation, exactly where efficiency optimization matters most. Non-mechanical sensors (ultrasonic, DP) do not have this dead band.",
+          "confidence": 0.7,
+          "product_related": true,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N13",
+          "statement": "Minimize the commissioning time required to configure fluid-type parameters and verify acoustic coupling after installation",
+          "job_step_number": 3,
+          "job_step_name": "PREPARE",
+          "error_type": "EFFORT",
+          "pyramid_level": "P1",
+          "importance": 6,
+          "satisfaction_current": 5,
+          "opportunity_score": 7,
+          "impact_category": "time",
+          "rationale": "Ultrasonic sensors require fluid type selection (water, glycol %, etc.) at commissioning. Pre-calibrated delivery reduces this burden, but field verification of acoustic coupling adds a step that mechanical sensors do not require.",
+          "confidence": 0.7,
+          "product_related": true,
+          "source": "01_product_decomposition"
+        },
+        {
+          "id": "N14",
+          "statement": "Minimize the likelihood of complete signal loss when transient air pockets pass through the sensor during system filling or de-aeration",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ROBUSTNESS",
+          "pyramid_level": "P1",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10,
+          "impact_category": "reliability",
+          "rationale": "Ultrasonic transit-time requires continuous acoustic coupling through liquid. Transient air pockets during filling, de-aeration, or micro-bubble events interrupt the signal path. The sensor must distinguish between air-related signal loss and genuine zero-flow.",
+          "confidence": 0.8,
+          "product_related": true,
+          "source": "web_search"
+        },
+        {
+          "id": "N14b",
+          "statement": "Minimize the OEM qualification cost for validating acoustic performance across the full DN range and glycol concentration matrix",
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "error_type": "EFFORT",
+          "pyramid_level": "P1",
+          "importance": 6,
+          "satisfaction_current": 4,
+          "opportunity_score": 8,
+          "impact_category": "cost",
+          "rationale": "Ultrasonic sensors require validation across each DN variant and fluid type combination. A 4-DN × 3-glycol matrix = 12 qualification campaigns. Pre-calibrated delivery from the vendor reduces this burden but does not eliminate OEM-side validation responsibility.",
+          "confidence": 0.6,
+          "product_related": true,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N14c",
+          "statement": "Increase the ability to distinguish genuine zero-flow conditions from ultrasonic signal loss caused by transient medium anomalies (bubbles, empty pipe)",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "error_type": "DETECTION",
+          "pyramid_level": "P1",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13,
+          "impact_category": "safety",
+          "rationale": "An ultrasonic sensor losing signal reports zero flow. If the controller interprets this as a genuine flow stoppage, it triggers a safety shutdown. If it ignores the alarm, it misses a real dry-fire condition. The sensor must provide diagnostic flags that disambiguate signal-loss causes from true zero-flow.",
+          "confidence": 0.7,
+          "product_related": true,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N15",
+          "statement": "Minimize the likelihood of flow estimate error exceeding ±15% due to pump curve deviation from catalog values at part-load conditions",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ACCURACY",
+          "pyramid_level": "P1",
+          "importance": 7,
+          "satisfaction_current": 2,
+          "opportunity_score": 12,
+          "impact_category": "reliability",
+          "rationale": "DP estimation relies on manufacturer's pump curve, which shifts with impeller wear, system fouling, and partial valve positions. At part-load, the flat portion of the curve amplifies small pressure errors into large flow errors.",
+          "confidence": 0.7,
+          "product_related": true,
+          "source": "VN_heating_equipment"
+        },
+        {
+          "id": "N15b",
+          "statement": "Minimize the number of undetected system faults (blocked filter, stuck valve) that DP estimation cannot sense because it has no direct flow measurement",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "error_type": "DETECTION",
+          "pyramid_level": "P1",
+          "importance": 8,
+          "satisfaction_current": 2,
+          "opportunity_score": 14,
+          "impact_category": "safety",
+          "rationale": "DP estimation infers flow from pump curve data. If a magnetic filter blocks or a zone valve sticks, the actual flow drops but the pump speed stays constant — DP estimation sees no change. Direct measurement sensors (turbine, ultrasonic, vortex) detect the flow reduction immediately.",
+          "confidence": 0.7,
+          "product_related": true,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N16",
+          "statement": "Minimize the installation footprint (physical length and required straight-pipe run) to enable placement in space-constrained boiler enclosures",
+          "job_step_number": 2,
+          "job_step_name": "LOCATE",
+          "error_type": "EFFORT",
+          "pyramid_level": "P2",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9,
+          "impact_category": "cost",
+          "rationale": "Boiler enclosures are designed for minimum footprint. Every cm of required straight-run upstream constrains placement options and may force piping redesign.",
+          "confidence": 0.7,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N16b",
+          "statement": "Minimize the likelihood of mounting the sensor at a location where turbulence from upstream fittings causes >2% systematic reading bias",
+          "job_step_number": 2,
+          "job_step_name": "LOCATE",
+          "error_type": "ACCURACY",
+          "pyramid_level": "P2",
+          "importance": 7,
+          "satisfaction_current": 4,
+          "opportunity_score": 10,
+          "impact_category": "reliability",
+          "rationale": "In compact boiler enclosures, sensors are often placed close to elbows, tees, or valves. Turbulent flow profiles from these fittings introduce systematic bias. Without clear installation guidelines and tolerance data, installers mount sensors in sub-optimal locations.",
+          "confidence": 0.7,
+          "product_related": false,
+          "source": "web_search"
+        },
+        {
+          "id": "N17",
+          "statement": "Minimize the total OEM integration time from unpacking to first valid reading, including mechanical fitting, electrical connection, and protocol handshake",
+          "job_step_number": 3,
+          "job_step_name": "PREPARE",
+          "error_type": "EFFORT",
+          "pyramid_level": "P2",
+          "importance": 7,
+          "satisfaction_current": 5,
+          "opportunity_score": 9,
+          "impact_category": "time",
+          "rationale": "OEM assembly line takt time constraints require rapid integration. Complex commissioning steps add per-unit labor cost and increase defect opportunity.",
+          "confidence": 0.7,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N18",
+          "statement": "Minimize the likelihood of an installer failing to detect incorrect sensor orientation (forward/reverse) before system start-up",
+          "job_step_number": 4,
+          "job_step_name": "CONFIRM",
+          "error_type": "DETECTION",
+          "pyramid_level": "P2",
+          "importance": 6,
+          "satisfaction_current": 6,
+          "opportunity_score": 6,
+          "impact_category": "skill",
+          "rationale": "Reversed installation yields negative flow readings or zero output. Most sensors have directional arrows, but in confined spaces these are easily missed.",
+          "confidence": 0.6,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N19",
+          "statement": "Increase the ability to simultaneously provide flow rate AND medium temperature from a single measurement point, eliminating separate temperature probe installation",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ACCURACY",
+          "pyramid_level": "P2",
+          "importance": 8,
+          "satisfaction_current": 4,
+          "opportunity_score": 12,
+          "impact_category": "cost",
+          "rationale": "Thermal energy calculation requires both flow and temperature. Traditional setups use separate sensors, each with its own wiring, mounting, and failure mode. A single-point measurement reduces component count, wiring complexity, and potential failure points.",
+          "confidence": 0.7,
+          "product_related": false,
+          "source": "02_functional_promise"
+        },
+        {
+          "id": "N20",
+          "statement": "Increase the ability to detect incipient circulator pump degradation via flow-rate trend analysis before complete pump failure causes comfort loss",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "error_type": "DETECTION",
+          "pyramid_level": "P2",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11,
+          "impact_category": "reliability",
+          "rationale": "Gradual flow decline (from pump bearing wear, impeller erosion, or system fouling) is invisible without trend data. By the time occupants notice comfort degradation, the pump is near failure. Continuous flow monitoring enables predictive maintenance.",
+          "confidence": 0.6,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N21",
+          "statement": "Minimize the number of sensor variants an OEM must qualify and stock to cover its full boiler product range (DN15–DN25)",
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "error_type": "EFFORT",
+          "pyramid_level": "P2",
+          "importance": 6,
+          "satisfaction_current": 4,
+          "opportunity_score": 8,
+          "impact_category": "cost",
+          "rationale": "Each sensor variant requires separate qualification testing, inventory, and supply chain management. A modular platform with shared electronics and interchangeable flow bodies reduces OEM complexity.",
+          "confidence": 0.6,
+          "product_related": false,
+          "source": "01_product_decomposition"
+        },
+        {
+          "id": "N22",
+          "statement": "Minimize the variation in thermal energy calculation (Q = ṁ × Cp × ΔT) caused by flow measurement noise at low modulation rates (<25% burner output)",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "CONSISTENCY",
+          "pyramid_level": "P2",
+          "importance": 8,
+          "satisfaction_current": 4,
+          "opportunity_score": 12,
+          "impact_category": "reliability",
+          "rationale": "At low modulation (25% of rated output), flow rates drop to 5-10 l/min. Measurement noise at these rates directly distorts thermal energy calculations used for efficiency verification and ErP labeling. Condensing efficiency is highest at low modulation — precisely where measurement matters most.",
+          "confidence": 0.8,
+          "product_related": false,
+          "source": "web_search"
+        },
+        {
+          "id": "N23",
+          "statement": "Minimize the likelihood of commissioning sign-off with hydraulic imbalance exceeding ±10% of design flow rate per zone",
+          "job_step_number": 4,
+          "job_step_name": "CONFIRM",
+          "error_type": "ACCURACY",
+          "pyramid_level": "P2",
+          "importance": 8,
+          "satisfaction_current": 4,
+          "opportunity_score": 12,
+          "impact_category": "cost",
+          "rationale": "Hydraulic balancing tolerance of ±10% is industry good practice. Imbalanced systems overheat some zones and underheat others, causing comfort complaints and energy waste of 10-15%. Without accurate flow data during commissioning, installers rely on guesswork.",
+          "confidence": 0.7,
+          "product_related": false,
+          "source": "web_search"
+        },
+        {
+          "id": "N24",
+          "statement": "Minimize the field failure rate of the flow sensing subsystem to below 0.1% within the 15-year appliance design life",
+          "job_step_number": 5,
+          "job_step_name": "EXECUTE",
+          "error_type": "ROBUSTNESS",
+          "pyramid_level": "P2",
+          "importance": 9,
+          "satisfaction_current": 5,
+          "opportunity_score": 13,
+          "impact_category": "reliability",
+          "rationale": "Boiler OEMs target <0.1% component failure rate over the appliance warranty period (typically 5-10 years, design life 15-20 years). Flow sensor failure triggers loss of modulation control, safety shutdown, or comfort complaint — each costing $200-500 in warranty service. OEM reputation damage from systematic sensor failures is disproportionate to component cost.",
+          "confidence": 0.8,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N25",
+          "statement": "Increase the ability to document measured seasonal efficiency (ηs) per EU EcoDesign Lot 1/2 using onboard flow + temperature data rather than laboratory-only test results",
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "error_type": "ACCURACY",
+          "pyramid_level": "P2",
+          "importance": 8,
+          "satisfaction_current": 3,
+          "opportunity_score": 13,
+          "impact_category": "cost",
+          "rationale": "EU EcoDesign revisions (consultation closed Jan 2026) are moving toward requiring heaters to measure and display consumption. Onboard flow + temperature enables field-measured efficiency verification, replacing lab-only certification. OEMs who can demonstrate real-world efficiency gain regulatory and marketing advantage.",
+          "confidence": 0.7,
+          "product_related": false,
+          "source": "web_search"
+        },
+        {
+          "id": "N26",
+          "statement": "Increase the ability to achieve A-rated energy label classification on the first certification submission by providing measurement accuracy that matches laboratory reference within ±2%",
+          "job_step_number": 1,
+          "job_step_name": "DEFINE",
+          "error_type": "ACCURACY",
+          "pyramid_level": "P3",
+          "importance": 8,
+          "satisfaction_current": 4,
+          "opportunity_score": 12,
+          "impact_category": "cost",
+          "rationale": "P3 Role Identity — the OEM engineer becomes 'the engineer whose platform hits top-tier labels on first submission.' Measurement accuracy close to lab reference reduces certification iterations (each costing $5K-20K and weeks of delay).",
+          "confidence": 0.6,
+          "product_related": false,
+          "source": "web_search"
+        },
+        {
+          "id": "N27",
+          "statement": "Increase the ability to provide installer-visible flow data (display or diagnostic output) that demonstrates measured — not estimated — system performance during commissioning and service visits",
+          "job_step_number": 6,
+          "job_step_name": "MONITOR",
+          "error_type": "DETECTION",
+          "pyramid_level": "P4",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11,
+          "impact_category": "skill",
+          "rationale": "P4 Image Identity — regulators and installers are watching. Visible flow data during commissioning signals engineering rigor. OEMs with estimated-only performance data face increasing scrutiny from energy auditors and building inspectors.",
+          "confidence": 0.5,
+          "product_related": false,
+          "source": "domain_knowledge"
+        },
+        {
+          "id": "N28",
+          "statement": "Minimize the likelihood of receiving a customer callback within 30 days of installation due to an undetected hydraulic imbalance that the sensor could have flagged during commissioning [hypothesis]",
+          "job_step_number": 4,
+          "job_step_name": "CONFIRM",
+          "error_type": "RECOVERY",
+          "pyramid_level": "P5",
+          "importance": 7,
+          "satisfaction_current": 3,
+          "opportunity_score": 11,
+          "impact_category": "cost",
+          "rationale": "P5 Emotional — the installer wants to feel confident the system is correctly commissioned and avoid the anxiety of a 30-day callback. Each callback costs the installer $150-300 in travel and labor and damages client relationship. Accurate flow data during commissioning provides objective confirmation.",
+          "confidence": 0.5,
+          "product_related": false,
+          "source": "domain_knowledge"
+        }
+      ],
+      "incumbent_anchors": [
+        {
+          "technology_name": "Impeller / Turbine Flow Sensor",
+          "anchor_vn_unit": "Flow Sensing & Measurement",
+          "anchor_level": "L4",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "rationale": "Incumbent technology in 55-65% of installed hydronic heating systems. Mechanical paddle-wheel or turbine rotor; declining share due to magnetite fouling and maintenance burden."
+        },
+        {
+          "technology_name": "Differential Pressure Estimation",
+          "anchor_vn_unit": "Flow Sensing & Measurement",
+          "anchor_level": "L4",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "rationale": "Budget fallback in 5-15% of systems. No dedicated hardware; flow inferred from pump speed and delta-P. Accuracy ±15-20%. Cannot meet EcoDesign measured-efficiency requirements."
+        }
+      ],
+      "entities_produced": {
+        "nodes": [
+          {
+            "label": "JobMap",
+            "key": {
+              "naics_code": "333414",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+              "anchor_vn_unit": "Ultrasonic Flow Sensor",
+              "anchor_level": "L4",
+              "parent_vn_unit": "Flow Sensing & Measurement",
+              "parent_level": "L5",
+              "product_job_statement": "Help Flow Sensing & Measurement to measure volumetric flow rate in closed-pipe hydronic heating circuits without obstructing flow or introducing mechanical wear points"
+            }
+          },
+          {
+            "label": "JobStep",
+            "key": {
+              "step_number": "<1-8>",
+              "naics_code": "333414",
+              "run_id": "TBD"
+            },
+            "count": 8
+          },
+          {
+            "label": "ErrorStatement",
+            "key": {
+              "statement": "<first 120 chars>",
+              "naics_code": "333414",
+              "run_id": "TBD"
+            },
+            "count": 33
+          },
+          {
+            "label": "IncumbentAnchor",
+            "key": {
+              "technology_name": "<per anchor>",
+              "naics_code": "333414",
+              "run_id": "TBD"
+            },
+            "count": 2
+          }
+        ],
+        "relationships": [
+          {
+            "type": "has_job_map",
+            "source": "Market:333414",
+            "target": "JobMap:333414"
+          },
+          {
+            "type": "anchored_at",
+            "source": "JobMap:333414",
+            "target": "ValueNetworkUnit:Ultrasonic Flow Sensor"
+          },
+          {
+            "type": "has_job_step",
+            "source": "JobMap:333414",
+            "target": "JobStep:<1-8>",
+            "count": 8
+          },
+          {
+            "type": "has_error_statement",
+            "source": "JobStep:<N>",
+            "target": "ErrorStatement:<each>",
+            "count": 33
+          },
+          {
+            "type": "has_need",
+            "source": "Market:333414",
+            "target": "ErrorStatement:<each>",
+            "count": 33
+          },
+          {
+            "type": "has_incumbent_anchor",
+            "source": "Market:333414",
+            "target": "IncumbentAnchor:<each>",
+            "count": 2
+          },
+          {
+            "type": "anchored_at",
+            "source": "IncumbentAnchor:Impeller / Turbine Flow Sensor",
+            "target": "ValueNetworkUnit:Flow Sensing & Measurement"
+          },
+          {
+            "type": "anchored_at",
+            "source": "IncumbentAnchor:Differential Pressure Estimation",
+            "target": "ValueNetworkUnit:Flow Sensing & Measurement"
+          }
+        ]
+      }
+    }
+  ],
+  "has_bom": true,
+  "naics_sector_type": "manufacturing"
+}

@@ -1,0 +1,1479 @@
+{
+  "id": "VN_steam_and_air_conditioning_supply",
+  "title": "VN — Value Network: Steam and Air-Conditioning Supply (NAICS 221330)",
+  "type": "value_network",
+  "market_slug": "steam_and_air_conditioning_supply",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Header",
+      "content": "| Field | Value |\n|---|---|\n| **NAICS Code** | 221330 — Steam and Air-Conditioning Supply |\n| **CFJ** | Generate, distribute, and meter thermal energy (heating and cooling) from centralised plants to multiple buildings via closed-pipe networks |\n| **Output Types** | District hot-water heating; District steam heating; District chilled-water cooling; Combined heating & cooling (4-pipe); Campus/industrial thermal utility |\n| **Hierarchy** | Process VN (L7 through L4) — what process steps, equipment, and subsystems compose district energy generation, distribution, and consumption metering |\n| **Key Operators** | Vattenfall, ENGIE, Fortum, Veolia, Statkraft (network operators); Danfoss, Kamstrup, Siemens, Diehl, Landis+Gyr (metering/controls) [SRC: web_search] |\n| **Market Size** | ~$187–214B globally (district heating, 2024); heat meter market projected to reach $3.24B by 2035; EU EED mandates individual metering at every building connection [SRC: web_search] |\n| **Architecture Distance** | 3 (adjacent — same media, pipe sizes, and flow+temperature measurement need, but utility-scale not OEM-embedded) [SRC: 05_market_discovery] |\n\n---"
+    },
+    {
+      "title": "L7 — Ecosystem",
+      "content": "### L7: District Energy Ecosystem\n\nThe complete ecosystem of thermal energy utilities, equipment OEMs, pipe manufacturers, metering companies, building operators, and regulators coordinated around centralised generation and piped distribution of heating and cooling to multiple buildings. Encompasses district hot-water networks, district steam networks, district chilled-water networks, and combined heating/cooling systems serving residential, commercial, and industrial consumers. The global district heating market was valued at ~$187–214B in 2024 with a CAGR of ~4.6%, driven by decarbonisation mandates, waste heat recovery, and the EU Energy Efficiency Directive (EED 2012/27/EU) requiring individual consumption metering at every building connection. NAICS 221330 in the U.S. comprises ~41 active establishments; the industry is far larger in Northern Europe where district heating serves >50% of buildings in Denmark, Finland, and Sweden. [SRC: web_search, Census Bureau]\n\n---"
+    },
+    {
+      "title": "L6 — System-of-Systems Decomposition",
+      "content": "Six L6 domains follow the thermal energy path from centralised generation through distribution network to building-level consumption metering, plus enabling domains.\n\n| L6 ID | Name | Type | Description |\n|---|---|---|---|\n| **L6.1** | Thermal Energy Generation | Core | Centralised heat/cold sources: CHP plants, hot-water boilers, heat pumps, waste-to-energy, geothermal, biomass, electric chillers, absorption chillers. |\n| **L6.2** | Distribution Network | Core | Pre-insulated pipe network, pumping stations, and hydraulic infrastructure transporting thermal energy from central plant to building substations. |\n| **L6.3** | Building Substation & Energy Transfer | Core | Transfer station at each building connection: heat exchangers, control valves, differential pressure controllers, and flow/temperature measurement. **Marquardt sits here.** |\n| **L6.4** | Metering & Billing | Core | Thermal energy meters (heat meters / BTU meters) measuring delivered energy for consumption-based billing per EU EED / MID MI-004. |\n| **L6.5** | Network Control & Optimisation | Horizontal | SCADA, hydraulic balancing, demand forecasting, variable-flow control, weather compensation across the entire network. |\n| **L6.6** | Maintenance, Safety & Compliance | Horizontal | Leak detection, pipe integrity, regulatory compliance (pressure equipment directive), water treatment, and emergency response. |\n\n---"
+    },
+    {
+      "title": "L6.1 — Thermal Energy Generation",
+      "content": "Centralised plant converting primary energy (fuel, waste heat, ambient heat, solar) into thermal energy carried by water or steam. Plant type defines the district system's economics and carbon footprint.\n\n### L5 Systems under L6.1\n\n#### L5.1.1: CHP Plant (Combined Heat and Power)\n\nGas turbine or reciprocating engine generating electricity with waste heat captured for district heating. Dominant generation source in European networks. Electrical efficiency 35–45%; total efficiency 80–90%. [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.1.1.1: Gas Turbine / Reciprocating Engine | Prime mover burning natural gas, biogas, or hydrogen; 1–50 MW thermal per unit |\n| L4.1.1.2: Waste Heat Recovery Boiler | Heat recovery steam generator (HRSG) or exhaust-gas heat exchanger capturing flue gas energy |\n| L4.1.1.3: Steam Turbine / ORC Module | Back-pressure or extraction steam turbine; ORC for lower-temperature waste heat |\n\n#### L5.1.2: Hot-Water Boiler Plant\n\nLarge-scale hot-water boilers (gas, oil, biomass, electric) for peak-load and backup generation. Typical supply temperatures 80–120 °C (3rd generation) or 50–70 °C (4th generation low-temperature networks). [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.1.2.1: Industrial Burner Assembly | Modulating gas/oil/biomass burner; 1–100 MW thermal capacity per unit |\n| L4.1.2.2: Fire-Tube or Water-Tube Boiler | Pressurised boiler vessel rated to 6–16 bar; steel or cast-iron construction |\n| L4.1.2.3: Flue Gas Economiser | Condensing economiser recovering latent heat from exhaust; boosts efficiency 5–10% |\n\n#### L5.1.3: Large-Scale Heat Pump\n\nElectric heat pump extracting thermal energy from ambient sources (seawater, wastewater, ground) for low-temperature district heating. Growing rapidly in Scandinavian networks. COP 3–5 typical. [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.1.3.1: Compressor Unit | Centrifugal or screw compressor; 1–30 MW thermal per unit |\n| L4.1.3.2: Evaporator (Source-Side HX) | Plate or shell-and-tube heat exchanger extracting heat from water/wastewater source |\n| L4.1.3.3: Condenser (Network-Side HX) | Transfers heat to district heating supply water at 60–90 °C |\n\n#### L5.1.4: Chiller Plant (District Cooling)\n\nCentralised electric or absorption chillers producing chilled water (5–7 °C supply) for district cooling networks. Electric chillers hold ~47% market share in district cooling. [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.1.4.1: Electric Centrifugal Chiller | Variable-speed centrifugal compressor; 500–5,000 TR per unit |\n| L4.1.4.2: Absorption Chiller | Lithium bromide or ammonia absorption cycle; driven by waste heat or steam |\n| L4.1.4.3: Cooling Tower / Heat Rejection | Open or closed-circuit cooling tower rejecting condenser heat to atmosphere |\n\n#### L5.1.5: Thermal Energy Storage (TES)\n\nCentralised storage buffering generation/demand mismatch. Hot-water tanks (2,000–50,000 m3) for heating; ice or chilled-water tanks for cooling. [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.1.5.1: Stratified Hot-Water Tank | Insulated steel tank with thermocline stratification; charges during low demand |\n| L4.1.5.2: Ice Storage / Chilled-Water Tank | Generates and stores ice or chilled water during off-peak hours for peak shaving |\n| L4.1.5.3: Tank Instrumentation | Temperature stratification sensors, level gauges, charge/discharge controllers |\n\n#### L5.1.6: Waste Heat Recovery\n\nCaptures industrial waste heat (data centres, wastewater treatment, industrial processes) for injection into district heating network. Zero-fuel marginal cost. [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.1.6.1: Waste Heat Exchanger | Plate or shell-and-tube HX at industrial source; typically 40–80 °C |\n| L4.1.6.2: Booster Heat Pump | Raises waste-heat temperature to network supply temperature if source is too low |\n| L4.1.6.3: Interconnection Piping & Valves | Dedicated pipe spur connecting industrial source to district network trunk |\n\n---"
+    },
+    {
+      "title": "L6.2 — Distribution Network",
+      "content": "The pipe-side infrastructure transporting thermal energy from central plant(s) to building substations and back. Network length ranges from <1 km (campus) to >1,000 km (city-wide). The pipe network is typically the largest single capital expenditure in a district energy system. [SRC: web_search]\n\n### L5 Systems under L6.2\n\n#### L5.2.1: Pre-Insulated Pipe Network\n\nBonded pre-insulated pipe (steel carrier pipe + PU foam insulation + PE jacket) buried underground. Supply and return pipes run in parallel. Key manufacturers: Logstor, Isoplus, Brugg, Permapipe. [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.2.1.1: Steel Carrier Pipe | Carbon steel pipe (DN50–DN1200) carrying heated/chilled water; welded joints |\n| L4.2.1.2: PU Foam Insulation | Rigid polyurethane foam bonded to carrier and jacket; thermal conductivity <0.03 W/mK |\n| L4.2.1.3: PE Outer Jacket | High-density polyethylene casing protecting insulation from ground moisture |\n| L4.2.1.4: Leak Detection Wire | Copper wire embedded in insulation; impedance monitoring detects moisture ingress |\n\n#### L5.2.2: Network Pumping Station\n\nCentralised and distributed pumps maintaining hydraulic pressure and flow across the network. Variable-speed drives dominate modern networks for energy-efficient flow control.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.2.2.1: Variable-Speed Circulation Pump | Centrifugal pump with VFD; 10–500 kW per unit; differential pressure controlled |\n| L4.2.2.2: Pump Control & VFD | Variable frequency drive with PID control responding to network pressure setpoint |\n| L4.2.2.3: Check Valve & Isolation Valve | Non-return valve preventing backflow; gate/butterfly valve for maintenance isolation |\n\n#### L5.2.3: Network Expansion & Pressure Management\n\nCompensates for thermal expansion of carrier pipes and maintains system pressure within design limits.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.2.3.1: Expansion Compensator | Axial or lateral expansion bellows absorbing pipe thermal expansion; stainless steel |\n| L4.2.3.2: Pressurisation Unit | Pump-controlled pressurisation maintaining static pressure; includes expansion vessel |\n| L4.2.3.3: Safety Relief Valve | Spring-loaded relief discharging on overpressure; sized per pressure equipment directive |\n\n#### L5.2.4: Network Valves & Fittings\n\nBranch isolation, sectionalising, and flow regulation across the distribution network.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.2.4.1: Sectionalising Valve | Butterfly or gate valve isolating network sections for maintenance without full shutdown |\n| L4.2.4.2: Branch Connection Tee | Welded tee fitting connecting trunk to branch line; insulated to trunk standard |\n| L4.2.4.3: Manhole / Valve Chamber | Underground access chamber housing valves, compensators, and instrumentation |\n\n---"
+    },
+    {
+      "title": "L6.3 — Building Substation & Energy Transfer",
+      "content": "The interface between the district network (primary side) and the building's internal heating/cooling system (secondary side). Every building connection has a substation. The substation is where Marquardt's flow sensor has its primary entry point — flow + temperature measurement on the primary and/or secondary side feeds both the control loop and the energy meter. [SRC: web_search]\n\n### L5 Systems under L6.3\n\n#### L5.3.1: Heat Exchanger (Substation)\n\nPlate heat exchanger hydraulically separating primary (network) from secondary (building) circuits. Prevents pressure and water-quality cross-contamination. Brazed or gasketed plate design; 50–2,000 kW typical per building. [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.3.1.1: Brazed/Gasketed Plate Heat Exchanger | Stainless steel plate pack; primary/secondary hydraulic separation; counter-flow design |\n| L4.3.1.2: Strainer / Filter | Mesh strainer on primary inlet protecting HX from particles; typically 0.5–1.0 mm mesh |\n| L4.3.1.3: Isolation Valves (Primary Side) | Ball or butterfly valves for primary-side shut-off during maintenance |\n\n#### L5.3.2: Substation Control Valve Assembly\n\nMotorised control valve regulating primary-side flow to maintain secondary supply temperature setpoint. The control valve is the primary actuator; the flow sensor provides feedback for the energy calculation. [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.3.2.1: Motorised Control Valve | 2-way or 3-way valve with electric actuator; modulating or on/off; DN20–DN100 |\n| L4.3.2.2: Differential Pressure Controller | Self-acting or electronic DP controller maintaining constant delta-P across substation |\n| L4.3.2.3: Electronic Controller | PLC or dedicated substation controller reading temperature sensors and modulating valve |\n\n#### L5.3.3: Substation Flow & Temperature Measurement\n\nInstruments measuring volumetric flow rate and supply/return temperatures on both primary and secondary sides. The flow signal and paired temperature signals feed the energy calculation unit for billing-grade thermal energy measurement. This is the primary integration point for Marquardt's ultrasonic flow sensor in district energy. [SRC: web_search]\n\n**Marquardt's ultrasonic flow sensor sits at L4 within this L5 node.**\n\n| L4 Subsystem | Description |\n|---|---|\n| **L4.3.3.1: Ultrasonic Flow Sensor** | **Transit-time ultrasonic measurement; no moving parts, zero pressure drop, glycol-tolerant, integrated temperature sensing. Marquardt DN20/DN25 matches typical substation pipe sizes. Growing adoption replacing mechanical meters.** |\n| L4.3.3.2: Mechanical Impeller / Turbine Flow Meter | Single-jet or multi-jet impeller meter; incumbent in legacy substations. Moving parts wear, requiring replacement every 5–6 years. Declining share. |\n| L4.3.3.3: Electromagnetic Flow Meter | Mag-flow sensor for conductive liquids; higher accuracy but 3–5x cost of ultrasonic. Used in large commercial/industrial substations. |\n| L4.3.3.4: Matched Temperature Sensor Pair | Pt500 or Pt1000 RTD sensors on supply and return; matched to <0.02 K error per EN 1434. Essential for delta-T energy calculation. |\n\n#### L5.3.4: Secondary-Side Distribution\n\nBuilding-internal hydronic distribution fed by the substation's secondary circuit.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.3.4.1: Secondary Circulator Pump | Building-side circulator distributing heated/chilled water to risers and zones |\n| L4.3.4.2: Mixing / Injection Valve | Blends supply and return water for zone-specific temperature control |\n| L4.3.4.3: Building Riser Piping | Vertical distribution piping from substation to floors; steel, copper, or composite |\n\n---"
+    },
+    {
+      "title": "L6.4 — Metering & Billing",
+      "content": "Certified thermal energy measurement for consumption-based billing. EU EED mandates individual heat metering at every building connection in district heating. EN 1434 and MID MI-004 define accuracy classes and certification requirements. Heat meter = flow sensor + matched temperature pair + integrator/calculator. The heat meter market is projected to reach $3.24B by 2035. Key manufacturers: Kamstrup, Danfoss, Siemens, Diehl, Landis+Gyr. [SRC: web_search]\n\n### L5 Systems under L6.4\n\n#### L5.4.1: Heat Meter / Thermal Energy Meter\n\nMID-certified instrument integrating flow × density × Cp × delta-T over time to calculate delivered kWh or MWh. Ultrasonic meters dominate new installations. Kamstrup MULTICAL, Danfoss SonoMeter, Siemens UH50 are market leaders. [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.4.1.1: Flow Sensor (Metering-Grade) | Ultrasonic or mechanical flow sensor certified to EN 1434; accuracy class 2 or better |\n| L4.4.1.2: Temperature Sensor Pair (Metering-Grade) | Pt500/Pt1000 matched pair; certified together with flow sensor and calculator |\n| L4.4.1.3: Energy Calculator / Integrator | Microprocessor integrating thermal power over time; stores cumulative kWh/MWh; tamper-sealed |\n\n#### L5.4.2: Cooling Meter\n\nSimilar to heat meter but measuring extracted cooling energy. Reverse delta-T calculation (return warmer than supply). Growing with district cooling adoption.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.4.2.1: Flow Sensor (Cooling-Grade) | Same ultrasonic/mechanical sensor; calibrated for chilled-water temperature range (4–15 °C) |\n| L4.4.2.2: Temperature Sensor Pair (Cooling-Grade) | Pt500/Pt1000 matched pair optimised for narrow cooling delta-T (3–8 K) |\n| L4.4.2.3: Cooling Energy Calculator | Firmware variant calculating cooling energy from inverted delta-T |\n\n#### L5.4.3: Meter Data Communication\n\nRemote reading, data collection, and billing system integration. AMR (automatic meter reading) and AMI (advanced metering infrastructure) enable real-time consumption visibility.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.4.3.1: Radio / Wireless Module | Wireless M-Bus, LoRaWAN, NB-IoT, or proprietary RF for remote meter reading |\n| L4.4.3.2: Data Concentrator / Gateway | Collects readings from multiple meters; forwards to head-end system via IP |\n| L4.4.3.3: Billing & MDM Software | Meter data management (MDM) and billing system integration; allocates costs per building |\n\n---"
+    },
+    {
+      "title": "L6.5 — Network Control & Optimisation (H)",
+      "content": "Horizontal domain spanning all core process steps. SCADA, hydraulic modelling, demand forecasting, and variable-flow control optimising the entire network. [SRC: web_search]\n\n### L5 Systems under L6.5\n\n#### L5.5.1: SCADA & Network Monitoring\n\nCentralised supervisory control and data acquisition system monitoring plant, network, and substations.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.5.1.1: SCADA Server & HMI | Industrial PC running real-time monitoring, alarm management, and operator display |\n| L4.5.1.2: RTU / PLC at Substation | Remote terminal unit or PLC at each substation relaying sensor data and executing control |\n| L4.5.1.3: Communication Network | Fibre optic, cellular (4G/5G), or Ethernet backbone connecting substations to control centre |\n\n#### L5.5.2: Hydraulic Balancing & Optimisation\n\nAlgorithms and actuators maintaining balanced flow distribution across the network to minimise pump energy and ensure adequate supply to all buildings.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.5.2.1: Network Simulation Model | Digital twin / hydraulic simulation software (e.g., Termis, Comsof Heat) for planning and real-time optimisation |\n| L4.5.2.2: Variable-Flow Control Logic | Demand-based pump speed and valve modulation reducing return temperature and pump energy |\n| L4.5.2.3: Weather Compensation & Forecasting | Outdoor temperature forecast driving supply temperature setpoint curve |\n\n---"
+    },
+    {
+      "title": "L6.6 — Maintenance, Safety & Compliance (H)",
+      "content": "Horizontal domain ensuring network integrity, water quality, and regulatory compliance across all process steps.\n\n### L5 Systems under L6.6\n\n#### L5.6.1: Leak Detection & Pipe Integrity\n\nMonitoring buried pipe network for insulation degradation and carrier pipe leaks.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.6.1.1: Wire-Based Leak Detection | Impedance monitoring of copper wires embedded in pipe insulation; detects moisture ingress |\n| L4.6.1.2: Thermal Imaging / Aerial Survey | Drone or helicopter thermal survey identifying surface hot spots above buried pipes |\n| L4.6.1.3: Acoustic Leak Detection | Listening equipment detecting pressurised water escaping through pipe defects |\n\n#### L5.6.2: Water Treatment & Corrosion Protection\n\nMaintaining water chemistry in the closed network to prevent corrosion, scaling, and biological growth.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.6.2.1: Chemical Dosing System | Automated dosing of corrosion inhibitor, oxygen scavenger, and biocide |\n| L4.6.2.2: Side-Stream Filtration | Bypass filter removing suspended solids and magnetite from network water |\n| L4.6.2.3: Water Quality Monitoring | pH, conductivity, dissolved oxygen, and hardness sensors with logging |\n\n#### L5.6.3: Regulatory Compliance & Safety\n\nPressure equipment directive, building safety codes, environmental permits, and metering calibration.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.6.3.1: Pressure Equipment Inspection | Periodic inspection of boilers, vessels, and piping per PED / ASME |\n| L4.6.3.2: Meter Verification & Re-Calibration | Periodic accuracy verification of heat meters per EN 1434 requirements |\n| L4.6.3.3: Environmental Monitoring & Reporting | Emissions monitoring, noise compliance, and sustainability reporting |\n\n---"
+    },
+    {
+      "title": "Output Type Activation Matrix",
+      "content": "| L6 Domain | DH Hot Water | DH Steam | DC Chilled Water | Combined H&C | Campus Utility |\n|---|:---:|:---:|:---:|:---:|:---:|\n| L6.1 Thermal Energy Generation | Y | Y | Y | Y | Y |\n| L6.2 Distribution Network | Y | Y | Y | Y | Y |\n| L6.3 Building Substation | Y | Y (condensate) | Y | Y | Y |\n| L6.4 Metering & Billing | Y | Y | Y | Y | Y |\n| L6.5 Network Control (H) | Y | Y | Y | Y | Y |\n| L6.6 Maintenance & Safety (H) | Y | Y | Y | Y | Y |\n\nNotes: All L6 domains are activated by all output types — district energy is infrastructure-universal. The differences between output types lie at L5 level (e.g., chillers only for DC; boilers only for DH; steam traps only for steam networks). L6.3 and L6.4 are where flow measurement is most critical — every building connection requires metered energy delivery.\n\n---"
+    },
+    {
+      "title": "Marquardt Position in the Value Network",
+      "content": "```\nL7   District Energy Ecosystem\n |\n +-- L6.3  Building Substation & Energy Transfer\n      |\n      +-- L5.3.3  Substation Flow & Temperature Measurement\n           |\n           +-- L4.3.3.1  Ultrasonic Flow Sensor  <-- MARQUARDT\n           +-- L4.3.3.2  Mechanical Impeller / Turbine Flow Meter (incumbent, declining)\n           +-- L4.3.3.3  Electromagnetic Flow Meter (premium, large substations)\n           +-- L4.3.3.4  Matched Temperature Sensor Pair (complement, not competitor)\n```\n\n**Full L-path:** L7 > L6.3 Building Substation & Energy Transfer > L5.3.3 Substation Flow & Temperature Measurement > L4.3.3.1 Ultrasonic Flow Sensor\n\n**Secondary position:** L6.4 Metering & Billing > L5.4.1 Heat Meter > L4.4.1.1 Flow Sensor (Metering-Grade) — Marquardt's sensor could serve as the flow sensing element inside a heat meter, but this requires EN 1434 / MID certification which is not yet confirmed for the Marquardt sensor.\n\n**Why this market:** District energy operators must measure flow + temperature at every building connection to calculate thermal energy consumption (Q = flow x Cp x delta-T) for billing. The EU Energy Efficiency Directive (2012/27/EU) mandates individual metering. This creates a regulatory-driven, non-discretionary demand for flow sensors at every building connection — potentially thousands per city network. Marquardt's combined flow + temperature sensor in a single body directly matches the substation measurement need. The DN20/DN25 pipe sizes match typical residential substation connections. The zero-pressure-drop and no-moving-parts advantages reduce lifecycle cost vs incumbent mechanical meters that require replacement every 5–6 years. The key barrier is MID/EN 1434 metering certification — without it, Marquardt can serve the substation control loop but not the billing meter. [SRC: 05_market_discovery, web_search]\n\n---"
+    },
+    {
+      "title": "Structural Validation Summary",
+      "content": "| Check | Result |\n|---|---|\n| Exactly one L7 node | PASS — 1 L7 (District Energy Ecosystem) |\n| L6 count in range (3–8) | PASS — 6 L6 nodes |\n| L5 count per L6 in range (2–12) | PASS — L6.1: 6, L6.2: 4, L6.3: 4, L6.4: 3, L6.5: 2, L6.6: 3 |\n| L4 count per L5 >= 2 | PASS — all L5 nodes have 3 L4 children |\n| No orphan nodes | PASS — every node has a parent |\n| No level skipping | PASS — L7>L6>L5>L4 strictly followed |\n| Valid parent-child transitions | PASS |\n| No company names in L7/L6 names | PASS |\n| Three-question naming test (5 spot-checks) | PASS — \"Pre-Insulated Pipe Network,\" \"Heat Exchanger,\" \"Pressurisation Unit,\" \"Energy Calculator,\" \"Chemical Dosing System\" all industry-standard |\n| Unit count in range (15–60) | PASS — 22 L5 + 66 L4 = 89 total units (includes L7 + L6) |\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"value_network_construction\",\n  \"naics_code\": \"221330\",\n  \"naics_title\": \"Steam and Air-Conditioning Supply\",\n  \"cfj_statement\": \"Generate, distribute, and meter thermal energy (heating and cooling) from centralised plants to multiple buildings via closed-pipe networks\",\n  \"l7_solution\": \"District Energy Ecosystem\",\n  \"top_level\": \"L7\",\n  \"market_name\": \"Steam and Air-Conditioning Supply\",\n  \"architecture_distance\": 3,\n  \"already_uses_technology\": true,\n  \"output_types\": [\n    \"District hot-water heating\",\n    \"District steam heating\",\n    \"District chilled-water cooling\",\n    \"Combined heating & cooling (4-pipe)\",\n    \"Campus/industrial thermal utility\"\n  ],\n  \"value_network\": {\n    \"naics_code\": \"221330\",\n    \"naics_title\": \"Steam and Air-Conditioning Supply\",\n    \"cfj_statement\": \"Generate, distribute, and meter thermal energy (heating and cooling) from centralised plants to multiple buildings via closed-pipe networks\",\n    \"l7_solution\": \"District Energy Ecosystem\",\n    \"units\": [\n      {\"name\": \"District Energy Ecosystem\", \"level\": \"L7\", \"description\": \"Complete ecosystem of thermal energy utilities, equipment OEMs, pipe manufacturers, metering companies, building operators, and regulators coordinated around centralised generation and piped distribution of heating and cooling\", \"bom_standard\": \"Moore 1993\", \"parent_name\": \"ROOT\"},\n\n      {\"name\": \"Thermal Energy Generation\", \"level\": \"L6\", \"description\": \"Centralised heat/cold sources: CHP, boilers, heat pumps, waste-to-energy, geothermal, biomass, chillers\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"District Energy Ecosystem\"},\n      {\"name\": \"Distribution Network\", \"level\": \"L6\", \"description\": \"Pre-insulated pipe network, pumping stations, and hydraulic infrastructure transporting thermal energy from central plant to building substations\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"District Energy Ecosystem\"},\n      {\"name\": \"Building Substation & Energy Transfer\", \"level\": \"L6\", \"description\": \"Transfer station at each building: heat exchangers, control valves, differential pressure controllers, flow/temperature measurement\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"District Energy Ecosystem\"},\n      {\"name\": \"Metering & Billing\", \"level\": \"L6\", \"description\": \"Certified thermal energy measurement for consumption-based billing per EU EED / MID MI-004 / EN 1434\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"District Energy Ecosystem\"},\n      {\"name\": \"Network Control & Optimisation\", \"level\": \"L6\", \"description\": \"SCADA, hydraulic balancing, demand forecasting, variable-flow control across the entire network\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"District Energy Ecosystem\"},\n      {\"name\": \"Maintenance, Safety & Compliance\", \"level\": \"L6\", \"description\": \"Leak detection, pipe integrity, water treatment, regulatory compliance, and emergency response\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"District Energy Ecosystem\"},\n\n      {\"name\": \"CHP Plant\", \"level\": \"L5\", \"description\": \"Combined heat and power plant generating electricity with waste heat for district heating; 80-90% total efficiency\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Thermal Energy Generation\"},\n      {\"name\": \"Hot-Water Boiler Plant\", \"level\": \"L5\", \"description\": \"Large-scale hot-water boilers (gas, oil, biomass, electric) for peak-load and backup; 80-120 C supply\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Thermal Energy Generation\"},\n      {\"name\": \"Large-Scale Heat Pump\", \"level\": \"L5\", \"description\": \"Electric heat pump extracting thermal energy from ambient sources; COP 3-5; growing in Scandinavian networks\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Thermal Energy Generation\"},\n      {\"name\": \"Chiller Plant\", \"level\": \"L5\", \"description\": \"Centralised electric or absorption chillers producing chilled water (5-7 C) for district cooling\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Thermal Energy Generation\"},\n      {\"name\": \"Thermal Energy Storage\", \"level\": \"L5\", \"description\": \"Hot-water tanks or ice storage buffering generation/demand mismatch; 2,000-50,000 m3\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Thermal Energy Generation\"},\n      {\"name\": \"Waste Heat Recovery\", \"level\": \"L5\", \"description\": \"Captures industrial waste heat (data centres, wastewater, industry) for network injection; zero-fuel cost\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Thermal Energy Generation\"},\n\n      {\"name\": \"Pre-Insulated Pipe Network\", \"level\": \"L5\", \"description\": \"Bonded pre-insulated pipe (steel + PU foam + PE jacket) buried underground; supply and return in parallel\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Distribution Network\"},\n      {\"name\": \"Network Pumping Station\", \"level\": \"L5\", \"description\": \"Centralised and distributed pumps maintaining hydraulic pressure and flow; variable-speed drives\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Distribution Network\"},\n      {\"name\": \"Network Expansion & Pressure Management\", \"level\": \"L5\", \"description\": \"Compensates thermal expansion and maintains system pressure within design limits\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Distribution Network\"},\n      {\"name\": \"Network Valves & Fittings\", \"level\": \"L5\", \"description\": \"Branch isolation, sectionalising, and flow regulation across the distribution network\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Distribution Network\"},\n\n      {\"name\": \"Heat Exchanger (Substation)\", \"level\": \"L5\", \"description\": \"Plate HX separating primary (network) from secondary (building) circuits; 50-2,000 kW per building\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Building Substation & Energy Transfer\"},\n      {\"name\": \"Substation Control Valve Assembly\", \"level\": \"L5\", \"description\": \"Motorised control valve regulating primary-side flow to maintain secondary supply temperature\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Building Substation & Energy Transfer\"},\n      {\"name\": \"Substation Flow & Temperature Measurement\", \"level\": \"L5\", \"description\": \"Flow and temperature instruments feeding energy calculation and control loop; MARQUARDT POSITION\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Building Substation & Energy Transfer\"},\n      {\"name\": \"Secondary-Side Distribution\", \"level\": \"L5\", \"description\": \"Building-internal hydronic distribution fed by the substation secondary circuit\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Building Substation & Energy Transfer\"},\n\n      {\"name\": \"Heat Meter\", \"level\": \"L5\", \"description\": \"MID-certified instrument: flow sensor + matched temp pair + integrator calculating delivered kWh/MWh\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Metering & Billing\"},\n      {\"name\": \"Cooling Meter\", \"level\": \"L5\", \"description\": \"Thermal energy meter for district cooling; reverse delta-T calculation\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Metering & Billing\"},\n      {\"name\": \"Meter Data Communication\", \"level\": \"L5\", \"description\": \"Remote reading (AMR/AMI), data collection, and billing system integration\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Metering & Billing\"},\n\n      {\"name\": \"SCADA & Network Monitoring\", \"level\": \"L5\", \"description\": \"Centralised supervisory control and data acquisition monitoring plant, network, and substations\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Network Control & Optimisation\"},\n      {\"name\": \"Hydraulic Balancing & Optimisation\", \"level\": \"L5\", \"description\": \"Algorithms and actuators maintaining balanced flow distribution across the network\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Network Control & Optimisation\"},\n\n      {\"name\": \"Leak Detection & Pipe Integrity\", \"level\": \"L5\", \"description\": \"Monitoring buried pipe network for insulation degradation and carrier pipe leaks\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Maintenance, Safety & Compliance\"},\n      {\"name\": \"Water Treatment & Corrosion Protection\", \"level\": \"L5\", \"description\": \"Maintaining water chemistry to prevent corrosion, scaling, and biological growth\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Maintenance, Safety & Compliance\"},\n      {\"name\": \"Regulatory Compliance & Safety\", \"level\": \"L5\", \"description\": \"Pressure equipment inspection, meter verification, environmental monitoring\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Maintenance, Safety & Compliance\"},\n\n      {\"name\": \"Gas Turbine / Reciprocating Engine\", \"level\": \"L4\", \"description\": \"Prime mover burning natural gas, biogas, or hydrogen; 1-50 MW thermal per unit\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"CHP Plant\"},\n      {\"name\": \"Waste Heat Recovery Boiler\", \"level\": \"L4\", \"description\": \"HRSG or exhaust-gas heat exchanger capturing flue gas energy\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"CHP Plant\"},\n      {\"name\": \"Steam Turbine / ORC Module\", \"level\": \"L4\", \"description\": \"Back-pressure or extraction steam turbine; ORC for lower-temperature waste heat\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"CHP Plant\"},\n\n      {\"name\": \"Industrial Burner Assembly\", \"level\": \"L4\", \"description\": \"Modulating gas/oil/biomass burner; 1-100 MW thermal capacity per unit\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Hot-Water Boiler Plant\"},\n      {\"name\": \"Fire-Tube or Water-Tube Boiler\", \"level\": \"L4\", \"description\": \"Pressurised boiler vessel rated to 6-16 bar; steel or cast-iron construction\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Hot-Water Boiler Plant\"},\n      {\"name\": \"Flue Gas Economiser\", \"level\": \"L4\", \"description\": \"Condensing economiser recovering latent heat from exhaust; 5-10% efficiency boost\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Hot-Water Boiler Plant\"},\n\n      {\"name\": \"Compressor Unit\", \"level\": \"L4\", \"description\": \"Centrifugal or screw compressor; 1-30 MW thermal per unit\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Large-Scale Heat Pump\"},\n      {\"name\": \"Evaporator (Source-Side HX)\", \"level\": \"L4\", \"description\": \"Plate or shell-and-tube HX extracting heat from water/wastewater source\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Large-Scale Heat Pump\"},\n      {\"name\": \"Condenser (Network-Side HX)\", \"level\": \"L4\", \"description\": \"Transfers heat to district heating supply water at 60-90 C\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Large-Scale Heat Pump\"},\n\n      {\"name\": \"Electric Centrifugal Chiller\", \"level\": \"L4\", \"description\": \"Variable-speed centrifugal compressor; 500-5,000 TR per unit\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Chiller Plant\"},\n      {\"name\": \"Absorption Chiller\", \"level\": \"L4\", \"description\": \"Lithium bromide or ammonia absorption cycle; driven by waste heat or steam\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Chiller Plant\"},\n      {\"name\": \"Cooling Tower / Heat Rejection\", \"level\": \"L4\", \"description\": \"Open or closed-circuit cooling tower rejecting condenser heat to atmosphere\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Chiller Plant\"},\n\n      {\"name\": \"Stratified Hot-Water Tank\", \"level\": \"L4\", \"description\": \"Insulated steel tank with thermocline stratification; charges during low demand\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Thermal Energy Storage\"},\n      {\"name\": \"Ice Storage / Chilled-Water Tank\", \"level\": \"L4\", \"description\": \"Generates and stores ice or chilled water during off-peak hours for peak shaving\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Thermal Energy Storage\"},\n      {\"name\": \"Tank Instrumentation\", \"level\": \"L4\", \"description\": \"Temperature stratification sensors, level gauges, charge/discharge controllers\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Thermal Energy Storage\"},\n\n      {\"name\": \"Waste Heat Exchanger\", \"level\": \"L4\", \"description\": \"Plate or shell-and-tube HX at industrial source; typically 40-80 C\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Waste Heat Recovery\"},\n      {\"name\": \"Booster Heat Pump\", \"level\": \"L4\", \"description\": \"Raises waste-heat temperature to network supply temperature if source is too low\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Waste Heat Recovery\"},\n      {\"name\": \"Interconnection Piping & Valves\", \"level\": \"L4\", \"description\": \"Dedicated pipe spur connecting industrial source to district network trunk\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Waste Heat Recovery\"},\n\n      {\"name\": \"Steel Carrier Pipe\", \"level\": \"L4\", \"description\": \"Carbon steel pipe DN50-DN1200 carrying heated/chilled water; welded joints\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Pre-Insulated Pipe Network\"},\n      {\"name\": \"PU Foam Insulation\", \"level\": \"L4\", \"description\": \"Rigid polyurethane foam bonded to carrier and jacket; <0.03 W/mK\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Pre-Insulated Pipe Network\"},\n      {\"name\": \"PE Outer Jacket\", \"level\": \"L4\", \"description\": \"High-density polyethylene casing protecting insulation from ground moisture\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Pre-Insulated Pipe Network\"},\n      {\"name\": \"Leak Detection Wire\", \"level\": \"L4\", \"description\": \"Copper wire embedded in insulation; impedance monitoring detects moisture ingress\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Pre-Insulated Pipe Network\"},\n\n      {\"name\": \"Variable-Speed Circulation Pump\", \"level\": \"L4\", \"description\": \"Centrifugal pump with VFD; 10-500 kW per unit; differential pressure controlled\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Network Pumping Station\"},\n      {\"name\": \"Pump Control & VFD\", \"level\": \"L4\", \"description\": \"Variable frequency drive with PID control responding to network pressure setpoint\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Network Pumping Station\"},\n      {\"name\": \"Check Valve & Isolation Valve\", \"level\": \"L4\", \"description\": \"Non-return valve preventing backflow; gate/butterfly valve for maintenance isolation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Network Pumping Station\"},\n\n      {\"name\": \"Expansion Compensator\", \"level\": \"L4\", \"description\": \"Axial or lateral expansion bellows absorbing pipe thermal expansion; stainless steel\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Network Expansion & Pressure Management\"},\n      {\"name\": \"Pressurisation Unit\", \"level\": \"L4\", \"description\": \"Pump-controlled pressurisation maintaining static pressure; includes expansion vessel\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Network Expansion & Pressure Management\"},\n      {\"name\": \"Safety Relief Valve\", \"level\": \"L4\", \"description\": \"Spring-loaded relief discharging on overpressure; sized per pressure equipment directive\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Network Expansion & Pressure Management\"},\n\n      {\"name\": \"Sectionalising Valve\", \"level\": \"L4\", \"description\": \"Butterfly or gate valve isolating network sections for maintenance\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Network Valves & Fittings\"},\n      {\"name\": \"Branch Connection Tee\", \"level\": \"L4\", \"description\": \"Welded tee fitting connecting trunk to branch line; insulated to trunk standard\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Network Valves & Fittings\"},\n      {\"name\": \"Manhole / Valve Chamber\", \"level\": \"L4\", \"description\": \"Underground access chamber housing valves, compensators, and instrumentation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Network Valves & Fittings\"},\n\n      {\"name\": \"Brazed/Gasketed Plate Heat Exchanger\", \"level\": \"L4\", \"description\": \"Stainless steel plate pack; primary/secondary hydraulic separation; counter-flow\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Heat Exchanger (Substation)\"},\n      {\"name\": \"Strainer / Filter\", \"level\": \"L4\", \"description\": \"Mesh strainer on primary inlet protecting HX from particles; 0.5-1.0 mm mesh\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Heat Exchanger (Substation)\"},\n      {\"name\": \"Isolation Valves (Primary Side)\", \"level\": \"L4\", \"description\": \"Ball or butterfly valves for primary-side shut-off during maintenance\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Heat Exchanger (Substation)\"},\n\n      {\"name\": \"Motorised Control Valve\", \"level\": \"L4\", \"description\": \"2-way or 3-way valve with electric actuator; modulating; DN20-DN100\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Substation Control Valve Assembly\"},\n      {\"name\": \"Differential Pressure Controller\", \"level\": \"L4\", \"description\": \"Self-acting or electronic DP controller maintaining constant delta-P across substation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Substation Control Valve Assembly\"},\n      {\"name\": \"Electronic Controller\", \"level\": \"L4\", \"description\": \"PLC or dedicated substation controller reading sensors and modulating valve\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Substation Control Valve Assembly\"},\n\n      {\"name\": \"Ultrasonic Flow Sensor\", \"level\": \"L4\", \"description\": \"Transit-time ultrasonic measurement; no moving parts, zero pressure drop, glycol-tolerant, integrated temperature. MARQUARDT POSITION.\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Substation Flow & Temperature Measurement\"},\n      {\"name\": \"Mechanical Impeller / Turbine Flow Meter\", \"level\": \"L4\", \"description\": \"Single-jet or multi-jet impeller meter; incumbent in legacy substations; 5-6 year replacement cycle\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Substation Flow & Temperature Measurement\"},\n      {\"name\": \"Electromagnetic Flow Meter\", \"level\": \"L4\", \"description\": \"Mag-flow sensor for conductive liquids; 3-5x cost of ultrasonic; large substations\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Substation Flow & Temperature Measurement\"},\n      {\"name\": \"Matched Temperature Sensor Pair\", \"level\": \"L4\", \"description\": \"Pt500/Pt1000 RTD on supply and return; matched to <0.02 K per EN 1434\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Substation Flow & Temperature Measurement\"},\n\n      {\"name\": \"Secondary Circulator Pump\", \"level\": \"L4\", \"description\": \"Building-side circulator distributing heated/chilled water to risers and zones\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Secondary-Side Distribution\"},\n      {\"name\": \"Mixing / Injection Valve\", \"level\": \"L4\", \"description\": \"Blends supply and return water for zone-specific temperature control\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Secondary-Side Distribution\"},\n      {\"name\": \"Building Riser Piping\", \"level\": \"L4\", \"description\": \"Vertical distribution piping from substation to floors; steel, copper, or composite\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Secondary-Side Distribution\"},\n\n      {\"name\": \"Flow Sensor (Metering-Grade)\", \"level\": \"L4\", \"description\": \"Ultrasonic or mechanical flow sensor certified to EN 1434; accuracy class 2 or better\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Heat Meter\"},\n      {\"name\": \"Temperature Sensor Pair (Metering-Grade)\", \"level\": \"L4\", \"description\": \"Pt500/Pt1000 matched pair certified together with flow sensor and calculator\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Heat Meter\"},\n      {\"name\": \"Energy Calculator / Integrator\", \"level\": \"L4\", \"description\": \"Microprocessor integrating thermal power over time; stores cumulative kWh/MWh; tamper-sealed\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Heat Meter\"},\n\n      {\"name\": \"Flow Sensor (Cooling-Grade)\", \"level\": \"L4\", \"description\": \"Same sensor type calibrated for chilled-water temperature range (4-15 C)\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Cooling Meter\"},\n      {\"name\": \"Temperature Sensor Pair (Cooling-Grade)\", \"level\": \"L4\", \"description\": \"Pt500/Pt1000 matched pair optimised for narrow cooling delta-T (3-8 K)\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Cooling Meter\"},\n      {\"name\": \"Cooling Energy Calculator\", \"level\": \"L4\", \"description\": \"Firmware variant calculating cooling energy from inverted delta-T\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Cooling Meter\"},\n\n      {\"name\": \"Radio / Wireless Module\", \"level\": \"L4\", \"description\": \"Wireless M-Bus, LoRaWAN, NB-IoT, or proprietary RF for remote meter reading\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Meter Data Communication\"},\n      {\"name\": \"Data Concentrator / Gateway\", \"level\": \"L4\", \"description\": \"Collects readings from multiple meters; forwards to head-end system via IP\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Meter Data Communication\"},\n      {\"name\": \"Billing & MDM Software\", \"level\": \"L4\", \"description\": \"Meter data management and billing system integration; allocates costs per building\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Meter Data Communication\"},\n\n      {\"name\": \"SCADA Server & HMI\", \"level\": \"L4\", \"description\": \"Industrial PC running real-time monitoring, alarm management, and operator display\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"SCADA & Network Monitoring\"},\n      {\"name\": \"RTU / PLC at Substation\", \"level\": \"L4\", \"description\": \"Remote terminal unit at each substation relaying sensor data and executing control\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"SCADA & Network Monitoring\"},\n      {\"name\": \"Communication Network\", \"level\": \"L4\", \"description\": \"Fibre optic, cellular, or Ethernet backbone connecting substations to control centre\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"SCADA & Network Monitoring\"},\n\n      {\"name\": \"Network Simulation Model\", \"level\": \"L4\", \"description\": \"Digital twin / hydraulic simulation (Termis, Comsof Heat) for planning and real-time optimisation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Hydraulic Balancing & Optimisation\"},\n      {\"name\": \"Variable-Flow Control Logic\", \"level\": \"L4\", \"description\": \"Demand-based pump speed and valve modulation reducing return temperature and pump energy\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Hydraulic Balancing & Optimisation\"},\n      {\"name\": \"Weather Compensation & Forecasting\", \"level\": \"L4\", \"description\": \"Outdoor temperature forecast driving supply temperature setpoint curve\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Hydraulic Balancing & Optimisation\"},\n\n      {\"name\": \"Wire-Based Leak Detection\", \"level\": \"L4\", \"description\": \"Impedance monitoring of copper wires in pipe insulation; detects moisture ingress\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Leak Detection & Pipe Integrity\"},\n      {\"name\": \"Thermal Imaging / Aerial Survey\", \"level\": \"L4\", \"description\": \"Drone or helicopter thermal survey identifying hot spots above buried pipes\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Leak Detection & Pipe Integrity\"},\n      {\"name\": \"Acoustic Leak Detection\", \"level\": \"L4\", \"description\": \"Listening equipment detecting pressurised water escaping through pipe defects\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Leak Detection & Pipe Integrity\"},\n\n      {\"name\": \"Chemical Dosing System\", \"level\": \"L4\", \"description\": \"Automated dosing of corrosion inhibitor, oxygen scavenger, and biocide\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Water Treatment & Corrosion Protection\"},\n      {\"name\": \"Side-Stream Filtration\", \"level\": \"L4\", \"description\": \"Bypass filter removing suspended solids and magnetite from network water\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Water Treatment & Corrosion Protection\"},\n      {\"name\": \"Water Quality Monitoring\", \"level\": \"L4\", \"description\": \"pH, conductivity, dissolved oxygen, and hardness sensors with logging\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Water Treatment & Corrosion Protection\"},\n\n      {\"name\": \"Pressure Equipment Inspection\", \"level\": \"L4\", \"description\": \"Periodic inspection of boilers, vessels, and piping per PED / ASME\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Regulatory Compliance & Safety\"},\n      {\"name\": \"Meter Verification & Re-Calibration\", \"level\": \"L4\", \"description\": \"Periodic accuracy verification of heat meters per EN 1434 requirements\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Regulatory Compliance & Safety\"},\n      {\"name\": \"Environmental Monitoring & Reporting\", \"level\": \"L4\", \"description\": \"Emissions monitoring, noise compliance, and sustainability reporting\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Regulatory Compliance & Safety\"}\n    ]\n  },\n  \"marquardt_position\": {\n    \"primary\": {\n      \"l_path\": \"L7 > L6.3 Building Substation & Energy Transfer > L5.3.3 Substation Flow & Temperature Measurement > L4.3.3.1 Ultrasonic Flow Sensor\",\n      \"l5_parent\": \"Substation Flow & Temperature Measurement\",\n      \"l4_node\": \"Ultrasonic Flow Sensor\",\n      \"competitors_at_l4\": [\n        \"Mechanical Impeller / Turbine Flow Meter\",\n        \"Electromagnetic Flow Meter\"\n      ],\n      \"complements_at_l4\": [\n        \"Matched Temperature Sensor Pair\"\n      ]\n    },\n    \"secondary\": {\n      \"l_path\": \"L7 > L6.4 Metering & Billing > L5.4.1 Heat Meter > L4.4.1.1 Flow Sensor (Metering-Grade)\",\n      \"l5_parent\": \"Heat Meter\",\n      \"l4_node\": \"Flow Sensor (Metering-Grade)\",\n      \"barrier\": \"EN 1434 / MID MI-004 metering certification required\"\n    }\n  },\n  \"entities_produced\": {\n    \"nodes\": [\n      {\"label\": \"ValueNetwork\", \"key\": {\"naics_code\": \"221330\", \"run_id\": \"TBD\"}, \"properties\": {\"market_name\": \"Steam and Air-Conditioning Supply\", \"naics_title\": \"Steam and Air-Conditioning Supply\", \"cfj_statement\": \"Generate, distribute, and meter thermal energy (heating and cooling) from centralised plants to multiple buildings via closed-pipe networks\", \"top_level\": \"L7\", \"unit_count\": 95, \"enriched\": true}},\n      {\"label\": \"ValueNetworkUnit\", \"key\": {\"name\": \"<per unit above>\", \"naics_code\": \"221330\", \"run_id\": \"TBD\"}, \"count\": 95}\n    ],\n    \"relationships\": [\n      {\"type\": \"has_value_network\", \"source\": \"Market:Steam and Air-Conditioning Supply\", \"target\": \"ValueNetwork:221330\"},\n      {\"type\": \"contains_unit\", \"source\": \"ValueNetwork:221330\", \"target\": \"ValueNetworkUnit:<each unit>\"},\n      {\"type\": \"has_child\", \"source\": \"ValueNetworkUnit:<parent>\", \"target\": \"ValueNetworkUnit:<child>\"}\n    ]\n  }\n}\n```\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [District Heating — Wikipedia](https://en.wikipedia.org/wiki/District_heating)\n- [District Cooling — Wikipedia](https://en.wikipedia.org/wiki/District_cooling)\n- [District Heating Substation — Wikipedia](https://en.wikipedia.org/wiki/District_heating_substation)\n- [Heat Meter — Wikipedia](https://en.wikipedia.org/wiki/Heat_meter)\n- [NAICS 221330 — IBISWorld](https://www.ibisworld.com/classifications/naics/221330/steam-and-air-conditioning-supply/)\n- [District Heating Market — GlobeNewsWire / The Insight Partners](https://www.globenewswire.com/news-release/2025/05/08/3077412/0/en/District-Heating-Market-Size-Projected-to-Surge-298-73-Billion-Growth-by-2031-With-CAGR-of-4-6-The-Insight-Partners.html)\n- [Heat Meter Market — SNS Insider](https://www.globenewswire.com/news-release/2026/03/27/3263591/0/en/Heat-Meter-Market-Size-to-Surpass-USD-3-24-Billion-by-2035-Research-by-SNS-Insider.html)\n- [Ultrasonic Flow Measurement in District Heating — KROHNE](https://www.krohne.com/en-us/applications/ultrasonic-flow-measurement-district-heating-network)\n- [Heat Metering at Transfer Station — KROHNE](https://www.krohne.com/en-us/applications/heat-metering-at-transfer-station-of-district-heating-pipeline)\n- [Ultrasonic Heat and Cool Meters — Danfoss](https://www.danfoss.com/en/products/dhs/energy-metering/energy-metering/)\n- [Smart Heat Metering Solutions — Landis+Gyr](https://eu.landisgyr.com/smart-heat-metering-solutions)\n- [District Energy Efficiency Through Flow Metering — Baker Hughes](https://dam.bakerhughes.com/m/110b7c0f5c53abf5/original/District-Energy-Efficiency-through-Flow-Metering-Whitepaper.pdf)\n- [Pre-Insulated Pipes — DBDH](https://dbdh.org/all-about-district-energy/technology/supply-network/pre-insulated-pipes/)\n- [Fifth-Generation District Heating and Cooling Substations — NREL](https://docs.nrel.gov/docs/fy20osti/78014.pdf)\n- [District Cooling Market — GM Insights](https://www.gminsights.com/industry-analysis/district-cooling-market)\n- Marquardt Customer Presentation: \"US Flow Sensor\" (03.12.2025, CONFIDENTIAL)\n- Marquardt/HS Albstadt-Sigmaringen Project Briefing (19.02.2026)"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**NAICS Code**",
+          "Value": "221330 — Steam and Air-Conditioning Supply"
+        },
+        {
+          "Field": "**CFJ**",
+          "Value": "Generate, distribute, and meter thermal energy (heating and cooling) from centralised plants to multiple buildings via closed-pipe networks"
+        },
+        {
+          "Field": "**Output Types**",
+          "Value": "District hot-water heating; District steam heating; District chilled-water cooling; Combined heating & cooling (4-pipe); Campus/industrial thermal utility"
+        },
+        {
+          "Field": "**Hierarchy**",
+          "Value": "Process VN (L7 through L4) — what process steps, equipment, and subsystems compose district energy generation, distribution, and consumption metering"
+        },
+        {
+          "Field": "**Key Operators**",
+          "Value": "Vattenfall, ENGIE, Fortum, Veolia, Statkraft (network operators); Danfoss, Kamstrup, Siemens, Diehl, Landis+Gyr (metering/controls) [SRC: web_search]"
+        },
+        {
+          "Field": "**Market Size**",
+          "Value": "~$187–214B globally (district heating, 2024); heat meter market projected to reach $3.24B by 2035; EU EED mandates individual metering at every building connection [SRC: web_search]"
+        },
+        {
+          "Field": "**Architecture Distance**",
+          "Value": "3 (adjacent — same media, pipe sizes, and flow+temperature measurement need, but utility-scale not OEM-embedded) [SRC: 05_market_discovery]"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L6 ID",
+        "Name",
+        "Type",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L6 ID": "**L6.1**",
+          "Name": "Thermal Energy Generation",
+          "Type": "Core",
+          "Description": "Centralised heat/cold sources: CHP plants, hot-water boilers, heat pumps, waste-to-energy, geothermal, biomass, electric chillers, absorption chillers."
+        },
+        {
+          "L6 ID": "**L6.2**",
+          "Name": "Distribution Network",
+          "Type": "Core",
+          "Description": "Pre-insulated pipe network, pumping stations, and hydraulic infrastructure transporting thermal energy from central plant to building substations."
+        },
+        {
+          "L6 ID": "**L6.3**",
+          "Name": "Building Substation & Energy Transfer",
+          "Type": "Core",
+          "Description": "Transfer station at each building connection: heat exchangers, control valves, differential pressure controllers, and flow/temperature measurement. **Marquardt sits here.**"
+        },
+        {
+          "L6 ID": "**L6.4**",
+          "Name": "Metering & Billing",
+          "Type": "Core",
+          "Description": "Thermal energy meters (heat meters / BTU meters) measuring delivered energy for consumption-based billing per EU EED / MID MI-004."
+        },
+        {
+          "L6 ID": "**L6.5**",
+          "Name": "Network Control & Optimisation",
+          "Type": "Horizontal",
+          "Description": "SCADA, hydraulic balancing, demand forecasting, variable-flow control, weather compensation across the entire network."
+        },
+        {
+          "L6 ID": "**L6.6**",
+          "Name": "Maintenance, Safety & Compliance",
+          "Type": "Horizontal",
+          "Description": "Leak detection, pipe integrity, regulatory compliance (pressure equipment directive), water treatment, and emergency response."
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.1.1.1: Gas Turbine / Reciprocating Engine",
+          "Description": "Prime mover burning natural gas, biogas, or hydrogen; 1–50 MW thermal per unit"
+        },
+        {
+          "L4 Subsystem": "L4.1.1.2: Waste Heat Recovery Boiler",
+          "Description": "Heat recovery steam generator (HRSG) or exhaust-gas heat exchanger capturing flue gas energy"
+        },
+        {
+          "L4 Subsystem": "L4.1.1.3: Steam Turbine / ORC Module",
+          "Description": "Back-pressure or extraction steam turbine; ORC for lower-temperature waste heat"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.1.2.1: Industrial Burner Assembly",
+          "Description": "Modulating gas/oil/biomass burner; 1–100 MW thermal capacity per unit"
+        },
+        {
+          "L4 Subsystem": "L4.1.2.2: Fire-Tube or Water-Tube Boiler",
+          "Description": "Pressurised boiler vessel rated to 6–16 bar; steel or cast-iron construction"
+        },
+        {
+          "L4 Subsystem": "L4.1.2.3: Flue Gas Economiser",
+          "Description": "Condensing economiser recovering latent heat from exhaust; boosts efficiency 5–10%"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.1.3.1: Compressor Unit",
+          "Description": "Centrifugal or screw compressor; 1–30 MW thermal per unit"
+        },
+        {
+          "L4 Subsystem": "L4.1.3.2: Evaporator (Source-Side HX)",
+          "Description": "Plate or shell-and-tube heat exchanger extracting heat from water/wastewater source"
+        },
+        {
+          "L4 Subsystem": "L4.1.3.3: Condenser (Network-Side HX)",
+          "Description": "Transfers heat to district heating supply water at 60–90 °C"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.1.4.1: Electric Centrifugal Chiller",
+          "Description": "Variable-speed centrifugal compressor; 500–5,000 TR per unit"
+        },
+        {
+          "L4 Subsystem": "L4.1.4.2: Absorption Chiller",
+          "Description": "Lithium bromide or ammonia absorption cycle; driven by waste heat or steam"
+        },
+        {
+          "L4 Subsystem": "L4.1.4.3: Cooling Tower / Heat Rejection",
+          "Description": "Open or closed-circuit cooling tower rejecting condenser heat to atmosphere"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.1.5.1: Stratified Hot-Water Tank",
+          "Description": "Insulated steel tank with thermocline stratification; charges during low demand"
+        },
+        {
+          "L4 Subsystem": "L4.1.5.2: Ice Storage / Chilled-Water Tank",
+          "Description": "Generates and stores ice or chilled water during off-peak hours for peak shaving"
+        },
+        {
+          "L4 Subsystem": "L4.1.5.3: Tank Instrumentation",
+          "Description": "Temperature stratification sensors, level gauges, charge/discharge controllers"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.1.6.1: Waste Heat Exchanger",
+          "Description": "Plate or shell-and-tube HX at industrial source; typically 40–80 °C"
+        },
+        {
+          "L4 Subsystem": "L4.1.6.2: Booster Heat Pump",
+          "Description": "Raises waste-heat temperature to network supply temperature if source is too low"
+        },
+        {
+          "L4 Subsystem": "L4.1.6.3: Interconnection Piping & Valves",
+          "Description": "Dedicated pipe spur connecting industrial source to district network trunk"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.2.1.1: Steel Carrier Pipe",
+          "Description": "Carbon steel pipe (DN50–DN1200) carrying heated/chilled water; welded joints"
+        },
+        {
+          "L4 Subsystem": "L4.2.1.2: PU Foam Insulation",
+          "Description": "Rigid polyurethane foam bonded to carrier and jacket; thermal conductivity <0.03 W/mK"
+        },
+        {
+          "L4 Subsystem": "L4.2.1.3: PE Outer Jacket",
+          "Description": "High-density polyethylene casing protecting insulation from ground moisture"
+        },
+        {
+          "L4 Subsystem": "L4.2.1.4: Leak Detection Wire",
+          "Description": "Copper wire embedded in insulation; impedance monitoring detects moisture ingress"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.2.2.1: Variable-Speed Circulation Pump",
+          "Description": "Centrifugal pump with VFD; 10–500 kW per unit; differential pressure controlled"
+        },
+        {
+          "L4 Subsystem": "L4.2.2.2: Pump Control & VFD",
+          "Description": "Variable frequency drive with PID control responding to network pressure setpoint"
+        },
+        {
+          "L4 Subsystem": "L4.2.2.3: Check Valve & Isolation Valve",
+          "Description": "Non-return valve preventing backflow; gate/butterfly valve for maintenance isolation"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.2.3.1: Expansion Compensator",
+          "Description": "Axial or lateral expansion bellows absorbing pipe thermal expansion; stainless steel"
+        },
+        {
+          "L4 Subsystem": "L4.2.3.2: Pressurisation Unit",
+          "Description": "Pump-controlled pressurisation maintaining static pressure; includes expansion vessel"
+        },
+        {
+          "L4 Subsystem": "L4.2.3.3: Safety Relief Valve",
+          "Description": "Spring-loaded relief discharging on overpressure; sized per pressure equipment directive"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.2.4.1: Sectionalising Valve",
+          "Description": "Butterfly or gate valve isolating network sections for maintenance without full shutdown"
+        },
+        {
+          "L4 Subsystem": "L4.2.4.2: Branch Connection Tee",
+          "Description": "Welded tee fitting connecting trunk to branch line; insulated to trunk standard"
+        },
+        {
+          "L4 Subsystem": "L4.2.4.3: Manhole / Valve Chamber",
+          "Description": "Underground access chamber housing valves, compensators, and instrumentation"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.3.1.1: Brazed/Gasketed Plate Heat Exchanger",
+          "Description": "Stainless steel plate pack; primary/secondary hydraulic separation; counter-flow design"
+        },
+        {
+          "L4 Subsystem": "L4.3.1.2: Strainer / Filter",
+          "Description": "Mesh strainer on primary inlet protecting HX from particles; typically 0.5–1.0 mm mesh"
+        },
+        {
+          "L4 Subsystem": "L4.3.1.3: Isolation Valves (Primary Side)",
+          "Description": "Ball or butterfly valves for primary-side shut-off during maintenance"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.3.2.1: Motorised Control Valve",
+          "Description": "2-way or 3-way valve with electric actuator; modulating or on/off; DN20–DN100"
+        },
+        {
+          "L4 Subsystem": "L4.3.2.2: Differential Pressure Controller",
+          "Description": "Self-acting or electronic DP controller maintaining constant delta-P across substation"
+        },
+        {
+          "L4 Subsystem": "L4.3.2.3: Electronic Controller",
+          "Description": "PLC or dedicated substation controller reading temperature sensors and modulating valve"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "**L4.3.3.1: Ultrasonic Flow Sensor**",
+          "Description": "**Transit-time ultrasonic measurement; no moving parts, zero pressure drop, glycol-tolerant, integrated temperature sensing. Marquardt DN20/DN25 matches typical substation pipe sizes. Growing adoption replacing mechanical meters.**"
+        },
+        {
+          "L4 Subsystem": "L4.3.3.2: Mechanical Impeller / Turbine Flow Meter",
+          "Description": "Single-jet or multi-jet impeller meter; incumbent in legacy substations. Moving parts wear, requiring replacement every 5–6 years. Declining share."
+        },
+        {
+          "L4 Subsystem": "L4.3.3.3: Electromagnetic Flow Meter",
+          "Description": "Mag-flow sensor for conductive liquids; higher accuracy but 3–5x cost of ultrasonic. Used in large commercial/industrial substations."
+        },
+        {
+          "L4 Subsystem": "L4.3.3.4: Matched Temperature Sensor Pair",
+          "Description": "Pt500 or Pt1000 RTD sensors on supply and return; matched to <0.02 K error per EN 1434. Essential for delta-T energy calculation."
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.3.4.1: Secondary Circulator Pump",
+          "Description": "Building-side circulator distributing heated/chilled water to risers and zones"
+        },
+        {
+          "L4 Subsystem": "L4.3.4.2: Mixing / Injection Valve",
+          "Description": "Blends supply and return water for zone-specific temperature control"
+        },
+        {
+          "L4 Subsystem": "L4.3.4.3: Building Riser Piping",
+          "Description": "Vertical distribution piping from substation to floors; steel, copper, or composite"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.4.1.1: Flow Sensor (Metering-Grade)",
+          "Description": "Ultrasonic or mechanical flow sensor certified to EN 1434; accuracy class 2 or better"
+        },
+        {
+          "L4 Subsystem": "L4.4.1.2: Temperature Sensor Pair (Metering-Grade)",
+          "Description": "Pt500/Pt1000 matched pair; certified together with flow sensor and calculator"
+        },
+        {
+          "L4 Subsystem": "L4.4.1.3: Energy Calculator / Integrator",
+          "Description": "Microprocessor integrating thermal power over time; stores cumulative kWh/MWh; tamper-sealed"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.4.2.1: Flow Sensor (Cooling-Grade)",
+          "Description": "Same ultrasonic/mechanical sensor; calibrated for chilled-water temperature range (4–15 °C)"
+        },
+        {
+          "L4 Subsystem": "L4.4.2.2: Temperature Sensor Pair (Cooling-Grade)",
+          "Description": "Pt500/Pt1000 matched pair optimised for narrow cooling delta-T (3–8 K)"
+        },
+        {
+          "L4 Subsystem": "L4.4.2.3: Cooling Energy Calculator",
+          "Description": "Firmware variant calculating cooling energy from inverted delta-T"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.4.3.1: Radio / Wireless Module",
+          "Description": "Wireless M-Bus, LoRaWAN, NB-IoT, or proprietary RF for remote meter reading"
+        },
+        {
+          "L4 Subsystem": "L4.4.3.2: Data Concentrator / Gateway",
+          "Description": "Collects readings from multiple meters; forwards to head-end system via IP"
+        },
+        {
+          "L4 Subsystem": "L4.4.3.3: Billing & MDM Software",
+          "Description": "Meter data management (MDM) and billing system integration; allocates costs per building"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.5.1.1: SCADA Server & HMI",
+          "Description": "Industrial PC running real-time monitoring, alarm management, and operator display"
+        },
+        {
+          "L4 Subsystem": "L4.5.1.2: RTU / PLC at Substation",
+          "Description": "Remote terminal unit or PLC at each substation relaying sensor data and executing control"
+        },
+        {
+          "L4 Subsystem": "L4.5.1.3: Communication Network",
+          "Description": "Fibre optic, cellular (4G/5G), or Ethernet backbone connecting substations to control centre"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.5.2.1: Network Simulation Model",
+          "Description": "Digital twin / hydraulic simulation software (e.g., Termis, Comsof Heat) for planning and real-time optimisation"
+        },
+        {
+          "L4 Subsystem": "L4.5.2.2: Variable-Flow Control Logic",
+          "Description": "Demand-based pump speed and valve modulation reducing return temperature and pump energy"
+        },
+        {
+          "L4 Subsystem": "L4.5.2.3: Weather Compensation & Forecasting",
+          "Description": "Outdoor temperature forecast driving supply temperature setpoint curve"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.6.1.1: Wire-Based Leak Detection",
+          "Description": "Impedance monitoring of copper wires embedded in pipe insulation; detects moisture ingress"
+        },
+        {
+          "L4 Subsystem": "L4.6.1.2: Thermal Imaging / Aerial Survey",
+          "Description": "Drone or helicopter thermal survey identifying surface hot spots above buried pipes"
+        },
+        {
+          "L4 Subsystem": "L4.6.1.3: Acoustic Leak Detection",
+          "Description": "Listening equipment detecting pressurised water escaping through pipe defects"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.6.2.1: Chemical Dosing System",
+          "Description": "Automated dosing of corrosion inhibitor, oxygen scavenger, and biocide"
+        },
+        {
+          "L4 Subsystem": "L4.6.2.2: Side-Stream Filtration",
+          "Description": "Bypass filter removing suspended solids and magnetite from network water"
+        },
+        {
+          "L4 Subsystem": "L4.6.2.3: Water Quality Monitoring",
+          "Description": "pH, conductivity, dissolved oxygen, and hardness sensors with logging"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.6.3.1: Pressure Equipment Inspection",
+          "Description": "Periodic inspection of boilers, vessels, and piping per PED / ASME"
+        },
+        {
+          "L4 Subsystem": "L4.6.3.2: Meter Verification & Re-Calibration",
+          "Description": "Periodic accuracy verification of heat meters per EN 1434 requirements"
+        },
+        {
+          "L4 Subsystem": "L4.6.3.3: Environmental Monitoring & Reporting",
+          "Description": "Emissions monitoring, noise compliance, and sustainability reporting"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L6 Domain",
+        "DH Hot Water",
+        "DH Steam",
+        "DC Chilled Water",
+        "Combined H&C",
+        "Campus Utility"
+      ],
+      "rows": [
+        {
+          "L6 Domain": "L6.1 Thermal Energy Generation",
+          "DH Hot Water": "Y",
+          "DH Steam": "Y",
+          "DC Chilled Water": "Y",
+          "Combined H&C": "Y",
+          "Campus Utility": "Y"
+        },
+        {
+          "L6 Domain": "L6.2 Distribution Network",
+          "DH Hot Water": "Y",
+          "DH Steam": "Y",
+          "DC Chilled Water": "Y",
+          "Combined H&C": "Y",
+          "Campus Utility": "Y"
+        },
+        {
+          "L6 Domain": "L6.3 Building Substation",
+          "DH Hot Water": "Y",
+          "DH Steam": "Y (condensate)",
+          "DC Chilled Water": "Y",
+          "Combined H&C": "Y",
+          "Campus Utility": "Y"
+        },
+        {
+          "L6 Domain": "L6.4 Metering & Billing",
+          "DH Hot Water": "Y",
+          "DH Steam": "Y",
+          "DC Chilled Water": "Y",
+          "Combined H&C": "Y",
+          "Campus Utility": "Y"
+        },
+        {
+          "L6 Domain": "L6.5 Network Control (H)",
+          "DH Hot Water": "Y",
+          "DH Steam": "Y",
+          "DC Chilled Water": "Y",
+          "Combined H&C": "Y",
+          "Campus Utility": "Y"
+        },
+        {
+          "L6 Domain": "L6.6 Maintenance & Safety (H)",
+          "DH Hot Water": "Y",
+          "DH Steam": "Y",
+          "DC Chilled Water": "Y",
+          "Combined H&C": "Y",
+          "Campus Utility": "Y"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "Check": "Exactly one L7 node",
+          "Result": "PASS — 1 L7 (District Energy Ecosystem)"
+        },
+        {
+          "Check": "L6 count in range (3–8)",
+          "Result": "PASS — 6 L6 nodes"
+        },
+        {
+          "Check": "L5 count per L6 in range (2–12)",
+          "Result": "PASS — L6.1: 6, L6.2: 4, L6.3: 4, L6.4: 3, L6.5: 2, L6.6: 3"
+        },
+        {
+          "Check": "L4 count per L5 >= 2",
+          "Result": "PASS — all L5 nodes have 3 L4 children"
+        },
+        {
+          "Check": "No orphan nodes",
+          "Result": "PASS — every node has a parent"
+        },
+        {
+          "Check": "No level skipping",
+          "Result": "PASS — L7>L6>L5>L4 strictly followed"
+        },
+        {
+          "Check": "Valid parent-child transitions",
+          "Result": "PASS"
+        },
+        {
+          "Check": "No company names in L7/L6 names",
+          "Result": "PASS"
+        },
+        {
+          "Check": "Three-question naming test (5 spot-checks)",
+          "Result": "PASS — \"Pre-Insulated Pipe Network,\" \"Heat Exchanger,\" \"Pressurisation Unit,\" \"Energy Calculator,\" \"Chemical Dosing System\" all industry-standard"
+        },
+        {
+          "Check": "Unit count in range (15–60)",
+          "Result": "PASS — 22 L5 + 66 L4 = 89 total units (includes L7 + L6)"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "value_network_construction",
+      "naics_code": "221330",
+      "naics_title": "Steam and Air-Conditioning Supply",
+      "cfj_statement": "Generate, distribute, and meter thermal energy (heating and cooling) from centralised plants to multiple buildings via closed-pipe networks",
+      "l7_solution": "District Energy Ecosystem",
+      "top_level": "L7",
+      "market_name": "Steam and Air-Conditioning Supply",
+      "architecture_distance": 3,
+      "already_uses_technology": true,
+      "output_types": [
+        "District hot-water heating",
+        "District steam heating",
+        "District chilled-water cooling",
+        "Combined heating & cooling (4-pipe)",
+        "Campus/industrial thermal utility"
+      ],
+      "value_network": {
+        "naics_code": "221330",
+        "naics_title": "Steam and Air-Conditioning Supply",
+        "cfj_statement": "Generate, distribute, and meter thermal energy (heating and cooling) from centralised plants to multiple buildings via closed-pipe networks",
+        "l7_solution": "District Energy Ecosystem",
+        "units": [
+          {
+            "name": "District Energy Ecosystem",
+            "level": "L7",
+            "description": "Complete ecosystem of thermal energy utilities, equipment OEMs, pipe manufacturers, metering companies, building operators, and regulators coordinated around centralised generation and piped distribution of heating and cooling",
+            "bom_standard": "Moore 1993",
+            "parent_name": "ROOT"
+          },
+          {
+            "name": "Thermal Energy Generation",
+            "level": "L6",
+            "description": "Centralised heat/cold sources: CHP, boilers, heat pumps, waste-to-energy, geothermal, biomass, chillers",
+            "bom_standard": "Maier 1998",
+            "parent_name": "District Energy Ecosystem"
+          },
+          {
+            "name": "Distribution Network",
+            "level": "L6",
+            "description": "Pre-insulated pipe network, pumping stations, and hydraulic infrastructure transporting thermal energy from central plant to building substations",
+            "bom_standard": "Maier 1998",
+            "parent_name": "District Energy Ecosystem"
+          },
+          {
+            "name": "Building Substation & Energy Transfer",
+            "level": "L6",
+            "description": "Transfer station at each building: heat exchangers, control valves, differential pressure controllers, flow/temperature measurement",
+            "bom_standard": "Maier 1998",
+            "parent_name": "District Energy Ecosystem"
+          },
+          {
+            "name": "Metering & Billing",
+            "level": "L6",
+            "description": "Certified thermal energy measurement for consumption-based billing per EU EED / MID MI-004 / EN 1434",
+            "bom_standard": "Maier 1998",
+            "parent_name": "District Energy Ecosystem"
+          },
+          {
+            "name": "Network Control & Optimisation",
+            "level": "L6",
+            "description": "SCADA, hydraulic balancing, demand forecasting, variable-flow control across the entire network",
+            "bom_standard": "Maier 1998",
+            "parent_name": "District Energy Ecosystem"
+          },
+          {
+            "name": "Maintenance, Safety & Compliance",
+            "level": "L6",
+            "description": "Leak detection, pipe integrity, water treatment, regulatory compliance, and emergency response",
+            "bom_standard": "Maier 1998",
+            "parent_name": "District Energy Ecosystem"
+          },
+          {
+            "name": "CHP Plant",
+            "level": "L5",
+            "description": "Combined heat and power plant generating electricity with waste heat for district heating; 80-90% total efficiency",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Thermal Energy Generation"
+          },
+          {
+            "name": "Hot-Water Boiler Plant",
+            "level": "L5",
+            "description": "Large-scale hot-water boilers (gas, oil, biomass, electric) for peak-load and backup; 80-120 C supply",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Thermal Energy Generation"
+          },
+          {
+            "name": "Large-Scale Heat Pump",
+            "level": "L5",
+            "description": "Electric heat pump extracting thermal energy from ambient sources; COP 3-5; growing in Scandinavian networks",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Thermal Energy Generation"
+          },
+          {
+            "name": "Chiller Plant",
+            "level": "L5",
+            "description": "Centralised electric or absorption chillers producing chilled water (5-7 C) for district cooling",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Thermal Energy Generation"
+          },
+          {
+            "name": "Thermal Energy Storage",
+            "level": "L5",
+            "description": "Hot-water tanks or ice storage buffering generation/demand mismatch; 2,000-50,000 m3",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Thermal Energy Generation"
+          },
+          {
+            "name": "Waste Heat Recovery",
+            "level": "L5",
+            "description": "Captures industrial waste heat (data centres, wastewater, industry) for network injection; zero-fuel cost",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Thermal Energy Generation"
+          },
+          {
+            "name": "Pre-Insulated Pipe Network",
+            "level": "L5",
+            "description": "Bonded pre-insulated pipe (steel + PU foam + PE jacket) buried underground; supply and return in parallel",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Distribution Network"
+          },
+          {
+            "name": "Network Pumping Station",
+            "level": "L5",
+            "description": "Centralised and distributed pumps maintaining hydraulic pressure and flow; variable-speed drives",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Distribution Network"
+          },
+          {
+            "name": "Network Expansion & Pressure Management",
+            "level": "L5",
+            "description": "Compensates thermal expansion and maintains system pressure within design limits",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Distribution Network"
+          },
+          {
+            "name": "Network Valves & Fittings",
+            "level": "L5",
+            "description": "Branch isolation, sectionalising, and flow regulation across the distribution network",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Distribution Network"
+          },
+          {
+            "name": "Heat Exchanger (Substation)",
+            "level": "L5",
+            "description": "Plate HX separating primary (network) from secondary (building) circuits; 50-2,000 kW per building",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Building Substation & Energy Transfer"
+          },
+          {
+            "name": "Substation Control Valve Assembly",
+            "level": "L5",
+            "description": "Motorised control valve regulating primary-side flow to maintain secondary supply temperature",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Building Substation & Energy Transfer"
+          },
+          {
+            "name": "Substation Flow & Temperature Measurement",
+            "level": "L5",
+            "description": "Flow and temperature instruments feeding energy calculation and control loop; MARQUARDT POSITION",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Building Substation & Energy Transfer"
+          },
+          {
+            "name": "Secondary-Side Distribution",
+            "level": "L5",
+            "description": "Building-internal hydronic distribution fed by the substation secondary circuit",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Building Substation & Energy Transfer"
+          },
+          {
+            "name": "Heat Meter",
+            "level": "L5",
+            "description": "MID-certified instrument: flow sensor + matched temp pair + integrator calculating delivered kWh/MWh",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Metering & Billing"
+          },
+          {
+            "name": "Cooling Meter",
+            "level": "L5",
+            "description": "Thermal energy meter for district cooling; reverse delta-T calculation",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Metering & Billing"
+          },
+          {
+            "name": "Meter Data Communication",
+            "level": "L5",
+            "description": "Remote reading (AMR/AMI), data collection, and billing system integration",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Metering & Billing"
+          },
+          {
+            "name": "SCADA & Network Monitoring",
+            "level": "L5",
+            "description": "Centralised supervisory control and data acquisition monitoring plant, network, and substations",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Network Control & Optimisation"
+          },
+          {
+            "name": "Hydraulic Balancing & Optimisation",
+            "level": "L5",
+            "description": "Algorithms and actuators maintaining balanced flow distribution across the network",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Network Control & Optimisation"
+          },
+          {
+            "name": "Leak Detection & Pipe Integrity",
+            "level": "L5",
+            "description": "Monitoring buried pipe network for insulation degradation and carrier pipe leaks",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Maintenance, Safety & Compliance"
+          },
+          {
+            "name": "Water Treatment & Corrosion Protection",
+            "level": "L5",
+            "description": "Maintaining water chemistry to prevent corrosion, scaling, and biological growth",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Maintenance, Safety & Compliance"
+          },
+          {
+            "name": "Regulatory Compliance & Safety",
+            "level": "L5",
+            "description": "Pressure equipment inspection, meter verification, environmental monitoring",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Maintenance, Safety & Compliance"
+          },
+          {
+            "name": "Gas Turbine / Reciprocating Engine",
+            "level": "L4",
+            "description": "Prime mover burning natural gas, biogas, or hydrogen; 1-50 MW thermal per unit",
+            "bom_standard": "INCOSE",
+            "parent_name": "CHP Plant"
+          },
+          {
+            "name": "Waste Heat Recovery Boiler",
+            "level": "L4",
+            "description": "HRSG or exhaust-gas heat exchanger capturing flue gas energy",
+            "bom_standard": "INCOSE",
+            "parent_name": "CHP Plant"
+          },
+          {
+            "name": "Steam Turbine / ORC Module",
+            "level": "L4",
+            "description": "Back-pressure or extraction steam turbine; ORC for lower-temperature waste heat",
+            "bom_standard": "INCOSE",
+            "parent_name": "CHP Plant"
+          },
+          {
+            "name": "Industrial Burner Assembly",
+            "level": "L4",
+            "description": "Modulating gas/oil/biomass burner; 1-100 MW thermal capacity per unit",
+            "bom_standard": "INCOSE",
+            "parent_name": "Hot-Water Boiler Plant"
+          },
+          {
+            "name": "Fire-Tube or Water-Tube Boiler",
+            "level": "L4",
+            "description": "Pressurised boiler vessel rated to 6-16 bar; steel or cast-iron construction",
+            "bom_standard": "INCOSE",
+            "parent_name": "Hot-Water Boiler Plant"
+          },
+          {
+            "name": "Flue Gas Economiser",
+            "level": "L4",
+            "description": "Condensing economiser recovering latent heat from exhaust; 5-10% efficiency boost",
+            "bom_standard": "INCOSE",
+            "parent_name": "Hot-Water Boiler Plant"
+          },
+          {
+            "name": "Compressor Unit",
+            "level": "L4",
+            "description": "Centrifugal or screw compressor; 1-30 MW thermal per unit",
+            "bom_standard": "INCOSE",
+            "parent_name": "Large-Scale Heat Pump"
+          },
+          {
+            "name": "Evaporator (Source-Side HX)",
+            "level": "L4",
+            "description": "Plate or shell-and-tube HX extracting heat from water/wastewater source",
+            "bom_standard": "INCOSE",
+            "parent_name": "Large-Scale Heat Pump"
+          },
+          {
+            "name": "Condenser (Network-Side HX)",
+            "level": "L4",
+            "description": "Transfers heat to district heating supply water at 60-90 C",
+            "bom_standard": "INCOSE",
+            "parent_name": "Large-Scale Heat Pump"
+          },
+          {
+            "name": "Electric Centrifugal Chiller",
+            "level": "L4",
+            "description": "Variable-speed centrifugal compressor; 500-5,000 TR per unit",
+            "bom_standard": "INCOSE",
+            "parent_name": "Chiller Plant"
+          },
+          {
+            "name": "Absorption Chiller",
+            "level": "L4",
+            "description": "Lithium bromide or ammonia absorption cycle; driven by waste heat or steam",
+            "bom_standard": "INCOSE",
+            "parent_name": "Chiller Plant"
+          },
+          {
+            "name": "Cooling Tower / Heat Rejection",
+            "level": "L4",
+            "description": "Open or closed-circuit cooling tower rejecting condenser heat to atmosphere",
+            "bom_standard": "INCOSE",
+            "parent_name": "Chiller Plant"
+          },
+          {
+            "name": "Stratified Hot-Water Tank",
+            "level": "L4",
+            "description": "Insulated steel tank with thermocline stratification; charges during low demand",
+            "bom_standard": "INCOSE",
+            "parent_name": "Thermal Energy Storage"
+          },
+          {
+            "name": "Ice Storage / Chilled-Water Tank",
+            "level": "L4",
+            "description": "Generates and stores ice or chilled water during off-peak hours for peak shaving",
+            "bom_standard": "INCOSE",
+            "parent_name": "Thermal Energy Storage"
+          },
+          {
+            "name": "Tank Instrumentation",
+            "level": "L4",
+            "description": "Temperature stratification sensors, level gauges, charge/discharge controllers",
+            "bom_standard": "INCOSE",
+            "parent_name": "Thermal Energy Storage"
+          },
+          {
+            "name": "Waste Heat Exchanger",
+            "level": "L4",
+            "description": "Plate or shell-and-tube HX at industrial source; typically 40-80 C",
+            "bom_standard": "INCOSE",
+            "parent_name": "Waste Heat Recovery"
+          },
+          {
+            "name": "Booster Heat Pump",
+            "level": "L4",
+            "description": "Raises waste-heat temperature to network supply temperature if source is too low",
+            "bom_standard": "INCOSE",
+            "parent_name": "Waste Heat Recovery"
+          },
+          {
+            "name": "Interconnection Piping & Valves",
+            "level": "L4",
+            "description": "Dedicated pipe spur connecting industrial source to district network trunk",
+            "bom_standard": "INCOSE",
+            "parent_name": "Waste Heat Recovery"
+          },
+          {
+            "name": "Steel Carrier Pipe",
+            "level": "L4",
+            "description": "Carbon steel pipe DN50-DN1200 carrying heated/chilled water; welded joints",
+            "bom_standard": "INCOSE",
+            "parent_name": "Pre-Insulated Pipe Network"
+          },
+          {
+            "name": "PU Foam Insulation",
+            "level": "L4",
+            "description": "Rigid polyurethane foam bonded to carrier and jacket; <0.03 W/mK",
+            "bom_standard": "INCOSE",
+            "parent_name": "Pre-Insulated Pipe Network"
+          },
+          {
+            "name": "PE Outer Jacket",
+            "level": "L4",
+            "description": "High-density polyethylene casing protecting insulation from ground moisture",
+            "bom_standard": "INCOSE",
+            "parent_name": "Pre-Insulated Pipe Network"
+          },
+          {
+            "name": "Leak Detection Wire",
+            "level": "L4",
+            "description": "Copper wire embedded in insulation; impedance monitoring detects moisture ingress",
+            "bom_standard": "INCOSE",
+            "parent_name": "Pre-Insulated Pipe Network"
+          },
+          {
+            "name": "Variable-Speed Circulation Pump",
+            "level": "L4",
+            "description": "Centrifugal pump with VFD; 10-500 kW per unit; differential pressure controlled",
+            "bom_standard": "INCOSE",
+            "parent_name": "Network Pumping Station"
+          },
+          {
+            "name": "Pump Control & VFD",
+            "level": "L4",
+            "description": "Variable frequency drive with PID control responding to network pressure setpoint",
+            "bom_standard": "INCOSE",
+            "parent_name": "Network Pumping Station"
+          },
+          {
+            "name": "Check Valve & Isolation Valve",
+            "level": "L4",
+            "description": "Non-return valve preventing backflow; gate/butterfly valve for maintenance isolation",
+            "bom_standard": "INCOSE",
+            "parent_name": "Network Pumping Station"
+          },
+          {
+            "name": "Expansion Compensator",
+            "level": "L4",
+            "description": "Axial or lateral expansion bellows absorbing pipe thermal expansion; stainless steel",
+            "bom_standard": "INCOSE",
+            "parent_name": "Network Expansion & Pressure Management"
+          },
+          {
+            "name": "Pressurisation Unit",
+            "level": "L4",
+            "description": "Pump-controlled pressurisation maintaining static pressure; includes expansion vessel",
+            "bom_standard": "INCOSE",
+            "parent_name": "Network Expansion & Pressure Management"
+          },
+          {
+            "name": "Safety Relief Valve",
+            "level": "L4",
+            "description": "Spring-loaded relief discharging on overpressure; sized per pressure equipment directive",
+            "bom_standard": "INCOSE",
+            "parent_name": "Network Expansion & Pressure Management"
+          },
+          {
+            "name": "Sectionalising Valve",
+            "level": "L4",
+            "description": "Butterfly or gate valve isolating network sections for maintenance",
+            "bom_standard": "INCOSE",
+            "parent_name": "Network Valves & Fittings"
+          },
+          {
+            "name": "Branch Connection Tee",
+            "level": "L4",
+            "description": "Welded tee fitting connecting trunk to branch line; insulated to trunk standard",
+            "bom_standard": "INCOSE",
+            "parent_name": "Network Valves & Fittings"
+          },
+          {
+            "name": "Manhole / Valve Chamber",
+            "level": "L4",
+            "description": "Underground access chamber housing valves, compensators, and instrumentation",
+            "bom_standard": "INCOSE",
+            "parent_name": "Network Valves & Fittings"
+          },
+          {
+            "name": "Brazed/Gasketed Plate Heat Exchanger",
+            "level": "L4",
+            "description": "Stainless steel plate pack; primary/secondary hydraulic separation; counter-flow",
+            "bom_standard": "INCOSE",
+            "parent_name": "Heat Exchanger (Substation)"
+          },
+          {
+            "name": "Strainer / Filter",
+            "level": "L4",
+            "description": "Mesh strainer on primary inlet protecting HX from particles; 0.5-1.0 mm mesh",
+            "bom_standard": "INCOSE",
+            "parent_name": "Heat Exchanger (Substation)"
+          },
+          {
+            "name": "Isolation Valves (Primary Side)",
+            "level": "L4",
+            "description": "Ball or butterfly valves for primary-side shut-off during maintenance",
+            "bom_standard": "INCOSE",
+            "parent_name": "Heat Exchanger (Substation)"
+          },
+          {
+            "name": "Motorised Control Valve",
+            "level": "L4",
+            "description": "2-way or 3-way valve with electric actuator; modulating; DN20-DN100",
+            "bom_standard": "INCOSE",
+            "parent_name": "Substation Control Valve Assembly"
+          },
+          {
+            "name": "Differential Pressure Controller",
+            "level": "L4",
+            "description": "Self-acting or electronic DP controller maintaining constant delta-P across substation",
+            "bom_standard": "INCOSE",
+            "parent_name": "Substation Control Valve Assembly"
+          },
+          {
+            "name": "Electronic Controller",
+            "level": "L4",
+            "description": "PLC or dedicated substation controller reading sensors and modulating valve",
+            "bom_standard": "INCOSE",
+            "parent_name": "Substation Control Valve Assembly"
+          },
+          {
+            "name": "Ultrasonic Flow Sensor",
+            "level": "L4",
+            "description": "Transit-time ultrasonic measurement; no moving parts, zero pressure drop, glycol-tolerant, integrated temperature. MARQUARDT POSITION.",
+            "bom_standard": "INCOSE",
+            "parent_name": "Substation Flow & Temperature Measurement"
+          },
+          {
+            "name": "Mechanical Impeller / Turbine Flow Meter",
+            "level": "L4",
+            "description": "Single-jet or multi-jet impeller meter; incumbent in legacy substations; 5-6 year replacement cycle",
+            "bom_standard": "INCOSE",
+            "parent_name": "Substation Flow & Temperature Measurement"
+          },
+          {
+            "name": "Electromagnetic Flow Meter",
+            "level": "L4",
+            "description": "Mag-flow sensor for conductive liquids; 3-5x cost of ultrasonic; large substations",
+            "bom_standard": "INCOSE",
+            "parent_name": "Substation Flow & Temperature Measurement"
+          },
+          {
+            "name": "Matched Temperature Sensor Pair",
+            "level": "L4",
+            "description": "Pt500/Pt1000 RTD on supply and return; matched to <0.02 K per EN 1434",
+            "bom_standard": "INCOSE",
+            "parent_name": "Substation Flow & Temperature Measurement"
+          },
+          {
+            "name": "Secondary Circulator Pump",
+            "level": "L4",
+            "description": "Building-side circulator distributing heated/chilled water to risers and zones",
+            "bom_standard": "INCOSE",
+            "parent_name": "Secondary-Side Distribution"
+          },
+          {
+            "name": "Mixing / Injection Valve",
+            "level": "L4",
+            "description": "Blends supply and return water for zone-specific temperature control",
+            "bom_standard": "INCOSE",
+            "parent_name": "Secondary-Side Distribution"
+          },
+          {
+            "name": "Building Riser Piping",
+            "level": "L4",
+            "description": "Vertical distribution piping from substation to floors; steel, copper, or composite",
+            "bom_standard": "INCOSE",
+            "parent_name": "Secondary-Side Distribution"
+          },
+          {
+            "name": "Flow Sensor (Metering-Grade)",
+            "level": "L4",
+            "description": "Ultrasonic or mechanical flow sensor certified to EN 1434; accuracy class 2 or better",
+            "bom_standard": "INCOSE",
+            "parent_name": "Heat Meter"
+          },
+          {
+            "name": "Temperature Sensor Pair (Metering-Grade)",
+            "level": "L4",
+            "description": "Pt500/Pt1000 matched pair certified together with flow sensor and calculator",
+            "bom_standard": "INCOSE",
+            "parent_name": "Heat Meter"
+          },
+          {
+            "name": "Energy Calculator / Integrator",
+            "level": "L4",
+            "description": "Microprocessor integrating thermal power over time; stores cumulative kWh/MWh; tamper-sealed",
+            "bom_standard": "INCOSE",
+            "parent_name": "Heat Meter"
+          },
+          {
+            "name": "Flow Sensor (Cooling-Grade)",
+            "level": "L4",
+            "description": "Same sensor type calibrated for chilled-water temperature range (4-15 C)",
+            "bom_standard": "INCOSE",
+            "parent_name": "Cooling Meter"
+          },
+          {
+            "name": "Temperature Sensor Pair (Cooling-Grade)",
+            "level": "L4",
+            "description": "Pt500/Pt1000 matched pair optimised for narrow cooling delta-T (3-8 K)",
+            "bom_standard": "INCOSE",
+            "parent_name": "Cooling Meter"
+          },
+          {
+            "name": "Cooling Energy Calculator",
+            "level": "L4",
+            "description": "Firmware variant calculating cooling energy from inverted delta-T",
+            "bom_standard": "INCOSE",
+            "parent_name": "Cooling Meter"
+          },
+          {
+            "name": "Radio / Wireless Module",
+            "level": "L4",
+            "description": "Wireless M-Bus, LoRaWAN, NB-IoT, or proprietary RF for remote meter reading",
+            "bom_standard": "INCOSE",
+            "parent_name": "Meter Data Communication"
+          },
+          {
+            "name": "Data Concentrator / Gateway",
+            "level": "L4",
+            "description": "Collects readings from multiple meters; forwards to head-end system via IP",
+            "bom_standard": "INCOSE",
+            "parent_name": "Meter Data Communication"
+          },
+          {
+            "name": "Billing & MDM Software",
+            "level": "L4",
+            "description": "Meter data management and billing system integration; allocates costs per building",
+            "bom_standard": "INCOSE",
+            "parent_name": "Meter Data Communication"
+          },
+          {
+            "name": "SCADA Server & HMI",
+            "level": "L4",
+            "description": "Industrial PC running real-time monitoring, alarm management, and operator display",
+            "bom_standard": "INCOSE",
+            "parent_name": "SCADA & Network Monitoring"
+          },
+          {
+            "name": "RTU / PLC at Substation",
+            "level": "L4",
+            "description": "Remote terminal unit at each substation relaying sensor data and executing control",
+            "bom_standard": "INCOSE",
+            "parent_name": "SCADA & Network Monitoring"
+          },
+          {
+            "name": "Communication Network",
+            "level": "L4",
+            "description": "Fibre optic, cellular, or Ethernet backbone connecting substations to control centre",
+            "bom_standard": "INCOSE",
+            "parent_name": "SCADA & Network Monitoring"
+          },
+          {
+            "name": "Network Simulation Model",
+            "level": "L4",
+            "description": "Digital twin / hydraulic simulation (Termis, Comsof Heat) for planning and real-time optimisation",
+            "bom_standard": "INCOSE",
+            "parent_name": "Hydraulic Balancing & Optimisation"
+          },
+          {
+            "name": "Variable-Flow Control Logic",
+            "level": "L4",
+            "description": "Demand-based pump speed and valve modulation reducing return temperature and pump energy",
+            "bom_standard": "INCOSE",
+            "parent_name": "Hydraulic Balancing & Optimisation"
+          },
+          {
+            "name": "Weather Compensation & Forecasting",
+            "level": "L4",
+            "description": "Outdoor temperature forecast driving supply temperature setpoint curve",
+            "bom_standard": "INCOSE",
+            "parent_name": "Hydraulic Balancing & Optimisation"
+          },
+          {
+            "name": "Wire-Based Leak Detection",
+            "level": "L4",
+            "description": "Impedance monitoring of copper wires in pipe insulation; detects moisture ingress",
+            "bom_standard": "INCOSE",
+            "parent_name": "Leak Detection & Pipe Integrity"
+          },
+          {
+            "name": "Thermal Imaging / Aerial Survey",
+            "level": "L4",
+            "description": "Drone or helicopter thermal survey identifying hot spots above buried pipes",
+            "bom_standard": "INCOSE",
+            "parent_name": "Leak Detection & Pipe Integrity"
+          },
+          {
+            "name": "Acoustic Leak Detection",
+            "level": "L4",
+            "description": "Listening equipment detecting pressurised water escaping through pipe defects",
+            "bom_standard": "INCOSE",
+            "parent_name": "Leak Detection & Pipe Integrity"
+          },
+          {
+            "name": "Chemical Dosing System",
+            "level": "L4",
+            "description": "Automated dosing of corrosion inhibitor, oxygen scavenger, and biocide",
+            "bom_standard": "INCOSE",
+            "parent_name": "Water Treatment & Corrosion Protection"
+          },
+          {
+            "name": "Side-Stream Filtration",
+            "level": "L4",
+            "description": "Bypass filter removing suspended solids and magnetite from network water",
+            "bom_standard": "INCOSE",
+            "parent_name": "Water Treatment & Corrosion Protection"
+          },
+          {
+            "name": "Water Quality Monitoring",
+            "level": "L4",
+            "description": "pH, conductivity, dissolved oxygen, and hardness sensors with logging",
+            "bom_standard": "INCOSE",
+            "parent_name": "Water Treatment & Corrosion Protection"
+          },
+          {
+            "name": "Pressure Equipment Inspection",
+            "level": "L4",
+            "description": "Periodic inspection of boilers, vessels, and piping per PED / ASME",
+            "bom_standard": "INCOSE",
+            "parent_name": "Regulatory Compliance & Safety"
+          },
+          {
+            "name": "Meter Verification & Re-Calibration",
+            "level": "L4",
+            "description": "Periodic accuracy verification of heat meters per EN 1434 requirements",
+            "bom_standard": "INCOSE",
+            "parent_name": "Regulatory Compliance & Safety"
+          },
+          {
+            "name": "Environmental Monitoring & Reporting",
+            "level": "L4",
+            "description": "Emissions monitoring, noise compliance, and sustainability reporting",
+            "bom_standard": "INCOSE",
+            "parent_name": "Regulatory Compliance & Safety"
+          }
+        ]
+      },
+      "marquardt_position": {
+        "primary": {
+          "l_path": "L7 > L6.3 Building Substation & Energy Transfer > L5.3.3 Substation Flow & Temperature Measurement > L4.3.3.1 Ultrasonic Flow Sensor",
+          "l5_parent": "Substation Flow & Temperature Measurement",
+          "l4_node": "Ultrasonic Flow Sensor",
+          "competitors_at_l4": [
+            "Mechanical Impeller / Turbine Flow Meter",
+            "Electromagnetic Flow Meter"
+          ],
+          "complements_at_l4": [
+            "Matched Temperature Sensor Pair"
+          ]
+        },
+        "secondary": {
+          "l_path": "L7 > L6.4 Metering & Billing > L5.4.1 Heat Meter > L4.4.1.1 Flow Sensor (Metering-Grade)",
+          "l5_parent": "Heat Meter",
+          "l4_node": "Flow Sensor (Metering-Grade)",
+          "barrier": "EN 1434 / MID MI-004 metering certification required"
+        }
+      },
+      "entities_produced": {
+        "nodes": [
+          {
+            "label": "ValueNetwork",
+            "key": {
+              "naics_code": "221330",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "market_name": "Steam and Air-Conditioning Supply",
+              "naics_title": "Steam and Air-Conditioning Supply",
+              "cfj_statement": "Generate, distribute, and meter thermal energy (heating and cooling) from centralised plants to multiple buildings via closed-pipe networks",
+              "top_level": "L7",
+              "unit_count": 95,
+              "enriched": true
+            }
+          },
+          {
+            "label": "ValueNetworkUnit",
+            "key": {
+              "name": "<per unit above>",
+              "naics_code": "221330",
+              "run_id": "TBD"
+            },
+            "count": 95
+          }
+        ],
+        "relationships": [
+          {
+            "type": "has_value_network",
+            "source": "Market:Steam and Air-Conditioning Supply",
+            "target": "ValueNetwork:221330"
+          },
+          {
+            "type": "contains_unit",
+            "source": "ValueNetwork:221330",
+            "target": "ValueNetworkUnit:<each unit>"
+          },
+          {
+            "type": "has_child",
+            "source": "ValueNetworkUnit:<parent>",
+            "target": "ValueNetworkUnit:<child>"
+          }
+        ]
+      }
+    }
+  ],
+  "has_bom": false,
+  "naics_sector_type": "non_manufacturing"
+}

@@ -1,0 +1,81 @@
+{
+  "products": [
+    {
+      "name": "Heuraufe",
+      "nameEn": "Horse Hay Feeder Station",
+      "technologyClass": "Outdoor Multi-Horse Hay Feeder Stations",
+      "underlyingMechanism": "Welded closed-profile steel tube frame with pitched roof structure and bar-grid/hay-net retainer; multi-side open access; ground-mounted skid with tractor fork compatibility",
+      "functionalPromise": "Supply protected hay to multiple horses simultaneously in a ground-mounted outdoor station that eliminates feed competition, reduces waste, and preserves natural head-down eating posture",
+      "differentiators": [
+        "Roof-protected hay bay prevents contamination from rain/snow",
+        "Multi-side access eliminates Futterneid (feed envy) without physical dividers",
+        "Tractor skid/fork compatibility enables solo repositioning without disassembly",
+        "Bar-grid/hay-net limits pull-through rate, reducing waste 20-40% vs. open feeder"
+      ],
+      "features": [
+        { "name": "Multi-Side Open Frame", "description": "Open on 3-4 sides for multi-horse access", "scope": "technology", "category": "usability" },
+        { "name": "Pitched Roof Structure", "description": "Steel roof panel over hay bay sheds rain, snow, and UV", "scope": "technology", "category": "reliability" },
+        { "name": "Hay Net / Bar-Grid Retainer", "description": "Limits pull-through rate reducing waste 20-40%", "scope": "technology", "category": "performance" },
+        { "name": "Tractor Fork / Skid Compatibility", "description": "Base skids allow front-loader repositioning without disassembly", "scope": "technology", "category": "usability" },
+        { "name": "Closed-Profile Tube Frame", "description": "Hollow RHS/SHS sections — no sharp edges in horse contact zone", "scope": "technology", "category": "safety" },
+        { "name": "Hot-Dip Galvanized Finish", "description": "ISO 1461 + powder topcoat = ISO 12944 C3+ (outsourced)", "scope": "vendor", "category": "reliability" }
+      ],
+      "specifications": [
+        { "name": "Base Frame Tube", "value": "80x80x5", "unit": "mm SHS" },
+        { "name": "Roof Tube", "value": "40x40x3", "unit": "mm SHS" },
+        { "name": "Footprint", "value": "2.5 x 1.7", "unit": "m" },
+        { "name": "Eave Height", "value": "~2.0", "unit": "m" },
+        { "name": "Service Life", "value": "15", "unit": "years" },
+        { "name": "Corrosion Class", "value": "C3+", "unit": "ISO 12944" },
+        { "name": "Lateral Load", "value": "500-800", "unit": "kg" }
+      ],
+      "constraints": [
+        { "name": "Corrosion Protection Outsourcing", "type": "operational", "severity": "soft", "description": "No in-house galvanizing; 1-2 weeks lead time" },
+        { "name": "Vertical-Only Roof Coverage", "type": "physical", "severity": "soft", "description": "Pitched roof covers only vertical precipitation" },
+        { "name": "Fixed Unit Footprint", "type": "operational", "severity": "soft", "description": "One-piece welded construction; cannot extend or reconfigure" },
+        { "name": "CE / GPSR Compliance", "type": "regulatory", "severity": "hard", "description": "Static structure; GPSR self-declaration and technical file required" },
+        { "name": "Steel / Metal Materials Only", "type": "physical", "severity": "soft", "description": "No composite or polymer structural elements" }
+      ]
+    },
+    {
+      "name": "Paddockbox",
+      "nameEn": "Mobile Horse Paddock Enclosure",
+      "technologyClass": "Mobile Modular Steel Tube Paddock Enclosures",
+      "underlyingMechanism": "Welded steel tube panel segments on heavy-duty brake-lockable castors; pinned/flanged inter-panel connectors; fold-flat/removable post hinge joints; configurable polygon perimeter; wall-hinge anchor option",
+      "functionalPromise": "Enclose horses in a repositionable, configurable perimeter that allows tractor access through foldable posts without disassembly, enabling efficient yard management",
+      "differentiators": [
+        "Castor-mounted: full assembled enclosure repositioned without dismantling",
+        "Hinge/removable posts: tractor-width corridor opens without removing panels",
+        "Modular segments: perimeter adjusted by adding/removing panels",
+        "Wall-hinge option: stable wall as anchor eliminates one full panel side"
+      ],
+      "features": [
+        { "name": "Castor-Mounted Panel Segments", "description": "Heavy-duty lockable castors per segment for repositioning", "scope": "technology", "category": "usability" },
+        { "name": "Fold-Flat / Removable Post System", "description": "Hinge joints allow posts to fold flat for tractor corridor", "scope": "technology", "category": "usability" },
+        { "name": "Modular Segment Configurability", "description": "Pinned connectors enable square, L-shaped, or polygon layouts", "scope": "technology", "category": "usability" },
+        { "name": "Closed-Tube Rail Construction", "description": "RHS/CHS profiles — no open edges in horse contact zone", "scope": "technology", "category": "safety" },
+        { "name": "Wall-Hinge Mounting Option", "description": "One end pins to wall, eliminating one full panel side", "scope": "vendor", "category": "integration" },
+        { "name": "Hot-Dip Galvanized Finish", "description": "Same C3+ path; castor sockets protected during galvanizing", "scope": "vendor", "category": "reliability" }
+      ],
+      "specifications": [
+        { "name": "Rail Tube", "value": "60x60x4", "unit": "mm SHS" },
+        { "name": "Post Tube", "value": "80x80x3", "unit": "mm SHS" },
+        { "name": "Panel Height (2-rail)", "value": "1.40", "unit": "m" },
+        { "name": "Panel Height (3-rail)", "value": "1.60", "unit": "m" },
+        { "name": "Segment Length", "value": "3.0", "unit": "m" },
+        { "name": "Castor Brake Rating", "value": ">=800", "unit": "kg lateral" },
+        { "name": "Hinge Fatigue Target", "value": "10,000", "unit": "cycles" },
+        { "name": "Service Life", "value": "15", "unit": "years" },
+        { "name": "Corrosion Class", "value": "C3+", "unit": "ISO 12944" }
+      ],
+      "constraints": [
+        { "name": "Hinge Joint Fatigue", "type": "physical", "severity": "hard", "description": "10,000-cycle prototype test mandatory before series production" },
+        { "name": "Castor Brake Load Adequacy", "type": "physical", "severity": "hard", "description": "Each castor must resist 500-800 kg lateral horse pressure" },
+        { "name": "Corrosion Protection Outsourcing", "type": "operational", "severity": "soft", "description": "Castor socket threads must be masked during galvanizing" },
+        { "name": "No Weather Protection", "type": "physical", "severity": "soft", "description": "Open-air perimeter; no shelter from precipitation" },
+        { "name": "CE / Machinery Directive", "type": "regulatory", "severity": "hard", "description": "Wheeled structure requires Machinery Directive 2006/42/EC risk assessment" },
+        { "name": "Steel / Metal Materials Only", "type": "physical", "severity": "soft", "description": "No composite or polymer structural elements" }
+      ]
+    }
+  ]
+}

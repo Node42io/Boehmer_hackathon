@@ -1,0 +1,346 @@
+{
+  "id": "COMPAT_heating_equipment_except_warm_air_furnac",
+  "title": "COMPAT — Constraint-Market Compatibility: Heating Equipment (except Warm Air Furnaces) Manufacturing (NAICS 333414)",
+  "type": "constraint_compatibility",
+  "market_slug": "heating_equipment_except_warm_air_furnac",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Step 07 — Product Constraints (from upstream)",
+      "content": "Constraints carried forward from 01_product_decomposition. No web search augmentation per instructions.\n\n| # | Constraint | Type | Severity | Threshold | is_absolute |\n|---|---|---|---|---|---|\n| C1 | Media Limitation | physical | hard | Water/water-like only | true |\n| C2 | Maximum Medium Temperature | physical | hard | 90 °C | true |\n| C3 | Maximum Operating Pressure | physical | hard | 10 bar | true |\n| C4 | Minimum Flow Rate Detection | operational | soft | 0.25–4.2 l/min (variant) | false |\n| C5 | Air Bubble Tolerance | physical | soft | ~2% vol | false |\n| C6 | Pipe Full Condition | operational | hard | Pipe must be full | true |\n| C7 | Minimum Straight Pipe Run | operational | soft | 5–10× DN | false |\n| C8 | Temperature-Dependent Accuracy | physical | soft | ~0.2% with NTC comp. | false |\n\n---"
+    },
+    {
+      "title": "Step 08 — Constraint-Market Assessment: NAICS 333414",
+      "content": "**Market context:** OEMs manufacturing hydronic heating equipment — gas condensing/non-condensing boilers, oil-fired boilers, electric hydronic boilers, baseboard heaters, radiant floor systems, solar water heating, and pool/spa heaters. Marquardt's sensor sits at L4.2.5.1 (Ultrasonic Flow Sensor) under L5.2.5 Flow Sensing & Measurement within L6.2 Hydraulic Distribution. [SRC: VN_heating_equipment_except_warm_air_furnac]\n\nOperating environment: Closed-loop hydronic circuits, DN15–DN25 pipe, water or water-glycol media, 40–80 °C typical flow temperatures (non-condensing boilers up to 82–85 °C), 1–3 bar residential / up to 6 bar commercial, flow rates 5–30 l/min per zone. [SRC: 05_market_discovery Rank 1, VN L6.2]\n\n### Verdict Matrix\n\n| # | Constraint | Verdict | Rationale |\n|---|---|---|---|\n| C1 | Media Limitation | **none** | Hydronic heating circuits circulate water or water-glycol mixtures exclusively. No oils, gases, or non-polar liquids present. Exact media match for sensor capability. [SRC: 01, VN L6.2] |\n| C2 | Max Medium Temperature (90 °C) | **none** | Condensing boilers operate at 35–60 °C return / 55–80 °C flow. Non-condensing boilers reach 82–85 °C max flow temperature. Radiant floor systems run at 30–45 °C. All within the 90 °C rated limit with 5–55 °C headroom depending on output type. [SRC: VN L6.1, L6.3] |\n| C3 | Max Operating Pressure (10 bar) | **none** | Residential hydronic systems operate at 1–3 bar with safety relief valves set at 3 bar. Commercial systems up to 6 bar. Well within 10 bar limit. [SRC: VN L5.2.6] |\n| C4 | Min Flow Rate Detection | **none** | Boiler circulation flows are 5–30 l/min per zone at DN15–DN25. Minimum detectable (4.2 l/min DN20, 0.25 l/min DN14) is below typical operating range. Even low-load modulating boilers maintain circulation above detection threshold. [SRC: 01 specs, 05 Rank 1] |\n| C5 | Air Bubble Tolerance (~2% vol) | **none** | Closed-loop hydronic heating systems are filled, purged, and pressurized at commissioning. Properly designed systems with expansion vessels (L5.2.6) and automatic air vents (L5.2.2) maintain <0.5% air content. Chronic air entrainment is a system defect addressed by water treatment (L5.2.7), not a routine operating condition. [SRC: VN L5.2.6, L5.2.7] |\n| C6 | Pipe Full Condition | **none** | All hydronic heating circuits are closed-loop, fully filled, and pressurized as a prerequisite to operation. Partially filled pipes are a fault state detected during commissioning (L6.6). Fill valve and backflow preventer (L4.2.6.4) maintain system pressure. [SRC: VN L5.2.6] |\n| C7 | Min Straight Pipe Run (5–10× DN) | **mitigable** | Inside boiler casings and compact mechanical rooms, space for 100–250 mm straight run (5–10× DN20) upstream of the sensor can be constrained. OEM integration within packaged boiler enclosures requires deliberate piping layout. Standard challenge for any inline sensor in this market — well understood by heating equipment designers. |\n| C8 | Temp-Dependent Accuracy | **none** | Hydronic heating operates in a moderate, predictable temperature range (30–85 °C) with gradual ramp-up/down cycles. No extreme thermal transients. Built-in NTC compensation reduces error to ~0.2%, adequate for boiler modulation control and energy efficiency calculation. [SRC: 01 constraints, VN L6.4] |\n\n### C7 Mitigation Detail\n\n| Field | Value |\n|---|---|\n| **Mitigation actions** | 1. Specify sensor mounting position in boiler hydraulic design (L6.2) to ensure adequate straight run — standard practice for OEM component integration. 2. Use integrated flow straightener vane upstream (<$5 BOM cost in OEM volume, adds ~2× DN equivalent). 3. Select DN14 variant for compact boiler platforms (shorter 120 mm body, reduced absolute straight-run requirement). |\n| **Cost estimate** | low (<$10K) |\n| **Time estimate** | 0 — addressable at OEM design phase with no product modification |\n\n---"
+    },
+    {
+      "title": "Summary",
+      "content": "| Metric | Value |\n|---|---|\n| **Total assessments** | 8 |\n| **Knockouts** | 0 |\n| **Mitigable** | 1 (C7 — Minimum Straight Pipe Run) |\n| **None (irrelevant)** | 7 |\n| **Market status** | **SURVIVING** — no knockouts, proceeds to downstream scoring |\n\n**Conclusion:** NAICS 333414 presents zero physics or regulatory barriers to Marquardt's ultrasonic flow sensor. The only relevant constraint is straight pipe run (C7), a standard OEM integration consideration mitigable at near-zero cost during boiler hydraulic design. This aligns with the market's Tier 1 near-adjacent classification (architecture distance = 2) — the closest market to the home market (333415). Media, temperature, pressure, and flow ranges are a near-perfect match: hydronic heating circuits operate squarely within the sensor's design envelope. The market can be entered with the current product, no redesign required. [SRC: 05_market_discovery Rank 1, VN_heating_equipment_except_warm_air_furnac]\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"constraint_market_compatibility\",\n  \"product_name\": \"Ultrasonic Flow Sensor\",\n  \"vendor_name\": \"Marquardt\",\n  \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n  \"naics_code\": \"333414\",\n  \"architecture_distance\": 2,\n  \"constraints_assessed\": 8,\n  \"assessments\": [\n    {\n      \"constraint_name\": \"Media Limitation\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Hydronic heating circuits circulate water or water-glycol mixtures exclusively. Exact media match for sensor capability.\"\n    },\n    {\n      \"constraint_name\": \"Maximum Medium Temperature\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Condensing boilers 55-80 degC flow, non-condensing up to 82-85 degC. Radiant floor 30-45 degC. All within 90 degC limit.\"\n    },\n    {\n      \"constraint_name\": \"Maximum Operating Pressure\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Residential 1-3 bar, commercial up to 6 bar. Safety relief valves cap system pressure. Well within 10 bar.\"\n    },\n    {\n      \"constraint_name\": \"Minimum Flow Rate Detection\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Boiler circulation 5-30 l/min per zone. Minimum detectable 4.2 l/min (DN20) or 0.25 l/min (DN14) — below operating range.\"\n    },\n    {\n      \"constraint_name\": \"Air Bubble Tolerance\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Closed-loop hydronic systems purged at commissioning. Expansion vessels and auto air vents maintain <0.5% air content in steady state.\"\n    },\n    {\n      \"constraint_name\": \"Pipe Full Condition\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Closed-loop hydronic circuits are fully filled and pressurized. Partially filled pipes are a fault state, not routine operation.\"\n    },\n    {\n      \"constraint_name\": \"Minimum Straight Pipe Run\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"verdict\": \"mitigable\",\n      \"mitigation_actions\": [\n        \"Specify sensor mounting position in OEM boiler hydraulic design to ensure adequate straight run\",\n        \"Integrate flow straightener vane upstream (<$5 BOM cost in volume, adds ~2x DN equivalent)\",\n        \"Select DN14 variant for compact boiler platforms (shorter body, reduced absolute straight-run requirement)\"\n      ],\n      \"mitigation_cost_estimate\": \"low\",\n      \"mitigation_time_estimate\": \"0 — addressable at OEM design phase\",\n      \"knockout_reason\": null,\n      \"rationale\": \"Inside boiler casings and compact mechanical rooms, space for 100-250 mm straight run upstream can be constrained. Standard OEM integration consideration, addressable at design phase.\"\n    },\n    {\n      \"constraint_name\": \"Temperature-Dependent Accuracy\",\n      \"market_name\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n      \"naics_code\": \"333414\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Hydronic heating operates at 30-85 degC with gradual ramp cycles. NTC compensation reduces error to ~0.2%. No extreme transients.\"\n    }\n  ],\n  \"markets_eliminated\": [],\n  \"markets_surviving\": [\"333414\"],\n  \"market_status\": \"surviving\",\n  \"knockout_count\": 0,\n  \"mitigable_count\": 1,\n  \"none_count\": 7,\n  \"entities_produced\": {\n    \"nodes\": [],\n    \"relationships\": [\n      {\n        \"type\": \"incompatible_with\",\n        \"source\": \"Constraint:Minimum Straight Pipe Run\",\n        \"target\": \"Market:333414\",\n        \"properties\": {\n          \"compatibility\": \"mitigable\",\n          \"rationale\": \"Inside boiler casings and compact mechanical rooms, space for straight-run distance upstream can be constrained. Addressable at OEM design phase via sensor placement or flow straightener.\",\n          \"mitigation_actions\": [\"OEM hydraulic design placement\", \"Flow straightener vane (<$5 BOM)\", \"DN14 variant for compact platforms\"],\n          \"mitigation_cost_estimate\": \"low\",\n          \"mitigation_time_estimate\": \"0 — addressable at OEM design phase\",\n          \"knockout_reason\": null\n        }\n      }\n    ]\n  }\n}\n```"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "#",
+        "Constraint",
+        "Type",
+        "Severity",
+        "Threshold",
+        "is_absolute"
+      ],
+      "rows": [
+        {
+          "#": "C1",
+          "Constraint": "Media Limitation",
+          "Type": "physical",
+          "Severity": "hard",
+          "Threshold": "Water/water-like only",
+          "is_absolute": "true"
+        },
+        {
+          "#": "C2",
+          "Constraint": "Maximum Medium Temperature",
+          "Type": "physical",
+          "Severity": "hard",
+          "Threshold": "90 °C",
+          "is_absolute": "true"
+        },
+        {
+          "#": "C3",
+          "Constraint": "Maximum Operating Pressure",
+          "Type": "physical",
+          "Severity": "hard",
+          "Threshold": "10 bar",
+          "is_absolute": "true"
+        },
+        {
+          "#": "C4",
+          "Constraint": "Minimum Flow Rate Detection",
+          "Type": "operational",
+          "Severity": "soft",
+          "Threshold": "0.25–4.2 l/min (variant)",
+          "is_absolute": "false"
+        },
+        {
+          "#": "C5",
+          "Constraint": "Air Bubble Tolerance",
+          "Type": "physical",
+          "Severity": "soft",
+          "Threshold": "~2% vol",
+          "is_absolute": "false"
+        },
+        {
+          "#": "C6",
+          "Constraint": "Pipe Full Condition",
+          "Type": "operational",
+          "Severity": "hard",
+          "Threshold": "Pipe must be full",
+          "is_absolute": "true"
+        },
+        {
+          "#": "C7",
+          "Constraint": "Minimum Straight Pipe Run",
+          "Type": "operational",
+          "Severity": "soft",
+          "Threshold": "5–10× DN",
+          "is_absolute": "false"
+        },
+        {
+          "#": "C8",
+          "Constraint": "Temperature-Dependent Accuracy",
+          "Type": "physical",
+          "Severity": "soft",
+          "Threshold": "~0.2% with NTC comp.",
+          "is_absolute": "false"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Constraint",
+        "Verdict",
+        "Rationale"
+      ],
+      "rows": [
+        {
+          "#": "C1",
+          "Constraint": "Media Limitation",
+          "Verdict": "**none**",
+          "Rationale": "Hydronic heating circuits circulate water or water-glycol mixtures exclusively. No oils, gases, or non-polar liquids present. Exact media match for sensor capability. [SRC: 01, VN L6.2]"
+        },
+        {
+          "#": "C2",
+          "Constraint": "Max Medium Temperature (90 °C)",
+          "Verdict": "**none**",
+          "Rationale": "Condensing boilers operate at 35–60 °C return / 55–80 °C flow. Non-condensing boilers reach 82–85 °C max flow temperature. Radiant floor systems run at 30–45 °C. All within the 90 °C rated limit with 5–55 °C headroom depending on output type. [SRC: VN L6.1, L6.3]"
+        },
+        {
+          "#": "C3",
+          "Constraint": "Max Operating Pressure (10 bar)",
+          "Verdict": "**none**",
+          "Rationale": "Residential hydronic systems operate at 1–3 bar with safety relief valves set at 3 bar. Commercial systems up to 6 bar. Well within 10 bar limit. [SRC: VN L5.2.6]"
+        },
+        {
+          "#": "C4",
+          "Constraint": "Min Flow Rate Detection",
+          "Verdict": "**none**",
+          "Rationale": "Boiler circulation flows are 5–30 l/min per zone at DN15–DN25. Minimum detectable (4.2 l/min DN20, 0.25 l/min DN14) is below typical operating range. Even low-load modulating boilers maintain circulation above detection threshold. [SRC: 01 specs, 05 Rank 1]"
+        },
+        {
+          "#": "C5",
+          "Constraint": "Air Bubble Tolerance (~2% vol)",
+          "Verdict": "**none**",
+          "Rationale": "Closed-loop hydronic heating systems are filled, purged, and pressurized at commissioning. Properly designed systems with expansion vessels (L5.2.6) and automatic air vents (L5.2.2) maintain <0.5% air content. Chronic air entrainment is a system defect addressed by water treatment (L5.2.7), not a routine operating condition. [SRC: VN L5.2.6, L5.2.7]"
+        },
+        {
+          "#": "C6",
+          "Constraint": "Pipe Full Condition",
+          "Verdict": "**none**",
+          "Rationale": "All hydronic heating circuits are closed-loop, fully filled, and pressurized as a prerequisite to operation. Partially filled pipes are a fault state detected during commissioning (L6.6). Fill valve and backflow preventer (L4.2.6.4) maintain system pressure. [SRC: VN L5.2.6]"
+        },
+        {
+          "#": "C7",
+          "Constraint": "Min Straight Pipe Run (5–10× DN)",
+          "Verdict": "**mitigable**",
+          "Rationale": "Inside boiler casings and compact mechanical rooms, space for 100–250 mm straight run (5–10× DN20) upstream of the sensor can be constrained. OEM integration within packaged boiler enclosures requires deliberate piping layout. Standard challenge for any inline sensor in this market — well understood by heating equipment designers."
+        },
+        {
+          "#": "C8",
+          "Constraint": "Temp-Dependent Accuracy",
+          "Verdict": "**none**",
+          "Rationale": "Hydronic heating operates in a moderate, predictable temperature range (30–85 °C) with gradual ramp-up/down cycles. No extreme thermal transients. Built-in NTC compensation reduces error to ~0.2%, adequate for boiler modulation control and energy efficiency calculation. [SRC: 01 constraints, VN L6.4]"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**Mitigation actions**",
+          "Value": "1. Specify sensor mounting position in boiler hydraulic design (L6.2) to ensure adequate straight run — standard practice for OEM component integration. 2. Use integrated flow straightener vane upstream (<$5 BOM cost in OEM volume, adds ~2× DN equivalent). 3. Select DN14 variant for compact boiler platforms (shorter 120 mm body, reduced absolute straight-run requirement)."
+        },
+        {
+          "Field": "**Cost estimate**",
+          "Value": "low (<$10K)"
+        },
+        {
+          "Field": "**Time estimate**",
+          "Value": "0 — addressable at OEM design phase with no product modification"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Metric",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Metric": "**Total assessments**",
+          "Value": "8"
+        },
+        {
+          "Metric": "**Knockouts**",
+          "Value": "0"
+        },
+        {
+          "Metric": "**Mitigable**",
+          "Value": "1 (C7 — Minimum Straight Pipe Run)"
+        },
+        {
+          "Metric": "**None (irrelevant)**",
+          "Value": "7"
+        },
+        {
+          "Metric": "**Market status**",
+          "Value": "**SURVIVING** — no knockouts, proceeds to downstream scoring"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "constraint_market_compatibility",
+      "product_name": "Ultrasonic Flow Sensor",
+      "vendor_name": "Marquardt",
+      "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+      "naics_code": "333414",
+      "architecture_distance": 2,
+      "constraints_assessed": 8,
+      "assessments": [
+        {
+          "constraint_name": "Media Limitation",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Hydronic heating circuits circulate water or water-glycol mixtures exclusively. Exact media match for sensor capability."
+        },
+        {
+          "constraint_name": "Maximum Medium Temperature",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Condensing boilers 55-80 degC flow, non-condensing up to 82-85 degC. Radiant floor 30-45 degC. All within 90 degC limit."
+        },
+        {
+          "constraint_name": "Maximum Operating Pressure",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Residential 1-3 bar, commercial up to 6 bar. Safety relief valves cap system pressure. Well within 10 bar."
+        },
+        {
+          "constraint_name": "Minimum Flow Rate Detection",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Boiler circulation 5-30 l/min per zone. Minimum detectable 4.2 l/min (DN20) or 0.25 l/min (DN14) — below operating range."
+        },
+        {
+          "constraint_name": "Air Bubble Tolerance",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Closed-loop hydronic systems purged at commissioning. Expansion vessels and auto air vents maintain <0.5% air content in steady state."
+        },
+        {
+          "constraint_name": "Pipe Full Condition",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Closed-loop hydronic circuits are fully filled and pressurized. Partially filled pipes are a fault state, not routine operation."
+        },
+        {
+          "constraint_name": "Minimum Straight Pipe Run",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "verdict": "mitigable",
+          "mitigation_actions": [
+            "Specify sensor mounting position in OEM boiler hydraulic design to ensure adequate straight run",
+            "Integrate flow straightener vane upstream (<$5 BOM cost in volume, adds ~2x DN equivalent)",
+            "Select DN14 variant for compact boiler platforms (shorter body, reduced absolute straight-run requirement)"
+          ],
+          "mitigation_cost_estimate": "low",
+          "mitigation_time_estimate": "0 — addressable at OEM design phase",
+          "knockout_reason": null,
+          "rationale": "Inside boiler casings and compact mechanical rooms, space for 100-250 mm straight run upstream can be constrained. Standard OEM integration consideration, addressable at design phase."
+        },
+        {
+          "constraint_name": "Temperature-Dependent Accuracy",
+          "market_name": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+          "naics_code": "333414",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Hydronic heating operates at 30-85 degC with gradual ramp cycles. NTC compensation reduces error to ~0.2%. No extreme transients."
+        }
+      ],
+      "markets_eliminated": [],
+      "markets_surviving": [
+        "333414"
+      ],
+      "market_status": "surviving",
+      "knockout_count": 0,
+      "mitigable_count": 1,
+      "none_count": 7,
+      "entities_produced": {
+        "nodes": [],
+        "relationships": [
+          {
+            "type": "incompatible_with",
+            "source": "Constraint:Minimum Straight Pipe Run",
+            "target": "Market:333414",
+            "properties": {
+              "compatibility": "mitigable",
+              "rationale": "Inside boiler casings and compact mechanical rooms, space for straight-run distance upstream can be constrained. Addressable at OEM design phase via sensor placement or flow straightener.",
+              "mitigation_actions": [
+                "OEM hydraulic design placement",
+                "Flow straightener vane (<$5 BOM)",
+                "DN14 variant for compact platforms"
+              ],
+              "mitigation_cost_estimate": "low",
+              "mitigation_time_estimate": "0 — addressable at OEM design phase",
+              "knockout_reason": null
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "has_bom": true,
+  "naics_sector_type": "manufacturing"
+}

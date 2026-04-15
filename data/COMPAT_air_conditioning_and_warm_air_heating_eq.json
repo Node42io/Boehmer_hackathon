@@ -1,0 +1,304 @@
+{
+  "id": "COMPAT_air_conditioning_and_warm_air_heating_eq",
+  "title": "COMPAT — Constraint-Market Compatibility: Air-Conditioning and Warm Air Heating Equipment Mfg (NAICS 333415)",
+  "type": "constraint_compatibility",
+  "market_slug": "air_conditioning_and_warm_air_heating_eq",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Step 07 — Product Constraints (from upstream)",
+      "content": "Constraints carried forward from 01_product_decomposition. No web search augmentation per instructions.\n\n| # | Constraint | Type | Severity | Threshold | is_absolute |\n|---|---|---|---|---|---|\n| C1 | Media Limitation | physical | hard | Water/water-like only | true |\n| C2 | Maximum Medium Temperature | physical | hard | 90 °C | true |\n| C3 | Maximum Operating Pressure | physical | hard | 10 bar | true |\n| C4 | Minimum Flow Rate Detection | operational | soft | 0.25–4.2 l/min (variant) | false |\n| C5 | Air Bubble Tolerance | physical | soft | ~2% vol | false |\n| C6 | Pipe Full Condition | operational | hard | Pipe must be full | true |\n| C7 | Minimum Straight Pipe Run | operational | soft | 5–10× DN | false |\n| C8 | Temperature-Dependent Accuracy | physical | soft | ~0.2% with NTC comp. | false |\n\n---"
+    },
+    {
+      "title": "Step 08 — Constraint-Market Assessment: NAICS 333415",
+      "content": "**Market context:** This is the sensor's **home market**. The Marquardt Ultrasonic Flow Sensor occupies the Flow Sensor (L5) position within L6f: Hydronic Circuit Assembly, activated by OT-2 (water-source heat pumps) and OT-5 (water-cooled chillers). The sensor is integrated during manufacturing as a component of the hydraulic module. [SRC: VN_air_conditioning_and_warm_air_heating_eq]\n\nOperating environment: Closed-loop hydronic circuits inside manufactured equipment. Water or water-glycol media, DN15–DN25 pipe, 5–65 °C typical (heating mode max ~65 °C, cooling mode 5–12 °C), 1–4 bar, flow rates 5–40 l/min. [SRC: 01_product_decomposition, VN L6f]\n\n### Verdict Matrix\n\n| # | Constraint | Verdict | Rationale |\n|---|---|---|---|\n| C1 | Media Limitation | **none** | Hydronic circuits in heat pumps and chillers use water or water-glycol mixtures — the exact media the sensor was designed for. No oils, gases, or non-polar liquids on the water side of these systems. [SRC: 01, VN L6f] |\n| C2 | Max Medium Temperature (90 °C) | **none** | Heating-mode flow temperatures 35–55 °C (standard HP) or up to 65 °C (high-temperature HP). Cooling mode 5–12 °C. Well within 90 °C limit. [SRC: VN L6f, 01 specs] |\n| C3 | Max Operating Pressure (10 bar) | **none** | Hydronic circuits in heat pumps and chillers operate at 1–4 bar. System safety relief valves set at 3 bar (residential) or 6 bar (commercial). Well within 10 bar. [SRC: VN L6f] |\n| C4 | Min Flow Rate Detection | **none** | Water-source heat pumps and small/medium chillers circulate 5–40 l/min through DN15–DN25 piping. Minimum detectable 4.2 l/min (DN20) or 0.25 l/min (DN14) is below typical operating range. [SRC: 01 specs, VN L6f] |\n| C5 | Air Bubble Tolerance (~2% vol) | **none** | Closed-loop hydronic circuits include expansion vessels and are de-aerated during factory commissioning (L6i). Properly filled systems have <0.5% air content. The sensor's own Digital Anomaly Detection flags bubble presence as diagnostic. [SRC: 01 features, VN L6f–L6i] |\n| C6 | Pipe Full Condition | **none** | Closed-loop pressurized hydronic circuits are fully filled during System Evacuation & Charging (L6g) or hydronic commissioning. Partially filled pipes are a manufacturing defect caught during Performance Testing (L6i). [SRC: VN L6g, L6i] |\n| C7 | Min Straight Pipe Run (5–10× DN) | **none** | OEM controls internal piping layout. Sensor placement is designed into the hydraulic module in CAD during product development. Adequate straight-run (100–250 mm for DN20) is allocated from the start. This is a solved constraint in OEM-integrated design. [SRC: VN L6f, 01 specs] |\n| C8 | Temp-Dependent Accuracy | **none** | Heat pump and chiller hydronic circuits operate in moderate temperature range (5–65 °C) with gradual changes. Built-in NTC compensation reduces error to ~0.2%. No extreme transients in standard HVAC operation. [SRC: 01 constraints] |\n\n---"
+    },
+    {
+      "title": "Summary",
+      "content": "| Metric | Value |\n|---|---|\n| **Total assessments** | 8 |\n| **Knockouts** | 0 |\n| **Mitigable** | 0 |\n| **None (irrelevant)** | 8 |\n| **Market status** | **SURVIVING** — no knockouts, no mitigable constraints. Home market — product designed for this application. |\n\n**Conclusion:** NAICS 333415 is the sensor's home market. All 8 constraints are irrelevant (\"none\") — the product was engineered specifically for hydronic circuits in heat pumps and chillers. Every operating parameter (media, temperature, pressure, flow rate, pipe condition) falls comfortably within the sensor's design envelope. No adaptation, certification, or redesign required. This serves as the baseline against which all new-market compatibility assessments should be compared. [SRC: 01_product_decomposition, VN_air_conditioning_and_warm_air_heating_eq]\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"constraint_market_compatibility\",\n  \"product_name\": \"Ultrasonic Flow Sensor\",\n  \"vendor_name\": \"Marquardt\",\n  \"market_name\": \"Air-Conditioning and Warm Air Heating Equipment and Commercial and Industrial Refrigeration Equipment Manufacturing\",\n  \"naics_code\": \"333415\",\n  \"architecture_distance\": 0,\n  \"constraints_assessed\": 8,\n  \"assessments\": [\n    {\n      \"constraint_name\": \"Media Limitation\",\n      \"market_name\": \"Air-Conditioning and Warm Air Heating Equipment and Commercial and Industrial Refrigeration Equipment Manufacturing\",\n      \"naics_code\": \"333415\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Hydronic circuits in heat pumps and chillers use water or water-glycol — exact media match.\"\n    },\n    {\n      \"constraint_name\": \"Maximum Medium Temperature\",\n      \"market_name\": \"Air-Conditioning and Warm Air Heating Equipment and Commercial and Industrial Refrigeration Equipment Manufacturing\",\n      \"naics_code\": \"333415\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Heating mode 35-55 degC (standard) to 65 degC (high-temp HP). Cooling mode 5-12 degC. Well within 90 degC limit.\"\n    },\n    {\n      \"constraint_name\": \"Maximum Operating Pressure\",\n      \"market_name\": \"Air-Conditioning and Warm Air Heating Equipment and Commercial and Industrial Refrigeration Equipment Manufacturing\",\n      \"naics_code\": \"333415\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Hydronic circuits 1-4 bar typical. Safety relief valves cap at 3-6 bar. Well within 10 bar.\"\n    },\n    {\n      \"constraint_name\": \"Minimum Flow Rate Detection\",\n      \"market_name\": \"Air-Conditioning and Warm Air Heating Equipment and Commercial and Industrial Refrigeration Equipment Manufacturing\",\n      \"naics_code\": \"333415\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Heat pump/chiller hydronic flows 5-40 l/min. Minimum detectable 4.2 l/min (DN20) or 0.25 l/min (DN14) — below operating range.\"\n    },\n    {\n      \"constraint_name\": \"Air Bubble Tolerance\",\n      \"market_name\": \"Air-Conditioning and Warm Air Heating Equipment and Commercial and Industrial Refrigeration Equipment Manufacturing\",\n      \"naics_code\": \"333415\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Closed-loop systems de-aerated during factory commissioning. Properly filled: <0.5% air content.\"\n    },\n    {\n      \"constraint_name\": \"Pipe Full Condition\",\n      \"market_name\": \"Air-Conditioning and Warm Air Heating Equipment and Commercial and Industrial Refrigeration Equipment Manufacturing\",\n      \"naics_code\": \"333415\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Closed-loop pressurized circuits fully filled during manufacturing. Partially filled = defect caught at performance testing.\"\n    },\n    {\n      \"constraint_name\": \"Minimum Straight Pipe Run\",\n      \"market_name\": \"Air-Conditioning and Warm Air Heating Equipment and Commercial and Industrial Refrigeration Equipment Manufacturing\",\n      \"naics_code\": \"333415\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"OEM controls internal piping layout. Sensor placement designed into hydraulic module from the start. Solved constraint in OEM-integrated design.\"\n    },\n    {\n      \"constraint_name\": \"Temperature-Dependent Accuracy\",\n      \"market_name\": \"Air-Conditioning and Warm Air Heating Equipment and Commercial and Industrial Refrigeration Equipment Manufacturing\",\n      \"naics_code\": \"333415\",\n      \"verdict\": \"none\",\n      \"mitigation_actions\": [],\n      \"mitigation_cost_estimate\": null,\n      \"mitigation_time_estimate\": null,\n      \"knockout_reason\": null,\n      \"rationale\": \"Moderate temperature range (5-65 degC) with gradual changes. NTC compensation reduces error to ~0.2%.\"\n    }\n  ],\n  \"markets_eliminated\": [],\n  \"markets_surviving\": [\"333415\"],\n  \"market_status\": \"surviving\",\n  \"knockout_count\": 0,\n  \"mitigable_count\": 0,\n  \"none_count\": 8,\n  \"entities_produced\": {\n    \"nodes\": [],\n    \"relationships\": []\n  }\n}\n```"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "#",
+        "Constraint",
+        "Type",
+        "Severity",
+        "Threshold",
+        "is_absolute"
+      ],
+      "rows": [
+        {
+          "#": "C1",
+          "Constraint": "Media Limitation",
+          "Type": "physical",
+          "Severity": "hard",
+          "Threshold": "Water/water-like only",
+          "is_absolute": "true"
+        },
+        {
+          "#": "C2",
+          "Constraint": "Maximum Medium Temperature",
+          "Type": "physical",
+          "Severity": "hard",
+          "Threshold": "90 °C",
+          "is_absolute": "true"
+        },
+        {
+          "#": "C3",
+          "Constraint": "Maximum Operating Pressure",
+          "Type": "physical",
+          "Severity": "hard",
+          "Threshold": "10 bar",
+          "is_absolute": "true"
+        },
+        {
+          "#": "C4",
+          "Constraint": "Minimum Flow Rate Detection",
+          "Type": "operational",
+          "Severity": "soft",
+          "Threshold": "0.25–4.2 l/min (variant)",
+          "is_absolute": "false"
+        },
+        {
+          "#": "C5",
+          "Constraint": "Air Bubble Tolerance",
+          "Type": "physical",
+          "Severity": "soft",
+          "Threshold": "~2% vol",
+          "is_absolute": "false"
+        },
+        {
+          "#": "C6",
+          "Constraint": "Pipe Full Condition",
+          "Type": "operational",
+          "Severity": "hard",
+          "Threshold": "Pipe must be full",
+          "is_absolute": "true"
+        },
+        {
+          "#": "C7",
+          "Constraint": "Minimum Straight Pipe Run",
+          "Type": "operational",
+          "Severity": "soft",
+          "Threshold": "5–10× DN",
+          "is_absolute": "false"
+        },
+        {
+          "#": "C8",
+          "Constraint": "Temperature-Dependent Accuracy",
+          "Type": "physical",
+          "Severity": "soft",
+          "Threshold": "~0.2% with NTC comp.",
+          "is_absolute": "false"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "Constraint",
+        "Verdict",
+        "Rationale"
+      ],
+      "rows": [
+        {
+          "#": "C1",
+          "Constraint": "Media Limitation",
+          "Verdict": "**none**",
+          "Rationale": "Hydronic circuits in heat pumps and chillers use water or water-glycol mixtures — the exact media the sensor was designed for. No oils, gases, or non-polar liquids on the water side of these systems. [SRC: 01, VN L6f]"
+        },
+        {
+          "#": "C2",
+          "Constraint": "Max Medium Temperature (90 °C)",
+          "Verdict": "**none**",
+          "Rationale": "Heating-mode flow temperatures 35–55 °C (standard HP) or up to 65 °C (high-temperature HP). Cooling mode 5–12 °C. Well within 90 °C limit. [SRC: VN L6f, 01 specs]"
+        },
+        {
+          "#": "C3",
+          "Constraint": "Max Operating Pressure (10 bar)",
+          "Verdict": "**none**",
+          "Rationale": "Hydronic circuits in heat pumps and chillers operate at 1–4 bar. System safety relief valves set at 3 bar (residential) or 6 bar (commercial). Well within 10 bar. [SRC: VN L6f]"
+        },
+        {
+          "#": "C4",
+          "Constraint": "Min Flow Rate Detection",
+          "Verdict": "**none**",
+          "Rationale": "Water-source heat pumps and small/medium chillers circulate 5–40 l/min through DN15–DN25 piping. Minimum detectable 4.2 l/min (DN20) or 0.25 l/min (DN14) is below typical operating range. [SRC: 01 specs, VN L6f]"
+        },
+        {
+          "#": "C5",
+          "Constraint": "Air Bubble Tolerance (~2% vol)",
+          "Verdict": "**none**",
+          "Rationale": "Closed-loop hydronic circuits include expansion vessels and are de-aerated during factory commissioning (L6i). Properly filled systems have <0.5% air content. The sensor's own Digital Anomaly Detection flags bubble presence as diagnostic. [SRC: 01 features, VN L6f–L6i]"
+        },
+        {
+          "#": "C6",
+          "Constraint": "Pipe Full Condition",
+          "Verdict": "**none**",
+          "Rationale": "Closed-loop pressurized hydronic circuits are fully filled during System Evacuation & Charging (L6g) or hydronic commissioning. Partially filled pipes are a manufacturing defect caught during Performance Testing (L6i). [SRC: VN L6g, L6i]"
+        },
+        {
+          "#": "C7",
+          "Constraint": "Min Straight Pipe Run (5–10× DN)",
+          "Verdict": "**none**",
+          "Rationale": "OEM controls internal piping layout. Sensor placement is designed into the hydraulic module in CAD during product development. Adequate straight-run (100–250 mm for DN20) is allocated from the start. This is a solved constraint in OEM-integrated design. [SRC: VN L6f, 01 specs]"
+        },
+        {
+          "#": "C8",
+          "Constraint": "Temp-Dependent Accuracy",
+          "Verdict": "**none**",
+          "Rationale": "Heat pump and chiller hydronic circuits operate in moderate temperature range (5–65 °C) with gradual changes. Built-in NTC compensation reduces error to ~0.2%. No extreme transients in standard HVAC operation. [SRC: 01 constraints]"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Metric",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Metric": "**Total assessments**",
+          "Value": "8"
+        },
+        {
+          "Metric": "**Knockouts**",
+          "Value": "0"
+        },
+        {
+          "Metric": "**Mitigable**",
+          "Value": "0"
+        },
+        {
+          "Metric": "**None (irrelevant)**",
+          "Value": "8"
+        },
+        {
+          "Metric": "**Market status**",
+          "Value": "**SURVIVING** — no knockouts, no mitigable constraints. Home market — product designed for this application."
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "constraint_market_compatibility",
+      "product_name": "Ultrasonic Flow Sensor",
+      "vendor_name": "Marquardt",
+      "market_name": "Air-Conditioning and Warm Air Heating Equipment and Commercial and Industrial Refrigeration Equipment Manufacturing",
+      "naics_code": "333415",
+      "architecture_distance": 0,
+      "constraints_assessed": 8,
+      "assessments": [
+        {
+          "constraint_name": "Media Limitation",
+          "market_name": "Air-Conditioning and Warm Air Heating Equipment and Commercial and Industrial Refrigeration Equipment Manufacturing",
+          "naics_code": "333415",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Hydronic circuits in heat pumps and chillers use water or water-glycol — exact media match."
+        },
+        {
+          "constraint_name": "Maximum Medium Temperature",
+          "market_name": "Air-Conditioning and Warm Air Heating Equipment and Commercial and Industrial Refrigeration Equipment Manufacturing",
+          "naics_code": "333415",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Heating mode 35-55 degC (standard) to 65 degC (high-temp HP). Cooling mode 5-12 degC. Well within 90 degC limit."
+        },
+        {
+          "constraint_name": "Maximum Operating Pressure",
+          "market_name": "Air-Conditioning and Warm Air Heating Equipment and Commercial and Industrial Refrigeration Equipment Manufacturing",
+          "naics_code": "333415",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Hydronic circuits 1-4 bar typical. Safety relief valves cap at 3-6 bar. Well within 10 bar."
+        },
+        {
+          "constraint_name": "Minimum Flow Rate Detection",
+          "market_name": "Air-Conditioning and Warm Air Heating Equipment and Commercial and Industrial Refrigeration Equipment Manufacturing",
+          "naics_code": "333415",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Heat pump/chiller hydronic flows 5-40 l/min. Minimum detectable 4.2 l/min (DN20) or 0.25 l/min (DN14) — below operating range."
+        },
+        {
+          "constraint_name": "Air Bubble Tolerance",
+          "market_name": "Air-Conditioning and Warm Air Heating Equipment and Commercial and Industrial Refrigeration Equipment Manufacturing",
+          "naics_code": "333415",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Closed-loop systems de-aerated during factory commissioning. Properly filled: <0.5% air content."
+        },
+        {
+          "constraint_name": "Pipe Full Condition",
+          "market_name": "Air-Conditioning and Warm Air Heating Equipment and Commercial and Industrial Refrigeration Equipment Manufacturing",
+          "naics_code": "333415",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Closed-loop pressurized circuits fully filled during manufacturing. Partially filled = defect caught at performance testing."
+        },
+        {
+          "constraint_name": "Minimum Straight Pipe Run",
+          "market_name": "Air-Conditioning and Warm Air Heating Equipment and Commercial and Industrial Refrigeration Equipment Manufacturing",
+          "naics_code": "333415",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "OEM controls internal piping layout. Sensor placement designed into hydraulic module from the start. Solved constraint in OEM-integrated design."
+        },
+        {
+          "constraint_name": "Temperature-Dependent Accuracy",
+          "market_name": "Air-Conditioning and Warm Air Heating Equipment and Commercial and Industrial Refrigeration Equipment Manufacturing",
+          "naics_code": "333415",
+          "verdict": "none",
+          "mitigation_actions": [],
+          "mitigation_cost_estimate": null,
+          "mitigation_time_estimate": null,
+          "knockout_reason": null,
+          "rationale": "Moderate temperature range (5-65 degC) with gradual changes. NTC compensation reduces error to ~0.2%."
+        }
+      ],
+      "markets_eliminated": [],
+      "markets_surviving": [
+        "333415"
+      ],
+      "market_status": "surviving",
+      "knockout_count": 0,
+      "mitigable_count": 0,
+      "none_count": 8,
+      "entities_produced": {
+        "nodes": [],
+        "relationships": []
+      }
+    }
+  ],
+  "has_bom": true,
+  "naics_sector_type": "manufacturing"
+}

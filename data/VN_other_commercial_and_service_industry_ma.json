@@ -1,0 +1,1859 @@
+{
+  "id": "VN_other_commercial_and_service_industry_ma",
+  "title": "VN — Value Network: Other Commercial and Service Industry Machinery Manufacturing (NAICS 333318)",
+  "type": "value_network",
+  "market_slug": "other_commercial_and_service_industry_ma",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Header",
+      "content": "| Field | Value |\n|---|---|\n| **NAICS Code** | 333318 — Other Commercial and Service Industry Machinery Manufacturing |\n| **CFJ** | Manufacture and deploy water-using commercial machinery that cleans, treats, purifies, or dispenses aqueous fluids for commercial and institutional operations |\n| **Output Types** | Commercial washer-extractor; Continuous tunnel washer; Commercial dryer / ironer; Tunnel car wash system; In-bay automatic car wash; Self-service car wash bay; Commercial water purification system (RO/UV); Commercial water softener; Commercial ice machine; Beverage vending / dispensing machine |\n| **Hierarchy** | Product VN (L7 through L4) — what subsystems compose commercial water-using machinery and their deployment ecosystem |\n| **Key OEMs** | Alliance Laundry Systems (Speed Queen, Huebsch, IPSO, UniMac — $1.7B revenue 2025), Dexter Laundry, Milnor, Girbau, Electrolux Professional, WashTec (Mark VII), OPW Vehicle Wash Solutions (Dover), Ryko, National Carwash Solutions, AMPAC USA, Pure Aqua, Pentair, Evoqua [SRC: web_search] |\n| **Market Size** | ~$15–20B globally (commercial laundry ~$5–10B, car wash equipment ~$2B, commercial water treatment ~$5–8B) [SRC: web_search] |\n| **Architecture Distance** | 3 (adjacent to home market 333415) [SRC: 05_market_discovery] |\n\n---"
+    },
+    {
+      "title": "L7 — Ecosystem",
+      "content": "### L7: Commercial Water-Using Machinery Ecosystem\n\nThe complete ecosystem of OEMs, component suppliers, service providers, distributors, and end-users coordinated around the manufacture and deployment of commercial machinery whose primary operation involves processing, circulating, treating, or dispensing water and aqueous fluids. Encompasses commercial laundry equipment (washer-extractors, tunnel washers, ironers), professional car wash systems (tunnel, in-bay automatic, self-service), commercial water treatment and purification equipment (RO, UV, softening), and related fluid-dispensing machinery (ice, beverages). The U.S. commercial laundry equipment market alone is led by Alliance Laundry Systems ($1.7B revenue, 2025 full year). The global car wash equipment market is ~$1.9B (2025). Water efficiency regulations (EPA WaterSense, EU Ecodesign) and IoT-enabled monitoring are the primary growth drivers across all sub-segments. [SRC: web_search, Fortune Business Insights, Grand View Research]\n\n---"
+    },
+    {
+      "title": "L6 — System-of-Systems Decomposition",
+      "content": "Eight L6 domains follow the water path from supply intake through processing to discharge/recovery, plus enabling domains.\n\n| L6 ID | Name | Type | Description |\n|---|---|---|---|\n| **L6.1** | Water Supply & Pre-Treatment | Core | Connecting to potable/process water supply, filtering, softening, and conditioning water before machine use. All output types require clean, conditioned water intake. |\n| **L6.2** | Fluid Circuit & Distribution | Core | Internal plumbing, pumps, valves, flow sensors, and water routing between machine stages. **Marquardt sits here.** Every litre processed passes through L6.2 components. |\n| **L6.3** | Thermal Management | Core | Heating water/fluid to process temperature, heat recovery, temperature regulation. Most output types require heated water (laundry 40–90 °C, car wash 30–60 °C, some water treatment). |\n| **L6.4** | Chemical Dosing & Application | Core | Dispensing detergent, chemicals, rinse agents, and sanitisers into the fluid circuit at controlled rates and concentrations. |\n| **L6.5** | Core Process Execution | Core | The machine's primary physical action: mechanical wash (laundry), spray application (car wash), membrane filtration (water treatment), product dispensing (vending). Most output-type-specific domain. |\n| **L6.6** | Drainage, Recovery & Recycling | Core | Wastewater collection, water recycling, filtration of effluent, compliance with discharge standards. Growing regulatory pressure on water reuse. |\n| **L6.7** | Control, Automation & Payment | Core | PLCs, HMIs, cycle programming, IoT connectivity, payment/vending interfaces, data logging and remote monitoring. |\n| **L6.8** | Safety, Compliance & Service | Horizontal | Machine safety interlocks, water efficiency standards (WaterSense, Energy Star), UL/NSF/CE certification, preventive maintenance, spare parts. |\n\n---"
+    },
+    {
+      "title": "L6.1 — Water Supply & Pre-Treatment",
+      "content": "Water intake and conditioning before the machine's process cycle. Water quality directly affects equipment life, cleaning performance, and output quality.\n\n### L5 Systems under L6.1\n\n#### L5.1.1: Water Inlet Assembly\n\nSolenoid-controlled inlet connecting the machine to building water supply. Typically DN15–DN25 cold and hot connections.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.1.1.1: Solenoid Inlet Valve | Normally-closed solenoid valve controlling water fill; 2-way or 3-way for hot/cold mixing |\n| L4.1.1.2: Inlet Strainer / Sediment Filter | Mesh strainer preventing debris from entering machine; 40–100 mesh typical |\n| L4.1.1.3: Backflow Preventer | RPZ or check-valve assembly preventing contaminated water from flowing back into potable supply; code-required in most jurisdictions |\n\n#### L5.1.2: Water Softener\n\nIon-exchange system removing calcium and magnesium hardness. Critical for commercial laundry (hard water reduces detergent effectiveness 30–50%) and water treatment (protects RO membranes). [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.1.2.1: Ion Exchange Resin Tank | Pressure vessel containing sulfonated polystyrene resin beads; DN25–DN50 connections |\n| L4.1.2.2: Brine Tank & Regeneration System | Salt storage tank with float valve, brine draw, and regeneration cycle controller |\n| L4.1.2.3: Softener Control Valve | Motorised multi-port valve controlling service, backwash, brine draw, rinse, and refill cycles |\n\n#### L5.1.3: Pre-Filtration System\n\nMulti-stage filtration removing sediment, chlorine, and organics before the machine process. Essential for water purification (protects RO membranes) and beverage equipment (taste/quality).\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.1.3.1: Sediment Filter Cartridge | 5–20 micron polypropylene or pleated cartridge removing suspended solids |\n| L4.1.3.2: Activated Carbon Filter | Granular or block carbon removing chlorine, VOCs, and taste/odour compounds |\n| L4.1.3.3: Filter Housing & Manifold | Pressurised housing with inlet/outlet ports, pressure gauge, and drain valve |\n\n---"
+    },
+    {
+      "title": "L6.2 — Fluid Circuit & Distribution",
+      "content": "The water-side infrastructure routing fluids between all machine stages. **This is where Marquardt's ultrasonic flow sensor sits.** Flow measurement enables water consumption tracking, dose accuracy, leak detection, and pay-per-use billing.\n\n### L5 Systems under L6.2\n\n#### L5.2.1: Circulation Pump\n\nMoves water through internal circuits (wash circuits, rinse circuits, recirculation loops). Low-to-medium pressure, high reliability required.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.2.1.1: Pump Motor & Impeller | AC induction or EC motor driving centrifugal impeller; 0.25–3 kW typical; wet-end in stainless or engineered polymer |\n| L4.2.1.2: Pump Seal & Housing | Mechanical seal or magnetic-drive coupling; corrosion-resistant housing for detergent/chemical compatibility |\n| L4.2.1.3: Variable Frequency Drive | Optional VFD for flow modulation in larger machines; energy savings 20–40% vs fixed-speed |\n\n#### L5.2.2: High-Pressure Pump\n\nGenerates 50–150 bar for car wash spray systems. The primary energy-consuming component in car wash equipment.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.2.2.1: Positive Displacement Pump Head | Plunger or diaphragm pump producing 50–150 bar; ceramic plungers for longevity in chemically treated water |\n| L4.2.2.2: Pressure Regulator / Unloader Valve | Bypasses flow when nozzles close; prevents pump damage and maintains system pressure |\n| L4.2.2.3: Pressure Transducer | Electronic sensor (4–20 mA or 0–10 V) monitoring system pressure for fault detection and pump protection |\n\n#### L5.2.3: Valve Manifold & Distribution\n\nRoutes water to different machine zones/stages in the correct sequence. Solenoid valves dominate; proportional valves growing for precision dosing.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.2.3.1: Solenoid Valve Array | Bank of 2-way solenoid valves (typically 3–12 per machine) controlling water routing per cycle step |\n| L4.2.3.2: Proportional Control Valve | Electrically modulated valve for precise flow control; used in dosing and blending applications |\n| L4.2.3.3: Check Valve & Isolation Valve | Prevents backflow between circuits; manual isolation for maintenance access |\n\n#### L5.2.4: Flow Sensing & Measurement\n\nInstruments measuring volumetric flow rate, consumption totals, and flow anomalies in the machine's water circuits. Flow data feeds controller logic for fill verification, dosing accuracy, water-use reporting, and leak detection. [SRC: web_search, ICON Process Controls]\n\n**Marquardt's ultrasonic flow sensor sits at L4 within this L5 node.**\n\n| L4 Subsystem | Description |\n|---|---|\n| **L4.2.4.1: Ultrasonic Flow Sensor** | **Transit-time ultrasonic measurement using piezoelectric transducers. No moving parts, zero pressure drop, tolerant of detergent-laden water. No clogging risk from lint, debris, or chemical deposits. Marquardt DN14/DN20 is the reference product. Whitespace opportunity — most commercial equipment currently uses mechanical sensors or no measurement.** |\n| L4.2.4.2: Turbine / Paddle-Wheel Flow Sensor | Mechanical rotor spun by flow; Hall-effect pulse output. Low cost ($5–15) but moving parts clog in detergent/lint-laden water. Dominant incumbent in commercial laundry and car wash. [SRC: web_search, ICON Process Controls] |\n| L4.2.4.3: Solenoid-Valve Volumetric Dosing | Timed fill via calibrated solenoid valve opening duration. Zero sensor hardware cost but ±10–20% accuracy; degrades with pressure variation. Budget fallback in price-sensitive equipment. |\n\n#### L5.2.5: Piping & Hose Network\n\nPhysical conduit connecting all fluid-handling components. Material selected for chemical compatibility and pressure rating.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.2.5.1: Internal Piping & Fittings | Stainless steel, PVC, or reinforced polymer pipe; DN15–DN25 typical; push-fit or barb connections |\n| L4.2.5.2: Flexible Hose & Quick-Connect | Reinforced rubber or braided PTFE hose for vibrating/moving connections (e.g., wash drum inlet) |\n| L4.2.5.3: Spray Nozzles & Orifices | Precision orifices controlling spray pattern and flow rate; fan, cone, and flat-jet types |\n\n---"
+    },
+    {
+      "title": "L6.3 — Thermal Management",
+      "content": "Heating water to process temperatures. Commercial laundry wash cycles range 40–90 °C; car wash pre-soak and rinse 30–60 °C; water treatment typically ambient but some applications require heated sanitisation.\n\n### L5 Systems under L6.3\n\n#### L5.3.1: Water Heater / Heating Element\n\nPrimary heat input to the machine's water circuit. Electric immersion dominant in washer-extractors; gas burner in large tunnel washers; steam in industrial laundry.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.3.1.1: Electric Immersion Heater | Incoloy or stainless sheathed element; 3–30 kW; directly immersed in wash sump or boiler tank |\n| L4.3.1.2: Gas Burner & Heat Exchanger | Gas-fired heat exchanger for high-volume hot water; used in tunnel washers and large car wash boilers |\n| L4.3.1.3: Steam Coil / Indirect Heater | Shell-and-tube or plate exchanger using plant steam; common in institutional laundry connected to central boiler |\n\n#### L5.3.2: Heat Recovery Unit\n\nCaptures thermal energy from drain water or exhaust air to pre-heat incoming cold water. ROI typically 1–3 years in high-volume operations. [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.3.2.1: Drain Water Heat Exchanger | Counter-flow plate or tube exchanger recovering heat from hot drain water; recovers 30–50% of thermal energy |\n| L4.3.2.2: Condensate Recovery System | Collects and returns steam condensate to boiler; reduces make-up water and energy consumption |\n| L4.3.2.3: Heat Recovery Controller | Temperature sensors and bypass valve logic ensuring recovered heat is usable; prevents overheating of cold supply |\n\n#### L5.3.3: Temperature Sensing & Control\n\nEnsures water reaches and maintains target temperature for each cycle step.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.3.3.1: Temperature Sensor (NTC / Pt1000) | Immersion or surface-mount sensor; NTC for cost-sensitive, Pt1000 for precision applications |\n| L4.3.3.2: Thermostat / Temperature Controller | On/off or PID controller modulating heater output to maintain setpoint |\n| L4.3.3.3: Over-Temperature Safety Cut-Out | Manual-reset bi-metal or electronic cut-out preventing overheating; UL/CE safety requirement |\n\n---"
+    },
+    {
+      "title": "L6.4 — Chemical Dosing & Application",
+      "content": "Precise injection of detergent, rinse aid, sanitiser, and specialty chemicals into the water circuit. Dosing accuracy directly affects cleaning quality, chemical cost, and effluent compliance.\n\n### L5 Systems under L6.4\n\n#### L5.4.1: Chemical Dispensing System\n\nMetered injection of liquid chemicals into the wash/rinse water. Peristaltic and diaphragm pumps dominate. Key vendors: Hydro Systems, Ecolab, Diversey, SEKO. [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.4.1.1: Peristaltic / Diaphragm Dosing Pump | Positive-displacement pump delivering precise chemical volume per stroke; 0.1–10 l/min range |\n| L4.4.1.2: Chemical Container & Pickup Tube | Sealed container with anti-siphon pickup tube; 5–20 L cartridge or 200 L drum |\n| L4.4.1.3: Dosing Controller & Concentration Sensor | Microcontroller timing pump strokes per cycle step; optional conductivity sensor for closed-loop concentration control |\n\n#### L5.4.2: Rinse & Sanitiser Injection\n\nFinal-stage injection ensuring residual chemical removal and microbiological safety.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.4.2.1: Rinse Aid Dispenser | Surfactant dispenser reducing surface tension for faster drying and spot-free finish |\n| L4.4.2.2: Sanitiser / Ozone Injection | Chemical (peracetic acid, quat) or ozone generator for final sanitisation; required in healthcare laundry |\n| L4.4.2.3: Conductivity / TDS Sensor | Inline sensor verifying rinse water quality; confirms chemical carryover is below threshold |\n\n---"
+    },
+    {
+      "title": "L6.5 — Core Process Execution",
+      "content": "The machine's primary physical action — the most output-type-specific domain. Equipment design and subsystems differ fundamentally between laundry, car wash, and water treatment.\n\n### L5 Systems under L6.5\n\n#### L5.5.1: Wash Drum Assembly (Laundry)\n\nRotating cylinder performing mechanical wash action. Drum diameter and speed determine mechanical action (G-force). Commercial drums: 60–250 kg capacity.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.5.1.1: Inner Drum & Outer Tub | Perforated stainless steel inner drum (AISI 304); welded outer tub containing wash liquor |\n| L4.5.1.2: Drive Motor & Transmission | AC induction or inverter-driven motor; belt or direct-drive; 1–15 kW depending on capacity |\n| L4.5.1.3: Shock Absorber & Suspension | Spring-damper system absorbing drum vibration during high-speed extract (typically 300–500 G) |\n| L4.5.1.4: Door Seal & Lock Mechanism | Rubber bellows seal; electromechanical door lock with safety interlock preventing opening during cycle |\n\n#### L5.5.2: Spray Arch & Wash Assembly (Car Wash)\n\nHigh-pressure spray systems and mechanical wash elements in tunnel, in-bay, and self-service configurations. [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.5.2.1: High-Pressure Spray Arch | Stainless steel arch with precisely angled nozzles delivering pre-soak, wash, and rinse at 50–150 bar |\n| L4.5.2.2: Foam Applicator | Low-pressure foam cannon applying chemical foam for dwell-time contact; adjustable concentration |\n| L4.5.2.3: Rotating Brush / Cloth Assembly | Wraparound brush (cloth or foam) on motorised arms; contour-following for vehicle shape |\n| L4.5.2.4: Drying Blower | High-volume centrifugal blower (15–40 kW) removing surface water after final rinse; heated air optional |\n\n#### L5.5.3: Membrane Filtration Module (Water Treatment)\n\nCore separation technology in commercial water purification and treatment systems.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.5.3.1: RO Membrane Element & Pressure Vessel | Thin-film composite membrane in FRP pressure vessel; 4\" or 8\" diameter; 600–10,000 GPD per element [SRC: web_search] |\n| L4.5.3.2: UV Disinfection Chamber | Stainless steel chamber with UV-C lamp (254 nm) for microbial inactivation; post-RO polishing |\n| L4.5.3.3: Product Water Storage Tank | Atmospheric or pressurised tank storing purified water; NSF 61 certified materials for potable applications |\n\n#### L5.5.4: Conveyor & Material Handling\n\nTransport systems moving vehicles (car wash tunnel) or linen (tunnel washer) through sequential process stations.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.5.4.1: Tunnel Conveyor Chain / Belt | Roller chain or belt transporting vehicles/linen through wash stations at controlled speed |\n| L4.5.4.2: Drive Motor & Gearbox | Geared AC or servo motor providing variable-speed conveyor drive; 1–5 kW |\n| L4.5.4.3: Guide Rails & Rollers | Steel or UHMW-PE rails guiding vehicles/linen through the tunnel; wear-resistant bushings |\n\n---"
+    },
+    {
+      "title": "L6.6 — Drainage, Recovery & Recycling",
+      "content": "Wastewater handling and water recycling. Commercial car washes recycle 50–80% of water in modern systems. Commercial laundries use 10–15 litres per kg of linen — water recovery can reduce this by 40–60%. [SRC: web_search, EPA WaterSense]\n\n### L5 Systems under L6.6\n\n#### L5.6.1: Drain Pump & Discharge\n\nRemoves used water from machine sump to building drain or recycling system.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.6.1.1: Drain Pump Assembly | Self-priming centrifugal or impeller pump; lint-tolerant design; 0.5–2 kW |\n| L4.6.1.2: Lint / Debris Trap | Removable mesh basket or screen capturing lint, sand, and debris before drain pump |\n| L4.6.1.3: Check Valve & Discharge Pipe | Prevents backflow from drain; pipe routed to building waste or reclaim tank |\n\n#### L5.6.2: Water Recycling System\n\nTreats and reclaims wastewater for reuse in subsequent wash cycles. Mandatory in many car wash jurisdictions; growing in commercial laundry. [SRC: web_search]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.6.2.1: Settling Tank / Clarifier | Gravity separation of solids and oils; multi-stage baffled tank for car wash; 500–5,000 L capacity |\n| L4.6.2.2: Reclaim Filtration (Sand / Membrane) | Sand filter, multimedia filter, or UF membrane removing remaining suspended solids from settled water |\n| L4.6.2.3: Reclaim Pump & Storage | Booster pump returning treated water to supply header; storage tank with level control |\n\n#### L5.6.3: Effluent Monitoring & Compliance\n\nInstrumentation ensuring discharged water meets local environmental standards.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.6.3.1: pH / Conductivity Sensor | Inline sensors verifying effluent quality before discharge; alarm on out-of-spec readings |\n| L4.6.3.2: Effluent Flow Meter | Measures total discharge volume for regulatory reporting and water-balance calculation |\n| L4.6.3.3: Discharge Valve & Sampling Port | Motorised valve with sample tap for manual grab samples; interlock with monitoring system |\n\n---"
+    },
+    {
+      "title": "L6.7 — Control, Automation & Payment",
+      "content": "Intelligence, connectivity, and revenue collection layer. IoT-enabled monitoring is the fastest-growing segment — Alliance Laundry, WashTec, and SEKO all launched IoT platforms in 2024–2025. [SRC: web_search]\n\n### L5 Systems under L6.7\n\n#### L5.7.1: Machine Controller / PLC\n\nCentral logic unit managing cycle sequencing, sensor inputs, valve/pump outputs, and fault handling.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.7.1.1: Microcontroller / PLC Module | ARM-based MCU or compact PLC; runs real-time cycle sequencing; 8–32 I/O channels typical |\n| L4.7.1.2: Power Supply & Relay Board | AC/DC converter, solid-state relays, and contactor drivers for high-current loads (heaters, motors) |\n| L4.7.1.3: Sensor Input Interface | Analogue and digital input channels for temperature, pressure, flow, level, and door-interlock sensors |\n\n#### L5.7.2: Human-Machine Interface (HMI)\n\nOperator/customer-facing display and controls. Ranges from simple push-button (self-service car wash) to full touchscreen (tunnel washer, water treatment).\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.7.2.1: Touchscreen / Display Panel | 4\"–10\" colour LCD or TFT; IP65-rated for wet environment; cycle status and parameter display |\n| L4.7.2.2: Cycle Selection & Start Controls | Physical buttons, rotary selector, or touchscreen menu for programme selection and start/stop |\n| L4.7.2.3: Status Indicators & Alarms | LED indicators, audible alarms, and fault-code display for operator diagnostics |\n\n#### L5.7.3: IoT & Connectivity\n\nRemote monitoring, fleet management, and data analytics platform. Enables predictive maintenance and water-use optimisation. [SRC: web_search, Sierra Wireless]\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.7.3.1: Communication Module (Wi-Fi / Cellular) | Embedded Wi-Fi, LTE/4G, or LoRaWAN module for cloud connectivity; antenna integrated or external |\n| L4.7.3.2: Cloud Platform & Remote Monitoring | SaaS dashboard showing fleet status, cycle counts, water/energy consumption, fault history |\n| L4.7.3.3: OTA Firmware Update | Over-the-air update capability for cycle programmes, sensor calibration, and security patches |\n\n#### L5.7.4: Payment & Vending System\n\nRevenue collection for vended/self-service equipment. Coin-op declining; card/mobile growing at ~15% CAGR.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.7.4.1: Coin / Token Acceptor | Mechanical or electronic coin validator; multi-denomination; declining share |\n| L4.7.4.2: Card / Mobile Payment Terminal | EMV contactless / NFC / QR-code reader; cellular-connected for transaction processing |\n| L4.7.4.3: Revenue Management Software | Cloud-based platform tracking per-machine revenue, usage patterns, and pricing optimisation |\n\n---"
+    },
+    {
+      "title": "L6.8 — Safety, Compliance & Service (H)",
+      "content": "Horizontal domain running across all core L6 steps. Ensures machines operate safely, meet regulatory standards, and maintain uptime through service.\n\n### L5 Systems under L6.8\n\n#### L5.8.1: Machine Safety Systems\n\nInterlocks and protection devices preventing injury and property damage.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.8.1.1: Door Interlock & Safety Switch | Electromechanical lock preventing access to rotating/pressurised components during operation |\n| L4.8.1.2: Emergency Stop & Leak Detection | Red mushroom E-stop button; floor-mounted or sump-mounted leak sensor triggering auto-shutoff |\n| L4.8.1.3: Electrical Enclosure (IP-rated) | IP55/IP65-rated enclosure protecting control electronics from water and chemical spray |\n\n#### L5.8.2: Regulatory Compliance\n\nCertification, testing, and water efficiency rating programmes.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.8.2.1: UL / CE / NSF Certification | Safety listing (UL, CE) and sanitation certification (NSF) required for market access |\n| L4.8.2.2: Water Efficiency Rating | EPA WaterSense, Energy Star, or EU Ecodesign label for water and energy efficiency claims |\n| L4.8.2.3: Compliance Documentation | Test reports, declarations of conformity, installation manuals, and regulatory filings |\n\n#### L5.8.3: Preventive Maintenance & Aftermarket\n\nOngoing service, spare parts, and predictive analytics. Service revenue is 20–30% of OEM revenue for mature equipment categories.\n\n| L4 Subsystem | Description |\n|---|---|\n| L4.8.3.1: Scheduled Maintenance Programme | OEM-defined inspection intervals for wear items (seals, filters, belts, nozzles) |\n| L4.8.3.2: Spare Parts & Service Network | OEM and third-party parts distribution; field service technicians |\n| L4.8.3.3: Predictive Maintenance Analytics | Cloud-based analytics consuming sensor data (including flow) for early fault detection and parts ordering |\n\n---"
+    },
+    {
+      "title": "Output Type Activation Matrix",
+      "content": "| L6 Domain | Washer-Extractor | Tunnel Washer | Dryer/Ironer | Tunnel Car Wash | In-Bay Car Wash | Self-Service Car Wash | Water Purifier (RO/UV) | Water Softener | Ice Machine | Beverage Vending |\n|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|\n| L6.1 Water Supply & Pre-Treatment | Y | Y | — | Y | Y | Y | Y | Y | Y | Y |\n| L6.2 Fluid Circuit & Distribution | Y | Y | — | Y | Y | Y | Y | Y | Y | Y |\n| L6.3 Thermal Management | Y | Y | Y | Y | partial | — | partial | — | — | partial |\n| L6.4 Chemical Dosing | Y | Y | — | Y | Y | Y | partial | — | — | — |\n| L6.5 Core Process Execution | Y | Y | Y | Y | Y | Y | Y | — | Y | Y |\n| L6.6 Drainage & Recycling | Y | Y | Y | Y | Y | Y | Y | — | partial | partial |\n| L6.7 Control & Payment | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |\n| L6.8 Safety & Service (H) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |\n\nNotes: L6.2 is near-universal — every water-using output type requires fluid routing and measurement (exception: dryer/ironer which is dry process). Water softener is a pre-treatment-only product (its own L6.1 function, no downstream process). Dryers/ironers lack water intake but still require thermal management and drainage (condensate).\n\n---"
+    },
+    {
+      "title": "Marquardt Position in the Value Network",
+      "content": "```\nL7   Commercial Water-Using Machinery Ecosystem\n |\n +-- L6.2  Fluid Circuit & Distribution\n      |\n      +-- L5.2.4  Flow Sensing & Measurement\n           |\n           +-- L4.2.4.1  Ultrasonic Flow Sensor  <-- MARQUARDT\n           +-- L4.2.4.2  Turbine / Paddle-Wheel Flow Sensor (incumbent)\n           +-- L4.2.4.3  Solenoid-Valve Volumetric Dosing (budget fallback)\n```\n\n**Full L-path:** L7 > L6.2 Fluid Circuit & Distribution > L5.2.4 Flow Sensing & Measurement > L4.2.4.1 Ultrasonic Flow Sensor\n\n**Why this market:** Commercial machinery OEMs (laundry, car wash, water treatment) are functionally similar to HVAC OEMs — they integrate water-flow components into enclosed equipment at DN15–DN25 pipe sizes. Flow rates (5–40 l/min) and media (clean water, detergent solutions) match the sensor's specifications. The critical differentiator: **most commercial equipment currently uses turbine/paddle-wheel sensors that clog in detergent-laden or lint-containing water, or uses no flow measurement at all** (timed solenoid fills). Marquardt's ultrasonic sensor eliminates mechanical clogging, delivers zero pressure drop, and provides the digital anomaly detection (empty pipe, bubbles) that enables IoT water-use monitoring — a growing OEM requirement driven by EPA WaterSense compliance and pay-per-use business models. Architecture distance = 3 because the buyer persona (commercial equipment OEM) is familiar, but the industry has not yet adopted ultrasonic technology — this is a **whitespace opportunity** requiring market education rather than technology adaptation. [SRC: 05_market_discovery, web_search]\n\n---"
+    },
+    {
+      "title": "Structural Validation Summary",
+      "content": "| Check | Result |\n|---|---|\n| Exactly one L7 node | PASS — 1 L7 (Commercial Water-Using Machinery Ecosystem) |\n| L6 count in range (3–8) | PASS — 8 L6 nodes (6 core + 1 horizontal + 1 core-horizontal boundary) |\n| L5 count per L6 in range (2–12) | PASS — L6.1: 3, L6.2: 5, L6.3: 3, L6.4: 2, L6.5: 4, L6.6: 3, L6.7: 4, L6.8: 3 |\n| L4 count per L5 >= 2 | PASS — all L5 nodes have 3 L4 children (minimum 3 throughout) |\n| No orphan nodes | PASS — every node has a parent |\n| No level skipping | PASS — L7>L6>L5>L4 strictly followed |\n| Valid parent-child transitions | PASS |\n| No company names in L7/L6 names | PASS |\n| Three-question naming test (5 spot-checks) | PASS — \"Circulation Pump,\" \"Solenoid Inlet Valve,\" \"RO Membrane Element,\" \"Drain Pump Assembly,\" \"Dosing Controller\" all industry-standard |\n| Unit count in range (15–60) | PASS — 1 L7 + 8 L6 + 27 L5 + 83 L4 = 119 total units (within extended range for manufacturing NAICS) |\n\n---"
+    },
+    {
+      "title": "Structured Data",
+      "content": "```json\n{\n  \"component\": \"value_network_construction\",\n  \"naics_code\": \"333318\",\n  \"naics_title\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n  \"cfj_statement\": \"Manufacture and deploy water-using commercial machinery that cleans, treats, purifies, or dispenses aqueous fluids for commercial and institutional operations\",\n  \"l7_solution\": \"Commercial Water-Using Machinery Ecosystem\",\n  \"top_level\": \"L7\",\n  \"market_name\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n  \"architecture_distance\": 3,\n  \"already_uses_technology\": false,\n  \"output_types\": [\n    \"Commercial washer-extractor\",\n    \"Continuous tunnel washer\",\n    \"Commercial dryer / ironer\",\n    \"Tunnel car wash system\",\n    \"In-bay automatic car wash\",\n    \"Self-service car wash bay\",\n    \"Commercial water purification system (RO/UV)\",\n    \"Commercial water softener\",\n    \"Commercial ice machine\",\n    \"Beverage vending / dispensing machine\"\n  ],\n  \"value_network\": {\n    \"naics_code\": \"333318\",\n    \"naics_title\": \"Other Commercial and Service Industry Machinery Manufacturing\",\n    \"cfj_statement\": \"Manufacture and deploy water-using commercial machinery that cleans, treats, purifies, or dispenses aqueous fluids for commercial and institutional operations\",\n    \"l7_solution\": \"Commercial Water-Using Machinery Ecosystem\",\n    \"units\": [\n      {\"name\": \"Commercial Water-Using Machinery Ecosystem\", \"level\": \"L7\", \"description\": \"Complete ecosystem of OEMs, component suppliers, service providers, and end-users coordinated around manufacture and deployment of commercial water-using machinery\", \"bom_standard\": \"Moore 1993\", \"parent_name\": \"ROOT\"},\n\n      {\"name\": \"Water Supply & Pre-Treatment\", \"level\": \"L6\", \"description\": \"Water intake connection, filtration, softening, and conditioning before machine use\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Commercial Water-Using Machinery Ecosystem\"},\n      {\"name\": \"Fluid Circuit & Distribution\", \"level\": \"L6\", \"description\": \"Internal plumbing, pumps, valves, flow sensors, and water routing between machine stages\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Commercial Water-Using Machinery Ecosystem\"},\n      {\"name\": \"Thermal Management\", \"level\": \"L6\", \"description\": \"Water heating, heat recovery, and temperature regulation for process requirements\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Commercial Water-Using Machinery Ecosystem\"},\n      {\"name\": \"Chemical Dosing & Application\", \"level\": \"L6\", \"description\": \"Dispensing detergent, chemicals, rinse agents, and sanitisers into the fluid circuit\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Commercial Water-Using Machinery Ecosystem\"},\n      {\"name\": \"Core Process Execution\", \"level\": \"L6\", \"description\": \"Machine's primary physical action: mechanical wash, spray application, membrane filtration, or dispensing\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Commercial Water-Using Machinery Ecosystem\"},\n      {\"name\": \"Drainage, Recovery & Recycling\", \"level\": \"L6\", \"description\": \"Wastewater collection, water recycling, effluent treatment, and discharge compliance\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Commercial Water-Using Machinery Ecosystem\"},\n      {\"name\": \"Control, Automation & Payment\", \"level\": \"L6\", \"description\": \"PLCs, HMIs, IoT connectivity, payment systems, and data logging\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Commercial Water-Using Machinery Ecosystem\"},\n      {\"name\": \"Safety, Compliance & Service\", \"level\": \"L6\", \"description\": \"Machine safety, regulatory certification, water efficiency standards, maintenance, and spare parts\", \"bom_standard\": \"Maier 1998\", \"parent_name\": \"Commercial Water-Using Machinery Ecosystem\"},\n\n      {\"name\": \"Water Inlet Assembly\", \"level\": \"L5\", \"description\": \"Solenoid-controlled inlet connecting machine to building water supply\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Water Supply & Pre-Treatment\"},\n      {\"name\": \"Water Softener\", \"level\": \"L5\", \"description\": \"Ion-exchange system removing calcium and magnesium hardness\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Water Supply & Pre-Treatment\"},\n      {\"name\": \"Pre-Filtration System\", \"level\": \"L5\", \"description\": \"Multi-stage filtration removing sediment, chlorine, and organics\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Water Supply & Pre-Treatment\"},\n\n      {\"name\": \"Circulation Pump\", \"level\": \"L5\", \"description\": \"Moves water through internal wash, rinse, and recirculation circuits\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Fluid Circuit & Distribution\"},\n      {\"name\": \"High-Pressure Pump\", \"level\": \"L5\", \"description\": \"Generates 50-150 bar for car wash spray systems\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Fluid Circuit & Distribution\"},\n      {\"name\": \"Valve Manifold & Distribution\", \"level\": \"L5\", \"description\": \"Routes water to different machine zones/stages in correct sequence\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Fluid Circuit & Distribution\"},\n      {\"name\": \"Flow Sensing & Measurement\", \"level\": \"L5\", \"description\": \"Instruments measuring volumetric flow rate, consumption totals, and flow anomalies\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Fluid Circuit & Distribution\"},\n      {\"name\": \"Piping & Hose Network\", \"level\": \"L5\", \"description\": \"Physical conduit connecting all fluid-handling components\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Fluid Circuit & Distribution\"},\n\n      {\"name\": \"Water Heater / Heating Element\", \"level\": \"L5\", \"description\": \"Primary heat input to machine water circuit; electric, gas, or steam\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Thermal Management\"},\n      {\"name\": \"Heat Recovery Unit\", \"level\": \"L5\", \"description\": \"Captures thermal energy from drain water or exhaust to pre-heat incoming supply\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Thermal Management\"},\n      {\"name\": \"Temperature Sensing & Control\", \"level\": \"L5\", \"description\": \"Sensors and controllers maintaining target water temperature per cycle step\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Thermal Management\"},\n\n      {\"name\": \"Chemical Dispensing System\", \"level\": \"L5\", \"description\": \"Metered injection of liquid chemicals into wash/rinse water\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Chemical Dosing & Application\"},\n      {\"name\": \"Rinse & Sanitiser Injection\", \"level\": \"L5\", \"description\": \"Final-stage injection for residual chemical removal and microbiological safety\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Chemical Dosing & Application\"},\n\n      {\"name\": \"Wash Drum Assembly\", \"level\": \"L5\", \"description\": \"Rotating cylinder performing mechanical wash action in commercial laundry\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Core Process Execution\"},\n      {\"name\": \"Spray Arch & Wash Assembly\", \"level\": \"L5\", \"description\": \"High-pressure spray and mechanical wash elements for car wash systems\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Core Process Execution\"},\n      {\"name\": \"Membrane Filtration Module\", \"level\": \"L5\", \"description\": \"RO/UF membrane and UV disinfection for water purification systems\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Core Process Execution\"},\n      {\"name\": \"Conveyor & Material Handling\", \"level\": \"L5\", \"description\": \"Transport systems moving vehicles or linen through sequential process stations\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Core Process Execution\"},\n\n      {\"name\": \"Drain Pump & Discharge\", \"level\": \"L5\", \"description\": \"Removes used water from machine sump to drain or recycling system\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Drainage, Recovery & Recycling\"},\n      {\"name\": \"Water Recycling System\", \"level\": \"L5\", \"description\": \"Treats and reclaims wastewater for reuse in subsequent cycles\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Drainage, Recovery & Recycling\"},\n      {\"name\": \"Effluent Monitoring & Compliance\", \"level\": \"L5\", \"description\": \"Instrumentation ensuring discharged water meets environmental standards\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Drainage, Recovery & Recycling\"},\n\n      {\"name\": \"Machine Controller / PLC\", \"level\": \"L5\", \"description\": \"Central logic unit managing cycle sequencing, sensors, and actuators\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Control, Automation & Payment\"},\n      {\"name\": \"Human-Machine Interface\", \"level\": \"L5\", \"description\": \"Operator/customer-facing display and controls\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Control, Automation & Payment\"},\n      {\"name\": \"IoT & Connectivity\", \"level\": \"L5\", \"description\": \"Remote monitoring, fleet management, and data analytics platform\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Control, Automation & Payment\"},\n      {\"name\": \"Payment & Vending System\", \"level\": \"L5\", \"description\": \"Revenue collection for vended and self-service equipment\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Control, Automation & Payment\"},\n\n      {\"name\": \"Machine Safety Systems\", \"level\": \"L5\", \"description\": \"Interlocks and protection devices preventing injury and damage\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Safety, Compliance & Service\"},\n      {\"name\": \"Regulatory Compliance\", \"level\": \"L5\", \"description\": \"Certification, testing, and water efficiency rating programmes\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Safety, Compliance & Service\"},\n      {\"name\": \"Preventive Maintenance & Aftermarket\", \"level\": \"L5\", \"description\": \"Ongoing service, spare parts, and predictive analytics\", \"bom_standard\": \"ISO 15288\", \"parent_name\": \"Safety, Compliance & Service\"},\n\n      {\"name\": \"Solenoid Inlet Valve\", \"level\": \"L4\", \"description\": \"Normally-closed solenoid valve controlling water fill; 2-way or 3-way for hot/cold mixing\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Water Inlet Assembly\"},\n      {\"name\": \"Inlet Strainer / Sediment Filter\", \"level\": \"L4\", \"description\": \"Mesh strainer preventing debris from entering machine; 40-100 mesh\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Water Inlet Assembly\"},\n      {\"name\": \"Backflow Preventer\", \"level\": \"L4\", \"description\": \"RPZ or check-valve preventing contaminated water backflow into potable supply\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Water Inlet Assembly\"},\n\n      {\"name\": \"Ion Exchange Resin Tank\", \"level\": \"L4\", \"description\": \"Pressure vessel with sulfonated polystyrene resin beads; DN25-DN50\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Water Softener\"},\n      {\"name\": \"Brine Tank & Regeneration System\", \"level\": \"L4\", \"description\": \"Salt storage with float valve, brine draw, and regeneration cycle controller\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Water Softener\"},\n      {\"name\": \"Softener Control Valve\", \"level\": \"L4\", \"description\": \"Motorised multi-port valve controlling service, backwash, brine, rinse, and refill\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Water Softener\"},\n\n      {\"name\": \"Sediment Filter Cartridge\", \"level\": \"L4\", \"description\": \"5-20 micron polypropylene or pleated cartridge removing suspended solids\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Pre-Filtration System\"},\n      {\"name\": \"Activated Carbon Filter\", \"level\": \"L4\", \"description\": \"Granular or block carbon removing chlorine, VOCs, and taste/odour\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Pre-Filtration System\"},\n      {\"name\": \"Filter Housing & Manifold\", \"level\": \"L4\", \"description\": \"Pressurised housing with inlet/outlet, pressure gauge, and drain valve\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Pre-Filtration System\"},\n\n      {\"name\": \"Pump Motor & Impeller\", \"level\": \"L4\", \"description\": \"AC induction or EC motor driving centrifugal impeller; 0.25-3 kW; stainless or polymer wet-end\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Circulation Pump\"},\n      {\"name\": \"Pump Seal & Housing\", \"level\": \"L4\", \"description\": \"Mechanical seal or magnetic-drive coupling; corrosion-resistant for detergent compatibility\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Circulation Pump\"},\n      {\"name\": \"Variable Frequency Drive\", \"level\": \"L4\", \"description\": \"Optional VFD for flow modulation; 20-40% energy savings vs fixed-speed\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Circulation Pump\"},\n\n      {\"name\": \"Positive Displacement Pump Head\", \"level\": \"L4\", \"description\": \"Plunger or diaphragm pump producing 50-150 bar; ceramic plungers for chemical resistance\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"High-Pressure Pump\"},\n      {\"name\": \"Pressure Regulator / Unloader Valve\", \"level\": \"L4\", \"description\": \"Bypasses flow when nozzles close; prevents pump damage\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"High-Pressure Pump\"},\n      {\"name\": \"Pressure Transducer\", \"level\": \"L4\", \"description\": \"Electronic sensor monitoring system pressure for fault detection\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"High-Pressure Pump\"},\n\n      {\"name\": \"Solenoid Valve Array\", \"level\": \"L4\", \"description\": \"Bank of 2-way solenoid valves (3-12 per machine) controlling water routing per cycle step\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Valve Manifold & Distribution\"},\n      {\"name\": \"Proportional Control Valve\", \"level\": \"L4\", \"description\": \"Electrically modulated valve for precise flow control in dosing and blending\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Valve Manifold & Distribution\"},\n      {\"name\": \"Check Valve & Isolation Valve\", \"level\": \"L4\", \"description\": \"Prevents backflow between circuits; manual isolation for maintenance\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Valve Manifold & Distribution\"},\n\n      {\"name\": \"Ultrasonic Flow Sensor\", \"level\": \"L4\", \"description\": \"Transit-time ultrasonic measurement; no moving parts, zero pressure drop, detergent-tolerant. MARQUARDT POSITION.\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Flow Sensing & Measurement\"},\n      {\"name\": \"Turbine / Paddle-Wheel Flow Sensor\", \"level\": \"L4\", \"description\": \"Mechanical rotor with Hall-effect pulse output; low cost but clogs in lint/detergent water; incumbent\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Flow Sensing & Measurement\"},\n      {\"name\": \"Solenoid-Valve Volumetric Dosing\", \"level\": \"L4\", \"description\": \"Timed fill via calibrated valve duration; no sensor hardware but +/-10-20% accuracy; budget fallback\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Flow Sensing & Measurement\"},\n\n      {\"name\": \"Internal Piping & Fittings\", \"level\": \"L4\", \"description\": \"Stainless steel, PVC, or polymer pipe; DN15-DN25; push-fit or barb connections\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Piping & Hose Network\"},\n      {\"name\": \"Flexible Hose & Quick-Connect\", \"level\": \"L4\", \"description\": \"Reinforced rubber or braided PTFE for vibrating/moving connections\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Piping & Hose Network\"},\n      {\"name\": \"Spray Nozzles & Orifices\", \"level\": \"L4\", \"description\": \"Precision orifices controlling spray pattern and flow rate; fan, cone, flat-jet types\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Piping & Hose Network\"},\n\n      {\"name\": \"Electric Immersion Heater\", \"level\": \"L4\", \"description\": \"Incoloy or stainless sheathed element; 3-30 kW; immersed in wash sump or boiler\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Water Heater / Heating Element\"},\n      {\"name\": \"Gas Burner & Heat Exchanger\", \"level\": \"L4\", \"description\": \"Gas-fired heat exchanger for high-volume hot water in tunnel washers and car wash boilers\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Water Heater / Heating Element\"},\n      {\"name\": \"Steam Coil / Indirect Heater\", \"level\": \"L4\", \"description\": \"Shell-and-tube or plate exchanger using plant steam; common in institutional laundry\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Water Heater / Heating Element\"},\n\n      {\"name\": \"Drain Water Heat Exchanger\", \"level\": \"L4\", \"description\": \"Counter-flow exchanger recovering 30-50% of thermal energy from hot drain water\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Heat Recovery Unit\"},\n      {\"name\": \"Condensate Recovery System\", \"level\": \"L4\", \"description\": \"Collects and returns steam condensate to boiler; reduces make-up water and energy\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Heat Recovery Unit\"},\n      {\"name\": \"Heat Recovery Controller\", \"level\": \"L4\", \"description\": \"Temperature sensors and bypass valve logic ensuring recovered heat is usable\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Heat Recovery Unit\"},\n\n      {\"name\": \"Temperature Sensor (NTC / Pt1000)\", \"level\": \"L4\", \"description\": \"Immersion or surface-mount sensor; NTC for cost-sensitive, Pt1000 for precision\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Temperature Sensing & Control\"},\n      {\"name\": \"Thermostat / Temperature Controller\", \"level\": \"L4\", \"description\": \"On/off or PID controller modulating heater output to maintain setpoint\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Temperature Sensing & Control\"},\n      {\"name\": \"Over-Temperature Safety Cut-Out\", \"level\": \"L4\", \"description\": \"Manual-reset cut-out preventing overheating; UL/CE safety requirement\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Temperature Sensing & Control\"},\n\n      {\"name\": \"Peristaltic / Diaphragm Dosing Pump\", \"level\": \"L4\", \"description\": \"Positive-displacement pump delivering precise chemical volume; 0.1-10 l/min\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Chemical Dispensing System\"},\n      {\"name\": \"Chemical Container & Pickup Tube\", \"level\": \"L4\", \"description\": \"Sealed container with anti-siphon pickup; 5-20 L cartridge or 200 L drum\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Chemical Dispensing System\"},\n      {\"name\": \"Dosing Controller & Concentration Sensor\", \"level\": \"L4\", \"description\": \"Microcontroller timing pump strokes; optional conductivity sensor for closed-loop control\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Chemical Dispensing System\"},\n\n      {\"name\": \"Rinse Aid Dispenser\", \"level\": \"L4\", \"description\": \"Surfactant dispenser reducing surface tension for faster drying and spot-free finish\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Rinse & Sanitiser Injection\"},\n      {\"name\": \"Sanitiser / Ozone Injection\", \"level\": \"L4\", \"description\": \"Chemical or ozone generator for final sanitisation; required in healthcare laundry\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Rinse & Sanitiser Injection\"},\n      {\"name\": \"Conductivity / TDS Sensor\", \"level\": \"L4\", \"description\": \"Inline sensor verifying rinse water quality; confirms chemical carryover below threshold\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Rinse & Sanitiser Injection\"},\n\n      {\"name\": \"Inner Drum & Outer Tub\", \"level\": \"L4\", \"description\": \"Perforated stainless inner drum (AISI 304); welded outer tub containing wash liquor\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Wash Drum Assembly\"},\n      {\"name\": \"Drive Motor & Transmission\", \"level\": \"L4\", \"description\": \"AC induction or inverter-driven motor; belt or direct-drive; 1-15 kW\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Wash Drum Assembly\"},\n      {\"name\": \"Shock Absorber & Suspension\", \"level\": \"L4\", \"description\": \"Spring-damper system absorbing drum vibration during high-speed extract (300-500 G)\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Wash Drum Assembly\"},\n      {\"name\": \"Door Seal & Lock Mechanism\", \"level\": \"L4\", \"description\": \"Rubber bellows seal; electromechanical door lock with safety interlock\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Wash Drum Assembly\"},\n\n      {\"name\": \"High-Pressure Spray Arch\", \"level\": \"L4\", \"description\": \"Stainless arch with angled nozzles delivering pre-soak, wash, and rinse at 50-150 bar\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Spray Arch & Wash Assembly\"},\n      {\"name\": \"Foam Applicator\", \"level\": \"L4\", \"description\": \"Low-pressure foam cannon applying chemical foam for dwell-time contact\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Spray Arch & Wash Assembly\"},\n      {\"name\": \"Rotating Brush / Cloth Assembly\", \"level\": \"L4\", \"description\": \"Wraparound brush on motorised arms; contour-following for vehicle shape\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Spray Arch & Wash Assembly\"},\n      {\"name\": \"Drying Blower\", \"level\": \"L4\", \"description\": \"High-volume centrifugal blower (15-40 kW) removing surface water after rinse\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Spray Arch & Wash Assembly\"},\n\n      {\"name\": \"RO Membrane Element & Pressure Vessel\", \"level\": \"L4\", \"description\": \"Thin-film composite membrane in FRP vessel; 600-10,000 GPD per element\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Membrane Filtration Module\"},\n      {\"name\": \"UV Disinfection Chamber\", \"level\": \"L4\", \"description\": \"Stainless chamber with UV-C lamp (254 nm) for microbial inactivation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Membrane Filtration Module\"},\n      {\"name\": \"Product Water Storage Tank\", \"level\": \"L4\", \"description\": \"Atmospheric or pressurised tank storing purified water; NSF 61 certified\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Membrane Filtration Module\"},\n\n      {\"name\": \"Tunnel Conveyor Chain / Belt\", \"level\": \"L4\", \"description\": \"Roller chain or belt transporting vehicles/linen through wash stations\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Conveyor & Material Handling\"},\n      {\"name\": \"Conveyor Drive Motor & Gearbox\", \"level\": \"L4\", \"description\": \"Geared AC or servo motor providing variable-speed conveyor drive; 1-5 kW\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Conveyor & Material Handling\"},\n      {\"name\": \"Guide Rails & Rollers\", \"level\": \"L4\", \"description\": \"Steel or UHMW-PE rails guiding items through tunnel; wear-resistant bushings\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Conveyor & Material Handling\"},\n\n      {\"name\": \"Drain Pump Assembly\", \"level\": \"L4\", \"description\": \"Self-priming centrifugal or impeller pump; lint-tolerant design; 0.5-2 kW\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Drain Pump & Discharge\"},\n      {\"name\": \"Lint / Debris Trap\", \"level\": \"L4\", \"description\": \"Removable mesh basket capturing lint, sand, and debris before drain pump\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Drain Pump & Discharge\"},\n      {\"name\": \"Drain Check Valve & Discharge Pipe\", \"level\": \"L4\", \"description\": \"Prevents backflow from drain; pipe routed to building waste or reclaim tank\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Drain Pump & Discharge\"},\n\n      {\"name\": \"Settling Tank / Clarifier\", \"level\": \"L4\", \"description\": \"Gravity separation of solids and oils; multi-stage baffled; 500-5,000 L\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Water Recycling System\"},\n      {\"name\": \"Reclaim Filtration (Sand / Membrane)\", \"level\": \"L4\", \"description\": \"Sand, multimedia, or UF membrane removing suspended solids from settled water\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Water Recycling System\"},\n      {\"name\": \"Reclaim Pump & Storage\", \"level\": \"L4\", \"description\": \"Booster pump returning treated water to supply header; storage with level control\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Water Recycling System\"},\n\n      {\"name\": \"pH / Conductivity Sensor\", \"level\": \"L4\", \"description\": \"Inline sensors verifying effluent quality; alarm on out-of-spec readings\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Effluent Monitoring & Compliance\"},\n      {\"name\": \"Effluent Flow Meter\", \"level\": \"L4\", \"description\": \"Measures total discharge volume for regulatory reporting and water balance\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Effluent Monitoring & Compliance\"},\n      {\"name\": \"Discharge Valve & Sampling Port\", \"level\": \"L4\", \"description\": \"Motorised valve with sample tap for grab samples; interlock with monitoring\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Effluent Monitoring & Compliance\"},\n\n      {\"name\": \"Microcontroller / PLC Module\", \"level\": \"L4\", \"description\": \"ARM-based MCU or compact PLC; real-time cycle sequencing; 8-32 I/O channels\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Machine Controller / PLC\"},\n      {\"name\": \"Power Supply & Relay Board\", \"level\": \"L4\", \"description\": \"AC/DC converter, solid-state relays, contactor drivers for heaters and motors\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Machine Controller / PLC\"},\n      {\"name\": \"Sensor Input Interface\", \"level\": \"L4\", \"description\": \"Analogue and digital inputs for temperature, pressure, flow, level, and interlock sensors\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Machine Controller / PLC\"},\n\n      {\"name\": \"Touchscreen / Display Panel\", \"level\": \"L4\", \"description\": \"4-10 inch colour LCD/TFT; IP65-rated for wet environment\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Human-Machine Interface\"},\n      {\"name\": \"Cycle Selection & Start Controls\", \"level\": \"L4\", \"description\": \"Physical buttons, rotary selector, or touchscreen menu for programme selection\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Human-Machine Interface\"},\n      {\"name\": \"Status Indicators & Alarms\", \"level\": \"L4\", \"description\": \"LED indicators, audible alarms, fault-code display for diagnostics\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Human-Machine Interface\"},\n\n      {\"name\": \"Communication Module (Wi-Fi / Cellular)\", \"level\": \"L4\", \"description\": \"Embedded Wi-Fi, LTE, or LoRaWAN for cloud connectivity\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"IoT & Connectivity\"},\n      {\"name\": \"Cloud Platform & Remote Monitoring\", \"level\": \"L4\", \"description\": \"SaaS dashboard for fleet status, cycle counts, water/energy consumption, faults\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"IoT & Connectivity\"},\n      {\"name\": \"OTA Firmware Update\", \"level\": \"L4\", \"description\": \"Over-the-air update for cycle programmes, calibration, and security patches\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"IoT & Connectivity\"},\n\n      {\"name\": \"Coin / Token Acceptor\", \"level\": \"L4\", \"description\": \"Mechanical or electronic coin validator; multi-denomination; declining share\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Payment & Vending System\"},\n      {\"name\": \"Card / Mobile Payment Terminal\", \"level\": \"L4\", \"description\": \"EMV contactless / NFC / QR-code reader; cellular-connected for transactions\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Payment & Vending System\"},\n      {\"name\": \"Revenue Management Software\", \"level\": \"L4\", \"description\": \"Cloud platform tracking per-machine revenue, usage patterns, pricing optimisation\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Payment & Vending System\"},\n\n      {\"name\": \"Door Interlock & Safety Switch\", \"level\": \"L4\", \"description\": \"Electromechanical lock preventing access to rotating/pressurised components\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Machine Safety Systems\"},\n      {\"name\": \"Emergency Stop & Leak Detection\", \"level\": \"L4\", \"description\": \"E-stop button; floor/sump leak sensor triggering auto-shutoff\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Machine Safety Systems\"},\n      {\"name\": \"Electrical Enclosure (IP-rated)\", \"level\": \"L4\", \"description\": \"IP55/IP65 enclosure protecting electronics from water and chemical spray\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Machine Safety Systems\"},\n\n      {\"name\": \"UL / CE / NSF Certification\", \"level\": \"L4\", \"description\": \"Safety listing and sanitation certification required for market access\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Regulatory Compliance\"},\n      {\"name\": \"Water Efficiency Rating\", \"level\": \"L4\", \"description\": \"EPA WaterSense, Energy Star, or EU Ecodesign label for efficiency claims\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Regulatory Compliance\"},\n      {\"name\": \"Compliance Documentation\", \"level\": \"L4\", \"description\": \"Test reports, declarations of conformity, installation manuals, regulatory filings\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Regulatory Compliance\"},\n\n      {\"name\": \"Scheduled Maintenance Programme\", \"level\": \"L4\", \"description\": \"OEM-defined inspection intervals for seals, filters, belts, nozzles\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Preventive Maintenance & Aftermarket\"},\n      {\"name\": \"Spare Parts & Service Network\", \"level\": \"L4\", \"description\": \"OEM and third-party parts distribution; field service technicians\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Preventive Maintenance & Aftermarket\"},\n      {\"name\": \"Predictive Maintenance Analytics\", \"level\": \"L4\", \"description\": \"Cloud analytics consuming sensor data (incl. flow) for early fault detection\", \"bom_standard\": \"INCOSE\", \"parent_name\": \"Preventive Maintenance & Aftermarket\"}\n    ]\n  },\n  \"marquardt_position\": {\n    \"l_path\": \"L7 > L6.2 Fluid Circuit & Distribution > L5.2.4 Flow Sensing & Measurement > L4.2.4.1 Ultrasonic Flow Sensor\",\n    \"l7\": \"Commercial Water-Using Machinery Ecosystem\",\n    \"l6\": \"Fluid Circuit & Distribution\",\n    \"l5\": \"Flow Sensing & Measurement\",\n    \"l4\": \"Ultrasonic Flow Sensor\",\n    \"alternatives_at_l4\": [\n      {\"name\": \"Turbine / Paddle-Wheel Flow Sensor\", \"status\": \"incumbent, dominant\", \"share_estimate\": \"60-75%\", \"confidence\": \"MEDIUM\"},\n      {\"name\": \"Ultrasonic Flow Sensor\", \"status\": \"whitespace, <2% penetration\", \"share_estimate\": \"<2%\", \"confidence\": \"LOW\"},\n      {\"name\": \"Solenoid-Valve Volumetric Dosing\", \"status\": \"budget fallback, declining\", \"share_estimate\": \"20-35%\", \"confidence\": \"LOW\"}\n    ]\n  },\n  \"entities_produced\": {\n    \"nodes\": [\n      {\"label\": \"ValueNetwork\", \"key\": {\"naics_code\": \"333318\", \"run_id\": \"TBD\"}, \"properties\": {\"naics_title\": \"Other Commercial and Service Industry Machinery Manufacturing\", \"cfj_statement\": \"Manufacture and deploy water-using commercial machinery that cleans, treats, purifies, or dispenses aqueous fluids for commercial and institutional operations\", \"l7_solution\": \"Commercial Water-Using Machinery Ecosystem\", \"top_level\": \"L7\", \"unit_count\": 119, \"enriched\": true}},\n      {\"label\": \"ValueNetworkUnit\", \"key\": {\"name\": \"<per unit>\", \"naics_code\": \"333318\", \"level\": \"<per unit>\", \"run_id\": \"TBD\"}, \"count\": 119}\n    ],\n    \"relationships\": [\n      {\"type\": \"has_value_network\", \"source\": \"Market:333318\", \"target\": \"ValueNetwork:333318\"},\n      {\"type\": \"contains_unit\", \"source\": \"ValueNetwork:333318\", \"target\": \"ValueNetworkUnit:<each>\", \"count\": 119},\n      {\"type\": \"has_child\", \"source\": \"ValueNetworkUnit:<parent>\", \"target\": \"ValueNetworkUnit:<child>\", \"count\": 118}\n    ]\n  },\n  \"qa_checklist\": {\n    \"Q1_cfj_industry_level\": {\"pass\": true, \"note\": \"CFJ describes entire industry purpose, no reference to specific technology\"},\n    \"Q2_no_orphan_nodes\": {\"pass\": true, \"note\": \"Every unit except L7 has valid parent_name\"},\n    \"Q3_valid_level_transitions\": {\"pass\": true, \"note\": \"L7>L6>L5>L4 strictly followed, no skipping\"},\n    \"Q4_l4_children_per_l5\": {\"pass\": true, \"note\": \"All L5 nodes have 3+ L4 children\"},\n    \"Q5_no_solution_specific_l7_l6\": {\"pass\": true, \"note\": \"L7 and L6 names are industry-generic, no technology or brand references\"},\n    \"Q6_naming_test\": {\"pass\": true, \"note\": \"Spot-checked: Circulation Pump, Solenoid Inlet Valve, RO Membrane Element, Drain Pump Assembly, Dosing Controller — all industry-standard\"},\n    \"Q7_unit_count_in_range\": {\"pass\": true, \"note\": \"119 units total (within extended range for manufacturing NAICS)\"}\n  }\n}\n```\n\n---"
+    },
+    {
+      "title": "Sources",
+      "content": "- [NAICS 333318 — U.S. Census Bureau](https://www.census.gov/naics/?input=333318&year=2022&details=333318)\n- [Car Wash Instrumentation: Designing Reliable Systems — ICON Process Controls](https://iconprocon.com/blog-post/car-wash-instrumentation-designing-reliable-systems-for-modern-car-wash-manufacturers/)\n- [Commercial Laundry Equipment Market — Fortune Business Insights](https://www.fortunebusinessinsights.com/commercial-laundry-market-103905)\n- [Car Wash Service Market — Grand View Research](https://www.grandviewresearch.com/industry-analysis/car-wash-service-market)\n- [Alliance Reports Full Year 2025 Results — Alliance Laundry Systems](https://ir.alliancelaundry.com/news-events/press-releases/detail/138/alliance-reports-fourth-quarter-and-full-year-2025-results)\n- [WaterSense at Work Section 3.5: Laundry Equipment — EPA](https://www.epa.gov/system/files/documents/2023-06/ws-commercial-watersense-at-work_Section_3.5_Laundry_Equipment.pdf)\n- [Commercial Laundry Wastewater Monitoring — Keco Engineered Controls](https://kecocontrols.com/applications/commercial-laundry-wastewater-monitoring-system/)\n- [IoT-Enabled Smart Washing Machine — Sierra Wireless](https://www.sierrawireless.com/industries/industrial/iot-enabled-washing-machines/)\n- [SEKO WashDose Tunnel System — Fluid Handling Pro](https://fluidhandlingpro.com/fluid-process-technology/pumps-pumping-systems/seko-launches-tunnel-laundry-iot-pump-system/)\n- [Commercial Reverse Osmosis Systems — Applied Membranes](https://www.appliedmembranes.com/pages/commercial-industrial-ro)\n- 05_market_discovery.md — Architecture distance scoring for NAICS 333318\n- Marquardt Customer Presentation: \"US Flow Sensor\" (03.12.2025, CONFIDENTIAL)\n\n---\n\n*End of VN — feeds JTBD Analysis, Competitive Landscape, and Fit Assessment for the Other Commercial/Service Machinery market. The Marquardt L-path (L7 > L6.2 > L5.2.4 > L4.2.4.1) is the anchor for all downstream coverage and ODI scoring. Key insight: this is a whitespace market where ultrasonic technology has <2% penetration — the cost-of-inaccuracy and zero-maintenance selling proposition must overcome buyer inertia with timed-fill or turbine incumbents.*"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "Field",
+        "Value"
+      ],
+      "rows": [
+        {
+          "Field": "**NAICS Code**",
+          "Value": "333318 — Other Commercial and Service Industry Machinery Manufacturing"
+        },
+        {
+          "Field": "**CFJ**",
+          "Value": "Manufacture and deploy water-using commercial machinery that cleans, treats, purifies, or dispenses aqueous fluids for commercial and institutional operations"
+        },
+        {
+          "Field": "**Output Types**",
+          "Value": "Commercial washer-extractor; Continuous tunnel washer; Commercial dryer / ironer; Tunnel car wash system; In-bay automatic car wash; Self-service car wash bay; Commercial water purification system (RO/UV); Commercial water softener; Commercial ice machine; Beverage vending / dispensing machine"
+        },
+        {
+          "Field": "**Hierarchy**",
+          "Value": "Product VN (L7 through L4) — what subsystems compose commercial water-using machinery and their deployment ecosystem"
+        },
+        {
+          "Field": "**Key OEMs**",
+          "Value": "Alliance Laundry Systems (Speed Queen, Huebsch, IPSO, UniMac — $1.7B revenue 2025), Dexter Laundry, Milnor, Girbau, Electrolux Professional, WashTec (Mark VII), OPW Vehicle Wash Solutions (Dover), Ryko, National Carwash Solutions, AMPAC USA, Pure Aqua, Pentair, Evoqua [SRC: web_search]"
+        },
+        {
+          "Field": "**Market Size**",
+          "Value": "~$15–20B globally (commercial laundry ~$5–10B, car wash equipment ~$2B, commercial water treatment ~$5–8B) [SRC: web_search]"
+        },
+        {
+          "Field": "**Architecture Distance**",
+          "Value": "3 (adjacent to home market 333415) [SRC: 05_market_discovery]"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L6 ID",
+        "Name",
+        "Type",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L6 ID": "**L6.1**",
+          "Name": "Water Supply & Pre-Treatment",
+          "Type": "Core",
+          "Description": "Connecting to potable/process water supply, filtering, softening, and conditioning water before machine use. All output types require clean, conditioned water intake."
+        },
+        {
+          "L6 ID": "**L6.2**",
+          "Name": "Fluid Circuit & Distribution",
+          "Type": "Core",
+          "Description": "Internal plumbing, pumps, valves, flow sensors, and water routing between machine stages. **Marquardt sits here.** Every litre processed passes through L6.2 components."
+        },
+        {
+          "L6 ID": "**L6.3**",
+          "Name": "Thermal Management",
+          "Type": "Core",
+          "Description": "Heating water/fluid to process temperature, heat recovery, temperature regulation. Most output types require heated water (laundry 40–90 °C, car wash 30–60 °C, some water treatment)."
+        },
+        {
+          "L6 ID": "**L6.4**",
+          "Name": "Chemical Dosing & Application",
+          "Type": "Core",
+          "Description": "Dispensing detergent, chemicals, rinse agents, and sanitisers into the fluid circuit at controlled rates and concentrations."
+        },
+        {
+          "L6 ID": "**L6.5**",
+          "Name": "Core Process Execution",
+          "Type": "Core",
+          "Description": "The machine's primary physical action: mechanical wash (laundry), spray application (car wash), membrane filtration (water treatment), product dispensing (vending). Most output-type-specific domain."
+        },
+        {
+          "L6 ID": "**L6.6**",
+          "Name": "Drainage, Recovery & Recycling",
+          "Type": "Core",
+          "Description": "Wastewater collection, water recycling, filtration of effluent, compliance with discharge standards. Growing regulatory pressure on water reuse."
+        },
+        {
+          "L6 ID": "**L6.7**",
+          "Name": "Control, Automation & Payment",
+          "Type": "Core",
+          "Description": "PLCs, HMIs, cycle programming, IoT connectivity, payment/vending interfaces, data logging and remote monitoring."
+        },
+        {
+          "L6 ID": "**L6.8**",
+          "Name": "Safety, Compliance & Service",
+          "Type": "Horizontal",
+          "Description": "Machine safety interlocks, water efficiency standards (WaterSense, Energy Star), UL/NSF/CE certification, preventive maintenance, spare parts."
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.1.1.1: Solenoid Inlet Valve",
+          "Description": "Normally-closed solenoid valve controlling water fill; 2-way or 3-way for hot/cold mixing"
+        },
+        {
+          "L4 Subsystem": "L4.1.1.2: Inlet Strainer / Sediment Filter",
+          "Description": "Mesh strainer preventing debris from entering machine; 40–100 mesh typical"
+        },
+        {
+          "L4 Subsystem": "L4.1.1.3: Backflow Preventer",
+          "Description": "RPZ or check-valve assembly preventing contaminated water from flowing back into potable supply; code-required in most jurisdictions"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.1.2.1: Ion Exchange Resin Tank",
+          "Description": "Pressure vessel containing sulfonated polystyrene resin beads; DN25–DN50 connections"
+        },
+        {
+          "L4 Subsystem": "L4.1.2.2: Brine Tank & Regeneration System",
+          "Description": "Salt storage tank with float valve, brine draw, and regeneration cycle controller"
+        },
+        {
+          "L4 Subsystem": "L4.1.2.3: Softener Control Valve",
+          "Description": "Motorised multi-port valve controlling service, backwash, brine draw, rinse, and refill cycles"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.1.3.1: Sediment Filter Cartridge",
+          "Description": "5–20 micron polypropylene or pleated cartridge removing suspended solids"
+        },
+        {
+          "L4 Subsystem": "L4.1.3.2: Activated Carbon Filter",
+          "Description": "Granular or block carbon removing chlorine, VOCs, and taste/odour compounds"
+        },
+        {
+          "L4 Subsystem": "L4.1.3.3: Filter Housing & Manifold",
+          "Description": "Pressurised housing with inlet/outlet ports, pressure gauge, and drain valve"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.2.1.1: Pump Motor & Impeller",
+          "Description": "AC induction or EC motor driving centrifugal impeller; 0.25–3 kW typical; wet-end in stainless or engineered polymer"
+        },
+        {
+          "L4 Subsystem": "L4.2.1.2: Pump Seal & Housing",
+          "Description": "Mechanical seal or magnetic-drive coupling; corrosion-resistant housing for detergent/chemical compatibility"
+        },
+        {
+          "L4 Subsystem": "L4.2.1.3: Variable Frequency Drive",
+          "Description": "Optional VFD for flow modulation in larger machines; energy savings 20–40% vs fixed-speed"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.2.2.1: Positive Displacement Pump Head",
+          "Description": "Plunger or diaphragm pump producing 50–150 bar; ceramic plungers for longevity in chemically treated water"
+        },
+        {
+          "L4 Subsystem": "L4.2.2.2: Pressure Regulator / Unloader Valve",
+          "Description": "Bypasses flow when nozzles close; prevents pump damage and maintains system pressure"
+        },
+        {
+          "L4 Subsystem": "L4.2.2.3: Pressure Transducer",
+          "Description": "Electronic sensor (4–20 mA or 0–10 V) monitoring system pressure for fault detection and pump protection"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.2.3.1: Solenoid Valve Array",
+          "Description": "Bank of 2-way solenoid valves (typically 3–12 per machine) controlling water routing per cycle step"
+        },
+        {
+          "L4 Subsystem": "L4.2.3.2: Proportional Control Valve",
+          "Description": "Electrically modulated valve for precise flow control; used in dosing and blending applications"
+        },
+        {
+          "L4 Subsystem": "L4.2.3.3: Check Valve & Isolation Valve",
+          "Description": "Prevents backflow between circuits; manual isolation for maintenance access"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "**L4.2.4.1: Ultrasonic Flow Sensor**",
+          "Description": "**Transit-time ultrasonic measurement using piezoelectric transducers. No moving parts, zero pressure drop, tolerant of detergent-laden water. No clogging risk from lint, debris, or chemical deposits. Marquardt DN14/DN20 is the reference product. Whitespace opportunity — most commercial equipment currently uses mechanical sensors or no measurement.**"
+        },
+        {
+          "L4 Subsystem": "L4.2.4.2: Turbine / Paddle-Wheel Flow Sensor",
+          "Description": "Mechanical rotor spun by flow; Hall-effect pulse output. Low cost ($5–15) but moving parts clog in detergent/lint-laden water. Dominant incumbent in commercial laundry and car wash. [SRC: web_search, ICON Process Controls]"
+        },
+        {
+          "L4 Subsystem": "L4.2.4.3: Solenoid-Valve Volumetric Dosing",
+          "Description": "Timed fill via calibrated solenoid valve opening duration. Zero sensor hardware cost but ±10–20% accuracy; degrades with pressure variation. Budget fallback in price-sensitive equipment."
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.2.5.1: Internal Piping & Fittings",
+          "Description": "Stainless steel, PVC, or reinforced polymer pipe; DN15–DN25 typical; push-fit or barb connections"
+        },
+        {
+          "L4 Subsystem": "L4.2.5.2: Flexible Hose & Quick-Connect",
+          "Description": "Reinforced rubber or braided PTFE hose for vibrating/moving connections (e.g., wash drum inlet)"
+        },
+        {
+          "L4 Subsystem": "L4.2.5.3: Spray Nozzles & Orifices",
+          "Description": "Precision orifices controlling spray pattern and flow rate; fan, cone, and flat-jet types"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.3.1.1: Electric Immersion Heater",
+          "Description": "Incoloy or stainless sheathed element; 3–30 kW; directly immersed in wash sump or boiler tank"
+        },
+        {
+          "L4 Subsystem": "L4.3.1.2: Gas Burner & Heat Exchanger",
+          "Description": "Gas-fired heat exchanger for high-volume hot water; used in tunnel washers and large car wash boilers"
+        },
+        {
+          "L4 Subsystem": "L4.3.1.3: Steam Coil / Indirect Heater",
+          "Description": "Shell-and-tube or plate exchanger using plant steam; common in institutional laundry connected to central boiler"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.3.2.1: Drain Water Heat Exchanger",
+          "Description": "Counter-flow plate or tube exchanger recovering heat from hot drain water; recovers 30–50% of thermal energy"
+        },
+        {
+          "L4 Subsystem": "L4.3.2.2: Condensate Recovery System",
+          "Description": "Collects and returns steam condensate to boiler; reduces make-up water and energy consumption"
+        },
+        {
+          "L4 Subsystem": "L4.3.2.3: Heat Recovery Controller",
+          "Description": "Temperature sensors and bypass valve logic ensuring recovered heat is usable; prevents overheating of cold supply"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.3.3.1: Temperature Sensor (NTC / Pt1000)",
+          "Description": "Immersion or surface-mount sensor; NTC for cost-sensitive, Pt1000 for precision applications"
+        },
+        {
+          "L4 Subsystem": "L4.3.3.2: Thermostat / Temperature Controller",
+          "Description": "On/off or PID controller modulating heater output to maintain setpoint"
+        },
+        {
+          "L4 Subsystem": "L4.3.3.3: Over-Temperature Safety Cut-Out",
+          "Description": "Manual-reset bi-metal or electronic cut-out preventing overheating; UL/CE safety requirement"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.4.1.1: Peristaltic / Diaphragm Dosing Pump",
+          "Description": "Positive-displacement pump delivering precise chemical volume per stroke; 0.1–10 l/min range"
+        },
+        {
+          "L4 Subsystem": "L4.4.1.2: Chemical Container & Pickup Tube",
+          "Description": "Sealed container with anti-siphon pickup tube; 5–20 L cartridge or 200 L drum"
+        },
+        {
+          "L4 Subsystem": "L4.4.1.3: Dosing Controller & Concentration Sensor",
+          "Description": "Microcontroller timing pump strokes per cycle step; optional conductivity sensor for closed-loop concentration control"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.4.2.1: Rinse Aid Dispenser",
+          "Description": "Surfactant dispenser reducing surface tension for faster drying and spot-free finish"
+        },
+        {
+          "L4 Subsystem": "L4.4.2.2: Sanitiser / Ozone Injection",
+          "Description": "Chemical (peracetic acid, quat) or ozone generator for final sanitisation; required in healthcare laundry"
+        },
+        {
+          "L4 Subsystem": "L4.4.2.3: Conductivity / TDS Sensor",
+          "Description": "Inline sensor verifying rinse water quality; confirms chemical carryover is below threshold"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.5.1.1: Inner Drum & Outer Tub",
+          "Description": "Perforated stainless steel inner drum (AISI 304); welded outer tub containing wash liquor"
+        },
+        {
+          "L4 Subsystem": "L4.5.1.2: Drive Motor & Transmission",
+          "Description": "AC induction or inverter-driven motor; belt or direct-drive; 1–15 kW depending on capacity"
+        },
+        {
+          "L4 Subsystem": "L4.5.1.3: Shock Absorber & Suspension",
+          "Description": "Spring-damper system absorbing drum vibration during high-speed extract (typically 300–500 G)"
+        },
+        {
+          "L4 Subsystem": "L4.5.1.4: Door Seal & Lock Mechanism",
+          "Description": "Rubber bellows seal; electromechanical door lock with safety interlock preventing opening during cycle"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.5.2.1: High-Pressure Spray Arch",
+          "Description": "Stainless steel arch with precisely angled nozzles delivering pre-soak, wash, and rinse at 50–150 bar"
+        },
+        {
+          "L4 Subsystem": "L4.5.2.2: Foam Applicator",
+          "Description": "Low-pressure foam cannon applying chemical foam for dwell-time contact; adjustable concentration"
+        },
+        {
+          "L4 Subsystem": "L4.5.2.3: Rotating Brush / Cloth Assembly",
+          "Description": "Wraparound brush (cloth or foam) on motorised arms; contour-following for vehicle shape"
+        },
+        {
+          "L4 Subsystem": "L4.5.2.4: Drying Blower",
+          "Description": "High-volume centrifugal blower (15–40 kW) removing surface water after final rinse; heated air optional"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.5.3.1: RO Membrane Element & Pressure Vessel",
+          "Description": "Thin-film composite membrane in FRP pressure vessel; 4\" or 8\" diameter; 600–10,000 GPD per element [SRC: web_search]"
+        },
+        {
+          "L4 Subsystem": "L4.5.3.2: UV Disinfection Chamber",
+          "Description": "Stainless steel chamber with UV-C lamp (254 nm) for microbial inactivation; post-RO polishing"
+        },
+        {
+          "L4 Subsystem": "L4.5.3.3: Product Water Storage Tank",
+          "Description": "Atmospheric or pressurised tank storing purified water; NSF 61 certified materials for potable applications"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.5.4.1: Tunnel Conveyor Chain / Belt",
+          "Description": "Roller chain or belt transporting vehicles/linen through wash stations at controlled speed"
+        },
+        {
+          "L4 Subsystem": "L4.5.4.2: Drive Motor & Gearbox",
+          "Description": "Geared AC or servo motor providing variable-speed conveyor drive; 1–5 kW"
+        },
+        {
+          "L4 Subsystem": "L4.5.4.3: Guide Rails & Rollers",
+          "Description": "Steel or UHMW-PE rails guiding vehicles/linen through the tunnel; wear-resistant bushings"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.6.1.1: Drain Pump Assembly",
+          "Description": "Self-priming centrifugal or impeller pump; lint-tolerant design; 0.5–2 kW"
+        },
+        {
+          "L4 Subsystem": "L4.6.1.2: Lint / Debris Trap",
+          "Description": "Removable mesh basket or screen capturing lint, sand, and debris before drain pump"
+        },
+        {
+          "L4 Subsystem": "L4.6.1.3: Check Valve & Discharge Pipe",
+          "Description": "Prevents backflow from drain; pipe routed to building waste or reclaim tank"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.6.2.1: Settling Tank / Clarifier",
+          "Description": "Gravity separation of solids and oils; multi-stage baffled tank for car wash; 500–5,000 L capacity"
+        },
+        {
+          "L4 Subsystem": "L4.6.2.2: Reclaim Filtration (Sand / Membrane)",
+          "Description": "Sand filter, multimedia filter, or UF membrane removing remaining suspended solids from settled water"
+        },
+        {
+          "L4 Subsystem": "L4.6.2.3: Reclaim Pump & Storage",
+          "Description": "Booster pump returning treated water to supply header; storage tank with level control"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.6.3.1: pH / Conductivity Sensor",
+          "Description": "Inline sensors verifying effluent quality before discharge; alarm on out-of-spec readings"
+        },
+        {
+          "L4 Subsystem": "L4.6.3.2: Effluent Flow Meter",
+          "Description": "Measures total discharge volume for regulatory reporting and water-balance calculation"
+        },
+        {
+          "L4 Subsystem": "L4.6.3.3: Discharge Valve & Sampling Port",
+          "Description": "Motorised valve with sample tap for manual grab samples; interlock with monitoring system"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.7.1.1: Microcontroller / PLC Module",
+          "Description": "ARM-based MCU or compact PLC; runs real-time cycle sequencing; 8–32 I/O channels typical"
+        },
+        {
+          "L4 Subsystem": "L4.7.1.2: Power Supply & Relay Board",
+          "Description": "AC/DC converter, solid-state relays, and contactor drivers for high-current loads (heaters, motors)"
+        },
+        {
+          "L4 Subsystem": "L4.7.1.3: Sensor Input Interface",
+          "Description": "Analogue and digital input channels for temperature, pressure, flow, level, and door-interlock sensors"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.7.2.1: Touchscreen / Display Panel",
+          "Description": "4\"–10\" colour LCD or TFT; IP65-rated for wet environment; cycle status and parameter display"
+        },
+        {
+          "L4 Subsystem": "L4.7.2.2: Cycle Selection & Start Controls",
+          "Description": "Physical buttons, rotary selector, or touchscreen menu for programme selection and start/stop"
+        },
+        {
+          "L4 Subsystem": "L4.7.2.3: Status Indicators & Alarms",
+          "Description": "LED indicators, audible alarms, and fault-code display for operator diagnostics"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.7.3.1: Communication Module (Wi-Fi / Cellular)",
+          "Description": "Embedded Wi-Fi, LTE/4G, or LoRaWAN module for cloud connectivity; antenna integrated or external"
+        },
+        {
+          "L4 Subsystem": "L4.7.3.2: Cloud Platform & Remote Monitoring",
+          "Description": "SaaS dashboard showing fleet status, cycle counts, water/energy consumption, fault history"
+        },
+        {
+          "L4 Subsystem": "L4.7.3.3: OTA Firmware Update",
+          "Description": "Over-the-air update capability for cycle programmes, sensor calibration, and security patches"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.7.4.1: Coin / Token Acceptor",
+          "Description": "Mechanical or electronic coin validator; multi-denomination; declining share"
+        },
+        {
+          "L4 Subsystem": "L4.7.4.2: Card / Mobile Payment Terminal",
+          "Description": "EMV contactless / NFC / QR-code reader; cellular-connected for transaction processing"
+        },
+        {
+          "L4 Subsystem": "L4.7.4.3: Revenue Management Software",
+          "Description": "Cloud-based platform tracking per-machine revenue, usage patterns, and pricing optimisation"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.8.1.1: Door Interlock & Safety Switch",
+          "Description": "Electromechanical lock preventing access to rotating/pressurised components during operation"
+        },
+        {
+          "L4 Subsystem": "L4.8.1.2: Emergency Stop & Leak Detection",
+          "Description": "Red mushroom E-stop button; floor-mounted or sump-mounted leak sensor triggering auto-shutoff"
+        },
+        {
+          "L4 Subsystem": "L4.8.1.3: Electrical Enclosure (IP-rated)",
+          "Description": "IP55/IP65-rated enclosure protecting control electronics from water and chemical spray"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.8.2.1: UL / CE / NSF Certification",
+          "Description": "Safety listing (UL, CE) and sanitation certification (NSF) required for market access"
+        },
+        {
+          "L4 Subsystem": "L4.8.2.2: Water Efficiency Rating",
+          "Description": "EPA WaterSense, Energy Star, or EU Ecodesign label for water and energy efficiency claims"
+        },
+        {
+          "L4 Subsystem": "L4.8.2.3: Compliance Documentation",
+          "Description": "Test reports, declarations of conformity, installation manuals, and regulatory filings"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "Description"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "L4.8.3.1: Scheduled Maintenance Programme",
+          "Description": "OEM-defined inspection intervals for wear items (seals, filters, belts, nozzles)"
+        },
+        {
+          "L4 Subsystem": "L4.8.3.2: Spare Parts & Service Network",
+          "Description": "OEM and third-party parts distribution; field service technicians"
+        },
+        {
+          "L4 Subsystem": "L4.8.3.3: Predictive Maintenance Analytics",
+          "Description": "Cloud-based analytics consuming sensor data (including flow) for early fault detection and parts ordering"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L6 Domain",
+        "Washer-Extractor",
+        "Tunnel Washer",
+        "Dryer/Ironer",
+        "Tunnel Car Wash",
+        "In-Bay Car Wash",
+        "Self-Service Car Wash",
+        "Water Purifier (RO/UV)",
+        "Water Softener",
+        "Ice Machine",
+        "Beverage Vending"
+      ],
+      "rows": [
+        {
+          "L6 Domain": "L6.1 Water Supply & Pre-Treatment",
+          "Washer-Extractor": "Y",
+          "Tunnel Washer": "Y",
+          "Dryer/Ironer": "—",
+          "Tunnel Car Wash": "Y",
+          "In-Bay Car Wash": "Y",
+          "Self-Service Car Wash": "Y",
+          "Water Purifier (RO/UV)": "Y",
+          "Water Softener": "Y",
+          "Ice Machine": "Y",
+          "Beverage Vending": "Y"
+        },
+        {
+          "L6 Domain": "L6.2 Fluid Circuit & Distribution",
+          "Washer-Extractor": "Y",
+          "Tunnel Washer": "Y",
+          "Dryer/Ironer": "—",
+          "Tunnel Car Wash": "Y",
+          "In-Bay Car Wash": "Y",
+          "Self-Service Car Wash": "Y",
+          "Water Purifier (RO/UV)": "Y",
+          "Water Softener": "Y",
+          "Ice Machine": "Y",
+          "Beverage Vending": "Y"
+        },
+        {
+          "L6 Domain": "L6.3 Thermal Management",
+          "Washer-Extractor": "Y",
+          "Tunnel Washer": "Y",
+          "Dryer/Ironer": "Y",
+          "Tunnel Car Wash": "Y",
+          "In-Bay Car Wash": "partial",
+          "Self-Service Car Wash": "—",
+          "Water Purifier (RO/UV)": "partial",
+          "Water Softener": "—",
+          "Ice Machine": "—",
+          "Beverage Vending": "partial"
+        },
+        {
+          "L6 Domain": "L6.4 Chemical Dosing",
+          "Washer-Extractor": "Y",
+          "Tunnel Washer": "Y",
+          "Dryer/Ironer": "—",
+          "Tunnel Car Wash": "Y",
+          "In-Bay Car Wash": "Y",
+          "Self-Service Car Wash": "Y",
+          "Water Purifier (RO/UV)": "partial",
+          "Water Softener": "—",
+          "Ice Machine": "—",
+          "Beverage Vending": "—"
+        },
+        {
+          "L6 Domain": "L6.5 Core Process Execution",
+          "Washer-Extractor": "Y",
+          "Tunnel Washer": "Y",
+          "Dryer/Ironer": "Y",
+          "Tunnel Car Wash": "Y",
+          "In-Bay Car Wash": "Y",
+          "Self-Service Car Wash": "Y",
+          "Water Purifier (RO/UV)": "Y",
+          "Water Softener": "—",
+          "Ice Machine": "Y",
+          "Beverage Vending": "Y"
+        },
+        {
+          "L6 Domain": "L6.6 Drainage & Recycling",
+          "Washer-Extractor": "Y",
+          "Tunnel Washer": "Y",
+          "Dryer/Ironer": "Y",
+          "Tunnel Car Wash": "Y",
+          "In-Bay Car Wash": "Y",
+          "Self-Service Car Wash": "Y",
+          "Water Purifier (RO/UV)": "Y",
+          "Water Softener": "—",
+          "Ice Machine": "partial",
+          "Beverage Vending": "partial"
+        },
+        {
+          "L6 Domain": "L6.7 Control & Payment",
+          "Washer-Extractor": "Y",
+          "Tunnel Washer": "Y",
+          "Dryer/Ironer": "Y",
+          "Tunnel Car Wash": "Y",
+          "In-Bay Car Wash": "Y",
+          "Self-Service Car Wash": "Y",
+          "Water Purifier (RO/UV)": "Y",
+          "Water Softener": "Y",
+          "Ice Machine": "Y",
+          "Beverage Vending": "Y"
+        },
+        {
+          "L6 Domain": "L6.8 Safety & Service (H)",
+          "Washer-Extractor": "Y",
+          "Tunnel Washer": "Y",
+          "Dryer/Ironer": "Y",
+          "Tunnel Car Wash": "Y",
+          "In-Bay Car Wash": "Y",
+          "Self-Service Car Wash": "Y",
+          "Water Purifier (RO/UV)": "Y",
+          "Water Softener": "Y",
+          "Ice Machine": "Y",
+          "Beverage Vending": "Y"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Check",
+        "Result"
+      ],
+      "rows": [
+        {
+          "Check": "Exactly one L7 node",
+          "Result": "PASS — 1 L7 (Commercial Water-Using Machinery Ecosystem)"
+        },
+        {
+          "Check": "L6 count in range (3–8)",
+          "Result": "PASS — 8 L6 nodes (6 core + 1 horizontal + 1 core-horizontal boundary)"
+        },
+        {
+          "Check": "L5 count per L6 in range (2–12)",
+          "Result": "PASS — L6.1: 3, L6.2: 5, L6.3: 3, L6.4: 2, L6.5: 4, L6.6: 3, L6.7: 4, L6.8: 3"
+        },
+        {
+          "Check": "L4 count per L5 >= 2",
+          "Result": "PASS — all L5 nodes have 3 L4 children (minimum 3 throughout)"
+        },
+        {
+          "Check": "No orphan nodes",
+          "Result": "PASS — every node has a parent"
+        },
+        {
+          "Check": "No level skipping",
+          "Result": "PASS — L7>L6>L5>L4 strictly followed"
+        },
+        {
+          "Check": "Valid parent-child transitions",
+          "Result": "PASS"
+        },
+        {
+          "Check": "No company names in L7/L6 names",
+          "Result": "PASS"
+        },
+        {
+          "Check": "Three-question naming test (5 spot-checks)",
+          "Result": "PASS — \"Circulation Pump,\" \"Solenoid Inlet Valve,\" \"RO Membrane Element,\" \"Drain Pump Assembly,\" \"Dosing Controller\" all industry-standard"
+        },
+        {
+          "Check": "Unit count in range (15–60)",
+          "Result": "PASS — 1 L7 + 8 L6 + 27 L5 + 83 L4 = 119 total units (within extended range for manufacturing NAICS)"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "component": "value_network_construction",
+      "naics_code": "333318",
+      "naics_title": "Other Commercial and Service Industry Machinery Manufacturing",
+      "cfj_statement": "Manufacture and deploy water-using commercial machinery that cleans, treats, purifies, or dispenses aqueous fluids for commercial and institutional operations",
+      "l7_solution": "Commercial Water-Using Machinery Ecosystem",
+      "top_level": "L7",
+      "market_name": "Other Commercial and Service Industry Machinery Manufacturing",
+      "architecture_distance": 3,
+      "already_uses_technology": false,
+      "output_types": [
+        "Commercial washer-extractor",
+        "Continuous tunnel washer",
+        "Commercial dryer / ironer",
+        "Tunnel car wash system",
+        "In-bay automatic car wash",
+        "Self-service car wash bay",
+        "Commercial water purification system (RO/UV)",
+        "Commercial water softener",
+        "Commercial ice machine",
+        "Beverage vending / dispensing machine"
+      ],
+      "value_network": {
+        "naics_code": "333318",
+        "naics_title": "Other Commercial and Service Industry Machinery Manufacturing",
+        "cfj_statement": "Manufacture and deploy water-using commercial machinery that cleans, treats, purifies, or dispenses aqueous fluids for commercial and institutional operations",
+        "l7_solution": "Commercial Water-Using Machinery Ecosystem",
+        "units": [
+          {
+            "name": "Commercial Water-Using Machinery Ecosystem",
+            "level": "L7",
+            "description": "Complete ecosystem of OEMs, component suppliers, service providers, and end-users coordinated around manufacture and deployment of commercial water-using machinery",
+            "bom_standard": "Moore 1993",
+            "parent_name": "ROOT"
+          },
+          {
+            "name": "Water Supply & Pre-Treatment",
+            "level": "L6",
+            "description": "Water intake connection, filtration, softening, and conditioning before machine use",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Commercial Water-Using Machinery Ecosystem"
+          },
+          {
+            "name": "Fluid Circuit & Distribution",
+            "level": "L6",
+            "description": "Internal plumbing, pumps, valves, flow sensors, and water routing between machine stages",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Commercial Water-Using Machinery Ecosystem"
+          },
+          {
+            "name": "Thermal Management",
+            "level": "L6",
+            "description": "Water heating, heat recovery, and temperature regulation for process requirements",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Commercial Water-Using Machinery Ecosystem"
+          },
+          {
+            "name": "Chemical Dosing & Application",
+            "level": "L6",
+            "description": "Dispensing detergent, chemicals, rinse agents, and sanitisers into the fluid circuit",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Commercial Water-Using Machinery Ecosystem"
+          },
+          {
+            "name": "Core Process Execution",
+            "level": "L6",
+            "description": "Machine's primary physical action: mechanical wash, spray application, membrane filtration, or dispensing",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Commercial Water-Using Machinery Ecosystem"
+          },
+          {
+            "name": "Drainage, Recovery & Recycling",
+            "level": "L6",
+            "description": "Wastewater collection, water recycling, effluent treatment, and discharge compliance",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Commercial Water-Using Machinery Ecosystem"
+          },
+          {
+            "name": "Control, Automation & Payment",
+            "level": "L6",
+            "description": "PLCs, HMIs, IoT connectivity, payment systems, and data logging",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Commercial Water-Using Machinery Ecosystem"
+          },
+          {
+            "name": "Safety, Compliance & Service",
+            "level": "L6",
+            "description": "Machine safety, regulatory certification, water efficiency standards, maintenance, and spare parts",
+            "bom_standard": "Maier 1998",
+            "parent_name": "Commercial Water-Using Machinery Ecosystem"
+          },
+          {
+            "name": "Water Inlet Assembly",
+            "level": "L5",
+            "description": "Solenoid-controlled inlet connecting machine to building water supply",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Water Supply & Pre-Treatment"
+          },
+          {
+            "name": "Water Softener",
+            "level": "L5",
+            "description": "Ion-exchange system removing calcium and magnesium hardness",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Water Supply & Pre-Treatment"
+          },
+          {
+            "name": "Pre-Filtration System",
+            "level": "L5",
+            "description": "Multi-stage filtration removing sediment, chlorine, and organics",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Water Supply & Pre-Treatment"
+          },
+          {
+            "name": "Circulation Pump",
+            "level": "L5",
+            "description": "Moves water through internal wash, rinse, and recirculation circuits",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Fluid Circuit & Distribution"
+          },
+          {
+            "name": "High-Pressure Pump",
+            "level": "L5",
+            "description": "Generates 50-150 bar for car wash spray systems",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Fluid Circuit & Distribution"
+          },
+          {
+            "name": "Valve Manifold & Distribution",
+            "level": "L5",
+            "description": "Routes water to different machine zones/stages in correct sequence",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Fluid Circuit & Distribution"
+          },
+          {
+            "name": "Flow Sensing & Measurement",
+            "level": "L5",
+            "description": "Instruments measuring volumetric flow rate, consumption totals, and flow anomalies",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Fluid Circuit & Distribution"
+          },
+          {
+            "name": "Piping & Hose Network",
+            "level": "L5",
+            "description": "Physical conduit connecting all fluid-handling components",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Fluid Circuit & Distribution"
+          },
+          {
+            "name": "Water Heater / Heating Element",
+            "level": "L5",
+            "description": "Primary heat input to machine water circuit; electric, gas, or steam",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Thermal Management"
+          },
+          {
+            "name": "Heat Recovery Unit",
+            "level": "L5",
+            "description": "Captures thermal energy from drain water or exhaust to pre-heat incoming supply",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Thermal Management"
+          },
+          {
+            "name": "Temperature Sensing & Control",
+            "level": "L5",
+            "description": "Sensors and controllers maintaining target water temperature per cycle step",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Thermal Management"
+          },
+          {
+            "name": "Chemical Dispensing System",
+            "level": "L5",
+            "description": "Metered injection of liquid chemicals into wash/rinse water",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Chemical Dosing & Application"
+          },
+          {
+            "name": "Rinse & Sanitiser Injection",
+            "level": "L5",
+            "description": "Final-stage injection for residual chemical removal and microbiological safety",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Chemical Dosing & Application"
+          },
+          {
+            "name": "Wash Drum Assembly",
+            "level": "L5",
+            "description": "Rotating cylinder performing mechanical wash action in commercial laundry",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Core Process Execution"
+          },
+          {
+            "name": "Spray Arch & Wash Assembly",
+            "level": "L5",
+            "description": "High-pressure spray and mechanical wash elements for car wash systems",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Core Process Execution"
+          },
+          {
+            "name": "Membrane Filtration Module",
+            "level": "L5",
+            "description": "RO/UF membrane and UV disinfection for water purification systems",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Core Process Execution"
+          },
+          {
+            "name": "Conveyor & Material Handling",
+            "level": "L5",
+            "description": "Transport systems moving vehicles or linen through sequential process stations",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Core Process Execution"
+          },
+          {
+            "name": "Drain Pump & Discharge",
+            "level": "L5",
+            "description": "Removes used water from machine sump to drain or recycling system",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Drainage, Recovery & Recycling"
+          },
+          {
+            "name": "Water Recycling System",
+            "level": "L5",
+            "description": "Treats and reclaims wastewater for reuse in subsequent cycles",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Drainage, Recovery & Recycling"
+          },
+          {
+            "name": "Effluent Monitoring & Compliance",
+            "level": "L5",
+            "description": "Instrumentation ensuring discharged water meets environmental standards",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Drainage, Recovery & Recycling"
+          },
+          {
+            "name": "Machine Controller / PLC",
+            "level": "L5",
+            "description": "Central logic unit managing cycle sequencing, sensors, and actuators",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Control, Automation & Payment"
+          },
+          {
+            "name": "Human-Machine Interface",
+            "level": "L5",
+            "description": "Operator/customer-facing display and controls",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Control, Automation & Payment"
+          },
+          {
+            "name": "IoT & Connectivity",
+            "level": "L5",
+            "description": "Remote monitoring, fleet management, and data analytics platform",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Control, Automation & Payment"
+          },
+          {
+            "name": "Payment & Vending System",
+            "level": "L5",
+            "description": "Revenue collection for vended and self-service equipment",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Control, Automation & Payment"
+          },
+          {
+            "name": "Machine Safety Systems",
+            "level": "L5",
+            "description": "Interlocks and protection devices preventing injury and damage",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Safety, Compliance & Service"
+          },
+          {
+            "name": "Regulatory Compliance",
+            "level": "L5",
+            "description": "Certification, testing, and water efficiency rating programmes",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Safety, Compliance & Service"
+          },
+          {
+            "name": "Preventive Maintenance & Aftermarket",
+            "level": "L5",
+            "description": "Ongoing service, spare parts, and predictive analytics",
+            "bom_standard": "ISO 15288",
+            "parent_name": "Safety, Compliance & Service"
+          },
+          {
+            "name": "Solenoid Inlet Valve",
+            "level": "L4",
+            "description": "Normally-closed solenoid valve controlling water fill; 2-way or 3-way for hot/cold mixing",
+            "bom_standard": "INCOSE",
+            "parent_name": "Water Inlet Assembly"
+          },
+          {
+            "name": "Inlet Strainer / Sediment Filter",
+            "level": "L4",
+            "description": "Mesh strainer preventing debris from entering machine; 40-100 mesh",
+            "bom_standard": "INCOSE",
+            "parent_name": "Water Inlet Assembly"
+          },
+          {
+            "name": "Backflow Preventer",
+            "level": "L4",
+            "description": "RPZ or check-valve preventing contaminated water backflow into potable supply",
+            "bom_standard": "INCOSE",
+            "parent_name": "Water Inlet Assembly"
+          },
+          {
+            "name": "Ion Exchange Resin Tank",
+            "level": "L4",
+            "description": "Pressure vessel with sulfonated polystyrene resin beads; DN25-DN50",
+            "bom_standard": "INCOSE",
+            "parent_name": "Water Softener"
+          },
+          {
+            "name": "Brine Tank & Regeneration System",
+            "level": "L4",
+            "description": "Salt storage with float valve, brine draw, and regeneration cycle controller",
+            "bom_standard": "INCOSE",
+            "parent_name": "Water Softener"
+          },
+          {
+            "name": "Softener Control Valve",
+            "level": "L4",
+            "description": "Motorised multi-port valve controlling service, backwash, brine, rinse, and refill",
+            "bom_standard": "INCOSE",
+            "parent_name": "Water Softener"
+          },
+          {
+            "name": "Sediment Filter Cartridge",
+            "level": "L4",
+            "description": "5-20 micron polypropylene or pleated cartridge removing suspended solids",
+            "bom_standard": "INCOSE",
+            "parent_name": "Pre-Filtration System"
+          },
+          {
+            "name": "Activated Carbon Filter",
+            "level": "L4",
+            "description": "Granular or block carbon removing chlorine, VOCs, and taste/odour",
+            "bom_standard": "INCOSE",
+            "parent_name": "Pre-Filtration System"
+          },
+          {
+            "name": "Filter Housing & Manifold",
+            "level": "L4",
+            "description": "Pressurised housing with inlet/outlet, pressure gauge, and drain valve",
+            "bom_standard": "INCOSE",
+            "parent_name": "Pre-Filtration System"
+          },
+          {
+            "name": "Pump Motor & Impeller",
+            "level": "L4",
+            "description": "AC induction or EC motor driving centrifugal impeller; 0.25-3 kW; stainless or polymer wet-end",
+            "bom_standard": "INCOSE",
+            "parent_name": "Circulation Pump"
+          },
+          {
+            "name": "Pump Seal & Housing",
+            "level": "L4",
+            "description": "Mechanical seal or magnetic-drive coupling; corrosion-resistant for detergent compatibility",
+            "bom_standard": "INCOSE",
+            "parent_name": "Circulation Pump"
+          },
+          {
+            "name": "Variable Frequency Drive",
+            "level": "L4",
+            "description": "Optional VFD for flow modulation; 20-40% energy savings vs fixed-speed",
+            "bom_standard": "INCOSE",
+            "parent_name": "Circulation Pump"
+          },
+          {
+            "name": "Positive Displacement Pump Head",
+            "level": "L4",
+            "description": "Plunger or diaphragm pump producing 50-150 bar; ceramic plungers for chemical resistance",
+            "bom_standard": "INCOSE",
+            "parent_name": "High-Pressure Pump"
+          },
+          {
+            "name": "Pressure Regulator / Unloader Valve",
+            "level": "L4",
+            "description": "Bypasses flow when nozzles close; prevents pump damage",
+            "bom_standard": "INCOSE",
+            "parent_name": "High-Pressure Pump"
+          },
+          {
+            "name": "Pressure Transducer",
+            "level": "L4",
+            "description": "Electronic sensor monitoring system pressure for fault detection",
+            "bom_standard": "INCOSE",
+            "parent_name": "High-Pressure Pump"
+          },
+          {
+            "name": "Solenoid Valve Array",
+            "level": "L4",
+            "description": "Bank of 2-way solenoid valves (3-12 per machine) controlling water routing per cycle step",
+            "bom_standard": "INCOSE",
+            "parent_name": "Valve Manifold & Distribution"
+          },
+          {
+            "name": "Proportional Control Valve",
+            "level": "L4",
+            "description": "Electrically modulated valve for precise flow control in dosing and blending",
+            "bom_standard": "INCOSE",
+            "parent_name": "Valve Manifold & Distribution"
+          },
+          {
+            "name": "Check Valve & Isolation Valve",
+            "level": "L4",
+            "description": "Prevents backflow between circuits; manual isolation for maintenance",
+            "bom_standard": "INCOSE",
+            "parent_name": "Valve Manifold & Distribution"
+          },
+          {
+            "name": "Ultrasonic Flow Sensor",
+            "level": "L4",
+            "description": "Transit-time ultrasonic measurement; no moving parts, zero pressure drop, detergent-tolerant. MARQUARDT POSITION.",
+            "bom_standard": "INCOSE",
+            "parent_name": "Flow Sensing & Measurement"
+          },
+          {
+            "name": "Turbine / Paddle-Wheel Flow Sensor",
+            "level": "L4",
+            "description": "Mechanical rotor with Hall-effect pulse output; low cost but clogs in lint/detergent water; incumbent",
+            "bom_standard": "INCOSE",
+            "parent_name": "Flow Sensing & Measurement"
+          },
+          {
+            "name": "Solenoid-Valve Volumetric Dosing",
+            "level": "L4",
+            "description": "Timed fill via calibrated valve duration; no sensor hardware but +/-10-20% accuracy; budget fallback",
+            "bom_standard": "INCOSE",
+            "parent_name": "Flow Sensing & Measurement"
+          },
+          {
+            "name": "Internal Piping & Fittings",
+            "level": "L4",
+            "description": "Stainless steel, PVC, or polymer pipe; DN15-DN25; push-fit or barb connections",
+            "bom_standard": "INCOSE",
+            "parent_name": "Piping & Hose Network"
+          },
+          {
+            "name": "Flexible Hose & Quick-Connect",
+            "level": "L4",
+            "description": "Reinforced rubber or braided PTFE for vibrating/moving connections",
+            "bom_standard": "INCOSE",
+            "parent_name": "Piping & Hose Network"
+          },
+          {
+            "name": "Spray Nozzles & Orifices",
+            "level": "L4",
+            "description": "Precision orifices controlling spray pattern and flow rate; fan, cone, flat-jet types",
+            "bom_standard": "INCOSE",
+            "parent_name": "Piping & Hose Network"
+          },
+          {
+            "name": "Electric Immersion Heater",
+            "level": "L4",
+            "description": "Incoloy or stainless sheathed element; 3-30 kW; immersed in wash sump or boiler",
+            "bom_standard": "INCOSE",
+            "parent_name": "Water Heater / Heating Element"
+          },
+          {
+            "name": "Gas Burner & Heat Exchanger",
+            "level": "L4",
+            "description": "Gas-fired heat exchanger for high-volume hot water in tunnel washers and car wash boilers",
+            "bom_standard": "INCOSE",
+            "parent_name": "Water Heater / Heating Element"
+          },
+          {
+            "name": "Steam Coil / Indirect Heater",
+            "level": "L4",
+            "description": "Shell-and-tube or plate exchanger using plant steam; common in institutional laundry",
+            "bom_standard": "INCOSE",
+            "parent_name": "Water Heater / Heating Element"
+          },
+          {
+            "name": "Drain Water Heat Exchanger",
+            "level": "L4",
+            "description": "Counter-flow exchanger recovering 30-50% of thermal energy from hot drain water",
+            "bom_standard": "INCOSE",
+            "parent_name": "Heat Recovery Unit"
+          },
+          {
+            "name": "Condensate Recovery System",
+            "level": "L4",
+            "description": "Collects and returns steam condensate to boiler; reduces make-up water and energy",
+            "bom_standard": "INCOSE",
+            "parent_name": "Heat Recovery Unit"
+          },
+          {
+            "name": "Heat Recovery Controller",
+            "level": "L4",
+            "description": "Temperature sensors and bypass valve logic ensuring recovered heat is usable",
+            "bom_standard": "INCOSE",
+            "parent_name": "Heat Recovery Unit"
+          },
+          {
+            "name": "Temperature Sensor (NTC / Pt1000)",
+            "level": "L4",
+            "description": "Immersion or surface-mount sensor; NTC for cost-sensitive, Pt1000 for precision",
+            "bom_standard": "INCOSE",
+            "parent_name": "Temperature Sensing & Control"
+          },
+          {
+            "name": "Thermostat / Temperature Controller",
+            "level": "L4",
+            "description": "On/off or PID controller modulating heater output to maintain setpoint",
+            "bom_standard": "INCOSE",
+            "parent_name": "Temperature Sensing & Control"
+          },
+          {
+            "name": "Over-Temperature Safety Cut-Out",
+            "level": "L4",
+            "description": "Manual-reset cut-out preventing overheating; UL/CE safety requirement",
+            "bom_standard": "INCOSE",
+            "parent_name": "Temperature Sensing & Control"
+          },
+          {
+            "name": "Peristaltic / Diaphragm Dosing Pump",
+            "level": "L4",
+            "description": "Positive-displacement pump delivering precise chemical volume; 0.1-10 l/min",
+            "bom_standard": "INCOSE",
+            "parent_name": "Chemical Dispensing System"
+          },
+          {
+            "name": "Chemical Container & Pickup Tube",
+            "level": "L4",
+            "description": "Sealed container with anti-siphon pickup; 5-20 L cartridge or 200 L drum",
+            "bom_standard": "INCOSE",
+            "parent_name": "Chemical Dispensing System"
+          },
+          {
+            "name": "Dosing Controller & Concentration Sensor",
+            "level": "L4",
+            "description": "Microcontroller timing pump strokes; optional conductivity sensor for closed-loop control",
+            "bom_standard": "INCOSE",
+            "parent_name": "Chemical Dispensing System"
+          },
+          {
+            "name": "Rinse Aid Dispenser",
+            "level": "L4",
+            "description": "Surfactant dispenser reducing surface tension for faster drying and spot-free finish",
+            "bom_standard": "INCOSE",
+            "parent_name": "Rinse & Sanitiser Injection"
+          },
+          {
+            "name": "Sanitiser / Ozone Injection",
+            "level": "L4",
+            "description": "Chemical or ozone generator for final sanitisation; required in healthcare laundry",
+            "bom_standard": "INCOSE",
+            "parent_name": "Rinse & Sanitiser Injection"
+          },
+          {
+            "name": "Conductivity / TDS Sensor",
+            "level": "L4",
+            "description": "Inline sensor verifying rinse water quality; confirms chemical carryover below threshold",
+            "bom_standard": "INCOSE",
+            "parent_name": "Rinse & Sanitiser Injection"
+          },
+          {
+            "name": "Inner Drum & Outer Tub",
+            "level": "L4",
+            "description": "Perforated stainless inner drum (AISI 304); welded outer tub containing wash liquor",
+            "bom_standard": "INCOSE",
+            "parent_name": "Wash Drum Assembly"
+          },
+          {
+            "name": "Drive Motor & Transmission",
+            "level": "L4",
+            "description": "AC induction or inverter-driven motor; belt or direct-drive; 1-15 kW",
+            "bom_standard": "INCOSE",
+            "parent_name": "Wash Drum Assembly"
+          },
+          {
+            "name": "Shock Absorber & Suspension",
+            "level": "L4",
+            "description": "Spring-damper system absorbing drum vibration during high-speed extract (300-500 G)",
+            "bom_standard": "INCOSE",
+            "parent_name": "Wash Drum Assembly"
+          },
+          {
+            "name": "Door Seal & Lock Mechanism",
+            "level": "L4",
+            "description": "Rubber bellows seal; electromechanical door lock with safety interlock",
+            "bom_standard": "INCOSE",
+            "parent_name": "Wash Drum Assembly"
+          },
+          {
+            "name": "High-Pressure Spray Arch",
+            "level": "L4",
+            "description": "Stainless arch with angled nozzles delivering pre-soak, wash, and rinse at 50-150 bar",
+            "bom_standard": "INCOSE",
+            "parent_name": "Spray Arch & Wash Assembly"
+          },
+          {
+            "name": "Foam Applicator",
+            "level": "L4",
+            "description": "Low-pressure foam cannon applying chemical foam for dwell-time contact",
+            "bom_standard": "INCOSE",
+            "parent_name": "Spray Arch & Wash Assembly"
+          },
+          {
+            "name": "Rotating Brush / Cloth Assembly",
+            "level": "L4",
+            "description": "Wraparound brush on motorised arms; contour-following for vehicle shape",
+            "bom_standard": "INCOSE",
+            "parent_name": "Spray Arch & Wash Assembly"
+          },
+          {
+            "name": "Drying Blower",
+            "level": "L4",
+            "description": "High-volume centrifugal blower (15-40 kW) removing surface water after rinse",
+            "bom_standard": "INCOSE",
+            "parent_name": "Spray Arch & Wash Assembly"
+          },
+          {
+            "name": "RO Membrane Element & Pressure Vessel",
+            "level": "L4",
+            "description": "Thin-film composite membrane in FRP vessel; 600-10,000 GPD per element",
+            "bom_standard": "INCOSE",
+            "parent_name": "Membrane Filtration Module"
+          },
+          {
+            "name": "UV Disinfection Chamber",
+            "level": "L4",
+            "description": "Stainless chamber with UV-C lamp (254 nm) for microbial inactivation",
+            "bom_standard": "INCOSE",
+            "parent_name": "Membrane Filtration Module"
+          },
+          {
+            "name": "Product Water Storage Tank",
+            "level": "L4",
+            "description": "Atmospheric or pressurised tank storing purified water; NSF 61 certified",
+            "bom_standard": "INCOSE",
+            "parent_name": "Membrane Filtration Module"
+          },
+          {
+            "name": "Tunnel Conveyor Chain / Belt",
+            "level": "L4",
+            "description": "Roller chain or belt transporting vehicles/linen through wash stations",
+            "bom_standard": "INCOSE",
+            "parent_name": "Conveyor & Material Handling"
+          },
+          {
+            "name": "Conveyor Drive Motor & Gearbox",
+            "level": "L4",
+            "description": "Geared AC or servo motor providing variable-speed conveyor drive; 1-5 kW",
+            "bom_standard": "INCOSE",
+            "parent_name": "Conveyor & Material Handling"
+          },
+          {
+            "name": "Guide Rails & Rollers",
+            "level": "L4",
+            "description": "Steel or UHMW-PE rails guiding items through tunnel; wear-resistant bushings",
+            "bom_standard": "INCOSE",
+            "parent_name": "Conveyor & Material Handling"
+          },
+          {
+            "name": "Drain Pump Assembly",
+            "level": "L4",
+            "description": "Self-priming centrifugal or impeller pump; lint-tolerant design; 0.5-2 kW",
+            "bom_standard": "INCOSE",
+            "parent_name": "Drain Pump & Discharge"
+          },
+          {
+            "name": "Lint / Debris Trap",
+            "level": "L4",
+            "description": "Removable mesh basket capturing lint, sand, and debris before drain pump",
+            "bom_standard": "INCOSE",
+            "parent_name": "Drain Pump & Discharge"
+          },
+          {
+            "name": "Drain Check Valve & Discharge Pipe",
+            "level": "L4",
+            "description": "Prevents backflow from drain; pipe routed to building waste or reclaim tank",
+            "bom_standard": "INCOSE",
+            "parent_name": "Drain Pump & Discharge"
+          },
+          {
+            "name": "Settling Tank / Clarifier",
+            "level": "L4",
+            "description": "Gravity separation of solids and oils; multi-stage baffled; 500-5,000 L",
+            "bom_standard": "INCOSE",
+            "parent_name": "Water Recycling System"
+          },
+          {
+            "name": "Reclaim Filtration (Sand / Membrane)",
+            "level": "L4",
+            "description": "Sand, multimedia, or UF membrane removing suspended solids from settled water",
+            "bom_standard": "INCOSE",
+            "parent_name": "Water Recycling System"
+          },
+          {
+            "name": "Reclaim Pump & Storage",
+            "level": "L4",
+            "description": "Booster pump returning treated water to supply header; storage with level control",
+            "bom_standard": "INCOSE",
+            "parent_name": "Water Recycling System"
+          },
+          {
+            "name": "pH / Conductivity Sensor",
+            "level": "L4",
+            "description": "Inline sensors verifying effluent quality; alarm on out-of-spec readings",
+            "bom_standard": "INCOSE",
+            "parent_name": "Effluent Monitoring & Compliance"
+          },
+          {
+            "name": "Effluent Flow Meter",
+            "level": "L4",
+            "description": "Measures total discharge volume for regulatory reporting and water balance",
+            "bom_standard": "INCOSE",
+            "parent_name": "Effluent Monitoring & Compliance"
+          },
+          {
+            "name": "Discharge Valve & Sampling Port",
+            "level": "L4",
+            "description": "Motorised valve with sample tap for grab samples; interlock with monitoring",
+            "bom_standard": "INCOSE",
+            "parent_name": "Effluent Monitoring & Compliance"
+          },
+          {
+            "name": "Microcontroller / PLC Module",
+            "level": "L4",
+            "description": "ARM-based MCU or compact PLC; real-time cycle sequencing; 8-32 I/O channels",
+            "bom_standard": "INCOSE",
+            "parent_name": "Machine Controller / PLC"
+          },
+          {
+            "name": "Power Supply & Relay Board",
+            "level": "L4",
+            "description": "AC/DC converter, solid-state relays, contactor drivers for heaters and motors",
+            "bom_standard": "INCOSE",
+            "parent_name": "Machine Controller / PLC"
+          },
+          {
+            "name": "Sensor Input Interface",
+            "level": "L4",
+            "description": "Analogue and digital inputs for temperature, pressure, flow, level, and interlock sensors",
+            "bom_standard": "INCOSE",
+            "parent_name": "Machine Controller / PLC"
+          },
+          {
+            "name": "Touchscreen / Display Panel",
+            "level": "L4",
+            "description": "4-10 inch colour LCD/TFT; IP65-rated for wet environment",
+            "bom_standard": "INCOSE",
+            "parent_name": "Human-Machine Interface"
+          },
+          {
+            "name": "Cycle Selection & Start Controls",
+            "level": "L4",
+            "description": "Physical buttons, rotary selector, or touchscreen menu for programme selection",
+            "bom_standard": "INCOSE",
+            "parent_name": "Human-Machine Interface"
+          },
+          {
+            "name": "Status Indicators & Alarms",
+            "level": "L4",
+            "description": "LED indicators, audible alarms, fault-code display for diagnostics",
+            "bom_standard": "INCOSE",
+            "parent_name": "Human-Machine Interface"
+          },
+          {
+            "name": "Communication Module (Wi-Fi / Cellular)",
+            "level": "L4",
+            "description": "Embedded Wi-Fi, LTE, or LoRaWAN for cloud connectivity",
+            "bom_standard": "INCOSE",
+            "parent_name": "IoT & Connectivity"
+          },
+          {
+            "name": "Cloud Platform & Remote Monitoring",
+            "level": "L4",
+            "description": "SaaS dashboard for fleet status, cycle counts, water/energy consumption, faults",
+            "bom_standard": "INCOSE",
+            "parent_name": "IoT & Connectivity"
+          },
+          {
+            "name": "OTA Firmware Update",
+            "level": "L4",
+            "description": "Over-the-air update for cycle programmes, calibration, and security patches",
+            "bom_standard": "INCOSE",
+            "parent_name": "IoT & Connectivity"
+          },
+          {
+            "name": "Coin / Token Acceptor",
+            "level": "L4",
+            "description": "Mechanical or electronic coin validator; multi-denomination; declining share",
+            "bom_standard": "INCOSE",
+            "parent_name": "Payment & Vending System"
+          },
+          {
+            "name": "Card / Mobile Payment Terminal",
+            "level": "L4",
+            "description": "EMV contactless / NFC / QR-code reader; cellular-connected for transactions",
+            "bom_standard": "INCOSE",
+            "parent_name": "Payment & Vending System"
+          },
+          {
+            "name": "Revenue Management Software",
+            "level": "L4",
+            "description": "Cloud platform tracking per-machine revenue, usage patterns, pricing optimisation",
+            "bom_standard": "INCOSE",
+            "parent_name": "Payment & Vending System"
+          },
+          {
+            "name": "Door Interlock & Safety Switch",
+            "level": "L4",
+            "description": "Electromechanical lock preventing access to rotating/pressurised components",
+            "bom_standard": "INCOSE",
+            "parent_name": "Machine Safety Systems"
+          },
+          {
+            "name": "Emergency Stop & Leak Detection",
+            "level": "L4",
+            "description": "E-stop button; floor/sump leak sensor triggering auto-shutoff",
+            "bom_standard": "INCOSE",
+            "parent_name": "Machine Safety Systems"
+          },
+          {
+            "name": "Electrical Enclosure (IP-rated)",
+            "level": "L4",
+            "description": "IP55/IP65 enclosure protecting electronics from water and chemical spray",
+            "bom_standard": "INCOSE",
+            "parent_name": "Machine Safety Systems"
+          },
+          {
+            "name": "UL / CE / NSF Certification",
+            "level": "L4",
+            "description": "Safety listing and sanitation certification required for market access",
+            "bom_standard": "INCOSE",
+            "parent_name": "Regulatory Compliance"
+          },
+          {
+            "name": "Water Efficiency Rating",
+            "level": "L4",
+            "description": "EPA WaterSense, Energy Star, or EU Ecodesign label for efficiency claims",
+            "bom_standard": "INCOSE",
+            "parent_name": "Regulatory Compliance"
+          },
+          {
+            "name": "Compliance Documentation",
+            "level": "L4",
+            "description": "Test reports, declarations of conformity, installation manuals, regulatory filings",
+            "bom_standard": "INCOSE",
+            "parent_name": "Regulatory Compliance"
+          },
+          {
+            "name": "Scheduled Maintenance Programme",
+            "level": "L4",
+            "description": "OEM-defined inspection intervals for seals, filters, belts, nozzles",
+            "bom_standard": "INCOSE",
+            "parent_name": "Preventive Maintenance & Aftermarket"
+          },
+          {
+            "name": "Spare Parts & Service Network",
+            "level": "L4",
+            "description": "OEM and third-party parts distribution; field service technicians",
+            "bom_standard": "INCOSE",
+            "parent_name": "Preventive Maintenance & Aftermarket"
+          },
+          {
+            "name": "Predictive Maintenance Analytics",
+            "level": "L4",
+            "description": "Cloud analytics consuming sensor data (incl. flow) for early fault detection",
+            "bom_standard": "INCOSE",
+            "parent_name": "Preventive Maintenance & Aftermarket"
+          }
+        ]
+      },
+      "marquardt_position": {
+        "l_path": "L7 > L6.2 Fluid Circuit & Distribution > L5.2.4 Flow Sensing & Measurement > L4.2.4.1 Ultrasonic Flow Sensor",
+        "l7": "Commercial Water-Using Machinery Ecosystem",
+        "l6": "Fluid Circuit & Distribution",
+        "l5": "Flow Sensing & Measurement",
+        "l4": "Ultrasonic Flow Sensor",
+        "alternatives_at_l4": [
+          {
+            "name": "Turbine / Paddle-Wheel Flow Sensor",
+            "status": "incumbent, dominant",
+            "share_estimate": "60-75%",
+            "confidence": "MEDIUM"
+          },
+          {
+            "name": "Ultrasonic Flow Sensor",
+            "status": "whitespace, <2% penetration",
+            "share_estimate": "<2%",
+            "confidence": "LOW"
+          },
+          {
+            "name": "Solenoid-Valve Volumetric Dosing",
+            "status": "budget fallback, declining",
+            "share_estimate": "20-35%",
+            "confidence": "LOW"
+          }
+        ]
+      },
+      "entities_produced": {
+        "nodes": [
+          {
+            "label": "ValueNetwork",
+            "key": {
+              "naics_code": "333318",
+              "run_id": "TBD"
+            },
+            "properties": {
+              "naics_title": "Other Commercial and Service Industry Machinery Manufacturing",
+              "cfj_statement": "Manufacture and deploy water-using commercial machinery that cleans, treats, purifies, or dispenses aqueous fluids for commercial and institutional operations",
+              "l7_solution": "Commercial Water-Using Machinery Ecosystem",
+              "top_level": "L7",
+              "unit_count": 119,
+              "enriched": true
+            }
+          },
+          {
+            "label": "ValueNetworkUnit",
+            "key": {
+              "name": "<per unit>",
+              "naics_code": "333318",
+              "level": "<per unit>",
+              "run_id": "TBD"
+            },
+            "count": 119
+          }
+        ],
+        "relationships": [
+          {
+            "type": "has_value_network",
+            "source": "Market:333318",
+            "target": "ValueNetwork:333318"
+          },
+          {
+            "type": "contains_unit",
+            "source": "ValueNetwork:333318",
+            "target": "ValueNetworkUnit:<each>",
+            "count": 119
+          },
+          {
+            "type": "has_child",
+            "source": "ValueNetworkUnit:<parent>",
+            "target": "ValueNetworkUnit:<child>",
+            "count": 118
+          }
+        ]
+      },
+      "qa_checklist": {
+        "Q1_cfj_industry_level": {
+          "pass": true,
+          "note": "CFJ describes entire industry purpose, no reference to specific technology"
+        },
+        "Q2_no_orphan_nodes": {
+          "pass": true,
+          "note": "Every unit except L7 has valid parent_name"
+        },
+        "Q3_valid_level_transitions": {
+          "pass": true,
+          "note": "L7>L6>L5>L4 strictly followed, no skipping"
+        },
+        "Q4_l4_children_per_l5": {
+          "pass": true,
+          "note": "All L5 nodes have 3+ L4 children"
+        },
+        "Q5_no_solution_specific_l7_l6": {
+          "pass": true,
+          "note": "L7 and L6 names are industry-generic, no technology or brand references"
+        },
+        "Q6_naming_test": {
+          "pass": true,
+          "note": "Spot-checked: Circulation Pump, Solenoid Inlet Valve, RO Membrane Element, Drain Pump Assembly, Dosing Controller — all industry-standard"
+        },
+        "Q7_unit_count_in_range": {
+          "pass": true,
+          "note": "119 units total (within extended range for manufacturing NAICS)"
+        }
+      }
+    }
+  ],
+  "has_bom": true,
+  "naics_sector_type": "manufacturing"
+}

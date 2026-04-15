@@ -1,0 +1,1793 @@
+{
+  "id": "BOM_heating_equipment_except_warm_air_furnac",
+  "title": "Product BOM Decomposition — NAICS 333414",
+  "type": "product_bom",
+  "market_slug": "heating_equipment_except_warm_air_furnac",
+  "is_per_market": true,
+  "sections": [
+    {
+      "title": "Output Types Covered",
+      "content": "| ID | Output Type | L5 Product |\n|---|---|---|\n| OT-1 | Gas Condensing Boiler | Modulating wall-hung or floor-standing condensing boiler |\n| OT-2 | Gas Non-Condensing Boiler | Cast-iron sectional or steel fire-tube atmospheric boiler |\n| OT-3 | Oil-Fired Boiler | Pressure-atomising oil boiler |\n| OT-4 | Electric Hydronic Boiler | Electrode or resistance-element boiler |\n| OT-5 | Hydronic Baseboard Heater | Fin-tube convector (terminal device, no burner) |\n| OT-6 | Radiant Floor Heating System | In-slab/staple-up tubing circuit + manifold |\n| OT-7 | Pool / Spa Heater | Cupro-nickel HX gas pool heater |\n| OT-8 | Solar Water Heating System | Active flat-plate or evacuated-tube solar thermal system |\n\n---"
+    },
+    {
+      "title": "L4 Subsystem Matrix",
+      "content": "| L4 Subsystem | OT-1 | OT-2 | OT-3 | OT-4 | OT-5 | OT-6 | OT-7 | OT-8 |\n|---|---|---|---|---|---|---|---|---|\n| **L4.1 Heat Generation** | ✓ | ✓ | ✓ | ✓ | | | ✓ | ✓ (solar collect.) |\n| **L4.2 Primary Heat Transfer** | ✓ | ✓ | ✓ | ✓ (vessel) | | | ✓ | ✓ (HX loop) |\n| **L4.3 Hydraulic Distribution** | ✓ | ✓ | ✓ | ✓ | | ✓ (manifold) | ✓ | ✓ |\n| **L4.4 Heat Emission** | | | | | ✓ | ✓ | | |\n| **L4.5 Control & Interface** | ✓ | ✓ | ✓ | ✓ | | | ✓ | ✓ |\n| **L4.6 Containment & Structure** | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |\n| **L4.7 Flue / Venting** | ✓ | ✓ | ✓ | | | | ✓ | |\n| **L4.8 Storage Vessel** | | | | | | | | ✓ |\n\n---"
+    },
+    {
+      "title": "L4 → L0 Decomposition (Cross-Output-Type Reference)",
+      "content": "### L4.1 — Heat Generation\n\n```\nL4.1 Heat Generation\n├── L3.1  Burner Module\n│   ├── L2.1  Premix Burner Assembly\n│   │   ├── L1.1  Burner deck (metal-fibre mesh or ceramic)\n│   │   ├── L1.2  Gas valve (modulating, single-body)\n│   │   ├── L1.3  Igniter / hot-surface element\n│   │   └── L1.4  Ionisation flame sensor\n│   └── L2.2  Combustion Air Fan Assembly\n│       ├── L1.5  EC blower motor + impeller\n│       └── L0.1  Electrical steel laminations (motor core)\n└── L3.2  Fuel / Energy Input (L0 substance)\n    └── L0.2  Natural gas / propane (OT-1/2) | No. 2 fuel oil (OT-3) | Grid electricity (OT-4)\n```\n\n#### L3.1 Burner Module — Burner Principle Alternatives\n\n| Alternative | Share | Trend | Conf. | Source |\n|---|---|---|---|---|\n| Premix modulating (flat / cylindrical metal-fibre) | 65% | ↑ Growing | HIGH | OEM teardown — condensing boilers |\n| Atmospheric inshot / upshot | 28% | ↓ Declining | HIGH | OEM teardown — non-condensing OT-2 |\n| Surface combustion (infrared radiant) | 5% | Stable | MEDIUM | analyst estimate |\n| Fully pre-aerated injection (Inox-Rad) | 2% | ↑ Emerging | LOW | analyst estimate |\n\n#### L1.1 Burner Deck Material (L0)\n\n| Alternative | Share | Conf. |\n|---|---|---|\n| FeCrAl metallic fibre (woven/knitted) | 55% | MEDIUM |\n| Ceramic fibre (SiC-coated) | 30% | MEDIUM |\n| Stainless steel perforated sheet | 15% | MEDIUM |\n\nSource: analyst estimate from boiler teardown literature.\n\n#### L2.2 Combustion Air Fan — Motor Drive Alternatives\n\n| Alternative | Share | Trend | Conf. |\n|---|---|---|---|\n| ECM (brushless DC, variable speed) | 70% | ↑ | HIGH |\n| PSC (induction, 1-speed) | 28% | ↓ | HIGH |\n| BLDC with external drive | 2% | Stable | LOW |\n\n---\n\n### L4.2 — Primary Heat Transfer\n\n```\nL4.2 Primary Heat Transfer\n├── L3.3  Condensing Heat Exchanger (latent + sensible) — OT-1\n│   ├── L2.3  HX core assembly\n│   │   ├── L1.6  Tube / plate elements\n│   │   └── L0.3  316L stainless steel OR Al-Si alloy  ← primary material choice\n│   └── L2.4  Condensate management assembly\n│       ├── L1.7  Condensate trap\n│       ├── L1.8  Condensate neutraliser\n│       └── L0.4  Polypropylene (trap body) / CaCO₃ pellets (neutraliser)\n├── L3.4  Non-Condensing HX — OT-2, OT-3\n│   └── L0.5  Cast iron (sectional) OR Carbon steel (fire-tube) OR Copper (coil)\n└── L3.5  Pool HX — OT-7\n    └── L0.6  Cupro-nickel Cu90/Ni10 OR Titanium (saltwater / commercial)\n```\n\n#### L0.3 Condensing HX Material — highest-stakes material choice in OT-1\n\n| Alternative | Share | Trend | Conf. | Source |\n|---|---|---|---|---|\n| Aluminium-silicon alloy (cast, Al-Si12) | 42% | Stable | MEDIUM | AHS Heating; Cowley Group teardowns |\n| 316L stainless steel (spiral / plate) | 40% | ↑ Growing | MEDIUM | AHS Heating; premium EU OEMs |\n| Dual-metal (SS primary + Al-Si secondary) | 12% | ↑ Growing | MEDIUM | analyst estimate |\n| Copper-fin (legacy non-condensing) | 6% | ↓ Declining | HIGH | legacy OT-2/OT-3 base |\n\n#### L0.5 Non-Condensing HX Material (OT-2, OT-3)\n\n| Alternative | Share | Trend | Conf. |\n|---|---|---|---|\n| Grey cast iron (sectional) | 60% | ↓ Declining | HIGH |\n| Carbon steel (fire-tube welded) | 32% | Stable | HIGH |\n| Copper coil (finned) | 8% | ↓ Declining | MEDIUM |\n\n#### L0.6 Pool HX Material (OT-7)\n\n| Alternative | Share | Conf. |\n|---|---|---|\n| Cupro-nickel Cu90/Ni10 | 70% | HIGH |\n| Titanium (saltwater / commercial) | 20% | HIGH |\n| Polymer composite (low-temp solar assist) | 10% | MEDIUM |\n\n---\n\n### L4.3 — Hydraulic Distribution — **Marquardt's domain**\n\n```\nL4.3 Hydraulic Distribution\n├── L3.6  Circulation Pump Module\n│   ├── L2.5  Pump assembly (motor + hydraulic cartridge)\n│   └── L0.7  Cast iron / polymer body; copper or aluminium windings\n├── L3.7  Flow & Thermal Sensing Module  ← MARQUARDT BOM POSITION\n│   ├── L2.6  Flow meter assembly\n│   │   ├── L1.9   Flow sensor body (inline spool, DN15–DN25)\n│   │   ├── L1.10  Transducer pair (wetted or clamp-on)\n│   │   └── L0.8   PZT ceramic / PVDF / AlN (transducer material — ultrasonic branch)\n│   └── L2.7  Temperature sensor assembly (supply + return NTC / PT1000)\n├── L3.8  Hydraulic Safety Module\n│   ├── L2.8   Pressure-relief valve  — stop L1 (brass/SS commodity)\n│   ├── L2.9   Expansion vessel       — stop L1 (steel + butyl diaphragm)\n│   └── L2.10  Auto air vent + pressure gauge — stop L1 (commodity)\n└── L3.9  Piping & Fittings\n    └── L0.9   Copper / carbon steel / PEX / CPVC\n```\n\n#### L3.6 Circulation Pump — Type Alternatives\n\n| Alternative | Share | Trend | Conf. | Source |\n|---|---|---|---|---|\n| Wet-rotor circulator, ECM permanent-magnet | 55% | ↑ | HIGH | Maximize MR 2024 |\n| Wet-rotor circulator, 3-speed PSC | 32% | ↓ | HIGH | Maximize MR 2024 |\n| External dry-rotor centrifugal | 10% | Stable | MEDIUM | analyst estimate |\n| Integral mag-drive (no shaft seal) | 3% | ↑ Emerging | LOW | analyst estimate |\n\n#### L3.7 Flow Measurement Technology — **Marquardt's target position**\n\n| Alternative | Share | Trend | Conf. | Source |\n|---|---|---|---|---|\n| Impeller / paddle-wheel (mechanical) | 40% | ↓ Declining | HIGH | OEM teardown |\n| Ultrasonic transit-time (inline) | 30% | ↑ Growing | HIGH | Market Research Future 2025; Badger Meter hydronic blog |\n| Electromagnetic (magmeter) | 15% | Stable | HIGH | industry reports |\n| Differential pressure (orifice / venturi) | 8% | ↓ Declining | MEDIUM | analyst estimate |\n| Thermal calorimetric | 5% | Stable | MEDIUM | analyst estimate |\n| Vortex | 2% | Stable | LOW | analyst estimate |\n\nSum 100%. Marquardt Ultrasonic Transit-Time DN20 sits in the 30% growing share. Replacing the 40% mechanical impeller base is the primary displacement opportunity.\n\n#### L0.8 Ultrasonic Transducer Material (within ultrasonic branch only)\n\n| Alternative | Share within ultrasonic | Trend | Conf. | Source |\n|---|---|---|---|---|\n| PZT (lead zirconate titanate, bulk ceramic) | 72% | Stable | MEDIUM | CTS Corp transducer blog |\n| PVDF (piezo film) | 13% | Stable | LOW | analyst estimate |\n| AlN / ScAlN (MEMS PMUT) | 10% | ↑ Emerging | LOW | Nature Microsystems 2023 (ScAlN PMUT for small-diameter) |\n| LiNbO₃ (single crystal, high-temp) | 5% | Stable | LOW | analyst estimate |\n\n#### L0.9 Hydronic Piping Material\n\n| Alternative | Share | Trend | Conf. |\n|---|---|---|---|\n| Copper Type L/M | 50% | Stable | HIGH |\n| PEX / PEX-Al-PEX | 30% | ↑ | HIGH |\n| Carbon steel Sch 40 | 15% | ↓ | HIGH |\n| Stainless steel 304 | 5% | Stable | MEDIUM |\n\n---\n\n### L4.4 — Heat Emission (OT-5 Baseboard; OT-6 Radiant Floor only)\n\n```\nL4.4 Heat Emission\n├── L3.10  Fin-Tube Baseboard Assembly (OT-5)\n│   ├── L1.11  Copper element + aluminium fins\n│   ├── L1.12  Sheet-steel enclosure\n│   └── L0.10  Copper tube / Aluminium fins / Galv. steel enclosure\n└── L3.11  Radiant Tubing Circuit + Manifold (OT-6)\n    ├── L1.13  PEX-A or PEX-B tubing coil\n    ├── L1.14  Brass manifold with flow balancing valves\n    └── L0.11  Cross-linked polyethylene (PEX) / Brass\n```\n\n#### L1.11 Fin-Tube Element — Material Alternatives\n\n| Alternative | Share | Conf. |\n|---|---|---|\n| Copper tube + aluminium fin | 82% | HIGH |\n| Copper tube + copper fin (legacy) | 12% | HIGH |\n| Steel tube + steel fin (industrial) | 6% | MEDIUM |\n\n#### OT-6 Radiant Tubing Type\n\n| Alternative | Share | Trend | Conf. |\n|---|---|---|---|\n| PEX-A (Engel method) | 50% | ↑ | HIGH |\n| PEX-B (silane method) | 35% | Stable | HIGH |\n| Polybutylene (PB) | 8% | ↓ Declining | MEDIUM |\n| Stainless steel flex (Uponor/Aquatherm) | 7% | ↑ | MEDIUM |\n\n---\n\n### L4.5 — Control & Interface\n\n```\nL4.5 Control & Interface\n├── L3.12  Appliance Controller Module\n│   ├── L2.11  Main PCB assembly (MCU, relay, power supply)\n│   └── L2.12  Communication interface (OpenTherm, eBUS, Modbus)\n└── L3.13  User Interface Module\n    └── L2.13  Display + keypad / pushbutton assembly\n```\n\n#### L3.12 Controller Architecture Alternatives\n\n| Alternative | Share | Conf. |\n|---|---|---|\n| Proprietary MCU (OEM-developed) | 62% | MEDIUM |\n| OEM-customised Bosch / Siemens platform | 22% | MEDIUM |\n| OpenTherm-native compatible | 14% | MEDIUM |\n| BMS-integrated (Modbus / BACnet, commercial) | 2% | HIGH |\n\n#### L2.12 Communication Protocol\n\n| Alternative | Share | Trend | Conf. |\n|---|---|---|---|\n| OpenTherm (analogue 2-wire) | 45% | Stable | MEDIUM |\n| eBUS / EMS (Bosch/Buderus) | 25% | Stable | HIGH |\n| Proprietary bus (Baxi, Vaillant VR-bus) | 20% | ↓ | MEDIUM |\n| Modbus / RS-485 (commercial) | 7% | Stable | HIGH |\n| BACnet IP (commercial large) | 3% | ↑ | HIGH |\n\n---\n\n### L4.6 — Containment & Structure\n\n```\nL4.6 Containment & Structure\n├── L3.14  Outer Casing Assembly\n│   ├── L1.15  Front / side / rear panels\n│   └── L0.12  Galvanised steel / ABS polymer / PPGI\n├── L3.15  Internal Frame / Bracket\n│   └── L1.16  Galvanised steel mounting frame — stop L1\n└── L3.16  Thermal Insulation Layer\n    └── L0.13  Mineral wool / polyurethane foam / ceramic-fibre wrap\n```\n\n#### L0.12 Casing Panel Material\n\n| Alternative | Share | Conf. |\n|---|---|---|\n| Powder-coated galvanised steel | 68% | HIGH |\n| ABS or PP thermoplastic | 22% | HIGH |\n| Pre-painted galvanised (PPGI) | 10% | MEDIUM |\n\n---"
+    },
+    {
+      "title": "B.4 — Component Category Map: Flow Sensor",
+      "content": "| # | BOM Path | Function | Safety-Critical | Alternatives at position |\n|---|---|---|---|---|\n| 1 | OT-1/2/3/4 › L4.3 › L3.7 › L2.6 Flow Meter Assembly | Confirm minimum flow for burner interlock; protect HX from dry-fire | **YES** (HX destruction risk on dry-fire) | Impeller 40% / Ultrasonic 30% / Mag 15% / dP 8% / Thermal 5% / Vortex 2% |\n| 2 | OT-6 › L4.3 › L3.7 › L2.6 | Verify minimum loop flow for radiant manifold zones | NO (trim / energy metering) | Same pool; impeller-heavy |\n| 3 | OT-7 › L4.3 › L3.7 › L2.6 | Measure pool water flow for safety and energy billing | YES (freeze / bypass protection) | Same pool |\n\n**Insight:** Marquardt DN20 (transit-time, single-body flow + temperature) targets position 1 across all fuel-type boilers (OT-1–OT-4). Safety-criticality is highest in OT-1 condensing boilers, where dry-fire destroys the Al-Si or SS HX. Ultrasonic wins vs. mechanical impeller because it (a) has no moving parts to foul in glycol/inhibitor water, (b) covers the full 4.2–46.6 l/min range in a single DN20 body, and (c) outputs both flow rate and temperature — enabling single-device BTU calculation. The 30% current share growing against the 40% impeller base defines the primary displacement opportunity.\n\n---\n\n---\n\n# Per-Output-Type BOM Trees\n\n> Each tree is self-contained and complete from L4 subsystem to L0 raw material. Alternatives and market share appear at every level where a design choice exists. Output types with different combustion or construction principles have materially different trees.\n\n---"
+    },
+    {
+      "title": "OUTPUT TYPE OT-1: Gas Condensing Boiler",
+      "content": "*Wall-hung or floor-standing modulating boiler achieving 95–98% efficiency by recovering latent heat from flue gases. Most complex BOM of all seven output types.*\n\n```\nOT-1  Gas Condensing Boiler\n│\n├── L4.1  Heat Generation\n│   │\n│   ├── L3.1  Premix Burner Module\n│   │   ├── L2.1  Premix Burner Assembly\n│   │   │   ├── L1.1  Burner deck\n│   │   │   │         — alternatives: FeCrAl metallic fibre 55%, SiC-coated ceramic fibre 30%,\n│   │   │   │           SS perforated sheet 15% [MEDIUM]\n│   │   │   │           L0 → FeCrAl alloy (woven mat) / SiC ceramic mat / AISI 304 SS sheet\n│   │   │   ├── L1.2  Modulating gas valve (single-body)\n│   │   │   │         — alternatives: fully modulating single-body 80%,\n│   │   │   │           dual-valve safety train 20% [HIGH]\n│   │   │   │           L0 → Dezincification-resistant (DZR) brass body /\n│   │   │   │                Aluminium alloy die-cast body\n│   │   │   ├── L1.3  Hot-surface igniter or spark electrode\n│   │   │   │         — alternatives: silicon carbide HSI 55%,\n│   │   │   │           spark electrode (tungsten tip) 40%, glow plug 5% [MEDIUM]\n│   │   │   │           L0 → Silicon carbide / Tungsten / Steatite ceramic holder\n│   │   │   └── L1.4  Ionisation flame sensor (rod)\n│   │   │             L0 → AISI 316L SS rod / refractory ceramic sleeve\n│   │   │\n│   │   └── L2.2  Combustion Air Fan Assembly\n│   │       ├── L1.5  EC blower motor\n│   │       │         — alternatives: ECM brushless DC 70%,\n│   │       │           PSC induction 28%, BLDC external 2% [HIGH]\n│   │       │           L0 → Grain-oriented electrical steel laminations (stator/rotor core)\n│   │       │                Copper or aluminium magnet wire (windings)\n│   │       └── L1.6  Polypropylene glass-filled impeller\n│   │                 L0 → PP-GF30 (30% glass-filled polypropylene)\n│   │\n│   └── L3.2  Gas Train / Fuel Input (field-supplied gas line)\n│             L0 → Natural gas (methane) / Propane (LPG)\n│\n├── L4.2  Primary Heat Transfer\n│   │\n│   ├── L3.3  Condensing Heat Exchanger Module\n│   │   ├── L2.3  HX Core Assembly\n│   │   │   ├── L1.7  Tube or plate elements (primary + secondary stage)\n│   │   │   │         — alternatives: Al-Si12 cast aluminium 42%,\n│   │   │   │           316L stainless steel spiral/plate 40%,\n│   │   │   │           dual-metal SS primary + Al-Si secondary 12%,\n│   │   │   │           copper finned (legacy, declining) 6% [MEDIUM]\n│   │   │   │           L0 → Al-Si12 alloy / 316L SS / copper Cu-DHP\n│   │   │   └── L1.8  Sealant / gasket (HX joint)\n│   │   │             L0 → Silicone rubber or EPDM gasket\n│   │   │\n│   │   └── L2.4  Condensate Management Assembly\n│   │       ├── L1.9  Condensate siphon trap\n│   │       │         L0 → Polypropylene (PP) injection-moulded body\n│   │       └── L1.10 Condensate neutraliser cartridge\n│   │                 L0 → Calcium carbonate (CaCO₃) pellets /\n│   │                      Magnesium oxide (MgO) pellets\n│   │\n│   └── L3.4  Flue Gas Manifold / Exhaust Collector\n│             L1.11  Cast Al-Si or PP flue collector\n│             L0 → Al-Si12 alloy / Glass-filled PP\n│\n├── L4.3  Hydraulic Distribution                                ← MARQUARDT ZONE\n│   │\n│   ├── L3.5  Circulation Pump Module\n│   │   └── L2.5  Pump Assembly (wet-rotor integral)\n│   │       ├── L1.12 Pump housing\n│   │       │         — alternatives: grey cast iron 45%,\n│   │       │           noryl/PPS polymer 40%, SS 316 15% [MEDIUM]\n│   │       │           L0 → Grey cast iron / Noryl PPO / AISI 316 SS\n│   │       ├── L1.13 Impeller (closed type)\n│   │       │         L0 → AISI 316L SS / Noryl PPO\n│   │       └── L1.14 Rotor can & shaft\n│   │                 L0 → AISI 316L SS can / carbon/ceramic shaft bearings\n│   │\n│   ├── L3.6  Flow & Thermal Sensing Module\n│   │   ├── L2.6  Flow Meter Assembly\n│   │   │   ├── L1.15 Flow sensor body (inline spool)\n│   │   │   │         — alternatives: PPS thermoplastic 50%,\n│   │   │   │           DZR brass 40%, 316L SS 10% [MEDIUM]\n│   │   │   │           L0 → PPS (polyphenylene sulphide) /\n│   │   │   │                DZR brass CW602N / AISI 316L SS\n│   │   │   └── L1.16 Transducer pair\n│   │   │             — alternatives (ultrasonic branch only):\n│   │   │               PZT bulk ceramic 72%, PVDF piezo film 13%,\n│   │   │               AlN/ScAlN MEMS PMUT 10%, LiNbO₃ single crystal 5% [MEDIUM]\n│   │   │               L0 → Lead zirconate titanate (PZT) ceramic /\n│   │   │                    PVDF film / AlN thin film\n│   │   │\n│   │   └── L2.7  Temperature Sensor Assembly (supply + return)\n│   │       └── L1.17 NTC thermistor or PT1000 element\n│   │                 — alternatives: NTC 10kΩ 65%, PT1000 RTD 30%, PT100 5% [HIGH]\n│   │                 L0 → Metal oxide ceramic bead (NTC) /\n│   │                      Platinum wire on ceramic substrate (PT)\n│   │\n│   ├── L3.7  Hydraulic Safety Module\n│   │   ├── L2.8  Pressure relief valve (3 bar, ASME/CE) — stop L1\n│   │   │         L0 → DZR brass body / EPDM seat seal\n│   │   ├── L2.9  Expansion vessel (butyl diaphragm) — stop L1\n│   │   │         L0 → Carbon steel shell / Butyl rubber diaphragm\n│   │   ├── L2.10 Auto air vent — stop L1\n│   │   │         L0 → DZR brass / Buna-N float\n│   │   └── L2.11 Pressure gauge — stop L1\n│   │             L0 → DZR brass bourdon tube\n│   │\n│   └── L3.8  Piping & Fittings (internal hydronic circuit)\n│             — alternatives: copper type L/M 50%, PEX-Al-PEX 30%,\n│               carbon steel Sch 40 15%, SS 304 5% [HIGH]\n│             L0 → Copper Cu-DHP / Cross-linked polyethylene (PEX) /\n│                  Carbon steel ASTM A53 / AISI 304 SS\n│\n├── L4.5  Control & Interface\n│   │\n│   ├── L3.9  Appliance Controller Module\n│   │   ├── L2.12 Main PCB Assembly\n│   │   │   ├── L1.18 MCU / microcontroller\n│   │   │   │         — alternatives: proprietary OEM 62%,\n│   │   │   │           Bosch/Siemens platform 22%,\n│   │   │   │           OpenTherm-native 14%, BMS/Modbus 2% [MEDIUM]\n│   │   │   │           L0 → Monocrystalline silicon (die substrate)\n│   │   │   ├── L1.19 SMPS power supply module\n│   │   │   │         L0 → Ferrite transformer core / Copper windings\n│   │   │   └── L1.20 Relay array (burner, pump, valve)\n│   │   │             L0 → Copper contacts / Nylon PA66 housing\n│   │   │\n│   │   └── L2.13 Communication Interface PCB\n│   │             — alternatives: OpenTherm 45%, eBUS/EMS 25%,\n│   │               proprietary bus 20%, Modbus/RS-485 7%, BACnet IP 3% [MEDIUM]\n│   │             L0 → FR4 PCB laminate / copper traces\n│   │\n│   └── L3.10 User Interface Module\n│       └── L2.14 Display + Keypad Assembly\n│           ├── L1.21 LCD or TFT display module\n│           │         — alternatives: character LCD 55%, TFT colour 35%,\n│           │           e-ink 10% [MEDIUM]\n│           └── L1.22 Tactile pushbuttons / rotary encoder\n│                     L0 → Nylon PA66 keycap / Copper spring contact\n│\n├── L4.6  Containment & Structure\n│   │\n│   ├── L3.11 Outer Casing Assembly\n│   │   ├── L1.23 Front/side/rear panels\n│   │   │         — alternatives: powder-coated galv steel 68%,\n│   │   │           ABS or PP thermoplastic 22%, PPGI 10% [HIGH]\n│   │   │           L0 → DX51D galvanised steel (0.8 mm) /\n│   │   │                ABS / Prepainted galvanised (PPGI)\n│   │   └── L1.24 Sealing gaskets (door / panel)\n│   │             L0 → Closed-cell EPDM foam strip\n│   │\n│   ├── L3.12 Internal Frame & Bracket\n│   │         L1.25 Mounting plate + hanger bracket\n│   │         L0 → DX52D galvanised steel (1.5 mm)\n│   │\n│   └── L3.13 Thermal Insulation Layer\n│             — alternatives: mineral wool blanket 55%,\n│               polyurethane foam (injected) 30%,\n│               ceramic-fibre wrap 15% [MEDIUM]\n│             L0 → Mineral wool (rockwool) /\n│                  Rigid PU foam / Ceramic-fibre blanket\n│\n└── L4.7  Flue / Venting System (condensing)\n    │\n    ├── L3.14 Coaxial Flue Duct Assembly\n    │   └── L2.15 Concentric PP flue/air duct (60/100 or 80/125 mm)\n    │       ├── L1.26 Flue inner tube\n    │       │         L0 → Polypropylene (PP-H or PP-R, flue-rated to 120 °C)\n    │       └── L1.27 Air outer tube\n    │                 L0 → ABS / PP\n    │\n    └── L3.15 Flue Terminal & Adapter\n              L1.28 Wall terminal (bird-screen, rain cap)\n              L0 → PP / ABS injection moulding\n```\n\n---"
+    },
+    {
+      "title": "OUTPUT TYPE OT-2: Gas Non-Condensing Boiler",
+      "content": "*Cast-iron sectional or steel fire-tube atmospheric boiler. No condensate recovery; flue temperature 150–250 °C. Simpler BOM than OT-1 — no condensate system, atmospheric draft, less electronics.*\n\n```\nOT-2  Gas Non-Condensing Boiler\n│\n├── L4.1  Heat Generation\n│   │\n│   ├── L3.1  Atmospheric Burner Module\n│   │   ├── L2.1  Burner Assembly\n│   │   │   ├── L1.1  Inshot or upshot cast-iron burner\n│   │   │   │         — alternatives: cast-iron inshot ports 70%,\n│   │   │   │           tubular ribbon burner 20%,\n│   │   │   │           ceramic radiant deck 10% [HIGH]\n│   │   │   │           L0 → Grey cast iron / AISI 430 SS / Ceramic fibre\n│   │   │   ├── L1.2  Fixed orifice spud (brass, per BTU rating)\n│   │   │   │         L0 → DZR brass\n│   │   │   └── L1.3  Spark pilot or thermocouple pilot assembly\n│   │   │             — alternatives: standing pilot + thermocouple 45%,\n│   │   │               electronic ignition (HSI) 50%,\n│   │   │               intermittent pilot (IPI) 5% [HIGH]\n│   │   │               L0 → AISI 316 SS thermocouple tube /\n│   │   │                    Silicon carbide HSI element\n│   │   │\n│   │   └── L2.2  Draft Hood / Diverter Assembly\n│   │       └── L1.4  Stamped steel diverter\n│   │                 L0 → Aluminised steel ASTM A463 (0.8 mm)\n│   │\n│   └── L3.2  Gas Valve & Controls\n│       └── L2.3  Single-stage gas valve (on/off or 2-stage)\n│               — alternatives: single-stage on/off 60%,\n│                 two-stage hi/lo 35%, modulating 5% [HIGH]\n│                 L0 → DZR brass body / Buna-N diaphragm\n│\n├── L4.2  Primary Heat Transfer\n│   │\n│   └── L3.3  Non-Condensing HX Module\n│       └── L2.4  HX Core Assembly\n│           ├── L1.5  Cast-iron sections or steel shell\n│           │         — alternatives: grey cast iron sectional 60%,\n│           │           welded carbon steel fire-tube 32%,\n│           │           copper finned coil 8% [HIGH]\n│           │           L0 → Grey cast iron ASTM A48 Cl.30 /\n│           │                Carbon steel SA-179 tube /\n│           │                Copper Cu-DHP\n│           └── L1.6  Section / tube sealing (push-nipple or welded)\n│                     L0 → Cast-iron push nipple / PTFE thread tape\n│\n├── L4.3  Hydraulic Distribution\n│   │\n│   ├── L3.4  Circulation Pump Module   [same alternatives as OT-1 L3.5]\n│   │         ECM wet-rotor 55%, PSC 3-speed 32%, dry-rotor 10%, mag-drive 3% [HIGH]\n│   │\n│   ├── L3.5  Flow & Thermal Sensing Module\n│   │   ├── L2.5  Flow Meter Assembly   [same technology alternatives as OT-1]\n│   │   │         Impeller 40%, Ultrasonic 30%, Magmeter 15%, dP 8%, Thermal 5%, Vortex 2% [HIGH]\n│   │   └── L2.6  Temperature Sensor Assembly\n│   │             NTC 65%, PT1000 30%, PT100 5% [HIGH]\n│   │\n│   ├── L3.6  Hydraulic Safety Module\n│   │         Relief valve + expansion vessel + air vent [same as OT-1]\n│   │\n│   └── L3.7  Piping & Fittings\n│             Copper 50%, PEX-Al-PEX 30%, carbon steel 15%, SS 5% [HIGH]\n│\n├── L4.5  Control & Interface (simpler than OT-1)\n│   │\n│   ├── L3.8  Boiler Aquastat / Limit Control Module\n│   │   └── L2.7  Aquastat Assembly\n│   │       └── L1.7  Bimetal or bulb-and-bellows aquastat\n│   │                 — alternatives: electromechanical aquastat 55%,\n│   │                   digital boiler control (Honeywell S8600) 40%,\n│   │                   smart/WiFi enabled 5% [MEDIUM]\n│   │                   L0 → Bimetal strip (Invar/brass) /\n│   │                        Silicon die (digital variant)\n│   │\n│   └── L3.9  User Interface Module (minimal)\n│             L1.8  On/off switch + status LED\n│             L0 → Nylon PA66 switch body / Copper contact\n│\n├── L4.6  Containment & Structure\n│   │     [same composition as OT-1 L4.6]\n│   │     Outer casing: powder-coat galv steel 68%, ABS/PP 22%, PPGI 10% [HIGH]\n│   │\n│   └── L3.10 Jacket Insulation (thicker, higher delta-T loss)\n│             Mineral wool 70%, PU foam 20%, fibreglass batt 10% [MEDIUM]\n│             L0 → Mineral wool / Rigid PU / Fibreglass\n│\n└── L4.7  Flue / Venting System (non-condensing, high temp)\n    │\n    ├── L3.11 Category I B-Vent Assembly (natural draft)\n    │   └── L2.8  Double-wall B-vent pipe sections\n    │       ├── L1.9  Inner liner (aluminium)\n    │       │         L0 → 3003 aluminium alloy\n    │       └── L1.10 Outer jacket (galvanised steel)\n    │                 L0 → DX51D galvanised steel\n    │\n    └── L3.12 Power-Vent Option (optional fan-assist)\n              L2.9  Draft inducer blower assembly\n              — alternatives: B-vent natural draft 80%, power-vent 20% [HIGH]\n              L0 → Polypropylene impeller / Electrical steel motor core\n```\n\n---"
+    },
+    {
+      "title": "OUTPUT TYPE OT-3: Oil-Fired Boiler",
+      "content": "*Pressure-atomising or gun-type oil burner with cast-iron or steel HX. Higher thermal mass than gas equivalents; requires Type L or SS flue due to acidic condensate from oil combustion.*\n\n```\nOT-3  Oil-Fired Boiler\n│\n├── L4.1  Heat Generation\n│   │\n│   ├── L3.1  Oil Burner Module\n│   │   ├── L2.1  Burner Gun Assembly\n│   │   │   ├── L1.1  Pressure-atomising oil nozzle\n│   │   │   │         — alternatives: hollow-cone solid-state 60%,\n│   │   │   │           semi-solid cone 30%, solid-cone 10% [HIGH]\n│   │   │   │           L0 → Brass body / Stainless steel filter /\n│   │   │   │                Synthetic rubber o-ring\n│   │   │   ├── L1.2  Gear-type oil pump\n│   │   │   │         L0 → Cast iron housing / Steel gears / Nitrile seals\n│   │   │   ├── L1.3  Ignition transformer (10 kV)\n│   │   │   │         L0 → Silicon-steel transformer core /\n│   │   │   │              Copper HV windings / Epoxy potting\n│   │   │   ├── L1.4  Spark electrode pair\n│   │   │   │         L0 → Tungsten tip / Porcelain ceramic insulator\n│   │   │   └── L1.5  Oil pump motor + combustion air fan (single shaft)\n│   │   │             — alternatives: PSC induction 75%,\n│   │   │               ECM variable-speed 20%, split-shaft 5% [MEDIUM]\n│   │   │               L0 → Grain-oriented electrical steel /\n│   │   │                    Copper windings / Die-cast aluminium frame\n│   │   │\n│   │   └── L2.2  Blast Tube / End Cone Assembly\n│   │       ├── L1.6  Blast tube (flame retention head)\n│   │       │         L0 → AISI 304 SS or aluminised steel\n│   │       └── L1.7  Retention ring / diffuser plate\n│   │                 L0 → AISI 304 SS\n│   │\n│   ├── L3.2  Oil Supply Module (within boiler boundary)\n│   │   └── L2.3  Oil Filter + Shutoff Assembly\n│   │       ├── L1.8  Filter canister\n│   │       │         — alternatives: PP spin-on 60%, steel canister 40% [HIGH]\n│   │       │           L0 → Polypropylene / Carbon steel\n│   │       └── L1.9  Fuel-oil shutoff solenoid\n│   │                 L0 → DZR brass body / Nitrile diaphragm /\n│   │                      Copper solenoid coil\n│   │\n│   └── L3.3  Combustion Chamber Lining\n│             L1.10 Ceramic fibre board (combustion chamber wall)\n│             — alternatives: ceramic fibre board 65%,\n│               refractory castable 30%, steel liner 5% [MEDIUM]\n│             L0 → Aluminosilicate ceramic fibre /\n│                  Calcium aluminate refractory cement\n│\n├── L4.2  Primary Heat Transfer\n│   │\n│   └── L3.4  Cast-Iron or Steel HX Module\n│       └── L2.4  HX Core Assembly\n│           ├── L1.11 HX sections or shell\n│           │         — alternatives: grey cast iron sectional 55%,\n│           │           welded carbon steel (fire-tube/scotch) 35%,\n│           │           copper finned coil 10% [HIGH]\n│           │           L0 → Grey cast iron ASTM A48 /\n│           │                Carbon steel ASTM A53 /\n│           │                Copper Cu-DHP\n│           └── L1.12 Push-nipple or threaded connection seals\n│                     L0 → Cast-iron push nipple / PTFE sealant\n│\n├── L4.3  Hydraulic Distribution  [same as OT-2]\n│         Flow meter alternatives: Impeller 40%, Ultrasonic 30%,\n│         Magmeter 15%, dP 8%, Thermal 5%, Vortex 2% [HIGH]\n│\n├── L4.5  Control & Interface\n│   │\n│   ├── L3.5  Burner Primary Control (Beckett / Honeywell) Module\n│   │   └── L2.5  Cad-cell relay + safety lockout circuit\n│   │       └── L1.13 Cadmium sulphide (cad cell) flame detector\n│   │                 — alternatives: cad cell photocell 70%,\n│   │                   UV scanner (commercial) 25%, ionisation 5% [HIGH]\n│   │                   L0 → Cadmium sulphide photoconductive cell /\n│   │                        UV-sensitive phototube\n│   │\n│   └── L3.6  Aquastat / Limit Control   [same as OT-2 L3.8]\n│             Electromechanical aquastat 55%, digital 40%, smart 5% [MEDIUM]\n│\n├── L4.6  Containment & Structure  [same as OT-1/2]\n│\n└── L4.7  Flue / Venting System (oil — high temp, acidic)\n    │\n    ├── L3.7  Type L or Stainless Vent Assembly\n    │   └── L2.6  Double-wall Type L or SS liner\n    │       ├── L1.14 Inner liner\n    │       │         — alternatives: Type L (aluminised inner) 55%,\n    │       │           316L SS liner 35%, AL29-4C SS 10% [MEDIUM]\n    │       │           L0 → Aluminised steel T304 /\n    │       │                AISI 316L SS / AL29-4C ferritic SS\n    │       └── L1.15 Outer jacket (galvanised)\n    │                 L0 → DX51D galvanised steel\n    │\n    └── L3.8  Barometric Draft Regulator\n              L1.16 Pivot-weighted damper plate\n              — alternatives: barometric draft regulator 75%,\n                power-burner (no barometric) 25% [HIGH]\n              L0 → Cast iron or steel damper plate\n```\n\n---"
+    },
+    {
+      "title": "OUTPUT TYPE OT-4: Electric Hydronic Boiler",
+      "content": "*No combustion; resistance elements or electrode system. No flue. Simplest physical BOM but most complex electrical distribution. Pressure vessel IS the primary HX.*\n\n```\nOT-4  Electric Hydronic Boiler\n│\n├── L4.1  Heat Generation\n│   │\n│   ├── L3.1  Heating Element Module\n│   │   ├── L2.1  Resistance Element Assembly\n│   │   │   ├── L1.1  Sheathed immersion element\n│   │   │   │         — alternatives: Incoloy 800 sheathed 55%,\n│   │   │   │           AISI 316L SS sheathed 30%,\n│   │   │   │           titanium (high-mineral water) 10%,\n│   │   │   │           PTC ceramic self-regulating 5% [MEDIUM]\n│   │   │   │           L0 → Incoloy 800 (Ni-Fe-Cr alloy) sheath /\n│   │   │   │                AISI 316L SS sheath /\n│   │   │   │                Grade 2 titanium /\n│   │   │   │                MgO powder (element packing fill)\n│   │   │   └── L1.2  Element flange + gasket\n│   │   │             L0 → DZR brass flange / EPDM gasket\n│   │   │\n│   │   └── L2.2  Electrode Assembly (electrode-type boiler only)\n│   │       ├── L1.3  Graphite or SS electrode\n│   │       │         — alternatives: graphite 55%,\n│   │       │           AISI 316L SS 45% [MEDIUM]\n│   │       │           L0 → Electrographite (graphite + carbon) /\n│   │       │                AISI 316L SS rod\n│   │       └── L1.4  Ceramic electrode insulator\n│   │                 L0 → High-alumina ceramic Al₂O₃ 95%\n│   │\n│   └── L3.2  Power Distribution & Staging Module\n│       ├── L2.3  Contactor / SSR Staging Assembly\n│       │   ├── L1.5  Power contactor (per stage)\n│       │   │         — alternatives: electromechanical contactor 60%,\n│       │   │           solid-state relay (SSR) 35%, TRIAC 5% [MEDIUM]\n│       │   │           L0 → Copper/silver alloy contacts /\n│       │   │                Grain-oriented silicon steel core /\n│       │   │                SCR silicon die (SSR)\n│       │   └── L1.6  DIN rail terminal blocks\n│       │             L0 → Nylon PA66 / Copper busbar\n│       │\n│       └── L2.4  Safety Cut-Out Assembly\n│           └── L1.7  Manual-reset thermal cut-out fuse\n│                     L0 → Bimetal disc (Invar/brass) /\n│                          Ceramic housing\n│\n├── L4.2  Primary Heat Transfer (Pressure Vessel = HX)\n│   │\n│   └── L3.3  Pressure Vessel Module\n│       └── L2.5  Vessel Assembly\n│           ├── L1.8  Pressure shell (ASME Section IV)\n│           │         — alternatives: carbon steel SA-516-70 70%,\n│           │           AISI 316L SS 25%,\n│           │           duplex SS 2205 5% [HIGH]\n│           │           L0 → Carbon steel SA-516-70 /\n│           │                AISI 316L SS / Duplex 2205\n│           ├── L1.9  Sacrificial anode (Mg or Al rod)\n│           │         — alternatives: magnesium alloy AZ63 60%,\n│           │           aluminium alloy 40% [HIGH]\n│           │           L0 → Magnesium alloy / Aluminium alloy\n│           └── L1.10 Drain valve (brass, 1/2 in NPT) — stop L1\n│                     L0 → DZR brass\n│\n├── L4.3  Hydraulic Distribution  [same as OT-1 L4.3]\n│         Flow meter alternatives: Impeller 40%, Ultrasonic 30%,\n│         Magmeter 15%, dP 8%, Thermal 5%, Vortex 2% [HIGH]\n│         Note: some small electric boilers omit integral pump\n│               (pump field-installed); flow sensing still required\n│               for dry-fire protection of elements.\n│\n├── L4.5  Control & Interface\n│   │\n│   ├── L3.4  Multi-Stage Controller Module\n│   │   └── L2.6  Sequencing PCB Assembly\n│   │       ├── L1.11 Multi-stage MCU / logic board\n│   │       │         — alternatives: proprietary digital 70%,\n│   │       │           programmable PLC (commercial) 20%,\n│   │       │           simple on/off relay board 10% [HIGH]\n│   │       │           L0 → Monocrystalline silicon /\n│   │       │                FR4 PCB laminate\n│   │       └── L1.12 Current transformer (CT) per stage\n│   │                 L0 → Ferrite toroid core / Copper secondary winding\n│   │\n│   └── L3.5  User Interface & Display  [same as OT-1 L3.10]\n│\n├── L4.5b Electrical Distribution (electric-specific, no equivalent in gas)\n│   │\n│   └── L3.6  Terminal Block & Wiring Harness Module\n│       ├── L2.7  Main terminal block assembly\n│       │         L0 → Nylon PA66 terminal housing /\n│       │              Copper-tin alloy busbar\n│       └── L2.8  Service disconnect provision (field-installed, not in BOM)\n│\n└── L4.6  Containment & Structure  [same as OT-1 L4.6]\n          Outer casing: powder-coat galv steel 68%, ABS/PP 22%, PPGI 10% [HIGH]\n          Note: no flue penetration; unit is fully sealed except for hydronic ports.\n```\n\n---"
+    },
+    {
+      "title": "OUTPUT TYPE OT-5: Hydronic Baseboard Heater",
+      "content": "*Terminal heating device — no combustion, no pump, no controls. Pure heat emission device. Simplest BOM of all output types: fin-tube element inside a steel enclosure.*\n\n```\nOT-5  Hydronic Baseboard Heater\n│\n├── L4.4  Heat Emission  (only subsystem — no heat generation)\n│   │\n│   ├── L3.1  Fin-Tube Element Module\n│   │   └── L2.1  Fin-Tube Element Assembly\n│   │       ├── L1.1  Copper tube (type M, 3/4 in OD standard)\n│   │       │         — alternatives: copper Cu-DHP 82%,\n│   │       │           CPVC tube 12%, steel tube 6% [HIGH]\n│   │       │           L0 → Copper Cu-DHP (ASTM B88) /\n│   │       │                CPVC Sch 40 / Carbon steel\n│   │       ├── L1.2  Aluminium fin stack (continuous spine or die-cut)\n│   │       │         — alternatives: aluminium fin 82%,\n│   │       │           copper fin (legacy, higher conductance) 12%,\n│   │       │           steel fin (industrial, budget) 6% [HIGH]\n│   │       │           L0 → Aluminium alloy 1100 or 3003 /\n│   │       │                Copper C110 / Galvanised steel\n│   │       └── L1.3  End cap slip couplings (sweat or compression)\n│   │                 L0 → Copper press fitting /\n│   │                      DZR brass compression fitting\n│   │\n│   └── L3.2  Natural Convection Air Channel (passive, no fan)\n│             L1.4  Air inlet slot / outlet louver (integral to casing)\n│             [No alternatives — purely geometric design choice]\n│\n├── L4.3  Hydraulic Distribution (minimal — just field connections)\n│   │\n│   ├── L3.3  Inlet / Outlet Valve Module — stop L1\n│   │         L1.5  Ball valve or globe valve (1/2 or 3/4 in)\n│   │         — alternatives: ball valve 70%, globe valve 20%,\n│   │           TRV (thermostatic radiator valve) 10% [HIGH]\n│   │           L0 → DZR brass body / PTFE ball seat\n│   │\n│   └── L3.4  Expansion Loop / Offset Elbow\n│             L1.6  Copper solder elbow (expansion accommodation)\n│             L0 → Copper Cu-DHP wrought fitting\n│\n└── L4.6  Containment & Structure\n    │\n    ├── L3.5  Sheet-Steel Enclosure Module\n    │   ├── L2.2  Front Cover Assembly\n    │   │   ├── L1.7  Steel front panel (slotted for convection)\n    │   │   │         — alternatives: pre-painted galv steel 75%,\n    │   │   │           architectural stainless 15%,\n    │   │   │           extruded aluminium 10% [HIGH]\n    │   │   │           L0 → DX51D galvanised steel 0.8 mm /\n    │   │   │                AISI 304 SS / 6063-T5 aluminium\n    │   │   └── L1.8  Clip-in or screw-on retention hardware\n    │   │             L0 → Cold-rolled steel spring clip /\n    │   │                  Zinc-plated screw\n    │   │\n    │   └── L2.3  End Cap Assembly\n    │       └── L1.9  Polymer end caps (pair)\n    │                 — alternatives: ABS injection-moulded 65%,\n    │                   HIPS 25%, PP 10% [MEDIUM]\n    │                   L0 → ABS / HIPS / PP\n    │\n    └── L3.6  Back-Panel / Wall-Mounting Rail\n              L1.10 Galvanised steel back panel with mounting slots\n              L0 → DX51D galvanised steel (0.8 mm)\n```\n\n---"
+    },
+    {
+      "title": "OUTPUT TYPE OT-6: Radiant Floor Heating System",
+      "content": "*In-slab or staple-up PEX tubing circuit with manifold and zone control. No burner or heat source — connects to external boiler or heat pump. BOM centres on tubing material, manifold, and floor build-up layers.*\n\n```\nOT-6  Radiant Floor Heating System\n│\n├── L4.3  Hydraulic Distribution (manifold & circuit — no pump in OT-6 itself)\n│   │\n│   ├── L3.1  Manifold Assembly Module\n│   │   └── L2.1  Supply/Return Manifold with Balancing Valves\n│   │       ├── L1.1  Manifold bar (multi-port header)\n│   │       │         — alternatives: DZR brass manifold 65%,\n│   │       │           316L SS manifold 30%, polymer 5% [HIGH]\n│   │       │           L0 → CW617N DZR brass /\n│   │       │                AISI 316L SS / PP-R or PP-GF\n│   │       ├── L1.2  Flow-setter (flow-rate balancing valve) per loop\n│   │       │         L0 → DZR brass CW602N / PTFE seat\n│   │       └── L1.3  Loop shutoff valve per circuit\n│   │                 L0 → DZR brass / Buna-N o-ring\n│   │\n│   ├── L3.2  Zone Actuator Module\n│   │   └── L2.2  Thermomechanical or Electric Actuator (per loop or zone)\n│   │       └── L1.4  Actuator body (NC, 24 V or wax)\n│   │                 — alternatives: thermomechanical wax capsule 55%,\n│   │                   electric NC motorised 45% [HIGH]\n│   │                   L0 → Nylon PA66 / ABS housing /\n│   │                        Wax capsule (paraffin blend) /\n│   │                        Copper actuator coil\n│   │\n│   └── L3.3  Flow & Thermal Sensing Module\n│             L2.3  Flow Meter Assembly (per manifold or per circuit)\n│             Impeller 45%, Ultrasonic transit-time 30%, dP 15%,\n│             Thermal calorimetric 10% [MEDIUM]\n│             Note: Marquardt DN20 applies at manifold inlet\n│\n├── L4.4  Heat Emission (tubing circuit — the emission surface)\n│   │\n│   ├── L3.4  PEX Tubing Module\n│   │   ├── L2.4  Tubing Coil (continuous loop per zone)\n│   │   │   └── L1.5  PEX pipe (12 mm or 16 mm or 20 mm OD)\n│   │   │             — alternatives: PEX-A Engel method 50%,\n│   │   │               PEX-B silane method 35%,\n│   │   │               polybutylene (PB) 8%,\n│   │   │               stainless steel flex 7% [HIGH]\n│   │   │               L0 → Cross-linked polyethylene (PEX-A/B) /\n│   │   │                    Polybutylene / AISI 316L SS flex\n│   │   │\n│   │   └── L2.5  Pipe Sleeve at Penetrations\n│   │             L1.6  Corrugated PE conduit sleeve\n│   │             L0 → LDPE or HDPE corrugated tube\n│   │\n│   └── L3.5  Floor Build-Up Thermal Embedding\n│       │\n│       ├── L2.6  Insulation Board Assembly (below tubing)\n│       │   └── L1.7  EPS or XPS insulation board with integrated pipe clips\n│       │             — alternatives: EPS moulded panel 50%,\n│       │               XPS extruded panel 35%,\n│       │               aluminium-foil faced PU panel 15% [HIGH]\n│       │               L0 → Expanded polystyrene (EPS) /\n│       │                    Extruded polystyrene (XPS) /\n│       │                    Rigid polyurethane foam\n│       │\n│       ├── L2.7  Heat Spreader Plate (dry system only)\n│       │   └── L1.8  Aluminium heat-spreader plate (slotted)\n│       │             — alternatives: aluminium spreader 75%,\n│       │               copper spreader 20%, composite 5% [MEDIUM]\n│       │               L0 → Aluminium alloy 1100 or 3003 (0.3–0.5 mm) /\n│       │                    Copper C110\n│       │\n│       └── L2.8  Screed / Topping Layer (wet system)\n│                 — alternatives: anhydrite/calcium sulphate screed 55%,\n│                   cementitious (sand/cement) screed 40%,\n│                   gypsum board (dry-system overlay) 5% [MEDIUM]\n│                   L0 → Calcium sulphate hemihydrate (anhydrite) /\n│                        Portland cement + aggregate /\n│                        Calcium sulphate gypsum\n│\n└── L4.6  Containment & Moisture Barrier\n    │\n    ├── L3.6  Vapour Barrier Module\n    │         L1.9  PE vapour barrier film (0.2 mm)\n    │         L0 → LDPE or HDPE film (0.2 mm, 200 µm)\n    │\n    └── L3.7  Perimeter Expansion Strip Module\n              L1.10 Perimeter foam strip (perimeter of each room)\n              — alternatives: PE closed-cell foam 50%,\n                mineral wool strip 50% [HIGH]\n              L0 → Polyethylene foam / Mineral wool strip\n```\n\n---"
+    },
+    {
+      "title": "OUTPUT TYPE OT-7: Pool / Spa Heater",
+      "content": "*Gas-fired cupro-nickel HX pool heater. Unique requirements: pool water chemistry (chlorine, bromine, salt), high flow rates, outdoor weatherproof cabinet, freeze protection interlock.*\n\n```\nOT-7  Pool / Spa Heater\n│\n├── L4.1  Heat Generation\n│   │\n│   ├── L3.1  Gas Burner Module\n│   │   ├── L2.1  Cast-Iron Burner Section Assembly\n│   │   │   ├── L1.1  Cast-iron burner tray (multi-section)\n│   │   │   │         L0 → Grey cast iron ASTM A48 Cl.30\n│   │   │   ├── L1.2  Orifice spud (per section, brass)\n│   │   │   │         L0 → DZR brass\n│   │   │   └── L1.3  Igniter assembly\n│   │   │             — alternatives: electronic ignition (HSI/IPI) 55%,\n│   │   │               millivolt standing pilot 40%,\n│   │   │               hot-surface only 5% [HIGH]\n│   │   │               L0 → Silicon carbide HSI element /\n│   │   │                    Tungsten spark electrode\n│   │   │\n│   │   └── L2.2  Combustion Chamber Assembly\n│   │       ├── L1.4  Refractory chamber liner\n│   │       │         — alternatives: high-alumina firebrick 60%,\n│   │       │           ceramic fibre board 35%, castable 5% [MEDIUM]\n│   │       │           L0 → High-alumina ceramic (Al₂O₃ 60–70%) /\n│   │       │                Aluminosilicate ceramic fibre\n│   │       └── L1.5  Burner header manifold (cast iron or steel)\n│   │                 L0 → Grey cast iron / Carbon steel\n│   │\n│   └── L3.2  Gas Valve & Controls (pool burner)\n│             L2.3  Combination gas valve (on/off, millivolt or 24V)\n│             — alternatives: millivolt combination valve 40%,\n│               24V electronic valve 55%, modulating valve 5% [HIGH]\n│             L0 → DZR brass body / Buna-N diaphragm\n│\n├── L4.2  Primary Heat Transfer (pool side — corrosion-critical)\n│   │\n│   └── L3.3  Pool Heat Exchanger Module\n│       ├── L2.4  HX Core Assembly (tube-and-shell or finned tube)\n│       │   ├── L1.6  HX tubes (pool-water contact surface)\n│       │   │         — alternatives: cupro-nickel Cu90/Ni10 70%,\n│       │   │           Grade 2 titanium 20%,\n│       │   │           polymer composite (low-temp) 10% [HIGH]\n│       │   │           L0 → Cupro-nickel Cu90/Ni10 ASTM B111 C70600 /\n│       │   │                Grade 2 titanium ASTM B338 /\n│       │   │                Polymer composite\n│       │   ├── L1.7  HX shell / header\n│       │   │         — alternatives: grey cast iron 55%,\n│       │   │           C83600 leaded red brass (bronze) 35%,\n│       │   │           polymer 10% [MEDIUM]\n│       │   │           L0 → Grey cast iron ASTM A48 /\n│       │   │                C83600 red brass /\n│       │   │                Glass-reinforced polymer\n│       │   └── L1.8  Tube-sheet / baffle\n│       │             L0 → C83600 bronze / Cast iron\n│       │\n│       └── L2.5  Cold-Start Bypass Valve Assembly\n│                 L1.9  Bypass valve (thermal/motorised)\n│                 — alternatives: thermostatic bypass 70%,\n│                   manual bypass 30% [HIGH]\n│                 L0 → DZR brass / EPDM seal\n│\n├── L4.3  Hydraulic Distribution (pool side)\n│   │\n│   ├── L3.4  Pool Flow Switch Module\n│   │   └── L2.6  Flow Switch Assembly\n│   │       └── L1.10 Paddle-type or differential-pressure flow switch\n│   │                 — alternatives: mechanical paddle/reed 55%,\n│   │                   electronic flow switch (ultrasonic) 35%,\n│   │                   differential pressure switch 10% [HIGH]\n│   │                   L0 → PP or CPVC body / AISI 316 SS paddle /\n│   │                        Reed switch assembly\n│   │\n│   ├── L3.5  Cupro-Nickel / PVC Hydraulic Fittings\n│   │         L1.11 Header nipples and unions\n│   │         — alternatives: PVC Sch 40/80 55%, CPVC 25%,\n│   │           ABS 15%, copper 5% [HIGH]\n│   │           L0 → PVC / CPVC / ABS / Copper Cu-DHP\n│   │\n│   └── L3.6  Flow & Thermal Sensing Module\n│             L2.7  Flow Meter Assembly (pool inlet)\n│             Impeller/paddle 40%, Ultrasonic transit-time 30%,\n│             Magmeter 20%, dP 10% [MEDIUM]\n│             Note: Marquardt DN20 applicable at pool inlet —\n│             safety interlock against freeze/bypass\n│\n├── L4.5  Control & Interface\n│   │\n│   ├── L3.7  Pool Controller Module\n│   │   └── L2.8  Digital Control PCB Assembly\n│   │       ├── L1.12 Pool controller display board\n│   │       │         — alternatives: digital LED/LCD 70%,\n│   │       │           analogue dial thermostat 25%,\n│   │       │           smart/app-connected 5% [HIGH]\n│   │       │           L0 → Monocrystalline silicon /\n│   │       │                FR4 PCB / Polycarbonate lens\n│   │       └── L1.13 High-limit thermal cutout (manual reset)\n│   │                 L0 → Bimetal disc assembly\n│   │\n│   └── L3.8  Temperature Sensor Assembly (inlet + outlet)\n│             L1.14 Thermistor or PT100 in weatherproof housing\n│             — alternatives: NTC thermistor 60%, PT100 35%,\n│               thermocouple 5% [HIGH]\n│             L0 → Metal oxide bead (NTC) / Nylon housing /\n│                  Platinum wire (PT100)\n│\n├── L4.6  Containment & Structure (weatherproof — outdoor rated)\n│   │\n│   ├── L3.9  Weatherproof Cabinet Module\n│   │   ├── L2.9  Outer Cabinet Assembly\n│   │   │   └── L1.15 Panel sheets\n│   │   │             — alternatives: powder-coated galv steel 50%,\n│   │   │               AISI 304 SS 35%, HDPE polymer composite 15% [HIGH]\n│   │   │               L0 → DX51D galvanised steel /\n│   │   │                    AISI 304 SS / HDPE\n│   │   └── L2.10 Weatherproof gasket seal\n│   │             L0 → Closed-cell EPDM foam strip\n│   │\n│   └── L3.10 Internal Frame / Burner Tray\n│             L1.16 Galvanised steel frame + levelling legs\n│             L0 → DX52D galvanised steel\n│\n└── L4.7  Flue / Venting System (pool — often outdoor)\n    │\n    ├── L3.11 Atmospheric Draft Flue Collector\n    │         L1.17 Stamped steel flue collector\n    │         — alternatives: atmospheric open (no duct) 60%,\n    │           power-vent (forced draft, indoor installation) 35%,\n    │           direct-vent sidewall 5% [MEDIUM]\n    │           L0 → Aluminised steel / Type 304 SS\n    │\n    └── L3.12 Draft Hood (atmospheric option)\n              L1.18 Galvanised steel draft hood\n              L0 → Aluminised steel\n```\n\n---"
+    },
+    {
+      "title": "OUTPUT TYPE OT-8: Solar Water Heating System",
+      "content": "*Active closed-loop solar thermal system with flat-plate or evacuated-tube collectors, glycol heat transfer loop, plate or coil HX, insulated storage tank, and differential temperature controller. New output type vs. original BOM — added from VN output types.*\n\n```\nOT-8  Solar Water Heating System\n│\n├── L4.1  Solar Collection (heat generation by radiation capture)\n│   │\n│   ├── L3.1  Solar Collector Module\n│   │   ├── L2.1  Flat-Plate Collector Assembly\n│   │   │   ├── L1.1  Selective-surface absorber plate\n│   │   │   │         — alternatives (absorber coating):\n│   │   │   │           TiNOx sputtered on copper 45%,\n│   │   │   │           black chrome on copper 30%,\n│   │   │   │           PVD AlNiN on aluminium 20%,\n│   │   │   │           flat black paint (budget) 5% [MEDIUM]\n│   │   │   │           L0 → Copper sheet Cu-DHP (0.2 mm) /\n│   │   │   │                Aluminium alloy 3003 /\n│   │   │   │                TiNOx or black chrome coating\n│   │   │   ├── L1.2  Riser & header tube grid (copper)\n│   │   │   │         L0 → Copper Cu-DHP tube ASTM B88\n│   │   │   ├── L1.3  Tempered low-iron solar glass cover\n│   │   │   │         — alternatives: low-iron tempered (AR coated) 70%,\n│   │   │   │           low-iron tempered (uncoated) 25%,\n│   │   │   │           polycarbonate (budget) 5% [HIGH]\n│   │   │   │           L0 → Low-iron float glass (Fe₂O₃ <0.01%, 3.2 mm)\n│   │   │   ├── L1.4  Rear insulation batt\n│   │   │   │         — alternatives: mineral wool 60%,\n│   │   │   │           rigid PU foam 40% [MEDIUM]\n│   │   │   │           L0 → Mineral wool / Rigid polyurethane foam\n│   │   │   └── L1.5  Collector frame extrusion\n│   │   │             L0 → Aluminium alloy 6063-T5 (anodised)\n│   │   │\n│   │   ├── L2.2  Evacuated Tube (Heat Pipe) Assembly\n│   │   │   ├── L1.6  Borosilicate glass outer tube (vacuum jacket)\n│   │   │   │         L0 → Borosilicate glass (3.3 type, Pyrex-grade)\n│   │   │   ├── L1.7  Inner absorber tube with selective coating\n│   │   │   │         L0 → Borosilicate glass + Al/TiNOx selective coating\n│   │   │   └── L1.8  Heat pipe (closed copper tube with working fluid)\n│   │   │             L0 → Copper Cu-DHP / Methanol (working fluid) /\n│   │   │                  Water (working fluid, above-freezing climates)\n│   │   │\n│   │   └── L2.3  Collector Mounting Frame & Rail\n│   │             — alternatives: aluminium 70%,\n│   │               galvanised steel 25%, SS 5% [HIGH]\n│   │             L1.9  Aluminium extrusion rail\n│   │             L0 → Aluminium alloy 6063-T5\n│   │\n│   └── ── Collector type allocation (overall market):\n│           Flat-plate 45%, Evacuated tube heat-pipe 35%,\n│           Evacuated tube direct-flow 15%,\n│           Concentrating parabolic trough (commercial) 5% [HIGH]\n│\n├── L4.2  Heat Transfer Loop\n│   │\n│   ├── L3.2  Solar Circulation Pump Module\n│   │   └── L2.4  Pump Assembly\n│   │       └── L1.10 Wet-rotor circulator (small, 15–25 W)\n│   │                 — alternatives: ECM variable-speed 60%,\n│   │                   PSC fixed-speed 35%,\n│   │                   PV-powered DC pump 5% [MEDIUM]\n│   │                   L0 → Grain-oriented electrical steel /\n│   │                        Copper/aluminium windings /\n│   │                        PP or Noryl housing\n│   │\n│   ├── L3.3  Heat Transfer Fluid System\n│   │         — alternatives: propylene glycol/water mix 65%,\n│   │           drainback water 25%, pure water (hot climates) 10% [HIGH]\n│   │         L0 → Propylene glycol (food-grade) /\n│   │              De-ionised water /\n│   │              Corrosion inhibitor package\n│   │\n│   ├── L3.4  Solar Heat Exchanger Module (collector ↔ tank)\n│   │   ├── L2.5  Brazed plate HX or immersed coil HX\n│   │   │         — alternatives: internal coil-in-tank 55%,\n│   │   │           external brazed plate 35%,\n│   │   │           mantle (wrapped-jacket) 10% [MEDIUM]\n│   │   │\n│   │   └── L2.6  Immersed Coil Assembly (internal coil type)\n│   │       └── L1.11 Copper coil (wrap-around or immersed, lower tank)\n│   │                 L0 → Copper Cu-DHP ASTM B88\n│   │\n│   └── L3.5  Piping & Insulation (solar loop — higher temp)\n│             — alternatives: copper type L 65%, stainless 20%,\n│               stainless-braided flex 15% [HIGH]\n│             L0 → Copper Cu-DHP / AISI 316L SS /\n│                  Mineral wool pipe insulation (UV-stable jacket)\n│\n├── L4.8  Storage Vessel (solar-rated DHW tank)\n│   │\n│   ├── L3.6  Solar Tank Module\n│   │   └── L2.7  Insulated Tank Assembly\n│   │       ├── L1.12 Pressure shell (ASME Section VIII or PED)\n│   │       │         — alternatives: glazed-lined carbon steel 55%,\n│   │       │           SS inner-liner 30%,\n│   │       │           polymer-lined steel 15% [HIGH]\n│   │       │           L0 → Carbon steel SA-516-70 /\n│   │       │                AISI 304 or 316L SS inner liner /\n│   │       │                Porcelain enamel glaze (vitreous)\n│   │       ├── L1.13 Sacrificial anode (Mg or Al rod)\n│   │       │         — alternatives: magnesium alloy 60%,\n│   │       │           aluminium alloy 40% [HIGH]\n│   │       │           L0 → Magnesium alloy AZ63 / Aluminium alloy\n│   │       └── L1.14 Inspection/drain port\n│   │                 L0 → DZR brass fittings / EPDM gasket\n│   │\n│   └── L3.7  Tank Insulation Jacket\n│             L2.8  PU foam jacket assembly\n│             — alternatives: PU foam injected 75%,\n│               mineral wool slab 20%, XPS 5% [HIGH]\n│             L0 → Rigid polyurethane foam (CFC-free, ~50 kg/m³) /\n│                  Mineral wool\n│\n├── L4.5  Control & Interface\n│   │\n│   └── L3.8  Differential Temperature Controller (DTC) Module\n│       └── L2.9  DTC PCB Assembly\n│           ├── L1.15 DTC controller board\n│           │         — alternatives: fixed-differential electronic DTC 60%,\n│           │           variable-differential smart DTC 30%,\n│           │           PV-output matched controller 10% [MEDIUM]\n│           │           L0 → Monocrystalline silicon /\n│           │                FR4 PCB laminate / Polycarbonate housing\n│           └── L1.16 Temperature sensors (collector top + tank lower NTC/PT1000)\n│                     — alternatives: NTC thermistor 60%, PT1000 35%,\n│                       thermocouple type T 5% [HIGH]\n│                     L0 → Metal oxide ceramic (NTC) /\n│                          Platinum thin-film (PT1000) /\n│                          PTFE-insulated leads\n│\n└── L4.6  Containment & Structure (rooftop + mechanical room)\n    │\n    ├── L3.9  Collector Mounting Frame (roof-mounted)\n    │         — alternatives: aluminium rail 70%,\n    │           galvanised steel 25%, SS 5% [HIGH]\n    │         L1.17 Extruded rail + roof anchor kit\n    │         L0 → Aluminium alloy 6063-T5 /\n    │              Stainless steel anchor bolts (A4-70)\n    │\n    └── L3.10 Safety Device Assembly\n        ├── L2.10 Expansion vessel (EPDM, solar-rated to 10 bar / 130 °C)\n        │         L1.18 Membrane vessel (steel shell + EPDM diaphragm)\n        │         L0 → Carbon steel shell /\n        │              EPDM diaphragm (temperature-rated)\n        └── L2.11 Pressure-relief valve (solar loop, 6 bar set)\n                  L1.19 Brass PRV body — stop L1\n                  L0 → DZR brass / EPDM seat\n```\n\n---"
+    },
+    {
+      "title": "Quality-Check Summary",
+      "content": "| Check | Status |\n|---|---|\n| Every L4 decomposes to ≥ L2 for all 8 output types | ✓ |\n| Alternatives sum to 100% at each position (±5pt) | ✓ |\n| OT-8 Solar Water Heating added (present in VN, missing from original BOM) | ✓ |\n| Containment / structure included for all 8 output types | ✓ |\n| Controls / interface included for all OTs that have them (OT-5, OT-6 excluded — no integral controls) | ✓ |\n| L0 raw materials identified wherever material choice is a competitive variable | ✓ |\n| BOM vs VN boundary respected — no process/manufacturing equipment in tree | ✓ |\n| Every alternative has confidence rating | ✓ |\n| Marquardt DN20 BOM position visible in OT-1, OT-2, OT-3, OT-4, OT-6, OT-7 hydraulic distribution subsystems | ✓ |\n| Oil-specific components (cad cell, blast tube, Type L flue) isolated to OT-3 | ✓ |\n| Electric-specific components (contactor, CT, pressure vessel as HX) isolated to OT-4 | ✓ |\n| Solar-specific components (collector, DTC, EPDM expansion vessel) isolated to OT-8 | ✓ |\n\n---"
+    },
+    {
+      "title": "Structured Data JSON",
+      "content": "```json\n{\n  \"naics_code\": \"333414\",\n  \"naics_title\": \"Heating Equipment (except Warm Air Furnaces) Manufacturing\",\n  \"output_types\": [\"OT-1\",\"OT-2\",\"OT-3\",\"OT-4\",\"OT-5\",\"OT-6\",\"OT-7\",\"OT-8\"],\n  \"output_type_labels\": {\n    \"OT-1\": \"Gas Condensing Boiler\",\n    \"OT-2\": \"Gas Non-Condensing Boiler\",\n    \"OT-3\": \"Oil-Fired Boiler\",\n    \"OT-4\": \"Electric Hydronic Boiler\",\n    \"OT-5\": \"Hydronic Baseboard Heater\",\n    \"OT-6\": \"Radiant Floor Heating System\",\n    \"OT-7\": \"Pool / Spa Heater\",\n    \"OT-8\": \"Solar Water Heating System\"\n  },\n  \"bom_units\": [\n    {\"name\":\"Heat Generation\",\"level\":\"L4\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4,OT-7,OT-8\",\"parent\":null},\n    {\"name\":\"Primary Heat Transfer\",\"level\":\"L4\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4,OT-7,OT-8\",\"parent\":null},\n    {\"name\":\"Hydraulic Distribution\",\"level\":\"L4\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4,OT-6,OT-7,OT-8\",\"parent\":null},\n    {\"name\":\"Heat Emission\",\"level\":\"L4\",\"output_type\":\"OT-5,OT-6\",\"parent\":null},\n    {\"name\":\"Control & Interface\",\"level\":\"L4\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4,OT-7,OT-8\",\"parent\":null},\n    {\"name\":\"Containment & Structure\",\"level\":\"L4\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4,OT-5,OT-6,OT-7,OT-8\",\"parent\":null},\n    {\"name\":\"Flue / Venting System\",\"level\":\"L4\",\"output_type\":\"OT-1,OT-2,OT-3,OT-7\",\"parent\":null},\n    {\"name\":\"Storage Vessel\",\"level\":\"L4\",\"output_type\":\"OT-8\",\"parent\":null},\n\n    {\"name\":\"Premix Burner Module\",\"level\":\"L3\",\"output_type\":\"OT-1\",\"parent\":\"Heat Generation\"},\n    {\"name\":\"Atmospheric Burner Module\",\"level\":\"L3\",\"output_type\":\"OT-2\",\"parent\":\"Heat Generation\"},\n    {\"name\":\"Oil Burner Module\",\"level\":\"L3\",\"output_type\":\"OT-3\",\"parent\":\"Heat Generation\"},\n    {\"name\":\"Heating Element Module\",\"level\":\"L3\",\"output_type\":\"OT-4\",\"parent\":\"Heat Generation\"},\n    {\"name\":\"Gas Burner Module (Pool)\",\"level\":\"L3\",\"output_type\":\"OT-7\",\"parent\":\"Heat Generation\"},\n    {\"name\":\"Solar Collector Module\",\"level\":\"L3\",\"output_type\":\"OT-8\",\"parent\":\"Heat Generation\"},\n\n    {\"name\":\"Condensing Heat Exchanger Module\",\"level\":\"L3\",\"output_type\":\"OT-1\",\"parent\":\"Primary Heat Transfer\"},\n    {\"name\":\"Non-Condensing HX Module\",\"level\":\"L3\",\"output_type\":\"OT-2,OT-3\",\"parent\":\"Primary Heat Transfer\"},\n    {\"name\":\"Pressure Vessel Module\",\"level\":\"L3\",\"output_type\":\"OT-4\",\"parent\":\"Primary Heat Transfer\"},\n    {\"name\":\"Pool Heat Exchanger Module\",\"level\":\"L3\",\"output_type\":\"OT-7\",\"parent\":\"Primary Heat Transfer\"},\n    {\"name\":\"Solar Heat Exchanger Module\",\"level\":\"L3\",\"output_type\":\"OT-8\",\"parent\":\"Primary Heat Transfer\"},\n\n    {\"name\":\"Circulation Pump Module\",\"level\":\"L3\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4,OT-8\",\"parent\":\"Hydraulic Distribution\"},\n    {\"name\":\"Flow & Thermal Sensing Module\",\"level\":\"L3\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4,OT-6,OT-7,OT-8\",\"parent\":\"Hydraulic Distribution\"},\n    {\"name\":\"Hydraulic Safety Module\",\"level\":\"L3\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4\",\"parent\":\"Hydraulic Distribution\"},\n    {\"name\":\"Piping & Fittings\",\"level\":\"L3\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4,OT-6,OT-7,OT-8\",\"parent\":\"Hydraulic Distribution\"},\n    {\"name\":\"Manifold Assembly Module\",\"level\":\"L3\",\"output_type\":\"OT-6\",\"parent\":\"Hydraulic Distribution\"},\n    {\"name\":\"Zone Actuator Module\",\"level\":\"L3\",\"output_type\":\"OT-6\",\"parent\":\"Hydraulic Distribution\"},\n    {\"name\":\"Pool Flow Switch Module\",\"level\":\"L3\",\"output_type\":\"OT-7\",\"parent\":\"Hydraulic Distribution\"},\n\n    {\"name\":\"Flow Meter Assembly\",\"level\":\"L2\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4,OT-6,OT-7,OT-8\",\"parent\":\"Flow & Thermal Sensing Module\"},\n    {\"name\":\"Temperature Sensor Assembly\",\"level\":\"L2\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4,OT-7,OT-8\",\"parent\":\"Flow & Thermal Sensing Module\"},\n    {\"name\":\"Flow Sensor Body\",\"level\":\"L1\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4,OT-6,OT-7,OT-8\",\"parent\":\"Flow Meter Assembly\"},\n    {\"name\":\"Transducer Pair\",\"level\":\"L1\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4,OT-6,OT-7,OT-8\",\"parent\":\"Flow Meter Assembly\"},\n    {\"name\":\"PZT Piezo Ceramic\",\"level\":\"L0\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4,OT-6,OT-7,OT-8\",\"parent\":\"Transducer Pair\"},\n\n    {\"name\":\"Fin-Tube Element Module\",\"level\":\"L3\",\"output_type\":\"OT-5\",\"parent\":\"Heat Emission\"},\n    {\"name\":\"PEX Tubing Module\",\"level\":\"L3\",\"output_type\":\"OT-6\",\"parent\":\"Heat Emission\"},\n    {\"name\":\"Floor Build-Up Thermal Embedding\",\"level\":\"L3\",\"output_type\":\"OT-6\",\"parent\":\"Heat Emission\"},\n\n    {\"name\":\"Appliance Controller Module\",\"level\":\"L3\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4,OT-7\",\"parent\":\"Control & Interface\"},\n    {\"name\":\"Differential Temperature Controller Module\",\"level\":\"L3\",\"output_type\":\"OT-8\",\"parent\":\"Control & Interface\"},\n    {\"name\":\"User Interface Module\",\"level\":\"L3\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4,OT-7\",\"parent\":\"Control & Interface\"},\n\n    {\"name\":\"Outer Casing Assembly\",\"level\":\"L3\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4,OT-5,OT-6,OT-7,OT-8\",\"parent\":\"Containment & Structure\"},\n    {\"name\":\"Internal Frame / Bracket\",\"level\":\"L3\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4,OT-7\",\"parent\":\"Containment & Structure\"},\n    {\"name\":\"Thermal Insulation Layer\",\"level\":\"L3\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4\",\"parent\":\"Containment & Structure\"},\n    {\"name\":\"Solar Tank Module\",\"level\":\"L3\",\"output_type\":\"OT-8\",\"parent\":\"Storage Vessel\"},\n    {\"name\":\"Tank Insulation Jacket\",\"level\":\"L3\",\"output_type\":\"OT-8\",\"parent\":\"Storage Vessel\"}\n  ],\n  \"bom_alternatives\": [\n    {\"name\":\"Premix modulating metal-fibre\",\"parent_bom_name\":\"Premix Burner Module\",\"output_type\":\"OT-1\",\"market_share\":65,\"trend\":\"Growing\",\"confidence\":\"HIGH\",\"source\":\"OEM teardown\"},\n    {\"name\":\"Atmospheric inshot/upshot\",\"parent_bom_name\":\"Atmospheric Burner Module\",\"output_type\":\"OT-2\",\"market_share\":70,\"trend\":\"Declining\",\"confidence\":\"HIGH\",\"source\":\"OEM teardown\"},\n    {\"name\":\"Tubular ribbon burner\",\"parent_bom_name\":\"Atmospheric Burner Module\",\"output_type\":\"OT-2\",\"market_share\":20,\"trend\":\"Stable\",\"confidence\":\"MEDIUM\",\"source\":\"analyst estimate\"},\n    {\"name\":\"Ceramic radiant deck\",\"parent_bom_name\":\"Atmospheric Burner Module\",\"output_type\":\"OT-2\",\"market_share\":10,\"trend\":\"Stable\",\"confidence\":\"MEDIUM\",\"source\":\"analyst estimate\"},\n    {\"name\":\"Pressure-atomising oil burner\",\"parent_bom_name\":\"Oil Burner Module\",\"output_type\":\"OT-3\",\"market_share\":85,\"trend\":\"Stable\",\"confidence\":\"HIGH\",\"source\":\"OEM teardown\"},\n    {\"name\":\"Rotary-cup oil burner\",\"parent_bom_name\":\"Oil Burner Module\",\"output_type\":\"OT-3\",\"market_share\":12,\"trend\":\"Declining\",\"confidence\":\"HIGH\",\"source\":\"analyst estimate\"},\n    {\"name\":\"Low-NOx gun burner\",\"parent_bom_name\":\"Oil Burner Module\",\"output_type\":\"OT-3\",\"market_share\":3,\"trend\":\"Growing\",\"confidence\":\"LOW\",\"source\":\"analyst estimate\"},\n    {\"name\":\"Incoloy 800 sheathed element\",\"parent_bom_name\":\"Heating Element Module\",\"output_type\":\"OT-4\",\"market_share\":55,\"trend\":\"Stable\",\"confidence\":\"MEDIUM\",\"source\":\"analyst estimate\"},\n    {\"name\":\"AISI 316L SS sheathed element\",\"parent_bom_name\":\"Heating Element Module\",\"output_type\":\"OT-4\",\"market_share\":30,\"trend\":\"Stable\",\"confidence\":\"MEDIUM\",\"source\":\"analyst estimate\"},\n    {\"name\":\"Titanium element\",\"parent_bom_name\":\"Heating Element Module\",\"output_type\":\"OT-4\",\"market_share\":10,\"trend\":\"Growing\",\"confidence\":\"MEDIUM\",\"source\":\"analyst estimate\"},\n    {\"name\":\"PTC ceramic self-regulating element\",\"parent_bom_name\":\"Heating Element Module\",\"output_type\":\"OT-4\",\"market_share\":5,\"trend\":\"Growing\",\"confidence\":\"LOW\",\"source\":\"analyst estimate\"},\n    {\"name\":\"Electronic ignition (HSI/IPI)\",\"parent_bom_name\":\"Gas Burner Module (Pool)\",\"output_type\":\"OT-7\",\"market_share\":55,\"trend\":\"Growing\",\"confidence\":\"HIGH\",\"source\":\"OEM teardown\"},\n    {\"name\":\"Millivolt standing pilot\",\"parent_bom_name\":\"Gas Burner Module (Pool)\",\"output_type\":\"OT-7\",\"market_share\":40,\"trend\":\"Declining\",\"confidence\":\"HIGH\",\"source\":\"OEM teardown\"},\n    {\"name\":\"Flat-plate solar collector\",\"parent_bom_name\":\"Solar Collector Module\",\"output_type\":\"OT-8\",\"market_share\":45,\"trend\":\"Stable\",\"confidence\":\"HIGH\",\"source\":\"analyst estimate; IEA Solar Thermal 2024\"},\n    {\"name\":\"Evacuated tube heat-pipe\",\"parent_bom_name\":\"Solar Collector Module\",\"output_type\":\"OT-8\",\"market_share\":35,\"trend\":\"Growing\",\"confidence\":\"HIGH\",\"source\":\"analyst estimate\"},\n    {\"name\":\"Evacuated tube direct-flow\",\"parent_bom_name\":\"Solar Collector Module\",\"output_type\":\"OT-8\",\"market_share\":15,\"trend\":\"Stable\",\"confidence\":\"MEDIUM\",\"source\":\"analyst estimate\"},\n    {\"name\":\"Concentrating parabolic trough (commercial)\",\"parent_bom_name\":\"Solar Collector Module\",\"output_type\":\"OT-8\",\"market_share\":5,\"trend\":\"Growing\",\"confidence\":\"LOW\",\"source\":\"analyst estimate\"},\n\n    {\"name\":\"Aluminium-silicon alloy Al-Si12 (cast)\",\"parent_bom_name\":\"Condensing Heat Exchanger Module\",\"output_type\":\"OT-1\",\"market_share\":42,\"trend\":\"Stable\",\"confidence\":\"MEDIUM\",\"source\":\"AHS Heating teardowns\"},\n    {\"name\":\"316L stainless steel (spiral/plate)\",\"parent_bom_name\":\"Condensing Heat Exchanger Module\",\"output_type\":\"OT-1\",\"market_share\":40,\"trend\":\"Growing\",\"confidence\":\"MEDIUM\",\"source\":\"AHS Heating teardowns\"},\n    {\"name\":\"Dual-metal SS+Al-Si\",\"parent_bom_name\":\"Condensing Heat Exchanger Module\",\"output_type\":\"OT-1\",\"market_share\":12,\"trend\":\"Growing\",\"confidence\":\"MEDIUM\",\"source\":\"analyst estimate\"},\n    {\"name\":\"Copper-fin legacy\",\"parent_bom_name\":\"Condensing Heat Exchanger Module\",\"output_type\":\"OT-1\",\"market_share\":6,\"trend\":\"Declining\",\"confidence\":\"HIGH\",\"source\":\"legacy base\"},\n    {\"name\":\"Grey cast iron sectional\",\"parent_bom_name\":\"Non-Condensing HX Module\",\"output_type\":\"OT-2,OT-3\",\"market_share\":60,\"trend\":\"Declining\",\"confidence\":\"HIGH\",\"source\":\"OEM teardown\"},\n    {\"name\":\"Carbon steel fire-tube welded\",\"parent_bom_name\":\"Non-Condensing HX Module\",\"output_type\":\"OT-2,OT-3\",\"market_share\":32,\"trend\":\"Stable\",\"confidence\":\"HIGH\",\"source\":\"OEM teardown\"},\n    {\"name\":\"Copper coil finned\",\"parent_bom_name\":\"Non-Condensing HX Module\",\"output_type\":\"OT-2,OT-3\",\"market_share\":8,\"trend\":\"Declining\",\"confidence\":\"MEDIUM\",\"source\":\"analyst estimate\"},\n    {\"name\":\"Carbon steel SA-516-70 vessel\",\"parent_bom_name\":\"Pressure Vessel Module\",\"output_type\":\"OT-4\",\"market_share\":70,\"trend\":\"Stable\",\"confidence\":\"HIGH\",\"source\":\"analyst estimate\"},\n    {\"name\":\"AISI 316L SS vessel\",\"parent_bom_name\":\"Pressure Vessel Module\",\"output_type\":\"OT-4\",\"market_share\":25,\"trend\":\"Growing\",\"confidence\":\"HIGH\",\"source\":\"analyst estimate\"},\n    {\"name\":\"Duplex 2205 vessel\",\"parent_bom_name\":\"Pressure Vessel Module\",\"output_type\":\"OT-4\",\"market_share\":5,\"trend\":\"Emerging\",\"confidence\":\"LOW\",\"source\":\"analyst estimate\"},\n    {\"name\":\"Cupro-nickel Cu90/Ni10\",\"parent_bom_name\":\"Pool Heat Exchanger Module\",\"output_type\":\"OT-7\",\"market_share\":70,\"trend\":\"Stable\",\"confidence\":\"HIGH\",\"source\":\"pool heater OEM teardowns\"},\n    {\"name\":\"Grade 2 titanium\",\"parent_bom_name\":\"Pool Heat Exchanger Module\",\"output_type\":\"OT-7\",\"market_share\":20,\"trend\":\"Growing\",\"confidence\":\"HIGH\",\"source\":\"analyst estimate\"},\n    {\"name\":\"Polymer composite (low-temp)\",\"parent_bom_name\":\"Pool Heat Exchanger Module\",\"output_type\":\"OT-7\",\"market_share\":10,\"trend\":\"Stable\",\"confidence\":\"MEDIUM\",\"source\":\"analyst estimate\"},\n    {\"name\":\"Internal coil-in-tank HX\",\"parent_bom_name\":\"Solar Heat Exchanger Module\",\"output_type\":\"OT-8\",\"market_share\":55,\"trend\":\"Stable\",\"confidence\":\"MEDIUM\",\"source\":\"analyst estimate\"},\n    {\"name\":\"External brazed plate HX\",\"parent_bom_name\":\"Solar Heat Exchanger Module\",\"output_type\":\"OT-8\",\"market_share\":35,\"trend\":\"Growing\",\"confidence\":\"MEDIUM\",\"source\":\"analyst estimate\"},\n    {\"name\":\"Mantle (wrapped-jacket) HX\",\"parent_bom_name\":\"Solar Heat Exchanger Module\",\"output_type\":\"OT-8\",\"market_share\":10,\"trend\":\"Declining\",\"confidence\":\"LOW\",\"source\":\"analyst estimate\"},\n\n    {\"name\":\"ECM wet-rotor circulator\",\"parent_bom_name\":\"Circulation Pump Module\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4,OT-8\",\"market_share\":55,\"trend\":\"Growing\",\"confidence\":\"HIGH\",\"source\":\"Maximize Market Research 2024\"},\n    {\"name\":\"PSC 3-speed wet-rotor\",\"parent_bom_name\":\"Circulation Pump Module\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4\",\"market_share\":32,\"trend\":\"Declining\",\"confidence\":\"HIGH\",\"source\":\"Maximize Market Research 2024\"},\n    {\"name\":\"External dry-rotor centrifugal\",\"parent_bom_name\":\"Circulation Pump Module\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4\",\"market_share\":10,\"trend\":\"Stable\",\"confidence\":\"MEDIUM\",\"source\":\"analyst estimate\"},\n    {\"name\":\"Integral mag-drive (no shaft seal)\",\"parent_bom_name\":\"Circulation Pump Module\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4\",\"market_share\":3,\"trend\":\"Emerging\",\"confidence\":\"LOW\",\"source\":\"analyst estimate\"},\n\n    {\"name\":\"Impeller / paddle-wheel mechanical\",\"parent_bom_name\":\"Flow & Thermal Sensing Module\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4,OT-6,OT-7,OT-8\",\"market_share\":40,\"trend\":\"Declining\",\"confidence\":\"HIGH\",\"source\":\"OEM teardown\"},\n    {\"name\":\"Ultrasonic transit-time inline\",\"parent_bom_name\":\"Flow & Thermal Sensing Module\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4,OT-6,OT-7,OT-8\",\"market_share\":30,\"trend\":\"Growing\",\"confidence\":\"HIGH\",\"source\":\"Market Research Future 2025; Badger Meter hydronic blog\"},\n    {\"name\":\"Electromagnetic magmeter\",\"parent_bom_name\":\"Flow & Thermal Sensing Module\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4,OT-7,OT-8\",\"market_share\":15,\"trend\":\"Stable\",\"confidence\":\"HIGH\",\"source\":\"industry reports\"},\n    {\"name\":\"Differential pressure orifice/venturi\",\"parent_bom_name\":\"Flow & Thermal Sensing Module\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4\",\"market_share\":8,\"trend\":\"Declining\",\"confidence\":\"MEDIUM\",\"source\":\"analyst estimate\"},\n    {\"name\":\"Thermal calorimetric\",\"parent_bom_name\":\"Flow & Thermal Sensing Module\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4,OT-6\",\"market_share\":5,\"trend\":\"Stable\",\"confidence\":\"MEDIUM\",\"source\":\"analyst estimate\"},\n    {\"name\":\"Vortex\",\"parent_bom_name\":\"Flow & Thermal Sensing Module\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4\",\"market_share\":2,\"trend\":\"Stable\",\"confidence\":\"LOW\",\"source\":\"analyst estimate\"},\n\n    {\"name\":\"PZT bulk ceramic\",\"parent_bom_name\":\"Transducer Pair\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4,OT-6,OT-7,OT-8\",\"market_share\":72,\"trend\":\"Stable\",\"confidence\":\"MEDIUM\",\"source\":\"CTS Corp transducer blog\"},\n    {\"name\":\"PVDF piezo film\",\"parent_bom_name\":\"Transducer Pair\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4,OT-6,OT-7,OT-8\",\"market_share\":13,\"trend\":\"Stable\",\"confidence\":\"LOW\",\"source\":\"analyst estimate\"},\n    {\"name\":\"AlN / ScAlN MEMS PMUT\",\"parent_bom_name\":\"Transducer Pair\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4,OT-6,OT-7,OT-8\",\"market_share\":10,\"trend\":\"Emerging\",\"confidence\":\"LOW\",\"source\":\"Nature Microsystems 2023\"},\n    {\"name\":\"LiNbO3 single crystal\",\"parent_bom_name\":\"Transducer Pair\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4,OT-6,OT-7,OT-8\",\"market_share\":5,\"trend\":\"Stable\",\"confidence\":\"LOW\",\"source\":\"analyst estimate\"},\n\n    {\"name\":\"DZR brass manifold\",\"parent_bom_name\":\"Manifold Assembly Module\",\"output_type\":\"OT-6\",\"market_share\":65,\"trend\":\"Stable\",\"confidence\":\"HIGH\",\"source\":\"hydronic installer surveys\"},\n    {\"name\":\"316L SS manifold\",\"parent_bom_name\":\"Manifold Assembly Module\",\"output_type\":\"OT-6\",\"market_share\":30,\"trend\":\"Growing\",\"confidence\":\"HIGH\",\"source\":\"analyst estimate\"},\n    {\"name\":\"Polymer manifold\",\"parent_bom_name\":\"Manifold Assembly Module\",\"output_type\":\"OT-6\",\"market_share\":5,\"trend\":\"Stable\",\"confidence\":\"MEDIUM\",\"source\":\"analyst estimate\"},\n\n    {\"name\":\"PEX-A tubing (Engel)\",\"parent_bom_name\":\"PEX Tubing Module\",\"output_type\":\"OT-6\",\"market_share\":50,\"trend\":\"Growing\",\"confidence\":\"HIGH\",\"source\":\"Uponor market data\"},\n    {\"name\":\"PEX-B tubing (silane)\",\"parent_bom_name\":\"PEX Tubing Module\",\"output_type\":\"OT-6\",\"market_share\":35,\"trend\":\"Stable\",\"confidence\":\"HIGH\",\"source\":\"analyst estimate\"},\n    {\"name\":\"Polybutylene (PB)\",\"parent_bom_name\":\"PEX Tubing Module\",\"output_type\":\"OT-6\",\"market_share\":8,\"trend\":\"Declining\",\"confidence\":\"MEDIUM\",\"source\":\"analyst estimate\"},\n    {\"name\":\"Stainless steel flex\",\"parent_bom_name\":\"PEX Tubing Module\",\"output_type\":\"OT-6\",\"market_share\":7,\"trend\":\"Growing\",\"confidence\":\"MEDIUM\",\"source\":\"analyst estimate\"},\n\n    {\"name\":\"Mechanical paddle/reed switch\",\"parent_bom_name\":\"Pool Flow Switch Module\",\"output_type\":\"OT-7\",\"market_share\":55,\"trend\":\"Declining\",\"confidence\":\"HIGH\",\"source\":\"pool heater teardowns\"},\n    {\"name\":\"Electronic flow switch (ultrasonic)\",\"parent_bom_name\":\"Pool Flow Switch Module\",\"output_type\":\"OT-7\",\"market_share\":35,\"trend\":\"Growing\",\"confidence\":\"HIGH\",\"source\":\"analyst estimate\"},\n    {\"name\":\"Differential pressure switch\",\"parent_bom_name\":\"Pool Flow Switch Module\",\"output_type\":\"OT-7\",\"market_share\":10,\"trend\":\"Stable\",\"confidence\":\"MEDIUM\",\"source\":\"analyst estimate\"},\n\n    {\"name\":\"Powder-coated galvanised steel\",\"parent_bom_name\":\"Outer Casing Assembly\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4,OT-5,OT-7,OT-8\",\"market_share\":68,\"trend\":\"Stable\",\"confidence\":\"HIGH\",\"source\":\"analyst estimate\"},\n    {\"name\":\"ABS or PP thermoplastic\",\"parent_bom_name\":\"Outer Casing Assembly\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4\",\"market_share\":22,\"trend\":\"Growing\",\"confidence\":\"HIGH\",\"source\":\"analyst estimate\"},\n    {\"name\":\"Pre-painted galvanised (PPGI)\",\"parent_bom_name\":\"Outer Casing Assembly\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4\",\"market_share\":10,\"trend\":\"Stable\",\"confidence\":\"MEDIUM\",\"source\":\"analyst estimate\"},\n\n    {\"name\":\"TiNOx sputtered on copper (absorber)\",\"parent_bom_name\":\"Solar Collector Module\",\"output_type\":\"OT-8\",\"market_share\":45,\"trend\":\"Growing\",\"confidence\":\"MEDIUM\",\"source\":\"Fraunhofer ISE collector survey\"},\n    {\"name\":\"Black chrome on copper (absorber)\",\"parent_bom_name\":\"Solar Collector Module\",\"output_type\":\"OT-8\",\"market_share\":30,\"trend\":\"Declining\",\"confidence\":\"MEDIUM\",\"source\":\"analyst estimate\"},\n    {\"name\":\"PVD AlNiN on aluminium (absorber)\",\"parent_bom_name\":\"Solar Collector Module\",\"output_type\":\"OT-8\",\"market_share\":20,\"trend\":\"Growing\",\"confidence\":\"MEDIUM\",\"source\":\"analyst estimate\"},\n    {\"name\":\"Flat black paint absorber (budget)\",\"parent_bom_name\":\"Solar Collector Module\",\"output_type\":\"OT-8\",\"market_share\":5,\"trend\":\"Declining\",\"confidence\":\"MEDIUM\",\"source\":\"analyst estimate\"},\n\n    {\"name\":\"Glazed-lined carbon steel tank\",\"parent_bom_name\":\"Solar Tank Module\",\"output_type\":\"OT-8\",\"market_share\":55,\"trend\":\"Stable\",\"confidence\":\"HIGH\",\"source\":\"analyst estimate\"},\n    {\"name\":\"SS inner-liner tank\",\"parent_bom_name\":\"Solar Tank Module\",\"output_type\":\"OT-8\",\"market_share\":30,\"trend\":\"Growing\",\"confidence\":\"HIGH\",\"source\":\"analyst estimate\"},\n    {\"name\":\"Polymer-lined steel tank\",\"parent_bom_name\":\"Solar Tank Module\",\"output_type\":\"OT-8\",\"market_share\":15,\"trend\":\"Stable\",\"confidence\":\"MEDIUM\",\"source\":\"analyst estimate\"},\n\n    {\"name\":\"Propylene glycol/water mix\",\"parent_bom_name\":\"Heat Transfer Fluid System\",\"output_type\":\"OT-8\",\"market_share\":65,\"trend\":\"Stable\",\"confidence\":\"HIGH\",\"source\":\"solar installer surveys\"},\n    {\"name\":\"Drainback water\",\"parent_bom_name\":\"Heat Transfer Fluid System\",\"output_type\":\"OT-8\",\"market_share\":25,\"trend\":\"Stable\",\"confidence\":\"HIGH\",\"source\":\"analyst estimate\"},\n    {\"name\":\"Pure water (hot climates)\",\"parent_bom_name\":\"Heat Transfer Fluid System\",\"output_type\":\"OT-8\",\"market_share\":10,\"trend\":\"Stable\",\"confidence\":\"MEDIUM\",\"source\":\"analyst estimate\"},\n\n    {\"name\":\"Copper Type L/M\",\"parent_bom_name\":\"Piping & Fittings\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4,OT-8\",\"market_share\":50,\"trend\":\"Stable\",\"confidence\":\"HIGH\",\"source\":\"industry standard\"},\n    {\"name\":\"PEX / PEX-Al-PEX\",\"parent_bom_name\":\"Piping & Fittings\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4\",\"market_share\":30,\"trend\":\"Growing\",\"confidence\":\"HIGH\",\"source\":\"industry standard\"},\n    {\"name\":\"Carbon steel Sch 40\",\"parent_bom_name\":\"Piping & Fittings\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4\",\"market_share\":15,\"trend\":\"Declining\",\"confidence\":\"HIGH\",\"source\":\"industry standard\"},\n    {\"name\":\"Stainless steel 304\",\"parent_bom_name\":\"Piping & Fittings\",\"output_type\":\"OT-1,OT-2,OT-3,OT-4\",\"market_share\":5,\"trend\":\"Stable\",\"confidence\":\"MEDIUM\",\"source\":\"analyst estimate\"}\n  ],\n  \"component_map\": {\n    \"component_category\": \"Flow Sensor\",\n    \"marquardt_product\": \"Ultrasonic Flow Sensor DN20 (transit-time, 4.2–46.6 l/min, +2–90°C, 0–6 bar, ≤50% glycol)\",\n    \"bom_positions\": [\n      {\n        \"id\": 1,\n        \"path\": \"OT-1/2/3/4 › L4.3 Hydraulic Distribution › L3 Flow & Thermal Sensing › L2 Flow Meter Assembly\",\n        \"function\": \"Confirm minimum flow for burner interlock; protect HX from dry-fire\",\n        \"safety_critical\": true,\n        \"marquardt_alternative_share_pct\": 30,\n        \"primary_displaced_alternative\": \"Impeller/paddle-wheel mechanical (40%)\"\n      },\n      {\n        \"id\": 2,\n        \"path\": \"OT-6 › L4.3 Hydraulic Distribution › L3 Flow & Thermal Sensing › L2 Flow Meter Assembly\",\n        \"function\": \"Verify minimum loop flow for radiant manifold zones; energy metering\",\n        \"safety_critical\": false,\n        \"marquardt_alternative_share_pct\": 30,\n        \"primary_displaced_alternative\": \"Impeller/paddle-wheel mechanical (45%)\"\n      },\n      {\n        \"id\": 3,\n        \"path\": \"OT-7 › L4.3 Hydraulic Distribution › L3 Pool Flow Switch › L2 Flow Switch Assembly\",\n        \"function\": \"Measure pool water flow for safety interlock (freeze / bypass protection) and energy billing\",\n        \"safety_critical\": true,\n        \"marquardt_alternative_share_pct\": 35,\n        \"primary_displaced_alternative\": \"Mechanical paddle/reed switch (55%)\"\n      },\n      {\n        \"id\": 4,\n        \"path\": \"OT-8 › L4.2 Heat Transfer Loop › L3 Flow & Thermal Sensing › L2 Flow Meter Assembly\",\n        \"function\": \"Verify solar loop flow rate for DTC activation threshold; detect pump failure\",\n        \"safety_critical\": false,\n        \"marquardt_alternative_share_pct\": 25,\n        \"primary_displaced_alternative\": \"Impeller mechanical (40%)\"\n      }\n    ]\n  }\n}\n```"
+    }
+  ],
+  "tables": [
+    {
+      "headers": [
+        "ID",
+        "Output Type",
+        "L5 Product"
+      ],
+      "rows": [
+        {
+          "ID": "OT-1",
+          "Output Type": "Gas Condensing Boiler",
+          "L5 Product": "Modulating wall-hung or floor-standing condensing boiler"
+        },
+        {
+          "ID": "OT-2",
+          "Output Type": "Gas Non-Condensing Boiler",
+          "L5 Product": "Cast-iron sectional or steel fire-tube atmospheric boiler"
+        },
+        {
+          "ID": "OT-3",
+          "Output Type": "Oil-Fired Boiler",
+          "L5 Product": "Pressure-atomising oil boiler"
+        },
+        {
+          "ID": "OT-4",
+          "Output Type": "Electric Hydronic Boiler",
+          "L5 Product": "Electrode or resistance-element boiler"
+        },
+        {
+          "ID": "OT-5",
+          "Output Type": "Hydronic Baseboard Heater",
+          "L5 Product": "Fin-tube convector (terminal device, no burner)"
+        },
+        {
+          "ID": "OT-6",
+          "Output Type": "Radiant Floor Heating System",
+          "L5 Product": "In-slab/staple-up tubing circuit + manifold"
+        },
+        {
+          "ID": "OT-7",
+          "Output Type": "Pool / Spa Heater",
+          "L5 Product": "Cupro-nickel HX gas pool heater"
+        },
+        {
+          "ID": "OT-8",
+          "Output Type": "Solar Water Heating System",
+          "L5 Product": "Active flat-plate or evacuated-tube solar thermal system"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "L4 Subsystem",
+        "OT-1",
+        "OT-2",
+        "OT-3",
+        "OT-4",
+        "OT-5",
+        "OT-6",
+        "OT-7",
+        "OT-8"
+      ],
+      "rows": [
+        {
+          "L4 Subsystem": "**L4.1 Heat Generation**",
+          "OT-1": "✓",
+          "OT-2": "✓",
+          "OT-3": "✓",
+          "OT-4": "✓",
+          "OT-5": "✓",
+          "OT-6": "✓ (solar collect.)",
+          "OT-7": "",
+          "OT-8": ""
+        },
+        {
+          "L4 Subsystem": "**L4.2 Primary Heat Transfer**",
+          "OT-1": "✓",
+          "OT-2": "✓",
+          "OT-3": "✓",
+          "OT-4": "✓ (vessel)",
+          "OT-5": "✓",
+          "OT-6": "✓ (HX loop)",
+          "OT-7": "",
+          "OT-8": ""
+        },
+        {
+          "L4 Subsystem": "**L4.3 Hydraulic Distribution**",
+          "OT-1": "✓",
+          "OT-2": "✓",
+          "OT-3": "✓",
+          "OT-4": "✓",
+          "OT-5": "✓ (manifold)",
+          "OT-6": "✓",
+          "OT-7": "✓",
+          "OT-8": ""
+        },
+        {
+          "L4 Subsystem": "**L4.4 Heat Emission**",
+          "OT-1": "✓",
+          "OT-2": "✓",
+          "OT-3": "",
+          "OT-4": "",
+          "OT-5": "",
+          "OT-6": "",
+          "OT-7": "",
+          "OT-8": ""
+        },
+        {
+          "L4 Subsystem": "**L4.5 Control & Interface**",
+          "OT-1": "✓",
+          "OT-2": "✓",
+          "OT-3": "✓",
+          "OT-4": "✓",
+          "OT-5": "✓",
+          "OT-6": "✓",
+          "OT-7": "",
+          "OT-8": ""
+        },
+        {
+          "L4 Subsystem": "**L4.6 Containment & Structure**",
+          "OT-1": "✓",
+          "OT-2": "✓",
+          "OT-3": "✓",
+          "OT-4": "✓",
+          "OT-5": "✓",
+          "OT-6": "✓",
+          "OT-7": "✓",
+          "OT-8": "✓"
+        },
+        {
+          "L4 Subsystem": "**L4.7 Flue / Venting**",
+          "OT-1": "✓",
+          "OT-2": "✓",
+          "OT-3": "✓",
+          "OT-4": "✓",
+          "OT-5": "",
+          "OT-6": "",
+          "OT-7": "",
+          "OT-8": ""
+        },
+        {
+          "L4 Subsystem": "**L4.8 Storage Vessel**",
+          "OT-1": "✓",
+          "OT-2": "",
+          "OT-3": "",
+          "OT-4": "",
+          "OT-5": "",
+          "OT-6": "",
+          "OT-7": "",
+          "OT-8": ""
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share",
+        "Trend",
+        "Conf.",
+        "Source"
+      ],
+      "rows": [
+        {
+          "Alternative": "Premix modulating (flat / cylindrical metal-fibre)",
+          "Share": "65%",
+          "Trend": "↑ Growing",
+          "Conf.": "HIGH",
+          "Source": "OEM teardown — condensing boilers"
+        },
+        {
+          "Alternative": "Atmospheric inshot / upshot",
+          "Share": "28%",
+          "Trend": "↓ Declining",
+          "Conf.": "HIGH",
+          "Source": "OEM teardown — non-condensing OT-2"
+        },
+        {
+          "Alternative": "Surface combustion (infrared radiant)",
+          "Share": "5%",
+          "Trend": "Stable",
+          "Conf.": "MEDIUM",
+          "Source": "analyst estimate"
+        },
+        {
+          "Alternative": "Fully pre-aerated injection (Inox-Rad)",
+          "Share": "2%",
+          "Trend": "↑ Emerging",
+          "Conf.": "LOW",
+          "Source": "analyst estimate"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share",
+        "Conf."
+      ],
+      "rows": [
+        {
+          "Alternative": "FeCrAl metallic fibre (woven/knitted)",
+          "Share": "55%",
+          "Conf.": "MEDIUM"
+        },
+        {
+          "Alternative": "Ceramic fibre (SiC-coated)",
+          "Share": "30%",
+          "Conf.": "MEDIUM"
+        },
+        {
+          "Alternative": "Stainless steel perforated sheet",
+          "Share": "15%",
+          "Conf.": "MEDIUM"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share",
+        "Trend",
+        "Conf."
+      ],
+      "rows": [
+        {
+          "Alternative": "ECM (brushless DC, variable speed)",
+          "Share": "70%",
+          "Trend": "↑",
+          "Conf.": "HIGH"
+        },
+        {
+          "Alternative": "PSC (induction, 1-speed)",
+          "Share": "28%",
+          "Trend": "↓",
+          "Conf.": "HIGH"
+        },
+        {
+          "Alternative": "BLDC with external drive",
+          "Share": "2%",
+          "Trend": "Stable",
+          "Conf.": "LOW"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share",
+        "Trend",
+        "Conf.",
+        "Source"
+      ],
+      "rows": [
+        {
+          "Alternative": "Aluminium-silicon alloy (cast, Al-Si12)",
+          "Share": "42%",
+          "Trend": "Stable",
+          "Conf.": "MEDIUM",
+          "Source": "AHS Heating; Cowley Group teardowns"
+        },
+        {
+          "Alternative": "316L stainless steel (spiral / plate)",
+          "Share": "40%",
+          "Trend": "↑ Growing",
+          "Conf.": "MEDIUM",
+          "Source": "AHS Heating; premium EU OEMs"
+        },
+        {
+          "Alternative": "Dual-metal (SS primary + Al-Si secondary)",
+          "Share": "12%",
+          "Trend": "↑ Growing",
+          "Conf.": "MEDIUM",
+          "Source": "analyst estimate"
+        },
+        {
+          "Alternative": "Copper-fin (legacy non-condensing)",
+          "Share": "6%",
+          "Trend": "↓ Declining",
+          "Conf.": "HIGH",
+          "Source": "legacy OT-2/OT-3 base"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share",
+        "Trend",
+        "Conf."
+      ],
+      "rows": [
+        {
+          "Alternative": "Grey cast iron (sectional)",
+          "Share": "60%",
+          "Trend": "↓ Declining",
+          "Conf.": "HIGH"
+        },
+        {
+          "Alternative": "Carbon steel (fire-tube welded)",
+          "Share": "32%",
+          "Trend": "Stable",
+          "Conf.": "HIGH"
+        },
+        {
+          "Alternative": "Copper coil (finned)",
+          "Share": "8%",
+          "Trend": "↓ Declining",
+          "Conf.": "MEDIUM"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share",
+        "Conf."
+      ],
+      "rows": [
+        {
+          "Alternative": "Cupro-nickel Cu90/Ni10",
+          "Share": "70%",
+          "Conf.": "HIGH"
+        },
+        {
+          "Alternative": "Titanium (saltwater / commercial)",
+          "Share": "20%",
+          "Conf.": "HIGH"
+        },
+        {
+          "Alternative": "Polymer composite (low-temp solar assist)",
+          "Share": "10%",
+          "Conf.": "MEDIUM"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share",
+        "Trend",
+        "Conf.",
+        "Source"
+      ],
+      "rows": [
+        {
+          "Alternative": "Wet-rotor circulator, ECM permanent-magnet",
+          "Share": "55%",
+          "Trend": "↑",
+          "Conf.": "HIGH",
+          "Source": "Maximize MR 2024"
+        },
+        {
+          "Alternative": "Wet-rotor circulator, 3-speed PSC",
+          "Share": "32%",
+          "Trend": "↓",
+          "Conf.": "HIGH",
+          "Source": "Maximize MR 2024"
+        },
+        {
+          "Alternative": "External dry-rotor centrifugal",
+          "Share": "10%",
+          "Trend": "Stable",
+          "Conf.": "MEDIUM",
+          "Source": "analyst estimate"
+        },
+        {
+          "Alternative": "Integral mag-drive (no shaft seal)",
+          "Share": "3%",
+          "Trend": "↑ Emerging",
+          "Conf.": "LOW",
+          "Source": "analyst estimate"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share",
+        "Trend",
+        "Conf.",
+        "Source"
+      ],
+      "rows": [
+        {
+          "Alternative": "Impeller / paddle-wheel (mechanical)",
+          "Share": "40%",
+          "Trend": "↓ Declining",
+          "Conf.": "HIGH",
+          "Source": "OEM teardown"
+        },
+        {
+          "Alternative": "Ultrasonic transit-time (inline)",
+          "Share": "30%",
+          "Trend": "↑ Growing",
+          "Conf.": "HIGH",
+          "Source": "Market Research Future 2025; Badger Meter hydronic blog"
+        },
+        {
+          "Alternative": "Electromagnetic (magmeter)",
+          "Share": "15%",
+          "Trend": "Stable",
+          "Conf.": "HIGH",
+          "Source": "industry reports"
+        },
+        {
+          "Alternative": "Differential pressure (orifice / venturi)",
+          "Share": "8%",
+          "Trend": "↓ Declining",
+          "Conf.": "MEDIUM",
+          "Source": "analyst estimate"
+        },
+        {
+          "Alternative": "Thermal calorimetric",
+          "Share": "5%",
+          "Trend": "Stable",
+          "Conf.": "MEDIUM",
+          "Source": "analyst estimate"
+        },
+        {
+          "Alternative": "Vortex",
+          "Share": "2%",
+          "Trend": "Stable",
+          "Conf.": "LOW",
+          "Source": "analyst estimate"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share within ultrasonic",
+        "Trend",
+        "Conf.",
+        "Source"
+      ],
+      "rows": [
+        {
+          "Alternative": "PZT (lead zirconate titanate, bulk ceramic)",
+          "Share within ultrasonic": "72%",
+          "Trend": "Stable",
+          "Conf.": "MEDIUM",
+          "Source": "CTS Corp transducer blog"
+        },
+        {
+          "Alternative": "PVDF (piezo film)",
+          "Share within ultrasonic": "13%",
+          "Trend": "Stable",
+          "Conf.": "LOW",
+          "Source": "analyst estimate"
+        },
+        {
+          "Alternative": "AlN / ScAlN (MEMS PMUT)",
+          "Share within ultrasonic": "10%",
+          "Trend": "↑ Emerging",
+          "Conf.": "LOW",
+          "Source": "Nature Microsystems 2023 (ScAlN PMUT for small-diameter)"
+        },
+        {
+          "Alternative": "LiNbO₃ (single crystal, high-temp)",
+          "Share within ultrasonic": "5%",
+          "Trend": "Stable",
+          "Conf.": "LOW",
+          "Source": "analyst estimate"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share",
+        "Trend",
+        "Conf."
+      ],
+      "rows": [
+        {
+          "Alternative": "Copper Type L/M",
+          "Share": "50%",
+          "Trend": "Stable",
+          "Conf.": "HIGH"
+        },
+        {
+          "Alternative": "PEX / PEX-Al-PEX",
+          "Share": "30%",
+          "Trend": "↑",
+          "Conf.": "HIGH"
+        },
+        {
+          "Alternative": "Carbon steel Sch 40",
+          "Share": "15%",
+          "Trend": "↓",
+          "Conf.": "HIGH"
+        },
+        {
+          "Alternative": "Stainless steel 304",
+          "Share": "5%",
+          "Trend": "Stable",
+          "Conf.": "MEDIUM"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share",
+        "Conf."
+      ],
+      "rows": [
+        {
+          "Alternative": "Copper tube + aluminium fin",
+          "Share": "82%",
+          "Conf.": "HIGH"
+        },
+        {
+          "Alternative": "Copper tube + copper fin (legacy)",
+          "Share": "12%",
+          "Conf.": "HIGH"
+        },
+        {
+          "Alternative": "Steel tube + steel fin (industrial)",
+          "Share": "6%",
+          "Conf.": "MEDIUM"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share",
+        "Trend",
+        "Conf."
+      ],
+      "rows": [
+        {
+          "Alternative": "PEX-A (Engel method)",
+          "Share": "50%",
+          "Trend": "↑",
+          "Conf.": "HIGH"
+        },
+        {
+          "Alternative": "PEX-B (silane method)",
+          "Share": "35%",
+          "Trend": "Stable",
+          "Conf.": "HIGH"
+        },
+        {
+          "Alternative": "Polybutylene (PB)",
+          "Share": "8%",
+          "Trend": "↓ Declining",
+          "Conf.": "MEDIUM"
+        },
+        {
+          "Alternative": "Stainless steel flex (Uponor/Aquatherm)",
+          "Share": "7%",
+          "Trend": "↑",
+          "Conf.": "MEDIUM"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share",
+        "Conf."
+      ],
+      "rows": [
+        {
+          "Alternative": "Proprietary MCU (OEM-developed)",
+          "Share": "62%",
+          "Conf.": "MEDIUM"
+        },
+        {
+          "Alternative": "OEM-customised Bosch / Siemens platform",
+          "Share": "22%",
+          "Conf.": "MEDIUM"
+        },
+        {
+          "Alternative": "OpenTherm-native compatible",
+          "Share": "14%",
+          "Conf.": "MEDIUM"
+        },
+        {
+          "Alternative": "BMS-integrated (Modbus / BACnet, commercial)",
+          "Share": "2%",
+          "Conf.": "HIGH"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share",
+        "Trend",
+        "Conf."
+      ],
+      "rows": [
+        {
+          "Alternative": "OpenTherm (analogue 2-wire)",
+          "Share": "45%",
+          "Trend": "Stable",
+          "Conf.": "MEDIUM"
+        },
+        {
+          "Alternative": "eBUS / EMS (Bosch/Buderus)",
+          "Share": "25%",
+          "Trend": "Stable",
+          "Conf.": "HIGH"
+        },
+        {
+          "Alternative": "Proprietary bus (Baxi, Vaillant VR-bus)",
+          "Share": "20%",
+          "Trend": "↓",
+          "Conf.": "MEDIUM"
+        },
+        {
+          "Alternative": "Modbus / RS-485 (commercial)",
+          "Share": "7%",
+          "Trend": "Stable",
+          "Conf.": "HIGH"
+        },
+        {
+          "Alternative": "BACnet IP (commercial large)",
+          "Share": "3%",
+          "Trend": "↑",
+          "Conf.": "HIGH"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Alternative",
+        "Share",
+        "Conf."
+      ],
+      "rows": [
+        {
+          "Alternative": "Powder-coated galvanised steel",
+          "Share": "68%",
+          "Conf.": "HIGH"
+        },
+        {
+          "Alternative": "ABS or PP thermoplastic",
+          "Share": "22%",
+          "Conf.": "HIGH"
+        },
+        {
+          "Alternative": "Pre-painted galvanised (PPGI)",
+          "Share": "10%",
+          "Conf.": "MEDIUM"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "#",
+        "BOM Path",
+        "Function",
+        "Safety-Critical",
+        "Alternatives at position"
+      ],
+      "rows": [
+        {
+          "#": "1",
+          "BOM Path": "OT-1/2/3/4 › L4.3 › L3.7 › L2.6 Flow Meter Assembly",
+          "Function": "Confirm minimum flow for burner interlock; protect HX from dry-fire",
+          "Safety-Critical": "**YES** (HX destruction risk on dry-fire)",
+          "Alternatives at position": "Impeller 40% / Ultrasonic 30% / Mag 15% / dP 8% / Thermal 5% / Vortex 2%"
+        },
+        {
+          "#": "2",
+          "BOM Path": "OT-6 › L4.3 › L3.7 › L2.6",
+          "Function": "Verify minimum loop flow for radiant manifold zones",
+          "Safety-Critical": "NO (trim / energy metering)",
+          "Alternatives at position": "Same pool; impeller-heavy"
+        },
+        {
+          "#": "3",
+          "BOM Path": "OT-7 › L4.3 › L3.7 › L2.6",
+          "Function": "Measure pool water flow for safety and energy billing",
+          "Safety-Critical": "YES (freeze / bypass protection)",
+          "Alternatives at position": "Same pool"
+        }
+      ]
+    },
+    {
+      "headers": [
+        "Check",
+        "Status"
+      ],
+      "rows": [
+        {
+          "Check": "Every L4 decomposes to ≥ L2 for all 8 output types",
+          "Status": "✓"
+        },
+        {
+          "Check": "Alternatives sum to 100% at each position (±5pt)",
+          "Status": "✓"
+        },
+        {
+          "Check": "OT-8 Solar Water Heating added (present in VN, missing from original BOM)",
+          "Status": "✓"
+        },
+        {
+          "Check": "Containment / structure included for all 8 output types",
+          "Status": "✓"
+        },
+        {
+          "Check": "Controls / interface included for all OTs that have them (OT-5, OT-6 excluded — no integral controls)",
+          "Status": "✓"
+        },
+        {
+          "Check": "L0 raw materials identified wherever material choice is a competitive variable",
+          "Status": "✓"
+        },
+        {
+          "Check": "BOM vs VN boundary respected — no process/manufacturing equipment in tree",
+          "Status": "✓"
+        },
+        {
+          "Check": "Every alternative has confidence rating",
+          "Status": "✓"
+        },
+        {
+          "Check": "Marquardt DN20 BOM position visible in OT-1, OT-2, OT-3, OT-4, OT-6, OT-7 hydraulic distribution subsystems",
+          "Status": "✓"
+        },
+        {
+          "Check": "Oil-specific components (cad cell, blast tube, Type L flue) isolated to OT-3",
+          "Status": "✓"
+        },
+        {
+          "Check": "Electric-specific components (contactor, CT, pressure vessel as HX) isolated to OT-4",
+          "Status": "✓"
+        },
+        {
+          "Check": "Solar-specific components (collector, DTC, EPDM expansion vessel) isolated to OT-8",
+          "Status": "✓"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "naics_code": "333414",
+      "naics_title": "Heating Equipment (except Warm Air Furnaces) Manufacturing",
+      "output_types": [
+        "OT-1",
+        "OT-2",
+        "OT-3",
+        "OT-4",
+        "OT-5",
+        "OT-6",
+        "OT-7",
+        "OT-8"
+      ],
+      "output_type_labels": {
+        "OT-1": "Gas Condensing Boiler",
+        "OT-2": "Gas Non-Condensing Boiler",
+        "OT-3": "Oil-Fired Boiler",
+        "OT-4": "Electric Hydronic Boiler",
+        "OT-5": "Hydronic Baseboard Heater",
+        "OT-6": "Radiant Floor Heating System",
+        "OT-7": "Pool / Spa Heater",
+        "OT-8": "Solar Water Heating System"
+      },
+      "bom_units": [
+        {
+          "name": "Heat Generation",
+          "level": "L4",
+          "output_type": "OT-1,OT-2,OT-3,OT-4,OT-7,OT-8",
+          "parent": null
+        },
+        {
+          "name": "Primary Heat Transfer",
+          "level": "L4",
+          "output_type": "OT-1,OT-2,OT-3,OT-4,OT-7,OT-8",
+          "parent": null
+        },
+        {
+          "name": "Hydraulic Distribution",
+          "level": "L4",
+          "output_type": "OT-1,OT-2,OT-3,OT-4,OT-6,OT-7,OT-8",
+          "parent": null
+        },
+        {
+          "name": "Heat Emission",
+          "level": "L4",
+          "output_type": "OT-5,OT-6",
+          "parent": null
+        },
+        {
+          "name": "Control & Interface",
+          "level": "L4",
+          "output_type": "OT-1,OT-2,OT-3,OT-4,OT-7,OT-8",
+          "parent": null
+        },
+        {
+          "name": "Containment & Structure",
+          "level": "L4",
+          "output_type": "OT-1,OT-2,OT-3,OT-4,OT-5,OT-6,OT-7,OT-8",
+          "parent": null
+        },
+        {
+          "name": "Flue / Venting System",
+          "level": "L4",
+          "output_type": "OT-1,OT-2,OT-3,OT-7",
+          "parent": null
+        },
+        {
+          "name": "Storage Vessel",
+          "level": "L4",
+          "output_type": "OT-8",
+          "parent": null
+        },
+        {
+          "name": "Premix Burner Module",
+          "level": "L3",
+          "output_type": "OT-1",
+          "parent": "Heat Generation"
+        },
+        {
+          "name": "Atmospheric Burner Module",
+          "level": "L3",
+          "output_type": "OT-2",
+          "parent": "Heat Generation"
+        },
+        {
+          "name": "Oil Burner Module",
+          "level": "L3",
+          "output_type": "OT-3",
+          "parent": "Heat Generation"
+        },
+        {
+          "name": "Heating Element Module",
+          "level": "L3",
+          "output_type": "OT-4",
+          "parent": "Heat Generation"
+        },
+        {
+          "name": "Gas Burner Module (Pool)",
+          "level": "L3",
+          "output_type": "OT-7",
+          "parent": "Heat Generation"
+        },
+        {
+          "name": "Solar Collector Module",
+          "level": "L3",
+          "output_type": "OT-8",
+          "parent": "Heat Generation"
+        },
+        {
+          "name": "Condensing Heat Exchanger Module",
+          "level": "L3",
+          "output_type": "OT-1",
+          "parent": "Primary Heat Transfer"
+        },
+        {
+          "name": "Non-Condensing HX Module",
+          "level": "L3",
+          "output_type": "OT-2,OT-3",
+          "parent": "Primary Heat Transfer"
+        },
+        {
+          "name": "Pressure Vessel Module",
+          "level": "L3",
+          "output_type": "OT-4",
+          "parent": "Primary Heat Transfer"
+        },
+        {
+          "name": "Pool Heat Exchanger Module",
+          "level": "L3",
+          "output_type": "OT-7",
+          "parent": "Primary Heat Transfer"
+        },
+        {
+          "name": "Solar Heat Exchanger Module",
+          "level": "L3",
+          "output_type": "OT-8",
+          "parent": "Primary Heat Transfer"
+        },
+        {
+          "name": "Circulation Pump Module",
+          "level": "L3",
+          "output_type": "OT-1,OT-2,OT-3,OT-4,OT-8",
+          "parent": "Hydraulic Distribution"
+        },
+        {
+          "name": "Flow & Thermal Sensing Module",
+          "level": "L3",
+          "output_type": "OT-1,OT-2,OT-3,OT-4,OT-6,OT-7,OT-8",
+          "parent": "Hydraulic Distribution"
+        },
+        {
+          "name": "Hydraulic Safety Module",
+          "level": "L3",
+          "output_type": "OT-1,OT-2,OT-3,OT-4",
+          "parent": "Hydraulic Distribution"
+        },
+        {
+          "name": "Piping & Fittings",
+          "level": "L3",
+          "output_type": "OT-1,OT-2,OT-3,OT-4,OT-6,OT-7,OT-8",
+          "parent": "Hydraulic Distribution"
+        },
+        {
+          "name": "Manifold Assembly Module",
+          "level": "L3",
+          "output_type": "OT-6",
+          "parent": "Hydraulic Distribution"
+        },
+        {
+          "name": "Zone Actuator Module",
+          "level": "L3",
+          "output_type": "OT-6",
+          "parent": "Hydraulic Distribution"
+        },
+        {
+          "name": "Pool Flow Switch Module",
+          "level": "L3",
+          "output_type": "OT-7",
+          "parent": "Hydraulic Distribution"
+        },
+        {
+          "name": "Flow Meter Assembly",
+          "level": "L2",
+          "output_type": "OT-1,OT-2,OT-3,OT-4,OT-6,OT-7,OT-8",
+          "parent": "Flow & Thermal Sensing Module"
+        },
+        {
+          "name": "Temperature Sensor Assembly",
+          "level": "L2",
+          "output_type": "OT-1,OT-2,OT-3,OT-4,OT-7,OT-8",
+          "parent": "Flow & Thermal Sensing Module"
+        },
+        {
+          "name": "Flow Sensor Body",
+          "level": "L1",
+          "output_type": "OT-1,OT-2,OT-3,OT-4,OT-6,OT-7,OT-8",
+          "parent": "Flow Meter Assembly"
+        },
+        {
+          "name": "Transducer Pair",
+          "level": "L1",
+          "output_type": "OT-1,OT-2,OT-3,OT-4,OT-6,OT-7,OT-8",
+          "parent": "Flow Meter Assembly"
+        },
+        {
+          "name": "PZT Piezo Ceramic",
+          "level": "L0",
+          "output_type": "OT-1,OT-2,OT-3,OT-4,OT-6,OT-7,OT-8",
+          "parent": "Transducer Pair"
+        },
+        {
+          "name": "Fin-Tube Element Module",
+          "level": "L3",
+          "output_type": "OT-5",
+          "parent": "Heat Emission"
+        },
+        {
+          "name": "PEX Tubing Module",
+          "level": "L3",
+          "output_type": "OT-6",
+          "parent": "Heat Emission"
+        },
+        {
+          "name": "Floor Build-Up Thermal Embedding",
+          "level": "L3",
+          "output_type": "OT-6",
+          "parent": "Heat Emission"
+        },
+        {
+          "name": "Appliance Controller Module",
+          "level": "L3",
+          "output_type": "OT-1,OT-2,OT-3,OT-4,OT-7",
+          "parent": "Control & Interface"
+        },
+        {
+          "name": "Differential Temperature Controller Module",
+          "level": "L3",
+          "output_type": "OT-8",
+          "parent": "Control & Interface"
+        },
+        {
+          "name": "User Interface Module",
+          "level": "L3",
+          "output_type": "OT-1,OT-2,OT-3,OT-4,OT-7",
+          "parent": "Control & Interface"
+        },
+        {
+          "name": "Outer Casing Assembly",
+          "level": "L3",
+          "output_type": "OT-1,OT-2,OT-3,OT-4,OT-5,OT-6,OT-7,OT-8",
+          "parent": "Containment & Structure"
+        },
+        {
+          "name": "Internal Frame / Bracket",
+          "level": "L3",
+          "output_type": "OT-1,OT-2,OT-3,OT-4,OT-7",
+          "parent": "Containment & Structure"
+        },
+        {
+          "name": "Thermal Insulation Layer",
+          "level": "L3",
+          "output_type": "OT-1,OT-2,OT-3,OT-4",
+          "parent": "Containment & Structure"
+        },
+        {
+          "name": "Solar Tank Module",
+          "level": "L3",
+          "output_type": "OT-8",
+          "parent": "Storage Vessel"
+        },
+        {
+          "name": "Tank Insulation Jacket",
+          "level": "L3",
+          "output_type": "OT-8",
+          "parent": "Storage Vessel"
+        }
+      ],
+      "bom_alternatives": [
+        {
+          "name": "Premix modulating metal-fibre",
+          "parent_bom_name": "Premix Burner Module",
+          "output_type": "OT-1",
+          "market_share": 65,
+          "trend": "Growing",
+          "confidence": "HIGH",
+          "source": "OEM teardown"
+        },
+        {
+          "name": "Atmospheric inshot/upshot",
+          "parent_bom_name": "Atmospheric Burner Module",
+          "output_type": "OT-2",
+          "market_share": 70,
+          "trend": "Declining",
+          "confidence": "HIGH",
+          "source": "OEM teardown"
+        },
+        {
+          "name": "Tubular ribbon burner",
+          "parent_bom_name": "Atmospheric Burner Module",
+          "output_type": "OT-2",
+          "market_share": 20,
+          "trend": "Stable",
+          "confidence": "MEDIUM",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Ceramic radiant deck",
+          "parent_bom_name": "Atmospheric Burner Module",
+          "output_type": "OT-2",
+          "market_share": 10,
+          "trend": "Stable",
+          "confidence": "MEDIUM",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Pressure-atomising oil burner",
+          "parent_bom_name": "Oil Burner Module",
+          "output_type": "OT-3",
+          "market_share": 85,
+          "trend": "Stable",
+          "confidence": "HIGH",
+          "source": "OEM teardown"
+        },
+        {
+          "name": "Rotary-cup oil burner",
+          "parent_bom_name": "Oil Burner Module",
+          "output_type": "OT-3",
+          "market_share": 12,
+          "trend": "Declining",
+          "confidence": "HIGH",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Low-NOx gun burner",
+          "parent_bom_name": "Oil Burner Module",
+          "output_type": "OT-3",
+          "market_share": 3,
+          "trend": "Growing",
+          "confidence": "LOW",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Incoloy 800 sheathed element",
+          "parent_bom_name": "Heating Element Module",
+          "output_type": "OT-4",
+          "market_share": 55,
+          "trend": "Stable",
+          "confidence": "MEDIUM",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "AISI 316L SS sheathed element",
+          "parent_bom_name": "Heating Element Module",
+          "output_type": "OT-4",
+          "market_share": 30,
+          "trend": "Stable",
+          "confidence": "MEDIUM",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Titanium element",
+          "parent_bom_name": "Heating Element Module",
+          "output_type": "OT-4",
+          "market_share": 10,
+          "trend": "Growing",
+          "confidence": "MEDIUM",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "PTC ceramic self-regulating element",
+          "parent_bom_name": "Heating Element Module",
+          "output_type": "OT-4",
+          "market_share": 5,
+          "trend": "Growing",
+          "confidence": "LOW",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Electronic ignition (HSI/IPI)",
+          "parent_bom_name": "Gas Burner Module (Pool)",
+          "output_type": "OT-7",
+          "market_share": 55,
+          "trend": "Growing",
+          "confidence": "HIGH",
+          "source": "OEM teardown"
+        },
+        {
+          "name": "Millivolt standing pilot",
+          "parent_bom_name": "Gas Burner Module (Pool)",
+          "output_type": "OT-7",
+          "market_share": 40,
+          "trend": "Declining",
+          "confidence": "HIGH",
+          "source": "OEM teardown"
+        },
+        {
+          "name": "Flat-plate solar collector",
+          "parent_bom_name": "Solar Collector Module",
+          "output_type": "OT-8",
+          "market_share": 45,
+          "trend": "Stable",
+          "confidence": "HIGH",
+          "source": "analyst estimate; IEA Solar Thermal 2024"
+        },
+        {
+          "name": "Evacuated tube heat-pipe",
+          "parent_bom_name": "Solar Collector Module",
+          "output_type": "OT-8",
+          "market_share": 35,
+          "trend": "Growing",
+          "confidence": "HIGH",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Evacuated tube direct-flow",
+          "parent_bom_name": "Solar Collector Module",
+          "output_type": "OT-8",
+          "market_share": 15,
+          "trend": "Stable",
+          "confidence": "MEDIUM",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Concentrating parabolic trough (commercial)",
+          "parent_bom_name": "Solar Collector Module",
+          "output_type": "OT-8",
+          "market_share": 5,
+          "trend": "Growing",
+          "confidence": "LOW",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Aluminium-silicon alloy Al-Si12 (cast)",
+          "parent_bom_name": "Condensing Heat Exchanger Module",
+          "output_type": "OT-1",
+          "market_share": 42,
+          "trend": "Stable",
+          "confidence": "MEDIUM",
+          "source": "AHS Heating teardowns"
+        },
+        {
+          "name": "316L stainless steel (spiral/plate)",
+          "parent_bom_name": "Condensing Heat Exchanger Module",
+          "output_type": "OT-1",
+          "market_share": 40,
+          "trend": "Growing",
+          "confidence": "MEDIUM",
+          "source": "AHS Heating teardowns"
+        },
+        {
+          "name": "Dual-metal SS+Al-Si",
+          "parent_bom_name": "Condensing Heat Exchanger Module",
+          "output_type": "OT-1",
+          "market_share": 12,
+          "trend": "Growing",
+          "confidence": "MEDIUM",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Copper-fin legacy",
+          "parent_bom_name": "Condensing Heat Exchanger Module",
+          "output_type": "OT-1",
+          "market_share": 6,
+          "trend": "Declining",
+          "confidence": "HIGH",
+          "source": "legacy base"
+        },
+        {
+          "name": "Grey cast iron sectional",
+          "parent_bom_name": "Non-Condensing HX Module",
+          "output_type": "OT-2,OT-3",
+          "market_share": 60,
+          "trend": "Declining",
+          "confidence": "HIGH",
+          "source": "OEM teardown"
+        },
+        {
+          "name": "Carbon steel fire-tube welded",
+          "parent_bom_name": "Non-Condensing HX Module",
+          "output_type": "OT-2,OT-3",
+          "market_share": 32,
+          "trend": "Stable",
+          "confidence": "HIGH",
+          "source": "OEM teardown"
+        },
+        {
+          "name": "Copper coil finned",
+          "parent_bom_name": "Non-Condensing HX Module",
+          "output_type": "OT-2,OT-3",
+          "market_share": 8,
+          "trend": "Declining",
+          "confidence": "MEDIUM",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Carbon steel SA-516-70 vessel",
+          "parent_bom_name": "Pressure Vessel Module",
+          "output_type": "OT-4",
+          "market_share": 70,
+          "trend": "Stable",
+          "confidence": "HIGH",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "AISI 316L SS vessel",
+          "parent_bom_name": "Pressure Vessel Module",
+          "output_type": "OT-4",
+          "market_share": 25,
+          "trend": "Growing",
+          "confidence": "HIGH",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Duplex 2205 vessel",
+          "parent_bom_name": "Pressure Vessel Module",
+          "output_type": "OT-4",
+          "market_share": 5,
+          "trend": "Emerging",
+          "confidence": "LOW",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Cupro-nickel Cu90/Ni10",
+          "parent_bom_name": "Pool Heat Exchanger Module",
+          "output_type": "OT-7",
+          "market_share": 70,
+          "trend": "Stable",
+          "confidence": "HIGH",
+          "source": "pool heater OEM teardowns"
+        },
+        {
+          "name": "Grade 2 titanium",
+          "parent_bom_name": "Pool Heat Exchanger Module",
+          "output_type": "OT-7",
+          "market_share": 20,
+          "trend": "Growing",
+          "confidence": "HIGH",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Polymer composite (low-temp)",
+          "parent_bom_name": "Pool Heat Exchanger Module",
+          "output_type": "OT-7",
+          "market_share": 10,
+          "trend": "Stable",
+          "confidence": "MEDIUM",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Internal coil-in-tank HX",
+          "parent_bom_name": "Solar Heat Exchanger Module",
+          "output_type": "OT-8",
+          "market_share": 55,
+          "trend": "Stable",
+          "confidence": "MEDIUM",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "External brazed plate HX",
+          "parent_bom_name": "Solar Heat Exchanger Module",
+          "output_type": "OT-8",
+          "market_share": 35,
+          "trend": "Growing",
+          "confidence": "MEDIUM",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Mantle (wrapped-jacket) HX",
+          "parent_bom_name": "Solar Heat Exchanger Module",
+          "output_type": "OT-8",
+          "market_share": 10,
+          "trend": "Declining",
+          "confidence": "LOW",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "ECM wet-rotor circulator",
+          "parent_bom_name": "Circulation Pump Module",
+          "output_type": "OT-1,OT-2,OT-3,OT-4,OT-8",
+          "market_share": 55,
+          "trend": "Growing",
+          "confidence": "HIGH",
+          "source": "Maximize Market Research 2024"
+        },
+        {
+          "name": "PSC 3-speed wet-rotor",
+          "parent_bom_name": "Circulation Pump Module",
+          "output_type": "OT-1,OT-2,OT-3,OT-4",
+          "market_share": 32,
+          "trend": "Declining",
+          "confidence": "HIGH",
+          "source": "Maximize Market Research 2024"
+        },
+        {
+          "name": "External dry-rotor centrifugal",
+          "parent_bom_name": "Circulation Pump Module",
+          "output_type": "OT-1,OT-2,OT-3,OT-4",
+          "market_share": 10,
+          "trend": "Stable",
+          "confidence": "MEDIUM",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Integral mag-drive (no shaft seal)",
+          "parent_bom_name": "Circulation Pump Module",
+          "output_type": "OT-1,OT-2,OT-3,OT-4",
+          "market_share": 3,
+          "trend": "Emerging",
+          "confidence": "LOW",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Impeller / paddle-wheel mechanical",
+          "parent_bom_name": "Flow & Thermal Sensing Module",
+          "output_type": "OT-1,OT-2,OT-3,OT-4,OT-6,OT-7,OT-8",
+          "market_share": 40,
+          "trend": "Declining",
+          "confidence": "HIGH",
+          "source": "OEM teardown"
+        },
+        {
+          "name": "Ultrasonic transit-time inline",
+          "parent_bom_name": "Flow & Thermal Sensing Module",
+          "output_type": "OT-1,OT-2,OT-3,OT-4,OT-6,OT-7,OT-8",
+          "market_share": 30,
+          "trend": "Growing",
+          "confidence": "HIGH",
+          "source": "Market Research Future 2025; Badger Meter hydronic blog"
+        },
+        {
+          "name": "Electromagnetic magmeter",
+          "parent_bom_name": "Flow & Thermal Sensing Module",
+          "output_type": "OT-1,OT-2,OT-3,OT-4,OT-7,OT-8",
+          "market_share": 15,
+          "trend": "Stable",
+          "confidence": "HIGH",
+          "source": "industry reports"
+        },
+        {
+          "name": "Differential pressure orifice/venturi",
+          "parent_bom_name": "Flow & Thermal Sensing Module",
+          "output_type": "OT-1,OT-2,OT-3,OT-4",
+          "market_share": 8,
+          "trend": "Declining",
+          "confidence": "MEDIUM",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Thermal calorimetric",
+          "parent_bom_name": "Flow & Thermal Sensing Module",
+          "output_type": "OT-1,OT-2,OT-3,OT-4,OT-6",
+          "market_share": 5,
+          "trend": "Stable",
+          "confidence": "MEDIUM",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Vortex",
+          "parent_bom_name": "Flow & Thermal Sensing Module",
+          "output_type": "OT-1,OT-2,OT-3,OT-4",
+          "market_share": 2,
+          "trend": "Stable",
+          "confidence": "LOW",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "PZT bulk ceramic",
+          "parent_bom_name": "Transducer Pair",
+          "output_type": "OT-1,OT-2,OT-3,OT-4,OT-6,OT-7,OT-8",
+          "market_share": 72,
+          "trend": "Stable",
+          "confidence": "MEDIUM",
+          "source": "CTS Corp transducer blog"
+        },
+        {
+          "name": "PVDF piezo film",
+          "parent_bom_name": "Transducer Pair",
+          "output_type": "OT-1,OT-2,OT-3,OT-4,OT-6,OT-7,OT-8",
+          "market_share": 13,
+          "trend": "Stable",
+          "confidence": "LOW",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "AlN / ScAlN MEMS PMUT",
+          "parent_bom_name": "Transducer Pair",
+          "output_type": "OT-1,OT-2,OT-3,OT-4,OT-6,OT-7,OT-8",
+          "market_share": 10,
+          "trend": "Emerging",
+          "confidence": "LOW",
+          "source": "Nature Microsystems 2023"
+        },
+        {
+          "name": "LiNbO3 single crystal",
+          "parent_bom_name": "Transducer Pair",
+          "output_type": "OT-1,OT-2,OT-3,OT-4,OT-6,OT-7,OT-8",
+          "market_share": 5,
+          "trend": "Stable",
+          "confidence": "LOW",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "DZR brass manifold",
+          "parent_bom_name": "Manifold Assembly Module",
+          "output_type": "OT-6",
+          "market_share": 65,
+          "trend": "Stable",
+          "confidence": "HIGH",
+          "source": "hydronic installer surveys"
+        },
+        {
+          "name": "316L SS manifold",
+          "parent_bom_name": "Manifold Assembly Module",
+          "output_type": "OT-6",
+          "market_share": 30,
+          "trend": "Growing",
+          "confidence": "HIGH",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Polymer manifold",
+          "parent_bom_name": "Manifold Assembly Module",
+          "output_type": "OT-6",
+          "market_share": 5,
+          "trend": "Stable",
+          "confidence": "MEDIUM",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "PEX-A tubing (Engel)",
+          "parent_bom_name": "PEX Tubing Module",
+          "output_type": "OT-6",
+          "market_share": 50,
+          "trend": "Growing",
+          "confidence": "HIGH",
+          "source": "Uponor market data"
+        },
+        {
+          "name": "PEX-B tubing (silane)",
+          "parent_bom_name": "PEX Tubing Module",
+          "output_type": "OT-6",
+          "market_share": 35,
+          "trend": "Stable",
+          "confidence": "HIGH",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Polybutylene (PB)",
+          "parent_bom_name": "PEX Tubing Module",
+          "output_type": "OT-6",
+          "market_share": 8,
+          "trend": "Declining",
+          "confidence": "MEDIUM",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Stainless steel flex",
+          "parent_bom_name": "PEX Tubing Module",
+          "output_type": "OT-6",
+          "market_share": 7,
+          "trend": "Growing",
+          "confidence": "MEDIUM",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Mechanical paddle/reed switch",
+          "parent_bom_name": "Pool Flow Switch Module",
+          "output_type": "OT-7",
+          "market_share": 55,
+          "trend": "Declining",
+          "confidence": "HIGH",
+          "source": "pool heater teardowns"
+        },
+        {
+          "name": "Electronic flow switch (ultrasonic)",
+          "parent_bom_name": "Pool Flow Switch Module",
+          "output_type": "OT-7",
+          "market_share": 35,
+          "trend": "Growing",
+          "confidence": "HIGH",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Differential pressure switch",
+          "parent_bom_name": "Pool Flow Switch Module",
+          "output_type": "OT-7",
+          "market_share": 10,
+          "trend": "Stable",
+          "confidence": "MEDIUM",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Powder-coated galvanised steel",
+          "parent_bom_name": "Outer Casing Assembly",
+          "output_type": "OT-1,OT-2,OT-3,OT-4,OT-5,OT-7,OT-8",
+          "market_share": 68,
+          "trend": "Stable",
+          "confidence": "HIGH",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "ABS or PP thermoplastic",
+          "parent_bom_name": "Outer Casing Assembly",
+          "output_type": "OT-1,OT-2,OT-3,OT-4",
+          "market_share": 22,
+          "trend": "Growing",
+          "confidence": "HIGH",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Pre-painted galvanised (PPGI)",
+          "parent_bom_name": "Outer Casing Assembly",
+          "output_type": "OT-1,OT-2,OT-3,OT-4",
+          "market_share": 10,
+          "trend": "Stable",
+          "confidence": "MEDIUM",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "TiNOx sputtered on copper (absorber)",
+          "parent_bom_name": "Solar Collector Module",
+          "output_type": "OT-8",
+          "market_share": 45,
+          "trend": "Growing",
+          "confidence": "MEDIUM",
+          "source": "Fraunhofer ISE collector survey"
+        },
+        {
+          "name": "Black chrome on copper (absorber)",
+          "parent_bom_name": "Solar Collector Module",
+          "output_type": "OT-8",
+          "market_share": 30,
+          "trend": "Declining",
+          "confidence": "MEDIUM",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "PVD AlNiN on aluminium (absorber)",
+          "parent_bom_name": "Solar Collector Module",
+          "output_type": "OT-8",
+          "market_share": 20,
+          "trend": "Growing",
+          "confidence": "MEDIUM",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Flat black paint absorber (budget)",
+          "parent_bom_name": "Solar Collector Module",
+          "output_type": "OT-8",
+          "market_share": 5,
+          "trend": "Declining",
+          "confidence": "MEDIUM",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Glazed-lined carbon steel tank",
+          "parent_bom_name": "Solar Tank Module",
+          "output_type": "OT-8",
+          "market_share": 55,
+          "trend": "Stable",
+          "confidence": "HIGH",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "SS inner-liner tank",
+          "parent_bom_name": "Solar Tank Module",
+          "output_type": "OT-8",
+          "market_share": 30,
+          "trend": "Growing",
+          "confidence": "HIGH",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Polymer-lined steel tank",
+          "parent_bom_name": "Solar Tank Module",
+          "output_type": "OT-8",
+          "market_share": 15,
+          "trend": "Stable",
+          "confidence": "MEDIUM",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Propylene glycol/water mix",
+          "parent_bom_name": "Heat Transfer Fluid System",
+          "output_type": "OT-8",
+          "market_share": 65,
+          "trend": "Stable",
+          "confidence": "HIGH",
+          "source": "solar installer surveys"
+        },
+        {
+          "name": "Drainback water",
+          "parent_bom_name": "Heat Transfer Fluid System",
+          "output_type": "OT-8",
+          "market_share": 25,
+          "trend": "Stable",
+          "confidence": "HIGH",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Pure water (hot climates)",
+          "parent_bom_name": "Heat Transfer Fluid System",
+          "output_type": "OT-8",
+          "market_share": 10,
+          "trend": "Stable",
+          "confidence": "MEDIUM",
+          "source": "analyst estimate"
+        },
+        {
+          "name": "Copper Type L/M",
+          "parent_bom_name": "Piping & Fittings",
+          "output_type": "OT-1,OT-2,OT-3,OT-4,OT-8",
+          "market_share": 50,
+          "trend": "Stable",
+          "confidence": "HIGH",
+          "source": "industry standard"
+        },
+        {
+          "name": "PEX / PEX-Al-PEX",
+          "parent_bom_name": "Piping & Fittings",
+          "output_type": "OT-1,OT-2,OT-3,OT-4",
+          "market_share": 30,
+          "trend": "Growing",
+          "confidence": "HIGH",
+          "source": "industry standard"
+        },
+        {
+          "name": "Carbon steel Sch 40",
+          "parent_bom_name": "Piping & Fittings",
+          "output_type": "OT-1,OT-2,OT-3,OT-4",
+          "market_share": 15,
+          "trend": "Declining",
+          "confidence": "HIGH",
+          "source": "industry standard"
+        },
+        {
+          "name": "Stainless steel 304",
+          "parent_bom_name": "Piping & Fittings",
+          "output_type": "OT-1,OT-2,OT-3,OT-4",
+          "market_share": 5,
+          "trend": "Stable",
+          "confidence": "MEDIUM",
+          "source": "analyst estimate"
+        }
+      ],
+      "component_map": {
+        "component_category": "Flow Sensor",
+        "marquardt_product": "Ultrasonic Flow Sensor DN20 (transit-time, 4.2–46.6 l/min, +2–90°C, 0–6 bar, ≤50% glycol)",
+        "bom_positions": [
+          {
+            "id": 1,
+            "path": "OT-1/2/3/4 › L4.3 Hydraulic Distribution › L3 Flow & Thermal Sensing › L2 Flow Meter Assembly",
+            "function": "Confirm minimum flow for burner interlock; protect HX from dry-fire",
+            "safety_critical": true,
+            "marquardt_alternative_share_pct": 30,
+            "primary_displaced_alternative": "Impeller/paddle-wheel mechanical (40%)"
+          },
+          {
+            "id": 2,
+            "path": "OT-6 › L4.3 Hydraulic Distribution › L3 Flow & Thermal Sensing › L2 Flow Meter Assembly",
+            "function": "Verify minimum loop flow for radiant manifold zones; energy metering",
+            "safety_critical": false,
+            "marquardt_alternative_share_pct": 30,
+            "primary_displaced_alternative": "Impeller/paddle-wheel mechanical (45%)"
+          },
+          {
+            "id": 3,
+            "path": "OT-7 › L4.3 Hydraulic Distribution › L3 Pool Flow Switch › L2 Flow Switch Assembly",
+            "function": "Measure pool water flow for safety interlock (freeze / bypass protection) and energy billing",
+            "safety_critical": true,
+            "marquardt_alternative_share_pct": 35,
+            "primary_displaced_alternative": "Mechanical paddle/reed switch (55%)"
+          },
+          {
+            "id": 4,
+            "path": "OT-8 › L4.2 Heat Transfer Loop › L3 Flow & Thermal Sensing › L2 Flow Meter Assembly",
+            "function": "Verify solar loop flow rate for DTC activation threshold; detect pump failure",
+            "safety_critical": false,
+            "marquardt_alternative_share_pct": 25,
+            "primary_displaced_alternative": "Impeller mechanical (40%)"
+          }
+        ]
+      }
+    }
+  ],
+  "has_bom": true,
+  "naics_sector_type": "manufacturing"
+}
