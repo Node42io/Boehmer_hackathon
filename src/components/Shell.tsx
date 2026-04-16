@@ -1,17 +1,6 @@
 /**
  * Shell — root app layout: left nav sidebar + main content area.
- *
- * Sidebar structure (flat, with expandable section anchors like Zollern):
- *   00  Overview           ▶
- *   01  Company Profile    ▶
- *   02  Capability Assessment ▶
- *   02b Capability Register ▶
- *   03  Product & Market Analysis ▶
- *   04  Manufacturing VN & Product BOMs ▶
- *   05  Equine Production VN ▶
- *   06  Adjacent Capabilities ▶
- *   07  JTBD + Stakeholder Needs ▶
- *   08  Strategic Synthesis ▶
+ * Zollern-style flat nav with expandable ▶ section anchors.
  */
 
 import { useState, useEffect, useCallback } from "react";
@@ -37,9 +26,9 @@ const navItems: NavItem[] = [
     kicker: "00",
     sections: [
       { id: "ovw-company", label: "About Böhmer" },
+      { id: "ovw-divisions", label: "Business Divisions" },
       { id: "ovw-products", label: "Products at a Glance" },
-      { id: "ovw-composite", label: "Composite Score" },
-      { id: "ovw-recommendation", label: "Recommendation" },
+      { id: "ovw-scores", label: "Composite Score" },
       { id: "ovw-howto", label: "How to Read" },
     ],
   },
@@ -49,11 +38,11 @@ const navItems: NavItem[] = [
     kicker: "01",
     sections: [
       { id: "cp-profile", label: "Company Profile" },
-      { id: "cp-crossval", label: "Cross-Validation" },
+      { id: "cp-validation", label: "Cross-Validation" },
       { id: "cp-divisions", label: "Business Divisions" },
       { id: "cp-persons", label: "Key Persons" },
       { id: "cp-certs", label: "Certifications" },
-      { id: "cp-context", label: "Strategic Context" },
+      { id: "cp-strategy", label: "Strategic Context" },
     ],
   },
   {
@@ -62,10 +51,11 @@ const navItems: NavItem[] = [
     kicker: "02",
     sections: [
       { id: "ca-strengths", label: "Existing Strengths" },
-      { id: "ca-register", label: "Constraint Register" },
+      { id: "ca-tech", label: "Technology Class" },
+      { id: "ca-constraints", label: "Constraint Register" },
       { id: "ca-heuraufe", label: "Heuraufe Compatibility" },
       { id: "ca-paddockbox", label: "Paddockbox Compatibility" },
-      { id: "ca-summary", label: "Summary" },
+      { id: "ca-gaps", label: "Gap Register" },
     ],
   },
   {
@@ -77,9 +67,8 @@ const navItems: NavItem[] = [
       { id: "cap-derivation", label: "Derivation Logic" },
       { id: "cap-cards", label: "Capabilities (C1–C9)" },
       { id: "cap-combinations", label: "Combinations" },
-      { id: "cap-trackA", label: "Track A: Direct Transfer" },
-      { id: "cap-trackB", label: "Track B: Expansion" },
-      { id: "cap-trackC", label: "Track C: Vertical" },
+      { id: "cap-tracks", label: "Track A / B / C" },
+      { id: "cap-reference", label: "Reference" },
     ],
   },
   {
@@ -87,13 +76,14 @@ const navItems: NavItem[] = [
     label: "Product & Market Analysis",
     kicker: "03",
     sections: [
-      { id: "pma-fp", label: "Functional Promise" },
-      { id: "pma-heuraufe-fp", label: "Heuraufe FP", sub: true },
-      { id: "pma-paddockbox-fp", label: "Paddockbox FP", sub: true },
-      { id: "pma-decomp", label: "Product Decomposition" },
+      { id: "pma-overview", label: "Overview" },
+      { id: "pma-tech", label: "Technology Class" },
+      { id: "pma-heuraufe", label: "Heuraufe Analysis" },
+      { id: "pma-paddockbox", label: "Paddockbox Analysis" },
       { id: "pma-market", label: "Market Context" },
-      { id: "pma-comp-heuraufe", label: "Competitors: Heuraufe" },
-      { id: "pma-comp-paddockbox", label: "Competitors: Paddockbox" },
+      { id: "pma-h-competitors", label: "Heuraufe Competitors" },
+      { id: "pma-p-competitors", label: "Paddockbox Competitors" },
+      { id: "pma-summary", label: "Summary" },
     ],
   },
   {
@@ -101,10 +91,10 @@ const navItems: NavItem[] = [
     label: "Manufacturing VN & BOMs",
     kicker: "04",
     sections: [
-      { id: "vn-diagram", label: "Manufacturing VN" },
-      { id: "vn-scaling", label: "Process Scaling Analysis" },
-      { id: "bom-heuraufe", label: "Heuraufe BOM" },
-      { id: "bom-paddockbox", label: "Paddockbox BOM" },
+      { id: "vn-steps", label: "Process Steps & Scaling" },
+      { id: "vn-bom-heuraufe", label: "Heuraufe BOM" },
+      { id: "vn-bom-paddockbox", label: "Paddockbox BOM" },
+      { id: "vn-summary", label: "Summary" },
     ],
   },
   {
@@ -112,11 +102,12 @@ const navItems: NavItem[] = [
     label: "Equine Production VN",
     kicker: "05",
     sections: [
-      { id: "eq-diagram", label: "VN Diagram (112920)" },
-      { id: "eq-segments", label: "Segments" },
-      { id: "eq-l6", label: "L6 Process Steps" },
-      { id: "eq-alternatives", label: "Alternatives & Share" },
-      { id: "eq-adjacency", label: "Adjacency Analysis" },
+      { id: "vr-scope", label: "Scope & CFJ" },
+      { id: "vr-overview", label: "VN Overview" },
+      { id: "vr-l6", label: "L6 Process Steps" },
+      { id: "vr-hierarchy", label: "L7→L4 Hierarchy" },
+      { id: "vr-adjacency", label: "Adjacency Analysis" },
+      { id: "vr-summary", label: "Summary" },
     ],
   },
   {
@@ -124,12 +115,14 @@ const navItems: NavItem[] = [
     label: "Adjacent Capabilities",
     kicker: "06",
     sections: [
-      { id: "adj-register", label: "Constraint Register" },
+      { id: "adj-scope", label: "Scope" },
+      { id: "adj-constraints", label: "Constraint Register" },
       { id: "adj-a1", label: "A1: Weidezelt / Shelter" },
       { id: "adj-a2", label: "A2: Boxentrennwand" },
       { id: "adj-a3", label: "A3: Hay Barn Frame" },
       { id: "adj-a4", label: "A4: Stall System" },
-      { id: "adj-priority", label: "Priority Ranking" },
+      { id: "adj-aggregate", label: "Aggregate Results" },
+      { id: "adj-mitigation", label: "Mitigation Priority" },
     ],
   },
   {
@@ -138,12 +131,14 @@ const navItems: NavItem[] = [
     kicker: "07",
     sections: [
       { id: "jtbd-scope", label: "Scope & CFJ" },
-      { id: "jtbd-segments", label: "Segments" },
-      { id: "jtbd-heuraufe", label: "Heuraufe Jobs" },
-      { id: "jtbd-paddockbox", label: "Paddockbox Jobs" },
-      { id: "jtbd-stakeholders", label: "Stakeholder Mapping" },
-      { id: "jtbd-needs", label: "Needs & ODI Scoring" },
+      { id: "jtbd-phase1", label: "Industry Landscape" },
+      { id: "jtbd-phase2", label: "Company Enters" },
+      { id: "jtbd-p1", label: "Heuraufe Jobs", sub: true },
+      { id: "jtbd-p2", label: "Paddockbox Jobs", sub: true },
+      { id: "jtbd-phase3", label: "Needs Derivation" },
+      { id: "jtbd-stakeholder-needs", label: "Stakeholder Needs" },
       { id: "jtbd-top10", label: "Top 10 Underserved" },
+      { id: "jtbd-yield", label: "Yield Summary" },
     ],
   },
   {
@@ -152,7 +147,6 @@ const navItems: NavItem[] = [
     kicker: "08",
     sections: [
       { id: "syn-executive", label: "Executive Summary" },
-      { id: "syn-classification", label: "Product Classification" },
       { id: "syn-themes", label: "Capability Themes" },
       { id: "syn-roadmap", label: "Launch Sequence" },
     ],
@@ -210,16 +204,13 @@ export default function Shell() {
 
   return (
     <div className="app-shell">
-      {/* Left navigation sidebar */}
       <aside className="app-sidebar">
-        {/* Brand block */}
         <div className="app-sidebar__brand">
           <div className="app-sidebar__brand-kicker">Clayton / Node42</div>
           <div className="app-sidebar__brand-title">Böhmer Systemtechnik</div>
           <div className="app-sidebar__brand-sub">Equestrian Product Analysis</div>
         </div>
 
-        {/* Navigation */}
         <div className="app-sidebar__section">
           <div className="app-sidebar__section-label">Analysis</div>
           <nav>
@@ -229,7 +220,6 @@ export default function Shell() {
 
               return (
                 <div key={item.to}>
-                  {/* Main nav row */}
                   <div style={{ display: "flex", alignItems: "stretch" }}>
                     <NavLink
                       to={item.to}
@@ -243,7 +233,6 @@ export default function Shell() {
                       <span>{item.label}</span>
                     </NavLink>
 
-                    {/* Chevron toggle */}
                     {hasSections && (
                       <button
                         onClick={() => toggle(item.to)}
@@ -276,7 +265,6 @@ export default function Shell() {
                     )}
                   </div>
 
-                  {/* Section links — slide in/out */}
                   {hasSections && (
                     <div
                       style={{
@@ -331,7 +319,6 @@ export default function Shell() {
           </nav>
         </div>
 
-        {/* Tagline at bottom */}
         <div style={{
           padding: "20px",
           marginTop: "auto",
@@ -353,7 +340,6 @@ export default function Shell() {
         </div>
       </aside>
 
-      {/* Main content */}
       <main className="app-main">
         <Outlet />
       </main>
